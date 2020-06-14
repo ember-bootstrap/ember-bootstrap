@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <title>addon/mixins/component-parent.js - ember-bootstrap</title>
+  <title>addon/components/bs-progress/bar.js - ember-bootstrap</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="../assets/css/api.css">
   <script type="text/javascript" src="//use.typekit.net/dkq5epu.js"></script>
@@ -54,64 +54,170 @@
         <div id="docs-main">
           <div class="content">
 <div class="page-header">
-    <h1>addon/mixins/component-parent.js <small>File</small></h1>
+    <h1>addon/components/bs-progress/bar.js <small>File</small></h1>
 </div>
 
 <div class="file">
     <pre class="prettyprint linenums">
-import { schedule } from &#x27;@ember/runloop&#x27;;
-import { A } from &#x27;@ember/array&#x27;;
-import Mixin from &#x27;@ember/object/mixin&#x27;;
+import { layout as templateLayout, tagName } from &#x27;@ember-decorators/component&#x27;;
+import { computed } from &#x27;@ember/object&#x27;;
+import Component from &#x27;@ember/component&#x27;;
+import layout from &#x27;ember-bootstrap/templates/components/bs-progress/bar&#x27;;
+import defaultValue from &#x27;ember-bootstrap/utils/default-decorator&#x27;;
+import typeClass from &#x27;ember-bootstrap/utils/cp/type-class&#x27;;
+import { macroCondition, getOwnConfig } from &#x27;@embroider/macros&#x27;;
 
 /**
- * Mixin for components that act as a parent component in a parent-child relationship of components
- *
- * @class ComponentParent
- * @namespace Mixins
- * @private
+
+ Component for a single progress bar, see [Components.Progress](Components.Progress.html) for more examples.
+
+ @class ProgressBar
+ @namespace Components
+ @extends Ember.Component
+ @public
  */
-// eslint-disable-next-line ember/no-new-mixins
-export default Mixin.create({
+@tagName(&#x27;&#x27;)
+@templateLayout(layout)
+export default class ProgressBar extends Component {
   /**
-   * Array of registered child components
+   * The lower limit of the value range
    *
-   * @property children
-   * @type array
+   * @property minValue
+   * @type number
+   * @default 0
+   * @public
+   */
+  @defaultValue
+  minValue = 0;
+
+  /**
+   * The upper limit of the value range
+   *
+   * @property maxValue
+   * @type number
+   * @default 100
+   * @public
+   */
+  @defaultValue
+  maxValue = 100;
+
+  /**
+   * The value the progress bar should represent
+   *
+   * @property value
+   * @type number
+   * @default 0
+   * @public
+   */
+  @defaultValue
+  value = 0;
+
+  /**
+   If true a label will be shown inside the progress bar.
+
+   By default it will be the percentage corresponding to the &#x60;value&#x60; property, rounded to &#x60;roundDigits&#x60; digits.
+   You can customize it by using the component with a block template, which the component yields the percentage
+   value to:
+
+   &#x60;&#x60;&#x60;hbs
+   {{#bs-progress}}
+   {{#bs-progress-bar value=progressValue as |percent|}}{{progressValue}} ({{percent}}%){{/bs-progress-bar}}
+   {{/bs-progress}}
+   &#x60;&#x60;&#x60;
+
+   @property showLabel
+   @type boolean
+   @default false
+   @public
+   */
+  @defaultValue
+  showLabel = false;
+
+  /**
+   * Create a striped effect, see http://getbootstrap.com/components/#progress-striped
+   *
+   * @property striped
+   * @type boolean
+   * @default false
+   * @public
+   */
+  @defaultValue
+  striped = false;
+
+  /**
+   * Animate the stripes, see http://getbootstrap.com/components/#progress-animated
+   *
+   * @property animate
+   * @type boolean
+   * @default false
+   * @public
+   */
+  @defaultValue
+  animate = false;
+
+  /**
+   * Specify to how many digits the progress bar label should be rounded.
+   *
+   * @property roundDigits
+   * @type number
+   * @default 0
+   * @public
+   */
+  @defaultValue
+  roundDigits = 0;
+
+  /**
+   * Property for type styling
+   *
+   * For the available types see the [Bootstrap docs](https://getbootstrap.com/docs/4.3/components/progress/#backgrounds)
+   *
+   * @property type
+   * @type String
+   * @default &#x27;default&#x27;
+   * @public
+   */
+  @defaultValue
+  type = &#x27;default&#x27;;
+
+  @typeClass(macroCondition(getOwnConfig().isBS4) ? &#x27;bg&#x27; : &#x27;progress-bar&#x27;, &#x27;type&#x27;)
+  typeClass;
+
+  /**
+   * The percentage of &#x60;value&#x60;
+   *
+   * @property percent
+   * @type number
    * @protected
+   * @readonly
    */
-  children: null,
+  @(computed(&#x27;value&#x27;, &#x27;minValue&#x27;, &#x27;maxValue&#x27;).readOnly())
+  get percent() {
+    let value = parseFloat(this.value);
+    let minValue = parseFloat(this.minValue);
+    let maxValue = parseFloat(this.maxValue);
 
-  init() {
-    this._super(...arguments);
-    this.set(&#x27;children&#x27;, A());
-  },
-
-  /**
-   * Register a component as a child of this parent
-   *
-   * @method registerChild
-   * @param child
-   * @public
-   */
-  registerChild(child) {
-    schedule(&#x27;actions&#x27;, this, function () {
-      this.children.addObject(child);
-    });
-  },
+    return Math.min(Math.max((value - minValue) / (maxValue - minValue), 0), 1) * 100;
+  }
 
   /**
-   * Remove the child component from this parent component
+   * The percentage of &#x60;value&#x60;, rounded to &#x60;roundDigits&#x60; digits
    *
-   * @method removeChild
-   * @param child
-   * @public
+   * @property percentRounded
+   * @type number
+   * @protected
+   * @readonly
    */
-  removeChild(child) {
-    schedule(&#x27;actions&#x27;, this, function () {
-      this.children.removeObject(child);
-    });
-  },
-});
+  @(computed(&#x27;percent&#x27;, &#x27;roundDigits&#x27;).readOnly())
+  get percentRounded() {
+    let roundFactor = Math.pow(10, this.roundDigits);
+    return Math.round(this.percent * roundFactor) / roundFactor;
+  }
+
+  get percentStyleValue() {
+    let percent = this.percent;
+    return !isNaN(percent) ? &#x60;${percent}%&#x60; : &#x27;&#x27;;
+  }
+}
 
     </pre>
 </div>

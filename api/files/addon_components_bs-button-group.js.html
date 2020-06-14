@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <title>addon/mixins/component-parent.js - ember-bootstrap</title>
+  <title>addon/components/bs-button-group.js - ember-bootstrap</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="../assets/css/api.css">
   <script type="text/javascript" src="//use.typekit.net/dkq5epu.js"></script>
@@ -54,64 +54,212 @@
         <div id="docs-main">
           <div class="content">
 <div class="page-header">
-    <h1>addon/mixins/component-parent.js <small>File</small></h1>
+    <h1>addon/components/bs-button-group.js <small>File</small></h1>
 </div>
 
 <div class="file">
     <pre class="prettyprint linenums">
-import { schedule } from &#x27;@ember/runloop&#x27;;
-import { A } from &#x27;@ember/array&#x27;;
-import Mixin from &#x27;@ember/object/mixin&#x27;;
+import { action } from &#x27;@ember/object&#x27;;
+import { layout as templateLayout, tagName } from &#x27;@ember-decorators/component&#x27;;
+import { equal } from &#x27;@ember/object/computed&#x27;;
+import Component from &#x27;@ember/component&#x27;;
+import { A, isArray } from &#x27;@ember/array&#x27;;
+import layout from &#x27;ember-bootstrap/templates/components/bs-button-group&#x27;;
+import sizeClass from &#x27;ember-bootstrap/utils/cp/size-class&#x27;;
+import defaultValue from &#x27;ember-bootstrap/utils/default-decorator&#x27;;
 
 /**
- * Mixin for components that act as a parent component in a parent-child relationship of components
- *
- * @class ComponentParent
- * @namespace Mixins
- * @private
- */
-// eslint-disable-next-line ember/no-new-mixins
-export default Mixin.create({
+  Bootstrap-style button group, that visually groups buttons, and optionally adds radio/checkbox like behaviour.
+  See http://getbootstrap.com/components/#btn-groups
+
+  Use as a block level component with any number of [Components.Button](Components.Button.html) components provided as
+  a yielded pre-configured contextual component:
+
+  &#x60;&#x60;&#x60;handlebars
+  &lt;BsButtonGroup as |bg|&gt;
+    &lt;bg.button&gt;1&lt;/bg.button&gt;
+    &lt;bg.button&gt;2&lt;/bg.button&gt;
+    &lt;bg.button&gt;3&lt;/bg.button&gt;
+  &lt;/BsButtonGroup&gt;
+  &#x60;&#x60;&#x60;
+
+  ### Radio-like behaviour
+
+  Use the &#x60;type&#x60; property set to &quot;radio&quot; to make the child buttons toggle like radio buttons, i.e. only one button can be active.
+  Set the &#x60;value&#x60; property of the buttons to something meaningful. The &#x60;value&#x60; property of the button group will then reflect
+  the value of the active button:
+
+  &#x60;&#x60;&#x60;handlebars
+  &lt;BsButtonGroup @value={{this.buttonGroupValue}} @type=&quot;radio&quot; @onChange={{action (mut this.buttonGroupValue}} as |bg|&gt;
+    &lt;bg.button @type=&quot;default&quot; @value={{1}}&gt;1&lt;/bg.button&gt;
+    &lt;bg.button @type=&quot;default&quot; @value={{2}}&gt;2&lt;/bg.button&gt;
+    &lt;bg.button @type=&quot;default&quot; @value={{3}}&gt;3&lt;/bg.button&gt;
+  &lt;/BsButtonGroup&gt;
+
+  You selected: {{this.buttonGroupValue}}!
+  &#x60;&#x60;&#x60;
+
+  ### Checkbox-like behaviour
+
+  Set &#x60;type&#x60; to &quot;checkbox&quot; to make any number of child buttons selectable. The &#x60;value&#x60; property will be an array
+  of all the values of the active buttons:
+
+  &#x60;&#x60;&#x60;handlebars
+  &lt;BsButtonGroup @value={{this.buttonGroupValue}} @type=&quot;checkbox&quot; @onChange={{action (mut this.buttonGroupValue}} as |bg|&gt;
+    &lt;bg.button @type=&quot;default&quot; @value={{1}}&gt;1&lt;/bg.button&gt;
+    &lt;bg.button @type=&quot;default&quot; @value={{2}}&gt;2&lt;/bg.button&gt;
+    &lt;bg.button @type=&quot;default&quot; @value={{3}}&gt;3&lt;/bg.button&gt;
+  &lt;/BsButtonGroup&gt;
+
+  You selected:
+  &lt;ul&gt;
+    {{#each value in this.buttonGroupValue}}
+      &lt;li&gt;{{value}}&lt;/li&gt;
+    {{/each}}
+  &lt;/ul&gt;
+  &#x60;&#x60;&#x60;
+
+  @class ButtonGroup
+  @namespace Components
+  @extends Ember.Component
+  @public
+*/
+@tagName(&#x27;&#x27;)
+@templateLayout(layout)
+export default class ButtonGroup extends Component {
+  ariaRole = &#x27;group&#x27;;
+
   /**
-   * Array of registered child components
+   * @property buttonComponent
+   * @type {String}
+   * @private
+   */
+  @defaultValue
+  buttonComponent = &#x27;bs-button-group/button&#x27;;
+
+  /**
+   * Set to true for a vertically stacked button group, see http://getbootstrap.com/components/#btn-groups-vertical
    *
-   * @property children
+   * @property vertical
+   * @type boolean
+   * @default false
+   * @public
+   */
+  @defaultValue
+  vertical = false;
+
+  /**
+   * Set to true for the buttons to stretch at equal sizes to span the entire width of its parent. (BS3 only!)
+   *
+   * *Important*: You have to wrap every button component in a &#x60;div class=&quot;btn-group&quot;&gt;&#x60;:
+   *
+   * &#x60;&#x60;&#x60;handlebars
+   * &lt;div class=&quot;btn-group&quot; role=&quot;group&quot;&gt;
+   * {{#bs-button}}My Button{{/bs-button}}
+   * &lt;/div&gt;
+   * &#x60;&#x60;&#x60;
+   *
+   * See http://getbootstrap.com/components/#btn-groups-justified
+   *
+   * @property justified
+   * @type boolean
+   * @default false
+   * @public
+   */
+  @defaultValue
+  justified = false;
+
+  /**
+   * The type of the button group specifies how child buttons behave and how the &#x60;value&#x60; property will be computed:
+   *
+   * ### null
+   * If &#x60;type&#x60; is not set (null), the button group will add no functionality besides Bootstrap styling
+   *
+   * ### radio
+   * if &#x60;type&#x60; is set to &quot;radio&quot;, the buttons will behave like radio buttons:
+   * * the &#x60;value&#x60; property of the button group will reflect the &#x60;value&#x60; property of the active button
+   * * thus only one button may be active
+   *
+   * ### checkbox
+   * if &#x60;type&#x60; is set to &quot;checkbox&quot;, the buttons will behave like checkboxes:
+   * * any number of buttons may be active
+   * * the &#x60;value&#x60; property of the button group will be an array containing the &#x60;value&#x60; properties of all active buttons
+   *
+   * @property type
+   * @type string
+   * @default null
+   * @public
+   */
+
+  /**
+   * The value of the button group, computed by its child buttons.
+   * See the &#x60;type&#x60; property for how the value property is constructed.
+   *
+   * When you set the value, the corresponding buttons will be activated:
+   * * use a single value for a radio button group to activate the button with the same value
+   * * use an array of values for a checkbox button group to activate all the buttons with values contained in the array
+   *
+   * @property value
    * @type array
-   * @protected
-   */
-  children: null,
-
-  init() {
-    this._super(...arguments);
-    this.set(&#x27;children&#x27;, A());
-  },
-
-  /**
-   * Register a component as a child of this parent
-   *
-   * @method registerChild
-   * @param child
    * @public
    */
-  registerChild(child) {
-    schedule(&#x27;actions&#x27;, this, function () {
-      this.children.addObject(child);
-    });
-  },
 
   /**
-   * Remove the child component from this parent component
+   * @property isRadio
+   * @type boolean
+   * @private
+   */
+  @(equal(&#x27;type&#x27;, &#x27;radio&#x27;).readOnly())
+  isRadio;
+
+  /**
+   * Property for size styling, set to &#x27;lg&#x27;, &#x27;sm&#x27; or &#x27;xs&#x27;
    *
-   * @method removeChild
-   * @param child
+   * Also see the [Bootstrap docs](https://getbootstrap.com/docs/4.3/components/button-group/#sizing)
+   *
+   * @property size
+   * @type String
    * @public
    */
-  removeChild(child) {
-    schedule(&#x27;actions&#x27;, this, function () {
-      this.children.removeObject(child);
-    });
-  },
-});
+  @defaultValue
+  size = null;
+
+  @sizeClass(&#x27;btn-group&#x27;, &#x27;size&#x27;)
+  sizeClass;
+
+  /**
+   * This action is called whenever the button group&#x27;s value should be changed because the user clicked a button.
+   * You will receive the new value of the button group (based on the &#x60;type&#x60; property), which you should use to update the
+   * &#x60;value&#x60; property.
+   *
+   * @event onChange
+   * @param {*} value
+   * @public
+   */
+  onChange() {}
+
+  @action
+  buttonPressed(pressedValue) {
+    let newValue;
+
+    if (this.isRadio) {
+      newValue = pressedValue;
+    } else {
+      if (!isArray(this.value)) {
+        newValue = A([pressedValue]);
+      } else {
+        newValue = A(this.value.slice());
+        if (newValue.includes(pressedValue)) {
+          newValue.removeObject(pressedValue);
+        } else {
+          newValue.pushObject(pressedValue);
+        }
+      }
+    }
+
+    this.onChange(newValue);
+  }
+}
 
     </pre>
 </div>

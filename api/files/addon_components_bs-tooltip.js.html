@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <title>addon/mixins/component-parent.js - ember-bootstrap</title>
+  <title>addon/components/bs-tooltip.js - ember-bootstrap</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="../assets/css/api.css">
   <script type="text/javascript" src="//use.typekit.net/dkq5epu.js"></script>
@@ -54,64 +54,115 @@
         <div id="docs-main">
           <div class="content">
 <div class="page-header">
-    <h1>addon/mixins/component-parent.js <small>File</small></h1>
+    <h1>addon/components/bs-tooltip.js <small>File</small></h1>
 </div>
 
 <div class="file">
     <pre class="prettyprint linenums">
-import { schedule } from &#x27;@ember/runloop&#x27;;
-import { A } from &#x27;@ember/array&#x27;;
-import Mixin from &#x27;@ember/object/mixin&#x27;;
+import { layout as templateLayout } from &#x27;@ember-decorators/component&#x27;;
+import { computed } from &#x27;@ember/object&#x27;;
+import ContextualHelp from &#x27;./bs-contextual-help&#x27;;
+import layout from &#x27;ember-bootstrap/templates/components/bs-tooltip&#x27;;
+import defaultValue from &#x27;ember-bootstrap/utils/default-decorator&#x27;;
 
 /**
- * Mixin for components that act as a parent component in a parent-child relationship of components
- *
- * @class ComponentParent
- * @namespace Mixins
- * @private
- */
-// eslint-disable-next-line ember/no-new-mixins
-export default Mixin.create({
-  /**
-   * Array of registered child components
-   *
-   * @property children
-   * @type array
-   * @protected
-   */
-  children: null,
+  Component that implements Bootstrap [tooltips](http://getbootstrap.com/javascript/#tooltips).
 
-  init() {
-    this._super(...arguments);
-    this.set(&#x27;children&#x27;, A());
-  },
+  By default it will attach its listeners (mouseover and focus) to the parent DOM element to trigger
+  the tooltip:
+
+  &#x60;&#x60;&#x60;hbs
+  &lt;button class=&quot;btn&quot;&gt;
+    &lt;BsTooltip @title=&quot;This is a toolip&quot; /&gt;
+  &lt;/button&gt;
+  &#x60;&#x60;&#x60;
+
+  You can also use the component in a block form to set the title:
+
+  &#x60;&#x60;&#x60;hbs
+  &lt;button class=&quot;btn&quot;&gt;
+    &lt;BsTooltip&gt;
+      This is a toolip
+    &lt;/BsTooltip&gt;
+  &lt;/button&gt;
+  &#x60;&#x60;&#x60;
+
+  ### Trigger
+
+  The trigger element is the DOM element that will cause the tooltip to be shown when one of the trigger events occur on
+  that element. By default the trigger element is the parent DOM element of the component, and the trigger events will be
+  &quot;hover&quot; and &quot;focus&quot;.
+
+  The &#x60;triggerElement&#x60; property accepts any CSS selector to attach the tooltip to any other existing DOM element.
+  With the special value &quot;parentView&quot; you can attach the tooltip to the DOM element of the parent component:
+
+  &#x60;&#x60;&#x60;hbs
+  &lt;MyComponent&gt;
+    &lt;BsTooltip @title=&quot;This is a toolip&quot; @triggerElement=&quot;parentView&quot;/&gt;
+  &lt;/MyComponent&gt;
+  &#x60;&#x60;&#x60;
+
+  To customize the events that will trigger the tooltip use the &#x60;triggerEvents&#x60; property, that accepts an array or a
+  string of events, with &quot;hover&quot;, &quot;focus&quot; and &quot;click&quot; being supported.
+
+  ### Placement options
+
+  By default the tooltip will show up on top of the trigger element. Use the &#x60;placement&#x60; property to change that
+  (&quot;top&quot;, &quot;bottom&quot;, &quot;left&quot; and &quot;right&quot;). To make sure the tooltip will not exceed the viewport (see Advanced customization)
+  you can set &#x60;autoPlacement&#x60; to true. A tooltip with &#x60;placement=&quot;right&quot; will be placed to the right if there is enough
+  space, otherwise to the left.
+
+  ### Advanced customization
+
+  Several other properties allow for some advanced customization:
+  * &#x60;visible&#x60; to show/hide the tooltip programmatically
+  * &#x60;fade&#x60; to disable the fade in transition
+  * &#x60;delay&#x60; (or &#x60;delayShow&#x60; and &#x60;delayHide&#x60;) to add a delay
+  * &#x60;viewportSelector&#x60; and &#x60;viewportPadding&#x60; to customize the viewport that affects &#x60;autoPlacement&#x60;
+  * a &#x60;close&#x60; action is yielded, that allows you to close the tooltip:
+
+  &#x60;&#x60;&#x60;hbs
+  &lt;BsTooltip as |tt|&gt;This is a toolip &lt;button onclick={{action tt.close}}&gt;Close&lt;/button&gt;&lt;/BsTooltip&gt;
+  &#x60;&#x60;&#x60;
+
+  See the individual API docs for each property.
+
+  ### Actions
+
+  When you want to react on the tooltip being shown or hidden, you can use one of the following supported actions:
+  * &#x60;onShow&#x60;
+  * &#x60;onShown&#x60;
+  * &#x60;onHide&#x60;
+  * &#x60;onHidden&#x60;
+
+  @class Tooltip
+  @namespace Components
+  @extends Components.ContextualHelp
+  @public
+*/
+@templateLayout(layout)
+export default class Tooltip extends ContextualHelp {
+  /**
+   * @property elementComponent
+   * @type {String}
+   * @private
+   */
+  @defaultValue
+  elementComponent = &#x27;bs-tooltip/element&#x27;;
 
   /**
-   * Register a component as a child of this parent
+   * The DOM element of the arrow element.
    *
-   * @method registerChild
-   * @param child
-   * @public
+   * @property arrowElement
+   * @type object
+   * @readonly
+   * @private
    */
-  registerChild(child) {
-    schedule(&#x27;actions&#x27;, this, function () {
-      this.children.addObject(child);
-    });
-  },
-
-  /**
-   * Remove the child component from this parent component
-   *
-   * @method removeChild
-   * @param child
-   * @public
-   */
-  removeChild(child) {
-    schedule(&#x27;actions&#x27;, this, function () {
-      this.children.removeObject(child);
-    });
-  },
-});
+  @computed(&#x27;overlayElement&#x27;)
+  get arrowElement() {
+    return this.overlayElement.querySelector(&#x27;.tooltip-arrow&#x27;);
+  }
+}
 
     </pre>
 </div>

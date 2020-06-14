@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <title>addon/mixins/component-parent.js - ember-bootstrap</title>
+  <title>addon/components/bs-navbar/toggle.js - ember-bootstrap</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="../assets/css/api.css">
   <script type="text/javascript" src="//use.typekit.net/dkq5epu.js"></script>
@@ -54,64 +54,48 @@
         <div id="docs-main">
           <div class="content">
 <div class="page-header">
-    <h1>addon/mixins/component-parent.js <small>File</small></h1>
+    <h1>addon/components/bs-navbar/toggle.js <small>File</small></h1>
 </div>
 
 <div class="file">
     <pre class="prettyprint linenums">
-import { schedule } from &#x27;@ember/runloop&#x27;;
-import { A } from &#x27;@ember/array&#x27;;
-import Mixin from &#x27;@ember/object/mixin&#x27;;
+import { action } from &#x27;@ember/object&#x27;;
+import { layout as templateLayout, tagName } from &#x27;@ember-decorators/component&#x27;;
+import Component from &#x27;@ember/component&#x27;;
+import layout from &#x27;ember-bootstrap/templates/components/bs-navbar/toggle&#x27;;
+import defaultValue from &#x27;ember-bootstrap/utils/default-decorator&#x27;;
 
 /**
- * Mixin for components that act as a parent component in a parent-child relationship of components
+ * Component to implement the responsive menu toggle behavior in a [Components.Navbar](Components.Navbar.html)
+ * component. Have a look there for examples.
  *
- * @class ComponentParent
- * @namespace Mixins
- * @private
+ * ### Bootstrap 3/4 Notes
+ *
+ * The inline version of the component uses the triple &#x60;icon-bar&#x60; styling for Bootstrap 3 and the
+ * &#x60;navbar-toggler-icon&#x60; styling for Bootstrap 4.
+ *
+ * @class NavbarToggle
+ * @namespace Components
+ * @extends Ember.Component
+ * @public
  */
-// eslint-disable-next-line ember/no-new-mixins
-export default Mixin.create({
-  /**
-   * Array of registered child components
-   *
-   * @property children
-   * @type array
-   * @protected
-   */
-  children: null,
-
-  init() {
-    this._super(...arguments);
-    this.set(&#x27;children&#x27;, A());
-  },
+@templateLayout(layout)
+@tagName(&#x27;&#x27;)
+export default class NavbarToggle extends Component {
+  @defaultValue
+  collapsed = true;
 
   /**
-   * Register a component as a child of this parent
-   *
-   * @method registerChild
-   * @param child
+   * @event onClick
    * @public
    */
-  registerChild(child) {
-    schedule(&#x27;actions&#x27;, this, function () {
-      this.children.addObject(child);
-    });
-  },
+  onClick() {}
 
-  /**
-   * Remove the child component from this parent component
-   *
-   * @method removeChild
-   * @param child
-   * @public
-   */
-  removeChild(child) {
-    schedule(&#x27;actions&#x27;, this, function () {
-      this.children.removeObject(child);
-    });
-  },
-});
+  @action
+  handleClick() {
+    this.onClick();
+  }
+}
 
     </pre>
 </div>

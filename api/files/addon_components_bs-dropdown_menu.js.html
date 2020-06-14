@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <title>addon/mixins/component-parent.js - ember-bootstrap</title>
+  <title>addon/components/bs-dropdown/menu.js - ember-bootstrap</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="../assets/css/api.css">
   <script type="text/javascript" src="//use.typekit.net/dkq5epu.js"></script>
@@ -54,64 +54,194 @@
         <div id="docs-main">
           <div class="content">
 <div class="page-header">
-    <h1>addon/mixins/component-parent.js <small>File</small></h1>
+    <h1>addon/components/bs-dropdown/menu.js <small>File</small></h1>
 </div>
 
 <div class="file">
     <pre class="prettyprint linenums">
-import { schedule } from &#x27;@ember/runloop&#x27;;
-import { A } from &#x27;@ember/array&#x27;;
-import Mixin from &#x27;@ember/object/mixin&#x27;;
+import { layout as templateLayout, tagName } from &#x27;@ember-decorators/component&#x27;;
+import { computed, action } from &#x27;@ember/object&#x27;;
+import Component from &#x27;@ember/component&#x27;;
+import layout from &#x27;ember-bootstrap/templates/components/bs-dropdown/menu&#x27;;
+import { next } from &#x27;@ember/runloop&#x27;;
+import { getDestinationElement } from &#x27;ember-bootstrap/utils/dom&#x27;;
+import defaultValue from &#x27;ember-bootstrap/utils/default-decorator&#x27;;
 
 /**
- * Mixin for components that act as a parent component in a parent-child relationship of components
- *
- * @class ComponentParent
- * @namespace Mixins
- * @private
+ Component for the dropdown menu.
+
+ See [Components.Dropdown](Components.Dropdown.html) for examples.
+
+ @class DropdownMenu
+ @namespace Components
+ @extends Ember.Component
+ @public
  */
-// eslint-disable-next-line ember/no-new-mixins
-export default Mixin.create({
+@templateLayout(layout)
+@tagName(&#x27;&#x27;)
+export default class DropdownMenu extends Component {
   /**
-   * Array of registered child components
-   *
-   * @property children
-   * @type array
+   * @property ariaRole
+   * @default menu
+   * @type string
    * @protected
    */
-  children: null,
-
-  init() {
-    this._super(...arguments);
-    this.set(&#x27;children&#x27;, A());
-  },
+  ariaRole = &#x27;menu&#x27;;
 
   /**
-   * Register a component as a child of this parent
+   * Alignment of the menu, either &quot;left&quot; or &quot;right&quot;
    *
-   * @method registerChild
-   * @param child
+   * @property align
+   * @type string
+   * @default left
    * @public
    */
-  registerChild(child) {
-    schedule(&#x27;actions&#x27;, this, function () {
-      this.children.addObject(child);
-    });
-  },
+  @defaultValue
+  align = &#x27;left&#x27;;
 
   /**
-   * Remove the child component from this parent component
+   * @property direction
+   * @default &#x27;down&#x27;
+   * @type string
+   * @private
+   */
+  @defaultValue
+  direction = &#x27;down&#x27;;
+
+  /**
+   * @property inNav
+   * @type {boolean}
+   * @private
+   */
+  inNav = false;
+
+  /**
+   * By default the menu is rendered in the same place as the dropdown. If you experience clipping
+   * issues, you can set this to false to render the menu in a wormhole at the top of the DOM.
    *
-   * @method removeChild
-   * @param child
+   * @property renderInPlace
+   * @type boolean
+   * @default true
    * @public
    */
-  removeChild(child) {
-    schedule(&#x27;actions&#x27;, this, function () {
-      this.children.removeObject(child);
+  @defaultValue
+  renderInPlace = true;
+
+  /**
+   * @property _renderInPlace
+   * @type boolean
+   * @private
+   */
+  @computed(&#x27;renderInPlace&#x27;)
+  get _renderInPlace() {
+    return this.renderInPlace || !this.destinationElement;
+  }
+
+  /**
+   * The wormhole destinationElement
+   *
+   * @property destinationElement
+   * @type object
+   * @readonly
+   * @private
+   */
+  @computed
+  get destinationElement() {
+    return getDestinationElement(this);
+  }
+
+  @computed(&#x27;align&#x27;)
+  get alignClass() {
+    return this.align !== &#x27;left&#x27; ? &#x60;dropdown-menu-${this.align}&#x60; : undefined;
+  }
+
+  @computed
+  get isOpen() {
+    return false;
+  }
+
+  set isOpen(value) {
+    // delay removing the menu from DOM to allow (delegated Ember) event to fire for the menu&#x27;s children
+    // Fixes https://github.com/kaliber5/ember-bootstrap/issues/660
+    next(() =&gt; {
+      if (this.isDestroying || this.isDestroyed) {
+        return;
+      }
+      this.set(&#x27;_isOpen&#x27;, value);
     });
-  },
-});
+    return value;
+  }
+
+  _isOpen = false;
+  flip = true;
+  _popperApi = null;
+
+  @computed(&#x27;direction&#x27;, &#x27;align&#x27;)
+  get popperPlacement() {
+    let placement = &#x27;bottom-start&#x27;;
+    let { direction, align } = this;
+
+    if (direction === &#x27;up&#x27;) {
+      placement = &#x27;top-start&#x27;;
+      if (align === &#x27;right&#x27;) {
+        placement = &#x27;top-end&#x27;;
+      }
+    } else if (direction === &#x27;left&#x27;) {
+      placement = &#x27;left-start&#x27;;
+    } else if (direction === &#x27;right&#x27;) {
+      placement = &#x27;right-start&#x27;;
+    } else if (align === &#x27;right&#x27;) {
+      placement = &#x27;bottom-end&#x27;;
+    }
+    return placement;
+  }
+
+  @action
+  setFocus() {
+    // when the dropdown menu is rendered in place, focus can stay on the toggle element
+    if (this._renderInPlace) {
+      return;
+    }
+
+    if (this.menuElement) {
+      this.menuElement.focus();
+    }
+  }
+
+  @computed(&#x27;inNav&#x27;, &#x27;flip&#x27;)
+  get popperModifiers() {
+    return {
+      // @todo add offset config
+      applyStyle: {
+        enabled: !this.inNav,
+      },
+      flip: {
+        enabled: this.flip,
+      },
+    };
+  }
+
+  /**
+   * @property itemComponent
+   * @type {String}
+   * @private
+   */
+  itemComponent = &#x27;bs-dropdown/menu/item&#x27;;
+
+  /**
+   * @property linkToComponent
+   * @type {String}
+   * @private
+   */
+  linkToComponent = &#x27;bs-dropdown/menu/link-to&#x27;;
+
+  /**
+   * @property dividerComponent
+   * @type {String}
+   * @private
+   */
+  dividerComponent = &#x27;bs-dropdown/menu/divider&#x27;;
+}
 
     </pre>
 </div>

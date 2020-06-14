@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <title>addon/mixins/component-parent.js - ember-bootstrap</title>
+  <title>addon/components/bs-modal/footer.js - ember-bootstrap</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="../assets/css/api.css">
   <script type="text/javascript" src="//use.typekit.net/dkq5epu.js"></script>
@@ -54,64 +54,104 @@
         <div id="docs-main">
           <div class="content">
 <div class="page-header">
-    <h1>addon/mixins/component-parent.js <small>File</small></h1>
+    <h1>addon/components/bs-modal/footer.js <small>File</small></h1>
 </div>
 
 <div class="file">
     <pre class="prettyprint linenums">
-import { schedule } from &#x27;@ember/runloop&#x27;;
-import { A } from &#x27;@ember/array&#x27;;
-import Mixin from &#x27;@ember/object/mixin&#x27;;
+import { action } from &#x27;@ember/object&#x27;;
+import { layout as templateLayout, tagName } from &#x27;@ember-decorators/component&#x27;;
+import { notEmpty } from &#x27;@ember/object/computed&#x27;;
+import Component from &#x27;@ember/component&#x27;;
+import layout from &#x27;ember-bootstrap/templates/components/bs-modal/footer&#x27;;
+import defaultValue from &#x27;ember-bootstrap/utils/default-decorator&#x27;;
 
 /**
- * Mixin for components that act as a parent component in a parent-child relationship of components
- *
- * @class ComponentParent
- * @namespace Mixins
- * @private
+
+ Modal footer element used within [Components.Modal](Components.Modal.html) components. See there for examples.
+
+ @class ModalFooter
+ @namespace Components
+ @extends Ember.Component
+ @public
  */
-// eslint-disable-next-line ember/no-new-mixins
-export default Mixin.create({
+@templateLayout(layout)
+@tagName(&#x27;&#x27;)
+export default class ModalFooter extends Component {
   /**
-   * Array of registered child components
+   * The title of the default close button. Will be ignored (i.e. no close button) if you provide your own block
+   * template.
    *
-   * @property children
-   * @type array
-   * @protected
-   */
-  children: null,
-
-  init() {
-    this._super(...arguments);
-    this.set(&#x27;children&#x27;, A());
-  },
-
-  /**
-   * Register a component as a child of this parent
-   *
-   * @method registerChild
-   * @param child
+   * @property closeTitle
+   * @type string
+   * @default &#x27;Ok&#x27;
    * @public
    */
-  registerChild(child) {
-    schedule(&#x27;actions&#x27;, this, function () {
-      this.children.addObject(child);
-    });
-  },
+  @defaultValue
+  closeTitle = &#x27;Ok&#x27;;
 
   /**
-   * Remove the child component from this parent component
+   * The title of the submit button (primary button). Will be ignored (i.e. no button) if set to null or if you provide
+   * your own block template.
    *
-   * @method removeChild
-   * @param child
+   * @property submitTitle
+   * @type string
+   * @default null
    * @public
    */
-  removeChild(child) {
-    schedule(&#x27;actions&#x27;, this, function () {
-      this.children.removeObject(child);
-    });
-  },
-});
+  @notEmpty(&#x27;submitTitle&#x27;)
+  hasSubmitButton;
+
+  /**
+   * Set to true to disable the submit button. If you bind this to some property that indicates if submitting is allowed
+   * (form validation for example) this can be used to prevent the user from pressing the submit button.
+   *
+   * @property submitDisabled
+   * @type boolean
+   * @default false
+   * @public
+   */
+  @defaultValue
+  submitDisabled = false;
+
+  /**
+   * The type of the submit button (primary button).
+   *
+   * @property submitButtonType
+   * @type string
+   * @default &#x27;primary&#x27;
+   * @public
+   */
+  @defaultValue
+  submitButtonType = &#x27;primary&#x27;;
+
+  /**
+   * @property buttonComponent
+   * @type {String}
+   * @private
+   */
+  @defaultValue
+  buttonComponent = &#x27;bs-button&#x27;;
+
+  /**
+   * The action to send to the parent modal component when the modal footer&#x27;s form is submitted
+   *
+   * @event onSubmit
+   * @public
+   */
+
+  /**
+   * @event onClose
+   * @public
+   */
+
+  @action
+  handleSubmit(e) {
+    e.preventDefault();
+    // send to parent bs-modal component
+    this.onSubmit();
+  }
+}
 
     </pre>
 </div>

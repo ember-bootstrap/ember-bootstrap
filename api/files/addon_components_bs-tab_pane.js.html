@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <title>addon/mixins/component-parent.js - ember-bootstrap</title>
+  <title>addon/components/bs-tab/pane.js - ember-bootstrap</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="../assets/css/api.css">
   <script type="text/javascript" src="//use.typekit.net/dkq5epu.js"></script>
@@ -54,64 +54,213 @@
         <div id="docs-main">
           <div class="content">
 <div class="page-header">
-    <h1>addon/mixins/component-parent.js <small>File</small></h1>
+    <h1>addon/components/bs-tab/pane.js <small>File</small></h1>
 </div>
 
 <div class="file">
     <pre class="prettyprint linenums">
-import { schedule } from &#x27;@ember/runloop&#x27;;
-import { A } from &#x27;@ember/array&#x27;;
-import Mixin from &#x27;@ember/object/mixin&#x27;;
+import { layout as templateLayout, tagName } from &#x27;@ember-decorators/component&#x27;;
+import { computed } from &#x27;@ember/object&#x27;;
+import { addObserver } from &#x27;@ember/object/observers&#x27;;
+import Component from &#x27;@ember/component&#x27;;
+import { scheduleOnce } from &#x27;@ember/runloop&#x27;;
+import layout from &#x27;ember-bootstrap/templates/components/bs-tab/pane&#x27;;
+import ComponentChild from &#x27;ember-bootstrap/mixins/component-child&#x27;;
+import transitionEnd from &#x27;ember-bootstrap/utils/transition-end&#x27;;
+import usesTransition from &#x27;ember-bootstrap/utils/cp/uses-transition&#x27;;
+import defaultValue from &#x27;ember-bootstrap/utils/default-decorator&#x27;;
+import { guidFor } from &#x27;@ember/object/internals&#x27;;
 
 /**
- * Mixin for components that act as a parent component in a parent-child relationship of components
- *
- * @class ComponentParent
- * @namespace Mixins
- * @private
+ The tab pane of a tab component.
+ See [Components.Tab](Components.Tab.html) for examples.
+
+ @class TabPane
+ @namespace Components
+ @extends Ember.Component
+ @uses Mixins.ComponentChild
+ @public
  */
-// eslint-disable-next-line ember/no-new-mixins
-export default Mixin.create({
+@tagName(&#x27;&#x27;)
+@templateLayout(layout)
+export default class TabPane extends Component.extend(ComponentChild) {
   /**
-   * Array of registered child components
+   * @property id
+   * @type string
+   * @public
+   */
+  id = guidFor(this);
+
+  /**
+   * @property activeId
+   * @private
+   */
+  @defaultValue
+  activeId = null;
+
+  /**
+   * True if this pane is active (visible)
    *
-   * @property children
-   * @type array
+   * @property isActive
+   * @type boolean
+   * @readonly
+   * @private
+   */
+  @(computed(&#x27;activeId&#x27;, &#x27;id&#x27;).readOnly())
+  get isActive() {
+    return this.activeId === this.id;
+  }
+
+  /**
+   * Used to apply Bootstrap&#x27;s &quot;active&quot; class
+   *
+   * @property active
+   * @type boolean
+   * @default false
+   * @private
+   */
+  @defaultValue
+  active = false;
+
+  /**
+   * Used to trigger the Bootstrap visibility classes.
+   *
+   * @property showContent
+   * @type boolean
+   * @default false
+   * @private
+   */
+  @defaultValue
+  showContent = false;
+
+  /**
+   * The title for this tab pane. This is used by the &#x60;bs-tab&#x60; component to automatically generate
+   * the tab navigation.
+   * See the [Components.Tab](Components.Tab.html) for examples.
+   *
+   * @property title
+   * @type string
+   * @default null
+   * @public
+   */
+  @defaultValue
+  title = null;
+
+  /**
+   * An optional group title used by the &#x60;bs-tab&#x60; component to group all panes with the same group title
+   * under a common drop down in the tab navigation.
+   * See the [Components.Tab](Components.Tab.html) for examples.
+   *
+   * @property groupTitle
+   * @type string
+   * @default null
+   * @public
+   */
+  @defaultValue
+  groupTitle = null;
+
+  /**
+   * Use fade animation when switching tabs.
+   *
+   * @property fade
+   * @type boolean
+   * @private
+   */
+  @defaultValue
+  fade = true;
+
+  /**
+   * The duration of the fade out animation
+   *
+   * @property fadeDuration
+   * @type integer
+   * @default 150
+   * @private
+   */
+  @defaultValue
+  fadeDuration = 150;
+
+  /**
+   * Use CSS transitions?
+   *
+   * @property usesTransition
+   * @type boolean
+   * @readonly
+   * @private
+   */
+  @usesTransition(&#x27;fade&#x27;)
+  usesTransition;
+
+  /**
+   * Show the pane
+   *
+   * @method show
    * @protected
    */
-  children: null,
+  show() {
+    if (this.usesTransition) {
+      if (!this._element) {
+        // _element is initially set by &#x60;{{ref}}&#x60; which happens in next run loop, so can be undefined here.
+        this.setProperties({
+          active: true,
+          showContent: true,
+        });
+      } else {
+        transitionEnd(this._element, this.fadeDuration).then(() =&gt; {
+          if (!this.isDestroyed) {
+            this.setProperties({
+              active: true,
+              showContent: true,
+            });
+          }
+        });
+      }
+    } else {
+      this.set(&#x27;active&#x27;, true);
+    }
+  }
+
+  /**
+   * Hide the pane
+   *
+   * @method hide
+   * @protected
+   */
+  hide() {
+    if (this.usesTransition) {
+      transitionEnd(this._element, this.fadeDuration).then(() =&gt; {
+        if (!this.isDestroyed) {
+          this.set(&#x27;active&#x27;, false);
+        }
+      });
+      this.set(&#x27;showContent&#x27;, false);
+    } else {
+      this.set(&#x27;active&#x27;, false);
+    }
+  }
+
+  _showHide() {
+    if (this.isActive) {
+      this.show();
+    } else {
+      this.hide();
+    }
+  }
+
+  _setActive() {
+    this.set(&#x27;active&#x27;, this.isActive);
+    this.set(&#x27;showContent&#x27;, this.isActive &amp;&amp; this.fade);
+  }
 
   init() {
-    this._super(...arguments);
-    this.set(&#x27;children&#x27;, A());
-  },
+    super.init(...arguments);
 
-  /**
-   * Register a component as a child of this parent
-   *
-   * @method registerChild
-   * @param child
-   * @public
-   */
-  registerChild(child) {
-    schedule(&#x27;actions&#x27;, this, function () {
-      this.children.addObject(child);
-    });
-  },
+    // isActive comes from parent component, so only available after render...
+    scheduleOnce(&#x27;afterRender&#x27;, this, this._setActive);
 
-  /**
-   * Remove the child component from this parent component
-   *
-   * @method removeChild
-   * @param child
-   * @public
-   */
-  removeChild(child) {
-    schedule(&#x27;actions&#x27;, this, function () {
-      this.children.removeObject(child);
-    });
-  },
-});
+    addObserver(this, &#x27;isActive&#x27;, null, this._showHide, true);
+  }
+}
 
     </pre>
 </div>

@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <title>addon/mixins/component-parent.js - ember-bootstrap</title>
+  <title>addon/components/bs-collapse.js - ember-bootstrap</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="../assets/css/api.css">
   <script type="text/javascript" src="//use.typekit.net/dkq5epu.js"></script>
@@ -54,64 +54,316 @@
         <div id="docs-main">
           <div class="content">
 <div class="page-header">
-    <h1>addon/mixins/component-parent.js <small>File</small></h1>
+    <h1>addon/components/bs-collapse.js <small>File</small></h1>
 </div>
 
 <div class="file">
     <pre class="prettyprint linenums">
-import { schedule } from &#x27;@ember/runloop&#x27;;
-import { A } from &#x27;@ember/array&#x27;;
-import Mixin from &#x27;@ember/object/mixin&#x27;;
+import { layout as templateLayout, tagName } from &#x27;@ember-decorators/component&#x27;;
+import layout from &#x27;ember-bootstrap/templates/components/bs-collapse&#x27;;
+import { alias, and, not } from &#x27;@ember/object/computed&#x27;;
+import { addObserver } from &#x27;@ember/object/observers&#x27;;
+import Component from &#x27;@ember/component&#x27;;
+import { isPresent, isNone } from &#x27;@ember/utils&#x27;;
+import { next } from &#x27;@ember/runloop&#x27;;
+import { camelize } from &#x27;@ember/string&#x27;;
+import transitionEnd from &#x27;ember-bootstrap/utils/transition-end&#x27;;
+import { assert } from &#x27;@ember/debug&#x27;;
+import defaultValue from &#x27;ember-bootstrap/utils/default-decorator&#x27;;
+import { computed } from &#x27;@ember/object&#x27;;
 
 /**
- * Mixin for components that act as a parent component in a parent-child relationship of components
- *
- * @class ComponentParent
- * @namespace Mixins
- * @private
- */
-// eslint-disable-next-line ember/no-new-mixins
-export default Mixin.create({
+  An Ember component that mimics the behaviour of [Bootstrap&#x27;s collapse.js plugin](http://getbootstrap.com/javascript/#collapse)
+
+  ### Usage
+
+  &#x60;&#x60;&#x60;hbs
+  &lt;BsCollapse @collapsed={{this.collapsed}}&gt;
+    &lt;div class=&quot;well&quot;&gt;
+      &lt;h2&gt;Collapse&lt;/h2&gt;
+      &lt;p&gt;This is collapsible content&lt;/p&gt;
+    &lt;/div&gt;
+  &lt;/BsCollapse&gt;
+  &#x60;&#x60;&#x60;
+
+  @class Collapse
+  @namespace Components
+  @extends Ember.Component
+  @public
+*/
+@tagName(&#x27;&#x27;)
+@templateLayout(layout)
+export default class Collapse extends Component {
   /**
-   * Array of registered child components
+   * Collapsed/expanded state
    *
-   * @property children
-   * @type array
+   * @property collapsed
+   * @type boolean
+   * @default true
+   * @public
+   */
+  @defaultValue
+  collapsed = true;
+
+  /**
+   * True if this item is expanded
+   *
+   * @property active
+   * @private
+   */
+  @defaultValue
+  active = !this.collapsed;
+
+  @not(&#x27;transitioning&#x27;)
+  collapse;
+
+  @alias(&#x27;transitioning&#x27;)
+  collapsing;
+
+  @and(&#x27;collapse&#x27;, &#x27;active&#x27;)
+  showContent;
+
+  /**
+   * true if the component is currently transitioning
+   *
+   * @property transitioning
+   * @type boolean
+   * @private
+   */
+  @defaultValue
+  transitioning = false;
+
+  /**
+   * The size of the element when collapsed. Defaults to 0.
+   *
+   * @property collapsedSize
+   * @type number
+   * @default 0
+   * @public
+   */
+  @defaultValue
+  collapsedSize = 0;
+
+  /**
+   * The size of the element when expanded. When null the value is calculated automatically to fit the containing elements.
+   *
+   * @property expandedSize
+   * @type number
+   * @default null
+   * @public
+   */
+  expandedSize = null;
+
+  /**
+   * Calculates a hash for style attribute.
+   */
+  @computed(&#x27;collapseDimension&#x27;, &#x27;collapseSize&#x27;)
+  get cssStyle() {
+    if (isNone(this.collapseSize)) {
+      return {};
+    }
+
+    return {
+      [this.collapseDimension]: &#x60;${this.collapseSize}px&#x60;,
+    };
+  }
+
+  /**
+   * Usually the size (height) of the element is only set while transitioning, and reseted afterwards. Set to true to always set a size.
+   *
+   * @property resetSizeWhenNotCollapsing
+   * @type boolean
+   * @default true
+   * @private
+   */
+  resetSizeWhenNotCollapsing = true;
+
+  /**
+   * The direction (height/width) of the collapse animation.
+   * When setting this to &#x27;width&#x27; you should also define custom CSS transitions for the width property, as the Bootstrap
+   * CSS does only support collapsible elements for the height direction.
+   *
+   * @property collapseDimension
+   * @type string
+   * @default &#x27;height&#x27;
+   * @public
+   */
+  collapseDimension = &#x27;height&#x27;;
+
+  /**
+   * The duration of the fade transition
+   *
+   * @property transitionDuration
+   * @type number
+   * @default 350
+   * @public
+   */
+  transitionDuration = 350;
+
+  collapseSize = null;
+
+  setCollapseSize(size) {
+    let dimension = this.collapseDimension;
+
+    assert(
+      &#x60;collapseDimension must be either &quot;width&quot; or &quot;height&quot;. ${dimension} given.&#x60;,
+      [&#x27;width&#x27;, &#x27;height&#x27;].indexOf(dimension) !== -1
+    );
+
+    this.set(&#x27;collapseSize&#x27;, size);
+  }
+
+  /**
+   * The action to be sent when the element is about to be hidden.
+   *
+   * @event onHide
+   * @public
+   */
+  onHide() {}
+
+  /**
+   * The action to be sent after the element has been completely hidden (including the CSS transition).
+   *
+   * @event onHidden
+   * @public
+   */
+  onHidden() {}
+
+  /**
+   * The action to be sent when the element is about to be shown.
+   *
+   * @event onShow
+   * @public
+   */
+  onShow() {}
+
+  /**
+   * The action to be sent after the element has been completely shown (including the CSS transition).
+   *
+   * @event onShown
+   * @public
+   */
+  onShown() {}
+
+  /**
+   * Triggers the show transition
+   *
+   * @method show
    * @protected
    */
-  children: null,
+  show() {
+    this.onShow();
+
+    this.setProperties({
+      transitioning: true,
+      active: true,
+    });
+    this.setCollapseSize(this.collapsedSize);
+
+    transitionEnd(this._element, this.transitionDuration).then(() =&gt; {
+      if (this.isDestroyed) {
+        return;
+      }
+      this.set(&#x27;transitioning&#x27;, false);
+      if (this.resetSizeWhenNotCollapsing) {
+        this.setCollapseSize(null);
+      }
+      this.onShown();
+    });
+
+    next(this, function () {
+      if (!this.isDestroyed) {
+        this.setCollapseSize(this.getExpandedSize(&#x27;show&#x27;));
+      }
+    });
+  }
+
+  /**
+   * Get the size of the element when expanded
+   *
+   * @method getExpandedSize
+   * @param action
+   * @return {Number}
+   * @private
+   */
+  getExpandedSize(action) {
+    let expandedSize = this.expandedSize;
+    if (isPresent(expandedSize)) {
+      return expandedSize;
+    }
+
+    let collapseElement = this._element;
+    let prefix = action === &#x27;show&#x27; ? &#x27;scroll&#x27; : &#x27;offset&#x27;;
+    let measureProperty = camelize(&#x60;${prefix}-${this.collapseDimension}&#x60;);
+    return collapseElement[measureProperty];
+  }
+
+  /**
+   * Triggers the hide transition
+   *
+   * @method hide
+   * @protected
+   */
+  hide() {
+    this.onHide();
+
+    this.setProperties({
+      transitioning: true,
+      active: false,
+    });
+    this.setCollapseSize(this.getExpandedSize(&#x27;hide&#x27;));
+
+    transitionEnd(this._element, this.transitionDuration).then(() =&gt; {
+      if (this.isDestroyed) {
+        return;
+      }
+      this.set(&#x27;transitioning&#x27;, false);
+      if (this.resetSizeWhenNotCollapsing) {
+        this.setCollapseSize(null);
+      }
+      this.onHidden();
+    });
+
+    next(this, function () {
+      if (!this.isDestroyed) {
+        this.setCollapseSize(this.collapsedSize);
+      }
+    });
+  }
+
+  _onCollapsedChange() {
+    let collapsed = this.collapsed;
+    let active = this.active;
+    if (collapsed !== active) {
+      return;
+    }
+    if (collapsed === false) {
+      this.show();
+    } else {
+      this.hide();
+    }
+  }
+
+  _updateCollapsedSize() {
+    if (!this.resetSizeWhenNotCollapsing &amp;&amp; this.collapsed &amp;&amp; !this.collapsing) {
+      this.setCollapseSize(this.collapsedSize);
+    }
+  }
+
+  _updateExpandedSize() {
+    if (!this.resetSizeWhenNotCollapsing &amp;&amp; !this.collapsed &amp;&amp; !this.collapsing) {
+      this.setCollapseSize(this.expandedSize);
+    }
+  }
 
   init() {
-    this._super(...arguments);
-    this.set(&#x27;children&#x27;, A());
-  },
+    super.init(...arguments);
 
-  /**
-   * Register a component as a child of this parent
-   *
-   * @method registerChild
-   * @param child
-   * @public
-   */
-  registerChild(child) {
-    schedule(&#x27;actions&#x27;, this, function () {
-      this.children.addObject(child);
-    });
-  },
-
-  /**
-   * Remove the child component from this parent component
-   *
-   * @method removeChild
-   * @param child
-   * @public
-   */
-  removeChild(child) {
-    schedule(&#x27;actions&#x27;, this, function () {
-      this.children.removeObject(child);
-    });
-  },
-});
+    addObserver(this, &#x27;collapsed&#x27;, null, this._onCollapsedChange, true);
+    addObserver(this, &#x27;collapsedSize&#x27;, null, this._updateCollapsedSize, true);
+    addObserver(this, &#x27;expandedSize&#x27;, null, this._updateExpandedSize, true);
+  }
+}
 
     </pre>
 </div>

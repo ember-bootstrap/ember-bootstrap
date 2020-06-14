@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <title>addon/mixins/component-parent.js - ember-bootstrap</title>
+  <title>addon/components/bs-progress.js - ember-bootstrap</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="../assets/css/api.css">
   <script type="text/javascript" src="//use.typekit.net/dkq5epu.js"></script>
@@ -54,64 +54,60 @@
         <div id="docs-main">
           <div class="content">
 <div class="page-header">
-    <h1>addon/mixins/component-parent.js <small>File</small></h1>
+    <h1>addon/components/bs-progress.js <small>File</small></h1>
 </div>
 
 <div class="file">
     <pre class="prettyprint linenums">
-import { schedule } from &#x27;@ember/runloop&#x27;;
-import { A } from &#x27;@ember/array&#x27;;
-import Mixin from &#x27;@ember/object/mixin&#x27;;
+import { layout as templateLayout, tagName } from &#x27;@ember-decorators/component&#x27;;
+import Component from &#x27;@ember/component&#x27;;
+import layout from &#x27;ember-bootstrap/templates/components/bs-progress&#x27;;
+import defaultValue from &#x27;ember-bootstrap/utils/default-decorator&#x27;;
 
 /**
- * Mixin for components that act as a parent component in a parent-child relationship of components
- *
- * @class ComponentParent
- * @namespace Mixins
- * @private
- */
-// eslint-disable-next-line ember/no-new-mixins
-export default Mixin.create({
-  /**
-   * Array of registered child components
-   *
-   * @property children
-   * @type array
-   * @protected
-   */
-  children: null,
+  Component to display a Bootstrap progress bar, see http://getbootstrap.com/components/#progress.
 
-  init() {
-    this._super(...arguments);
-    this.set(&#x27;children&#x27;, A());
-  },
+  ### Usage
 
-  /**
-   * Register a component as a child of this parent
-   *
-   * @method registerChild
-   * @param child
-   * @public
-   */
-  registerChild(child) {
-    schedule(&#x27;actions&#x27;, this, function () {
-      this.children.addObject(child);
-    });
-  },
+  The component yields a [Components.ProgressBar)(Components.ProgressBar.html) component that represents a single bar.
+  Use the &#x60;value&#x60; property to control the progress bar&#x27;s width. To apply the different styling options supplied by
+  Bootstrap, use the appropriate properties like &#x60;type&#x60;, &#x60;showLabel&#x60;, &#x60;striped&#x60; or &#x60;animate&#x60;.
 
+  &#x60;&#x60;&#x60;hbs
+  &lt;BsProgress as |pg| &gt;
+    &lt;pg.bar @value={{this.progressValue}} @minValue={{0}} @maxValue={{10}} @showLabel={{true}} @type=&quot;danger&quot; /&gt;
+  &lt;/BsProgress&gt;
+  &#x60;&#x60;&#x60;
+
+  ### Stacked
+
+  You can place multiple progress bar components in a single progress component to
+  create a stack of progress bars as seen in http://getbootstrap.com/components/#progress-stacked.
+
+  &#x60;&#x60;&#x60;hbs
+  &lt;BsProgress as |pg| &gt;
+    &lt;pg.bar @value={{this.progressValue1}} @type=&quot;success&quot; /&gt;
+    &lt;pg.bar @value={{this.progressValue2}} @type=&quot;warning&quot; /&gt;
+    &lt;pg.bar @value={{this.progressValue3}} @type=&quot;danger&quot; /&gt;
+  &lt;/BsProgress&gt;
+  &#x60;&#x60;&#x60;
+
+  @class Progress
+  @namespace Components
+  @extends Ember.Component
+  @public
+*/
+@tagName(&#x27;&#x27;)
+@templateLayout(layout)
+export default class Progress extends Component {
   /**
-   * Remove the child component from this parent component
-   *
-   * @method removeChild
-   * @param child
-   * @public
+   * @property progressBarComponent
+   * @type {String}
+   * @private
    */
-  removeChild(child) {
-    schedule(&#x27;actions&#x27;, this, function () {
-      this.children.removeObject(child);
-    });
-  },
-});
+  @defaultValue
+  progressBarComponent = &#x27;bs-progress/bar&#x27;;
+}
 
     </pre>
 </div>

@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <title>Mixins.ComponentParent - ember-bootstrap</title>
+  <title>Components.NavItem - ember-bootstrap</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="../assets/css/api.css">
   <script type="text/javascript" src="//use.typekit.net/dkq5epu.js"></script>
@@ -54,10 +54,10 @@
         <div id="docs-main">
           <div class="content">
 <div class="card">
-  <h1 class="card-header">Mixins.ComponentParent <span class="badge badge-private small">private</span></h1>
+  <h1 class="card-header">Components.NavItem <span class="badge badge-public small">public</span></h1>
   <div class="card-body">
 
-<p>Mixin for components that act as a parent component in a parent-child relationship of components</p>
+<p>Component for each item within a <a href="Components.Nav.html">Components.Nav</a> component. Have a look there for examples.</p>
 
 
   </div>
@@ -65,10 +65,24 @@
   <div class="card-footer text-muted">
     <dl class="row m-0">
         <dt class="col-sm-3">
+          Uses
+        </dt>
+        <dd class="col-sm-9">
+          <ul class="list-inline mb-0">
+              <li class="list-inline-item"><a href="Mixins.ComponentParent.html">Mixins.ComponentParent</a></li>
+          </ul>
+        </dd>
+        <dt class="col-sm-3">
+          Extends
+        </dt>
+        <dd class="col-sm-9">
+          Ember.Component
+        </dd>
+        <dt class="col-sm-3">
           Defined in
         </dt>
         <dd class="col-sm-9">
-          <a href="../files/addon_mixins_component-parent.js.html#l5"><code>addon&#x2F;mixins&#x2F;component-parent.js:5</code></a>
+          <a href="../files/addon_components_bs-nav_item.js.html#l13"><code>addon&#x2F;components&#x2F;bs-nav&#x2F;item.js:13</code></a>
         </dd>
 
     </dl>
@@ -116,6 +130,7 @@
 
         <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#methods">Methods</a></li>
         <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#properties">Properties</a></li>
+        <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#events">Events</a></li>
     </ul>
   </div>
   <div class="card-body">
@@ -126,12 +141,12 @@
           <div class="index-section methods">
             <h3>Methods</h3>
 
-            <ul class="index-list methods">
-                <li class="index-item method public">
+            <ul class="index-list methods extends">
+                <li class="index-item method public inherited">
                   <a href="#" data-tabid="#methods" data-anchor="#method_registerChild" data-tablink="registerChild">registerChild</a>
 
                 </li>
-                <li class="index-item method public">
+                <li class="index-item method public inherited">
                   <a href="#" data-tabid="#methods" data-anchor="#method_removeChild" data-tablink="removeChild">removeChild</a>
 
                 </li>
@@ -141,20 +156,45 @@
           <div class="index-section properties">
             <h3>Properties</h3>
 
-            <ul class="index-list properties">
-                <li class="index-item property protected">
+            <ul class="index-list properties extends">
+                <li class="index-item property public">
+                  <a href="#" data-tabid="#properties" data-anchor="#property_active"
+                     data-tablink="active">active</a>
+
+                </li>
+                <li class="index-item property private">
+                  <a href="#" data-tabid="#properties" data-anchor="#property_childLinks"
+                     data-tablink="childLinks">childLinks</a>
+
+                </li>
+                <li class="index-item property protected inherited">
                   <a href="#" data-tabid="#properties" data-anchor="#property_children"
                      data-tablink="children">children</a>
+
+                </li>
+                <li class="index-item property public">
+                  <a href="#" data-tabid="#properties" data-anchor="#property_disabled"
+                     data-tablink="disabled">disabled</a>
 
                 </li>
             </ul>
           </div>
 
 
+          <div class="index-section events">
+            <h3>Events</h3>
+
+            <ul class="index-list events extends">
+                <li class="index-item event public">
+                  <a href="#" data-tabid="#events" data-anchor="#event_onClick" data-tablink="onClick">onClick</a>
+
+                </li>
+            </ul>
+          </div>
       </div>
 
         <div id="methods" class="tab-pane">
-            <div id="method_registerChild" class="method item public">
+            <div id="method_registerChild" class="method item public inherited">
                 <h3 class="name">registerChild
                 <span class="small"> </span>
                 </h3>
@@ -168,8 +208,8 @@
             
             
                 <div class="meta">
-                            <p>
-                            Defined in
+                            <p>Inherited from
+                            <a href="../classes/Mixins.ComponentParent.html#method_registerChild">Mixins.ComponentParent</a>:
                     <a href="../files/addon_mixins_component-parent.js.html#l28"><code>addon&#x2F;mixins&#x2F;component-parent.js:28</code></a>
                     </p>
             
@@ -178,8 +218,7 @@
                 </div>
             
                 <div class="description">
-                    <p>Register a component as a child of this parent</p>
-            
+                    Register a component as a child of this parent
                 </div>
             
                     <div class="params">
@@ -192,7 +231,7 @@
             
             
                                 <div class="param-description">
-                                    
+                                     
                                 </div>
             
                             </li>
@@ -201,7 +240,7 @@
             
             
             </div>
-            <div id="method_removeChild" class="method item public">
+            <div id="method_removeChild" class="method item public inherited">
                 <h3 class="name">removeChild
                 <span class="small"> </span>
                 </h3>
@@ -215,8 +254,8 @@
             
             
                 <div class="meta">
-                            <p>
-                            Defined in
+                            <p>Inherited from
+                            <a href="../classes/Mixins.ComponentParent.html#method_removeChild">Mixins.ComponentParent</a>:
                     <a href="../files/addon_mixins_component-parent.js.html#l41"><code>addon&#x2F;mixins&#x2F;component-parent.js:41</code></a>
                     </p>
             
@@ -225,8 +264,7 @@
                 </div>
             
                 <div class="description">
-                    <p>Remove the child component from this parent component</p>
-            
+                    Remove the child component from this parent component
                 </div>
             
                     <div class="params">
@@ -239,7 +277,7 @@
             
             
                                 <div class="param-description">
-                                    
+                                     
                                 </div>
             
                             </li>
@@ -251,8 +289,69 @@
         </div>
 
         <div id="properties" class="tab-pane">
+            <div id="property_active"
+                 class="property item public">
+              <h3 class="name">active
+                <span class="badge badge-secondary small">boolean</span>
+                  <span class="badge badge-public small">public</span>
+            
+            
+            
+            
+              </h3>
+            
+              <div class="meta">
+                  <p>
+                      Defined in
+                  <a href="../files/addon_components_bs-nav_item.js.html#l42"><code>addon&#x2F;components&#x2F;bs-nav&#x2F;item.js:42</code></a>
+              </p>
+            
+            
+              </div>
+            
+              <div class="description">
+                <p>Render the nav item as active.
+            By default it will look at any nested <code>link-to</code> components and make itself active if there is an active link
+            (i.e. the link points to the current route).
+            See the <a href="http://emberjs.com/api/classes/Ember.Templates.helpers.html#toc_handling-current-route">link-to API</a></p>
+            
+              </div>
+            
+            
+            
+            
+            </div>
+            <div id="property_childLinks"
+                 class="property item private">
+              <h3 class="name">childLinks
+                <span class="badge badge-secondary small">unknown</span>
+                  <span class="badge badge-private small">private</span>
+            
+            
+            
+            
+              </h3>
+            
+              <div class="meta">
+                  <p>
+                      Defined in
+                  <a href="../files/addon_components_bs-nav_item.js.html#l59"><code>addon&#x2F;components&#x2F;bs-nav&#x2F;item.js:59</code></a>
+              </p>
+            
+            
+              </div>
+            
+              <div class="description">
+                <p>Collection of all <code>Ember.LinkComponent</code>s that are children</p>
+            
+              </div>
+            
+            
+            
+            
+            </div>
             <div id="property_children"
-                 class="property item protected">
+                 class="property item protected inherited">
               <h3 class="name">children
                 <span class="badge badge-secondary small">array</span>
                   <span class="badge badge-protected small">protected</span>
@@ -263,8 +362,8 @@
               </h3>
             
               <div class="meta">
-                  <p>
-                      Defined in
+                  <p>Inherited from
+                    <a href="../classes/Mixins.ComponentParent.html#property_children">Mixins.ComponentParent</a>:
                   <a href="../files/addon_mixins_component-parent.js.html#l14"><code>addon&#x2F;mixins&#x2F;component-parent.js:14</code></a>
               </p>
             
@@ -272,7 +371,37 @@
               </div>
             
               <div class="description">
-                <p>Array of registered child components</p>
+                Array of registered child components
+              </div>
+            
+            
+            
+            
+            </div>
+            <div id="property_disabled"
+                 class="property item public">
+              <h3 class="name">disabled
+                <span class="badge badge-secondary small">boolean</span>
+                  <span class="badge badge-public small">public</span>
+            
+            
+            
+            
+              </h3>
+            
+              <div class="meta">
+                  <p>
+                      Defined in
+                  <a href="../files/addon_components_bs-nav_item.js.html#l26"><code>addon&#x2F;components&#x2F;bs-nav&#x2F;item.js:26</code></a>
+              </p>
+            
+            
+              </div>
+            
+              <div class="description">
+                <p>Render the nav item as disabled (see <a href="http://getbootstrap.com/components/#nav-disabled-links">Bootstrap docs</a>).
+            By default it will look at any nested <code>link-to</code> components and make itself disabled if there is a disabled link.
+            See the <a href="http://emberjs.com/api/classes/Ember.Templates.helpers.html#toc_disabling-the-code-link-to-code-component">link-to API</a></p>
             
               </div>
             
@@ -283,6 +412,34 @@
         </div>
 
 
+        <div id="events" class="tab-pane">
+            <div id="event_onClick" class="events item public">
+                <h3 class="name"><code>onClick</code></h3>
+                <span class="type"></span>
+            
+            
+                    <span class="flag public">public</span>
+            
+            
+            
+                <div class="meta">
+                            <p>
+                            Defined in
+                    <a href="../files/addon_components_bs-nav_item.js.html#l82"><code>addon&#x2F;components&#x2F;bs-nav&#x2F;item.js:82</code></a>
+                    </p>
+            
+            
+                </div>
+            
+                <div class="description">
+                    <p>Called when clicking the nav item</p>
+            
+                </div>
+            
+            
+            
+            </div>
+        </div>
     </div>
   </div>
 </div>

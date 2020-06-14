@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <title>addon/mixins/component-parent.js - ember-bootstrap</title>
+  <title>addon/components/bs-carousel/slide.js - ember-bootstrap</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="../assets/css/api.css">
   <script type="text/javascript" src="//use.typekit.net/dkq5epu.js"></script>
@@ -54,64 +54,185 @@
         <div id="docs-main">
           <div class="content">
 <div class="page-header">
-    <h1>addon/mixins/component-parent.js <small>File</small></h1>
+    <h1>addon/components/bs-carousel/slide.js <small>File</small></h1>
 </div>
 
 <div class="file">
     <pre class="prettyprint linenums">
-import { schedule } from &#x27;@ember/runloop&#x27;;
-import { A } from &#x27;@ember/array&#x27;;
-import Mixin from &#x27;@ember/object/mixin&#x27;;
+import { layout as templateLayout, tagName } from &#x27;@ember-decorators/component&#x27;;
+import { computed } from &#x27;@ember/object&#x27;;
+import Component from &#x27;@ember/component&#x27;;
+import ComponentChild from &#x27;ember-bootstrap/mixins/component-child&#x27;;
+import layout from &#x27;ember-bootstrap/templates/components/bs-carousel/slide&#x27;;
+import { next } from &#x27;@ember/runloop&#x27;;
+import overrideableCP from &#x27;ember-bootstrap/utils/cp/overrideable&#x27;;
+import { addObserver } from &#x27;@ember/object/observers&#x27;;
 
 /**
- * Mixin for components that act as a parent component in a parent-child relationship of components
- *
- * @class ComponentParent
- * @namespace Mixins
- * @private
+  A visible user-defined slide.
+
+  See [Components.Carousel](Components.Carousel.html) for examples.
+
+  @class CarouselSlide
+  @namespace Components
+  @extends Ember.Component
+  @public
  */
-// eslint-disable-next-line ember/no-new-mixins
-export default Mixin.create({
+@tagName(&#x27;&#x27;)
+@templateLayout(layout)
+export default class CarouselSlide extends Component.extend(ComponentChild) {
   /**
-   * Array of registered child components
+   * Defines slide visibility.
    *
-   * @property children
-   * @type array
-   * @protected
+   * @property active
+   * @type boolean
+   * @private
    */
-  children: null,
+  @overrideableCP(&#x27;isCurrentSlide&#x27;, &#x27;presentationState&#x27;, function () {
+    return this.isCurrentSlide &amp;&amp; this.presentationState === null;
+  })
+  active;
+
+  /**
+   * @private
+   * @property isCurrentSlide
+   * @type boolean
+   */
+  @(computed(&#x27;currentSlide&#x27;).readOnly())
+  get isCurrentSlide() {
+    return this.currentSlide === this;
+  }
+
+  /**
+   * @private
+   * @property isFollowingSlide
+   * @type boolean
+   */
+  @(computed(&#x27;followingSlide&#x27;).readOnly())
+  get isFollowingSlide() {
+    return this.followingSlide === this;
+  }
+
+  /**
+   * Slide is moving to the left.
+   *
+   * @property left
+   * @type boolean
+   * @private
+   */
+  left = false;
+
+  /**
+   * Next to appear in a left sliding.
+   *
+   * @property next
+   * @type boolean
+   * @private
+   */
+  next = false;
+
+  /**
+   * Next to appear in a right sliding.
+   *
+   * @property prev
+   * @type boolean
+   * @private
+   */
+  prev = false;
+
+  /**
+   * Slide is moving to the right.
+   *
+   * @property right
+   * @type boolean
+   * @private
+   */
+  right = false;
+
+  /**
+   * Coordinates the execution of a presentation.
+   *
+   * @method presentationStateObserver
+   * @private
+   */
+  presentationStateObserver() {
+    let presentationState = this.presentationState;
+    if (this.isCurrentSlide) {
+      switch (presentationState) {
+        case &#x27;didTransition&#x27;:
+          this.currentSlideDidTransition();
+          break;
+        case &#x27;willTransit&#x27;:
+          this.currentSlideWillTransit();
+          break;
+      }
+    }
+    if (this.isFollowingSlide) {
+      switch (presentationState) {
+        case &#x27;didTransition&#x27;:
+          this.followingSlideDidTransition();
+          break;
+        case &#x27;willTransit&#x27;:
+          this.followingSlideWillTransit();
+          break;
+      }
+    }
+  }
 
   init() {
-    this._super(...arguments);
-    this.set(&#x27;children&#x27;, A());
-  },
+    super.init(...arguments);
+    addObserver(this, &#x27;presentationState&#x27;, null, this.presentationStateObserver, true);
+  }
 
   /**
-   * Register a component as a child of this parent
-   *
-   * @method registerChild
-   * @param child
-   * @public
+   * @method currentSlideDidTransition
+   * @private
    */
-  registerChild(child) {
-    schedule(&#x27;actions&#x27;, this, function () {
-      this.children.addObject(child);
-    });
-  },
+  currentSlideDidTransition() {
+    this.set(this.directionalClassName, false);
+    this.set(&#x27;active&#x27;, false);
+  }
 
   /**
-   * Remove the child component from this parent component
-   *
-   * @method removeChild
-   * @param child
-   * @public
+   * @method currentSlideWillTransit
+   * @private
    */
-  removeChild(child) {
-    schedule(&#x27;actions&#x27;, this, function () {
-      this.children.removeObject(child);
+  currentSlideWillTransit() {
+    this.set(&#x27;active&#x27;, true);
+    next(this, function () {
+      this.set(this.directionalClassName, true);
     });
-  },
-});
+  }
+
+  /**
+   * @method followingSlideDidTransition
+   * @private
+   */
+  followingSlideDidTransition() {
+    this.set(&#x27;active&#x27;, true);
+    this.set(this.directionalClassName, false);
+    this.set(this.orderClassName, false);
+  }
+
+  /**
+   * @method followingSlideWillTransit
+   * @private
+   */
+  followingSlideWillTransit() {
+    this.set(this.orderClassName, true);
+    next(this, function () {
+      this.reflow();
+      this.set(this.directionalClassName, true);
+    });
+  }
+
+  /**
+   * Makes things more stable, especially when fast changing.
+   */
+  reflow() {
+    this._element.offsetHeight;
+  }
+}
 
     </pre>
 </div>

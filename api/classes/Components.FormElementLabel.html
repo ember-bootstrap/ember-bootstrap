@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <title>Mixins.ComponentParent - ember-bootstrap</title>
+  <title>Components.FormElementLabel - ember-bootstrap</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="../assets/css/api.css">
   <script type="text/javascript" src="//use.typekit.net/dkq5epu.js"></script>
@@ -54,10 +54,9 @@
         <div id="docs-main">
           <div class="content">
 <div class="card">
-  <h1 class="card-header">Mixins.ComponentParent <span class="badge badge-private small">private</span></h1>
+  <h1 class="card-header">Components.FormElementLabel <span class="badge badge-private small">private</span></h1>
   <div class="card-body">
 
-<p>Mixin for components that act as a parent component in a parent-child relationship of components</p>
 
 
   </div>
@@ -65,10 +64,16 @@
   <div class="card-footer text-muted">
     <dl class="row m-0">
         <dt class="col-sm-3">
+          Extends
+        </dt>
+        <dd class="col-sm-9">
+          Ember.Component
+        </dd>
+        <dt class="col-sm-3">
           Defined in
         </dt>
         <dd class="col-sm-9">
-          <a href="../files/addon_mixins_component-parent.js.html#l5"><code>addon&#x2F;mixins&#x2F;component-parent.js:5</code></a>
+          <a href="../files/addon_components_bs-form_element_label.js.html#l9"><code>addon&#x2F;components&#x2F;bs-form&#x2F;element&#x2F;label.js:9</code></a>
         </dd>
 
     </dl>
@@ -114,7 +119,6 @@
     <ul class="nav nav-tabs card-header-tabs">
       <li class="nav-item active"><a class="nav-link" data-toggle="tab" href="#index">Index</a></li>
 
-        <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#methods">Methods</a></li>
         <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#properties">Properties</a></li>
     </ul>
   </div>
@@ -123,28 +127,54 @@
       <div id="index" class="tab-pane active">
         <h2 class="off-left">Item Index</h2>
 
-          <div class="index-section methods">
-            <h3>Methods</h3>
-
-            <ul class="index-list methods">
-                <li class="index-item method public">
-                  <a href="#" data-tabid="#methods" data-anchor="#method_registerChild" data-tablink="registerChild">registerChild</a>
-
-                </li>
-                <li class="index-item method public">
-                  <a href="#" data-tabid="#methods" data-anchor="#method_removeChild" data-tablink="removeChild">removeChild</a>
-
-                </li>
-            </ul>
-          </div>
 
           <div class="index-section properties">
             <h3>Properties</h3>
 
-            <ul class="index-list properties">
-                <li class="index-item property protected">
-                  <a href="#" data-tabid="#properties" data-anchor="#property_children"
-                     data-tablink="children">children</a>
+            <ul class="index-list properties extends">
+                <li class="index-item property public">
+                  <a href="#" data-tabid="#properties" data-anchor="#property_controlType"
+                     data-tablink="controlType">controlType</a>
+
+                </li>
+                <li class="index-item property public">
+                  <a href="#" data-tabid="#properties" data-anchor="#property_formElementId"
+                     data-tablink="formElementId">formElementId</a>
+
+                </li>
+                <li class="index-item property public">
+                  <a href="#" data-tabid="#properties" data-anchor="#property_formLayout"
+                     data-tablink="formLayout">formLayout</a>
+
+                </li>
+                <li class="index-item property public">
+                  <a href="#" data-tabid="#properties" data-anchor="#property_invisibleLabel"
+                     data-tablink="invisibleLabel">invisibleLabel</a>
+
+                </li>
+                <li class="index-item property private">
+                  <a href="#" data-tabid="#properties" data-anchor="#property_isCheckbox"
+                     data-tablink="isCheckbox">isCheckbox</a>
+
+                </li>
+                <li class="index-item property private">
+                  <a href="#" data-tabid="#properties" data-anchor="#property_isHorizontal"
+                     data-tablink="isHorizontal">isHorizontal</a>
+
+                </li>
+                <li class="index-item property public">
+                  <a href="#" data-tabid="#properties" data-anchor="#property_label"
+                     data-tablink="label">label</a>
+
+                </li>
+                <li class="index-item property public">
+                  <a href="#" data-tabid="#properties" data-anchor="#property_labelClass"
+                     data-tablink="labelClass">labelClass</a>
+
+                </li>
+                <li class="index-item property public">
+                  <a href="#" data-tabid="#properties" data-anchor="#property_size"
+                     data-tablink="size">size</a>
 
                 </li>
             </ul>
@@ -153,109 +183,51 @@
 
       </div>
 
-        <div id="methods" class="tab-pane">
-            <div id="method_registerChild" class="method item public">
-                <h3 class="name">registerChild
-                <span class="small"> </span>
-                </h3>
-            
-            
-            
-                    <span class="label label-public">public</span>
-            
-            
-            
-            
-            
-                <div class="meta">
-                            <p>
-                            Defined in
-                    <a href="../files/addon_mixins_component-parent.js.html#l28"><code>addon&#x2F;mixins&#x2F;component-parent.js:28</code></a>
-                    </p>
-            
-            
-            
-                </div>
-            
-                <div class="description">
-                    <p>Register a component as a child of this parent</p>
-            
-                </div>
-            
-                    <div class="params">
-                        <h4>Parameters:</h4>
-            
-                        <ul class="params-list">
-                            <li class="param">
-                                    <code class="param-name">child</code>
-                                    <span class="type">Object</span>
-            
-            
-                                <div class="param-description">
-                                    
-                                </div>
-            
-                            </li>
-                        </ul>
-                    </div>
-            
-            
-            </div>
-            <div id="method_removeChild" class="method item public">
-                <h3 class="name">removeChild
-                <span class="small"> </span>
-                </h3>
-            
-            
-            
-                    <span class="label label-public">public</span>
-            
-            
-            
-            
-            
-                <div class="meta">
-                            <p>
-                            Defined in
-                    <a href="../files/addon_mixins_component-parent.js.html#l41"><code>addon&#x2F;mixins&#x2F;component-parent.js:41</code></a>
-                    </p>
-            
-            
-            
-                </div>
-            
-                <div class="description">
-                    <p>Remove the child component from this parent component</p>
-            
-                </div>
-            
-                    <div class="params">
-                        <h4>Parameters:</h4>
-            
-                        <ul class="params-list">
-                            <li class="param">
-                                    <code class="param-name">child</code>
-                                    <span class="type">Object</span>
-            
-            
-                                <div class="param-description">
-                                    
-                                </div>
-            
-                            </li>
-                        </ul>
-                    </div>
-            
-            
-            </div>
-        </div>
 
         <div id="properties" class="tab-pane">
-            <div id="property_children"
-                 class="property item protected">
-              <h3 class="name">children
-                <span class="badge badge-secondary small">array</span>
-                  <span class="badge badge-protected small">protected</span>
+            <div id="property_controlType"
+                 class="property item public">
+              <h3 class="name">controlType
+                <span class="badge badge-secondary small">string</span>
+                  <span class="badge badge-public small">public</span>
+            
+            
+            
+            
+              </h3>
+            
+              <div class="meta">
+                  <p><strong>Default:</strong> &#x27;text&#x27;</p>
+                  <p>
+                      Defined in
+                  <a href="../files/addon_components_bs-form_element_label.js.html#l86"><code>addon&#x2F;components&#x2F;bs-form&#x2F;element&#x2F;label.js:86</code></a>
+              </p>
+            
+            
+              </div>
+            
+              <div class="description">
+                <p>The type of the control widget.
+            Supported types:</p>
+            <ul>
+            <li>'text'</li>
+            <li>'checkbox'</li>
+            <li>'textarea'</li>
+            <li>any other type will use an input tag with the <code>controlType</code> value as the type attribute (for e.g. HTML5 input
+            types like 'email'), and the same layout as the 'text' type</li>
+            </ul>
+            
+              </div>
+            
+            
+            
+            
+            </div>
+            <div id="property_formElementId"
+                 class="property item public">
+              <h3 class="name">formElementId
+                <span class="badge badge-secondary small">{String}</span>
+                  <span class="badge badge-public small">public</span>
             
             
             
@@ -265,14 +237,220 @@
               <div class="meta">
                   <p>
                       Defined in
-                  <a href="../files/addon_mixins_component-parent.js.html#l14"><code>addon&#x2F;mixins&#x2F;component-parent.js:14</code></a>
+                  <a href="../files/addon_components_bs-form_element_label.js.html#l57"><code>addon&#x2F;components&#x2F;bs-form&#x2F;element&#x2F;label.js:57</code></a>
               </p>
             
             
               </div>
             
               <div class="description">
-                <p>Array of registered child components</p>
+                
+              </div>
+            
+            
+            
+            
+            </div>
+            <div id="property_formLayout"
+                 class="property item public">
+              <h3 class="name">formLayout
+                <span class="badge badge-secondary small">string</span>
+                  <span class="badge badge-public small">public</span>
+            
+            
+            
+            
+              </h3>
+            
+              <div class="meta">
+                  <p><strong>Default:</strong> &#x27;vertical&#x27;</p>
+                  <p>
+                      Defined in
+                  <a href="../files/addon_components_bs-form_element_label.js.html#l69"><code>addon&#x2F;components&#x2F;bs-form&#x2F;element&#x2F;label.js:69</code></a>
+              </p>
+            
+            
+              </div>
+            
+              <div class="description">
+                <p>The form layout used for the markup generation (see <a href="http://getbootstrap.com/css/#forms">http://getbootstrap.com/css/#forms</a>):</p>
+            <ul>
+            <li>'horizontal'</li>
+            <li>'vertical'</li>
+            <li>'inline'</li>
+            </ul>
+            <p>Defaults to the parent <code>form</code>'s <code>formLayout</code> property.</p>
+            
+              </div>
+            
+            
+            
+            
+            </div>
+            <div id="property_invisibleLabel"
+                 class="property item public">
+              <h3 class="name">invisibleLabel
+                <span class="badge badge-secondary small">boolean</span>
+                  <span class="badge badge-public small">public</span>
+            
+            
+            
+            
+              </h3>
+            
+              <div class="meta">
+                  <p>
+                      Defined in
+                  <a href="../files/addon_components_bs-form_element_label.js.html#l25"><code>addon&#x2F;components&#x2F;bs-form&#x2F;element&#x2F;label.js:25</code></a>
+              </p>
+            
+            
+              </div>
+            
+              <div class="description">
+                
+              </div>
+            
+            
+            
+            
+            </div>
+            <div id="property_isCheckbox"
+                 class="property item private">
+              <h3 class="name">isCheckbox
+                <span class="badge badge-secondary small">boolean</span>
+                  <span class="badge badge-private small">private</span>
+            
+            
+            
+            
+              </h3>
+            
+              <div class="meta">
+                  <p>
+                      Defined in
+                  <a href="../files/addon_components_bs-form_element_label.js.html#l104"><code>addon&#x2F;components&#x2F;bs-form&#x2F;element&#x2F;label.js:104</code></a>
+              </p>
+            
+            
+              </div>
+            
+              <div class="description">
+                <p>Indicates whether the type of the control widget equals <code>checkbox</code></p>
+            
+              </div>
+            
+            
+            
+            
+            </div>
+            <div id="property_isHorizontal"
+                 class="property item private">
+              <h3 class="name">isHorizontal
+                <span class="badge badge-secondary small">boolean</span>
+                  <span class="badge badge-private small">private</span>
+            
+            
+            
+            
+              </h3>
+            
+              <div class="meta">
+                  <p>
+                      Defined in
+                  <a href="../files/addon_components_bs-form_element_label.js.html#l114"><code>addon&#x2F;components&#x2F;bs-form&#x2F;element&#x2F;label.js:114</code></a>
+              </p>
+            
+            
+              </div>
+            
+              <div class="description">
+                <p>Indicates whether the form type equals <code>horizontal</code></p>
+            
+              </div>
+            
+            
+            
+            
+            </div>
+            <div id="property_label"
+                 class="property item public">
+              <h3 class="name">label
+                <span class="badge badge-secondary small">string</span>
+                  <span class="badge badge-public small">public</span>
+            
+            
+            
+            
+              </h3>
+            
+              <div class="meta">
+                  <p>
+                      Defined in
+                  <a href="../files/addon_components_bs-form_element_label.js.html#l19"><code>addon&#x2F;components&#x2F;bs-form&#x2F;element&#x2F;label.js:19</code></a>
+              </p>
+            
+            
+              </div>
+            
+              <div class="description">
+                
+              </div>
+            
+            
+            
+            
+            </div>
+            <div id="property_labelClass"
+                 class="property item public">
+              <h3 class="name">labelClass
+                <span class="badge badge-secondary small">{String}</span>
+                  <span class="badge badge-public small">public</span>
+            
+            
+            
+            
+              </h3>
+            
+              <div class="meta">
+                  <p>
+                      Defined in
+                  <a href="../files/addon_components_bs-form_element_label.js.html#l63"><code>addon&#x2F;components&#x2F;bs-form&#x2F;element&#x2F;label.js:63</code></a>
+              </p>
+            
+            
+              </div>
+            
+              <div class="description">
+                
+              </div>
+            
+            
+            
+            
+            </div>
+            <div id="property_size"
+                 class="property item public">
+              <h3 class="name">size
+                <span class="badge badge-secondary small">String</span>
+                  <span class="badge badge-public small">public</span>
+            
+            
+            
+            
+              </h3>
+            
+              <div class="meta">
+                  <p>
+                      Defined in
+                  <a href="../files/addon_components_bs-form_element_label.js.html#l47"><code>addon&#x2F;components&#x2F;bs-form&#x2F;element&#x2F;label.js:47</code></a>
+              </p>
+            
+            
+              </div>
+            
+              <div class="description">
+                <p>[BS4 only] Property for size styling, set to 'lg', 'sm'</p>
             
               </div>
             

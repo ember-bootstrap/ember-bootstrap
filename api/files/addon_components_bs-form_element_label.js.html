@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <title>addon/mixins/component-parent.js - ember-bootstrap</title>
+  <title>addon/components/bs-form/element/label.js - ember-bootstrap</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="../assets/css/api.css">
   <script type="text/javascript" src="//use.typekit.net/dkq5epu.js"></script>
@@ -54,64 +54,134 @@
         <div id="docs-main">
           <div class="content">
 <div class="page-header">
-    <h1>addon/mixins/component-parent.js <small>File</small></h1>
+    <h1>addon/components/bs-form/element/label.js <small>File</small></h1>
 </div>
 
 <div class="file">
     <pre class="prettyprint linenums">
-import { schedule } from &#x27;@ember/runloop&#x27;;
-import { A } from &#x27;@ember/array&#x27;;
-import Mixin from &#x27;@ember/object/mixin&#x27;;
+import { layout as templateLayout, tagName } from &#x27;@ember-decorators/component&#x27;;
+import { computed } from &#x27;@ember/object&#x27;;
+import { equal } from &#x27;@ember/object/computed&#x27;;
+import Component from &#x27;@ember/component&#x27;;
+import layout from &#x27;ember-bootstrap/templates/components/bs-form/element/label&#x27;;
+import defaultValue from &#x27;ember-bootstrap/utils/default-decorator&#x27;;
+import { isBlank } from &#x27;@ember/utils&#x27;;
 
 /**
- * Mixin for components that act as a parent component in a parent-child relationship of components
- *
- * @class ComponentParent
- * @namespace Mixins
- * @private
+
+ @class FormElementLabel
+ @namespace Components
+ @extends Ember.Component
+ @private
  */
-// eslint-disable-next-line ember/no-new-mixins
-export default Mixin.create({
+@templateLayout(layout)
+@tagName(&#x27;&#x27;)
+export default class FormElementLabel extends Component {
   /**
-   * Array of registered child components
-   *
-   * @property children
-   * @type array
-   * @protected
-   */
-  children: null,
-
-  init() {
-    this._super(...arguments);
-    this.set(&#x27;children&#x27;, A());
-  },
-
-  /**
-   * Register a component as a child of this parent
-   *
-   * @method registerChild
-   * @param child
+   * @property label
+   * @type string
    * @public
    */
-  registerChild(child) {
-    schedule(&#x27;actions&#x27;, this, function () {
-      this.children.addObject(child);
-    });
-  },
 
   /**
-   * Remove the child component from this parent component
-   *
-   * @method removeChild
-   * @param child
+   * @property invisibleLabel
+   * @type boolean
    * @public
    */
-  removeChild(child) {
-    schedule(&#x27;actions&#x27;, this, function () {
-      this.children.removeObject(child);
-    });
-  },
-});
+  @defaultValue
+  invisibleLabel = false;
+
+  @computed(&#x27;isHorizontal&#x27;, &#x27;isCheckbox&#x27;)
+  get isHorizontalAndNotCheckbox() {
+    return this.isHorizontal &amp;&amp; !this.isCheckbox;
+  }
+
+  @computed(&#x27;size&#x27;, &#x27;isHorizontal&#x27;)
+  get sizeClass() {
+    if (!this.isHorizontal) {
+      return undefined;
+    }
+    let size = this.size;
+    return isBlank(size) ? null : &#x60;col-form-label-${size}&#x60;;
+  }
+
+  /**
+   * [BS4 only] Property for size styling, set to &#x27;lg&#x27;, &#x27;sm&#x27;
+   *
+   * @property size
+   * @type String
+   * @public
+   */
+  @defaultValue
+  size = null;
+
+  /**
+   * @property formElementId
+   * @type {String}
+   * @public
+   */
+
+  /**
+   * @property labelClass
+   * @type {String}
+   * @public
+   */
+
+  /**
+   * The form layout used for the markup generation (see http://getbootstrap.com/css/#forms):
+   *
+   * * &#x27;horizontal&#x27;
+   * * &#x27;vertical&#x27;
+   * * &#x27;inline&#x27;
+   *
+   * Defaults to the parent &#x60;form&#x60;&#x27;s &#x60;formLayout&#x60; property.
+   *
+   * @property formLayout
+   * @type string
+   * @default &#x27;vertical&#x27;
+   * @public
+   */
+  @defaultValue
+  formLayout = &#x27;vertical&#x27;;
+
+  /**
+   * The type of the control widget.
+   * Supported types:
+   *
+   * * &#x27;text&#x27;
+   * * &#x27;checkbox&#x27;
+   * * &#x27;textarea&#x27;
+   * * any other type will use an input tag with the &#x60;controlType&#x60; value as the type attribute (for e.g. HTML5 input
+   * types like &#x27;email&#x27;), and the same layout as the &#x27;text&#x27; type
+   *
+   * @property controlType
+   * @type string
+   * @default &#x27;text&#x27;
+   * @public
+   */
+  @defaultValue
+  controlType = &#x27;text&#x27;;
+
+  /**
+   * Indicates whether the type of the control widget equals &#x60;checkbox&#x60;
+   *
+   * @property isCheckbox
+   * @type boolean
+   * @private
+   */
+  @(equal(&#x27;controlType&#x27;, &#x27;checkbox&#x27;).readOnly())
+  isCheckbox;
+
+  /**
+   * Indicates whether the form type equals &#x60;horizontal&#x60;
+   *
+   * @property isHorizontal
+   * @type boolean
+   * @private
+   */
+  @(equal(&#x27;formLayout&#x27;, &#x27;horizontal&#x27;).readOnly())
+  isHorizontal;
+}
 
     </pre>
 </div>

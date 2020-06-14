@@ -1,0 +1,1191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Components.Form - ember-bootstrap</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="../assets/css/api.css">
+  <script type="text/javascript" src="//use.typekit.net/dkq5epu.js"></script>
+  <script type="text/javascript">
+    try {
+      Typekit.load();
+    } catch(e) {
+    }
+  </script>
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+  <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
+  <link rel="shortcut icon" href="//kaliber5.github.io/ember-bootstrap/favicon.ico">
+</head>
+<body class="yui3-skin-sam">
+<div class="navbar navbar-dark navbar-expand-lg bg-primary">
+  <div class="container">
+    <a href="/" class="navbar-brand">ember-bootstrap</a>
+    <button type="button" class="navbar-toggler" data-toggle="collapse" data-target=".js-navbar-collapse">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse js-navbar-collapse">
+      <ul class="navbar-nav nav mr-auto">
+        <li class="navbar-nav"><a class="nav-link" href="/#/getting-started">Getting Started</a></li>
+        <li class="navbar-nav"><a class="nav-link" href="/#/components">Components</a></li>
+        <li class="navbar-nav"><a class="nav-link" href="/api">API</a></li>
+        <li class="navbar-nav"><a class="nav-link" href="/#/addons">Addons</a></li>
+      </ul>
+      <ul class="navbar-nav nav">
+        <li class="navbar-nav"><a class="nav-link" href="https://github.com/kaliber5/ember-bootstrap" target="_blank"><i
+          class="fab fa-github"></i></a></li>
+        <li class="navbar-nav"><a class="nav-link" href="https://twitter.com/simonihmig" target="_blank"><i
+          class="fab fa-twitter"></i></a>
+        </li>
+        <li class="navbar-nav">
+          <div class="navbar-text">
+            <iframe src="https://ghbtns.com/github-btn.html?user=kaliber5&repo=ember-bootstrap&type=star&count=true"
+                    frameborder="0" scrolling="0" width="100px" height="20px"></iframe>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
+<div class="container">
+  <div class="row">
+    <div class="col-sm-8">
+      <div class="apidocs">
+        <div id="docs-main">
+          <div class="content">
+<div class="card">
+  <h1 class="card-header">Components.Form <span class="badge badge-public small">public</span></h1>
+  <div class="card-body">
+
+<p>Render a form with the appropriate Bootstrap layout class (see <code>formLayout</code>).
+Allows setting a <code>model</code> that nested <code>Components.FormElement</code>s can access, and that can provide form validation (see below)</p>
+<p>You can use whatever markup you like within the form. The following shows Bootstrap 3 usage for the internal markup.</p>
+<pre class="code prettyprint"><code class="language-handlebars">&lt;BsForm @onSubmit={{action "submit"}} as |form|&gt;
+  &lt;form.group&gt;
+    &lt;label class="control-label"&gt;First name&lt;/label&gt;
+    &lt;input value={{this.firstname}} class="form-control" oninput={{action (mut this.firstname) value="target.value"}} type="text"&gt;
+  &lt;/form.group&gt;
+&lt;/BsForm&gt;
+</code></pre>
+<p>However to benefit from features such as automatic form markup, validations and validation markup, use <code>Components.FormElement</code>
+as nested components. See below for an example.</p>
+<h3>Submitting the form</h3>
+<p>When the form is submitted (e.g. by clicking a submit button), the event will be intercepted and the <code>onSubmit</code> action
+will be sent to the controller or parent component.
+In case the form supports validation (see "Form validation" below), the <code>onBefore</code> action is called (which allows you to
+do e.g. model data normalization), then the available validation rules are evaluated, and if those fail, the <code>onInvalid</code>
+action is sent instead of <code>onSubmit</code>.</p>
+<h3>Use with Components.FormElement</h3>
+<p>When using <code>Components.FormElement</code>s with their <code>property</code> set to property names of the form's validation enabled
+<code>model</code>, you gain some additional powerful features:</p>
+<ul>
+<li>the appropriate Bootstrap markup for the given <code>formLayout</code> and the form element's <code>controlType</code> is automatically generated</li>
+<li>markup for validation states and error messages is generated based on the model's validation (if available), when submitting the form
+with an invalid validation, or when focusing out of invalid inputs</li>
+</ul>
+<pre class="code prettyprint"><code class="language-handlebars">&lt;BsForm @formLayout="horizontal" @model={{this}} @onSubmit={{action "submit"}} as |form|&gt;
+  &lt;form.element @controlType="email" @label="Email" @placeholder="Email" @property="email" /&gt;
+  &lt;form.element @controlType="password" @label="Password" @placeholder="Password" @property="password" /&gt;
+  &lt;form.element @controlType="checkbox" @label="Remember me" @property="rememberMe" /&gt;
+  &lt;BsButton @defaultText="Submit" @type="primary" @buttonType="submit" /&gt;
+&lt;/BsForm&gt;
+</code></pre>
+<p>See the <a href="Components.FormElement.html">Components.FormElement</a> API docs for further information.</p>
+<h3>Form validation</h3>
+<p>All version of ember-bootstrap beginning from 0.7.0 do not come with built-in support for validation engines anymore.
+Instead support is added usually by additional Ember addons, for example:</p>
+<ul>
+<li><a href="https://github.com/kaliber5/ember-bootstrap-validations">ember-bootstrap-validations</a>: adds support for <a href="https://github.com/DockYard/ember-validations">ember-validations</a></li>
+<li><a href="https://github.com/offirgolan/ember-bootstrap-cp-validations">ember-bootstrap-cp-validations</a>: adds support for <a href="https://github.com/offirgolan/ember-cp-validations">ember-cp-validations</a></li>
+<li><a href="https://github.com/kaliber5/ember-bootstrap-changeset-validations">ember-bootstrap-changeset-validations</a>: adds support for <a href="https://github.com/poteto/ember-changeset">ember-changeset</a></li>
+</ul>
+<p>To add your own validation support, you have to:</p>
+<ul>
+<li>extend this component, setting <code>hasValidator</code> to true if validations are available (by means of a computed property for example), and implementing the <code>validate</code> method</li>
+<li>extend the <a href="Components.FormElement.html">Components.FormElement</a> component and implement the <code>setupValidations</code> hook or simply override the <code>errors</code> property to add the validation error messages to be displayed</li>
+</ul>
+<p>When validation fails, the appropriate Bootstrap markup is added automatically, i.e. the error classes are applied and
+the validation messages are shown for each form element. In case the validation library supports it, also warning messages
+are shown. See the <a href="Components.FormElement.html">Components.FormElement</a> documentation for further details.</p>
+<p>See the above mentioned addons for examples.</p>
+<p>The <code>novalidate</code> HTML attribute is set by default for forms that have validation.</p>
+<h3>Submission state</h3>
+<p>A <code>isSubmitting</code> property is yielded, which is <code>true</code> after submit has been triggered and before the Promise returned
+by <code>onSubmit</code> is fulfilled. It could be used to disable form's submit button and showing a loading spinner for example:</p>
+<pre class="code prettyprint"><code class="language-hbs">&lt;BsForm @onSubmit={{action "save"}} as |form|&gt;
+  &lt;BsButton @buttonType="submit" @disabled={{form.isSubmitting}}&gt;
+    Save
+    {{#if form.isSubmitting}} {{fa-icon "spinner"}} {{/if}}
+  &lt;/BsButton&gt;
+&lt;/BsForm&gt;
+</code></pre>
+<p>Additionaly <code>isSubmitted</code> and <code>isRejected</code> properties are yielded. <code>isSubmitted</code> is <code>true</code> if last submission was successful.
+<code>isRejected</code> is <code>true</code> if last submission was rejected due to validation errors or by an action bound to <code>onSubmit</code> event, returning a rejected promise.
+Both are reset as soon as any value of a form element changes. It could be used for visual feedback about last submission:</p>
+<pre class="code prettyprint"><code class="language-hbs">&lt;BsForm @onSubmit={{action 'save}} as |form|&gt;
+  &lt;BsButton @buttonType="submit" @type={{if form.isRejected "danger" "primary"}}&gt;
+    Save
+  &lt;/BsButton&gt;
+&lt;/BsForm&gt;
+</code></pre>
+
+
+  </div>
+
+  <div class="card-footer text-muted">
+    <dl class="row m-0">
+        <dt class="col-sm-3">
+          Extends
+        </dt>
+        <dd class="col-sm-9">
+          Ember.Component
+        </dd>
+        <dt class="col-sm-3">
+          Defined in
+        </dt>
+        <dd class="col-sm-9">
+          <a href="../files/addon_components_bs-form.js.html#l14"><code>addon&#x2F;components&#x2F;bs-form.js:14</code></a>
+        </dd>
+
+    </dl>
+  </div>
+</div>
+
+
+
+<form id="options-form" class="form-inline mb-1 mt-4">
+
+  <div class="form-check mb-2 mr-sm-2">
+    <input class="form-check-inline" type="checkbox" id="api-show-inherited" checked>
+    <label class="form-check-label" for="api-show-inherited">
+      Inherited
+    </label>
+  </div>
+
+  <div class="form-check mb-2 mr-sm-2">
+    <input class="form-check-inline" type="checkbox" id="api-show-protected">
+    <label class="form-check-label" for="api-show-protected">
+      Protected
+    </label>
+  </div>
+
+  <div class="form-check mb-2 mr-sm-2">
+    <input class="form-check-inline" type="checkbox" id="api-show-private">
+    <label class="form-check-label" for="api-show-private">
+      Private
+    </label>
+  </div>
+
+  <div class="form-check mb-2 mr-sm-2">
+    <input class="form-check-inline" type="checkbox" id="api-show-deprecated">
+    <label class="form-check-label" for="api-show-deprecated">
+      Deprecated
+    </label>
+  </div>
+
+</form>
+
+<div class="card">
+  <div class="card-header">
+    <ul class="nav nav-tabs card-header-tabs">
+      <li class="nav-item active"><a class="nav-link" data-toggle="tab" href="#index">Index</a></li>
+
+        <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#methods">Methods</a></li>
+        <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#properties">Properties</a></li>
+        <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#events">Events</a></li>
+    </ul>
+  </div>
+  <div class="card-body">
+    <div class="tab-content">
+      <div id="index" class="tab-pane active">
+        <h2 class="off-left">Item Index</h2>
+
+          <div class="index-section methods">
+            <h3>Methods</h3>
+
+            <ul class="index-list methods extends">
+                <li class="index-item method private">
+                  <a href="#" data-tabid="#methods" data-anchor="#method_submit" data-tablink="submit">submit</a>
+
+                </li>
+                <li class="index-item method public">
+                  <a href="#" data-tabid="#methods" data-anchor="#method_validate" data-tablink="validate">validate</a>
+
+                </li>
+            </ul>
+          </div>
+
+          <div class="index-section properties">
+            <h3>Properties</h3>
+
+            <ul class="index-list properties extends">
+                <li class="index-item property public">
+                  <a href="#" data-tabid="#properties" data-anchor="#property_disabled"
+                     data-tablink="disabled">disabled</a>
+
+                </li>
+                <li class="index-item property private">
+                  <a href="#" data-tabid="#properties" data-anchor="#property_elementComponent"
+                     data-tablink="elementComponent">elementComponent</a>
+
+                </li>
+                <li class="index-item property public">
+                  <a href="#" data-tabid="#properties" data-anchor="#property_formLayout"
+                     data-tablink="formLayout">formLayout</a>
+
+                </li>
+                <li class="index-item property private">
+                  <a href="#" data-tabid="#properties" data-anchor="#property_groupComponent"
+                     data-tablink="groupComponent">groupComponent</a>
+
+                </li>
+                <li class="index-item property protected">
+                  <a href="#" data-tabid="#properties" data-anchor="#property_hasValidator"
+                     data-tablink="hasValidator">hasValidator</a>
+
+                </li>
+                <li class="index-item property public">
+                  <a href="#" data-tabid="#properties" data-anchor="#property_hideValidationsOnSubmit"
+                     data-tablink="hideValidationsOnSubmit">hideValidationsOnSubmit</a>
+
+                </li>
+                <li class="index-item property public">
+                  <a href="#" data-tabid="#properties" data-anchor="#property_horizontalLabelGridClass"
+                     data-tablink="horizontalLabelGridClass">horizontalLabelGridClass</a>
+
+                </li>
+                <li class="index-item property private">
+                  <a href="#" data-tabid="#properties" data-anchor="#property_isRejected"
+                     data-tablink="isRejected">isRejected</a>
+
+                </li>
+                <li class="index-item property private">
+                  <a href="#" data-tabid="#properties" data-anchor="#property_isSubmitted"
+                     data-tablink="isSubmitted">isSubmitted</a>
+
+                </li>
+                <li class="index-item property private">
+                  <a href="#" data-tabid="#properties" data-anchor="#property_isSubmitting"
+                     data-tablink="isSubmitting">isSubmitting</a>
+
+                </li>
+                <li class="index-item property protected">
+                  <a href="#" data-tabid="#properties" data-anchor="#property_layoutClass"
+                     data-tablink="layoutClass">layoutClass</a>
+
+                </li>
+                <li class="index-item property public">
+                  <a href="#" data-tabid="#properties" data-anchor="#property_model"
+                     data-tablink="model">model</a>
+
+                </li>
+                <li class="index-item property private">
+                  <a href="#" data-tabid="#properties" data-anchor="#property_pendingSubmissions"
+                     data-tablink="pendingSubmissions">pendingSubmissions</a>
+
+                </li>
+                <li class="index-item property public">
+                  <a href="#" data-tabid="#properties" data-anchor="#property_preventConcurrency"
+                     data-tablink="preventConcurrency">preventConcurrency</a>
+
+                </li>
+                <li class="index-item property public">
+                  <a href="#" data-tabid="#properties" data-anchor="#property_readonly"
+                     data-tablink="readonly">readonly</a>
+
+                </li>
+                <li class="index-item property private">
+                  <a href="#" data-tabid="#properties" data-anchor="#property_showAllValidations"
+                     data-tablink="showAllValidations">showAllValidations</a>
+
+                </li>
+                <li class="index-item property public">
+                  <a href="#" data-tabid="#properties" data-anchor="#property_submitOnEnter"
+                     data-tablink="submitOnEnter">submitOnEnter</a>
+
+                </li>
+            </ul>
+          </div>
+
+
+          <div class="index-section events">
+            <h3>Events</h3>
+
+            <ul class="index-list events extends">
+                <li class="index-item event public">
+                  <a href="#" data-tabid="#events" data-anchor="#event_onBefore" data-tablink="onBefore">onBefore</a>
+
+                </li>
+                <li class="index-item event public">
+                  <a href="#" data-tabid="#events" data-anchor="#event_onInvalid" data-tablink="onInvalid">onInvalid</a>
+
+                </li>
+                <li class="index-item event public">
+                  <a href="#" data-tabid="#events" data-anchor="#event_onSubmit" data-tablink="onSubmit">onSubmit</a>
+
+                </li>
+            </ul>
+          </div>
+      </div>
+
+        <div id="methods" class="tab-pane">
+            <div id="method_submit" class="method item private">
+                <h3 class="name">submit
+                <span class="small"> </span>
+                </h3>
+            
+            
+            
+                    <span class="label label-private">private</span>
+            
+            
+            
+            
+            
+                <div class="meta">
+                            <p>
+                            Defined in
+                    <a href="../files/addon_components_bs-form.js.html#l357"><code>addon&#x2F;components&#x2F;bs-form.js:357</code></a>
+                    </p>
+            
+            
+            
+                </div>
+            
+                <div class="description">
+                    <p>Submit handler that will send the default action ("action") to the controller when submitting the form.</p>
+            <p>If there is a supplied <code>model</code> that supports validation (<code>hasValidator</code>) the model will be validated before, and
+            only if validation is successful the default action will be sent. Otherwise an "invalid" action will be sent, and
+            all the <code>showValidation</code> property of all child <code>Components.FormElement</code>s will be set to true, so error state and
+            messages will be shown automatically.</p>
+            
+                </div>
+            
+            
+            
+            </div>
+            <div id="method_validate" class="method item public">
+                <h3 class="name">validate
+                <span class="small">Promise</span>
+                </h3>
+            
+            
+            
+                    <span class="label label-public">public</span>
+            
+            
+            
+            
+            
+                <div class="meta">
+                            <p>
+                            Defined in
+                    <a href="../files/addon_components_bs-form.js.html#l308"><code>addon&#x2F;components&#x2F;bs-form.js:308</code></a>
+                    </p>
+            
+            
+            
+                </div>
+            
+                <div class="description">
+                    <p>Validate hook which will return a promise that will either resolve if the model is valid
+            or reject if it's not. This should be overridden to add validation support.</p>
+            
+                </div>
+            
+                    <div class="params">
+                        <h4>Parameters:</h4>
+            
+                        <ul class="params-list">
+                            <li class="param">
+                                    <code class="param-name">model</code>
+                                    <span class="type">Object</span>
+            
+            
+                                <div class="param-description">
+                                     
+                                </div>
+            
+                            </li>
+                        </ul>
+                    </div>
+            
+                    <div class="returns">
+                        <h4>Returns:</h4>
+            
+                        <div class="returns-description">
+                                    <span class="type">Promise</span>:
+                        </div>
+                    </div>
+            
+            </div>
+        </div>
+
+        <div id="properties" class="tab-pane">
+            <div id="property_disabled"
+                 class="property item public">
+              <h3 class="name">disabled
+                <span class="badge badge-secondary small">boolean</span>
+                  <span class="badge badge-public small">public</span>
+            
+            
+            
+            
+              </h3>
+            
+              <div class="meta">
+                  <p><strong>Default:</strong> false</p>
+                  <p>
+                      Defined in
+                  <a href="../files/addon_components_bs-form.js.html#l297"><code>addon&#x2F;components&#x2F;bs-form.js:297</code></a>
+              </p>
+            
+            
+              </div>
+            
+              <div class="description">
+                <p>If set to true the <code>disabled</code> property of all yielded form elements will be set, making their form controls disabled.</p>
+            
+              </div>
+            
+            
+            
+            
+            </div>
+            <div id="property_elementComponent"
+                 class="property item private">
+              <h3 class="name">elementComponent
+                <span class="badge badge-secondary small">{String}</span>
+                  <span class="badge badge-private small">private</span>
+            
+            
+            
+            
+              </h3>
+            
+              <div class="meta">
+                  <p>
+                      Defined in
+                  <a href="../files/addon_components_bs-form.js.html#l178"><code>addon&#x2F;components&#x2F;bs-form.js:178</code></a>
+              </p>
+            
+            
+              </div>
+            
+              <div class="description">
+                
+              </div>
+            
+            
+            
+            
+            </div>
+            <div id="property_formLayout"
+                 class="property item public">
+              <h3 class="name">formLayout
+                <span class="badge badge-secondary small">string</span>
+                  <span class="badge badge-public small">public</span>
+            
+            
+            
+            
+              </h3>
+            
+              <div class="meta">
+                  <p>
+                      Defined in
+                  <a href="../files/addon_components_bs-form.js.html#l147"><code>addon&#x2F;components&#x2F;bs-form.js:147</code></a>
+              </p>
+            
+            
+              </div>
+            
+              <div class="description">
+                <p>Set the layout of the form to either "vertical", "horizontal" or "inline". See <a href="http://getbootstrap.com/css/#forms-inline">http://getbootstrap.com/css/#forms-inline</a> and <a href="http://getbootstrap.com/css/#forms-horizontal">http://getbootstrap.com/css/#forms-horizontal</a></p>
+            
+              </div>
+            
+            
+            
+            
+            </div>
+            <div id="property_groupComponent"
+                 class="property item private">
+              <h3 class="name">groupComponent
+                <span class="badge badge-secondary small">{String}</span>
+                  <span class="badge badge-private small">private</span>
+            
+            
+            
+            
+              </h3>
+            
+              <div class="meta">
+                  <p>
+                      Defined in
+                  <a href="../files/addon_components_bs-form.js.html#l186"><code>addon&#x2F;components&#x2F;bs-form.js:186</code></a>
+              </p>
+            
+            
+              </div>
+            
+              <div class="description">
+                
+              </div>
+            
+            
+            
+            
+            </div>
+            <div id="property_hasValidator"
+                 class="property item protected">
+              <h3 class="name">hasValidator
+                <span class="badge badge-secondary small">boolean</span>
+                  <span class="badge badge-protected small">protected</span>
+            
+            
+            
+            
+              </h3>
+            
+              <div class="meta">
+                  <p>
+                      Defined in
+                  <a href="../files/addon_components_bs-form.js.html#l157"><code>addon&#x2F;components&#x2F;bs-form.js:157</code></a>
+              </p>
+            
+            
+              </div>
+            
+              <div class="description">
+                <p>Check if validating the model is supported. This needs to be implemented by another addon.</p>
+            
+              </div>
+            
+            
+            
+            
+            </div>
+            <div id="property_hideValidationsOnSubmit"
+                 class="property item public">
+              <h3 class="name">hideValidationsOnSubmit
+                <span class="badge badge-secondary small">{Boolean}</span>
+                  <span class="badge badge-public small">public</span>
+            
+            
+            
+            
+              </h3>
+            
+              <div class="meta">
+                  <p><strong>Default:</strong> false</p>
+                  <p>
+                      Defined in
+                  <a href="../files/addon_components_bs-form.js.html#l273"><code>addon&#x2F;components&#x2F;bs-form.js:273</code></a>
+              </p>
+            
+            
+              </div>
+            
+              <div class="description">
+                <p>If true, after successful validation and upon submitting the form, all current element validations will be hidden.
+            If the form remains visible, the user would have to focus out of elements of submit the form again for the
+            validations to show up again, as if a fresh new form component had been rendered.</p>
+            
+              </div>
+            
+            
+            
+            
+            </div>
+            <div id="property_horizontalLabelGridClass"
+                 class="property item public">
+              <h3 class="name">horizontalLabelGridClass
+                <span class="badge badge-secondary small">string</span>
+                  <span class="badge badge-public small">public</span>
+            
+            
+            
+            
+              </h3>
+            
+              <div class="meta">
+                  <p><strong>Default:</strong> &#x27;col-md-4&#x27;</p>
+                  <p>
+                      Defined in
+                  <a href="../files/addon_components_bs-form.js.html#l166"><code>addon&#x2F;components&#x2F;bs-form.js:166</code></a>
+              </p>
+            
+            
+              </div>
+            
+              <div class="description">
+                <p>The Bootstrap grid class for form labels. This is used by the <code>Components.FormElement</code> class as a default for the
+            whole form.</p>
+            
+              </div>
+            
+            
+            
+            
+            </div>
+            <div id="property_isRejected"
+                 class="property item private">
+              <h3 class="name">isRejected
+                <span class="badge badge-secondary small">{Boolean}</span>
+                  <span class="badge badge-private small">private</span>
+            
+            
+            
+            
+              </h3>
+            
+              <div class="meta">
+                  <p>
+                      Defined in
+                  <a href="../files/addon_components_bs-form.js.html#l222"><code>addon&#x2F;components&#x2F;bs-form.js:222</code></a>
+              </p>
+            
+            
+              </div>
+            
+              <div class="description">
+                <p><code>isRejected</code> is <code>true</code> if last submission was rejected.
+            A submission is considered as rejected if form is invalid as well as if <code>onSubmit</code> rejects.
+            A change to any form element resets it's value to <code>false</code>.</p>
+            <p>If not using <code>Components.FormElement</code>, <code>resetSubmissionState</code> action must be triggered on each change to reset
+            form's submission state.</p>
+            
+              </div>
+            
+            
+            
+            
+            </div>
+            <div id="property_isSubmitted"
+                 class="property item private">
+              <h3 class="name">isSubmitted
+                <span class="badge badge-secondary small">{Boolean}</span>
+                  <span class="badge badge-private small">private</span>
+            
+            
+            
+            
+              </h3>
+            
+              <div class="meta">
+                  <p>
+                      Defined in
+                  <a href="../files/addon_components_bs-form.js.html#l208"><code>addon&#x2F;components&#x2F;bs-form.js:208</code></a>
+              </p>
+            
+            
+              </div>
+            
+              <div class="description">
+                <p><code>isSubmitted</code> is <code>true</code> if last submission was successful.
+            A change to any form element resets it's value to <code>false</code>.</p>
+            <p>If not using <code>Components.FormElement</code>, <code>resetSubmissionState</code> action must be triggered on each change to reset
+            form's submission state.</p>
+            
+              </div>
+            
+            
+            
+            
+            </div>
+            <div id="property_isSubmitting"
+                 class="property item private">
+              <h3 class="name">isSubmitting
+                <span class="badge badge-secondary small">{Boolean}</span>
+                  <span class="badge badge-private small">private</span>
+            
+            
+            
+            
+              </h3>
+            
+              <div class="meta">
+                  <p>
+                      Defined in
+                  <a href="../files/addon_components_bs-form.js.html#l194"><code>addon&#x2F;components&#x2F;bs-form.js:194</code></a>
+              </p>
+            
+            
+              </div>
+            
+              <div class="description">
+                <p><code>isSubmitting</code> is <code>true</code> after <code>submit</code> event has been triggered and until Promise returned by <code>onSubmit</code> is
+            fulfilled. If <code>validate</code> returns a Promise that one is also taken into consideration.</p>
+            <p>If multiple concurrent submit events are fired, it stays <code>true</code> until all submit events have been fulfilled.</p>
+            
+              </div>
+            
+            
+            
+            
+            </div>
+            <div id="property_layoutClass"
+                 class="property item protected">
+              <h3 class="name">layoutClass
+                <span class="badge badge-secondary small">string</span>
+                  <span class="badge badge-protected small">protected</span>
+            
+            
+            
+            
+              </h3>
+            
+              <div class="meta">
+                  <p>
+                      Defined in
+                  <a href="../files/addon_components_bs-form.js.html#l115"><code>addon&#x2F;components&#x2F;bs-form.js:115</code></a>
+              </p>
+            
+            
+              </div>
+            
+              <div class="description">
+                <p>Bootstrap form class name (computed)</p>
+            
+              </div>
+            
+            
+            
+            
+            </div>
+            <div id="property_model"
+                 class="property item public">
+              <h3 class="name">model
+                <span class="badge badge-secondary small">Ember.Object</span>
+                  <span class="badge badge-public small">public</span>
+            
+            
+            
+            
+              </h3>
+            
+              <div class="meta">
+                  <p>
+                      Defined in
+                  <a href="../files/addon_components_bs-form.js.html#l134"><code>addon&#x2F;components&#x2F;bs-form.js:134</code></a>
+              </p>
+            
+            
+              </div>
+            
+              <div class="description">
+                <p>Set a model that this form should represent. This serves several purposes:</p>
+            <ul>
+            <li>child <code>Components.FormElement</code>s can access and bind to this model by their <code>property</code></li>
+            <li>when the model supports validation by using the <a href="https://github.com/dockyard/ember-validations">ember-validations</a> mixin,
+            child <code>Components.FormElement</code>s will look at the validation information of their <code>property</code> and render their form group accordingly.
+            Moreover the form's <code>submit</code> event handler will validate the model and deny submitting if the model is not validated successfully.</li>
+            </ul>
+            
+              </div>
+            
+            
+            
+            
+            </div>
+            <div id="property_pendingSubmissions"
+                 class="property item private">
+              <h3 class="name">pendingSubmissions
+                <span class="badge badge-secondary small">{Integer}</span>
+                  <span class="badge badge-private small">private</span>
+            
+            
+            
+            
+              </h3>
+            
+              <div class="meta">
+                  <p>
+                      Defined in
+                  <a href="../files/addon_components_bs-form.js.html#l237"><code>addon&#x2F;components&#x2F;bs-form.js:237</code></a>
+              </p>
+            
+            
+              </div>
+            
+              <div class="description">
+                <p>Count of pending submissions.</p>
+            
+              </div>
+            
+            
+            
+            
+            </div>
+            <div id="property_preventConcurrency"
+                 class="property item public">
+              <h3 class="name">preventConcurrency
+                <span class="badge badge-secondary small">Boolean</span>
+                  <span class="badge badge-public small">public</span>
+            
+            
+            
+            
+              </h3>
+            
+              <div class="meta">
+                  <p><strong>Default:</strong> true</p>
+                  <p>
+                      Defined in
+                  <a href="../files/addon_components_bs-form.js.html#l258"><code>addon&#x2F;components&#x2F;bs-form.js:258</code></a>
+              </p>
+            
+            
+              </div>
+            
+              <div class="description">
+                <p>Controls if <code>onSubmit</code> action is fired concurrently. If <code>true</code> submitting form multiple
+            times will not trigger <code>onSubmit</code> action if a Promise returned by previous submission is
+            not settled yet.</p>
+            <p>Droping a submission also prevents rerunning validation and <code>onBefore</code> hook.</p>
+            
+              </div>
+            
+            
+            
+            
+            </div>
+            <div id="property_readonly"
+                 class="property item public">
+              <h3 class="name">readonly
+                <span class="badge badge-secondary small">boolean</span>
+                  <span class="badge badge-public small">public</span>
+            
+            
+            
+            
+              </h3>
+            
+              <div class="meta">
+                  <p><strong>Default:</strong> false</p>
+                  <p>
+                      Defined in
+                  <a href="../files/addon_components_bs-form.js.html#l286"><code>addon&#x2F;components&#x2F;bs-form.js:286</code></a>
+              </p>
+            
+            
+              </div>
+            
+              <div class="description">
+                <p>If set to true the <code>readonly</code> property of all yielded form elements will be set, making their form controls read-only.</p>
+            
+              </div>
+            
+            
+            
+            
+            </div>
+            <div id="property_showAllValidations"
+                 class="property item private">
+              <h3 class="name">showAllValidations
+                <span class="badge badge-secondary small">boolean</span>
+                  <span class="badge badge-private small">private</span>
+            
+            
+            
+            
+              </h3>
+            
+              <div class="meta">
+                  <p><strong>Default:</strong> undefined</p>
+                  <p>
+                      Defined in
+                  <a href="../files/addon_components_bs-form.js.html#l319"><code>addon&#x2F;components&#x2F;bs-form.js:319</code></a>
+              </p>
+            
+            
+              </div>
+            
+              <div class="description">
+                
+              </div>
+            
+            
+            
+            
+            </div>
+            <div id="property_submitOnEnter"
+                 class="property item public">
+              <h3 class="name">submitOnEnter
+                <span class="badge badge-secondary small">boolean</span>
+                  <span class="badge badge-public small">public</span>
+            
+            
+            
+            
+              </h3>
+            
+              <div class="meta">
+                  <p><strong>Default:</strong> false</p>
+                  <p>
+                      Defined in
+                  <a href="../files/addon_components_bs-form.js.html#l247"><code>addon&#x2F;components&#x2F;bs-form.js:247</code></a>
+              </p>
+            
+            
+              </div>
+            
+              <div class="description">
+                <p>If set to true pressing enter will submit the form, even if no submit button is present</p>
+            
+              </div>
+            
+            
+            
+            
+            </div>
+        </div>
+
+
+        <div id="events" class="tab-pane">
+            <div id="event_onBefore" class="events item public">
+                <h3 class="name"><code>onBefore</code></h3>
+                <span class="type"></span>
+            
+            
+                    <span class="flag public">public</span>
+            
+            
+            
+                <div class="meta">
+                            <p>
+                            Defined in
+                    <a href="../files/addon_components_bs-form.js.html#l328"><code>addon&#x2F;components&#x2F;bs-form.js:328</code></a>
+                    </p>
+            
+            
+                </div>
+            
+                <div class="description">
+                    <p>Action is called before the form is validated (if possible) and submitted.</p>
+            
+                </div>
+            
+                    <div class="params">
+                        <h4>Event Payload:</h4>
+            
+                        <ul class="params-list">
+                            <li class="param">
+                                    <code class="param-name">model</code>
+                                    <span class="type">Object</span>
+            
+            
+                                <div class="param-description">
+                                    <p>The form's <code>model</code></p>
+            
+                                </div>
+            
+                            </li>
+                        </ul>
+                    </div>
+            
+            
+            </div>
+            <div id="event_onInvalid" class="events item public">
+                <h3 class="name"><code>onInvalid</code></h3>
+                <span class="type"></span>
+            
+            
+                    <span class="flag public">public</span>
+            
+            
+            
+                <div class="meta">
+                            <p>
+                            Defined in
+                    <a href="../files/addon_components_bs-form.js.html#l347"><code>addon&#x2F;components&#x2F;bs-form.js:347</code></a>
+                    </p>
+            
+            
+                </div>
+            
+                <div class="description">
+                    <p>Action is called when validation of the model has failed.</p>
+            
+                </div>
+            
+                    <div class="params">
+                        <h4>Event Payload:</h4>
+            
+                        <ul class="params-list">
+                            <li class="param">
+                                    <code class="param-name">model</code>
+                                    <span class="type">Object</span>
+            
+            
+                                <div class="param-description">
+                                    <p>The form's <code>model</code></p>
+            
+                                </div>
+            
+                            </li>
+                            <li class="param">
+                                    <code class="param-name">error</code>
+                                    <span class="type">Object</span>
+            
+            
+                                <div class="param-description">
+                                     
+                                </div>
+            
+                            </li>
+                        </ul>
+                    </div>
+            
+            
+            </div>
+            <div id="event_onSubmit" class="events item public">
+                <h3 class="name"><code>onSubmit</code></h3>
+                <span class="type"></span>
+            
+            
+                    <span class="flag public">public</span>
+            
+            
+            
+                <div class="meta">
+                            <p>
+                            Defined in
+                    <a href="../files/addon_components_bs-form.js.html#l337"><code>addon&#x2F;components&#x2F;bs-form.js:337</code></a>
+                    </p>
+            
+            
+                </div>
+            
+                <div class="description">
+                    <p>Action is called when submit has been triggered and the model has passed all validations (if present).</p>
+            
+                </div>
+            
+                    <div class="params">
+                        <h4>Event Payload:</h4>
+            
+                        <ul class="params-list">
+                            <li class="param">
+                                    <code class="param-name">model</code>
+                                    <span class="type">Object</span>
+            
+            
+                                <div class="param-description">
+                                    <p>The form's <code>model</code></p>
+            
+                                </div>
+            
+                            </li>
+                            <li class="param">
+                                    <code class="param-name">result</code>
+                                    <span class="type">Object</span>
+            
+            
+                                <div class="param-description">
+                                    <p>The returned result from the validate method, if validation is available</p>
+            
+                                </div>
+            
+                            </li>
+                        </ul>
+                    </div>
+            
+            
+            </div>
+        </div>
+    </div>
+  </div>
+</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-4">
+      <div class="card">
+        <div class="card-header">
+          Classes
+        </div>
+        <ul class="list-group list-group-flush">
+            <li class="list-group-item list-group-item-public"><a href="../classes/Components.Accordion.html">Components.Accordion</a></li>
+            <li class="list-group-item list-group-item-public"><a href="../classes/Components.AccordionItem.html">Components.AccordionItem</a></li>
+            <li class="list-group-item list-group-item-public"><a href="../classes/Components.AccordionItemBody.html">Components.AccordionItemBody</a></li>
+            <li class="list-group-item list-group-item-public"><a href="../classes/Components.AccordionItemTitle.html">Components.AccordionItemTitle</a></li>
+            <li class="list-group-item list-group-item-public"><a href="../classes/Components.Alert.html">Components.Alert</a></li>
+            <li class="list-group-item list-group-item-public"><a href="../classes/Components.Button.html">Components.Button</a></li>
+            <li class="list-group-item list-group-item-public"><a href="../classes/Components.ButtonGroup.html">Components.ButtonGroup</a></li>
+            <li class="list-group-item list-group-item-private"><a href="../classes/Components.ButtonGroupButton.html">Components.ButtonGroupButton</a></li>
+            <li class="list-group-item list-group-item-public"><a href="../classes/Components.Carousel.html">Components.Carousel</a></li>
+            <li class="list-group-item list-group-item-public"><a href="../classes/Components.CarouselSlide.html">Components.CarouselSlide</a></li>
+            <li class="list-group-item list-group-item-public"><a href="../classes/Components.Collapse.html">Components.Collapse</a></li>
+            <li class="list-group-item list-group-item-private"><a href="../classes/Components.ContextualHelp.html">Components.ContextualHelp</a></li>
+            <li class="list-group-item list-group-item-private"><a href="../classes/Components.ContextualHelpElement.html">Components.ContextualHelpElement</a></li>
+            <li class="list-group-item list-group-item-public"><a href="../classes/Components.Dropdown.html">Components.Dropdown</a></li>
+            <li class="list-group-item list-group-item-public"><a href="../classes/Components.DropdownButton.html">Components.DropdownButton</a></li>
+            <li class="list-group-item list-group-item-public"><a href="../classes/Components.DropdownMenu.html">Components.DropdownMenu</a></li>
+            <li class="list-group-item list-group-item-public"><a href="../classes/Components.DropdownMenuDivider.html">Components.DropdownMenuDivider</a></li>
+            <li class="list-group-item list-group-item-public"><a href="../classes/Components.DropdownMenuItem.html">Components.DropdownMenuItem</a></li>
+            <li class="list-group-item list-group-item-public"><a href="../classes/Components.DropdownMenuLinkTo.html">Components.DropdownMenuLinkTo</a></li>
+            <li class="list-group-item list-group-item-public"><a href="../classes/Components.DropdownToggle.html">Components.DropdownToggle</a></li>
+            <li class="list-group-item list-group-item-public"><a href="../classes/Components.Form.html">Components.Form</a></li>
+            <li class="list-group-item list-group-item-public"><a href="../classes/Components.FormElement.html">Components.FormElement</a></li>
+            <li class="list-group-item list-group-item-private"><a href="../classes/Components.FormElementControl.html">Components.FormElementControl</a></li>
+            <li class="list-group-item list-group-item-private"><a href="../classes/Components.FormElementControlCheckbox.html">Components.FormElementControlCheckbox</a></li>
+            <li class="list-group-item list-group-item-private"><a href="../classes/Components.FormElementControlInput.html">Components.FormElementControlInput</a></li>
+            <li class="list-group-item list-group-item-private"><a href="../classes/Components.FormElementControlRadio.html">Components.FormElementControlRadio</a></li>
+            <li class="list-group-item list-group-item-private"><a href="../classes/Components.FormElementControlTextarea.html">Components.FormElementControlTextarea</a></li>
+            <li class="list-group-item list-group-item-private"><a href="../classes/Components.FormElementErrors.html">Components.FormElementErrors</a></li>
+            <li class="list-group-item list-group-item-private"><a href="../classes/Components.FormElementFeedbackIcon.html">Components.FormElementFeedbackIcon</a></li>
+            <li class="list-group-item list-group-item-private"><a href="../classes/Components.FormElementHelpText.html">Components.FormElementHelpText</a></li>
+            <li class="list-group-item list-group-item-private"><a href="../classes/Components.FormElementLabel.html">Components.FormElementLabel</a></li>
+            <li class="list-group-item list-group-item-private"><a href="../classes/Components.FormElementLayout.html">Components.FormElementLayout</a></li>
+            <li class="list-group-item list-group-item-private"><a href="../classes/Components.FormElementLayoutHorizontal.html">Components.FormElementLayoutHorizontal</a></li>
+            <li class="list-group-item list-group-item-private"><a href="../classes/Components.FormElementLayoutInline.html">Components.FormElementLayoutInline</a></li>
+            <li class="list-group-item list-group-item-private"><a href="../classes/Components.FormElementLayoutInlineCheckbox.html">Components.FormElementLayoutInlineCheckbox</a></li>
+            <li class="list-group-item list-group-item-private"><a href="../classes/Components.FormElementLayoutVertical.html">Components.FormElementLayoutVertical</a></li>
+            <li class="list-group-item list-group-item-private"><a href="../classes/Components.FormElementLayoutVerticalCheckbox.html">Components.FormElementLayoutVerticalCheckbox</a></li>
+            <li class="list-group-item list-group-item-public"><a href="../classes/Components.FormGroup.html">Components.FormGroup</a></li>
+            <li class="list-group-item list-group-item-public"><a href="../classes/Components.Modal.html">Components.Modal</a></li>
+            <li class="list-group-item list-group-item-public"><a href="../classes/Components.ModalBody.html">Components.ModalBody</a></li>
+            <li class="list-group-item list-group-item-private"><a href="../classes/Components.ModalDialog.html">Components.ModalDialog</a></li>
+            <li class="list-group-item list-group-item-public"><a href="../classes/Components.ModalFooter.html">Components.ModalFooter</a></li>
+            <li class="list-group-item list-group-item-public"><a href="../classes/Components.ModalHeader.html">Components.ModalHeader</a></li>
+            <li class="list-group-item list-group-item-private"><a href="../classes/Components.ModalHeaderClose.html">Components.ModalHeaderClose</a></li>
+            <li class="list-group-item list-group-item-private"><a href="../classes/Components.ModalHeaderTitle.html">Components.ModalHeaderTitle</a></li>
+            <li class="list-group-item list-group-item-public"><a href="../classes/Components.ModalSimple.html">Components.ModalSimple</a></li>
+            <li class="list-group-item list-group-item-public"><a href="../classes/Components.Nav.html">Components.Nav</a></li>
+            <li class="list-group-item list-group-item-public"><a href="../classes/Components.Navbar.html">Components.Navbar</a></li>
+            <li class="list-group-item list-group-item-public"><a href="../classes/Components.NavbarContent.html">Components.NavbarContent</a></li>
+            <li class="list-group-item list-group-item-public"><a href="../classes/Components.NavbarLinkTo.html">Components.NavbarLinkTo</a></li>
+            <li class="list-group-item list-group-item-public"><a href="../classes/Components.NavbarNav.html">Components.NavbarNav</a></li>
+            <li class="list-group-item list-group-item-public"><a href="../classes/Components.NavbarToggle.html">Components.NavbarToggle</a></li>
+            <li class="list-group-item list-group-item-public"><a href="../classes/Components.NavItem.html">Components.NavItem</a></li>
+            <li class="list-group-item list-group-item-public"><a href="../classes/Components.NavLinkTo.html">Components.NavLinkTo</a></li>
+            <li class="list-group-item list-group-item-public"><a href="../classes/Components.Popover.html">Components.Popover</a></li>
+            <li class="list-group-item list-group-item-private"><a href="../classes/Components.PopoverElement.html">Components.PopoverElement</a></li>
+            <li class="list-group-item list-group-item-public"><a href="../classes/Components.Progress.html">Components.Progress</a></li>
+            <li class="list-group-item list-group-item-public"><a href="../classes/Components.ProgressBar.html">Components.ProgressBar</a></li>
+            <li class="list-group-item list-group-item-public"><a href="../classes/Components.Tab.html">Components.Tab</a></li>
+            <li class="list-group-item list-group-item-public"><a href="../classes/Components.TabPane.html">Components.TabPane</a></li>
+            <li class="list-group-item list-group-item-public"><a href="../classes/Components.Tooltip.html">Components.Tooltip</a></li>
+            <li class="list-group-item list-group-item-private"><a href="../classes/Components.TooltipElement.html">Components.TooltipElement</a></li>
+            <li class="list-group-item list-group-item-private"><a href="../classes/Mixins.ComponentChild.html">Mixins.ComponentChild</a></li>
+            <li class="list-group-item list-group-item-private"><a href="../classes/Mixins.ComponentParent.html">Mixins.ComponentParent</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+<script
+  src="https://code.jquery.com/jquery-3.3.1.min.js"
+  integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+  crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"
+        integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T"
+        crossorigin="anonymous"></script>
+<script src="../assets/vendor/prettify/prettify-min.js"></script>
+<script src="../assets/js/yuidoc-bootstrap.js"></script>
+<script>prettyPrint();</script>
+</body>
+</html>

@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <title>addon/mixins/component-parent.js - ember-bootstrap</title>
+  <title>addon/components/bs-modal/dialog.js - ember-bootstrap</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="../assets/css/api.css">
   <script type="text/javascript" src="//use.typekit.net/dkq5epu.js"></script>
@@ -54,64 +54,149 @@
         <div id="docs-main">
           <div class="content">
 <div class="page-header">
-    <h1>addon/mixins/component-parent.js <small>File</small></h1>
+    <h1>addon/components/bs-modal/dialog.js <small>File</small></h1>
 </div>
 
 <div class="file">
     <pre class="prettyprint linenums">
-import { schedule } from &#x27;@ember/runloop&#x27;;
-import { A } from &#x27;@ember/array&#x27;;
-import Mixin from &#x27;@ember/object/mixin&#x27;;
+import { layout as templateLayout, tagName } from &#x27;@ember-decorators/component&#x27;;
+import { action, computed } from &#x27;@ember/object&#x27;;
+import { readOnly } from &#x27;@ember/object/computed&#x27;;
+import { isBlank } from &#x27;@ember/utils&#x27;;
+import Component from &#x27;@ember/component&#x27;;
+import layout from &#x27;ember-bootstrap/templates/components/bs-modal/dialog&#x27;;
+import { next } from &#x27;@ember/runloop&#x27;;
 
 /**
- * Mixin for components that act as a parent component in a parent-child relationship of components
- *
- * @class ComponentParent
- * @namespace Mixins
- * @private
+ Internal component for modal&#x27;s markup and event handling. Should not be used directly.
+
+ @class ModalDialog
+ @namespace Components
+ @extends Ember.Component
+ @private
  */
-// eslint-disable-next-line ember/no-new-mixins
-export default Mixin.create({
+@tagName(&#x27;&#x27;)
+@templateLayout(layout)
+export default class ModalDialog extends Component {
+  @readOnly(&#x27;titleId&#x27;)
+  ariaLabelledby;
+
   /**
-   * Array of registered child components
+   * Name of the size class
    *
-   * @property children
-   * @type array
-   * @protected
+   * @property sizeClass
+   * @type string
+   * @readOnly
+   * @private
    */
-  children: null,
-
-  init() {
-    this._super(...arguments);
-    this.set(&#x27;children&#x27;, A());
-  },
+  @(computed(&#x27;size&#x27;).readOnly())
+  get sizeClass() {
+    let size = this.size;
+    return isBlank(size) ? null : &#x60;modal-${size}&#x60;;
+  }
 
   /**
-   * Register a component as a child of this parent
+   * The id of the &#x60;.modal-title&#x60; element
    *
-   * @method registerChild
-   * @param child
+   * @property titleId
+   * @type string
+   * @default null
+   * @private
+   */
+  titleId = null;
+
+  /**
+   * Gets or sets the id of the title element for aria accessibility tags
+   *
+   * @method getSetTitleID
+   * @private
+   */
+  @action
+  getOrSetTitleId(modalNode) {
+    //Title element may be set by user so we have to try and find it to set the id
+    let nodeId = null;
+
+    if (modalNode) {
+      const titleNode = modalNode.querySelector(&#x27;.modal-title&#x27;);
+      if (titleNode) {
+        //Get title id of .modal-title
+        nodeId = titleNode.id;
+        if (!nodeId) {
+          //no title id so we set one
+          nodeId = &#x60;${this.id}-title&#x60;;
+          titleNode.id = nodeId;
+        }
+      }
+    }
+    this.set(&#x27;titleId&#x27;, nodeId);
+  }
+
+  @action
+  setInitialFocus(element) {
+    let autofocus = element &amp;&amp; element.querySelector(&#x27;[autofocus]&#x27;);
+    if (autofocus) {
+      next(() =&gt; autofocus.focus());
+    }
+  }
+
+  /**
+   * If true clicking on the backdrop will be ignored and will not close modal.
+   *
+   * @property ignoreBackdropClick
+   * @type boolean
+   * @default false
+   * @private
+   */
+  ignoreBackdropClick = false;
+
+  /**
+   * The target DOM element of mouse down event.
+   *
+   * @property mouseDownElement
+   * @type object
+   * @default null
+   * @private
+   */
+  mouseDownElement = null;
+
+  /**
+   * @event onClose
    * @public
    */
-  registerChild(child) {
-    schedule(&#x27;actions&#x27;, this, function () {
-      this.children.addObject(child);
-    });
-  },
+  onClose() {}
 
-  /**
-   * Remove the child component from this parent component
-   *
-   * @method removeChild
-   * @param child
-   * @public
-   */
-  removeChild(child) {
-    schedule(&#x27;actions&#x27;, this, function () {
-      this.children.removeObject(child);
-    });
-  },
-});
+  @action
+  handleKeyDown(e) {
+    let code = e.keyCode || e.which;
+    if (code === 27 &amp;&amp; this.keyboard) {
+      this.onClose();
+    }
+  }
+
+  @action
+  handleClick(e) {
+    if (this.ignoreBackdropClick) {
+      this.set(&#x27;ignoreBackdropClick&#x27;, false);
+      return;
+    }
+    if (e.target !== this._element || !this.backdropClose) {
+      return;
+    }
+    this.onClose();
+  }
+
+  @action
+  handleMouseDown(e) {
+    this.set(&#x27;mouseDownElement&#x27;, e.target);
+  }
+
+  @action
+  handleMouseUp(e) {
+    if (this.mouseDownElement !== this._element &amp;&amp; e.target === this._element) {
+      this.set(&#x27;ignoreBackdropClick&#x27;, true);
+    }
+  }
+}
 
     </pre>
 </div>

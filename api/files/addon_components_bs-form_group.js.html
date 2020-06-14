@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <title>addon/mixins/component-parent.js - ember-bootstrap</title>
+  <title>addon/components/bs-form/group.js - ember-bootstrap</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="../assets/css/api.css">
   <script type="text/javascript" src="//use.typekit.net/dkq5epu.js"></script>
@@ -54,64 +54,261 @@
         <div id="docs-main">
           <div class="content">
 <div class="page-header">
-    <h1>addon/mixins/component-parent.js <small>File</small></h1>
+    <h1>addon/components/bs-form/group.js <small>File</small></h1>
 </div>
 
 <div class="file">
     <pre class="prettyprint linenums">
-import { schedule } from &#x27;@ember/runloop&#x27;;
-import { A } from &#x27;@ember/array&#x27;;
-import Mixin from &#x27;@ember/object/mixin&#x27;;
+import { layout as templateLayout, tagName } from &#x27;@ember-decorators/component&#x27;;
+import Component from &#x27;@ember/component&#x27;;
+import layout from &#x27;ember-bootstrap/templates/components/bs-form/group&#x27;;
+import { computed } from &#x27;@ember/object&#x27;;
+import { and, equal, notEmpty } from &#x27;@ember/object/computed&#x27;;
+import Config from &#x27;ember-bootstrap/config&#x27;;
+import { isBlank } from &#x27;@ember/utils&#x27;;
+import sizeClass from &#x27;ember-bootstrap/utils/cp/size-class&#x27;;
+import defaultValue from &#x27;ember-bootstrap/utils/default-decorator&#x27;;
 
 /**
- * Mixin for components that act as a parent component in a parent-child relationship of components
- *
- * @class ComponentParent
- * @namespace Mixins
- * @private
- */
-// eslint-disable-next-line ember/no-new-mixins
-export default Mixin.create({
+  This component renders a &#x60;&lt;div class=&quot;form-group&quot;&gt;&#x60; element, with support for validation states and feedback icons (only for BS3).
+  You can use it as a block level component. The following shows Bootstrap 3 usage for the internal markup.
+
+  &#x60;&#x60;&#x60;hbs
+  &lt;BsForm as |form|&gt;
+    &lt;form.group @validation={{this.firstNameValidation}}&gt;
+      &lt;label class=&quot;control-label&quot;&gt;First name&lt;/label&gt;
+      &lt;input value={{this.firstname}} class=&quot;form-control&quot; oninput={{action (mut this.firstname) value=&quot;target.value&quot;}} type=&quot;text&quot;&gt;
+    &lt;/form.group&gt;
+  &lt;/bs-form&gt;
+  &#x60;&#x60;&#x60;
+
+  If the &#x60;validation&#x60; property is set to some state (usually Bootstrap&#x27;s predefined states &quot;success&quot;,
+  &quot;warning&quot; or &quot;error&quot;), the appropriate styles will be added, together with a feedback icon.
+  See http://getbootstrap.com/css/#forms-control-validation
+
+  @class FormGroup
+  @namespace Components
+  @extends Ember.Component
+  @public
+*/
+@tagName(&#x27;&#x27;)
+@templateLayout(layout)
+export default class FormGroup extends Component {
   /**
-   * Array of registered child components
-   *
-   * @property children
-   * @type array
-   * @protected
+   * @property classTypePrefix
+   * @type String
+   * @default &#x27;form-group&#x27; (BS3) or &#x27;form-control&#x27; (BS4)
+   * @private
    */
-  children: null,
-
-  init() {
-    this._super(...arguments);
-    this.set(&#x27;children&#x27;, A());
-  },
 
   /**
-   * Register a component as a child of this parent
+   * Computed property which is true if the form group is in a validation state
    *
-   * @method registerChild
-   * @param child
+   * @property hasValidation
+   * @type boolean
+   * @private
+   * @readonly
+   */
+  @(notEmpty(&#x27;validation&#x27;).readOnly())
+  hasValidation;
+
+  /**
+   * [BS3 only] Set to a validation state to render the form-group with a validation style.
+   * See http://getbootstrap.com/css/#forms-control-validation
+   *
+   * The default states of &quot;success&quot;, &quot;warning&quot; and &quot;error&quot; are supported by Bootstrap out-of-the-box.
+   * But you can use custom states as well. This will set a has-&lt;state&gt; class, and (if &#x60;useIcons&#x60;is true)
+   * a feedback whose class is taken from the &lt;state&gt;Icon property
+   *
+   * @property validation
+   * @type string
    * @public
    */
-  registerChild(child) {
-    schedule(&#x27;actions&#x27;, this, function () {
-      this.children.addObject(child);
-    });
-  },
 
   /**
-   * Remove the child component from this parent component
+   * [BS3 only] Whether to show validation state icons.
+   * See http://getbootstrap.com/css/#forms-control-validation
    *
-   * @method removeChild
-   * @param child
+   * @property useIcons
+   * @type boolean
+   * @default true
    * @public
    */
-  removeChild(child) {
-    schedule(&#x27;actions&#x27;, this, function () {
-      this.children.removeObject(child);
-    });
-  },
-});
+  @defaultValue
+  useIcons = true;
+
+  /**
+   * [BS3 only] Computed property which is true if the form group is showing a validation icon
+   *
+   * @property hasFeedback
+   * @type boolean
+   * @private
+   * @readonly
+   */
+  @(and(&#x27;hasValidation&#x27;, &#x27;useIcons&#x27;, &#x27;hasIconForValidationState&#x27;).readOnly())
+  hasFeedback;
+
+  /**
+   * [BS3 only] The icon classes to be used for a feedback icon in a &quot;success&quot; validation state.
+   * Defaults to the usual glyphicon classes. This is ignored, and no feedback icon is
+   * rendered if &#x60;useIcons&#x60; is false.
+   *
+   * You can change this globally by setting the &#x60;formValidationSuccessIcon&#x60; property of
+   * the ember-bootstrap configuration in your config/environment.js file. If your are
+   * using FontAwesome for example:
+   *
+   * &#x60;&#x60;&#x60;js
+   * ENV[&#x27;ember-bootstrap&#x27;] = {
+   *   formValidationSuccessIcon: &#x27;fas fa-check&#x27;
+   * }
+   * &#x60;&#x60;&#x60;
+   *
+   * @property successIcon
+   * @type string
+   * @default &#x27;glyphicon glyphicon-ok&#x27;
+   * @public
+   */
+  @defaultValue
+  successIcon = Config.formValidationSuccessIcon;
+
+  /**
+   * [BS3 only] The icon classes to be used for a feedback icon in a &quot;error&quot; validation state.
+   * Defaults to the usual glyphicon classes. This is ignored, and no feedback icon is
+   * rendered if &#x60;useIcons&#x60; is false.
+   *
+   * You can change this globally by setting the &#x60;formValidationErrorIcon&#x60; property of
+   * the ember-bootstrap configuration in your config/environment.js file. If your are
+   * using FontAwesome for example:
+   *
+   * &#x60;&#x60;&#x60;js
+   * ENV[&#x27;ember-bootstrap&#x27;] = {
+   *   formValidationErrorIcon: &#x27;fas fa-times&#x27;
+   * }
+   * &#x60;&#x60;&#x60;
+   *
+   * @property errorIcon
+   * @type string
+   * @public
+   */
+  @defaultValue
+  errorIcon = Config.formValidationErrorIcon;
+
+  /**
+   * [BS3 only] The icon classes to be used for a feedback icon in a &quot;warning&quot; validation state.
+   * Defaults to the usual glyphicon classes. This is ignored, and no feedback icon is
+   * rendered if &#x60;useIcons&#x60; is false.
+   *
+   * You can change this globally by setting the &#x60;formValidationWarningIcon&#x60; property of
+   * the ember-bootstrap configuration in your config/environment.js file. If your are
+   * using FontAwesome for example:
+   *
+   * &#x60;&#x60;&#x60;js
+   * ENV[&#x27;ember-bootstrap&#x27;] = {
+   *   formValidationWarningIcon: &#x27;fas fa-exclamation-triangle&#x27;
+   * }
+   * &#x60;&#x60;&#x60;
+   *
+   * @property warningIcon
+   * @type string
+   * @public
+   */
+  @defaultValue
+  warningIcon = Config.formValidationWarningIcon;
+
+  /**
+   * [BS3 only] The icon classes to be used for a feedback icon in a &quot;info&quot; validation state.
+   * Defaults to the usual glyphicon classes. This is ignored, and no feedback icon is
+   * rendered if &#x60;useIcons&#x60; is false.
+   *
+   * You can change this globally by setting the &#x60;formValidationInfoIcon&#x60; property of
+   * the ember-bootstrap configuration in your config/environment.js file. If your are
+   * using FontAwesome for example:
+   *
+   * &#x60;&#x60;&#x60;js
+   * ENV[&#x27;ember-bootstrap&#x27;] = {
+   *   formValidationInfoIcon: &#x27;fa fa-info-circle
+   * }
+   * &#x60;&#x60;&#x60;
+   *
+   * The &quot;info&quot; validation state is not supported in Bootstrap CSS, but can be easily added
+   * using the following LESS style:
+   * &#x60;&#x60;&#x60;less
+   * .has-info {
+   *   .form-control-validation(@state-info-text; @state-info-text; @state-info-bg);
+   * }
+   * &#x60;&#x60;&#x60;
+   *
+   * @property infoIcon
+   * @type string
+   * @public
+   */
+  @defaultValue
+  infoIcon = Config.formValidationInfoIcon;
+
+  /**
+   * [BS3 only] Property for size styling, set to &#x27;lg&#x27;, &#x27;sm&#x27; or &#x27;xs&#x27;
+   *
+   * Also see the [Bootstrap docs](https://getbootstrap.com/docs/3.4/css/#forms-control-sizes)
+   *
+   * @property size
+   * @type String
+   * @public
+   */
+  @defaultValue
+  size = null;
+
+  @sizeClass(&#x27;form-group&#x27;, &#x27;size&#x27;)
+  sizeClass;
+
+  /**
+   * [BS3 only]
+   *
+   * @property iconName
+   * @type string
+   * @readonly
+   * @private
+   */
+  @(computed(&#x27;validation&#x27;).readOnly())
+  get iconName() {
+    let validation = this.validation || &#x27;success&#x27;;
+    return this.get(&#x60;${validation}Icon&#x60;);
+  }
+
+  /**
+   * [BS3 only]
+   *
+   * @property hasIconForValidationState
+   * @type boolean
+   * @readonly
+   * @private
+   */
+  @(notEmpty(&#x27;iconName&#x27;).readOnly())
+  hasIconForValidationState;
+
+  /**
+   * [BS3 only]
+   *
+   * @property validationClass
+   * @type string
+   * @readonly
+   * @private
+   */
+  @(computed(&#x27;validation&#x27;).readOnly())
+  get validationClass() {
+    let validation = this.validation;
+    return !isBlank(validation) ? &#x60;has-${validation}&#x60; : undefined;
+  }
+
+  /**
+   * Indicates whether the form type equals &#x60;horizontal&#x60;
+   *
+   * @property isHorizontal
+   * @type boolean
+   * @private
+   */
+  @(equal(&#x27;formLayout&#x27;, &#x27;horizontal&#x27;).readOnly())
+  isHorizontal;
+}
 
     </pre>
 </div>

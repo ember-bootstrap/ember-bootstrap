@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <title>addon/mixins/component-parent.js - ember-bootstrap</title>
+  <title>addon/components/bs-tab.js - ember-bootstrap</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="../assets/css/api.css">
   <script type="text/javascript" src="//use.typekit.net/dkq5epu.js"></script>
@@ -54,64 +54,288 @@
         <div id="docs-main">
           <div class="content">
 <div class="page-header">
-    <h1>addon/mixins/component-parent.js <small>File</small></h1>
+    <h1>addon/components/bs-tab.js <small>File</small></h1>
 </div>
 
 <div class="file">
     <pre class="prettyprint linenums">
-import { schedule } from &#x27;@ember/runloop&#x27;;
+import { layout as templateLayout, tagName } from &#x27;@ember-decorators/component&#x27;;
+import { action, computed } from &#x27;@ember/object&#x27;;
+import { filter, oneWay } from &#x27;@ember/object/computed&#x27;;
+import Component from &#x27;@ember/component&#x27;;
+import { isPresent } from &#x27;@ember/utils&#x27;;
 import { A } from &#x27;@ember/array&#x27;;
-import Mixin from &#x27;@ember/object/mixin&#x27;;
+import layout from &#x27;ember-bootstrap/templates/components/bs-tab&#x27;;
+import ComponentParent from &#x27;ember-bootstrap/mixins/component-parent&#x27;;
+import TabPane from &#x27;ember-bootstrap/components/bs-tab/pane&#x27;;
+import listenTo from &#x27;ember-bootstrap/utils/cp/listen-to&#x27;;
+import defaultValue from &#x27;ember-bootstrap/utils/default-decorator&#x27;;
 
 /**
- * Mixin for components that act as a parent component in a parent-child relationship of components
- *
- * @class ComponentParent
- * @namespace Mixins
- * @private
- */
-// eslint-disable-next-line ember/no-new-mixins
-export default Mixin.create({
+  Tab component for dynamic tab functionality that mimics the behaviour of Bootstrap&#x27;s tab.js plugin,
+  see http://getbootstrap.com/javascript/#tabs
+
+  ### Usage
+
+  Just nest any number of yielded [Components.TabPane](Components.TabPane.html) components that hold the tab content.
+  The tab navigation is automatically generated from the tab panes&#x27; &#x60;title&#x60; property:
+
+  &#x60;&#x60;&#x60;hbs
+  &lt;BsTab as |tab|&gt;
+    &lt;tab.pane @title=&quot;Tab 1&quot;&gt;
+      &lt;p&gt; ... &lt;/p&gt;
+    &lt;/tab.pane&gt;
+    &lt;tab.pane @title=&quot;Tab 2&quot;&gt;
+      &lt;p&gt; ... &lt;/p&gt;
+    &lt;/tab.pane&gt;
+  &lt;/BsTab&gt;
+  &#x60;&#x60;&#x60;
+
+  ### Groupable (dropdown) tabs
+
+  Bootstrap&#x27;s support for dropdown menus as tab navigation is mimiced by the use of the &#x60;groupTitle&#x60; property.
+  All panes with the same &#x60;groupTitle&#x60; will be put inside the menu of a [Components.Dropdown](Components.Dropdown.html)
+  component with &#x60;groupTitle&#x60; being the dropdown&#x27;s title:
+
+  &#x60;&#x60;&#x60;hbs
+  &lt;BsTab as |tab|&gt;
+    &lt;tab.pane @title=&quot;Tab 1&quot;&gt;
+      &lt;p&gt; ... &lt;/p&gt;
+    &lt;/tab.pane&gt;
+    &lt;tab.pane @title=&quot;Tab 2&quot;&gt;
+      &lt;p&gt; ... &lt;/p&gt;
+    &lt;/tab.pane&gt;
+    &lt;tab.pane @title=&quot;Tab 3&quot; @groupTitle=&quot;Dropdown&quot;&gt;
+      &lt;p&gt; ... &lt;/p&gt;
+    &lt;/tab.pane&gt;
+    &lt;tab.pane @title=&quot;Tab 4&quot; @groupTitle=&quot;Dropdown&quot;&gt;
+      &lt;p&gt; ... &lt;/p&gt;
+    &lt;/tab.pane&gt;
+  &lt;/BsTab&gt;
+  &#x60;&#x60;&#x60;
+
+  ### Custom tabs
+
+  When having the tab pane&#x27;s &#x60;title&#x60; as the tab navigation title is not sufficient, for example because you want to
+  integrate some other dynamic content, maybe even other components in the tab navigation item, then you have to setup
+  your navigation by yourself.
+
+  Set &#x60;customTabs&#x60; to true to deactivate the automatic tab navigation generation. Then setup your navigation, probably
+  using a [Components.Nav](Components.Nav.html) component. The tab component yields the &#x60;activeId&#x60; property as well as
+  its &#x60;select&#x60; action, which you would have to use to manually set the &#x60;active&#x60; state of the navigation items and to
+  trigger the selection of the different tab panes, using their ids:
+
+  &#x60;&#x60;&#x60;hbs
+  &lt;BsTab @customTabs={{true}} as |tab|&gt;
+    &lt;BsNav @type=&quot;tabs&quot; as |nav|&gt;
+      &lt;nav.item @active={{bs-eq Tab.activeId &quot;pane1&quot;}}&gt;&lt;a href=&quot;#pane1&quot; role=&quot;tab&quot; onclick={{action Tab.select &quot;pane1&quot;}}&gt;Tab 1&lt;/a&gt;&lt;/nav.item&gt;
+      &lt;nav.item @active={{bs-eq Tab.activeId &quot;pane2&quot;}}&gt;&lt;a href=&quot;#pane2&quot; role=&quot;tab&quot; onclick={{action Tab.select &quot;pane2&quot;}}&gt;Tab 2 &lt;span class=&quot;badge&quot;&gt;{{badge}}&lt;/span&gt;&lt;/a&gt;&lt;/nav.item&gt;
+    &lt;/BsNav&gt;
+    &lt;div class=&quot;tab-content&quot;&gt;
+      &lt;tab.pane @id=&quot;pane1&quot; @title=&quot;Tab 1&quot;&gt;
+        &lt;p&gt; ... &lt;/p&gt;
+      &lt;/tab.pane&gt;
+      &lt;tab.pane @id=&quot;pane2&quot; @title=&quot;Tab 2&quot;&gt;
+        &lt;p&gt; ... &lt;/p&gt;
+      &lt;/tab.pane&gt;
+    &lt;/div&gt;
+  &lt;/BsTab&gt;
+  &#x60;&#x60;&#x60;
+
+  Note that the &#x60;bs-eq&#x60; helper used in the example above is a private helper, which is not guaranteed to be available for
+  the future. Better use the corresponding &#x60;eq&#x60; helper of the
+  [ember-truth-helpers](https://github.com/jmurphyau/ember-truth-helpers) addon for example!
+
+  ### Routable tabs
+
+  The tab component purpose is to have panes of content, that are all in DOM at the same time and that are activated and
+  deactivated dynamically, just as the  original Bootstrap implementation.
+
+  If you want to have the content delivered through individual sub routes, just use
+  the [Components.Nav](Components.Nav.html) component and an &#x60;{{outlet}}&#x60; that show the nested routes&#x27; content:
+
+  &#x60;&#x60;&#x60;hbs
+  &lt;div&gt;
+    &lt;BsNav @type=&quot;tabs&quot; as |nav|&gt;
+      &lt;nav.item&gt;
+        &lt;nav.linkTo @route=&quot;tabs.index&quot;&gt;Tab 1&lt;/nav.linkTo&gt;
+      &lt;/nav.item&gt;
+      &lt;nav.item&gt;
+        &lt;nav.linkTo @route=&quot;tabs.other&quot;&gt;Tab 3&lt;/nav.linkTo&gt;
+      &lt;/nav.item&gt;
+    &lt;/BsNav&gt;
+  &lt;/div&gt;
+  &#x60;&#x60;&#x60;
+
+  @class Tab
+  @namespace Components
+  @extends Ember.Component
+  @uses Mixins.ComponentParent
+  @public
+*/
+@tagName(&#x27;&#x27;)
+@templateLayout(layout)
+export default class Tab extends Component.extend(ComponentParent) {
   /**
-   * Array of registered child components
+   * Type of nav, either &quot;pills&quot; or &quot;tabs&quot;
    *
-   * @property children
+   * @property type
+   * @type String
+   * @default &#x27;tabs&#x27;
+   * @public
+   */
+  @defaultValue
+  type = &#x27;tabs&#x27;;
+
+  /**
+   * @property paneComponent
+   * @type {String}
+   * @private
+   */
+  @defaultValue
+  paneComponent = &#x27;bs-tab/pane&#x27;;
+
+  /**
+   * @property navComponent
+   * @type {String}
+   * @private
+   */
+  @defaultValue
+  navComponent = &#x27;bs-nav&#x27;;
+
+  /**
+   * By default the tabs will be automatically generated using the available [TabPane](Components.TabPane.html)
+   * components. If set to true, you can deactivate this and setup the tabs manually. See the example above.
+   *
+   * @property customTabs
+   * @type boolean
+   * @default false
+   * @public
+   */
+  @defaultValue
+  customTabs = false;
+
+  /**
+   * The id (&#x60;id&#x60;) of the active [TabPane](Components.TabPane.html).
+   * By default the first tab will be active, but this can be changed by setting this property
+   *
+   * &#x60;&#x60;&#x60;hbs
+   * {{#bs-tab activeId=&quot;pane2&quot;}}
+   *   {{#tab.pane id=&quot;pane1&quot; title=&quot;Tab 1&quot;}}
+   *      ...
+   *   {{/tab.pane}}
+   *   {{#tab.pane id=&quot;pane1&quot; title=&quot;Tab 1&quot;}}
+   *     ...
+   *   {{/tab.pane}}
+   * {{/bs-tab}}
+   * &#x60;&#x60;&#x60;
+   *
+   * When the selection is changed by user interaction this property will not update by using two-way bindings in order
+   * to follow DDAU best practices. If you want to react to such changes, subscribe to the &#x60;onChange&#x60; action
+   *
+   * @property activeId
+   * @type string
+   * @public
+   */
+  @oneWay(&#x27;childPanes.firstObject.id&#x27;)
+  activeId;
+
+  /**
+   * @property isActiveId
+   * @private
+   */
+  @listenTo(&#x27;activeId&#x27;)
+  isActiveId;
+
+  /**
+   * Set to false to disable the fade animation when switching tabs.
+   *
+   * @property fade
+   * @type boolean
+   * @default true
+   * @public
+   */
+  @defaultValue
+  fade = true;
+
+  /**
+   * The duration of the fade animation
+   *
+   * @property fadeDuration
+   * @type integer
+   * @default 150
+   * @public
+   */
+  @defaultValue
+  fadeDuration = 150;
+
+  /**
+   * This action is called when switching the active tab, with the new and previous pane id
+   *
+   * You can return false to prevent changing the active tab automatically, and do that in your action by
+   * setting &#x60;activeId&#x60;.
+   *
+   * @event onChange
+   * @public
+   */
+  onChange() {}
+
+  /**
+   * All &#x60;TabPane&#x60; child components
+   *
+   * @property childPanes
    * @type array
-   * @protected
+   * @readonly
+   * @private
    */
-  children: null,
-
-  init() {
-    this._super(...arguments);
-    this.set(&#x27;children&#x27;, A());
-  },
-
-  /**
-   * Register a component as a child of this parent
-   *
-   * @method registerChild
-   * @param child
-   * @public
-   */
-  registerChild(child) {
-    schedule(&#x27;actions&#x27;, this, function () {
-      this.children.addObject(child);
-    });
-  },
+  @filter(&#x27;children&#x27;, function (view) {
+    return view instanceof TabPane;
+  })
+  childPanes;
 
   /**
-   * Remove the child component from this parent component
+   * Array of objects that define the tab structure
    *
-   * @method removeChild
-   * @param child
-   * @public
+   * @property navItems
+   * @type array
+   * @readonly
+   * @private
    */
-  removeChild(child) {
-    schedule(&#x27;actions&#x27;, this, function () {
-      this.children.removeObject(child);
+  @computed(&#x27;childPanes.@each.{id,title,group}&#x27;)
+  get navItems() {
+    let items = A();
+    this.childPanes.forEach((pane) =&gt; {
+      let groupTitle = pane.get(&#x27;groupTitle&#x27;);
+      let item = pane.getProperties(&#x27;id&#x27;, &#x27;title&#x27;);
+      if (isPresent(groupTitle)) {
+        let group = items.findBy(&#x27;groupTitle&#x27;, groupTitle);
+        if (group) {
+          group.children.push(item);
+          group.childIds.push(item.id);
+        } else {
+          items.push({
+            isGroup: true,
+            groupTitle,
+            children: A([item]),
+            childIds: A([item.id]),
+          });
+        }
+      } else {
+        items.push(item);
+      }
     });
-  },
-});
+    return items;
+  }
+
+  @action
+  select(id) {
+    let previous = this.isActiveId;
+    if (this.onChange(id, previous) !== false) {
+      // change active tab when &#x60;onChange&#x60; does not return false
+      this.set(&#x27;isActiveId&#x27;, id);
+    }
+  }
+}
 
     </pre>
 </div>

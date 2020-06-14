@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <title>addon/mixins/component-parent.js - ember-bootstrap</title>
+  <title>addon/components/bs-nav/item.js - ember-bootstrap</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="../assets/css/api.css">
   <script type="text/javascript" src="//use.typekit.net/dkq5epu.js"></script>
@@ -54,64 +54,132 @@
         <div id="docs-main">
           <div class="content">
 <div class="page-header">
-    <h1>addon/mixins/component-parent.js <small>File</small></h1>
+    <h1>addon/components/bs-nav/item.js <small>File</small></h1>
 </div>
 
 <div class="file">
     <pre class="prettyprint linenums">
-import { schedule } from &#x27;@ember/runloop&#x27;;
-import { A } from &#x27;@ember/array&#x27;;
-import Mixin from &#x27;@ember/object/mixin&#x27;;
+import { layout as templateLayout, tagName } from &#x27;@ember-decorators/component&#x27;;
+import { observes } from &#x27;@ember-decorators/object&#x27;;
+import { filter, filterBy, gt } from &#x27;@ember/object/computed&#x27;;
+import Component from &#x27;@ember/component&#x27;;
+import { action } from &#x27;@ember/object&#x27;;
+import { scheduleOnce } from &#x27;@ember/runloop&#x27;;
+import LinkComponent from &#x27;@ember/routing/link-component&#x27;;
+import layout from &#x27;ember-bootstrap/templates/components/bs-nav/item&#x27;;
+import ComponentParent from &#x27;ember-bootstrap/mixins/component-parent&#x27;;
+import overrideableCP from &#x27;ember-bootstrap/utils/cp/overrideable&#x27;;
+import { assert } from &#x27;@ember/debug&#x27;;
 
 /**
- * Mixin for components that act as a parent component in a parent-child relationship of components
- *
- * @class ComponentParent
- * @namespace Mixins
- * @private
+
+ Component for each item within a [Components.Nav](Components.Nav.html) component. Have a look there for examples.
+
+ @class NavItem
+ @namespace Components
+ @extends Ember.Component
+ @uses Mixins.ComponentParent
+ @public
  */
-// eslint-disable-next-line ember/no-new-mixins
-export default Mixin.create({
+@templateLayout(layout)
+@tagName(&#x27;&#x27;)
+export default class NavItem extends Component.extend(ComponentParent) {
   /**
-   * Array of registered child components
+   * Render the nav item as disabled (see [Bootstrap docs](http://getbootstrap.com/components/#nav-disabled-links)).
+   * By default it will look at any nested &#x60;link-to&#x60; components and make itself disabled if there is a disabled link.
+   * See the [link-to API](http://emberjs.com/api/classes/Ember.Templates.helpers.html#toc_disabling-the-code-link-to-code-component)
    *
-   * @property children
-   * @type array
-   * @protected
+   * @property disabled
+   * @type boolean
+   * @public
    */
-  children: null,
+  @overrideableCP(&#x27;_disabled&#x27;, function () {
+    return this._disabled;
+  })
+  disabled;
+
+  _disabled = false;
+
+  /**
+   * Render the nav item as active.
+   * By default it will look at any nested &#x60;link-to&#x60; components and make itself active if there is an active link
+   * (i.e. the link points to the current route).
+   * See the [link-to API](http://emberjs.com/api/classes/Ember.Templates.helpers.html#toc_handling-current-route)
+   *
+   * @property active
+   * @type boolean
+   * @public
+   */
+  @overrideableCP(&#x27;_active&#x27;, function () {
+    return this._active;
+  })
+  active;
+
+  _active = false;
+
+  /**
+   * Collection of all &#x60;Ember.LinkComponent&#x60;s that are children
+   *
+   * @property childLinks
+   * @private
+   */
+  @filter(&#x27;children&#x27;, function (view) {
+    return view instanceof LinkComponent;
+  })
+  childLinks;
+
+  @filterBy(&#x27;childLinks&#x27;, &#x27;active&#x27;)
+  activeChildLinks;
+
+  @gt(&#x27;activeChildLinks.length&#x27;, 0)
+  hasActiveChildLinks;
+
+  @filterBy(&#x27;childLinks&#x27;, &#x27;disabled&#x27;)
+  disabledChildLinks;
+
+  @gt(&#x27;disabledChildLinks.length&#x27;, 0)
+  hasDisabledChildLinks;
+
+  /**
+   * Called when clicking the nav item
+   *
+   * @event onClick
+   * @public
+   */
+  onClick() {}
+
+  @action
+  handleClick() {
+    this.onClick();
+  }
 
   init() {
-    this._super(...arguments);
-    this.set(&#x27;children&#x27;, A());
-  },
+    super.init(...arguments);
+    let { model, models } = this;
+    assert(&#x27;You cannot pass both &#x60;@model&#x60; and &#x60;@models&#x60; to a nav item component!&#x27;, !model || !models);
 
-  /**
-   * Register a component as a child of this parent
-   *
-   * @method registerChild
-   * @param child
-   * @public
-   */
-  registerChild(child) {
-    schedule(&#x27;actions&#x27;, this, function () {
-      this.children.addObject(child);
-    });
-  },
+    this.activeChildLinks;
+    this.disabledChildLinks;
+  }
 
-  /**
-   * Remove the child component from this parent component
-   *
-   * @method removeChild
-   * @param child
-   * @public
-   */
-  removeChild(child) {
-    schedule(&#x27;actions&#x27;, this, function () {
-      this.children.removeObject(child);
-    });
-  },
-});
+  @observes(&#x27;activeChildLinks.[]&#x27;)
+  _observeActive() {
+    scheduleOnce(&#x27;afterRender&#x27;, this, this._updateActive);
+  }
+
+  _updateActive() {
+    this.set(&#x27;_active&#x27;, this.hasActiveChildLinks);
+  }
+
+  @observes(&#x27;disabledChildLinks.[]&#x27;)
+  _observeDisabled() {
+    scheduleOnce(&#x27;afterRender&#x27;, this, this._updateDisabled);
+  }
+
+  _updateDisabled() {
+    this.set(&#x27;_disabled&#x27;, this.hasDisabledChildLinks);
+  }
+}
 
     </pre>
 </div>

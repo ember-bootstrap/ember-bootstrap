@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <title>addon/mixins/component-parent.js - ember-bootstrap</title>
+  <title>addon/components/bs-form/element/control/input.js - ember-bootstrap</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="../assets/css/api.css">
   <script type="text/javascript" src="//use.typekit.net/dkq5epu.js"></script>
@@ -54,64 +54,102 @@
         <div id="docs-main">
           <div class="content">
 <div class="page-header">
-    <h1>addon/mixins/component-parent.js <small>File</small></h1>
+    <h1>addon/components/bs-form/element/control/input.js <small>File</small></h1>
 </div>
 
 <div class="file">
     <pre class="prettyprint linenums">
-import { schedule } from &#x27;@ember/runloop&#x27;;
-import { A } from &#x27;@ember/array&#x27;;
-import Mixin from &#x27;@ember/object/mixin&#x27;;
+import { layout as templateLayout, tagName } from &#x27;@ember-decorators/component&#x27;;
+import layout from &#x27;ember-bootstrap/templates/components/bs-form/element/control/input&#x27;;
+import { computed, action } from &#x27;@ember/object&#x27;;
+import Control from &#x27;../control&#x27;;
+import { isEmpty } from &#x27;@ember/utils&#x27;;
+import sizeClass from &#x27;ember-bootstrap/utils/cp/size-class&#x27;;
+import defaultValue from &#x27;ember-bootstrap/utils/default-decorator&#x27;;
+
+const allowedTypes = new Map();
+function canUseType(type) {
+  if (typeof document !== &#x27;object&#x27; || typeof document.createElement !== &#x27;function&#x27;) {
+    // consider all types as supported if running in an
+    // environment that doesn&#x27;t support DOM
+    return true;
+  }
+
+  if (!allowedTypes.has(type)) {
+    try {
+      let inputElement = document.createElement(&#x27;input&#x27;);
+      inputElement.type = type;
+      allowedTypes.set(type, true);
+    } catch (error) {
+      allowedTypes.set(type, false);
+    }
+  }
+
+  return allowedTypes.get(type);
+}
 
 /**
- * Mixin for components that act as a parent component in a parent-child relationship of components
- *
- * @class ComponentParent
- * @namespace Mixins
- * @private
+
+ @class FormElementControlInput
+ @namespace Components
+ @extends Components.FormElementControl
+ @private
  */
-// eslint-disable-next-line ember/no-new-mixins
-export default Mixin.create({
+@templateLayout(layout)
+@tagName(&#x27;&#x27;)
+export default class FormElementControlInput extends Control {
   /**
-   * Array of registered child components
-   *
-   * @property children
-   * @type array
-   * @protected
-   */
-  children: null,
-
-  init() {
-    this._super(...arguments);
-    this.set(&#x27;children&#x27;, A());
-  },
-
-  /**
-   * Register a component as a child of this parent
-   *
-   * @method registerChild
-   * @param child
+   * @property type
+   * @type {String}
    * @public
    */
-  registerChild(child) {
-    schedule(&#x27;actions&#x27;, this, function () {
-      this.children.addObject(child);
-    });
-  },
+  @computed
+  get type() {
+    return &#x27;text&#x27;;
+  }
+  set type(value) {
+    // fallback to &#x27;text&#x27; if value is empty
+    if (isEmpty(value)) {
+      return &#x27;text&#x27;;
+    }
+
+    // IE 11 throws if setting an unsupported type via DOM.
+    // We guard against that behaviour by testing if user
+    // agent throws on setting the provided type.
+    // This is inspired by input helper shipped with Ember.js:
+    // https://github.com/emberjs/ember.js/blob/30137796af42c63b28ead127cba0e43e45a773c1/packages/%40ember/-internals/glimmer/lib/components/text_field.ts#L93-L115
+    if (!canUseType(value)) {
+      return &#x27;text&#x27;;
+    }
+
+    return value;
+  }
+
+  @action
+  handleChange(event) {
+    this.onChange(event.target.value);
+  }
+
+  @action
+  handleInput(event) {
+    this.onChange(event.target.value);
+  }
 
   /**
-   * Remove the child component from this parent component
+   * [BS4 only] Property for size styling, set to &#x27;lg&#x27;, &#x27;sm&#x27; or &#x27;xs&#x27;
    *
-   * @method removeChild
-   * @param child
+   * Also see the [Bootstrap docs](https://getbootstrap.com/docs/4.3/components/forms/#sizing)
+   *
+   * @property size
+   * @type String
    * @public
    */
-  removeChild(child) {
-    schedule(&#x27;actions&#x27;, this, function () {
-      this.children.removeObject(child);
-    });
-  },
-});
+  @defaultValue
+  size = null;
+
+  @sizeClass(&#x27;form-control&#x27;, &#x27;size&#x27;)
+  sizeClass;
+}
 
     </pre>
 </div>

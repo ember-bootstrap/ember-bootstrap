@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <title>addon/mixins/component-parent.js - ember-bootstrap</title>
+  <title>addon/components/bs-tooltip/element.js - ember-bootstrap</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="../assets/css/api.css">
   <script type="text/javascript" src="//use.typekit.net/dkq5epu.js"></script>
@@ -54,64 +54,30 @@
         <div id="docs-main">
           <div class="content">
 <div class="page-header">
-    <h1>addon/mixins/component-parent.js <small>File</small></h1>
+    <h1>addon/components/bs-tooltip/element.js <small>File</small></h1>
 </div>
 
 <div class="file">
     <pre class="prettyprint linenums">
-import { schedule } from &#x27;@ember/runloop&#x27;;
-import { A } from &#x27;@ember/array&#x27;;
-import Mixin from &#x27;@ember/object/mixin&#x27;;
+import { layout as templateLayout } from &#x27;@ember-decorators/component&#x27;;
+import layout from &#x27;ember-bootstrap/templates/components/bs-tooltip/element&#x27;;
+import ContextualHelpElement from &#x27;../bs-contextual-help/element&#x27;;
+import defaultValue from &#x27;ember-bootstrap/utils/default-decorator&#x27;;
+import { macroCondition, getOwnConfig } from &#x27;@embroider/macros&#x27;;
 
 /**
- * Mixin for components that act as a parent component in a parent-child relationship of components
- *
- * @class ComponentParent
- * @namespace Mixins
- * @private
+ Internal component for tooltip&#x27;s markup. Should not be used directly.
+
+ @class TooltipElement
+ @namespace Components
+ @extends Components.ContextualHelpElement
+ @private
  */
-// eslint-disable-next-line ember/no-new-mixins
-export default Mixin.create({
-  /**
-   * Array of registered child components
-   *
-   * @property children
-   * @type array
-   * @protected
-   */
-  children: null,
-
-  init() {
-    this._super(...arguments);
-    this.set(&#x27;children&#x27;, A());
-  },
-
-  /**
-   * Register a component as a child of this parent
-   *
-   * @method registerChild
-   * @param child
-   * @public
-   */
-  registerChild(child) {
-    schedule(&#x27;actions&#x27;, this, function () {
-      this.children.addObject(child);
-    });
-  },
-
-  /**
-   * Remove the child component from this parent component
-   *
-   * @method removeChild
-   * @param child
-   * @public
-   */
-  removeChild(child) {
-    schedule(&#x27;actions&#x27;, this, function () {
-      this.children.removeObject(child);
-    });
-  },
-});
+@templateLayout(layout)
+export default class TooltipElement extends ContextualHelpElement {
+  @defaultValue
+  arrowClass = macroCondition(getOwnConfig().isBS3) ? &#x27;tooltip-arrow&#x27; : &#x27;arrow&#x27;;
+}
 
     </pre>
 </div>

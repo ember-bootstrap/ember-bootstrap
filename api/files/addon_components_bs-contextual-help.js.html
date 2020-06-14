@@ -1,0 +1,873 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>addon/components/bs-contextual-help.js - ember-bootstrap</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="../assets/css/api.css">
+  <script type="text/javascript" src="//use.typekit.net/dkq5epu.js"></script>
+  <script type="text/javascript">
+    try {
+      Typekit.load();
+    } catch(e) {
+    }
+  </script>
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+  <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
+  <link rel="shortcut icon" href="//kaliber5.github.io/ember-bootstrap/favicon.ico">
+</head>
+<body class="yui3-skin-sam">
+<div class="navbar navbar-dark navbar-expand-lg bg-primary">
+  <div class="container">
+    <a href="/" class="navbar-brand">ember-bootstrap</a>
+    <button type="button" class="navbar-toggler" data-toggle="collapse" data-target=".js-navbar-collapse">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse js-navbar-collapse">
+      <ul class="navbar-nav nav mr-auto">
+        <li class="navbar-nav"><a class="nav-link" href="/#/getting-started">Getting Started</a></li>
+        <li class="navbar-nav"><a class="nav-link" href="/#/components">Components</a></li>
+        <li class="navbar-nav"><a class="nav-link" href="/api">API</a></li>
+        <li class="navbar-nav"><a class="nav-link" href="/#/addons">Addons</a></li>
+      </ul>
+      <ul class="navbar-nav nav">
+        <li class="navbar-nav"><a class="nav-link" href="https://github.com/kaliber5/ember-bootstrap" target="_blank"><i
+          class="fab fa-github"></i></a></li>
+        <li class="navbar-nav"><a class="nav-link" href="https://twitter.com/simonihmig" target="_blank"><i
+          class="fab fa-twitter"></i></a>
+        </li>
+        <li class="navbar-nav">
+          <div class="navbar-text">
+            <iframe src="https://ghbtns.com/github-btn.html?user=kaliber5&repo=ember-bootstrap&type=star&count=true"
+                    frameborder="0" scrolling="0" width="100px" height="20px"></iframe>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
+<div class="container">
+  <div class="row">
+    <div class="col-sm-8">
+      <div class="apidocs">
+        <div id="docs-main">
+          <div class="content">
+<div class="page-header">
+    <h1>addon/components/bs-contextual-help.js <small>File</small></h1>
+</div>
+
+<div class="file">
+    <pre class="prettyprint linenums">
+import { tagName } from &#x27;@ember-decorators/component&#x27;;
+import { observes } from &#x27;@ember-decorators/object&#x27;;
+import { gt, or, reads } from &#x27;@ember/object/computed&#x27;;
+import Component from &#x27;@ember/component&#x27;;
+import { guidFor } from &#x27;@ember/object/internals&#x27;;
+import { isArray } from &#x27;@ember/array&#x27;;
+import EmberObject, { action, computed } from &#x27;@ember/object&#x27;;
+import { cancel, later, next, schedule } from &#x27;@ember/runloop&#x27;;
+import transitionEnd from &#x27;ember-bootstrap/utils/transition-end&#x27;;
+import { getDestinationElement } from &#x27;ember-bootstrap/utils/dom&#x27;;
+import usesTransition from &#x27;ember-bootstrap/utils/cp/uses-transition&#x27;;
+import defaultValue from &#x27;ember-bootstrap/utils/default-decorator&#x27;;
+
+class InState extends EmberObject {
+  hover = false;
+  focus = false;
+  click = false;
+
+  @or(&#x27;hover&#x27;, &#x27;focus&#x27;, &#x27;click&#x27;)
+  showHelp;
+}
+
+function noop() {}
+
+/**
+  @class ContextualHelp
+  @namespace Components
+  @extends Ember.Component
+  @private
+*/
+@tagName(&#x27;&#x27;)
+export default class ContextualHelp extends Component {
+  /**
+   * @property title
+   * @type string
+   * @public
+   */
+
+  /**
+   * How to position the tooltip/popover - top | bottom | left | right
+   *
+   * @property title
+   * @type string
+   * @default &#x27;top&#x27;
+   * @public
+   */
+  @defaultValue
+  placement = &#x27;top&#x27;;
+
+  /**
+   * By default it will dynamically reorient the tooltip/popover based on the available space in the viewport. For
+   * example, if &#x60;placement&#x60; is &quot;left&quot;, the tooltip/popover will display to the left when possible, otherwise it will
+   * display right. Set to &#x60;false&#x60; to force placement according to the &#x60;placement&#x60; property
+   *
+   * @property autoPlacement
+   * @type boolean
+   * @default true
+   * @public
+   */
+  @defaultValue
+  autoPlacement = true;
+
+  /**
+   * You can programmatically show the tooltip/popover by setting this to &#x60;true&#x60;
+   *
+   * @property visible
+   * @type boolean
+   * @default false
+   * @public
+   */
+  @defaultValue
+  visible = false;
+
+  /**
+   * @property inDom
+   * @type boolean
+   * @private
+   */
+  @defaultValue
+  inDom = this.visible &amp;&amp; this.triggerTargetElement;
+
+  /**
+   * Set to false to disable fade animations.
+   *
+   * @property fade
+   * @type boolean
+   * @default true
+   * @public
+   */
+  @defaultValue
+  fade = true;
+
+  /**
+   * Used to apply Bootstrap&#x27;s visibility class
+   *
+   * @property showHelp
+   * @type boolean
+   * @default false
+   * @private
+   */
+  @reads(&#x27;visible&#x27;)
+  showHelp;
+
+  /**
+   * Delay showing and hiding the tooltip/popover (ms). Individual delays for showing and hiding can be specified by using the
+   * &#x60;delayShow&#x60; and &#x60;delayHide&#x60; properties.
+   *
+   * @property delay
+   * @type number
+   * @default 0
+   * @public
+   */
+  @defaultValue
+  delay = 0;
+
+  /**
+   * Delay showing the tooltip/popover. This property overrides the general delay set with the &#x60;delay&#x60; property.
+   *
+   * @property delayShow
+   * @type number
+   * @default 0
+   * @public
+   */
+  @reads(&#x27;delay&#x27;)
+  delayShow;
+
+  /**
+   * Delay hiding the tooltip/popover. This property overrides the general delay set with the &#x60;delay&#x60; property.
+   *
+   * @property delayHide
+   * @type number
+   * @default 0
+   * @public
+   */
+  @reads(&#x27;delay&#x27;)
+  delayHide;
+
+  @gt(&#x27;delayShow&#x27;, 0)
+  hasDelayShow;
+
+  @gt(&#x27;delayHide&#x27;, 0)
+  hasDelayHide;
+
+  /**
+   * The duration of the fade transition
+   *
+   * @property transitionDuration
+   * @type number
+   * @default 150
+   * @public
+   */
+  @defaultValue
+  transitionDuration = 150;
+
+  /**
+   * Keeps the tooltip/popover within the bounds of this element when &#x60;autoPlacement&#x60; is true. Can be any valid CSS selector.
+   *
+   * @property viewportSelector
+   * @type string
+   * @default &#x27;body&#x27;
+   * @see viewportPadding
+   * @see autoPlacement
+   * @public
+   */
+  @defaultValue
+  viewportSelector = &#x27;body&#x27;;
+
+  /**
+   * Take a padding into account for keeping the tooltip/popover within the bounds of the element given by &#x60;viewportSelector&#x60;.
+   *
+   * @property viewportPadding
+   * @type number
+   * @default 0
+   * @see viewportSelector
+   * @see autoPlacement
+   * @public
+   */
+  @defaultValue
+  viewportPadding = 0;
+
+  _parentFinder = self.document ? self.document.createTextNode(&#x27;&#x27;) : &#x27;&#x27;;
+
+  /**
+   * The id of the overlay element.
+   *
+   * @property overlayId
+   * @type string
+   * @readonly
+   * @private
+   */
+  @computed
+  get overlayId() {
+    return &#x60;overlay-${guidFor(this)}&#x60;;
+  }
+
+  /**
+   * The DOM element of the arrow element.
+   *
+   * @property arrowElement
+   * @type object
+   * @readonly
+   * @private
+   */
+
+  /**
+   * The wormhole destinationElement
+   *
+   * @property destinationElement
+   * @type object
+   * @readonly
+   * @private
+   */
+  @computed
+  get destinationElement() {
+    return getDestinationElement(this);
+  }
+
+  /**
+   * The DOM element of the viewport element.
+   *
+   * @property viewportElement
+   * @type object
+   * @readonly
+   * @private
+   */
+  @computed(&#x27;viewportSelector&#x27;)
+  get viewportElement() {
+    return document.querySelector(this.viewportSelector);
+  }
+
+  /**
+   * The DOM element that triggers the tooltip/popover. By default it is the parent element of this component.
+   * You can set this to any CSS selector to have any other element trigger the tooltip/popover.
+   * With the special value of &quot;parentView&quot; you can attach the tooltip/popover to the parent component&#x27;s element.
+   *
+   * @property triggerElement
+   * @type string
+   * @public
+   */
+  @defaultValue
+  triggerElement = null;
+
+  /**
+   * @method getTriggerTargetElement
+   * @private
+   */
+  getTriggerTargetElement() {
+    let triggerElement = this.triggerElement;
+
+    if (!triggerElement) {
+      return this._parent;
+    } else if (triggerElement === &#x27;parentView&#x27;) {
+      return this.get(&#x27;parentView.element&#x27;);
+    } else {
+      return document.querySelector(triggerElement);
+    }
+  }
+
+  /**
+   * The event(s) that should trigger the tooltip/popover - click | hover | focus.
+   * You can set this to a single event or multiple events, given as an array or a string separated by spaces.
+   *
+   * @property triggerEvents
+   * @type array|string
+   * @default &#x27;hover focus&#x27;
+   * @public
+   */
+  @defaultValue
+  triggerEvents = &#x27;hover focus&#x27;;
+
+  @computed(&#x27;triggerEvents&#x27;)
+  get _triggerEvents() {
+    let events = this.triggerEvents;
+    if (!isArray(events)) {
+      events = events.split(&#x27; &#x27;);
+    }
+
+    return events.map((event) =&gt; {
+      switch (event) {
+        case &#x27;hover&#x27;:
+          return [&#x27;mouseenter&#x27;, &#x27;mouseleave&#x27;];
+        case &#x27;focus&#x27;:
+          return [&#x27;focusin&#x27;, &#x27;focusout&#x27;];
+        default:
+          return event;
+      }
+    });
+  }
+
+  /**
+   * If true component will render in place, rather than be wormholed.
+   *
+   * @property renderInPlace
+   * @type boolean
+   * @default false
+   * @public
+   */
+  @defaultValue
+  renderInPlace = false;
+
+  /**
+   * @property _renderInPlace
+   * @type boolean
+   * @private
+   */
+  @computed(&#x27;renderInPlace&#x27;)
+  get _renderInPlace() {
+    return this.renderInPlace || !this.destinationElement;
+  }
+
+  /**
+   * Current hover state, &#x27;in&#x27;, &#x27;out&#x27; or null
+   *
+   * @property hoverState
+   * @type string
+   * @private
+   */
+  @defaultValue
+  hoverState = null;
+
+  /**
+   * Current state for events
+   *
+   * @property inState
+   * @type {InState}
+   * @private
+   */
+  @computed
+  get inState() {
+    return InState.create();
+  }
+
+  /**
+   * Ember.run timer
+   *
+   * @property timer
+   * @private
+   */
+  timer = null;
+
+  /**
+   * Use CSS transitions?
+   *
+   * @property usesTransition
+   * @type boolean
+   * @readonly
+   * @private
+   */
+  @usesTransition(&#x27;fade&#x27;)
+  usesTransition;
+
+  /**
+   * The DOM element of the overlay element.
+   *
+   * @property overlayElement
+   * @type object
+   * @readonly
+   * @private
+   */
+  get overlayElement() {
+    return document.getElementById(this.overlayId);
+  }
+
+  /**
+   * This action is called immediately when the tooltip/popover is about to be shown.
+   *
+   * @event onShow
+   * @public
+   */
+  onShow() {}
+
+  /**
+   * This action will be called when the tooltip/popover has been made visible to the user (will wait for CSS transitions to complete).
+   *
+   * @event onShown
+   * @public
+   */
+  onShown() {}
+
+  /**
+   * This action is called immediately when the tooltip/popover is about to be hidden.
+   *
+   * @event onHide
+   * @public
+   */
+  onHide() {}
+
+  /**
+   * This action is called when the tooltip/popover has finished being hidden from the user (will wait for CSS transitions to complete).
+   *
+   * @event onHidden
+   * @public
+   */
+  onHidden() {}
+
+  /**
+   * Called when a show event has been received
+   *
+   * @method enter
+   * @param e
+   * @private
+   */
+  enter(e) {
+    if (e) {
+      let eventType = e.type === &#x27;focusin&#x27; ? &#x27;focus&#x27; : &#x27;hover&#x27;;
+      this.inState.set(eventType, true);
+    }
+
+    if (this.showHelp || this.hoverState === &#x27;in&#x27;) {
+      this.set(&#x27;hoverState&#x27;, &#x27;in&#x27;);
+      return;
+    }
+
+    cancel(this.timer);
+
+    this.set(&#x27;hoverState&#x27;, &#x27;in&#x27;);
+
+    if (!this.hasDelayShow) {
+      return this.show();
+    }
+
+    this.timer = later(
+      this,
+      function () {
+        if (this.hoverState === &#x27;in&#x27;) {
+          this.show();
+        }
+      },
+      this.delayShow
+    );
+  }
+
+  /**
+   * Called when a hide event has been received
+   *
+   * @method leave
+   * @param e
+   * @private
+   */
+  leave(e) {
+    if (e) {
+      let eventType = e.type === &#x27;focusout&#x27; ? &#x27;focus&#x27; : &#x27;hover&#x27;;
+      this.inState.set(eventType, false);
+    }
+
+    if (this.get(&#x27;inState.showHelp&#x27;)) {
+      return;
+    }
+
+    cancel(this.timer);
+
+    this.set(&#x27;hoverState&#x27;, &#x27;out&#x27;);
+
+    if (!this.hasDelayHide) {
+      return this.hide();
+    }
+
+    this.timer = later(
+      this,
+      function () {
+        if (this.hoverState === &#x27;out&#x27;) {
+          this.hide();
+        }
+      },
+      this.delayHide
+    );
+  }
+
+  /**
+   * Called for a click event
+   *
+   * @method toggle
+   * @param e
+   * @private
+   */
+  toggle(e) {
+    if (e) {
+      this.inState.toggleProperty(&#x27;click&#x27;);
+      if (this.get(&#x27;inState.showHelp&#x27;)) {
+        this.enter();
+      } else {
+        this.leave();
+      }
+    } else {
+      if (this.showHelp) {
+        this.leave();
+      } else {
+        this.enter();
+      }
+    }
+  }
+
+  /**
+   * Show the tooltip/popover
+   *
+   * @method show
+   * @private
+   */
+  show() {
+    if (this.isDestroyed || this.isDestroying) {
+      return;
+    }
+
+    if (false === this.onShow(this)) {
+      return;
+    }
+
+    // this waits for the tooltip/popover element to be created. when animating a wormholed tooltip/popover we need to wait until
+    // ember-wormhole has moved things in the DOM for the animation to be correct, so use Ember.run.next in this case
+    let delayFn =
+      !this._renderInPlace &amp;&amp; this.fade
+        ? next
+        : function (target, fn) {
+            schedule(&#x27;afterRender&#x27;, target, fn);
+          };
+
+    this.set(&#x27;inDom&#x27;, true);
+    delayFn(this, this._show);
+  }
+
+  _show(skipTransition = false) {
+    if (this.isDestroyed || this.isDestroying) {
+      return;
+    }
+    this.set(&#x27;showHelp&#x27;, true);
+
+    // If this is a touch-enabled device we add extra
+    // empty mouseover listeners to the body&#x27;s immediate children;
+    // only needed because of broken event delegation on iOS
+    // https://www.quirksmode.org/blog/archives/2014/02/mouse_event_bub.html
+
+    // See https://github.com/twbs/bootstrap/pull/22481
+    if (&#x27;ontouchstart&#x27; in document.documentElement) {
+      let { children } = document.body;
+      for (let i = 0; i &lt; children.length; i++) {
+        children[i].addEventListener(&#x27;mouseover&#x27;, noop);
+      }
+    }
+
+    let tooltipShowComplete = () =&gt; {
+      if (this.isDestroyed) {
+        return;
+      }
+      let prevHoverState = this.hoverState;
+
+      this.onShown(this);
+      this.set(&#x27;hoverState&#x27;, null);
+
+      if (prevHoverState === &#x27;out&#x27;) {
+        this.leave();
+      }
+    };
+
+    if (skipTransition === false &amp;&amp; this.usesTransition) {
+      transitionEnd(this.overlayElement, this.transitionDuration).then(tooltipShowComplete);
+    } else {
+      tooltipShowComplete();
+    }
+  }
+
+  /**
+   * Position the tooltip/popover&#x27;s arrow
+   *
+   * @method replaceArrow
+   * @param delta
+   * @param dimension
+   * @param isVertical
+   * @private
+   */
+  replaceArrow(delta, dimension, isVertical) {
+    let el = this.arrowElement;
+    el.style[isVertical ? &#x27;left&#x27; : &#x27;top&#x27;] = &#x60;${50 * (1 - delta / dimension)}%&#x60;;
+    el.style[isVertical ? &#x27;top&#x27; : &#x27;left&#x27;] = null;
+  }
+
+  /**
+   * Hide the tooltip/popover
+   *
+   * @method hide
+   * @private
+   */
+  hide() {
+    if (this.isDestroyed) {
+      return;
+    }
+
+    if (false === this.onHide(this)) {
+      return;
+    }
+
+    let tooltipHideComplete = () =&gt; {
+      if (this.isDestroyed) {
+        return;
+      }
+      if (this.hoverState !== &#x27;in&#x27;) {
+        this.set(&#x27;inDom&#x27;, false);
+      }
+      this.onHidden(this);
+    };
+
+    this.set(&#x27;showHelp&#x27;, false);
+
+    // if this is a touch-enabled device we remove the extra
+    // empty mouseover listeners we added for iOS support
+    if (&#x27;ontouchstart&#x27; in document.documentElement) {
+      let { children } = document.body;
+      for (let i = 0; i &lt; children.length; i++) {
+        children[i].removeEventListener(&#x27;mouseover&#x27;, noop);
+      }
+    }
+
+    if (this.usesTransition) {
+      transitionEnd(this.overlayElement, this.transitionDuration).then(tooltipHideComplete);
+    } else {
+      tooltipHideComplete();
+    }
+
+    this.set(&#x27;hoverState&#x27;, null);
+  }
+
+  /**
+   * @method addListeners
+   * @private
+   */
+  addListeners() {
+    let target = this.triggerTargetElement;
+
+    this._triggerEvents.forEach((event) =&gt; {
+      if (isArray(event)) {
+        let [inEvent, outEvent] = event;
+        target.addEventListener(inEvent, this._handleEnter);
+        target.addEventListener(outEvent, this._handleLeave);
+      } else {
+        target.addEventListener(event, this._handleToggle);
+      }
+    });
+  }
+
+  /**
+   * @method removeListeners
+   * @private
+   */
+  removeListeners() {
+    try {
+      let target = this.triggerTargetElement;
+      this._triggerEvents.forEach((event) =&gt; {
+        if (isArray(event)) {
+          let [inEvent, outEvent] = event;
+          target.removeEventListener(inEvent, this._handleEnter);
+          target.removeEventListener(outEvent, this._handleLeave);
+        } else {
+          target.removeEventListener(event, this._handleToggle);
+        }
+      });
+    } catch (e) {} // eslint-disable-line no-empty
+  }
+
+  /**
+   * @method handleTriggerEvent
+   * @private
+   */
+  handleTriggerEvent(handler, e) {
+    let overlayElement = this.overlayElement;
+    if (overlayElement &amp;&amp; overlayElement.contains(e.target)) {
+      return;
+    }
+    return handler.call(this, e);
+  }
+
+  @action
+  _handleEnter(e) {
+    this.handleTriggerEvent(this.enter, e);
+  }
+
+  @action
+  _handleLeave(e) {
+    this.handleTriggerEvent(this.leave, e);
+  }
+
+  @action
+  _handleToggle(e) {
+    this.handleTriggerEvent(this.toggle, e);
+  }
+
+  @action
+  close() {
+    // Make sure our click state is off, otherwise the next click would
+    // close the already-closed tooltip/popover. We don&#x27;t need to worry
+    // about this for hover/focus because those aren&#x27;t &quot;stateful&quot; toggle
+    // events like click.
+    this.set(&#x27;inState.click&#x27;, false);
+    this.hide();
+  }
+
+  didInsertElement() {
+    super.didInsertElement(...arguments);
+    this._parent = this._parentFinder.parentNode;
+    this.triggerTargetElement = this.getTriggerTargetElement();
+    this.addListeners();
+    if (this.visible) {
+      next(this, this.show, true);
+    }
+  }
+
+  willDestroyElement() {
+    super.willDestroyElement(...arguments);
+    this.removeListeners();
+  }
+
+  @observes(&#x27;visible&#x27;)
+  _watchVisible() {
+    if (this.visible) {
+      this.show();
+    } else {
+      this.hide();
+    }
+  }
+}
+
+    </pre>
+</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-4">
+      <div class="card">
+        <div class="card-header">
+          Classes
+        </div>
+        <ul class="list-group list-group-flush">
+            <li class="list-group-item list-group-item-public"><a href="../classes/Components.Accordion.html">Components.Accordion</a></li>
+            <li class="list-group-item list-group-item-public"><a href="../classes/Components.AccordionItem.html">Components.AccordionItem</a></li>
+            <li class="list-group-item list-group-item-public"><a href="../classes/Components.AccordionItemBody.html">Components.AccordionItemBody</a></li>
+            <li class="list-group-item list-group-item-public"><a href="../classes/Components.AccordionItemTitle.html">Components.AccordionItemTitle</a></li>
+            <li class="list-group-item list-group-item-public"><a href="../classes/Components.Alert.html">Components.Alert</a></li>
+            <li class="list-group-item list-group-item-public"><a href="../classes/Components.Button.html">Components.Button</a></li>
+            <li class="list-group-item list-group-item-public"><a href="../classes/Components.ButtonGroup.html">Components.ButtonGroup</a></li>
+            <li class="list-group-item list-group-item-private"><a href="../classes/Components.ButtonGroupButton.html">Components.ButtonGroupButton</a></li>
+            <li class="list-group-item list-group-item-public"><a href="../classes/Components.Carousel.html">Components.Carousel</a></li>
+            <li class="list-group-item list-group-item-public"><a href="../classes/Components.CarouselSlide.html">Components.CarouselSlide</a></li>
+            <li class="list-group-item list-group-item-public"><a href="../classes/Components.Collapse.html">Components.Collapse</a></li>
+            <li class="list-group-item list-group-item-private"><a href="../classes/Components.ContextualHelp.html">Components.ContextualHelp</a></li>
+            <li class="list-group-item list-group-item-private"><a href="../classes/Components.ContextualHelpElement.html">Components.ContextualHelpElement</a></li>
+            <li class="list-group-item list-group-item-public"><a href="../classes/Components.Dropdown.html">Components.Dropdown</a></li>
+            <li class="list-group-item list-group-item-public"><a href="../classes/Components.DropdownButton.html">Components.DropdownButton</a></li>
+            <li class="list-group-item list-group-item-public"><a href="../classes/Components.DropdownMenu.html">Components.DropdownMenu</a></li>
+            <li class="list-group-item list-group-item-public"><a href="../classes/Components.DropdownMenuDivider.html">Components.DropdownMenuDivider</a></li>
+            <li class="list-group-item list-group-item-public"><a href="../classes/Components.DropdownMenuItem.html">Components.DropdownMenuItem</a></li>
+            <li class="list-group-item list-group-item-public"><a href="../classes/Components.DropdownMenuLinkTo.html">Components.DropdownMenuLinkTo</a></li>
+            <li class="list-group-item list-group-item-public"><a href="../classes/Components.DropdownToggle.html">Components.DropdownToggle</a></li>
+            <li class="list-group-item list-group-item-public"><a href="../classes/Components.Form.html">Components.Form</a></li>
+            <li class="list-group-item list-group-item-public"><a href="../classes/Components.FormElement.html">Components.FormElement</a></li>
+            <li class="list-group-item list-group-item-private"><a href="../classes/Components.FormElementControl.html">Components.FormElementControl</a></li>
+            <li class="list-group-item list-group-item-private"><a href="../classes/Components.FormElementControlCheckbox.html">Components.FormElementControlCheckbox</a></li>
+            <li class="list-group-item list-group-item-private"><a href="../classes/Components.FormElementControlInput.html">Components.FormElementControlInput</a></li>
+            <li class="list-group-item list-group-item-private"><a href="../classes/Components.FormElementControlRadio.html">Components.FormElementControlRadio</a></li>
+            <li class="list-group-item list-group-item-private"><a href="../classes/Components.FormElementControlTextarea.html">Components.FormElementControlTextarea</a></li>
+            <li class="list-group-item list-group-item-private"><a href="../classes/Components.FormElementErrors.html">Components.FormElementErrors</a></li>
+            <li class="list-group-item list-group-item-private"><a href="../classes/Components.FormElementFeedbackIcon.html">Components.FormElementFeedbackIcon</a></li>
+            <li class="list-group-item list-group-item-private"><a href="../classes/Components.FormElementHelpText.html">Components.FormElementHelpText</a></li>
+            <li class="list-group-item list-group-item-private"><a href="../classes/Components.FormElementLabel.html">Components.FormElementLabel</a></li>
+            <li class="list-group-item list-group-item-private"><a href="../classes/Components.FormElementLayout.html">Components.FormElementLayout</a></li>
+            <li class="list-group-item list-group-item-private"><a href="../classes/Components.FormElementLayoutHorizontal.html">Components.FormElementLayoutHorizontal</a></li>
+            <li class="list-group-item list-group-item-private"><a href="../classes/Components.FormElementLayoutInline.html">Components.FormElementLayoutInline</a></li>
+            <li class="list-group-item list-group-item-private"><a href="../classes/Components.FormElementLayoutInlineCheckbox.html">Components.FormElementLayoutInlineCheckbox</a></li>
+            <li class="list-group-item list-group-item-private"><a href="../classes/Components.FormElementLayoutVertical.html">Components.FormElementLayoutVertical</a></li>
+            <li class="list-group-item list-group-item-private"><a href="../classes/Components.FormElementLayoutVerticalCheckbox.html">Components.FormElementLayoutVerticalCheckbox</a></li>
+            <li class="list-group-item list-group-item-public"><a href="../classes/Components.FormGroup.html">Components.FormGroup</a></li>
+            <li class="list-group-item list-group-item-public"><a href="../classes/Components.Modal.html">Components.Modal</a></li>
+            <li class="list-group-item list-group-item-public"><a href="../classes/Components.ModalBody.html">Components.ModalBody</a></li>
+            <li class="list-group-item list-group-item-private"><a href="../classes/Components.ModalDialog.html">Components.ModalDialog</a></li>
+            <li class="list-group-item list-group-item-public"><a href="../classes/Components.ModalFooter.html">Components.ModalFooter</a></li>
+            <li class="list-group-item list-group-item-public"><a href="../classes/Components.ModalHeader.html">Components.ModalHeader</a></li>
+            <li class="list-group-item list-group-item-private"><a href="../classes/Components.ModalHeaderClose.html">Components.ModalHeaderClose</a></li>
+            <li class="list-group-item list-group-item-private"><a href="../classes/Components.ModalHeaderTitle.html">Components.ModalHeaderTitle</a></li>
+            <li class="list-group-item list-group-item-public"><a href="../classes/Components.ModalSimple.html">Components.ModalSimple</a></li>
+            <li class="list-group-item list-group-item-public"><a href="../classes/Components.Nav.html">Components.Nav</a></li>
+            <li class="list-group-item list-group-item-public"><a href="../classes/Components.Navbar.html">Components.Navbar</a></li>
+            <li class="list-group-item list-group-item-public"><a href="../classes/Components.NavbarContent.html">Components.NavbarContent</a></li>
+            <li class="list-group-item list-group-item-public"><a href="../classes/Components.NavbarLinkTo.html">Components.NavbarLinkTo</a></li>
+            <li class="list-group-item list-group-item-public"><a href="../classes/Components.NavbarNav.html">Components.NavbarNav</a></li>
+            <li class="list-group-item list-group-item-public"><a href="../classes/Components.NavbarToggle.html">Components.NavbarToggle</a></li>
+            <li class="list-group-item list-group-item-public"><a href="../classes/Components.NavItem.html">Components.NavItem</a></li>
+            <li class="list-group-item list-group-item-public"><a href="../classes/Components.NavLinkTo.html">Components.NavLinkTo</a></li>
+            <li class="list-group-item list-group-item-public"><a href="../classes/Components.Popover.html">Components.Popover</a></li>
+            <li class="list-group-item list-group-item-private"><a href="../classes/Components.PopoverElement.html">Components.PopoverElement</a></li>
+            <li class="list-group-item list-group-item-public"><a href="../classes/Components.Progress.html">Components.Progress</a></li>
+            <li class="list-group-item list-group-item-public"><a href="../classes/Components.ProgressBar.html">Components.ProgressBar</a></li>
+            <li class="list-group-item list-group-item-public"><a href="../classes/Components.Tab.html">Components.Tab</a></li>
+            <li class="list-group-item list-group-item-public"><a href="../classes/Components.TabPane.html">Components.TabPane</a></li>
+            <li class="list-group-item list-group-item-public"><a href="../classes/Components.Tooltip.html">Components.Tooltip</a></li>
+            <li class="list-group-item list-group-item-private"><a href="../classes/Components.TooltipElement.html">Components.TooltipElement</a></li>
+            <li class="list-group-item list-group-item-private"><a href="../classes/Mixins.ComponentChild.html">Mixins.ComponentChild</a></li>
+            <li class="list-group-item list-group-item-private"><a href="../classes/Mixins.ComponentParent.html">Mixins.ComponentParent</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+<script
+  src="https://code.jquery.com/jquery-3.3.1.min.js"
+  integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+  crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"
+        integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T"
+        crossorigin="anonymous"></script>
+<script src="../assets/vendor/prettify/prettify-min.js"></script>
+<script src="../assets/js/yuidoc-bootstrap.js"></script>
+<script>prettyPrint();</script>
+</body>
+</html>

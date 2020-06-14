@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <title>addon/mixins/component-parent.js - ember-bootstrap</title>
+  <title>addon/components/bs-accordion/item.js - ember-bootstrap</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="../assets/css/api.css">
   <script type="text/javascript" src="//use.typekit.net/dkq5epu.js"></script>
@@ -54,64 +54,132 @@
         <div id="docs-main">
           <div class="content">
 <div class="page-header">
-    <h1>addon/mixins/component-parent.js <small>File</small></h1>
+    <h1>addon/components/bs-accordion/item.js <small>File</small></h1>
 </div>
 
 <div class="file">
     <pre class="prettyprint linenums">
-import { schedule } from &#x27;@ember/runloop&#x27;;
-import { A } from &#x27;@ember/array&#x27;;
-import Mixin from &#x27;@ember/object/mixin&#x27;;
+import { layout as templateLayout, tagName } from &#x27;@ember-decorators/component&#x27;;
+import { computed } from &#x27;@ember/object&#x27;;
+import { not } from &#x27;@ember/object/computed&#x27;;
+import Component from &#x27;@ember/component&#x27;;
+import layout from &#x27;ember-bootstrap/templates/components/bs-accordion/item&#x27;;
+import defaultValue from &#x27;ember-bootstrap/utils/default-decorator&#x27;;
+import typeClass from &#x27;ember-bootstrap/utils/cp/type-class&#x27;;
+import { macroCondition, getOwnConfig } from &#x27;@embroider/macros&#x27;;
+import { guidFor } from &#x27;@ember/object/internals&#x27;;
 
 /**
- * Mixin for components that act as a parent component in a parent-child relationship of components
- *
- * @class ComponentParent
- * @namespace Mixins
- * @private
+ A collapsible/expandable item within an accordion
+
+ See [Components.Accordion](Components.Accordion.html) for examples.
+
+ @class AccordionItem
+ @namespace Components
+ @extends Ember.Component
+ @public
  */
-// eslint-disable-next-line ember/no-new-mixins
-export default Mixin.create({
+@tagName(&#x27;&#x27;)
+@templateLayout(layout)
+export default class AccordionItem extends Component {
   /**
-   * Array of registered child components
+   * The title of the accordion item, displayed as a .panel-title element
    *
-   * @property children
-   * @type array
-   * @protected
-   */
-  children: null,
-
-  init() {
-    this._super(...arguments);
-    this.set(&#x27;children&#x27;, A());
-  },
-
-  /**
-   * Register a component as a child of this parent
-   *
-   * @method registerChild
-   * @param child
+   * @property title
+   * @type string
    * @public
    */
-  registerChild(child) {
-    schedule(&#x27;actions&#x27;, this, function () {
-      this.children.addObject(child);
-    });
-  },
+  @defaultValue
+  title = null;
 
   /**
-   * Remove the child component from this parent component
+   * The value of the accordion item, which is used as the value of the &#x60;selected&#x60; property of the parent [Components.Accordion](Components.Accordion.html) component
    *
-   * @method removeChild
-   * @param child
+   * @property value
    * @public
    */
-  removeChild(child) {
-    schedule(&#x27;actions&#x27;, this, function () {
-      this.children.removeObject(child);
-    });
-  },
-});
+  value = guidFor(this);
+
+  /**
+   * @property selected
+   * @private
+   */
+  @defaultValue
+  selected = null;
+
+  /**
+   * @property titleComponent
+   * @type {String}
+   * @private
+   */
+  @defaultValue
+  titleComponent = &#x27;bs-accordion/item/title&#x27;;
+
+  /**
+   * @property bodyComponent
+   * @type {String}
+   * @private
+   */
+  @defaultValue
+  bodyComponent = &#x27;bs-accordion/item/body&#x27;;
+
+  /**
+   * @property collapsed
+   * @type boolean
+   * @readonly
+   * @private
+   */
+  @(computed(&#x27;value&#x27;, &#x27;selected&#x27;).readOnly())
+  get collapsed() {
+    return this.value !== this.selected;
+  }
+
+  /**
+   * @property active
+   * @type boolean
+   * @readonly
+   * @private
+   */
+  @not(&#x27;collapsed&#x27;)
+  active;
+
+  /**
+   * @property disabled
+   * @type boolean
+   * @public
+   */
+  @defaultValue
+  disabled = false;
+
+  /**
+   * Property for type styling
+   *
+   * For the available types see the [Bootstrap docs](https://getbootstrap.com/docs/4.3/components/navbar/#color-schemes)
+   *
+   * @property type
+   * @type String
+   * @default &#x27;default&#x27;
+   * @public
+   */
+  @defaultValue
+  type = &#x27;default&#x27;;
+
+  @typeClass(macroCondition(getOwnConfig().isBS4) ? &#x27;bg&#x27; : &#x27;panel&#x27;, &#x27;type&#x27;)
+  typeClass;
+
+  /**
+   * Reference to the parent &#x60;Components.Accordion&#x60; class.
+   *
+   * @property accordion
+   * @private
+   */
+
+  /**
+   * @event onClick
+   * @public
+   */
+  onClick() {}
+}
 
     </pre>
 </div>

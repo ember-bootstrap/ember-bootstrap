@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <title>addon/mixins/component-parent.js - ember-bootstrap</title>
+  <title>addon/components/bs-alert.js - ember-bootstrap</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="../assets/css/api.css">
   <script type="text/javascript" src="//use.typekit.net/dkq5epu.js"></script>
@@ -54,64 +54,236 @@
         <div id="docs-main">
           <div class="content">
 <div class="page-header">
-    <h1>addon/mixins/component-parent.js <small>File</small></h1>
+    <h1>addon/components/bs-alert.js <small>File</small></h1>
 </div>
 
 <div class="file">
     <pre class="prettyprint linenums">
-import { schedule } from &#x27;@ember/runloop&#x27;;
-import { A } from &#x27;@ember/array&#x27;;
-import Mixin from &#x27;@ember/object/mixin&#x27;;
+import { layout as templateLayout, tagName } from &#x27;@ember-decorators/component&#x27;;
+import { action } from &#x27;@ember/object&#x27;;
+import { and, not } from &#x27;@ember/object/computed&#x27;;
+import { addObserver } from &#x27;@ember/object/observers&#x27;;
+import Component from &#x27;@ember/component&#x27;;
+import { later } from &#x27;@ember/runloop&#x27;;
+import layout from &#x27;ember-bootstrap/templates/components/bs-alert&#x27;;
+import typeClass from &#x27;ember-bootstrap/utils/cp/type-class&#x27;;
+import listenTo from &#x27;ember-bootstrap/utils/cp/listen-to&#x27;;
+import usesTransition from &#x27;ember-bootstrap/utils/cp/uses-transition&#x27;;
+import defaultValue from &#x27;ember-bootstrap/utils/default-decorator&#x27;;
 
 /**
- * Mixin for components that act as a parent component in a parent-child relationship of components
- *
- * @class ComponentParent
- * @namespace Mixins
- * @private
- */
-// eslint-disable-next-line ember/no-new-mixins
-export default Mixin.create({
+  Implements [Bootstrap alerts](http://getbootstrap.com/components/#alerts)
+
+  ### Usage
+
+  By default it is a user dismissible alert with a fade out animation, both of which can be disabled. Be sure to set the
+  &#x60;type&#x60; property for proper styling.
+
+  &#x60;&#x60;&#x60;hbs
+  &lt;BsAlert @type=&quot;success&quot;&gt;
+    &lt;strong&gt;Well done!&lt;/strong&gt; You successfully read this important alert message.
+  &lt;/BsAlert&gt;
+  &#x60;&#x60;&#x60;
+
+  @class Alert
+  @namespace Components
+  @extends Ember.Component
+  @public
+*/
+@tagName(&#x27;&#x27;)
+@templateLayout(layout)
+export default class Alert extends Component {
   /**
-   * Array of registered child components
+   * A dismissible alert will have a close button in the upper right corner, that the user can click to dismiss
+   * the alert.
    *
-   * @property children
-   * @type array
-   * @protected
+   * @property dismissible
+   * @type boolean
+   * @default true
+   * @public
    */
-  children: null,
+  @defaultValue
+  dismissible = true;
+
+  /**
+   * If true the alert is completely hidden. Will be set when the fade animation has finished.
+   *
+   * @property hidden
+   * @type boolean
+   * @default false
+   * @readonly
+   * @private
+   */
+  @defaultValue
+  hidden = !this._visible;
+
+  /**
+   * This property controls if the alert should be visible. If false it might still be in the DOM until the fade animation
+   * has completed.
+   *
+   * When the alert is dismissed by user interaction this property will not update by using two-way bindings in order
+   * to follow DDAU best practices. If you want to react to such changes, subscribe to the &#x60;onDismiss&#x60; action
+   *
+   * @property visible
+   * @type boolean
+   * @default true
+   * @public
+   */
+  @defaultValue
+  visible = true;
+
+  /**
+   * @property _visible
+   * @private
+   */
+  @listenTo(&#x27;visible&#x27;)
+  _visible;
+
+  /**
+   * @property notVisible
+   * @private
+   */
+  @not(&#x27;_visible&#x27;)
+  notVisible;
+
+  /**
+   * Set to false to disable the fade out animation when hiding the alert.
+   *
+   * @property fade
+   * @type boolean
+   * @default true
+   * @public
+   */
+  @defaultValue
+  fade = true;
+
+  /**
+   * Computed property to set the alert class to the component div. Will be false when dismissed to have the component
+   * div (which cannot be removed form DOM by the component itself) without any markup.
+   *
+   * @property alert
+   * @type boolean
+   * @private
+   */
+  @not(&#x27;hidden&#x27;)
+  alert;
+
+  @and(&#x27;_visible&#x27;, &#x27;fade&#x27;)
+  showAlert;
+
+  /**
+   * The duration of the fade out animation
+   *
+   * @property fadeDuration
+   * @type number
+   * @default 150
+   * @public
+   */
+  @defaultValue
+  fadeDuration = 150;
+
+  /**
+   * Property for type styling
+   *
+   * For the available types see the [Bootstrap docs](https://getbootstrap.com/docs/4.3/components/alerts/)
+   *
+   * @property type
+   * @type String
+   * @default &#x27;default&#x27;
+   * @public
+   */
+  @defaultValue
+  type = &#x27;default&#x27;;
+
+  @typeClass(&#x27;alert&#x27;, &#x27;type&#x27;)
+  typeClass;
+
+  /**
+   * Use CSS transitions?
+   *
+   * @property usesTransition
+   * @type boolean
+   * @readonly
+   * @private
+   */
+  @usesTransition(&#x27;fade&#x27;)
+  usesTransition;
+
+  /**
+   * The action to be sent after the alert has been dismissed (including the CSS transition).
+   *
+   * @event onDismissed
+   * @public
+   */
+  onDismissed() {}
+
+  /**
+   * The action is called when the close button is clicked.
+   *
+   * You can return false to prevent closing the alert automatically, and do that in your action by
+   * setting &#x60;visible&#x60; to false.
+   *
+   * @event onDismiss
+   * @public
+   */
+  onDismiss() {}
+
+  @action
+  dismiss() {
+    if (this.onDismiss() !== false) {
+      this.set(&#x27;_visible&#x27;, false);
+    }
+  }
+
+  /**
+   * Call to make the alert visible again after it has been hidden
+   *
+   * @method show
+   * @private
+   */
+  show() {
+    this.set(&#x27;hidden&#x27;, false);
+  }
+
+  /**
+   * Call to hide the alert. If the &#x60;fade&#x60; property is true, this will fade out the alert before being finally
+   * dismissed.
+   *
+   * @method hide
+   * @private
+   */
+  hide() {
+    if (this.usesTransition) {
+      later(
+        this,
+        function () {
+          if (!this.isDestroyed) {
+            this.set(&#x27;hidden&#x27;, true);
+            this.onDismissed();
+          }
+        },
+        this.fadeDuration
+      );
+    } else {
+      this.set(&#x27;hidden&#x27;, true);
+      this.onDismissed();
+    }
+  }
+
+  _observeIsVisible() {
+    if (this._visible) {
+      this.show();
+    } else {
+      this.hide();
+    }
+  }
 
   init() {
-    this._super(...arguments);
-    this.set(&#x27;children&#x27;, A());
-  },
+    super.init(...arguments);
 
-  /**
-   * Register a component as a child of this parent
-   *
-   * @method registerChild
-   * @param child
-   * @public
-   */
-  registerChild(child) {
-    schedule(&#x27;actions&#x27;, this, function () {
-      this.children.addObject(child);
-    });
-  },
-
-  /**
-   * Remove the child component from this parent component
-   *
-   * @method removeChild
-   * @param child
-   * @public
-   */
-  removeChild(child) {
-    schedule(&#x27;actions&#x27;, this, function () {
-      this.children.removeObject(child);
-    });
-  },
-});
+    addObserver(this, &#x27;_visible&#x27;, null, this._observeIsVisible, true);
+  }
+}
 
     </pre>
 </div>

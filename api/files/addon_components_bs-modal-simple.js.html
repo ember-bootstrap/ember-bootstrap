@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <title>addon/mixins/component-parent.js - ember-bootstrap</title>
+  <title>addon/components/bs-modal-simple.js - ember-bootstrap</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="../assets/css/api.css">
   <script type="text/javascript" src="//use.typekit.net/dkq5epu.js"></script>
@@ -54,64 +54,332 @@
         <div id="docs-main">
           <div class="content">
 <div class="page-header">
-    <h1>addon/mixins/component-parent.js <small>File</small></h1>
+    <h1>addon/components/bs-modal-simple.js <small>File</small></h1>
 </div>
 
 <div class="file">
     <pre class="prettyprint linenums">
-import { schedule } from &#x27;@ember/runloop&#x27;;
-import { A } from &#x27;@ember/array&#x27;;
-import Mixin from &#x27;@ember/object/mixin&#x27;;
+import { layout as templateLayout, tagName } from &#x27;@ember-decorators/component&#x27;;
+import Component from &#x27;@ember/component&#x27;;
+import layout from &#x27;ember-bootstrap/templates/components/bs-modal-simple&#x27;;
+import defaultValue from &#x27;ember-bootstrap/utils/default-decorator&#x27;;
 
 /**
- * Mixin for components that act as a parent component in a parent-child relationship of components
- *
- * @class ComponentParent
- * @namespace Mixins
- * @private
- */
-// eslint-disable-next-line ember/no-new-mixins
-export default Mixin.create({
-  /**
-   * Array of registered child components
-   *
-   * @property children
-   * @type array
-   * @protected
-   */
-  children: null,
+  Component for creating [Bootstrap modals](http://getbootstrap.com/javascript/#modals) with a some common default markup
+  including a header, footer and body. Creating a simple modal is easy:
 
-  init() {
-    this._super(...arguments);
-    this.set(&#x27;children&#x27;, A());
-  },
+  &#x60;&#x60;&#x60;hbs
+  {{#bs-modal-simple title=&quot;Simple Dialog&quot;}}
+    Hello world!
+  {{/bs-modal-simple}}
+  &#x60;&#x60;&#x60;
 
+  This will automatically create the appropriate markup, with a modal header containing the title, and a footer containing
+  a default &quot;Ok&quot; button, that will close the modal automatically (unless you return false from &#x60;onHide&#x60;).
+
+  A modal created this way will be visible at once. You can use the &#x60;{{#if ...}}&#x60; helper to hide all modal elements from
+  the DOM until needed. Or you can bind the &#x60;open&#x60; property to trigger showing and hiding the modal:
+
+  &#x60;&#x60;&#x60;hbs
+  &lt;BsModalSimple @open={{this.openModal}} @title=&quot;Simple Dialog&quot;&gt;
+    Hello world!
+  &lt;/BsModalSimple&gt;
+  &#x60;&#x60;&#x60;
+
+  ### Custom Markup
+
+  To customize the markup within the modal you can use the [bs-modal](Components.Modal.html) component.
+
+  ### Modals with forms
+
+  There is a special case when you have a form inside your modals body: you probably do not want to have a submit button
+  within your form but instead in your modal footer. Hover pressing the submit button outside of your form would not
+  trigger the form data to be submitted. In the example below this would not trigger the submit action of the form, an
+  thus bypass the form validation feature of the form component.
+
+  &#x60;&#x60;&#x60;hbs
+  &lt;BsModalSimple @title=&quot;Form Example&quot; @closeTitle=&quot;Cancel&quot; @submitTitle=&quot;Ok&quot;&gt;
+    &lt;BsForm @model={{this}} @onSubmit={{action &quot;submit&quot;}} @submitOnError={{true}} as |Form|&gt;
+      &lt;Form.element @controlType=&quot;text&quot; @label=&quot;first name&quot; @property=&quot;firstname&quot; /&gt;
+      &lt;Form.element @controlType=&quot;text&quot; @label=&quot;last name&quot; @property=&quot;lastname&quot; /&gt;
+    &lt;/BsForm&gt;
+  &lt;/BsModalSimple&gt;
+  &#x60;&#x60;&#x60;
+
+  The modal component supports this common case by triggering the submit event programmatically on the body&#x27;s form if
+  present whenever the footer&#x27;s submit button is pressed. To allow the form to be submitted by pressing the enter key
+  also, you must either set &#x60;@submitOnError={{true}}&#x60; on the &#x60;&lt;BsForm&gt;&#x60; or include an invisible submit button in the
+  form (&#x60;&lt;button type=&quot;submit&quot; class=&quot;d-hidden&quot;&gt;Submit&lt;/button&gt;&#x60;).
+
+  ### Auto-focus
+
+  In order to allow key handling to function, the modal&#x27;s root element is given focus once the modal is shown. If your
+  modal contains an element such as a text input and you would like it to be given focus rather than the modal element,
+  then give it the HTML5 autofocus attribute:
+
+  &#x60;&#x60;&#x60;hbs
+  &lt;BsModalSimple @title=&quot;Form Example&quot; @closeTitle=&quot;Cancel&quot; @submitTitle=&quot;Ok&quot;&gt;
+    &lt;BsForm @model={{this}} @onSubmit={{action &quot;submit&quot;}} @submitOnError={{true}} as |Form|&gt;
+      &lt;Form.element @controlType=&quot;text&quot; @label=&quot;first name&quot; @property=&quot;firstname&quot; @autofocus={{true}} /&gt;
+      &lt;Form.element @controlType=&quot;text&quot; @label=&quot;last name&quot; @property=&quot;lastname&quot; /&gt;
+    &lt;/BsForm&gt;
+  &lt;/BsModalSimple&gt;
+  &#x60;&#x60;&#x60;
+
+  ### Modals inside wormhole
+
+  Modals make use of the [ember-wormhole](https://github.com/yapplabs/ember-wormhole) addon, which will be installed
+  automatically alongside ember-bootstrap. This is used to allow the modal to be placed in deeply nested
+  components/templates where it belongs to logically, but to have the actual DOM elements within a special container
+  element, which is a child of ember&#x27;s root element. This will make sure that modals always overlay the whole app, and
+  are not effected by parent elements with &#x60;overflow: hidden&#x60; for example.
+
+  If you want the modal to render in place, rather than being wormholed, you can set renderInPlace=true.
+
+  @class ModalSimple
+  @namespace Components
+  @extends Ember.Component
+  @public
+*/
+@templateLayout(layout)
+@tagName(&#x27;&#x27;)
+export default class ModalSimple extends Component {
   /**
-   * Register a component as a child of this parent
+   * The title of the modal, visible in the modal header. Is ignored if &#x60;header&#x60; is false.
    *
-   * @method registerChild
-   * @param child
+   * @property title
+   * @type string
    * @public
    */
-  registerChild(child) {
-    schedule(&#x27;actions&#x27;, this, function () {
-      this.children.addObject(child);
-    });
-  },
 
   /**
-   * Remove the child component from this parent component
+   * Visibility of the modal. Toggle to show/hide with CSS transitions.
    *
-   * @method removeChild
-   * @param child
+   * When the modal is closed by user interaction this property will not update by using two-way bindings in order
+   * to follow DDAU best practices. If you want to react to such changes, subscribe to the &#x60;onHide&#x60; action
+   *
+   * @property open
+   * @type boolean
+   * @default true
    * @public
    */
-  removeChild(child) {
-    schedule(&#x27;actions&#x27;, this, function () {
-      this.children.removeObject(child);
-    });
-  },
-});
+  @defaultValue
+  open = true;
+
+  /**
+   * Set to false to disable fade animations.
+   *
+   * @property fade
+   * @type boolean
+   * @default true
+   * @public
+   */
+  @defaultValue
+  fade = undefined;
+
+  /**
+   * Use a semi-transparent modal background to hide the rest of the page.
+   *
+   * @property backdrop
+   * @type boolean
+   * @default true
+   * @public
+   */
+  @defaultValue
+  backdrop = true;
+
+  /**
+   * Closes the modal when escape key is pressed.
+   *
+   * @property keyboard
+   * @type boolean
+   * @default true
+   * @public
+   */
+  @defaultValue
+  keyboard = true;
+
+  /**
+   * [BS4 only!] Vertical position, either &#x27;top&#x27; (default) or &#x27;center&#x27;
+   * &#x27;center&#x27; will apply the &#x60;modal-dialog-centered&#x60; class
+   *
+   * @property position
+   * @type {string}
+   * @default &#x27;top&#x27;
+   * @public
+   */
+  @defaultValue
+  position = &#x27;top&#x27;;
+
+  /**
+   * [BS4 only!] Allows scrolling within the modal body
+   * &#x27;true&#x27; will apply the &#x60;modal-dialog-scrollable&#x60; class
+   *
+   * @property scrollable
+   * @type boolean
+   * @default false
+   * @public
+   */
+  @defaultValue
+  scrollable = false;
+
+  /**
+   * Property for size styling, set to null (default), &#x27;lg&#x27; or &#x27;sm&#x27;
+   *
+   * Also see the [Bootstrap docs](http://getbootstrap.com/javascript/#modals-sizes)
+   *
+   * @property size
+   * @type String
+   * @public
+   */
+  @defaultValue
+  size = null;
+
+  /**
+   * If true clicking on the backdrop will close the modal.
+   *
+   * @property backdropClose
+   * @type boolean
+   * @default true
+   * @public
+   */
+  @defaultValue
+  backdropClose = true;
+
+  /**
+   * If true component will render in place, rather than be wormholed.
+   *
+   * @property renderInPlace
+   * @type boolean
+   * @default false
+   * @public
+   */
+  @defaultValue
+  renderInPlace = false;
+
+  /**
+   * The duration of the fade transition
+   *
+   * @property transitionDuration
+   * @type number
+   * @default 300
+   * @public
+   */
+  @defaultValue
+  transitionDuration = 300;
+
+  /**
+   * The duration of the backdrop fade transition
+   *
+   * @property backdropTransitionDuration
+   * @type number
+   * @default 150
+   * @public
+   */
+  @defaultValue
+  backdropTransitionDuration = 150;
+
+  /**
+   * The action to be sent when the modal footer&#x27;s submit button (if present) is pressed.
+   * Note that if your modal body contains a form (e.g. [Components.Form](Components.Form.html)) this action will
+   * not be triggered. Instead a submit event will be triggered on the form itself. See the class description for an
+   * example.
+   *
+   * @property onSubmit
+   * @type function
+   * @public
+   */
+  onSubmit() {}
+
+  /**
+   * The action to be sent when the modal is closing.
+   * This will be triggered by pressing the modal header&#x27;s close button (x button) or the modal footer&#x27;s close button.
+   * Note that this will happen before the modal is hidden from the DOM, as the fade transitions will still need some
+   * time to finish. Use the &#x60;onHidden&#x60; if you need the modal to be hidden when the action triggers.
+   *
+   * You can return false to prevent closing the modal automatically, and do that in your action by
+   * setting &#x60;open&#x60; to false.
+   *
+   * @property onHide
+   * @type function
+   * @public
+   */
+  onHide() {}
+
+  /**
+   * The action to be sent after the modal has been completely hidden (including the CSS transition).
+   *
+   * @property onHidden
+   * @type function
+   * @default null
+   * @public
+   */
+  onHidden() {}
+
+  /**
+   * The action to be sent when the modal is opening.
+   * This will be triggered immediately after the modal is shown (so it&#x27;s safe to access the DOM for
+   * size calculations and the like). This means that if fade=true, it will be shown in between the
+   * backdrop animation and the fade animation.
+   *
+   * @property onShow
+   * @type function
+   * @default null
+   * @public
+   */
+  onShow() {}
+
+  /**
+   * The action to be sent after the modal has been completely shown (including the CSS transition).
+   *
+   * @property onShown
+   * @type function
+   * @public
+   */
+  onShown() {}
+
+  /**
+   * Display a close button (x icon) in the corner of the modal header.
+   *
+   * @property closeButton
+   * @type boolean
+   * @default true
+   * @public
+   */
+  @defaultValue
+  closeButton = true;
+
+  /**
+   * The title of the default close button.
+   *
+   * @property closeTitle
+   * @type string
+   * @default &#x27;Ok&#x27;
+   * @public
+   */
+  @defaultValue
+  closeTitle = &#x27;Ok&#x27;;
+
+  /**
+   * The type of the submit button (primary button).
+   *
+   * @property submitButtonType
+   * @type string
+   * @default &#x27;primary&#x27;
+   * @public
+   */
+  @defaultValue
+  submitButtonType = &#x27;primary&#x27;;
+
+  /**
+   * The title of the submit button (primary button). Will be ignored (i.e. no button) if set to null.
+   *
+   * @property submitTitle
+   * @type string
+   * @default null
+   * @public
+   */
+}
 
     </pre>
 </div>

@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <title>addon/mixins/component-parent.js - ember-bootstrap</title>
+  <title>Components.FormElementLayoutInlineCheckbox - ember-bootstrap</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="../assets/css/api.css">
   <script type="text/javascript" src="//use.typekit.net/dkq5epu.js"></script>
@@ -53,67 +53,296 @@
       <div class="apidocs">
         <div id="docs-main">
           <div class="content">
-<div class="page-header">
-    <h1>addon/mixins/component-parent.js <small>File</small></h1>
+<div class="card">
+  <h1 class="card-header">Components.FormElementLayoutInlineCheckbox <span class="badge badge-private small">private</span></h1>
+  <div class="card-body">
+
+
+
+  </div>
+
+  <div class="card-footer text-muted">
+    <dl class="row m-0">
+        <dt class="col-sm-3">
+          Extends
+        </dt>
+        <dd class="col-sm-9">
+          <a href="../classes/Components.FormElementLayout.html" class="crosslink">Components.FormElementLayout</a>
+        </dd>
+        <dt class="col-sm-3">
+          Defined in
+        </dt>
+        <dd class="col-sm-9">
+          <a href="../files/addon_components_bs-form_element_layout_inline_checkbox.js.html#l5"><code>addon&#x2F;components&#x2F;bs-form&#x2F;element&#x2F;layout&#x2F;inline&#x2F;checkbox.js:5</code></a>
+        </dd>
+
+    </dl>
+  </div>
 </div>
 
-<div class="file">
-    <pre class="prettyprint linenums">
-import { schedule } from &#x27;@ember/runloop&#x27;;
-import { A } from &#x27;@ember/array&#x27;;
-import Mixin from &#x27;@ember/object/mixin&#x27;;
 
-/**
- * Mixin for components that act as a parent component in a parent-child relationship of components
- *
- * @class ComponentParent
- * @namespace Mixins
- * @private
- */
-// eslint-disable-next-line ember/no-new-mixins
-export default Mixin.create({
-  /**
-   * Array of registered child components
-   *
-   * @property children
-   * @type array
-   * @protected
-   */
-  children: null,
 
-  init() {
-    this._super(...arguments);
-    this.set(&#x27;children&#x27;, A());
-  },
+<form id="options-form" class="form-inline mb-1 mt-4">
 
-  /**
-   * Register a component as a child of this parent
-   *
-   * @method registerChild
-   * @param child
-   * @public
-   */
-  registerChild(child) {
-    schedule(&#x27;actions&#x27;, this, function () {
-      this.children.addObject(child);
-    });
-  },
+  <div class="form-check mb-2 mr-sm-2">
+    <input class="form-check-inline" type="checkbox" id="api-show-inherited" checked>
+    <label class="form-check-label" for="api-show-inherited">
+      Inherited
+    </label>
+  </div>
 
-  /**
-   * Remove the child component from this parent component
-   *
-   * @method removeChild
-   * @param child
-   * @public
-   */
-  removeChild(child) {
-    schedule(&#x27;actions&#x27;, this, function () {
-      this.children.removeObject(child);
-    });
-  },
-});
+  <div class="form-check mb-2 mr-sm-2">
+    <input class="form-check-inline" type="checkbox" id="api-show-protected">
+    <label class="form-check-label" for="api-show-protected">
+      Protected
+    </label>
+  </div>
 
-    </pre>
+  <div class="form-check mb-2 mr-sm-2">
+    <input class="form-check-inline" type="checkbox" id="api-show-private">
+    <label class="form-check-label" for="api-show-private">
+      Private
+    </label>
+  </div>
+
+  <div class="form-check mb-2 mr-sm-2">
+    <input class="form-check-inline" type="checkbox" id="api-show-deprecated">
+    <label class="form-check-label" for="api-show-deprecated">
+      Deprecated
+    </label>
+  </div>
+
+</form>
+
+<div class="card">
+  <div class="card-header">
+    <ul class="nav nav-tabs card-header-tabs">
+      <li class="nav-item active"><a class="nav-link" data-toggle="tab" href="#index">Index</a></li>
+
+        <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#properties">Properties</a></li>
+    </ul>
+  </div>
+  <div class="card-body">
+    <div class="tab-content">
+      <div id="index" class="tab-pane active">
+        <h2 class="off-left">Item Index</h2>
+
+
+          <div class="index-section properties">
+            <h3>Properties</h3>
+
+            <ul class="index-list properties extends">
+                <li class="index-item property public inherited">
+                  <a href="#" data-tabid="#properties" data-anchor="#property_errorsComponent"
+                     data-tablink="errorsComponent">errorsComponent</a>
+
+                </li>
+                <li class="index-item property public inherited">
+                  <a href="#" data-tabid="#properties" data-anchor="#property_feedbackIconComponent"
+                     data-tablink="feedbackIconComponent">feedbackIconComponent</a>
+
+                </li>
+                <li class="index-item property public inherited">
+                  <a href="#" data-tabid="#properties" data-anchor="#property_formElementId"
+                     data-tablink="formElementId">formElementId</a>
+
+                </li>
+                <li class="index-item property public inherited">
+                  <a href="#" data-tabid="#properties" data-anchor="#property_hasLabel"
+                     data-tablink="hasLabel">hasLabel</a>
+
+                </li>
+                <li class="index-item property public inherited">
+                  <a href="#" data-tabid="#properties" data-anchor="#property_helpTextComponent"
+                     data-tablink="helpTextComponent">helpTextComponent</a>
+
+                </li>
+                <li class="index-item property public inherited">
+                  <a href="#" data-tabid="#properties" data-anchor="#property_labelComponent"
+                     data-tablink="labelComponent">labelComponent</a>
+
+                </li>
+            </ul>
+          </div>
+
+
+      </div>
+
+
+        <div id="properties" class="tab-pane">
+            <div id="property_errorsComponent"
+                 class="property item public inherited">
+              <h3 class="name">errorsComponent
+                <span class="badge badge-secondary small">{Ember.Component}</span>
+                  <span class="badge badge-public small">public</span>
+            
+            
+            
+            
+              </h3>
+            
+              <div class="meta">
+                  <p>Inherited from
+                    <a href="../classes/Components.FormElementLayout.html#property_errorsComponent">Components.FormElementLayout</a>:
+                  <a href="../files/addon_components_bs-form_element_layout.js.html#l30"><code>addon&#x2F;components&#x2F;bs-form&#x2F;element&#x2F;layout.js:30</code></a>
+              </p>
+            
+            
+              </div>
+            
+              <div class="description">
+                
+              </div>
+            
+            
+            
+            
+            </div>
+            <div id="property_feedbackIconComponent"
+                 class="property item public inherited">
+              <h3 class="name">feedbackIconComponent
+                <span class="badge badge-secondary small">{Ember.Component}</span>
+                  <span class="badge badge-public small">public</span>
+            
+            
+            
+            
+              </h3>
+            
+              <div class="meta">
+                  <p>Inherited from
+                    <a href="../classes/Components.FormElementLayout.html#property_feedbackIconComponent">Components.FormElementLayout</a>:
+                  <a href="../files/addon_components_bs-form_element_layout.js.html#l38"><code>addon&#x2F;components&#x2F;bs-form&#x2F;element&#x2F;layout.js:38</code></a>
+              </p>
+            
+            
+              </div>
+            
+              <div class="description">
+                
+              </div>
+            
+            
+            
+            
+            </div>
+            <div id="property_formElementId"
+                 class="property item public inherited">
+              <h3 class="name">formElementId
+                <span class="badge badge-secondary small">{String}</span>
+                  <span class="badge badge-public small">public</span>
+            
+            
+            
+            
+              </h3>
+            
+              <div class="meta">
+                  <p>Inherited from
+                    <a href="../classes/Components.FormElementLayout.html#property_formElementId">Components.FormElementLayout</a>:
+                  <a href="../files/addon_components_bs-form_element_layout.js.html#l14"><code>addon&#x2F;components&#x2F;bs-form&#x2F;element&#x2F;layout.js:14</code></a>
+              </p>
+            
+            
+              </div>
+            
+              <div class="description">
+                
+              </div>
+            
+            
+            
+            
+            </div>
+            <div id="property_hasLabel"
+                 class="property item public inherited">
+              <h3 class="name">hasLabel
+                <span class="badge badge-secondary small">boolean</span>
+                  <span class="badge badge-public small">public</span>
+            
+            
+            
+            
+              </h3>
+            
+              <div class="meta">
+                  <p>Inherited from
+                    <a href="../classes/Components.FormElementLayout.html#property_hasLabel">Components.FormElementLayout</a>:
+                  <a href="../files/addon_components_bs-form_element_layout.js.html#l22"><code>addon&#x2F;components&#x2F;bs-form&#x2F;element&#x2F;layout.js:22</code></a>
+              </p>
+            
+            
+              </div>
+            
+              <div class="description">
+                
+              </div>
+            
+            
+            
+            
+            </div>
+            <div id="property_helpTextComponent"
+                 class="property item public inherited">
+              <h3 class="name">helpTextComponent
+                <span class="badge badge-secondary small">{Ember.Component}</span>
+                  <span class="badge badge-public small">public</span>
+            
+            
+            
+            
+              </h3>
+            
+              <div class="meta">
+                  <p>Inherited from
+                    <a href="../classes/Components.FormElementLayout.html#property_helpTextComponent">Components.FormElementLayout</a>:
+                  <a href="../files/addon_components_bs-form_element_layout.js.html#l54"><code>addon&#x2F;components&#x2F;bs-form&#x2F;element&#x2F;layout.js:54</code></a>
+              </p>
+            
+            
+              </div>
+            
+              <div class="description">
+                
+              </div>
+            
+            
+            
+            
+            </div>
+            <div id="property_labelComponent"
+                 class="property item public inherited">
+              <h3 class="name">labelComponent
+                <span class="badge badge-secondary small">{Ember.Component}</span>
+                  <span class="badge badge-public small">public</span>
+            
+            
+            
+            
+              </h3>
+            
+              <div class="meta">
+                  <p>Inherited from
+                    <a href="../classes/Components.FormElementLayout.html#property_labelComponent">Components.FormElementLayout</a>:
+                  <a href="../files/addon_components_bs-form_element_layout.js.html#l46"><code>addon&#x2F;components&#x2F;bs-form&#x2F;element&#x2F;layout.js:46</code></a>
+              </p>
+            
+            
+              </div>
+            
+              <div class="description">
+                
+              </div>
+            
+            
+            
+            
+            </div>
+        </div>
+
+
+    </div>
+  </div>
 </div>
           </div>
         </div>

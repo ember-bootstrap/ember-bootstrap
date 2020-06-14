@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <title>Mixins.ComponentParent - ember-bootstrap</title>
+  <title>Components.ProgressBar - ember-bootstrap</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="../assets/css/api.css">
   <script type="text/javascript" src="//use.typekit.net/dkq5epu.js"></script>
@@ -54,10 +54,10 @@
         <div id="docs-main">
           <div class="content">
 <div class="card">
-  <h1 class="card-header">Mixins.ComponentParent <span class="badge badge-private small">private</span></h1>
+  <h1 class="card-header">Components.ProgressBar <span class="badge badge-public small">public</span></h1>
   <div class="card-body">
 
-<p>Mixin for components that act as a parent component in a parent-child relationship of components</p>
+<p>Component for a single progress bar, see <a href="Components.Progress.html">Components.Progress</a> for more examples.</p>
 
 
   </div>
@@ -65,10 +65,16 @@
   <div class="card-footer text-muted">
     <dl class="row m-0">
         <dt class="col-sm-3">
+          Extends
+        </dt>
+        <dd class="col-sm-9">
+          Ember.Component
+        </dd>
+        <dt class="col-sm-3">
           Defined in
         </dt>
         <dd class="col-sm-9">
-          <a href="../files/addon_mixins_component-parent.js.html#l5"><code>addon&#x2F;mixins&#x2F;component-parent.js:5</code></a>
+          <a href="../files/addon_components_bs-progress_bar.js.html#l9"><code>addon&#x2F;components&#x2F;bs-progress&#x2F;bar.js:9</code></a>
         </dd>
 
     </dl>
@@ -114,7 +120,6 @@
     <ul class="nav nav-tabs card-header-tabs">
       <li class="nav-item active"><a class="nav-link" data-toggle="tab" href="#index">Index</a></li>
 
-        <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#methods">Methods</a></li>
         <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#properties">Properties</a></li>
     </ul>
   </div>
@@ -123,28 +128,59 @@
       <div id="index" class="tab-pane active">
         <h2 class="off-left">Item Index</h2>
 
-          <div class="index-section methods">
-            <h3>Methods</h3>
-
-            <ul class="index-list methods">
-                <li class="index-item method public">
-                  <a href="#" data-tabid="#methods" data-anchor="#method_registerChild" data-tablink="registerChild">registerChild</a>
-
-                </li>
-                <li class="index-item method public">
-                  <a href="#" data-tabid="#methods" data-anchor="#method_removeChild" data-tablink="removeChild">removeChild</a>
-
-                </li>
-            </ul>
-          </div>
 
           <div class="index-section properties">
             <h3>Properties</h3>
 
-            <ul class="index-list properties">
+            <ul class="index-list properties extends">
+                <li class="index-item property public">
+                  <a href="#" data-tabid="#properties" data-anchor="#property_animate"
+                     data-tablink="animate">animate</a>
+
+                </li>
+                <li class="index-item property public">
+                  <a href="#" data-tabid="#properties" data-anchor="#property_maxValue"
+                     data-tablink="maxValue">maxValue</a>
+
+                </li>
+                <li class="index-item property public">
+                  <a href="#" data-tabid="#properties" data-anchor="#property_minValue"
+                     data-tablink="minValue">minValue</a>
+
+                </li>
                 <li class="index-item property protected">
-                  <a href="#" data-tabid="#properties" data-anchor="#property_children"
-                     data-tablink="children">children</a>
+                  <a href="#" data-tabid="#properties" data-anchor="#property_percent"
+                     data-tablink="percent">percent</a>
+
+                </li>
+                <li class="index-item property protected">
+                  <a href="#" data-tabid="#properties" data-anchor="#property_percentRounded"
+                     data-tablink="percentRounded">percentRounded</a>
+
+                </li>
+                <li class="index-item property public">
+                  <a href="#" data-tabid="#properties" data-anchor="#property_roundDigits"
+                     data-tablink="roundDigits">roundDigits</a>
+
+                </li>
+                <li class="index-item property public">
+                  <a href="#" data-tabid="#properties" data-anchor="#property_showLabel"
+                     data-tablink="showLabel">showLabel</a>
+
+                </li>
+                <li class="index-item property public">
+                  <a href="#" data-tabid="#properties" data-anchor="#property_striped"
+                     data-tablink="striped">striped</a>
+
+                </li>
+                <li class="index-item property public">
+                  <a href="#" data-tabid="#properties" data-anchor="#property_type"
+                     data-tablink="type">type</a>
+
+                </li>
+                <li class="index-item property public">
+                  <a href="#" data-tabid="#properties" data-anchor="#property_value"
+                     data-tablink="value">value</a>
 
                 </li>
             </ul>
@@ -153,108 +189,102 @@
 
       </div>
 
-        <div id="methods" class="tab-pane">
-            <div id="method_registerChild" class="method item public">
-                <h3 class="name">registerChild
-                <span class="small"> </span>
-                </h3>
-            
-            
-            
-                    <span class="label label-public">public</span>
-            
-            
-            
-            
-            
-                <div class="meta">
-                            <p>
-                            Defined in
-                    <a href="../files/addon_mixins_component-parent.js.html#l28"><code>addon&#x2F;mixins&#x2F;component-parent.js:28</code></a>
-                    </p>
-            
-            
-            
-                </div>
-            
-                <div class="description">
-                    <p>Register a component as a child of this parent</p>
-            
-                </div>
-            
-                    <div class="params">
-                        <h4>Parameters:</h4>
-            
-                        <ul class="params-list">
-                            <li class="param">
-                                    <code class="param-name">child</code>
-                                    <span class="type">Object</span>
-            
-            
-                                <div class="param-description">
-                                    
-                                </div>
-            
-                            </li>
-                        </ul>
-                    </div>
-            
-            
-            </div>
-            <div id="method_removeChild" class="method item public">
-                <h3 class="name">removeChild
-                <span class="small"> </span>
-                </h3>
-            
-            
-            
-                    <span class="label label-public">public</span>
-            
-            
-            
-            
-            
-                <div class="meta">
-                            <p>
-                            Defined in
-                    <a href="../files/addon_mixins_component-parent.js.html#l41"><code>addon&#x2F;mixins&#x2F;component-parent.js:41</code></a>
-                    </p>
-            
-            
-            
-                </div>
-            
-                <div class="description">
-                    <p>Remove the child component from this parent component</p>
-            
-                </div>
-            
-                    <div class="params">
-                        <h4>Parameters:</h4>
-            
-                        <ul class="params-list">
-                            <li class="param">
-                                    <code class="param-name">child</code>
-                                    <span class="type">Object</span>
-            
-            
-                                <div class="param-description">
-                                    
-                                </div>
-            
-                            </li>
-                        </ul>
-                    </div>
-            
-            
-            </div>
-        </div>
 
         <div id="properties" class="tab-pane">
-            <div id="property_children"
+            <div id="property_animate"
+                 class="property item public">
+              <h3 class="name">animate
+                <span class="badge badge-secondary small">boolean</span>
+                  <span class="badge badge-public small">public</span>
+            
+            
+            
+            
+              </h3>
+            
+              <div class="meta">
+                  <p><strong>Default:</strong> false</p>
+                  <p>
+                      Defined in
+                  <a href="../files/addon_components_bs-progress_bar.js.html#l86"><code>addon&#x2F;components&#x2F;bs-progress&#x2F;bar.js:86</code></a>
+              </p>
+            
+            
+              </div>
+            
+              <div class="description">
+                <p>Animate the stripes, see <a href="http://getbootstrap.com/components/#progress-animated">http://getbootstrap.com/components/#progress-animated</a></p>
+            
+              </div>
+            
+            
+            
+            
+            </div>
+            <div id="property_maxValue"
+                 class="property item public">
+              <h3 class="name">maxValue
+                <span class="badge badge-secondary small">number</span>
+                  <span class="badge badge-public small">public</span>
+            
+            
+            
+            
+              </h3>
+            
+              <div class="meta">
+                  <p><strong>Default:</strong> 100</p>
+                  <p>
+                      Defined in
+                  <a href="../files/addon_components_bs-progress_bar.js.html#l32"><code>addon&#x2F;components&#x2F;bs-progress&#x2F;bar.js:32</code></a>
+              </p>
+            
+            
+              </div>
+            
+              <div class="description">
+                <p>The upper limit of the value range</p>
+            
+              </div>
+            
+            
+            
+            
+            </div>
+            <div id="property_minValue"
+                 class="property item public">
+              <h3 class="name">minValue
+                <span class="badge badge-secondary small">number</span>
+                  <span class="badge badge-public small">public</span>
+            
+            
+            
+            
+              </h3>
+            
+              <div class="meta">
+                  <p><strong>Default:</strong> 0</p>
+                  <p>
+                      Defined in
+                  <a href="../files/addon_components_bs-progress_bar.js.html#l21"><code>addon&#x2F;components&#x2F;bs-progress&#x2F;bar.js:21</code></a>
+              </p>
+            
+            
+              </div>
+            
+              <div class="description">
+                <p>The lower limit of the value range</p>
+            
+              </div>
+            
+            
+            
+            
+            </div>
+            <div id="property_percent"
                  class="property item protected">
-              <h3 class="name">children
-                <span class="badge badge-secondary small">array</span>
+              <h3 class="name">percent
+                <span class="badge badge-secondary small">number</span>
                   <span class="badge badge-protected small">protected</span>
             
             
@@ -265,14 +295,201 @@
               <div class="meta">
                   <p>
                       Defined in
-                  <a href="../files/addon_mixins_component-parent.js.html#l14"><code>addon&#x2F;mixins&#x2F;component-parent.js:14</code></a>
+                  <a href="../files/addon_components_bs-progress_bar.js.html#l124"><code>addon&#x2F;components&#x2F;bs-progress&#x2F;bar.js:124</code></a>
               </p>
             
             
               </div>
             
               <div class="description">
-                <p>Array of registered child components</p>
+                <p>The percentage of <code>value</code></p>
+            
+              </div>
+            
+            
+            
+            
+            </div>
+            <div id="property_percentRounded"
+                 class="property item protected">
+              <h3 class="name">percentRounded
+                <span class="badge badge-secondary small">number</span>
+                  <span class="badge badge-protected small">protected</span>
+            
+            
+            
+            
+              </h3>
+            
+              <div class="meta">
+                  <p>
+                      Defined in
+                  <a href="../files/addon_components_bs-progress_bar.js.html#l141"><code>addon&#x2F;components&#x2F;bs-progress&#x2F;bar.js:141</code></a>
+              </p>
+            
+            
+              </div>
+            
+              <div class="description">
+                <p>The percentage of <code>value</code>, rounded to <code>roundDigits</code> digits</p>
+            
+              </div>
+            
+            
+            
+            
+            </div>
+            <div id="property_roundDigits"
+                 class="property item public">
+              <h3 class="name">roundDigits
+                <span class="badge badge-secondary small">number</span>
+                  <span class="badge badge-public small">public</span>
+            
+            
+            
+            
+              </h3>
+            
+              <div class="meta">
+                  <p><strong>Default:</strong> 0</p>
+                  <p>
+                      Defined in
+                  <a href="../files/addon_components_bs-progress_bar.js.html#l97"><code>addon&#x2F;components&#x2F;bs-progress&#x2F;bar.js:97</code></a>
+              </p>
+            
+            
+              </div>
+            
+              <div class="description">
+                <p>Specify to how many digits the progress bar label should be rounded.</p>
+            
+              </div>
+            
+            
+            
+            
+            </div>
+            <div id="property_showLabel"
+                 class="property item public">
+              <h3 class="name">showLabel
+                <span class="badge badge-secondary small">boolean</span>
+                  <span class="badge badge-public small">public</span>
+            
+            
+            
+            
+              </h3>
+            
+              <div class="meta">
+                  <p><strong>Default:</strong> false</p>
+                  <p>
+                      Defined in
+                  <a href="../files/addon_components_bs-progress_bar.js.html#l54"><code>addon&#x2F;components&#x2F;bs-progress&#x2F;bar.js:54</code></a>
+              </p>
+            
+            
+              </div>
+            
+              <div class="description">
+                <p>If true a label will be shown inside the progress bar.</p>
+            <p>By default it will be the percentage corresponding to the <code>value</code> property, rounded to <code>roundDigits</code> digits.
+            You can customize it by using the component with a block template, which the component yields the percentage
+            value to:</p>
+            <pre class="code prettyprint"><code class="language-hbs">{{#bs-progress}}
+            {{#bs-progress-bar value=progressValue as |percent|}}{{progressValue}} ({{percent}}%){{/bs-progress-bar}}
+            {{/bs-progress}}
+            </code></pre>
+            
+              </div>
+            
+            
+            
+            
+            </div>
+            <div id="property_striped"
+                 class="property item public">
+              <h3 class="name">striped
+                <span class="badge badge-secondary small">boolean</span>
+                  <span class="badge badge-public small">public</span>
+            
+            
+            
+            
+              </h3>
+            
+              <div class="meta">
+                  <p><strong>Default:</strong> false</p>
+                  <p>
+                      Defined in
+                  <a href="../files/addon_components_bs-progress_bar.js.html#l75"><code>addon&#x2F;components&#x2F;bs-progress&#x2F;bar.js:75</code></a>
+              </p>
+            
+            
+              </div>
+            
+              <div class="description">
+                <p>Create a striped effect, see <a href="http://getbootstrap.com/components/#progress-striped">http://getbootstrap.com/components/#progress-striped</a></p>
+            
+              </div>
+            
+            
+            
+            
+            </div>
+            <div id="property_type"
+                 class="property item public">
+              <h3 class="name">type
+                <span class="badge badge-secondary small">String</span>
+                  <span class="badge badge-public small">public</span>
+            
+            
+            
+            
+              </h3>
+            
+              <div class="meta">
+                  <p><strong>Default:</strong> &#x27;default&#x27;</p>
+                  <p>
+                      Defined in
+                  <a href="../files/addon_components_bs-progress_bar.js.html#l108"><code>addon&#x2F;components&#x2F;bs-progress&#x2F;bar.js:108</code></a>
+              </p>
+            
+            
+              </div>
+            
+              <div class="description">
+                <p>Property for type styling</p>
+            <p>For the available types see the <a href="https://getbootstrap.com/docs/4.3/components/progress/#backgrounds">Bootstrap docs</a></p>
+            
+              </div>
+            
+            
+            
+            
+            </div>
+            <div id="property_value"
+                 class="property item public">
+              <h3 class="name">value
+                <span class="badge badge-secondary small">number</span>
+                  <span class="badge badge-public small">public</span>
+            
+            
+            
+            
+              </h3>
+            
+              <div class="meta">
+                  <p><strong>Default:</strong> 0</p>
+                  <p>
+                      Defined in
+                  <a href="../files/addon_components_bs-progress_bar.js.html#l43"><code>addon&#x2F;components&#x2F;bs-progress&#x2F;bar.js:43</code></a>
+              </p>
+            
+            
+              </div>
+            
+              <div class="description">
+                <p>The value the progress bar should represent</p>
             
               </div>
             

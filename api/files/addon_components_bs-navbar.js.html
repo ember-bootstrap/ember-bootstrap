@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <title>addon/mixins/component-parent.js - ember-bootstrap</title>
+  <title>addon/components/bs-navbar.js - ember-bootstrap</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="../assets/css/api.css">
   <script type="text/javascript" src="//use.typekit.net/dkq5epu.js"></script>
@@ -54,64 +54,366 @@
         <div id="docs-main">
           <div class="content">
 <div class="page-header">
-    <h1>addon/mixins/component-parent.js <small>File</small></h1>
+    <h1>addon/components/bs-navbar.js <small>File</small></h1>
 </div>
 
 <div class="file">
     <pre class="prettyprint linenums">
-import { schedule } from &#x27;@ember/runloop&#x27;;
-import { A } from &#x27;@ember/array&#x27;;
-import Mixin from &#x27;@ember/object/mixin&#x27;;
+import { layout as templateLayout, tagName } from &#x27;@ember-decorators/component&#x27;;
+import { observes } from &#x27;@ember-decorators/object&#x27;;
+import { action, computed } from &#x27;@ember/object&#x27;;
+import Component from &#x27;@ember/component&#x27;;
+import layout from &#x27;ember-bootstrap/templates/components/bs-navbar&#x27;;
+import listenTo from &#x27;ember-bootstrap/utils/cp/listen-to&#x27;;
+import defaultValue from &#x27;ember-bootstrap/utils/default-decorator&#x27;;
+import { assert } from &#x27;@ember/debug&#x27;;
+import { macroCondition, getOwnConfig } from &#x27;@embroider/macros&#x27;;
+import { isBlank } from &#x27;@ember/utils&#x27;;
 
 /**
- * Mixin for components that act as a parent component in a parent-child relationship of components
- *
- * @class ComponentParent
- * @namespace Mixins
- * @private
- */
-// eslint-disable-next-line ember/no-new-mixins
-export default Mixin.create({
-  /**
-   * Array of registered child components
-   *
-   * @property children
-   * @type array
-   * @protected
-   */
-  children: null,
+  Component to generate [Bootstrap navbars](http://getbootstrap.com/components/#navbar).
 
-  init() {
-    this._super(...arguments);
-    this.set(&#x27;children&#x27;, A());
-  },
+  ### Usage
 
+  Uses the following components by a contextual reference:
+
+  &#x60;&#x60;&#x60;hbs
+  &lt;BsNavbar as |navbar|&gt;
+    &lt;div class=&quot;navbar-header&quot;&gt;
+      &lt;navbar.toggle /&gt;
+      &lt;a class=&quot;navbar-brand&quot; href=&quot;#&quot;&gt;Brand&lt;/a&gt;
+    &lt;/div&gt;
+    &lt;navbar.content&gt;
+      &lt;navbar.nav as |nav|&gt;
+        &lt;nav.item&gt;
+          &lt;nav.linkTo @route=&quot;home&quot;&gt;Home&lt;/nav.linkTo&gt;
+        &lt;/nav.item&gt;
+        &lt;nav.item&gt;
+          &lt;nav.linkTo @route=&quot;navbars&quot;&gt;Navbars&lt;/nav.linkTo&gt;
+        &lt;/nav.item&gt;
+      &lt;/navbar.nav&gt;
+    &lt;/navbar.content&gt;
+  &lt;/BsNavbar&gt;
+  &#x60;&#x60;&#x60;
+
+  **Note:** the &#x60;&lt;div class=&quot;navbar-header&quot;&gt;&#x60; is required for BS3 to hold the elements visible on a mobile breakpoint,
+  when the actual content is collapsed. It should *not* be used for BS4!
+
+  The component yields references to the following contextual components:
+
+  * [Components.NavbarContent](Components.NavbarContent.html)
+  * [Components.NavbarToggle](Components.NavbarToggle.html)
+  * [Components.NavbarNav](Components.NavbarNav.html)
+
+  Furthermore references to the following actions are yielded:
+
+  * &#x60;collapse&#x60;: triggers the &#x60;onCollapse&#x60; action and collapses the navbar (mobile)
+  * &#x60;expand&#x60;: triggers the &#x60;onExpand&#x60; action and expands the navbar (mobile)
+  * &#x60;toggleNavbar&#x60;: triggers the &#x60;toggleNavbar&#x60; action and toggles the navbar (mobile)
+
+  ### Responsive Design
+
+  For the mobile breakpoint the Bootstrap styles will hide the navbar content (&#x60;{{navbar.content}}&#x60;). Clicking on the
+  navbar toggle button (&#x60;{{navbar.toggle}}&#x60;) will expand the menu. By default all nav links (&#x60;&lt;nav.linkTo @route=&quot;...&quot;&gt;&#x60;) are already
+  wired up to call the navbar&#x27;s &#x60;collapse&#x60; action, so clicking any of them will collapse the navbar. To selectively
+  prevent that, you can set its &#x60;collapseNavbar&#x60; property to false:
+
+  &#x60;&#x60;&#x60;hbs
+  &lt;nav.item&gt;
+    &lt;nav.linkTo @route=&quot;index&quot; @collapseNavbar={{false}}&gt;Don&#x27;t collapse&lt;/nav.linkTo&gt;
+  &lt;/nav.item&gt;
+  &#x60;&#x60;&#x60;
+
+  To collapse the navbar when clicking on some nav items that are not internal links, you can use the yielded &#x60;collapse&#x60;
+  action:
+
+  &#x60;&#x60;&#x60;hbs
+  &lt;BsNavbar as |navbar|&gt;
+    &lt;navbar.content&gt;
+      &lt;navbar.nav as |nav|&gt;
+        &lt;nav.item&gt;
+          &lt;a onclick={{action navbar.collapse}}&gt;Collapse&lt;/a&gt;
+        &lt;/nav.item&gt;
+      &lt;/navbar.nav&gt;
+    &lt;/navbar.content&gt;
+  &lt;/BsNavbar&gt;
+  &#x60;&#x60;&#x60;
+
+  ### Navbar styles
+
+  The component supports the default bootstrap navbar styling options through the &#x60;type&#x60;
+  property. Bootstrap navbars [do not currently support justified nav links](http://getbootstrap.com/components/#navbar-default),
+  so those are explicitly disallowed.
+
+  Other bootstrap navbar variations, such as forms, buttons, etc. can be supported through direct use of
+  bootstrap styles applied through the &#x60;class&#x60; attribute on the components.
+
+  ### Bootstrap 3/4 Notes
+
+  Bootstrap 4 changed the default navbar styling option from &#x60;navbar-default&#x60; to &#x60;navbar-light&#x60;.
+  If you explicitly specified &quot;default&quot; in Bootstrap 3 and are migrating, you will need to change
+  this in your code. Bootstrap 4 changes &#x60;navbar-inverse&#x60; to &#x60;navbar-dark&#x60;.
+
+  Bootstrap 4 navbars are fluid by default without the need for an additional container. An
+  additional container is added like with Bootstrap 3 if &#x60;fluid&#x60; is &#x60;false&#x60;.
+
+  @class Navbar
+  @namespace Components
+  @extends Ember.Component
+  @public
+*/
+@templateLayout(layout)
+@tagName(&#x27;&#x27;)
+export default class Navbar extends Component {
   /**
-   * Register a component as a child of this parent
+   * Manages the state for the responsive menu between the toggle and the content.
    *
-   * @method registerChild
-   * @param child
+   * @property collapsed
+   * @type boolean
+   * @default true
    * @public
    */
-  registerChild(child) {
-    schedule(&#x27;actions&#x27;, this, function () {
-      this.children.addObject(child);
-    });
-  },
+  @defaultValue
+  collapsed = true;
 
   /**
-   * Remove the child component from this parent component
+   * @property _collapsed
+   * @private
+   */
+  @listenTo(&#x27;collapsed&#x27;)
+  _collapsed;
+
+  /**
+   * Controls whether the wrapping div is a fluid container or not.
    *
-   * @method removeChild
-   * @param child
+   * @property fluid
+   * @type boolean
+   * @default true
    * @public
    */
-  removeChild(child) {
-    schedule(&#x27;actions&#x27;, this, function () {
-      this.children.removeObject(child);
-    });
-  },
-});
+  @defaultValue
+  fluid = true;
+
+  /**
+   * Specifies the position classes for the navbar, currently supporting none, &quot;fixed-top&quot;, &quot;fixed-bottom&quot;, and
+   * either &quot;static-top&quot; (BS3) or &quot;sticky-top&quot; (BS4).
+   * See the [bootstrap docs](http://getbootstrap.com/components/#navbar-fixed-top) for details.
+   *
+   * @property position
+   * @type String
+   * @default null
+   * @public
+   */
+  @defaultValue
+  position = null;
+
+  @computed(&#x27;position&#x27;)
+  get positionClass() {
+    let position = this.position;
+    let validPositions = macroCondition(getOwnConfig().isBS3)
+      ? [&#x27;fixed-top&#x27;, &#x27;fixed-bottom&#x27;, &#x27;static-top&#x27;]
+      : [&#x27;fixed-top&#x27;, &#x27;fixed-bottom&#x27;, &#x27;sticky-top&#x27;];
+    let positionPrefix = macroCondition(getOwnConfig().isBS3) ? &#x27;navbar-&#x27; : &#x27;&#x27;;
+
+    if (validPositions.indexOf(position) === -1) {
+      return null;
+    }
+
+    return &#x60;${positionPrefix}${position}&#x60;;
+  }
+
+  /**
+   * Property for type styling
+   *
+   * For the available types see the [Bootstrap docs](https://getbootstrap.com/docs/4.3/components/navbar/#color-schemes)
+   *
+   * @property type
+   * @type String
+   * @default &#x27;default&#x27;
+   * @public
+   */
+  @defaultValue
+  type = &#x27;default&#x27;;
+
+  @computed(&#x27;type&#x27;)
+  get typeClass() {
+    let type = this.type || &#x27;default&#x27;;
+    assert(&#x27;The value of &#x60;type&#x60; must be a string&#x27;, typeof type === &#x27;string&#x27; &amp;&amp; type !== &#x27;&#x27;);
+
+    if (macroCondition(getOwnConfig().isBS4)) {
+      // &#x27;default&#x60; is not a valid type in BS4, but still accepted for compatibility purposes, and mapped to &#x60;light&#x27;
+      if (type === &#x27;default&#x27;) {
+        type = &#x27;light&#x27;;
+      }
+    }
+    return &#x60;navbar-${type}&#x60;;
+  }
+
+  /**
+   * The action to be sent when the navbar is about to be collapsed.
+   *
+   * You can return false to prevent collapsing the navbar automatically, and do that in your action by
+   * setting &#x60;collapsed&#x60; to true.
+   *
+   * @event onCollapse
+   * @public
+   */
+  onCollapse() {}
+
+  /**
+   * The action to be sent after the navbar has been collapsed (including the CSS transition).
+   *
+   * @event onCollapsed
+   * @public
+   */
+  onCollapsed() {}
+
+  /**
+   * The action to be sent when the navbar is about to be expanded.
+   *
+   * You can return false to prevent expanding the navbar automatically, and do that in your action by
+   * setting &#x60;collapsed&#x60; to false.
+   *
+   * @event onExpand
+   * @public
+   */
+  onExpand() {}
+
+  /**
+   * The action to be sent after the navbar has been expanded (including the CSS transition).
+   *
+   * @event onExpanded
+   * @public
+   */
+  onExpanded() {}
+
+  @observes(&#x27;_collapsed&#x27;)
+  _onCollapsedChange() {
+    let collapsed = this._collapsed;
+    let active = this.active;
+    if (collapsed !== active) {
+      return;
+    }
+    if (collapsed === false) {
+      this.show();
+    } else {
+      this.hide();
+    }
+  }
+
+  /**
+   * @method expand
+   * @private
+   */
+  @action
+  expand() {
+    if (this.onExpand() !== false) {
+      this.set(&#x27;_collapsed&#x27;, false);
+    }
+  }
+
+  /**
+   * @method collapse
+   * @private
+   */
+  @action
+  collapse() {
+    if (this.onCollapse() !== false) {
+      this.set(&#x27;_collapsed&#x27;, true);
+    }
+  }
+
+  @action
+  toggleNavbar() {
+    if (this._collapsed) {
+      this.expand();
+    } else {
+      this.collapse();
+    }
+  }
+
+  /**
+   * Bootstrap 4 Only: Defines the responsive toggle breakpoint size. Options are the standard
+   * two character Bootstrap size abbreviations. Used to set the &#x60;navbar-expand-*&#x60;
+   * class. Set to &#x60;null&#x60; to disable collapsing.
+   *
+   * @property toggleBreakpoint
+   * @type String
+   * @default &#x27;lg&#x27;
+   * @public
+   */
+  @defaultValue
+  toggleBreakpoint = &#x27;lg&#x27;;
+
+  /**
+   * Bootstrap 4 Only: Sets the background color for the navbar. Can be any color
+   * in the set that composes the &#x60;bg-*&#x60; classes and can be extended by creating your
+   * own &#x60;bg-*&#x60; classes.
+   *
+   * @property backgroundColor
+   * @type String
+   * @default &#x27;light&#x27;
+   * @public
+   */
+  @defaultValue
+  backgroundColor = &#x27;light&#x27;;
+
+  @computed(&#x27;toggleBreakpoint&#x27;)
+  get breakpointClass() {
+    if (macroCondition(getOwnConfig().isBS3)) {
+      return undefined;
+    } else {
+      let toggleBreakpoint = this.toggleBreakpoint;
+
+      if (isBlank(toggleBreakpoint)) {
+        return &#x27;navbar-expand&#x27;;
+      } else {
+        return &#x60;navbar-expand-${toggleBreakpoint}&#x60;;
+      }
+    }
+  }
+
+  @computed(&#x27;backgroundColor&#x27;)
+  get backgroundClass() {
+    if (macroCondition(getOwnConfig().isBS3)) {
+      return undefined;
+    } else {
+      return &#x60;bg-${this.backgroundColor}&#x60;;
+    }
+  }
+
+  /**
+   * @property toggleComponent
+   * @type {String}
+   * @private
+   */
+  @defaultValue
+  toggleComponent = &#x27;bs-navbar/toggle&#x27;;
+
+  /**
+   * @property contentComponent
+   * @type {String}
+   * @private
+   */
+  @defaultValue
+  contentComponent = &#x27;bs-navbar/content&#x27;;
+
+  /**
+   * @property navComponent
+   * @type {String}
+   * @private
+   */
+  @defaultValue
+  navComponent = &#x27;bs-navbar/nav&#x27;;
+
+  /**
+   * @property linkToComponent
+   * @type {String}
+   * @private
+   */
+  @defaultValue
+  linkToComponent = &#x27;bs-navbar/link-to&#x27;;
+}
 
     </pre>
 </div>

@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <title>addon/mixins/component-parent.js - ember-bootstrap</title>
+  <title>addon/components/bs-nav.js - ember-bootstrap</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="../assets/css/api.css">
   <script type="text/javascript" src="//use.typekit.net/dkq5epu.js"></script>
@@ -54,64 +54,171 @@
         <div id="docs-main">
           <div class="content">
 <div class="page-header">
-    <h1>addon/mixins/component-parent.js <small>File</small></h1>
+    <h1>addon/components/bs-nav.js <small>File</small></h1>
 </div>
 
 <div class="file">
     <pre class="prettyprint linenums">
-import { schedule } from &#x27;@ember/runloop&#x27;;
-import { A } from &#x27;@ember/array&#x27;;
-import Mixin from &#x27;@ember/object/mixin&#x27;;
+import { layout as templateLayout, tagName } from &#x27;@ember-decorators/component&#x27;;
+import { computed } from &#x27;@ember/object&#x27;;
+import Component from &#x27;@ember/component&#x27;;
+import layout from &#x27;ember-bootstrap/templates/components/bs-nav&#x27;;
+import defaultValue from &#x27;ember-bootstrap/utils/default-decorator&#x27;;
 
 /**
- * Mixin for components that act as a parent component in a parent-child relationship of components
- *
- * @class ComponentParent
- * @namespace Mixins
- * @private
+  Component to generate [bootstrap navs](http://getbootstrap.com/components/#nav)
+
+  ### Usage
+
+  Use in combination with the yielded components
+
+  * [Components.NavItem](Components.NavItem.html)
+  * [&#x60;nav.dropdown&#x60;](Components.Dropdown.html)
+
+  &#x60;&#x60;&#x60;hbs
+  &lt;BsNav @type=&quot;pills&quot; as |nav|&gt;
+    &lt;nav.item&gt;
+      &lt;nav.linkTo @route=&quot;foo&quot;&gt;
+        Foo
+      &lt;/nav.linkTo&gt;
+    &lt;/nav.item&gt;
+    &lt;nav.item&gt;
+      &lt;nav.linkTo @route=&quot;bar&quot; @model={{this.model}}&gt;
+        Bar
+      &lt;/nav.linkTo&gt;
+    &lt;/nav.item&gt;
+  &lt;/BsNav&gt;
+  &#x60;&#x60;&#x60;
+
+  &gt; Note: the use of angle brackets &#x60;&lt;nav.linkTo&gt;&#x60; as shown above is only supported for Ember &gt;= 3.10, as it relies on
+  &gt; Ember&#x27;s native implementation of the [&#x60;LinkComponent&#x60;](https://api.emberjs.com/ember/3.12/classes/Ember.Templates.helpers/methods/link-to?anchor=link-to).
+  &gt; For older Ember versions please use the legacy syntax with positional arguments: &#x60;{{#nav.link-to &quot;bar&quot; this.model}}Bar{{/nav.link-to}}&#x60;
+
+  ### Nav styles
+
+  The component supports the default bootstrap nav styling options &quot;pills&quot; and &quot;tabs&quot; through the &#x60;type&#x60;
+  property, as well as the &#x60;justified&#x60;, &#x60;fill&#x60; and &#x60;stacked&#x60; properties.
+
+  ### Active items
+
+  Bootstrap 3 expects to have the &#x60;active&#x60; class on the &#x60;&lt;li&gt;&#x60; element that should be the active (highlighted)
+  navigation item. To achieve that use the &#x60;@route&#x60; and optionally &#x60;@model&#x60; (or &#x60;@models&#x60;) and &#x60;@query&#x60; properties
+  of the yielded &#x60;nav.linkTo&#x60; component just as you would for Ember&#x27;s &#x60;&lt;LinkTo&gt;&#x60; component to create a link with proper
+  &#x60;active&#x60; class support.
+
+  ### Dropdowns
+
+  Use the &#x60;nav.dropdown&#x60; contextual version of the [Components.Dropdown](Components.Dropdown.html) component
+  with a &#x60;tagName&#x60; of &quot;li&quot; to integrate a dropdown into your nav:
+
+  &#x60;&#x60;&#x60;hbs
+  &lt;BsNav @type=&quot;pills&quot; as |nav|&gt;
+    &lt;nav.item&gt;
+      &lt;nav.linkTo @route=&quot;index&quot;&gt;
+        Home
+      &lt;/nav.linkTo&gt;
+    &lt;/nav.item&gt;
+    &lt;nav.dropdown as |dd|&gt;
+      &lt;dd.toggle&gt;Dropdown &lt;span class=&quot;caret&quot;&gt;&lt;/span&gt;&lt;/dd.toggle&gt;
+      &lt;dd.menu as |ddm|&gt;
+        &lt;ddm.item&gt;&lt;ddm.linkTo @route=&quot;foo&quot;&gt;Foo&lt;/ddm.linkTo&gt;&lt;/ddm.item&gt;
+        &lt;ddm.item&gt;&lt;ddm.linkTo @route=&quot;bar&quot;&gt;Bar&lt;/ddm.linkTo&gt;&lt;/ddm.item&gt;
+      &lt;/dd.menu&gt;
+    &lt;/nav.dropdown&gt;
+  &lt;/BsNav&gt;
+  &#x60;&#x60;&#x60;
+
+  ### Bootstrap 3/4 Notes
+
+  Use [&#x60;nav.linkTo&#x60;](Components.NavLinkTo.html) for in-app links to ensure proper styling regardless of
+  Bootstrap version. Explicit use of &#x60;&lt;a&gt;&#x60; tags in Bootstrap 4 must apply the &#x60;nav-link&#x60; class and manage
+  the &#x60;active&#x60; state explicitly.
+
+  The &#x60;fill&#x60; styling is only available with Bootstrap 4
+
+  @class Nav
+  @namespace Components
+  @extends Ember.Component
+  @public
+
  */
-// eslint-disable-next-line ember/no-new-mixins
-export default Mixin.create({
-  /**
-   * Array of registered child components
-   *
-   * @property children
-   * @type array
-   * @protected
-   */
-  children: null,
-
-  init() {
-    this._super(...arguments);
-    this.set(&#x27;children&#x27;, A());
-  },
+@templateLayout(layout)
+@tagName(&#x27;&#x27;)
+export default class Nav extends Component {
+  @computed(&#x27;type&#x27;)
+  get typeClass() {
+    let type = this.type;
+    return type ? &#x60;nav-${type}&#x60; : undefined;
+  }
 
   /**
-   * Register a component as a child of this parent
+   * Special type of nav, either &quot;pills&quot; or &quot;tabs&quot;
    *
-   * @method registerChild
-   * @param child
+   * @property type
+   * @type String
+   * @default null
    * @public
    */
-  registerChild(child) {
-    schedule(&#x27;actions&#x27;, this, function () {
-      this.children.addObject(child);
-    });
-  },
+  @defaultValue
+  type = null;
 
   /**
-   * Remove the child component from this parent component
+   * Make the nav justified, see [bootstrap docs](http://getbootstrap.com/components/#nav-justified)
    *
-   * @method removeChild
-   * @param child
+   * @property justified
+   * @type boolean
+   * @default false
    * @public
    */
-  removeChild(child) {
-    schedule(&#x27;actions&#x27;, this, function () {
-      this.children.removeObject(child);
-    });
-  },
-});
+  @defaultValue
+  justified = false;
+
+  /**
+   * Make the nav pills stacked, see [bootstrap docs](http://getbootstrap.com/components/#nav-pills)
+   *
+   * @property stacked
+   * @type boolean
+   * @default false
+   * @public
+   */
+  @defaultValue
+  stacked = false;
+
+  /**
+   * Make the nav flex fill (BS4 only), see [bootstrap docs](http://getbootstrap.com/docs/4.1/components/navs/#fill-and-justify)
+   *
+   * @property fill
+   * @type boolean
+   * @default false
+   * @public
+   */
+  @defaultValue
+  fill = false;
+
+  /**
+   * @property itemComponent
+   * @type {String}
+   * @private
+   */
+  @defaultValue
+  itemComponent = &#x27;bs-nav/item&#x27;;
+
+  /**
+   * @property linkToComponent
+   * @type {String}
+   * @private
+   */
+  @defaultValue
+  linkToComponent = &#x27;bs-nav/link-to&#x27;;
+
+  /**
+   * @property dropdownComponent
+   * @type {String}
+   * @private
+   */
+  @defaultValue
+  dropdownComponent = &#x27;bs-dropdown&#x27;;
+}
 
     </pre>
 </div>

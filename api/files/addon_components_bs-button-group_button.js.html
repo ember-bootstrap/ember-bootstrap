@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <title>addon/mixins/component-parent.js - ember-bootstrap</title>
+  <title>addon/components/bs-button-group/button.js - ember-bootstrap</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="../assets/css/api.css">
   <script type="text/javascript" src="//use.typekit.net/dkq5epu.js"></script>
@@ -54,64 +54,59 @@
         <div id="docs-main">
           <div class="content">
 <div class="page-header">
-    <h1>addon/mixins/component-parent.js <small>File</small></h1>
+    <h1>addon/components/bs-button-group/button.js <small>File</small></h1>
 </div>
 
 <div class="file">
     <pre class="prettyprint linenums">
-import { schedule } from &#x27;@ember/runloop&#x27;;
-import { A } from &#x27;@ember/array&#x27;;
-import Mixin from &#x27;@ember/object/mixin&#x27;;
+import { computed } from &#x27;@ember/object&#x27;;
+import { isArray } from &#x27;@ember/array&#x27;;
+import Button from &#x27;ember-bootstrap/components/bs-button&#x27;;
+import defaultValue from &#x27;ember-bootstrap/utils/default-decorator&#x27;;
 
 /**
- * Mixin for components that act as a parent component in a parent-child relationship of components
- *
- * @class ComponentParent
- * @namespace Mixins
- * @private
+ Internal component for button-group buttons
+
+ @class ButtonGroupButton
+ @namespace Components
+ @extends Components.Button
+ @private
  */
-// eslint-disable-next-line ember/no-new-mixins
-export default Mixin.create({
+export default class ButtonGroupButton extends Button {
   /**
-   * Array of registered child components
-   *
-   * @property children
-   * @type array
-   * @protected
+   * @property groupValue
+   * @private
    */
-  children: null,
-
-  init() {
-    this._super(...arguments);
-    this.set(&#x27;children&#x27;, A());
-  },
+  @defaultValue
+  groupValue = null;
 
   /**
-   * Register a component as a child of this parent
-   *
-   * @method registerChild
-   * @param child
-   * @public
+   * @property buttonGroupType
+   * @type string
+   * @private
    */
-  registerChild(child) {
-    schedule(&#x27;actions&#x27;, this, function () {
-      this.children.addObject(child);
-    });
-  },
+  @defaultValue
+  buttonGroupType = false;
 
   /**
-   * Remove the child component from this parent component
-   *
-   * @method removeChild
-   * @param child
-   * @public
+   * @property active
+   * @type boolean
+   * @readonly
+   * @private
    */
-  removeChild(child) {
-    schedule(&#x27;actions&#x27;, this, function () {
-      this.children.removeObject(child);
-    });
-  },
-});
+  @(computed(&#x27;buttonGroupType&#x27;, &#x27;groupValue.[]&#x27;, &#x27;value&#x27;).readOnly())
+  get active() {
+    let { value, groupValue } = this;
+    if (this.buttonGroupType === &#x27;radio&#x27;) {
+      return value === groupValue;
+    } else {
+      if (isArray(groupValue)) {
+        return groupValue.indexOf(value) !== -1;
+      }
+    }
+    return false;
+  }
+}
 
     </pre>
 </div>

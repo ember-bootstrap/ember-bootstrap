@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <title>addon/mixins/component-parent.js - ember-bootstrap</title>
+  <title>addon/components/bs-form/element/layout/horizontal.js - ember-bootstrap</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="../assets/css/api.css">
   <script type="text/javascript" src="//use.typekit.net/dkq5epu.js"></script>
@@ -54,64 +54,82 @@
         <div id="docs-main">
           <div class="content">
 <div class="page-header">
-    <h1>addon/mixins/component-parent.js <small>File</small></h1>
+    <h1>addon/components/bs-form/element/layout/horizontal.js <small>File</small></h1>
 </div>
 
 <div class="file">
     <pre class="prettyprint linenums">
-import { schedule } from &#x27;@ember/runloop&#x27;;
-import { A } from &#x27;@ember/array&#x27;;
-import Mixin from &#x27;@ember/object/mixin&#x27;;
+import { layout as templateLayout, tagName } from &#x27;@ember-decorators/component&#x27;;
+import { computed } from &#x27;@ember/object&#x27;;
+import { assert } from &#x27;@ember/debug&#x27;;
+import { isBlank } from &#x27;@ember/utils&#x27;;
+import FormElementLayout from &#x27;../layout&#x27;;
+import layout from &#x27;ember-bootstrap/templates/components/bs-form/element/layout/horizontal&#x27;;
+import defaultValue from &#x27;ember-bootstrap/utils/default-decorator&#x27;;
+import { macroCondition, getOwnConfig } from &#x27;@embroider/macros&#x27;;
 
 /**
- * Mixin for components that act as a parent component in a parent-child relationship of components
- *
- * @class ComponentParent
- * @namespace Mixins
- * @private
+
+ @class FormElementLayoutHorizontal
+ @namespace Components
+ @extends Components.FormElementLayout
+ @private
  */
-// eslint-disable-next-line ember/no-new-mixins
-export default Mixin.create({
+@tagName(&#x27;&#x27;)
+@templateLayout(layout)
+export default class FormElementLayoutHorizontal extends FormElementLayout {
   /**
-   * Array of registered child components
+   * The Bootstrap grid class for form labels within a horizontal layout form.
    *
-   * @property children
-   * @type array
-   * @protected
-   */
-  children: null,
-
-  init() {
-    this._super(...arguments);
-    this.set(&#x27;children&#x27;, A());
-  },
-
-  /**
-   * Register a component as a child of this parent
-   *
-   * @method registerChild
-   * @param child
+   * @property horizontalLabelGridClass
+   * @type string
    * @public
    */
-  registerChild(child) {
-    schedule(&#x27;actions&#x27;, this, function () {
-      this.children.addObject(child);
-    });
-  },
+  @defaultValue
+  horizontalLabelGridClass = null;
 
   /**
-   * Remove the child component from this parent component
+   * Computed property that specifies the Bootstrap grid class for form controls within a horizontal layout form.
    *
-   * @method removeChild
-   * @param child
-   * @public
+   * @property horizontalInputGridClass
+   * @type string
+   * @readonly
+   * @private
    */
-  removeChild(child) {
-    schedule(&#x27;actions&#x27;, this, function () {
-      this.children.removeObject(child);
-    });
-  },
-});
+  @(computed(&#x27;horizontalLabelGridClass&#x27;).readOnly())
+  get horizontalInputGridClass() {
+    if (isBlank(this.horizontalLabelGridClass)) {
+      return undefined;
+    }
+    let parts = this.horizontalLabelGridClass.split(&#x27;-&#x27;);
+    assert(&#x27;horizontalInputGridClass must match format bootstrap grid column class&#x27;, parts.length === 3);
+    parts[2] = 12 - parts[2];
+    return parts.join(&#x27;-&#x27;);
+  }
+
+  /**
+   * Computed property that specifies the Bootstrap offset grid class for form controls within a horizontal layout
+   * form, that have no label.
+   *
+   * @property horizontalInputOffsetGridClass
+   * @type string
+   * @readonly
+   * @private
+   */
+  @computed(&#x27;horizontalLabelGridClass&#x27;)
+  get horizontalInputOffsetGridClass() {
+    if (isBlank(this.horizontalLabelGridClass)) {
+      return undefined;
+    }
+    let parts = this.horizontalLabelGridClass.split(&#x27;-&#x27;);
+    if (macroCondition(getOwnConfig().isBS3)) {
+      parts.splice(2, 0, &#x27;offset&#x27;);
+    } else {
+      parts.splice(0, 1, &#x27;offset&#x27;);
+    }
+    return parts.join(&#x27;-&#x27;);
+  }
+}
 
     </pre>
 </div>

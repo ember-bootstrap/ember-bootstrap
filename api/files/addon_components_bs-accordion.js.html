@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <title>addon/mixins/component-parent.js - ember-bootstrap</title>
+  <title>addon/components/bs-accordion.js - ember-bootstrap</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="../assets/css/api.css">
   <script type="text/javascript" src="//use.typekit.net/dkq5epu.js"></script>
@@ -54,64 +54,105 @@
         <div id="docs-main">
           <div class="content">
 <div class="page-header">
-    <h1>addon/mixins/component-parent.js <small>File</small></h1>
+    <h1>addon/components/bs-accordion.js <small>File</small></h1>
 </div>
 
 <div class="file">
     <pre class="prettyprint linenums">
-import { schedule } from &#x27;@ember/runloop&#x27;;
-import { A } from &#x27;@ember/array&#x27;;
-import Mixin from &#x27;@ember/object/mixin&#x27;;
+import { action } from &#x27;@ember/object&#x27;;
+import { layout as templateLayout, tagName } from &#x27;@ember-decorators/component&#x27;;
+import Component from &#x27;@ember/component&#x27;;
+import layout from &#x27;ember-bootstrap/templates/components/bs-accordion&#x27;;
+import listenTo from &#x27;ember-bootstrap/utils/cp/listen-to&#x27;;
+import defaultValue from &#x27;ember-bootstrap/utils/default-decorator&#x27;;
 
 /**
- * Mixin for components that act as a parent component in a parent-child relationship of components
- *
- * @class ComponentParent
- * @namespace Mixins
- * @private
- */
-// eslint-disable-next-line ember/no-new-mixins
-export default Mixin.create({
-  /**
-   * Array of registered child components
-   *
-   * @property children
-   * @type array
-   * @protected
-   */
-  children: null,
+  Bootstrap-style [accordion group](http://getbootstrap.com/javascript/#collapse-example-accordion),
+  with collapsible/expandable items.
 
-  init() {
-    this._super(...arguments);
-    this.set(&#x27;children&#x27;, A());
-  },
+  ### Usage
 
+  Use as a block level component with any number of yielded [Components.AccordionItem](Components.AccordionItem.html)
+  components as children:
+
+  &#x60;&#x60;&#x60;handlebars
+  &lt;BsAccordion as |Acc|&gt;
+    &lt;Acc.item @value={{1}} @title=&quot;First item&quot;&gt;
+      &lt;p&gt;Lorem ipsum...&lt;/p&gt;
+      &lt;button onclick={{action acc.change 2}}&gt;Next&lt;/button&gt;
+    &lt;/Acc.item&gt;
+    &lt;Acc.item @value={{2}} @title=&quot;Second item&quot;&gt;
+      &lt;p&gt;Lorem ipsum...&lt;/p&gt;
+    &lt;/Acc.item&gt;
+    &lt;Acc.item @value={{3}} @title=&quot;Third item&quot;&gt;
+      &lt;p&gt;Lorem ipsum...&lt;/p&gt;
+    &lt;/Acc.item&gt;
+  &lt;/BsAccordion&gt;
+  &#x60;&#x60;&#x60;
+
+  In the example above the first accordion item utilizes the yielded &#x60;change&#x60; action to add some custom behaviour.
+
+  @class Accordion
+  @namespace Components
+  @extends Ember.Component
+  @public
+*/
+@tagName(&#x27;&#x27;)
+@templateLayout(layout)
+export default class Accordion extends Component {
   /**
-   * Register a component as a child of this parent
+   * The value of the currently selected accordion item. Set this to change selection programmatically.
    *
-   * @method registerChild
-   * @param child
+   * When the selection is changed by user interaction this property will not update by using two-way bindings in order
+   * to follow DDAU best practices. If you want to react to such changes, subscribe to the &#x60;onChange&#x60; action
+   *
+   * @property selected
    * @public
    */
-  registerChild(child) {
-    schedule(&#x27;actions&#x27;, this, function () {
-      this.children.addObject(child);
-    });
-  },
+  @defaultValue
+  selected = null;
 
   /**
-   * Remove the child component from this parent component
+   * @property itemComponent
+   * @type {String}
+   * @private
+   */
+  @defaultValue
+  itemComponent = &#x27;bs-accordion/item&#x27;;
+
+  /**
+   * The value of the currently selected accordion item
    *
-   * @method removeChild
-   * @param child
+   * @property isSelected
+   * @private
+   */
+  @listenTo(&#x27;selected&#x27;)
+  isSelected;
+
+  /**
+   * Action when the selected accordion item is about to be changed.
+   *
+   * You can return false to prevent changing the active item, and do that in your action by
+   * setting the &#x60;selected&#x60; accordingly.
+   *
+   * @event onChange
+   * @param newValue
+   * @param oldValue
    * @public
    */
-  removeChild(child) {
-    schedule(&#x27;actions&#x27;, this, function () {
-      this.children.removeObject(child);
-    });
-  },
-});
+  onChange(newValue, oldValue) {} // eslint-disable-line no-unused-vars
+
+  @action
+  doChange(newValue) {
+    let oldValue = this.isSelected;
+    if (oldValue === newValue) {
+      newValue = null;
+    }
+    if (this.onChange(newValue, oldValue) !== false) {
+      this.set(&#x27;isSelected&#x27;, newValue);
+    }
+  }
+}
 
     </pre>
 </div>
