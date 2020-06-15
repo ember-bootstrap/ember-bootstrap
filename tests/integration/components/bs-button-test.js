@@ -77,7 +77,6 @@ module('Integration | Component | bs-button', function(hooks) {
     await render(hbs`{{bs-button buttonType="submit"}}`);
 
     assert.dom('button').hasAttribute('type', 'submit');
-    assert.deprecationsInclude('Argument buttonType of <BsButton> component is deprecated.');
   });
 
   test('button with icon property shows icon', async function(assert) {
