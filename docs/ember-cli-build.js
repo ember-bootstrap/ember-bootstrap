@@ -2,18 +2,45 @@
 
 const EmberApp = require('ember-cli/lib/broccoli/ember-app');
 
-module.exports = function(defaults) {
+module.exports = function (defaults) {
   let app = new EmberApp(defaults, {
     'ember-bootstrap': {
       bootstrapVersion: 4,
-      importBootstrapCSS: false
+      importBootstrapCSS: false,
     },
     'ember-prism': {
-      'components': ['markup-templating', 'handlebars', 'javascript'],
-      plugins: [
-        'line-numbers',
+      components: ['markup-templating', 'handlebars', 'javascript'],
+      plugins: ['line-numbers'],
+    },
+    prember: {
+      urls: [
+        '/',
+        '/components',
+        '/components/accordion',
+        '/components/alert',
+        '/components/button',
+        '/components/button-group',
+        '/components/carousel',
+        '/components/collapse',
+        '/components/dropdown',
+        '/components/forms',
+        '/components/modal',
+        '/components/navbars',
+        '/components/navs',
+        '/components/popover',
+        '/components/progress',
+        '/components/tabs',
+        '/components/tabs/other',
+        '/components/tooltip',
+        '/getting-started',
+        '/getting-started/setup',
+        '/getting-started/assets',
+        '/getting-started/bootstrap-4',
+        '/addons',
+        '/license',
+        '/changelog',
       ],
-    }
+    },
   });
 
   // Use `app.import` to add additional libraries to the generated
