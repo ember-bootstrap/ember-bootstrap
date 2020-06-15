@@ -1,3 +1,34 @@
+## v4.0.0-rc.2 (2020-06-15)
+
+#### :boom: Breaking Change
+* [#1104](https://github.com/kaliber5/ember-bootstrap/pull/1104) Remove support for subclassing component classes  ([@simonihmig](https://github.com/simonihmig))
+* [#1097](https://github.com/kaliber5/ember-bootstrap/pull/1097) Remove leftover two-way binding of form element's `@value` argument ([@basz](https://github.com/basz))
+* [#1106](https://github.com/kaliber5/ember-bootstrap/pull/1106) Refactor BsModalSimple to not extend from BsModal ([@simonihmig](https://github.com/simonihmig))
+
+#### Features
+* [#1112](https://github.com/kaliber5/ember-bootstrap/pull/1112) Add codemod link to warnings ([@simonihmig](https://github.com/simonihmig))
+* [#1107](https://github.com/kaliber5/ember-bootstrap/pull/1107) Render body.modal-open in FastBoot ([@simonihmig](https://github.com/simonihmig))
+
+#### Bug Fixes
+* [#1098](https://github.com/kaliber5/ember-bootstrap/pull/1098) Reset style attribute after transition of BsCollapse ([@basz](https://github.com/basz))
+* [#1097](https://github.com/kaliber5/ember-bootstrap/pull/1097) Remove leftover two-way binding of form element's `@value` argument ([@basz](https://github.com/basz))
+* [#1076](https://github.com/kaliber5/ember-bootstrap/pull/1076) Remove debug code from production builds ([@simonihmig](https://github.com/simonihmig))
+* [#1077](https://github.com/kaliber5/ember-bootstrap/pull/1077) Fix warnings for removed form element arguments disabled and readonly ([@simonihmig](https://github.com/simonihmig))
+
+#### Documentation
+* [#1116](https://github.com/kaliber5/ember-bootstrap/pull/1116) Pre-render docs as static pages w/ prember ([@simonihmig](https://github.com/simonihmig))
+* [#1108](https://github.com/kaliber5/ember-bootstrap/pull/1108) Update API docs for FormElement#value ([@simonihmig](https://github.com/simonihmig))
+
+#### Internal
+* [#1115](https://github.com/kaliber5/ember-bootstrap/pull/1115) Deploy docs in CI ([@simonihmig](https://github.com/simonihmig))
+* [#1114](https://github.com/kaliber5/ember-bootstrap/pull/1114) Add `docs:build` and `docs:serve` scripts, remove publishing of docs from gulpfile ([@simonihmig](https://github.com/simonihmig))
+
+#### Committers: 3
+- Bas Kamer ([@basz](https://github.com/basz))
+- Simon Ihmig ([@simonihmig](https://github.com/simonihmig))
+- [@dependabot-preview[bot]](https://github.com/apps/dependabot-preview)
+
+
 ## v4.0.0-rc.1 (2020-05-08)
 
 #### Bug Fixes
