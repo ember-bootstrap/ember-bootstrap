@@ -1,15 +1,12 @@
 name: Publish docs
 
 on:
-  push:
-    tags:
-      - 'v*'
+  release:
+    types: [published,edited]
 
 jobs:
   deploy:
     runs-on: ubuntu-18.04
-    # only run on master branch, to prevent publishing docs for previous release branches
-    if: github.ref == 'refs/heads/master'
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
