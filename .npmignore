@@ -43,3 +43,4 @@ gulpfile.js
 /DEBUG
 *.pid
 *.log
+/docs
