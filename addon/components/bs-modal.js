@@ -721,11 +721,8 @@ export default class Modal extends Component {
 
       let existingClasses = document.body.getAttribute('class') || '';
       if (!existingClasses.includes('modal-open')) {
-        console.log('huhu');
-
         document.body.setAttribute('class', `modal-open ${existingClasses}`);
       }
-      console.log(document.body.getAttribute('class'));
     }
   }
 
