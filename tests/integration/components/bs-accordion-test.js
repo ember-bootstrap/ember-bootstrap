@@ -9,7 +9,7 @@ import {
   testBS3,
   testBS4,
   visibilityClass,
-} from '../../helpers/bootstrap-test';
+} from '../../helpers/bootstrap';
 import setupNoDeprecations from '../../helpers/setup-no-deprecations';
 import a11yAudit from 'ember-a11y-testing/test-support/audit';
 import sinon from 'sinon';

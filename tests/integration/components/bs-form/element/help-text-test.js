@@ -2,7 +2,7 @@ import { module, test } from 'qunit';
 import { setupRenderingTest } from 'ember-qunit';
 import { render } from '@ember/test-helpers';
 import hbs from 'htmlbars-inline-precompile';
-import { formHelpTextClass } from '../../../../helpers/bootstrap-test';
+import { formHelpTextClass } from '../../../../helpers/bootstrap';
 import setupNoDeprecations from '../../../../helpers/setup-no-deprecations';
 
 module('Integration | Component | bs form/element/help text', function (hooks) {

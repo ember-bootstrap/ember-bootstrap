@@ -3,7 +3,7 @@ import { setupRenderingTest } from 'ember-qunit';
 import { render } from '@ember/test-helpers';
 import hbs from 'htmlbars-inline-precompile';
 import setupNoDeprecations from '../../../helpers/setup-no-deprecations';
-import { testBS4 } from '../../../helpers/bootstrap-test';
+import { testBS4 } from '../../../helpers/bootstrap';
 import hasEmberVersion from '@ember/test-helpers/has-ember-version';
 
 const supportsAngleBracketsLinkTo = hasEmberVersion(3, 10);

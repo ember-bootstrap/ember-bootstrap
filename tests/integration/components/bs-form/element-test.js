@@ -18,7 +18,7 @@ import {
   validationWarningClass,
   formFeedbackElement,
   formHelpTextClass,
-} from '../../../helpers/bootstrap-test';
+} from '../../../helpers/bootstrap';
 import hbs from 'htmlbars-inline-precompile';
 import setupNoDeprecations from '../../../helpers/setup-no-deprecations';
 import { gte } from 'ember-compatibility-helpers';
@@ -101,7 +101,7 @@ module('Integration | Component | bs-form/element', function (hooks) {
       await fillIn(selector, value);
       // this.$(selector).val(value).change();
     }
-    assert.equal(this.get('model.name'), oldValue, `${controlType} value has not changed`);
+    assert.equal(this.model.name, oldValue, `${controlType} value has not changed`);
     assert.ok(
       action.calledWith(value, model, 'name'),
       `onChange action of ${controlType} has been called with expected args`
@@ -346,7 +346,7 @@ module('Integration | Component | bs-form/element', function (hooks) {
       );
       await click(this.element.querySelectorAll('input[type=radio]')[1]);
 
-      assert.equal(this.get('model.name'), 'foo', `radio value has not changed`);
+      assert.equal(this.model.name, 'foo', `radio value has not changed`);
       assert.ok(action.calledWith('bar', model, 'name'), `onChange action of radio has been called with expected args`);
     });
   });

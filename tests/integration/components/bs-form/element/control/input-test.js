@@ -1,5 +1,5 @@
 import { module, test } from 'qunit';
-import { testBS4 } from '../../../../../helpers/bootstrap-test';
+import { testBS4 } from '../../../../../helpers/bootstrap';
 import { setupRenderingTest } from 'ember-qunit';
 import { render, find } from '@ember/test-helpers';
 import hbs from 'htmlbars-inline-precompile';

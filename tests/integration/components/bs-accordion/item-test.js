@@ -10,7 +10,7 @@ import {
   accordionItemClickableSelector,
   test,
   visibilityClass,
-} from '../../../helpers/bootstrap-test';
+} from '../../../helpers/bootstrap';
 import setupNoDeprecations from '../../../helpers/setup-no-deprecations';
 import sinon from 'sinon';
 

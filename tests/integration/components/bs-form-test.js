@@ -25,7 +25,7 @@ import {
   validationErrorClass,
   formFeedbackElement,
   validationSuccessClass,
-} from '../../helpers/bootstrap-test';
+} from '../../helpers/bootstrap';
 import hbs from 'htmlbars-inline-precompile';
 import { defer } from 'rsvp';
 import { next, run } from '@ember/runloop';
@@ -279,7 +279,7 @@ module('Integration | Component | bs-form', function (hooks) {
     let model = {};
     this.set('model', model);
     this.set('errors', A([]));
-    this.set('validateStub', () => (this.get('errors.length') > 0 ? reject() : resolve()));
+    this.set('validateStub', () => (this.errors.length > 0 ? reject() : resolve()));
     let deferredSubmitAction = defer();
     this.set('submitAction', () => {
       return deferredSubmitAction.promise;
@@ -321,7 +321,7 @@ module('Integration | Component | bs-form', function (hooks) {
       let model = {};
       this.set('model', model);
       this.set('errors', A([]));
-      this.set('validateStub', () => (this.get('errors.length') > 0 ? reject() : resolve()));
+      this.set('validateStub', () => (this.errors.length > 0 ? reject() : resolve()));
       let deferredSubmitAction = defer();
       this.set('submitAction', () => {
         return deferredSubmitAction.promise;
@@ -373,7 +373,7 @@ module('Integration | Component | bs-form', function (hooks) {
       let model = {};
       this.set('model', model);
       this.set('errors', A([]));
-      this.set('validateStub', () => (this.get('errors.length') > 0 ? reject() : resolve()));
+      this.set('validateStub', () => (this.errors.length > 0 ? reject() : resolve()));
       this.set('submitAction', () => {});
       await render(
         hbs`

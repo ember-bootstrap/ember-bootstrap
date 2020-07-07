@@ -1,7 +1,7 @@
 import { triggerEvent } from '@ember/test-helpers';
 import transitionEnd from 'ember-bootstrap/utils/transition-end';
 import { module } from 'qunit';
-import { test, testRequiringTransitions } from '../../helpers/bootstrap-test';
+import { test, testRequiringTransitions } from '../../helpers/bootstrap';
 import sinon from 'sinon';
 
 module('Unit | Utility | transition end', function () {

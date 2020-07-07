@@ -2,7 +2,7 @@ import { module, skip } from 'qunit';
 import { setupRenderingTest } from 'ember-qunit';
 import { render, click, triggerEvent, settled } from '@ember/test-helpers';
 import hbs from 'htmlbars-inline-precompile';
-import { test, versionDependent, visibilityClass, popoverPositionClass } from '../../helpers/bootstrap-test';
+import { test, versionDependent, visibilityClass, popoverPositionClass } from '../../helpers/bootstrap';
 import { setupForPositioning, assertPositioning } from '../../helpers/contextual-help';
 import setupStylesheetSupport from '../../helpers/setup-stylesheet-support';
 import setupNoDeprecations from '../../helpers/setup-no-deprecations';
