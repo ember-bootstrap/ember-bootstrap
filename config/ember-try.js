@@ -26,7 +26,7 @@ module.exports = async function () {
           },
         },
         env: {
-          FAIL_ON_DEPRECATION: true,
+          // FAIL_ON_DEPRECATION: true,
         },
       },
       {
@@ -47,7 +47,7 @@ module.exports = async function () {
           },
         },
         env: {
-          FAIL_ON_DEPRECATION: true,
+          // FAIL_ON_DEPRECATION: true,
         },
       },
       // The default `.travis.yml` runs this scenario via `npm test`,
