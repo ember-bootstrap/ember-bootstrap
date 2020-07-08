@@ -73,6 +73,7 @@ import typeClass from &#x27;ember-bootstrap/utils/cp/type-class&#x27;;
 import overrideableCP from &#x27;ember-bootstrap/utils/cp/overrideable&#x27;;
 import defaultValue from &#x27;ember-bootstrap/utils/default-decorator&#x27;;
 import { macroCondition, getOwnConfig } from &#x27;@embroider/macros&#x27;;
+import deprecateSubclassing from &#x27;ember-bootstrap/utils/deprecate-subclassing&#x27;;
 
 /**
   Implements a HTML button element, with support for all [Bootstrap button CSS styles](http://getbootstrap.com/css/#buttons)
@@ -159,6 +160,8 @@ import { macroCondition, getOwnConfig } from &#x27;@embroider/macros&#x27;;
   You can &#x60;reset&#x60; the state represented by these properties and used for button&#x27;s text by setting &#x60;reset&#x60; property to
   &#x60;true&#x60;.
 
+  *Note that only invoking the component in a template as shown above is considered part of its public API. Extending from it (subclassing) is generally not supported, and may break at any time.*
+
   @class Button
   @namespace Components
   @extends Ember.Component
@@ -166,6 +169,7 @@ import { macroCondition, getOwnConfig } from &#x27;@embroider/macros&#x27;;
 */
 @templateLayout(layout)
 @tagName(&#x27;&#x27;)
+@deprecateSubclassing
 export default class Button extends Component {
   /**
    * Default label of the button. Not need if used as a block component
@@ -580,7 +584,6 @@ export default class Button extends Component {
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.Button.html">Components.Button</a></li>
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.ButtonGroup.html">Components.ButtonGroup</a></li>
             <li class="list-group-item list-group-item-private"><a href="../classes/Components.ButtonGroupButton.html">Components.ButtonGroupButton</a></li>
-            <li class="list-group-item list-group-item-public"><a href="../classes/Components.Carousel.html">Components.Carousel</a></li>
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.CarouselSlide.html">Components.CarouselSlide</a></li>
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.Collapse.html">Components.Collapse</a></li>
             <li class="list-group-item list-group-item-private"><a href="../classes/Components.ContextualHelp.html">Components.ContextualHelp</a></li>

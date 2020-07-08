@@ -70,6 +70,7 @@ import typeClass from &#x27;ember-bootstrap/utils/cp/type-class&#x27;;
 import listenTo from &#x27;ember-bootstrap/utils/cp/listen-to&#x27;;
 import usesTransition from &#x27;ember-bootstrap/utils/cp/uses-transition&#x27;;
 import defaultValue from &#x27;ember-bootstrap/utils/default-decorator&#x27;;
+import deprecateSubclassing from &#x27;ember-bootstrap/utils/deprecate-subclassing&#x27;;
 
 /**
   Implements [Bootstrap alerts](http://getbootstrap.com/components/#alerts)
@@ -85,12 +86,15 @@ import defaultValue from &#x27;ember-bootstrap/utils/default-decorator&#x27;;
   &lt;/BsAlert&gt;
   &#x60;&#x60;&#x60;
 
+  *Note that only invoking the component in a template as shown above is considered part of its public API. Extending from it (subclassing) is generally not supported, and may break at any time.*
+
   @class Alert
   @namespace Components
   @extends Ember.Component
   @public
 */
 @tagName(&#x27;&#x27;)
+@deprecateSubclassing
 @templateLayout(layout)
 export default class Alert extends Component {
   /**
@@ -305,7 +309,6 @@ export default class Alert extends Component {
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.Button.html">Components.Button</a></li>
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.ButtonGroup.html">Components.ButtonGroup</a></li>
             <li class="list-group-item list-group-item-private"><a href="../classes/Components.ButtonGroupButton.html">Components.ButtonGroupButton</a></li>
-            <li class="list-group-item list-group-item-public"><a href="../classes/Components.Carousel.html">Components.Carousel</a></li>
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.CarouselSlide.html">Components.CarouselSlide</a></li>
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.Collapse.html">Components.Collapse</a></li>
             <li class="list-group-item list-group-item-private"><a href="../classes/Components.ContextualHelp.html">Components.ContextualHelp</a></li>

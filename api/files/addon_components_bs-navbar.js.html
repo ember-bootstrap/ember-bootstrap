@@ -69,6 +69,7 @@ import defaultValue from &#x27;ember-bootstrap/utils/default-decorator&#x27;;
 import { assert } from &#x27;@ember/debug&#x27;;
 import { macroCondition, getOwnConfig } from &#x27;@embroider/macros&#x27;;
 import { isBlank } from &#x27;@ember/utils&#x27;;
+import deprecateSubclassing from &#x27;ember-bootstrap/utils/deprecate-subclassing&#x27;;
 
 /**
   Component to generate [Bootstrap navbars](http://getbootstrap.com/components/#navbar).
@@ -157,6 +158,8 @@ import { isBlank } from &#x27;@ember/utils&#x27;;
   Bootstrap 4 navbars are fluid by default without the need for an additional container. An
   additional container is added like with Bootstrap 3 if &#x60;fluid&#x60; is &#x60;false&#x60;.
 
+  *Note that only invoking the component in a template as shown above is considered part of its public API. Extending from it (subclassing) is generally not supported, and may break at any time.*
+
   @class Navbar
   @namespace Components
   @extends Ember.Component
@@ -164,6 +167,7 @@ import { isBlank } from &#x27;@ember/utils&#x27;;
 */
 @templateLayout(layout)
 @tagName(&#x27;&#x27;)
+@deprecateSubclassing
 export default class Navbar extends Component {
   /**
    * Manages the state for the responsive menu between the toggle and the content.
@@ -435,7 +439,6 @@ export default class Navbar extends Component {
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.Button.html">Components.Button</a></li>
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.ButtonGroup.html">Components.ButtonGroup</a></li>
             <li class="list-group-item list-group-item-private"><a href="../classes/Components.ButtonGroupButton.html">Components.ButtonGroupButton</a></li>
-            <li class="list-group-item list-group-item-public"><a href="../classes/Components.Carousel.html">Components.Carousel</a></li>
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.CarouselSlide.html">Components.CarouselSlide</a></li>
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.Collapse.html">Components.Collapse</a></li>
             <li class="list-group-item list-group-item-private"><a href="../classes/Components.ContextualHelp.html">Components.ContextualHelp</a></li>

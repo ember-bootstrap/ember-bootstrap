@@ -80,7 +80,44 @@ the <code>disabled</code> HTML attribute or by setting <code>@preventConcurrency
   disabled={{false}}
 /&gt;
 </code></pre>
-<pre class="code prettyprint"><code class="language-hbs">&lt;BsButton</code></pre>
+<pre class="code prettyprint"><code class="language-hbs">&lt;BsButton
+  @preventConcurrency={{false}}
+/&gt;
+</code></pre>
+<p>The label could be changed automatically according to the state of the promise with <code>@defaultText</code>,
+<code>@pendingText</code>, <code>@fulfilledText</code> and <code>@rejectedText</code> arguments:</p>
+<pre class="code prettyprint"><code class="language-hbs">&lt;BsButton
+  @type="primary"
+  @icon="glyphicon glyphicon-download"
+  @defaultText="Download"
+  @pendingText="Loading..."
+  @fulfilledText="Completed!"
+  @rejectedText="Oups!?"
+  @onClick={{this.download}}
+/&gt;
+</code></pre>
+<pre class="code prettyprint"><code class="language-js">// controller.js
+import { Controller } from '@ember/controller';
+import { action } from '@ember/object';
+
+export default class MyController extends Controller {
+  @action
+  download(value) {
+    return new Promise(...);
+  }
+});
+</code></pre>
+<p>For further customization <code>isPending</code>, <code>isFulfilled</code>, <code>isRejected</code> and <code>isSettled</code> properties are yielded:</p>
+<pre class="code prettyprint"><code class="language-hbs">&lt;BsButton @onClick=(action "download") as |button|&gt;
+  Download
+  {{#if button.isPending}}
+    &lt;span class="loading-spinner"&gt;&lt;/span&gt;
+  {{/if}}
+&lt;/BsButton&gt;
+</code></pre>
+<p>You can <code>reset</code> the state represented by these properties and used for button's text by setting <code>reset</code> property to
+<code>true</code>.</p>
+<p><em>Note that only invoking the component in a template as shown above is considered part of its public API. Extending from it (subclassing) is generally not supported, and may break at any time.</em></p>
 
 
   </div>
@@ -97,7 +134,7 @@ the <code>disabled</code> HTML attribute or by setting <code>@preventConcurrency
           Defined in
         </dt>
         <dd class="col-sm-9">
-          <a href="../files/addon_components_bs-button.js.html#l16"><code>addon&#x2F;components&#x2F;bs-button.js:16</code></a>
+          <a href="../files/addon_components_bs-button.js.html#l17"><code>addon&#x2F;components&#x2F;bs-button.js:17</code></a>
         </dd>
 
     </dl>
@@ -321,7 +358,7 @@ the <code>disabled</code> HTML attribute or by setting <code>@preventConcurrency
                 <div class="meta">
                             <p>
                             Defined in
-                    <a href="../files/addon_components_bs-button.js.html#l429"><code>addon&#x2F;components&#x2F;bs-button.js:429</code></a>
+                    <a href="../files/addon_components_bs-button.js.html#l433"><code>addon&#x2F;components&#x2F;bs-button.js:433</code></a>
                     </p>
             
             
@@ -351,7 +388,7 @@ the <code>disabled</code> HTML attribute or by setting <code>@preventConcurrency
                 <div class="meta">
                             <p>
                             Defined in
-                    <a href="../files/addon_components_bs-button.js.html#l407"><code>addon&#x2F;components&#x2F;bs-button.js:407</code></a>
+                    <a href="../files/addon_components_bs-button.js.html#l411"><code>addon&#x2F;components&#x2F;bs-button.js:411</code></a>
                     </p>
             
             
@@ -384,7 +421,7 @@ the <code>disabled</code> HTML attribute or by setting <code>@preventConcurrency
                   <p><strong>Default:</strong> null</p>
                   <p>
                       Defined in
-                  <a href="../files/addon_components_bs-button.js.html#l152"><code>addon&#x2F;components&#x2F;bs-button.js:152</code></a>
+                  <a href="../files/addon_components_bs-button.js.html#l156"><code>addon&#x2F;components&#x2F;bs-button.js:156</code></a>
               </p>
             
             
@@ -415,7 +452,7 @@ the <code>disabled</code> HTML attribute or by setting <code>@preventConcurrency
                   <p><strong>Default:</strong> false</p>
                   <p>
                       Defined in
-                  <a href="../files/addon_components_bs-button.js.html#l185"><code>addon&#x2F;components&#x2F;bs-button.js:185</code></a>
+                  <a href="../files/addon_components_bs-button.js.html#l189"><code>addon&#x2F;components&#x2F;bs-button.js:189</code></a>
               </p>
             
             
@@ -445,7 +482,7 @@ the <code>disabled</code> HTML attribute or by setting <code>@preventConcurrency
                   <p><strong>Default:</strong> false</p>
                   <p>
                       Defined in
-                  <a href="../files/addon_components_bs-button.js.html#l196"><code>addon&#x2F;components&#x2F;bs-button.js:196</code></a>
+                  <a href="../files/addon_components_bs-button.js.html#l200"><code>addon&#x2F;components&#x2F;bs-button.js:200</code></a>
               </p>
             
             
@@ -476,7 +513,7 @@ the <code>disabled</code> HTML attribute or by setting <code>@preventConcurrency
                   <p><strong>Default:</strong> false</p>
                   <p>
                       Defined in
-                  <a href="../files/addon_components_bs-button.js.html#l208"><code>addon&#x2F;components&#x2F;bs-button.js:208</code></a>
+                  <a href="../files/addon_components_bs-button.js.html#l212"><code>addon&#x2F;components&#x2F;bs-button.js:212</code></a>
               </p>
             
             
@@ -508,7 +545,7 @@ the <code>disabled</code> HTML attribute or by setting <code>@preventConcurrency
                   <p><strong>Default:</strong> &#x27;button&#x27;</p>
                   <p>
                       Defined in
-                  <a href="../files/addon_components_bs-button.js.html#l173"><code>addon&#x2F;components&#x2F;bs-button.js:173</code></a>
+                  <a href="../files/addon_components_bs-button.js.html#l177"><code>addon&#x2F;components&#x2F;bs-button.js:177</code></a>
               </p>
             
             
@@ -537,7 +574,7 @@ the <code>disabled</code> HTML attribute or by setting <code>@preventConcurrency
               <div class="meta">
                   <p>
                       Defined in
-                  <a href="../files/addon_components_bs-button.js.html#l109"><code>addon&#x2F;components&#x2F;bs-button.js:109</code></a>
+                  <a href="../files/addon_components_bs-button.js.html#l113"><code>addon&#x2F;components&#x2F;bs-button.js:113</code></a>
               </p>
             
             
@@ -567,7 +604,7 @@ the <code>disabled</code> HTML attribute or by setting <code>@preventConcurrency
                   <p><strong>Default:</strong> false</p>
                   <p>
                       Defined in
-                  <a href="../files/addon_components_bs-button.js.html#l376"><code>addon&#x2F;components&#x2F;bs-button.js:376</code></a>
+                  <a href="../files/addon_components_bs-button.js.html#l380"><code>addon&#x2F;components&#x2F;bs-button.js:380</code></a>
               </p>
             
             
@@ -596,7 +633,7 @@ the <code>disabled</code> HTML attribute or by setting <code>@preventConcurrency
               <div class="meta">
                   <p>
                       Defined in
-                  <a href="../files/addon_components_bs-button.js.html#l130"><code>addon&#x2F;components&#x2F;bs-button.js:130</code></a>
+                  <a href="../files/addon_components_bs-button.js.html#l134"><code>addon&#x2F;components&#x2F;bs-button.js:134</code></a>
               </p>
             
             
@@ -626,7 +663,7 @@ the <code>disabled</code> HTML attribute or by setting <code>@preventConcurrency
               <div class="meta">
                   <p>
                       Defined in
-                  <a href="../files/addon_components_bs-button.js.html#l240"><code>addon&#x2F;components&#x2F;bs-button.js:240</code></a>
+                  <a href="../files/addon_components_bs-button.js.html#l244"><code>addon&#x2F;components&#x2F;bs-button.js:244</code></a>
               </p>
             
             
@@ -656,7 +693,7 @@ the <code>disabled</code> HTML attribute or by setting <code>@preventConcurrency
               <div class="meta">
                   <p>
                       Defined in
-                  <a href="../files/addon_components_bs-button.js.html#l220"><code>addon&#x2F;components&#x2F;bs-button.js:220</code></a>
+                  <a href="../files/addon_components_bs-button.js.html#l224"><code>addon&#x2F;components&#x2F;bs-button.js:224</code></a>
               </p>
             
             
@@ -685,7 +722,7 @@ the <code>disabled</code> HTML attribute or by setting <code>@preventConcurrency
               <div class="meta">
                   <p>
                       Defined in
-                  <a href="../files/addon_components_bs-button.js.html#l230"><code>addon&#x2F;components&#x2F;bs-button.js:230</code></a>
+                  <a href="../files/addon_components_bs-button.js.html#l234"><code>addon&#x2F;components&#x2F;bs-button.js:234</code></a>
               </p>
             
             
@@ -714,7 +751,7 @@ the <code>disabled</code> HTML attribute or by setting <code>@preventConcurrency
               <div class="meta">
                   <p>
                       Defined in
-                  <a href="../files/addon_components_bs-button.js.html#l304"><code>addon&#x2F;components&#x2F;bs-button.js:304</code></a>
+                  <a href="../files/addon_components_bs-button.js.html#l308"><code>addon&#x2F;components&#x2F;bs-button.js:308</code></a>
               </p>
             
             
@@ -743,7 +780,7 @@ the <code>disabled</code> HTML attribute or by setting <code>@preventConcurrency
               <div class="meta">
                   <p>
                       Defined in
-                  <a href="../files/addon_components_bs-button.js.html#l324"><code>addon&#x2F;components&#x2F;bs-button.js:324</code></a>
+                  <a href="../files/addon_components_bs-button.js.html#l328"><code>addon&#x2F;components&#x2F;bs-button.js:328</code></a>
               </p>
             
             
@@ -772,7 +809,7 @@ the <code>disabled</code> HTML attribute or by setting <code>@preventConcurrency
               <div class="meta">
                   <p>
                       Defined in
-                  <a href="../files/addon_components_bs-button.js.html#l294"><code>addon&#x2F;components&#x2F;bs-button.js:294</code></a>
+                  <a href="../files/addon_components_bs-button.js.html#l298"><code>addon&#x2F;components&#x2F;bs-button.js:298</code></a>
               </p>
             
             
@@ -801,7 +838,7 @@ the <code>disabled</code> HTML attribute or by setting <code>@preventConcurrency
               <div class="meta">
                   <p>
                       Defined in
-                  <a href="../files/addon_components_bs-button.js.html#l314"><code>addon&#x2F;components&#x2F;bs-button.js:314</code></a>
+                  <a href="../files/addon_components_bs-button.js.html#l318"><code>addon&#x2F;components&#x2F;bs-button.js:318</code></a>
               </p>
             
             
@@ -830,7 +867,7 @@ the <code>disabled</code> HTML attribute or by setting <code>@preventConcurrency
               <div class="meta">
                   <p>
                       Defined in
-                  <a href="../files/addon_components_bs-button.js.html#l119"><code>addon&#x2F;components&#x2F;bs-button.js:119</code></a>
+                  <a href="../files/addon_components_bs-button.js.html#l123"><code>addon&#x2F;components&#x2F;bs-button.js:123</code></a>
               </p>
             
             
@@ -861,7 +898,7 @@ the <code>disabled</code> HTML attribute or by setting <code>@preventConcurrency
                   <p><strong>Default:</strong> true</p>
                   <p>
                       Defined in
-                  <a href="../files/addon_components_bs-button.js.html#l265"><code>addon&#x2F;components&#x2F;bs-button.js:265</code></a>
+                  <a href="../files/addon_components_bs-button.js.html#l269"><code>addon&#x2F;components&#x2F;bs-button.js:269</code></a>
               </p>
             
             
@@ -892,7 +929,7 @@ the <code>disabled</code> HTML attribute or by setting <code>@preventConcurrency
               <div class="meta">
                   <p>
                       Defined in
-                  <a href="../files/addon_components_bs-button.js.html#l141"><code>addon&#x2F;components&#x2F;bs-button.js:141</code></a>
+                  <a href="../files/addon_components_bs-button.js.html#l145"><code>addon&#x2F;components&#x2F;bs-button.js:145</code></a>
               </p>
             
             
@@ -922,7 +959,7 @@ the <code>disabled</code> HTML attribute or by setting <code>@preventConcurrency
               <div class="meta">
                   <p>
                       Defined in
-                  <a href="../files/addon_components_bs-button.js.html#l334"><code>addon&#x2F;components&#x2F;bs-button.js:334</code></a>
+                  <a href="../files/addon_components_bs-button.js.html#l338"><code>addon&#x2F;components&#x2F;bs-button.js:338</code></a>
               </p>
             
             
@@ -954,7 +991,7 @@ the <code>disabled</code> HTML attribute or by setting <code>@preventConcurrency
               <div class="meta">
                   <p>
                       Defined in
-                  <a href="../files/addon_components_bs-button.js.html#l348"><code>addon&#x2F;components&#x2F;bs-button.js:348</code></a>
+                  <a href="../files/addon_components_bs-button.js.html#l352"><code>addon&#x2F;components&#x2F;bs-button.js:352</code></a>
               </p>
             
             
@@ -985,7 +1022,7 @@ the <code>disabled</code> HTML attribute or by setting <code>@preventConcurrency
                   <p><strong>Default:</strong> &#x27;default&#x27;</p>
                   <p>
                       Defined in
-                  <a href="../files/addon_components_bs-button.js.html#l279"><code>addon&#x2F;components&#x2F;bs-button.js:279</code></a>
+                  <a href="../files/addon_components_bs-button.js.html#l283"><code>addon&#x2F;components&#x2F;bs-button.js:283</code></a>
               </p>
             
             
@@ -1019,7 +1056,7 @@ the <code>disabled</code> HTML attribute or by setting <code>@preventConcurrency
                   <p><strong>Default:</strong> &#x27;secondary&#x27;</p>
                   <p>
                       Defined in
-                  <a href="../files/addon_components_bs-button.js.html#l363"><code>addon&#x2F;components&#x2F;bs-button.js:363</code></a>
+                  <a href="../files/addon_components_bs-button.js.html#l367"><code>addon&#x2F;components&#x2F;bs-button.js:367</code></a>
               </p>
             
             
@@ -1049,7 +1086,7 @@ the <code>disabled</code> HTML attribute or by setting <code>@preventConcurrency
               <div class="meta">
                   <p>
                       Defined in
-                  <a href="../files/addon_components_bs-button.js.html#l254"><code>addon&#x2F;components&#x2F;bs-button.js:254</code></a>
+                  <a href="../files/addon_components_bs-button.js.html#l258"><code>addon&#x2F;components&#x2F;bs-button.js:258</code></a>
               </p>
             
             
@@ -1081,7 +1118,7 @@ the <code>disabled</code> HTML attribute or by setting <code>@preventConcurrency
                 <div class="meta">
                             <p>
                             Defined in
-                    <a href="../files/addon_components_bs-button.js.html#l390"><code>addon&#x2F;components&#x2F;bs-button.js:390</code></a>
+                    <a href="../files/addon_components_bs-button.js.html#l394"><code>addon&#x2F;components&#x2F;bs-button.js:394</code></a>
                     </p>
             
             
@@ -1138,7 +1175,6 @@ the <code>disabled</code> HTML attribute or by setting <code>@preventConcurrency
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.Button.html">Components.Button</a></li>
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.ButtonGroup.html">Components.ButtonGroup</a></li>
             <li class="list-group-item list-group-item-private"><a href="../classes/Components.ButtonGroupButton.html">Components.ButtonGroupButton</a></li>
-            <li class="list-group-item list-group-item-public"><a href="../classes/Components.Carousel.html">Components.Carousel</a></li>
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.CarouselSlide.html">Components.CarouselSlide</a></li>
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.Collapse.html">Components.Collapse</a></li>
             <li class="list-group-item list-group-item-private"><a href="../classes/Components.ContextualHelp.html">Components.ContextualHelp</a></li>

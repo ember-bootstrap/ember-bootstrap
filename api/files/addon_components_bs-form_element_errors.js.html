@@ -63,6 +63,7 @@ import { layout as templateLayout, tagName } from &#x27;@ember-decorators/compon
 import Component from &#x27;@ember/component&#x27;;
 import layout from &#x27;ember-bootstrap/templates/components/bs-form/element/errors&#x27;;
 import defaultValue from &#x27;ember-bootstrap/utils/default-decorator&#x27;;
+import deprecateSubclassing from &#x27;ember-bootstrap/utils/deprecate-subclassing&#x27;;
 
 /**
  @class FormElementErrors
@@ -72,6 +73,7 @@ import defaultValue from &#x27;ember-bootstrap/utils/default-decorator&#x27;;
  */
 @templateLayout(layout)
 @tagName(&#x27;&#x27;)
+@deprecateSubclassing
 export default class FormElementErrors extends Component {
   /**
    * @property show
@@ -119,7 +121,6 @@ export default class FormElementErrors extends Component {
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.Button.html">Components.Button</a></li>
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.ButtonGroup.html">Components.ButtonGroup</a></li>
             <li class="list-group-item list-group-item-private"><a href="../classes/Components.ButtonGroupButton.html">Components.ButtonGroupButton</a></li>
-            <li class="list-group-item list-group-item-public"><a href="../classes/Components.Carousel.html">Components.Carousel</a></li>
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.CarouselSlide.html">Components.CarouselSlide</a></li>
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.Collapse.html">Components.Collapse</a></li>
             <li class="list-group-item list-group-item-private"><a href="../classes/Components.ContextualHelp.html">Components.ContextualHelp</a></li>

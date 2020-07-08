@@ -64,6 +64,7 @@ import { computed } from &#x27;@ember/object&#x27;;
 import Component from &#x27;@ember/component&#x27;;
 import layout from &#x27;ember-bootstrap/templates/components/bs-nav&#x27;;
 import defaultValue from &#x27;ember-bootstrap/utils/default-decorator&#x27;;
+import deprecateSubclassing from &#x27;ember-bootstrap/utils/deprecate-subclassing&#x27;;
 
 /**
   Component to generate [bootstrap navs](http://getbootstrap.com/components/#nav)
@@ -136,6 +137,8 @@ import defaultValue from &#x27;ember-bootstrap/utils/default-decorator&#x27;;
 
   The &#x60;fill&#x60; styling is only available with Bootstrap 4
 
+  *Note that only invoking the component in a template as shown above is considered part of its public API. Extending from it (subclassing) is generally not supported, and may break at any time.*
+
   @class Nav
   @namespace Components
   @extends Ember.Component
@@ -144,6 +147,7 @@ import defaultValue from &#x27;ember-bootstrap/utils/default-decorator&#x27;;
  */
 @templateLayout(layout)
 @tagName(&#x27;&#x27;)
+@deprecateSubclassing
 export default class Nav extends Component {
   @computed(&#x27;type&#x27;)
   get typeClass() {
@@ -240,7 +244,6 @@ export default class Nav extends Component {
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.Button.html">Components.Button</a></li>
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.ButtonGroup.html">Components.ButtonGroup</a></li>
             <li class="list-group-item list-group-item-private"><a href="../classes/Components.ButtonGroupButton.html">Components.ButtonGroupButton</a></li>
-            <li class="list-group-item list-group-item-public"><a href="../classes/Components.Carousel.html">Components.Carousel</a></li>
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.CarouselSlide.html">Components.CarouselSlide</a></li>
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.Collapse.html">Components.Collapse</a></li>
             <li class="list-group-item list-group-item-private"><a href="../classes/Components.ContextualHelp.html">Components.ContextualHelp</a></li>

@@ -690,7 +690,8 @@ export default class FormElement extends FormGroup {
       this._showValidationOn.indexOf(type) === -1 ||
       // validation should not be shown for this event target
       (isArray(this.doNotShowValidationForEventTargets) &amp;&amp;
-        this.get(&#x27;doNotShowValidationForEventTargets.length&#x27;) &gt; 0 &amp;&amp;
+        this.doNotShowValidationForEventTargets.length &gt; 0 &amp;&amp;
+        this._element &amp;&amp;
         [...this._element.querySelectorAll(this.doNotShowValidationForEventTargets.join(&#x27;,&#x27;))].some((el) =&gt;
           el.contains(target)
         ))
@@ -829,7 +830,7 @@ export default class FormElement extends FormGroup {
    * @type {String}
    * @private
    */
-  @computed(&#x27;formLayout&#x27;, &#x27;controlType&#x27;)
+  @computed(&#x27;controlType&#x27;, &#x27;formComponent&#x27;, &#x27;formLayout&#x27;)
   get layoutComponent() {
     const formComponent = this.formComponent;
     const formLayout = this.formLayout;
@@ -847,7 +848,7 @@ export default class FormElement extends FormGroup {
    * @type {String}
    * @private
    */
-  @computed(&#x27;controlType&#x27;)
+  @computed(&#x27;controlType&#x27;, &#x27;formComponent&#x27;)
   get controlComponent() {
     const formComponent = this.formComponent;
     const controlType = this.controlType;
@@ -1074,7 +1075,6 @@ export default class FormElement extends FormGroup {
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.Button.html">Components.Button</a></li>
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.ButtonGroup.html">Components.ButtonGroup</a></li>
             <li class="list-group-item list-group-item-private"><a href="../classes/Components.ButtonGroupButton.html">Components.ButtonGroupButton</a></li>
-            <li class="list-group-item list-group-item-public"><a href="../classes/Components.Carousel.html">Components.Carousel</a></li>
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.CarouselSlide.html">Components.CarouselSlide</a></li>
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.Collapse.html">Components.Collapse</a></li>
             <li class="list-group-item list-group-item-private"><a href="../classes/Components.ContextualHelp.html">Components.ContextualHelp</a></li>

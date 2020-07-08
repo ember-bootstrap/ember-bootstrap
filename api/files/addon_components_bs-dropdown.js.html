@@ -65,6 +65,7 @@ import Component from &#x27;@ember/component&#x27;;
 import layout from &#x27;ember-bootstrap/templates/components/bs-dropdown&#x27;;
 import defaultValue from &#x27;ember-bootstrap/utils/default-decorator&#x27;;
 import { assert } from &#x27;@ember/debug&#x27;;
+import deprecateSubclassing from &#x27;ember-bootstrap/utils/deprecate-subclassing&#x27;;
 
 const ESCAPE_KEYCODE = 27; // KeyboardEvent.which value for Escape (Esc) key
 const SPACE_KEYCODE = 32; // KeyboardEvent.which value for space key
@@ -225,12 +226,15 @@ const SUPPORTED_KEYCODES = [ESCAPE_KEYCODE, ARROW_DOWN_KEYCODE, ARROW_UP_KEYCODE
   version does. This also allows you to set &#x60;renderInPlace=false&#x60; on the menu component to render it in a wormhole,
   which you might want to do if you experience clipping issues by an outer &#x60;overflow: hidden&#x60; element.
 
+  *Note that only invoking the component in a template as shown above is considered part of its public API. Extending from it (subclassing) is generally not supported, and may break at any time.*
+
   @class Dropdown
   @namespace Components
   @extends Ember.Component
   @public
 s*/
 @tagName(&#x27;&#x27;)
+@deprecateSubclassing
 @templateLayout(layout)
 export default class Dropdown extends Component {
   /**
@@ -294,7 +298,7 @@ export default class Dropdown extends Component {
    * @readonly
    * @private
    */
-  @computed(&#x27;toggleElement&#x27;, &#x27;direction&#x27;)
+  @computed(&#x27;direction&#x27;, &#x27;hasButton&#x27;, &#x27;toggleElement.classList&#x27;)
   get containerClass() {
     if (this.hasButton &amp;&amp; !this.toggleElement.classList.contains(&#x27;btn-block&#x27;)) {
       return this.direction !== &#x27;down&#x27; ? &#x60;btn-group drop${this.direction}&#x60; : &#x27;btn-group&#x27;;
@@ -498,7 +502,6 @@ export default class Dropdown extends Component {
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.Button.html">Components.Button</a></li>
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.ButtonGroup.html">Components.ButtonGroup</a></li>
             <li class="list-group-item list-group-item-private"><a href="../classes/Components.ButtonGroupButton.html">Components.ButtonGroupButton</a></li>
-            <li class="list-group-item list-group-item-public"><a href="../classes/Components.Carousel.html">Components.Carousel</a></li>
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.CarouselSlide.html">Components.CarouselSlide</a></li>
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.Collapse.html">Components.Collapse</a></li>
             <li class="list-group-item list-group-item-private"><a href="../classes/Components.ContextualHelp.html">Components.ContextualHelp</a></li>

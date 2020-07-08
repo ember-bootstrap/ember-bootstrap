@@ -72,6 +72,7 @@ import { task, timeout } from &#x27;ember-concurrency&#x27;;
 import RSVP from &#x27;rsvp&#x27;;
 import defaultValue from &#x27;ember-bootstrap/utils/default-decorator&#x27;;
 import { equal } from &#x27;@ember/object/computed&#x27;;
+import deprecateSubclassing from &#x27;ember-bootstrap/utils/deprecate-subclassing&#x27;;
 
 /**
   Ember implementation of Bootstrap&#x27;s Carousel. Supports all original features but API is partially different:
@@ -116,12 +117,15 @@ import { equal } from &#x27;@ember/object/computed&#x27;;
   | Wrap | wrap slides, cycles without stopping at first or last slide. |
   &#x60;&#x60;&#x60;
 
+  *Note that only invoking the component in a template as shown above is considered part of its public API. Extending from it (subclassing) is generally not supported, and may break at any time.*
+
   @class Carousel
   @namespace Components
   @extends Ember.Component
   @public
 */
 @tagName(&#x27;&#x27;)
+@deprecateSubclassing
 @templateLayout(layout)
 export default class Carousel extends Component.extend(ComponentParent) {
   tabindex = &#x27;1&#x27;;
@@ -153,7 +157,7 @@ export default class Carousel extends Component.extend(ComponentParent) {
    */
   @computed(&#x27;childSlides.length&#x27;, &#x27;wrap&#x27;, &#x27;currentIndex&#x27;)
   get canTurnToRight() {
-    return this.wrap || this.currentIndex &lt; this.get(&#x27;childSlides.length&#x27;) - 1;
+    return this.wrap || this.currentIndex &lt; this.childSlides.length - 1;
   }
 
   /**
@@ -276,7 +280,7 @@ export default class Carousel extends Component.extend(ComponentParent) {
    */
   @computed(&#x27;childSlides.length&#x27;)
   get indicators() {
-    return [...Array(this.get(&#x27;childSlides.length&#x27;))];
+    return [...Array(this.childSlides.length)];
   }
 
   /**
@@ -632,10 +636,7 @@ export default class Carousel extends Component.extend(ComponentParent) {
 
   @action
   handleMouseLeave() {
-    if (
-      this.pauseOnMouseEnter &amp;&amp;
-      (this.get(&#x27;transitioner.last&#x27;) !== null || this.get(&#x27;waitIntervalToInitCycle.last&#x27;) !== null)
-    ) {
+    if (this.pauseOnMouseEnter &amp;&amp; (this.transitioner.last !== null || this.waitIntervalToInitCycle.last !== null)) {
       this.set(&#x27;isMouseHovering&#x27;, false);
       this.waitIntervalToInitCycle.perform();
     }
@@ -719,7 +720,6 @@ export default class Carousel extends Component.extend(ComponentParent) {
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.Button.html">Components.Button</a></li>
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.ButtonGroup.html">Components.ButtonGroup</a></li>
             <li class="list-group-item list-group-item-private"><a href="../classes/Components.ButtonGroupButton.html">Components.ButtonGroupButton</a></li>
-            <li class="list-group-item list-group-item-public"><a href="../classes/Components.Carousel.html">Components.Carousel</a></li>
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.CarouselSlide.html">Components.CarouselSlide</a></li>
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.Collapse.html">Components.Collapse</a></li>
             <li class="list-group-item list-group-item-private"><a href="../classes/Components.ContextualHelp.html">Components.ContextualHelp</a></li>

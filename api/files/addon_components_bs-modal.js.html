@@ -74,6 +74,7 @@ import { guidFor } from &#x27;@ember/object/internals&#x27;;
 import usesTransition from &#x27;ember-bootstrap/utils/cp/uses-transition&#x27;;
 import isFastBoot from &#x27;ember-bootstrap/utils/is-fastboot&#x27;;
 import defaultValue from &#x27;ember-bootstrap/utils/default-decorator&#x27;;
+import deprecateSubclassing from &#x27;ember-bootstrap/utils/deprecate-subclassing&#x27;;
 
 /**
   Component for creating [Bootstrap modals](http://getbootstrap.com/javascript/#modals) with custom markup.
@@ -110,6 +111,8 @@ import defaultValue from &#x27;ember-bootstrap/utils/default-decorator&#x27;;
 
   See the documentation of the [bs-modal-simple](Components.ModalSimple.html) component for further examples.
 
+  *Note that only invoking the component in a template as shown above is considered part of its public API. Extending from it (subclassing) is generally not supported, and may break at any time.*
+
   @class Modal
   @namespace Components
   @extends Ember.Component
@@ -117,6 +120,7 @@ import defaultValue from &#x27;ember-bootstrap/utils/default-decorator&#x27;;
 */
 @templateLayout(layout)
 @tagName(&#x27;&#x27;)
+@deprecateSubclassing
 export default class Modal extends Component {
   @service(&#x27;-document&#x27;)
   document;
@@ -743,7 +747,7 @@ export default class Modal extends Component {
    * @readonly
    * @private
    */
-  @computed
+  @computed(&#x27;modalElement&#x27;)
   get scrollbarWidth() {
     let scrollDiv = document.createElement(&#x27;div&#x27;);
     scrollDiv.className = &#x27;modal-scrollbar-measure&#x27;;
@@ -778,11 +782,8 @@ export default class Modal extends Component {
 
       let existingClasses = document.body.getAttribute(&#x27;class&#x27;) || &#x27;&#x27;;
       if (!existingClasses.includes(&#x27;modal-open&#x27;)) {
-        console.log(&#x27;huhu&#x27;);
-
         document.body.setAttribute(&#x27;class&#x27;, &#x60;modal-open ${existingClasses}&#x60;);
       }
-      console.log(document.body.getAttribute(&#x27;class&#x27;));
     }
   }
 
@@ -829,7 +830,6 @@ export default class Modal extends Component {
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.Button.html">Components.Button</a></li>
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.ButtonGroup.html">Components.ButtonGroup</a></li>
             <li class="list-group-item list-group-item-private"><a href="../classes/Components.ButtonGroupButton.html">Components.ButtonGroupButton</a></li>
-            <li class="list-group-item list-group-item-public"><a href="../classes/Components.Carousel.html">Components.Carousel</a></li>
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.CarouselSlide.html">Components.CarouselSlide</a></li>
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.Collapse.html">Components.Collapse</a></li>
             <li class="list-group-item list-group-item-private"><a href="../classes/Components.ContextualHelp.html">Components.ContextualHelp</a></li>

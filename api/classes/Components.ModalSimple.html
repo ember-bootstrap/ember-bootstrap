@@ -107,6 +107,7 @@ components/templates where it belongs to logically, but to have the actual DOM e
 element, which is a child of ember's root element. This will make sure that modals always overlay the whole app, and
 are not effected by parent elements with <code>overflow: hidden</code> for example.</p>
 <p>If you want the modal to render in place, rather than being wormholed, you can set renderInPlace=true.</p>
+<p><em>Note that only invoking the component in a template as shown above is considered part of its public API. Extending from it (subclassing) is generally not supported, and may break at any time.</em></p>
 
 
   </div>
@@ -123,7 +124,7 @@ are not effected by parent elements with <code>overflow: hidden</code> for examp
           Defined in
         </dt>
         <dd class="col-sm-9">
-          <a href="../files/addon_components_bs-modal-simple.js.html#l6"><code>addon&#x2F;components&#x2F;bs-modal-simple.js:6</code></a>
+          <a href="../files/addon_components_bs-modal-simple.js.html#l7"><code>addon&#x2F;components&#x2F;bs-modal-simple.js:7</code></a>
         </dd>
 
     </dl>
@@ -310,7 +311,7 @@ are not effected by parent elements with <code>overflow: hidden</code> for examp
                   <p><strong>Default:</strong> true</p>
                   <p>
                       Defined in
-                  <a href="../files/addon_components_bs-modal-simple.js.html#l119"><code>addon&#x2F;components&#x2F;bs-modal-simple.js:119</code></a>
+                  <a href="../files/addon_components_bs-modal-simple.js.html#l123"><code>addon&#x2F;components&#x2F;bs-modal-simple.js:123</code></a>
               </p>
             
             
@@ -340,7 +341,7 @@ are not effected by parent elements with <code>overflow: hidden</code> for examp
                   <p><strong>Default:</strong> true</p>
                   <p>
                       Defined in
-                  <a href="../files/addon_components_bs-modal-simple.js.html#l177"><code>addon&#x2F;components&#x2F;bs-modal-simple.js:177</code></a>
+                  <a href="../files/addon_components_bs-modal-simple.js.html#l181"><code>addon&#x2F;components&#x2F;bs-modal-simple.js:181</code></a>
               </p>
             
             
@@ -370,7 +371,7 @@ are not effected by parent elements with <code>overflow: hidden</code> for examp
                   <p><strong>Default:</strong> 150</p>
                   <p>
                       Defined in
-                  <a href="../files/addon_components_bs-modal-simple.js.html#l210"><code>addon&#x2F;components&#x2F;bs-modal-simple.js:210</code></a>
+                  <a href="../files/addon_components_bs-modal-simple.js.html#l214"><code>addon&#x2F;components&#x2F;bs-modal-simple.js:214</code></a>
               </p>
             
             
@@ -400,7 +401,7 @@ are not effected by parent elements with <code>overflow: hidden</code> for examp
                   <p><strong>Default:</strong> true</p>
                   <p>
                       Defined in
-                  <a href="../files/addon_components_bs-modal-simple.js.html#l280"><code>addon&#x2F;components&#x2F;bs-modal-simple.js:280</code></a>
+                  <a href="../files/addon_components_bs-modal-simple.js.html#l284"><code>addon&#x2F;components&#x2F;bs-modal-simple.js:284</code></a>
               </p>
             
             
@@ -430,7 +431,7 @@ are not effected by parent elements with <code>overflow: hidden</code> for examp
                   <p><strong>Default:</strong> &#x27;Ok&#x27;</p>
                   <p>
                       Defined in
-                  <a href="../files/addon_components_bs-modal-simple.js.html#l291"><code>addon&#x2F;components&#x2F;bs-modal-simple.js:291</code></a>
+                  <a href="../files/addon_components_bs-modal-simple.js.html#l295"><code>addon&#x2F;components&#x2F;bs-modal-simple.js:295</code></a>
               </p>
             
             
@@ -460,7 +461,7 @@ are not effected by parent elements with <code>overflow: hidden</code> for examp
                   <p><strong>Default:</strong> true</p>
                   <p>
                       Defined in
-                  <a href="../files/addon_components_bs-modal-simple.js.html#l108"><code>addon&#x2F;components&#x2F;bs-modal-simple.js:108</code></a>
+                  <a href="../files/addon_components_bs-modal-simple.js.html#l112"><code>addon&#x2F;components&#x2F;bs-modal-simple.js:112</code></a>
               </p>
             
             
@@ -490,7 +491,7 @@ are not effected by parent elements with <code>overflow: hidden</code> for examp
                   <p><strong>Default:</strong> true</p>
                   <p>
                       Defined in
-                  <a href="../files/addon_components_bs-modal-simple.js.html#l130"><code>addon&#x2F;components&#x2F;bs-modal-simple.js:130</code></a>
+                  <a href="../files/addon_components_bs-modal-simple.js.html#l134"><code>addon&#x2F;components&#x2F;bs-modal-simple.js:134</code></a>
               </p>
             
             
@@ -520,7 +521,7 @@ are not effected by parent elements with <code>overflow: hidden</code> for examp
                   <p><strong>Default:</strong> null</p>
                   <p>
                       Defined in
-                  <a href="../files/addon_components_bs-modal-simple.js.html#l248"><code>addon&#x2F;components&#x2F;bs-modal-simple.js:248</code></a>
+                  <a href="../files/addon_components_bs-modal-simple.js.html#l252"><code>addon&#x2F;components&#x2F;bs-modal-simple.js:252</code></a>
               </p>
             
             
@@ -549,7 +550,7 @@ are not effected by parent elements with <code>overflow: hidden</code> for examp
               <div class="meta">
                   <p>
                       Defined in
-                  <a href="../files/addon_components_bs-modal-simple.js.html#l233"><code>addon&#x2F;components&#x2F;bs-modal-simple.js:233</code></a>
+                  <a href="../files/addon_components_bs-modal-simple.js.html#l237"><code>addon&#x2F;components&#x2F;bs-modal-simple.js:237</code></a>
               </p>
             
             
@@ -584,7 +585,7 @@ are not effected by parent elements with <code>overflow: hidden</code> for examp
                   <p><strong>Default:</strong> null</p>
                   <p>
                       Defined in
-                  <a href="../files/addon_components_bs-modal-simple.js.html#l258"><code>addon&#x2F;components&#x2F;bs-modal-simple.js:258</code></a>
+                  <a href="../files/addon_components_bs-modal-simple.js.html#l262"><code>addon&#x2F;components&#x2F;bs-modal-simple.js:262</code></a>
               </p>
             
             
@@ -616,7 +617,7 @@ are not effected by parent elements with <code>overflow: hidden</code> for examp
               <div class="meta">
                   <p>
                       Defined in
-                  <a href="../files/addon_components_bs-modal-simple.js.html#l271"><code>addon&#x2F;components&#x2F;bs-modal-simple.js:271</code></a>
+                  <a href="../files/addon_components_bs-modal-simple.js.html#l275"><code>addon&#x2F;components&#x2F;bs-modal-simple.js:275</code></a>
               </p>
             
             
@@ -645,7 +646,7 @@ are not effected by parent elements with <code>overflow: hidden</code> for examp
               <div class="meta">
                   <p>
                       Defined in
-                  <a href="../files/addon_components_bs-modal-simple.js.html#l221"><code>addon&#x2F;components&#x2F;bs-modal-simple.js:221</code></a>
+                  <a href="../files/addon_components_bs-modal-simple.js.html#l225"><code>addon&#x2F;components&#x2F;bs-modal-simple.js:225</code></a>
               </p>
             
             
@@ -678,7 +679,7 @@ are not effected by parent elements with <code>overflow: hidden</code> for examp
                   <p><strong>Default:</strong> true</p>
                   <p>
                       Defined in
-                  <a href="../files/addon_components_bs-modal-simple.js.html#l94"><code>addon&#x2F;components&#x2F;bs-modal-simple.js:94</code></a>
+                  <a href="../files/addon_components_bs-modal-simple.js.html#l98"><code>addon&#x2F;components&#x2F;bs-modal-simple.js:98</code></a>
               </p>
             
             
@@ -710,7 +711,7 @@ are not effected by parent elements with <code>overflow: hidden</code> for examp
                   <p><strong>Default:</strong> &#x27;top&#x27;</p>
                   <p>
                       Defined in
-                  <a href="../files/addon_components_bs-modal-simple.js.html#l141"><code>addon&#x2F;components&#x2F;bs-modal-simple.js:141</code></a>
+                  <a href="../files/addon_components_bs-modal-simple.js.html#l145"><code>addon&#x2F;components&#x2F;bs-modal-simple.js:145</code></a>
               </p>
             
             
@@ -741,7 +742,7 @@ are not effected by parent elements with <code>overflow: hidden</code> for examp
                   <p><strong>Default:</strong> false</p>
                   <p>
                       Defined in
-                  <a href="../files/addon_components_bs-modal-simple.js.html#l188"><code>addon&#x2F;components&#x2F;bs-modal-simple.js:188</code></a>
+                  <a href="../files/addon_components_bs-modal-simple.js.html#l192"><code>addon&#x2F;components&#x2F;bs-modal-simple.js:192</code></a>
               </p>
             
             
@@ -771,7 +772,7 @@ are not effected by parent elements with <code>overflow: hidden</code> for examp
                   <p><strong>Default:</strong> false</p>
                   <p>
                       Defined in
-                  <a href="../files/addon_components_bs-modal-simple.js.html#l153"><code>addon&#x2F;components&#x2F;bs-modal-simple.js:153</code></a>
+                  <a href="../files/addon_components_bs-modal-simple.js.html#l157"><code>addon&#x2F;components&#x2F;bs-modal-simple.js:157</code></a>
               </p>
             
             
@@ -801,7 +802,7 @@ are not effected by parent elements with <code>overflow: hidden</code> for examp
               <div class="meta">
                   <p>
                       Defined in
-                  <a href="../files/addon_components_bs-modal-simple.js.html#l165"><code>addon&#x2F;components&#x2F;bs-modal-simple.js:165</code></a>
+                  <a href="../files/addon_components_bs-modal-simple.js.html#l169"><code>addon&#x2F;components&#x2F;bs-modal-simple.js:169</code></a>
               </p>
             
             
@@ -832,7 +833,7 @@ are not effected by parent elements with <code>overflow: hidden</code> for examp
                   <p><strong>Default:</strong> &#x27;primary&#x27;</p>
                   <p>
                       Defined in
-                  <a href="../files/addon_components_bs-modal-simple.js.html#l302"><code>addon&#x2F;components&#x2F;bs-modal-simple.js:302</code></a>
+                  <a href="../files/addon_components_bs-modal-simple.js.html#l306"><code>addon&#x2F;components&#x2F;bs-modal-simple.js:306</code></a>
               </p>
             
             
@@ -862,7 +863,7 @@ are not effected by parent elements with <code>overflow: hidden</code> for examp
                   <p><strong>Default:</strong> null</p>
                   <p>
                       Defined in
-                  <a href="../files/addon_components_bs-modal-simple.js.html#l313"><code>addon&#x2F;components&#x2F;bs-modal-simple.js:313</code></a>
+                  <a href="../files/addon_components_bs-modal-simple.js.html#l317"><code>addon&#x2F;components&#x2F;bs-modal-simple.js:317</code></a>
               </p>
             
             
@@ -891,7 +892,7 @@ are not effected by parent elements with <code>overflow: hidden</code> for examp
               <div class="meta">
                   <p>
                       Defined in
-                  <a href="../files/addon_components_bs-modal-simple.js.html#l86"><code>addon&#x2F;components&#x2F;bs-modal-simple.js:86</code></a>
+                  <a href="../files/addon_components_bs-modal-simple.js.html#l90"><code>addon&#x2F;components&#x2F;bs-modal-simple.js:90</code></a>
               </p>
             
             
@@ -921,7 +922,7 @@ are not effected by parent elements with <code>overflow: hidden</code> for examp
                   <p><strong>Default:</strong> 300</p>
                   <p>
                       Defined in
-                  <a href="../files/addon_components_bs-modal-simple.js.html#l199"><code>addon&#x2F;components&#x2F;bs-modal-simple.js:199</code></a>
+                  <a href="../files/addon_components_bs-modal-simple.js.html#l203"><code>addon&#x2F;components&#x2F;bs-modal-simple.js:203</code></a>
               </p>
             
             
@@ -960,7 +961,6 @@ are not effected by parent elements with <code>overflow: hidden</code> for examp
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.Button.html">Components.Button</a></li>
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.ButtonGroup.html">Components.ButtonGroup</a></li>
             <li class="list-group-item list-group-item-private"><a href="../classes/Components.ButtonGroupButton.html">Components.ButtonGroupButton</a></li>
-            <li class="list-group-item list-group-item-public"><a href="../classes/Components.Carousel.html">Components.Carousel</a></li>
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.CarouselSlide.html">Components.CarouselSlide</a></li>
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.Collapse.html">Components.Collapse</a></li>
             <li class="list-group-item list-group-item-private"><a href="../classes/Components.ContextualHelp.html">Components.ContextualHelp</a></li>
