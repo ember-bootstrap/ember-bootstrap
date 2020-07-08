@@ -13,6 +13,7 @@ import BsCollapse from 'ember-bootstrap/components/bs-collapse';
 import BsDropdown from 'ember-bootstrap/components/bs-dropdown';
 import BsForm from 'ember-bootstrap/components/bs-form';
 import BsModal from 'ember-bootstrap/components/bs-modal';
+import BsModalSimple from 'ember-bootstrap/components/bs-modal-simple';
 import BsNav from 'ember-bootstrap/components/bs-nav';
 import BsNavbar from 'ember-bootstrap/components/bs-navbar';
 import BsPopover from 'ember-bootstrap/components/bs-popover';
@@ -53,12 +54,10 @@ const tests = [
     name: 'BsForm',
     clazz: BsForm,
   },
-  // As BsModalSimple extends from BsModal itself, the subclassing check is disabled
-  // @todo enable again when https://github.com/kaliber5/ember-bootstrap/issues/1105 is resolved
-  // {
-  //   name: 'BsModalSimple',
-  //   clazz: BsModalSimple,
-  // },
+  {
+    name: 'BsModalSimple',
+    clazz: BsModalSimple,
+  },
   {
     name: 'BsModal',
     clazz: BsModal,
