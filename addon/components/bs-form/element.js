@@ -630,6 +630,7 @@ export default class FormElement extends FormGroup {
       // validation should not be shown for this event target
       (isArray(this.doNotShowValidationForEventTargets) &&
         this.get('doNotShowValidationForEventTargets.length') > 0 &&
+        this._element &&
         [...this._element.querySelectorAll(this.doNotShowValidationForEventTargets.join(','))].some((el) =>
           el.contains(target)
         ))

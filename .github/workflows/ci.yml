@@ -53,6 +53,7 @@ jobs:
     needs:
       - test
     strategy:
+      fail-fast: false
       matrix:
         command:
           - ember test
