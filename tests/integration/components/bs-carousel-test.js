@@ -2,7 +2,7 @@ import hbs from 'htmlbars-inline-precompile';
 import { module } from 'qunit';
 import { render, click, triggerEvent, getContext } from '@ember/test-helpers';
 import { setupRenderingTest } from 'ember-qunit';
-import { test, testBS3, testBS4, delay } from '../../helpers/bootstrap-test';
+import { test, testBS3, testBS4, delay } from '../../helpers/bootstrap';
 import { skip } from 'qunit';
 import setupNoDeprecations from '../../helpers/setup-no-deprecations';
 import a11yAudit from 'ember-a11y-testing/test-support/audit';

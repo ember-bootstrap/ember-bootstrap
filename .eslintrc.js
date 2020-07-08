@@ -23,7 +23,9 @@ module.exports = {
     'ember/no-classic-classes': 'error',
     'ember/require-tagless-components': 'error',
     'ember/no-observers': 'warn',
+    'ember/no-mixins': 'warn',
     'hbs/check-hbs-template-literals': 'error',
+    'no-setter-return': 'off', // computed setters may return a value!
   },
   overrides: [
     // node files
@@ -51,9 +53,7 @@ module.exports = {
         node: true,
       },
       plugins: ['node'],
-      rules: Object.assign({}, require('eslint-plugin-node').configs.recommended.rules, {
-        // add your custom rules and overrides for node files here
-      }),
+      extends: ['plugin:node/recommended'],
     },
   ],
 };

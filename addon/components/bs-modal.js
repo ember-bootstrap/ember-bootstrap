@@ -686,7 +686,7 @@ export default class Modal extends Component {
    * @readonly
    * @private
    */
-  @computed
+  @computed('modalElement')
   get scrollbarWidth() {
     let scrollDiv = document.createElement('div');
     scrollDiv.className = 'modal-scrollbar-measure';

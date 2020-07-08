@@ -9,7 +9,7 @@ import {
   defaultButtonClass,
   visibilityClass,
   testRequiringTransitions,
-} from '../../helpers/bootstrap-test';
+} from '../../helpers/bootstrap';
 import hbs from 'htmlbars-inline-precompile';
 import setupNoDeprecations from '../../helpers/setup-no-deprecations';
 import a11yAudit from 'ember-a11y-testing/test-support/audit';

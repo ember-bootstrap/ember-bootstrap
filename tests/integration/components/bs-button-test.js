@@ -3,7 +3,7 @@ import { defer, reject, resolve } from 'rsvp';
 import { module, skip } from 'qunit';
 import { setupRenderingTest } from 'ember-qunit';
 import { find, render, click, settled, waitUntil } from '@ember/test-helpers';
-import { test, testBS4, defaultButtonClass } from '../../helpers/bootstrap-test';
+import { test, testBS4, defaultButtonClass } from '../../helpers/bootstrap';
 import { gte } from 'ember-compatibility-helpers';
 import hbs from 'htmlbars-inline-precompile';
 import setupNoDeprecations from '../../helpers/setup-no-deprecations';

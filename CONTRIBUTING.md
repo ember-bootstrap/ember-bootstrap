@@ -63,7 +63,7 @@ This addon uses TravisCI to run a [ember-try](https://github.com/ember-cli/ember
 containing separate test runs for Bootstrap 3 and 4. By default all tests will run for both versions. 
 
 To also accommodate for different testing requirements based on the Bootstrap version, there exist some testing
-helpers in [tests/helpers/bootstrap-test.js](tests/helpers/bootstrap-test.js). In particular if you need a 
+helpers in [tests/helpers/bootstrap.js](tests/helpers/bootstrap.js). In particular if you need a 
 different test for a specific Bootstrap version, you can use one of `testBS3()` or `testBS4()` as a replacement
 for the usual QUnit `test()` function, which will only be used in a test run for that specific version.
 

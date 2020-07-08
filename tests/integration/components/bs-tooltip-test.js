@@ -11,7 +11,7 @@ import {
   tooltipPositionClass,
   tooltipArrowClass,
   delay,
-} from '../../helpers/bootstrap-test';
+} from '../../helpers/bootstrap';
 import { setupForPositioning, assertPositioning } from '../../helpers/contextual-help';
 import setupStylesheetSupport from '../../helpers/setup-stylesheet-support';
 import setupNoDeprecations from '../../helpers/setup-no-deprecations';

@@ -73,7 +73,7 @@ export default class DropdownMenu extends Component {
    * @type boolean
    * @private
    */
-  @computed('renderInPlace')
+  @computed('destinationElement', 'renderInPlace')
   get _renderInPlace() {
     return this.renderInPlace || !this.destinationElement;
   }

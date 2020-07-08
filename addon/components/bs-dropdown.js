@@ -237,7 +237,7 @@ export default class Dropdown extends Component {
    * @readonly
    * @private
    */
-  @computed('toggleElement', 'direction')
+  @computed('direction', 'hasButton', 'toggleElement.classList')
   get containerClass() {
     if (this.hasButton && !this.toggleElement.classList.contains('btn-block')) {
       return this.direction !== 'down' ? `btn-group drop${this.direction}` : 'btn-group';

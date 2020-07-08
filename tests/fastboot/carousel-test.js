@@ -1,7 +1,7 @@
 import { module } from 'qunit';
 import { setup, visit /* mockServer */ } from 'ember-cli-fastboot-testing/test-support';
 import setupFastBootRootElement from '../helpers/setup-fastboot';
-import { testBS3, testBS4 } from '../helpers/bootstrap-test';
+import { testBS3, testBS4 } from '../helpers/bootstrap';
 
 module('FastBoot | carousel', function (hooks) {
   setup(hooks);

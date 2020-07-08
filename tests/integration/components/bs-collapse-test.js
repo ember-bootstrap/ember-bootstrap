@@ -2,7 +2,7 @@ import { module } from 'qunit';
 import { setupRenderingTest } from 'ember-qunit';
 import { waitFor, render, settled } from '@ember/test-helpers';
 import hbs from 'htmlbars-inline-precompile';
-import { test, visibilityClass, delay } from '../../helpers/bootstrap-test';
+import { test, visibilityClass, delay } from '../../helpers/bootstrap';
 import setupNoDeprecations from '../../helpers/setup-no-deprecations';
 import a11yAudit from 'ember-a11y-testing/test-support/audit';
 import { skipTransition } from 'ember-bootstrap/utils/transition-end';

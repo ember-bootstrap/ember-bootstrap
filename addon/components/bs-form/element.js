@@ -629,7 +629,7 @@ export default class FormElement extends FormGroup {
       this._showValidationOn.indexOf(type) === -1 ||
       // validation should not be shown for this event target
       (isArray(this.doNotShowValidationForEventTargets) &&
-        this.get('doNotShowValidationForEventTargets.length') > 0 &&
+        this.doNotShowValidationForEventTargets.length > 0 &&
         this._element &&
         [...this._element.querySelectorAll(this.doNotShowValidationForEventTargets.join(','))].some((el) =>
           el.contains(target)
@@ -769,7 +769,7 @@ export default class FormElement extends FormGroup {
    * @type {String}
    * @private
    */
-  @computed('formLayout', 'controlType')
+  @computed('controlType', 'formComponent', 'formLayout')
   get layoutComponent() {
     const formComponent = this.formComponent;
     const formLayout = this.formLayout;
@@ -787,7 +787,7 @@ export default class FormElement extends FormGroup {
    * @type {String}
    * @private
    */
-  @computed('controlType')
+  @computed('controlType', 'formComponent')
   get controlComponent() {
     const formComponent = this.formComponent;
     const controlType = this.controlType;

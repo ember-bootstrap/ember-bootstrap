@@ -96,7 +96,7 @@ export default class Carousel extends Component.extend(ComponentParent) {
    */
   @computed('childSlides.length', 'wrap', 'currentIndex')
   get canTurnToRight() {
-    return this.wrap || this.currentIndex < this.get('childSlides.length') - 1;
+    return this.wrap || this.currentIndex < this.childSlides.length - 1;
   }
 
   /**
@@ -219,7 +219,7 @@ export default class Carousel extends Component.extend(ComponentParent) {
    */
   @computed('childSlides.length')
   get indicators() {
-    return [...Array(this.get('childSlides.length'))];
+    return [...Array(this.childSlides.length)];
   }
 
   /**
@@ -575,10 +575,7 @@ export default class Carousel extends Component.extend(ComponentParent) {
 
   @action
   handleMouseLeave() {
-    if (
-      this.pauseOnMouseEnter &&
-      (this.get('transitioner.last') !== null || this.get('waitIntervalToInitCycle.last') !== null)
-    ) {
+    if (this.pauseOnMouseEnter && (this.transitioner.last !== null || this.waitIntervalToInitCycle.last !== null)) {
       this.set('isMouseHovering', false);
       this.waitIntervalToInitCycle.perform();
     }

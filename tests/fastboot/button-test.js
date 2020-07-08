@@ -1,7 +1,7 @@
 import { module, test } from 'qunit';
 import { setup, visit /* mockServer */ } from 'ember-cli-fastboot-testing/test-support';
 import setupFastBootRootElement from '../helpers/setup-fastboot';
-import { defaultButtonClass } from '../helpers/bootstrap-test';
+import { defaultButtonClass } from '../helpers/bootstrap';
 
 module('FastBoot | button', function (hooks) {
   setup(hooks);

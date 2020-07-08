@@ -250,7 +250,7 @@ export default class ContextualHelp extends Component {
     if (!triggerElement) {
       return this._parent;
     } else if (triggerElement === 'parentView') {
-      return this.get('parentView.element');
+      return this.parentView.element;
     } else {
       return document.querySelector(triggerElement);
     }
@@ -303,7 +303,7 @@ export default class ContextualHelp extends Component {
    * @type boolean
    * @private
    */
-  @computed('renderInPlace')
+  @computed('destinationElement', 'renderInPlace')
   get _renderInPlace() {
     return this.renderInPlace || !this.destinationElement;
   }
@@ -443,7 +443,7 @@ export default class ContextualHelp extends Component {
       this.inState.set(eventType, false);
     }
 
-    if (this.get('inState.showHelp')) {
+    if (this.inState.showHelp) {
       return;
     }
 
@@ -476,7 +476,7 @@ export default class ContextualHelp extends Component {
   toggle(e) {
     if (e) {
       this.inState.toggleProperty('click');
-      if (this.get('inState.showHelp')) {
+      if (this.inState.showHelp) {
         this.enter();
       } else {
         this.leave();

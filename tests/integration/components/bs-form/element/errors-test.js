@@ -2,7 +2,7 @@ import { A } from '@ember/array';
 import { module } from 'qunit';
 import { setupRenderingTest } from 'ember-qunit';
 import { render } from '@ember/test-helpers';
-import { formFeedbackClass, test } from '../../../../helpers/bootstrap-test';
+import { formFeedbackClass, test } from '../../../../helpers/bootstrap';
 import hbs from 'htmlbars-inline-precompile';
 import setupNoDeprecations from '../../../../helpers/setup-no-deprecations';
 

@@ -1,7 +1,7 @@
 import { module, test } from 'qunit';
 import { setup, visit } from 'ember-cli-fastboot-testing/test-support';
 import setupFastBootRootElement from '../helpers/setup-fastboot';
-import { visibilityClass } from '../helpers/bootstrap-test';
+import { visibilityClass } from '../helpers/bootstrap';
 
 module('FastBoot | modal', function (hooks) {
   setup(hooks);
