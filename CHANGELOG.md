@@ -1,3 +1,17 @@
+## v4.0.0-rc.3 (2020-07-08)
+
+#### Bug Fixes
+* [#1142](https://github.com/kaliber5/ember-bootstrap/pull/1142) Fix subclassing deprecation, causing exceptions in BsModalSimple and BsNav ([@simonihmig](https://github.com/simonihmig))
+
+#### Internal
+* [#1140](https://github.com/kaliber5/ember-bootstrap/pull/1140) Update Ember and dependencies ([@simonihmig](https://github.com/simonihmig))
+* [#1143](https://github.com/kaliber5/ember-bootstrap/pull/1143) Fix failing beta/canary tests ([@simonihmig](https://github.com/simonihmig))
+* [#1126](https://github.com/kaliber5/ember-bootstrap/pull/1126) Reenable Embroider tests ([@simonihmig](https://github.com/simonihmig))
+
+#### Committers: 2
+- Simon Ihmig ([@simonihmig](https://github.com/simonihmig))
+- [@dependabot-preview[bot]](https://github.com/apps/dependabot-preview)
+
 ## v4.0.0-rc.2 (2020-06-15)
 
 #### :boom: Breaking Change
