@@ -72,7 +72,7 @@
     "@glimmer/component": "^1.0.1",
     "@glimmer/tracking": "^1.0.1",
     "babel-eslint": "^10.1.0",
-    "bootstrap": "^4.5.0",
+    "bootstrap": "^4.5.2",
     "bootstrap-sass": "^3.3.7",
     "broccoli-asset-rev": "^3.0.0",
     "chai": "^4.0.0",
