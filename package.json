@@ -59,7 +59,7 @@
     "ember-in-element-polyfill": "^1.0.0",
     "ember-on-helper": "^0.1.0",
     "ember-popper": "^0.11.2",
-    "ember-ref-modifier": "^1.0.1",
+    "ember-ref-bucket": "^0.0.4",
     "ember-style-modifier": "^0.6.0",
     "findup-sync": "^4.0.0",
     "fs-extra": "^9.0.1",
