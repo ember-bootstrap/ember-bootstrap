@@ -11,6 +11,7 @@ import FormGroup from 'ember-bootstrap/components/bs-form/group';
 import defaultValue from 'ember-bootstrap/utils/default-decorator';
 import { macroCondition, getOwnConfig } from '@embroider/macros';
 import { guidFor } from '@ember/object/internals';
+import { ref } from 'ember-ref-bucket';
 
 const nonDefaultLayouts = A(['checkbox']);
 
@@ -198,6 +199,12 @@ const nonDefaultLayouts = A(['checkbox']);
 */
 @templateLayout(layout)
 export default class FormElement extends FormGroup {
+  /**
+   * @property _element
+   * @type null | HTMLElement
+   */
+  @ref('_element') _element = null;
+
   @defaultValue
   doNotShowValidationForEventTargets = macroCondition(getOwnConfig().isBS3)
     ? ['.input-group-addon', '.input-group-btn']

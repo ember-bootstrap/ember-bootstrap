@@ -12,7 +12,7 @@
       ...attributes
       {{did-insert @registerChildElement "menu"}}
       {{will-destroy @unregisterChildElement "menu"}}
-      {{ref this "menuElement"}}
+      {{ref "menuElement"}}
     >
       {{yield
         (hash
@@ -41,7 +41,7 @@
         ...attributes
         {{did-insert @registerChildElement "menu"}}
         {{will-destroy @unregisterChildElement "menu"}}
-        {{ref this "menuElement"}}
+        {{ref "menuElement"}}
       >
         {{yield
           (hash
