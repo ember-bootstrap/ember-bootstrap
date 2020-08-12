@@ -2,7 +2,7 @@
   class="tab-pane {{if (macroCondition (macroGetOwnConfig "isBS4")) (if this.showContent "show")}} {{if (macroCondition (macroGetOwnConfig "isBS3")) (if this.showContent "in")}} {{if this.active "active"}} {{if this.usesTransition "fade"}}"
   role="tabpanel"
   ...attributes
-  {{ref "_element"}}
+  {{ref "mainNode"}}
 >
   {{yield}}
 </div>

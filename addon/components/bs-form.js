@@ -11,7 +11,6 @@ import defaultValue from 'ember-bootstrap/utils/default-decorator';
 import { macroCondition, getOwnConfig } from '@embroider/macros';
 import { DEBUG } from '@glimmer/env';
 import deprecateSubclassing from 'ember-bootstrap/utils/deprecate-subclassing';
-import { ref } from 'ember-ref-bucket';
 
 /**
   Render a form with the appropriate Bootstrap layout class (see `formLayout`).
@@ -117,12 +116,6 @@ import { ref } from 'ember-ref-bucket';
 @tagName('')
 @deprecateSubclassing
 export default class Form extends Component {
-  /**
-   * @property _element
-   * @type null | HTMLElement
-   */
-  @ref('_element') _element = null;
-
   /**
    * Bootstrap form class name (computed)
    *

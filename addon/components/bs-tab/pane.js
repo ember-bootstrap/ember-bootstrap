@@ -30,7 +30,7 @@ export default class TabPane extends Component.extend(ComponentChild) {
    * @property id
    * @type null | HTMLElement
    */
-  @ref('_element') _element = null;
+  @ref('mainNode') _element = null;
   /**
    * @property id
    * @type string

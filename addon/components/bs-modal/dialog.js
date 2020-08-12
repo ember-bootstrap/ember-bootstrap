@@ -24,7 +24,7 @@ export default class ModalDialog extends Component {
    * @property id
    * @type null | HTMLElement
    */
-  @ref('_element') _element = null;
+  @ref('mainNode') _element = null;
 
   @readOnly('titleId')
   ariaLabelledby;

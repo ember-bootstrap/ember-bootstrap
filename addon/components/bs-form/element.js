@@ -203,7 +203,7 @@ export default class FormElement extends FormGroup {
    * @property _element
    * @type null | HTMLElement
    */
-  @ref('_element') _element = null;
+  @ref('mainNode') _element = null;
 
   @defaultValue
   doNotShowValidationForEventTargets = macroCondition(getOwnConfig().isBS3)

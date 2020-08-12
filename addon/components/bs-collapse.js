@@ -42,7 +42,7 @@ export default class Collapse extends Component {
    * @property _element
    * @type null | HTMLElement
    */
-  @ref('_element') _element = null;
+  @ref('mainNode') _element = null;
 
   /**
    * Collapsed/expanded state

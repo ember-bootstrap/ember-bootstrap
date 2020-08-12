@@ -1,7 +1,7 @@
 <div
   class="{{if this.collapse "collapse"}} {{if this.collapsing "collapsing"}} {{if this.showContent (if (macroCondition (macroGetOwnConfig "isBS4")) "show" "in")}}"
   ...attributes
-  {{ref "_element"}}
+  {{ref "mainNode"}}
   {{style this.cssStyle}}
 >
   {{yield}}
