@@ -147,7 +147,7 @@ export default class TabPane extends Component.extend(ComponentChild) {
   show() {
     if (this.usesTransition) {
       if (!this._element) {
-        // _element is initially set by `{{ref}}` which happens in next run loop, so can be undefined here.
+        // _element is initially set by `{{create-ref}}` which happens in next run loop, so can be undefined here.
         this.setProperties({
           active: true,
           showContent: true,
