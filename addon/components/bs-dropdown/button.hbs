@@ -1,12 +1,11 @@
 <button
   disabled={{this.__disabled}}
   type={{this.buttonType}}
-  title={{this.title}}
-  aria-expanded={{this.ariaExpanded}}
-  class="btn dropdown-toggle {{if this.active "active"}} {{if this.block "btn-block"}} {{this.sizeClass}} {{this.typeClass}}"
+  aria-expanded={{if @isOpen "true" "false"}}
+  class="btn dropdown-toggle {{if @active "active"}} {{if this.block "btn-block"}} {{bs-size-class "btn" @size}} {{bs-type-class "btn" @type default=(if (macroCondition (macroGetOwnConfig "isBS3")) "default" "secondary") outline=@outline}}"
   ...attributes
   {{on "click" this.handleClick}}
-  {{on "keydown" this.handleKeyDown}}
+  {{on "keydown" @onKeyDown}}
   {{did-insert @registerChildElement "toggle"}}
   {{will-destroy @unregisterChildElement "toggle"}}
 >
@@ -18,5 +17,4 @@
       isSettled=this.isSettled
     )
   }}
-
 </button>
