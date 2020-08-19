@@ -10,6 +10,7 @@ import usesTransition from 'ember-bootstrap/utils/cp/uses-transition';
 import defaultValue from 'ember-bootstrap/utils/default-decorator';
 import { guidFor } from '@ember/object/internals';
 import deprecateSubclassing from 'ember-bootstrap/utils/deprecate-subclassing';
+import { ref } from 'ember-ref-bucket';
 
 /**
  The tab pane of a tab component.
@@ -25,6 +26,11 @@ import deprecateSubclassing from 'ember-bootstrap/utils/deprecate-subclassing';
 @deprecateSubclassing
 @templateLayout(layout)
 export default class TabPane extends Component.extend(ComponentChild) {
+  /**
+   * @property id
+   * @type null | HTMLElement
+   */
+  @ref('mainNode') _element = null;
   /**
    * @property id
    * @type string
@@ -141,7 +147,7 @@ export default class TabPane extends Component.extend(ComponentChild) {
   show() {
     if (this.usesTransition) {
       if (!this._element) {
-        // _element is initially set by `{{ref}}` which happens in next run loop, so can be undefined here.
+        // _element is initially set by `{{create-ref}}` which happens in next run loop, so can be undefined here.
         this.setProperties({
           active: true,
           showContent: true,

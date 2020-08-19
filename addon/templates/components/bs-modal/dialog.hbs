@@ -9,7 +9,7 @@
   {{on "mouseup" this.handleMouseUp}}
   {{on "click" this.handleClick}}
   {{style paddingLeft=(concat @paddingLeft "px") paddingRight=(concat @paddingRight "px") display=(if @inDom "block" "")}}
-  {{ref this "_element"}}
+  {{create-ref "mainNode"}}
   {{did-insert this.getOrSetTitleId}}
   {{did-insert this.setInitialFocus}}
 >

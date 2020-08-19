@@ -2,7 +2,7 @@
 <div
   class="form-group {{if this.disabled "disabled"}} {{if this.required "is-required"}} {{if this.isValidating "is-validating"}} {{if (macroCondition (macroGetOwnConfig "isBS3")) this.validationClass}} {{if (macroCondition (macroGetOwnConfig "isBS3")) (if this.hasFeedback "has-feedback")}} {{if (macroCondition (macroGetOwnConfig "isBS3")) this.sizeClass}} {{if (macroCondition (macroGetOwnConfig "isBS4")) (if this.isHorizontal "row")}}"
   ...attributes
-  {{ref this "_element"}}
+  {{create-ref "mainNode"}}
   {{on "focusout" this.showValidationOnHandler}}
   {{on "change" this.showValidationOnHandler}}
   {{on "input" this.showValidationOnHandler}}
