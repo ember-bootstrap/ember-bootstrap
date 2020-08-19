@@ -6,7 +6,6 @@ import hbs from 'htmlbars-inline-precompile';
 import setupNoDeprecations from '../../helpers/setup-no-deprecations';
 import BsAccordion from 'ember-bootstrap/components/bs-accordion';
 import BsAlert from 'ember-bootstrap/components/bs-alert';
-import BsButtonGroup from 'ember-bootstrap/components/bs-button-group';
 import BsCarousel from 'ember-bootstrap/components/bs-carousel';
 import BsCollapse from 'ember-bootstrap/components/bs-collapse';
 import BsDropdown from 'ember-bootstrap/components/bs-dropdown';
@@ -28,10 +27,6 @@ const tests = [
   {
     name: 'BsAlert',
     clazz: BsAlert,
-  },
-  {
-    name: 'BsButtonGroup',
-    clazz: BsButtonGroup,
   },
   {
     name: 'BsCarousel',
