@@ -456,17 +456,13 @@ export default class Form extends Component {
   }
 
   @action
-  handleKeyPress(e) {
-    let code = e.keyCode || e.which;
+  handleKeyPress(event) {
+    let code = event.keyCode || event.which;
     if (code === 13 && this.submitOnEnter) {
-      this.triggerSubmit();
+      let submitEvent = document.createEvent('Event');
+      submitEvent.initEvent('submit', true, true);
+      event.target.dispatchEvent(submitEvent);
     }
-  }
-
-  triggerSubmit() {
-    let event = document.createEvent('Event');
-    event.initEvent('submit', true, true);
-    this._element.dispatchEvent(event);
   }
 
   init() {
