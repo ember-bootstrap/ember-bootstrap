@@ -1,6 +1,6 @@
 import { tracked } from '@glimmer/tracking';
 import { action } from '@ember/object';
-import { equal, or } from '@ember/object/computed';
+import { equal, or } from 'macro-decorators';
 import { warn } from '@ember/debug';
 import Component from '@glimmer/component';
 import arg from 'ember-bootstrap/utils/decorators/arg';
