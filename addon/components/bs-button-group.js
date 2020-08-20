@@ -2,6 +2,7 @@ import { action } from '@ember/object';
 import Component from '@glimmer/component';
 import { isArray } from '@ember/array';
 import arg from 'ember-bootstrap/utils/decorators/arg';
+import deprecateSubclassing from 'ember-bootstrap/utils/deprecate-subclassing';
 
 /**
   Bootstrap-style button group, that visually groups buttons, and optionally adds radio/checkbox like behaviour.
@@ -61,6 +62,7 @@ import arg from 'ember-bootstrap/utils/decorators/arg';
   @extends Glimmer.Component
   @public
 */
+@deprecateSubclassing
 export default class ButtonGroup extends Component {
   /**
    * @property buttonComponent

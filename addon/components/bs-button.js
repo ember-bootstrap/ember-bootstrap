@@ -1,8 +1,11 @@
 import { tracked } from '@glimmer/tracking';
 import { action } from '@ember/object';
 import { equal, or } from '@ember/object/computed';
+import { warn } from '@ember/debug';
 import Component from '@glimmer/component';
 import arg from 'ember-bootstrap/utils/decorators/arg';
+import deprecateSubclassing from 'ember-bootstrap/utils/deprecate-subclassing';
+import { DEBUG } from '@glimmer/env';
 
 /**
   Implements a HTML button element, with support for all [Bootstrap button CSS styles](http://getbootstrap.com/css/#buttons)
@@ -96,6 +99,7 @@ import arg from 'ember-bootstrap/utils/decorators/arg';
   @extends Glimmer.Component
   @public
 */
+@deprecateSubclassing
 export default class Button extends Component {
   /**
    * Default label of the button. Not need if used as a block component
@@ -400,6 +404,41 @@ export default class Button extends Component {
 
     if (!this.args.bubble) {
       e.stopPropagation();
+    }
+  }
+
+  constructor() {
+    super(...arguments);
+
+    // deprecate arguments used for attribute bindings only
+    if (DEBUG) {
+      [
+        // ['buttonType:type', 'submit'],
+        ['disabled', true],
+        ['title', 'foo'],
+      ].forEach(([mapping, value]) => {
+        let argument = mapping.split(':')[0];
+        let attribute = mapping.includes(':') ? mapping.split(':')[1] : argument;
+        let warningMessage =
+          `Argument ${argument} of <BsButton> component has been removed. Its only purpose ` +
+          `was setting the HTML attribute ${attribute} of the control element. You should use ` +
+          `angle bracket component invocation syntax instead:\n` +
+          `Before:\n` +
+          `  {{bs-button ${attribute}=${typeof value === 'string' ? `"${value}"` : value}}}\n` +
+          `  <BsButton @${attribute}=${typeof value === 'string' ? `"${value}"` : `{{${value}}}`} />\n` +
+          `After:\n` +
+          `  <BsButton ${typeof value === 'boolean' ? attribute : `${attribute}="${value}"`} />\n` +
+          `A codemod is available to help with the required migration. See https://github.com/kaliber5/ember-bootstrap-codemods/blob/master/transforms/deprecated-attribute-arguments/README.md`;
+
+        warn(
+          warningMessage,
+          // eslint-disable-next-line ember/no-attrs-in-components
+          !Object.keys(this.args).includes(argument),
+          {
+            id: `ember-bootstrap.removed-argument.button#${argument}`,
+          }
+        );
+      });
     }
   }
 }
