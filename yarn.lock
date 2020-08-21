@@ -987,17 +987,17 @@
     ember-cli-htmlbars-inline-precompile "^2.1.0"
     ember-test-waiters "^1.1.1"
 
-"@embroider/core@0.20.0":
-  version "0.20.0"
-  resolved "https://registry.yarnpkg.com/@embroider/core/-/core-0.20.0.tgz#8df099c95c241a25dbbd3a08ec500961883e82b5"
-  integrity sha512-1QolXRo1XWiuv3Vw0ImK2RIfALt1oDvsqKGeOOehG/Skru5EJQt3iWMF9RFNvOTNc/jf7W7FSPOQftTAxcr2Sg==
+"@embroider/core@0.21.0":
+  version "0.21.0"
+  resolved "https://registry.yarnpkg.com/@embroider/core/-/core-0.21.0.tgz#1dea8a49b46208bbaada24fcb5d16f380898963c"
+  integrity sha512-UHhPEyC6NaLLU6nol4ulREnS90WSQLavd+UY976aJFKXaFPHxunIE59dtUTB6QvS8bZdxM5u61QTsVmSXZpfng==
   dependencies:
     "@babel/core" "^7.8.7"
     "@babel/parser" "^7.8.7"
     "@babel/plugin-syntax-dynamic-import" "^7.8.3"
     "@babel/traverse" "^7.8.6"
     "@babel/types" "^7.8.7"
-    "@embroider/macros" "0.20.0"
+    "@embroider/macros" "0.21.0"
     assert-never "^1.1.0"
     babel-plugin-syntax-dynamic-import "^6.18.0"
     broccoli-persistent-filter "^2.2.2"
@@ -1056,15 +1056,15 @@
     typescript-memoize "^1.0.0-alpha.3"
     walk-sync "^1.1.3"
 
-"@embroider/macros@0.20.0", "@embroider/macros@^0.20.0":
-  version "0.20.0"
-  resolved "https://registry.yarnpkg.com/@embroider/macros/-/macros-0.20.0.tgz#530bcfc81d0ff69485308abaf1d2468a343962bd"
-  integrity sha512-6V21YX7QEB7vApcxJNuE6MItS41Rug1PklQvI7USxY1N26dXz1wmSHFTG1kcIx9Nbn6Y+vEVyD1Z37kPZGzYEA==
+"@embroider/macros@0.21.0", "@embroider/macros@^0.21.0":
+  version "0.21.0"
+  resolved "https://registry.yarnpkg.com/@embroider/macros/-/macros-0.21.0.tgz#e9ea44313b0f505aae47f8f954b081c8e54c062a"
+  integrity sha512-6bQgT95D60WIdfgcs2MWXUhTNH85i/xH3+IJIwE5LkPs/+a+xbVcMO1r4SGckZvPSmdyGfj3KQjSE/caKtGwKA==
   dependencies:
     "@babel/core" "^7.8.7"
     "@babel/traverse" "^7.8.6"
     "@babel/types" "^7.8.7"
-    "@embroider/core" "0.20.0"
+    "@embroider/core" "0.21.0"
     assert-never "^1.1.0"
     ember-cli-babel "^7.20.5"
     lodash "^4.17.10"
