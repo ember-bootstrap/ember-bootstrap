@@ -1,3 +1,17 @@
+## v4.0.1 (2020-08-21)
+
+#### Bug Fixes
+* [#1183](https://github.com/kaliber5/ember-bootstrap/pull/1183) Avoid using ref modifier in form ([@basz](https://github.com/basz))
+
+#### Internal
+* [#1182](https://github.com/kaliber5/ember-bootstrap/pull/1182) Replace ember-ref-modifier to ember-ref-bucket ([@lifeart](https://github.com/lifeart))
+
+#### Committers: 4
+- Alex Kanunnikov ([@lifeart](https://github.com/lifeart))
+- Bas Kamer ([@basz](https://github.com/basz))
+- Simon Ihmig ([@simonihmig](https://github.com/simonihmig))
+- [@dependabot-preview[bot]](https://github.com/apps/dependabot-preview)
+
 ## v4.0.0 (2020-08-04)
 
 ## v4.0.0-rc.3 (2020-07-08)
