@@ -99,7 +99,11 @@ module('Integration | Component | bs-form/element', function (hooks) {
       await setValueFn.call(this.element.querySelector(selector), value);
     } else {
       await fillIn(selector, value);
-      // this.$(selector).val(value).change();
+      // somehow this blur was required to make tests pass in Ember 3.22 canary, as the showValidationOnHandler event handler was called (on "focusout")
+      // when clearing the render, where the following `this.set('showOwnValidation', true);` would cause an obscure error:
+      // ERROR: Uncaught Error: Assertion Failed: You attempted to update `showOwnValidation` on `<FormElement:ember1760>`, but it had already been used previously in the same computation.
+      // @todo check if we can remove this again when the upstream issue has been sorted out
+      await blur(selector);
     }
     assert.equal(this.model.name, oldValue, `${controlType} value has not changed`);
     assert.ok(
@@ -489,6 +493,7 @@ module('Integration | Component | bs-form/element', function (hooks) {
     );
     this.set('errors', A([]));
     await fillIn('.addon input', 'foo');
+    await blur('.addon input');
     await triggerEvent('.addon input', 'change');
     assert.equal(
       this.element.querySelector('.addon .form-control-feedback').style.right,
