@@ -286,9 +286,14 @@ export default class FormElement extends FormGroup {
   }
 
   set value(value) {
-    assert('You cannot set both property and value on a form element', isBlank(this.property));
-
     this._value = value;
+  }
+
+  get twoWayBoundValue() {
+    return this.value;
+  }
+  set twoWayBoundValue(value) {
+    this.doChange(value);
   }
 
   /**
@@ -875,10 +880,18 @@ export default class FormElement extends FormGroup {
 
   init() {
     super.init(...arguments);
+
     if (this.showValidationOn === null) {
       this.set('showValidationOn', ['focusOut']);
     }
+
     if (!isBlank(this.property)) {
+      assert(
+        'You cannot set both property and value on a form element',
+        // eslint-disable-next-line ember/no-attrs-in-components
+        !Object.keys(this.attrs).includes('value')
+      );
+
       this.setupValidations();
     }
 

@@ -415,6 +415,26 @@ module('Integration | Component | bs-form/element', function (hooks) {
     assert.dom('#control input[type=text]').exists({ count: 1 }, 'control component is yielded');
   });
 
+  test('Yielded value is writeable', async function (assert) {
+    let model = { name: '' };
+    this.set('model', model);
+
+    await render(hbs`
+      <BsForm @model={{this.model}} as |form|>
+        <form.element @property="name" as |el|>
+          <input
+            type="text"
+            value={{el.value}}
+            {{on "change" (action (mut el.value) value="target.value")}}
+          />
+        </form.element>
+      </BsForm>
+    `);
+
+    await fillIn('input', 'Klara');
+    assert.equal(model.name, 'Klara');
+  });
+
   test('required property propagates', async function (assert) {
     await render(hbs`<BsForm::Element @label="myLabel" @required={{true}} />`);
     assert.dom('.form-group').hasClass('is-required', 'component has is-required class');
