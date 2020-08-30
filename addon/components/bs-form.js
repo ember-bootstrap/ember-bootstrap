@@ -32,7 +32,16 @@ import deprecateSubclassing from 'ember-bootstrap/utils/deprecate-subclassing';
 
   ### Submitting the form
 
-  When the form is submitted (e.g. by clicking a submit button), the event will be intercepted and the `onSubmit` action
+  The form yields a `submitButton` component, which is a preconfigured `<BsButton>` with `@type="primary"` and `@buttonType="submit"`.
+  The button is disabled while a form submission is pending. Additionally the button state is bound to the form submission state.
+
+  ```hbs
+  <BsForm as |form|>
+    <form.submitButton>Submit</form.submitButton>
+  </BsForm>
+  ```
+
+  When the form is submitted (e.g. by clicking the submit button), the event will be intercepted and the `onSubmit` action
   will be sent to the controller or parent component.
   In case the form supports validation (see "Form validation" below), the `onBefore` action is called (which allows you to
   do e.g. model data normalization), then the available validation rules are evaluated, and if those fail, the `onInvalid`
@@ -51,7 +60,7 @@ import deprecateSubclassing from 'ember-bootstrap/utils/deprecate-subclassing';
     <form.element @controlType="email" @label="Email" @placeholder="Email" @property="email" />
     <form.element @controlType="password" @label="Password" @placeholder="Password" @property="password" />
     <form.element @controlType="checkbox" @label="Remember me" @property="rememberMe" />
-    <BsButton @defaultText="Submit" @type="primary" @buttonType="submit" />
+    <form.submitButton>Submit</form.submitButton>
   </BsForm>
   ```
 
@@ -82,28 +91,34 @@ import deprecateSubclassing from 'ember-bootstrap/utils/deprecate-subclassing';
   ### Submission state
 
   A `isSubmitting` property is yielded, which is `true` after submit has been triggered and before the Promise returned
-  by `onSubmit` is fulfilled. It could be used to disable form's submit button and showing a loading spinner for example:
+  by `onSubmit` is fulfilled. It could be used to show a loading spinner instead of the form while it's submitting for example:
 
   ```hbs
   <BsForm @onSubmit={{action "save"}} as |form|>
-    <BsButton @buttonType="submit" @disabled={{form.isSubmitting}}>
-      Save
-      {{#if form.isSubmitting}} {{fa-icon "spinner"}} {{/if}}
-    </BsButton>
+    {{#if form.isSubmitting}}
+      <FaIcon @icon="spinner" />
+    {{else}}
+      <form.element @property="email" @label="email" />
+      <form.element @property="password" @label="password" @controlType="password" />
+      <form.submitButton>Login</form.submitButton>
+    {{/if}}
   </BsForm>
   ```
 
   Additionaly `isSubmitted` and `isRejected` properties are yielded. `isSubmitted` is `true` if last submission was successful.
   `isRejected` is `true` if last submission was rejected due to validation errors or by an action bound to `onSubmit` event, returning a rejected promise.
-  Both are reset as soon as any value of a form element changes. It could be used for visual feedback about last submission:
+  It could be used for visual feedback about last submission:
 
   ```hbs
   <BsForm @onSubmit={{action 'save}} as |form|>
-    <BsButton @buttonType="submit" @type={{if form.isRejected "danger" "primary"}}>
+    <form.submitButton @type={{if form.isRejected "danger" "primary"}}>
       Save
-    </BsButton>
+    </form.submitButton>
   </BsForm>
   ```
+
+  The submission state is reset as soon as any value of a form element changes. Additionally it can be reset programatically by
+  calling the yielded `resetSubmissionState` function.
 
   *Note that only invoking the component in a template as shown above is considered part of its public API. Extending from it (subclassing) is generally not supported, and may break at any time.*
 
