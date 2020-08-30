@@ -23,6 +23,7 @@ import hbs from 'htmlbars-inline-precompile';
 import setupNoDeprecations from '../../../helpers/setup-no-deprecations';
 import { gte } from 'ember-compatibility-helpers';
 import sinon from 'sinon';
+import { tracked } from '@glimmer/tracking';
 
 const formLayouts = ['vertical', 'horizontal', 'inline'];
 
@@ -391,12 +392,11 @@ module('Integration | Component | bs-form/element', function (hooks) {
   });
 
   test('Custom controls are supported', async function (assert) {
-    this.set(
-      'model',
-      EmberObject.create({
-        gender: 'male',
-      })
-    );
+    let model = new (class {
+      @tracked gender = 'male';
+    })();
+
+    this.set('model', model);
     await render(hbs`
       <BsForm @model={{model}} as |form|>
         <form.element
@@ -424,6 +424,16 @@ module('Integration | Component | bs-form/element', function (hooks) {
     assert.dom('input').hasAttribute('id', { any: true }, 'id is yielded to block template');
     assert.dom('input').hasClass('success', 'validation status is yielded to block template');
     assert.dom('textarea').exists({ count: 1 }, 'control component is yielded');
+
+    await fillIn('input', 'female');
+    assert.equal(model.gender, 'female', 'yielded setValue function updates property of model');
+    assert.dom('input').hasValue('female', 'yielded value is updated with setValue function');
+    assert.dom('textarea').hasValue('female', 'value of yielded control component is updated');
+
+    await fillIn('textarea', 'diverse');
+    assert.equal(model.gender, 'diverse', 'yielded control component updates property of model');
+    assert.dom('input').hasValue('diverse', 'yielded value is updated if changed through control component');
+    assert.dom('textarea').hasValue('diverse', 'value of yielded control component is updated');
   });
 
   test('required property propagates', async function (assert) {
