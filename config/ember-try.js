@@ -6,7 +6,6 @@ const bootstrapVersion = process.env.BOOTSTRAPVERSION === '3' ? '^3.4.1' : '^4.3
 module.exports = async function () {
   return {
     useYarn: true,
-    command: 'ember test --filter !FastBoot',
     scenarios: [
       {
         name: 'ember-lts-3.16',
