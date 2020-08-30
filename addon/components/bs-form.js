@@ -196,6 +196,14 @@ export default class Form extends Component {
   groupComponent = 'bs-form/group';
 
   /**
+   * @property submitButtonComponent
+   * @type {String}
+   * @private
+   */
+  @defaultValue
+  submitButtonComponent = 'bs-button';
+
+  /**
    * `isSubmitting` is `true` after `submit` event has been triggered and until Promise returned by `onSubmit` is
    * fulfilled. If `validate` returns a Promise that one is also taken into consideration.
    *
@@ -237,6 +245,29 @@ export default class Form extends Component {
    */
   @defaultValue
   isRejected = false;
+
+  /**
+   * State of the form expressed as state values expected by `<BsButton>`.
+   *
+   * @property submitButtonState
+   * @type {String}
+   * @private
+   */
+  get submitButtonState() {
+    if (this.isSubmitting) {
+      return 'pending';
+    }
+
+    if (this.isSubmitted) {
+      return 'fulfilled';
+    }
+
+    if (this.isRejected) {
+      return 'rejected';
+    }
+
+    return 'default';
+  }
 
   /**
    * Count of pending submissions.
