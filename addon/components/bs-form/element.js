@@ -74,7 +74,7 @@ const nonDefaultLayouts = A(['checkbox']);
   ```hbs
   <BsForm @model={{this}} @onSubmit={{action "submit"}} as |form|>
     <form.element @label="Select-2" @property="gender" @useIcons={{false}} as |el|>
-      <PikadayInput @value={{el.value}} @onSelection={{action (mut el.value)}} id={{el.id}} />
+      <PikadayInput @value={{el.value}} @onSelection={{action el.setValue}} id={{el.id}} />
     </form.element>
   </BsForm>
   ```
@@ -83,6 +83,7 @@ const nonDefaultLayouts = A(['checkbox']);
   * `control`: the component that would be used for rendering the form control based on the given `controlType`
   * `id`: id to be used for the form control, so it matches the labels `for` attribute
   * `value`: the value of the form element
+  * `setValue`: function to change the value of the form element
   * `validation`: the validation state of the element, `null` if no validation is to be shown, otherwise 'success', 'error' or 'warning'
 
   If your custom control does not render an input element, you should set `useIcons` to `false` since bootstrap only supports
