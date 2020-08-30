@@ -5780,7 +5780,7 @@ ember-cli-htmlbars@^4.2.0, ember-cli-htmlbars@^4.3.1:
     strip-bom "^4.0.0"
     walk-sync "^2.0.2"
 
-ember-cli-htmlbars@^5.1.0, ember-cli-htmlbars@^5.1.2, ember-cli-htmlbars@^5.2.0:
+ember-cli-htmlbars@^5.1.0, ember-cli-htmlbars@^5.1.2, ember-cli-htmlbars@^5.3.1:
   version "5.3.1"
   resolved "https://registry.yarnpkg.com/ember-cli-htmlbars/-/ember-cli-htmlbars-5.3.1.tgz#61793964fc2599ce750db9e972ab55c6dd177c48"
   integrity sha512-ZjQTt44euDoqLvUkWbt1svgNCXgLzOztEbc2qqYMQvhQig416LMrWK7l3SSbNU+BtLD5UIxmwvLfF1tsO2CVyA==
@@ -6263,13 +6263,13 @@ ember-raf-scheduler@^0.1.0:
   dependencies:
     ember-cli-babel "^6.6.0"
 
-ember-ref-bucket@^1.0.0:
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/ember-ref-bucket/-/ember-ref-bucket-1.0.0.tgz#e310388d8ec698c3686b4350275af28d05481599"
-  integrity sha512-Kfnzx9XMiiyDGFxFCVH9VWfLMFBRlxgimdB1PKfx9zQUmNkiiM+N1MOXCN3CnDyJ+Azbfz6SCPcOuOEPuYWTxA==
+ember-ref-bucket@^1.0.1:
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/ember-ref-bucket/-/ember-ref-bucket-1.0.1.tgz#e0287c1209fc255d8bfa2cc35f11e64ddc438114"
+  integrity sha512-mHnCkcBJn4KUM5bUin0GWhyOtjFzzDBy7VKfoZ6PypkXLhP3vw479OL89sm9x4mTKWZ8e173GnjwyRiWZkWAiw==
   dependencies:
-    ember-cli-babel "^7.21.0"
-    ember-cli-htmlbars "^5.2.0"
+    ember-cli-babel "^7.22.1"
+    ember-cli-htmlbars "^5.3.1"
     ember-destroyable-polyfill "^2.0.1"
 
 ember-resolver@^8.0.2:
