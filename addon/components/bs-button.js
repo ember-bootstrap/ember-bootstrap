@@ -328,7 +328,7 @@ export default class Button extends Component {
   /**
    * Promise returned by `onClick` event has been succeeded or rejected.
    *
-   * @property isFulfilled
+   * @property isSettled
    * @type Boolean
    * @private
    */
