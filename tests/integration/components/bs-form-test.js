@@ -1021,24 +1021,30 @@ module('Integration | Component | bs-form', function (hooks) {
           </BsForm>
         `);
         assert.dom('button[type="submit"]').hasNoText();
+        assert.dom('button[type="submit"]').hasNoAttribute('disabled');
 
         await submitForm();
         assert.dom('button[type="submit"]').hasText('isPending');
+        assert.dom('button[type="submit"]').hasAttribute('disabled', '');
 
         deferredSubmitAction.resolve();
         await settled();
         assert.dom('button[type="submit"]').hasText('isFulfilled isSettled');
+        assert.dom('button[type="submit"]').hasNoAttribute('disabled');
 
         deferredSubmitAction = defer();
         await click('button[type="button"]');
         assert.dom('button[type="submit"]').hasNoText();
+        assert.dom('button[type="submit"]').hasNoAttribute('disabled');
 
         await submitForm();
         assert.dom('button[type="submit"]').hasText('isPending');
+        assert.dom('button[type="submit"]').hasAttribute('disabled', '');
 
         deferredSubmitAction.reject();
         await settled();
         assert.dom('button[type="submit"]').hasText('isRejected isSettled');
+        assert.dom('button[type="submit"]').hasNoAttribute('disabled');
       });
     });
   });
