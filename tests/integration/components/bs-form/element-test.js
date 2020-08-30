@@ -399,20 +399,31 @@ module('Integration | Component | bs-form/element', function (hooks) {
     );
     await render(hbs`
       <BsForm @model={{model}} as |form|>
-        <form.element @label="Gender" @property="gender" @showAllValidations={{true}} @hasValidator={{true}} as |el|>
-          <div id="value">{{el.value}}</div>
-          <div id="id">{{el.id}}</div>
-          <div id="validation">{{el.validation}}</div>
-          <div id="control">{{el.control}}</div>
+        <form.element
+          @controlType="textarea"
+          @label="Gender"
+          @property="gender"
+          @showAllValidations={{true}}
+          @hasValidator={{true}}
+          as |el|
+        >
+          <input
+            type="text"
+            id={{el.id}}
+            value={{el.value}}
+            class={{el.validation}}
+            {{on "input" (action el.setValue value="target.value")}}
+          >
+          <el.control />
         </form.element>
       </BsForm>
     `);
 
-    assert.dom('#value').exists({ count: 1 }, 'block template is rendered');
-    assert.dom('#value').hasText('male', 'value is yielded to block template');
-    assert.dom('#id').hasAnyText('id is yielded to block template');
-    assert.dom('#validation').hasText('success');
-    assert.dom('#control input[type=text]').exists({ count: 1 }, 'control component is yielded');
+    assert.dom('input').exists({ count: 1 }, 'block template is rendered');
+    assert.dom('input').hasValue('male', 'value is yielded to block template');
+    assert.dom('input').hasAttribute('id', { any: true }, 'id is yielded to block template');
+    assert.dom('input').hasClass('success', 'validation status is yielded to block template');
+    assert.dom('textarea').exists({ count: 1 }, 'control component is yielded');
   });
 
   test('required property propagates', async function (assert) {
