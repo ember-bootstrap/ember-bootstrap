@@ -804,15 +804,17 @@ module('Integration | Component | bs-form', function (hooks) {
     await render(hbs`
       <BsForm @onSubmit={{action "submit"}} @model={{hash }} as |form|>
         <input onchange={{form.resetSubmissionState}}>
-        <button type="submit" class={{if form.isSubmitted "is-submitted"}}>submit</button>
+        {{#if form.isSubmitting}}isSubmitting{{/if}}
+        {{#if form.isSubmitted}}isSubmitted{{/if}}
+        {{#if form.isRejected}}isRejected{{/if}}
       </BsForm>
     `);
 
     await triggerEvent('form', 'submit');
-    assert.dom('form button').hasClass('is-submitted', 'assumption');
+    assert.dom('form').hasText('isSubmitted');
 
     await fillIn('input', 'bar');
-    assert.dom('form button').doesNotHaveClass('is-submitted');
+    assert.dom('form').hasNoText();
   });
 
   test("Adds default onChange action to form elements that updates model's property", async function (assert) {
@@ -953,5 +955,97 @@ module('Integration | Component | bs-form', function (hooks) {
 
     await a11yAudit();
     assert.ok(true, 'A11y audit passed');
+  });
+
+  module('yielded submitButton', function () {
+    test('it yields submitButton component', async function (assert) {
+      await render(hbs`
+        <BsForm as |form|>
+          <form.submitButton />
+        </BsForm>
+      `);
+
+      assert.dom('form button').exists('yielded submitButton component renders a button element');
+      assert.dom('form button').hasAttribute('type', 'submit', 'its type is submit');
+      assert.dom('form button').hasClass('btn-primary', 'its a primary button by default');
+    });
+
+    test('click yielded submitButton component submits the form', async function (assert) {
+      this.set('submitHandler', () => {
+        assert.step('@onSubmit action is exected');
+      });
+
+      await render(hbs`
+        <BsForm @onSubmit={{this.submitHandler}} as |form|>
+          <form.submitButton />
+        </BsForm>
+      `);
+      await click('button');
+      assert.verifySteps(['@onSubmit action is exected']);
+    });
+
+    ['submitted via event', 'submitted via yielded submitButton'].forEach((scenario) => {
+      async function submitForm() {
+        switch (scenario) {
+          case 'submitted via event':
+            await triggerEvent('form', 'submit');
+            break;
+
+          case 'submitted via yielded submitButton':
+            await click('button');
+            break;
+
+          default:
+            throw new Error('scenario is not supported');
+        }
+      }
+
+      test(`state of yielded submitButton component is bound to form submission state if ${scenario}`, async function (assert) {
+        let deferredSubmitAction = defer();
+
+        this.set('resetTrigger', false);
+        this.set('submitHandler', () => {
+          return deferredSubmitAction.promise;
+        });
+
+        await render(hbs`
+          <BsForm @onSubmit={{this.submitHandler}} as |form|>
+            <form.submitButton as |button|>
+              {{#if button.isPending}}isPending{{/if}}
+              {{#if button.isFulfilled}}isFulfilled{{/if}}
+              {{#if button.isRejected}}isRejected{{/if}}
+              {{#if button.isSettled}}isSettled{{/if}}
+            </form.submitButton>
+            <button type="button" {{on "click" form.resetSubmissionState}}>
+            </button>
+          </BsForm>
+        `);
+        assert.dom('button[type="submit"]').hasNoText();
+        assert.dom('button[type="submit"]').hasNoAttribute('disabled');
+
+        await submitForm();
+        assert.dom('button[type="submit"]').hasText('isPending');
+        assert.dom('button[type="submit"]').hasAttribute('disabled', '');
+
+        deferredSubmitAction.resolve();
+        await settled();
+        assert.dom('button[type="submit"]').hasText('isFulfilled isSettled');
+        assert.dom('button[type="submit"]').hasNoAttribute('disabled');
+
+        deferredSubmitAction = defer();
+        await click('button[type="button"]');
+        assert.dom('button[type="submit"]').hasNoText();
+        assert.dom('button[type="submit"]').hasNoAttribute('disabled');
+
+        await submitForm();
+        assert.dom('button[type="submit"]').hasText('isPending');
+        assert.dom('button[type="submit"]').hasAttribute('disabled', '');
+
+        deferredSubmitAction.reject();
+        await settled();
+        assert.dom('button[type="submit"]').hasText('isRejected isSettled');
+        assert.dom('button[type="submit"]').hasNoAttribute('disabled');
+      });
+    });
   });
 });
