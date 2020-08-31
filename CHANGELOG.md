@@ -32,7 +32,7 @@
 
 #### :boom: Breaking Change
 * [#1104](https://github.com/kaliber5/ember-bootstrap/pull/1104) Remove support for subclassing component classes  ([@simonihmig](https://github.com/simonihmig))
-* [#1097](https://github.com/kaliber5/ember-bootstrap/pull/1097) Remove leftover two-way binding of form element's `@value` argument ([@basz](https://github.com/basz))
+* [#1097](https://github.com/kaliber5/ember-bootstrap/pull/1097) Remove leftover two-way binding of form element's `@value` argument and yielded `value` ([@basz](https://github.com/basz))
 * [#1106](https://github.com/kaliber5/ember-bootstrap/pull/1106) Refactor BsModalSimple to not extend from BsModal ([@simonihmig](https://github.com/simonihmig))
 
 #### Features
