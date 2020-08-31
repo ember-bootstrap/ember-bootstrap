@@ -96,7 +96,8 @@ import deprecateSubclassing from 'ember-bootstrap/utils/deprecate-subclassing';
   ```hbs
   <BsForm @onSubmit={{action "save"}} as |form|>
     {{#if form.isSubmitting}}
-      <FaIcon @icon="spinner" />
+      <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+      Logging in...
     {{else}}
       <form.element @property="email" @label="email" />
       <form.element @property="password" @label="password" @controlType="password" />
