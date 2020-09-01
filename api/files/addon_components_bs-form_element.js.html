@@ -72,6 +72,7 @@ import FormGroup from &#x27;ember-bootstrap/components/bs-form/group&#x27;;
 import defaultValue from &#x27;ember-bootstrap/utils/default-decorator&#x27;;
 import { macroCondition, getOwnConfig } from &#x27;@embroider/macros&#x27;;
 import { guidFor } from &#x27;@ember/object/internals&#x27;;
+import { ref } from &#x27;ember-ref-bucket&#x27;;
 
 const nonDefaultLayouts = A([&#x27;checkbox&#x27;]);
 
@@ -134,7 +135,7 @@ const nonDefaultLayouts = A([&#x27;checkbox&#x27;]);
   &#x60;&#x60;&#x60;hbs
   &lt;BsForm @model={{this}} @onSubmit={{action &quot;submit&quot;}} as |form|&gt;
     &lt;form.element @label=&quot;Select-2&quot; @property=&quot;gender&quot; @useIcons={{false}} as |el|&gt;
-      &lt;PikadayInput @value={{el.value}} @onSelection={{action (mut el.value)}} id={{el.id}} /&gt;
+      &lt;PikadayInput @value={{el.value}} @onSelection={{action el.setValue}} id={{el.id}} /&gt;
     &lt;/form.element&gt;
   &lt;/BsForm&gt;
   &#x60;&#x60;&#x60;
@@ -143,6 +144,7 @@ const nonDefaultLayouts = A([&#x27;checkbox&#x27;]);
   * &#x60;control&#x60;: the component that would be used for rendering the form control based on the given &#x60;controlType&#x60;
   * &#x60;id&#x60;: id to be used for the form control, so it matches the labels &#x60;for&#x60; attribute
   * &#x60;value&#x60;: the value of the form element
+  * &#x60;setValue&#x60;: function to change the value of the form element
   * &#x60;validation&#x60;: the validation state of the element, &#x60;null&#x60; if no validation is to be shown, otherwise &#x27;success&#x27;, &#x27;error&#x27; or &#x27;warning&#x27;
 
   If your custom control does not render an input element, you should set &#x60;useIcons&#x60; to &#x60;false&#x60; since bootstrap only supports
@@ -259,6 +261,12 @@ const nonDefaultLayouts = A([&#x27;checkbox&#x27;]);
 */
 @templateLayout(layout)
 export default class FormElement extends FormGroup {
+  /**
+   * @property _element
+   * @type null | HTMLElement
+   */
+  @ref(&#x27;mainNode&#x27;) _element = null;
+
   @defaultValue
   doNotShowValidationForEventTargets = macroCondition(getOwnConfig().isBS3)
     ? [&#x27;.input-group-addon&#x27;, &#x27;.input-group-btn&#x27;]

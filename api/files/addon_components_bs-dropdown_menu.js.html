@@ -67,6 +67,7 @@ import { next } from &#x27;@ember/runloop&#x27;;
 import { getDestinationElement } from &#x27;ember-bootstrap/utils/dom&#x27;;
 import defaultValue from &#x27;ember-bootstrap/utils/default-decorator&#x27;;
 import deprecateSubclassing from &#x27;ember-bootstrap/utils/deprecate-subclassing&#x27;;
+import { ref } from &#x27;ember-ref-bucket&#x27;;
 
 /**
  Component for the dropdown menu.
@@ -82,6 +83,12 @@ import deprecateSubclassing from &#x27;ember-bootstrap/utils/deprecate-subclassi
 @tagName(&#x27;&#x27;)
 @deprecateSubclassing
 export default class DropdownMenu extends Component {
+  /**
+   * @property _element
+   * @type null | HTMLElement
+   */
+  @ref(&#x27;menuElement&#x27;) menuElement = null;
+
   /**
    * @property ariaRole
    * @default menu

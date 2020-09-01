@@ -68,6 +68,7 @@ import { next } from &#x27;@ember/runloop&#x27;;
 import overrideableCP from &#x27;ember-bootstrap/utils/cp/overrideable&#x27;;
 import { addObserver } from &#x27;@ember/object/observers&#x27;;
 import deprecateSubclassing from &#x27;ember-bootstrap/utils/deprecate-subclassing&#x27;;
+import { ref } from &#x27;ember-ref-bucket&#x27;;
 
 /**
   A visible user-defined slide.
@@ -83,6 +84,12 @@ import deprecateSubclassing from &#x27;ember-bootstrap/utils/deprecate-subclassi
 @deprecateSubclassing
 @templateLayout(layout)
 export default class CarouselSlide extends Component.extend(ComponentChild) {
+  /**
+   * @property _element
+   * @type null | HTMLElement
+   */
+  @ref(&#x27;mainNode&#x27;) _element = null;
+
   /**
    * Defines slide visibility.
    *

@@ -93,7 +93,16 @@ import deprecateSubclassing from &#x27;ember-bootstrap/utils/deprecate-subclassi
 
   ### Submitting the form
 
-  When the form is submitted (e.g. by clicking a submit button), the event will be intercepted and the &#x60;onSubmit&#x60; action
+  The form yields a &#x60;submitButton&#x60; component, which is a preconfigured &#x60;&lt;BsButton&gt;&#x60; with &#x60;@type=&quot;primary&quot;&#x60; and &#x60;@buttonType=&quot;submit&quot;&#x60;.
+  The button is disabled while a form submission is pending. Additionally the button state is bound to the form submission state.
+
+  &#x60;&#x60;&#x60;hbs
+  &lt;BsForm as |form|&gt;
+    &lt;form.submitButton&gt;Submit&lt;/form.submitButton&gt;
+  &lt;/BsForm&gt;
+  &#x60;&#x60;&#x60;
+
+  When the form is submitted (e.g. by clicking the submit button), the event will be intercepted and the &#x60;onSubmit&#x60; action
   will be sent to the controller or parent component.
   In case the form supports validation (see &quot;Form validation&quot; below), the &#x60;onBefore&#x60; action is called (which allows you to
   do e.g. model data normalization), then the available validation rules are evaluated, and if those fail, the &#x60;onInvalid&#x60;
@@ -112,7 +121,7 @@ import deprecateSubclassing from &#x27;ember-bootstrap/utils/deprecate-subclassi
     &lt;form.element @controlType=&quot;email&quot; @label=&quot;Email&quot; @placeholder=&quot;Email&quot; @property=&quot;email&quot; /&gt;
     &lt;form.element @controlType=&quot;password&quot; @label=&quot;Password&quot; @placeholder=&quot;Password&quot; @property=&quot;password&quot; /&gt;
     &lt;form.element @controlType=&quot;checkbox&quot; @label=&quot;Remember me&quot; @property=&quot;rememberMe&quot; /&gt;
-    &lt;BsButton @defaultText=&quot;Submit&quot; @type=&quot;primary&quot; @buttonType=&quot;submit&quot; /&gt;
+    &lt;form.submitButton&gt;Submit&lt;/form.submitButton&gt;
   &lt;/BsForm&gt;
   &#x60;&#x60;&#x60;
 
@@ -143,28 +152,35 @@ import deprecateSubclassing from &#x27;ember-bootstrap/utils/deprecate-subclassi
   ### Submission state
 
   A &#x60;isSubmitting&#x60; property is yielded, which is &#x60;true&#x60; after submit has been triggered and before the Promise returned
-  by &#x60;onSubmit&#x60; is fulfilled. It could be used to disable form&#x27;s submit button and showing a loading spinner for example:
+  by &#x60;onSubmit&#x60; is fulfilled. It could be used to show a loading spinner instead of the form while it&#x27;s submitting for example:
 
   &#x60;&#x60;&#x60;hbs
   &lt;BsForm @onSubmit={{action &quot;save&quot;}} as |form|&gt;
-    &lt;BsButton @buttonType=&quot;submit&quot; @disabled={{form.isSubmitting}}&gt;
-      Save
-      {{#if form.isSubmitting}} {{fa-icon &quot;spinner&quot;}} {{/if}}
-    &lt;/BsButton&gt;
+    {{#if form.isSubmitting}}
+      &lt;span class=&quot;spinner-border spinner-border-sm&quot; role=&quot;status&quot; aria-hidden=&quot;true&quot;&gt;&lt;/span&gt;
+      Logging in...
+    {{else}}
+      &lt;form.element @property=&quot;email&quot; @label=&quot;email&quot; /&gt;
+      &lt;form.element @property=&quot;password&quot; @label=&quot;password&quot; @controlType=&quot;password&quot; /&gt;
+      &lt;form.submitButton&gt;Login&lt;/form.submitButton&gt;
+    {{/if}}
   &lt;/BsForm&gt;
   &#x60;&#x60;&#x60;
 
   Additionaly &#x60;isSubmitted&#x60; and &#x60;isRejected&#x60; properties are yielded. &#x60;isSubmitted&#x60; is &#x60;true&#x60; if last submission was successful.
   &#x60;isRejected&#x60; is &#x60;true&#x60; if last submission was rejected due to validation errors or by an action bound to &#x60;onSubmit&#x60; event, returning a rejected promise.
-  Both are reset as soon as any value of a form element changes. It could be used for visual feedback about last submission:
+  It could be used for visual feedback about last submission:
 
   &#x60;&#x60;&#x60;hbs
   &lt;BsForm @onSubmit={{action &#x27;save}} as |form|&gt;
-    &lt;BsButton @buttonType=&quot;submit&quot; @type={{if form.isRejected &quot;danger&quot; &quot;primary&quot;}}&gt;
+    &lt;form.submitButton @type={{if form.isRejected &quot;danger&quot; &quot;primary&quot;}}&gt;
       Save
-    &lt;/BsButton&gt;
+    &lt;/form.submitButton&gt;
   &lt;/BsForm&gt;
   &#x60;&#x60;&#x60;
+
+  The submission state is reset as soon as any value of a form element changes. Additionally it can be reset programatically by
+  calling the yielded &#x60;resetSubmissionState&#x60; function.
 
   *Note that only invoking the component in a template as shown above is considered part of its public API. Extending from it (subclassing) is generally not supported, and may break at any time.*
 
@@ -257,6 +273,14 @@ export default class Form extends Component {
   groupComponent = &#x27;bs-form/group&#x27;;
 
   /**
+   * @property submitButtonComponent
+   * @type {String}
+   * @private
+   */
+  @defaultValue
+  submitButtonComponent = &#x27;bs-button&#x27;;
+
+  /**
    * &#x60;isSubmitting&#x60; is &#x60;true&#x60; after &#x60;submit&#x60; event has been triggered and until Promise returned by &#x60;onSubmit&#x60; is
    * fulfilled. If &#x60;validate&#x60; returns a Promise that one is also taken into consideration.
    *
@@ -298,6 +322,29 @@ export default class Form extends Component {
    */
   @defaultValue
   isRejected = false;
+
+  /**
+   * State of the form expressed as state values expected by &#x60;&lt;BsButton&gt;&#x60;.
+   *
+   * @property submitButtonState
+   * @type {String}
+   * @private
+   */
+  get submitButtonState() {
+    if (this.isSubmitting) {
+      return &#x27;pending&#x27;;
+    }
+
+    if (this.isSubmitted) {
+      return &#x27;fulfilled&#x27;;
+    }
+
+    if (this.isRejected) {
+      return &#x27;rejected&#x27;;
+    }
+
+    return &#x27;default&#x27;;
+  }
 
   /**
    * Count of pending submissions.
@@ -517,17 +564,13 @@ export default class Form extends Component {
   }
 
   @action
-  handleKeyPress(e) {
-    let code = e.keyCode || e.which;
+  handleKeyPress(event) {
+    let code = event.keyCode || event.which;
     if (code === 13 &amp;&amp; this.submitOnEnter) {
-      this.triggerSubmit();
+      let submitEvent = document.createEvent(&#x27;Event&#x27;);
+      submitEvent.initEvent(&#x27;submit&#x27;, true, true);
+      event.target.dispatchEvent(submitEvent);
     }
-  }
-
-  triggerSubmit() {
-    let event = document.createEvent(&#x27;Event&#x27;);
-    event.initEvent(&#x27;submit&#x27;, true, true);
-    this._element.dispatchEvent(event);
   }
 
   init() {

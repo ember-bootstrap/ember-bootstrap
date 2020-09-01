@@ -72,6 +72,7 @@ import { assert } from &#x27;@ember/debug&#x27;;
 import defaultValue from &#x27;ember-bootstrap/utils/default-decorator&#x27;;
 import { computed } from &#x27;@ember/object&#x27;;
 import deprecateSubclassing from &#x27;ember-bootstrap/utils/deprecate-subclassing&#x27;;
+import { ref } from &#x27;ember-ref-bucket&#x27;;
 
 /**
   An Ember component that mimics the behaviour of [Bootstrap&#x27;s collapse.js plugin](http://getbootstrap.com/javascript/#collapse)
@@ -98,6 +99,12 @@ import deprecateSubclassing from &#x27;ember-bootstrap/utils/deprecate-subclassi
 @deprecateSubclassing
 @templateLayout(layout)
 export default class Collapse extends Component {
+  /**
+   * @property _element
+   * @type null | HTMLElement
+   */
+  @ref(&#x27;mainNode&#x27;) _element = null;
+
   /**
    * Collapsed/expanded state
    *

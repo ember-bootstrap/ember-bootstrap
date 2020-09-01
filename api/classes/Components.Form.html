@@ -70,7 +70,13 @@ Allows setting a <code>model</code> that nested <code>Components.FormElement</co
 <p>However to benefit from features such as automatic form markup, validations and validation markup, use <code>Components.FormElement</code>
 as nested components. See below for an example.</p>
 <h3>Submitting the form</h3>
-<p>When the form is submitted (e.g. by clicking a submit button), the event will be intercepted and the <code>onSubmit</code> action
+<p>The form yields a <code>submitButton</code> component, which is a preconfigured <code>&lt;BsButton&gt;</code> with <code>@type="primary"</code> and <code>@buttonType="submit"</code>.
+The button is disabled while a form submission is pending. Additionally the button state is bound to the form submission state.</p>
+<pre class="code prettyprint"><code class="language-hbs">&lt;BsForm as |form|&gt;
+  &lt;form.submitButton&gt;Submit&lt;/form.submitButton&gt;
+&lt;/BsForm&gt;
+</code></pre>
+<p>When the form is submitted (e.g. by clicking the submit button), the event will be intercepted and the <code>onSubmit</code> action
 will be sent to the controller or parent component.
 In case the form supports validation (see "Form validation" below), the <code>onBefore</code> action is called (which allows you to
 do e.g. model data normalization), then the available validation rules are evaluated, and if those fail, the <code>onInvalid</code>
@@ -87,7 +93,7 @@ with an invalid validation, or when focusing out of invalid inputs</li>
   &lt;form.element @controlType="email" @label="Email" @placeholder="Email" @property="email" /&gt;
   &lt;form.element @controlType="password" @label="Password" @placeholder="Password" @property="password" /&gt;
   &lt;form.element @controlType="checkbox" @label="Remember me" @property="rememberMe" /&gt;
-  &lt;BsButton @defaultText="Submit" @type="primary" @buttonType="submit" /&gt;
+  &lt;form.submitButton&gt;Submit&lt;/form.submitButton&gt;
 &lt;/BsForm&gt;
 </code></pre>
 <p>See the <a href="Components.FormElement.html">Components.FormElement</a> API docs for further information.</p>
@@ -111,23 +117,29 @@ are shown. See the <a href="Components.FormElement.html">Components.FormElement<
 <p>The <code>novalidate</code> HTML attribute is set by default for forms that have validation.</p>
 <h3>Submission state</h3>
 <p>A <code>isSubmitting</code> property is yielded, which is <code>true</code> after submit has been triggered and before the Promise returned
-by <code>onSubmit</code> is fulfilled. It could be used to disable form's submit button and showing a loading spinner for example:</p>
+by <code>onSubmit</code> is fulfilled. It could be used to show a loading spinner instead of the form while it's submitting for example:</p>
 <pre class="code prettyprint"><code class="language-hbs">&lt;BsForm @onSubmit={{action "save"}} as |form|&gt;
-  &lt;BsButton @buttonType="submit" @disabled={{form.isSubmitting}}&gt;
-    Save
-    {{#if form.isSubmitting}} {{fa-icon "spinner"}} {{/if}}
-  &lt;/BsButton&gt;
+  {{#if form.isSubmitting}}
+    &lt;span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"&gt;&lt;/span&gt;
+    Logging in...
+  {{else}}
+    &lt;form.element @property="email" @label="email" /&gt;
+    &lt;form.element @property="password" @label="password" @controlType="password" /&gt;
+    &lt;form.submitButton&gt;Login&lt;/form.submitButton&gt;
+  {{/if}}
 &lt;/BsForm&gt;
 </code></pre>
 <p>Additionaly <code>isSubmitted</code> and <code>isRejected</code> properties are yielded. <code>isSubmitted</code> is <code>true</code> if last submission was successful.
 <code>isRejected</code> is <code>true</code> if last submission was rejected due to validation errors or by an action bound to <code>onSubmit</code> event, returning a rejected promise.
-Both are reset as soon as any value of a form element changes. It could be used for visual feedback about last submission:</p>
+It could be used for visual feedback about last submission:</p>
 <pre class="code prettyprint"><code class="language-hbs">&lt;BsForm @onSubmit={{action 'save}} as |form|&gt;
-  &lt;BsButton @buttonType="submit" @type={{if form.isRejected "danger" "primary"}}&gt;
+  &lt;form.submitButton @type={{if form.isRejected "danger" "primary"}}&gt;
     Save
-  &lt;/BsButton&gt;
+  &lt;/form.submitButton&gt;
 &lt;/BsForm&gt;
 </code></pre>
+<p>The submission state is reset as soon as any value of a form element changes. Additionally it can be reset programatically by
+calling the yielded <code>resetSubmissionState</code> function.</p>
 <p><em>Note that only invoking the component in a template as shown above is considered part of its public API. Extending from it (subclassing) is generally not supported, and may break at any time.</em></p>
 
 
@@ -300,6 +312,16 @@ Both are reset as soon as any value of a form element changes. It could be used 
                      data-tablink="showAllValidations">showAllValidations</a>
 
                 </li>
+                <li class="index-item property private">
+                  <a href="#" data-tabid="#properties" data-anchor="#property_submitButtonComponent"
+                     data-tablink="submitButtonComponent">submitButtonComponent</a>
+
+                </li>
+                <li class="index-item property private">
+                  <a href="#" data-tabid="#properties" data-anchor="#property_submitButtonState"
+                     data-tablink="submitButtonState">submitButtonState</a>
+
+                </li>
                 <li class="index-item property public">
                   <a href="#" data-tabid="#properties" data-anchor="#property_submitOnEnter"
                      data-tablink="submitOnEnter">submitOnEnter</a>
@@ -346,7 +368,7 @@ Both are reset as soon as any value of a form element changes. It could be used 
                 <div class="meta">
                             <p>
                             Defined in
-                    <a href="../files/addon_components_bs-form.js.html#l361"><code>addon&#x2F;components&#x2F;bs-form.js:361</code></a>
+                    <a href="../files/addon_components_bs-form.js.html#l408"><code>addon&#x2F;components&#x2F;bs-form.js:408</code></a>
                     </p>
             
             
@@ -381,7 +403,7 @@ Both are reset as soon as any value of a form element changes. It could be used 
                 <div class="meta">
                             <p>
                             Defined in
-                    <a href="../files/addon_components_bs-form.js.html#l312"><code>addon&#x2F;components&#x2F;bs-form.js:312</code></a>
+                    <a href="../files/addon_components_bs-form.js.html#l359"><code>addon&#x2F;components&#x2F;bs-form.js:359</code></a>
                     </p>
             
             
@@ -438,7 +460,7 @@ Both are reset as soon as any value of a form element changes. It could be used 
                   <p><strong>Default:</strong> false</p>
                   <p>
                       Defined in
-                  <a href="../files/addon_components_bs-form.js.html#l301"><code>addon&#x2F;components&#x2F;bs-form.js:301</code></a>
+                  <a href="../files/addon_components_bs-form.js.html#l348"><code>addon&#x2F;components&#x2F;bs-form.js:348</code></a>
               </p>
             
             
@@ -467,7 +489,7 @@ Both are reset as soon as any value of a form element changes. It could be used 
               <div class="meta">
                   <p>
                       Defined in
-                  <a href="../files/addon_components_bs-form.js.html#l182"><code>addon&#x2F;components&#x2F;bs-form.js:182</code></a>
+                  <a href="../files/addon_components_bs-form.js.html#l198"><code>addon&#x2F;components&#x2F;bs-form.js:198</code></a>
               </p>
             
             
@@ -495,7 +517,7 @@ Both are reset as soon as any value of a form element changes. It could be used 
               <div class="meta">
                   <p>
                       Defined in
-                  <a href="../files/addon_components_bs-form.js.html#l151"><code>addon&#x2F;components&#x2F;bs-form.js:151</code></a>
+                  <a href="../files/addon_components_bs-form.js.html#l167"><code>addon&#x2F;components&#x2F;bs-form.js:167</code></a>
               </p>
             
             
@@ -524,7 +546,7 @@ Both are reset as soon as any value of a form element changes. It could be used 
               <div class="meta">
                   <p>
                       Defined in
-                  <a href="../files/addon_components_bs-form.js.html#l190"><code>addon&#x2F;components&#x2F;bs-form.js:190</code></a>
+                  <a href="../files/addon_components_bs-form.js.html#l206"><code>addon&#x2F;components&#x2F;bs-form.js:206</code></a>
               </p>
             
             
@@ -552,7 +574,7 @@ Both are reset as soon as any value of a form element changes. It could be used 
               <div class="meta">
                   <p>
                       Defined in
-                  <a href="../files/addon_components_bs-form.js.html#l161"><code>addon&#x2F;components&#x2F;bs-form.js:161</code></a>
+                  <a href="../files/addon_components_bs-form.js.html#l177"><code>addon&#x2F;components&#x2F;bs-form.js:177</code></a>
               </p>
             
             
@@ -582,7 +604,7 @@ Both are reset as soon as any value of a form element changes. It could be used 
                   <p><strong>Default:</strong> false</p>
                   <p>
                       Defined in
-                  <a href="../files/addon_components_bs-form.js.html#l277"><code>addon&#x2F;components&#x2F;bs-form.js:277</code></a>
+                  <a href="../files/addon_components_bs-form.js.html#l324"><code>addon&#x2F;components&#x2F;bs-form.js:324</code></a>
               </p>
             
             
@@ -614,7 +636,7 @@ Both are reset as soon as any value of a form element changes. It could be used 
                   <p><strong>Default:</strong> &#x27;col-md-4&#x27;</p>
                   <p>
                       Defined in
-                  <a href="../files/addon_components_bs-form.js.html#l170"><code>addon&#x2F;components&#x2F;bs-form.js:170</code></a>
+                  <a href="../files/addon_components_bs-form.js.html#l186"><code>addon&#x2F;components&#x2F;bs-form.js:186</code></a>
               </p>
             
             
@@ -644,7 +666,7 @@ Both are reset as soon as any value of a form element changes. It could be used 
               <div class="meta">
                   <p>
                       Defined in
-                  <a href="../files/addon_components_bs-form.js.html#l226"><code>addon&#x2F;components&#x2F;bs-form.js:226</code></a>
+                  <a href="../files/addon_components_bs-form.js.html#l250"><code>addon&#x2F;components&#x2F;bs-form.js:250</code></a>
               </p>
             
             
@@ -677,7 +699,7 @@ Both are reset as soon as any value of a form element changes. It could be used 
               <div class="meta">
                   <p>
                       Defined in
-                  <a href="../files/addon_components_bs-form.js.html#l212"><code>addon&#x2F;components&#x2F;bs-form.js:212</code></a>
+                  <a href="../files/addon_components_bs-form.js.html#l236"><code>addon&#x2F;components&#x2F;bs-form.js:236</code></a>
               </p>
             
             
@@ -709,7 +731,7 @@ Both are reset as soon as any value of a form element changes. It could be used 
               <div class="meta">
                   <p>
                       Defined in
-                  <a href="../files/addon_components_bs-form.js.html#l198"><code>addon&#x2F;components&#x2F;bs-form.js:198</code></a>
+                  <a href="../files/addon_components_bs-form.js.html#l222"><code>addon&#x2F;components&#x2F;bs-form.js:222</code></a>
               </p>
             
             
@@ -740,7 +762,7 @@ Both are reset as soon as any value of a form element changes. It could be used 
               <div class="meta">
                   <p>
                       Defined in
-                  <a href="../files/addon_components_bs-form.js.html#l119"><code>addon&#x2F;components&#x2F;bs-form.js:119</code></a>
+                  <a href="../files/addon_components_bs-form.js.html#l135"><code>addon&#x2F;components&#x2F;bs-form.js:135</code></a>
               </p>
             
             
@@ -769,7 +791,7 @@ Both are reset as soon as any value of a form element changes. It could be used 
               <div class="meta">
                   <p>
                       Defined in
-                  <a href="../files/addon_components_bs-form.js.html#l138"><code>addon&#x2F;components&#x2F;bs-form.js:138</code></a>
+                  <a href="../files/addon_components_bs-form.js.html#l154"><code>addon&#x2F;components&#x2F;bs-form.js:154</code></a>
               </p>
             
             
@@ -804,7 +826,7 @@ Both are reset as soon as any value of a form element changes. It could be used 
               <div class="meta">
                   <p>
                       Defined in
-                  <a href="../files/addon_components_bs-form.js.html#l241"><code>addon&#x2F;components&#x2F;bs-form.js:241</code></a>
+                  <a href="../files/addon_components_bs-form.js.html#l288"><code>addon&#x2F;components&#x2F;bs-form.js:288</code></a>
               </p>
             
             
@@ -834,7 +856,7 @@ Both are reset as soon as any value of a form element changes. It could be used 
                   <p><strong>Default:</strong> true</p>
                   <p>
                       Defined in
-                  <a href="../files/addon_components_bs-form.js.html#l262"><code>addon&#x2F;components&#x2F;bs-form.js:262</code></a>
+                  <a href="../files/addon_components_bs-form.js.html#l309"><code>addon&#x2F;components&#x2F;bs-form.js:309</code></a>
               </p>
             
             
@@ -867,7 +889,7 @@ Both are reset as soon as any value of a form element changes. It could be used 
                   <p><strong>Default:</strong> false</p>
                   <p>
                       Defined in
-                  <a href="../files/addon_components_bs-form.js.html#l290"><code>addon&#x2F;components&#x2F;bs-form.js:290</code></a>
+                  <a href="../files/addon_components_bs-form.js.html#l337"><code>addon&#x2F;components&#x2F;bs-form.js:337</code></a>
               </p>
             
             
@@ -897,7 +919,7 @@ Both are reset as soon as any value of a form element changes. It could be used 
                   <p><strong>Default:</strong> undefined</p>
                   <p>
                       Defined in
-                  <a href="../files/addon_components_bs-form.js.html#l323"><code>addon&#x2F;components&#x2F;bs-form.js:323</code></a>
+                  <a href="../files/addon_components_bs-form.js.html#l370"><code>addon&#x2F;components&#x2F;bs-form.js:370</code></a>
               </p>
             
             
@@ -905,6 +927,63 @@ Both are reset as soon as any value of a form element changes. It could be used 
             
               <div class="description">
                 
+              </div>
+            
+            
+            
+            
+            </div>
+            <div id="property_submitButtonComponent"
+                 class="property item private">
+              <h3 class="name">submitButtonComponent
+                <span class="badge badge-secondary small">{String}</span>
+                  <span class="badge badge-private small">private</span>
+            
+            
+            
+            
+              </h3>
+            
+              <div class="meta">
+                  <p>
+                      Defined in
+                  <a href="../files/addon_components_bs-form.js.html#l214"><code>addon&#x2F;components&#x2F;bs-form.js:214</code></a>
+              </p>
+            
+            
+              </div>
+            
+              <div class="description">
+                
+              </div>
+            
+            
+            
+            
+            </div>
+            <div id="property_submitButtonState"
+                 class="property item private">
+              <h3 class="name">submitButtonState
+                <span class="badge badge-secondary small">{String}</span>
+                  <span class="badge badge-private small">private</span>
+            
+            
+            
+            
+              </h3>
+            
+              <div class="meta">
+                  <p>
+                      Defined in
+                  <a href="../files/addon_components_bs-form.js.html#l265"><code>addon&#x2F;components&#x2F;bs-form.js:265</code></a>
+              </p>
+            
+            
+              </div>
+            
+              <div class="description">
+                <p>State of the form expressed as state values expected by <code>&lt;BsButton&gt;</code>.</p>
+            
               </div>
             
             
@@ -926,7 +1005,7 @@ Both are reset as soon as any value of a form element changes. It could be used 
                   <p><strong>Default:</strong> false</p>
                   <p>
                       Defined in
-                  <a href="../files/addon_components_bs-form.js.html#l251"><code>addon&#x2F;components&#x2F;bs-form.js:251</code></a>
+                  <a href="../files/addon_components_bs-form.js.html#l298"><code>addon&#x2F;components&#x2F;bs-form.js:298</code></a>
               </p>
             
             
@@ -957,7 +1036,7 @@ Both are reset as soon as any value of a form element changes. It could be used 
                 <div class="meta">
                             <p>
                             Defined in
-                    <a href="../files/addon_components_bs-form.js.html#l332"><code>addon&#x2F;components&#x2F;bs-form.js:332</code></a>
+                    <a href="../files/addon_components_bs-form.js.html#l379"><code>addon&#x2F;components&#x2F;bs-form.js:379</code></a>
                     </p>
             
             
@@ -1000,7 +1079,7 @@ Both are reset as soon as any value of a form element changes. It could be used 
                 <div class="meta">
                             <p>
                             Defined in
-                    <a href="../files/addon_components_bs-form.js.html#l351"><code>addon&#x2F;components&#x2F;bs-form.js:351</code></a>
+                    <a href="../files/addon_components_bs-form.js.html#l398"><code>addon&#x2F;components&#x2F;bs-form.js:398</code></a>
                     </p>
             
             
@@ -1053,7 +1132,7 @@ Both are reset as soon as any value of a form element changes. It could be used 
                 <div class="meta">
                             <p>
                             Defined in
-                    <a href="../files/addon_components_bs-form.js.html#l341"><code>addon&#x2F;components&#x2F;bs-form.js:341</code></a>
+                    <a href="../files/addon_components_bs-form.js.html#l388"><code>addon&#x2F;components&#x2F;bs-form.js:388</code></a>
                     </p>
             
             

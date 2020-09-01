@@ -1,3 +1,36 @@
+## v4.1.0 (2020-09-01)
+
+#### Features
+* [#1205](https://github.com/kaliber5/ember-bootstrap/pull/1205) yield submitButton component from  ([@jelhan](https://github.com/jelhan))
+* [#1203](https://github.com/kaliber5/ember-bootstrap/pull/1203) yield setValue function from  to mutate the value in custom controls ([@jelhan](https://github.com/jelhan))
+
+#### Documentation
+* [#1218](https://github.com/kaliber5/ember-bootstrap/pull/1218) Update docs for new yielded submit button ([@simonihmig](https://github.com/simonihmig))
+* [#1204](https://github.com/kaliber5/ember-bootstrap/pull/1204) isSettled property of Button was documented as isFulfilled ([@jelhan](https://github.com/jelhan))
+
+#### Internal
+* [#1217](https://github.com/kaliber5/ember-bootstrap/pull/1217) Fix CSP failures in FastBoot tests ([@simonihmig](https://github.com/simonihmig))
+* [#1207](https://github.com/kaliber5/ember-bootstrap/pull/1207) Fix CI config for running FastBoot tests ([@simonihmig](https://github.com/simonihmig))
+
+#### Committers: 3
+- Jeldrik Hanschke ([@jelhan](https://github.com/jelhan))
+- Simon Ihmig ([@simonihmig](https://github.com/simonihmig))
+- [@dependabot-preview[bot]](https://github.com/apps/dependabot-preview)
+
+## v4.0.1 (2020-08-21)
+
+#### Bug Fixes
+* [#1183](https://github.com/kaliber5/ember-bootstrap/pull/1183) Avoid using ref modifier in form ([@basz](https://github.com/basz))
+
+#### Internal
+* [#1182](https://github.com/kaliber5/ember-bootstrap/pull/1182) Replace ember-ref-modifier to ember-ref-bucket ([@lifeart](https://github.com/lifeart))
+
+#### Committers: 4
+- Alex Kanunnikov ([@lifeart](https://github.com/lifeart))
+- Bas Kamer ([@basz](https://github.com/basz))
+- Simon Ihmig ([@simonihmig](https://github.com/simonihmig))
+- [@dependabot-preview[bot]](https://github.com/apps/dependabot-preview)
+
 ## v4.0.0 (2020-08-04)
 
 ## v4.0.0-rc.3 (2020-07-08)
@@ -18,7 +51,7 @@
 
 #### :boom: Breaking Change
 * [#1104](https://github.com/kaliber5/ember-bootstrap/pull/1104) Remove support for subclassing component classes  ([@simonihmig](https://github.com/simonihmig))
-* [#1097](https://github.com/kaliber5/ember-bootstrap/pull/1097) Remove leftover two-way binding of form element's `@value` argument ([@basz](https://github.com/basz))
+* [#1097](https://github.com/kaliber5/ember-bootstrap/pull/1097) Remove leftover two-way binding of form element's `@value` argument and yielded `value` ([@basz](https://github.com/basz))
 * [#1106](https://github.com/kaliber5/ember-bootstrap/pull/1106) Refactor BsModalSimple to not extend from BsModal ([@simonihmig](https://github.com/simonihmig))
 
 #### Features

@@ -67,6 +67,7 @@ import Component from &#x27;@ember/component&#x27;;
 import layout from &#x27;ember-bootstrap/templates/components/bs-modal/dialog&#x27;;
 import { next } from &#x27;@ember/runloop&#x27;;
 import deprecateSubclassing from &#x27;ember-bootstrap/utils/deprecate-subclassing&#x27;;
+import { ref } from &#x27;ember-ref-bucket&#x27;;
 
 /**
  Internal component for modal&#x27;s markup and event handling. Should not be used directly.
@@ -80,6 +81,12 @@ import deprecateSubclassing from &#x27;ember-bootstrap/utils/deprecate-subclassi
 @deprecateSubclassing
 @templateLayout(layout)
 export default class ModalDialog extends Component {
+  /**
+   * @property id
+   * @type null | HTMLElement
+   */
+  @ref(&#x27;mainNode&#x27;) _element = null;
+
   @readOnly(&#x27;titleId&#x27;)
   ariaLabelledby;
 
