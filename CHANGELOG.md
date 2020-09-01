@@ -1,3 +1,22 @@
+## v4.1.0 (2020-09-01)
+
+#### Features
+* [#1205](https://github.com/kaliber5/ember-bootstrap/pull/1205) yield submitButton component from <BsForm> ([@jelhan](https://github.com/jelhan))
+* [#1203](https://github.com/kaliber5/ember-bootstrap/pull/1203) yield setValue function from <form.element> to mutate the value in custom controls ([@jelhan](https://github.com/jelhan))
+
+#### Documentation
+* [#1218](https://github.com/kaliber5/ember-bootstrap/pull/1218) Update docs for new yielded submit button ([@simonihmig](https://github.com/simonihmig))
+* [#1204](https://github.com/kaliber5/ember-bootstrap/pull/1204) isSettled property of Button was documented as isFulfilled ([@jelhan](https://github.com/jelhan))
+
+#### Internal
+* [#1217](https://github.com/kaliber5/ember-bootstrap/pull/1217) Fix CSP failures in FastBoot tests ([@simonihmig](https://github.com/simonihmig))
+* [#1207](https://github.com/kaliber5/ember-bootstrap/pull/1207) Fix CI config for running FastBoot tests ([@simonihmig](https://github.com/simonihmig))
+
+#### Committers: 3
+- Jeldrik Hanschke ([@jelhan](https://github.com/jelhan))
+- Simon Ihmig ([@simonihmig](https://github.com/simonihmig))
+- [@dependabot-preview[bot]](https://github.com/apps/dependabot-preview)
+
 ## v4.0.1 (2020-08-21)
 
 #### Bug Fixes
