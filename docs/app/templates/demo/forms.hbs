@@ -20,7 +20,7 @@
     <form.element @controlType="radio" @label="Radio" @property="radio" @options={{radioOptions}} @optionLabelPath="label" />
     <form.element @controlType="checkbox" @label="Checkbox" @property="checkbox" />
     <form.element @controlType="textarea" @label="Textarea" @property="textarea" />
-    <BsButton @defaultText="Submit" @type="primary" @buttonType="submit" />
+    <form.submitButton>Submit</form.submitButton>
   </BsForm>
   <!-- END-SNIPPET -->
 </div>
@@ -69,7 +69,7 @@
   <BsForm @model={{this.login}} @onSubmit={{action "submit"}} as |form|>
     <form.element @controlType="email" @label="Email" @placeholder="Email" @property="email" />
     <form.element @controlType="password" @label="Password" @placeholder="Password" @property="password" @helpText="Minimum 6 characters" />
-    <BsButton @defaultText="Submit" @type="primary" @buttonType="submit" />
+    <form.submitButton>Submit</form.submitButton>
   </BsForm>
   <!-- END-SNIPPET -->
 </div>
@@ -102,7 +102,7 @@
       </div>
     </form.element>
     <form.element @size="lg" @controlType="password" @label="Password" @placeholder="Password" @property="password" @helpText="Minimum 6 characters" />
-    <BsButton @defaultText="Submit" @type="primary" @buttonType="submit" />
+    <form.submitButton>Submit</form.submitButton>
   </BsForm>
   <!-- END-SNIPPET -->
 </div>
@@ -118,7 +118,7 @@
     <form.element @label="Email" @placeholder="Email" @property="email" as |el|>
       <el.control class="border-info" />
     </form.element>
-    <BsButton @defaultText="Submit" @type="primary" @buttonType="submit" />
+    <form.submitButton>Submit</form.submitButton>
   </BsForm>
   <!-- END-SNIPPET -->
 </div>
