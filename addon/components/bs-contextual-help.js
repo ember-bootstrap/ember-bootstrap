@@ -10,6 +10,8 @@ import transitionEnd from 'ember-bootstrap/utils/transition-end';
 import { getDestinationElement } from 'ember-bootstrap/utils/dom';
 import usesTransition from 'ember-bootstrap/utils/cp/uses-transition';
 import defaultValue from 'ember-bootstrap/utils/default-decorator';
+import { assert } from '@ember/debug';
+import Ember from 'ember';
 
 class InState extends EmberObject {
   hover = false;
@@ -246,14 +248,18 @@ export default class ContextualHelp extends Component {
    */
   getTriggerTargetElement() {
     let triggerElement = this.triggerElement;
+    let el;
 
     if (!triggerElement) {
-      return this._parent;
+      el = this._parent;
     } else if (triggerElement === 'parentView') {
-      return this.parentView.element;
+      el = this.parentView.element;
     } else {
-      return document.querySelector(triggerElement);
+      el = document.querySelector(triggerElement);
     }
+
+    assert('Could not find trigger element for tooltip/popover component', el);
+    return el;
   }
 
   /**
@@ -694,7 +700,20 @@ export default class ContextualHelp extends Component {
 
   didInsertElement() {
     super.didInsertElement(...arguments);
-    this._parent = this._parentFinder.parentNode;
+    let parent = this._parentFinder.parentNode;
+    // In the rare case of using FastBoot w/ rehydration, the parent finder TextNode rendered by FastBoot will be reused,
+    // so our own instance on the component is not rendered, only exists here as detached from DOM and thus has no parent.
+    // In this case we try to use Ember's private API as a fallback.
+    // Related: https://github.com/emberjs/rfcs/issues/168
+    if (!parent) {
+      try {
+        parent = Ember.ViewUtils.getViewBounds(this).parentElement;
+      } catch (e) {
+        // we catch the possibly broken private API call, the component can still work if the trigger element is defined
+        // using a CSS selector.
+      }
+    }
+    this._parent = parent;
     this.triggerTargetElement = this.getTriggerTargetElement();
     this.addListeners();
     if (this.visible) {
