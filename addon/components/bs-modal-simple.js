@@ -1,6 +1,5 @@
-import { layout as templateLayout, tagName } from '@ember-decorators/component';
+import { tagName } from '@ember-decorators/component';
 import Component from '@ember/component';
-import layout from 'ember-bootstrap/templates/components/bs-modal-simple';
 import defaultValue from 'ember-bootstrap/utils/default-decorator';
 import deprecateSubclassing from 'ember-bootstrap/utils/deprecate-subclassing';
 
@@ -83,7 +82,6 @@ import deprecateSubclassing from 'ember-bootstrap/utils/deprecate-subclassing';
   @extends Ember.Component
   @public
 */
-@templateLayout(layout)
 @tagName('')
 @deprecateSubclassing
 export default class ModalSimple extends Component {

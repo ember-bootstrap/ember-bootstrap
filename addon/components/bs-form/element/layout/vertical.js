@@ -1,6 +1,4 @@
-import { layout as templateLayout } from '@ember-decorators/component';
 import FormElementLayout from '../layout';
-import layout from 'ember-bootstrap/templates/components/bs-form/element/layout/vertical';
 
 /**
 
@@ -9,5 +7,4 @@ import layout from 'ember-bootstrap/templates/components/bs-form/element/layout/
  @extends Components.FormElementLayout
  @private
  */
-@templateLayout(layout)
 export default class FormElementLayoutVertical extends FormElementLayout {}

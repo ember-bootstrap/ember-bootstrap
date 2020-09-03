@@ -1,7 +1,6 @@
-import { layout as templateLayout, tagName } from '@ember-decorators/component';
+import { tagName } from '@ember-decorators/component';
 import { computed, action } from '@ember/object';
 import Component from '@ember/component';
-import layout from 'ember-bootstrap/templates/components/bs-dropdown/menu';
 import { next } from '@ember/runloop';
 import { getDestinationElement } from 'ember-bootstrap/utils/dom';
 import defaultValue from 'ember-bootstrap/utils/default-decorator';
@@ -18,7 +17,6 @@ import { ref } from 'ember-ref-bucket';
  @extends Ember.Component
  @public
  */
-@templateLayout(layout)
 @tagName('')
 @deprecateSubclassing
 export default class DropdownMenu extends Component {

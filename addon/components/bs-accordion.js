@@ -1,7 +1,6 @@
 import { action } from '@ember/object';
-import { layout as templateLayout, tagName } from '@ember-decorators/component';
+import { tagName } from '@ember-decorators/component';
 import Component from '@ember/component';
-import layout from 'ember-bootstrap/templates/components/bs-accordion';
 import listenTo from 'ember-bootstrap/utils/cp/listen-to';
 import defaultValue from 'ember-bootstrap/utils/default-decorator';
 import deprecateSubclassing from 'ember-bootstrap/utils/deprecate-subclassing';
@@ -41,7 +40,6 @@ import deprecateSubclassing from 'ember-bootstrap/utils/deprecate-subclassing';
 */
 @tagName('')
 @deprecateSubclassing
-@templateLayout(layout)
 export default class Accordion extends Component {
   /**
    * The value of the currently selected accordion item. Set this to change selection programmatically.

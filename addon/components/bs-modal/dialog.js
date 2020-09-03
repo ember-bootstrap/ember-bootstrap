@@ -1,9 +1,8 @@
-import { layout as templateLayout, tagName } from '@ember-decorators/component';
+import { tagName } from '@ember-decorators/component';
 import { action, computed } from '@ember/object';
 import { readOnly } from '@ember/object/computed';
 import { isBlank } from '@ember/utils';
 import Component from '@ember/component';
-import layout from 'ember-bootstrap/templates/components/bs-modal/dialog';
 import { next } from '@ember/runloop';
 import deprecateSubclassing from 'ember-bootstrap/utils/deprecate-subclassing';
 import { ref } from 'ember-ref-bucket';
@@ -18,7 +17,6 @@ import { ref } from 'ember-ref-bucket';
  */
 @tagName('')
 @deprecateSubclassing
-@templateLayout(layout)
 export default class ModalDialog extends Component {
   /**
    * @property id

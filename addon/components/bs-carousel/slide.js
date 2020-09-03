@@ -1,8 +1,7 @@
-import { layout as templateLayout, tagName } from '@ember-decorators/component';
+import { tagName } from '@ember-decorators/component';
 import { computed } from '@ember/object';
 import Component from '@ember/component';
 import ComponentChild from 'ember-bootstrap/mixins/component-child';
-import layout from 'ember-bootstrap/templates/components/bs-carousel/slide';
 import { next } from '@ember/runloop';
 import overrideableCP from 'ember-bootstrap/utils/cp/overrideable';
 import { addObserver } from '@ember/object/observers';
@@ -21,7 +20,6 @@ import { ref } from 'ember-ref-bucket';
  */
 @tagName('')
 @deprecateSubclassing
-@templateLayout(layout)
 export default class CarouselSlide extends Component.extend(ComponentChild) {
   /**
    * @property _element

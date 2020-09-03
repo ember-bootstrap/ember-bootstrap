@@ -1,10 +1,9 @@
-import { layout as templateLayout, tagName } from '@ember-decorators/component';
+import { tagName } from '@ember-decorators/component';
 import { action } from '@ember/object';
 import { and, not } from '@ember/object/computed';
 import { addObserver } from '@ember/object/observers';
 import Component from '@ember/component';
 import { later } from '@ember/runloop';
-import layout from 'ember-bootstrap/templates/components/bs-alert';
 import typeClass from 'ember-bootstrap/utils/cp/type-class';
 import listenTo from 'ember-bootstrap/utils/cp/listen-to';
 import usesTransition from 'ember-bootstrap/utils/cp/uses-transition';
@@ -34,7 +33,6 @@ import deprecateSubclassing from 'ember-bootstrap/utils/deprecate-subclassing';
 */
 @tagName('')
 @deprecateSubclassing
-@templateLayout(layout)
 export default class Alert extends Component {
   /**
    * A dismissible alert will have a close button in the upper right corner, that the user can click to dismiss

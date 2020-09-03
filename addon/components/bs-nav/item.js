@@ -1,11 +1,10 @@
-import { layout as templateLayout, tagName } from '@ember-decorators/component';
+import { tagName } from '@ember-decorators/component';
 import { observes } from '@ember-decorators/object';
 import { filter, filterBy, gt } from '@ember/object/computed';
 import Component from '@ember/component';
 import { action } from '@ember/object';
 import { scheduleOnce } from '@ember/runloop';
 import LinkComponent from '@ember/routing/link-component';
-import layout from 'ember-bootstrap/templates/components/bs-nav/item';
 import ComponentParent from 'ember-bootstrap/mixins/component-parent';
 import overrideableCP from 'ember-bootstrap/utils/cp/overrideable';
 import { assert } from '@ember/debug';
@@ -21,7 +20,6 @@ import deprecateSubclassing from 'ember-bootstrap/utils/deprecate-subclassing';
  @uses Mixins.ComponentParent
  @public
  */
-@templateLayout(layout)
 @tagName('')
 @deprecateSubclassing
 export default class NavItem extends Component.extend(ComponentParent) {

@@ -1,11 +1,10 @@
-import { layout as templateLayout, tagName } from '@ember-decorators/component';
+import { tagName } from '@ember-decorators/component';
 import { action, computed } from '@ember/object';
 import { addObserver } from '@ember/object/observers';
 import { assert } from '@ember/debug';
 import Component from '@ember/component';
 import { bind, next, schedule } from '@ember/runloop';
 import { inject as service } from '@ember/service';
-import layout from 'ember-bootstrap/templates/components/bs-modal';
 import listenTo from 'ember-bootstrap/utils/cp/listen-to';
 import transitionEnd from 'ember-bootstrap/utils/transition-end';
 import { getDestinationElement } from 'ember-bootstrap/utils/dom';
@@ -57,7 +56,6 @@ import deprecateSubclassing from 'ember-bootstrap/utils/deprecate-subclassing';
   @extends Ember.Component
   @public
 */
-@templateLayout(layout)
 @tagName('')
 @deprecateSubclassing
 export default class Modal extends Component {

@@ -1,4 +1,4 @@
-import { layout as templateLayout, tagName } from '@ember-decorators/component';
+import { tagName } from '@ember-decorators/component';
 import { observes } from '@ember-decorators/object';
 import { computed, action } from '@ember/object';
 import { equal, or } from '@ember/object/computed';
@@ -6,7 +6,6 @@ import { scheduleOnce } from '@ember/runloop';
 import { warn } from '@ember/debug';
 import { DEBUG } from '@glimmer/env';
 import Component from '@ember/component';
-import layout from 'ember-bootstrap/templates/components/bs-button';
 import sizeClass from 'ember-bootstrap/utils/cp/size-class';
 import typeClass from 'ember-bootstrap/utils/cp/type-class';
 import overrideableCP from 'ember-bootstrap/utils/cp/overrideable';
@@ -106,7 +105,6 @@ import deprecateSubclassing from 'ember-bootstrap/utils/deprecate-subclassing';
   @extends Ember.Component
   @public
 */
-@templateLayout(layout)
 @tagName('')
 @deprecateSubclassing
 export default class Button extends Component {

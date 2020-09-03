@@ -1,7 +1,5 @@
-import { layout as templateLayout } from '@ember-decorators/component';
 import { computed } from '@ember/object';
 import ContextualHelp from './bs-contextual-help';
-import layout from 'ember-bootstrap/templates/components/bs-tooltip';
 import defaultValue from 'ember-bootstrap/utils/default-decorator';
 import deprecateSubclassing from 'ember-bootstrap/utils/deprecate-subclassing';
 
@@ -82,7 +80,6 @@ import deprecateSubclassing from 'ember-bootstrap/utils/deprecate-subclassing';
   @extends Components.ContextualHelp
   @public
 */
-@templateLayout(layout)
 @deprecateSubclassing
 export default class Tooltip extends ContextualHelp {
   /**

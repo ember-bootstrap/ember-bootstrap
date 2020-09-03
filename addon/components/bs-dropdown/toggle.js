@@ -1,7 +1,5 @@
 import { tagName } from '@ember-decorators/component';
 import Component from '@ember/component';
-import { layout as templateLayout } from '@ember-decorators/component';
-import layout from 'ember-bootstrap/templates/components/bs-dropdown/toggle';
 import defaultValue from 'ember-bootstrap/utils/default-decorator';
 import { computed, action } from '@ember/object';
 import deprecateSubclassing from 'ember-bootstrap/utils/deprecate-subclassing';
@@ -19,7 +17,6 @@ import deprecateSubclassing from 'ember-bootstrap/utils/deprecate-subclassing';
  */
 @tagName('')
 @deprecateSubclassing
-@templateLayout(layout)
 export default class DropdownToggle extends Component {
   /**
    * @property inNav

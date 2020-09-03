@@ -1,7 +1,6 @@
-import { layout as templateLayout, tagName } from '@ember-decorators/component';
+import { tagName } from '@ember-decorators/component';
 import { computed } from '@ember/object';
 import Component from '@ember/component';
-import layout from 'ember-bootstrap/templates/components/bs-nav';
 import defaultValue from 'ember-bootstrap/utils/default-decorator';
 import deprecateSubclassing from 'ember-bootstrap/utils/deprecate-subclassing';
 
@@ -84,7 +83,6 @@ import deprecateSubclassing from 'ember-bootstrap/utils/deprecate-subclassing';
   @public
 
  */
-@templateLayout(layout)
 @tagName('')
 @deprecateSubclassing
 export default class Nav extends Component {

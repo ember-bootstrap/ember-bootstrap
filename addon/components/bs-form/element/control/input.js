@@ -1,5 +1,4 @@
-import { layout as templateLayout, tagName } from '@ember-decorators/component';
-import layout from 'ember-bootstrap/templates/components/bs-form/element/control/input';
+import { tagName } from '@ember-decorators/component';
 import { computed, action } from '@ember/object';
 import Control from '../control';
 import { isEmpty } from '@ember/utils';
@@ -35,7 +34,6 @@ function canUseType(type) {
  @extends Components.FormElementControl
  @private
  */
-@templateLayout(layout)
 @tagName('')
 @deprecateSubclassing
 export default class FormElementControlInput extends Control {

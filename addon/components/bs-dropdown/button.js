@@ -1,6 +1,4 @@
 import Button from 'ember-bootstrap/components/bs-button';
-import { layout as templateLayout } from '@ember-decorators/component';
-import layout from 'ember-bootstrap/templates/components/bs-dropdown/button';
 import { computed, action } from '@ember/object';
 
 /**
@@ -13,7 +11,6 @@ import { computed, action } from '@ember/object';
  @extends Components.Button
  @public
  */
-@templateLayout(layout)
 export default class DropdownButton extends Button {
   '__ember-bootstrap_subclass' = true;
 

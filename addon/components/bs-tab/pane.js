@@ -1,9 +1,8 @@
-import { layout as templateLayout, tagName } from '@ember-decorators/component';
+import { tagName } from '@ember-decorators/component';
 import { computed } from '@ember/object';
 import { addObserver } from '@ember/object/observers';
 import Component from '@ember/component';
 import { scheduleOnce } from '@ember/runloop';
-import layout from 'ember-bootstrap/templates/components/bs-tab/pane';
 import ComponentChild from 'ember-bootstrap/mixins/component-child';
 import transitionEnd from 'ember-bootstrap/utils/transition-end';
 import usesTransition from 'ember-bootstrap/utils/cp/uses-transition';
@@ -24,7 +23,6 @@ import { ref } from 'ember-ref-bucket';
  */
 @tagName('')
 @deprecateSubclassing
-@templateLayout(layout)
 export default class TabPane extends Component.extend(ComponentChild) {
   /**
    * @property id
