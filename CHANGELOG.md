@@ -95,7 +95,7 @@
 ## v4.0.0-rc.0 (2020-04-28)
 
 #### :boom: Breaking Change
-* All components are refactored to tag-less Ember components as a first stepping stone to a full Glimmer components rewrite. In most cases this should not affect you, but there are some edge cases where it might break, e.g. using `ember-test-selectors` with the legacy curly invocation syntax.
+* All components are refactored to tag-less Ember components as a first stepping stone to a full Glimmer components rewrite. In most cases this should not affect you, but there are some edge cases where it might break, e.g. using `ember-test-selectors` with the legacy curly invocation syntax or using `attributeBindings` provided by `@ember/component` like `@id`. In all cases setting them as HTML attributes using angle bracket component invocation is the recommended path forward.
 * [#965](https://github.com/kaliber5/ember-bootstrap/pull/965), [#1037](https://github.com/kaliber5/ember-bootstrap/pull/1037) Drop support for Ember < 3.16 and node 8 ([@jelhan](https://github.com/jelhan), [@simonihmig](https://github.com/simonihmig))
 * [#1004](https://github.com/kaliber5/ember-bootstrap/pull/1004) Drop deprecated arguments for HTML attributes of Form and Button components ([@jelhan](https://github.com/jelhan))
 * [#932](https://github.com/kaliber5/ember-bootstrap/pull/932) radio group should have a legend not a label ([@jelhan](https://github.com/jelhan))
