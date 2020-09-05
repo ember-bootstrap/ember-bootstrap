@@ -1,4 +1,3 @@
-import { layout as templateLayout } from '@ember-decorators/component';
 import { and, equal, gt, notEmpty, or } from '@ember/object/computed';
 import { action, computed, get } from '@ember/object';
 import { assert, warn } from '@ember/debug';
@@ -6,7 +5,6 @@ import { DEBUG } from '@glimmer/env';
 import { isBlank, typeOf } from '@ember/utils';
 import { A, isArray } from '@ember/array';
 import { getOwner } from '@ember/application';
-import layout from 'ember-bootstrap/templates/components/bs-form/element';
 import FormGroup from 'ember-bootstrap/components/bs-form/group';
 import defaultValue from 'ember-bootstrap/utils/default-decorator';
 import { macroCondition, getOwnConfig } from '@embroider/macros';
@@ -198,7 +196,6 @@ const nonDefaultLayouts = A(['checkbox']);
   @extends Components.FormGroup
   @public
 */
-@templateLayout(layout)
 export default class FormElement extends FormGroup {
   /**
    * @property _element

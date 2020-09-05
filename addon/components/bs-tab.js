@@ -1,10 +1,9 @@
-import { layout as templateLayout, tagName } from '@ember-decorators/component';
+import { tagName } from '@ember-decorators/component';
 import { action, computed } from '@ember/object';
 import { filter, oneWay } from '@ember/object/computed';
 import Component from '@ember/component';
 import { isPresent } from '@ember/utils';
 import { A } from '@ember/array';
-import layout from 'ember-bootstrap/templates/components/bs-tab';
 import ComponentParent from 'ember-bootstrap/mixins/component-parent';
 import TabPane from 'ember-bootstrap/components/bs-tab/pane';
 import listenTo from 'ember-bootstrap/utils/cp/listen-to';
@@ -117,7 +116,6 @@ import deprecateSubclassing from 'ember-bootstrap/utils/deprecate-subclassing';
 */
 @tagName('')
 @deprecateSubclassing
-@templateLayout(layout)
 export default class Tab extends Component.extend(ComponentParent) {
   /**
    * Type of nav, either "pills" or "tabs"

@@ -1,9 +1,8 @@
 import { action } from '@ember/object';
-import { layout as templateLayout, tagName } from '@ember-decorators/component';
+import { tagName } from '@ember-decorators/component';
 import { equal } from '@ember/object/computed';
 import Component from '@ember/component';
 import { A, isArray } from '@ember/array';
-import layout from 'ember-bootstrap/templates/components/bs-button-group';
 import sizeClass from 'ember-bootstrap/utils/cp/size-class';
 import defaultValue from 'ember-bootstrap/utils/default-decorator';
 import deprecateSubclassing from 'ember-bootstrap/utils/deprecate-subclassing';
@@ -68,7 +67,6 @@ import deprecateSubclassing from 'ember-bootstrap/utils/deprecate-subclassing';
 */
 @tagName('')
 @deprecateSubclassing
-@templateLayout(layout)
 export default class ButtonGroup extends Component {
   ariaRole = 'group';
 

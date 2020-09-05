@@ -1,11 +1,10 @@
-import { layout as templateLayout, tagName } from '@ember-decorators/component';
+import { tagName } from '@ember-decorators/component';
 import { gt } from '@ember/object/computed';
 import Component from '@ember/component';
 import { computed, action, set } from '@ember/object';
 import { assert, warn } from '@ember/debug';
 import { isPresent } from '@ember/utils';
 import { schedule } from '@ember/runloop';
-import layout from 'ember-bootstrap/templates/components/bs-form';
 import RSVP from 'rsvp';
 import defaultValue from 'ember-bootstrap/utils/default-decorator';
 import { macroCondition, getOwnConfig } from '@embroider/macros';
@@ -128,7 +127,6 @@ import deprecateSubclassing from 'ember-bootstrap/utils/deprecate-subclassing';
   @extends Ember.Component
   @public
 */
-@templateLayout(layout)
 @tagName('')
 @deprecateSubclassing
 export default class Form extends Component {

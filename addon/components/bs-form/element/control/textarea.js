@@ -1,6 +1,5 @@
 import { action } from '@ember/object';
-import { layout as templateLayout, tagName } from '@ember-decorators/component';
-import layout from 'ember-bootstrap/templates/components/bs-form/element/control/textarea';
+import { tagName } from '@ember-decorators/component';
 import Control from '../control';
 import deprecateSubclassing from 'ember-bootstrap/utils/deprecate-subclassing';
 
@@ -11,7 +10,6 @@ import deprecateSubclassing from 'ember-bootstrap/utils/deprecate-subclassing';
  @extends Components.FormElementControl
  @private
  */
-@templateLayout(layout)
 @tagName('')
 @deprecateSubclassing
 export default class FormElementControlTextarea extends Control {

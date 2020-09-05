@@ -1,8 +1,7 @@
-import { layout as templateLayout, tagName } from '@ember-decorators/component';
+import { tagName } from '@ember-decorators/component';
 import { action, computed } from '@ember/object';
 import { reads } from '@ember/object/computed';
 import Component from '@ember/component';
-import layout from 'ember-bootstrap/templates/components/bs-tooltip/element';
 import { assert } from '@ember/debug';
 import { scheduleOnce } from '@ember/runloop';
 import defaultValue from 'ember-bootstrap/utils/default-decorator';
@@ -15,7 +14,6 @@ import defaultValue from 'ember-bootstrap/utils/default-decorator';
  @extends Ember.Component
  @private
  */
-@templateLayout(layout)
 @tagName('')
 export default class ContextualHelpElement extends Component {
   ariaRole = 'tooltip';

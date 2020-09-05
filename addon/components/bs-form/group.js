@@ -1,6 +1,5 @@
-import { layout as templateLayout, tagName } from '@ember-decorators/component';
+import { tagName } from '@ember-decorators/component';
 import Component from '@ember/component';
-import layout from 'ember-bootstrap/templates/components/bs-form/group';
 import { computed } from '@ember/object';
 import { and, equal, notEmpty } from '@ember/object/computed';
 import Config from 'ember-bootstrap/config';
@@ -31,7 +30,6 @@ import defaultValue from 'ember-bootstrap/utils/default-decorator';
   @public
 */
 @tagName('')
-@templateLayout(layout)
 export default class FormGroup extends Component {
   /**
    * @property classTypePrefix

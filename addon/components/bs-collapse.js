@@ -1,5 +1,4 @@
-import { layout as templateLayout, tagName } from '@ember-decorators/component';
-import layout from 'ember-bootstrap/templates/components/bs-collapse';
+import { tagName } from '@ember-decorators/component';
 import { alias, and, not } from '@ember/object/computed';
 import { addObserver } from '@ember/object/observers';
 import Component from '@ember/component';
@@ -36,7 +35,6 @@ import { ref } from 'ember-ref-bucket';
 */
 @tagName('')
 @deprecateSubclassing
-@templateLayout(layout)
 export default class Collapse extends Component {
   /**
    * @property _element

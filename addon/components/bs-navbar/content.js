@@ -1,5 +1,4 @@
-import { layout as templateLayout, tagName } from '@ember-decorators/component';
-import layout from 'ember-bootstrap/templates/components/bs-navbar/content';
+import { tagName } from '@ember-decorators/component';
 import Component from '@ember/component';
 import deprecateSubclassing from 'ember-bootstrap/utils/deprecate-subclassing';
 
@@ -14,5 +13,4 @@ import deprecateSubclassing from 'ember-bootstrap/utils/deprecate-subclassing';
  */
 @tagName('')
 @deprecateSubclassing
-@templateLayout(layout)
 export default class NavbarContent extends Component {}

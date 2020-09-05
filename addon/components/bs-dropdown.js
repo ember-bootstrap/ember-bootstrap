@@ -1,7 +1,6 @@
-import { layout as templateLayout, tagName } from '@ember-decorators/component';
+import { tagName } from '@ember-decorators/component';
 import { action, computed } from '@ember/object';
 import Component from '@ember/component';
-import layout from 'ember-bootstrap/templates/components/bs-dropdown';
 import defaultValue from 'ember-bootstrap/utils/default-decorator';
 import { assert } from '@ember/debug';
 import deprecateSubclassing from 'ember-bootstrap/utils/deprecate-subclassing';
@@ -174,7 +173,6 @@ const SUPPORTED_KEYCODES = [ESCAPE_KEYCODE, ARROW_DOWN_KEYCODE, ARROW_UP_KEYCODE
 s*/
 @tagName('')
 @deprecateSubclassing
-@templateLayout(layout)
 export default class Dropdown extends Component {
   /**
    * The tag name used for the dropdown element.

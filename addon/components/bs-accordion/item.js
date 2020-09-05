@@ -1,8 +1,7 @@
-import { layout as templateLayout, tagName } from '@ember-decorators/component';
+import { tagName } from '@ember-decorators/component';
 import { computed } from '@ember/object';
 import { not } from '@ember/object/computed';
 import Component from '@ember/component';
-import layout from 'ember-bootstrap/templates/components/bs-accordion/item';
 import defaultValue from 'ember-bootstrap/utils/default-decorator';
 import typeClass from 'ember-bootstrap/utils/cp/type-class';
 import { macroCondition, getOwnConfig } from '@embroider/macros';
@@ -21,7 +20,6 @@ import deprecateSubclassing from 'ember-bootstrap/utils/deprecate-subclassing';
  */
 @tagName('')
 @deprecateSubclassing
-@templateLayout(layout)
 export default class AccordionItem extends Component {
   /**
    * The title of the accordion item, displayed as a .panel-title element

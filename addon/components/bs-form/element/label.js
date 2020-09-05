@@ -1,8 +1,7 @@
-import { layout as templateLayout, tagName } from '@ember-decorators/component';
+import { tagName } from '@ember-decorators/component';
 import { computed } from '@ember/object';
 import { equal } from '@ember/object/computed';
 import Component from '@ember/component';
-import layout from 'ember-bootstrap/templates/components/bs-form/element/label';
 import defaultValue from 'ember-bootstrap/utils/default-decorator';
 import { isBlank } from '@ember/utils';
 import deprecateSubclassing from 'ember-bootstrap/utils/deprecate-subclassing';
@@ -14,7 +13,6 @@ import deprecateSubclassing from 'ember-bootstrap/utils/deprecate-subclassing';
  @extends Ember.Component
  @private
  */
-@templateLayout(layout)
 @tagName('')
 @deprecateSubclassing
 export default class FormElementLabel extends Component {

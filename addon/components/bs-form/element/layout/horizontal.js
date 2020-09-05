@@ -1,9 +1,7 @@
-import { layout as templateLayout } from '@ember-decorators/component';
 import { computed } from '@ember/object';
 import { assert } from '@ember/debug';
 import { isBlank } from '@ember/utils';
 import FormElementLayout from '../layout';
-import layout from 'ember-bootstrap/templates/components/bs-form/element/layout/horizontal';
 import defaultValue from 'ember-bootstrap/utils/default-decorator';
 import { macroCondition, getOwnConfig } from '@embroider/macros';
 
@@ -14,7 +12,6 @@ import { macroCondition, getOwnConfig } from '@embroider/macros';
  @extends Components.FormElementLayout
  @private
  */
-@templateLayout(layout)
 export default class FormElementLayoutHorizontal extends FormElementLayout {
   /**
    * The Bootstrap grid class for form labels within a horizontal layout form.

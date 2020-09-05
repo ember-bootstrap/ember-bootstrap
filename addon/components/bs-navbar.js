@@ -1,8 +1,7 @@
-import { layout as templateLayout, tagName } from '@ember-decorators/component';
+import { tagName } from '@ember-decorators/component';
 import { observes } from '@ember-decorators/object';
 import { action, computed } from '@ember/object';
 import Component from '@ember/component';
-import layout from 'ember-bootstrap/templates/components/bs-navbar';
 import listenTo from 'ember-bootstrap/utils/cp/listen-to';
 import defaultValue from 'ember-bootstrap/utils/default-decorator';
 import { assert } from '@ember/debug';
@@ -104,7 +103,6 @@ import deprecateSubclassing from 'ember-bootstrap/utils/deprecate-subclassing';
   @extends Ember.Component
   @public
 */
-@templateLayout(layout)
 @tagName('')
 @deprecateSubclassing
 export default class Navbar extends Component {

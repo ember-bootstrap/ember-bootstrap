@@ -1,11 +1,10 @@
-import { layout as templateLayout, tagName } from '@ember-decorators/component';
+import { tagName } from '@ember-decorators/component';
 import { observes } from '@ember-decorators/object';
 import { action, computed } from '@ember/object';
 import { filter, gt, lte, readOnly } from '@ember/object/computed';
 import CarouselSlide from 'ember-bootstrap/components/bs-carousel/slide';
 import Component from '@ember/component';
 import ComponentParent from 'ember-bootstrap/mixins/component-parent';
-import layout from 'ember-bootstrap/templates/components/bs-carousel';
 import { schedule, scheduleOnce } from '@ember/runloop';
 import { task, timeout } from 'ember-concurrency';
 import RSVP from 'rsvp';
@@ -65,7 +64,6 @@ import deprecateSubclassing from 'ember-bootstrap/utils/deprecate-subclassing';
 */
 @tagName('')
 @deprecateSubclassing
-@templateLayout(layout)
 export default class Carousel extends Component.extend(ComponentParent) {
   tabindex = '1';
 
