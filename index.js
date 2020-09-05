@@ -27,6 +27,7 @@ const componentDependencies = {
   'bs-button-group': ['bs-button'],
   'bs-accordion': ['bs-collapse'],
   'bs-dropdown': ['bs-button'],
+  'bs-form': ['bs-button'],
   'bs-modal-simple': ['bs-modal'],
   'bs-navbar': ['bs-nav', 'bs-button'],
   'bs-popover': ['bs-contextual-help'],
