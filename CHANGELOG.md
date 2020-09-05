@@ -1,3 +1,15 @@
+## v4.1.1 (2020-09-05)
+
+#### Bug Fixes
+* [#1219](https://github.com/kaliber5/ember-bootstrap/pull/1219) Fix Tooltips/Popovers when used w/ FastBoot and rehydration enabled ([@simonihmig](https://github.com/simonihmig))
+
+#### Internal
+* [#1221](https://github.com/kaliber5/ember-bootstrap/pull/1221) Colocate component templates ([@jelhan](https://github.com/jelhan))
+
+#### Committers: 2
+- Jeldrik Hanschke ([@jelhan](https://github.com/jelhan))
+- Simon Ihmig ([@simonihmig](https://github.com/simonihmig))
+
 ## v4.1.0 (2020-09-01)
 
 #### Features
