@@ -256,7 +256,13 @@ export default class Button extends Component {
    * @default 'default'
    * @private
    */
-  @tracked state = 'default';
+  @tracked _state = 'default';
+  get state() {
+    return this.args.state ?? this._state;
+  }
+  set state(state) {
+    this._state = state;
+  }
 
   /**
    * Promise returned by `onClick` event is pending.
