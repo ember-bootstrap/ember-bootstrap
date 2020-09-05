@@ -59,8 +59,7 @@
 
 <div class="file">
     <pre class="prettyprint linenums">
-import { layout as templateLayout, tagName } from &#x27;@ember-decorators/component&#x27;;
-import layout from &#x27;ember-bootstrap/templates/components/bs-collapse&#x27;;
+import { tagName } from &#x27;@ember-decorators/component&#x27;;
 import { alias, and, not } from &#x27;@ember/object/computed&#x27;;
 import { addObserver } from &#x27;@ember/object/observers&#x27;;
 import Component from &#x27;@ember/component&#x27;;
@@ -97,7 +96,6 @@ import { ref } from &#x27;ember-ref-bucket&#x27;;
 */
 @tagName(&#x27;&#x27;)
 @deprecateSubclassing
-@templateLayout(layout)
 export default class Collapse extends Component {
   /**
    * @property _element

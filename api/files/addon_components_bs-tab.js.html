@@ -59,13 +59,12 @@
 
 <div class="file">
     <pre class="prettyprint linenums">
-import { layout as templateLayout, tagName } from &#x27;@ember-decorators/component&#x27;;
+import { tagName } from &#x27;@ember-decorators/component&#x27;;
 import { action, computed } from &#x27;@ember/object&#x27;;
 import { filter, oneWay } from &#x27;@ember/object/computed&#x27;;
 import Component from &#x27;@ember/component&#x27;;
 import { isPresent } from &#x27;@ember/utils&#x27;;
 import { A } from &#x27;@ember/array&#x27;;
-import layout from &#x27;ember-bootstrap/templates/components/bs-tab&#x27;;
 import ComponentParent from &#x27;ember-bootstrap/mixins/component-parent&#x27;;
 import TabPane from &#x27;ember-bootstrap/components/bs-tab/pane&#x27;;
 import listenTo from &#x27;ember-bootstrap/utils/cp/listen-to&#x27;;
@@ -178,7 +177,6 @@ import deprecateSubclassing from &#x27;ember-bootstrap/utils/deprecate-subclassi
 */
 @tagName(&#x27;&#x27;)
 @deprecateSubclassing
-@templateLayout(layout)
 export default class Tab extends Component.extend(ComponentParent) {
   /**
    * Type of nav, either &quot;pills&quot; or &quot;tabs&quot;

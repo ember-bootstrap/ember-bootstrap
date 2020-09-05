@@ -59,10 +59,8 @@
 
 <div class="file">
     <pre class="prettyprint linenums">
-import { layout as templateLayout } from &#x27;@ember-decorators/component&#x27;;
 import { notEmpty } from &#x27;@ember/object/computed&#x27;;
 import ContextualHelpElement from &#x27;../bs-contextual-help/element&#x27;;
-import layout from &#x27;ember-bootstrap/templates/components/bs-popover/element&#x27;;
 
 /**
  Internal component for popover&#x27;s markup. Should not be used directly.
@@ -72,7 +70,6 @@ import layout from &#x27;ember-bootstrap/templates/components/bs-popover/element
  @extends Components.ContextualHelpElement
  @private
  */
-@templateLayout(layout)
 export default class PopoverElement extends ContextualHelpElement {
   /**
    * @property title

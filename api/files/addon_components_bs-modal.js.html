@@ -59,14 +59,13 @@
 
 <div class="file">
     <pre class="prettyprint linenums">
-import { layout as templateLayout, tagName } from &#x27;@ember-decorators/component&#x27;;
+import { tagName } from &#x27;@ember-decorators/component&#x27;;
 import { action, computed } from &#x27;@ember/object&#x27;;
 import { addObserver } from &#x27;@ember/object/observers&#x27;;
 import { assert } from &#x27;@ember/debug&#x27;;
 import Component from &#x27;@ember/component&#x27;;
 import { bind, next, schedule } from &#x27;@ember/runloop&#x27;;
 import { inject as service } from &#x27;@ember/service&#x27;;
-import layout from &#x27;ember-bootstrap/templates/components/bs-modal&#x27;;
 import listenTo from &#x27;ember-bootstrap/utils/cp/listen-to&#x27;;
 import transitionEnd from &#x27;ember-bootstrap/utils/transition-end&#x27;;
 import { getDestinationElement } from &#x27;ember-bootstrap/utils/dom&#x27;;
@@ -118,7 +117,6 @@ import deprecateSubclassing from &#x27;ember-bootstrap/utils/deprecate-subclassi
   @extends Ember.Component
   @public
 */
-@templateLayout(layout)
 @tagName(&#x27;&#x27;)
 @deprecateSubclassing
 export default class Modal extends Component {

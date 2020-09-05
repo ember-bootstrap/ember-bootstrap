@@ -59,7 +59,6 @@
 
 <div class="file">
     <pre class="prettyprint linenums">
-import { layout as templateLayout } from &#x27;@ember-decorators/component&#x27;;
 import { and, equal, gt, notEmpty, or } from &#x27;@ember/object/computed&#x27;;
 import { action, computed, get } from &#x27;@ember/object&#x27;;
 import { assert, warn } from &#x27;@ember/debug&#x27;;
@@ -67,7 +66,6 @@ import { DEBUG } from &#x27;@glimmer/env&#x27;;
 import { isBlank, typeOf } from &#x27;@ember/utils&#x27;;
 import { A, isArray } from &#x27;@ember/array&#x27;;
 import { getOwner } from &#x27;@ember/application&#x27;;
-import layout from &#x27;ember-bootstrap/templates/components/bs-form/element&#x27;;
 import FormGroup from &#x27;ember-bootstrap/components/bs-form/group&#x27;;
 import defaultValue from &#x27;ember-bootstrap/utils/default-decorator&#x27;;
 import { macroCondition, getOwnConfig } from &#x27;@embroider/macros&#x27;;
@@ -259,7 +257,6 @@ const nonDefaultLayouts = A([&#x27;checkbox&#x27;]);
   @extends Components.FormGroup
   @public
 */
-@templateLayout(layout)
 export default class FormElement extends FormGroup {
   /**
    * @property _element

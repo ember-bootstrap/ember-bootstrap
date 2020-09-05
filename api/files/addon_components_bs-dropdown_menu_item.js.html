@@ -60,8 +60,7 @@
 <div class="file">
     <pre class="prettyprint linenums">
 import Component from &#x27;@ember/component&#x27;;
-import { layout as templateLayout, tagName } from &#x27;@ember-decorators/component&#x27;;
-import layout from &#x27;ember-bootstrap/templates/components/bs-dropdown/menu/item&#x27;;
+import { tagName } from &#x27;@ember-decorators/component&#x27;;
 import deprecateSubclassing from &#x27;ember-bootstrap/utils/deprecate-subclassing&#x27;;
 
 /**
@@ -74,7 +73,6 @@ import deprecateSubclassing from &#x27;ember-bootstrap/utils/deprecate-subclassi
  @extends Ember.Component
  @public
  */
-@templateLayout(layout)
 @tagName(&#x27;&#x27;)
 @deprecateSubclassing
 export default class DropdownMenuItem extends Component {}

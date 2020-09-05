@@ -59,12 +59,10 @@
 
 <div class="file">
     <pre class="prettyprint linenums">
-import { layout as templateLayout } from &#x27;@ember-decorators/component&#x27;;
 import { computed } from &#x27;@ember/object&#x27;;
 import { assert } from &#x27;@ember/debug&#x27;;
 import { isBlank } from &#x27;@ember/utils&#x27;;
 import FormElementLayout from &#x27;../layout&#x27;;
-import layout from &#x27;ember-bootstrap/templates/components/bs-form/element/layout/horizontal&#x27;;
 import defaultValue from &#x27;ember-bootstrap/utils/default-decorator&#x27;;
 import { macroCondition, getOwnConfig } from &#x27;@embroider/macros&#x27;;
 
@@ -75,7 +73,6 @@ import { macroCondition, getOwnConfig } from &#x27;@embroider/macros&#x27;;
  @extends Components.FormElementLayout
  @private
  */
-@templateLayout(layout)
 export default class FormElementLayoutHorizontal extends FormElementLayout {
   /**
    * The Bootstrap grid class for form labels within a horizontal layout form.

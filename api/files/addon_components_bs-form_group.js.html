@@ -59,9 +59,8 @@
 
 <div class="file">
     <pre class="prettyprint linenums">
-import { layout as templateLayout, tagName } from &#x27;@ember-decorators/component&#x27;;
+import { tagName } from &#x27;@ember-decorators/component&#x27;;
 import Component from &#x27;@ember/component&#x27;;
-import layout from &#x27;ember-bootstrap/templates/components/bs-form/group&#x27;;
 import { computed } from &#x27;@ember/object&#x27;;
 import { and, equal, notEmpty } from &#x27;@ember/object/computed&#x27;;
 import Config from &#x27;ember-bootstrap/config&#x27;;
@@ -92,7 +91,6 @@ import defaultValue from &#x27;ember-bootstrap/utils/default-decorator&#x27;;
   @public
 */
 @tagName(&#x27;&#x27;)
-@templateLayout(layout)
 export default class FormGroup extends Component {
   /**
    * @property classTypePrefix

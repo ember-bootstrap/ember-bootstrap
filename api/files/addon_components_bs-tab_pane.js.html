@@ -59,12 +59,11 @@
 
 <div class="file">
     <pre class="prettyprint linenums">
-import { layout as templateLayout, tagName } from &#x27;@ember-decorators/component&#x27;;
+import { tagName } from &#x27;@ember-decorators/component&#x27;;
 import { computed } from &#x27;@ember/object&#x27;;
 import { addObserver } from &#x27;@ember/object/observers&#x27;;
 import Component from &#x27;@ember/component&#x27;;
 import { scheduleOnce } from &#x27;@ember/runloop&#x27;;
-import layout from &#x27;ember-bootstrap/templates/components/bs-tab/pane&#x27;;
 import ComponentChild from &#x27;ember-bootstrap/mixins/component-child&#x27;;
 import transitionEnd from &#x27;ember-bootstrap/utils/transition-end&#x27;;
 import usesTransition from &#x27;ember-bootstrap/utils/cp/uses-transition&#x27;;
@@ -85,7 +84,6 @@ import { ref } from &#x27;ember-ref-bucket&#x27;;
  */
 @tagName(&#x27;&#x27;)
 @deprecateSubclassing
-@templateLayout(layout)
 export default class TabPane extends Component.extend(ComponentChild) {
   /**
    * @property id

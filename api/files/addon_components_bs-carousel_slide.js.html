@@ -59,11 +59,10 @@
 
 <div class="file">
     <pre class="prettyprint linenums">
-import { layout as templateLayout, tagName } from &#x27;@ember-decorators/component&#x27;;
+import { tagName } from &#x27;@ember-decorators/component&#x27;;
 import { computed } from &#x27;@ember/object&#x27;;
 import Component from &#x27;@ember/component&#x27;;
 import ComponentChild from &#x27;ember-bootstrap/mixins/component-child&#x27;;
-import layout from &#x27;ember-bootstrap/templates/components/bs-carousel/slide&#x27;;
 import { next } from &#x27;@ember/runloop&#x27;;
 import overrideableCP from &#x27;ember-bootstrap/utils/cp/overrideable&#x27;;
 import { addObserver } from &#x27;@ember/object/observers&#x27;;
@@ -82,7 +81,6 @@ import { ref } from &#x27;ember-ref-bucket&#x27;;
  */
 @tagName(&#x27;&#x27;)
 @deprecateSubclassing
-@templateLayout(layout)
 export default class CarouselSlide extends Component.extend(ComponentChild) {
   /**
    * @property _element

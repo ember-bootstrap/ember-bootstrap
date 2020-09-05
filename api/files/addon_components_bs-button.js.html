@@ -59,7 +59,7 @@
 
 <div class="file">
     <pre class="prettyprint linenums">
-import { layout as templateLayout, tagName } from &#x27;@ember-decorators/component&#x27;;
+import { tagName } from &#x27;@ember-decorators/component&#x27;;
 import { observes } from &#x27;@ember-decorators/object&#x27;;
 import { computed, action } from &#x27;@ember/object&#x27;;
 import { equal, or } from &#x27;@ember/object/computed&#x27;;
@@ -67,7 +67,6 @@ import { scheduleOnce } from &#x27;@ember/runloop&#x27;;
 import { warn } from &#x27;@ember/debug&#x27;;
 import { DEBUG } from &#x27;@glimmer/env&#x27;;
 import Component from &#x27;@ember/component&#x27;;
-import layout from &#x27;ember-bootstrap/templates/components/bs-button&#x27;;
 import sizeClass from &#x27;ember-bootstrap/utils/cp/size-class&#x27;;
 import typeClass from &#x27;ember-bootstrap/utils/cp/type-class&#x27;;
 import overrideableCP from &#x27;ember-bootstrap/utils/cp/overrideable&#x27;;
@@ -167,7 +166,6 @@ import deprecateSubclassing from &#x27;ember-bootstrap/utils/deprecate-subclassi
   @extends Ember.Component
   @public
 */
-@templateLayout(layout)
 @tagName(&#x27;&#x27;)
 @deprecateSubclassing
 export default class Button extends Component {

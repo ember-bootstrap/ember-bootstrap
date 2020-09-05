@@ -59,10 +59,9 @@
 
 <div class="file">
     <pre class="prettyprint linenums">
-import { layout as templateLayout, tagName } from &#x27;@ember-decorators/component&#x27;;
+import { tagName } from &#x27;@ember-decorators/component&#x27;;
 import { action, computed } from &#x27;@ember/object&#x27;;
 import Component from &#x27;@ember/component&#x27;;
-import layout from &#x27;ember-bootstrap/templates/components/bs-dropdown&#x27;;
 import defaultValue from &#x27;ember-bootstrap/utils/default-decorator&#x27;;
 import { assert } from &#x27;@ember/debug&#x27;;
 import deprecateSubclassing from &#x27;ember-bootstrap/utils/deprecate-subclassing&#x27;;
@@ -235,7 +234,6 @@ const SUPPORTED_KEYCODES = [ESCAPE_KEYCODE, ARROW_DOWN_KEYCODE, ARROW_UP_KEYCODE
 s*/
 @tagName(&#x27;&#x27;)
 @deprecateSubclassing
-@templateLayout(layout)
 export default class Dropdown extends Component {
   /**
    * The tag name used for the dropdown element.

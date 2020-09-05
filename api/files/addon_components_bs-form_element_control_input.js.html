@@ -59,8 +59,7 @@
 
 <div class="file">
     <pre class="prettyprint linenums">
-import { layout as templateLayout, tagName } from &#x27;@ember-decorators/component&#x27;;
-import layout from &#x27;ember-bootstrap/templates/components/bs-form/element/control/input&#x27;;
+import { tagName } from &#x27;@ember-decorators/component&#x27;;
 import { computed, action } from &#x27;@ember/object&#x27;;
 import Control from &#x27;../control&#x27;;
 import { isEmpty } from &#x27;@ember/utils&#x27;;
@@ -96,7 +95,6 @@ function canUseType(type) {
  @extends Components.FormElementControl
  @private
  */
-@templateLayout(layout)
 @tagName(&#x27;&#x27;)
 @deprecateSubclassing
 export default class FormElementControlInput extends Control {

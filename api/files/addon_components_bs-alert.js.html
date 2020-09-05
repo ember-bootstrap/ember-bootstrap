@@ -59,13 +59,12 @@
 
 <div class="file">
     <pre class="prettyprint linenums">
-import { layout as templateLayout, tagName } from &#x27;@ember-decorators/component&#x27;;
+import { tagName } from &#x27;@ember-decorators/component&#x27;;
 import { action } from &#x27;@ember/object&#x27;;
 import { and, not } from &#x27;@ember/object/computed&#x27;;
 import { addObserver } from &#x27;@ember/object/observers&#x27;;
 import Component from &#x27;@ember/component&#x27;;
 import { later } from &#x27;@ember/runloop&#x27;;
-import layout from &#x27;ember-bootstrap/templates/components/bs-alert&#x27;;
 import typeClass from &#x27;ember-bootstrap/utils/cp/type-class&#x27;;
 import listenTo from &#x27;ember-bootstrap/utils/cp/listen-to&#x27;;
 import usesTransition from &#x27;ember-bootstrap/utils/cp/uses-transition&#x27;;
@@ -95,7 +94,6 @@ import deprecateSubclassing from &#x27;ember-bootstrap/utils/deprecate-subclassi
 */
 @tagName(&#x27;&#x27;)
 @deprecateSubclassing
-@templateLayout(layout)
 export default class Alert extends Component {
   /**
    * A dismissible alert will have a close button in the upper right corner, that the user can click to dismiss

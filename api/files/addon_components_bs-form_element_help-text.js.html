@@ -59,9 +59,8 @@
 
 <div class="file">
     <pre class="prettyprint linenums">
-import { layout as templateLayout, tagName } from &#x27;@ember-decorators/component&#x27;;
+import { tagName } from &#x27;@ember-decorators/component&#x27;;
 import Component from &#x27;@ember/component&#x27;;
-import layout from &#x27;ember-bootstrap/templates/components/bs-form/element/help-text&#x27;;
 import deprecateSubclassing from &#x27;ember-bootstrap/utils/deprecate-subclassing&#x27;;
 
 /**
@@ -73,7 +72,6 @@ import deprecateSubclassing from &#x27;ember-bootstrap/utils/deprecate-subclassi
  */
 @tagName(&#x27;&#x27;)
 @deprecateSubclassing
-@templateLayout(layout)
 export default class FormElementHelpText extends Component {}
 
     </pre>

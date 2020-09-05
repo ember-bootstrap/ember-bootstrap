@@ -60,9 +60,8 @@
 <div class="file">
     <pre class="prettyprint linenums">
 import { action } from &#x27;@ember/object&#x27;;
-import { layout as templateLayout, tagName } from &#x27;@ember-decorators/component&#x27;;
+import { tagName } from &#x27;@ember-decorators/component&#x27;;
 import Component from &#x27;@ember/component&#x27;;
-import layout from &#x27;ember-bootstrap/templates/components/bs-accordion/item/title&#x27;;
 import deprecateSubclassing from &#x27;ember-bootstrap/utils/deprecate-subclassing&#x27;;
 
 /**
@@ -77,7 +76,6 @@ import deprecateSubclassing from &#x27;ember-bootstrap/utils/deprecate-subclassi
  */
 @tagName(&#x27;&#x27;)
 @deprecateSubclassing
-@templateLayout(layout)
 export default class AccordionItemTitle extends Component {
   /**
    * @property collapsed

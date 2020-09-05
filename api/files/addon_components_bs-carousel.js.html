@@ -59,14 +59,13 @@
 
 <div class="file">
     <pre class="prettyprint linenums">
-import { layout as templateLayout, tagName } from &#x27;@ember-decorators/component&#x27;;
+import { tagName } from &#x27;@ember-decorators/component&#x27;;
 import { observes } from &#x27;@ember-decorators/object&#x27;;
 import { action, computed } from &#x27;@ember/object&#x27;;
 import { filter, gt, lte, readOnly } from &#x27;@ember/object/computed&#x27;;
 import CarouselSlide from &#x27;ember-bootstrap/components/bs-carousel/slide&#x27;;
 import Component from &#x27;@ember/component&#x27;;
 import ComponentParent from &#x27;ember-bootstrap/mixins/component-parent&#x27;;
-import layout from &#x27;ember-bootstrap/templates/components/bs-carousel&#x27;;
 import { schedule, scheduleOnce } from &#x27;@ember/runloop&#x27;;
 import { task, timeout } from &#x27;ember-concurrency&#x27;;
 import RSVP from &#x27;rsvp&#x27;;
@@ -126,7 +125,6 @@ import deprecateSubclassing from &#x27;ember-bootstrap/utils/deprecate-subclassi
 */
 @tagName(&#x27;&#x27;)
 @deprecateSubclassing
-@templateLayout(layout)
 export default class Carousel extends Component.extend(ComponentParent) {
   tabindex = &#x27;1&#x27;;
 

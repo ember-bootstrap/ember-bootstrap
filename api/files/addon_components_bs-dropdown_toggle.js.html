@@ -61,8 +61,6 @@
     <pre class="prettyprint linenums">
 import { tagName } from &#x27;@ember-decorators/component&#x27;;
 import Component from &#x27;@ember/component&#x27;;
-import { layout as templateLayout } from &#x27;@ember-decorators/component&#x27;;
-import layout from &#x27;ember-bootstrap/templates/components/bs-dropdown/toggle&#x27;;
 import defaultValue from &#x27;ember-bootstrap/utils/default-decorator&#x27;;
 import { computed, action } from &#x27;@ember/object&#x27;;
 import deprecateSubclassing from &#x27;ember-bootstrap/utils/deprecate-subclassing&#x27;;
@@ -80,7 +78,6 @@ import deprecateSubclassing from &#x27;ember-bootstrap/utils/deprecate-subclassi
  */
 @tagName(&#x27;&#x27;)
 @deprecateSubclassing
-@templateLayout(layout)
 export default class DropdownToggle extends Component {
   /**
    * @property inNav

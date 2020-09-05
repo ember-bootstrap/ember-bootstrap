@@ -59,11 +59,10 @@
 
 <div class="file">
     <pre class="prettyprint linenums">
-import { layout as templateLayout, tagName } from &#x27;@ember-decorators/component&#x27;;
+import { tagName } from &#x27;@ember-decorators/component&#x27;;
 import { action, computed } from &#x27;@ember/object&#x27;;
 import { reads } from &#x27;@ember/object/computed&#x27;;
 import Component from &#x27;@ember/component&#x27;;
-import layout from &#x27;ember-bootstrap/templates/components/bs-tooltip/element&#x27;;
 import { assert } from &#x27;@ember/debug&#x27;;
 import { scheduleOnce } from &#x27;@ember/runloop&#x27;;
 import defaultValue from &#x27;ember-bootstrap/utils/default-decorator&#x27;;
@@ -76,7 +75,6 @@ import defaultValue from &#x27;ember-bootstrap/utils/default-decorator&#x27;;
  @extends Ember.Component
  @private
  */
-@templateLayout(layout)
 @tagName(&#x27;&#x27;)
 export default class ContextualHelpElement extends Component {
   ariaRole = &#x27;tooltip&#x27;;

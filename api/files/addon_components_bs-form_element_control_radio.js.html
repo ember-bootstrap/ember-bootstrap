@@ -59,9 +59,8 @@
 
 <div class="file">
     <pre class="prettyprint linenums">
-import { layout as templateLayout, tagName } from &#x27;@ember-decorators/component&#x27;;
+import { tagName } from &#x27;@ember-decorators/component&#x27;;
 import Control from &#x27;../control&#x27;;
-import layout from &#x27;ember-bootstrap/templates/components/bs-form/element/control/radio&#x27;;
 import defaultValue from &#x27;ember-bootstrap/utils/default-decorator&#x27;;
 import deprecateSubclassing from &#x27;ember-bootstrap/utils/deprecate-subclassing&#x27;;
 
@@ -72,7 +71,6 @@ import deprecateSubclassing from &#x27;ember-bootstrap/utils/deprecate-subclassi
  @extends Components.FormElementControl
  @private
  */
-@templateLayout(layout)
 @tagName(&#x27;&#x27;)
 @deprecateSubclassing
 export default class FormElementControlRadio extends Control {

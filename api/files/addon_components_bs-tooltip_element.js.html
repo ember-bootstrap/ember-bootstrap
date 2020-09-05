@@ -59,8 +59,6 @@
 
 <div class="file">
     <pre class="prettyprint linenums">
-import { layout as templateLayout } from &#x27;@ember-decorators/component&#x27;;
-import layout from &#x27;ember-bootstrap/templates/components/bs-tooltip/element&#x27;;
 import ContextualHelpElement from &#x27;../bs-contextual-help/element&#x27;;
 import defaultValue from &#x27;ember-bootstrap/utils/default-decorator&#x27;;
 import { macroCondition, getOwnConfig } from &#x27;@embroider/macros&#x27;;
@@ -73,7 +71,6 @@ import { macroCondition, getOwnConfig } from &#x27;@embroider/macros&#x27;;
  @extends Components.ContextualHelpElement
  @private
  */
-@templateLayout(layout)
 export default class TooltipElement extends ContextualHelpElement {
   @defaultValue
   arrowClass = macroCondition(getOwnConfig().isBS3) ? &#x27;tooltip-arrow&#x27; : &#x27;arrow&#x27;;

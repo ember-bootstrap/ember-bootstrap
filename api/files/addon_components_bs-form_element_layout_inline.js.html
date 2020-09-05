@@ -59,9 +59,7 @@
 
 <div class="file">
     <pre class="prettyprint linenums">
-import { layout as templateLayout } from &#x27;@ember-decorators/component&#x27;;
-import FormElementLayout from &#x27;../layout&#x27;;
-import layout from &#x27;ember-bootstrap/templates/components/bs-form/element/layout/vertical&#x27;;
+import FormElementLayoutVertical from &#x27;./vertical&#x27;;
 
 /**
 
@@ -70,8 +68,7 @@ import layout from &#x27;ember-bootstrap/templates/components/bs-form/element/la
  @extends Components.FormElementLayout
  @private
  */
-@templateLayout(layout)
-export default class FormElementLayoutInline extends FormElementLayout {}
+export default class FormElementLayoutInline extends FormElementLayoutVertical {}
 
     </pre>
 </div>
