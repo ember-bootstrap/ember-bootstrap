@@ -10,6 +10,8 @@ import Button from 'ember-bootstrap/components/bs-button';
  @private
  */
 export default class ButtonGroupButton extends Button {
+  '__ember-bootstrap_subclass' = true;
+
   /**
    * @property groupValue
    * @private

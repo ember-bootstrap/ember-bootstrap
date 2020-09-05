@@ -379,7 +379,7 @@ export default class Button extends Component {
     let onClick = this.args.onClick;
     let preventConcurrency = this.args.preventConcurrency;
 
-    if (!onClick) {
+    if (typeof onClick !== 'function') {
       return;
     }
 
@@ -428,16 +428,11 @@ export default class Button extends Component {
           `  <BsButton @${attribute}=${typeof value === 'string' ? `"${value}"` : `{{${value}}}`} />\n` +
           `After:\n` +
           `  <BsButton ${typeof value === 'boolean' ? attribute : `${attribute}="${value}"`} />\n` +
-          `A codemod is available to help with the required migration. See https://github.com/kaliber5/ember-bootstrap-codemods/blob/master/transforms/deprecated-attribute-arguments/README.md`;
+          `A codemod is available to help withFi the required migration. See https://github.com/kaliber5/ember-bootstrap-codemods/blob/master/transforms/deprecated-attribute-arguments/README.md`;
 
-        warn(
-          warningMessage,
-          // eslint-disable-next-line ember/no-attrs-in-components
-          !Object.keys(this.args).includes(argument),
-          {
-            id: `ember-bootstrap.removed-argument.button#${argument}`,
-          }
-        );
+        warn(warningMessage, !Object.keys(this.args).includes(argument), {
+          id: `ember-bootstrap.removed-argument.button#${argument}`,
+        });
       });
     }
   }

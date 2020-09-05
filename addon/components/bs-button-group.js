@@ -1,6 +1,6 @@
 import { action } from '@ember/object';
 import Component from '@glimmer/component';
-import { isArray } from '@ember/array';
+import { A, isArray } from '@ember/array';
 import arg from 'ember-bootstrap/utils/decorators/arg';
 import deprecateSubclassing from 'ember-bootstrap/utils/deprecate-subclassing';
 
@@ -174,6 +174,10 @@ export default class ButtonGroup extends Component {
           newValue = [...this.args.value, pressedValue];
         }
       }
+
+      // For compatibility we continue to return an EmberArray instance for now
+      // @todo this should be changed for the next major release!
+      newValue = A(newValue);
     }
 
     this.args.onChange(newValue);
