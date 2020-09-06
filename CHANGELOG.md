@@ -1,3 +1,11 @@
+## v4.1.2 (2020-09-06)
+
+#### Bug Fixes
+* [#1223](https://github.com/kaliber5/ember-bootstrap/pull/1223) Manual include/exclude of components: <BsForm> requires <BsButton> due to yielded submitButton ([@jelhan](https://github.com/jelhan))
+
+#### Committers: 1
+- Jeldrik Hanschke ([@jelhan](https://github.com/jelhan))
+
 ## v4.1.1 (2020-09-05)
 
 #### Bug Fixes
