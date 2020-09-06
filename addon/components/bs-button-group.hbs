@@ -1,8 +1,7 @@
-<div class="{{if this.vertical "btn-group-vertical" "btn-group"}} {{this.sizeClass}} {{if this.justified (if (macroCondition (macroGetOwnConfig "isBS3")) "btn-group-justified")}}" ...attributes>
+<div class="{{if @vertical "btn-group-vertical" "btn-group"}} {{bs-size-class "btn-group" @size}} {{if @justified (if (macroCondition (macroGetOwnConfig "isBS3")) "btn-group-justified")}}" role="group" ...attributes>
   {{yield
     (hash
       button=(component this.buttonComponent buttonGroupType=@type groupValue=@value onClick=this.buttonPressed)
     )
   }}
-
 </div>

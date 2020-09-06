@@ -1,10 +1,7 @@
 import { action } from '@ember/object';
-import { tagName } from '@ember-decorators/component';
-import { equal } from '@ember/object/computed';
-import Component from '@ember/component';
+import Component from '@glimmer/component';
 import { A, isArray } from '@ember/array';
-import sizeClass from 'ember-bootstrap/utils/cp/size-class';
-import defaultValue from 'ember-bootstrap/utils/default-decorator';
+import arg from 'ember-bootstrap/utils/decorators/arg';
 import deprecateSubclassing from 'ember-bootstrap/utils/deprecate-subclassing';
 
 /**
@@ -62,20 +59,17 @@ import deprecateSubclassing from 'ember-bootstrap/utils/deprecate-subclassing';
 
   @class ButtonGroup
   @namespace Components
-  @extends Ember.Component
+  @extends Glimmer.Component
   @public
 */
-@tagName('')
 @deprecateSubclassing
 export default class ButtonGroup extends Component {
-  ariaRole = 'group';
-
   /**
    * @property buttonComponent
    * @type {String}
    * @private
    */
-  @defaultValue
+  @arg
   buttonComponent = 'bs-button-group/button';
 
   /**
@@ -86,8 +80,6 @@ export default class ButtonGroup extends Component {
    * @default false
    * @public
    */
-  @defaultValue
-  vertical = false;
 
   /**
    * Set to true for the buttons to stretch at equal sizes to span the entire width of its parent. (BS3 only!)
@@ -107,8 +99,6 @@ export default class ButtonGroup extends Component {
    * @default false
    * @public
    */
-  @defaultValue
-  justified = false;
 
   /**
    * The type of the button group specifies how child buttons behave and how the `value` property will be computed:
@@ -146,14 +136,6 @@ export default class ButtonGroup extends Component {
    */
 
   /**
-   * @property isRadio
-   * @type boolean
-   * @private
-   */
-  @(equal('type', 'radio').readOnly())
-  isRadio;
-
-  /**
    * Property for size styling, set to 'lg', 'sm' or 'xs'
    *
    * Also see the [Bootstrap docs](https://getbootstrap.com/docs/4.3/components/button-group/#sizing)
@@ -162,11 +144,6 @@ export default class ButtonGroup extends Component {
    * @type String
    * @public
    */
-  @defaultValue
-  size = null;
-
-  @sizeClass('btn-group', 'size')
-  sizeClass;
 
   /**
    * This action is called whenever the button group's value should be changed because the user clicked a button.
@@ -177,27 +154,32 @@ export default class ButtonGroup extends Component {
    * @param {*} value
    * @public
    */
-  onChange() {}
 
   @action
   buttonPressed(pressedValue) {
+    if (!this.args.onChange) {
+      return;
+    }
     let newValue;
 
-    if (this.isRadio) {
+    if (this.args.type === 'radio') {
       newValue = pressedValue;
     } else {
-      if (!isArray(this.value)) {
-        newValue = A([pressedValue]);
+      if (!isArray(this.args.value)) {
+        newValue = [pressedValue];
       } else {
-        newValue = A(this.value.slice());
-        if (newValue.includes(pressedValue)) {
-          newValue.removeObject(pressedValue);
+        if (this.args.value.includes(pressedValue)) {
+          newValue = this.args.value.filter((v) => v !== pressedValue);
         } else {
-          newValue.pushObject(pressedValue);
+          newValue = [...this.args.value, pressedValue];
         }
       }
+
+      // For compatibility we continue to return an EmberArray instance for now
+      // @todo this should be changed for the next major release!
+      newValue = A(newValue);
     }
 
-    this.onChange(newValue);
+    this.args.onChange(newValue);
   }
 }

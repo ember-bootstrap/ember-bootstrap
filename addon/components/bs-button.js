@@ -1,17 +1,11 @@
-import { tagName } from '@ember-decorators/component';
-import { observes } from '@ember-decorators/object';
-import { computed, action } from '@ember/object';
-import { equal, or } from '@ember/object/computed';
-import { scheduleOnce } from '@ember/runloop';
+import { tracked } from '@glimmer/tracking';
+import { action } from '@ember/object';
+import { equal, or } from 'macro-decorators';
 import { warn } from '@ember/debug';
-import { DEBUG } from '@glimmer/env';
-import Component from '@ember/component';
-import sizeClass from 'ember-bootstrap/utils/cp/size-class';
-import typeClass from 'ember-bootstrap/utils/cp/type-class';
-import overrideableCP from 'ember-bootstrap/utils/cp/overrideable';
-import defaultValue from 'ember-bootstrap/utils/default-decorator';
-import { macroCondition, getOwnConfig } from '@embroider/macros';
+import Component from '@glimmer/component';
+import arg from 'ember-bootstrap/utils/decorators/arg';
 import deprecateSubclassing from 'ember-bootstrap/utils/deprecate-subclassing';
+import { DEBUG } from '@glimmer/env';
 
 /**
   Implements a HTML button element, with support for all [Bootstrap button CSS styles](http://getbootstrap.com/css/#buttons)
@@ -102,10 +96,9 @@ import deprecateSubclassing from 'ember-bootstrap/utils/deprecate-subclassing';
 
   @class Button
   @namespace Components
-  @extends Ember.Component
+  @extends Glimmer.Component
   @public
 */
-@tagName('')
 @deprecateSubclassing
 export default class Button extends Component {
   /**
@@ -115,8 +108,6 @@ export default class Button extends Component {
    * @type string
    * @public
    */
-  @defaultValue
-  defaultText = null;
 
   /**
    * Label of the button used if `onClick` event has returned a Promise which is pending.
@@ -126,8 +117,6 @@ export default class Button extends Component {
    * @type string
    * @public
    */
-  @defaultValue
-  pendingText = undefined;
 
   /**
    * Label of the button used if `onClick` event has returned a Promise which succeeded.
@@ -137,8 +126,6 @@ export default class Button extends Component {
    * @type string
    * @public
    */
-  @defaultValue
-  fulfilledText = undefined;
 
   /**
    * Label of the button used if `onClick` event has returned a Promise which failed.
@@ -148,8 +135,6 @@ export default class Button extends Component {
    * @type string
    * @public
    */
-  @defaultValue
-  rejectedText = undefined;
 
   /**
    * Property to disable the button only used in internal communication
@@ -160,16 +145,13 @@ export default class Button extends Component {
    * @default null
    * @private
    */
-  @defaultValue
-  _disabled = null;
 
-  @computed('_disabled', 'isPending', 'preventConcurrency')
   get __disabled() {
-    if (this._disabled !== null) {
-      return this._disabled;
+    if (this.args._disabled !== undefined) {
+      return this.args._disabled;
     }
 
-    return this.isPending && this.preventConcurrency;
+    return this.isPending && this.args.preventConcurrency !== false;
   }
 
   /**
@@ -181,8 +163,7 @@ export default class Button extends Component {
    * @deprecated
    * @public
    */
-  @defaultValue
-  buttonType = 'button';
+  @arg buttonType = 'button';
 
   /**
    * Set the 'active' class to apply active/pressed CSS styling
@@ -192,8 +173,6 @@ export default class Button extends Component {
    * @default false
    * @public
    */
-  @defaultValue
-  active = false;
 
   /**
    * Property for block level buttons
@@ -204,8 +183,7 @@ export default class Button extends Component {
    * @default false
    * @public
    */
-  @defaultValue
-  block = false;
+  @arg block = false;
 
   /**
    * A click event on a button will not bubble up the DOM tree if it has an `onClick` action handler. Set to true to
@@ -216,8 +194,6 @@ export default class Button extends Component {
    * @default false
    * @public
    */
-  @defaultValue
-  bubble = false;
 
   /**
    * If button is active and this is set, the icon property will match this property
@@ -226,8 +202,6 @@ export default class Button extends Component {
    * @type String
    * @public
    */
-  @defaultValue
-  iconActive = null;
 
   /**
    * If button is inactive and this is set, the icon property will match this property
@@ -236,8 +210,6 @@ export default class Button extends Component {
    * @type String
    * @public
    */
-  @defaultValue
-  iconInactive = null;
 
   /**
    * Class(es) (e.g. glyphicons or font awesome) to use as a button icon
@@ -245,13 +217,11 @@ export default class Button extends Component {
    *
    * @property icon
    * @type String
-   * @readonly
    * @public
    */
-  @overrideableCP('active', function () {
-    return this.active ? this.iconActive : this.iconInactive;
-  })
-  icon;
+  get icon() {
+    return this.args.icon || (this.args.active ? this.args.iconActive : this.args.iconInactive);
+  }
 
   /**
    * Supply a value that will be associated with this button. This will be send
@@ -261,8 +231,6 @@ export default class Button extends Component {
    * @type any
    * @public
    */
-  @defaultValue
-  value = null;
 
   /**
    * Controls if `onClick` action is fired concurrently. If `true` clicking button multiple times will not trigger
@@ -275,8 +243,6 @@ export default class Button extends Component {
    * @default true
    * @public
    */
-  @defaultValue
-  preventConcurrency = true;
 
   /**
    * State of the button. The button's label (if not used as a block component) will be set to the
@@ -290,8 +256,13 @@ export default class Button extends Component {
    * @default 'default'
    * @private
    */
-  @defaultValue
-  state = 'default';
+  @tracked _state = 'default';
+  get state() {
+    return this.args.state ?? this._state;
+  }
+  set state(state) {
+    this._state = state;
+  }
 
   /**
    * Promise returned by `onClick` event is pending.
@@ -344,8 +315,6 @@ export default class Button extends Component {
    * @type boolean
    * @public
    */
-  @defaultValue
-  reset = null;
 
   /**
    * Property for size styling, set to 'lg', 'sm' or 'xs'
@@ -356,11 +325,6 @@ export default class Button extends Component {
    * @type String
    * @public
    */
-  @defaultValue
-  size = null;
-
-  @sizeClass('btn', 'size')
-  sizeClass;
 
   /**
    * Property for type styling
@@ -372,8 +336,6 @@ export default class Button extends Component {
    * @default 'secondary'
    * @public
    */
-  @defaultValue
-  type = macroCondition(getOwnConfig().isBS4) ? 'secondary' : 'default';
 
   /**
    * Property to create outline buttons (BS4+ only)
@@ -383,11 +345,6 @@ export default class Button extends Component {
    * @default false
    * @public
    */
-  @defaultValue
-  outline = false;
-
-  @typeClass('btn', 'type')
-  typeClass;
 
   /**
    * When clicking the button this action is called with the value of the button (that is the value of the "value" property).
@@ -403,8 +360,6 @@ export default class Button extends Component {
    * @param {*} value
    * @public
    */
-  @defaultValue
-  onClick = null;
 
   /**
    * This will reset the state property to 'default', and with that the button's label to defaultText
@@ -412,20 +367,13 @@ export default class Button extends Component {
    * @method resetState
    * @private
    */
+  @action
   resetState() {
-    this.set('state', 'default');
+    this.state = 'default';
   }
 
-  @observes('reset')
-  resetObserver() {
-    if (this.reset) {
-      scheduleOnce('actions', this, 'resetState');
-    }
-  }
-
-  @computed('state', 'defaultText', 'pendingText', 'fulfilledText', 'rejectedText')
   get text() {
-    return this[`${this.state}Text`] || this.defaultText;
+    return this.args[`${this.state}Text`] || this.args.defaultText;
   }
 
   /**
@@ -434,39 +382,39 @@ export default class Button extends Component {
    */
   @action
   handleClick(e) {
-    let onClick = this.onClick;
-    let preventConcurrency = this.preventConcurrency;
+    let onClick = this.args.onClick;
+    let preventConcurrency = this.args.preventConcurrency;
 
-    if (onClick === null || onClick === undefined) {
+    if (typeof onClick !== 'function') {
       return;
     }
 
     if (!preventConcurrency || !this.isPending) {
-      let promise = onClick(this.value);
+      let promise = onClick(this.args.value);
       if (promise && typeof promise.then === 'function' && !this.isDestroyed) {
-        this.set('state', 'pending');
+        this.state = 'pending';
         promise.then(
           () => {
             if (!this.isDestroyed) {
-              this.set('state', 'fulfilled');
+              this.state = 'fulfilled';
             }
           },
           () => {
             if (!this.isDestroyed) {
-              this.set('state', 'rejected');
+              this.state = 'rejected';
             }
           }
         );
       }
     }
 
-    if (!this.bubble) {
+    if (!this.args.bubble) {
       e.stopPropagation();
     }
   }
 
-  init() {
-    super.init(...arguments);
+  constructor() {
+    super(...arguments);
 
     // deprecate arguments used for attribute bindings only
     if (DEBUG) {
@@ -486,16 +434,11 @@ export default class Button extends Component {
           `  <BsButton @${attribute}=${typeof value === 'string' ? `"${value}"` : `{{${value}}}`} />\n` +
           `After:\n` +
           `  <BsButton ${typeof value === 'boolean' ? attribute : `${attribute}="${value}"`} />\n` +
-          `A codemod is available to help with the required migration. See https://github.com/kaliber5/ember-bootstrap-codemods/blob/master/transforms/deprecated-attribute-arguments/README.md`;
+          `A codemod is available to help withFi the required migration. See https://github.com/kaliber5/ember-bootstrap-codemods/blob/master/transforms/deprecated-attribute-arguments/README.md`;
 
-        warn(
-          warningMessage,
-          // eslint-disable-next-line ember/no-attrs-in-components
-          !Object.keys(this.attrs).includes(argument),
-          {
-            id: `ember-bootstrap.removed-argument.button#${argument}`,
-          }
-        );
+        warn(warningMessage, !Object.keys(this.args).includes(argument), {
+          id: `ember-bootstrap.removed-argument.button#${argument}`,
+        });
       });
     }
   }

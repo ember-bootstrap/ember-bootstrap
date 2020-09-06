@@ -6,7 +6,7 @@ export default function typeClass(prefix, typeProperty) {
   assert('You have to provide a typeProperty for typeClass', typeof typeProperty === 'string');
 
   return computed('outline', 'type', function () {
-    let type = this.get(typeProperty) || 'default';
+    let type = this[typeProperty] || 'default';
     assert('The value of `type` must be a string', typeof type === 'string' && type !== '');
 
     if (this.outline) {
