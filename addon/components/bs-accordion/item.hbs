@@ -1,10 +1,10 @@
 {{#let
-  (component (ensure-safe-component (bs-default @titleComponent (component "bs-accordion/item/title"))) collapsed=this.collapsed disabled=this.disabled onClick=(fn (bs-default @onClick (bs-noop)) this.value))
+  (component (ensure-safe-component (bs-default @titleComponent (component "bs-accordion/item/title"))) collapsed=this.collapsed disabled=@disabled onClick=(fn (bs-default @onClick (bs-noop)) this.value))
   (component (ensure-safe-component (bs-default @bodyComponent (component "bs-accordion/item/body"))) collapsed=this.collapsed)
 as |Title Body|
 }}
   <div
-    class="{{if this.disabled "disabled"}} {{this.typeClass}} {{if (macroCondition (macroGetOwnConfig "isNotBS3")) "card"}} {{if (macroCondition (macroGetOwnConfig "isBS3")) "panel"}}"
+    class="{{if @disabled "disabled"}} {{this.typeClass}} {{if (macroCondition (macroGetOwnConfig "isNotBS3")) "card"}} {{if (macroCondition (macroGetOwnConfig "isBS3")) "panel"}}"
     ...attributes
   >
     {{#if (has-block-params)}}
