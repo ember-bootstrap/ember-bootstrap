@@ -217,7 +217,7 @@ export default class Collapse extends Component {
    */
   getExpandedSize(action) {
     let expandedSize = this.expandedSize;
-    if (expandedSize) {
+    if (expandedSize != null) {
       return expandedSize;
     }
 
