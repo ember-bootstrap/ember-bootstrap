@@ -52,7 +52,7 @@ export default class Alert extends Component {
    * @private
    */
   @tracked
-  hidden = !this._visible;
+  hidden = !this.visible;
 
   /**
    * This property controls if the alert should be visible. If false it might still be in the DOM until the fade animation
@@ -84,8 +84,6 @@ export default class Alert extends Component {
    * @default true
    * @public
    */
-  @arg
-  fade = true;
 
   get showAlert() {
     return this._visible && this.args.fade !== false;
@@ -183,7 +181,7 @@ export default class Alert extends Component {
   }
 
   @action
-  _observeIsVisible() {
+  showOrHide() {
     if (this._visible) {
       this.show();
     } else {

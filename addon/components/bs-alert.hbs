@@ -1,7 +1,7 @@
 <div
   class="{{unless this.hidden "alert"}} {{if this.fade "fade"}} {{if this.dismissible "alert-dismissible"}} {{bs-type-class "alert" @type}} {{if this.showAlert (if (macroCondition (macroGetOwnConfig "isBS4")) "show" "in")}}"
   ...attributes
-  {{did-update this._observeIsVisible this._visible}}
+  {{did-update this.showOrHide this._visible}}
 >
   {{#unless this.hidden}}
     {{#if this.dismissible}}
