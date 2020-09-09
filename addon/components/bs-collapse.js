@@ -1,16 +1,13 @@
-import { tagName } from '@ember-decorators/component';
-import { alias, and, not } from '@ember/object/computed';
-import { addObserver } from '@ember/object/observers';
-import Component from '@ember/component';
-import { isPresent, isNone } from '@ember/utils';
+import { action } from '@ember/object';
+import Component from '@glimmer/component';
+import { isNone } from '@ember/utils';
 import { next } from '@ember/runloop';
 import { camelize } from '@ember/string';
 import transitionEnd from 'ember-bootstrap/utils/transition-end';
-import { assert } from '@ember/debug';
-import defaultValue from 'ember-bootstrap/utils/default-decorator';
-import { computed } from '@ember/object';
 import deprecateSubclassing from 'ember-bootstrap/utils/deprecate-subclassing';
 import { ref } from 'ember-ref-bucket';
+import arg from '../utils/decorators/arg';
+import { tracked } from '@glimmer/tracking';
 
 /**
   An Ember component that mimics the behaviour of [Bootstrap's collapse.js plugin](http://getbootstrap.com/javascript/#collapse)
@@ -30,10 +27,9 @@ import { ref } from 'ember-ref-bucket';
 
   @class Collapse
   @namespace Components
-  @extends Ember.Component
+  @extends Glimmer.Component
   @public
 */
-@tagName('')
 @deprecateSubclassing
 export default class Collapse extends Component {
   /**
@@ -50,7 +46,7 @@ export default class Collapse extends Component {
    * @default true
    * @public
    */
-  @defaultValue
+  @arg
   collapsed = true;
 
   /**
@@ -59,17 +55,16 @@ export default class Collapse extends Component {
    * @property active
    * @private
    */
-  @defaultValue
+  @tracked
   active = !this.collapsed;
 
-  @not('transitioning')
-  collapse;
+  get collapse() {
+    return !this.transitioning;
+  }
 
-  @alias('transitioning')
-  collapsing;
-
-  @and('collapse', 'active')
-  showContent;
+  get showContent() {
+    return this.collapse && this.active;
+  }
 
   /**
    * true if the component is currently transitioning
@@ -78,7 +73,7 @@ export default class Collapse extends Component {
    * @type boolean
    * @private
    */
-  @defaultValue
+  @tracked
   transitioning = false;
 
   /**
@@ -89,7 +84,7 @@ export default class Collapse extends Component {
    * @default 0
    * @public
    */
-  @defaultValue
+  @arg
   collapsedSize = 0;
 
   /**
@@ -100,12 +95,12 @@ export default class Collapse extends Component {
    * @default null
    * @public
    */
+  @arg
   expandedSize = null;
 
   /**
    * Calculates a hash for style attribute.
    */
-  @computed('collapseDimension', 'collapseSize')
   get cssStyle() {
     if (isNone(this.collapseSize)) {
       return {};
@@ -136,6 +131,7 @@ export default class Collapse extends Component {
    * @default 'height'
    * @public
    */
+  @arg
   collapseDimension = 'height';
 
   /**
@@ -146,20 +142,11 @@ export default class Collapse extends Component {
    * @default 350
    * @public
    */
+  @arg
   transitionDuration = 350;
 
+  @tracked
   collapseSize = null;
-
-  setCollapseSize(size) {
-    let dimension = this.collapseDimension;
-
-    assert(
-      `collapseDimension must be either "width" or "height". ${dimension} given.`,
-      ['width', 'height'].indexOf(dimension) !== -1
-    );
-
-    this.set('collapseSize', size);
-  }
 
   /**
    * The action to be sent when the element is about to be hidden.
@@ -167,7 +154,6 @@ export default class Collapse extends Component {
    * @event onHide
    * @public
    */
-  onHide() {}
 
   /**
    * The action to be sent after the element has been completely hidden (including the CSS transition).
@@ -175,7 +161,6 @@ export default class Collapse extends Component {
    * @event onHidden
    * @public
    */
-  onHidden() {}
 
   /**
    * The action to be sent when the element is about to be shown.
@@ -183,7 +168,6 @@ export default class Collapse extends Component {
    * @event onShow
    * @public
    */
-  onShow() {}
 
   /**
    * The action to be sent after the element has been completely shown (including the CSS transition).
@@ -191,7 +175,6 @@ export default class Collapse extends Component {
    * @event onShown
    * @public
    */
-  onShown() {}
 
   /**
    * Triggers the show transition
@@ -200,28 +183,26 @@ export default class Collapse extends Component {
    * @protected
    */
   show() {
-    this.onShow();
+    this.args.onShow?.();
 
-    this.setProperties({
-      transitioning: true,
-      active: true,
-    });
-    this.setCollapseSize(this.collapsedSize);
+    this.transitioning = true;
+    this.active = true;
+    this.collapseSize = this.collapsedSize;
 
     transitionEnd(this._element, this.transitionDuration).then(() => {
       if (this.isDestroyed) {
         return;
       }
-      this.set('transitioning', false);
+      this.transitioning = false;
       if (this.resetSizeWhenNotCollapsing) {
-        this.setCollapseSize(null);
+        this.collapseSize = null;
       }
-      this.onShown();
+      this.args.onShown?.();
     });
 
     next(this, function () {
       if (!this.isDestroyed) {
-        this.setCollapseSize(this.getExpandedSize('show'));
+        this.collapseSize = this.getExpandedSize('show');
       }
     });
   }
@@ -236,7 +217,7 @@ export default class Collapse extends Component {
    */
   getExpandedSize(action) {
     let expandedSize = this.expandedSize;
-    if (isPresent(expandedSize)) {
+    if (expandedSize != null) {
       return expandedSize;
     }
 
@@ -253,32 +234,31 @@ export default class Collapse extends Component {
    * @protected
    */
   hide() {
-    this.onHide();
+    this.args.onHide?.();
 
-    this.setProperties({
-      transitioning: true,
-      active: false,
-    });
-    this.setCollapseSize(this.getExpandedSize('hide'));
+    this.transitioning = true;
+    this.active = false;
+    this.collapseSize = this.getExpandedSize('hide');
 
     transitionEnd(this._element, this.transitionDuration).then(() => {
       if (this.isDestroyed) {
         return;
       }
-      this.set('transitioning', false);
+      this.transitioning = false;
       if (this.resetSizeWhenNotCollapsing) {
-        this.setCollapseSize(null);
+        this.collapseSize = null;
       }
-      this.onHidden();
+      this.args.onHidden?.();
     });
 
     next(this, function () {
       if (!this.isDestroyed) {
-        this.setCollapseSize(this.collapsedSize);
+        this.collapseSize = this.collapsedSize;
       }
     });
   }
 
+  @action
   _onCollapsedChange() {
     let collapsed = this.collapsed;
     let active = this.active;
@@ -292,23 +272,17 @@ export default class Collapse extends Component {
     }
   }
 
+  @action
   _updateCollapsedSize() {
     if (!this.resetSizeWhenNotCollapsing && this.collapsed && !this.collapsing) {
-      this.setCollapseSize(this.collapsedSize);
+      this.collapseSize = this.collapsedSize;
     }
   }
 
+  @action
   _updateExpandedSize() {
     if (!this.resetSizeWhenNotCollapsing && !this.collapsed && !this.collapsing) {
-      this.setCollapseSize(this.expandedSize);
+      this.collapseSize = this.expandedSize;
     }
-  }
-
-  init() {
-    super.init(...arguments);
-
-    addObserver(this, 'collapsed', null, this._onCollapsedChange, true);
-    addObserver(this, 'collapsedSize', null, this._updateCollapsedSize, true);
-    addObserver(this, 'expandedSize', null, this._updateExpandedSize, true);
   }
 }
