@@ -1202,7 +1202,7 @@
     handlebars "^4.7.4"
     simple-html-tokenizer "^0.5.9"
 
-"@glimmer/tracking@^1.0.1":
+"@glimmer/tracking@^1.0.0", "@glimmer/tracking@^1.0.1":
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/@glimmer/tracking/-/tracking-1.0.1.tgz#77d8b16e9e0be2cc8e4a00b77259fdc208802840"
   integrity sha512-Jt8rn4/6S6CObILaotYUT0lFWNPq1xJubXdU/9p6zxWtMrBXYJalVvI5hFYrCh/hG8Z/aLoERGnb2YRWtBSyzw==
@@ -5599,6 +5599,14 @@ ember-auto-import@^1.6.0:
     typescript-memoize "^1.0.0-alpha.3"
     walk-sync "^0.3.3"
     webpack "~4.28"
+
+ember-cache-primitive-polyfill@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/ember-cache-primitive-polyfill/-/ember-cache-primitive-polyfill-1.0.0.tgz#33330c2d6be1473f9f277c37a63f588b1c9a82cf"
+  integrity sha512-LhsJZlu4AU1th96kTER1kcw9IVTevSDD7L40GnA3dkSkSCrVkSsq0CotT4wnpFwNvklJCOGLitTxem3REiE2Gw==
+  dependencies:
+    ember-cli-babel "^7.19.0"
+    ember-compatibility-helpers "^1.2.1"
 
 ember-cli-app-version@^3.0.0:
   version "3.2.0"
@@ -14313,6 +14321,24 @@ tr46@^2.0.2:
   integrity sha512-3n1qG+/5kg+jrbTzwAykB5yRYtQCTqOGKq5U5PE3b0a1/mzo6snDhjGS0zJVJunO0NrT3Dg1MLy5TjWP/UJppg==
   dependencies:
     punycode "^2.1.1"
+
+tracked-maps-and-sets@^2.0.0:
+  version "2.1.0"
+  resolved "https://registry.yarnpkg.com/tracked-maps-and-sets/-/tracked-maps-and-sets-2.1.0.tgz#762cf89fb22ca16aa4b1a7198c03e844e0ef238d"
+  integrity sha512-N8v0ulJfyTD0Ew4omtO1JZTDql7qh/9ZqM+YIhygVDuvwLQjTa29QBO4eIfdyx/ZnRDNgBl9FBAZIuc/2R9UKQ==
+  dependencies:
+    "@glimmer/tracking" "^1.0.0"
+    ember-cli-babel "^7.17.2"
+
+tracked-toolbox@^1.2.0:
+  version "1.2.0"
+  resolved "https://registry.yarnpkg.com/tracked-toolbox/-/tracked-toolbox-1.2.0.tgz#cc855205def6fd81a56e3b8670e0e6420bf8d061"
+  integrity sha512-xpnA95KXpkp5gmmpG6c+qvUKUkHWR+9iamdy5JcJvpL1x+3ms5vefvJpJsfBVMz5BPiixcSUlVwLaBHeUoU0sw==
+  dependencies:
+    ember-cache-primitive-polyfill "^1.0.0"
+    ember-cli-babel "^7.21.0"
+    ember-cli-htmlbars "^4.2.0"
+    tracked-maps-and-sets "^2.0.0"
 
 tree-sync@^1.2.2:
   version "1.4.0"

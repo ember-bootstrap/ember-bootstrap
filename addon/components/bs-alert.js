@@ -1,14 +1,11 @@
-import { tagName } from '@ember-decorators/component';
 import { action } from '@ember/object';
-import { and, not } from '@ember/object/computed';
-import { addObserver } from '@ember/object/observers';
-import Component from '@ember/component';
+import Component from '@glimmer/component';
+import { tracked } from '@glimmer/tracking';
 import { later } from '@ember/runloop';
-import typeClass from 'ember-bootstrap/utils/cp/type-class';
-import listenTo from 'ember-bootstrap/utils/cp/listen-to';
-import usesTransition from 'ember-bootstrap/utils/cp/uses-transition';
-import defaultValue from 'ember-bootstrap/utils/default-decorator';
+import usesTransition from 'ember-bootstrap/utils/decorators/uses-transition';
 import deprecateSubclassing from 'ember-bootstrap/utils/deprecate-subclassing';
+import arg from 'ember-bootstrap/utils/decorators/arg';
+import { localCopy } from 'tracked-toolbox';
 
 /**
   Implements [Bootstrap alerts](http://getbootstrap.com/components/#alerts)
@@ -28,10 +25,9 @@ import deprecateSubclassing from 'ember-bootstrap/utils/deprecate-subclassing';
 
   @class Alert
   @namespace Components
-  @extends Ember.Component
+  @extends Glimmer.Component
   @public
 */
-@tagName('')
 @deprecateSubclassing
 export default class Alert extends Component {
   /**
@@ -43,7 +39,7 @@ export default class Alert extends Component {
    * @default true
    * @public
    */
-  @defaultValue
+  @arg
   dismissible = true;
 
   /**
@@ -55,8 +51,8 @@ export default class Alert extends Component {
    * @readonly
    * @private
    */
-  @defaultValue
-  hidden = !this._visible;
+  @tracked
+  hidden = !this.visible;
 
   /**
    * This property controls if the alert should be visible. If false it might still be in the DOM until the fade animation
@@ -70,22 +66,15 @@ export default class Alert extends Component {
    * @default true
    * @public
    */
-  @defaultValue
+  @arg
   visible = true;
 
   /**
    * @property _visible
    * @private
    */
-  @listenTo('visible')
+  @localCopy('visible')
   _visible;
-
-  /**
-   * @property notVisible
-   * @private
-   */
-  @not('_visible')
-  notVisible;
 
   /**
    * Set to false to disable the fade out animation when hiding the alert.
@@ -95,22 +84,10 @@ export default class Alert extends Component {
    * @default true
    * @public
    */
-  @defaultValue
-  fade = true;
 
-  /**
-   * Computed property to set the alert class to the component div. Will be false when dismissed to have the component
-   * div (which cannot be removed form DOM by the component itself) without any markup.
-   *
-   * @property alert
-   * @type boolean
-   * @private
-   */
-  @not('hidden')
-  alert;
-
-  @and('_visible', 'fade')
-  showAlert;
+  get showAlert() {
+    return this._visible && this.args.fade !== false;
+  }
 
   /**
    * The duration of the fade out animation
@@ -120,7 +97,7 @@ export default class Alert extends Component {
    * @default 150
    * @public
    */
-  @defaultValue
+  @arg
   fadeDuration = 150;
 
   /**
@@ -130,14 +107,8 @@ export default class Alert extends Component {
    *
    * @property type
    * @type String
-   * @default 'default'
    * @public
    */
-  @defaultValue
-  type = 'default';
-
-  @typeClass('alert', 'type')
-  typeClass;
 
   /**
    * Use CSS transitions?
@@ -156,7 +127,6 @@ export default class Alert extends Component {
    * @event onDismissed
    * @public
    */
-  onDismissed() {}
 
   /**
    * The action is called when the close button is clicked.
@@ -167,12 +137,11 @@ export default class Alert extends Component {
    * @event onDismiss
    * @public
    */
-  onDismiss() {}
 
   @action
   dismiss() {
-    if (this.onDismiss() !== false) {
-      this.set('_visible', false);
+    if (this.args.onDismiss?.() !== false) {
+      this._visible = false;
     }
   }
 
@@ -183,7 +152,7 @@ export default class Alert extends Component {
    * @private
    */
   show() {
-    this.set('hidden', false);
+    this.hidden = false;
   }
 
   /**
@@ -199,29 +168,24 @@ export default class Alert extends Component {
         this,
         function () {
           if (!this.isDestroyed) {
-            this.set('hidden', true);
-            this.onDismissed();
+            this.hidden = true;
+            this.args.onDismissed?.();
           }
         },
         this.fadeDuration
       );
     } else {
-      this.set('hidden', true);
-      this.onDismissed();
+      this.hidden = true;
+      this.args.onDismissed?.();
     }
   }
 
-  _observeIsVisible() {
+  @action
+  showOrHide() {
     if (this._visible) {
       this.show();
     } else {
       this.hide();
     }
-  }
-
-  init() {
-    super.init(...arguments);
-
-    addObserver(this, '_visible', null, this._observeIsVisible, true);
   }
 }
