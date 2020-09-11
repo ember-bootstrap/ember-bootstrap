@@ -12,6 +12,7 @@ import usesTransition from 'ember-bootstrap/utils/cp/uses-transition';
 import defaultValue from 'ember-bootstrap/utils/default-decorator';
 import { assert } from '@ember/debug';
 import Ember from 'ember';
+import { deprecate } from '@ember/application/deprecations';
 
 class InState extends EmberObject {
   hover = false;
@@ -254,6 +255,14 @@ export default class ContextualHelp extends Component {
       el = this._parent;
     } else if (triggerElement === 'parentView') {
       el = this.parentView.element;
+      deprecate(
+        '@triggerElement="parentView" is deprecated. Please remove the @triggerElement argument to target the parent DOM element, or use a CSS selector',
+        false,
+        {
+          id: `ember-bootstrap.contextual-help.parent-view`,
+          until: '5.0.0',
+        }
+      );
     } else {
       el = document.querySelector(triggerElement);
     }

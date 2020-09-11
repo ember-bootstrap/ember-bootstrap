@@ -149,6 +149,10 @@ module('Integration | Component | bs-tooltip', function (hooks) {
 
     await triggerEvent('#target', 'mouseleave');
     assert.dom('.tooltip').doesNotExist('tooltip is not visible');
+
+    assert.deprecationsInclude(
+      '@triggerElement="parentView" is deprecated. Please remove the @triggerElement argument to target the parent DOM element, or use a CSS selector'
+    );
   });
 
   test('it calls onShow/onShown actions when showing tooltip [fade=false]', async function (assert) {
