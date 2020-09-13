@@ -1,1 +1,1 @@
-export { default, eq } from 'ember-bootstrap/helpers/bs-size-class';
+export { default } from 'ember-bootstrap/helpers/bs-size-class';
