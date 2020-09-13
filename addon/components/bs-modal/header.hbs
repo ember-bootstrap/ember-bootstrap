@@ -2,8 +2,8 @@
   {{#if hasBlockParams}}
     {{yield
       (hash
-        title=(component this.titleComponent)
-        close=(component this.closeComponent onClick=@onClose)
+        title=(bs-default @titleComponent (component "bs-modal/header/title"))
+        close=(component (bs-default @closeComponent (component "bs-modal/header/close")) onClick=@onClose)
       )
     }}
   {{else}}
@@ -11,20 +11,20 @@
       {{#if hasBlock}}
         {{yield}}
       {{else}}
-        {{#component this.titleComponent}}{{@title}}{{/component}}
+        {{#component (bs-default @titleComponent (component "bs-modal/header/title"))}}{{@title}}{{/component}}
       {{/if}}
       {{#if this.closeButton}}
-        {{component this.closeComponent onClick=@onClose}}
+        {{component (bs-default @closeComponent (component "bs-modal/header/close")) onClick=@onClose}}
       {{/if}}
     {{/if}}
     {{#if (macroCondition (macroGetOwnConfig "isBS3"))}}
       {{#if this.closeButton}}
-        {{component this.closeComponent onClick=@onClose}}
+        {{component (bs-default @closeComponent (component "bs-modal/header/close")) onClick=@onClose}}
       {{/if}}
       {{#if hasBlock}}
         {{yield}}
       {{else}}
-        {{#component this.titleComponent}}{{@title}}{{/component}}
+        {{#component (bs-default @titleComponent (component "bs-modal/header/title"))}}{{@title}}{{/component}}
       {{/if}}
     {{/if}}
   {{/if}}

@@ -1,5 +1,5 @@
 {{#if this.inDom}}
-  {{#let (component this.dialogComponent
+  {{#let (component (bs-default @dialogComponent (component "bs-modal/dialog"))
     onClose=this.close
     fade=this._fade
     showModal=this.showModal
@@ -20,9 +20,9 @@
       >
         {{yield
           (hash
-            header=(component this.headerComponent onClose=this.close)
-            body=(component this.bodyComponent)
-            footer=(component this.footerComponent onClose=this.close onSubmit=this.doSubmit)
+            header=(component (bs-default @headerComponent (component "bs-modal/header")) onClose=this.close)
+            body=(component (bs-default @bodyComponent (component "bs-modal/body")))
+            footer=(component (bs-default @footerComponent (component "bs-modal/footer")) onClose=this.close onSubmit=this.doSubmit)
             close=this.close
             submit=this.doSubmit
           )
@@ -42,9 +42,9 @@
         >
           {{yield
             (hash
-              header=(component this.headerComponent onClose=this.close)
-              body=(component this.bodyComponent)
-              footer=(component this.footerComponent onClose=this.close onSubmit=this.doSubmit)
+              header=(component (bs-default @headerComponent (component "bs-modal/header")) onClose=this.close)
+              body=(component (bs-default @bodyComponent (component "bs-modal/body")))
+              footer=(component (bs-default @footerComponent (component "bs-modal/footer")) onClose=this.close onSubmit=this.doSubmit)
               close=this.close
               submit=this.doSubmit
             )
