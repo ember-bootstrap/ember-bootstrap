@@ -48,7 +48,17 @@ module.exports = function (defaults) {
         staticAddonTestSupportTrees: true,
         staticAddonTrees: true,
         staticHelpers: true,
-        // staticComponents: true,
+        staticComponents: true,
+        packageRules: [
+          {
+            package: 'dummy',
+            components: {
+              '{{test-component}}': {
+                safeToIgnore: true,
+              },
+            },
+          },
+        ],
         packagerOptions: {
           webpackConfig: {
             devtool: false,

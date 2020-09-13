@@ -97,9 +97,9 @@ module('Integration | subclassing', function (hooks) {
       test('it should not be subclassed', async function (assert) {
         class MyClass extends clazz {}
 
-        this.owner.register('component:my-class', MyClass);
+        this.owner.register('component:test-component', MyClass);
 
-        await render(hbs`<MyClass />`);
+        await render(hbs`<TestComponent />`);
 
         assert.deprecationsInclude(
           `Extending from ember-bootstrap component classes is not supported, and might break anytime. Detected subclassing of <${name}> component.`
@@ -111,9 +111,9 @@ module('Integration | subclassing', function (hooks) {
           '__ember-bootstrap_subclass' = true;
         }
 
-        this.owner.register('component:my-class', MyClass);
+        this.owner.register('component:test-component', MyClass);
 
-        await render(hbs`<MyClass />`);
+        await render(hbs`<TestComponent />`);
 
         assert.deprecations(0);
       });

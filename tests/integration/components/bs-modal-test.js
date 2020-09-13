@@ -49,7 +49,7 @@ module('Integration | Component | bs-modal', function (hooks) {
 
   test('clicking ok button closes modal when autoClose=true with custom component hierarchy', async function (assert) {
     this.owner.register(
-      'component:my-component',
+      'component:test-component',
       class extends Component {
         layout = hbs`{{yield}}`;
       }
@@ -57,10 +57,10 @@ module('Integration | Component | bs-modal', function (hooks) {
 
     await render(hbs`
       <BsModal @title="Simple Dialog" @body={{false}} @footer={{false}} as |modal|>
-        {{#my-component}}
+        {{#test-component}}
           <modal.body>Hello world!</modal.body>
           <modal.footer />
-        {{/my-component}}
+        {{/test-component}}
       </BsModal>
 
     `);
