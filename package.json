@@ -129,7 +129,7 @@
     "prettier": "^2.1.1",
     "qunit-dom": "^1.4.0",
     "release-it": "^14.0.2",
-    "release-it-lerna-changelog": "^2.3.0",
+    "release-it-lerna-changelog": "^2.4.0",
     "striptags": "^3.0.0"
   },
   "engines": {
