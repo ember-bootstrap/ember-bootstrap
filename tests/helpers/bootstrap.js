@@ -1,5 +1,6 @@
 import config from 'dummy/config/environment';
-import { skip, test } from 'qunit';
+import { getOwnConfig } from '@embroider/macros';
+import { module, skip, test } from 'qunit';
 import { Promise } from 'rsvp';
 
 const currentBootstrapVersion = parseInt(config.bootstrapVersion);
@@ -26,6 +27,23 @@ export function versionDependent(v3, v4) {
   }
 
   return v4;
+}
+
+// eslint-disable-next-line ember/no-test-module-for
+export function moduleForOptionalFeature(optionalFeature, fn) {
+  let ownConfig = getOwnConfig();
+
+  if (!Object.keys(ownConfig).includes(optionalFeature)) {
+    throw new Error(`Optional feature ${optionalFeature} does not exist.`);
+  }
+
+  let optionalFeatureEnabled = ownConfig[optionalFeature];
+  let name = `Optional feature: ${optionalFeature}`;
+  if (optionalFeatureEnabled) {
+    module(name, fn);
+  } else {
+    skip(name, fn);
+  }
 }
 
 export function visibilityClass() {

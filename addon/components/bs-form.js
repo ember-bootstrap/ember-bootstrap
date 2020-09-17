@@ -161,6 +161,8 @@ export default class Form extends Component {
    * @type Ember.Object
    * @public
    */
+  @defaultValue
+  model = macroCondition(getOwnConfig().useDefaultValueIfUndefined) ? {} : undefined;
 
   /**
    * Set the layout of the form to either "vertical", "horizontal" or "inline". See http://getbootstrap.com/css/#forms-inline and http://getbootstrap.com/css/#forms-horizontal
