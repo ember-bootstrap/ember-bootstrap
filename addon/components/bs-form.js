@@ -381,7 +381,6 @@ export default class Form extends Component {
    * @param { Object } model  The form's `model`
    * @public
    */
-  onBefore(model) {} // eslint-disable-line no-unused-vars
 
   /**
    * Action is called when submit has been triggered and the model has passed all validations (if present).
@@ -391,7 +390,6 @@ export default class Form extends Component {
    * @param { Object } result The returned result from the validate method, if validation is available
    * @public
    */
-  onSubmit(model, result) {} // eslint-disable-line no-unused-vars
 
   /**
    * Action is called when validation of the model has failed.
@@ -401,7 +399,6 @@ export default class Form extends Component {
    * @param { Object } error
    * @public
    */
-  onInvalid(model, error) {} // eslint-disable-line no-unused-vars
 
   /**
    * Submit handler that will send the default action ("action") to the controller when submitting the form.
@@ -426,7 +423,10 @@ export default class Form extends Component {
     let model = this.model;
 
     this.incrementProperty('pendingSubmissions');
-    this.onBefore(model);
+
+    if (typeof this.onBefore === 'function') {
+      this.onBefore(model);
+    }
 
     return RSVP.resolve()
       .then(() => {
@@ -440,7 +440,9 @@ export default class Form extends Component {
 
           return RSVP.resolve()
             .then(() => {
-              return this.onSubmit(model, record);
+              if (typeof this.onSubmit === 'function') {
+                return this.onSubmit(model, record);
+              }
             })
             .then(() => {
               if (this.isDestroyed) {
@@ -474,7 +476,9 @@ export default class Form extends Component {
         (error) => {
           return RSVP.resolve()
             .then(() => {
-              return this.onInvalid(model, error);
+              if (typeof this.onInvalid === 'function') {
+                return this.onInvalid(model, error);
+              }
             })
             .finally(() => {
               if (this.isDestroyed) {

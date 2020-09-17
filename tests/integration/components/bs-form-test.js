@@ -1048,4 +1048,17 @@ module('Integration | Component | bs-form', function (hooks) {
       });
     });
   });
+
+  test('arguments @onBefore, @onSubmit, @onInvalid can be undefined', async function (assert) {
+    assert.expect(0);
+
+    this.set('onBefore', undefined);
+    this.set('onSubmit', undefined);
+    this.set('onInvalid', undefined);
+
+    await render(hbs`
+      <BsForm @onBefore={{this.onBefore}} @onSubmit={{this.onSubmit}} @onInvalid={{this.onInvalid}} />
+    `);
+    await triggerEvent('form', 'submit');
+  });
 });
