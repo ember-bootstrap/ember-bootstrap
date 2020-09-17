@@ -499,8 +499,8 @@ module('Integration | Component | bs-form', function (hooks) {
 
   test('yielded submit action rejects for expected scenarios', async function (assert) {
     let scenarios = [
-      { validate: sinon.fake.rejects('rejected value') },
-      { onSubmit: sinon.fake.rejects('rejected value') },
+      { validate: sinon.fake.rejects('rejected value'), onSubmit: sinon.fake.resolves() },
+      { validate: sinon.fake.resolves(), onSubmit: sinon.fake.rejects('rejected value') },
     ];
 
     class TestComponent extends Component {
@@ -518,7 +518,12 @@ module('Integration | Component | bs-form', function (hooks) {
     for (let i = 0; i < scenarios.length; i++) {
       this.setProperties(scenarios[i]);
       await render(hbs`
-        <BsForm @onSubmit={{onSubmit}} @validate={{validate}} as |form|>
+        <BsForm
+          @onSubmit={{this.onSubmit}}
+          @validate={{this.validate}}
+          @hasValidator={{true}}
+          as |form|
+        >
           {{test-component onSubmit=form.submit}}
         </BsForm>
       `);
