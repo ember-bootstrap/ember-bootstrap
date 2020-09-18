@@ -16,13 +16,17 @@
   {{/if}}
 
   <div class="carousel-inner" role="listbox">
-    {{yield (hash slide=(component this.slideComponent
-      currentSlide=this.currentSlide
-      directionalClassName=this.directionalClassName
-      followingSlide=this.followingSlide
-      orderClassName=this.orderClassName
-      presentationState=this.presentationState
-    ))}}
+    {{yield
+      (hash
+        slide=(component (bs-default @slideComponent (component "bs-carousel/slide"))
+          currentSlide=this.currentSlide
+          directionalClassName=this.directionalClassName
+          followingSlide=this.followingSlide
+          orderClassName=this.orderClassName
+          presentationState=this.presentationState
+        )
+      )
+    }}
   </div>
 
   {{#if this.showControls}}

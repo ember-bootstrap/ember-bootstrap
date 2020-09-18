@@ -72,8 +72,6 @@ export default class Carousel extends Component.extend(ComponentParent) {
    * @type {String}
    * @private
    */
-  @defaultValue
-  slideComponent = 'bs-carousel/slide';
 
   /**
    * If a slide can turn to left, including corners.

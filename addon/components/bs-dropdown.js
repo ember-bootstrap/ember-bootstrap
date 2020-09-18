@@ -402,19 +402,16 @@ export default class Dropdown extends Component {
    * @type {String}
    * @private
    */
-  buttonComponent = 'bs-dropdown/button';
 
   /**
    * @property toggleComponent
    * @type {String}
    * @private
    */
-  toggleComponent = 'bs-dropdown/toggle';
 
   /**
    * @property menuComponent
    * @type {String}
    * @private
    */
-  menuComponent = 'bs-dropdown/menu';
 }

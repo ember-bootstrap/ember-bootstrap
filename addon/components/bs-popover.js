@@ -95,8 +95,6 @@ export default class Popover extends ContextualHelp {
    * @type {String}
    * @private
    */
-  @defaultValue
-  elementComponent = 'bs-popover/element';
 
   /**
    * The DOM element of the arrow element.

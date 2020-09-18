@@ -141,22 +141,16 @@ export default class Nav extends Component {
    * @type {String}
    * @private
    */
-  @defaultValue
-  itemComponent = 'bs-nav/item';
 
   /**
    * @property linkToComponent
    * @type {String}
    * @private
    */
-  @defaultValue
-  linkToComponent = 'bs-nav/link-to';
 
   /**
    * @property dropdownComponent
    * @type {String}
    * @private
    */
-  @defaultValue
-  dropdownComponent = 'bs-dropdown';
 }
