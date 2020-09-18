@@ -60,8 +60,6 @@ export default class Accordion extends Component {
    * @type {String}
    * @private
    */
-  @defaultValue
-  itemComponent = 'bs-accordion/item';
 
   /**
    * The value of the currently selected accordion item
