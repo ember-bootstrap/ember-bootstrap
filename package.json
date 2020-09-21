@@ -43,7 +43,7 @@
     "@ember/render-modifiers": "^1.0.2",
     "@embroider/macros": "^0.24.1",
     "@glimmer/component": "^1.0.1",
-    "@glimmer/tracking": "^1.0.1",
+    "@glimmer/tracking": "^1.0.2",
     "broccoli-debug": "^0.6.3",
     "broccoli-funnel": "^3.0.2",
     "broccoli-merge-trees": "^4.2.0",
