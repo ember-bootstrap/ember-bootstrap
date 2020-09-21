@@ -120,6 +120,17 @@ module.exports = async function () {
           FASTBOOT_DISABLED: true,
         },
       },
+      {
+        name: 'optional-feature-use-default-value-if-undefined',
+        npm: {
+          devDependencies: {
+            bootstrap: bootstrapVersion,
+          },
+        },
+        env: {
+          OPTIONAL_FEATURE_USE_DEFAULT_VALUE_IF_UNDEFINED: true,
+        },
+      },
     ],
   };
 };

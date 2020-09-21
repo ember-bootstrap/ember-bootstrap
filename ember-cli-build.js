@@ -14,7 +14,8 @@ module.exports = function (defaults) {
     });
   }
 
-  let app = new EmberAddon(defaults, {
+  const options = {
+    'ember-bootstrap': {},
     'ember-cli-babel': {
       includePolyfill: !!process.env.BABELPOLYFILL,
     },
@@ -25,7 +26,13 @@ module.exports = function (defaults) {
     addons: {
       blacklist: process.env.FASTBOOT_DISABLED ? ['ember-cli-fastboot-testing'] : [],
     },
-  });
+  };
+
+  if (process.env.OPTIONAL_FEATURE_USE_DEFAULT_VALUE_IF_UNDEFINED) {
+    options['ember-bootstrap'].useDefaultValueIfUndefined = true;
+  }
+
+  let app = new EmberAddon(defaults, options);
 
   /*
     This build file specifies the options for the dummy test app of this
