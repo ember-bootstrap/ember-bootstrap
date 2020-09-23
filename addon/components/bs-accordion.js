@@ -15,17 +15,19 @@ import deprecateSubclassing from 'ember-bootstrap/utils/deprecate-subclassing';
   components as children:
 
   ```handlebars
-  <BsAccordion as |Acc|>
-    <Acc.item @value={{1}} @title="First item">
+  <BsAccordion as |acc|>
+    <acc.item @value={{1}} @title="First item">
       <p>Lorem ipsum...</p>
-      <button onclick={{action acc.change 2}}>Next</button>
-    </Acc.item>
-    <Acc.item @value={{2}} @title="Second item">
+      <button {{on "click" (fn acc.change 2)}}>
+        Next
+      </button>
+    </acc.item>
+    <acc.item @value={{2}} @title="Second item">
       <p>Lorem ipsum...</p>
-    </Acc.item>
-    <Acc.item @value={{3}} @title="Third item">
+    </acc.item>
+    <acc.item @value={{3}} @title="Third item">
       <p>Lorem ipsum...</p>
-    </Acc.item>
+    </acc.item>
   </BsAccordion>
   ```
 
