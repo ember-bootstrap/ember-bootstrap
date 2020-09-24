@@ -36,6 +36,7 @@
   },
   "resolutions": {
     "ember-cli-htmlbars/semver": "~7.0.0",
+    "ember-concurrency": "^1.3.0",
     "ip-regex": "^2.1.0"
   },
   "dependencies": {
