@@ -64,6 +64,7 @@ jobs:
           - ember-canary
           - ember-default-with-jquery
           - ember-classic
+          - ember-concurrency-2.x
         bootstrap:
           - 3
           - 4
