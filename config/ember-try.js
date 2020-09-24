@@ -112,6 +112,7 @@ module.exports = async function () {
         npm: {
           dependencies: {
             'ember-concurrency': '^1.3.0',
+            bootstrap: bootstrapVersion,
           },
         },
       },
@@ -120,6 +121,7 @@ module.exports = async function () {
         npm: {
           dependencies: {
             'ember-concurrency': '^2.0.0-beta.1',
+            bootstrap: bootstrapVersion,
           },
         },
       },
