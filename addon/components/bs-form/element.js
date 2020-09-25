@@ -200,6 +200,7 @@ export default class FormElement extends FormGroup {
   /**
    * @property _element
    * @type null | HTMLElement
+   * @private
    */
   @ref('mainNode') _element = null;
 

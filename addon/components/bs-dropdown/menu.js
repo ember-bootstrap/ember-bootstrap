@@ -23,6 +23,7 @@ export default class DropdownMenu extends Component {
   /**
    * @property _element
    * @type null | HTMLElement
+   * @private
    */
   @ref('menuElement') menuElement = null;
 

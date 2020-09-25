@@ -24,6 +24,7 @@ export default class CarouselSlide extends Component.extend(ComponentChild) {
   /**
    * @property _element
    * @type null | HTMLElement
+   * @private
    */
   @ref('mainNode') _element = null;
 

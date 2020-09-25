@@ -35,6 +35,7 @@ export default class Collapse extends Component {
   /**
    * @property _element
    * @type null | HTMLElement
+   * @private
    */
   @ref('mainNode') _element = null;
 
