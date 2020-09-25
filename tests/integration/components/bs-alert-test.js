@@ -119,4 +119,28 @@ module('Integration | Component | bs-alert', function (hooks) {
     await a11yAudit();
     assert.ok(true, 'A11y audit passed');
   });
+
+  test('it allows to set a header using named blocks', async function (assert) {
+    await render(hbs`
+      <BsAlert>
+        <:header>Warning</:header>
+        <:body><p>Some content</p></:body>
+      </BsAlert>
+    `);
+
+    assert.dom('.alert .alert-heading').exists({ count: 1 }, 'header exists');
+    assert.dom('.alert .alert-heading').hasText('Warning', 'block content is rendered inside header');
+    assert.dom('.alert .alert-heading').hasTagName('h4', 'header uses a h4 tag');
+    assert.dom('.alert .alert-heading + p').exists({ count: 1 }, 'body is rendered a as silbing of header');
+  });
+
+  test('tagName used for header element can be customized with headerTag argument', async function (assert) {
+    await render(hbs`
+      <BsAlert @headerTag="h1">
+        <:header>Warning</:header>
+        <:body><p>Some content</p></:body>
+      </BsAlert>
+    `);
+    assert.dom('.alert .alert-heading').hasTagName('h1');
+  });
 });
