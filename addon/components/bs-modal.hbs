@@ -21,7 +21,7 @@
         {{yield
           (hash
             header=(component (bs-default @headerComponent (component "bs-modal/header")) onClose=this.close)
-            body=(component (bs-default @bodyComponent (component "bs-modal/body")))
+            body=(bs-default @bodyComponent (component "bs-modal/body"))
             footer=(component (bs-default @footerComponent (component "bs-modal/footer")) onClose=this.close onSubmit=this.doSubmit)
             close=this.close
             submit=this.doSubmit
@@ -43,7 +43,7 @@
           {{yield
             (hash
               header=(component (bs-default @headerComponent (component "bs-modal/header")) onClose=this.close)
-              body=(component (bs-default @bodyComponent (component "bs-modal/body")))
+              body=(bs-default @bodyComponent (component "bs-modal/body"))
               footer=(component (bs-default @footerComponent (component "bs-modal/footer")) onClose=this.close onSubmit=this.doSubmit)
               close=this.close
               submit=this.doSubmit

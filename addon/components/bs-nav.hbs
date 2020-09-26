@@ -1,4 +1,3 @@
-{{log this}}
 <ul class="nav {{this.typeClass}} {{this.additionalClass}} {{if this.justified "nav-justified"}} {{if this.stacked (if (macroCondition (macroGetOwnConfig "isBS4")) "flex-column" "nav-stacked")}} {{if (macroCondition (macroGetOwnConfig "isBS4")) (if this.fill "nav-fill")}}" ...attributes>
   {{yield
     (hash
