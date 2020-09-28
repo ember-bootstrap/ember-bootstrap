@@ -1,4 +1,4 @@
-import { and, equal, gt, notEmpty, or } from '@ember/object/computed';
+import { and, gt, notEmpty, or } from '@ember/object/computed';
 import { action, computed, get } from '@ember/object';
 import { assert, warn } from '@ember/debug';
 import { DEBUG } from '@glimmer/env';
@@ -702,11 +702,18 @@ export default class FormElement extends FormGroup {
    *
    * @property useIcons
    * @type boolean
-   * @readonly
    * @public
    */
-  @equal('controlComponent', 'bs-form/element/control/input')
-  useIcons;
+  @computed('customControlComponent', 'controlType')
+  get useIcons() {
+    let { controlType } = this;
+    return (
+      !this.customControlComponent &&
+      controlType !== 'textarea' &&
+      controlType !== 'checkbox' &&
+      controlType !== 'radio'
+    );
+  }
 
   /**
    * The form layout used for the markup generation (see http://getbootstrap.com/css/#forms):
