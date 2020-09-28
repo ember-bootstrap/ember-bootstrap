@@ -60,7 +60,6 @@
 <div class="file">
     <pre class="prettyprint linenums">
 import Button from &#x27;ember-bootstrap/components/bs-button&#x27;;
-import { computed, action } from &#x27;@ember/object&#x27;;
 
 /**
  Button component with that can act as a dropdown toggler.
@@ -72,19 +71,7 @@ import { computed, action } from &#x27;@ember/object&#x27;;
  @extends Components.Button
  @public
  */
-export default class DropdownButton extends Button {
-  &#x27;__ember-bootstrap_subclass&#x27; = true;
-
-  @action
-  handleKeyDown(e) {
-    this.onKeyDown(e);
-  }
-
-  @computed(&#x27;isOpen&#x27;)
-  get ariaExpanded() {
-    return this.isOpen ? &#x27;true&#x27; : &#x27;false&#x27;;
-  }
-}
+export default class DropdownButton extends Button {}
 
     </pre>
 </div>

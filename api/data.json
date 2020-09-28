@@ -2,7 +2,7 @@
     "project": {
         "name": "ember-bootstrap",
         "description": "Twitter Bootstrap components for Ember.js",
-        "version": "v4.1.2"
+        "version": "v4.2.0"
     },
     "files": {
         "addon/components/bs-accordion/item/body.js": {
@@ -775,7 +775,7 @@
             "extension_for": [],
             "namespace": "Components",
             "file": "addon/components/bs-button-group/button.js",
-            "line": 6,
+            "line": 4,
             "description": "Internal component for button-group buttons",
             "extends": "Components.Button",
             "access": "private",
@@ -871,7 +871,7 @@
             "extension_for": [],
             "namespace": "Components",
             "file": "addon/components/bs-dropdown/button.js",
-            "line": 4,
+            "line": 3,
             "description": "Button component with that can act as a dropdown toggler.\n\nSee [Components.Dropdown](Components.Dropdown.html) for examples.",
             "extends": "Components.Button",
             "access": "public",
@@ -1440,7 +1440,7 @@
             "namespace": "Components",
             "file": "addon/components/bs-accordion.js",
             "line": 8,
-            "description": "Bootstrap-style [accordion group](http://getbootstrap.com/javascript/#collapse-example-accordion),\nwith collapsible/expandable items.\n\n### Usage\n\nUse as a block level component with any number of yielded [Components.AccordionItem](Components.AccordionItem.html)\ncomponents as children:\n\n```handlebars\n<BsAccordion as |Acc|>\n  <Acc.item @value={{1}} @title=\"First item\">\n    <p>Lorem ipsum...</p>\n    <button onclick={{action acc.change 2}}>Next</button>\n  </Acc.item>\n  <Acc.item @value={{2}} @title=\"Second item\">\n    <p>Lorem ipsum...</p>\n  </Acc.item>\n  <Acc.item @value={{3}} @title=\"Third item\">\n    <p>Lorem ipsum...</p>\n  </Acc.item>\n</BsAccordion>\n```\n\nIn the example above the first accordion item utilizes the yielded `change` action to add some custom behaviour.\n\n*Note that only invoking the component in a template as shown above is considered part of its public API. Extending from it (subclassing) is generally not supported, and may break at any time.*",
+            "description": "Bootstrap-style [accordion group](http://getbootstrap.com/javascript/#collapse-example-accordion),\nwith collapsible/expandable items.\n\n### Usage\n\nUse as a block level component with any number of yielded [Components.AccordionItem](Components.AccordionItem.html)\ncomponents as children:\n\n```handlebars\n<BsAccordion as |acc|>\n  <acc.item @value={{1}} @title=\"First item\">\n    <p>Lorem ipsum...</p>\n    <button {{on \"click\" (fn acc.change 2)}}>\n      Next\n    </button>\n  </acc.item>\n  <acc.item @value={{2}} @title=\"Second item\">\n    <p>Lorem ipsum...</p>\n  </acc.item>\n  <acc.item @value={{3}} @title=\"Third item\">\n    <p>Lorem ipsum...</p>\n  </acc.item>\n</BsAccordion>\n```\n\nIn the example above the first accordion item utilizes the yielded `change` action to add some custom behaviour.\n\n*Note that only invoking the component in a template as shown above is considered part of its public API. Extending from it (subclassing) is generally not supported, and may break at any time.*",
             "extends": "Ember.Component",
             "access": "public",
             "tagname": ""
@@ -1455,9 +1455,9 @@
             "extension_for": [],
             "namespace": "Components",
             "file": "addon/components/bs-alert.js",
-            "line": 13,
+            "line": 10,
             "description": "Implements [Bootstrap alerts](http://getbootstrap.com/components/#alerts)\n\n### Usage\n\nBy default it is a user dismissible alert with a fade out animation, both of which can be disabled. Be sure to set the\n`type` property for proper styling.\n\n```hbs\n<BsAlert @type=\"success\">\n  <strong>Well done!</strong> You successfully read this important alert message.\n</BsAlert>\n```\n\n*Note that only invoking the component in a template as shown above is considered part of its public API. Extending from it (subclassing) is generally not supported, and may break at any time.*",
-            "extends": "Ember.Component",
+            "extends": "Glimmer.Component",
             "access": "public",
             "tagname": ""
         },
@@ -1471,9 +1471,9 @@
             "extension_for": [],
             "namespace": "Components",
             "file": "addon/components/bs-button-group.js",
-            "line": 10,
+            "line": 7,
             "description": "Bootstrap-style button group, that visually groups buttons, and optionally adds radio/checkbox like behaviour.\nSee http://getbootstrap.com/components/#btn-groups\n\nUse as a block level component with any number of [Components.Button](Components.Button.html) components provided as\na yielded pre-configured contextual component:\n\n```handlebars\n<BsButtonGroup as |bg|>\n  <bg.button>1</bg.button>\n  <bg.button>2</bg.button>\n  <bg.button>3</bg.button>\n</BsButtonGroup>\n```\n\n### Radio-like behaviour\n\nUse the `type` property set to \"radio\" to make the child buttons toggle like radio buttons, i.e. only one button can be active.\nSet the `value` property of the buttons to something meaningful. The `value` property of the button group will then reflect\nthe value of the active button:\n\n```handlebars\n<BsButtonGroup @value={{this.buttonGroupValue}} @type=\"radio\" @onChange={{action (mut this.buttonGroupValue}} as |bg|>\n  <bg.button @type=\"default\" @value={{1}}>1</bg.button>\n  <bg.button @type=\"default\" @value={{2}}>2</bg.button>\n  <bg.button @type=\"default\" @value={{3}}>3</bg.button>\n</BsButtonGroup>\n\nYou selected: {{this.buttonGroupValue}}!\n```\n\n### Checkbox-like behaviour\n\nSet `type` to \"checkbox\" to make any number of child buttons selectable. The `value` property will be an array\nof all the values of the active buttons:\n\n```handlebars\n<BsButtonGroup @value={{this.buttonGroupValue}} @type=\"checkbox\" @onChange={{action (mut this.buttonGroupValue}} as |bg|>\n  <bg.button @type=\"default\" @value={{1}}>1</bg.button>\n  <bg.button @type=\"default\" @value={{2}}>2</bg.button>\n  <bg.button @type=\"default\" @value={{3}}>3</bg.button>\n</BsButtonGroup>\n\nYou selected:\n<ul>\n  {{#each value in this.buttonGroupValue}}\n    <li>{{value}}</li>\n  {{/each}}\n</ul>\n```\n\n*Note that only invoking the component in a template as shown above is considered part of its public API. Extending from it (subclassing) is generally not supported, and may break at any time.*",
-            "extends": "Ember.Component",
+            "extends": "Glimmer.Component",
             "access": "public",
             "tagname": ""
         },
@@ -1487,9 +1487,9 @@
             "extension_for": [],
             "namespace": "Components",
             "file": "addon/components/bs-button.js",
-            "line": 16,
+            "line": 10,
             "description": "Implements a HTML button element, with support for all [Bootstrap button CSS styles](http://getbootstrap.com/css/#buttons)\nas well as advanced functionality such as button states.\n\n### Basic Usage\n\n```hbs\n<BsButton @type=\"primary\" @icon=\"glyphicon glyphicon-download\">\n  Downloads\n</BsButton>\n```\n\n### Actions\n\nUse the `onClick` property of the component to send an action to your controller. It will receive the button's value\n(see the `value` property) as an argument.\n\n```hbs\n<BsButton @type=\"primary\" @icon=\"glyphicon glyphicon-download\" @onClick=(action \"download\")>\n  Downloads\n</BsButton>\n```\n\n### Promise support for automatic state change\n\nWhen returning a Promise for any asynchronous operation from the `onClick` closure action the button will\nmanage an internal state (\"default\" > \"pending\" > \"fulfilled\"/\"rejected\") automatically.\n\nThe button is disabled by default if it's in pending state. You could override this behavior by passing\nthe `disabled` HTML attribute or by setting `@preventConcurrency` to false.\n\n```hbs\n<BsButton\n  disabled={{false}}\n/>\n```\n\n```hbs\n<BsButton\n  @preventConcurrency={{false}}\n/>\n```\n\nThe label could be changed automatically according to the state of the promise with `@defaultText`,\n`@pendingText`, `@fulfilledText` and `@rejectedText` arguments:\n\n```hbs\n<BsButton\n  @type=\"primary\"\n  @icon=\"glyphicon glyphicon-download\"\n  @defaultText=\"Download\"\n  @pendingText=\"Loading...\"\n  @fulfilledText=\"Completed!\"\n  @rejectedText=\"Oups!?\"\n  @onClick={{this.download}}\n/>\n```\n\n```js\n// controller.js\nimport { Controller } from '@ember/controller';\nimport { action } from '@ember/object';\n\nexport default class MyController extends Controller {\n  @action\n  download(value) {\n    return new Promise(...);\n  }\n});\n```\n\nFor further customization `isPending`, `isFulfilled`, `isRejected` and `isSettled` properties are yielded:\n\n```hbs\n<BsButton @onClick=(action \"download\") as |button|>\n  Download\n  {{#if button.isPending}}\n    <span class=\"loading-spinner\"></span>\n  {{/if}}\n</BsButton>\n```\n\nYou can `reset` the state represented by these properties and used for button's text by setting `reset` property to\n`true`.\n\n*Note that only invoking the component in a template as shown above is considered part of its public API. Extending from it (subclassing) is generally not supported, and may break at any time.*",
-            "extends": "Ember.Component",
+            "extends": "Glimmer.Component",
             "access": "public",
             "tagname": ""
         },
@@ -1503,9 +1503,9 @@
             "extension_for": [],
             "namespace": "Components",
             "file": "addon/components/bs-collapse.js",
-            "line": 15,
+            "line": 12,
             "description": "An Ember component that mimics the behaviour of [Bootstrap's collapse.js plugin](http://getbootstrap.com/javascript/#collapse)\n\n### Usage\n\n```hbs\n<BsCollapse @collapsed={{this.collapsed}}>\n  <div class=\"well\">\n    <h2>Collapse</h2>\n    <p>This is collapsible content</p>\n  </div>\n</BsCollapse>\n```\n\n*Note that only invoking the component in a template as shown above is considered part of its public API. Extending from it (subclassing) is generally not supported, and may break at any time.*",
-            "extends": "Ember.Component",
+            "extends": "Glimmer.Component",
             "access": "public",
             "tagname": ""
         },
@@ -1519,7 +1519,7 @@
             "extension_for": [],
             "namespace": "Components",
             "file": "addon/components/bs-contextual-help.js",
-            "line": 27,
+            "line": 28,
             "extends": "Ember.Component",
             "access": "private",
             "tagname": ""
@@ -1895,7 +1895,7 @@
         },
         {
             "file": "addon/components/bs-button-group/button.js",
-            "line": 17,
+            "line": 15,
             "itemtype": "property",
             "name": "groupValue",
             "access": "private",
@@ -1905,7 +1905,7 @@
         },
         {
             "file": "addon/components/bs-button-group/button.js",
-            "line": 24,
+            "line": 20,
             "itemtype": "property",
             "name": "buttonGroupType",
             "type": "string",
@@ -1916,7 +1916,7 @@
         },
         {
             "file": "addon/components/bs-button-group/button.js",
-            "line": 32,
+            "line": 26,
             "itemtype": "property",
             "name": "active",
             "type": "boolean",
@@ -1932,12 +1932,14 @@
             "itemtype": "property",
             "name": "_element",
             "type": "null | HTMLElement",
+            "access": "private",
+            "tagname": "",
             "class": "Components.CarouselSlide",
             "namespace": "Components"
         },
         {
             "file": "addon/components/bs-carousel/slide.js",
-            "line": 30,
+            "line": 31,
             "description": "Defines slide visibility.",
             "itemtype": "property",
             "name": "active",
@@ -1949,7 +1951,7 @@
         },
         {
             "file": "addon/components/bs-carousel/slide.js",
-            "line": 42,
+            "line": 43,
             "access": "private",
             "tagname": "",
             "itemtype": "property",
@@ -1960,7 +1962,7 @@
         },
         {
             "file": "addon/components/bs-carousel/slide.js",
-            "line": 52,
+            "line": 53,
             "access": "private",
             "tagname": "",
             "itemtype": "property",
@@ -1971,7 +1973,7 @@
         },
         {
             "file": "addon/components/bs-carousel/slide.js",
-            "line": 62,
+            "line": 63,
             "description": "Slide is moving to the left.",
             "itemtype": "property",
             "name": "left",
@@ -1983,7 +1985,7 @@
         },
         {
             "file": "addon/components/bs-carousel/slide.js",
-            "line": 71,
+            "line": 72,
             "description": "Next to appear in a left sliding.",
             "itemtype": "property",
             "name": "next",
@@ -1995,7 +1997,7 @@
         },
         {
             "file": "addon/components/bs-carousel/slide.js",
-            "line": 80,
+            "line": 81,
             "description": "Next to appear in a right sliding.",
             "itemtype": "property",
             "name": "prev",
@@ -2007,7 +2009,7 @@
         },
         {
             "file": "addon/components/bs-carousel/slide.js",
-            "line": 89,
+            "line": 90,
             "description": "Slide is moving to the right.",
             "itemtype": "property",
             "name": "right",
@@ -2019,7 +2021,7 @@
         },
         {
             "file": "addon/components/bs-carousel/slide.js",
-            "line": 98,
+            "line": 99,
             "description": "Coordinates the execution of a presentation.",
             "itemtype": "method",
             "name": "presentationStateObserver",
@@ -2030,7 +2032,7 @@
         },
         {
             "file": "addon/components/bs-carousel/slide.js",
-            "line": 133,
+            "line": 134,
             "itemtype": "method",
             "name": "currentSlideDidTransition",
             "access": "private",
@@ -2040,7 +2042,7 @@
         },
         {
             "file": "addon/components/bs-carousel/slide.js",
-            "line": 142,
+            "line": 143,
             "itemtype": "method",
             "name": "currentSlideWillTransit",
             "access": "private",
@@ -2050,7 +2052,7 @@
         },
         {
             "file": "addon/components/bs-carousel/slide.js",
-            "line": 153,
+            "line": 154,
             "itemtype": "method",
             "name": "followingSlideDidTransition",
             "access": "private",
@@ -2060,7 +2062,7 @@
         },
         {
             "file": "addon/components/bs-carousel/slide.js",
-            "line": 163,
+            "line": 164,
             "itemtype": "method",
             "name": "followingSlideWillTransit",
             "access": "private",
@@ -2070,7 +2072,7 @@
         },
         {
             "file": "addon/components/bs-carousel/slide.js",
-            "line": 175,
+            "line": 176,
             "description": "Makes things more stable, especially when fast changing.",
             "class": "Components.CarouselSlide",
             "namespace": "Components"
@@ -2201,12 +2203,14 @@
             "itemtype": "property",
             "name": "_element",
             "type": "null | HTMLElement",
+            "access": "private",
+            "tagname": "",
             "class": "Components.DropdownMenu",
             "namespace": "Components"
         },
         {
             "file": "addon/components/bs-dropdown/menu.js",
-            "line": 29,
+            "line": 30,
             "itemtype": "property",
             "name": "ariaRole",
             "default": "menu",
@@ -2218,7 +2222,7 @@
         },
         {
             "file": "addon/components/bs-dropdown/menu.js",
-            "line": 37,
+            "line": 38,
             "description": "Alignment of the menu, either \"left\" or \"right\"",
             "itemtype": "property",
             "name": "align",
@@ -2231,7 +2235,7 @@
         },
         {
             "file": "addon/components/bs-dropdown/menu.js",
-            "line": 48,
+            "line": 49,
             "itemtype": "property",
             "name": "direction",
             "default": "'down'",
@@ -2243,7 +2247,7 @@
         },
         {
             "file": "addon/components/bs-dropdown/menu.js",
-            "line": 57,
+            "line": 58,
             "itemtype": "property",
             "name": "inNav",
             "type": "{boolean}",
@@ -2254,7 +2258,7 @@
         },
         {
             "file": "addon/components/bs-dropdown/menu.js",
-            "line": 64,
+            "line": 65,
             "description": "By default the menu is rendered in the same place as the dropdown. If you experience clipping\nissues, you can set this to false to render the menu in a wormhole at the top of the DOM.",
             "itemtype": "property",
             "name": "renderInPlace",
@@ -2267,7 +2271,7 @@
         },
         {
             "file": "addon/components/bs-dropdown/menu.js",
-            "line": 76,
+            "line": 77,
             "itemtype": "property",
             "name": "_renderInPlace",
             "type": "boolean",
@@ -2278,7 +2282,7 @@
         },
         {
             "file": "addon/components/bs-dropdown/menu.js",
-            "line": 86,
+            "line": 87,
             "description": "The wormhole destinationElement",
             "itemtype": "property",
             "name": "destinationElement",
@@ -2291,7 +2295,7 @@
         },
         {
             "file": "addon/components/bs-dropdown/menu.js",
-            "line": 170,
+            "line": 171,
             "itemtype": "property",
             "name": "itemComponent",
             "type": "{String}",
@@ -2302,7 +2306,7 @@
         },
         {
             "file": "addon/components/bs-dropdown/menu.js",
-            "line": 177,
+            "line": 178,
             "itemtype": "property",
             "name": "linkToComponent",
             "type": "{String}",
@@ -2313,7 +2317,7 @@
         },
         {
             "file": "addon/components/bs-dropdown/menu.js",
-            "line": 184,
+            "line": 185,
             "itemtype": "property",
             "name": "dividerComponent",
             "type": "{String}",
@@ -2698,12 +2702,14 @@
             "itemtype": "property",
             "name": "_element",
             "type": "null | HTMLElement",
+            "access": "private",
+            "tagname": "",
             "class": "Components.FormElement",
             "namespace": "Components"
         },
         {
             "file": "addon/components/bs-form/element.js",
-            "line": 211,
+            "line": 212,
             "description": "Text to display within a `<label>` tag.\n\nYou should include a label for every form input cause otherwise screen readers\nwill have trouble with your forms. Use `invisibleLabel` property if you want\nto hide them.",
             "itemtype": "property",
             "name": "label",
@@ -2715,7 +2721,7 @@
         },
         {
             "file": "addon/components/bs-form/element.js",
-            "line": 225,
+            "line": 226,
             "description": "Controls label visibility by adding 'sr-only' class.",
             "itemtype": "property",
             "name": "invisibleLabel",
@@ -2728,7 +2734,7 @@
         },
         {
             "file": "addon/components/bs-form/element.js",
-            "line": 236,
+            "line": 237,
             "itemtype": "property",
             "name": "hasLabel",
             "type": "boolean",
@@ -2740,7 +2746,7 @@
         },
         {
             "file": "addon/components/bs-form/element.js",
-            "line": 245,
+            "line": 246,
             "description": "The type of the control widget.\nSupported types:\n\n* 'text'\n* 'checkbox'\n* 'radio'\n* 'textarea'\n* any other type will use an input tag with the `controlType` value as the type attribute (for e.g. HTML5 input\ntypes like 'email'), and the same layout as the 'text' type",
             "itemtype": "property",
             "name": "controlType",
@@ -2753,7 +2759,7 @@
         },
         {
             "file": "addon/components/bs-form/element.js",
-            "line": 264,
+            "line": 265,
             "description": "The value of the control element is bound to this property:\n\n```hbs\n<form.element @controlType=\"email\" @label=\"Email\" @value={{this.email}} />\n```\n\nNote two things:\n* the binding is uni-directional (DDAU), so you would have to use the `onChange` action to subscribe to changes.\n* you lose the ability to validate this form element by directly binding to its value. It is recommended\nto use the `property` feature instead.",
             "itemtype": "property",
             "name": "value",
@@ -2764,7 +2770,7 @@
         },
         {
             "file": "addon/components/bs-form/element.js",
-            "line": 292,
+            "line": 293,
             "description": "Cache for value",
             "type": "{null}",
             "access": "private",
@@ -2774,7 +2780,7 @@
         },
         {
             "file": "addon/components/bs-form/element.js",
-            "line": 300,
+            "line": 301,
             "description": "The property name of the form element's `model` (by default the `model` of its parent `Components.Form`) that this\nform element should represent. The control element's value will automatically be bound to the model property's\nvalue.\n\nUsing this property enables form validation on this element.",
             "itemtype": "property",
             "name": "property",
@@ -2786,7 +2792,7 @@
         },
         {
             "file": "addon/components/bs-form/element.js",
-            "line": 314,
+            "line": 315,
             "description": "The model used for validation. Defaults to the parent `Components.Form`'s `model`",
             "itemtype": "property",
             "name": "model",
@@ -2797,7 +2803,7 @@
         },
         {
             "file": "addon/components/bs-form/element.js",
-            "line": 323,
+            "line": 324,
             "description": "Show a help text next to the control",
             "itemtype": "property",
             "name": "helpText",
@@ -2809,7 +2815,7 @@
         },
         {
             "file": "addon/components/bs-form/element.js",
-            "line": 333,
+            "line": 334,
             "description": "Only if there is a validator, this property makes all errors to be displayed at once\ninside a scrollable container.",
             "default": "false",
             "itemtype": "property",
@@ -2822,7 +2828,7 @@
         },
         {
             "file": "addon/components/bs-form/element.js",
-            "line": 345,
+            "line": 346,
             "description": "Array of options for control types that show a selection (e.g. radio button groups)\nCan be an array of simple strings or objects. For objects use `optionLabelPath` to specify the path containing the\nlabel.",
             "itemtype": "property",
             "name": "options",
@@ -2834,7 +2840,7 @@
         },
         {
             "file": "addon/components/bs-form/element.js",
-            "line": 357,
+            "line": 358,
             "description": "Property path (e.g. 'title' or 'related.name') to render the label of an selection option. See `options`.s",
             "itemtype": "property",
             "name": "optionLabelPath",
@@ -2846,7 +2852,7 @@
         },
         {
             "file": "addon/components/bs-form/element.js",
-            "line": 367,
+            "line": 368,
             "itemtype": "property",
             "name": "hasHelpText",
             "type": "boolean",
@@ -2858,7 +2864,7 @@
         },
         {
             "file": "addon/components/bs-form/element.js",
-            "line": 376,
+            "line": 377,
             "description": "The array of error messages from the `model`'s validation.",
             "itemtype": "property",
             "name": "errors",
@@ -2870,7 +2876,7 @@
         },
         {
             "file": "addon/components/bs-form/element.js",
-            "line": 386,
+            "line": 387,
             "itemtype": "property",
             "name": "hasErrors",
             "type": "boolean",
@@ -2882,7 +2888,7 @@
         },
         {
             "file": "addon/components/bs-form/element.js",
-            "line": 395,
+            "line": 396,
             "description": "The array of warning messages from the `model`'s validation.",
             "itemtype": "property",
             "name": "warnings",
@@ -2894,7 +2900,7 @@
         },
         {
             "file": "addon/components/bs-form/element.js",
-            "line": 405,
+            "line": 406,
             "itemtype": "property",
             "name": "hasWarnings",
             "type": "boolean",
@@ -2906,7 +2912,7 @@
         },
         {
             "file": "addon/components/bs-form/element.js",
-            "line": 414,
+            "line": 415,
             "description": "Show a custom error message that does not come from the model's validation. Will be immediately shown, regardless\nof any user interaction (i.e. no `focusOut` event required)",
             "itemtype": "property",
             "name": "customError",
@@ -2918,7 +2924,7 @@
         },
         {
             "file": "addon/components/bs-form/element.js",
-            "line": 425,
+            "line": 426,
             "itemtype": "property",
             "name": "hasCustomError",
             "type": "boolean",
@@ -2930,7 +2936,7 @@
         },
         {
             "file": "addon/components/bs-form/element.js",
-            "line": 434,
+            "line": 435,
             "description": "Show a custom warning message that does not come from the model's validation. Will be immediately shown, regardless\nof any user interaction (i.e. no `focusOut` event required). If the model's validation has an error then the error\nwill be shown in place of this warning.",
             "itemtype": "property",
             "name": "customWarning",
@@ -2942,7 +2948,7 @@
         },
         {
             "file": "addon/components/bs-form/element.js",
-            "line": 446,
+            "line": 447,
             "itemtype": "property",
             "name": "hasCustomWarning",
             "type": "boolean",
@@ -2954,7 +2960,7 @@
         },
         {
             "file": "addon/components/bs-form/element.js",
-            "line": 455,
+            "line": 456,
             "description": "Property for size styling, set to 'lg', 'sm' or 'xs' (the latter only for BS3)",
             "itemtype": "property",
             "name": "size",
@@ -2966,7 +2972,7 @@
         },
         {
             "file": "addon/components/bs-form/element.js",
-            "line": 465,
+            "line": 466,
             "description": "The array of validation messages (either errors or warnings) from either custom error/warnings or , if we are showing model validation messages, the model's validation",
             "itemtype": "property",
             "name": "validationMessages",
@@ -2978,7 +2984,7 @@
         },
         {
             "file": "addon/components/bs-form/element.js",
-            "line": 499,
+            "line": 500,
             "itemtype": "property",
             "name": "hasValidationMessages",
             "type": "boolean",
@@ -2990,7 +2996,7 @@
         },
         {
             "file": "addon/components/bs-form/element.js",
-            "line": 508,
+            "line": 509,
             "itemtype": "property",
             "name": "hasValidator",
             "type": "boolean",
@@ -3002,7 +3008,7 @@
         },
         {
             "file": "addon/components/bs-form/element.js",
-            "line": 517,
+            "line": 518,
             "description": "Set a validating state for async validations",
             "itemtype": "property",
             "name": "isValidating",
@@ -3015,7 +3021,7 @@
         },
         {
             "file": "addon/components/bs-form/element.js",
-            "line": 528,
+            "line": 529,
             "description": "If `true` form validation markup is rendered (requires a validatable `model`).",
             "itemtype": "property",
             "name": "showValidation",
@@ -3028,7 +3034,7 @@
         },
         {
             "file": "addon/components/bs-form/element.js",
-            "line": 539,
+            "line": 540,
             "itemtype": "property",
             "name": "showOwnValidation",
             "type": "boolean",
@@ -3040,7 +3046,7 @@
         },
         {
             "file": "addon/components/bs-form/element.js",
-            "line": 548,
+            "line": 549,
             "itemtype": "property",
             "name": "showAllValidations",
             "type": "boolean",
@@ -3052,7 +3058,7 @@
         },
         {
             "file": "addon/components/bs-form/element.js",
-            "line": 566,
+            "line": 567,
             "itemtype": "property",
             "name": "showModelValidations",
             "type": "boolean",
@@ -3064,7 +3070,7 @@
         },
         {
             "file": "addon/components/bs-form/element.js",
-            "line": 575,
+            "line": 576,
             "itemtype": "property",
             "name": "showValidationMessages",
             "type": "boolean",
@@ -3076,7 +3082,7 @@
         },
         {
             "file": "addon/components/bs-form/element.js",
-            "line": 584,
+            "line": 585,
             "description": "Event or list of events which enable form validation markup rendering.\nSupported events: ['focusout', 'change', 'input']",
             "itemtype": "property",
             "name": "showValidationOn",
@@ -3089,7 +3095,7 @@
         },
         {
             "file": "addon/components/bs-form/element.js",
-            "line": 596,
+            "line": 597,
             "itemtype": "property",
             "name": "_showValidationOn",
             "type": "array",
@@ -3101,7 +3107,7 @@
         },
         {
             "file": "addon/components/bs-form/element.js",
-            "line": 622,
+            "line": 623,
             "itemtype": "method",
             "name": "showValidationOnHandler",
             "params": [
@@ -3118,7 +3124,7 @@
         },
         {
             "file": "addon/components/bs-form/element.js",
-            "line": 649,
+            "line": 650,
             "description": "Controls if validation should be shown for specified event targets.\n\nIt expects an array of query selectors. If event target is a children of an event that matches\nthese selectors, an event triggered for it will not trigger validation errors to be shown.\n\nBy default events fired on elements inside an input group are skipped.\n\nIf `null` or an empty array is passed validation errors are shown for all events regardless\nof event target.",
             "itemtype": "property",
             "name": "doNotShowValidationForEventTargets",
@@ -3130,7 +3136,7 @@
         },
         {
             "file": "addon/components/bs-form/element.js",
-            "line": 665,
+            "line": 666,
             "description": "The validation (\"error\" (BS3)/\"danger\" (BS4), \"warning\", or \"success\") or null if no validation is to be shown. Automatically computed from the\nmodels validation state.",
             "itemtype": "property",
             "name": "validation",
@@ -3143,7 +3149,7 @@
         },
         {
             "file": "addon/components/bs-form/element.js",
-            "line": 701,
+            "line": 702,
             "description": "True for text field `controlType`s",
             "itemtype": "property",
             "name": "useIcons",
@@ -3156,7 +3162,7 @@
         },
         {
             "file": "addon/components/bs-form/element.js",
-            "line": 712,
+            "line": 713,
             "description": "The form layout used for the markup generation (see http://getbootstrap.com/css/#forms):\n\n* 'horizontal'\n* 'vertical'\n* 'inline'\n\nDefaults to the parent `form`'s `formLayout` property.",
             "itemtype": "property",
             "name": "formLayout",
@@ -3169,7 +3175,7 @@
         },
         {
             "file": "addon/components/bs-form/element.js",
-            "line": 729,
+            "line": 730,
             "description": "The Bootstrap grid class for form labels within a horizontal layout form. Defaults to the value of the same\nproperty of the parent form. The corresponding grid class for form controls is automatically computed.",
             "itemtype": "property",
             "name": "horizontalLabelGridClass",
@@ -3181,7 +3187,7 @@
         },
         {
             "file": "addon/components/bs-form/element.js",
-            "line": 742,
+            "line": 743,
             "description": "ID for input field and the corresponding label's \"for\" attribute",
             "itemtype": "property",
             "name": "formElementId",
@@ -3193,7 +3199,7 @@
         },
         {
             "file": "addon/components/bs-form/element.js",
-            "line": 753,
+            "line": 754,
             "description": "ID of the helpText, used for aria-describedby attribute of the control element",
             "itemtype": "property",
             "name": "ariaDescribedBy",
@@ -3205,7 +3211,7 @@
         },
         {
             "file": "addon/components/bs-form/element.js",
-            "line": 764,
+            "line": 765,
             "itemtype": "property",
             "name": "formComponent",
             "type": "{String}",
@@ -3216,7 +3222,7 @@
         },
         {
             "file": "addon/components/bs-form/element.js",
-            "line": 772,
+            "line": 773,
             "itemtype": "property",
             "name": "layoutComponent",
             "type": "{String}",
@@ -3227,7 +3233,7 @@
         },
         {
             "file": "addon/components/bs-form/element.js",
-            "line": 790,
+            "line": 791,
             "itemtype": "property",
             "name": "controlComponent",
             "type": "{String}",
@@ -3238,7 +3244,7 @@
         },
         {
             "file": "addon/components/bs-form/element.js",
-            "line": 808,
+            "line": 809,
             "itemtype": "property",
             "name": "errorsComponent",
             "type": "{String}",
@@ -3249,7 +3255,7 @@
         },
         {
             "file": "addon/components/bs-form/element.js",
-            "line": 816,
+            "line": 817,
             "itemtype": "property",
             "name": "feedbackIconComponent",
             "type": "{String}",
@@ -3260,7 +3266,7 @@
         },
         {
             "file": "addon/components/bs-form/element.js",
-            "line": 824,
+            "line": 825,
             "itemtype": "property",
             "name": "labelComponent",
             "type": "{String}",
@@ -3271,7 +3277,7 @@
         },
         {
             "file": "addon/components/bs-form/element.js",
-            "line": 838,
+            "line": 839,
             "itemtype": "property",
             "name": "helpTextComponent",
             "type": "{String}",
@@ -3282,7 +3288,7 @@
         },
         {
             "file": "addon/components/bs-form/element.js",
-            "line": 846,
+            "line": 847,
             "description": "Setup validation properties. This method acts as a hook for external validation\nlibraries to overwrite. In case of failed validations the `errors` property should contain an array of error messages.",
             "itemtype": "method",
             "name": "setupValidations",
@@ -3293,7 +3299,7 @@
         },
         {
             "file": "addon/components/bs-form/element.js",
-            "line": 855,
+            "line": 856,
             "description": "The action is called whenever the input value is changed, e.g. by typing text",
             "itemtype": "event",
             "name": "onChange",
@@ -3321,7 +3327,7 @@
         },
         {
             "file": "addon/components/bs-form/element.js",
-            "line": 866,
+            "line": 867,
             "description": "Private duplicate of onChange event used for internal state handling between form and it's elements.",
             "itemtype": "event",
             "name": "_onChange",
@@ -4126,7 +4132,7 @@
         },
         {
             "file": "addon/components/bs-accordion.js",
-            "line": 44,
+            "line": 46,
             "description": "The value of the currently selected accordion item. Set this to change selection programmatically.\n\nWhen the selection is changed by user interaction this property will not update by using two-way bindings in order\nto follow DDAU best practices. If you want to react to such changes, subscribe to the `onChange` action",
             "itemtype": "property",
             "name": "selected",
@@ -4137,7 +4143,7 @@
         },
         {
             "file": "addon/components/bs-accordion.js",
-            "line": 56,
+            "line": 58,
             "itemtype": "property",
             "name": "itemComponent",
             "type": "{String}",
@@ -4148,7 +4154,7 @@
         },
         {
             "file": "addon/components/bs-accordion.js",
-            "line": 64,
+            "line": 66,
             "description": "The value of the currently selected accordion item",
             "itemtype": "property",
             "name": "isSelected",
@@ -4159,7 +4165,7 @@
         },
         {
             "file": "addon/components/bs-accordion.js",
-            "line": 73,
+            "line": 75,
             "description": "Action when the selected accordion item is about to be changed.\n\nYou can return false to prevent changing the active item, and do that in your action by\nsetting the `selected` accordingly.",
             "itemtype": "event",
             "name": "onChange",
@@ -4180,7 +4186,7 @@
         },
         {
             "file": "addon/components/bs-alert.js",
-            "line": 37,
+            "line": 33,
             "description": "A dismissible alert will have a close button in the upper right corner, that the user can click to dismiss\nthe alert.",
             "itemtype": "property",
             "name": "dismissible",
@@ -4193,7 +4199,7 @@
         },
         {
             "file": "addon/components/bs-alert.js",
-            "line": 49,
+            "line": 45,
             "description": "If true the alert is completely hidden. Will be set when the fade animation has finished.",
             "itemtype": "property",
             "name": "hidden",
@@ -4207,7 +4213,7 @@
         },
         {
             "file": "addon/components/bs-alert.js",
-            "line": 61,
+            "line": 57,
             "description": "This property controls if the alert should be visible. If false it might still be in the DOM until the fade animation\nhas completed.\n\nWhen the alert is dismissed by user interaction this property will not update by using two-way bindings in order\nto follow DDAU best practices. If you want to react to such changes, subscribe to the `onDismiss` action",
             "itemtype": "property",
             "name": "visible",
@@ -4220,7 +4226,7 @@
         },
         {
             "file": "addon/components/bs-alert.js",
-            "line": 76,
+            "line": 72,
             "itemtype": "property",
             "name": "_visible",
             "access": "private",
@@ -4230,17 +4236,7 @@
         },
         {
             "file": "addon/components/bs-alert.js",
-            "line": 83,
-            "itemtype": "property",
-            "name": "notVisible",
-            "access": "private",
-            "tagname": "",
-            "class": "Components.Alert",
-            "namespace": "Components"
-        },
-        {
-            "file": "addon/components/bs-alert.js",
-            "line": 90,
+            "line": 79,
             "description": "Set to false to disable the fade out animation when hiding the alert.",
             "itemtype": "property",
             "name": "fade",
@@ -4253,19 +4249,7 @@
         },
         {
             "file": "addon/components/bs-alert.js",
-            "line": 101,
-            "description": "Computed property to set the alert class to the component div. Will be false when dismissed to have the component\ndiv (which cannot be removed form DOM by the component itself) without any markup.",
-            "itemtype": "property",
-            "name": "alert",
-            "type": "boolean",
-            "access": "private",
-            "tagname": "",
-            "class": "Components.Alert",
-            "namespace": "Components"
-        },
-        {
-            "file": "addon/components/bs-alert.js",
-            "line": 115,
+            "line": 92,
             "description": "The duration of the fade out animation",
             "itemtype": "property",
             "name": "fadeDuration",
@@ -4278,12 +4262,11 @@
         },
         {
             "file": "addon/components/bs-alert.js",
-            "line": 126,
+            "line": 103,
             "description": "Property for type styling\n\nFor the available types see the [Bootstrap docs](https://getbootstrap.com/docs/4.3/components/alerts/)",
             "itemtype": "property",
             "name": "type",
             "type": "String",
-            "default": "'default'",
             "access": "public",
             "tagname": "",
             "class": "Components.Alert",
@@ -4291,7 +4274,7 @@
         },
         {
             "file": "addon/components/bs-alert.js",
-            "line": 142,
+            "line": 113,
             "description": "Use CSS transitions?",
             "itemtype": "property",
             "name": "usesTransition",
@@ -4304,7 +4287,7 @@
         },
         {
             "file": "addon/components/bs-alert.js",
-            "line": 153,
+            "line": 124,
             "description": "The action to be sent after the alert has been dismissed (including the CSS transition).",
             "itemtype": "event",
             "name": "onDismissed",
@@ -4315,7 +4298,7 @@
         },
         {
             "file": "addon/components/bs-alert.js",
-            "line": 161,
+            "line": 131,
             "description": "The action is called when the close button is clicked.\n\nYou can return false to prevent closing the alert automatically, and do that in your action by\nsetting `visible` to false.",
             "itemtype": "event",
             "name": "onDismiss",
@@ -4326,7 +4309,7 @@
         },
         {
             "file": "addon/components/bs-alert.js",
-            "line": 179,
+            "line": 148,
             "description": "Call to make the alert visible again after it has been hidden",
             "itemtype": "method",
             "name": "show",
@@ -4337,7 +4320,7 @@
         },
         {
             "file": "addon/components/bs-alert.js",
-            "line": 189,
+            "line": 158,
             "description": "Call to hide the alert. If the `fade` property is true, this will fade out the alert before being finally\ndismissed.",
             "itemtype": "method",
             "name": "hide",
@@ -4348,7 +4331,7 @@
         },
         {
             "file": "addon/components/bs-button-group.js",
-            "line": 73,
+            "line": 67,
             "itemtype": "property",
             "name": "buttonComponent",
             "type": "{String}",
@@ -4359,7 +4342,7 @@
         },
         {
             "file": "addon/components/bs-button-group.js",
-            "line": 81,
+            "line": 75,
             "description": "Set to true for a vertically stacked button group, see http://getbootstrap.com/components/#btn-groups-vertical",
             "itemtype": "property",
             "name": "vertical",
@@ -4372,7 +4355,7 @@
         },
         {
             "file": "addon/components/bs-button-group.js",
-            "line": 92,
+            "line": 84,
             "description": "Set to true for the buttons to stretch at equal sizes to span the entire width of its parent. (BS3 only!)\n\n*Important*: You have to wrap every button component in a `div class=\"btn-group\">`:\n\n```handlebars\n<div class=\"btn-group\" role=\"group\">\n{{#bs-button}}My Button{{/bs-button}}\n</div>\n```\n\nSee http://getbootstrap.com/components/#btn-groups-justified",
             "itemtype": "property",
             "name": "justified",
@@ -4385,7 +4368,7 @@
         },
         {
             "file": "addon/components/bs-button-group.js",
-            "line": 113,
+            "line": 103,
             "description": "The type of the button group specifies how child buttons behave and how the `value` property will be computed:\n\n### null\nIf `type` is not set (null), the button group will add no functionality besides Bootstrap styling\n\n### radio\nif `type` is set to \"radio\", the buttons will behave like radio buttons:\n* the `value` property of the button group will reflect the `value` property of the active button\n* thus only one button may be active\n\n### checkbox\nif `type` is set to \"checkbox\", the buttons will behave like checkboxes:\n* any number of buttons may be active\n* the `value` property of the button group will be an array containing the `value` properties of all active buttons",
             "itemtype": "property",
             "name": "type",
@@ -4398,7 +4381,7 @@
         },
         {
             "file": "addon/components/bs-button-group.js",
-            "line": 135,
+            "line": 125,
             "description": "The value of the button group, computed by its child buttons.\nSee the `type` property for how the value property is constructed.\n\nWhen you set the value, the corresponding buttons will be activated:\n* use a single value for a radio button group to activate the button with the same value\n* use an array of values for a checkbox button group to activate all the buttons with values contained in the array",
             "itemtype": "property",
             "name": "value",
@@ -4410,18 +4393,7 @@
         },
         {
             "file": "addon/components/bs-button-group.js",
-            "line": 148,
-            "itemtype": "property",
-            "name": "isRadio",
-            "type": "boolean",
-            "access": "private",
-            "tagname": "",
-            "class": "Components.ButtonGroup",
-            "namespace": "Components"
-        },
-        {
-            "file": "addon/components/bs-button-group.js",
-            "line": 156,
+            "line": 138,
             "description": "Property for size styling, set to 'lg', 'sm' or 'xs'\n\nAlso see the [Bootstrap docs](https://getbootstrap.com/docs/4.3/components/button-group/#sizing)",
             "itemtype": "property",
             "name": "size",
@@ -4433,7 +4405,7 @@
         },
         {
             "file": "addon/components/bs-button-group.js",
-            "line": 171,
+            "line": 148,
             "description": "This action is called whenever the button group's value should be changed because the user clicked a button.\nYou will receive the new value of the button group (based on the `type` property), which you should use to update the\n`value` property.",
             "itemtype": "event",
             "name": "onChange",
@@ -4451,7 +4423,7 @@
         },
         {
             "file": "addon/components/bs-button.js",
-            "line": 111,
+            "line": 104,
             "description": "Default label of the button. Not need if used as a block component",
             "itemtype": "property",
             "name": "defaultText",
@@ -4463,7 +4435,7 @@
         },
         {
             "file": "addon/components/bs-button.js",
-            "line": 121,
+            "line": 112,
             "description": "Label of the button used if `onClick` event has returned a Promise which is pending.\nNot considered if used as a block component.",
             "itemtype": "property",
             "name": "pendingText",
@@ -4475,7 +4447,7 @@
         },
         {
             "file": "addon/components/bs-button.js",
-            "line": 132,
+            "line": 121,
             "description": "Label of the button used if `onClick` event has returned a Promise which succeeded.\nNot considered if used as a block component.",
             "itemtype": "property",
             "name": "fulfilledText",
@@ -4487,7 +4459,7 @@
         },
         {
             "file": "addon/components/bs-button.js",
-            "line": 143,
+            "line": 130,
             "description": "Label of the button used if `onClick` event has returned a Promise which failed.\nNot considered if used as a block component.",
             "itemtype": "property",
             "name": "rejectedText",
@@ -4499,7 +4471,7 @@
         },
         {
             "file": "addon/components/bs-button.js",
-            "line": 154,
+            "line": 139,
             "description": "Property to disable the button only used in internal communication\nbetween Ember Boostrap components.",
             "itemtype": "property",
             "name": "_disabled",
@@ -4512,7 +4484,7 @@
         },
         {
             "file": "addon/components/bs-button.js",
-            "line": 175,
+            "line": 157,
             "description": "Set the type of the button, either 'button' or 'submit'",
             "itemtype": "property",
             "name": "buttonType",
@@ -4526,7 +4498,7 @@
         },
         {
             "file": "addon/components/bs-button.js",
-            "line": 187,
+            "line": 168,
             "description": "Set the 'active' class to apply active/pressed CSS styling",
             "itemtype": "property",
             "name": "active",
@@ -4539,7 +4511,7 @@
         },
         {
             "file": "addon/components/bs-button.js",
-            "line": 198,
+            "line": 177,
             "description": "Property for block level buttons\n\nSee the [Bootstrap docs](http://getbootstrap.com/css/#buttons-sizes)",
             "itemtype": "property",
             "name": "block",
@@ -4552,7 +4524,7 @@
         },
         {
             "file": "addon/components/bs-button.js",
-            "line": 210,
+            "line": 188,
             "description": "A click event on a button will not bubble up the DOM tree if it has an `onClick` action handler. Set to true to\nenable the event to bubble",
             "itemtype": "property",
             "name": "bubble",
@@ -4565,7 +4537,7 @@
         },
         {
             "file": "addon/components/bs-button.js",
-            "line": 222,
+            "line": 198,
             "description": "If button is active and this is set, the icon property will match this property",
             "itemtype": "property",
             "name": "iconActive",
@@ -4577,7 +4549,7 @@
         },
         {
             "file": "addon/components/bs-button.js",
-            "line": 232,
+            "line": 206,
             "description": "If button is inactive and this is set, the icon property will match this property",
             "itemtype": "property",
             "name": "iconInactive",
@@ -4589,12 +4561,11 @@
         },
         {
             "file": "addon/components/bs-button.js",
-            "line": 242,
+            "line": 214,
             "description": "Class(es) (e.g. glyphicons or font awesome) to use as a button icon\nThis will render a <i class=\"{{icon}}\"></i> element in front of the button's label",
             "itemtype": "property",
             "name": "icon",
             "type": "String",
-            "readonly": "",
             "access": "public",
             "tagname": "",
             "class": "Components.Button",
@@ -4602,7 +4573,7 @@
         },
         {
             "file": "addon/components/bs-button.js",
-            "line": 256,
+            "line": 226,
             "description": "Supply a value that will be associated with this button. This will be send\nas a parameter of the default action triggered when clicking the button",
             "itemtype": "property",
             "name": "value",
@@ -4614,7 +4585,7 @@
         },
         {
             "file": "addon/components/bs-button.js",
-            "line": 267,
+            "line": 235,
             "description": "Controls if `onClick` action is fired concurrently. If `true` clicking button multiple times will not trigger\n`onClick` action if a Promise returned by previous click is not settled yet.\n\nThis does not affect event bubbling.",
             "itemtype": "property",
             "name": "preventConcurrency",
@@ -4627,7 +4598,7 @@
         },
         {
             "file": "addon/components/bs-button.js",
-            "line": 281,
+            "line": 247,
             "description": "State of the button. The button's label (if not used as a block component) will be set to the\n`<state>Text` property.\nThis property will automatically be set when using a click action that supplies the callback with a promise.\nPossible values are: \"default\" > \"pending\" > \"fulfilled\" / \"rejected\".\nIt could be reseted by `reset` property.",
             "itemtype": "property",
             "name": "state",
@@ -4640,7 +4611,7 @@
         },
         {
             "file": "addon/components/bs-button.js",
-            "line": 296,
+            "line": 267,
             "description": "Promise returned by `onClick` event is pending.",
             "itemtype": "property",
             "name": "isPending",
@@ -4652,7 +4623,7 @@
         },
         {
             "file": "addon/components/bs-button.js",
-            "line": 306,
+            "line": 277,
             "description": "Promise returned by `onClick` event has been succeeded.",
             "itemtype": "property",
             "name": "isFulfilled",
@@ -4664,7 +4635,7 @@
         },
         {
             "file": "addon/components/bs-button.js",
-            "line": 316,
+            "line": 287,
             "description": "Promise returned by `onClick` event has been rejected.",
             "itemtype": "property",
             "name": "isRejected",
@@ -4676,7 +4647,7 @@
         },
         {
             "file": "addon/components/bs-button.js",
-            "line": 326,
+            "line": 297,
             "description": "Promise returned by `onClick` event has been succeeded or rejected.",
             "itemtype": "property",
             "name": "isSettled",
@@ -4688,7 +4659,7 @@
         },
         {
             "file": "addon/components/bs-button.js",
-            "line": 336,
+            "line": 307,
             "description": "Set this to `true` to reset the `state`. A typical use case is to bind this attribute with ember-data isDirty flag.\n\nThe old value is not taken into consideration. Setting a `true` value to `true` again will also reset `state`.\nIn that case it's even to notify the observer system that the property has changed by calling\n[`notifyPropertyChange()`](https://www.emberjs.com/api/ember/3.2/classes/EmberObject/methods/notifyPropertyChange?anchor=notifyPropertyChange).",
             "itemtype": "property",
             "name": "reset",
@@ -4700,7 +4671,7 @@
         },
         {
             "file": "addon/components/bs-button.js",
-            "line": 350,
+            "line": 319,
             "description": "Property for size styling, set to 'lg', 'sm' or 'xs'\n\nAlso see the [Bootstrap docs](https://getbootstrap.com/docs/4.3/components/buttons/#sizes)",
             "itemtype": "property",
             "name": "size",
@@ -4712,7 +4683,7 @@
         },
         {
             "file": "addon/components/bs-button.js",
-            "line": 365,
+            "line": 329,
             "description": "Property for type styling\n\nFor the available types see the [Bootstrap docs](https://getbootstrap.com/docs/4.3/components/buttons/)",
             "itemtype": "property",
             "name": "type",
@@ -4725,7 +4696,7 @@
         },
         {
             "file": "addon/components/bs-button.js",
-            "line": 378,
+            "line": 340,
             "description": "Property to create outline buttons (BS4+ only)",
             "itemtype": "property",
             "name": "disabled",
@@ -4738,7 +4709,7 @@
         },
         {
             "file": "addon/components/bs-button.js",
-            "line": 392,
+            "line": 349,
             "description": "When clicking the button this action is called with the value of the button (that is the value of the \"value\" property).\n\nReturn a promise object, and the buttons state will automatically set to \"pending\", \"resolved\" and/or \"rejected\".\nThis could be used to automatically set the button's text depending on promise state (`defaultText`, `pendingText`,\n`fulfilledText`, `rejectedText`) and for futher customization using the yielded `isPending`, `isFulfilled`,\n`isRejected` properties.\n\nThe click event will not bubble up, unless you set `bubble` to true.",
             "itemtype": "event",
             "name": "onClick",
@@ -4756,7 +4727,7 @@
         },
         {
             "file": "addon/components/bs-button.js",
-            "line": 409,
+            "line": 364,
             "description": "This will reset the state property to 'default', and with that the button's label to defaultText",
             "itemtype": "method",
             "name": "resetState",
@@ -4767,7 +4738,7 @@
         },
         {
             "file": "addon/components/bs-button.js",
-            "line": 431,
+            "line": 379,
             "itemtype": "method",
             "name": "click",
             "access": "private",
@@ -5306,16 +5277,18 @@
         },
         {
             "file": "addon/components/bs-collapse.js",
-            "line": 39,
+            "line": 35,
             "itemtype": "property",
             "name": "_element",
             "type": "null | HTMLElement",
+            "access": "private",
+            "tagname": "",
             "class": "Components.Collapse",
             "namespace": "Components"
         },
         {
             "file": "addon/components/bs-collapse.js",
-            "line": 45,
+            "line": 42,
             "description": "Collapsed/expanded state",
             "itemtype": "property",
             "name": "collapsed",
@@ -5328,7 +5301,7 @@
         },
         {
             "file": "addon/components/bs-collapse.js",
-            "line": 56,
+            "line": 53,
             "description": "True if this item is expanded",
             "itemtype": "property",
             "name": "active",
@@ -5339,7 +5312,7 @@
         },
         {
             "file": "addon/components/bs-collapse.js",
-            "line": 74,
+            "line": 70,
             "description": "true if the component is currently transitioning",
             "itemtype": "property",
             "name": "transitioning",
@@ -5351,7 +5324,7 @@
         },
         {
             "file": "addon/components/bs-collapse.js",
-            "line": 84,
+            "line": 80,
             "description": "The size of the element when collapsed. Defaults to 0.",
             "itemtype": "property",
             "name": "collapsedSize",
@@ -5364,7 +5337,7 @@
         },
         {
             "file": "addon/components/bs-collapse.js",
-            "line": 95,
+            "line": 91,
             "description": "The size of the element when expanded. When null the value is calculated automatically to fit the containing elements.",
             "itemtype": "property",
             "name": "expandedSize",
@@ -5377,14 +5350,14 @@
         },
         {
             "file": "addon/components/bs-collapse.js",
-            "line": 105,
+            "line": 102,
             "description": "Calculates a hash for style attribute.",
             "class": "Components.Collapse",
             "namespace": "Components"
         },
         {
             "file": "addon/components/bs-collapse.js",
-            "line": 119,
+            "line": 115,
             "description": "Usually the size (height) of the element is only set while transitioning, and reseted afterwards. Set to true to always set a size.",
             "itemtype": "property",
             "name": "resetSizeWhenNotCollapsing",
@@ -5397,7 +5370,7 @@
         },
         {
             "file": "addon/components/bs-collapse.js",
-            "line": 129,
+            "line": 125,
             "description": "The direction (height/width) of the collapse animation.\nWhen setting this to 'width' you should also define custom CSS transitions for the width property, as the Bootstrap\nCSS does only support collapsible elements for the height direction.",
             "itemtype": "property",
             "name": "collapseDimension",
@@ -5410,7 +5383,7 @@
         },
         {
             "file": "addon/components/bs-collapse.js",
-            "line": 141,
+            "line": 138,
             "description": "The duration of the fade transition",
             "itemtype": "property",
             "name": "transitionDuration",
@@ -5423,7 +5396,7 @@
         },
         {
             "file": "addon/components/bs-collapse.js",
-            "line": 164,
+            "line": 152,
             "description": "The action to be sent when the element is about to be hidden.",
             "itemtype": "event",
             "name": "onHide",
@@ -5434,7 +5407,7 @@
         },
         {
             "file": "addon/components/bs-collapse.js",
-            "line": 172,
+            "line": 159,
             "description": "The action to be sent after the element has been completely hidden (including the CSS transition).",
             "itemtype": "event",
             "name": "onHidden",
@@ -5445,7 +5418,7 @@
         },
         {
             "file": "addon/components/bs-collapse.js",
-            "line": 180,
+            "line": 166,
             "description": "The action to be sent when the element is about to be shown.",
             "itemtype": "event",
             "name": "onShow",
@@ -5456,7 +5429,7 @@
         },
         {
             "file": "addon/components/bs-collapse.js",
-            "line": 188,
+            "line": 173,
             "description": "The action to be sent after the element has been completely shown (including the CSS transition).",
             "itemtype": "event",
             "name": "onShown",
@@ -5467,7 +5440,7 @@
         },
         {
             "file": "addon/components/bs-collapse.js",
-            "line": 196,
+            "line": 180,
             "description": "Triggers the show transition",
             "itemtype": "method",
             "name": "show",
@@ -5478,7 +5451,7 @@
         },
         {
             "file": "addon/components/bs-collapse.js",
-            "line": 229,
+            "line": 211,
             "description": "Get the size of the element when expanded",
             "itemtype": "method",
             "name": "getExpandedSize",
@@ -5499,7 +5472,7 @@
         },
         {
             "file": "addon/components/bs-collapse.js",
-            "line": 249,
+            "line": 231,
             "description": "Triggers the hide transition",
             "itemtype": "method",
             "name": "hide",
@@ -5510,7 +5483,7 @@
         },
         {
             "file": "addon/components/bs-contextual-help.js",
-            "line": 35,
+            "line": 36,
             "itemtype": "property",
             "name": "title",
             "type": "string",
@@ -5521,7 +5494,7 @@
         },
         {
             "file": "addon/components/bs-contextual-help.js",
-            "line": 41,
+            "line": 42,
             "description": "How to position the tooltip/popover - top | bottom | left | right",
             "itemtype": "property",
             "name": "title",
@@ -5534,7 +5507,7 @@
         },
         {
             "file": "addon/components/bs-contextual-help.js",
-            "line": 52,
+            "line": 53,
             "description": "By default it will dynamically reorient the tooltip/popover based on the available space in the viewport. For\nexample, if `placement` is \"left\", the tooltip/popover will display to the left when possible, otherwise it will\ndisplay right. Set to `false` to force placement according to the `placement` property",
             "itemtype": "property",
             "name": "autoPlacement",
@@ -5547,7 +5520,7 @@
         },
         {
             "file": "addon/components/bs-contextual-help.js",
-            "line": 65,
+            "line": 66,
             "description": "You can programmatically show the tooltip/popover by setting this to `true`",
             "itemtype": "property",
             "name": "visible",
@@ -5560,7 +5533,7 @@
         },
         {
             "file": "addon/components/bs-contextual-help.js",
-            "line": 76,
+            "line": 77,
             "itemtype": "property",
             "name": "inDom",
             "type": "boolean",
@@ -5571,7 +5544,7 @@
         },
         {
             "file": "addon/components/bs-contextual-help.js",
-            "line": 84,
+            "line": 85,
             "description": "Set to false to disable fade animations.",
             "itemtype": "property",
             "name": "fade",
@@ -5584,7 +5557,7 @@
         },
         {
             "file": "addon/components/bs-contextual-help.js",
-            "line": 95,
+            "line": 96,
             "description": "Used to apply Bootstrap's visibility class",
             "itemtype": "property",
             "name": "showHelp",
@@ -5597,7 +5570,7 @@
         },
         {
             "file": "addon/components/bs-contextual-help.js",
-            "line": 106,
+            "line": 107,
             "description": "Delay showing and hiding the tooltip/popover (ms). Individual delays for showing and hiding can be specified by using the\n`delayShow` and `delayHide` properties.",
             "itemtype": "property",
             "name": "delay",
@@ -5610,7 +5583,7 @@
         },
         {
             "file": "addon/components/bs-contextual-help.js",
-            "line": 118,
+            "line": 119,
             "description": "Delay showing the tooltip/popover. This property overrides the general delay set with the `delay` property.",
             "itemtype": "property",
             "name": "delayShow",
@@ -5623,7 +5596,7 @@
         },
         {
             "file": "addon/components/bs-contextual-help.js",
-            "line": 129,
+            "line": 130,
             "description": "Delay hiding the tooltip/popover. This property overrides the general delay set with the `delay` property.",
             "itemtype": "property",
             "name": "delayHide",
@@ -5636,7 +5609,7 @@
         },
         {
             "file": "addon/components/bs-contextual-help.js",
-            "line": 146,
+            "line": 147,
             "description": "The duration of the fade transition",
             "itemtype": "property",
             "name": "transitionDuration",
@@ -5649,7 +5622,7 @@
         },
         {
             "file": "addon/components/bs-contextual-help.js",
-            "line": 157,
+            "line": 158,
             "description": "Keeps the tooltip/popover within the bounds of this element when `autoPlacement` is true. Can be any valid CSS selector.",
             "itemtype": "property",
             "name": "viewportSelector",
@@ -5666,7 +5639,7 @@
         },
         {
             "file": "addon/components/bs-contextual-help.js",
-            "line": 170,
+            "line": 171,
             "description": "Take a padding into account for keeping the tooltip/popover within the bounds of the element given by `viewportSelector`.",
             "itemtype": "property",
             "name": "viewportPadding",
@@ -5683,7 +5656,7 @@
         },
         {
             "file": "addon/components/bs-contextual-help.js",
-            "line": 185,
+            "line": 186,
             "description": "The id of the overlay element.",
             "itemtype": "property",
             "name": "overlayId",
@@ -5696,7 +5669,7 @@
         },
         {
             "file": "addon/components/bs-contextual-help.js",
-            "line": 198,
+            "line": 199,
             "description": "The DOM element of the arrow element.",
             "itemtype": "property",
             "name": "arrowElement",
@@ -5709,7 +5682,7 @@
         },
         {
             "file": "addon/components/bs-contextual-help.js",
-            "line": 207,
+            "line": 208,
             "description": "The wormhole destinationElement",
             "itemtype": "property",
             "name": "destinationElement",
@@ -5722,7 +5695,7 @@
         },
         {
             "file": "addon/components/bs-contextual-help.js",
-            "line": 220,
+            "line": 221,
             "description": "The DOM element of the viewport element.",
             "itemtype": "property",
             "name": "viewportElement",
@@ -5735,7 +5708,7 @@
         },
         {
             "file": "addon/components/bs-contextual-help.js",
-            "line": 233,
+            "line": 234,
             "description": "The DOM element that triggers the tooltip/popover. By default it is the parent element of this component.\nYou can set this to any CSS selector to have any other element trigger the tooltip/popover.\nWith the special value of \"parentView\" you can attach the tooltip/popover to the parent component's element.",
             "itemtype": "property",
             "name": "triggerElement",
@@ -5747,7 +5720,7 @@
         },
         {
             "file": "addon/components/bs-contextual-help.js",
-            "line": 245,
+            "line": 246,
             "itemtype": "method",
             "name": "getTriggerTargetElement",
             "access": "private",
@@ -5757,7 +5730,7 @@
         },
         {
             "file": "addon/components/bs-contextual-help.js",
-            "line": 265,
+            "line": 274,
             "description": "The event(s) that should trigger the tooltip/popover - click | hover | focus.\nYou can set this to a single event or multiple events, given as an array or a string separated by spaces.",
             "itemtype": "property",
             "name": "triggerEvents",
@@ -5770,7 +5743,7 @@
         },
         {
             "file": "addon/components/bs-contextual-help.js",
-            "line": 296,
+            "line": 305,
             "description": "If true component will render in place, rather than be wormholed.",
             "itemtype": "property",
             "name": "renderInPlace",
@@ -5783,7 +5756,7 @@
         },
         {
             "file": "addon/components/bs-contextual-help.js",
-            "line": 307,
+            "line": 316,
             "itemtype": "property",
             "name": "_renderInPlace",
             "type": "boolean",
@@ -5794,7 +5767,7 @@
         },
         {
             "file": "addon/components/bs-contextual-help.js",
-            "line": 317,
+            "line": 326,
             "description": "Current hover state, 'in', 'out' or null",
             "itemtype": "property",
             "name": "hoverState",
@@ -5806,7 +5779,7 @@
         },
         {
             "file": "addon/components/bs-contextual-help.js",
-            "line": 327,
+            "line": 336,
             "description": "Current state for events",
             "itemtype": "property",
             "name": "inState",
@@ -5818,7 +5791,7 @@
         },
         {
             "file": "addon/components/bs-contextual-help.js",
-            "line": 339,
+            "line": 348,
             "description": "Ember.run timer",
             "itemtype": "property",
             "name": "timer",
@@ -5829,7 +5802,7 @@
         },
         {
             "file": "addon/components/bs-contextual-help.js",
-            "line": 347,
+            "line": 356,
             "description": "Use CSS transitions?",
             "itemtype": "property",
             "name": "usesTransition",
@@ -5842,7 +5815,7 @@
         },
         {
             "file": "addon/components/bs-contextual-help.js",
-            "line": 358,
+            "line": 367,
             "description": "The DOM element of the overlay element.",
             "itemtype": "property",
             "name": "overlayElement",
@@ -5855,7 +5828,7 @@
         },
         {
             "file": "addon/components/bs-contextual-help.js",
-            "line": 370,
+            "line": 379,
             "description": "This action is called immediately when the tooltip/popover is about to be shown.",
             "itemtype": "event",
             "name": "onShow",
@@ -5866,7 +5839,7 @@
         },
         {
             "file": "addon/components/bs-contextual-help.js",
-            "line": 378,
+            "line": 387,
             "description": "This action will be called when the tooltip/popover has been made visible to the user (will wait for CSS transitions to complete).",
             "itemtype": "event",
             "name": "onShown",
@@ -5877,7 +5850,7 @@
         },
         {
             "file": "addon/components/bs-contextual-help.js",
-            "line": 386,
+            "line": 395,
             "description": "This action is called immediately when the tooltip/popover is about to be hidden.",
             "itemtype": "event",
             "name": "onHide",
@@ -5888,7 +5861,7 @@
         },
         {
             "file": "addon/components/bs-contextual-help.js",
-            "line": 394,
+            "line": 403,
             "description": "This action is called when the tooltip/popover has finished being hidden from the user (will wait for CSS transitions to complete).",
             "itemtype": "event",
             "name": "onHidden",
@@ -5899,7 +5872,7 @@
         },
         {
             "file": "addon/components/bs-contextual-help.js",
-            "line": 402,
+            "line": 411,
             "description": "Called when a show event has been received",
             "itemtype": "method",
             "name": "enter",
@@ -5916,7 +5889,7 @@
         },
         {
             "file": "addon/components/bs-contextual-help.js",
-            "line": 439,
+            "line": 448,
             "description": "Called when a hide event has been received",
             "itemtype": "method",
             "name": "leave",
@@ -5933,7 +5906,7 @@
         },
         {
             "file": "addon/components/bs-contextual-help.js",
-            "line": 475,
+            "line": 484,
             "description": "Called for a click event",
             "itemtype": "method",
             "name": "toggle",
@@ -5950,7 +5923,7 @@
         },
         {
             "file": "addon/components/bs-contextual-help.js",
-            "line": 499,
+            "line": 508,
             "description": "Show the tooltip/popover",
             "itemtype": "method",
             "name": "show",
@@ -5961,7 +5934,7 @@
         },
         {
             "file": "addon/components/bs-contextual-help.js",
-            "line": 567,
+            "line": 576,
             "description": "Position the tooltip/popover's arrow",
             "itemtype": "method",
             "name": "replaceArrow",
@@ -5986,7 +5959,7 @@
         },
         {
             "file": "addon/components/bs-contextual-help.js",
-            "line": 582,
+            "line": 591,
             "description": "Hide the tooltip/popover",
             "itemtype": "method",
             "name": "hide",
@@ -5997,7 +5970,7 @@
         },
         {
             "file": "addon/components/bs-contextual-help.js",
-            "line": 627,
+            "line": 636,
             "itemtype": "method",
             "name": "addListeners",
             "access": "private",
@@ -6007,7 +5980,7 @@
         },
         {
             "file": "addon/components/bs-contextual-help.js",
-            "line": 645,
+            "line": 654,
             "itemtype": "method",
             "name": "removeListeners",
             "access": "private",
@@ -6017,7 +5990,7 @@
         },
         {
             "file": "addon/components/bs-contextual-help.js",
-            "line": 664,
+            "line": 673,
             "itemtype": "method",
             "name": "handleTriggerEvent",
             "access": "private",
@@ -6237,7 +6210,7 @@
         },
         {
             "file": "addon/components/bs-form.js",
-            "line": 165,
+            "line": 167,
             "description": "Set the layout of the form to either \"vertical\", \"horizontal\" or \"inline\". See http://getbootstrap.com/css/#forms-inline and http://getbootstrap.com/css/#forms-horizontal",
             "itemtype": "property",
             "name": "formLayout",
@@ -6249,7 +6222,7 @@
         },
         {
             "file": "addon/components/bs-form.js",
-            "line": 175,
+            "line": 177,
             "description": "Check if validating the model is supported. This needs to be implemented by another addon.",
             "itemtype": "property",
             "name": "hasValidator",
@@ -6262,7 +6235,7 @@
         },
         {
             "file": "addon/components/bs-form.js",
-            "line": 184,
+            "line": 186,
             "description": "The Bootstrap grid class for form labels. This is used by the `Components.FormElement` class as a default for the\nwhole form.",
             "itemtype": "property",
             "name": "horizontalLabelGridClass",
@@ -6275,7 +6248,7 @@
         },
         {
             "file": "addon/components/bs-form.js",
-            "line": 196,
+            "line": 198,
             "itemtype": "property",
             "name": "elementComponent",
             "type": "{String}",
@@ -6286,7 +6259,7 @@
         },
         {
             "file": "addon/components/bs-form.js",
-            "line": 204,
+            "line": 206,
             "itemtype": "property",
             "name": "groupComponent",
             "type": "{String}",
@@ -6297,7 +6270,7 @@
         },
         {
             "file": "addon/components/bs-form.js",
-            "line": 212,
+            "line": 214,
             "itemtype": "property",
             "name": "submitButtonComponent",
             "type": "{String}",
@@ -6308,7 +6281,7 @@
         },
         {
             "file": "addon/components/bs-form.js",
-            "line": 220,
+            "line": 222,
             "description": "`isSubmitting` is `true` after `submit` event has been triggered and until Promise returned by `onSubmit` is\nfulfilled. If `validate` returns a Promise that one is also taken into consideration.\n\nIf multiple concurrent submit events are fired, it stays `true` until all submit events have been fulfilled.",
             "itemtype": "property",
             "name": "isSubmitting",
@@ -6321,7 +6294,7 @@
         },
         {
             "file": "addon/components/bs-form.js",
-            "line": 234,
+            "line": 236,
             "description": "`isSubmitted` is `true` if last submission was successful.\nA change to any form element resets it's value to `false`.\n\nIf not using `Components.FormElement`, `resetSubmissionState` action must be triggered on each change to reset\nform's submission state.",
             "itemtype": "property",
             "name": "isSubmitted",
@@ -6333,7 +6306,7 @@
         },
         {
             "file": "addon/components/bs-form.js",
-            "line": 248,
+            "line": 250,
             "description": "`isRejected` is `true` if last submission was rejected.\nA submission is considered as rejected if form is invalid as well as if `onSubmit` rejects.\nA change to any form element resets it's value to `false`.\n\nIf not using `Components.FormElement`, `resetSubmissionState` action must be triggered on each change to reset\nform's submission state.",
             "itemtype": "property",
             "name": "isRejected",
@@ -6345,7 +6318,7 @@
         },
         {
             "file": "addon/components/bs-form.js",
-            "line": 263,
+            "line": 265,
             "description": "State of the form expressed as state values expected by `<BsButton>`.",
             "itemtype": "property",
             "name": "submitButtonState",
@@ -6357,7 +6330,7 @@
         },
         {
             "file": "addon/components/bs-form.js",
-            "line": 286,
+            "line": 288,
             "description": "Count of pending submissions.",
             "itemtype": "property",
             "name": "pendingSubmissions",
@@ -6369,7 +6342,7 @@
         },
         {
             "file": "addon/components/bs-form.js",
-            "line": 296,
+            "line": 298,
             "description": "If set to true pressing enter will submit the form, even if no submit button is present",
             "itemtype": "property",
             "name": "submitOnEnter",
@@ -6382,7 +6355,7 @@
         },
         {
             "file": "addon/components/bs-form.js",
-            "line": 307,
+            "line": 309,
             "description": "Controls if `onSubmit` action is fired concurrently. If `true` submitting form multiple\ntimes will not trigger `onSubmit` action if a Promise returned by previous submission is\nnot settled yet.\n\nDroping a submission also prevents rerunning validation and `onBefore` hook.",
             "itemtype": "property",
             "name": "preventConcurrency",
@@ -6395,7 +6368,7 @@
         },
         {
             "file": "addon/components/bs-form.js",
-            "line": 322,
+            "line": 324,
             "description": "If true, after successful validation and upon submitting the form, all current element validations will be hidden.\nIf the form remains visible, the user would have to focus out of elements of submit the form again for the\nvalidations to show up again, as if a fresh new form component had been rendered.",
             "itemtype": "property",
             "name": "hideValidationsOnSubmit",
@@ -6408,7 +6381,7 @@
         },
         {
             "file": "addon/components/bs-form.js",
-            "line": 335,
+            "line": 337,
             "description": "If set to true the `readonly` property of all yielded form elements will be set, making their form controls read-only.",
             "itemtype": "property",
             "name": "readonly",
@@ -6421,7 +6394,7 @@
         },
         {
             "file": "addon/components/bs-form.js",
-            "line": 346,
+            "line": 348,
             "description": "If set to true the `disabled` property of all yielded form elements will be set, making their form controls disabled.",
             "itemtype": "property",
             "name": "disabled",
@@ -6434,7 +6407,7 @@
         },
         {
             "file": "addon/components/bs-form.js",
-            "line": 357,
+            "line": 359,
             "description": "Validate hook which will return a promise that will either resolve if the model is valid\nor reject if it's not. This should be overridden to add validation support.",
             "itemtype": "method",
             "name": "validate",
@@ -6456,7 +6429,7 @@
         },
         {
             "file": "addon/components/bs-form.js",
-            "line": 368,
+            "line": 370,
             "itemtype": "property",
             "name": "showAllValidations",
             "type": "boolean",
@@ -6468,7 +6441,7 @@
         },
         {
             "file": "addon/components/bs-form.js",
-            "line": 377,
+            "line": 379,
             "description": "Action is called before the form is validated (if possible) and submitted.",
             "itemtype": "event",
             "name": "onBefore",
@@ -6486,7 +6459,7 @@
         },
         {
             "file": "addon/components/bs-form.js",
-            "line": 386,
+            "line": 387,
             "description": "Action is called when submit has been triggered and the model has passed all validations (if present).",
             "itemtype": "event",
             "name": "onSubmit",
@@ -6532,7 +6505,7 @@
         },
         {
             "file": "addon/components/bs-form.js",
-            "line": 406,
+            "line": 405,
             "description": "Submit handler that will send the default action (\"action\") to the controller when submitting the form.\n\nIf there is a supplied `model` that supports validation (`hasValidator`) the model will be validated before, and\nonly if validation is successful the default action will be sent. Otherwise an \"invalid\" action will be sent, and\nall the `showValidation` property of all child `Components.FormElement`s will be set to true, so error state and\nmessages will be shown automatically.",
             "itemtype": "method",
             "name": "submit",
@@ -7938,11 +7911,11 @@
     "warnings": [
         {
             "message": "Missing item type\nMakes things more stable, especially when fast changing.",
-            "line": " addon/components/bs-carousel/slide.js:175"
+            "line": " addon/components/bs-carousel/slide.js:176"
         },
         {
             "message": "Missing item type\nCache for value",
-            "line": " addon/components/bs-form/element.js:292"
+            "line": " addon/components/bs-form/element.js:293"
         },
         {
             "message": "Missing item type\nEmber implementation of Bootstrap's Carousel. Supports all original features but API is partially different:\n\n| Description | Original | Component |\n| ------ | ------ | ------ |\n| Autoplays after first user event or on page load. | ride='carousel'\\|false | autoPlay=false\\|true |\n| Disable automatic cycle. | interval=false | interval=0 |\n| If first slide should follow last slide on \"previous\" event, the opposite will also be true for \"next\" event. | wrap=false\\|true | wrap=false\\|true |\n| Jumps into specific slide index | data-slide-to=n | index=n |\n| Keyboard events. | keyboard=false\\|true | keyboard=false\\|true |\n| Left-to-right or right-to-left sliding. | N/A |  ltr=false\\|true |\n| Pause current cycle on mouse enter. | pause='hover'\\|null | pauseOnMouseEnter=false\\|true |\n| Show or hide controls  | Tag manipulation. | showControls=false\\|true |\n| Show or hide indicators  | Tag manipulation. | showIndicators=false\\|true |\n| Waiting time of slides in a automatic cycle. | interval=n | interval=n |\n\nDefault settings are the same as the original so you don't have to worry about changing parameters.\n\n```hbs\n<BsCarousel as |car|>\n  <car.slide>\n    <img alt=\"First slide\" src=\"slide1.jpg\">\n  </car.slide>\n  <car.slide>\n    <img alt=\"Second slide\" src=\"slide2.jpg\">\n  </car.slide>\n  <car.slide>\n    <img alt=\"Third slide\" src=\"slide3.jpg\">\n  </car.slide>\n</BsCarousel>\n```\n\nTo better understand the whole documentation, you should be aware of the following operations:\n\n| Operation | Description |\n| ------ | ------ |\n| Transition | Swaps two slides. |\n| Interval | Waiting time after a transition. |\n| Presentation | Represents a single transition, or a single interval, or the union of both. |\n| Cycle | Presents all slides until it reaches first or last slide. |\n| Wrap | wrap slides, cycles without stopping at first or last slide. |\n```\n\n*Note that only invoking the component in a template as shown above is considered part of its public API. Extending from it (subclassing) is generally not supported, and may break at any time.*\n\n@class Carousel\n@namespace Components\n@extends Ember.Component\n@public",
@@ -7954,7 +7927,7 @@
         },
         {
             "message": "Missing item type\nCalculates a hash for style attribute.",
-            "line": " addon/components/bs-collapse.js:105"
+            "line": " addon/components/bs-collapse.js:102"
         },
         {
             "message": "Missing item type\nThe DOM element of the `.dropdown-menu` element",

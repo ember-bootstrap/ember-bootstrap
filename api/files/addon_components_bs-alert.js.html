@@ -59,17 +59,14 @@
 
 <div class="file">
     <pre class="prettyprint linenums">
-import { tagName } from &#x27;@ember-decorators/component&#x27;;
 import { action } from &#x27;@ember/object&#x27;;
-import { and, not } from &#x27;@ember/object/computed&#x27;;
-import { addObserver } from &#x27;@ember/object/observers&#x27;;
-import Component from &#x27;@ember/component&#x27;;
+import Component from &#x27;@glimmer/component&#x27;;
+import { tracked } from &#x27;@glimmer/tracking&#x27;;
 import { later } from &#x27;@ember/runloop&#x27;;
-import typeClass from &#x27;ember-bootstrap/utils/cp/type-class&#x27;;
-import listenTo from &#x27;ember-bootstrap/utils/cp/listen-to&#x27;;
-import usesTransition from &#x27;ember-bootstrap/utils/cp/uses-transition&#x27;;
-import defaultValue from &#x27;ember-bootstrap/utils/default-decorator&#x27;;
+import usesTransition from &#x27;ember-bootstrap/utils/decorators/uses-transition&#x27;;
 import deprecateSubclassing from &#x27;ember-bootstrap/utils/deprecate-subclassing&#x27;;
+import arg from &#x27;ember-bootstrap/utils/decorators/arg&#x27;;
+import { localCopy } from &#x27;tracked-toolbox&#x27;;
 
 /**
   Implements [Bootstrap alerts](http://getbootstrap.com/components/#alerts)
@@ -89,10 +86,9 @@ import deprecateSubclassing from &#x27;ember-bootstrap/utils/deprecate-subclassi
 
   @class Alert
   @namespace Components
-  @extends Ember.Component
+  @extends Glimmer.Component
   @public
 */
-@tagName(&#x27;&#x27;)
 @deprecateSubclassing
 export default class Alert extends Component {
   /**
@@ -104,7 +100,7 @@ export default class Alert extends Component {
    * @default true
    * @public
    */
-  @defaultValue
+  @arg
   dismissible = true;
 
   /**
@@ -116,8 +112,8 @@ export default class Alert extends Component {
    * @readonly
    * @private
    */
-  @defaultValue
-  hidden = !this._visible;
+  @tracked
+  hidden = !this.visible;
 
   /**
    * This property controls if the alert should be visible. If false it might still be in the DOM until the fade animation
@@ -131,22 +127,15 @@ export default class Alert extends Component {
    * @default true
    * @public
    */
-  @defaultValue
+  @arg
   visible = true;
 
   /**
    * @property _visible
    * @private
    */
-  @listenTo(&#x27;visible&#x27;)
+  @localCopy(&#x27;visible&#x27;)
   _visible;
-
-  /**
-   * @property notVisible
-   * @private
-   */
-  @not(&#x27;_visible&#x27;)
-  notVisible;
 
   /**
    * Set to false to disable the fade out animation when hiding the alert.
@@ -156,22 +145,10 @@ export default class Alert extends Component {
    * @default true
    * @public
    */
-  @defaultValue
-  fade = true;
 
-  /**
-   * Computed property to set the alert class to the component div. Will be false when dismissed to have the component
-   * div (which cannot be removed form DOM by the component itself) without any markup.
-   *
-   * @property alert
-   * @type boolean
-   * @private
-   */
-  @not(&#x27;hidden&#x27;)
-  alert;
-
-  @and(&#x27;_visible&#x27;, &#x27;fade&#x27;)
-  showAlert;
+  get showAlert() {
+    return this._visible &amp;&amp; this.args.fade !== false;
+  }
 
   /**
    * The duration of the fade out animation
@@ -181,7 +158,7 @@ export default class Alert extends Component {
    * @default 150
    * @public
    */
-  @defaultValue
+  @arg
   fadeDuration = 150;
 
   /**
@@ -191,14 +168,8 @@ export default class Alert extends Component {
    *
    * @property type
    * @type String
-   * @default &#x27;default&#x27;
    * @public
    */
-  @defaultValue
-  type = &#x27;default&#x27;;
-
-  @typeClass(&#x27;alert&#x27;, &#x27;type&#x27;)
-  typeClass;
 
   /**
    * Use CSS transitions?
@@ -217,7 +188,6 @@ export default class Alert extends Component {
    * @event onDismissed
    * @public
    */
-  onDismissed() {}
 
   /**
    * The action is called when the close button is clicked.
@@ -228,12 +198,11 @@ export default class Alert extends Component {
    * @event onDismiss
    * @public
    */
-  onDismiss() {}
 
   @action
   dismiss() {
-    if (this.onDismiss() !== false) {
-      this.set(&#x27;_visible&#x27;, false);
+    if (this.args.onDismiss?.() !== false) {
+      this._visible = false;
     }
   }
 
@@ -244,7 +213,7 @@ export default class Alert extends Component {
    * @private
    */
   show() {
-    this.set(&#x27;hidden&#x27;, false);
+    this.hidden = false;
   }
 
   /**
@@ -260,30 +229,25 @@ export default class Alert extends Component {
         this,
         function () {
           if (!this.isDestroyed) {
-            this.set(&#x27;hidden&#x27;, true);
-            this.onDismissed();
+            this.hidden = true;
+            this.args.onDismissed?.();
           }
         },
         this.fadeDuration
       );
     } else {
-      this.set(&#x27;hidden&#x27;, true);
-      this.onDismissed();
+      this.hidden = true;
+      this.args.onDismissed?.();
     }
   }
 
-  _observeIsVisible() {
+  @action
+  showOrHide() {
     if (this._visible) {
       this.show();
     } else {
       this.hide();
     }
-  }
-
-  init() {
-    super.init(...arguments);
-
-    addObserver(this, &#x27;_visible&#x27;, null, this._observeIsVisible, true);
   }
 }
 

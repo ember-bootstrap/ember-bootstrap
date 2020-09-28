@@ -62,17 +62,19 @@ with collapsible/expandable items.</p>
 <h3>Usage</h3>
 <p>Use as a block level component with any number of yielded <a href="Components.AccordionItem.html">Components.AccordionItem</a>
 components as children:</p>
-<pre class="code prettyprint"><code class="language-handlebars">&lt;BsAccordion as |Acc|&gt;
-  &lt;Acc.item @value={{1}} @title="First item"&gt;
+<pre class="code prettyprint"><code class="language-handlebars">&lt;BsAccordion as |acc|&gt;
+  &lt;acc.item @value={{1}} @title="First item"&gt;
     &lt;p&gt;Lorem ipsum...&lt;/p&gt;
-    &lt;button onclick={{action acc.change 2}}&gt;Next&lt;/button&gt;
-  &lt;/Acc.item&gt;
-  &lt;Acc.item @value={{2}} @title="Second item"&gt;
+    &lt;button {{on "click" (fn acc.change 2)}}&gt;
+      Next
+    &lt;/button&gt;
+  &lt;/acc.item&gt;
+  &lt;acc.item @value={{2}} @title="Second item"&gt;
     &lt;p&gt;Lorem ipsum...&lt;/p&gt;
-  &lt;/Acc.item&gt;
-  &lt;Acc.item @value={{3}} @title="Third item"&gt;
+  &lt;/acc.item&gt;
+  &lt;acc.item @value={{3}} @title="Third item"&gt;
     &lt;p&gt;Lorem ipsum...&lt;/p&gt;
-  &lt;/Acc.item&gt;
+  &lt;/acc.item&gt;
 &lt;/BsAccordion&gt;
 </code></pre>
 <p>In the example above the first accordion item utilizes the yielded <code>change</code> action to add some custom behaviour.</p>
@@ -200,7 +202,7 @@ components as children:</p>
               <div class="meta">
                   <p>
                       Defined in
-                  <a href="../files/addon_components_bs-accordion.js.html#l64"><code>addon&#x2F;components&#x2F;bs-accordion.js:64</code></a>
+                  <a href="../files/addon_components_bs-accordion.js.html#l66"><code>addon&#x2F;components&#x2F;bs-accordion.js:66</code></a>
               </p>
             
             
@@ -229,7 +231,7 @@ components as children:</p>
               <div class="meta">
                   <p>
                       Defined in
-                  <a href="../files/addon_components_bs-accordion.js.html#l56"><code>addon&#x2F;components&#x2F;bs-accordion.js:56</code></a>
+                  <a href="../files/addon_components_bs-accordion.js.html#l58"><code>addon&#x2F;components&#x2F;bs-accordion.js:58</code></a>
               </p>
             
             
@@ -257,7 +259,7 @@ components as children:</p>
               <div class="meta">
                   <p>
                       Defined in
-                  <a href="../files/addon_components_bs-accordion.js.html#l44"><code>addon&#x2F;components&#x2F;bs-accordion.js:44</code></a>
+                  <a href="../files/addon_components_bs-accordion.js.html#l46"><code>addon&#x2F;components&#x2F;bs-accordion.js:46</code></a>
               </p>
             
             
@@ -290,7 +292,7 @@ components as children:</p>
                 <div class="meta">
                             <p>
                             Defined in
-                    <a href="../files/addon_components_bs-accordion.js.html#l73"><code>addon&#x2F;components&#x2F;bs-accordion.js:73</code></a>
+                    <a href="../files/addon_components_bs-accordion.js.html#l75"><code>addon&#x2F;components&#x2F;bs-accordion.js:75</code></a>
                     </p>
             
             

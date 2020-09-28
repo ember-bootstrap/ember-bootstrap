@@ -59,19 +59,16 @@
 
 <div class="file">
     <pre class="prettyprint linenums">
-import { tagName } from &#x27;@ember-decorators/component&#x27;;
-import { alias, and, not } from &#x27;@ember/object/computed&#x27;;
-import { addObserver } from &#x27;@ember/object/observers&#x27;;
-import Component from &#x27;@ember/component&#x27;;
-import { isPresent, isNone } from &#x27;@ember/utils&#x27;;
+import { action } from &#x27;@ember/object&#x27;;
+import Component from &#x27;@glimmer/component&#x27;;
+import { isNone } from &#x27;@ember/utils&#x27;;
 import { next } from &#x27;@ember/runloop&#x27;;
 import { camelize } from &#x27;@ember/string&#x27;;
 import transitionEnd from &#x27;ember-bootstrap/utils/transition-end&#x27;;
-import { assert } from &#x27;@ember/debug&#x27;;
-import defaultValue from &#x27;ember-bootstrap/utils/default-decorator&#x27;;
-import { computed } from &#x27;@ember/object&#x27;;
 import deprecateSubclassing from &#x27;ember-bootstrap/utils/deprecate-subclassing&#x27;;
 import { ref } from &#x27;ember-ref-bucket&#x27;;
+import arg from &#x27;../utils/decorators/arg&#x27;;
+import { tracked } from &#x27;@glimmer/tracking&#x27;;
 
 /**
   An Ember component that mimics the behaviour of [Bootstrap&#x27;s collapse.js plugin](http://getbootstrap.com/javascript/#collapse)
@@ -91,15 +88,15 @@ import { ref } from &#x27;ember-ref-bucket&#x27;;
 
   @class Collapse
   @namespace Components
-  @extends Ember.Component
+  @extends Glimmer.Component
   @public
 */
-@tagName(&#x27;&#x27;)
 @deprecateSubclassing
 export default class Collapse extends Component {
   /**
    * @property _element
    * @type null | HTMLElement
+   * @private
    */
   @ref(&#x27;mainNode&#x27;) _element = null;
 
@@ -111,7 +108,7 @@ export default class Collapse extends Component {
    * @default true
    * @public
    */
-  @defaultValue
+  @arg
   collapsed = true;
 
   /**
@@ -120,17 +117,16 @@ export default class Collapse extends Component {
    * @property active
    * @private
    */
-  @defaultValue
+  @tracked
   active = !this.collapsed;
 
-  @not(&#x27;transitioning&#x27;)
-  collapse;
+  get collapse() {
+    return !this.transitioning;
+  }
 
-  @alias(&#x27;transitioning&#x27;)
-  collapsing;
-
-  @and(&#x27;collapse&#x27;, &#x27;active&#x27;)
-  showContent;
+  get showContent() {
+    return this.collapse &amp;&amp; this.active;
+  }
 
   /**
    * true if the component is currently transitioning
@@ -139,7 +135,7 @@ export default class Collapse extends Component {
    * @type boolean
    * @private
    */
-  @defaultValue
+  @tracked
   transitioning = false;
 
   /**
@@ -150,7 +146,7 @@ export default class Collapse extends Component {
    * @default 0
    * @public
    */
-  @defaultValue
+  @arg
   collapsedSize = 0;
 
   /**
@@ -161,12 +157,12 @@ export default class Collapse extends Component {
    * @default null
    * @public
    */
+  @arg
   expandedSize = null;
 
   /**
    * Calculates a hash for style attribute.
    */
-  @computed(&#x27;collapseDimension&#x27;, &#x27;collapseSize&#x27;)
   get cssStyle() {
     if (isNone(this.collapseSize)) {
       return {};
@@ -197,6 +193,7 @@ export default class Collapse extends Component {
    * @default &#x27;height&#x27;
    * @public
    */
+  @arg
   collapseDimension = &#x27;height&#x27;;
 
   /**
@@ -207,20 +204,11 @@ export default class Collapse extends Component {
    * @default 350
    * @public
    */
+  @arg
   transitionDuration = 350;
 
+  @tracked
   collapseSize = null;
-
-  setCollapseSize(size) {
-    let dimension = this.collapseDimension;
-
-    assert(
-      &#x60;collapseDimension must be either &quot;width&quot; or &quot;height&quot;. ${dimension} given.&#x60;,
-      [&#x27;width&#x27;, &#x27;height&#x27;].indexOf(dimension) !== -1
-    );
-
-    this.set(&#x27;collapseSize&#x27;, size);
-  }
 
   /**
    * The action to be sent when the element is about to be hidden.
@@ -228,7 +216,6 @@ export default class Collapse extends Component {
    * @event onHide
    * @public
    */
-  onHide() {}
 
   /**
    * The action to be sent after the element has been completely hidden (including the CSS transition).
@@ -236,7 +223,6 @@ export default class Collapse extends Component {
    * @event onHidden
    * @public
    */
-  onHidden() {}
 
   /**
    * The action to be sent when the element is about to be shown.
@@ -244,7 +230,6 @@ export default class Collapse extends Component {
    * @event onShow
    * @public
    */
-  onShow() {}
 
   /**
    * The action to be sent after the element has been completely shown (including the CSS transition).
@@ -252,7 +237,6 @@ export default class Collapse extends Component {
    * @event onShown
    * @public
    */
-  onShown() {}
 
   /**
    * Triggers the show transition
@@ -261,28 +245,26 @@ export default class Collapse extends Component {
    * @protected
    */
   show() {
-    this.onShow();
+    this.args.onShow?.();
 
-    this.setProperties({
-      transitioning: true,
-      active: true,
-    });
-    this.setCollapseSize(this.collapsedSize);
+    this.transitioning = true;
+    this.active = true;
+    this.collapseSize = this.collapsedSize;
 
     transitionEnd(this._element, this.transitionDuration).then(() =&gt; {
       if (this.isDestroyed) {
         return;
       }
-      this.set(&#x27;transitioning&#x27;, false);
+      this.transitioning = false;
       if (this.resetSizeWhenNotCollapsing) {
-        this.setCollapseSize(null);
+        this.collapseSize = null;
       }
-      this.onShown();
+      this.args.onShown?.();
     });
 
     next(this, function () {
       if (!this.isDestroyed) {
-        this.setCollapseSize(this.getExpandedSize(&#x27;show&#x27;));
+        this.collapseSize = this.getExpandedSize(&#x27;show&#x27;);
       }
     });
   }
@@ -297,7 +279,7 @@ export default class Collapse extends Component {
    */
   getExpandedSize(action) {
     let expandedSize = this.expandedSize;
-    if (isPresent(expandedSize)) {
+    if (expandedSize != null) {
       return expandedSize;
     }
 
@@ -314,32 +296,31 @@ export default class Collapse extends Component {
    * @protected
    */
   hide() {
-    this.onHide();
+    this.args.onHide?.();
 
-    this.setProperties({
-      transitioning: true,
-      active: false,
-    });
-    this.setCollapseSize(this.getExpandedSize(&#x27;hide&#x27;));
+    this.transitioning = true;
+    this.active = false;
+    this.collapseSize = this.getExpandedSize(&#x27;hide&#x27;);
 
     transitionEnd(this._element, this.transitionDuration).then(() =&gt; {
       if (this.isDestroyed) {
         return;
       }
-      this.set(&#x27;transitioning&#x27;, false);
+      this.transitioning = false;
       if (this.resetSizeWhenNotCollapsing) {
-        this.setCollapseSize(null);
+        this.collapseSize = null;
       }
-      this.onHidden();
+      this.args.onHidden?.();
     });
 
     next(this, function () {
       if (!this.isDestroyed) {
-        this.setCollapseSize(this.collapsedSize);
+        this.collapseSize = this.collapsedSize;
       }
     });
   }
 
+  @action
   _onCollapsedChange() {
     let collapsed = this.collapsed;
     let active = this.active;
@@ -353,24 +334,18 @@ export default class Collapse extends Component {
     }
   }
 
+  @action
   _updateCollapsedSize() {
     if (!this.resetSizeWhenNotCollapsing &amp;&amp; this.collapsed &amp;&amp; !this.collapsing) {
-      this.setCollapseSize(this.collapsedSize);
+      this.collapseSize = this.collapsedSize;
     }
   }
 
+  @action
   _updateExpandedSize() {
     if (!this.resetSizeWhenNotCollapsing &amp;&amp; !this.collapsed &amp;&amp; !this.collapsing) {
-      this.setCollapseSize(this.expandedSize);
+      this.collapseSize = this.expandedSize;
     }
-  }
-
-  init() {
-    super.init(...arguments);
-
-    addObserver(this, &#x27;collapsed&#x27;, null, this._onCollapsedChange, true);
-    addObserver(this, &#x27;collapsedSize&#x27;, null, this._updateCollapsedSize, true);
-    addObserver(this, &#x27;expandedSize&#x27;, null, this._updateExpandedSize, true);
   }
 }
 

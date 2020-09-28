@@ -1,3 +1,26 @@
+## v4.2.0 (2020-09-28)
+
+#### Features
+* [#1259](https://github.com/kaliber5/ember-bootstrap/pull/1259) Support both ember-concurrency 1.x and 2.x ([@maxfierke](https://github.com/maxfierke))
+* [#1237](https://github.com/kaliber5/ember-bootstrap/pull/1237) Deprecate @triggerElement="parentView" for Tooltips and Popovers ([@simonihmig](https://github.com/simonihmig))
+* [#1224](https://github.com/kaliber5/ember-bootstrap/pull/1224) Refactor BsAlert to Glimmer component ([@simonihmig](https://github.com/simonihmig))
+* [#1225](https://github.com/kaliber5/ember-bootstrap/pull/1225) Refactor BsCollapse to Glimmer component ([@simonihmig](https://github.com/simonihmig))
+* [#1022](https://github.com/kaliber5/ember-bootstrap/pull/1022) Refactor Button and ButtonGroup to Glimmer components ([@simonihmig](https://github.com/simonihmig))
+
+#### Bug Fixes
+* [#1250](https://github.com/kaliber5/ember-bootstrap/pull/1250)  should support @onBefore, @onSubmit and @onInvalid arguments to be undefined ([@jelhan](https://github.com/jelhan))
+* [#1249](https://github.com/kaliber5/ember-bootstrap/pull/1249) upgrade @embroider/macros to fix usage in addons ([@jelhan](https://github.com/jelhan))
+
+#### Documentation
+* [#1260](https://github.com/kaliber5/ember-bootstrap/pull/1260) Declare _element property as private ([@simonihmig](https://github.com/simonihmig))
+* [#1257](https://github.com/kaliber5/ember-bootstrap/pull/1257) fix usage example in accordion docs ([@jelhan](https://github.com/jelhan))
+
+#### Committers: 4
+- Jeldrik Hanschke ([@jelhan](https://github.com/jelhan))
+- Max Fierke ([@maxfierke](https://github.com/maxfierke))
+- Simon Ihmig ([@simonihmig](https://github.com/simonihmig))
+- [@dependabot-preview[bot]](https://github.com/apps/dependabot-preview)
+
 ## v4.1.2 (2020-09-06)
 
 #### Bug Fixes

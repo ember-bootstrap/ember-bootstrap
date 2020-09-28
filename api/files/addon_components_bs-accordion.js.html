@@ -76,17 +76,19 @@ import deprecateSubclassing from &#x27;ember-bootstrap/utils/deprecate-subclassi
   components as children:
 
   &#x60;&#x60;&#x60;handlebars
-  &lt;BsAccordion as |Acc|&gt;
-    &lt;Acc.item @value={{1}} @title=&quot;First item&quot;&gt;
+  &lt;BsAccordion as |acc|&gt;
+    &lt;acc.item @value={{1}} @title=&quot;First item&quot;&gt;
       &lt;p&gt;Lorem ipsum...&lt;/p&gt;
-      &lt;button onclick={{action acc.change 2}}&gt;Next&lt;/button&gt;
-    &lt;/Acc.item&gt;
-    &lt;Acc.item @value={{2}} @title=&quot;Second item&quot;&gt;
+      &lt;button {{on &quot;click&quot; (fn acc.change 2)}}&gt;
+        Next
+      &lt;/button&gt;
+    &lt;/acc.item&gt;
+    &lt;acc.item @value={{2}} @title=&quot;Second item&quot;&gt;
       &lt;p&gt;Lorem ipsum...&lt;/p&gt;
-    &lt;/Acc.item&gt;
-    &lt;Acc.item @value={{3}} @title=&quot;Third item&quot;&gt;
+    &lt;/acc.item&gt;
+    &lt;acc.item @value={{3}} @title=&quot;Third item&quot;&gt;
       &lt;p&gt;Lorem ipsum...&lt;/p&gt;
-    &lt;/Acc.item&gt;
+    &lt;/acc.item&gt;
   &lt;/BsAccordion&gt;
   &#x60;&#x60;&#x60;
 

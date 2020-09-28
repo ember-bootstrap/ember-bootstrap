@@ -59,10 +59,8 @@
 
 <div class="file">
     <pre class="prettyprint linenums">
-import { computed } from &#x27;@ember/object&#x27;;
 import { isArray } from &#x27;@ember/array&#x27;;
 import Button from &#x27;ember-bootstrap/components/bs-button&#x27;;
-import defaultValue from &#x27;ember-bootstrap/utils/default-decorator&#x27;;
 
 /**
  Internal component for button-group buttons
@@ -79,16 +77,12 @@ export default class ButtonGroupButton extends Button {
    * @property groupValue
    * @private
    */
-  @defaultValue
-  groupValue = null;
 
   /**
    * @property buttonGroupType
    * @type string
    * @private
    */
-  @defaultValue
-  buttonGroupType = false;
 
   /**
    * @property active
@@ -96,10 +90,9 @@ export default class ButtonGroupButton extends Button {
    * @readonly
    * @private
    */
-  @(computed(&#x27;buttonGroupType&#x27;, &#x27;groupValue.[]&#x27;, &#x27;value&#x27;).readOnly())
   get active() {
-    let { value, groupValue } = this;
-    if (this.buttonGroupType === &#x27;radio&#x27;) {
+    let { value, groupValue } = this.args;
+    if (this.args.buttonGroupType === &#x27;radio&#x27;) {
       return value === groupValue;
     } else {
       if (isArray(groupValue)) {

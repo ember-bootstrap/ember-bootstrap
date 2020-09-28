@@ -222,6 +222,8 @@ export default class Form extends Component {
    * @type Ember.Object
    * @public
    */
+  @defaultValue
+  model = macroCondition(getOwnConfig().useDefaultValueIfUndefined) ? {} : undefined;
 
   /**
    * Set the layout of the form to either &quot;vertical&quot;, &quot;horizontal&quot; or &quot;inline&quot;. See http://getbootstrap.com/css/#forms-inline and http://getbootstrap.com/css/#forms-horizontal
@@ -442,7 +444,6 @@ export default class Form extends Component {
    * @param { Object } model  The form&#x27;s &#x60;model&#x60;
    * @public
    */
-  onBefore(model) {} // eslint-disable-line no-unused-vars
 
   /**
    * Action is called when submit has been triggered and the model has passed all validations (if present).
@@ -452,7 +453,6 @@ export default class Form extends Component {
    * @param { Object } result The returned result from the validate method, if validation is available
    * @public
    */
-  onSubmit(model, result) {} // eslint-disable-line no-unused-vars
 
   /**
    * Action is called when validation of the model has failed.
@@ -462,7 +462,6 @@ export default class Form extends Component {
    * @param { Object } error
    * @public
    */
-  onInvalid(model, error) {} // eslint-disable-line no-unused-vars
 
   /**
    * Submit handler that will send the default action (&quot;action&quot;) to the controller when submitting the form.
@@ -487,7 +486,10 @@ export default class Form extends Component {
     let model = this.model;
 
     this.incrementProperty(&#x27;pendingSubmissions&#x27;);
-    this.onBefore(model);
+
+    if (typeof this.onBefore === &#x27;function&#x27;) {
+      this.onBefore(model);
+    }
 
     return RSVP.resolve()
       .then(() =&gt; {
@@ -501,7 +503,9 @@ export default class Form extends Component {
 
           return RSVP.resolve()
             .then(() =&gt; {
-              return this.onSubmit(model, record);
+              if (typeof this.onSubmit === &#x27;function&#x27;) {
+                return this.onSubmit(model, record);
+              }
             })
             .then(() =&gt; {
               if (this.isDestroyed) {
@@ -535,7 +539,9 @@ export default class Form extends Component {
         (error) =&gt; {
           return RSVP.resolve()
             .then(() =&gt; {
-              return this.onInvalid(model, error);
+              if (typeof this.onInvalid === &#x27;function&#x27;) {
+                return this.onInvalid(model, error);
+              }
             })
             .finally(() =&gt; {
               if (this.isDestroyed) {
