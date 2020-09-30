@@ -22,13 +22,16 @@ To switch Bootstrap version or preprocessor, see the [setup documentation](http:
 
 ## Compatibility
 
-Ember Bootstrap works and is fully [tested](https://travis-ci.org/kaliber5/ember-bootstrap) with
+Ember Bootstrap works and is fully [tested](https://github.com/kaliber5/ember-bootstrap/actions?query=workflow%3ACI+branch%3Amaster) with
 
 * Ember.js 3.16+ (including all optional features)
 * Ember CLI 3.15+
 * Bootstrap 3 and 4
 * all modern evergreen browsers (Chrome, Firefox, Safari, Edge) and IE 11 (the latter requires the use of the [Babel polyfill](https://github.com/babel/ember-cli-babel#polyfill)).
 * FastBoot 1.0+
+* Embroider: we strive (and test) for maximum compatibility with Embroider, including the most aggressive setting 
+(`staticComponents`) for tree shaking and code splitting. However as Embroider itself is still considered beta software, 
+we won't be able to *guarantee* that for the time being.
 
 This project follows [Semantic Versioning](http://semver.org/).
 
