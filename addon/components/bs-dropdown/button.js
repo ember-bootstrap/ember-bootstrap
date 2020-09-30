@@ -10,4 +10,6 @@ import Button from 'ember-bootstrap/components/bs-button';
  @extends Components.Button
  @public
  */
-export default class DropdownButton extends Button {}
+export default class DropdownButton extends Button {
+  '__ember-bootstrap_subclass' = true;
+}

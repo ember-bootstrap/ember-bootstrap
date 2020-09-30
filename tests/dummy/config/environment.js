@@ -23,7 +23,6 @@ module.exports = function (environment) {
     },
 
     bootstrapVersion: process.env.BOOTSTRAPVERSION || 4,
-    failOnDeprecation: !!process.env.FAIL_ON_DEPRECATION,
     fastboot: {
       hostWhitelist: [/^localhost:\d+$/],
     },
