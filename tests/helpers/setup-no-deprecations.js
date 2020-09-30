@@ -1,6 +1,5 @@
 import QUnit from 'qunit';
 import { registerDeprecationHandler } from '@ember/debug';
-import config from 'dummy/config/environment';
 
 let isRegistered = false;
 let deprecations;
@@ -19,7 +18,7 @@ export default function setupNoDeprecations({ beforeEach, afterEach }) {
 
   afterEach(function (assert) {
     // guard in if instead of using assert.equal(), to not make assert.expect() fail
-    if (config.failOnDeprecation && deprecations && deprecations.length > 0) {
+    if (deprecations && deprecations.length > 0) {
       assert.ok(false, `Expected no deprecations, found: ${deprecations.map((msg) => `"${msg}"`).join(', ')}`);
     }
   });
