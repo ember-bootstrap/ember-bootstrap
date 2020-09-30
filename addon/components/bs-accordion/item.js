@@ -51,16 +51,12 @@ export default class AccordionItem extends Component {
    * @type {String}
    * @private
    */
-  @defaultValue
-  titleComponent = 'bs-accordion/item/title';
 
   /**
    * @property bodyComponent
    * @type {String}
    * @private
    */
-  @defaultValue
-  bodyComponent = 'bs-accordion/item/body';
 
   /**
    * @property collapsed

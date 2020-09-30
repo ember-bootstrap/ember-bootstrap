@@ -9,7 +9,7 @@
 >
   {{yield
     (hash
-      element=(component this.elementComponent
+      element=(component (bs-default @elementComponent (component "bs-form/element"))
         model=this.model
         formLayout=this.formLayout
         horizontalLabelGridClass=this.horizontalLabelGridClass
@@ -19,7 +19,7 @@
         onChange=this.elementChanged
         _onChange=this.resetSubmissionState
       )
-      group=(component this.groupComponent formLayout=this.formLayout)
+      group=(component (bs-default @groupComponent (component "bs-form/group")) formLayout=this.formLayout)
       isSubmitting=this.isSubmitting
       isSubmitted=this.isSubmitted
       isRejected=this.isRejected

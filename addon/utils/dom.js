@@ -77,7 +77,7 @@ export function getDestinationElement(context) {
         }
       }
       if (!id) {
-        return document.querySelector('#ember-testing > .ember-view');
+        return document.querySelector('#ember-testing');
       }
       return document.getElementById(id);
     }

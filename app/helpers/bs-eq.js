@@ -1,1 +1,1 @@
-export { default, eq } from 'ember-bootstrap/helpers/bs-eq';
+export { default } from 'ember-bootstrap/helpers/bs-eq';

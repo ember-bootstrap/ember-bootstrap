@@ -1,10 +1,10 @@
 {{#let
   (hash
-    toggle=(component this.toggleComponent onClick=this.toggleNavbar collapsed=this._collapsed)
-    content=(component this.contentComponent collapsed=this._collapsed onHidden=this.onCollapsed onShown=this.onExpanded)
+    toggle=(component (bs-default @toggleComponent (component "bs-navbar/toggle")) onClick=this.toggleNavbar collapsed=this._collapsed)
+    content=(component (bs-default @contentComponent (component "bs-navbar/content")) collapsed=this._collapsed onHidden=this.onCollapsed onShown=this.onExpanded)
     nav=(component
-      this.navComponent
-      linkToComponent=(component this.linkToComponent onCollapse=this.collapse)
+      (bs-default @navComponent (component "bs-navbar/nav"))
+      linkToComponent=(component "bs-navbar/link-to" onCollapse=this.collapse)
     )
     collapse=this.collapse
     expand=this.expand

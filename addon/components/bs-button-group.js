@@ -1,7 +1,6 @@
 import { action } from '@ember/object';
 import Component from '@glimmer/component';
 import { A, isArray } from '@ember/array';
-import arg from 'ember-bootstrap/utils/decorators/arg';
 import deprecateSubclassing from 'ember-bootstrap/utils/deprecate-subclassing';
 
 /**
@@ -69,8 +68,6 @@ export default class ButtonGroup extends Component {
    * @type {String}
    * @private
    */
-  @arg
-  buttonComponent = 'bs-button-group/button';
 
   /**
    * Set to true for a vertically stacked button group, see http://getbootstrap.com/components/#btn-groups-vertical

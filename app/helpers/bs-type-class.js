@@ -1,1 +1,1 @@
-export { default, eq } from 'ember-bootstrap/helpers/bs-type-class';
+export { default } from 'ember-bootstrap/helpers/bs-type-class';

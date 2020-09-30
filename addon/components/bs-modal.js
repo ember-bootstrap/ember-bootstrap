@@ -201,32 +201,24 @@ export default class Modal extends Component {
    * @type {String}
    * @private
    */
-  @defaultValue
-  dialogComponent = 'bs-modal/dialog';
 
   /**
    * @property headerComponent
    * @type {String}
    * @private
    */
-  @defaultValue
-  headerComponent = 'bs-modal/header';
 
   /**
    * @property bodyComponent
    * @type {String}
    * @private
    */
-  @defaultValue
-  bodyComponent = 'bs-modal/body';
 
   /**
    * @property footerComponent
    * @type {String}
    * @private
    */
-  @defaultValue
-  footerComponent = 'bs-modal/footer';
 
   /**
    * The id of the `.modal` element.

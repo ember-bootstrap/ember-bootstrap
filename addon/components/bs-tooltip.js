@@ -1,6 +1,5 @@
 import { computed } from '@ember/object';
 import ContextualHelp from './bs-contextual-help';
-import defaultValue from 'ember-bootstrap/utils/default-decorator';
 import deprecateSubclassing from 'ember-bootstrap/utils/deprecate-subclassing';
 
 /**
@@ -87,8 +86,6 @@ export default class Tooltip extends ContextualHelp {
    * @type {String}
    * @private
    */
-  @defaultValue
-  elementComponent = 'bs-tooltip/element';
 
   /**
    * The DOM element of the arrow element.

@@ -133,16 +133,12 @@ export default class Tab extends Component.extend(ComponentParent) {
    * @type {String}
    * @private
    */
-  @defaultValue
-  paneComponent = 'bs-tab/pane';
 
   /**
    * @property navComponent
    * @type {String}
    * @private
    */
-  @defaultValue
-  navComponent = 'bs-nav';
 
   /**
    * By default the tabs will be automatically generated using the available [TabPane](Components.TabPane.html)

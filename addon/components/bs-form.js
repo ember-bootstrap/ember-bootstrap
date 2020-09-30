@@ -200,16 +200,12 @@ export default class Form extends Component {
    * @type {String}
    * @private
    */
-  @defaultValue
-  elementComponent = 'bs-form/element';
 
   /**
    * @property groupComponent
    * @type {String}
    * @private
    */
-  @defaultValue
-  groupComponent = 'bs-form/group';
 
   /**
    * @property submitButtonComponent

@@ -2,14 +2,14 @@
   <Tag class="{{this.containerClass}} {{if this.inNav (if (macroCondition (macroGetOwnConfig "isBS4")) "nav-item")}} {{if this.isOpen (if (macroCondition (macroGetOwnConfig "isBS4")) "show" "open")}}" ...attributes>
     {{yield
       (hash
-        button=(component this.buttonComponent
+        button=(component (bs-default @buttonComponent (component "bs-dropdown/button"))
           isOpen=this.isOpen
           onClick=this.toggleDropdown
           onKeyDown=this.handleKeyEvent
           registerChildElement=this.registerChildElement
           unregisterChildElement=this.unregisterChildElement
         )
-        toggle=(component this.toggleComponent
+        toggle=(component (bs-default @toggleComponent (component "bs-dropdown/toggle"))
           isOpen=this.isOpen
           inNav=inNav
           onClick=this.toggleDropdown
@@ -17,7 +17,7 @@
           registerChildElement=this.registerChildElement
           unregisterChildElement=this.unregisterChildElement
         )
-        menu=(component this.menuComponent
+        menu=(component (bs-default @menuComponent (component "bs-dropdown/menu"))
           isOpen=this.isOpen
           direction=this.direction
           inNav=@inNav

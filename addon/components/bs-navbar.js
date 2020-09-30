@@ -328,30 +328,22 @@ export default class Navbar extends Component {
    * @type {String}
    * @private
    */
-  @defaultValue
-  toggleComponent = 'bs-navbar/toggle';
 
   /**
    * @property contentComponent
    * @type {String}
    * @private
    */
-  @defaultValue
-  contentComponent = 'bs-navbar/content';
 
   /**
    * @property navComponent
    * @type {String}
    * @private
    */
-  @defaultValue
-  navComponent = 'bs-navbar/nav';
 
   /**
    * @property linkToComponent
    * @type {String}
    * @private
    */
-  @defaultValue
-  linkToComponent = 'bs-navbar/link-to';
 }

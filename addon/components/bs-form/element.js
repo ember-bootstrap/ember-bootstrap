@@ -1,4 +1,4 @@
-import { and, equal, gt, notEmpty, or } from '@ember/object/computed';
+import { and, gt, notEmpty, or } from '@ember/object/computed';
 import { action, computed, get } from '@ember/object';
 import { assert, warn } from '@ember/debug';
 import { DEBUG } from '@glimmer/env';
@@ -7,11 +7,9 @@ import { A, isArray } from '@ember/array';
 import { getOwner } from '@ember/application';
 import FormGroup from 'ember-bootstrap/components/bs-form/group';
 import defaultValue from 'ember-bootstrap/utils/default-decorator';
-import { macroCondition, getOwnConfig } from '@embroider/macros';
+import { getOwnConfig, macroCondition } from '@embroider/macros';
 import { guidFor } from '@ember/object/internals';
 import { ref } from 'ember-ref-bucket';
-
-const nonDefaultLayouts = A(['checkbox']);
 
 /**
   Sub class of `Components.FormGroup` that adds automatic form layout markup and form validation features.
@@ -704,11 +702,18 @@ export default class FormElement extends FormGroup {
    *
    * @property useIcons
    * @type boolean
-   * @readonly
    * @public
    */
-  @equal('controlComponent', 'bs-form/element/control/input')
-  useIcons;
+  @computed('customControlComponent', 'controlType')
+  get useIcons() {
+    let { controlType } = this;
+    return (
+      !this.customControlComponent &&
+      controlType !== 'textarea' &&
+      controlType !== 'checkbox' &&
+      controlType !== 'radio'
+    );
+  }
 
   /**
    * The form layout used for the markup generation (see http://getbootstrap.com/css/#forms):
@@ -724,8 +729,6 @@ export default class FormElement extends FormGroup {
    * @default 'vertical'
    * @public
    */
-  @defaultValue
-  formLayout = 'vertical';
 
   /**
    * The Bootstrap grid class for form labels within a horizontal layout form. Defaults to the value of the same
@@ -763,47 +766,26 @@ export default class FormElement extends FormGroup {
   }
 
   /**
-   * @property formComponent
-   * @type {String}
-   * @private
-   */
-  @defaultValue
-  formComponent = 'bs-form';
-
-  /**
    * @property layoutComponent
    * @type {String}
    * @private
    */
-  @computed('controlType', 'formComponent', 'formLayout')
-  get layoutComponent() {
-    const formComponent = this.formComponent;
-    const formLayout = this.formLayout;
-    const controlType = this.controlType;
-
-    if (nonDefaultLayouts.includes(controlType)) {
-      return `${formComponent}/element/layout/${formLayout}/${controlType}`;
-    } else {
-      return `${formComponent}/element/layout/${formLayout}`;
-    }
-  }
 
   /**
-   * @property controlComponent
+   * @property customControlComponent
    * @type {String}
    * @private
    */
-  @computed('controlType', 'formComponent')
-  get controlComponent() {
-    const formComponent = this.formComponent;
+  @computed('controlType')
+  get customControlComponent() {
     const controlType = this.controlType;
-    const componentName = `${formComponent}/element/control/${controlType}`;
+    const componentName = `bs-form/element/control/${controlType}`;
 
     if (getOwner(this).hasRegistration(`component:${componentName}`)) {
       return componentName;
     }
 
-    return `${formComponent}/element/control/input`;
+    return null;
   }
 
   /**
@@ -811,38 +793,24 @@ export default class FormElement extends FormGroup {
    * @type {String}
    * @private
    */
-  @defaultValue
-  errorsComponent = 'bs-form/element/errors';
 
   /**
    * @property feedbackIconComponent
    * @type {String}
    * @private
    */
-  @defaultValue
-  feedbackIconComponent = 'bs-form/element/feedback-icon';
 
   /**
    * @property labelComponent
    * @type {String}
    * @private
    */
-  @computed('controlType')
-  get labelComponent() {
-    return macroCondition(getOwnConfig().isBS3)
-      ? 'bs-form/element/label'
-      : this.controlType === 'radio'
-      ? 'bs-form/element/legend'
-      : 'bs-form/element/label';
-  }
 
   /**
    * @property helpTextComponent
    * @type {String}
    * @private
    */
-  @defaultValue
-  helpTextComponent = 'bs-form/element/help-text';
 
   /**
    * Setup validation properties. This method acts as a hook for external validation
