@@ -74,6 +74,7 @@
   },
   "devDependencies": {
     "@ember/optional-features": "^2.0.0",
+    "@embroider/test-setup": "^0.27.0",
     "babel-eslint": "^10.1.0",
     "bootstrap": "^4.5.2",
     "bootstrap-sass": "^3.3.7",
