@@ -73,7 +73,8 @@ jobs:
             command: ember test --launch Firefox
           - scenario: fastboot-tests
           - scenario: node-tests
-          - scenario: embroider-tests
+          - scenario: embroider-safe
+          - scenario: embroider-optimized
     steps:
       - name: Checkout code
         uses: actions/checkout@v2

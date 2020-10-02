@@ -1,6 +1,7 @@
 'use strict';
 /* eslint-env node */
 const EmberAddon = require('ember-cli/lib/broccoli/ember-addon');
+const { maybeEmbroider } = require('@embroider/test-setup');
 
 module.exports = function (defaults) {
   let trees = {};
@@ -41,31 +42,21 @@ module.exports = function (defaults) {
     behave. You most likely want to be modifying `./index.js` or app's build file
   */
 
-  if ('@embroider/webpack' in app.dependencies()) {
-    const { Webpack } = require('@embroider/webpack'); // eslint-disable-line node/no-missing-require
-    return require('@embroider/compat') // eslint-disable-line node/no-missing-require
-      .compatBuild(app, Webpack, {
-        staticAddonTestSupportTrees: true,
-        staticAddonTrees: true,
-        staticHelpers: true,
-        staticComponents: true,
-        packageRules: [
-          {
-            package: 'dummy',
-            components: {
-              '{{test-component}}': {
-                safeToIgnore: true,
-              },
-            },
-          },
-        ],
-        packagerOptions: {
-          webpackConfig: {
-            devtool: false,
+  return maybeEmbroider(app, {
+    packageRules: [
+      {
+        package: 'dummy',
+        components: {
+          '{{test-component}}': {
+            safeToIgnore: true,
           },
         },
-      });
-  } else {
-    return app.toTree();
-  }
+      },
+    ],
+    packagerOptions: {
+      webpackConfig: {
+        devtool: false,
+      },
+    },
+  });
 };
