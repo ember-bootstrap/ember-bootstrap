@@ -537,7 +537,7 @@ module('Integration | Component | bs-form', function (hooks) {
     this.set('submitAction', () => {
       return deferredSubmitAction.promise;
     });
-    await this.render(hbs`
+    await render(hbs`
       <BsForm @onSubmit={{submitAction}} as |form|>
         <div class="state {{if form.isSubmitting "is-submitting"}}"></div>
       </BsForm>
@@ -558,7 +558,7 @@ module('Integration | Component | bs-form', function (hooks) {
     this.set('submitAction', () => {});
     this.set('validate', () => {});
     this.set('hasValidator', true);
-    await this.render(hbs`
+    await render(hbs`
       <BsForm @onSubmit={{submitAction}} @validate={{validate}} @hasValidator={{hasValidator}} as |form|>
         <div class="state {{if form.isSubmitting "is-submitting"}}"></div>
       </BsForm>
@@ -576,7 +576,7 @@ module('Integration | Component | bs-form', function (hooks) {
     this.set('submitAction', () => {
       return deferredSubmitAction.promise;
     });
-    await this.render(hbs`
+    await render(hbs`
       <BsForm @onSubmit={{submitAction}} as |form|>
         <div class="state {{if form.isSubmitting "is-submitting"}}"></div>
       </BsForm>
@@ -600,7 +600,7 @@ module('Integration | Component | bs-form', function (hooks) {
     this.set('validate', function () {
       return reject();
     });
-    await this.render(hbs`
+    await render(hbs`
       <BsForm @onInvalid={{submitAction}} @hasValidator={{true}} @validate={{validate}} as |form|>
         <div class="state {{if form.isSubmitting "is-submitting"}}"></div>
       </BsForm>
@@ -622,7 +622,7 @@ module('Integration | Component | bs-form', function (hooks) {
     this.set('validateAction', () => {
       return deferredValidateAction.promise;
     });
-    await this.render(hbs`
+    await render(hbs`
       <BsForm @hasValidator={{hasValidator}} @validate={{validateAction}} as |form|>
         <div class="state {{if form.isSubmitting "is-submitting"}}"></div>
       </BsForm>
@@ -647,7 +647,7 @@ module('Integration | Component | bs-form', function (hooks) {
     this.set('validateAction', () => {
       return deferredValidateAction.promise;
     });
-    await this.render(hbs`
+    await render(hbs`
       <BsForm @onSubmit={{submitAction}} @validate={{validateAction}} @hasValidator={{true}} as |form|>
         <div class="state {{if form.isSubmitting "is-submitting"}}"></div>
       </BsForm>
@@ -673,7 +673,7 @@ module('Integration | Component | bs-form', function (hooks) {
       deferredSubmitActions.push(deferred);
       return deferred.promise;
     });
-    await this.render(hbs`
+    await render(hbs`
       <BsForm @onSubmit={{submitAction}} @preventConcurrency={{false}} as |form|>
         <div class="state {{if form.isSubmitting "is-submitting"}}"></div>
       </BsForm>
