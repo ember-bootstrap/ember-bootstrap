@@ -8,8 +8,8 @@
 
 ## Pull requests
 
-* This addon supports Bootstrap 3 and 4 at the same time. Therefore the project structure is a bit different
-than that of usual Ember addon. Please read the section on [Dual Bootstrap support](#dual-bootstrap-support)
+* This addon supports Bootstrap 3 and 4 at the same time. Therefore the build setup is a bit different
+than that of a usual Ember addon. Please read the section on [Dual Bootstrap support](#dual-bootstrap-support)
 for more detailed explanations.
 
 * Add a test for your change. Only refactoring and documentation changes
@@ -23,43 +23,30 @@ that other users would easily understand the changes. The title will be used to 
 
 This addon supports apps using Bootstrap version 3 as well as 4. The user is able to set the version
 in the app's `ember-cli-build-js` (or using the addon's blueprint: `ember generate ember-bootstrap --bootstrap-version=3`).
-Therefore the addon needs to support both versions at the same time, which required a slightly different 
-file structure than usual.
+Therefore the addon needs to support both versions at the same time, which requires the components to be compiled
+differently at build time.
 
-### Components
+This is accomplished using the `@embroider/macros` addon, which provides helpers (called macros) that allow you to
+introduce conditionals based on the Bootstrap version, which are compiled away when building the host app, so no
+runtime overhead occurs. The most common case is applying different classes based on the Bootstrap version, like in 
+this example of the `<BsAlert>` component:
 
-That concerns the component file trees, both for the JavaScript as well as the template parts.
-The JavaScript components are located as usual in `addon/components`, but are split into these sub folders:
-* `base`
-* `bs3`
-* `bs4`
+```hbs
+<div
+  class="{{if (macroCondition (macroGetOwnConfig "isBS4")) "accordion"}} {{if (macroCondition (macroGetOwnConfig "isBS3")) "panel-group"}}"
+  role="tablist"
+  ...attributes
+>
+```
 
-Depending on the chosen Bootstrap version, only the `bs3` or the `bs4` trees are exposed to the consuming app
-at build time, and moved to the root of the component folder. So for example for a Bootstrap 4 app 
-`addon/components/bs4/bs-button.js` is moved to `addon/components/bs-button.js` using a Broccoli tree
-transformation, and as such is used by the app, while the `bs3` tree is dismissed. 
+This will compile to `<div class="accordion" role="tablist" ...attributes>` in a Bootstrap 4 app and to 
+`<div class="panel-group" role="tablist" ...attributes>` for Bootstrap 3.
 
-This allows to have a somewhat different implementation where required, to account for differences of the
-functionality and/or markup (e.g. different class names). But as the differences will be mostly small
-compared to the similarities, the Bootstrap version specific components will inherit from the base component
-in the `base` tree, which will contain the majority of the code, and which should be version-independent.
-
-So at the end for every common component there is one file in each of `bs3` and `bs4` trees, as well as the
-base component in `base`.
-
-### Templates
-
-A similar setup is used for templates. But as we don't have a way to extend templates, we do not have a 
-`base` template. Rather for templates that show no differences between the BS3 and BS4 implementation,
-those can be found in the `common` tree (and only there!). Only if a component needs different templates, 
-it will not have a file in `common`, but rather a file each in `bs3` as well as in `bs4`. 
-
-A Broccoli transformation will again kick in at build time, and merge the `common` tree with the appropriate 
-version-specific tree, while dismissing the other (unused) one.
+Please refer to the `@embroider/macros` [documentation](https://github.com/embroider-build/embroider/blob/master/packages/macros/README.md) for further information.
 
 ### Testing
 
-This addon uses TravisCI to run a [ember-try](https://github.com/ember-cli/ember-try) based test matrix 
+This addon uses Github Actions to run a [ember-try](https://github.com/ember-cli/ember-try) based test matrix 
 containing separate test runs for Bootstrap 3 and 4. By default all tests will run for both versions. 
 
 To also accommodate for different testing requirements based on the Bootstrap version, there exist some testing
