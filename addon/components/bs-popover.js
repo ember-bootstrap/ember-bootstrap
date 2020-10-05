@@ -1,6 +1,5 @@
-import { computed } from '@ember/object';
 import ContextualHelp from './bs-contextual-help';
-import defaultValue from 'ember-bootstrap/utils/default-decorator';
+import arg from '../utils/decorators/arg';
 import deprecateSubclassing from 'ember-bootstrap/utils/deprecate-subclassing';
 
 /**
@@ -78,7 +77,7 @@ export default class Popover extends ContextualHelp {
    * @default 'right'
    * @public
    */
-  @defaultValue
+  @arg
   placement = 'right';
 
   /**
@@ -87,7 +86,7 @@ export default class Popover extends ContextualHelp {
    * @default 'click'
    * @public
    */
-  @defaultValue
+  @arg
   triggerEvents = 'click';
 
   /**
@@ -104,7 +103,6 @@ export default class Popover extends ContextualHelp {
    * @readonly
    * @private
    */
-  @computed('overlayElement')
   get arrowElement() {
     return this.overlayElement.querySelector('.arrow');
   }

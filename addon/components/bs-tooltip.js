@@ -1,4 +1,3 @@
-import { computed } from '@ember/object';
 import ContextualHelp from './bs-contextual-help';
 import deprecateSubclassing from 'ember-bootstrap/utils/deprecate-subclassing';
 
@@ -95,7 +94,6 @@ export default class Tooltip extends ContextualHelp {
    * @readonly
    * @private
    */
-  @computed('overlayElement')
   get arrowElement() {
     return this.overlayElement.querySelector('.tooltip-arrow');
   }

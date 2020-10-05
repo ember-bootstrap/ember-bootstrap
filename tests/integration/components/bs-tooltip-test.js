@@ -141,7 +141,7 @@ module('Integration | Component | bs-tooltip', function (hooks) {
     this.owner.register('component:test-component', DummyComponent);
 
     await render(
-      hbs`{{#test-component id="target"}}<BsTooltip @title="Dummy" @fade={{false}} @triggerElement="parentView" />{{/test-component}}`
+      hbs`{{#test-component id="target"}}<div><BsTooltip @title="Dummy" @fade={{false}} @triggerElement="parentView" /></div>{{/test-component}}`
     );
 
     await triggerEvent('#target', 'mouseenter');
