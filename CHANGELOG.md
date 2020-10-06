@@ -1,3 +1,25 @@
+## v4.3.0 (2020-10-06)
+
+#### Features
+* [#1251](https://github.com/kaliber5/ember-bootstrap/pull/1251) Support Embroider with staticComponents for full tree-shaking ([@simonihmig](https://github.com/simonihmig))
+
+#### Bug Fixes
+* [#1275](https://github.com/kaliber5/ember-bootstrap/pull/1275) Enable splattributes on dropdown menu divider and add tests ([@fran-worley](https://github.com/fran-worley))
+* [#1272](https://github.com/kaliber5/ember-bootstrap/pull/1272) Avoid deprecation warning for dropdown button ([@simonihmig](https://github.com/simonihmig))
+
+#### Documentation
+* [#1274](https://github.com/kaliber5/ember-bootstrap/pull/1274) Update contributing docs to account for new @embroider/macros based build setup ([@simonihmig](https://github.com/simonihmig))
+* [#1271](https://github.com/kaliber5/ember-bootstrap/pull/1271) Add Embroider compatibility note ([@simonihmig](https://github.com/simonihmig))
+
+#### Internal
+* [#1273](https://github.com/kaliber5/ember-bootstrap/pull/1273) use @embroider/test-setup ([@ef4](https://github.com/ef4))
+
+#### Committers: 4
+- Edward Faulkner ([@ef4](https://github.com/ef4))
+- Fran Worley ([@fran-worley](https://github.com/fran-worley))
+- Simon Ihmig ([@simonihmig](https://github.com/simonihmig))
+- [@dependabot-preview[bot]](https://github.com/apps/dependabot-preview)
+
 ## v4.2.0 (2020-09-28)
 
 #### Features
