@@ -59,7 +59,7 @@
 
 <div class="file">
     <pre class="prettyprint linenums">
-import { and, equal, gt, notEmpty, or } from &#x27;@ember/object/computed&#x27;;
+import { and, gt, notEmpty, or } from &#x27;@ember/object/computed&#x27;;
 import { action, computed, get } from &#x27;@ember/object&#x27;;
 import { assert, warn } from &#x27;@ember/debug&#x27;;
 import { DEBUG } from &#x27;@glimmer/env&#x27;;
@@ -68,11 +68,9 @@ import { A, isArray } from &#x27;@ember/array&#x27;;
 import { getOwner } from &#x27;@ember/application&#x27;;
 import FormGroup from &#x27;ember-bootstrap/components/bs-form/group&#x27;;
 import defaultValue from &#x27;ember-bootstrap/utils/default-decorator&#x27;;
-import { macroCondition, getOwnConfig } from &#x27;@embroider/macros&#x27;;
+import { getOwnConfig, macroCondition } from &#x27;@embroider/macros&#x27;;
 import { guidFor } from &#x27;@ember/object/internals&#x27;;
 import { ref } from &#x27;ember-ref-bucket&#x27;;
-
-const nonDefaultLayouts = A([&#x27;checkbox&#x27;]);
 
 /**
   Sub class of &#x60;Components.FormGroup&#x60; that adds automatic form layout markup and form validation features.
@@ -765,11 +763,18 @@ export default class FormElement extends FormGroup {
    *
    * @property useIcons
    * @type boolean
-   * @readonly
    * @public
    */
-  @equal(&#x27;controlComponent&#x27;, &#x27;bs-form/element/control/input&#x27;)
-  useIcons;
+  @computed(&#x27;customControlComponent&#x27;, &#x27;controlType&#x27;)
+  get useIcons() {
+    let { controlType } = this;
+    return (
+      !this.customControlComponent &amp;&amp;
+      controlType !== &#x27;textarea&#x27; &amp;&amp;
+      controlType !== &#x27;checkbox&#x27; &amp;&amp;
+      controlType !== &#x27;radio&#x27;
+    );
+  }
 
   /**
    * The form layout used for the markup generation (see http://getbootstrap.com/css/#forms):
@@ -785,8 +790,6 @@ export default class FormElement extends FormGroup {
    * @default &#x27;vertical&#x27;
    * @public
    */
-  @defaultValue
-  formLayout = &#x27;vertical&#x27;;
 
   /**
    * The Bootstrap grid class for form labels within a horizontal layout form. Defaults to the value of the same
@@ -824,47 +827,26 @@ export default class FormElement extends FormGroup {
   }
 
   /**
-   * @property formComponent
-   * @type {String}
-   * @private
-   */
-  @defaultValue
-  formComponent = &#x27;bs-form&#x27;;
-
-  /**
    * @property layoutComponent
    * @type {String}
    * @private
    */
-  @computed(&#x27;controlType&#x27;, &#x27;formComponent&#x27;, &#x27;formLayout&#x27;)
-  get layoutComponent() {
-    const formComponent = this.formComponent;
-    const formLayout = this.formLayout;
-    const controlType = this.controlType;
-
-    if (nonDefaultLayouts.includes(controlType)) {
-      return &#x60;${formComponent}/element/layout/${formLayout}/${controlType}&#x60;;
-    } else {
-      return &#x60;${formComponent}/element/layout/${formLayout}&#x60;;
-    }
-  }
 
   /**
-   * @property controlComponent
+   * @property customControlComponent
    * @type {String}
    * @private
    */
-  @computed(&#x27;controlType&#x27;, &#x27;formComponent&#x27;)
-  get controlComponent() {
-    const formComponent = this.formComponent;
+  @computed(&#x27;controlType&#x27;)
+  get customControlComponent() {
     const controlType = this.controlType;
-    const componentName = &#x60;${formComponent}/element/control/${controlType}&#x60;;
+    const componentName = &#x60;bs-form/element/control/${controlType}&#x60;;
 
     if (getOwner(this).hasRegistration(&#x60;component:${componentName}&#x60;)) {
       return componentName;
     }
 
-    return &#x60;${formComponent}/element/control/input&#x60;;
+    return null;
   }
 
   /**
@@ -872,38 +854,24 @@ export default class FormElement extends FormGroup {
    * @type {String}
    * @private
    */
-  @defaultValue
-  errorsComponent = &#x27;bs-form/element/errors&#x27;;
 
   /**
    * @property feedbackIconComponent
    * @type {String}
    * @private
    */
-  @defaultValue
-  feedbackIconComponent = &#x27;bs-form/element/feedback-icon&#x27;;
 
   /**
    * @property labelComponent
    * @type {String}
    * @private
    */
-  @computed(&#x27;controlType&#x27;)
-  get labelComponent() {
-    return macroCondition(getOwnConfig().isBS3)
-      ? &#x27;bs-form/element/label&#x27;
-      : this.controlType === &#x27;radio&#x27;
-      ? &#x27;bs-form/element/legend&#x27;
-      : &#x27;bs-form/element/label&#x27;;
-  }
 
   /**
    * @property helpTextComponent
    * @type {String}
    * @private
    */
-  @defaultValue
-  helpTextComponent = &#x27;bs-form/element/help-text&#x27;;
 
   /**
    * Setup validation properties. This method acts as a hook for external validation

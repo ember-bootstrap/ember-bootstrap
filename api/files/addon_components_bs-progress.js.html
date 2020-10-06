@@ -61,7 +61,6 @@
     <pre class="prettyprint linenums">
 import { tagName } from &#x27;@ember-decorators/component&#x27;;
 import Component from &#x27;@ember/component&#x27;;
-import defaultValue from &#x27;ember-bootstrap/utils/default-decorator&#x27;;
 import deprecateSubclassing from &#x27;ember-bootstrap/utils/deprecate-subclassing&#x27;;
 
 /**
@@ -107,8 +106,6 @@ export default class Progress extends Component {
    * @type {String}
    * @private
    */
-  @defaultValue
-  progressBarComponent = &#x27;bs-progress/bar&#x27;;
 }
 
     </pre>

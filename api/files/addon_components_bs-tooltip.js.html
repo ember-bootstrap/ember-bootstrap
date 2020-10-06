@@ -61,7 +61,6 @@
     <pre class="prettyprint linenums">
 import { computed } from &#x27;@ember/object&#x27;;
 import ContextualHelp from &#x27;./bs-contextual-help&#x27;;
-import defaultValue from &#x27;ember-bootstrap/utils/default-decorator&#x27;;
 import deprecateSubclassing from &#x27;ember-bootstrap/utils/deprecate-subclassing&#x27;;
 
 /**
@@ -148,8 +147,6 @@ export default class Tooltip extends ContextualHelp {
    * @type {String}
    * @private
    */
-  @defaultValue
-  elementComponent = &#x27;bs-tooltip/element&#x27;;
 
   /**
    * The DOM element of the arrow element.
