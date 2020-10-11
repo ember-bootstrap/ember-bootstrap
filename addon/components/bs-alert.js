@@ -163,6 +163,10 @@ export default class Alert extends Component {
    * @private
    */
   hide() {
+    if (this.hidden) {
+      return;
+    }
+
     if (this.usesTransition) {
       later(
         this,
