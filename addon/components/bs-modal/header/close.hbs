@@ -1,3 +1,3 @@
-<button type="button" aria-label="Close" class="close" ...attributes {{on "click" this.handleClick}}>
+<button type="button" aria-label="Close" class="close" ...attributes {{on "click" (bs-action-fallback @onClick)}}>
   <span aria-hidden="true">&times;</span>
 </button>

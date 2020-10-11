@@ -1,7 +1,7 @@
 <div
   role="dialog"
   tabindex="-1"
-  aria-labelledby={{this.ariaLabelledby}}
+  aria-labelledby={{this.titleId}}
   class="modal {{if @fade "fade"}} {{if @showModal (if (macroCondition (macroGetOwnConfig "isBS4")) "show" "in")}} {{if @inDom (if (macroCondition (macroGetOwnConfig "isBS4")) "d-block" "show")}}"
   ...attributes
   {{on "keydown" this.handleKeyDown}}
