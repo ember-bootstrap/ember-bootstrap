@@ -1,5 +1,4 @@
 import { computed } from '@ember/object';
-import { macroCondition, getOwnConfig } from '@embroider/macros';
 
 export default function defaultValue(target, key, descriptor) {
   let { initializer, value } = descriptor;
@@ -9,15 +8,11 @@ export default function defaultValue(target, key, descriptor) {
       return initializer ? initializer.call(this) : value;
     },
     set(_, v) {
-      if (macroCondition(getOwnConfig().useDefaultValueIfUndefined)) {
-        if (v !== undefined) {
-          return v;
-        }
-
-        return initializer ? initializer.call(this) : value;
-      } else {
+      if (v !== undefined) {
         return v;
       }
+
+      return initializer ? initializer.call(this) : value;
     },
   })(target, key, { ...descriptor, value: undefined, initializer: undefined });
 }

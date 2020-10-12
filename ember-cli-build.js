@@ -29,10 +29,6 @@ module.exports = function (defaults) {
     },
   };
 
-  if (process.env.OPTIONAL_FEATURE_USE_DEFAULT_VALUE_IF_UNDEFINED) {
-    options['ember-bootstrap'].useDefaultValueIfUndefined = true;
-  }
-
   let app = new EmberAddon(defaults, options);
 
   /*

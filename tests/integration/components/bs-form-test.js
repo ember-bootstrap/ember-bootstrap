@@ -1,37 +1,34 @@
 import EmberObject from '@ember/object';
 import Component from '@ember/component';
 import { A } from '@ember/array';
-import { resolve, reject } from 'rsvp';
+import RSVP, { defer, reject, resolve } from 'rsvp';
 import { module } from 'qunit';
 import { setupRenderingTest } from 'ember-qunit';
 import {
-  render,
+  blur,
   click,
   fillIn,
-  triggerKeyEvent,
+  focus,
+  render,
+  settled,
   triggerEvent,
+  triggerKeyEvent,
   waitFor,
   waitUntil,
-  settled,
-  focus,
-  blur,
 } from '@ember/test-helpers';
 import {
   formFeedbackClass,
-  moduleForOptionalFeature,
+  formFeedbackElement,
   test,
-  testRequiringFocus,
   testBS3,
   testBS4,
+  testRequiringFocus,
   validationErrorClass,
-  formFeedbackElement,
   validationSuccessClass,
 } from '../../helpers/bootstrap';
 import hbs from 'htmlbars-inline-precompile';
-import { defer } from 'rsvp';
 import { next, run } from '@ember/runloop';
 import setupNoDeprecations from '../../helpers/setup-no-deprecations';
-import RSVP from 'rsvp';
 import a11yAudit from 'ember-a11y-testing/test-support/audit';
 import sinon from 'sinon';
 
@@ -1068,89 +1065,86 @@ module('Integration | Component | bs-form', function (hooks) {
     await triggerEvent('form', 'submit');
   });
 
-  // eslint-disable-next-line ember/no-test-module-for
-  moduleForOptionalFeature('useDefaultValueIfUndefined', function () {
-    test('it uses default value false for disabled argument if undefined', async function (assert) {
-      this.set('disabled', undefined);
-      await render(
-        hbs`
+  test('it uses default value false for disabled argument if undefined', async function (assert) {
+    this.set('disabled', undefined);
+    await render(
+      hbs`
           <BsForm @disabled={{this.disabled}} as |form|>
             <form.element />
           </BsForm>`
-      );
-      assert.dom('input').doesNotHaveAttribute('disabled');
-    });
+    );
+    assert.dom('input').doesNotHaveAttribute('disabled');
+  });
 
-    testBS3('it uses default value for formLayout argument if undefined', async function (assert) {
-      this.set('formLayout', undefined);
-      await render(hbs`
+  testBS3('it uses default value for formLayout argument if undefined', async function (assert) {
+    this.set('formLayout', undefined);
+    await render(hbs`
         <BsForm @formLayout={{this.formLayout}} />
       `);
-      assert.dom('form').hasClass('form');
-    });
+    assert.dom('form').hasClass('form');
+  });
 
-    testBS4('it uses default value for formLayout argument if undefined', async function (assert) {
-      this.set('formLayout', undefined);
-      await render(hbs`
+  testBS4('it uses default value for formLayout argument if undefined', async function (assert) {
+    this.set('formLayout', undefined);
+    await render(hbs`
         <BsForm @formLayout={{this.formLayout}} />
       `);
-      assert.dom('form').doesNotHaveAttribute('class');
-    });
+    assert.dom('form').doesNotHaveAttribute('class');
+  });
 
-    test('it uses a POJO as model if undefined', async function (assert) {
-      this.set('model', undefined);
-      this.set('submitHandler', (model) => {
-        assert.step('submit action on untouched form');
-        assert.ok(typeof model === 'object');
-      });
-      await render(hbs`
+  test('it uses a POJO as model if undefined', async function (assert) {
+    this.set('model', undefined);
+    this.set('submitHandler', (model) => {
+      assert.step('submit action on untouched form');
+      assert.ok(typeof model === 'object');
+    });
+    await render(hbs`
         <BsForm @model={{this.model}} @onSubmit={{this.submitHandler}} as |form|>
           <form.element @property="name" />
         </BsForm>
       `);
-      await triggerEvent('form', 'submit');
-      assert.verifySteps(['submit action on untouched form']);
+    await triggerEvent('form', 'submit');
+    assert.verifySteps(['submit action on untouched form']);
 
-      this.set('submitHandler', (model) => {
-        assert.step('submit action after user input');
-        assert.deepEqual(model, { name: 'John Doe' });
-      });
-      await fillIn('input', 'John Doe');
-      await triggerEvent('form', 'submit');
-      assert.verifySteps(['submit action after user input']);
+    this.set('submitHandler', (model) => {
+      assert.step('submit action after user input');
+      assert.deepEqual(model, { name: 'John Doe' });
     });
+    await fillIn('input', 'John Doe');
+    await triggerEvent('form', 'submit');
+    assert.verifySteps(['submit action after user input']);
+  });
 
-    test('POJO created for model if undefined does not leak between two instances', async function (assert) {
-      this.set('model', undefined);
-      this.set('submitHandlerForFirstForm', (model) => {
-        assert.step('first form submitted');
-        assert.deepEqual(model, { name: 'John Doe' }, 'name is set on model for first form');
-      });
-      this.set('submitHandlerForSecondForm', (model) => {
-        assert.step('second form submitted');
-        assert.deepEqual(model, {}, 'name is not set on model for second form');
-      });
-      await render(hbs`
+  test('POJO created for model if undefined does not leak between two instances', async function (assert) {
+    this.set('model', undefined);
+    this.set('submitHandlerForFirstForm', (model) => {
+      assert.step('first form submitted');
+      assert.deepEqual(model, { name: 'John Doe' }, 'name is set on model for first form');
+    });
+    this.set('submitHandlerForSecondForm', (model) => {
+      assert.step('second form submitted');
+      assert.deepEqual(model, {}, 'name is not set on model for second form');
+    });
+    await render(hbs`
         <BsForm @model={{this.model}} @onSubmit={{this.submitHandlerForFirstForm}} data-test-first-form as |form|>
           <form.element @property="name" />
         </BsForm>
         <BsForm @model={{this.model}} @onSubmit={{this.submitHandlerForSecondForm}} data-test-second-form />
       `);
-      await fillIn('input', 'John Doe');
-      await triggerEvent('[data-test-first-form]', 'submit');
-      await triggerEvent('[data-test-second-form]', 'submit');
-      assert.verifySteps(['first form submitted', 'second form submitted']);
-    });
+    await fillIn('input', 'John Doe');
+    await triggerEvent('[data-test-first-form]', 'submit');
+    await triggerEvent('[data-test-second-form]', 'submit');
+    assert.verifySteps(['first form submitted', 'second form submitted']);
+  });
 
-    test('it uses default value false for readonly argument if undefined', async function (assert) {
-      this.set('readonly', undefined);
-      await render(
-        hbs`
+  test('it uses default value false for readonly argument if undefined', async function (assert) {
+    this.set('readonly', undefined);
+    await render(
+      hbs`
           <BsForm @readonly={{this.readonly}} as |form|>
             <form.element />
           </BsForm>`
-      );
-      assert.dom('input').doesNotHaveAttribute('readonly');
-    });
+    );
+    assert.dom('input').doesNotHaveAttribute('readonly');
   });
 });

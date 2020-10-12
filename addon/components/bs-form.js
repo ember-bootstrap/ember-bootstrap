@@ -158,11 +158,11 @@ export default class Form extends Component {
    * Moreover the form's `submit` event handler will validate the model and deny submitting if the model is not validated successfully.
    *
    * @property model
-   * @type Ember.Object
+   * @type object
    * @public
    */
   @defaultValue
-  model = macroCondition(getOwnConfig().useDefaultValueIfUndefined) ? {} : undefined;
+  model = {};
 
   /**
    * Set the layout of the form to either "vertical", "horizontal" or "inline". See http://getbootstrap.com/css/#forms-inline and http://getbootstrap.com/css/#forms-horizontal

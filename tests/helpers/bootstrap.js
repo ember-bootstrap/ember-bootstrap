@@ -1,6 +1,5 @@
 import config from 'dummy/config/environment';
-import { dependencySatisfies, getConfig, getOwnConfig, macroCondition } from '@embroider/macros';
-import { module, skip, test } from 'qunit';
+import { skip, test } from 'qunit';
 import { Promise } from 'rsvp';
 
 const currentBootstrapVersion = parseInt(config.bootstrapVersion);
@@ -27,37 +26,6 @@ export function versionDependent(v3, v4) {
   }
 
   return v4;
-}
-
-// eslint-disable-next-line ember/no-test-module-for
-export function moduleForOptionalFeature(optionalFeature, fn) {
-  let optionalFeatureEnabled;
-
-  // `getConfig('ember-bootstrap')` is the correct way to retrieve the
-  // configuration of the addon it it's dummy app. But the `getConfig`
-  // macro is broken for dummy app of an addon in classic builds.
-  // `getOwnConfig` macro also has a bug in classic builds. It resolves
-  // with the configuration of the addon not of it's dummy app. We can
-  // use that bug as a work-a-round for classic builds until the but of
-  // `getConfig` macro has been fixed.
-  // Both bugs are tracked in this issue:
-  // https://github.com/embroider-build/embroider/issues/537
-  if (macroCondition(dependencySatisfies('@embroider/webpack', '*'))) {
-    optionalFeatureEnabled = getConfig('ember-bootstrap')[optionalFeature];
-  } else {
-    optionalFeatureEnabled = getOwnConfig()[optionalFeature];
-  }
-
-  if (optionalFeatureEnabled === undefined) {
-    throw new Error(`Optional feature ${optionalFeature} does not exist.`);
-  }
-
-  let name = `Optional feature: ${optionalFeature}`;
-  if (optionalFeatureEnabled) {
-    module(name, fn);
-  } else {
-    skip(name, fn);
-  }
 }
 
 export function visibilityClass() {
