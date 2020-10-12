@@ -16,6 +16,8 @@ export default function deprecateSubclassing(target) {
             {
               id: `ember-bootstrap.subclassing#${target.name}`,
               until: '5.0.0',
+              since: '4.0.0',
+              for: 'ember-bootstrap',
             }
           );
         });

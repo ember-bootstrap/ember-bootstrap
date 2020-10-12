@@ -261,6 +261,8 @@ export default class ContextualHelp extends Component {
         {
           id: `ember-bootstrap.contextual-help.parent-view`,
           until: '5.0.0',
+          since: '4.2.0',
+          for: 'ember-bootstrap',
         }
       );
     } else {
