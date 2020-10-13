@@ -1,0 +1,13 @@
+<LinkTo
+  @route={{this.route}}
+  @models={{this._models}}
+  @query={{this.query}}
+  @replace={{@replace}}
+  @disabled={{@disabled}}
+  @current-when={{@current-when}}
+  @activeClass={{@activeClass}}
+  class={{if (macroCondition (macroGetOwnConfig "isBS4")) "nav-link"}}
+  ...attributes
+>
+  {{yield}}
+</LinkTo>

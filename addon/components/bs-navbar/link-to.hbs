@@ -1,0 +1,14 @@
+<BsNav::LinkTo
+  @route={{this.route}}
+  @model={{this.model}}
+  @models={{this.models}}
+  @query={{this.query}}
+  @replace={{@replace}}
+  @disabled={{@disabled}}
+  @current-when={{@current-when}}
+  @activeClass={{@activeClass}}
+  {{on "click" this.onClick}}
+  ...attributes
+>
+  {{yield}}
+</BsNav::LinkTo>
