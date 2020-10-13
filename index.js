@@ -19,7 +19,6 @@ const defaultOptions = {
   importBootstrapFont: false,
   insertEmberWormholeElementToDom: true,
   bootstrapVersion: 4,
-  useDefaultValueIfUndefined: false,
 };
 
 const supportedPreprocessors = ['less', 'sass'];
@@ -99,9 +98,6 @@ module.exports = {
     // setup config for @embroider/macros
     this.options['@embroider/macros'].setOwnConfig.isBS3 = this.getBootstrapVersion() === 3;
     this.options['@embroider/macros'].setOwnConfig.isBS4 = this.getBootstrapVersion() === 4;
-    this.options['@embroider/macros'].setOwnConfig.useDefaultValueIfUndefined = Boolean(
-      this.bootstrapOptions.useDefaultValueIfUndefined
-    );
   },
 
   options: {
