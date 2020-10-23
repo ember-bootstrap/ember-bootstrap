@@ -19,7 +19,7 @@
  */
 
 /**
- * The title of the submit button (primary button). Will be ignored (i.e. no button) if set to null or if you provide
+ * The title of the submit button (primary button). Will be ignored (i.e. no button) if set to `null` or if you provide
  * your own block template.
  *
  * @property submitTitle
@@ -29,7 +29,7 @@
  */
 
 /**
- * Set to true to disable the submit button. If you bind this to some property that indicates if submitting is allowed
+ * Set to `true` to disable the submit button. If you bind this to some property that indicates if submitting is allowed
  * (form validation for example) this can be used to prevent the user from pressing the submit button.
  *
  * @property submitDisabled

@@ -3,16 +3,16 @@
   including a header, footer and body. Creating a simple modal is easy:
 
   ```hbs
-  {{#bs-modal-simple title="Simple Dialog"}}
+  <BsModalSimple @title="Simple Dialog">
     Hello world!
-  {{/bs-modal-simple}}
+  </BsModalSimple>
   ```
 
   This will automatically create the appropriate markup, with a modal header containing the title, and a footer containing
-  a default "Ok" button, that will close the modal automatically (unless you return false from `onHide`).
+  a default "Ok" button, that will close the modal automatically (unless you return `false` from `onHide`).
 
   A modal created this way will be visible at once. You can use the `{{#if ...}}` helper to hide all modal elements from
-  the DOM until needed. Or you can bind the `open` property to trigger showing and hiding the modal:
+  the DOM until needed. Or you can bind the `open` argument to trigger showing and hiding the modal:
 
   ```hbs
   <BsModalSimple @open={{this.openModal}} @title="Simple Dialog">
@@ -22,7 +22,7 @@
 
   ### Custom Markup
 
-  To customize the markup within the modal you can use the [bs-modal](Components.Modal.html) component.
+  To customize the markup within the modal you can use the [<BsModal>](Components.Modal.html) component.
 
   ### Modals with forms
 
@@ -33,16 +33,16 @@
 
   ```hbs
   <BsModalSimple @title="Form Example" @closeTitle="Cancel" @submitTitle="Ok">
-    <BsForm @model={{this}} @onSubmit={{action "submit"}} @submitOnError={{true}} as |Form|>
-      <Form.element @controlType="text" @label="first name" @property="firstname" />
-      <Form.element @controlType="text" @label="last name" @property="lastname" />
+    <BsForm @model={{this}} @onSubmit={{this.submit}} @submitOnEnter={{true}} as |Form|>
+      <Form.element @label="first name" @property="firstname" />
+      <Form.element @label="last name" @property="lastname" />
     </BsForm>
   </BsModalSimple>
   ```
 
   The modal component supports this common case by triggering the submit event programmatically on the body's form if
   present whenever the footer's submit button is pressed. To allow the form to be submitted by pressing the enter key
-  also, you must either set `@submitOnError={{true}}` on the `<BsForm>` or include an invisible submit button in the
+  also, you must either set `@submitOnEnter={{true}}` on the `<BsForm>` or include an invisible submit button in the
   form (`<button type="submit" class="d-hidden">Submit</button>`).
 
   ### Auto-focus
@@ -53,9 +53,9 @@
 
   ```hbs
   <BsModalSimple @title="Form Example" @closeTitle="Cancel" @submitTitle="Ok">
-    <BsForm @model={{this}} @onSubmit={{action "submit"}} @submitOnError={{true}} as |Form|>
-      <Form.element @controlType="text" @label="first name" @property="firstname" @autofocus={{true}} />
-      <Form.element @controlType="text" @label="last name" @property="lastname" />
+    <BsForm @model={{this}} @onSubmit={{this.submit}} @submitOnEnter={{true}} as |Form|>
+      <Form.element @label="first name" @property="firstname" @autofocus={{true}} />
+      <Form.element @label="last name" @property="lastname" />
     </BsForm>
   </BsModalSimple>
   ```
@@ -68,13 +68,10 @@
   element, which is a child of ember's root element. This will make sure that modals always overlay the whole app, and
   are not effected by parent elements with `overflow: hidden` for example.
 
-  If you want the modal to render in place, rather than being wormholed, you can set renderInPlace=true.
-
-  *Note that only invoking the component in a template as shown above is considered part of its public API. Extending from it (subclassing) is generally not supported, and may break at any time.*
+  If you want the modal to render in place, rather than being wormholed, you can set `@renderInPlace={{true}}`.
 
   @class ModalSimple
   @namespace Components
-  @extends Ember.Component
   @public
 */
 
@@ -208,8 +205,8 @@
  * Note that this will happen before the modal is hidden from the DOM, as the fade transitions will still need some
  * time to finish. Use the `onHidden` if you need the modal to be hidden when the action triggers.
  *
- * You can return false to prevent closing the modal automatically, and do that in your action by
- * setting `open` to false.
+ * You can return `false` to prevent closing the modal automatically, and do that in your action by
+ * setting `@open` to `false`.
  *
  * @property onHide
  * @type function
@@ -228,7 +225,7 @@
 /**
  * The action to be sent when the modal is opening.
  * This will be triggered immediately after the modal is shown (so it's safe to access the DOM for
- * size calculations and the like). This means that if fade=true, it will be shown in between the
+ * size calculations and the like). This means that if `@fade={{true}}`, it will be shown in between the
  * backdrop animation and the fade animation.
  *
  * @property onShow
