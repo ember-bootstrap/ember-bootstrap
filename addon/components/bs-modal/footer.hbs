@@ -9,14 +9,15 @@
       }}
         {{bs-default @closeTitle "Ok"}}
       {{/component}}
-      {{#component
-        (bs-default @buttonComponent (component "bs-button"))
-        type=(bs-default @submitButtonType "primary")
-        onClick=@onSubmit
-        _disabled=(bs-default @submitDisabled false)
-      }}
+      {{#let (bs-default @buttonComponent (component "bs-button")) as |Button|}}
+        <Button
+          @type={{bs-default @submitButtonType "primary"}}
+          @onClick={{@onSubmit}}
+          disabled={{bs-default @submitDisabled false}}
+        >
         {{@submitTitle}}
-      {{/component}}
+        </Button>
+      {{/let}}
     {{else}}
       {{#component
         (bs-default @buttonComponent (component "bs-button"))

@@ -108,7 +108,7 @@ export default class Modal extends Component {
    * @private
    */
   @tracked
-  showModal = false;
+  showModal = this.isOpen && (!this._fade || isFastBoot(this));
 
   /**
    * Render modal markup?
@@ -119,7 +119,7 @@ export default class Modal extends Component {
    * @private
    */
   @tracked
-  inDom = false;
+  inDom = this.isOpen;
 
   /**
    * @property paddingLeft
@@ -151,11 +151,10 @@ export default class Modal extends Component {
   /**
    * @property showBackdrop
    * @type boolean
-   * @default false
    * @private
    */
   @tracked
-  showBackdrop = false;
+  showBackdrop = this.isOpen && this.backdrop;
 
   /**
    * Closes the modal when escape key is pressed.
@@ -313,6 +312,8 @@ export default class Modal extends Component {
    */
   @usesTransition('_fade')
   usesTransition;
+
+  destinationElement = getDestinationElement(this);
 
   /**
    * The DOM element of the `.modal` element.
@@ -669,28 +670,16 @@ export default class Modal extends Component {
 
   willDestroy() {
     super.willDestroy(...arguments);
-    window.removeEventListener('resize', this.handleUpdate, false);
-    this.removeBodyClass();
-    this.resetScrollbar();
+
+    if (typeof FastBoot === 'undefined') {
+      window.removeEventListener('resize', this.handleUpdate, false);
+      this.removeBodyClass();
+      this.resetScrollbar();
+    }
   }
 
-  // didReceiveAttrs() {
-  //   super.didReceiveAttrs(...arguments);
-  //
-  //   // add `.modal-open` to <body> even in FastBoot, to allow scrolling
-  //   if (this.isOpen) {
-  //     // a SimpleDOM instance with just a subset of the DOM API!
-  //     let document = this.document;
-  //
-  //     let existingClasses = document.body.getAttribute('class') || '';
-  //     if (!existingClasses.includes('modal-open')) {
-  //       document.body.setAttribute('class', `modal-open ${existingClasses}`);
-  //     }
-  //   }
-  // }
-
   @action
-  handleOpening() {
+  handleVisibilityChanges() {
     if (isFastBoot(this)) {
       this.addBodyClass();
       return;
@@ -701,15 +690,5 @@ export default class Modal extends Component {
     } else {
       this.hide();
     }
-  }
-
-  constructor() {
-    super(...arguments);
-    let { isOpen, backdrop, _fade: fade } = this;
-    let isFB = isFastBoot(this);
-    this.showModal = isOpen && (!fade || isFB);
-    this.showBackdrop = isOpen && backdrop;
-    this.inDom = isOpen;
-    this.destinationElement = getDestinationElement(this);
   }
 }

@@ -1,5 +1,5 @@
-{{did-insert this.handleOpening}}
-{{did-update this.handleOpening this.isOpen}}
+{{did-insert this.handleVisibilityChanges}}
+{{did-update this.handleVisibilityChanges this.isOpen}}
 {{#if this.inDom}}
   {{#let (component (bs-default @dialogComponent (component "bs-modal/dialog"))
     onClose=this.close
