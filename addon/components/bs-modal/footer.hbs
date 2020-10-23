@@ -1,4 +1,4 @@
-<form class="modal-footer" ...attributes {{on "submit" (bs-action-fallback @onSubmit)}}>
+<form class="modal-footer" ...attributes {{on "submit" (bs-default @onSubmit (bs-noop))}}>
   {{#if hasBlock}}
     {{yield}}
   {{else}}
