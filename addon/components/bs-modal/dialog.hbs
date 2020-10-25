@@ -2,7 +2,12 @@
   role="dialog"
   tabindex="-1"
   aria-labelledby={{this.ariaLabelledby}}
-  class="modal {{if @fade "fade"}} {{if @showModal (if (macroCondition (macroGetOwnConfig "isBS4")) "show" "in")}} {{if @inDom (if (macroCondition (macroGetOwnConfig "isBS4")) "d-block" "show")}}"
+  class={{cx
+    "modal"
+    (if @fade "fade")
+    (if @showModal (if (macroCondition (macroGetOwnConfig "isBS4")) "show" "in"))
+    (if @inDom (if (macroCondition (macroGetOwnConfig "isBS4")) "d-block" "show"))
+  }}
   ...attributes
   {{on "keydown" this.handleKeyDown}}
   {{on "mousedown" this.handleMouseDown}}
@@ -13,7 +18,16 @@
   {{did-insert this.getOrSetTitleId}}
   {{did-insert this.setInitialFocus}}
 >
-  <div class="modal-dialog {{this.sizeClass}} {{if @centered "modal-dialog-centered"}} {{if @scrollable "modal-dialog-scrollable"}}" role="document">
+  <div
+    class={{cx
+      "modal-dialog"
+      this.sizeClass
+      (if @vertical "modal-dialog-vertical")
+      (if @centered "modal-dialog-centered")
+      (if @scrollable "modal-dialog-scrollable")
+    }}
+    role="document"
+  >
     <div class="modal-content"
       {{focus-trap
         shouldSelfFocus=true
