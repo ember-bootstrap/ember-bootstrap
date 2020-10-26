@@ -81,7 +81,6 @@ export default class Accordion extends Component {
    * @param oldValue
    * @public
    */
-  onChange(newValue, oldValue) {} // eslint-disable-line no-unused-vars
 
   @action
   doChange(newValue) {
@@ -89,7 +88,7 @@ export default class Accordion extends Component {
     if (oldValue === newValue) {
       newValue = null;
     }
-    if (this.onChange(newValue, oldValue) !== false) {
+    if (this.onChange?.(newValue, oldValue) !== false) {
       this.set('isSelected', newValue);
     }
   }
