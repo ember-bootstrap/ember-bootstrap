@@ -91,11 +91,11 @@ module('Integration | Component | bs-alert', function (hooks) {
 
   test('When fade is true, onDismissed is called once when visible changes from true to false', async function (assert) {
     let action = sinon.spy();
-    this.actions.dismissed = action;
+    this.dismissed = action;
     this.isAlertShown = true;
 
     await render(
-      hbs`<BsAlert @fade={{true}} @onDismissed={{action "dismissed"}} @visible={{this.isAlertShown}}>Test</BsAlert>`
+      hbs`<BsAlert @fade={{true}} @onDismissed={{this.dismissed}} @visible={{this.isAlertShown}}>Test</BsAlert>`
     );
 
     set(this, 'isAlertShown', false);
@@ -106,11 +106,11 @@ module('Integration | Component | bs-alert', function (hooks) {
 
   test('When fade is false, onDismissed is called once when visible changes from true to false', async function (assert) {
     let action = sinon.spy();
-    this.actions.dismissed = action;
+    this.dismissed = action;
     this.isAlertShown = true;
 
     await render(
-      hbs`<BsAlert @fade={{false}} @onDismissed={{action "dismissed"}} @visible={{this.isAlertShown}}>Test</BsAlert>`
+      hbs`<BsAlert @fade={{false}} @onDismissed={{this.dismissed}} @visible={{this.isAlertShown}}>Test</BsAlert>`
     );
 
     set(this, 'isAlertShown', false);
