@@ -1,6 +1,5 @@
 import { module } from 'qunit';
 import { setupRenderingTest } from 'ember-qunit';
-import { set } from '@ember/object';
 import { click, render, settled, waitFor } from '@ember/test-helpers';
 import { test, testRequiringTransitions } from '../../helpers/bootstrap';
 import hbs from 'htmlbars-inline-precompile';
@@ -98,7 +97,7 @@ module('Integration | Component | bs-alert', function (hooks) {
       hbs`<BsAlert @fade={{true}} @onDismissed={{this.dismissed}} @visible={{this.isAlertShown}}>Test</BsAlert>`
     );
 
-    set(this, 'isAlertShown', false);
+    this.set('isAlertShown', false);
     await settled();
 
     assert.ok(action.calledOnce, 'onDismissed is called once.');
@@ -113,7 +112,7 @@ module('Integration | Component | bs-alert', function (hooks) {
       hbs`<BsAlert @fade={{false}} @onDismissed={{this.dismissed}} @visible={{this.isAlertShown}}>Test</BsAlert>`
     );
 
-    set(this, 'isAlertShown', false);
+    this.set('isAlertShown', false);
     await settled();
 
     assert.ok(action.calledOnce, 'onDismissed is called once.');
