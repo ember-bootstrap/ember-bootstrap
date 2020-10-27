@@ -6334,10 +6334,10 @@ ember-raf-scheduler@^0.1.0:
   dependencies:
     ember-cli-babel "^6.6.0"
 
-ember-ref-bucket@^1.2.1:
-  version "1.2.1"
-  resolved "https://registry.yarnpkg.com/ember-ref-bucket/-/ember-ref-bucket-1.2.1.tgz#75fd2795ab044c07b57c56836c8176d4dc5420bd"
-  integrity sha512-wjGdB1Y5bc5DsmM2xBBuS1jx7GTHklQGf6bAQnJxwT0ItiSDhKC9dvy19ItqOiKGiHJP8ZVCaxc45ABNUo6XCw==
+ember-ref-bucket@^1.2.2:
+  version "1.2.2"
+  resolved "https://registry.yarnpkg.com/ember-ref-bucket/-/ember-ref-bucket-1.2.2.tgz#02f999119f44ba006363c48edbd013dcbe6270e1"
+  integrity sha512-DG09iwZ0m5aNJFcBXkpRKQeqLxMlfS8+3AXj+gX9vaCsjuA2y2C0tHdyYarNt0xxETGoJoEpXpAZvyE5l+/E2g==
   dependencies:
     ember-cli-babel "^7.22.1"
     ember-cli-htmlbars "^5.3.1"
