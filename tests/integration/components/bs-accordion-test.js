@@ -164,6 +164,19 @@ module('Integration | Component | bs-accordion', function (hooks) {
     assert.dom(`.${accordionClassFor()}:first-child .collapse`).hasNoClass(visibilityClass(), 'tabpanel is hidden');
   });
 
+  test('supports undefined as value of onChange argument', async function (assert) {
+    await render(hbs`
+      <BsAccordion @onChange={{undefined}} as |acc|>
+        <acc.item @value={{1}} @title="TITLE1" data-test-item="1">CONTENT1</acc.item>
+        <acc.item @value={{2}} @title="TITLE2">CONTENT2</acc.item>
+      </BsAccordion>
+    `);
+    assert.dom(`[data-test-item="1"] .collapse`).hasNoClass(visibilityClass());
+
+    await click(`[data-test-item="1"] .${accordionItemHeadClass()}`);
+    assert.dom(`[data-test-item="1"] .collapse`).hasClass(visibilityClass());
+  });
+
   test('changing selection does not leak to public selected property (DDAU)', async function (assert) {
     this.set('selected', 1);
     await render(hbs`
