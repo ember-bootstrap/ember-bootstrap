@@ -9,6 +9,19 @@
         <span aria-hidden="true">&times;</span>
       </button>
     {{/if}}
-    {{yield}}
+
+    {{#if (has-block "header")}}
+      {{#let (element (bs-default @headerTag "h4")) as |Tag|}}
+        <Tag class="alert-heading">
+          {{yield to="header"}}
+        </Tag>
+      {{/let}}
+    {{/if}}
+
+    {{#if (has-block "body")}}
+      {{yield to="body"}}
+    {{else}}
+      {{yield}}
+    {{/if}}
   {{/unless}}
 </div>

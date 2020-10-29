@@ -11,6 +11,7 @@
 <div class="highlight">
   <CodeSnippet @name="alert-simple.hbs" />
 </div>
+
 <h2>
   Options
 </h2>
@@ -45,6 +46,11 @@
     >
       <el.control @searchEnabled @class="ml-1" />
     </form.element>
+    <form.element
+      @label="Header tag"
+      @property="headerTag"
+      class="ml-sm-2"
+    />
   </BsForm>
   <hr>
   <!-- BEGIN-SNIPPET alert-options -->
@@ -52,8 +58,20 @@
     @visible={{visible}}
     @fade={{fade}}
     @type={{type}}
-    @dismissible={{dismissible}}>
+    @dismissible={{dismissible}}
+  >
     <strong> Well done!  </strong> You successfully read this important alert message.
+  </BsAlert>
+
+  <BsAlert
+    @visible={{visible}}
+    @fade={{fade}}
+    @type={{type}}
+    @dismissible={{dismissible}}
+    @headerTag={{headerTag}}
+  >
+    <:header>Well done!</:header>
+    <:body>You successfully read this important alert message.</:body>
   </BsAlert>
   <!-- END-SNIPPET -->
 </div>
@@ -65,6 +83,7 @@
       fade=fade
       dismissible=dismissible
       type=type
+      headerTag=headerTag
     }}
   />
 </div>
