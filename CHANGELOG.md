@@ -1,3 +1,21 @@
+## v4.4.0 (2020-10-30)
+
+#### Features
+* [#1279](https://github.com/kaliber5/ember-bootstrap/pull/1279) Refactor Tooltips and Popovers to Glimmer components ([@simonihmig](https://github.com/simonihmig))
+* [#1263](https://github.com/kaliber5/ember-bootstrap/pull/1263) render header for <BsAlert> using named blocks ([@jelhan](https://github.com/jelhan))
+
+#### Bug Fixes
+* [#1281](https://github.com/kaliber5/ember-bootstrap/pull/1281) Fixed onDismissed being called twice when visible changes value ([@ijlee2](https://github.com/ijlee2))
+* [#1306](https://github.com/kaliber5/ember-bootstrap/pull/1306) <BsAccordion> should support @onChange={{undefined}} ([@jelhan](https://github.com/jelhan))
+* [#1284](https://github.com/kaliber5/ember-bootstrap/pull/1284) Fix deprecate's own deprecations for Ember canary ([@simonihmig](https://github.com/simonihmig))
+
+#### Committers: 5
+- Isaac Lee ([@ijlee2](https://github.com/ijlee2))
+- Jeldrik Hanschke ([@jelhan](https://github.com/jelhan))
+- Robert Jackson ([@rwjblue](https://github.com/rwjblue))
+- Simon Ihmig ([@simonihmig](https://github.com/simonihmig))
+- [@dependabot-preview[bot]](https://github.com/apps/dependabot-preview)
+
 ## v4.3.0 (2020-10-06)
 
 #### Features
