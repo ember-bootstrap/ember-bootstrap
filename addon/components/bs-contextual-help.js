@@ -13,27 +13,9 @@ import arg from '../utils/decorators/arg';
 import { tracked } from '@glimmer/tracking';
 import { getParentView } from '../utils/dom';
 
-class InState {
-  hover = false;
-  focus = false;
-  click = false;
-
-  set(key, value) {
-    this[key] = value;
-  }
-
-  toggle(key) {
-    this[key] = !this[key];
-  }
-
-  get showHelp() {
-    return this.hover || this.focus || this.click;
-  }
-}
-
-const HOVERSTATE_NONE = 0;
-const HOVERSTATE_IN = 1;
-const HOVERSTATE_OUT = 2;
+const HOVERSTATE_NONE = 'none';
+const HOVERSTATE_IN = 'in';
+const HOVERSTATE_OUT = 'out';
 
 function noop() {}
 
@@ -343,12 +325,14 @@ export default class ContextualHelp extends Component {
 
   /**
    * Current state for events
-   *
-   * @property inState
-   * @type {InState}
-   * @private
    */
-  inState = new InState();
+  hover = false;
+  focus = false;
+  click = false;
+
+  get shouldShowHelp() {
+    return this.hover || this.focus || this.click;
+  }
 
   /**
    * Ember.run timer
@@ -419,7 +403,7 @@ export default class ContextualHelp extends Component {
   enter(e) {
     if (e) {
       let eventType = e.type === 'focusin' ? 'focus' : 'hover';
-      this.inState.set(eventType, true);
+      this[eventType] = true;
     }
 
     if (this.showHelp || this.hoverState === HOVERSTATE_IN) {
@@ -456,10 +440,10 @@ export default class ContextualHelp extends Component {
   leave(e) {
     if (e) {
       let eventType = e.type === 'focusout' ? 'focus' : 'hover';
-      this.inState.set(eventType, false);
+      this[eventType] = false;
     }
 
-    if (this.inState.showHelp) {
+    if (this.shouldShowHelp) {
       return;
     }
 
@@ -471,38 +455,25 @@ export default class ContextualHelp extends Component {
       return this.hide();
     }
 
-    this.timer = later(
-      this,
-      function () {
-        if (this.hoverState === HOVERSTATE_OUT) {
-          this.hide();
-        }
-      },
-      this.delayHide
-    );
+    this.timer = later(() => {
+      if (this.hoverState === HOVERSTATE_OUT) {
+        this.hide();
+      }
+    }, this.delayHide);
   }
 
   /**
    * Called for a click event
    *
    * @method toggle
-   * @param e
    * @private
    */
-  toggle(e) {
-    if (e) {
-      this.inState.toggle('click');
-      if (this.inState.showHelp) {
-        this.enter();
-      } else {
-        this.leave();
-      }
+  toggle() {
+    this.click = !this.click;
+    if (this.shouldShowHelp) {
+      this.enter();
     } else {
-      if (this.showHelp) {
-        this.leave();
-      } else {
-        this.enter();
-      }
+      this.leave();
     }
   }
 
@@ -521,17 +492,8 @@ export default class ContextualHelp extends Component {
       return;
     }
 
-    // this waits for the tooltip/popover element to be created. when animating a wormholed tooltip/popover we need to wait until
-    // ember-wormhole has moved things in the DOM for the animation to be correct, so use Ember.run.next in this case
-    let delayFn =
-      !this._renderInPlace && this.fade
-        ? next
-        : function (target, fn) {
-            schedule('afterRender', target, fn);
-          };
-
     this.inDom = true;
-    delayFn(this, this._show);
+    schedule('afterRender', this, this._show);
   }
 
   _show(skipTransition = false) {
@@ -704,7 +666,7 @@ export default class ContextualHelp extends Component {
     // close the already-closed tooltip/popover. We don't need to worry
     // about this for hover/focus because those aren't "stateful" toggle
     // events like click.
-    this.inState.set('click', false);
+    this.click = false;
     this.hide();
   }
 
