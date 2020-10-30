@@ -1,6 +1,6 @@
 import { module } from 'qunit';
 import { setupRenderingTest } from 'ember-qunit';
-import { render, click, waitFor } from '@ember/test-helpers';
+import { click, render, settled, waitFor } from '@ember/test-helpers';
 import { test, testRequiringTransitions } from '../../helpers/bootstrap';
 import hbs from 'htmlbars-inline-precompile';
 import setupNoDeprecations from '../../helpers/setup-no-deprecations';
@@ -86,6 +86,51 @@ module('Integration | Component | bs-alert', function (hooks) {
     await render(hbs`<BsAlert @type="success" @fade={{false}} @onDismissed={{action "dismissed"}}>Test</BsAlert>`);
     await click('button.close');
     assert.ok(action.calledOnce, 'onDismissed has been called.');
+  });
+
+  test('When fade is true, onDismissed is called once when visible changes from true to false', async function (assert) {
+    let action = sinon.spy();
+    this.dismissed = action;
+    this.isAlertShown = true;
+
+    await render(
+      hbs`<BsAlert @fade={{true}} @onDismissed={{this.dismissed}} @visible={{this.isAlertShown}}>Test</BsAlert>`
+    );
+
+    this.set('isAlertShown', false);
+    await settled();
+
+    assert.ok(action.calledOnce, 'onDismissed is called once.');
+  });
+
+  test('When fade is false, onDismissed is called once when visible changes from true to false', async function (assert) {
+    let action = sinon.spy();
+    this.dismissed = action;
+    this.isAlertShown = true;
+
+    await render(
+      hbs`<BsAlert @fade={{false}} @onDismissed={{this.dismissed}} @visible={{this.isAlertShown}}>Test</BsAlert>`
+    );
+
+    this.set('isAlertShown', false);
+    await settled();
+
+    assert.ok(action.calledOnce, 'onDismissed is called once.');
+  });
+
+  test('When fade is false, onDismissed is not called when visible changes from false to false', async function (assert) {
+    let action = sinon.spy();
+    this.dismissed = action;
+    this.isAlertShown = false;
+
+    await render(
+      hbs`<BsAlert @fade={{false}} @onDismissed={{this.dismissed}} @visible={{this.isAlertShown}}>Test</BsAlert>`
+    );
+
+    this.set('isAlertShown', false);
+    await settled();
+
+    assert.ok(action.notCalled, 'onDismissed is not called.');
   });
 
   test('alert is initially hidden when visible=false', async function (assert) {
