@@ -59,37 +59,33 @@
 
 <div class="file">
     <pre class="prettyprint linenums">
-import { tagName } from &#x27;@ember-decorators/component&#x27;;
-import { action, computed } from &#x27;@ember/object&#x27;;
-import { reads } from &#x27;@ember/object/computed&#x27;;
-import Component from &#x27;@ember/component&#x27;;
+import { action } from &#x27;@ember/object&#x27;;
+import Component from &#x27;@glimmer/component&#x27;;
 import { assert } from &#x27;@ember/debug&#x27;;
 import { scheduleOnce } from &#x27;@ember/runloop&#x27;;
-import defaultValue from &#x27;ember-bootstrap/utils/default-decorator&#x27;;
+import arg from &#x27;ember-bootstrap/utils/decorators/arg&#x27;;
+import { tracked } from &#x27;@glimmer/tracking&#x27;;
 
 /**
  Internal (abstract) component for contextual help markup. Should not be used directly.
 
  @class ContextualHelpElement
  @namespace Components
- @extends Ember.Component
+ @extends Glimmer.Component
  @private
  */
-@tagName(&#x27;&#x27;)
 export default class ContextualHelpElement extends Component {
-  ariaRole = &#x27;tooltip&#x27;;
-
   /**
    * @property placement
    * @type string
    * @default &#x27;top&#x27;
    * @public
    */
-  @defaultValue
+  @arg
   placement = &#x27;top&#x27;;
 
-  @reads(&#x27;placement&#x27;)
-  actualPlacement;
+  @tracked
+  actualPlacement = this.args.placement;
 
   /**
    * @property fade
@@ -97,7 +93,7 @@ export default class ContextualHelpElement extends Component {
    * @default true
    * @public
    */
-  @defaultValue
+  @arg
   fade = true;
 
   /**
@@ -106,7 +102,7 @@ export default class ContextualHelpElement extends Component {
    * @default false
    * @public
    */
-  @defaultValue
+  @arg
   showHelp = false;
 
   /**
@@ -117,8 +113,6 @@ export default class ContextualHelpElement extends Component {
    * @default true
    * @public
    */
-  @defaultValue
-  renderInPlace = true;
 
   /**
    * Which element to align to
@@ -127,8 +121,6 @@ export default class ContextualHelpElement extends Component {
    * @type {string|HTMLElement}
    * @public
    */
-  @defaultValue
-  popperTarget = null;
 
   /**
    * @property autoPlacement
@@ -136,8 +128,6 @@ export default class ContextualHelpElement extends Component {
    * @default true
    * @public
    */
-  @defaultValue
-  autoPlacement = true;
 
   /**
    * The DOM element of the viewport element.
@@ -146,8 +136,6 @@ export default class ContextualHelpElement extends Component {
    * @type object
    * @public
    */
-  @defaultValue
-  viewportElement = null;
 
   /**
    * Take a padding into account for keeping the tooltip/popover within the bounds of the element given by &#x60;viewportElement&#x60;.
@@ -157,14 +145,11 @@ export default class ContextualHelpElement extends Component {
    * @default 0
    * @public
    */
-  @defaultValue
-  viewportPadding = 0;
 
   /**
    * @property arrowClass
    * @private
    */
-  @defaultValue
   arrowClass = &#x27;arrow&#x27;;
 
   /**
@@ -174,16 +159,15 @@ export default class ContextualHelpElement extends Component {
    * @type {object}
    * @private
    */
-  @computed(&#x27;arrowClass&#x27;, &#x27;autoPlacement&#x27;, &#x27;viewportElement&#x27;, &#x27;viewportPadding&#x27;)
   get popperModifiers() {
-    let self = this;
+    let id = this.args.id;
     return {
       arrow: {
         element: &#x60;.${this.arrowClass}&#x60;,
       },
       offset: {
         fn(data) {
-          let tip = document.getElementById(self.get(&#x27;id&#x27;));
+          let tip = document.getElementById(id);
           assert(&#x27;Contextual help element needs existing popper element&#x27;, tip);
 
           // manually read margins because getBoundingClientRect includes difference
@@ -205,21 +189,17 @@ export default class ContextualHelpElement extends Component {
         },
       },
       preventOverflow: {
-        enabled: this.autoPlacement,
-        boundariesElement: this.viewportElement,
-        padding: this.viewportPadding,
+        enabled: this.args.autoPlacement,
+        boundariesElement: this.args.viewportElement,
+        padding: this.args.viewportPadding,
       },
       hide: {
-        enabled: this.autoPlacement,
+        enabled: this.args.autoPlacement,
       },
       flip: {
-        enabled: this.autoPlacement,
+        enabled: this.args.autoPlacement,
       },
     };
-  }
-
-  didReceiveAttrs() {
-    assert(&#x27;Contextual help element needs id for popper element&#x27;, this.id);
   }
 
   @action
@@ -227,7 +207,7 @@ export default class ContextualHelpElement extends Component {
     if (this.actualPlacement === popperDataObject.placement) {
       return;
     }
-    this.set(&#x27;actualPlacement&#x27;, popperDataObject.placement);
+    this.actualPlacement = popperDataObject.placement;
     scheduleOnce(&#x27;afterRender&#x27;, popperDataObject.instance, popperDataObject.instance.scheduleUpdate);
   }
 }

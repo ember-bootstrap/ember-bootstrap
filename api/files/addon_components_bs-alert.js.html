@@ -82,6 +82,26 @@ import { localCopy } from &#x27;tracked-toolbox&#x27;;
   &lt;/BsAlert&gt;
   &#x60;&#x60;&#x60;
 
+  Optionally you can render a header for the alert using named blocks syntax:
+
+  &#x60;&#x60;&#x60;hbs
+  &lt;BsAlert&gt;
+    &lt;:header&gt;
+      Well done!
+    &lt;/:header&gt;
+    &lt;:body&gt;
+      You successfully read this important alert message.
+    &lt;/:body&gt;
+  &lt;/BsAlert&gt;
+  &#x60;&#x60;&#x60;
+
+  The header is rendered using a &#x60;&lt;h4&gt;&#x60; element by default. You can customize
+  that one by setting &#x60;@headerTag&#x60; argument of &#x60;&lt;BsAlert&gt;&#x60;.
+
+  Using named block syntax as shown above may require to install
+  [ember-named-blocks-polyfill](https://github.com/ember-polyfills/ember-named-blocks-polyfill)
+  in your project depending on the Ember version used.
+
   *Note that only invoking the component in a template as shown above is considered part of its public API. Extending from it (subclassing) is generally not supported, and may break at any time.*
 
   @class Alert
@@ -224,6 +244,10 @@ export default class Alert extends Component {
    * @private
    */
   hide() {
+    if (this.hidden) {
+      return;
+    }
+
     if (this.usesTransition) {
       later(
         this,

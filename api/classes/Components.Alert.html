@@ -65,6 +65,21 @@
   &lt;strong&gt;Well done!&lt;/strong&gt; You successfully read this important alert message.
 &lt;/BsAlert&gt;
 </code></pre>
+<p>Optionally you can render a header for the alert using named blocks syntax:</p>
+<pre class="code prettyprint"><code class="language-hbs">&lt;BsAlert&gt;
+  &lt;:header&gt;
+    Well done!
+  &lt;/:header&gt;
+  &lt;:body&gt;
+    You successfully read this important alert message.
+  &lt;/:body&gt;
+&lt;/BsAlert&gt;
+</code></pre>
+<p>The header is rendered using a <code>&lt;h4&gt;</code> element by default. You can customize
+that one by setting <code>@headerTag</code> argument of <code>&lt;BsAlert&gt;</code>.</p>
+<p>Using named block syntax as shown above may require to install
+<a href="https://github.com/ember-polyfills/ember-named-blocks-polyfill">ember-named-blocks-polyfill</a>
+in your project depending on the Ember version used.</p>
 <p><em>Note that only invoking the component in a template as shown above is considered part of its public API. Extending from it (subclassing) is generally not supported, and may break at any time.</em></p>
 
 
@@ -234,7 +249,7 @@
                 <div class="meta">
                             <p>
                             Defined in
-                    <a href="../files/addon_components_bs-alert.js.html#l158"><code>addon&#x2F;components&#x2F;bs-alert.js:158</code></a>
+                    <a href="../files/addon_components_bs-alert.js.html#l178"><code>addon&#x2F;components&#x2F;bs-alert.js:178</code></a>
                     </p>
             
             
@@ -266,7 +281,7 @@
                 <div class="meta">
                             <p>
                             Defined in
-                    <a href="../files/addon_components_bs-alert.js.html#l148"><code>addon&#x2F;components&#x2F;bs-alert.js:148</code></a>
+                    <a href="../files/addon_components_bs-alert.js.html#l168"><code>addon&#x2F;components&#x2F;bs-alert.js:168</code></a>
                     </p>
             
             
@@ -298,7 +313,7 @@
               <div class="meta">
                   <p>
                       Defined in
-                  <a href="../files/addon_components_bs-alert.js.html#l72"><code>addon&#x2F;components&#x2F;bs-alert.js:72</code></a>
+                  <a href="../files/addon_components_bs-alert.js.html#l92"><code>addon&#x2F;components&#x2F;bs-alert.js:92</code></a>
               </p>
             
             
@@ -327,7 +342,7 @@
                   <p><strong>Default:</strong> true</p>
                   <p>
                       Defined in
-                  <a href="../files/addon_components_bs-alert.js.html#l33"><code>addon&#x2F;components&#x2F;bs-alert.js:33</code></a>
+                  <a href="../files/addon_components_bs-alert.js.html#l53"><code>addon&#x2F;components&#x2F;bs-alert.js:53</code></a>
               </p>
             
             
@@ -358,7 +373,7 @@
                   <p><strong>Default:</strong> true</p>
                   <p>
                       Defined in
-                  <a href="../files/addon_components_bs-alert.js.html#l79"><code>addon&#x2F;components&#x2F;bs-alert.js:79</code></a>
+                  <a href="../files/addon_components_bs-alert.js.html#l99"><code>addon&#x2F;components&#x2F;bs-alert.js:99</code></a>
               </p>
             
             
@@ -388,7 +403,7 @@
                   <p><strong>Default:</strong> 150</p>
                   <p>
                       Defined in
-                  <a href="../files/addon_components_bs-alert.js.html#l92"><code>addon&#x2F;components&#x2F;bs-alert.js:92</code></a>
+                  <a href="../files/addon_components_bs-alert.js.html#l112"><code>addon&#x2F;components&#x2F;bs-alert.js:112</code></a>
               </p>
             
             
@@ -418,7 +433,7 @@
                   <p><strong>Default:</strong> false</p>
                   <p>
                       Defined in
-                  <a href="../files/addon_components_bs-alert.js.html#l45"><code>addon&#x2F;components&#x2F;bs-alert.js:45</code></a>
+                  <a href="../files/addon_components_bs-alert.js.html#l65"><code>addon&#x2F;components&#x2F;bs-alert.js:65</code></a>
               </p>
             
             
@@ -447,7 +462,7 @@
               <div class="meta">
                   <p>
                       Defined in
-                  <a href="../files/addon_components_bs-alert.js.html#l103"><code>addon&#x2F;components&#x2F;bs-alert.js:103</code></a>
+                  <a href="../files/addon_components_bs-alert.js.html#l123"><code>addon&#x2F;components&#x2F;bs-alert.js:123</code></a>
               </p>
             
             
@@ -477,7 +492,7 @@
               <div class="meta">
                   <p>
                       Defined in
-                  <a href="../files/addon_components_bs-alert.js.html#l113"><code>addon&#x2F;components&#x2F;bs-alert.js:113</code></a>
+                  <a href="../files/addon_components_bs-alert.js.html#l133"><code>addon&#x2F;components&#x2F;bs-alert.js:133</code></a>
               </p>
             
             
@@ -507,7 +522,7 @@
                   <p><strong>Default:</strong> true</p>
                   <p>
                       Defined in
-                  <a href="../files/addon_components_bs-alert.js.html#l57"><code>addon&#x2F;components&#x2F;bs-alert.js:57</code></a>
+                  <a href="../files/addon_components_bs-alert.js.html#l77"><code>addon&#x2F;components&#x2F;bs-alert.js:77</code></a>
               </p>
             
             
@@ -541,7 +556,7 @@
                 <div class="meta">
                             <p>
                             Defined in
-                    <a href="../files/addon_components_bs-alert.js.html#l131"><code>addon&#x2F;components&#x2F;bs-alert.js:131</code></a>
+                    <a href="../files/addon_components_bs-alert.js.html#l151"><code>addon&#x2F;components&#x2F;bs-alert.js:151</code></a>
                     </p>
             
             
@@ -569,7 +584,7 @@
                 <div class="meta">
                             <p>
                             Defined in
-                    <a href="../files/addon_components_bs-alert.js.html#l124"><code>addon&#x2F;components&#x2F;bs-alert.js:124</code></a>
+                    <a href="../files/addon_components_bs-alert.js.html#l144"><code>addon&#x2F;components&#x2F;bs-alert.js:144</code></a>
                     </p>
             
             

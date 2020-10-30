@@ -8,7 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     
-<meta name="ember-bootstrap-docs/config/environment" content="%7B%22modulePrefix%22%3A%22ember-bootstrap-docs%22%2C%22environment%22%3A%22production%22%2C%22rootURL%22%3A%22%2F%22%2C%22locationType%22%3A%22auto%22%2C%22EmberENV%22%3A%7B%22FEATURES%22%3A%7B%7D%2C%22_APPLICATION_TEMPLATE_WRAPPER%22%3Afalse%2C%22_DEFAULT_ASYNC_OBSERVERS%22%3Atrue%2C%22_JQUERY_INTEGRATION%22%3Afalse%2C%22_TEMPLATE_ONLY_GLIMMER_COMPONENTS%22%3Atrue%7D%2C%22APP%22%3A%7B%22name%22%3A%22ember-bootstrap-docs%22%2C%22version%22%3A%22v4.3.0%2Be25ed88a%22%7D%2C%22contentSecurityPolicy%22%3A%7B%22default-src%22%3A%5B%22'none'%22%5D%2C%22script-src%22%3A%5B%22'self'%22%2C%22'sha256-1xtiB6mV1iIKZ5iz9CxA5lEnfEg8d0XEH3FL9L8NBqo%3D'%22%2C%22use.typekit.net%22%5D%2C%22font-src%22%3A%5B%22'self'%22%2C%22use.typekit.net%22%2C%22use.fontawesome.com%22%5D%2C%22connect-src%22%3A%5B%22'self'%22%2C%22performance.typekit.net%22%5D%2C%22img-src%22%3A%5B%22'self'%22%2C%22data%3A%22%2C%22p.typekit.net%22%5D%2C%22style-src%22%3A%5B%22'self'%22%2C%22'unsafe-inline'%22%2C%22use.typekit.net%22%2C%22use.fontawesome.com%22%5D%2C%22media-src%22%3A%5B%22'self'%22%5D%2C%22frame-src%22%3A%5B%22https%3A%2F%2Fghbtns.com%2F%22%5D%7D%2C%22fastboot%22%3A%7B%22hostWhitelist%22%3A%5B%7B%7D%5D%7D%2C%22exportApplicationGlobal%22%3Afalse%7D" />
+<meta name="ember-bootstrap-docs/config/environment" content="%7B%22modulePrefix%22%3A%22ember-bootstrap-docs%22%2C%22environment%22%3A%22production%22%2C%22rootURL%22%3A%22%2F%22%2C%22locationType%22%3A%22auto%22%2C%22EmberENV%22%3A%7B%22FEATURES%22%3A%7B%7D%2C%22_APPLICATION_TEMPLATE_WRAPPER%22%3Afalse%2C%22_DEFAULT_ASYNC_OBSERVERS%22%3Atrue%2C%22_JQUERY_INTEGRATION%22%3Afalse%2C%22_TEMPLATE_ONLY_GLIMMER_COMPONENTS%22%3Atrue%7D%2C%22APP%22%3A%7B%22name%22%3A%22ember-bootstrap-docs%22%2C%22version%22%3A%22v4.4.0%2B19ded703%22%7D%2C%22contentSecurityPolicy%22%3A%7B%22default-src%22%3A%5B%22'none'%22%5D%2C%22script-src%22%3A%5B%22'self'%22%2C%22'sha256-1xtiB6mV1iIKZ5iz9CxA5lEnfEg8d0XEH3FL9L8NBqo%3D'%22%2C%22use.typekit.net%22%5D%2C%22font-src%22%3A%5B%22'self'%22%2C%22use.typekit.net%22%2C%22use.fontawesome.com%22%5D%2C%22connect-src%22%3A%5B%22'self'%22%2C%22performance.typekit.net%22%5D%2C%22img-src%22%3A%5B%22'self'%22%2C%22data%3A%22%2C%22p.typekit.net%22%5D%2C%22style-src%22%3A%5B%22'self'%22%2C%22'unsafe-inline'%22%2C%22use.typekit.net%22%2C%22use.fontawesome.com%22%5D%2C%22media-src%22%3A%5B%22'self'%22%5D%2C%22frame-src%22%3A%5B%22https%3A%2F%2Fghbtns.com%2F%22%5D%7D%2C%22fastboot%22%3A%7B%22hostWhitelist%22%3A%5B%7B%7D%5D%7D%2C%22exportApplicationGlobal%22%3Afalse%7D" />
 <!-- EMBER_CLI_FASTBOOT_TITLE -->
 
     <link integrity="" rel="stylesheet" href="/assets/vendor-2d85e76797abd10b7eb7a72e9572086e.css">
@@ -234,7 +234,9 @@
         Provide contextual feedback messages for typical user actions with the handful of available and flexible alert messages.
       </p>
       <div class="alert   alert-info show">
-<!---->    
+<!---->
+<!---->
+      
   This page shows some example usage of the <code>&lt;BsAlert&gt;</code> component. For the full documentation please refer to
   the <a href="/api/classes/Components.Alert.html" class="alert-link">API Docs</a>. You might also want to consult the official
   <a href="https://getbootstrap.com/docs/4.3/components/alerts/" class="alert-link" target="_blank" rel="noopener noreferrer">Bootstrap Docs</a> for general information.
@@ -250,7 +252,9 @@
       <button class="close" aria-label="Close" type="button">
         <span aria-hidden="true">×</span>
       </button>
-    
+
+<!---->
+      
     <strong> Well done!  </strong> You successfully read this important alert message.
   
 </div>
@@ -262,6 +266,7 @@
 <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>BsAlert</span><span class="token punctuation">></span></span></code></pre>
 
 </div>
+
 <h2>
   Options
 </h2>
@@ -329,6 +334,15 @@
 
 <!---->
 <!----></div>
+    <div class="form-group        ml-sm-2">
+    <label class="    " for="ember238-field">
+<!---->    Header tag
+  </label>
+
+        <input id="ember238-field" value="h4" class="form-control  " type="text">
+
+<!---->
+<!----></div>
   
 </form>
 
@@ -338,19 +352,45 @@
       <button class="close" aria-label="Close" type="button">
         <span aria-hidden="true">×</span>
       </button>
-    
+
+<!---->
+      
     <strong> Well done!  </strong> You successfully read this important alert message.
   
+</div>
+
+  <div class="alert  alert-dismissible alert-success show">
+      <button class="close" aria-label="Close" type="button">
+        <span aria-hidden="true">×</span>
+      </button>
+
+        <h4 id="ember243" class="ember-view alert-heading">
+          Well done!
+        </h4>
+
+      You successfully read this important alert message.
 </div>
   <!-- END-SNIPPET -->
 </div>
 <div class="highlight">
-    <pre id="ember238" class="code-block language-handlebars ember-view line-numbers"><!----><code class="line-numbers language-handlebars"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>BsAlert</span>
+    <pre id="ember244" class="code-block language-handlebars ember-view line-numbers"><!----><code class="line-numbers language-handlebars"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>BsAlert</span>
   <span class="token attr-name">@visible</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token handlebars language-handlebars"><span class="token delimiter punctuation">{{</span><span class="token boolean">true</span><span class="token delimiter punctuation">}}</span></span></span>
   <span class="token attr-name">@fade</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token handlebars language-handlebars"><span class="token delimiter punctuation">{{</span><span class="token boolean">true</span><span class="token delimiter punctuation">}}</span></span></span>
   <span class="token attr-name">@type</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>success<span class="token punctuation">"</span></span>
-  <span class="token attr-name">@dismissible</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token handlebars language-handlebars"><span class="token delimiter punctuation">{{</span><span class="token boolean">true</span><span class="token delimiter punctuation">}}</span></span></span><span class="token punctuation">></span></span>
+  <span class="token attr-name">@dismissible</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token handlebars language-handlebars"><span class="token delimiter punctuation">{{</span><span class="token boolean">true</span><span class="token delimiter punctuation">}}</span></span></span>
+<span class="token punctuation">></span></span>
   <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>strong</span><span class="token punctuation">></span></span> Well done!  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>strong</span><span class="token punctuation">></span></span> You successfully read this important alert message.
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>BsAlert</span><span class="token punctuation">></span></span>
+
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>BsAlert</span>
+  <span class="token attr-name">@visible</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token handlebars language-handlebars"><span class="token delimiter punctuation">{{</span><span class="token boolean">true</span><span class="token delimiter punctuation">}}</span></span></span>
+  <span class="token attr-name">@fade</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token handlebars language-handlebars"><span class="token delimiter punctuation">{{</span><span class="token boolean">true</span><span class="token delimiter punctuation">}}</span></span></span>
+  <span class="token attr-name">@type</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>success<span class="token punctuation">"</span></span>
+  <span class="token attr-name">@dismissible</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token handlebars language-handlebars"><span class="token delimiter punctuation">{{</span><span class="token boolean">true</span><span class="token delimiter punctuation">}}</span></span></span>
+  <span class="token attr-name">@headerTag</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>h4<span class="token punctuation">"</span></span>
+<span class="token punctuation">></span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>:header</span><span class="token punctuation">></span></span>Well done!<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>:header</span><span class="token punctuation">></span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>:body</span><span class="token punctuation">></span></span>You successfully read this important alert message.<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>:body</span><span class="token punctuation">></span></span>
 <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>BsAlert</span><span class="token punctuation">></span></span></code></pre>
 
 </div>
@@ -361,8 +401,8 @@
 </div>
 <script type="x/boundary" id="fastboot-body-end"></script>
 
-    <script src="/assets/vendor-018c2abeefc3de5995abc3b8ec02b179.js"></script>
-    <script src="/assets/ember-bootstrap-docs-0052c9e0f4140102a4b6d70a9336109d.js"></script>
+    <script src="/assets/vendor-c3217a60f3da219a23d75961d7c13d8a.js"></script>
+    <script src="/assets/ember-bootstrap-docs-a245af61901599ea5b88736f84eee16d.js"></script>
 
     <div id="ember-bootstrap-wormhole"></div>
 <div id="ember-basic-dropdown-wormhole"></div>

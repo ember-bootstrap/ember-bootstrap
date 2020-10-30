@@ -59,9 +59,8 @@
 
 <div class="file">
     <pre class="prettyprint linenums">
-import { computed } from &#x27;@ember/object&#x27;;
 import ContextualHelp from &#x27;./bs-contextual-help&#x27;;
-import defaultValue from &#x27;ember-bootstrap/utils/default-decorator&#x27;;
+import arg from &#x27;../utils/decorators/arg&#x27;;
 import deprecateSubclassing from &#x27;ember-bootstrap/utils/deprecate-subclassing&#x27;;
 
 /**
@@ -139,7 +138,7 @@ export default class Popover extends ContextualHelp {
    * @default &#x27;right&#x27;
    * @public
    */
-  @defaultValue
+  @arg
   placement = &#x27;right&#x27;;
 
   /**
@@ -148,7 +147,7 @@ export default class Popover extends ContextualHelp {
    * @default &#x27;click&#x27;
    * @public
    */
-  @defaultValue
+  @arg
   triggerEvents = &#x27;click&#x27;;
 
   /**
@@ -165,7 +164,6 @@ export default class Popover extends ContextualHelp {
    * @readonly
    * @private
    */
-  @computed(&#x27;overlayElement&#x27;)
   get arrowElement() {
     return this.overlayElement.querySelector(&#x27;.arrow&#x27;);
   }
