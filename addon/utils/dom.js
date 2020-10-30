@@ -42,7 +42,7 @@ export function findElementById(doc, id) {
 // renderer, be it native browser DOM or Fastboot SimpleDOM
 export function getDOM(context) {
   let { renderer } = context;
-  if (!renderer._dom) {
+  if (!renderer?._dom) {
     // pre glimmer2
     let container = getOwner ? getOwner(context) : context.container;
     let documentService = container.lookup('service:-document');
@@ -59,6 +59,19 @@ export function getDOM(context) {
   } else {
     throw new Error('Could not get DOM');
   }
+}
+
+export function getParentView(el) {
+  return closest(el, '.ember-view');
+}
+
+// taken from https://developer.mozilla.org/en-US/docs/Web/API/Element/closest#Polyfill
+function closest(el, selector) {
+  do {
+    if (el.matches(selector)) return el;
+    el = el.parentElement || el.parentNode;
+  } while (el !== null && el.nodeType === 1);
+  return null;
 }
 
 export function getDestinationElement(context) {

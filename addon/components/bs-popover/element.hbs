@@ -1,8 +1,8 @@
 <EmberPopper
-  @ariaRole={{this.ariaRole}}
+  @ariaRole="tooltip"
   @placement={{this.placement}}
-  @renderInPlace={{this.renderInPlace}}
-  @popperTarget={{this.popperTarget}}
+  @renderInPlace={{@renderInPlace}}
+  @popperTarget={{@popperTarget}}
   @modifiers={{this.popperModifiers}}
   @popperContainer={{@destinationElement}}
   @onCreate={{this.updatePlacement}}
@@ -12,7 +12,7 @@
   ...attributes
 >
   <div class={{this.arrowClass}}></div>
-  {{#if this.hasTitle}}
+  {{#if @title}}
     <h3 class="{{if (macroCondition (macroGetOwnConfig "isBS4")) "popover-header"}}{{if (macroCondition (macroGetOwnConfig "isBS3")) "popover-title"}}">{{@title}}</h3>
   {{/if}}
   <div class="{{if (macroCondition (macroGetOwnConfig "isBS4")) "popover-body"}}{{if (macroCondition (macroGetOwnConfig "isBS3")) "popover-content"}}">{{yield}}</div>

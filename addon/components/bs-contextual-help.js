@@ -1,37 +1,30 @@
-import { tagName } from '@ember-decorators/component';
-import { observes } from '@ember-decorators/object';
-import { gt, or, reads } from '@ember/object/computed';
-import Component from '@ember/component';
+import Component from '@glimmer/component';
 import { guidFor } from '@ember/object/internals';
 import { isArray } from '@ember/array';
-import EmberObject, { action, computed } from '@ember/object';
+import { action } from '@ember/object';
 import { cancel, later, next, schedule } from '@ember/runloop';
 import transitionEnd from 'ember-bootstrap/utils/transition-end';
 import { getDestinationElement } from 'ember-bootstrap/utils/dom';
-import usesTransition from 'ember-bootstrap/utils/cp/uses-transition';
-import defaultValue from 'ember-bootstrap/utils/default-decorator';
+import usesTransition from 'ember-bootstrap/utils/decorators/uses-transition';
 import { assert } from '@ember/debug';
 import Ember from 'ember';
 import { deprecate } from '@ember/application/deprecations';
+import arg from '../utils/decorators/arg';
+import { tracked } from '@glimmer/tracking';
+import { getParentView } from '../utils/dom';
 
-class InState extends EmberObject {
-  hover = false;
-  focus = false;
-  click = false;
-
-  @or('hover', 'focus', 'click')
-  showHelp;
-}
+const HOVERSTATE_NONE = 'none';
+const HOVERSTATE_IN = 'in';
+const HOVERSTATE_OUT = 'out';
 
 function noop() {}
 
 /**
   @class ContextualHelp
   @namespace Components
-  @extends Ember.Component
+  @extends Glimmer.Component
   @private
 */
-@tagName('')
 export default class ContextualHelp extends Component {
   /**
    * @property title
@@ -47,7 +40,7 @@ export default class ContextualHelp extends Component {
    * @default 'top'
    * @public
    */
-  @defaultValue
+  @arg
   placement = 'top';
 
   /**
@@ -60,7 +53,7 @@ export default class ContextualHelp extends Component {
    * @default true
    * @public
    */
-  @defaultValue
+  @arg
   autoPlacement = true;
 
   /**
@@ -71,7 +64,7 @@ export default class ContextualHelp extends Component {
    * @default false
    * @public
    */
-  @defaultValue
+  @arg
   visible = false;
 
   /**
@@ -79,8 +72,19 @@ export default class ContextualHelp extends Component {
    * @type boolean
    * @private
    */
-  @defaultValue
-  inDom = this.visible && this.triggerTargetElement;
+  @tracked
+  _inDom;
+
+  get inDom() {
+    return this._inDom ?? !!(this.visible && this.triggerTargetElement);
+  }
+  set inDom(value) {
+    if (this._inDom === value) {
+      return;
+    }
+
+    this._inDom = value;
+  }
 
   /**
    * Set to false to disable fade animations.
@@ -90,7 +94,7 @@ export default class ContextualHelp extends Component {
    * @default true
    * @public
    */
-  @defaultValue
+  @arg
   fade = true;
 
   /**
@@ -101,8 +105,8 @@ export default class ContextualHelp extends Component {
    * @default false
    * @private
    */
-  @reads('visible')
-  showHelp;
+  @tracked
+  showHelp = this.visible;
 
   /**
    * Delay showing and hiding the tooltip/popover (ms). Individual delays for showing and hiding can be specified by using the
@@ -113,7 +117,7 @@ export default class ContextualHelp extends Component {
    * @default 0
    * @public
    */
-  @defaultValue
+  @arg
   delay = 0;
 
   /**
@@ -124,8 +128,8 @@ export default class ContextualHelp extends Component {
    * @default 0
    * @public
    */
-  @reads('delay')
-  delayShow;
+  @arg
+  delayShow = this.args.delay ?? 0;
 
   /**
    * Delay hiding the tooltip/popover. This property overrides the general delay set with the `delay` property.
@@ -135,14 +139,8 @@ export default class ContextualHelp extends Component {
    * @default 0
    * @public
    */
-  @reads('delay')
-  delayHide;
-
-  @gt('delayShow', 0)
-  hasDelayShow;
-
-  @gt('delayHide', 0)
-  hasDelayHide;
+  @arg
+  delayHide = this.args.delay ?? 0;
 
   /**
    * The duration of the fade transition
@@ -152,7 +150,7 @@ export default class ContextualHelp extends Component {
    * @default 150
    * @public
    */
-  @defaultValue
+  @arg
   transitionDuration = 150;
 
   /**
@@ -165,7 +163,7 @@ export default class ContextualHelp extends Component {
    * @see autoPlacement
    * @public
    */
-  @defaultValue
+  @arg
   viewportSelector = 'body';
 
   /**
@@ -178,7 +176,7 @@ export default class ContextualHelp extends Component {
    * @see autoPlacement
    * @public
    */
-  @defaultValue
+  @arg
   viewportPadding = 0;
 
   _parentFinder = self.document ? self.document.createTextNode('') : '';
@@ -191,10 +189,7 @@ export default class ContextualHelp extends Component {
    * @readonly
    * @private
    */
-  @computed
-  get overlayId() {
-    return `overlay-${guidFor(this)}`;
-  }
+  overlayId = `overlay-${guidFor(this)}`;
 
   /**
    * The DOM element of the arrow element.
@@ -213,7 +208,6 @@ export default class ContextualHelp extends Component {
    * @readonly
    * @private
    */
-  @computed
   get destinationElement() {
     return getDestinationElement(this);
   }
@@ -226,7 +220,6 @@ export default class ContextualHelp extends Component {
    * @readonly
    * @private
    */
-  @computed('viewportSelector')
   get viewportElement() {
     return document.querySelector(this.viewportSelector);
   }
@@ -237,10 +230,10 @@ export default class ContextualHelp extends Component {
    * With the special value of "parentView" you can attach the tooltip/popover to the parent component's element.
    *
    * @property triggerElement
-   * @type string
+   * @type string | null
    * @public
    */
-  @defaultValue
+  @arg
   triggerElement = null;
 
   /**
@@ -254,7 +247,6 @@ export default class ContextualHelp extends Component {
     if (!triggerElement) {
       el = this._parent;
     } else if (triggerElement === 'parentView') {
-      el = this.parentView.element;
       deprecate(
         '@triggerElement="parentView" is deprecated. Please remove the @triggerElement argument to target the parent DOM element, or use a CSS selector',
         false,
@@ -265,6 +257,7 @@ export default class ContextualHelp extends Component {
           for: 'ember-bootstrap',
         }
       );
+      el = getParentView(this._parent);
     } else {
       el = document.querySelector(triggerElement);
     }
@@ -282,10 +275,9 @@ export default class ContextualHelp extends Component {
    * @default 'hover focus'
    * @public
    */
-  @defaultValue
+  @arg
   triggerEvents = 'hover focus';
 
-  @computed('triggerEvents')
   get _triggerEvents() {
     let events = this.triggerEvents;
     if (!isArray(events)) {
@@ -312,39 +304,34 @@ export default class ContextualHelp extends Component {
    * @default false
    * @public
    */
-  @defaultValue
-  renderInPlace = false;
 
   /**
    * @property _renderInPlace
    * @type boolean
    * @private
    */
-  @computed('destinationElement', 'renderInPlace')
   get _renderInPlace() {
-    return this.renderInPlace || !this.destinationElement;
+    return this.args.renderInPlace || !this.destinationElement;
   }
 
   /**
    * Current hover state, 'in', 'out' or null
    *
    * @property hoverState
-   * @type string
+   * @type number
    * @private
    */
-  @defaultValue
-  hoverState = null;
+  hoverState = HOVERSTATE_NONE;
 
   /**
    * Current state for events
-   *
-   * @property inState
-   * @type {InState}
-   * @private
    */
-  @computed
-  get inState() {
-    return InState.create();
+  hover = false;
+  focus = false;
+  click = false;
+
+  get shouldShowHelp() {
+    return this.hover || this.focus || this.click;
   }
 
   /**
@@ -384,7 +371,6 @@ export default class ContextualHelp extends Component {
    * @event onShow
    * @public
    */
-  onShow() {}
 
   /**
    * This action will be called when the tooltip/popover has been made visible to the user (will wait for CSS transitions to complete).
@@ -392,7 +378,6 @@ export default class ContextualHelp extends Component {
    * @event onShown
    * @public
    */
-  onShown() {}
 
   /**
    * This action is called immediately when the tooltip/popover is about to be hidden.
@@ -400,7 +385,6 @@ export default class ContextualHelp extends Component {
    * @event onHide
    * @public
    */
-  onHide() {}
 
   /**
    * This action is called when the tooltip/popover has finished being hidden from the user (will wait for CSS transitions to complete).
@@ -408,7 +392,6 @@ export default class ContextualHelp extends Component {
    * @event onHidden
    * @public
    */
-  onHidden() {}
 
   /**
    * Called when a show event has been received
@@ -420,26 +403,26 @@ export default class ContextualHelp extends Component {
   enter(e) {
     if (e) {
       let eventType = e.type === 'focusin' ? 'focus' : 'hover';
-      this.inState.set(eventType, true);
+      this[eventType] = true;
     }
 
-    if (this.showHelp || this.hoverState === 'in') {
-      this.set('hoverState', 'in');
+    if (this.showHelp || this.hoverState === HOVERSTATE_IN) {
+      this.hoverState = HOVERSTATE_IN;
       return;
     }
 
     cancel(this.timer);
 
-    this.set('hoverState', 'in');
+    this.hoverState = HOVERSTATE_IN;
 
-    if (!this.hasDelayShow) {
+    if (!this.delayShow) {
       return this.show();
     }
 
     this.timer = later(
       this,
       function () {
-        if (this.hoverState === 'in') {
+        if (this.hoverState === HOVERSTATE_IN) {
           this.show();
         }
       },
@@ -457,53 +440,40 @@ export default class ContextualHelp extends Component {
   leave(e) {
     if (e) {
       let eventType = e.type === 'focusout' ? 'focus' : 'hover';
-      this.inState.set(eventType, false);
+      this[eventType] = false;
     }
 
-    if (this.inState.showHelp) {
+    if (this.shouldShowHelp) {
       return;
     }
 
     cancel(this.timer);
 
-    this.set('hoverState', 'out');
+    this.hoverState = HOVERSTATE_OUT;
 
-    if (!this.hasDelayHide) {
+    if (!this.delayHide) {
       return this.hide();
     }
 
-    this.timer = later(
-      this,
-      function () {
-        if (this.hoverState === 'out') {
-          this.hide();
-        }
-      },
-      this.delayHide
-    );
+    this.timer = later(() => {
+      if (this.hoverState === HOVERSTATE_OUT) {
+        this.hide();
+      }
+    }, this.delayHide);
   }
 
   /**
    * Called for a click event
    *
    * @method toggle
-   * @param e
    * @private
    */
-  toggle(e) {
-    if (e) {
-      this.inState.toggleProperty('click');
-      if (this.inState.showHelp) {
-        this.enter();
-      } else {
-        this.leave();
-      }
+  toggle() {
+    this.click = !this.click;
+    if (this.shouldShowHelp) {
+      this.enter();
     } else {
-      if (this.showHelp) {
-        this.leave();
-      } else {
-        this.enter();
-      }
+      this.leave();
     }
   }
 
@@ -518,28 +488,19 @@ export default class ContextualHelp extends Component {
       return;
     }
 
-    if (false === this.onShow(this)) {
+    if (false === this.args.onShow?.(this)) {
       return;
     }
 
-    // this waits for the tooltip/popover element to be created. when animating a wormholed tooltip/popover we need to wait until
-    // ember-wormhole has moved things in the DOM for the animation to be correct, so use Ember.run.next in this case
-    let delayFn =
-      !this._renderInPlace && this.fade
-        ? next
-        : function (target, fn) {
-            schedule('afterRender', target, fn);
-          };
-
-    this.set('inDom', true);
-    delayFn(this, this._show);
+    this.inDom = true;
+    schedule('afterRender', this, this._show);
   }
 
   _show(skipTransition = false) {
     if (this.isDestroyed || this.isDestroying) {
       return;
     }
-    this.set('showHelp', true);
+    this.showHelp = true;
 
     // If this is a touch-enabled device we add extra
     // empty mouseover listeners to the body's immediate children;
@@ -560,10 +521,10 @@ export default class ContextualHelp extends Component {
       }
       let prevHoverState = this.hoverState;
 
-      this.onShown(this);
-      this.set('hoverState', null);
+      this.args.onShown?.(this);
+      this.hoverState = HOVERSTATE_NONE;
 
-      if (prevHoverState === 'out') {
+      if (prevHoverState === HOVERSTATE_OUT) {
         this.leave();
       }
     };
@@ -601,7 +562,7 @@ export default class ContextualHelp extends Component {
       return;
     }
 
-    if (false === this.onHide(this)) {
+    if (false === this.args.onHide?.(this)) {
       return;
     }
 
@@ -609,13 +570,13 @@ export default class ContextualHelp extends Component {
       if (this.isDestroyed) {
         return;
       }
-      if (this.hoverState !== 'in') {
-        this.set('inDom', false);
+      if (this.hoverState !== HOVERSTATE_IN) {
+        this.inDom = false;
       }
-      this.onHidden(this);
+      this.args.onHidden?.(this);
     };
 
-    this.set('showHelp', false);
+    this.showHelp = false;
 
     // if this is a touch-enabled device we remove the extra
     // empty mouseover listeners we added for iOS support
@@ -632,7 +593,7 @@ export default class ContextualHelp extends Component {
       tooltipHideComplete();
     }
 
-    this.set('hoverState', null);
+    this.hoverState = HOVERSTATE_NONE;
   }
 
   /**
@@ -705,12 +666,16 @@ export default class ContextualHelp extends Component {
     // close the already-closed tooltip/popover. We don't need to worry
     // about this for hover/focus because those aren't "stateful" toggle
     // events like click.
-    this.set('inState.click', false);
+    this.click = false;
     this.hide();
   }
 
-  didInsertElement() {
-    super.didInsertElement(...arguments);
+  @action
+  setup() {
+    if (typeof FastBoot !== 'undefined') {
+      // ember-render-helpers calls this also in FastBoot, so guard against this
+      return;
+    }
     let parent = this._parentFinder.parentNode;
     // In the rare case of using FastBoot w/ rehydration, the parent finder TextNode rendered by FastBoot will be reused,
     // so our own instance on the component is not rendered, only exists here as detached from DOM and thus has no parent.
@@ -732,17 +697,17 @@ export default class ContextualHelp extends Component {
     }
   }
 
-  willDestroyElement() {
-    super.willDestroyElement(...arguments);
-    this.removeListeners();
-  }
-
-  @observes('visible')
-  _watchVisible() {
-    if (this.visible) {
+  @action
+  showOrHide(visible) {
+    if (visible) {
       this.show();
     } else {
       this.hide();
     }
+  }
+
+  willDestroyElement() {
+    super.willDestroyElement(...arguments);
+    this.removeListeners();
   }
 }

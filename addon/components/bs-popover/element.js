@@ -1,4 +1,3 @@
-import { notEmpty } from '@ember/object/computed';
 import ContextualHelpElement from '../bs-contextual-help/element';
 
 /**
@@ -15,12 +14,4 @@ export default class PopoverElement extends ContextualHelpElement {
    * @type string
    * @public
    */
-
-  /**
-   * @property hasTitle
-   * @type boolean
-   * @private
-   */
-  @notEmpty('title')
-  hasTitle;
 }

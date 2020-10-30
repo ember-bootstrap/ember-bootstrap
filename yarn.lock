@@ -6102,7 +6102,7 @@ ember-cli-typescript@^2.0.2:
     stagehand "^1.0.0"
     walk-sync "^1.0.0"
 
-ember-cli-typescript@^3.1.3:
+ember-cli-typescript@^3.1.1, ember-cli-typescript@^3.1.3:
   version "3.1.4"
   resolved "https://registry.yarnpkg.com/ember-cli-typescript/-/ember-cli-typescript-3.1.4.tgz#21d6ccd670d1f2e34c9cce68c6e32c442f46806b"
   integrity sha512-HJ73kL45OGRmIkPhBNFt31I1SGUvdZND+LCH21+qpq3pPlFpJG8GORyXpP+2ze8PbnITNLzwe5AwUrpyuRswdQ==
@@ -6451,6 +6451,14 @@ ember-ref-bucket@^1.2.2:
     ember-cli-htmlbars "^5.3.1"
     ember-destroyable-polyfill "^2.0.2"
     ember-modifier "^2.1.1"
+
+ember-render-helpers@^0.1.1:
+  version "0.1.1"
+  resolved "https://registry.yarnpkg.com/ember-render-helpers/-/ember-render-helpers-0.1.1.tgz#616a04d317b4a8a6958432f6af37674ebaecfa3f"
+  integrity sha512-i+6gcWa1hCxI9qGHdacrXjfTUJdR8VCPbOXG8SFNjpqfMFlkh6SNeCMjXgSzRG2Xt7YNSSXEzr0ZvK+C7RUuJw==
+  dependencies:
+    ember-cli-babel "^7.12.0"
+    ember-cli-typescript "^3.1.1"
 
 ember-resolver@^8.0.2:
   version "8.0.2"
