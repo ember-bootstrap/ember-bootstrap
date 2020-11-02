@@ -124,7 +124,7 @@
     "eslint-plugin-hbs": "^1.0.0",
     "eslint-plugin-node": "^11.1.0",
     "eslint-plugin-prettier": "^3.1.4",
-    "execa": "^4.0.3",
+    "execa": "^4.1.0",
     "glob": "^7.1.1",
     "gulp": "^4.0.0",
     "gulp-connect": "^5.7.0",
