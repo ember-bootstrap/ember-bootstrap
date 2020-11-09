@@ -133,6 +133,18 @@ module('Integration | Component | bs-tooltip', function (hooks) {
     assert.dom('.tooltip').doesNotExist('tooltip is not visible');
   });
 
+  test('trigger element can be rendered later in dom order than its tooltip', async function (assert) {
+    await render(
+      hbs`<div><BsTooltip @title="Dummy" @fade={{false}} @triggerElement="#target" /></div><div id="target"></div>`
+    );
+
+    await triggerEvent('#target', 'mouseenter');
+    assert.dom('.tooltip').exists({ count: 1 }, 'tooltip is visible');
+
+    await triggerEvent('#target', 'mouseleave');
+    assert.dom('.tooltip').doesNotExist('tooltip is not visible');
+  });
+
   test('it allows changing the trigger element to the parent view', async function (assert) {
     // eslint-disable-next-line ember/require-tagless-components
     class DummyComponent extends Component {
