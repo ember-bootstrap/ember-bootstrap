@@ -1,13 +1,14 @@
 {{!-- template-lint-disable no-invalid-interactive --}}
 <div
-  class="form-group {{if this.disabled "disabled"}} {{if this.required "is-required"}} {{if this.isValidating "is-validating"}} {{if (macroCondition (macroGetOwnConfig "isBS3")) this.validationClass}} {{if (macroCondition (macroGetOwnConfig "isBS3")) (if this.hasFeedback "has-feedback")}} {{if (macroCondition (macroGetOwnConfig "isBS3")) this.sizeClass}} {{if (macroCondition (macroGetOwnConfig "isBS4")) (if this.isHorizontal "row")}}"
+  class="form-group {{if @disabled "disabled"}} {{if @required "is-required"}} {{if this.isValidating "is-validating"}} {{if (macroCondition (macroGetOwnConfig "isBS3")) this.validationClass}} {{if (macroCondition (macroGetOwnConfig "isBS3")) (if this.hasFeedback "has-feedback")}} {{if (macroCondition (macroGetOwnConfig "isBS3")) (bs-size-class @size)}} {{if (macroCondition (macroGetOwnConfig "isBS4")) (if (bs-eq @formLayout "horizontal") "row")}}"
   ...attributes
   {{create-ref "mainNode"}}
   {{on "focusout" this.showValidationOnHandler}}
   {{on "change" this.showValidationOnHandler}}
   {{on "input" this.showValidationOnHandler}}
   {{did-insert this.adjustFeedbackIcons}}
-  {{did-update this.adjustFeedbackIcons this.hasFeedback this.formLayout}}
+  {{did-update this.adjustFeedbackIcons this.hasFeedback @formLayout}}
+  {{did-update this.showAllValidations this.handleShowAllValidationsChange}}
 >
   {{#component
     (bs-default
@@ -36,7 +37,7 @@
     )
     hasLabel=this.hasLabel
     formElementId=this.formElementId
-    horizontalLabelGridClass=this.horizontalLabelGridClass
+    horizontalLabelGridClass=@horizontalLabelGridClass
     errorsComponent=(component (bs-default @errorsComponent (component "bs-form/element/errors"))
       messages=this.validationMessages
       show=this.showValidationMessages
@@ -60,19 +61,24 @@
         )
       )
       label=@label
-      invisibleLabel=this.invisibleLabel
+      invisibleLabel=@invisibleLabel
       formElementId=this.formElementId
       controlType=this.controlType
-      formLayout=this.formLayout
+      formLayout=@formLayout
       size=@size
     )
-    helpTextComponent=(if this.hasHelpText
+    helpTextComponent=(if @helpText
       (component (bs-default @helpTextComponent (component "bs-form/element/help-text"))
         text=@helpText
         id=this.ariaDescribedBy
       )
     )
   }}
+    {{!
+      Ember does not allow to access a variable with `@` in template if its name start with an underscore.
+      `@_disabled` and `@_readonly` are affected by this. As a work-a-round we access them on `this.args`.
+    }}
+    {{!-- template-lint-disable no-args-paths --}}
     {{#let
       (component
         (bs-default
@@ -98,16 +104,17 @@
         id=this.formElementId
         type=this.controlType
         label=@label
-        disabled=this._disabled
-        readonly=this._readonly
+        disabled=this.args._disabled
+        readonly=this.args._readonly
         required=@required
         options=this.options
         optionLabelPath=this.optionLabelPath
-        ariaDescribedBy=(if this.hasHelpText this.ariaDescribedBy)
+        ariaDescribedBy=(if @helpText this.ariaDescribedBy)
         onChange=(action this.doChange)
         validationType=this.validation
-        size=this.size
+        size=@size
     ) as |Control|}}
+    {{!-- template-lint-enable no-args-paths --}}
       {{#if hasBlock}}
         {{yield
           (hash
