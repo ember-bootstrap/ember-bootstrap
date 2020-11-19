@@ -1,6 +1,6 @@
 {{!-- template-lint-disable no-invalid-interactive --}}
 <div
-  class="form-group {{if @disabled "disabled"}} {{if @required "is-required"}} {{if this.isValidating "is-validating"}} {{if (macroCondition (macroGetOwnConfig "isBS3")) this.validationClass}} {{if (macroCondition (macroGetOwnConfig "isBS3")) (if this.hasFeedback "has-feedback")}} {{if (macroCondition (macroGetOwnConfig "isBS3")) (bs-size-class @size)}} {{if (macroCondition (macroGetOwnConfig "isBS4")) (if (bs-eq @formLayout "horizontal") "row")}}"
+  class="form-group {{if @disabled "disabled"}} {{if @required "is-required"}} {{if this.isValidating "is-validating"}} {{if (macroCondition (macroGetOwnConfig "isBS3")) this.validationClass}} {{if (macroCondition (macroGetOwnConfig "isBS3")) (if this.hasFeedback "has-feedback")}} {{if (macroCondition (macroGetOwnConfig "isBS3")) (bs-size-class "form-group" @size)}} {{if (macroCondition (macroGetOwnConfig "isBS4")) (if (bs-eq @formLayout "horizontal") "row")}}"
   ...attributes
   {{create-ref "mainNode"}}
   {{on "focusout" this.showValidationOnHandler}}
