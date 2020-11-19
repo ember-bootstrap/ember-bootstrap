@@ -8,7 +8,7 @@
   {{on "input" this.showValidationOnHandler}}
   {{did-insert this.adjustFeedbackIcons}}
   {{did-update this.adjustFeedbackIcons this.hasFeedback @formLayout}}
-  {{did-update this.showAllValidations this.handleShowAllValidationsChange}}
+  {{did-update this.handleShowAllValidationsChange this.showAllValidations}}
 >
   {{#component
     (bs-default
