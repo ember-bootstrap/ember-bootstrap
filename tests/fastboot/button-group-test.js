@@ -1,10 +1,8 @@
 import { module, test } from 'qunit';
-import { setup, visit /* mockServer */ } from 'ember-cli-fastboot-testing/test-support';
-import setupFastBootRootElement from '../helpers/setup-fastboot';
+import { setup, visit } from 'ember-cli-fastboot-testing/test-support';
 
 module('FastBoot | button-group', function (hooks) {
   setup(hooks);
-  setupFastBootRootElement(hooks);
 
   test('it renders', async function (assert) {
     await visit('/fastboot/button-group');
