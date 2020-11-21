@@ -96,15 +96,6 @@ module.exports = async function () {
         },
       },
       {
-        name: 'fastboot-tests',
-        command: 'ember test --filter FastBoot',
-        npm: {
-          devDependencies: {
-            bootstrap: bootstrapVersion,
-          },
-        },
-      },
-      {
         name: 'node-tests',
         command: 'yarn run nodetest',
       },
