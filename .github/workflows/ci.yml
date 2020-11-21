@@ -55,8 +55,6 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        command:
-          - ember test --filter="\!FastBoot"
         scenario:
           - ember-lts-3.16
           - ember-release
@@ -71,7 +69,6 @@ jobs:
         include:
           - scenario: ember-default
             command: ember test --launch Firefox
-          - scenario: fastboot-tests
           - scenario: node-tests
           - scenario: embroider-safe
           - scenario: embroider-optimized
