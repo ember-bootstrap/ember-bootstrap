@@ -16,10 +16,10 @@
     >
       {{yield
         (hash
-          item=(bs-default @itemComponent (component "bs-dropdown/menu/item"))
-          link-to=(bs-default @linkToComponent (component "bs-dropdown/menu/link-to"))
-          linkTo=(bs-default @linkToComponent (component "bs-dropdown/menu/link-to"))
-          divider=(bs-default @dividerComponent (component "bs-dropdown/menu/divider"))
+          item=(ensure-safe-component (bs-default @itemComponent (component "bs-dropdown/menu/item")))
+          link-to=(ensure-safe-component (bs-default @linkToComponent (component "bs-dropdown/menu/link-to")))
+          linkTo=(ensure-safe-component (bs-default @linkToComponent (component "bs-dropdown/menu/link-to")))
+          divider=(ensure-safe-component (bs-default @dividerComponent (component "bs-dropdown/menu/divider")))
         )
       }}
     </EmberPopper>
@@ -45,10 +45,10 @@
       >
         {{yield
           (hash
-            item=(bs-default @itemComponent (component "bs-dropdown/menu/item"))
-            link-to=(bs-default @linkToComponent (component "bs-dropdown/menu/link-to"))
-            linkTo=(bs-default @linkToComponent (component "bs-dropdown/menu/link-to"))
-            divider=(bs-default @dividerComponent (component "bs-dropdown/menu/divider"))
+            item=(ensure-safe-component (bs-default @itemComponent (component "bs-dropdown/menu/item")))
+            link-to=(ensure-safe-component (bs-default @linkToComponent (component "bs-dropdown/menu/link-to")))
+            linkTo=(ensure-safe-component (bs-default @linkToComponent (component "bs-dropdown/menu/link-to")))
+            divider=(ensure-safe-component (bs-default @dividerComponent (component "bs-dropdown/menu/divider")))
           )
         }}
       </ul>

@@ -9,6 +9,10 @@ import FormGroup from 'ember-bootstrap/components/bs-form/group';
 import { getOwnConfig, macroCondition } from '@embroider/macros';
 import { guidFor } from '@ember/object/internals';
 import { ref } from 'ember-ref-bucket';
+import ControlInput from './element/control/input';
+import ControlCheckbox from './element/control/checkbox';
+import ControlTextarea from './element/control/textarea';
+import ControlRadio from './element/control/radio';
 import arg from 'ember-bootstrap/utils/decorators/arg';
 
 /**
@@ -712,19 +716,26 @@ export default class FormElement extends FormGroup {
    */
 
   /**
-   * @property customControlComponent
-   * @type {String}
+   * @property controlComponent
    * @private
    */
   get customControlComponent() {
-    const controlType = this.controlType;
-    const componentName = `bs-form/element/control/${controlType}`;
+    let owner = getOwner(this);
+    let componentClass = owner.resolveRegistration(`component:bs-form/element/control/${this.controlType}`);
 
-    if (getOwner(this).hasRegistration(`component:${componentName}`)) {
-      return componentName;
+    if (componentClass) {
+      return componentClass;
     }
 
-    return null;
+    if (this.controlType === 'checkbox') {
+      return ControlCheckbox;
+    } else if (this.controlType === 'textarea') {
+      return ControlTextarea;
+    } else if (this.controlType === 'radio') {
+      return ControlRadio;
+    } else {
+      return ControlInput;
+    }
   }
 
   /**

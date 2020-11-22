@@ -9,7 +9,7 @@
 >
   {{yield
     (hash
-      element=(component (bs-default @elementComponent (component "bs-form/element"))
+      element=(component (ensure-safe-component (bs-default @elementComponent (component "bs-form/element")))
         model=this.model
         formLayout=this.formLayout
         horizontalLabelGridClass=this.horizontalLabelGridClass
@@ -19,13 +19,13 @@
         onChange=this.elementChanged
         _onChange=this.resetSubmissionState
       )
-      group=(component (bs-default @groupComponent (component "bs-form/group")) formLayout=this.formLayout)
+      group=(component (ensure-safe-component (bs-default @groupComponent (component "bs-form/group")) formLayout=this.formLayout))
       isSubmitting=this.isSubmitting
       isSubmitted=this.isSubmitted
       isRejected=this.isRejected
       resetSubmissionState=this.resetSubmissionState
       submit=this.doSubmit
-      submitButton=(component this.submitButtonComponent
+      submitButton=(component (ensure-safe-component (bs-default @submitButtonComponent (component "bs-button")))
         buttonType="submit"
         type="primary"
         state=this.submitButtonState

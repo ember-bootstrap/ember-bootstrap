@@ -1,10 +1,10 @@
 <ul class="nav {{this.typeClass}} {{this.additionalClass}} {{if this.justified "nav-justified"}} {{if this.stacked (if (macroCondition (macroGetOwnConfig "isBS4")) "flex-column" "nav-stacked")}} {{if (macroCondition (macroGetOwnConfig "isBS4")) (if this.fill "nav-fill")}}" ...attributes>
   {{yield
     (hash
-      item=(bs-default @itemComponent (component "bs-nav/item"))
-      link-to=(bs-default @linkToComponent (component "bs-nav/link-to"))
-      linkTo=(bs-default @linkToComponent (component "bs-nav/link-to"))
-      dropdown=(component (bs-default @dropdownComponent (component "bs-dropdown")) inNav=true htmlTag="li")
+      item=(ensure-safe-component (bs-default @itemComponent (component "bs-nav/item")))
+      link-to=(ensure-safe-component (bs-default @linkToComponent (component "bs-nav/link-to")))
+      linkTo=(ensure-safe-component (bs-default @linkToComponent (component "bs-nav/link-to")))
+      dropdown=(component (ensure-safe-component (bs-default @dropdownComponent (component "bs-dropdown"))) inNav=true htmlTag="li")
     )
   }}
 

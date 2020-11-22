@@ -2,13 +2,13 @@
   {{#if this.customTabs}}
     {{yield
       (hash
-        pane=(component (bs-default @paneComponent (component "bs-tab/pane")) parent=this activeId=this.isActiveId fade=this.fade fadeTransition=this.fadeTransition)
+        pane=(component (ensure-safe-component (bs-default @paneComponent (component "bs-tab/pane"))) parent=this activeId=this.isActiveId fade=this.fade fadeTransition=this.fadeTransition)
         activeId=this.isActiveId
         select=this.select
       )
     }}
   {{else}}
-    {{#let (bs-default @navComponent (component "bs-nav")) as |NavComponent|}}
+    {{#let (ensure-safe-component (bs-default @navComponent (component "bs-nav"))) as |NavComponent|}}
       <NavComponent @type={{this.type}} role="tablist" as |Nav|>
         {{#each this.navItems as |item|}}
           {{#if item.isGroup}}
@@ -38,7 +38,7 @@
     <div class="tab-content">
       {{yield
         (hash
-          pane=(component (bs-default @paneComponent (component "bs-tab/pane")) parent=this activeId=this.isActiveId fade=this.fade fadeTransition=this.fadeTransition)
+          pane=(component (ensure-safe-component (bs-default @paneComponent (component "bs-tab/pane"))) parent=this activeId=this.isActiveId fade=this.fade fadeTransition=this.fadeTransition)
           activeId=this.isActiveId
           select=this.select
         )

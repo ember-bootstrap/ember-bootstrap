@@ -50,6 +50,7 @@
   "dependencies": {
     "@ember/render-modifiers": "^1.0.2",
     "@embroider/macros": "^0.36.0",
+    "@embroider/util": "^0.36.0",
     "@glimmer/component": "^1.0.3",
     "@glimmer/tracking": "^1.0.3",
     "broccoli-debug": "^0.6.3",

@@ -1,16 +1,16 @@
 {{#if (macroCondition (macroGetOwnConfig "isBS3"))}}
   <div class="checkbox">
-    {{#component @labelComponent}}
+    <@labelComponent>
       {{yield}}
-    {{/component}}
+    </@labelComponent>
   </div>
-  {{component @errorsComponent}}
-  {{component @helpTextComponent}}
+  <@errorsComponent/>
+  <@helpTextComponent/>
 {{else}}
   <div class="form-check">
     {{yield}}
-    {{component @labelComponent}}
-    {{component @errorsComponent}}
-    {{component @helpTextComponent}}
+    <@labelComponent/>
+    <@errorsComponent/>
+    <@helpTextComponent/>
   </div>
 {{/if}}

@@ -11,26 +11,28 @@
   {{did-update this.handleShowAllValidationsChange this.showAllValidations}}
 >
   {{#component
-    (bs-default
-      @layoutComponent
-      (if
-        (bs-eq this.controlType "checkbox")
+    (ensure-safe-component
+      (bs-default
+        @layoutComponent
         (if
-          (bs-eq @formLayout "inline")
-          (component "bs-form/element/layout/inline/checkbox")
+          (bs-eq this.controlType "checkbox")
           (if
-            (bs-eq @formLayout "horizontal")
-            (component "bs-form/element/layout/horizontal/checkbox")
-            (component "bs-form/element/layout/vertical/checkbox")
+            (bs-eq @formLayout "inline")
+            (component "bs-form/element/layout/inline/checkbox")
+            (if
+              (bs-eq @formLayout "horizontal")
+              (component "bs-form/element/layout/horizontal/checkbox")
+              (component "bs-form/element/layout/vertical/checkbox")
+            )
           )
-        )
-        (if
-          (bs-eq @formLayout "inline")
-          (component "bs-form/element/layout/inline")
           (if
-            (bs-eq @formLayout "horizontal")
-            (component "bs-form/element/layout/horizontal")
-            (component "bs-form/element/layout/vertical")
+            (bs-eq @formLayout "inline")
+            (component "bs-form/element/layout/inline")
+            (if
+              (bs-eq @formLayout "horizontal")
+              (component "bs-form/element/layout/horizontal")
+              (component "bs-form/element/layout/vertical")
+            )
           )
         )
       )
@@ -38,25 +40,27 @@
     hasLabel=(if @label true false)
     formElementId=this.formElementId
     horizontalLabelGridClass=@horizontalLabelGridClass
-    errorsComponent=(component (bs-default @errorsComponent (component "bs-form/element/errors"))
+    errorsComponent=(component (ensure-safe-component (bs-default @errorsComponent (component "bs-form/element/errors")))
       messages=this.validationMessages
       show=this.showValidationMessages
       showMultipleErrors=this.showMultipleErrors
     )
-    feedbackIconComponent=(component (bs-default @feedbackIconComponent (component "bs-form/element/feedback-icon"))
+    feedbackIconComponent=(component (ensure-safe-component (bs-default @feedbackIconComponent (component "bs-form/element/feedback-icon")))
       iconName=@iconName
       show=this.hasFeedback
     )
     labelComponent=(component
-      (bs-default
-        @labelComponent
-        (if
-          (macroCondition (macroGetOwnConfig "isBS3"))
-          (component "bs-form/element/label")
+      (ensure-safe-component
+        (bs-default
+          @labelComponent
           (if
-            (bs-eq this.controlType "radio")
-            (component "bs-form/element/legend")
+            (macroCondition (macroGetOwnConfig "isBS3"))
             (component "bs-form/element/label")
+            (if
+              (bs-eq this.controlType "radio")
+              (component "bs-form/element/legend")
+              (component "bs-form/element/label")
+            )
           )
         )
       )
@@ -68,7 +72,7 @@
       size=@size
     )
     helpTextComponent=(if @helpText
-      (component (bs-default @helpTextComponent (component "bs-form/element/help-text"))
+      (component (ensure-safe-component (bs-default @helpTextComponent (component "bs-form/element/help-text")))
         text=@helpText
         id=this.ariaDescribedBy
       )
@@ -81,23 +85,10 @@
     {{!-- template-lint-disable no-args-paths --}}
     {{#let
       (component
-        (bs-default
-          @controlComponent
+        (ensure-safe-component
           (bs-default
-            this.customControlComponent
-            (if
-              (bs-eq this.controlType "checkbox")
-              (component "bs-form/element/control/checkbox")
-              (if
-                (bs-eq this.controlType "radio")
-                (component "bs-form/element/control/radio")
-                (if
-                  (bs-eq this.controlType "textarea")
-                  (component "bs-form/element/control/textarea")
-                  (component "bs-form/element/control/input")
-                )
-              )
-            )
+            @controlComponent
+            this.controlComponent
           )
         )
         value=this.value

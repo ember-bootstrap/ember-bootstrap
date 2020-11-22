@@ -18,7 +18,7 @@
   <div class="carousel-inner" role="listbox">
     {{yield
       (hash
-        slide=(component (bs-default @slideComponent (component "bs-carousel/slide"))
+        slide=(component (ensure-safe-component (bs-default @slideComponent (component "bs-carousel/slide")))
           currentSlide=this.currentSlide
           directionalClassName=this.directionalClassName
           followingSlide=this.followingSlide

@@ -1,31 +1,37 @@
-<div class="modal-header" ...attributes>
-  {{#if (has-block-params)}}
-    {{yield
-      (hash
-        title=(bs-default @titleComponent (component "bs-modal/header/title"))
-        close=(component (bs-default @closeComponent (component "bs-modal/header/close")) onClick=@onClose)
-      )
-    }}
-  {{else}}
-    {{#if (macroCondition (macroGetOwnConfig "isBS4"))}}
-      {{#if (has-block)}}
-        {{yield}}
-      {{else}}
-        {{#component (bs-default @titleComponent (component "bs-modal/header/title"))}}{{@title}}{{/component}}
+{{#let
+  (ensure-safe-component (bs-default @titleComponent (component "bs-modal/header/title")))
+  (component (ensure-safe-component (bs-default @closeComponent (component "bs-modal/header/close"))) onClick=@onClose)
+as |Title Close|
+}}
+  <div class="modal-header" ...attributes>
+    {{#if (has-block-params)}}
+      {{yield
+        (hash
+          title=Title
+          close=Close
+        )
+      }}
+    {{else}}
+      {{#if (macroCondition (macroGetOwnConfig "isBS4"))}}
+        {{#if (has-block)}}
+          {{yield}}
+        {{else}}
+          <Title>{{@title}}</Title>>
+        {{/if}}
+        {{#if (bs-default @closeButton true)}}
+          <Close/>
+        {{/if}}
       {{/if}}
-      {{#if (bs-default @closeButton true)}}
-        {{component (bs-default @closeComponent (component "bs-modal/header/close")) onClick=@onClose}}
+      {{#if (macroCondition (macroGetOwnConfig "isBS3"))}}
+        {{#if (bs-default @closeButton true)}}
+          <Close/>
+        {{/if}}
+        {{#if (has-block)}}
+          {{yield}}
+        {{else}}
+          <Title>{{@title}}</Title>>
+        {{/if}}
       {{/if}}
     {{/if}}
-    {{#if (macroCondition (macroGetOwnConfig "isBS3"))}}
-      {{#if (bs-default @closeButton true)}}
-        {{component (bs-default @closeComponent (component "bs-modal/header/close")) onClick=@onClose}}
-      {{/if}}
-      {{#if (has-block)}}
-        {{yield}}
-      {{else}}
-        {{#component (bs-default @titleComponent (component "bs-modal/header/title"))}}{{@title}}{{/component}}
-      {{/if}}
-    {{/if}}
-  {{/if}}
-</div>
+  </div>
+{{/let}}
