@@ -2,7 +2,6 @@ import Component from '@glimmer/component';
 import Config from 'ember-bootstrap/config';
 import { isBlank, isPresent } from '@ember/utils';
 import arg from 'ember-bootstrap/utils/decorators/arg';
-import { localCopy } from 'tracked-toolbox';
 
 /**
   This component renders a `<div class="form-group">` element, with support for validation states and feedback icons (only for BS3).
@@ -58,7 +57,7 @@ export default class FormGroup extends Component {
    * @type string
    * @public
    */
-  @localCopy('args.validation') validation;
+  @arg validation;
 
   /**
    * [BS3 only] Whether to show validation state icons.
