@@ -213,8 +213,6 @@ export default class FormElement extends FormGroup {
    * @type string
    * @public
    */
-  @arg
-  label = null;
 
   /**
    * Controls label visibility by adding 'sr-only' class.
@@ -224,16 +222,6 @@ export default class FormElement extends FormGroup {
    * @default false
    * @public
    */
-
-  /**
-   * @property hasLabel
-   * @type boolean
-   * @readonly
-   * @private
-   */
-  get hasLabel() {
-    return isPresent(this.label);
-  }
 
   /**
    * The type of the control widget.

@@ -35,7 +35,7 @@
         )
       )
     )
-    hasLabel=this.hasLabel
+    hasLabel=(if @label true false)
     formElementId=this.formElementId
     horizontalLabelGridClass=@horizontalLabelGridClass
     errorsComponent=(component (bs-default @errorsComponent (component "bs-form/element/errors"))
