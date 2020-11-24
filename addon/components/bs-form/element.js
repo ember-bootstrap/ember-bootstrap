@@ -295,8 +295,6 @@ export default class FormElement extends FormGroup {
    * @property model
    * @public
    */
-  @arg
-  model = null;
 
   /**
    * Show a help text next to the control
@@ -327,18 +325,14 @@ export default class FormElement extends FormGroup {
    * @type {Array}
    * @public
    */
-  @arg
-  options = null;
 
   /**
-   * Property path (e.g. 'title' or 'related.name') to render the label of an selection option. See `options`.s
+   * Property path (e.g. 'title' or 'related.name') to render the label of an selection option. See `options`.
    *
    * @property optionLabelPath
    * @type {String}
    * @public
    */
-  @arg
-  optionLabelPath = null;
 
   /**
    * The array of error messages from the `model`'s validation.

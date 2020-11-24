@@ -107,8 +107,8 @@
         disabled=this.args._disabled
         readonly=this.args._readonly
         required=@required
-        options=this.options
-        optionLabelPath=this.optionLabelPath
+        options=@options
+        optionLabelPath=@optionLabelPath
         ariaDescribedBy=(if @helpText this.ariaDescribedBy)
         onChange=(action this.doChange)
         validationType=this.validation
