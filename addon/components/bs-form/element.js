@@ -422,8 +422,6 @@ export default class FormElement extends FormGroup {
    * @type String
    * @public
    */
-  @arg
-  size = null;
 
   /**
    * The array of validation messages (either errors or warnings) from either custom error/warnings or , if we are showing model validation messages, the model's validation
