@@ -1,15 +1,15 @@
-import { and, gt, notEmpty, or } from '@ember/object/computed';
-import { action, computed, get } from '@ember/object';
+import { tracked } from '@glimmer/tracking';
+import { action, get } from '@ember/object';
 import { assert, warn } from '@ember/debug';
 import { DEBUG } from '@glimmer/env';
-import { isBlank, typeOf } from '@ember/utils';
+import { isBlank, isPresent, typeOf } from '@ember/utils';
 import { A, isArray } from '@ember/array';
 import { getOwner } from '@ember/application';
 import FormGroup from 'ember-bootstrap/components/bs-form/group';
-import defaultValue from 'ember-bootstrap/utils/default-decorator';
 import { getOwnConfig, macroCondition } from '@embroider/macros';
 import { guidFor } from '@ember/object/internals';
 import { ref } from 'ember-ref-bucket';
+import arg from 'ember-bootstrap/utils/decorators/arg';
 
 /**
   Sub class of `Components.FormGroup` that adds automatic form layout markup and form validation features.
@@ -202,11 +202,6 @@ export default class FormElement extends FormGroup {
    */
   @ref('mainNode') _element = null;
 
-  @defaultValue
-  doNotShowValidationForEventTargets = macroCondition(getOwnConfig().isBS3)
-    ? ['.input-group-addon', '.input-group-btn']
-    : ['.input-group-append', '.input-group-prepend'];
-
   /**
    * Text to display within a `<label>` tag.
    *
@@ -218,8 +213,6 @@ export default class FormElement extends FormGroup {
    * @type string
    * @public
    */
-  @defaultValue
-  label = null;
 
   /**
    * Controls label visibility by adding 'sr-only' class.
@@ -229,17 +222,6 @@ export default class FormElement extends FormGroup {
    * @default false
    * @public
    */
-  @defaultValue
-  invisibleLabel = false;
-
-  /**
-   * @property hasLabel
-   * @type boolean
-   * @readonly
-   * @private
-   */
-  @notEmpty('label')
-  hasLabel;
 
   /**
    * The type of the control widget.
@@ -257,7 +239,7 @@ export default class FormElement extends FormGroup {
    * @default 'text'
    * @public
    */
-  @defaultValue
+  @arg
   controlType = 'text';
 
   /**
@@ -276,14 +258,14 @@ export default class FormElement extends FormGroup {
    * @public
    */
   get value() {
-    if (this.property && this.model) {
-      return get(this.model, this.property);
+    if (this.args.property && this.args.model) {
+      return get(this.args.model, this.args.property);
     }
     return this._value;
   }
 
   set value(value) {
-    assert('You cannot set both property and value on a form element', isBlank(this.property));
+    assert('You cannot set both property and value on a form element', isBlank(this.args.property));
 
     this._value = value;
   }
@@ -293,8 +275,7 @@ export default class FormElement extends FormGroup {
    * @type {null}
    * @private
    */
-  @defaultValue
-  _value = null;
+  @tracked _value = null;
 
   /**
    The property name of the form element's `model` (by default the `model` of its parent `Components.Form`) that this
@@ -307,8 +288,6 @@ export default class FormElement extends FormGroup {
    @type string
    @public
    */
-  @defaultValue
-  property = null;
 
   /**
    * The model used for validation. Defaults to the parent `Components.Form`'s `model`
@@ -316,8 +295,6 @@ export default class FormElement extends FormGroup {
    * @property model
    * @public
    */
-  @defaultValue
-  model = null;
 
   /**
    * Show a help text next to the control
@@ -326,8 +303,6 @@ export default class FormElement extends FormGroup {
    * @type {string}
    * @public
    */
-  @defaultValue
-  helpText = null;
 
   /**
    * Only if there is a validator, this property makes all errors to be displayed at once
@@ -338,7 +313,7 @@ export default class FormElement extends FormGroup {
    * @public
    * @type {Boolean}
    */
-  @defaultValue
+  @arg
   showMultipleErrors = false;
 
   /**
@@ -350,27 +325,14 @@ export default class FormElement extends FormGroup {
    * @type {Array}
    * @public
    */
-  @defaultValue
-  options = null;
 
   /**
-   * Property path (e.g. 'title' or 'related.name') to render the label of an selection option. See `options`.s
+   * Property path (e.g. 'title' or 'related.name') to render the label of an selection option. See `options`.
    *
    * @property optionLabelPath
    * @type {String}
    * @public
    */
-  @defaultValue
-  optionLabelPath = null;
-
-  /**
-   * @property hasHelpText
-   * @type boolean
-   * @readonly
-   * @private
-   */
-  @(notEmpty('helpText').readOnly())
-  hasHelpText;
 
   /**
    * The array of error messages from the `model`'s validation.
@@ -379,8 +341,10 @@ export default class FormElement extends FormGroup {
    * @type array
    * @protected
    */
-  @defaultValue
-  errors = null;
+  // This shouldn't be an argument. It's only an argument because tests rely on
+  // setting it as an argument. See https://github.com/kaliber5/ember-bootstrap/issues/1338
+  // for details.
+  @arg errors;
 
   /**
    * @property hasErrors
@@ -388,8 +352,9 @@ export default class FormElement extends FormGroup {
    * @readonly
    * @private
    */
-  @gt('errors.length', 0)
-  hasErrors;
+  get hasErrors() {
+    return Array.isArray(this.errors) && this.errors.length > 0;
+  }
 
   /**
    * The array of warning messages from the `model`'s validation.
@@ -398,8 +363,10 @@ export default class FormElement extends FormGroup {
    * @type array
    * @protected
    */
-  @defaultValue
-  warnings = null;
+  // This shouldn't be an argument. It's only an argument because tests rely on
+  // setting it as an argument. See https://github.com/kaliber5/ember-bootstrap/issues/1338
+  // for details.
+  @arg warnings;
 
   /**
    * @property hasWarnings
@@ -407,8 +374,9 @@ export default class FormElement extends FormGroup {
    * @readonly
    * @private
    */
-  @gt('warnings.length', 0)
-  hasWarnings;
+  get hasWarnings() {
+    return Array.isArray(this.warnings) && this.warnings.length > 0;
+  }
 
   /**
    * Show a custom error message that does not come from the model's validation. Will be immediately shown, regardless
@@ -418,8 +386,6 @@ export default class FormElement extends FormGroup {
    * @type string
    * @public
    */
-  @defaultValue
-  customError = null;
 
   /**
    * @property hasCustomError
@@ -427,8 +393,9 @@ export default class FormElement extends FormGroup {
    * @readonly
    * @private
    */
-  @notEmpty('customError')
-  hasCustomError;
+  get hasCustomError() {
+    return isPresent(this.args.customError);
+  }
 
   /**
    * Show a custom warning message that does not come from the model's validation. Will be immediately shown, regardless
@@ -439,8 +406,6 @@ export default class FormElement extends FormGroup {
    * @type string
    * @public
    */
-  @defaultValue
-  customWarning = null;
 
   /**
    * @property hasCustomWarning
@@ -448,8 +413,9 @@ export default class FormElement extends FormGroup {
    * @readonly
    * @private
    */
-  @notEmpty('customWarning')
-  hasCustomWarning;
+  get hasCustomWarning() {
+    return isPresent(this.args.customWarning);
+  }
 
   /**
    * Property for size styling, set to 'lg', 'sm' or 'xs' (the latter only for BS3)
@@ -458,8 +424,6 @@ export default class FormElement extends FormGroup {
    * @type String
    * @public
    */
-  @defaultValue
-  size = null;
 
   /**
    * The array of validation messages (either errors or warnings) from either custom error/warnings or , if we are showing model validation messages, the model's validation
@@ -468,26 +432,15 @@ export default class FormElement extends FormGroup {
    * @type array
    * @private
    */
-  @computed(
-    'hasCustomError',
-    'customError',
-    'hasErrors',
-    'hasCustomWarning',
-    'customWarning',
-    'hasWarnings',
-    'errors.[]',
-    'warnings.[]',
-    'showModelValidation'
-  )
   get validationMessages() {
     if (this.hasCustomError) {
-      return A([this.customError]);
+      return A([this.args.customError]);
     }
     if (this.hasErrors && this.showModelValidation) {
       return A(this.errors);
     }
     if (this.hasCustomWarning) {
-      return A([this.customWarning]);
+      return A([this.args.customWarning]);
     }
     if (this.hasWarnings && this.showModelValidation) {
       return A(this.warnings);
@@ -501,8 +454,9 @@ export default class FormElement extends FormGroup {
    * @readonly
    * @private
    */
-  @gt('validationMessages.length', 0)
-  hasValidationMessages;
+  get hasValidationMessages() {
+    return Array.isArray(this.validationMessages) && this.validationMessages.length > 0;
+  }
 
   /**
    * @property hasValidator
@@ -510,7 +464,10 @@ export default class FormElement extends FormGroup {
    * @default false
    * @protected
    */
-  @defaultValue
+  // This shouldn't be an argument. It's only an argument because tests rely on
+  // setting it as an argument. See https://github.com/kaliber5/ember-bootstrap/issues/1338
+  // for details.
+  @arg
   hasValidator = false;
 
   /**
@@ -521,8 +478,7 @@ export default class FormElement extends FormGroup {
    * @default false
    * @protected
    */
-  @defaultValue
-  isValidating = false;
+  @tracked isValidating = false;
 
   /**
    * If `true` form validation markup is rendered (requires a validatable `model`).
@@ -532,8 +488,9 @@ export default class FormElement extends FormGroup {
    * @default false
    * @private
    */
-  @or('showOwnValidation', 'showAllValidations', 'hasCustomError', 'hasCustomWarning')
-  showValidation;
+  get showValidation() {
+    return this.showOwnValidation || this.showAllValidations || this.hasCustomError || this.hasCustomWarning;
+  }
 
   /**
    * @property showOwnValidation
@@ -541,8 +498,7 @@ export default class FormElement extends FormGroup {
    * @default false
    * @private
    */
-  @defaultValue
-  showOwnValidation = false;
+  @tracked showOwnValidation = false;
 
   /**
    * @property showAllValidations
@@ -550,16 +506,18 @@ export default class FormElement extends FormGroup {
    * @default false
    * @private
    */
-  @computed
-  get showAllValidations() {
-    return false;
-  }
+  @arg
+  showAllValidations = false;
 
-  set showAllValidations(value) {
-    if (value === false) {
-      this.set('showOwnValidation', false);
+  /*
+   * Resets `showOwnValidation` if `@showAllValidatoins` argument is changed to `false`.
+   * Must be called whenever `@showAllValidations` argument changes.
+   */
+  @action
+  handleShowAllValidationsChange() {
+    if (this.args.showAllValidations === false) {
+      this.showOwnValidation = false;
     }
-    return value;
   }
 
   /**
@@ -568,8 +526,9 @@ export default class FormElement extends FormGroup {
    * @readonly
    * @private
    */
-  @or('showOwnValidation', 'showAllValidations')
-  showModelValidation;
+  get showModelValidation() {
+    return this.showOwnValidation || this.showAllValidations;
+  }
 
   /**
    * @property showValidationMessages
@@ -577,8 +536,9 @@ export default class FormElement extends FormGroup {
    * @readonly
    * @private
    */
-  @and('showValidation', 'hasValidationMessages')
-  showValidationMessages;
+  get showValidationMessages() {
+    return this.showValidation && this.hasValidationMessages;
+  }
 
   /**
    * Event or list of events which enable form validation markup rendering.
@@ -589,8 +549,8 @@ export default class FormElement extends FormGroup {
    * @default ['focusout']
    * @public
    */
-  @defaultValue
-  showValidationOn = null;
+  @arg
+  showValidationOn = ['focusOut'];
 
   /**
    * @property _showValidationOn
@@ -598,7 +558,6 @@ export default class FormElement extends FormGroup {
    * @readonly
    * @private
    */
-  @computed('showValidationOn.[]')
   get _showValidationOn() {
     let showValidationOn = this.showValidationOn;
 
@@ -642,7 +601,7 @@ export default class FormElement extends FormGroup {
       return;
     }
 
-    this.set('showOwnValidation', true);
+    this.showOwnValidation = true;
   }
 
   /**
@@ -660,6 +619,10 @@ export default class FormElement extends FormGroup {
    * @type ?array
    * @public
    */
+  @arg
+  doNotShowValidationForEventTargets = macroCondition(getOwnConfig().isBS3)
+    ? ['.input-group-addon', '.input-group-btn']
+    : ['.input-group-append', '.input-group-prepend'];
 
   /**
    * The validation ("error" (BS3)/"danger" (BS4), "warning", or "success") or null if no validation is to be shown. Automatically computed from the
@@ -670,19 +633,8 @@ export default class FormElement extends FormGroup {
    * @type string
    * @private
    */
-  @computed(
-    'hasCustomError',
-    'hasErrors',
-    'hasCustomWarning',
-    'hasWarnings',
-    'hasValidator',
-    'showValidation',
-    'showModelValidation',
-    'isValidating',
-    '_disabled'
-  )
   get validation() {
-    if (!this.showValidation || !this.hasValidator || this.isValidating || this._disabled) {
+    if (!this.showValidation || !this.hasValidator || this.isValidating || this.args._disabled) {
       return null;
     } else if (this.showModelValidation) {
       /* The display of model validation messages has been triggered */
@@ -704,7 +656,6 @@ export default class FormElement extends FormGroup {
    * @type boolean
    * @public
    */
-  @computed('customControlComponent', 'controlType')
   get useIcons() {
     let { controlType } = this;
     return (
@@ -738,8 +689,6 @@ export default class FormElement extends FormGroup {
    * @type string
    * @public
    */
-  @defaultValue
-  horizontalLabelGridClass = null;
 
   _elementId = guidFor(this);
 
@@ -776,7 +725,6 @@ export default class FormElement extends FormGroup {
    * @type {String}
    * @private
    */
-  @computed('controlType')
   get customControlComponent() {
     const controlType = this.controlType;
     const componentName = `bs-form/element/control/${controlType}`;
@@ -819,7 +767,6 @@ export default class FormElement extends FormGroup {
    * @method setupValidations
    * @private
    */
-  setupValidations() {}
 
   /**
    * The action is called whenever the input value is changed, e.g. by typing text
@@ -830,7 +777,6 @@ export default class FormElement extends FormGroup {
    * @param {String} property The value of `property`
    * @public
    */
-  onChange() {}
 
   /**
    * Private duplicate of onChange event used for internal state handling between form and it's elements.
@@ -838,15 +784,12 @@ export default class FormElement extends FormGroup {
    * @event _onChange
    * @private
    */
-  _onChange() {}
 
-  init() {
-    super.init(...arguments);
-    if (this.showValidationOn === null) {
-      this.set('showValidationOn', ['focusOut']);
-    }
-    if (!isBlank(this.property)) {
-      this.setupValidations();
+  constructor() {
+    super(...arguments);
+
+    if (!isBlank(this.args.property)) {
+      this.setupValidations?.();
     }
 
     // deprecate arguments used for attribute bindings only
@@ -905,14 +848,9 @@ export default class FormElement extends FormGroup {
           `  </BsForm>\n` +
           `A codemod is available to help with the required migration. See https://github.com/kaliber5/ember-bootstrap-codemods/blob/master/transforms/deprecated-attribute-arguments/README.md`;
 
-        warn(
-          warningMessage,
-          // eslint-disable-next-line ember/no-attrs-in-components
-          !Object.keys(this.attrs).includes(argument),
-          {
-            id: `ember-bootstrap.removed-argument.form-element#${argument}`,
-          }
-        );
+        warn(warningMessage, !Object.keys(this.args).includes(argument), {
+          id: `ember-bootstrap.removed-argument.form-element#${argument}`,
+        });
       });
     }
   }
@@ -962,8 +900,8 @@ export default class FormElement extends FormGroup {
 
   @action
   doChange(value) {
-    let { onChange, model, property, _onChange } = this;
-    onChange(value, model, property);
-    _onChange();
+    let { onChange, model, property, _onChange } = this.args;
+    onChange?.(value, model, property);
+    _onChange?.();
   }
 }

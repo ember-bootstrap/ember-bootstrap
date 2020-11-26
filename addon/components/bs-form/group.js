@@ -1,11 +1,7 @@
-import { tagName } from '@ember-decorators/component';
-import Component from '@ember/component';
-import { computed } from '@ember/object';
-import { and, equal, notEmpty } from '@ember/object/computed';
+import Component from '@glimmer/component';
 import Config from 'ember-bootstrap/config';
-import { isBlank } from '@ember/utils';
-import sizeClass from 'ember-bootstrap/utils/cp/size-class';
-import defaultValue from 'ember-bootstrap/utils/default-decorator';
+import { isBlank, isPresent } from '@ember/utils';
+import arg from 'ember-bootstrap/utils/decorators/arg';
 
 /**
   This component renders a `<div class="form-group">` element, with support for validation states and feedback icons (only for BS3).
@@ -29,7 +25,6 @@ import defaultValue from 'ember-bootstrap/utils/default-decorator';
   @extends Ember.Component
   @public
 */
-@tagName('')
 export default class FormGroup extends Component {
   /**
    * @property classTypePrefix
@@ -46,8 +41,9 @@ export default class FormGroup extends Component {
    * @private
    * @readonly
    */
-  @(notEmpty('validation').readOnly())
-  hasValidation;
+  get hasValidation() {
+    return isPresent(this.validation);
+  }
 
   /**
    * [BS3 only] Set to a validation state to render the form-group with a validation style.
@@ -61,6 +57,7 @@ export default class FormGroup extends Component {
    * @type string
    * @public
    */
+  @arg validation;
 
   /**
    * [BS3 only] Whether to show validation state icons.
@@ -71,7 +68,7 @@ export default class FormGroup extends Component {
    * @default true
    * @public
    */
-  @defaultValue
+  @arg
   useIcons = true;
 
   /**
@@ -82,8 +79,9 @@ export default class FormGroup extends Component {
    * @private
    * @readonly
    */
-  @(and('hasValidation', 'useIcons', 'hasIconForValidationState').readOnly())
-  hasFeedback;
+  get hasFeedback() {
+    return this.hasValidation && this.useIcons && this.hasIconForValidationState;
+  }
 
   /**
    * [BS3 only] The icon classes to be used for a feedback icon in a "success" validation state.
@@ -105,7 +103,7 @@ export default class FormGroup extends Component {
    * @default 'glyphicon glyphicon-ok'
    * @public
    */
-  @defaultValue
+  @arg
   successIcon = Config.formValidationSuccessIcon;
 
   /**
@@ -127,7 +125,7 @@ export default class FormGroup extends Component {
    * @type string
    * @public
    */
-  @defaultValue
+  @arg
   errorIcon = Config.formValidationErrorIcon;
 
   /**
@@ -149,7 +147,7 @@ export default class FormGroup extends Component {
    * @type string
    * @public
    */
-  @defaultValue
+  @arg
   warningIcon = Config.formValidationWarningIcon;
 
   /**
@@ -179,23 +177,8 @@ export default class FormGroup extends Component {
    * @type string
    * @public
    */
-  @defaultValue
+  @arg
   infoIcon = Config.formValidationInfoIcon;
-
-  /**
-   * [BS3 only] Property for size styling, set to 'lg', 'sm' or 'xs'
-   *
-   * Also see the [Bootstrap docs](https://getbootstrap.com/docs/3.4/css/#forms-control-sizes)
-   *
-   * @property size
-   * @type String
-   * @public
-   */
-  @defaultValue
-  size = null;
-
-  @sizeClass('form-group', 'size')
-  sizeClass;
 
   /**
    * [BS3 only]
@@ -205,10 +188,9 @@ export default class FormGroup extends Component {
    * @readonly
    * @private
    */
-  @(computed('validation').readOnly())
   get iconName() {
     let validation = this.validation || 'success';
-    return this.get(`${validation}Icon`);
+    return this[`${validation}Icon`];
   }
 
   /**
@@ -219,8 +201,9 @@ export default class FormGroup extends Component {
    * @readonly
    * @private
    */
-  @(notEmpty('iconName').readOnly())
-  hasIconForValidationState;
+  get hasIconForValidationState() {
+    return isPresent(this.iconName);
+  }
 
   /**
    * [BS3 only]
@@ -230,19 +213,8 @@ export default class FormGroup extends Component {
    * @readonly
    * @private
    */
-  @(computed('validation').readOnly())
   get validationClass() {
     let validation = this.validation;
     return !isBlank(validation) ? `has-${validation}` : undefined;
   }
-
-  /**
-   * Indicates whether the form type equals `horizontal`
-   *
-   * @property isHorizontal
-   * @type boolean
-   * @private
-   */
-  @(equal('formLayout', 'horizontal').readOnly())
-  isHorizontal;
 }
