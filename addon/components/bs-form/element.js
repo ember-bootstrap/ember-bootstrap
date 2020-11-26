@@ -341,6 +341,9 @@ export default class FormElement extends FormGroup {
    * @type array
    * @protected
    */
+  // This shouldn't be an argument. It's only an argument because tests rely on
+  // setting it as an argument. See https://github.com/kaliber5/ember-bootstrap/issues/1338
+  // for details.
   @arg errors;
 
   /**
@@ -360,6 +363,9 @@ export default class FormElement extends FormGroup {
    * @type array
    * @protected
    */
+  // This shouldn't be an argument. It's only an argument because tests rely on
+  // setting it as an argument. See https://github.com/kaliber5/ember-bootstrap/issues/1338
+  // for details.
   @arg warnings;
 
   /**
@@ -380,8 +386,6 @@ export default class FormElement extends FormGroup {
    * @type string
    * @public
    */
-  @arg
-  customError = null;
 
   /**
    * @property hasCustomError
@@ -390,7 +394,7 @@ export default class FormElement extends FormGroup {
    * @private
    */
   get hasCustomError() {
-    return isPresent(this.customError);
+    return isPresent(this.args.customError);
   }
 
   /**
@@ -402,8 +406,6 @@ export default class FormElement extends FormGroup {
    * @type string
    * @public
    */
-  @arg
-  customWarning = null;
 
   /**
    * @property hasCustomWarning
@@ -412,7 +414,7 @@ export default class FormElement extends FormGroup {
    * @private
    */
   get hasCustomWarning() {
-    return isPresent(this.customWarning);
+    return isPresent(this.args.customWarning);
   }
 
   /**
@@ -432,13 +434,13 @@ export default class FormElement extends FormGroup {
    */
   get validationMessages() {
     if (this.hasCustomError) {
-      return A([this.customError]);
+      return A([this.args.customError]);
     }
     if (this.hasErrors && this.showModelValidation) {
       return A(this.errors);
     }
     if (this.hasCustomWarning) {
-      return A([this.customWarning]);
+      return A([this.args.customWarning]);
     }
     if (this.hasWarnings && this.showModelValidation) {
       return A(this.warnings);
@@ -462,6 +464,9 @@ export default class FormElement extends FormGroup {
    * @default false
    * @protected
    */
+  // This shouldn't be an argument. It's only an argument because tests rely on
+  // setting it as an argument. See https://github.com/kaliber5/ember-bootstrap/issues/1338
+  // for details.
   @arg
   hasValidator = false;
 
