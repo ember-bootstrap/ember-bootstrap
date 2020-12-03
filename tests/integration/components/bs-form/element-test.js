@@ -231,10 +231,10 @@ module('Integration | Component | bs-form/element', function (hooks) {
       assert.dom(this.element.querySelectorAll('label')[1]).hasText('1: bar');
     });
 
-    testBS3('Block mode allows to customize label for each radio input if used together with inline', async function (
-      assert
-    ) {
-      await render(hbs`
+    testBS3(
+      'Block mode allows to customize label for each radio input if used together with inline',
+      async function (assert) {
+        await render(hbs`
         <BsForm::Element @controlType="radio" @options={{simpleOptions}} as |Element|>
           <Element.control @inline={{true}} as |option index|>
             {{index}}: {{option}}
@@ -242,9 +242,10 @@ module('Integration | Component | bs-form/element', function (hooks) {
         </BsForm::Element>
       `);
 
-      assert.dom(this.element.querySelectorAll('label')[0]).hasText('0: foo');
-      assert.dom(this.element.querySelectorAll('label')[1]).hasText('1: bar');
-    });
+        assert.dom(this.element.querySelectorAll('label')[0]).hasText('0: foo');
+        assert.dom(this.element.querySelectorAll('label')[1]).hasText('1: bar');
+      }
+    );
 
     testBS3('has correct markup', async function (assert) {
       await render(hbs`<BsForm::Element @controlType="radio" @options={{simpleOptions}} />`);
