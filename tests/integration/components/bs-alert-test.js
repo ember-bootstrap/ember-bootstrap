@@ -34,22 +34,23 @@ module('Integration | Component | bs-alert', function (hooks) {
     assert.dom('*').hasText('', 'alert has no content');
   });
 
-  testRequiringTransitions('dismissible alert can be hidden by clicking close button with fade=true', async function (
-    assert
-  ) {
-    await render(hbs`<BsAlert @type="success" @fade={{true}}>Test</BsAlert>`);
+  testRequiringTransitions(
+    'dismissible alert can be hidden by clicking close button with fade=true',
+    async function (assert) {
+      await render(hbs`<BsAlert @type="success" @fade={{true}}>Test</BsAlert>`);
 
-    assert.dom('button.close').exists({ count: 1 }, 'alert has close button');
-    let promise = click('button.close');
-    await waitFor('.alert:not(.in)');
+      assert.dom('button.close').exists({ count: 1 }, 'alert has close button');
+      let promise = click('button.close');
+      await waitFor('.alert:not(.in)');
 
-    assert.dom('.alert').exists('alert has alert class');
-    assert.dom('.alert').hasNoClass('in', 'alert has no in class');
+      assert.dom('.alert').exists('alert has alert class');
+      assert.dom('.alert').hasNoClass('in', 'alert has no in class');
 
-    await promise;
-    assert.dom('.alert').doesNotExist('alert has no alert class');
-    assert.dom('*').hasText('', 'alert has no content');
-  });
+      await promise;
+      assert.dom('.alert').doesNotExist('alert has no alert class');
+      assert.dom('*').hasText('', 'alert has no content');
+    }
+  );
 
   test('alert can be hidden by setting visible property', async function (assert) {
     this.set('visible', true);

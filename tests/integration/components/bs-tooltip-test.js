@@ -213,19 +213,20 @@ module('Integration | Component | bs-tooltip', function (hooks) {
     assert.dom('.tooltip').exists({ count: 1 }, 'tooltip is visible');
   });
 
-  testRequiringFocus('it keeps showing when leaving the mouse but is still focused [fade=false]', async function (
-    assert
-  ) {
-    await render(hbs`<a href="#" id="target"><BsTooltip @title="Dummy" @fade={{false}} /></a>`);
+  testRequiringFocus(
+    'it keeps showing when leaving the mouse but is still focused [fade=false]',
+    async function (assert) {
+      await render(hbs`<a href="#" id="target"><BsTooltip @title="Dummy" @fade={{false}} /></a>`);
 
-    await focus('#target');
-    assert.dom('.tooltip').exists({ count: 1 }, 'tooltip is visible');
+      await focus('#target');
+      assert.dom('.tooltip').exists({ count: 1 }, 'tooltip is visible');
 
-    await triggerEvent('#target', 'mouseenter');
-    assert.dom('.tooltip').exists({ count: 1 }, 'tooltip is visible');
-    await triggerEvent('#target', 'mouseleave');
-    assert.dom('.tooltip').exists({ count: 1 }, 'tooltip is visible');
-  });
+      await triggerEvent('#target', 'mouseenter');
+      assert.dom('.tooltip').exists({ count: 1 }, 'tooltip is visible');
+      await triggerEvent('#target', 'mouseleave');
+      assert.dom('.tooltip').exists({ count: 1 }, 'tooltip is visible');
+    }
+  );
 
   test("Renders in wormhole's default destination if renderInPlace is not set", async function (assert) {
     this.set('show', false);
