@@ -1,3 +1,17 @@
+## v4.5.0 (2020-12-03)
+
+#### Features
+* [#1339](https://github.com/kaliber5/ember-bootstrap/pull/1339) Refactor <BsForm::Group> and <BsForm::Element> to glimmer component and tracked properties ([@jelhan](https://github.com/jelhan))
+
+#### Internal
+* [#1349](https://github.com/kaliber5/ember-bootstrap/pull/1349) Allow Embroider tests to fail ([@simonihmig](https://github.com/simonihmig))
+* [#1340](https://github.com/kaliber5/ember-bootstrap/pull/1340) Fix FastBoot tests ([@simonihmig](https://github.com/simonihmig))
+
+#### Committers: 3
+- Jeldrik Hanschke ([@jelhan](https://github.com/jelhan))
+- Simon Ihmig ([@simonihmig](https://github.com/simonihmig))
+- [@dependabot-preview[bot]](https://github.com/apps/dependabot-preview)
+
 ## v4.4.0 (2020-10-30)
 
 #### Features
