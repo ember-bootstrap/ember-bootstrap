@@ -1075,10 +1075,10 @@
     resolve "^1.8.1"
     semver "^7.3.2"
 
-"@embroider/test-setup@^0.28.0":
-  version "0.28.0"
-  resolved "https://registry.yarnpkg.com/@embroider/test-setup/-/test-setup-0.28.0.tgz#c1504cc346607d3bbaffa9b25d9d0900ae455d4d"
-  integrity sha512-tTcbqQNtPHK57ExkMkXNuwVfrKcggcn7JB87PqPDNZ3POHqdtVKpOJWENM5p4d2PFSrYyQ7XAJW2mbtZPzuDLQ==
+"@embroider/test-setup@^0.33.0":
+  version "0.33.0"
+  resolved "https://registry.yarnpkg.com/@embroider/test-setup/-/test-setup-0.33.0.tgz#a5b6d1a88cf4e44506fb161072ed942f2d942149"
+  integrity sha512-a7zn6T805N53OSNKH0esuGq3WFD7k02wil83RK0a6/A6+cMD0A428L32VNU2Pi0wthXTHCKWJKisQDN8BnTehg==
   dependencies:
     lodash "^4.17.20"
     resolve "^1.17.0"
