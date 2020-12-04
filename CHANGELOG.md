@@ -1,5 +1,8 @@
 ## v4.5.0 (2020-12-03)
 
+#### Breaking
+* [Ember Bootstrap Changeset Validations](https://github.com/kaliber5/ember-bootstrap-changeset-validations) v3 relied on private API, which was changed in this release. If you are using it, you must update to its [v4 release](https://github.com/kaliber5/ember-bootstrap-changeset-validations/releases/tag/v4.0.0).
+
 #### Features
 * [#1339](https://github.com/kaliber5/ember-bootstrap/pull/1339) Refactor <BsForm::Group> and <BsForm::Element> to glimmer component and tracked properties ([@jelhan](https://github.com/jelhan))
 
