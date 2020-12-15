@@ -182,6 +182,7 @@ export default class Dropdown extends Component {
    * @type {string}
    * @public
    */
+  @defaultValue
   htmlTag = 'div';
 
   /**
