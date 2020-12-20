@@ -396,7 +396,7 @@ export default class Modal extends Component {
   @action
   close() {
     if (this.args.onHide?.() !== false) {
-      this.isOpen = false;
+      this.hide();
     }
   }
 
@@ -473,7 +473,7 @@ export default class Modal extends Component {
     if (!this._isOpen) {
       return;
     }
-    this._isOpen = false;
+    this.isOpen = false;
 
     this.resize();
     this.showModal = false;
@@ -685,7 +685,7 @@ export default class Modal extends Component {
       return;
     }
 
-    if (this.isOpen) {
+    if (this.args.open !== false) {
       this.show();
     } else {
       this.hide();
