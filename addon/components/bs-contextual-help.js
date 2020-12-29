@@ -690,11 +690,16 @@ export default class ContextualHelp extends Component {
       }
     }
     this._parent = parent;
-    this.triggerTargetElement = this.getTriggerTargetElement();
-    this.addListeners();
-    if (this.visible) {
-      next(this, this.show, true);
-    }
+
+    // Look for target element after rendering has finished, in case the target DOM element is rendered *after* us
+    // see https://github.com/kaliber5/ember-bootstrap/issues/1329
+    schedule('afterRender', () => {
+      this.triggerTargetElement = this.getTriggerTargetElement();
+      this.addListeners();
+      if (this.visible) {
+        next(this, this.show, true);
+      }
+    });
   }
 
   @action
