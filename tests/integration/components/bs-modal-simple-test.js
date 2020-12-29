@@ -319,6 +319,30 @@ module('Integration | Component | bs-modal-simple', function (hooks) {
     assert.dom('input[data-test-autofocus]').isFocused();
   });
 
+  testRequiringFocus('modal is focused when open', async function (assert) {
+    await render(hbs`
+      <BsModalSimple @title="Simple Dialog" @fade={{false}} @open={{true}}>
+        Hallo
+      </BsModalSimple>
+    `);
+
+    assert.dom('.modal-content').isFocused();
+  });
+
+  testRequiringFocus('modal is focused when opened later', async function (assert) {
+    this.set('open', false);
+    await render(hbs`
+      <BsModalSimple @title="Simple Dialog" @fade={{false}} @open={{open}}>
+        Hallo
+      </BsModalSimple>
+    `);
+
+    this.set('open', true);
+    await settled();
+
+    assert.dom('.modal-content').isFocused();
+  });
+
   // unfortunately it seems we cannot simulate the user moving focus by tabbing by triggering key events :(
   // keeping this around in case a working solution pops up...
   skip('focus is trapped in modal', async function (assert) {
