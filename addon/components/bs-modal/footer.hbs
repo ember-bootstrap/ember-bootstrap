@@ -1,13 +1,32 @@
-<form class="modal-footer" ...attributes {{on "submit" this.handleSubmit}}>
+<form class="modal-footer" ...attributes {{on "submit" (bs-default @onSubmit (bs-noop))}}>
   {{#if hasBlock}}
     {{yield}}
   {{else}}
-    {{#if this.hasSubmitButton}}
-      {{#component this.buttonComponent onClick=@onClose}}{{this.closeTitle}}{{/component}}
-      {{#component this.buttonComponent type=this.submitButtonType onClick=@onSubmit _disabled=this.submitDisabled}}{{@submitTitle}}{{/component}}
+    {{#if @submitTitle}}
+      {{#component
+        (bs-default @buttonComponent (component "bs-button"))
+        onClick=@onClose
+      }}
+        {{bs-default @closeTitle "Ok"}}
+      {{/component}}
+      {{#let (bs-default @buttonComponent (component "bs-button")) as |Button|}}
+        <Button
+          @type={{bs-default @submitButtonType "primary"}}
+          @onClick={{@onSubmit}}
+          disabled={{bs-default @submitDisabled false}}
+        >
+        {{@submitTitle}}
+        </Button>
+      {{/let}}
     {{else}}
-      {{#component this.buttonComponent type="primary" onClick=@onClose}}{{this.closeTitle}}{{/component}}
+      {{#component
+        (bs-default @buttonComponent (component "bs-button"))
+        type="primary"
+        onClick=@onClose
+      }}
+        {{bs-default @closeTitle "Ok"}}
+      {{/component}}
     {{/if}}
   {{/if}}
-  
+
 </form>

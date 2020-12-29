@@ -1,14 +1,13 @@
 import { module } from 'qunit';
 import { setupRenderingTest, skip } from 'ember-qunit';
-import { render, settled, click, triggerKeyEvent, waitUntil, focus } from '@ember/test-helpers';
-import { run } from '@ember/runloop';
+import { click, focus, render, settled, triggerKeyEvent, waitUntil } from '@ember/test-helpers';
 import {
+  defaultButtonClass,
   test,
   testBS4,
   testRequiringFocus,
-  defaultButtonClass,
-  visibilityClass,
   testRequiringTransitions,
+  visibilityClass,
 } from '../../helpers/bootstrap';
 import hbs from 'htmlbars-inline-precompile';
 import setupNoDeprecations from '../../helpers/setup-no-deprecations';
@@ -97,12 +96,15 @@ module('Integration | Component | bs-modal-simple', function (hooks) {
     );
 
     assert.dom('.modal').doesNotExist('Modal is hidden');
-    run(() => this.set('open', true));
+    this.set('open', true);
+    await settled();
 
     assert.dom('.modal').hasClass(visibilityClass(), 'Modal is visible');
     assert.dom('.modal').isVisible();
 
-    run(() => this.set('open', false));
+    this.set('open', false);
+    await settled();
+
     assert.dom('.modal').doesNotExist('Modal is hidden');
   });
 
@@ -218,6 +220,7 @@ module('Integration | Component | bs-modal-simple', function (hooks) {
     );
 
     this.set('open', true);
+    await settled();
 
     assert.ok(showSpy.calledOnce, 'onShow action fired after setting open=true');
     assert.ok(shownSpy.calledOnce, 'onShown action fired after setting open=true');

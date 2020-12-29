@@ -13,12 +13,12 @@
       {{else}}
         {{#component (bs-default @titleComponent (component "bs-modal/header/title"))}}{{@title}}{{/component}}
       {{/if}}
-      {{#if this.closeButton}}
+      {{#if (bs-default @closeButton true)}}
         {{component (bs-default @closeComponent (component "bs-modal/header/close")) onClick=@onClose}}
       {{/if}}
     {{/if}}
     {{#if (macroCondition (macroGetOwnConfig "isBS3"))}}
-      {{#if this.closeButton}}
+      {{#if (bs-default @closeButton true)}}
         {{component (bs-default @closeComponent (component "bs-modal/header/close")) onClick=@onClose}}
       {{/if}}
       {{#if hasBlock}}

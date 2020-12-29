@@ -1,21 +1,19 @@
-import { tagName } from '@ember-decorators/component';
-import { action, computed } from '@ember/object';
-import { readOnly } from '@ember/object/computed';
+import { action } from '@ember/object';
 import { isBlank } from '@ember/utils';
-import Component from '@ember/component';
+import Component from '@glimmer/component';
 import { next } from '@ember/runloop';
 import deprecateSubclassing from 'ember-bootstrap/utils/deprecate-subclassing';
 import { ref } from 'ember-ref-bucket';
+import { tracked } from '@glimmer/tracking';
 
 /**
  Internal component for modal's markup and event handling. Should not be used directly.
 
  @class ModalDialog
  @namespace Components
- @extends Ember.Component
+ @extends Glimmer.Component
  @private
  */
-@tagName('')
 @deprecateSubclassing
 export default class ModalDialog extends Component {
   /**
@@ -23,9 +21,6 @@ export default class ModalDialog extends Component {
    * @type null | HTMLElement
    */
   @ref('mainNode') _element = null;
-
-  @readOnly('titleId')
-  ariaLabelledby;
 
   /**
    * Name of the size class
@@ -35,9 +30,8 @@ export default class ModalDialog extends Component {
    * @readOnly
    * @private
    */
-  @(computed('size').readOnly())
   get sizeClass() {
-    let size = this.size;
+    let size = this.args.size;
     return isBlank(size) ? null : `modal-${size}`;
   }
 
@@ -49,6 +43,7 @@ export default class ModalDialog extends Component {
    * @default null
    * @private
    */
+  @tracked
   titleId = null;
 
   /**
@@ -74,7 +69,7 @@ export default class ModalDialog extends Component {
         }
       }
     }
-    this.set('titleId', nodeId);
+    this.titleId = nodeId;
   }
 
   @action
@@ -109,37 +104,36 @@ export default class ModalDialog extends Component {
    * @event onClose
    * @public
    */
-  onClose() {}
 
   @action
   handleKeyDown(e) {
     let code = e.keyCode || e.which;
-    if (code === 27 && this.keyboard) {
-      this.onClose();
+    if (code === 27 && this.args.keyboard) {
+      this.args.onClose?.();
     }
   }
 
   @action
   handleClick(e) {
     if (this.ignoreBackdropClick) {
-      this.set('ignoreBackdropClick', false);
+      this.ignoreBackdropClick = false;
       return;
     }
-    if (e.target !== this._element || !this.backdropClose) {
+    if (e.target !== this._element || !this.args.backdropClose) {
       return;
     }
-    this.onClose();
+    this.args.onClose?.();
   }
 
   @action
   handleMouseDown(e) {
-    this.set('mouseDownElement', e.target);
+    this.mouseDownElement = e.target;
   }
 
   @action
   handleMouseUp(e) {
     if (this.mouseDownElement !== this._element && e.target === this._element) {
-      this.set('ignoreBackdropClick', true);
+      this.ignoreBackdropClick = true;
     }
   }
 }

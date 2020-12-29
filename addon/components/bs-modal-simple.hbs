@@ -1,24 +1,24 @@
 <BsModal
-  @open={{this.open}}
-  @fade={{this.fade}}
-  @backdrop={{this.backdrop}}
-  @keyboard={{this.keyboard}}
-  @position={{this.position}}
-  @scrollable={{this.scrollable}}
-  @size={{this.size}}
-  @backdropClose={{this.backdropClose}}
-  @renderInPlace={{this.renderInPlace}}
-  @transitionDuration={{this.transitionDuration}}
-  @backdropTransitionDuration={{this.backdropTransitionDuration}}
-  @onSubmit={{this.onSubmit}}
-  @onHide={{this.onHide}}
-  @onHidden={{this.onHidden}}
-  @onShow={{this.onShow}}
-  @onShown={{this.onShown}}
+  @open={{@open}}
+  @fade={{@fade}}
+  @backdrop={{@backdrop}}
+  @keyboard={{@keyboard}}
+  @position={{@position}}
+  @scrollable={{@scrollable}}
+  @size={{@size}}
+  @backdropClose={{@backdropClose}}
+  @renderInPlace={{@renderInPlace}}
+  @transitionDuration={{@transitionDuration}}
+  @backdropTransitionDuration={{@backdropTransitionDuration}}
+  @onSubmit={{@onSubmit}}
+  @onHide={{@onHide}}
+  @onHidden={{@onHidden}}
+  @onShow={{@onShow}}
+  @onShown={{@onShown}}
   ...attributes
   as |modal|
 >
-  <modal.header @title={{@title}} @closeButton={{this.closeButton}} />
+  <modal.header @title={{@title}} @closeButton={{@closeButton}} />
   <modal.body>
     {{yield
       (hash
@@ -28,8 +28,8 @@
     }}
   </modal.body>
   <modal.footer
-    @closeTitle={{this.closeTitle}}
+    @closeTitle={{@closeTitle}}
     @submitTitle={{@submitTitle}}
-    @submitButtonType={{this.submitButtonType}}
+    @submitButtonType={{@submitButtonType}}
   />
 </BsModal>
