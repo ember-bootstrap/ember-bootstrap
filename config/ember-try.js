@@ -18,6 +18,15 @@ module.exports = async function () {
         },
       },
       {
+        name: 'ember-lts-3.20',
+        npm: {
+          devDependencies: {
+            'ember-source': '~3.20.5',
+            bootstrap: bootstrapVersion,
+          },
+        },
+      },
+      {
         name: 'ember-release',
         npm: {
           devDependencies: {
@@ -50,18 +59,6 @@ module.exports = async function () {
           // FAIL_ON_DEPRECATION: true,
         },
       },
-      // The default `.travis.yml` runs this scenario via `npm test`,
-      // not via `ember try`. It's still included here so that running
-      // `ember try:each` manually or from a customized CI config will run it
-      // along with all the other scenarios.
-      {
-        name: 'ember-default',
-        npm: {
-          devDependencies: {
-            bootstrap: bootstrapVersion,
-          },
-        },
-      },
       {
         name: 'ember-default-with-jquery',
         env: {
@@ -71,7 +68,7 @@ module.exports = async function () {
         },
         npm: {
           devDependencies: {
-            '@ember/jquery': '^0.5.1',
+            '@ember/jquery': '^1.1.0',
             bootstrap: bootstrapVersion,
           },
         },

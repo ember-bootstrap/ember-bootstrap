@@ -25,7 +25,6 @@ module('Integration | Component | bs-modal-simple', function (hooks) {
 
   test('Simple modal has header, footer and body', async function (assert) {
     await render(hbs`<BsModalSimple @fade={{false}} @title="Simple Dialog">Hello world!</BsModalSimple>`);
-    await settled();
 
     assert.dom('.modal').exists({ count: 1 }, 'Modal exists.');
     assert.dom('.modal .modal-header').exists({ count: 1 }, 'Modal has header.');
@@ -54,7 +53,6 @@ module('Integration | Component | bs-modal-simple', function (hooks) {
     await render(
       hbs`<BsModalSimple @title="Simple Dialog" @closeTitle="Cancel" @submitTitle="Ok">Hello world!</BsModalSimple>`
     );
-    await settled();
 
     assert.dom(`.modal .modal-footer button.${defaultButtonClass()}`).exists({ count: 1 }, 'Modal has close button.');
     assert
@@ -68,7 +66,6 @@ module('Integration | Component | bs-modal-simple', function (hooks) {
     await render(
       hbs`<BsModalSimple @closeTitle="Cancel" @submitTitle="Ok" @submitButtonType="danger">Hello world!</BsModalSimple>`
     );
-    await settled();
 
     assert
       .dom('.modal .modal-footer button.btn-danger')
@@ -127,7 +124,6 @@ module('Integration | Component | bs-modal-simple', function (hooks) {
   test('closeButton property shows close button', async function (assert) {
     this.set('closeButton', false);
     await render(hbs`<BsModalSimple @title="Simple Dialog" @closeButton={{closeButton}}>Hello world!</BsModalSimple>`);
-    await settled();
 
     assert.dom('.modal .modal-header .close').doesNotExist('Modal has no close button');
     this.set('closeButton', true);
@@ -552,7 +548,6 @@ module('Integration | Component | bs-modal-simple', function (hooks) {
         <button type="button" id="close" {{action modal.close}}>Close</button>
       </BsModalSimple>
     `);
-    await settled();
 
     await click('#close');
     assert.ok(closeAction.calledOnce, 'close action has been called.');
@@ -567,7 +562,6 @@ module('Integration | Component | bs-modal-simple', function (hooks) {
         <button type="button" id="submit" {{action modal.submit}}>Submit</button>
       </BsModalSimple>
     `);
-    await settled();
 
     await click('#submit');
     assert.ok(submitAction.calledOnce, 'submit action has been called.');
@@ -591,7 +585,6 @@ module('Integration | Component | bs-modal-simple', function (hooks) {
 
   test('Modal has accesibility attributes with default title', async function (assert) {
     await render(hbs`<BsModalSimple @open={{true}} @title="Simple Dialog">Hello world!</BsModalSimple>`);
-    await settled();
 
     const modalTitleId = document.getElementsByClassName('modal-title')[0].id;
     assert.dom('.modal').exists({ count: 1 }, 'Modal exists.');
