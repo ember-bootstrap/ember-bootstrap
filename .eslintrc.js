@@ -26,6 +26,11 @@ module.exports = {
     'ember/no-mixins': 'warn',
     'hbs/check-hbs-template-literals': 'error',
     'no-setter-return': 'off', // computed setters may return a value!
+    // turn Octane rules into warnings until all components have been refactored
+    'ember/no-computed-properties-in-native-classes': 'warn',
+    'ember/no-classic-components': 'warn',
+    'ember/classic-decorator-no-classic-methods': 'warn',
+    'ember/classic-decorator-hooks': 'warn',
   },
   overrides: [
     // node files

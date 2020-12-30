@@ -70,7 +70,7 @@ jobs:
           - 3
           - 4
         include:
-          - scenario: ember-default
+          - scenario: ember-release
             command: ember test --launch Firefox
           - scenario: node-tests
 #          - scenario: embroider-safe
