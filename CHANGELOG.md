@@ -1,3 +1,25 @@
+## v4.6.0 (2020-12-30)
+
+#### Features
+* [#1282](https://github.com/kaliber5/ember-bootstrap/pull/1282) Refactor Modals to Glimmer components ([@simonihmig](https://github.com/simonihmig))
+
+#### Bug Fixes
+* [#1383](https://github.com/kaliber5/ember-bootstrap/pull/1383) Fix cleanup of event listeners for Tooltips/Popovers ([@simonihmig](https://github.com/simonihmig))
+* [#1369](https://github.com/kaliber5/ember-bootstrap/pull/1369) Fix attaching to targets that are rendered *after* the tooltip/popover  ([@simonihmig](https://github.com/simonihmig))
+* [#1370](https://github.com/kaliber5/ember-bootstrap/pull/1370) Fix modal not receiving focus ([@simonihmig](https://github.com/simonihmig))
+* [#1365](https://github.com/kaliber5/ember-bootstrap/pull/1365) <BsDropdown> should use defaultValue if @htmlTag is undefined ([@jelhan](https://github.com/jelhan))
+
+#### Documentation
+* [#1364](https://github.com/kaliber5/ember-bootstrap/pull/1364) <BsForm> demo uses properties which have been removed in v4 ([@jelhan](https://github.com/jelhan))
+
+#### Internal
+* [#1382](https://github.com/kaliber5/ember-bootstrap/pull/1382) Run ember-cli-update ([@simonihmig](https://github.com/simonihmig))
+
+#### Committers: 3
+- Jeldrik Hanschke ([@jelhan](https://github.com/jelhan))
+- Simon Ihmig ([@simonihmig](https://github.com/simonihmig))
+- [@dependabot-preview[bot]](https://github.com/apps/dependabot-preview)
+
 ## v4.5.0 (2020-12-03)
 
 #### Breaking
