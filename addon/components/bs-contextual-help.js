@@ -711,9 +711,8 @@ export default class ContextualHelp extends Component {
     }
   }
 
-  // eslint-disable-next-line ember/no-component-lifecycle-hooks
-  willDestroyElement() {
-    super.willDestroyElement(...arguments);
+  willDestroy() {
+    super.willDestroy(...arguments);
     this.removeListeners();
   }
 }
