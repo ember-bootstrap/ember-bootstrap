@@ -473,7 +473,7 @@ export default class Modal extends Component {
     if (!this._isOpen) {
       return;
     }
-    this.isOpen = false;
+    this._isOpen = false;
 
     this.resize();
     this.showModal = false;
