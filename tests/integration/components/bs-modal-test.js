@@ -207,7 +207,8 @@ module('Integration | Component | bs-modal', function (hooks) {
 
   test('it can reopen after closing', async function (assert) {
     this.set('open', false);
-    await render(hbs`<BsModal @open={{open}}>Hello world!</BsModal>`);
+    this.set('close', () => (this.open = false));
+    await render(hbs`<BsModal @open={{this.open}} @onHidden={{action this.close}}>Hello world!</BsModal>`);
 
     assert.dom('.modal').doesNotExist('Modal is hidden');
     this.set('open', true);
@@ -216,9 +217,7 @@ module('Integration | Component | bs-modal', function (hooks) {
     assert.dom('.modal').hasClass(visibilityClass(), 'Modal is visible');
     assert.dom('.modal').isVisible();
 
-    this.set('open', false);
-    await settled();
-
+    await click('.modal');
     assert.dom('.modal').doesNotExist('Modal is hidden');
 
     this.set('open', true);
