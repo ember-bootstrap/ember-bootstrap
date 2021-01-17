@@ -128,11 +128,6 @@ export default class Modal extends Component {
    * @default true
    * @public
    */
-
-  /**
-   * @property open
-   * @private
-   */
   @arg
   open = true;
 
