@@ -1,7 +1,7 @@
 import Component from '@ember/component';
 import { module } from 'qunit';
 import { setupRenderingTest } from 'ember-qunit';
-import { render, click, triggerEvent } from '@ember/test-helpers';
+import { render, click, triggerEvent, settled } from '@ember/test-helpers';
 import { test, visibilityClass } from '../../helpers/bootstrap';
 import hbs from 'htmlbars-inline-precompile';
 import setupNoDeprecations from '../../helpers/setup-no-deprecations';
@@ -203,5 +203,47 @@ module('Integration | Component | bs-modal', function (hooks) {
 
     assert.dom('.modal-backdrop').exists({ count: 1 }, 'Modal has backdrop element');
     assert.dom('.modal-backdrop').hasClass(visibilityClass(), 'Modal backdrop has visibility class');
+  });
+
+  test('it can reopen after closing by clicking the backdrop', async function (assert) {
+    this.set('open', false);
+    this.set('close', () => this.set('open', false));
+    await render(hbs`<BsModal @open={{this.open}} @onHidden={{action this.close}}>Hello world!</BsModal>`);
+
+    assert.dom('.modal').doesNotExist('Modal is hidden');
+    this.set('open', true);
+    await settled();
+
+    assert.dom('.modal').hasClass(visibilityClass(), 'Modal is visible');
+    assert.dom('.modal').isVisible();
+
+    await click('.modal');
+    assert.dom('.modal').doesNotExist('Modal is hidden');
+
+    this.set('open', true);
+    await settled();
+
+    assert.dom('.modal').isVisible('Modal is visible again');
+  });
+
+  test('it can reopen after closing by setting the `open` state to false', async function (assert) {
+    this.set('open', false);
+    await render(hbs`<BsModal @open={{this.open}}>Hello world!</BsModal>`);
+
+    assert.dom('.modal').doesNotExist('Modal is hidden');
+    this.set('open', true);
+    await settled();
+
+    assert.dom('.modal').hasClass(visibilityClass(), 'Modal is visible');
+    assert.dom('.modal').isVisible();
+
+    this.set('open', false);
+    await settled();
+    assert.dom('.modal').doesNotExist('Modal is hidden');
+
+    this.set('open', true);
+    await settled();
+
+    assert.dom('.modal').isVisible('Modal is visible again');
   });
 });

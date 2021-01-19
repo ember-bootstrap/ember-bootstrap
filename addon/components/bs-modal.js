@@ -11,7 +11,6 @@ import isFastBoot from 'ember-bootstrap/utils/is-fastboot';
 import deprecateSubclassing from 'ember-bootstrap/utils/deprecate-subclassing';
 import arg from '../utils/decorators/arg';
 import { tracked } from '@glimmer/tracking';
-import { localCopy } from 'tracked-toolbox';
 
 /**
   Component for creating [Bootstrap modals](http://getbootstrap.com/javascript/#modals) with custom markup.
@@ -61,25 +60,6 @@ export default class Modal extends Component {
   document;
 
   /**
-   * Visibility of the modal. Toggle to show/hide with CSS transitions.
-   *
-   * When the modal is closed by user interaction this property will not update by using two-way bindings in order
-   * to follow DDAU best practices. If you want to react to such changes, subscribe to the `onHide` action
-   *
-   * @property open
-   * @type boolean
-   * @default true
-   * @public
-   */
-
-  /**
-   * @property isOpen
-   * @private
-   */
-  @localCopy('args.open', true)
-  isOpen;
-
-  /**
    * @property _isOpen
    * @private
    */
@@ -108,7 +88,7 @@ export default class Modal extends Component {
    * @private
    */
   @tracked
-  showModal = this.isOpen && (!this._fade || isFastBoot(this));
+  showModal = this.open && (!this._fade || isFastBoot(this));
 
   /**
    * Render modal markup?
@@ -119,7 +99,7 @@ export default class Modal extends Component {
    * @private
    */
   @tracked
-  inDom = this.isOpen;
+  inDom = this.open;
 
   /**
    * @property paddingLeft
@@ -138,6 +118,20 @@ export default class Modal extends Component {
   paddingRight;
 
   /**
+   * Visibility of the modal. Toggle to show/hide with CSS transitions.
+   *
+   * When the modal is closed by user interaction this property will not update by using two-way bindings in order
+   * to follow DDAU best practices. If you want to react to such changes, subscribe to the `onHide` action
+   *
+   * @property open
+   * @type boolean
+   * @default true
+   * @public
+   */
+  @arg
+  open = true;
+
+  /**
    * Use a semi-transparent modal background to hide the rest of the page.
    *
    * @property backdrop
@@ -154,7 +148,7 @@ export default class Modal extends Component {
    * @private
    */
   @tracked
-  showBackdrop = this.isOpen && this.backdrop;
+  showBackdrop = this.open && this.backdrop;
 
   /**
    * Closes the modal when escape key is pressed.
@@ -473,7 +467,7 @@ export default class Modal extends Component {
     if (!this._isOpen) {
       return;
     }
-    this.isOpen = false;
+    this._isOpen = false;
 
     this.resize();
     this.showModal = false;
@@ -515,7 +509,7 @@ export default class Modal extends Component {
   handleBackdrop(callback) {
     let doAnimate = this.usesTransition;
 
-    if (this.isOpen && this.backdrop) {
+    if (this.open && this.backdrop) {
       this.showBackdrop = true;
 
       if (!callback) {
@@ -531,7 +525,7 @@ export default class Modal extends Component {
           callback();
         }
       });
-    } else if (!this.isOpen && this.backdrop) {
+    } else if (!this.open && this.backdrop) {
       let backdrop = this.backdropElement;
       assert('Backdrop element should be in DOM', backdrop);
 
@@ -561,7 +555,7 @@ export default class Modal extends Component {
    * @private
    */
   resize() {
-    if (this.isOpen) {
+    if (this.open) {
       window.addEventListener('resize', this.handleUpdate, false);
     } else {
       window.removeEventListener('resize', this.handleUpdate, false);
