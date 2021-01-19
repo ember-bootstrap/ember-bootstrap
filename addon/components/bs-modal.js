@@ -60,12 +60,6 @@ export default class Modal extends Component {
   document;
 
   /**
-   * @property _isOpen
-   * @private
-   */
-  _isOpen = false;
-
-  /**
    * Set to false to disable fade animations.
    *
    * @property fade
@@ -89,17 +83,6 @@ export default class Modal extends Component {
    */
   @tracked
   showModal = this.open && (!this._fade || isFastBoot(this));
-
-  /**
-   * Render modal markup?
-   *
-   * @property inDom
-   * @type boolean
-   * @default false
-   * @private
-   */
-  @tracked
-  inDom = this.open;
 
   /**
    * @property paddingLeft
@@ -128,8 +111,6 @@ export default class Modal extends Component {
    * @default true
    * @public
    */
-  @arg
-  open = true;
 
   /**
    * Use a semi-transparent modal background to hide the rest of the page.
@@ -148,7 +129,7 @@ export default class Modal extends Component {
    * @private
    */
   @tracked
-  showBackdrop = this.open && this.backdrop;
+  showBackdrop = false;
 
   /**
    * Closes the modal when escape key is pressed.
@@ -208,6 +189,40 @@ export default class Modal extends Component {
    * @type {String}
    * @private
    */
+
+  /**
+   * Current state of the modal.
+   *
+   * Possible values:
+   * - 'opening'
+   * - 'open'
+   * - 'closing'
+   * - 'closed'
+   *
+   * @property state
+   * @private
+   */
+  @tracked state = 'closed';
+
+  get isOpen() {
+    return this.state === 'open';
+  }
+
+  get isOpening() {
+    return this.state === 'opening';
+  }
+
+  get isClosing() {
+    return this.state === 'closing';
+  }
+
+  get isClosed() {
+    return this.state === 'closed';
+  }
+
+  get isVisible() {
+    return !this.isClosed;
+  }
 
   /**
    * The id of the `.modal` element.
@@ -417,10 +432,11 @@ export default class Modal extends Component {
    * @private
    */
   show() {
-    if (this._isOpen) {
+    if (this.isOpening || this.isOpen) {
       return;
     }
-    this._isOpen = true;
+
+    this.state = 'opening';
 
     this.addBodyClass();
     this.resize();
@@ -440,8 +456,8 @@ export default class Modal extends Component {
         }
 
         modalEl.scrollTop = 0;
-        this.handleUpdate();
-        this.showModal = true;
+        this.adjustDialog();
+        this.state = 'open';
         this.args.onShow?.();
 
         if (this.usesTransition) {
@@ -453,7 +469,6 @@ export default class Modal extends Component {
         }
       });
     };
-    this.inDom = true;
     this.handleBackdrop(callback);
   }
 
@@ -464,13 +479,13 @@ export default class Modal extends Component {
    * @private
    */
   hide() {
-    if (!this._isOpen) {
+    if (this.isClosing || this.isClosed) {
       return;
     }
-    this._isOpen = false;
+
+    this.state = 'closing';
 
     this.resize();
-    this.showModal = false;
 
     if (this.usesTransition) {
       transitionEnd(this.modalElement, this.transitionDuration).then(() => this.hideModal());
@@ -494,13 +509,13 @@ export default class Modal extends Component {
       this.removeBodyClass();
       this.resetAdjustments();
       this.resetScrollbar();
-      this.inDom = false;
+      this.state = 'closed';
       this.args.onHidden?.();
     });
   }
 
   /**
-   * SHow/hide the backdrop
+   * Show/hide the backdrop
    *
    * @method handleBackdrop
    * @param callback
@@ -509,7 +524,7 @@ export default class Modal extends Component {
   handleBackdrop(callback) {
     let doAnimate = this.usesTransition;
 
-    if (this.open && this.backdrop) {
+    if (!this.isClosed && this.backdrop) {
       this.showBackdrop = true;
 
       if (!callback) {
@@ -555,26 +570,18 @@ export default class Modal extends Component {
    * @private
    */
   resize() {
-    if (this.open) {
-      window.addEventListener('resize', this.handleUpdate, false);
+    if (this.isOpen) {
+      window.addEventListener('resize', this.adjustDialog, false);
     } else {
-      window.removeEventListener('resize', this.handleUpdate, false);
+      window.removeEventListener('resize', this.adjustDialog, false);
     }
-  }
-
-  /**
-   * @method handleUpdate
-   * @private
-   */
-  @action
-  handleUpdate() {
-    this.adjustDialog();
   }
 
   /**
    * @method adjustDialog
    * @private
    */
+  @action
   adjustDialog() {
     let modalIsOverflowing = this.modalElement.scrollHeight > document.documentElement.clientHeight;
     this.paddingLeft = !this.bodyIsOverflowing && modalIsOverflowing ? this.scrollbarWidth : undefined;
@@ -666,7 +673,7 @@ export default class Modal extends Component {
     super.willDestroy(...arguments);
 
     if (typeof FastBoot === 'undefined') {
-      window.removeEventListener('resize', this.handleUpdate, false);
+      window.removeEventListener('resize', this.adjustDialog, false);
       this.removeBodyClass();
       this.resetScrollbar();
     }
@@ -679,10 +686,12 @@ export default class Modal extends Component {
       return;
     }
 
-    if (this.args.open !== false) {
-      this.show();
-    } else {
-      this.hide();
-    }
+    next(() => {
+      if (this.args.open !== false) {
+        this.show();
+      } else {
+        this.hide();
+      }
+    });
   }
 }
