@@ -1,3 +1,12 @@
+## v4.6.1 (2021-01-19)
+
+#### Bug Fixes
+* [#1393](https://github.com/kaliber5/ember-bootstrap/pull/1393) Fix modals not being able to open after being closed once ([@SanderKnauff](https://github.com/SanderKnauff))
+
+#### Committers: 2
+- Sander Knauff ([@SanderKnauff](https://github.com/SanderKnauff))
+- [@dependabot-preview[bot]](https://github.com/apps/dependabot-preview)
+
 ## v4.6.0 (2020-12-30)
 
 #### Features
