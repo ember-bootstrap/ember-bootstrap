@@ -440,7 +440,7 @@ export default class Modal extends Component {
         }
 
         modalEl.scrollTop = 0;
-        this.handleUpdate();
+        this.adjustDialog();
         this.showModal = true;
         this.args.onShow?.();
 
@@ -556,25 +556,17 @@ export default class Modal extends Component {
    */
   resize() {
     if (this.open) {
-      window.addEventListener('resize', this.handleUpdate, false);
+      window.addEventListener('resize', this.adjustDialog, false);
     } else {
-      window.removeEventListener('resize', this.handleUpdate, false);
+      window.removeEventListener('resize', this.adjustDialog, false);
     }
-  }
-
-  /**
-   * @method handleUpdate
-   * @private
-   */
-  @action
-  handleUpdate() {
-    this.adjustDialog();
   }
 
   /**
    * @method adjustDialog
    * @private
    */
+  @action
   adjustDialog() {
     let modalIsOverflowing = this.modalElement.scrollHeight > document.documentElement.clientHeight;
     this.paddingLeft = !this.bodyIsOverflowing && modalIsOverflowing ? this.scrollbarWidth : undefined;
@@ -666,7 +658,7 @@ export default class Modal extends Component {
     super.willDestroy(...arguments);
 
     if (typeof FastBoot === 'undefined') {
-      window.removeEventListener('resize', this.handleUpdate, false);
+      window.removeEventListener('resize', this.adjustDialog, false);
       this.removeBodyClass();
       this.resetScrollbar();
     }
