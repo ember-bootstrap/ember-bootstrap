@@ -258,24 +258,17 @@ export default class FormElement extends FormGroup {
    * @public
    */
   get value() {
+    assert(
+      'You can not set both property and value on a form element',
+      isBlank(this.args.property) || isBlank(this.args.value)
+    );
+
     if (this.args.property && this.args.model) {
       return get(this.args.model, this.args.property);
     }
-    return this._value;
+
+    return this.args.value;
   }
-
-  set value(value) {
-    assert('You cannot set both property and value on a form element', isBlank(this.args.property));
-
-    this._value = value;
-  }
-
-  /**
-   * Cache for value
-   * @type {null}
-   * @private
-   */
-  @tracked _value = null;
 
   /**
    The property name of the form element's `model` (by default the `model` of its parent `Components.Form`) that this

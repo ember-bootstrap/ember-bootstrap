@@ -824,6 +824,22 @@ module('Integration | Component | bs-form/element', function (hooks) {
     );
   });
 
+  test('it can change a value instead of a property', async function (assert) {
+    this.set('update', (name) => this.set('name', name));
+    this.set('name', 'Tomster');
+
+    await render(hbs`
+      <BsForm::Element @onChange={{this.update}} @value={{this.name}} />
+    `);
+
+    assert.dom('input').hasValue('Tomster');
+
+    await fillIn('input', 'Zoey');
+
+    assert.dom('input').hasValue('Zoey');
+    assert.equal(this.name, 'Zoey');
+  });
+
   // test for size property here to prevent regression of https://github.com/kaliber5/ember-bootstrap/issues/492
   testBS3('support size classes', async function (assert) {
     await render(hbs`<BsForm::Element @size="lg" />`);
