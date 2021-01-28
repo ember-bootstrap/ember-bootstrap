@@ -1147,4 +1147,38 @@ module('Integration | Component | bs-form', function (hooks) {
     );
     assert.dom('input').doesNotHaveAttribute('readonly');
   });
+
+  /**
+   * @see https://github.com/kaliber5/ember-bootstrap/issues/1414
+   */
+  test('it does not have a showOwnValidation bug', async function (assert) {
+    assert.expect(1);
+    this.set('submit', ({ name }) => assert.equal(name, 'Zoey'));
+    this.set('beforeSubmit', (model) => {
+      if (this.user) {
+        model.set('name', this.user.name);
+      }
+    });
+
+    await render(hbs`
+      <BsForm
+        @model={{this}}
+        @onBefore={{this.beforeSubmit}}
+        @onSubmit={{this.submit}}
+        as |Form|
+      >
+        {{#unless this.user}}
+          <Form.element @property="name" />
+        {{/unless}}
+
+        <Form.submitButton @defaultText="Submit" />
+      </BsForm>
+    `);
+
+    await fillIn('input', 'Tomster');
+
+    this.set('user', { name: 'Zoey' });
+
+    await click('button');
+  });
 });
