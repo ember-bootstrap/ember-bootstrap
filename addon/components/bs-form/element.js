@@ -579,8 +579,6 @@ export default class FormElement extends FormGroup {
   showValidationOnHandler({ target, type }) {
     // Should not do anything if
     if (
-      // validations are already shown or
-      this.showOwnValidation ||
       // validations should not be shown for this event type or
       this._showValidationOn.indexOf(type) === -1 ||
       // validation should not be shown for this event target
