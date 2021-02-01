@@ -1,3 +1,12 @@
+## v4.6.3 (2021-02-01)
+
+#### Bug Fixes
+* [#1415](https://github.com/kaliber5/ember-bootstrap/pull/1415) Fix for showOwnValidation throwing "same computation" Ember assertion ([@lindyhopchris](https://github.com/lindyhopchris))
+
+#### Committers: 2
+- Christopher Gammie ([@lindyhopchris](https://github.com/lindyhopchris))
+- [@dependabot-preview[bot]](https://github.com/apps/dependabot-preview)
+
 ## v4.6.2 (2021-01-21)
 
 #### Bug Fixes
