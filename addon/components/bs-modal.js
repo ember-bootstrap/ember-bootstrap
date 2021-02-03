@@ -74,17 +74,6 @@ export default class Modal extends Component {
   }
 
   /**
-   * Used to apply Bootstrap's visibility classes.
-   *
-   * @property showModal
-   * @type boolean
-   * @default false
-   * @private
-   */
-  @tracked
-  showModal = this.open && (!this._fade || isFastBoot(this));
-
-  /**
    * @property paddingLeft
    * @type number|undefined
    * @private
@@ -439,7 +428,7 @@ export default class Modal extends Component {
     this.state = 'opening';
 
     this.addBodyClass();
-    this.resize();
+    this.addResizeEventListeners();
 
     let callback = () => {
       if (this.isDestroyed) {
@@ -485,7 +474,7 @@ export default class Modal extends Component {
 
     this.state = 'closing';
 
-    this.resize();
+    this.removeResizeEventListeners();
 
     if (this.usesTransition) {
       transitionEnd(this.modalElement, this.transitionDuration).then(() => this.hideModal());
@@ -564,17 +553,17 @@ export default class Modal extends Component {
   }
 
   /**
-   * Attach/Detach resize event listeners
-   *
-   * @method resize
-   * @private
+   * Attach resize event listeners
    */
-  resize() {
-    if (this.isOpen) {
-      window.addEventListener('resize', this.adjustDialog, false);
-    } else {
-      window.removeEventListener('resize', this.adjustDialog, false);
-    }
+  addResizeEventListeners() {
+    window.addEventListener('resize', this.adjustDialog, false);
+  }
+
+  /**
+   * Detach resize event listeners
+   */
+  removeResizeEventListeners() {
+    window.removeEventListener('resize', this.adjustDialog, false);
   }
 
   /**
@@ -673,7 +662,7 @@ export default class Modal extends Component {
     super.willDestroy(...arguments);
 
     if (typeof FastBoot === 'undefined') {
-      window.removeEventListener('resize', this.adjustDialog, false);
+      this.removeResizeEventListeners();
       this.removeBodyClass();
       this.resetScrollbar();
     }
