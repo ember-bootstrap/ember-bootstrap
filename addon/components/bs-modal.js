@@ -556,6 +556,10 @@ export default class Modal extends Component {
    * Attach resize event listeners
    */
   addResizeEventListeners() {
+    if (isFastBoot(this)) {
+      return;
+    }
+
     window.addEventListener('resize', this.adjustDialog, false);
   }
 
@@ -563,6 +567,10 @@ export default class Modal extends Component {
    * Detach resize event listeners
    */
   removeResizeEventListeners() {
+    if (isFastBoot(this)) {
+      return;
+    }
+
     window.removeEventListener('resize', this.adjustDialog, false);
   }
 
@@ -618,6 +626,10 @@ export default class Modal extends Component {
    * @private
    */
   resetScrollbar() {
+    if (isFastBoot(this)) {
+      return;
+    }
+
     document.body.style.paddingRight = this._originalBodyPad;
   }
 
@@ -637,7 +649,11 @@ export default class Modal extends Component {
   }
 
   removeBodyClass() {
-    // no need for FastBoot support here
+    if (isFastBoot(this)) {
+      // no need for FastBoot support here
+      return;
+    }
+
     document.body.classList.remove('modal-open');
   }
 
@@ -661,11 +677,9 @@ export default class Modal extends Component {
   willDestroy() {
     super.willDestroy(...arguments);
 
-    if (typeof FastBoot === 'undefined') {
-      this.removeResizeEventListeners();
-      this.removeBodyClass();
-      this.resetScrollbar();
-    }
+    this.removeResizeEventListeners();
+    this.removeBodyClass();
+    this.resetScrollbar();
   }
 
   @action
