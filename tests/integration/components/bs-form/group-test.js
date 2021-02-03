@@ -52,7 +52,7 @@ module('Integration | Component | bs-form/group', function (hooks) {
 
   async function testValidationState(assert, state) {
     let validationConfig = validations[state];
-    await render(hbs`<BsForm::Group @validation={{validation}}></BsForm::Group>`);
+    await render(hbs`<BsForm::Group @validation={{this.validation}}></BsForm::Group>`);
     this.set('validation', state);
     validationConfig.formGroupClasses.forEach((className) => {
       assert.dom(`.${className}`).exists(`component has ${className} class`);

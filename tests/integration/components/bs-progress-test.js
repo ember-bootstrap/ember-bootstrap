@@ -56,7 +56,7 @@ module('Integration | Component | bs-progress', function (hooks) {
     await render(hbs`
       <div class="width-500">
         <BsProgress as |p|>
-          <p.bar @value={{value}} @minValue={{minValue}} @maxValue={{maxValue}} />
+          <p.bar @value={{this.value}} @minValue={{this.minValue}} @maxValue={{this.maxValue}} />
         </BsProgress>
       </div>
     `);

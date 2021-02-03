@@ -144,7 +144,7 @@ module('Integration | Component | bs-dropdown', function (hooks) {
         <dd.toggle>Dropdown <span class="caret"></span></dd.toggle>
         <dd.menu><li><a href="#">Something</a></li></dd.menu>
       </BsDropdown>
-      <div id="target" role="button" onclick={{action stopEvent}} />
+      <div id="target" role="button" onclick={{action this.stopEvent}} />
     `);
 
     await click('a.dropdown-toggle');

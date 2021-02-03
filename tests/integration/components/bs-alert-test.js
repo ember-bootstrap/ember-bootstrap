@@ -54,7 +54,7 @@ module('Integration | Component | bs-alert', function (hooks) {
 
   test('alert can be hidden by setting visible property', async function (assert) {
     this.set('visible', true);
-    await render(hbs`<BsAlert @type="success" @fade={{false}} @visible={{visible}}>Test</BsAlert>`);
+    await render(hbs`<BsAlert @type="success" @fade={{false}} @visible={{this.visible}}>Test</BsAlert>`);
 
     this.set('visible', false);
 
@@ -143,7 +143,7 @@ module('Integration | Component | bs-alert', function (hooks) {
 
   test('alert can be made visible when setting visible=true', async function (assert) {
     this.set('visible', false);
-    await render(hbs`<BsAlert @type="success" @visible={{visible}} @fade={{false}}>Test</BsAlert>`);
+    await render(hbs`<BsAlert @type="success" @visible={{this.visible}} @fade={{false}}>Test</BsAlert>`);
     this.set('visible', true);
 
     assert.dom('.alert').exists('alert has alert class');
@@ -152,7 +152,7 @@ module('Integration | Component | bs-alert', function (hooks) {
 
   test('dismissing alert does not change public visible property (DDAU)', async function (assert) {
     this.set('visible', true);
-    await render(hbs`<BsAlert @type="success" @visible={{visible}} @fade={{false}}>Test</BsAlert>`);
+    await render(hbs`<BsAlert @type="success" @visible={{this.visible}} @fade={{false}}>Test</BsAlert>`);
 
     await click('button.close');
 
