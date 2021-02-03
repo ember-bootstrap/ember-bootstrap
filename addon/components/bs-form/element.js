@@ -258,24 +258,17 @@ export default class FormElement extends FormGroup {
    * @public
    */
   get value() {
+    assert(
+      'You can not set both property and value on a form element',
+      isBlank(this.args.property) || isBlank(this.args.value)
+    );
+
     if (this.args.property && this.args.model) {
       return get(this.args.model, this.args.property);
     }
-    return this._value;
+
+    return this.args.value;
   }
-
-  set value(value) {
-    assert('You cannot set both property and value on a form element', isBlank(this.args.property));
-
-    this._value = value;
-  }
-
-  /**
-   * Cache for value
-   * @type {null}
-   * @private
-   */
-  @tracked _value = null;
 
   /**
    The property name of the form element's `model` (by default the `model` of its parent `Components.Form`) that this
@@ -586,8 +579,6 @@ export default class FormElement extends FormGroup {
   showValidationOnHandler({ target, type }) {
     // Should not do anything if
     if (
-      // validations are already shown or
-      this.showOwnValidation ||
       // validations should not be shown for this event type or
       this._showValidationOn.indexOf(type) === -1 ||
       // validation should not be shown for this event target
