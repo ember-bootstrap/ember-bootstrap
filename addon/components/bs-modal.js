@@ -118,7 +118,7 @@ export default class Modal extends Component {
    * @private
    */
   @tracked
-  showBackdrop = false;
+  isBackdropShown = false;
 
   /**
    * Closes the modal when escape key is pressed.
@@ -420,7 +420,7 @@ export default class Modal extends Component {
    * @method show
    * @private
    */
-  show() {
+  async show() {
     if (this.isOpening || this.isOpen) {
       return;
     }
@@ -430,35 +430,41 @@ export default class Modal extends Component {
     this.addBodyClass();
     this.addResizeEventListeners();
 
-    let callback = () => {
-      if (this.isDestroyed) {
-        return;
-      }
+    await this.showBackdrop();
 
-      this.checkScrollbar();
-      this.setScrollbar();
+    if (this.isDestroyed) {
+      return;
+    }
 
-      schedule('afterRender', () => {
-        let modalEl = this.modalElement;
-        if (!modalEl) {
+    this.checkScrollbar();
+    this.setScrollbar();
+
+    await new Promise((resolve) => {
+      schedule('afterRender', async () => {
+        let { modalElement, usesTransition, transitionDuration } = this;
+
+        if (!modalElement) {
           return;
         }
 
-        modalEl.scrollTop = 0;
+        modalElement.scrollTop = 0;
         this.adjustDialog();
         this.state = 'open';
         this.args.onShow?.();
 
-        if (this.usesTransition) {
-          transitionEnd(this.modalElement, this.transitionDuration).then(() => {
-            this.args.onShown?.();
-          });
-        } else {
-          this.args.onShown?.();
+        if (usesTransition) {
+          await transitionEnd(modalElement, transitionDuration);
         }
+
+        if (this.isDestroyed) {
+          return;
+        }
+
+        this.args.onShown?.();
+
+        resolve();
       });
-    };
-    this.handleBackdrop(callback);
+    });
   }
 
   /**
@@ -467,7 +473,7 @@ export default class Modal extends Component {
    * @method hide
    * @private
    */
-  hide() {
+  async hide() {
     if (this.isClosing || this.isClosed) {
       return;
     }
@@ -477,10 +483,10 @@ export default class Modal extends Component {
     this.removeResizeEventListeners();
 
     if (this.usesTransition) {
-      transitionEnd(this.modalElement, this.transitionDuration).then(() => this.hideModal());
-    } else {
-      this.hideModal();
+      await transitionEnd(this.modalElement, this.transitionDuration);
     }
+
+    this.hideModal();
   }
 
   /**
@@ -489,67 +495,79 @@ export default class Modal extends Component {
    * @method hideModal
    * @private
    */
-  hideModal() {
+  async hideModal() {
     if (this.isDestroyed) {
       return;
     }
 
-    this.handleBackdrop(() => {
-      this.removeBodyClass();
-      this.resetAdjustments();
-      this.resetScrollbar();
-      this.state = 'closed';
-      this.args.onHidden?.();
+    await this.hideBackdrop();
+
+    if (this.isDestroyed) {
+      return;
+    }
+
+    this.removeBodyClass();
+    this.resetAdjustments();
+    this.resetScrollbar();
+    this.state = 'closed';
+    this.args.onHidden?.();
+  }
+
+  /**
+   * Show the backdrop
+   *
+   * @method showBackdrop
+   * @param callback
+   * @private
+   */
+  async showBackdrop() {
+    if (!this.backdrop) {
+      return;
+    }
+
+    this.isBackdropShown = true;
+
+    await new Promise((resolve) => {
+      next(async () => {
+        if (!this.backdrop) {
+          return;
+        }
+
+        let { backdropElement, usesTransition } = this;
+        assert('Backdrop element should be in DOM', backdropElement);
+
+        if (usesTransition) {
+          await transitionEnd(backdropElement, this.backdropTransitionDuration);
+        }
+
+        resolve();
+      });
     });
   }
 
   /**
-   * Show/hide the backdrop
+   * Hide the backdrop
    *
-   * @method handleBackdrop
-   * @param callback
+   * @method hideBackdrop
    * @private
    */
-  handleBackdrop(callback) {
-    let doAnimate = this.usesTransition;
-
-    if (!this.isClosed && this.backdrop) {
-      this.showBackdrop = true;
-
-      if (!callback) {
-        return;
-      }
-
-      next(() => {
-        let backdrop = this.backdropElement;
-        assert('Backdrop element should be in DOM', backdrop);
-        if (doAnimate) {
-          transitionEnd(backdrop, this.backdropTransitionDuration).then(callback);
-        } else {
-          callback();
-        }
-      });
-    } else if (!this.open && this.backdrop) {
-      let backdrop = this.backdropElement;
-      assert('Backdrop element should be in DOM', backdrop);
-
-      let callbackRemove = () => {
-        if (this.isDestroyed) {
-          return;
-        }
-        this.showBackdrop = false;
-        if (callback) {
-          callback.call(this);
-        }
-      };
-      if (doAnimate) {
-        transitionEnd(backdrop, this.backdropTransitionDuration).then(callbackRemove);
-      } else {
-        callbackRemove();
-      }
-    } else if (callback) {
-      next(this, callback);
+  async hideBackdrop() {
+    if (!this.backdrop) {
+      return;
     }
+
+    let { backdropElement, usesTransition } = this;
+    assert('Backdrop element should be in DOM', backdropElement);
+
+    if (usesTransition) {
+      await transitionEnd(backdropElement, this.backdropTransitionDuration);
+    }
+
+    if (this.isDestroyed) {
+      return;
+    }
+
+    this.isBackdropShown = false;
   }
 
   /**
