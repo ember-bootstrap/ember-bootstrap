@@ -1,15 +1,15 @@
 {{did-insert this.handleVisibilityChanges}}
 {{did-update this.handleVisibilityChanges @open}}
 
-{{#if this.isVisible}}
+{{#if this.isModalShown}}
   {{#let (component (bs-default @dialogComponent (component "bs-modal/dialog"))
     onClose=this.close
     fade=this._fade
-    showModal=this.isOpen
+    showModal=this.isModalShown
     keyboard=this.keyboard
     size=@size
     backdropClose=this.backdropClose
-    inDom=this.isVisible
+    inDom=this.isModalShown
     paddingLeft=this.paddingLeft
     paddingRight=this.paddingRight
     centered=(bs-eq this.position "center")
@@ -33,7 +33,7 @@
       </Dialog>
       <div>
         {{#if this.isBackdropShown}}
-          <div class="modal-backdrop {{if this._fade "fade"}} {{if this.isVisible (if (macroCondition (macroGetOwnConfig "isBS4")) "show" "in")}}" id={{this.backdropId}}></div>
+          <div class="modal-backdrop {{if this._fade "fade"}} {{if this.isModalShown (if (macroCondition (macroGetOwnConfig "isBS4")) "show" "in")}}" id={{this.backdropId}}></div>
         {{/if}}
       </div>
     {{else}}
@@ -55,7 +55,7 @@
         </Dialog>
         <div>
           {{#if this.isBackdropShown}}
-            <div class="modal-backdrop {{if this._fade "fade"}} {{if this.isVisible (if (macroCondition (macroGetOwnConfig "isBS4")) "show" "in")}}" id={{this.backdropId}}></div>
+            <div class="modal-backdrop {{if this._fade "fade"}} {{if this.isModalShown (if (macroCondition (macroGetOwnConfig "isBS4")) "show" "in")}}" id={{this.backdropId}}></div>
           {{/if}}
         </div>
       {{/in-element}}

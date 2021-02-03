@@ -113,7 +113,7 @@ export default class Modal extends Component {
   backdrop = true;
 
   /**
-   * @property showBackdrop
+   * @property isBackdropShown
    * @type boolean
    * @private
    */
@@ -180,6 +180,15 @@ export default class Modal extends Component {
    */
 
   /**
+   * Controls if the modal is rendered in the DOM.
+   *
+   * It must be kept in sync with the non-tracked property `state`.
+   * To avoid getting out of sync it should be set only by the setter
+   * of `state` property.
+   */
+  @tracked isModalShown = this.state !== 'closed';
+
+  /**
    * Current state of the modal.
    *
    * Possible values:
@@ -188,10 +197,25 @@ export default class Modal extends Component {
    * - 'closing'
    * - 'closed'
    *
+   * Setting it to `'closed'` also updates the `isModalShown` tracked
+   * property.
+   *
+   * State can not be tracked itself. The methods to show and hide the modal
+   * must read the current state before setting it. Otherwise the methods may
+   * try to show a modal, which is already shown or hide a modal, which is
+   * already hidden.
+   *
    * @property state
    * @private
    */
-  @tracked state = 'closed';
+  get state() {
+    return this._state;
+  }
+  set state(value) {
+    this._state = value;
+    this.isModalShown = value !== 'closed';
+  }
+  _state = 'closed';
 
   get isOpen() {
     return this.state === 'open';
@@ -207,10 +231,6 @@ export default class Modal extends Component {
 
   get isClosed() {
     return this.state === 'closed';
-  }
-
-  get isVisible() {
-    return !this.isClosed;
   }
 
   /**
@@ -707,12 +727,10 @@ export default class Modal extends Component {
       return;
     }
 
-    next(() => {
-      if (this.args.open !== false) {
-        this.show();
-      } else {
-        this.hide();
-      }
-    });
+    if (this.args.open !== false) {
+      this.show();
+    } else {
+      this.hide();
+    }
   }
 }
