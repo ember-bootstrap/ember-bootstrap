@@ -722,11 +722,6 @@ export default class Modal extends Component {
 
   @action
   handleVisibilityChanges() {
-    if (isFastBoot(this)) {
-      this.addBodyClass();
-      return;
-    }
-
     if (this.args.open !== false) {
       this.show();
     } else {
