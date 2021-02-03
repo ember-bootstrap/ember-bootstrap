@@ -1,5 +1,5 @@
 <div class="modal-header" ...attributes>
-  {{#if hasBlockParams}}
+  {{#if (has-block-params)}}
     {{yield
       (hash
         title=(bs-default @titleComponent (component "bs-modal/header/title"))

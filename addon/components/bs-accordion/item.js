@@ -28,8 +28,6 @@ export default class AccordionItem extends Component {
    * @type string
    * @public
    */
-  @defaultValue
-  title = null;
 
   /**
    * The value of the accordion item, which is used as the value of the `selected` property of the parent [Components.Accordion](Components.Accordion.html) component

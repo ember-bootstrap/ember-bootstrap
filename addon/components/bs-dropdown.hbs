@@ -11,7 +11,7 @@
         )
         toggle=(component (bs-default @toggleComponent (component "bs-dropdown/toggle"))
           isOpen=this.isOpen
-          inNav=inNav
+          inNav=@inNav
           onClick=this.toggleDropdown
           onKeyDown=this.handleKeyEvent
           registerChildElement=this.registerChildElement

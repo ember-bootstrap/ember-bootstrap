@@ -1,7 +1,7 @@
 <BsButton id="openModal" @onClick={{action "addModal"}}>Open</BsButton>
 
-{{#if hasModal}}
-  <BsModalSimple @open={{modal}} @onHidden={{action "removeModal"}} @title="Dynamic Dialog">
+{{#if this.hasModal}}
+  <BsModalSimple @open={{this.modal}} @onHidden={{action "removeModal"}} @title="Dynamic Dialog">
     Hi there
   </BsModalSimple>
 {{/if}}
