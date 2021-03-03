@@ -57,7 +57,7 @@ module('Integration | Component | bs-modal/footer', function (hooks) {
 
   test('submitDisabled disables submit button', async function (assert) {
     this.set('disabled', true);
-    await render(hbs`<BsModal::Footer @closeTitle="close" @submitTitle="submit" @submitDisabled={{disabled}} />`);
+    await render(hbs`<BsModal::Footer @closeTitle="close" @submitTitle="submit" @submitDisabled={{this.disabled}} />`);
 
     assert.dom('.modal-footer button').exists({ count: 2 }, 'Modal footer has two button.');
     assert.notOk(

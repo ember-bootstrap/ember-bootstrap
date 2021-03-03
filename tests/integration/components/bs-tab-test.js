@@ -132,7 +132,7 @@ module('Integration | Component | bs-tab', function (hooks) {
   test('activeId activates tabs', async function (assert) {
     this.set('paneId', 'pane1');
     await render(hbs`
-      <BsTab @fade={{false}} @activeId={{paneId}} as |tab|>
+      <BsTab @fade={{false}} @activeId={{this.paneId}} as |tab|>
         <tab.pane @id="pane1" @title="Tab 1">
           tabcontent 1
         </tab.pane>
@@ -171,7 +171,7 @@ module('Integration | Component | bs-tab', function (hooks) {
   test('activeId activates tabs [fade]', async function (assert) {
     this.set('paneId', 'pane1');
     await render(hbs`
-      <BsTab @fade={{true}} @activeId={{paneId}} as |tab|>
+      <BsTab @fade={{true}} @activeId={{this.paneId}} as |tab|>
         <tab.pane @id="pane1" @title="Tab 1">
           tabcontent 1
         </tab.pane>
@@ -309,7 +309,7 @@ module('Integration | Component | bs-tab', function (hooks) {
   test('changing active tab does not change public activeId property (DDAU)', async function (assert) {
     this.set('paneId', 'pane1');
     await render(hbs`
-      <BsTab @fade={{false}} @activeId={{paneId}} as |tab|>
+      <BsTab @fade={{false}} @activeId={{this.paneId}} as |tab|>
         <tab.pane @id="pane1" @title="Tab 1">
           tabcontent 1
         </tab.pane>

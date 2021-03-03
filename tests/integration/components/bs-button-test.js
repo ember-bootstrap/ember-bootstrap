@@ -93,7 +93,7 @@ module('Integration | Component | bs-button', function (hooks) {
 
   test('button with iconActive and iconInactive properties shows icon depending on active state', async function (assert) {
     this.set('active', false);
-    await render(hbs`<BsButton @active={{active}} @iconInactive="fas fa-plus" @iconActive="fas fa-minus" />`);
+    await render(hbs`<BsButton @active={{this.active}} @iconInactive="fas fa-plus" @iconActive="fas fa-minus" />`);
 
     assert.dom('button i').hasClass('fas');
     assert.dom('button i').hasClass('fa-plus');
@@ -130,7 +130,7 @@ module('Integration | Component | bs-button', function (hooks) {
         @pendingText="text for pending state"
         @fulfilledText="text for fulfilled state"
         @rejectedText="text for rejected state"
-        @onClick={{clickAction}}
+        @onClick={{this.clickAction}}
       />
     `);
     assert.dom('button').hasText('default text');
@@ -161,7 +161,7 @@ module('Integration | Component | bs-button', function (hooks) {
       return deferredClickAction.promise;
     });
 
-    await render(hbs`<BsButton @defaultText="default text" @onClick={{clickAction}} />`);
+    await render(hbs`<BsButton @defaultText="default text" @onClick={{this.clickAction}} />`);
     assert.dom('button').hasText('default text');
 
     click('button');
@@ -190,7 +190,7 @@ module('Integration | Component | bs-button', function (hooks) {
     });
 
     await render(hbs`
-      <BsButton @defaultText="default text" @fulfilledText="text for fulfilled state" @reset={{reset}} @onClick={{clickAction}} />
+      <BsButton @defaultText="default text" @fulfilledText="text for fulfilled state" @reset={{this.reset}} @onClick={{this.clickAction}} />
     `);
     assert.dom('button').hasText('default text');
 
@@ -207,7 +207,7 @@ module('Integration | Component | bs-button', function (hooks) {
       return deferredClickAction.promise;
     });
 
-    await render(hbs`<BsButton @onClick={{clickAction}} />`);
+    await render(hbs`<BsButton @onClick={{this.clickAction}} />`);
     assert.dom('button').isNotDisabled();
 
     await click('button');
@@ -224,7 +224,7 @@ module('Integration | Component | bs-button', function (hooks) {
       return deferredClickAction.promise;
     });
 
-    await render(hbs`<BsButton @onClick={{clickAction}} @preventConcurrency={{false}} />`);
+    await render(hbs`<BsButton @onClick={{this.clickAction}} @preventConcurrency={{false}} />`);
     await click('button');
     assert.dom('button').isNotDisabled();
 
@@ -240,7 +240,7 @@ module('Integration | Component | bs-button', function (hooks) {
       return deferredClickAction.promise;
     });
 
-    await render(hbs`<BsButton @onClick={{clickAction}} disabled={{false}} />`);
+    await render(hbs`<BsButton @onClick={{this.clickAction}} disabled={{false}} />`);
     await click('button');
     assert.dom('button').isNotDisabled();
 
@@ -254,7 +254,7 @@ module('Integration | Component | bs-button', function (hooks) {
       return deferredClickAction.promise;
     });
     await render(hbs`
-      <BsButton @reset={{reset}} @onClick={{clickAction}} as |button|>
+      <BsButton @reset={{this.reset}} @onClick={{this.clickAction}} as |button|>
         {{#if button.isPending}}isPending{{/if}}
         {{#if button.isFulfilled}}isFulfilled{{/if}}
         {{#if button.isRejected}}isRejected{{/if}}
@@ -291,7 +291,7 @@ module('Integration | Component | bs-button', function (hooks) {
       return resolve();
     });
     await render(hbs`
-      <BsButton @reset={{reset}} @onClick={{clickAction}} as |button|>
+      <BsButton @reset={{this.reset}} @onClick={{this.clickAction}} as |button|>
         {{#if button.isSettled}}isSettled{{/if}}
       </BsButton>
     `);
@@ -361,7 +361,7 @@ module('Integration | Component | bs-button', function (hooks) {
       return deferredClickAction.promise;
     });
 
-    await render(hbs`<BsButton @onClick={{clickAction}} />`);
+    await render(hbs`<BsButton @onClick={{this.clickAction}} />`);
     click('button');
     await waitUntil(() => clickActionHasBeenExecuted);
 
@@ -388,7 +388,7 @@ module('Integration | Component | bs-button', function (hooks) {
       clickActionExecutionCount++;
       return deferredClickAction.promise;
     });
-    await render(hbs`<BsButton @onClick={{clickAction}} @preventConcurrency={{false}} />`);
+    await render(hbs`<BsButton @onClick={{this.clickAction}} @preventConcurrency={{false}} />`);
 
     await click('button');
     assert.equal(clickActionExecutionCount, 1);

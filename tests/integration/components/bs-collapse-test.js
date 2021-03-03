@@ -45,7 +45,7 @@ module('Integration | Component | bs-collapse', function (hooks) {
 
     this.set('collapsed', true);
     await render(
-      hbs`<BsCollapse @collapsed={{collapsed}} @onShow={{action "show"}} @onShown={{action "shown"}}><p>Just some content</p></BsCollapse>`
+      hbs`<BsCollapse @collapsed={{this.collapsed}} @onShow={{action "show"}} @onShown={{action "shown"}}><p>Just some content</p></BsCollapse>`
     );
     this.set('collapsed', false);
 
@@ -68,7 +68,7 @@ module('Integration | Component | bs-collapse', function (hooks) {
 
     this.set('collapsed', false);
     await render(
-      hbs`<BsCollapse @collapsed={{collapsed}} @onHide={{action "hide"}} @onHidden={{action "hidden"}}><p>Just some content</p></BsCollapse>`
+      hbs`<BsCollapse @collapsed={{this.collapsed}} @onHide={{action "hide"}} @onHidden={{action "hidden"}}><p>Just some content</p></BsCollapse>`
     );
     this.set('collapsed', true);
 
@@ -86,7 +86,7 @@ module('Integration | Component | bs-collapse', function (hooks) {
   test('after collapsing/expanding height/width is set correctly ', async function (assert) {
     this.set('collapsed', true);
     await render(
-      hbs`<BsCollapse @expandedSize={{200}} @transitionDuration={{200}} @collapsed={{collapsed}}><p>Just some content</p></BsCollapse>`
+      hbs`<BsCollapse @expandedSize={{200}} @transitionDuration={{200}} @collapsed={{this.collapsed}}><p>Just some content</p></BsCollapse>`
     );
     this.set('collapsed', false);
 

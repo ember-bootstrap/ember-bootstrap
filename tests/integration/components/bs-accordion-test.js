@@ -56,7 +56,7 @@ module('Integration | Component | bs-accordion', function (hooks) {
   test('accordion with preselected item has this item expanded', async function (assert) {
     this.set('selected', 1);
     await render(hbs`
-      <BsAccordion @selected={{selected}} as |acc|>
+      <BsAccordion @selected={{this.selected}} as |acc|>
         <acc.item @value={{1}} @title="TITLE1">CONTENT1</acc.item>
         <acc.item @value={{2}} @title="TITLE2">CONTENT2</acc.item>
       </BsAccordion>
@@ -74,7 +74,7 @@ module('Integration | Component | bs-accordion', function (hooks) {
   test('changing selected item expands this item', async function (assert) {
     this.set('selected', 1);
     await render(hbs`
-      <BsAccordion @selected={{selected}} as |acc|>
+      <BsAccordion @selected={{this.selected}} as |acc|>
         <acc.item @value={{1}} @title="TITLE1">CONTENT1</acc.item>
         <acc.item @value={{2}} @title="TITLE2">CONTENT2</acc.item>
       </BsAccordion>
@@ -180,7 +180,7 @@ module('Integration | Component | bs-accordion', function (hooks) {
   test('changing selection does not leak to public selected property (DDAU)', async function (assert) {
     this.set('selected', 1);
     await render(hbs`
-      <BsAccordion @selected={{selected}} as |acc|>
+      <BsAccordion @selected={{this.selected}} as |acc|>
         <acc.item @value={{1}} @title="TITLE1">CONTENT1</acc.item>
         <acc.item @value={{2}} @title="TITLE2">CONTENT2</acc.item>
       </BsAccordion>

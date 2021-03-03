@@ -2,16 +2,16 @@
   class="{{if this.disabled "disabled"}} {{this.typeClass}} {{if (macroCondition (macroGetOwnConfig "isBS4")) "card"}} {{if (macroCondition (macroGetOwnConfig "isBS3")) "panel"}}"
   ...attributes
 >
-  {{#if hasBlockParams}}
+  {{#if (has-block-params)}}
     {{yield
       (hash
-        title=(component (bs-default @titleComponent (component "bs-accordion/item/title")) collapsed=this.collapsed disabled=this.disabled onClick=(action onClick this.value))
+        title=(component (bs-default @titleComponent (component "bs-accordion/item/title")) collapsed=this.collapsed disabled=this.disabled onClick=(action this.onClick this.value))
         body=(component (bs-default @bodyComponent (component "bs-accordion/item/body")) collapsed=this.collapsed)
       )
     }}
   {{else}}
-    {{#component (bs-default @titleComponent (component "bs-accordion/item/title")) collapsed=this.collapsed disabled=this.disabled onClick=(action onClick this.value)}}
-      {{title}}
+    {{#component (bs-default @titleComponent (component "bs-accordion/item/title")) collapsed=this.collapsed disabled=this.disabled onClick=(action this.onClick this.value)}}
+      {{@title}}
     {{/component}}
     {{#component (bs-default @bodyComponent (component "bs-accordion/item/body")) collapsed=this.collapsed}}
       {{yield}}

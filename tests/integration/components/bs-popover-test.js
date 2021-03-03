@@ -40,7 +40,7 @@ module('Integration | Component | bs-popover', function (hooks) {
     this.set('placement', placements[0]);
     await render(hbs`
       <div id="wrapper">
-        <BsPopover::Element @id="popover-element" @placement={{placement}} @title="dummy title">
+        <BsPopover::Element @id="popover-element" @placement={{this.placement}} @title="dummy title">
           template block text
         </BsPopover::Element>
       </div>
@@ -128,7 +128,7 @@ module('Integration | Component | bs-popover', function (hooks) {
     this.set('hidden', hiddenAction);
     await render(hbs`
       <div id="target">
-        <BsPopover @visible={{true}} @onHide={{action hide}} @onHidden={{action hidden}} as |po|>
+        <BsPopover @visible={{true}} @onHide={{action this.hide}} @onHidden={{action this.hidden}} as |po|>
           <div id="hide" {{action po.close}} role="button">Hide</div>
         </BsPopover>
       </div>
@@ -213,7 +213,7 @@ module('Integration | Component | bs-popover', function (hooks) {
   test("Renders in wormhole's default destination if renderInPlace is not set", async function (assert) {
     this.set('show', false);
     await render(
-      hbs`<div id="ember-bootstrap-wormhole"></div>{{#if show}}<BsPopover @title="Simple popover" @visible={{true}} @fade={{false}} />{{/if}}`
+      hbs`<div id="ember-bootstrap-wormhole"></div>{{#if this.show}}<BsPopover @title="Simple popover" @visible={{true}} @fade={{false}} />{{/if}}`
     );
     this.set('show', true);
     await settled();
@@ -223,7 +223,7 @@ module('Integration | Component | bs-popover', function (hooks) {
 
   test('Renders in test container if renderInPlace is not set', async function (assert) {
     this.set('show', false);
-    await render(hbs`{{#if show}}<BsPopover @title="Simple popover" @visible={{true}} @fade={{false}} />{{/if}}`);
+    await render(hbs`{{#if this.show}}<BsPopover @title="Simple popover" @visible={{true}} @fade={{false}} />{{/if}}`);
     this.set('show', true);
     await settled();
 
@@ -234,7 +234,7 @@ module('Integration | Component | bs-popover', function (hooks) {
   test('Renders in place (no wormhole) if renderInPlace is set', async function (assert) {
     this.set('show', false);
     await render(
-      hbs`<div id="ember-bootstrap-wormhole"></div><div id="wrapper">{{#if show}}<BsPopover @title="Simple popover" @visible={{true}} @fade={{false}} @renderInPlace={{true}} />{{/if}}</div>`
+      hbs`<div id="ember-bootstrap-wormhole"></div><div id="wrapper">{{#if this.show}}<BsPopover @title="Simple popover" @visible={{true}} @fade={{false}} @renderInPlace={{true}} />{{/if}}</div>`
     );
     this.set('show', true);
     await settled();
