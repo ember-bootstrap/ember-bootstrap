@@ -189,7 +189,7 @@ module('Integration | Component | bs-navbar', function (hooks) {
 
     this.set('collapsed', true);
     await render(hbs`
-      {{#bs-navbar as collapsed=collapsed onExpanded=(action "expandedAction") as |navbar|}}
+      {{#bs-navbar collapsed=this.collapsed onExpanded=(action "expandedAction") as |navbar|}}
         <div class="navbar-header">
           {{navbar.toggle}}
           <a class="navbar-brand" href="#">Brand</a>
@@ -214,7 +214,7 @@ module('Integration | Component | bs-navbar', function (hooks) {
 
     this.set('collapsed', false);
     await render(hbs`
-      {{#bs-navbar as collapsed=collapsed onCollapsed=(action "collapsedAction") as |navbar|}}
+      {{#bs-navbar collapsed=this.collapsed onCollapsed=(action "collapsedAction") as |navbar|}}
         <div class="navbar-header">
           {{navbar.toggle}}
           <a class="navbar-brand" href="#">Brand</a>
@@ -242,7 +242,7 @@ module('Integration | Component | bs-navbar', function (hooks) {
     this.actions.expandedAction = expandedAction;
 
     await render(hbs`
-      {{#bs-navbar as collapsed=true onExpand=(action "expandAction") onExpanded=(action "expandedAction") as |navbar|}}
+      {{#bs-navbar collapsed=true onExpand=(action "expandAction") onExpanded=(action "expandedAction") as |navbar|}}
         <div class="navbar-header">
           {{navbar.toggle}}
           <a class="navbar-brand" href="#">Brand</a>
@@ -270,7 +270,7 @@ module('Integration | Component | bs-navbar', function (hooks) {
     this.actions.collapsedAction = collapsedAction;
 
     await render(hbs`
-      {{#bs-navbar as collapsed=false onCollapse=(action "collapseAction") onCollapsed=(action "collapsedAction") as |navbar|}}
+      {{#bs-navbar collapsed=false onCollapse=(action "collapseAction") onCollapsed=(action "collapsedAction") as |navbar|}}
         <div class="navbar-header">
           {{navbar.toggle}}
           <a class="navbar-brand" href="#">Brand</a>
@@ -338,7 +338,7 @@ module('Integration | Component | bs-navbar', function (hooks) {
   test('clicking the toggle does not modify the public collapsed property', async function (assert) {
     this.set('collapsed', true);
     await render(hbs`
-      <BsNavbar @collapsed={{collapsed}} as |navbar|>
+      <BsNavbar @collapsed={{this.collapsed}} as |navbar|>
         <div class="navbar-header">
           {{navbar.toggle}}
           <a class="navbar-brand" href="#">Brand</a>

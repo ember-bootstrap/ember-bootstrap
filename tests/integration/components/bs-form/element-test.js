@@ -47,7 +47,7 @@ module('Integration | Component | bs-form/element', function (hooks) {
     this.set('formLayout', 'vertical');
     this.set('controlType', controlType);
     await render(
-      hbs`<BsForm::Element @controlType={{controlType}} @formLayout={{formLayout}} @horizontalLabelGridClass="col-md-4" />`
+      hbs`<BsForm::Element @controlType={{this.controlType}} @formLayout={{this.formLayout}} @horizontalLabelGridClass="col-md-4" />`
     );
 
     formLayouts.forEach((layout) => {
@@ -67,7 +67,7 @@ module('Integration | Component | bs-form/element', function (hooks) {
     this.set('model', model);
 
     await render(
-      hbs`<BsForm @model={{model}} as |f|><f.element @controlType={{controlType}} @property="prop" /></BsForm>`
+      hbs`<BsForm @model={{this.model}} as |f|><f.element @controlType={{this.controlType}} @property="prop" /></BsForm>`
     );
 
     this.set('model.prop', 'foo');
@@ -93,7 +93,7 @@ module('Integration | Component | bs-form/element', function (hooks) {
     });
     this.set('model', model);
     await render(
-      hbs`<BsForm::Element @controlType={{controlType}} @horizontalLabelGridClass="col-md-4" @model={{model}} @property="name" @onChange={{action change}} />`
+      hbs`<BsForm::Element @controlType={{this.controlType}} @horizontalLabelGridClass="col-md-4" @model={{this.model}} @property="name" @onChange={{action this.change}} />`
     );
 
     if (typeof setValueFn === 'function') {
@@ -118,7 +118,7 @@ module('Integration | Component | bs-form/element', function (hooks) {
     let model = EmberObject.create();
     this.set('model', model);
     await render(
-      hbs`<BsForm @model={{model}} @formLayout={{formLayout}} as |form|><form.element @controlType={{controlType}} @property="prop" @label="myLabel" /></BsForm>`
+      hbs`<BsForm @model={{this.model}} @formLayout={{this.formLayout}} as |form|><form.element @controlType={{this.controlType}} @property="prop" @label="myLabel" /></BsForm>`
     );
 
     formLayouts.forEach((layout) => {
@@ -177,7 +177,7 @@ module('Integration | Component | bs-form/element', function (hooks) {
     test('controlType "radio" is supported', async function (assert) {
       this.set('formLayout', 'vertical');
       await render(
-        hbs`<BsForm::Element @controlType="radio" @formLayout={{formLayout}} @options={{simpleOptions}} @horizontalLabelGridClass="col-md-4" />`
+        hbs`<BsForm::Element @controlType="radio" @formLayout={{this.formLayout}} @options={{this.simpleOptions}} @horizontalLabelGridClass="col-md-4" />`
       );
 
       formLayouts.forEach((layout) => {
@@ -187,7 +187,9 @@ module('Integration | Component | bs-form/element', function (hooks) {
     });
 
     test('it renders simple options', async function (assert) {
-      await render(hbs`<BsForm::Element @controlType="radio" @formLayout="horizontal" @options={{simpleOptions}} />`);
+      await render(
+        hbs`<BsForm::Element @controlType="radio" @formLayout="horizontal" @options={{this.simpleOptions}} />`
+      );
 
       assert.dom('input[type=radio]').exists({ count: 2 });
       assert.dom('label').exists({ count: 2 });
@@ -203,7 +205,9 @@ module('Integration | Component | bs-form/element', function (hooks) {
     });
 
     test('it renders hash options', async function (assert) {
-      await render(hbs`<BsForm::Element @controlType="radio" @options={{hashOptions}} @optionLabelPath="title" />`);
+      await render(
+        hbs`<BsForm::Element @controlType="radio" @options={{this.hashOptions}} @optionLabelPath="title" />`
+      );
 
       assert.dom('input[type=radio]').exists({ count: 2 });
       assert.dom('label').exists({ count: 2 });
@@ -220,7 +224,7 @@ module('Integration | Component | bs-form/element', function (hooks) {
 
     test('Block mode allows to customize label for each radio input', async function (assert) {
       await render(hbs`
-        <BsForm::Element @controlType="radio" @options={{simpleOptions}} as |Element|>
+        <BsForm::Element @controlType="radio" @options={{this.simpleOptions}} as |Element|>
           <Element.control as |option index|>
             {{index}}: {{option}}
           </Element.control>
@@ -235,7 +239,7 @@ module('Integration | Component | bs-form/element', function (hooks) {
       'Block mode allows to customize label for each radio input if used together with inline',
       async function (assert) {
         await render(hbs`
-        <BsForm::Element @controlType="radio" @options={{simpleOptions}} as |Element|>
+        <BsForm::Element @controlType="radio" @options={{this.simpleOptions}} as |Element|>
           <Element.control @inline={{true}} as |option index|>
             {{index}}: {{option}}
           </Element.control>
@@ -248,7 +252,7 @@ module('Integration | Component | bs-form/element', function (hooks) {
     );
 
     testBS3('has correct markup', async function (assert) {
-      await render(hbs`<BsForm::Element @controlType="radio" @options={{simpleOptions}} />`);
+      await render(hbs`<BsForm::Element @controlType="radio" @options={{this.simpleOptions}} />`);
 
       assert.dom('.radio').exists({ count: 2 });
       assert.dom('.radio label').exists({ count: 2 });
@@ -257,7 +261,7 @@ module('Integration | Component | bs-form/element', function (hooks) {
 
     testBS3('supports inline', async function (assert) {
       await render(hbs`
-        <BsForm::Element @controlType="radio" @options={{simpleOptions}} as |Element|>
+        <BsForm::Element @controlType="radio" @options={{this.simpleOptions}} as |Element|>
           <Element.control @inline={{true}} />
         </BsForm::Element>
       `);
@@ -269,7 +273,7 @@ module('Integration | Component | bs-form/element', function (hooks) {
 
     testBS3('supports inline for hash options', async function (assert) {
       await render(hbs`
-        <BsForm::Element @controlType="radio" @options={{hashOptions}} @optionLabelPath="title" as |Element|>
+        <BsForm::Element @controlType="radio" @options={{this.hashOptions}} @optionLabelPath="title" as |Element|>
           <Element.control @inline={{true}} />
         </BsForm::Element>
       `);
@@ -291,7 +295,9 @@ module('Integration | Component | bs-form/element', function (hooks) {
     });
 
     testBS4('has correct markup', async function (assert) {
-      await render(hbs`<BsForm::Element @controlType="radio" @label="my radio group" @options={{simpleOptions}} />`);
+      await render(
+        hbs`<BsForm::Element @controlType="radio" @label="my radio group" @options={{this.simpleOptions}} />`
+      );
 
       assert.dom('legend').exists({ count: 1 }, 'renders a <legend> instead of a <label> for radio group');
       assert.dom('legend').hasText('my radio group', 'renders value of label argument as text of <legend>');
@@ -305,7 +311,7 @@ module('Integration | Component | bs-form/element', function (hooks) {
     testBS4('supports horizontal from layout', async function (assert) {
       await render(hbs`
         <BsForm @formLayout="horizontal" as |form|>
-          <form.element @controlType="radio" @label="my radio group" @options={{simpleOptions}} />
+          <form.element @controlType="radio" @label="my radio group" @options={{this.simpleOptions}} />
         </BsForm>
       `);
 
@@ -316,7 +322,7 @@ module('Integration | Component | bs-form/element', function (hooks) {
 
     testBS4('supports inline', async function (assert) {
       await render(hbs`
-        <BsForm::Element @controlType="radio" @options={{simpleOptions}} as |Element|>
+        <BsForm::Element @controlType="radio" @options={{this.simpleOptions}} as |Element|>
           <Element.control @inline={{true}} />
         </BsForm::Element>
       `);
@@ -329,7 +335,7 @@ module('Integration | Component | bs-form/element', function (hooks) {
       this.set('model', model);
 
       await render(
-        hbs`<BsForm @model={{model}} as |f|><f.element @controlType="radio" @options={{simpleOptions}} @property="prop" /></BsForm>`
+        hbs`<BsForm @model={{this.model}} as |f|><f.element @controlType="radio" @options={{this.simpleOptions}} @property="prop" /></BsForm>`
       );
 
       this.set('model.prop', undefined);
@@ -348,7 +354,7 @@ module('Integration | Component | bs-form/element', function (hooks) {
       });
       this.set('model', model);
       await render(
-        hbs`<BsForm::Element @controlType="radio" @options={{simpleOptions}} @model={{model}} @property="name" @onChange={{action change}} />`
+        hbs`<BsForm::Element @controlType="radio" @options={{this.simpleOptions}} @model={{this.model}} @property="name" @onChange={{action this.change}} />`
       );
       await click(this.element.querySelectorAll('input[type=radio]')[1]);
 
@@ -362,7 +368,7 @@ module('Integration | Component | bs-form/element', function (hooks) {
       foo: 'bar',
     });
     this.set('model', model);
-    await render(hbs`<BsForm::Element @property="foo" @model={{model}} />`);
+    await render(hbs`<BsForm::Element @property="foo" @model={{this.model}} />`);
 
     assert.dom('input').hasValue('bar', 'input has expected value from model');
 
@@ -373,7 +379,7 @@ module('Integration | Component | bs-form/element', function (hooks) {
   test('Changing formLayout changes markup', async function (assert) {
     this.set('formLayout', 'vertical');
     await render(
-      hbs`<BsForm @horizontalLabelGridClass="col-sm-4" @formLayout={{formLayout}} as |form|><form.element @controlType="text" @label="myLabel" /></BsForm>`
+      hbs`<BsForm @horizontalLabelGridClass="col-sm-4" @formLayout={{this.formLayout}} as |form|><form.element @controlType="text" @label="myLabel" /></BsForm>`
     );
     assert.dom('form > div').hasClass('form-group', 'component has form-group class');
     assert.equal(this.element.querySelector('form > div > :nth-child(1)').tagName, 'LABEL', 'first child is a label');
@@ -399,7 +405,7 @@ module('Integration | Component | bs-form/element', function (hooks) {
 
     this.set('model', model);
     await render(hbs`
-      <BsForm @model={{model}} as |form|>
+      <BsForm @model={{this.model}} as |form|>
         <form.element
           @controlType="textarea"
           @label="Gender"
@@ -472,8 +478,8 @@ module('Integration | Component | bs-form/element', function (hooks) {
     this.set('errors', A([]));
     this.set('formLayout', 'vertical');
     await render(hbs`
-      <BsForm @formLayout={{formLayout}} as |form|>
-        <form.element @showAllValidations={{true}} @hasValidator={{true}} @errors={{errors}} @label="adjusts validation icon position" class="addon">
+      <BsForm @formLayout={{this.formLayout}} as |form|>
+        <form.element @showAllValidations={{true}} @hasValidator={{true}} @errors={{this.errors}} @label="adjusts validation icon position" class="addon">
           <div class="input-group">
             <input class="form-control">
             <div class="input-group-addon">
@@ -481,7 +487,7 @@ module('Integration | Component | bs-form/element', function (hooks) {
             </div>
           </div>
         </form.element>
-        <form.element @showAllValidations={{true}} @hasValidator={{true}} @errors={{errors}} @label="adjusts validation icon position" class="button">
+        <form.element @showAllValidations={{true}} @hasValidator={{true}} @errors={{this.errors}} @label="adjusts validation icon position" class="button">
           <div class="input-group">
             <input class="form-control">
             <div class="input-group-btn">
@@ -545,7 +551,7 @@ module('Integration | Component | bs-form/element', function (hooks) {
       })
     );
     await render(hbs`
-        <BsForm::Element @property="name" @model={{model}} />
+        <BsForm::Element @property="name" @model={{this.model}} />
     `);
     await focus('input');
     await blur('input');
@@ -557,7 +563,7 @@ module('Integration | Component | bs-form/element', function (hooks) {
   test('shows validation success', async function (assert) {
     this.set('model', EmberObject.create({ name: null }));
     await render(hbs`
-        <BsForm::Element @property="name" @showAllValidations={{true}} @hasValidator={{true}} @model={{model}} />
+        <BsForm::Element @property="name" @showAllValidations={{true}} @hasValidator={{true}} @model={{this.model}} />
     `);
     assert
       .dom(formFeedbackElement())
@@ -568,7 +574,7 @@ module('Integration | Component | bs-form/element', function (hooks) {
     this.set('errors', A(['Invalid']));
     this.set('model', EmberObject.create({ name: null }));
     await render(hbs`
-        <BsForm::Element @property="name" @hasValidator={{true}} @errors={{errors}} @model={{model}} />
+        <BsForm::Element @property="name" @hasValidator={{true}} @errors={{this.errors}} @model={{this.model}} />
     `);
     assert
       .dom(formFeedbackElement())
@@ -591,7 +597,7 @@ module('Integration | Component | bs-form/element', function (hooks) {
     this.set('warnings', A(['Insecure']));
     this.set('model', EmberObject.create({ name: null }));
     await render(hbs`
-        <BsForm::Element @property="name" @hasValidator={{true}} @warnings={{warnings}} @model={{model}} />
+        <BsForm::Element @property="name" @hasValidator={{true}} @warnings={{this.warnings}} @model={{this.model}} />
     `);
     assert
       .dom(formFeedbackElement())
@@ -617,7 +623,7 @@ module('Integration | Component | bs-form/element', function (hooks) {
     this.set('model', EmberObject.create({ name: null }));
     this.set('error', 'some error');
     await render(hbs`
-        <BsForm::Element @property="name" @hasValidator={{true}} @customError={{error}} @model={{model}} />
+        <BsForm::Element @property="name" @hasValidator={{true}} @customError={{this.error}} @model={{this.model}} />
     `);
     assert.dom(formFeedbackElement()).hasClass(validationErrorClass(), 'custom error is shown immediately');
     assert.dom(`.form-group .${formFeedbackClass()}`).hasText('some error');
@@ -633,7 +639,7 @@ module('Integration | Component | bs-form/element', function (hooks) {
     this.set('model', EmberObject.create({ name: null }));
     this.set('warning', 'some warning');
     await render(hbs`
-        <BsForm::Element @property="name" @hasValidator={{true}} @customWarning={{warning}} @model={{model}} />
+        <BsForm::Element @property="name" @hasValidator={{true}} @customWarning={{this.warning}} @model={{this.model}} />
     `);
     assert.dom(formFeedbackElement()).hasClass(validationWarningClass(), 'custom warning is shown immediately');
     assert.dom(`.form-group .${formFeedbackClass()}`).hasText('some warning');
@@ -650,7 +656,7 @@ module('Integration | Component | bs-form/element', function (hooks) {
     this.set('warning', 'some warning');
     this.set('model', EmberObject.create({ name: null }));
     await render(hbs`
-        <BsForm::Element @property="name" @hasValidator={{true}} @errors={{errors}} @customWarning={{warning}} @model={{model}} />
+        <BsForm::Element @property="name" @hasValidator={{true}} @errors={{this.errors}} @customWarning={{this.warning}} @model={{this.model}} />
     `);
     assert
       .dom(formFeedbackElement())
@@ -684,7 +690,7 @@ module('Integration | Component | bs-form/element', function (hooks) {
       this.set('model', EmberObject.create({ name: null }));
       this.set('showValidationOn', ['change']);
       await render(hbs`
-        <BsForm::Element @property="name" @hasValidator={{true}} @errors={{errors}} @model={{model}} @showValidationOn={{showValidationOn}} />
+        <BsForm::Element @property="name" @hasValidator={{true}} @errors={{this.errors}} @model={{this.model}} @showValidationOn={{this.showValidationOn}} />
     `);
       assert
         .dom(formFeedbackElement())
@@ -708,7 +714,7 @@ module('Integration | Component | bs-form/element', function (hooks) {
       this.set('errors', A(['Invalid']));
       this.set('model', EmberObject.create({ name: null }));
       await render(hbs`
-        <BsForm::Element @property="name" @hasValidator={{true}} @errors={{errors}} @model={{model}} @showValidationOn="change" />
+        <BsForm::Element @property="name" @hasValidator={{true}} @errors={{this.errors}} @model={{this.model}} @showValidationOn="change" />
     `);
       assert
         .dom(formFeedbackElement())
@@ -730,7 +736,7 @@ module('Integration | Component | bs-form/element', function (hooks) {
     this.set('model', EmberObject.create({ name: null }));
     await render(hbs`
       <BsForm as |form|>
-        <form.element @property="name" @hasValidator={{true}} @errors={{errors}} @model={{model}} as |el|>
+        <form.element @property="name" @hasValidator={{true}} @errors={{this.errors}} @model={{this.model}} as |el|>
           <div class="input-group">
             <span class="input-group-btn">
               <button class="btn btn-default" type="button">Button</button>
@@ -751,7 +757,7 @@ module('Integration | Component | bs-form/element', function (hooks) {
     this.set('model', EmberObject.create({ name: null }));
     await render(hbs`
       <BsForm as |form|>
-        <form.element @property="name" @hasValidator={{true}} @errors={{errors}} @model={{model}} as |el|>
+        <form.element @property="name" @hasValidator={{true}} @errors={{this.errors}} @model={{this.model}} as |el|>
           <div class="input-group mb-3">
             <div class="input-group-prepend">
               <button class="btn btn-outline-secondary" type="button">Button</button>
@@ -775,7 +781,7 @@ module('Integration | Component | bs-form/element', function (hooks) {
       this.set('model', EmberObject.create({ name: null }));
       await render(hbs`
       <BsForm as |form|>
-        <form.element @property="name" @hasValidator={{true}} @errors={{errors}} @model={{model}} @doNotShowValidationForEventTargets={{doNotShowValidationForEventTargets}} as |el|>
+        <form.element @property="name" @hasValidator={{true}} @errors={{this.errors}} @model={{this.model}} @doNotShowValidationForEventTargets={{this.doNotShowValidationForEventTargets}} as |el|>
           {{el.control}}
           <button type="button" data-trigger-validation="false">Test</button>
         </form.element>
