@@ -116,7 +116,7 @@
     "ember-sinon-qunit": "^5.0.0",
     "ember-source": "~3.23.1",
     "ember-source-channel-url": "^3.0.0",
-    "ember-template-lint": "^2.18.0",
+    "ember-template-lint": "^3.1.1",
     "ember-try": "^1.4.0",
     "eslint": "^7.19.0",
     "eslint-config-prettier": "^7.2.0",
