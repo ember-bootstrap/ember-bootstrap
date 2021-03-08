@@ -1265,6 +1265,13 @@
   resolved "https://registry.yarnpkg.com/@glimmer/validator/-/validator-0.44.0.tgz#03d127097dc9cb23052cdb7fcae59d0a9dca53e1"
   integrity sha512-i01plR0EgFVz69GDrEuFgq1NheIjZcyTy3c7q+w7d096ddPVeVcRzU3LKaqCfovvLJ+6lJx40j45ecycASUUyw==
 
+"@glimmer/vm-babel-plugins@0.77.1":
+  version "0.77.1"
+  resolved "https://registry.yarnpkg.com/@glimmer/vm-babel-plugins/-/vm-babel-plugins-0.77.1.tgz#80c8b5476ccff68191bc42ebb29928a9b8d22d69"
+  integrity sha512-amkBPV3H/3OhYIeXo03sU1VzqmUl8TUxHhjfVJwRy+vQV22S5saZCiUCyOYUsUkxdEG5sU8qooooBY8VomkkBg==
+  dependencies:
+    babel-plugin-debug-macros "^0.3.4"
+
 "@glimmer/vm@^0.42.2":
   version "0.42.2"
   resolved "https://registry.yarnpkg.com/@glimmer/vm/-/vm-0.42.2.tgz#492a4f05eac587c3a37371b3c62593f20bef553d"
@@ -2661,10 +2668,10 @@ babel-plugin-debug-macros@^0.2.0, babel-plugin-debug-macros@^0.2.0-beta.6:
   dependencies:
     semver "^5.3.0"
 
-babel-plugin-debug-macros@^0.3.3:
-  version "0.3.3"
-  resolved "https://registry.yarnpkg.com/babel-plugin-debug-macros/-/babel-plugin-debug-macros-0.3.3.tgz#29c3449d663f61c7385f5b8c72d8015b069a5cb7"
-  integrity sha512-E+NI8TKpxJDBbVkdWkwHrKgJi696mnRL8XYrOPYw82veNHPDORM9WIQifl6TpIo8PNy2tU2skPqbfkmHXrHKQA==
+babel-plugin-debug-macros@^0.3.3, babel-plugin-debug-macros@^0.3.4:
+  version "0.3.4"
+  resolved "https://registry.yarnpkg.com/babel-plugin-debug-macros/-/babel-plugin-debug-macros-0.3.4.tgz#22961d0cb851a80654cece807a8b4b73d85c6075"
+  integrity sha512-wfel/vb3pXfwIDZUrkoDrn5FHmlWI96PCJ3UCDv2a86poJ3EQrnArNW5KfHSVJ9IOgxHbo748cQt7sDU+0KCEw==
   dependencies:
     semver "^5.3.0"
 
@@ -6432,15 +6439,16 @@ ember-source-channel-url@^3.0.0:
   dependencies:
     node-fetch "^2.6.0"
 
-ember-source@~3.23.1:
-  version "3.23.1"
-  resolved "https://registry.yarnpkg.com/ember-source/-/ember-source-3.23.1.tgz#6a26bb598ffaf8e4eeba475de30d9d1ce59106d0"
-  integrity sha512-KWeKSF9y0Ohmrnw8CKAs4zwMzzxwrS+AX9pPrQNPKNG0gcJpeREdAXnUWAFZEHZlUPJgZPwaSL2APpZ5tWNQJA==
+ember-source@~3.25.3:
+  version "3.25.3"
+  resolved "https://registry.yarnpkg.com/ember-source/-/ember-source-3.25.3.tgz#a64278a2dcc36b03056589e1b7393f4558c42d70"
+  integrity sha512-3HgfvYJfvcALNJSsPvbN0qn9ykI7Px7mPyCidXJRdm+tdPB0DKFW3nqT+4W+7YysWYGsj6yS81NhksnXEw4Naw==
   dependencies:
     "@babel/helper-module-imports" "^7.8.3"
     "@babel/plugin-transform-block-scoping" "^7.8.3"
     "@babel/plugin-transform-object-assign" "^7.8.3"
     "@ember/edition-utils" "^1.2.0"
+    "@glimmer/vm-babel-plugins" "0.77.1"
     babel-plugin-debug-macros "^0.3.3"
     babel-plugin-filter-imports "^4.0.0"
     broccoli-concat "^4.2.4"
@@ -6448,7 +6456,7 @@ ember-source@~3.23.1:
     broccoli-funnel "^2.0.2"
     broccoli-merge-trees "^4.2.0"
     chalk "^4.0.0"
-    ember-cli-babel "^7.19.0"
+    ember-cli-babel "^7.23.0"
     ember-cli-get-component-path-option "^1.0.0"
     ember-cli-is-package-missing "^1.0.0"
     ember-cli-normalize-entity-name "^1.0.0"
@@ -9174,7 +9182,7 @@ is-ci@2.0.0, is-ci@^2.0.0:
   dependencies:
     ci-info "^2.0.0"
 
-is-core-module@^2.1.0, is-core-module@^2.2.0:
+is-core-module@^2.2.0:
   version "2.2.0"
   resolved "https://registry.yarnpkg.com/is-core-module/-/is-core-module-2.2.0.tgz#97037ef3d52224d85163f5597b2b63d9afed981a"
   integrity sha512-XRAfAdyyY5F5cOXn7hYQDqh2Xmii+DEfIcQGxK/uNwMHhIkPWO0g8msXcbzLe+MpGoR951MlqM/2iIlU4vKDdQ==
@@ -12876,15 +12884,7 @@ resolve-url@^0.2.1:
   resolved "https://registry.yarnpkg.com/resolve-url/-/resolve-url-0.2.1.tgz#2c637fe77c893afd2a663fe21aa9080068e2052a"
   integrity sha1-LGN/53yJOv0qZj/iGqkIAGjiBSo=
 
-resolve@^1.1.6, resolve@^1.1.7, resolve@^1.10.1, resolve@^1.11.1, resolve@^1.12.0, resolve@^1.13.1, resolve@^1.15.0, resolve@^1.17.0, resolve@^1.18.1, resolve@^1.19.0, resolve@^1.3.2, resolve@^1.3.3, resolve@^1.4.0, resolve@^1.5.0, resolve@^1.8.1:
-  version "1.19.0"
-  resolved "https://registry.yarnpkg.com/resolve/-/resolve-1.19.0.tgz#1af5bf630409734a067cae29318aac7fa29a267c"
-  integrity sha512-rArEXAgsBG4UgRGcynxWIWKFvh/XZCcS8UJdHhwy91zwAvCZIbcs+vAbflgBnNjYMs/i/i+/Ux6IZhML1yPvxg==
-  dependencies:
-    is-core-module "^2.1.0"
-    path-parse "^1.0.6"
-
-resolve@^1.10.0:
+resolve@^1.1.6, resolve@^1.1.7, resolve@^1.10.0, resolve@^1.10.1, resolve@^1.11.1, resolve@^1.12.0, resolve@^1.13.1, resolve@^1.15.0, resolve@^1.17.0, resolve@^1.18.1, resolve@^1.19.0, resolve@^1.3.2, resolve@^1.3.3, resolve@^1.4.0, resolve@^1.5.0, resolve@^1.8.1:
   version "1.20.0"
   resolved "https://registry.yarnpkg.com/resolve/-/resolve-1.20.0.tgz#629a013fb3f70755d6f0b7935cc1c2c5378b1975"
   integrity sha512-wENBPt4ySzg4ybFQW2TT1zMQucPK95HSh/nq2CFTZVOGut2+pQvSsgtda4d26YrYcr067wjbmzOG8byDPBX63A==
