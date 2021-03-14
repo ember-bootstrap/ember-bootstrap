@@ -52,10 +52,10 @@ module('Integration | Component | bs-nav', function (hooks) {
     await render(hbs`
       <BsNav as |nav|>
         <nav.item>
-          {{#nav.link-to "application"}}Dummy{{/nav.link-to}}
+          <nav.link-to @route="application">Dummy</nav.link-to>
         </nav.item>
         <nav.item>
-          {{#nav.linkTo "application"}}Dummy{{/nav.linkTo}}
+          <nav.linkTo @route="application">Dummy</nav.linkTo>
         </nav.item>
         <nav.dropdown as |dd|>
           <dd.toggle>Dropdown <span class="caret"></span></dd.toggle>
@@ -76,10 +76,10 @@ module('Integration | Component | bs-nav', function (hooks) {
     await render(hbs`
       <BsNav as |nav|>
         <nav.item>
-          {{#nav.link-to "application"}}Dummy{{/nav.link-to}}
+          <nav.link-to @route="application">Dummy</nav.link-to>
         </nav.item>
         <nav.item>
-          {{#nav.linkTo "application"}}Dummy{{/nav.linkTo}}
+          <nav.linkTo @route="application">Dummy</nav.linkTo>
         </nav.item>
         <nav.dropdown as |dd|>
           <dd.toggle>Dropdown <span class="caret"></span></dd.toggle>

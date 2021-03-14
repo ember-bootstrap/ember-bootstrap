@@ -321,7 +321,7 @@ module('Integration | Component | bs-dropdown', function (hooks) {
       <dd.toggle>Dropdown</dd.toggle>
       <dd.menu as |menu|>
         <menu.item>
-          {{menu.link-to "Home" "index"}}
+          <menu.link-to @route="index">Home</menu.link-to>
         </menu.item>
       </dd.menu>
     </BsDropdown>`);

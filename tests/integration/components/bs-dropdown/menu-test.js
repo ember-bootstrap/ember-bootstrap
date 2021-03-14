@@ -58,8 +58,8 @@ module('Integration | Component | bs-dropdown/menu', function (hooks) {
       hbs`
       <BsDropdown as |dd|>
         <dd.menu @toggleElement={{this.element}} @isOpen={{true}} as |ddm|>
-          {{#ddm.link-to "index"}}Link{{/ddm.link-to}}
-          {{#ddm.linkTo "index"}}Link{{/ddm.linkTo}}
+          <ddm.link-to @route="index">Link</ddm.link-to>
+          <ddm.linkTo @route="index">Link</ddm.linkTo>
         </dd.menu>
       </BsDropdown>
     `

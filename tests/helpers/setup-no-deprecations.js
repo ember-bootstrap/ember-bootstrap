@@ -4,12 +4,17 @@ import { registerDeprecationHandler } from '@ember/debug';
 let isRegistered = false;
 let deprecations;
 
+// Ignore deprecations that are not caused by our own code, and which we cannot fix easily.
+const ignoredDeprecations = [/Versions of modifier manager capabilities prior to 3\.22 have been deprecated/];
+
 export default function setupNoDeprecations({ beforeEach, afterEach }) {
   beforeEach(function () {
     deprecations = [];
     if (!isRegistered) {
       registerDeprecationHandler((message, options, next) => {
-        deprecations.push(message);
+        if (!ignoredDeprecations.some((regex) => message.match(regex))) {
+          deprecations.push(message);
+        }
         next(message, options);
       });
       isRegistered = true;
