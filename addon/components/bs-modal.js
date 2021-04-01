@@ -186,7 +186,16 @@ export default class Modal extends Component {
    * To avoid getting out of sync it should be set only by the setter
    * of `state` property.
    */
-  @tracked isModalShown = this.state !== 'closed';
+  @tracked isInDom = this.state !== 'closed';
+
+  /**
+   * Controls if the modal is visible.
+   *
+   * It must be kept in sync with the non-tracked property `state`.
+   * To avoid getting out of sync it should be set only the setter
+   * of `state` property.
+   */
+  @tracked isShowModal = this.state === 'open' || this.state === 'opening';
 
   /**
    * Current state of the modal.
@@ -213,7 +222,8 @@ export default class Modal extends Component {
   }
   set state(value) {
     this._state = value;
-    this.isModalShown = value !== 'closed';
+    this.isShowModal = value === 'open' || value === 'opening';
+    this.isInDom = value !== 'closed';
   }
   _state = 'closed';
 
