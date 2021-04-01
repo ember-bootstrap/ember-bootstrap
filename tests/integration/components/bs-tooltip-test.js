@@ -54,7 +54,7 @@ module('Integration | Component | bs-tooltip', function (hooks) {
     let placements = ['top', 'left', 'bottom', 'right'];
     this.set('placement', placements[0]);
     await render(hbs`
-      <BsTooltip::Element @id="tooltip-element" @placement={{placement}}>
+      <BsTooltip::Element @id="tooltip-element" @placement={{this.placement}}>
         template block text
       </BsTooltip::Element>
     `);
@@ -243,7 +243,7 @@ module('Integration | Component | bs-tooltip', function (hooks) {
   test("Renders in wormhole's default destination if renderInPlace is not set", async function (assert) {
     this.set('show', false);
     await render(
-      hbs`<div id="ember-bootstrap-wormhole"></div>{{#if show}}<BsTooltip @title="Simple Tooltip" @visible={{true}} @fade={{false}} />{{/if}}`
+      hbs`<div id="ember-bootstrap-wormhole"></div>{{#if this.show}}<BsTooltip @title="Simple Tooltip" @visible={{true}} @fade={{false}} />{{/if}}`
     );
     this.set('show', true);
     await settled();
@@ -253,7 +253,7 @@ module('Integration | Component | bs-tooltip', function (hooks) {
 
   test('Renders in test container if renderInPlace is not set', async function (assert) {
     this.set('show', false);
-    await render(hbs`{{#if show}}<BsTooltip @title="Simple Tooltip" @visible={{true}} @fade={{false}} />{{/if}}`);
+    await render(hbs`{{#if this.show}}<BsTooltip @title="Simple Tooltip" @visible={{true}} @fade={{false}} />{{/if}}`);
     this.set('show', true);
     await settled();
 
@@ -264,7 +264,7 @@ module('Integration | Component | bs-tooltip', function (hooks) {
   test('Renders in place (no wormhole) if renderInPlace is set', async function (assert) {
     this.set('show', false);
     await render(
-      hbs`<div id="ember-bootstrap-wormhole"></div><div id="wrapper">{{#if show}}<BsTooltip @title="Simple Tooltip" @visible={{true}} @fade={{false}} @renderInPlace={{true}} />{{/if}}</div>`
+      hbs`<div id="ember-bootstrap-wormhole"></div><div id="wrapper">{{#if this.show}}<BsTooltip @title="Simple Tooltip" @visible={{true}} @fade={{false}} @renderInPlace={{true}} />{{/if}}</div>`
     );
     this.set('show', true);
     await settled();
@@ -295,7 +295,7 @@ module('Integration | Component | bs-tooltip', function (hooks) {
 
     await render(hbs`
       <div id="wrapper">
-        {{#if visible}}
+        {{#if this.visible}}
           <p class="margin-top">
             <a href="#" id="target">
               Hover me<BsTooltip @title="very very very very very very very long tooltip" @fade={{false}} @visible={{true}} />
@@ -318,7 +318,7 @@ module('Integration | Component | bs-tooltip', function (hooks) {
       <div id="wrapper">
         <p class="margin-top">
           <a href="#" id="target">
-            Hover me<BsTooltip @title="very very very very very very very long tooltip" @fade={{false}} @visible={{visible}} />
+            Hover me<BsTooltip @title="very very very very very very very long tooltip" @fade={{false}} @visible={{this.visible}} />
           </a>
         </p>
       </div>`);
@@ -468,7 +468,7 @@ module('Integration | Component | bs-tooltip', function (hooks) {
     this.set('hidden', hiddenAction);
     await render(hbs`
       <div id="target">
-        <BsTooltip @visible={{true}} @onHide={{action hide}} @onHidden={{action hidden}} as |tt|>
+        <BsTooltip @visible={{true}} @onHide={{action this.hide}} @onHidden={{action this.hidden}} as |tt|>
           <div id="hide" {{action tt.close}} role="button">Hide</div>
         </BsTooltip>
       </div>`);

@@ -1,5 +1,5 @@
 {{! template-lint-disable no-unbound }}
-{{unbound _parentFinder}}
+{{unbound this._parentFinder}}
 {{#if this.inDom}}
   {{#let (bs-default @elementComponent (component "bs-popover/element")) as |Element|}}
     <Element

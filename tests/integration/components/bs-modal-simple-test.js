@@ -89,7 +89,7 @@ module('Integration | Component | bs-modal-simple', function (hooks) {
   test('open property shows modal', async function (assert) {
     this.set('open', false);
     await render(
-      hbs`<BsModalSimple @title="Simple Dialog" @fade={{false}} @open={{open}}>Hello world!</BsModalSimple>`
+      hbs`<BsModalSimple @title="Simple Dialog" @fade={{false}} @open={{this.open}}>Hello world!</BsModalSimple>`
     );
 
     assert.dom('.modal').doesNotExist('Modal is hidden');
@@ -107,7 +107,7 @@ module('Integration | Component | bs-modal-simple', function (hooks) {
 
   testRequiringTransitions('open property shows modal [fade]', async function (assert) {
     this.set('open', false);
-    await render(hbs`<BsModalSimple @title="Simple Dialog" @open={{open}}>Hello world!</BsModalSimple>`);
+    await render(hbs`<BsModalSimple @title="Simple Dialog" @open={{this.open}}>Hello world!</BsModalSimple>`);
 
     assert.dom('.modal').doesNotExist('Modal is hidden');
     this.set('open', true);
@@ -123,7 +123,9 @@ module('Integration | Component | bs-modal-simple', function (hooks) {
 
   test('closeButton property shows close button', async function (assert) {
     this.set('closeButton', false);
-    await render(hbs`<BsModalSimple @title="Simple Dialog" @closeButton={{closeButton}}>Hello world!</BsModalSimple>`);
+    await render(
+      hbs`<BsModalSimple @title="Simple Dialog" @closeButton={{this.closeButton}}>Hello world!</BsModalSimple>`
+    );
 
     assert.dom('.modal .modal-header .close').doesNotExist('Modal has no close button');
     this.set('closeButton', true);
@@ -132,7 +134,7 @@ module('Integration | Component | bs-modal-simple', function (hooks) {
 
   test('fade property toggles fade effect', async function (assert) {
     this.set('fade', false);
-    await render(hbs`<BsModalSimple @title="Simple Dialog" @fade={{fade}}>Hello world!</BsModalSimple>`);
+    await render(hbs`<BsModalSimple @title="Simple Dialog" @fade={{this.fade}}>Hello world!</BsModalSimple>`);
     assert.dom('.modal').hasNoClass('fade', 'Modal has no fade class');
     this.set('fade', true);
     assert.dom('.modal').hasClass('fade', 'Modal has fade class');
@@ -212,7 +214,7 @@ module('Integration | Component | bs-modal-simple', function (hooks) {
     this.actions.openAction = showSpy;
     this.actions.openedAction = shownSpy;
     await render(
-      hbs`<BsModalSimple @title="Simple Dialog" @onShow={{action "openAction"}} @onShown={{action "openedAction"}} @open={{open}} @fade={{false}}>Hello world!</BsModalSimple>`
+      hbs`<BsModalSimple @title="Simple Dialog" @onShow={{action "openAction"}} @onShown={{action "openedAction"}} @open={{this.open}} @fade={{false}}>Hello world!</BsModalSimple>`
     );
 
     this.set('open', true);
@@ -229,7 +231,7 @@ module('Integration | Component | bs-modal-simple', function (hooks) {
     this.actions.openAction = showSpy;
     this.actions.openedAction = shownSpy;
     await render(
-      hbs`<BsModalSimple @title="Simple Dialog" @onShow={{action "openAction"}} @onShown={{action "openedAction"}} @open={{open}}>Hello world!</BsModalSimple>`
+      hbs`<BsModalSimple @title="Simple Dialog" @onShow={{action "openAction"}} @onShown={{action "openedAction"}} @open={{this.open}}>Hello world!</BsModalSimple>`
     );
 
     this.set('open', true);
@@ -257,7 +259,7 @@ module('Integration | Component | bs-modal-simple', function (hooks) {
     let hiddenSpy = sinon.spy();
     this.actions.testAction = hiddenSpy;
     await render(
-      hbs`<BsModalSimple @title="Simple Dialog" @onHidden={{action "testAction"}} @open={{open}}>Hello world!</BsModalSimple>`
+      hbs`<BsModalSimple @title="Simple Dialog" @onHidden={{action "testAction"}} @open={{this.open}}>Hello world!</BsModalSimple>`
     );
 
     this.set('open', false);
@@ -308,7 +310,7 @@ module('Integration | Component | bs-modal-simple', function (hooks) {
   testRequiringFocus('autofocus element is focused when present and fade=false', async function (assert) {
     this.set('open', false);
     await render(hbs`
-      <BsModalSimple @title="Simple Dialog" @fade={{false}} @open={{open}}>
+      <BsModalSimple @title="Simple Dialog" @fade={{false}} @open={{this.open}}>
         <input data-test-autofocus autofocus="autofocus">
       </BsModalSimple>
     `);
@@ -331,7 +333,7 @@ module('Integration | Component | bs-modal-simple', function (hooks) {
   testRequiringFocus('modal is focused when opened later', async function (assert) {
     this.set('open', false);
     await render(hbs`
-      <BsModalSimple @title="Simple Dialog" @fade={{false}} @open={{open}}>
+      <BsModalSimple @title="Simple Dialog" @fade={{false}} @open={{this.open}}>
         Hallo
       </BsModalSimple>
     `);
@@ -372,7 +374,7 @@ module('Integration | Component | bs-modal-simple', function (hooks) {
     this.set('open', false);
     await render(hbs`
       <button type="button" data-test-button>Open</button>
-      <BsModalSimple @title="Simple Dialog" @fade={{false}} @open={{open}}>
+      <BsModalSimple @title="Simple Dialog" @fade={{false}} @open={{this.open}}>
         Hallo
       </BsModalSimple>
     `);
@@ -481,7 +483,7 @@ module('Integration | Component | bs-modal-simple', function (hooks) {
   test("Renders in wormhole's default destination if renderInPlace is not set", async function (assert) {
     this.set('show', false);
     await render(
-      hbs`<div id="ember-bootstrap-wormhole"></div>{{#if show}}<BsModalSimple @title="Simple Dialog">Hello world!</BsModalSimple>{{/if}}`
+      hbs`<div id="ember-bootstrap-wormhole"></div>{{#if this.show}}<BsModalSimple @title="Simple Dialog">Hello world!</BsModalSimple>{{/if}}`
     );
     this.set('show', true);
     await settled();
@@ -493,7 +495,7 @@ module('Integration | Component | bs-modal-simple', function (hooks) {
   test('Renders in test container if renderInPlace is not set', async function (assert) {
     this.set('show', false);
     await render(
-      hbs`<div id="wrapper">{{#if show}}<BsModalSimple @title="Simple Dialog">Hello world!</BsModalSimple>{{/if}}</div>`
+      hbs`<div id="wrapper">{{#if this.show}}<BsModalSimple @title="Simple Dialog">Hello world!</BsModalSimple>{{/if}}</div>`
     );
     this.set('show', true);
     await settled();
@@ -505,7 +507,7 @@ module('Integration | Component | bs-modal-simple', function (hooks) {
   test('Renders in place (no wormhole) if renderInPlace is set', async function (assert) {
     this.set('show', false);
     await render(
-      hbs`<div id="ember-bootstrap-wormhole"></div><div id="wrapper">{{#if show}}<BsModalSimple @title="Simple Dialog" @renderInPlace={{true}}>Hello world!</BsModalSimple>{{/if}}</div>`
+      hbs`<div id="ember-bootstrap-wormhole"></div><div id="wrapper">{{#if this.show}}<BsModalSimple @title="Simple Dialog" @renderInPlace={{true}}>Hello world!</BsModalSimple>{{/if}}</div>`
     );
     this.set('show', true);
     await settled();
@@ -515,7 +517,9 @@ module('Integration | Component | bs-modal-simple', function (hooks) {
 
   test('Removes "modal-open" class when component is removed from view', async function (assert) {
     this.set('renderComponent', true);
-    await render(hbs`{{#if renderComponent}}<BsModalSimple @title="Simple Dialog">Hello world!</BsModalSimple>{{/if}}`);
+    await render(
+      hbs`{{#if this.renderComponent}}<BsModalSimple @title="Simple Dialog">Hello world!</BsModalSimple>{{/if}}`
+    );
 
     // wait for fade animation
     await waitUntil(() => this.element.querySelector('.modal').classList.contains(visibilityClass()));
@@ -529,7 +533,9 @@ module('Integration | Component | bs-modal-simple', function (hooks) {
   test('Resets scroll bar when component is removed from view', async function (assert) {
     document.body.style.paddingRight = '50px';
     this.set('renderComponent', true);
-    await render(hbs`{{#if renderComponent}}<BsModalSimple @title="Simple Dialog">Hello world!</BsModalSimple>{{/if}}`);
+    await render(
+      hbs`{{#if this.renderComponent}}<BsModalSimple @title="Simple Dialog">Hello world!</BsModalSimple>{{/if}}`
+    );
 
     await waitUntil(() => this.element.querySelector('.modal').classList.contains(visibilityClass()));
 
@@ -571,7 +577,7 @@ module('Integration | Component | bs-modal-simple', function (hooks) {
   test('closing modal does not modify public open property', async function (assert) {
     this.set('open', true);
     await render(
-      hbs`<BsModalSimple @title="Simple Dialog" @fade={{false}} @open={{open}}>Hello world!</BsModalSimple>`
+      hbs`<BsModalSimple @title="Simple Dialog" @fade={{false}} @open={{this.open}}>Hello world!</BsModalSimple>`
     );
     await click('.modal .modal-header .close');
     assert.equal(this.open, true, 'DOes not change open property');
