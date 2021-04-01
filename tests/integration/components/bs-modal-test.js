@@ -1,7 +1,7 @@
 import Component from '@ember/component';
 import { module } from 'qunit';
 import { setupRenderingTest } from 'ember-qunit';
-import { render, click, triggerEvent, settled } from '@ember/test-helpers';
+import { render, click, find, triggerEvent, settled, waitFor, waitUntil } from '@ember/test-helpers';
 import { test, visibilityClass } from '../../helpers/bootstrap';
 import hbs from 'htmlbars-inline-precompile';
 import setupNoDeprecations from '../../helpers/setup-no-deprecations';
@@ -245,5 +245,29 @@ module('Integration | Component | bs-modal', function (hooks) {
     await settled();
 
     assert.dom('.modal').isVisible('Modal is visible again');
+  });
+
+  test('it animates opening and closing the modal', async function (assert) {
+    this.set('open', false);
+    await render(hbs`<BsModal @open={{this.open}}>Hello world!</BsModal>`);
+
+    this.set('open', true);
+    await waitFor('.modal.show');
+    assert.dom('.modal').hasClass('show');
+    assert.dom('.modal').hasStyle({ display: 'block' });
+
+    await settled();
+    assert.dom('.modal').hasClass('show');
+    assert.dom('.modal').hasStyle({ display: 'block' });
+
+    this.set('open', false);
+    await waitUntil(() => {
+      return !find('.modal').classList.contains('show');
+    });
+    assert.dom('.modal').doesNotHaveClass('show');
+    assert.dom('.modal').hasStyle({ display: 'block' });
+
+    await settled();
+    assert.dom('.modal').doesNotExist();
   });
 });
