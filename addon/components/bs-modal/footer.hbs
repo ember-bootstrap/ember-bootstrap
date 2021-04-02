@@ -1,5 +1,5 @@
 <form class="modal-footer" ...attributes {{on "submit" (bs-default @onSubmit (bs-noop))}}>
-  {{#if hasBlock}}
+  {{#if (has-block)}}
     {{yield}}
   {{else}}
     {{#if @submitTitle}}

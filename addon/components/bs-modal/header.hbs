@@ -8,7 +8,7 @@
     }}
   {{else}}
     {{#if (macroCondition (macroGetOwnConfig "isBS4"))}}
-      {{#if hasBlock}}
+      {{#if (has-block)}}
         {{yield}}
       {{else}}
         {{#component (bs-default @titleComponent (component "bs-modal/header/title"))}}{{@title}}{{/component}}
@@ -21,7 +21,7 @@
       {{#if (bs-default @closeButton true)}}
         {{component (bs-default @closeComponent (component "bs-modal/header/close")) onClick=@onClose}}
       {{/if}}
-      {{#if hasBlock}}
+      {{#if (has-block)}}
         {{yield}}
       {{else}}
         {{#component (bs-default @titleComponent (component "bs-modal/header/title"))}}{{@title}}{{/component}}
