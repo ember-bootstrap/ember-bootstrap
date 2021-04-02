@@ -222,8 +222,8 @@ export default class Modal extends Component {
   }
   set state(value) {
     this._state = value;
-    this.isShowModal = value === 'open' || value === 'opening';
     this.isInDom = value !== 'closed';
+    this.isShowModal = value === 'open' || value === 'opening';
   }
   _state = 'closed';
 
@@ -420,6 +420,13 @@ export default class Modal extends Component {
    * @type function
    * @public
    */
+
+  /**
+   * @property isFastBoot
+   * @type boolean
+   * @private
+   */
+  isFastBoot = isFastBoot(this);
 
   @action
   close() {
