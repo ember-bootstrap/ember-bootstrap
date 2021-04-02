@@ -1,5 +1,6 @@
 {{did-insert this.handleVisibilityChanges}}
 {{did-update this.handleVisibilityChanges @open}}
+{{on-window "resize" this.adjustDialog}}
 
 {{#if this.isInDom}}
   {{#let (component (bs-default @dialogComponent (component "bs-modal/dialog"))

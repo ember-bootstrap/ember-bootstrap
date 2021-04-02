@@ -458,7 +458,6 @@ export default class Modal extends Component {
     this.state = 'opening';
 
     this.addBodyClass();
-    this.addResizeEventListeners();
 
     await this.showBackdrop();
 
@@ -509,8 +508,6 @@ export default class Modal extends Component {
     }
 
     this.state = 'closing';
-
-    this.removeResizeEventListeners();
 
     if (this.usesTransition) {
       await transitionEnd(this.modalElement, this.transitionDuration);
@@ -601,33 +598,15 @@ export default class Modal extends Component {
   }
 
   /**
-   * Attach resize event listeners
-   */
-  addResizeEventListeners() {
-    if (isFastBoot(this)) {
-      return;
-    }
-
-    window.addEventListener('resize', this.adjustDialog, false);
-  }
-
-  /**
-   * Detach resize event listeners
-   */
-  removeResizeEventListeners() {
-    if (isFastBoot(this)) {
-      return;
-    }
-
-    window.removeEventListener('resize', this.adjustDialog, false);
-  }
-
-  /**
    * @method adjustDialog
    * @private
    */
   @action
   adjustDialog() {
+    if (this.isClosed) {
+      return;
+    }
+
     let modalIsOverflowing = this.modalElement.scrollHeight > document.documentElement.clientHeight;
     this.paddingLeft = !this.bodyIsOverflowing && modalIsOverflowing ? this.scrollbarWidth : undefined;
     this.paddingRight = this.bodyIsOverflowing && !modalIsOverflowing ? this.scrollbarWidth : undefined;
@@ -725,7 +704,6 @@ export default class Modal extends Component {
   willDestroy() {
     super.willDestroy(...arguments);
 
-    this.removeResizeEventListeners();
     this.removeBodyClass();
     this.resetScrollbar();
   }
