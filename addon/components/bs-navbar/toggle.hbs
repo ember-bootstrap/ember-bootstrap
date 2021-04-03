@@ -1,5 +1,5 @@
 <button type="button" class="{{if (macroCondition (macroGetOwnConfig "isBS4")) "navbar-toggler" "navbar-toggle"}} {{if this.collapsed "collapsed"}}" ...attributes {{on "click" this.handleClick}}>
-  {{#if hasBlock}}
+  {{#if (has-block)}}
     {{yield}}
   {{else}}
     {{#if (macroCondition (macroGetOwnConfig "isBS4"))}}

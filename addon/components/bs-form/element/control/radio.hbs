@@ -21,7 +21,7 @@
             title={{@title}}
             ...attributes
           >
-          {{#if hasBlock}}
+          {{#if (has-block)}}
             {{yield option index}}
           {{else}}
             {{#if @optionLabelPath}}
@@ -51,7 +51,7 @@
               title={{@title}}
               ...attributes
             >
-            {{#if hasBlock}}
+            {{#if (has-block)}}
               {{yield option index}}
             {{else}}
               {{#if @optionLabelPath}}
@@ -84,7 +84,7 @@
           for={{id}}
           class="form-check-label"
         >
-          {{#if hasBlock}}
+          {{#if (has-block)}}
             {{yield option index}}
           {{else}}
             {{#if @optionLabelPath}}

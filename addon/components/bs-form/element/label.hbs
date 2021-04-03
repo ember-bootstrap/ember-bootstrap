@@ -1,5 +1,5 @@
 {{#if (macroCondition (macroGetOwnConfig "isBS3"))}}
-  {{#if hasBlock}}
+  {{#if (has-block)}}
     <label>
       {{yield}}
       {{@label}}
@@ -9,7 +9,7 @@
   {{/if}}
 {{else}}
   <label class="{{if this.invisibleLabel "sr-only"}} {{this.labelClass}} {{if this.isHorizontalAndNotCheckbox "col-form-label"}} {{if this.isCheckbox "form-check-label"}} {{this.sizeClass}}" for={{@formElementId}}>
-    {{#if hasBlock}}
+    {{#if (has-block)}}
       {{yield}}
     {{/if}}
     {{@label}}

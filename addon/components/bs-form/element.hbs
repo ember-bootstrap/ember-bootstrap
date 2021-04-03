@@ -115,7 +115,7 @@
         size=@size
     ) as |Control|}}
     {{!-- template-lint-enable no-args-paths --}}
-      {{#if hasBlock}}
+      {{#if (has-block)}}
         {{yield
           (hash
             value=this.value
