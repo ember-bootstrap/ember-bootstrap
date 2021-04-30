@@ -3,10 +3,7 @@
 const path = require('path');
 const mergeTrees = require('broccoli-merge-trees');
 const Funnel = require('broccoli-funnel');
-const stew = require('broccoli-stew');
 const replace = require('broccoli-string-replace');
-const map = stew.map;
-const rename = stew.rename;
 const BroccoliDebug = require('broccoli-debug');
 const chalk = require('chalk');
 const SilentError = require('silent-error'); // From ember-cli
@@ -92,12 +89,10 @@ module.exports = {
     // import custom addon CSS
     this.import(path.join(vendorPath, `bs${options.bootstrapVersion}.css`));
 
-    // register library version
-    this.import(path.join(vendorPath, 'register-version.js'));
-
     // setup config for @embroider/macros
     this.options['@embroider/macros'].setOwnConfig.isBS3 = this.getBootstrapVersion() === 3;
     this.options['@embroider/macros'].setOwnConfig.isBS4 = this.getBootstrapVersion() === 4;
+    this.options['@embroider/macros'].setOwnConfig.version = require('./package.json').version;
   },
 
   options: {
@@ -219,14 +214,6 @@ module.exports = {
 
   treeForVendor(tree) {
     let trees = [tree];
-    let versionTree = rename(
-      map(tree, 'ember-bootstrap/register-version.template', (c) =>
-        c.replace('###VERSION###', require('./package.json').version)
-      ),
-      'register-version.template',
-      'register-version.js'
-    );
-    trees.push(versionTree);
 
     if (!this.hasPreprocessor()) {
       trees.push(
