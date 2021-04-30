@@ -73,10 +73,10 @@ jobs:
           - scenario: ember-release
             command: ember test --launch Firefox
           - scenario: node-tests
-#          - scenario: embroider-safe
-#            allow-failure: true
-#          - scenario: embroider-optimized
-#            allow-failure: true
+          - scenario: embroider-safe
+            allow-failure: true
+          - scenario: embroider-optimized
+            allow-failure: true
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
