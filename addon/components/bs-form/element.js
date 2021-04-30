@@ -719,7 +719,7 @@ export default class FormElement extends FormGroup {
    * @property controlComponent
    * @private
    */
-  get customControlComponent() {
+  get controlComponent() {
     let owner = getOwner(this);
     let componentClass = owner.resolveRegistration(`component:bs-form/element/control/${this.controlType}`);
 
