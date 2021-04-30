@@ -731,9 +731,10 @@ module('Integration | Component | bs-form', function (hooks) {
   });
 
   test('A change to a form elements resets yielded #isSubmitted', async function (assert) {
+    this.model = {};
     this.actions.submit = sinon.fake.resolves();
     await render(hbs`
-      <BsForm @onSubmit={{action "submit"}} @model={{hash }} as |form|>
+      <BsForm @onSubmit={{action "submit"}} @model={{this.model}} as |form|>
         <form.element @property="foo" />
         <button type="submit" class={{if form.isSubmitted "is-submitted"}}>submit</button>
       </BsForm>
@@ -787,9 +788,10 @@ module('Integration | Component | bs-form', function (hooks) {
       }
     };
 
+    this.model = {};
     this.actions.submit = sinon.fake.rejects(expectedError);
     await render(hbs`
-      <BsForm @onSubmit={{action "submit"}} @model={{hash }} as |form|>
+      <BsForm @onSubmit={{action "submit"}} @model={{this.model}} as |form|>
         <form.element @property="foo" />
         <button type="submit" class={{if form.isRejected "is-rejected"}}>submit</button>
       </BsForm>
@@ -803,9 +805,10 @@ module('Integration | Component | bs-form', function (hooks) {
   });
 
   test('Triggering resetSubmissionState resets submission state of form', async function (assert) {
+    this.model = {};
     this.actions.submit = sinon.fake.resolves();
     await render(hbs`
-      <BsForm @onSubmit={{action "submit"}} @model={{hash }} as |form|>
+      <BsForm @onSubmit={{action "submit"}} @model={{this.model}} as |form|>
         <input onchange={{form.resetSubmissionState}}>
         {{#if form.isSubmitting}}isSubmitting{{/if}}
         {{#if form.isSubmitted}}isSubmitted{{/if}}
