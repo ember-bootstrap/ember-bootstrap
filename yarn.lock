@@ -1346,6 +1346,31 @@
     resolve "^1.8.1"
     semver "^7.3.2"
 
+"@embroider/macros@0.39.1":
+  version "0.39.1"
+  resolved "https://registry.yarnpkg.com/@embroider/macros/-/macros-0.39.1.tgz#d89596f649d171ed0c2f77f7d51ac523bcafd1b0"
+  integrity sha512-2T8g/M3JIfW+qf7HJ2zYBJ7EnxNyi3BzfAozAeqZhiUW0uppP5J9cKYevWAiAEaOFmVf1oGv5KrDgl0Tp9IKdQ==
+  dependencies:
+    "@embroider/shared-internals" "0.39.1"
+    assert-never "^1.1.0"
+    ember-cli-babel "^7.23.0"
+    lodash "^4.17.10"
+    resolve "^1.8.1"
+    semver "^7.3.2"
+
+"@embroider/shared-internals@0.39.1":
+  version "0.39.1"
+  resolved "https://registry.yarnpkg.com/@embroider/shared-internals/-/shared-internals-0.39.1.tgz#33c88778fc7c42ba20dbe625b34abe51816dfc77"
+  integrity sha512-fpENfZqPWd/JUlmpAW1pN967rxSoUg7dTGmkgtAt+UZQh/d4XMeyUGGHTkRToboKa0W19xRu64RZ9LT94xUkeQ==
+  dependencies:
+    ember-rfc176-data "^0.3.17"
+    fs-extra "^7.0.1"
+    lodash "^4.17.10"
+    pkg-up "^3.1.0"
+    resolve-package-path "^1.2.2"
+    semver "^7.3.2"
+    typescript-memoize "^1.0.0-alpha.3"
+
 "@embroider/test-setup@^0.36.0":
   version "0.36.0"
   resolved "https://registry.yarnpkg.com/@embroider/test-setup/-/test-setup-0.36.0.tgz#67ace15d69f04f282adde38ee39e4d48208173b7"
@@ -1353,6 +1378,23 @@
   dependencies:
     lodash "^4.17.20"
     resolve "^1.17.0"
+
+"@embroider/util@^0.36.0":
+  version "0.36.0"
+  resolved "https://registry.yarnpkg.com/@embroider/util/-/util-0.36.0.tgz#b2ffb2b06ac491f157a771392191ce91ef2216a6"
+  integrity sha512-gMIGL9UQ6Pl5WvpcIqIiE+QkK5GW49VLp+IEl+v4w9ZBkH7Z9boiwWariW4y/FtNU1iU8ELFbol1+IJ8I8VN4Q==
+  dependencies:
+    "@embroider/macros" "0.36.0"
+    ember-cli-babel "^7.22.1"
+
+"@embroider/util@^0.39.1":
+  version "0.39.1"
+  resolved "https://registry.yarnpkg.com/@embroider/util/-/util-0.39.1.tgz#7cec8ea13d8ce73539179d47d2564d8c09d055f6"
+  integrity sha512-3sQlpEjOXt03sId8ZYGWjm6SdQaR78Ppa6LwLon76kYsDM8J2hRXY1Zcpt1rKTSuOyXs/0Pc5+ri1MNfJKD3DA==
+  dependencies:
+    "@embroider/macros" "0.39.1"
+    broccoli-funnel ef4/broccoli-funnel#c70d060076e14793e8495571f304a976afc754ac
+    ember-cli-babel "^7.23.1"
 
 "@eslint/eslintrc@^0.3.0":
   version "0.3.0"
@@ -3941,6 +3983,24 @@ broccoli-funnel@^2.0.0, broccoli-funnel@^2.0.1, broccoli-funnel@^2.0.2:
     symlink-or-copy "^1.0.0"
     walk-sync "^0.3.1"
 
+"broccoli-funnel@github:ef4/broccoli-funnel#c70d060076e14793e8495571f304a976afc754ac":
+  version "2.0.2-ef4.0"
+  resolved "https://codeload.github.com/ef4/broccoli-funnel/tar.gz/c70d060076e14793e8495571f304a976afc754ac"
+  dependencies:
+    array-equal "^1.0.0"
+    blank-object "^1.0.1"
+    broccoli-plugin "^1.3.0"
+    debug "^2.2.0"
+    fast-ordered-set "^1.0.0"
+    fs-tree-diff "^0.5.3"
+    heimdalljs "^0.2.0"
+    minimatch "^3.0.0"
+    mkdirp "^0.5.0"
+    path-posix "^1.0.0"
+    rimraf "^2.4.3"
+    symlink-or-copy "^1.0.0"
+    walk-sync "^2.2.0"
+
 broccoli-kitchen-sink-helpers@^0.2.5:
   version "0.2.9"
   resolved "https://registry.yarnpkg.com/broccoli-kitchen-sink-helpers/-/broccoli-kitchen-sink-helpers-0.2.9.tgz#a5e0986ed8d76fb5984b68c3f0450d3a96e36ecc"
@@ -6052,7 +6112,7 @@ ember-cli-babel@^7.0.0, ember-cli-babel@^7.1.0, ember-cli-babel@^7.1.3, ember-cl
     rimraf "^3.0.1"
     semver "^5.5.0"
 
-ember-cli-babel@^7.26.4:
+ember-cli-babel@^7.23.1, ember-cli-babel@^7.26.4:
   version "7.26.4"
   resolved "https://registry.yarnpkg.com/ember-cli-babel/-/ember-cli-babel-7.26.4.tgz#b73d53592c05479814ca1770b3b849d4e01a87f0"
   integrity sha512-GibwLrBUVj8DxNMnbE5PObEIeznX6ohOdYHoSMmTkCBuXa/I9amRGIjBhNlDbAJj+exVKKZoEGAdrV13gnyftQ==
@@ -6602,14 +6662,14 @@ ember-disable-prototype-extensions@^1.1.3:
   resolved "https://registry.yarnpkg.com/ember-disable-prototype-extensions/-/ember-disable-prototype-extensions-1.1.3.tgz#1969135217654b5e278f9fe2d9d4e49b5720329e"
   integrity sha1-GWkTUhdlS14nj5/i2dTkm1cgMp4=
 
-ember-element-helper@^0.3.1:
-  version "0.3.2"
-  resolved "https://registry.yarnpkg.com/ember-element-helper/-/ember-element-helper-0.3.2.tgz#a0e384c266c6fb0e39803708d6f5e83ce6dba659"
-  integrity sha512-t4lrekoRb/jVQeg/N1V0kzehV6cw0YAH1hG1H2+Ykl35YxpYdX7/8hKtaGzVPxceemUVFO7fUorEQ6Y//wpWdA==
+ember-element-helper@^0.5.0:
+  version "0.5.0"
+  resolved "https://registry.yarnpkg.com/ember-element-helper/-/ember-element-helper-0.5.0.tgz#0e8bd489f2f8b515a01f47394c1194601dfb140c"
+  integrity sha512-l1aaL6JBU56KkTOAcoXAtb6JYjZXgwXR/A33oCwbJ2EOWL0tpXJ23zX6rw0LDqHEQXi0nGLqoggGiVijTpsGFQ==
   dependencies:
+    "@embroider/util" "^0.39.1"
     ember-cli-babel "^7.17.2"
     ember-cli-htmlbars "^5.1.0"
-    ember-compatibility-helpers "^1.2.1"
 
 ember-export-application-global@^2.0.1:
   version "2.0.1"
