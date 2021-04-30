@@ -8,7 +8,7 @@ import { getDestinationElement } from 'ember-bootstrap/utils/dom';
 import usesTransition from 'ember-bootstrap/utils/decorators/uses-transition';
 import { assert } from '@ember/debug';
 import Ember from 'ember';
-import { deprecate } from '@ember/application/deprecations';
+import { deprecate } from '@ember/debug';
 import arg from '../utils/decorators/arg';
 import { tracked } from '@glimmer/tracking';
 import { getParentView } from '../utils/dom';

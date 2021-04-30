@@ -8,7 +8,9 @@ let deprecations;
 const ignoredDeprecations = [
   /Versions of modifier manager capabilities prior to 3\.22 have been deprecated/,
   /Usage of the Ember Global is deprecated./,
-  /import .* directly from @ember\/runloop/,
+  /import .* directly from/,
+  // this will be fixed in a future PR...
+  /Using Ember.LinkComponent/,
 ];
 
 export default function setupNoDeprecations({ beforeEach, afterEach }) {
