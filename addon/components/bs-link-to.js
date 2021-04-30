@@ -4,6 +4,7 @@ import { tagName } from '@ember-decorators/component';
 import { computed } from '@ember/object';
 import { inject as service } from '@ember/service';
 import { assert } from '@ember/debug';
+import ComponentChild from 'ember-bootstrap/mixins/component-child';
 
 /**
  This is largely copied from Ember.LinkComponent. It is used as extending from Ember.LinkComponent has been deprecated.
@@ -17,7 +18,7 @@ import { assert } from '@ember/debug';
  @private
 */
 @tagName('')
-class LinkComponent extends Component {
+class LinkComponent extends Component.extend(ComponentChild) {
   // We still need to use the private service, so this component can react to changes of `currentState`, e.g. changing
   // the model while the route in unchanged.
   // eslint-disable-next-line ember/no-private-routing-service

@@ -17,8 +17,8 @@
       {{yield
         (hash
           item=(bs-default @itemComponent (component "bs-dropdown/menu/item"))
-          link-to=(bs-default @linkToComponent (component "bs-dropdown/menu/link-to"))
-          linkTo=(bs-default @linkToComponent (component "bs-dropdown/menu/link-to"))
+          link-to=(bs-default @linkToComponent (component "bs-link-to" class=(if (macroCondition (macroGetOwnConfig "isBS4")) "dropdown-item")))
+          linkTo=(bs-default @linkToComponent (component "bs-link-to" class=(if (macroCondition (macroGetOwnConfig "isBS4")) "dropdown-item")))
           divider=(bs-default @dividerComponent (component "bs-dropdown/menu/divider"))
         )
       }}
@@ -46,8 +46,8 @@
         {{yield
           (hash
             item=(bs-default @itemComponent (component "bs-dropdown/menu/item"))
-            link-to=(bs-default @linkToComponent (component "bs-dropdown/menu/link-to"))
-            linkTo=(bs-default @linkToComponent (component "bs-dropdown/menu/link-to"))
+            link-to=(bs-default @linkToComponent (component "bs-link-to" class=(if (macroCondition (macroGetOwnConfig "isBS4")) "dropdown-item")))
+            linkTo=(bs-default @linkToComponent (component "bs-link-to" class=(if (macroCondition (macroGetOwnConfig "isBS4")) "dropdown-item")))
             divider=(bs-default @dividerComponent (component "bs-dropdown/menu/divider"))
           )
         }}

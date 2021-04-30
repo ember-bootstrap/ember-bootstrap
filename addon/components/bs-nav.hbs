@@ -2,8 +2,8 @@
   {{yield
     (hash
       item=(bs-default @itemComponent (component "bs-nav/item"))
-      link-to=(bs-default @linkToComponent (component "bs-nav/link-to"))
-      linkTo=(bs-default @linkToComponent (component "bs-nav/link-to"))
+      link-to=(bs-default @linkToComponent (component "bs-link-to" class=(if (macroCondition (macroGetOwnConfig "isBS4")) "nav-link")))
+      linkTo=(bs-default @linkToComponent (component "bs-link-to" class=(if (macroCondition (macroGetOwnConfig "isBS4")) "nav-link")))
       dropdown=(component (bs-default @dropdownComponent (component "bs-dropdown")) inNav=true htmlTag="li")
     )
   }}
