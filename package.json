@@ -49,8 +49,8 @@
   },
   "dependencies": {
     "@ember/render-modifiers": "^1.0.2",
-    "@embroider/macros": "^0.36.0",
-    "@embroider/util": "^0.36.0",
+    "@embroider/macros": "^0.40.0",
+    "@embroider/util": "^0.40.0",
     "@glimmer/component": "^1.0.3",
     "@glimmer/tracking": "^1.0.3",
     "broccoli-debug": "^0.6.3",
@@ -84,7 +84,7 @@
   },
   "devDependencies": {
     "@ember/optional-features": "^2.0.0",
-    "@embroider/test-setup": "^0.36.0",
+    "@embroider/test-setup": "^0.40.0",
     "babel-eslint": "^10.1.0",
     "bootstrap": "^4.6.0",
     "bootstrap-sass": "^3.3.7",
