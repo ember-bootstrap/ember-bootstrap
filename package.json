@@ -101,7 +101,7 @@
     "ember-cli-fastboot-testing": "^0.4.0",
     "ember-cli-inject-live-reload": "^2.0.2",
     "ember-cli-sri": "^2.1.1",
-    "ember-cli-terser": "^4.0.1",
+    "ember-cli-terser": "^4.0.2",
     "ember-cli-test-loader": "^3.0.0",
     "ember-cli-yuidoc": "^0.9.1",
     "ember-compatibility-helpers": "^1.2.1",
