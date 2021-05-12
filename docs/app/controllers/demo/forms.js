@@ -9,6 +9,7 @@ export default Controller.extend({
   email: 'foo@example.com',
   password: null,
   checkbox: false,
+  switched: false,
   radio: null,
 
   login: computed(function() {
