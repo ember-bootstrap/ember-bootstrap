@@ -112,6 +112,16 @@ export default class FormElementLabel extends Component {
   isCheckbox;
 
   /**
+   * Indicates whether the type of the control widget equals `switch`
+   *
+   * @property isSwitch
+   * @type boolean
+   * @private
+   */
+  @(equal('controlType', 'switch').readOnly())
+  isSwitch;
+
+  /**
    * Indicates whether the form type equals `horizontal`
    *
    * @property isHorizontal

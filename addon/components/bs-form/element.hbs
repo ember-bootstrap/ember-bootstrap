@@ -14,14 +14,14 @@
     (bs-default
       @layoutComponent
       (if
-        (bs-eq this.controlType "checkbox")
+        (bs-contains (array "checkbox" "switch") this.controlType)
         (if
           (bs-eq @formLayout "inline")
-          (component "bs-form/element/layout/inline/checkbox")
+          (component "bs-form/element/layout/inline/checkbox" controlType=this.controlType)
           (if
             (bs-eq @formLayout "horizontal")
-            (component "bs-form/element/layout/horizontal/checkbox")
-            (component "bs-form/element/layout/vertical/checkbox")
+            (component "bs-form/element/layout/horizontal/checkbox" controlType=this.controlType)
+            (component "bs-form/element/layout/vertical/checkbox" controlType=this.controlType)
           )
         )
         (if

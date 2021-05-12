@@ -42,6 +42,14 @@ module('Integration | Component | bs form/element/label', function (hooks) {
     assert.dom('label').hasClass('form-check-label', 'component has form-check-label class');
   });
 
+  testBS4('component has custom-control-label class when using control type switch', async function (assert) {
+    await render(hbs`<BsForm::Element::Label @controlType="switch" />`);
+    assert
+      .dom('label')
+      .hasClass('custom-control-label', 'component has custom-control-label class')
+      .doesNotHaveClass('form-check-label', 'component does not have form-check-label class');
+  });
+
   testBS4('support size classes when using horizontal forms', async function (assert) {
     await render(hbs`<BsForm::Element::Label @size="lg" @formLayout="horizontal" />`);
     assert.dom('label').hasClass('col-form-label-lg', 'label has large class');

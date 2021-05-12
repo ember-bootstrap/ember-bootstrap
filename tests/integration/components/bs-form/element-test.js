@@ -148,6 +148,22 @@ module('Integration | Component | bs-form/element', function (hooks) {
     });
   });
 
+  testBS4('controlType "switch" is supported', async function (assert) {
+    await render(hbs`<BsForm::Element @controlType="switch" />`);
+
+    assert.dom('div.custom-control.custom-switch > input[type="checkbox"].custom-control-input').exists({ count: 1 });
+    assert.dom('div.custom-control.custom-switch > label.custom-control-label').exists({ count: 1 });
+    assert.dom('div.custom-control.custom-switch').doesNotHaveClass('form-check');
+
+    await controlTypeLayoutTest.call(this, assert, 'switch', 'input[type=checkbox]');
+    await controlTypeValueTest.call(this, assert, 'switch', 'input[type=checkbox]', [true, false], function () {
+      return this.checked;
+    });
+    await controlTypeUpdateTest.call(this, assert, 'switch', 'input[type=checkbox]', true, false, function () {
+      return click(this);
+    });
+  });
+
   test('controlType "textarea" is supported', async function (assert) {
     await controlTypeLayoutTest.call(this, assert, 'textarea', 'textarea', 'myValue');
     await controlTypeValueTest.call(this, assert, 'textarea', 'textarea', ['myValue', undefined]);
