@@ -5,7 +5,7 @@ import deprecateSubclassing from 'ember-bootstrap/utils/deprecate-subclassing';
 
 /**
 
- @class FormElementControlCheckbox
+ @class FormElementControlSwitch
  @namespace Components
  @extends Components.FormElementControl
  @private
