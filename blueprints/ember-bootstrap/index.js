@@ -11,6 +11,7 @@ const SilentError = require('silent-error');
 
 const bs3Version = '^3.4.1';
 const bs4Version = '^4.6.0';
+const bs5Version = '^5.0.0';
 
 const validPreprocessors = ['none', 'less', 'sass'];
 
@@ -34,8 +35,8 @@ module.exports = {
     let bootstrapVersion = parseInt(option.bootstrapVersion, 10) || this.retrieveBootstrapVersion() || 4;
     let preprocessor = option.preprocessor;
 
-    if (bootstrapVersion !== 3 && bootstrapVersion !== 4) {
-      throw new SilentError('Bootstrap version must be 3 or 4');
+    if (![3, 4, 5].includes(bootstrapVersion)) {
+      throw new SilentError('Bootstrap version must be 3, 4 or 5');
     }
 
     if (preprocessor && validPreprocessors.indexOf(preprocessor) === -1) {
@@ -53,8 +54,8 @@ module.exports = {
       }
     }
 
-    if (bootstrapVersion === 4 && preprocessor === 'less') {
-      throw new SilentError('You cannot use LESS with Bootstrap 4');
+    if ([4, 5].includes(bootstrapVersion) && preprocessor === 'less') {
+      throw new SilentError(`You cannot use LESS with Bootstrap ${bootstrapVersion}`);
     }
 
     this.ui.writeLine(chalk.green(`Installing for Bootstrap ${bootstrapVersion} using preprocessor ${preprocessor}`));
@@ -102,11 +103,11 @@ module.exports = {
       promises.push(this.removePackageFromBowerJSON('bootstrap-sass'));
     }
 
-    if (bootstrapVersion === 4) {
+    if ([4, 5].includes(bootstrapVersion)) {
       if ('bootstrap-sass' in dependencies) {
         promises.push(this.removePackageFromProject('bootstrap-sass'));
       }
-      promises.push(this.addPackageToProject('bootstrap', bs4Version));
+      promises.push(this.addPackageToProject('bootstrap', bootstrapVersion === 5 ? bs5Version : bs4Version));
     } else if (preprocessor === 'sass') {
       if ('bootstrap' in dependencies) {
         promises.push(this.removePackageFromProject('bootstrap'));
