@@ -7,17 +7,12 @@ const path = require('path');
 const writeFile = rsvp.denodeify(fs.writeFile);
 const chalk = require('chalk');
 const BuildConfigEditor = require('ember-cli-build-config-editor');
-const SilentError = require('silent-error'); // From ember-cli
-
+const SilentError = require('silent-error');
 
 const bs3Version = '^3.4.1';
-const bs4Version = '^4.3.1';
+const bs4Version = '^4.6.0';
 
-const validPreprocessors = [
-  'none',
-  'less',
-  'sass'
-];
+const validPreprocessors = ['none', 'less', 'sass'];
 
 module.exports = {
   name: 'ember-bootstrap',
@@ -26,13 +21,12 @@ module.exports = {
 
   availableOptions: [
     { name: 'bootstrap-version', type: Number, aliases: ['bootstrap', 'bv'] },
-    { name: 'preprocessor', type: String, aliases: ['pp'] }
+    { name: 'preprocessor', type: String, aliases: ['pp'] },
   ],
 
   works: 'insideProject',
 
-  normalizeEntityName() {
-  },
+  normalizeEntityName() {},
 
   existingConfiguration: null,
 
@@ -78,7 +72,7 @@ module.exports = {
 
   removePackageFromBowerJSON(dependency) {
     this.ui.writeLine(chalk.green(`  uninstall bower package ${chalk.white(dependency)}`));
-    return new rsvp.Promise(function(resolve, reject) {
+    return new rsvp.Promise(function (resolve, reject) {
       try {
         let bowerJSONPath = 'bower.json';
         let bowerJSON = fs.readJsonSync(bowerJSONPath);
@@ -88,7 +82,7 @@ module.exports = {
         fs.writeJsonSync(bowerJSONPath, bowerJSON);
 
         resolve();
-      } catch(error) {
+      } catch (error) {
         reject(error);
       }
     });
@@ -183,16 +177,18 @@ module.exports = {
     let preprocessor = this.preprocessor;
     let config = this.retrieveExistingConfiguration();
     let settings = {
-      bootstrapVersion
+      bootstrapVersion,
     };
 
     if (bootstrapVersion === 3) {
-      settings.importBootstrapFont = Object.prototype.hasOwnProperty.call(config, 'importBootstrapFont') ? config.importBootstrapFont : true;
+      settings.importBootstrapFont = Object.prototype.hasOwnProperty.call(config, 'importBootstrapFont')
+        ? config.importBootstrapFont
+        : true;
     }
 
     if (preprocessor !== 'none') {
       settings.importBootstrapCSS = false;
-    } else if (Object.prototype.hasOwnProperty.call(config,'importBootstrapCSS')) {
+    } else if (Object.prototype.hasOwnProperty.call(config, 'importBootstrapCSS')) {
       settings.importBootstrapCSS = config.importBootstrapCSS;
     } else {
       settings.importBootstrapCSS = true;
@@ -210,9 +206,13 @@ module.exports = {
       let newBuild = build.edit(this.name, settings);
       fs.writeFileSync(file, newBuild.code());
       this.ui.writeLine(chalk.green(`Added ember-bootstrap configuration to ${file}`));
-    } catch(error) {
+    } catch (error) {
       let settingsString = JSON.stringify(settings);
-      this.ui.writeLine(chalk.red(`Configuration file could not be edited. Manually update your ember-cli-build.js to include '${this.name}': ${settingsString}`));
+      this.ui.writeLine(
+        chalk.red(
+          `Configuration file could not be edited. Manually update your ember-cli-build.js to include '${this.name}': ${settingsString}`
+        )
+      );
     }
   },
 
@@ -230,9 +230,8 @@ module.exports = {
   },
 
   retrieveBootstrapVersion() {
-
     let config = this.retrieveExistingConfiguration();
 
     return config.bootstrapVersion && parseInt(config.bootstrapVersion, 10);
-  }
+  },
 };
