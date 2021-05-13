@@ -2,7 +2,13 @@ import { module, skip } from 'qunit';
 import { setupRenderingTest } from 'ember-qunit';
 import { render, click, triggerEvent, settled } from '@ember/test-helpers';
 import hbs from 'htmlbars-inline-precompile';
-import { test, versionDependent, visibilityClass, popoverPositionClass } from '../../helpers/bootstrap';
+import {
+  test,
+  versionDependent,
+  visibilityClass,
+  popoverPositionClass,
+  popoverArrowClass,
+} from '../../helpers/bootstrap';
 import { setupForPositioning, assertPositioning } from '../../helpers/contextual-help';
 import setupStylesheetSupport from '../../helpers/setup-stylesheet-support';
 import setupNoDeprecations from '../../helpers/setup-no-deprecations';
@@ -28,7 +34,7 @@ module('Integration | Component | bs-popover', function (hooks) {
     assert.dom('.popover').hasClass('fade', 'has fade class');
     assert.dom('.popover').hasClass(visibilityClass(), 'has visibility class');
     assert.equal(this.element.querySelector('.popover').getAttribute('role'), 'tooltip', 'has ARIA role');
-    assert.dom('.arrow').exists({ count: 1 }, 'has arrow');
+    assert.dom(`.${popoverArrowClass()}`).exists({ count: 1 }, 'has arrow');
     assert.dom(versionDependent('.popover-title', '.popover-header')).hasText('dummy title', 'shows title');
     assert.dom(versionDependent('.popover-content', '.popover-body')).hasText('template block text', 'shows content');
   });
@@ -69,15 +75,13 @@ module('Integration | Component | bs-popover', function (hooks) {
     setupForPositioning();
 
     await click('#target');
-
-    assertPositioning(assert, '.popover');
+    assertPositioning(assert, '.popover', versionDependent(0, 0, 8));
   });
 
   test('should adjust popover arrow', async function (assert) {
     this.insertCSSRule('#wrapper p { margin-top: 200px }');
 
-    // @todo v5 needs changes in markup
-    let expectedArrowPosition = versionDependent(225, 219, 0);
+    let expectedArrowPosition = versionDependent(225, 219, 220);
 
     await render(hbs`
       <div id="ember-bootstrap-wormhole"></div>
@@ -92,7 +96,7 @@ module('Integration | Component | bs-popover', function (hooks) {
     setupForPositioning('right');
 
     await click('#target');
-    let arrowPosition = parseInt(this.element.querySelector('.arrow').style.left, 10);
+    let arrowPosition = parseInt(this.element.querySelector(`.${popoverArrowClass()}`).style.left, 10);
     assert.ok(
       Math.abs(arrowPosition - expectedArrowPosition) <= 2,
       `Expected position: ${expectedArrowPosition}, actual: ${arrowPosition}`
@@ -101,7 +105,7 @@ module('Integration | Component | bs-popover', function (hooks) {
     // check again to prevent regression of https://github.com/kaliber5/ember-bootstrap/issues/361
     await click('#target');
     await click('#target');
-    arrowPosition = parseInt(this.element.querySelector('.arrow').style.left, 10);
+    arrowPosition = parseInt(this.element.querySelector(`.${popoverArrowClass()}`).style.left, 10);
     assert.ok(
       Math.abs(arrowPosition - expectedArrowPosition) <= 2,
       `Expected position: ${expectedArrowPosition}, actual: ${arrowPosition}`

@@ -4,6 +4,7 @@ import { assert } from '@ember/debug';
 import { scheduleOnce } from '@ember/runloop';
 import arg from 'ember-bootstrap/utils/decorators/arg';
 import { tracked } from '@glimmer/tracking';
+import { getOwnConfig, macroCondition } from '@embroider/macros';
 
 /**
  Internal (abstract) component for contextual help markup. Should not be used directly.
@@ -91,6 +92,10 @@ export default class ContextualHelpElement extends Component {
    */
   arrowClass = 'arrow';
 
+  placementClassPrefix = '';
+
+  offset = [0, 0];
+
   /**
    * popper.js modifier config
    *
@@ -105,6 +110,7 @@ export default class ContextualHelpElement extends Component {
         element: `.${this.arrowClass}`,
       },
       offset: {
+        offset: this.offset.join(','),
         fn(data) {
           let tip = document.getElementById(id);
           assert('Contextual help element needs existing popper element', tip);
@@ -139,6 +145,22 @@ export default class ContextualHelpElement extends Component {
         enabled: this.args.autoPlacement,
       },
     };
+  }
+
+  get actualPlacementClass() {
+    let ending = this.actualPlacement;
+
+    if (macroCondition(getOwnConfig().isBS5)) {
+      if (ending === 'right') {
+        ending = 'end';
+      }
+
+      if (ending === 'left') {
+        ending = 'start';
+      }
+    }
+
+    return this.placementClassPrefix + ending;
   }
 
   @action

@@ -32,7 +32,7 @@ function offset(el) {
   };
 }
 
-export function assertPositioning(assert, selector = '.tooltip') {
+export function assertPositioning(assert, selector = '.tooltip', additionalOffset = 0) {
   assert.dom(selector).exists({ count: 1 }, 'Element exists.');
 
   let rootEl = getContext().element;
@@ -41,7 +41,7 @@ export function assertPositioning(assert, selector = '.tooltip') {
   let margin =
     -parseInt(window.getComputedStyle(tooltip).marginTop, 10) +
     parseInt(window.getComputedStyle(tooltip).marginBottom, 10);
-  let tooltipPos = Math.round(offset(tooltip).top + tooltip.offsetHeight + margin);
+  let tooltipPos = Math.round(offset(tooltip).top + tooltip.offsetHeight + margin + additionalOffset);
   let triggerPos = Math.round(offset(trigger).top);
   assert.ok(Math.abs(triggerPos - tooltipPos) <= 1, `Expected position: ${triggerPos}, actual: ${tooltipPos}`);
 }
