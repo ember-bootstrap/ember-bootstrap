@@ -60,5 +60,11 @@ module.exports = {
       plugins: ['node'],
       extends: ['plugin:node/recommended'],
     },
+    {
+      files: ['node-tests/**/*.js'],
+      env: {
+        mocha: true,
+      },
+    },
   ],
 };
