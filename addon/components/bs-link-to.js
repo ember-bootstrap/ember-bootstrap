@@ -1,10 +1,10 @@
 /* eslint-disable ember/classic-decorator-no-classic-methods */
 import Component from '@ember/component';
 import { tagName } from '@ember-decorators/component';
-import { computed } from '@ember/object';
 import { inject as service } from '@ember/service';
 import { assert } from '@ember/debug';
-import ComponentChild from 'ember-bootstrap/mixins/component-child';
+import ComponentChild from '../mixins/component-child';
+import { dependentKeyCompat } from '@ember/object/compat';
 
 /**
  This is largely copied from Ember.LinkComponent. It is used as extending from Ember.LinkComponent has been deprecated.
@@ -19,24 +19,33 @@ import ComponentChild from 'ember-bootstrap/mixins/component-child';
 */
 @tagName('')
 class LinkComponent extends Component.extend(ComponentChild) {
-  // We still need to use the private service, so this component can react to changes of `currentState`, e.g. changing
-  // the model while the route in unchanged.
-  // eslint-disable-next-line ember/no-private-routing-service
-  @service('-routing')
-  _routing;
+  @service('router')
+  router;
 
-  @computed('models', 'query', 'route', '_routing.currentState', 'current-when')
+  @dependentKeyCompat
   get active() {
-    let state = this._routing.currentState;
-
-    if (state) {
-      return this._isActive(state);
-    } else {
+    if (!this.route) {
       return false;
     }
+
+    // Not all Ember versions we support correctly entangle autotracking with routing state changes, so we manually do that here
+    // See https://github.com/emberjs/ember.js/issues/19004
+    // shamelessly stolen from https://github.com/rwjblue/ember-router-helpers/blob/master/addon/utils/track-active-route.js
+
+    // ensure we recompute anytime `router.currentURL` changes
+    this.router.currentURL;
+
+    // ensure we recompute whenever the `router.currentRouteName` changes
+    // this is slightly overlapping with router.currentURL but there are
+    // cases where route.currentURL doesn't change but the
+    // router.currentRouteName has (e.g. loading and error states)
+    this.router.currentRouteName;
+
+    return this.query
+      ? this.router.isActive(this.route, ...this._models, this.query)
+      : this.router.isActive(this.route, ...this._models);
   }
 
-  @computed('model', 'models')
   get _models() {
     let { model, models } = this;
 
@@ -49,25 +58,6 @@ class LinkComponent extends Component.extend(ComponentChild) {
       return [];
     }
   }
-
-  _isActive(routerState) {
-    let currentWhen = this['current-when'];
-
-    if (typeof currentWhen === 'boolean') {
-      return currentWhen;
-    }
-
-    let { _models: models, _routing: routing } = this;
-
-    if (typeof currentWhen === 'string') {
-      return currentWhen
-        .split(' ')
-        .some((route) => routing.isActiveForRoute(models, undefined, this._namespaceRoute(route), routerState));
-    } else {
-      return routing.isActiveForRoute(models, this.query || {}, this.route, routerState);
-    }
-  }
-
   // eslint-disable-next-line ember/no-component-lifecycle-hooks
   didReceiveAttrs() {
     super.didReceiveAttrs(...arguments);
@@ -79,7 +69,10 @@ class LinkComponent extends Component.extend(ComponentChild) {
 
     params = params.slice();
 
+    // taken from original Ember.LnkComponent
     // Process the positional arguments, in order.
+
+    // Skipping this, as we don't support this
     // 1. Inline link title comes first, if present.
     // if (!hasBlock) {
     //   this.set('linkTitle', params.shift());
