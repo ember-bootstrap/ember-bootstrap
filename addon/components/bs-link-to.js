@@ -41,9 +41,7 @@ class LinkComponent extends Component.extend(ComponentChild) {
     // router.currentRouteName has (e.g. loading and error states)
     this.router.currentRouteName;
 
-    return this.query
-      ? this.router.isActive(this.route, ...this._models, this.query)
-      : this.router.isActive(this.route, ...this._models);
+    return this.router.isActive(this.route, ...this._models, this.query ?? { queryParams: {} });
   }
 
   get _models() {
@@ -58,6 +56,11 @@ class LinkComponent extends Component.extend(ComponentChild) {
       return [];
     }
   }
+
+  get _query() {
+    return this.query ?? {};
+  }
+
   // eslint-disable-next-line ember/no-component-lifecycle-hooks
   didReceiveAttrs() {
     super.didReceiveAttrs(...arguments);
