@@ -41,7 +41,7 @@ class LinkComponent extends Component.extend(ComponentChild) {
     // router.currentRouteName has (e.g. loading and error states)
     this.router.currentRouteName;
 
-    return this.router.isActive(this.route, ...this._models, this.query ?? { queryParams: {} });
+    return this.router.isActive(this.route, ...this._models, { queryParams: this._query });
   }
 
   get _models() {
