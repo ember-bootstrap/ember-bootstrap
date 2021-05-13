@@ -1,4 +1,4 @@
-<ul class="nav {{this.typeClass}} {{this.additionalClass}} {{if this.justified "nav-justified"}} {{if this.stacked (if (macroCondition (macroGetOwnConfig "isBS45")) "flex-column" "nav-stacked")}} {{if (macroCondition (macroGetOwnConfig "isBS45")) (if this.fill "nav-fill")}}" ...attributes>
+<ul class="nav {{this.typeClass}} {{this.additionalClass}} {{if this.justified "nav-justified"}} {{if this.stacked (if (macroCondition (macroGetOwnConfig "isNotBS3")) "flex-column" "nav-stacked")}} {{if (macroCondition (macroGetOwnConfig "isNotBS3")) (if this.fill "nav-fill")}}" ...attributes>
   {{yield
     (hash
       item=(bs-default @itemComponent (component "bs-nav/item"))

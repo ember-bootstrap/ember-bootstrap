@@ -3,7 +3,7 @@ import { setupRenderingTest } from 'ember-qunit';
 import { render } from '@ember/test-helpers';
 import hbs from 'htmlbars-inline-precompile';
 import setupNoDeprecations from '../../../helpers/setup-no-deprecations';
-import { testBS45 } from '../../../helpers/bootstrap';
+import { testNotBS3 } from '../../../helpers/bootstrap';
 
 module('Integration | Component | bs-nav/link-to', function (hooks) {
   setupRenderingTest(hooks);
@@ -27,7 +27,7 @@ module('Integration | Component | bs-nav/link-to', function (hooks) {
       assert.dom('a').hasAttribute('href', '/acceptance/link/1?foo=bar');
     });
 
-    testBS45('link has nav-link class', async function (assert) {
+    testNotBS3('link has nav-link class', async function (assert) {
       await render(hbs`{{#bs-nav/link-to "index"}}Link{{/bs-nav/link-to}}`);
 
       assert.dom('a').hasClass('nav-link');
@@ -60,7 +60,7 @@ module('Integration | Component | bs-nav/link-to', function (hooks) {
       assert.dom('a').hasAttribute('href', '/acceptance/link/1?foo=bar');
     });
 
-    testBS45('link has nav-link class', async function (assert) {
+    testNotBS3('link has nav-link class', async function (assert) {
       await render(hbs`<BsNav::link-to @route="index">Link</BsNav::link-to>`);
 
       assert.dom('a').hasClass('nav-link');

@@ -10,7 +10,7 @@
     expand=this.expand
     toggleNavbar=this.toggleNavbar
   ) as |yieldedHash|}}
-  {{#if (macroCondition (macroGetOwnConfig "isBS45"))}}
+  {{#if (macroCondition (macroGetOwnConfig "isNotBS3"))}}
     <nav class="navbar {{this.positionClass}} {{this.typeClass}} {{this.breakpointClass}} {{this.backgroundClass}}" ...attributes>
       {{#if this.fluid}}
         {{yield yieldedHash}}

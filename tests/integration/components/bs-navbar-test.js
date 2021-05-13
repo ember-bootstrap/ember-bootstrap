@@ -6,7 +6,7 @@ import {
   positionStickyClass,
   test,
   testBS3,
-  testBS45,
+  testNotBS3,
   visibilityClass,
 } from '../../helpers/bootstrap';
 import hbs from 'htmlbars-inline-precompile';
@@ -33,7 +33,7 @@ module('Integration | Component | bs-navbar', function (hooks) {
     assert.dom('nav > div').hasClass('container-fluid', 'the div is a fluid container');
   });
 
-  testBS45('it has correct default markup', async function (assert) {
+  testNotBS3('it has correct default markup', async function (assert) {
     await render(hbs`<BsNavbar />`);
 
     assert.dom('nav').exists({ count: 1 }, 'there is only one nav element');
@@ -73,7 +73,7 @@ module('Integration | Component | bs-navbar', function (hooks) {
       .hasNoClass('collapsed', 'ensure the toggled state of the button through the active class');
   });
 
-  testBS45('it handles the toggling action properly', async function (assert) {
+  testNotBS3('it handles the toggling action properly', async function (assert) {
     await render(hbs`
       <BsNavbar as |navbar|>
         <navbar.toggle @class="clickme">Button</navbar.toggle>
@@ -111,7 +111,7 @@ module('Integration | Component | bs-navbar', function (hooks) {
     assert.dom('nav.navbar-default .navbar-collapse > .navbar-nav').exists({ count: 1 }, 'it has the navbar nav');
   });
 
-  testBS45('it exposes all the requisite contextual components', async function (assert) {
+  testNotBS3('it exposes all the requisite contextual components', async function (assert) {
     await render(hbs`
       <BsNavbar as |navbar|>
         <div class="navbar-header">
@@ -156,13 +156,13 @@ module('Integration | Component | bs-navbar', function (hooks) {
     assert.dom('nav').hasNoClass(positionStickyClass(), `it does not have ${positionStickyClass()}`);
   });
 
-  testBS45('it handles navbar-expand[-*] properly', async function (assert) {
+  testNotBS3('it handles navbar-expand[-*] properly', async function (assert) {
     await render(hbs`<BsNavbar @toggleBreakpoint="sm" />`);
     assert.dom('nav').hasNoClass('navbar-expand-lg', 'it does not have default navbar-expand-lg');
     assert.dom('nav').hasClass('navbar-expand-sm', 'it has navbar-expand-sm');
   });
 
-  testBS45('it handles navbar-expand properly', async function (assert) {
+  testNotBS3('it handles navbar-expand properly', async function (assert) {
     await render(hbs`<BsNavbar @toggleBreakpoint={{null}} />`);
     assert.dom('nav').hasClass('navbar-expand', 'it has navbar-expand');
   });
@@ -175,7 +175,7 @@ module('Integration | Component | bs-navbar', function (hooks) {
     assert.dom('nav').hasClass(positionStickyClass(), `it has ${positionStickyClass()}`);
   });
 
-  testBS45('it handles sticky-top properly', async function (assert) {
+  testNotBS3('it handles sticky-top properly', async function (assert) {
     await render(hbs`<BsNavbar @position="sticky-top" />`);
 
     assert.dom('nav').hasNoClass(positionClassFor('fixed-top'), 'it does not have position fixed-top');

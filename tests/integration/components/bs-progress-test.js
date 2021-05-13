@@ -1,7 +1,7 @@
 import { module } from 'qunit';
 import { setupRenderingTest } from 'ember-qunit';
 import { render } from '@ember/test-helpers';
-import { test, testBS3, testBS45 } from '../../helpers/bootstrap';
+import { test, testBS3, testNotBS3 } from '../../helpers/bootstrap';
 import hbs from 'htmlbars-inline-precompile';
 import setupStylesheetSupport from '../../helpers/setup-stylesheet-support';
 import setupNoDeprecations from '../../helpers/setup-no-deprecations';
@@ -153,7 +153,7 @@ module('Integration | Component | bs-progress', function (hooks) {
     assert.dom('.progress-bar').hasClass('progress-bar-success', 'Progress bar has type class');
   });
 
-  testBS45('progress bar supports type class', async function (assert) {
+  testNotBS3('progress bar supports type class', async function (assert) {
     await render(hbs`
       <BsProgress as |p|>
         <p.bar @value={{50}} @type="success" />
@@ -184,7 +184,7 @@ module('Integration | Component | bs-progress', function (hooks) {
     assert.dom('.progress-bar').hasClass('active', 'Progress bar has active class');
   });
 
-  testBS45('progress bar supports animated stripes', async function (assert) {
+  testNotBS3('progress bar supports animated stripes', async function (assert) {
     await render(hbs`
       <BsProgress as |p|>
         <p.bar @value={{50}} @type="success" @striped={{true}} @animate={{true}} />

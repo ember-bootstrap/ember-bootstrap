@@ -1,5 +1,5 @@
 {{#let (element this.htmlTag) as |Tag|}}
-  <Tag class="{{this.containerClass}} {{if this.inNav (if (macroCondition (macroGetOwnConfig "isBS45")) "nav-item")}} {{if this.isOpen (if (macroCondition (macroGetOwnConfig "isBS45")) "show" "open")}}" ...attributes>
+  <Tag class="{{this.containerClass}} {{if this.inNav (if (macroCondition (macroGetOwnConfig "isNotBS3")) "nav-item")}} {{if this.isOpen (if (macroCondition (macroGetOwnConfig "isNotBS3")) "show" "open")}}" ...attributes>
     {{yield
       (hash
         button=(component (bs-default @buttonComponent (component "bs-dropdown/button"))

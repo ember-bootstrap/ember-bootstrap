@@ -27,7 +27,7 @@ export function testBS5() {
   return testForBootstrap(5, ...arguments);
 }
 
-export function testBS45() {
+export function testNotBS3() {
   return testForBootstrap([4, 5], ...arguments);
 }
 
@@ -172,9 +172,9 @@ export function testBS5RequiringFocus(name, fn) {
   }
 }
 
-export function testBS45RequiringFocus(name, fn) {
+export function testNotBS3RequiringFocus(name, fn) {
   if (document.hasFocus()) {
-    return testBS45(name, fn);
+    return testNotBS3(name, fn);
   } else {
     skip(name);
   }

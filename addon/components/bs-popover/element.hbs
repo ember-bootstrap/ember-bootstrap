@@ -8,12 +8,12 @@
   @onCreate={{this.updatePlacement}}
   @onUpdate={{this.updatePlacement}}
   @id={{@id}}
-  @class="popover {{@class}} {{if this.fade "fade"}} {{if (macroCondition (macroGetOwnConfig "isBS45")) (concat "bs-popover-" this.actualPlacement)}} {{if (macroCondition (macroGetOwnConfig "isBS3")) this.actualPlacement}} {{if (macroCondition (macroGetOwnConfig "isBS45")) (if this.showHelp "show")}} {{if (macroCondition (macroGetOwnConfig "isBS3")) (if this.showHelp "in")}} {{if (macroCondition (macroGetOwnConfig "isBS3")) "ember-bootstrap-popover"}}"
+  @class="popover {{@class}} {{if this.fade "fade"}} {{if (macroCondition (macroGetOwnConfig "isNotBS3")) (concat "bs-popover-" this.actualPlacement)}} {{if (macroCondition (macroGetOwnConfig "isBS3")) this.actualPlacement}} {{if (macroCondition (macroGetOwnConfig "isNotBS3")) (if this.showHelp "show")}} {{if (macroCondition (macroGetOwnConfig "isBS3")) (if this.showHelp "in")}} {{if (macroCondition (macroGetOwnConfig "isBS3")) "ember-bootstrap-popover"}}"
   ...attributes
 >
   <div class={{this.arrowClass}}></div>
   {{#if @title}}
-    <h3 class="{{if (macroCondition (macroGetOwnConfig "isBS45")) "popover-header"}}{{if (macroCondition (macroGetOwnConfig "isBS3")) "popover-title"}}">{{@title}}</h3>
+    <h3 class="{{if (macroCondition (macroGetOwnConfig "isNotBS3")) "popover-header"}}{{if (macroCondition (macroGetOwnConfig "isBS3")) "popover-title"}}">{{@title}}</h3>
   {{/if}}
-  <div class="{{if (macroCondition (macroGetOwnConfig "isBS45")) "popover-body"}}{{if (macroCondition (macroGetOwnConfig "isBS3")) "popover-content"}}">{{yield}}</div>
+  <div class="{{if (macroCondition (macroGetOwnConfig "isNotBS3")) "popover-body"}}{{if (macroCondition (macroGetOwnConfig "isBS3")) "popover-content"}}">{{yield}}</div>
 </EmberPopper>

@@ -7,7 +7,7 @@
       )
     }}
   {{else}}
-    {{#if (macroCondition (macroGetOwnConfig "isBS45"))}}
+    {{#if (macroCondition (macroGetOwnConfig "isNotBS3"))}}
       {{#if (has-block)}}
         {{yield}}
       {{else}}

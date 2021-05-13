@@ -7,7 +7,7 @@ import {
   accordionItemHeadClass,
   test,
   testBS3,
-  testBS45,
+  testNotBS3,
   visibilityClass,
 } from '../../helpers/bootstrap';
 import setupNoDeprecations from '../../helpers/setup-no-deprecations';
@@ -33,7 +33,7 @@ module('Integration | Component | bs-accordion', function (hooks) {
     assert.dom('.panel-group').exists('accordion has panel-group class');
   });
 
-  testBS45('accordion has correct default markup', async function (assert) {
+  testNotBS3('accordion has correct default markup', async function (assert) {
     await render(hbs`
       <BsAccordion as |acc|>
         <acc.item @value={{1}} @title="TITLE1">CONTENT1</acc.item>

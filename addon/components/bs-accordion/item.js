@@ -97,7 +97,7 @@ export default class AccordionItem extends Component {
   @defaultValue
   type = 'default';
 
-  @typeClass(macroCondition(getOwnConfig().isBS45) ? 'bg' : 'panel', 'type')
+  @typeClass(macroCondition(getOwnConfig().isNotBS3) ? 'bg' : 'panel', 'type')
   typeClass;
 
   /**
