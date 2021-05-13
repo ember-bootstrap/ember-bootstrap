@@ -11,5 +11,5 @@ import { macroCondition, getOwnConfig } from '@embroider/macros';
  @extends Ember.LinkComponent
  @public
  */
-@classNames(macroCondition(getOwnConfig().isBS4) ? 'dropdown-item' : '')
+@classNames(macroCondition(getOwnConfig().isBS45) ? 'dropdown-item' : '')
 export default class DropdownMenuLinkTo extends LinkComponent {}

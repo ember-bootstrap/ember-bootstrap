@@ -13,5 +13,5 @@ import { macroCondition, getOwnConfig } from '@embroider/macros';
  @uses Mixins.ComponentChild
  @public
  */
-@classNames(macroCondition(getOwnConfig().isBS4) ? 'nav-link' : '')
+@classNames(macroCondition(getOwnConfig().isBS45) ? 'nav-link' : '')
 export default class NavLinkTo extends LinkComponent.extend(ComponentChild) {}

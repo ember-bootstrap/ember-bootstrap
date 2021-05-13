@@ -1,7 +1,7 @@
 import { module, test, skip } from 'qunit';
 import { setupRenderingTest } from 'ember-qunit';
 import { render } from '@ember/test-helpers';
-import { testBS3, testBS4 } from '../../../helpers/bootstrap';
+import { testBS3, testBS45 } from '../../../helpers/bootstrap';
 import hbs from 'htmlbars-inline-precompile';
 import setupNoDeprecations from '../../../helpers/setup-no-deprecations';
 import { gte } from 'ember-compatibility-helpers';
@@ -26,7 +26,7 @@ module('Integration | Component | bs-dropdown/menu', function (hooks) {
     assert.dom('.dropdown-menu').hasText('Something');
   });
 
-  testBS4('dropdown menu has correct markup', async function (assert) {
+  testBS45('dropdown menu has correct markup', async function (assert) {
     await render(
       hbs`<BsDropdown as |dd|><dd.menu @align="right" @isOpen={{true}} @toggleElement={{this.element}}>Something</dd.menu></BsDropdown>`
     );
@@ -45,7 +45,7 @@ module('Integration | Component | bs-dropdown/menu', function (hooks) {
     assert.dom('li').exists({ count: 1 }, 'has item component');
   });
 
-  testBS4('dropdown menu yields item component', async function (assert) {
+  testBS45('dropdown menu yields item component', async function (assert) {
     await render(
       hbs`<BsDropdown as |dd|><dd.menu @toggleElement={{this.element}} @isOpen={{true}} as |ddm|><ddm.item>Dummy</ddm.item></dd.menu></BsDropdown>`
     );

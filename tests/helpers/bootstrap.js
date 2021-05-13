@@ -5,7 +5,10 @@ import { Promise } from 'rsvp';
 const currentBootstrapVersion = parseInt(config.bootstrapVersion);
 
 function testForBootstrap(bsVersion, name, fn) {
-  if (bsVersion !== currentBootstrapVersion) {
+  if (!Array.isArray(bsVersion)) {
+    bsVersion = [bsVersion];
+  }
+  if (!bsVersion.includes(currentBootstrapVersion)) {
     // Skip test for different Bootstrap version
     return;
   }
@@ -18,6 +21,14 @@ export function testBS3() {
 
 export function testBS4() {
   return testForBootstrap(4, ...arguments);
+}
+
+export function testBS5() {
+  return testForBootstrap(5, ...arguments);
+}
+
+export function testBS45() {
+  return testForBootstrap([4, 5], ...arguments);
 }
 
 export function versionDependent(v3, v4) {
@@ -144,6 +155,22 @@ export function testBS3RequiringFocus(name, fn) {
 export function testBS4RequiringFocus(name, fn) {
   if (document.hasFocus()) {
     return testBS4(name, fn);
+  } else {
+    skip(name);
+  }
+}
+
+export function testBS5RequiringFocus(name, fn) {
+  if (document.hasFocus()) {
+    return testBS5(name, fn);
+  } else {
+    skip(name);
+  }
+}
+
+export function testBS45RequiringFocus(name, fn) {
+  if (document.hasFocus()) {
+    return testBS45(name, fn);
   } else {
     skip(name);
   }

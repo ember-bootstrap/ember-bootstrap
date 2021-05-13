@@ -2,7 +2,7 @@ import hbs from 'htmlbars-inline-precompile';
 import { module } from 'qunit';
 import { render, click, triggerEvent, getContext } from '@ember/test-helpers';
 import { setupRenderingTest } from 'ember-qunit';
-import { test, testBS3, testBS4, delay } from '../../helpers/bootstrap';
+import { test, testBS3, testBS45, delay } from '../../helpers/bootstrap';
 import { skip } from 'qunit';
 import setupNoDeprecations from '../../helpers/setup-no-deprecations';
 import a11yAudit from 'ember-a11y-testing/test-support/audit';
@@ -82,7 +82,7 @@ module('Integration | Component | bs-carousel', function (hooks) {
     assert.ok(right.querySelector('.sr-only'), 'right control has sr-only');
   });
 
-  testBS4('carousel has correct controls markup', async function (assert) {
+  testBS45('carousel has correct controls markup', async function (assert) {
     await render(hbs`<BsCarousel @interval={{0}}></BsCarousel>`);
 
     let prev = this.element.querySelectorAll('.carousel-control-prev');
@@ -100,7 +100,7 @@ module('Integration | Component | bs-carousel', function (hooks) {
     assert.dom('.carousel-inner .item').exists({ count: 2 }, 'has right number of slides');
   });
 
-  testBS4('carousel has correct indicators and slides markup', async function (assert) {
+  testBS45('carousel has correct indicators and slides markup', async function (assert) {
     await render(hbs`<BsCarousel @interval={{0}} as |car|>{{car.slide}}{{car.slide}}</BsCarousel>`);
 
     assert.dom('.carousel-indicators li').exists({ count: 2 }, 'has right number of indicators');
@@ -109,7 +109,7 @@ module('Integration | Component | bs-carousel', function (hooks) {
 
   // Parameters
 
-  testBS4('carousel transition="fade" has correct markup', async function (assert) {
+  testBS45('carousel transition="fade" has correct markup', async function (assert) {
     await render(hbs`<BsCarousel @interval={{0}} @transition="fade" />`);
     assert.dom('.carousel').hasClass('carousel-fade', 'has carousel-fade class');
   });

@@ -118,7 +118,7 @@ export default class ProgressBar extends Component {
   @defaultValue
   type = 'default';
 
-  @typeClass(macroCondition(getOwnConfig().isBS4) ? 'bg' : 'progress-bar', 'type')
+  @typeClass(macroCondition(getOwnConfig().isBS45) ? 'bg' : 'progress-bar', 'type')
   typeClass;
 
   /**

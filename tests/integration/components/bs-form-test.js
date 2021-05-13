@@ -21,7 +21,7 @@ import {
   formFeedbackElement,
   test,
   testBS3,
-  testBS4,
+  testBS45,
   testRequiringFocus,
   validationErrorClass,
   validationSuccessClass,
@@ -65,7 +65,7 @@ module('Integration | Component | bs-form', function (hooks) {
     }
   });
 
-  testBS4('form has correct markup', async function (assert) {
+  testBS45('form has correct markup', async function (assert) {
     let classSpec = {
       vertical: ['form', false],
       horizontal: ['form-horizontal', false],
@@ -1087,7 +1087,7 @@ module('Integration | Component | bs-form', function (hooks) {
     assert.dom('form').hasClass('form');
   });
 
-  testBS4('it uses default value for formLayout argument if undefined', async function (assert) {
+  testBS45('it uses default value for formLayout argument if undefined', async function (assert) {
     this.set('formLayout', undefined);
     await render(hbs`
         <BsForm @formLayout={{this.formLayout}} />

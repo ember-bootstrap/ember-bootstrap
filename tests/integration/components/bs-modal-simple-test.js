@@ -4,7 +4,7 @@ import { click, focus, render, settled, triggerKeyEvent, waitUntil } from '@embe
 import {
   defaultButtonClass,
   test,
-  testBS4,
+  testBS45,
   testRequiringFocus,
   testRequiringTransitions,
   visibilityClass,
@@ -582,7 +582,7 @@ module('Integration | Component | bs-modal-simple', function (hooks) {
     assert.equal(this.open, true, 'DOes not change open property');
   });
 
-  testBS4('modal can be centered vertically', async function (assert) {
+  testBS45('modal can be centered vertically', async function (assert) {
     await render(
       hbs`<BsModalSimple @title="Simple Dialog" @fade={{false}} @position="center">Hello world!</BsModalSimple>`
     );
@@ -612,7 +612,7 @@ module('Integration | Component | bs-modal-simple', function (hooks) {
     assert.dom('.modal').hasAttribute('data-test');
   });
 
-  testBS4('modal can be set to scrollable', async function (assert) {
+  testBS45('modal can be set to scrollable', async function (assert) {
     await render(
       hbs`<BsModalSimple @title="Simple Dialog" @fade={{false}} @scrollable={{true}}>Hello world!</BsModalSimple>`
     );
