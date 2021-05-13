@@ -31,9 +31,13 @@ export function testBS45() {
   return testForBootstrap([4, 5], ...arguments);
 }
 
-export function versionDependent(v3, v4) {
+export function versionDependent(v3, v4, v5) {
   if (currentBootstrapVersion === 3) {
     return v3;
+  }
+
+  if (currentBootstrapVersion === 5) {
+    return v5 ?? v4;
   }
 
   return v4;
