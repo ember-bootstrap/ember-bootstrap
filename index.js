@@ -93,6 +93,7 @@ module.exports = {
     this.options['@embroider/macros'].setOwnConfig.isBS3 = this.getBootstrapVersion() === 3;
     this.options['@embroider/macros'].setOwnConfig.isBS4 = this.getBootstrapVersion() === 4;
     this.options['@embroider/macros'].setOwnConfig.isBS5 = this.getBootstrapVersion() === 5;
+    this.options['@embroider/macros'].setOwnConfig.isNotBS3 = this.getBootstrapVersion() !== 3;
     this.options['@embroider/macros'].setOwnConfig.version = require('./package.json').version;
   },
 

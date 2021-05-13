@@ -7,7 +7,7 @@ import {
   isVisible,
   openClass,
   test,
-  testBS4,
+  testNotBS3,
 } from '../../helpers/bootstrap';
 import hbs from 'htmlbars-inline-precompile';
 import setupNoDeprecations from '../../helpers/setup-no-deprecations';
@@ -35,13 +35,13 @@ module('Integration | Component | bs-dropdown', function (hooks) {
     assert.dom('.dropup').exists('has dropup class');
   });
 
-  testBS4('dropdown container supports dropright style', async function (assert) {
+  testNotBS3('dropdown container supports dropright style', async function (assert) {
     await render(hbs`<BsDropdown @direction="right">Test</BsDropdown>`);
 
     assert.dom('.dropright').exists('has dropright class');
   });
 
-  testBS4('dropdown container supports dropleft style', async function (assert) {
+  testNotBS3('dropdown container supports dropleft style', async function (assert) {
     await render(hbs`<BsDropdown @direction="left">Test</BsDropdown>`);
 
     assert.dom('.dropleft').exists('has dropleft class');

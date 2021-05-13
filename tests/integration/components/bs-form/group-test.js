@@ -1,7 +1,7 @@
 import { module } from 'qunit';
 import { setupRenderingTest } from 'ember-qunit';
 import { render } from '@ember/test-helpers';
-import { test, testBS3, testBS4, validationErrorClass } from '../../../helpers/bootstrap';
+import { test, testBS3, testNotBS3, validationErrorClass } from '../../../helpers/bootstrap';
 import hbs from 'htmlbars-inline-precompile';
 import setupNoDeprecations from '../../../helpers/setup-no-deprecations';
 
@@ -29,7 +29,7 @@ module('Integration | Component | bs-form/group', function (hooks) {
     assert.dom('.form-group').exists('component has form-group class');
   });
 
-  testBS4('component has row class for horizontal layouts', async function (assert) {
+  testNotBS3('component has row class for horizontal layouts', async function (assert) {
     await render(hbs`<BsForm::Group @formLayout="horizontal" />`);
     assert.dom('.row').exists('component has row class');
   });
@@ -42,7 +42,7 @@ module('Integration | Component | bs-form/group', function (hooks) {
     assert.dom('.form-group').hasClass('form-group-sm', 'form-group has small class');
   });
 
-  testBS4('does not set size class for BS4', async function (assert) {
+  testNotBS3('does not set size class for BS4', async function (assert) {
     await render(hbs`<BsForm::Group @size="lg" />`);
     assert.dom('.form-group').hasNoClass('form-group-lg', 'form-group has not large class');
 

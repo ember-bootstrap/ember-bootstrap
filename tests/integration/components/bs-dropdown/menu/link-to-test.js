@@ -1,7 +1,7 @@
 import { module, test } from 'qunit';
 import { setupRenderingTest } from 'ember-qunit';
 import { render } from '@ember/test-helpers';
-import { testBS3, testBS4 } from '../../../../helpers/bootstrap';
+import { testBS3, testNotBS3 } from '../../../../helpers/bootstrap';
 import hbs from 'htmlbars-inline-precompile';
 import setupNoDeprecations from '../../../../helpers/setup-no-deprecations';
 
@@ -23,7 +23,7 @@ module('Integration | Component | bs-dropdown/menu/link-to', function (hooks) {
     assert.dom('a.dropdown-item').doesNotExist('renders as plain element with no dropdown item class');
   });
 
-  testBS4('it has correct markup', async function (assert) {
+  testNotBS3('it has correct markup', async function (assert) {
     // Template block usage:
     await render(hbs`
       {{#bs-dropdown/menu/link-to "index"}}

@@ -1,5 +1,5 @@
 {{#if this._isOpen}}
-  {{#if (macroCondition (macroGetOwnConfig "isBS4"))}}
+  {{#if (macroCondition (macroGetOwnConfig "isNotBS3"))}}
     <EmberPopper
       class="dropdown-menu {{this.alignClass}} {{if this.isOpen "show"}} {{@class}}"
       @placement={{this.popperPlacement}}
