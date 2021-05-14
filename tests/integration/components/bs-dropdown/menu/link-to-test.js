@@ -44,7 +44,7 @@ module('Integration | Component | bs-dropdown/menu/link-to', function (hooks) {
   module('positional params', function (hooks) {
     hooks.afterEach(function (assert) {
       assert.deprecationsInclude(`Positional arguments for ember-bootstrap's link-to components are deprecated.`);
-      assert.deprecationsInclude(`The \`query-params\` helper is deprecated.`);
+      assert.deprecations();
     });
     test('simple route link', async function (assert) {
       await render(hbs`
