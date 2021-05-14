@@ -7,11 +7,16 @@ import { testNotBS3 } from '../../../helpers/bootstrap';
 
 module('Integration | Component | bs-nav/link-to', function (hooks) {
   setupRenderingTest(hooks);
+  setupNoDeprecations(hooks);
   hooks.beforeEach(function () {
     this.owner.setupRouter();
   });
 
-  module('positional params', function () {
+  module('positional params', function (hooks) {
+    hooks.afterEach(function (assert) {
+      assert.deprecationsInclude(`Positional arguments for ember-bootstrap's link-to components are deprecated.`);
+      assert.deprecationsInclude(`The \`query-params\` helper is deprecated.`);
+    });
     test('simple route link', async function (assert) {
       await render(hbs`
         <BsNav as |nav|>
@@ -62,9 +67,7 @@ module('Integration | Component | bs-nav/link-to', function (hooks) {
     });
   });
 
-  module('<LinkTo> properties', function (hooks) {
-    setupNoDeprecations(hooks);
-
+  module('<LinkTo> properties', function () {
     test('simple route link', async function (assert) {
       await render(hbs`
         <BsNav as |nav|>

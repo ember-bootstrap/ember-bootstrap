@@ -2,7 +2,7 @@
 import Component from '@ember/component';
 import { tagName } from '@ember-decorators/component';
 import { inject as service } from '@ember/service';
-import { assert } from '@ember/debug';
+import { assert, deprecate } from '@ember/debug';
 import ComponentChild from '../mixins/component-child';
 import { dependentKeyCompat } from '@ember/object/compat';
 
@@ -69,6 +69,17 @@ class LinkComponent extends Component.extend(ComponentChild) {
     if (!params || params.length === 0) {
       return;
     }
+
+    deprecate(
+      `Positional arguments for ember-bootstrap's link-to components are deprecated. Switch to angle bracket invocation and named arguments.`,
+      false,
+      {
+        id: `ember-bootstrap.link-to.positional-args`,
+        until: '5.0.0',
+        since: '4.7.0',
+        for: 'ember-bootstrap',
+      }
+    );
 
     params = params.slice();
 
