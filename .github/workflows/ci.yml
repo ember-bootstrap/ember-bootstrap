@@ -69,6 +69,7 @@ jobs:
         bootstrap:
           - 3
           - 4
+          - 5
         include:
           - scenario: ember-release
             command: ember test --launch Firefox

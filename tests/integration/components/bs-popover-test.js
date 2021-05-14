@@ -75,7 +75,8 @@ module('Integration | Component | bs-popover', function (hooks) {
   test('should adjust popover arrow', async function (assert) {
     this.insertCSSRule('#wrapper p { margin-top: 200px }');
 
-    let expectedArrowPosition = versionDependent(225, 219);
+    // @todo v5 needs changes in markup
+    let expectedArrowPosition = versionDependent(225, 219, 0);
 
     await render(hbs`
       <div id="ember-bootstrap-wormhole"></div>

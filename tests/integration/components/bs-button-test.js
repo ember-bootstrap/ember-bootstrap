@@ -3,7 +3,7 @@ import { defer, reject, resolve } from 'rsvp';
 import { module, skip } from 'qunit';
 import { setupRenderingTest } from 'ember-qunit';
 import { find, render, click, settled, waitUntil } from '@ember/test-helpers';
-import { test, testBS4, defaultButtonClass } from '../../helpers/bootstrap';
+import { test, testNotBS3, defaultButtonClass } from '../../helpers/bootstrap';
 import { gte } from 'ember-compatibility-helpers';
 import hbs from 'htmlbars-inline-precompile';
 import setupNoDeprecations from '../../helpers/setup-no-deprecations';
@@ -85,7 +85,7 @@ module('Integration | Component | bs-button', function (hooks) {
     assert.dom('button i').hasClass('fa-check');
   });
 
-  testBS4('button with outline property shows as outline', async function (assert) {
+  testNotBS3('button with outline property shows as outline', async function (assert) {
     await render(hbs`<BsButton @type="primary" @outline={{true}} />`);
     assert.dom('button').hasClass('btn-outline-primary');
     assert.dom('button').doesNotHaveClass('btn-primary');

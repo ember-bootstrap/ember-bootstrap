@@ -1,7 +1,7 @@
 import { module } from 'qunit';
 import { setupRenderingTest } from 'ember-qunit';
 import { render } from '@ember/test-helpers';
-import { test, testBS3, testBS4, versionDependent } from '../../../helpers/bootstrap';
+import { test, testBS3, testNotBS3, versionDependent } from '../../../helpers/bootstrap';
 import hbs from 'htmlbars-inline-precompile';
 import setupNoDeprecations from '../../../helpers/setup-no-deprecations';
 
@@ -15,7 +15,7 @@ module('Integration | Component | bs-navbar/toggle', function (hooks) {
     assert.dom('*').hasText('Toggle navigation');
   });
 
-  testBS4('it renders inline usage', async function (assert) {
+  testNotBS3('it renders inline usage', async function (assert) {
     await render(hbs`<BsNavbar::Toggle />`);
 
     assert.dom('.navbar-toggler > span').hasClass('navbar-toggler-icon');

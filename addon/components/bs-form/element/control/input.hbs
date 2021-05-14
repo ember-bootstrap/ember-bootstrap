@@ -5,7 +5,7 @@
   readonly={{this.readonly}}
   aria-describedby={{this.ariaDescribedBy}}
   value={{this.value}}
-  class="form-control {{if (macroCondition (macroGetOwnConfig "isBS4")) this.formValidationClass}} {{if (macroCondition (macroGetOwnConfig "isBS4")) this.sizeClass}}"
+  class="form-control {{if (macroCondition (macroGetOwnConfig "isNotBS3")) this.formValidationClass}} {{if (macroCondition (macroGetOwnConfig "isNotBS3")) this.sizeClass}}"
   ...attributes
   {{on "change" this.handleChange}}
   {{on "input" this.handleInput}}

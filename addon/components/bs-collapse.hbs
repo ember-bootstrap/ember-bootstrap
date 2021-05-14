@@ -1,5 +1,5 @@
 <div
-  class="{{if this.collapse "collapse"}} {{if this.transitioning "collapsing"}} {{if this.showContent (if (macroCondition (macroGetOwnConfig "isBS4")) "show" "in")}}"
+  class="{{if this.collapse "collapse"}} {{if this.transitioning "collapsing"}} {{if this.showContent (if (macroCondition (macroGetOwnConfig "isNotBS3")) "show" "in")}}"
   ...attributes
   {{create-ref "mainNode"}}
   {{style this.cssStyle}}

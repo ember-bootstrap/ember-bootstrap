@@ -10,9 +10,10 @@ import {
   test,
   testBS3,
   testBS4,
+  testNotBS3,
   testRequiringFocus,
   testBS3RequiringFocus,
-  testBS4RequiringFocus,
+  testNotBS3RequiringFocus,
   validationSuccessClass,
   validationErrorClass,
   validationWarningClass,
@@ -314,7 +315,7 @@ module('Integration | Component | bs-form/element', function (hooks) {
         .hasAttribute('for', this.element.querySelectorAll('input[type=radio]')[1].getAttribute('id'));
     });
 
-    testBS4('has correct markup', async function (assert) {
+    testNotBS3('has correct markup', async function (assert) {
       await render(
         hbs`<BsForm::Element @controlType="radio" @label="my radio group" @options={{this.simpleOptions}} />`
       );
@@ -328,7 +329,7 @@ module('Integration | Component | bs-form/element', function (hooks) {
       assert.dom('.form-check label').hasClass('form-check-label');
     });
 
-    testBS4('supports horizontal from layout', async function (assert) {
+    testNotBS3('supports horizontal from layout', async function (assert) {
       await render(hbs`
         <BsForm @formLayout="horizontal" as |form|>
           <form.element @controlType="radio" @label="my radio group" @options={{this.simpleOptions}} />
@@ -340,7 +341,7 @@ module('Integration | Component | bs-form/element', function (hooks) {
       assert.dom('.row > :not(legend)').hasClass('col-md-8');
     });
 
-    testBS4('supports inline', async function (assert) {
+    testNotBS3('supports inline', async function (assert) {
       await render(hbs`
         <BsForm::Element @controlType="radio" @options={{this.simpleOptions}} as |Element|>
           <Element.control @inline={{true}} />
@@ -772,7 +773,7 @@ module('Integration | Component | bs-form/element', function (hooks) {
       .hasNoClass(validationErrorClass(), "validation warnings aren't shown before user interaction");
   });
 
-  testBS4RequiringFocus('event triggered on input group button does not enable validation', async function (assert) {
+  testNotBS3RequiringFocus('event triggered on input group button does not enable validation', async function (assert) {
     this.set('errors', A(['Invalid']));
     this.set('model', EmberObject.create({ name: null }));
     await render(hbs`
@@ -875,7 +876,7 @@ module('Integration | Component | bs-form/element', function (hooks) {
     assert.dom('.form-group').hasClass('form-group-sm', 'form-group has small class');
   });
 
-  testBS4('support size classes', async function (assert) {
+  testNotBS3('support size classes', async function (assert) {
     await render(hbs`<BsForm::Element @size="lg" @label="foo" @formLayout="horizontal" />`);
     assert.dom('.form-group').hasNoClass('form-group-lg', 'form-group has not large class');
     assert.dom('input').hasClass('form-control-lg', 'input has large class');
