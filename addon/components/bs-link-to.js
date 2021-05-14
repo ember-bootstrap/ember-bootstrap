@@ -28,7 +28,7 @@ class LinkComponent extends Component.extend(ComponentChild) {
       return false;
     }
 
-    // Not all Ember versions we support correctly entangle autotracking with routing state changes, so we manually do that here
+    // Ember < 3.22 does not correctly entangle autotracking with routing state changes, so we manually do that here
     // See https://github.com/emberjs/ember.js/issues/19004
     // shamelessly stolen from https://github.com/rwjblue/ember-router-helpers/blob/master/addon/utils/track-active-route.js
 
