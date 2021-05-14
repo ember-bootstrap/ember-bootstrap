@@ -7,7 +7,7 @@
   {{component @errorsComponent}}
   {{component @helpTextComponent}}
 {{else}}
-  <div class="{{if this.isSwitch "custom-control custom-switch" "form-check"}}">
+  <div class="{{if (bs-eq "switch" @controlType) "custom-control custom-switch" "form-check"}}">
     {{yield}}
     {{component @labelComponent}}
     {{component @errorsComponent}}

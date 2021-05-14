@@ -10,7 +10,12 @@ module('Integration | Component | bs form/element/control/switch', function (hoo
   setupNoDeprecations(hooks);
 
   testBS4('it renders', async function (assert) {
-    await render(hbs`<BsForm::Element::Control::Switch />`);
+    await render(hbs`
+      <BsForm as |form|>
+        <form.element @controlType="switch" />
+      </BsForm>
+    `);
+
     assert.dom('input[type=checkbox]').hasClass('custom-control-input', 'component has custom-control-input class');
   });
 });

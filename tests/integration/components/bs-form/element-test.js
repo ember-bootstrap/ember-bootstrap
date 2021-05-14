@@ -149,7 +149,11 @@ module('Integration | Component | bs-form/element', function (hooks) {
   });
 
   testBS4('controlType "switch" is supported', async function (assert) {
-    await render(hbs`<BsForm::Element @controlType="switch" />`);
+    await render(hbs`
+      <BsForm as |form|>
+        <form.element @controlType="switch" />
+      </BsForm>
+    `);
 
     assert.dom('div.custom-control.custom-switch > input[type="checkbox"].custom-control-input').exists({ count: 1 });
     assert.dom('div.custom-control.custom-switch > label.custom-control-label').exists({ count: 1 });

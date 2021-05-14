@@ -43,7 +43,12 @@ module('Integration | Component | bs form/element/label', function (hooks) {
   });
 
   testBS4('component has custom-control-label class when using control type switch', async function (assert) {
-    await render(hbs`<BsForm::Element::Label @controlType="switch" />`);
+    await render(hbs`
+      <BsForm as |form|>
+        <form.element @label="Switch" @controlType="switch" />
+      </BsForm>
+    `);
+
     assert
       .dom('label')
       .hasClass('custom-control-label', 'component has custom-control-label class')
