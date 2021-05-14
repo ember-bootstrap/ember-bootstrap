@@ -2,7 +2,7 @@ import EmberObject from '@ember/object';
 import Component from '@ember/component';
 import { A } from '@ember/array';
 import RSVP, { defer, reject, resolve } from 'rsvp';
-import { module } from 'qunit';
+import { module, skip } from 'qunit';
 import { setupRenderingTest } from 'ember-qunit';
 import {
   blur,
@@ -407,7 +407,8 @@ module('Integration | Component | bs-form', function (hooks) {
     }
   );
 
-  test('it supports hash helper as model', async function (assert) {
+  // @todo enable again when/if https://github.com/glimmerjs/glimmer-vm/pull/1298 is resolved
+  skip('it supports hash helper as model', async function (assert) {
     this.set('submitAction', function (model) {
       assert.step('submit');
       assert.equal(model.name, 'Moritz');
