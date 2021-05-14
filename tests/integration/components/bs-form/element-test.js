@@ -9,6 +9,7 @@ import {
   formFeedbackClass,
   test,
   testBS3,
+  testBS4,
   testNotBS3,
   testRequiringFocus,
   testBS3RequiringFocus,
@@ -144,6 +145,26 @@ module('Integration | Component | bs-form/element', function (hooks) {
       return this.checked;
     });
     await controlTypeUpdateTest.call(this, assert, 'checkbox', 'input[type=checkbox]', true, false, function () {
+      return click(this);
+    });
+  });
+
+  testBS4('controlType "switch" is supported', async function (assert) {
+    await render(hbs`
+      <BsForm as |form|>
+        <form.element @controlType="switch" />
+      </BsForm>
+    `);
+
+    assert.dom('div.custom-control.custom-switch > input[type="checkbox"].custom-control-input').exists({ count: 1 });
+    assert.dom('div.custom-control.custom-switch > label.custom-control-label').exists({ count: 1 });
+    assert.dom('div.custom-control.custom-switch').doesNotHaveClass('form-check');
+
+    await controlTypeLayoutTest.call(this, assert, 'switch', 'input[type=checkbox]');
+    await controlTypeValueTest.call(this, assert, 'switch', 'input[type=checkbox]', [true, false], function () {
+      return this.checked;
+    });
+    await controlTypeUpdateTest.call(this, assert, 'switch', 'input[type=checkbox]', true, false, function () {
       return click(this);
     });
   });
