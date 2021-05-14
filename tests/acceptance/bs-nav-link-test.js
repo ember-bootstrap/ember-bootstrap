@@ -1,9 +1,6 @@
 import { visit } from '@ember/test-helpers';
 import { test, module } from 'qunit';
 import { setupApplicationTest } from 'ember-qunit';
-import hasEmberVersion from '@ember/test-helpers/has-ember-version';
-
-const supportsAngleBracketsLinkTo = hasEmberVersion(3, 10);
 
 module('Acceptance | bs-nav-link', function (hooks) {
   setupApplicationTest(hooks);
@@ -19,16 +16,14 @@ module('Acceptance | bs-nav-link', function (hooks) {
     assert.dom(this.element.querySelectorAll('.nav li')[2]).hasClass('active');
   });
 
-  if (supportsAngleBracketsLinkTo) {
-    test('active @route property marks nav item as active', async function (assert) {
-      await visit('/acceptance/linkto/1');
-      assert.dom(this.element.querySelectorAll('.nav li')[0]).hasClass('active');
-      assert.dom(this.element.querySelectorAll('.nav li')[1]).hasNoClass('active');
-      assert.dom(this.element.querySelectorAll('.nav li')[2]).hasClass('active');
-      await visit('/acceptance/linkto/2');
-      assert.dom(this.element.querySelectorAll('.nav li')[0]).hasNoClass('active');
-      assert.dom(this.element.querySelectorAll('.nav li')[1]).hasClass('active');
-      assert.dom(this.element.querySelectorAll('.nav li')[2]).hasClass('active');
-    });
-  }
+  test('active @route property marks nav item as active', async function (assert) {
+    await visit('/acceptance/linkto/1');
+    assert.dom(this.element.querySelectorAll('.nav li')[0]).hasClass('active');
+    assert.dom(this.element.querySelectorAll('.nav li')[1]).hasNoClass('active');
+    assert.dom(this.element.querySelectorAll('.nav li')[2]).hasClass('active');
+    await visit('/acceptance/linkto/2');
+    assert.dom(this.element.querySelectorAll('.nav li')[0]).hasNoClass('active');
+    assert.dom(this.element.querySelectorAll('.nav li')[1]).hasClass('active');
+    assert.dom(this.element.querySelectorAll('.nav li')[2]).hasClass('active');
+  });
 });

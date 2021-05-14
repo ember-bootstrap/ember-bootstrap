@@ -13,7 +13,13 @@ module('Integration | Component | bs-nav/link-to', function (hooks) {
 
   module('positional params', function () {
     test('simple route link', async function (assert) {
-      await render(hbs`{{#bs-nav/link-to "index"}}Link{{/bs-nav/link-to}}`);
+      await render(hbs`
+        <BsNav as |nav|>
+          <nav.item>
+            {{#nav.link-to "index"}}Link{{/nav.link-to}}
+          </nav.item>
+        </BsNav>
+      `);
 
       assert.dom('a').exists({ count: 1 });
       assert.dom('a').hasText('Link');
@@ -21,21 +27,37 @@ module('Integration | Component | bs-nav/link-to', function (hooks) {
     });
 
     test('link with model', async function (assert) {
-      await render(hbs`{{#bs-nav/link-to "acceptance.link" "1" (query-params foo="bar")}}Link{{/bs-nav/link-to}}`);
+      await render(hbs`
+        <BsNav as |nav|>
+          <nav.item>
+            {{#nav.link-to "acceptance.link" "1" (query-params foo="bar")}}Link{{/nav.link-to}}
+          </nav.item>
+        </BsNav>
+      `);
 
       assert.dom('a').exists({ count: 1 });
       assert.dom('a').hasAttribute('href', '/acceptance/link/1?foo=bar');
     });
 
     testNotBS3('link has nav-link class', async function (assert) {
-      await render(hbs`{{#bs-nav/link-to "index"}}Link{{/bs-nav/link-to}}`);
-
+      await render(hbs`
+        <BsNav as |nav|>
+          <nav.item>
+            {{#nav.link-to "index"}}Link{{/nav.link-to}}
+          </nav.item>
+        </BsNav>
+      `);
       assert.dom('a').hasClass('nav-link');
     });
 
     test('disabled link', async function (assert) {
-      await render(hbs`{{#bs-nav/link-to "index" disabled=true}}Link{{/bs-nav/link-to}}`);
-
+      await render(hbs`
+        <BsNav as |nav|>
+          <nav.item>
+            {{#nav.link-to "index" disabled=true}}Link{{/nav.link-to}}
+          </nav.item>
+        </BsNav>
+      `);
       assert.dom('a').hasClass('disabled');
     });
   });
@@ -44,7 +66,13 @@ module('Integration | Component | bs-nav/link-to', function (hooks) {
     setupNoDeprecations(hooks);
 
     test('simple route link', async function (assert) {
-      await render(hbs`<BsNav::link-to @route="index">Link</BsNav::link-to>`);
+      await render(hbs`
+        <BsNav as |nav|>
+          <nav.item>
+            <nav.link-to @route="index">Link</nav.link-to>
+          </nav.item>
+        </BsNav>
+      `);
 
       assert.dom('a').exists({ count: 1 });
       assert.dom('a').hasText('Link');
@@ -52,23 +80,38 @@ module('Integration | Component | bs-nav/link-to', function (hooks) {
     });
 
     test('link with model', async function (assert) {
-      await render(
-        hbs`<BsNav::link-to @route="acceptance.link" @model="1" @query={{hash foo="bar"}}>Link</BsNav::link-to>`
-      );
+      await render(hbs`
+        <BsNav as |nav|>
+          <nav.item>
+            <nav.link-to @route="acceptance.link" @model="1" @query={{hash foo="bar"}}>Link</nav.link-to>
+          </nav.item>
+        </BsNav>
+      `);
 
       assert.dom('a').exists({ count: 1 });
       assert.dom('a').hasAttribute('href', '/acceptance/link/1?foo=bar');
     });
 
     testNotBS3('link has nav-link class', async function (assert) {
-      await render(hbs`<BsNav::link-to @route="index">Link</BsNav::link-to>`);
+      await render(hbs`
+        <BsNav as |nav|>
+          <nav.item>
+            <nav.link-to @route="index">Link</nav.link-to>
+          </nav.item>
+        </BsNav>
+      `);
 
       assert.dom('a').hasClass('nav-link');
     });
 
     test('disabled link', async function (assert) {
-      await render(hbs`<BsNav::link-to @route="index" @disabled={{true}}>Link</BsNav::link-to>`);
-
+      await render(hbs`
+        <BsNav as |nav|>
+          <nav.item>
+            <nav.link-to @route="index" @disabled={{true}}>Link</nav.link-to>
+          </nav.item>
+        </BsNav>
+      `);
       assert.dom('a').hasClass('disabled');
     });
   });

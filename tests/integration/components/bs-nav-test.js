@@ -47,8 +47,8 @@ module('Integration | Component | bs-nav', function (hooks) {
   });
 
   test('it exposes contextual components', async function (assert) {
-    // eslint-disable-next-line ember/no-private-routing-service
-    this.owner.lookup('router:main').setupRouter();
+    this.owner.setupRouter();
+
     await render(hbs`
       <BsNav as |nav|>
         <nav.item>
@@ -73,6 +73,8 @@ module('Integration | Component | bs-nav', function (hooks) {
   });
 
   test('it passes accessibility checks', async function (assert) {
+    this.owner.setupRouter();
+
     await render(hbs`
       <BsNav as |nav|>
         <nav.item>
