@@ -69,7 +69,11 @@ module('Integration | Component | bs-accordion-item', function (hooks) {
       .dom(accordionItemClickableSelector())
       .hasClass('disabled', 'Clickable accordion selector has `.disabled` class');
     assert.dom(`.${accordionClassFor()}`).hasClass('disabled', 'entire item has `.disabled` class');
-    await click(accordionItemClickableSelector());
+    try {
+      await click(accordionItemClickableSelector());
+    } catch (e) {
+      // click helper will throw on a disabled button
+    }
     assert.notOk(action.calledWith(1), 'onClick action should not be called');
   });
 });

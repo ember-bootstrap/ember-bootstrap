@@ -496,8 +496,8 @@ module('Integration | Component | bs-tooltip', function (hooks) {
 
   test('can be shown and disposed in same loop', async function (assert) {
     this.set('show', true);
-    await render(hbs`{{#if this.show}}<div id="target">{{bs-tooltip title="Dummy" class="wide"}}</div>{{/if}}`);
-    triggerEvent('#target', 'mouseenter');
+    await render(hbs`{{#if this.show}}<div id="target"><BsTooltip @title="Dummy" class="wide"/></div>{{/if}}`);
+    await triggerEvent('#target', 'mouseenter');
     this.set('show', false);
     await settled();
     assert.dom('.tooltip').doesNotExist();

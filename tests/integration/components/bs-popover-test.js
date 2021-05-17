@@ -69,6 +69,7 @@ module('Integration | Component | bs-popover', function (hooks) {
     setupForPositioning();
 
     await click('#target');
+
     assertPositioning(assert, '.popover');
   });
 

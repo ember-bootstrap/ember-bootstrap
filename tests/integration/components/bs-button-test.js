@@ -368,7 +368,11 @@ module('Integration | Component | bs-button', function (hooks) {
     this.set('clickAction', () => {
       assert.ok(false, 'onClick action is not executed concurrently');
     });
-    await click('button');
+    try {
+      await click('button');
+    } catch (e) {
+      // click helper will throw on a disabled button
+    }
 
     deferredClickAction.resolve();
     await settled();
