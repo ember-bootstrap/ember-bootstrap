@@ -14,6 +14,13 @@ export function setupForPositioning(align = 'left') {
   assign(document.getElementById('ember-testing').style, {
     transform: 'none',
   });
+
+  // popper.js v1 seems to have issues with the positioning of our testing container since ember-qunit v5
+  // Could be related to https://github.com/popperjs/popper-core/issues/670
+  assign(document.getElementById('ember-testing-container').style, {
+    position: 'relative',
+    top: 0,
+  });
 }
 
 function offset(el) {

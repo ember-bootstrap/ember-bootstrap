@@ -1,5 +1,5 @@
-import { module } from 'qunit';
-import { setupRenderingTest, skip } from 'ember-qunit';
+import { module, skip } from 'qunit';
+import { setupRenderingTest } from 'ember-qunit';
 import { click, focus, render, settled, triggerKeyEvent, waitUntil } from '@ember/test-helpers';
 import {
   defaultButtonClass,
