@@ -408,14 +408,15 @@ module('Integration | Component | bs-tooltip', function (hooks) {
 
   test('should adjust tooltip arrow', async function (assert) {
     this.insertCSSRule('.margin-top { margin-top: 200px; }');
+    this.insertCSSRule('#target { width: 100px; padding: 0; border: none; }');
 
-    let expectedArrowPosition = versionDependent(155, 150, 150);
+    let expectedArrowPosition = versionDependent(145, 144, 144);
 
     await render(hbs`
       <div id="ember-bootstrap-wormhole"></div>
       <div id="wrapper">
         <p class="margin-top">
-          <button type="button" class="btn" id="target">
+          <button type="button" id="target">
             Click me<BsTooltip @autoPlacement={{true}} @viewportSelector="#wrapper" @placement="top" @title="very very very very very very very long tooltip" @fade={{false}} />
           </button>
         </p>
