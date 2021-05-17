@@ -11,7 +11,7 @@
             type="radio"
             id={{id}}
             checked={{bs-eq option @value}}
-            onclick={{action this.onChange option}}
+            onclick={{fn this.onChange option}}
             name={{@name}}
             required={{@required}}
             disabled={{@disabled}}
@@ -41,7 +41,7 @@
               type="radio"
               id={{id}}
               checked={{bs-eq option @value}}
-              onclick={{action this.onChange option}}
+              onclick={{fn this.onChange option}}
               name={{@name}}
               required={{@required}}
               disabled={{@disabled}}
@@ -70,7 +70,7 @@
           class="form-check-input"
           id={{id}}
           checked={{bs-eq option @value}}
-          onclick={{action this.onChange option}}
+          onclick={{fn this.onChange option}}
           name={{@name}}
           required={{@required}}
           disabled={{@disabled}}

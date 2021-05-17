@@ -122,7 +122,7 @@ module('Integration | Component | bs-form', function (hooks) {
   test('Submit event bubbles', async function (assert) {
     this.set('action', () => assert.step('bubbles'));
 
-    // eslint-disable-next-line hbs/check-hbs-template-literals
+    // Enable again when hbs plugin works again _eslint-disable-next-line hbs/check-hbs-template-literals
     await render(hbs`
       <div {{on "submit" this.action}}>
         <BsForm>
