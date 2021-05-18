@@ -5,7 +5,7 @@
   readonly={{this.readonly}}
   aria-describedby={{this.ariaDescribedBy}}
   checked={{this.value}}
-  class="custom-control-input {{this.formValidationClass}}"
+  class="{{if (macroCondition (macroGetOwnConfig "isBS5")) "form-check-input" "custom-control-input"}} {{this.formValidationClass}}"
   ...attributes
   {{on "click" this.handleClick}}
 >

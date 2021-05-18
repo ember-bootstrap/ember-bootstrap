@@ -35,13 +35,13 @@ module('Integration | Component | bs-form/element', function (hooks) {
   setupNoDeprecations(hooks);
 
   testForBootstrap([3, 4], 'component has form-group bootstrap class', async function (assert) {
-    await render(hbs`<BsForm::Element />`);
-    assert.dom('[data-test-form-element]').exists('component has form-group class');
+    await render(hbs`<BsForm::Element data-test-form-element />`);
+    assert.dom('[data-test-form-element]').hasClass('form-group', 'component has form-group class');
   });
 
   testBS5('component has no form-group bootstrap class', async function (assert) {
-    await render(hbs`<BsForm::Element />`);
-    assert.dom('[data-test-form-element]').doesNotExist('component has no form-group class');
+    await render(hbs`<BsForm::Element data-test-form-element />`);
+    assert.dom('[data-test-form-element]').doesNotHaveClass('form-group', 'component has no form-group class');
   });
 
   test('setting label property displays label tag', async function (assert) {
@@ -244,6 +244,25 @@ module('Integration | Component | bs-form/element', function (hooks) {
       assert.dom('div.custom-control.custom-switch > input[type="checkbox"].custom-control-input').exists({ count: 1 });
       assert.dom('div.custom-control.custom-switch > label.custom-control-label').exists({ count: 1 });
       assert.dom('div.custom-control.custom-switch').doesNotHaveClass('form-check');
+
+      await controlTypeLayoutTest.call(this, assert, 'switch', 'input[type=checkbox]');
+      await controlTypeValueTest.call(this, assert, 'switch', 'input[type=checkbox]', [true, false], function () {
+        return this.checked;
+      });
+      await controlTypeUpdateTest.call(this, assert, 'switch', 'input[type=checkbox]', true, false, function () {
+        return click(this);
+      });
+    });
+
+    testBS5('controlType "switch" is supported', async function (assert) {
+      await render(hbs`
+      <BsForm as |form|>
+        <form.element @controlType="switch" />
+      </BsForm>
+    `);
+
+      assert.dom('div.form-check.form-switch > input[type="checkbox"].form-check-input').exists({ count: 1 });
+      assert.dom('div.form-check.form-switch > label.form-check-label').exists({ count: 1 });
 
       await controlTypeLayoutTest.call(this, assert, 'switch', 'input[type=checkbox]');
       await controlTypeValueTest.call(this, assert, 'switch', 'input[type=checkbox]', [true, false], function () {
