@@ -20,7 +20,11 @@ module.exports = function (environment) {
 
     contentSecurityPolicy: {
       'default-src': ["'none'"],
-      'script-src': ["'self'", "'sha256-1xtiB6mV1iIKZ5iz9CxA5lEnfEg8d0XEH3FL9L8NBqo='", 'use.typekit.net'],
+      'script-src': [
+        "'self'",
+        "'sha256-1xtiB6mV1iIKZ5iz9CxA5lEnfEg8d0XEH3FL9L8NBqo='",
+        'use.typekit.net',
+      ],
       'font-src': ["'self'", 'use.typekit.net', 'use.fontawesome.com'],
       'connect-src': ["'self'", 'performance.typekit.net'],
       'img-src': [
@@ -29,7 +33,12 @@ module.exports = function (environment) {
         'data:',
         'p.typekit.net',
       ],
-      'style-src': ["'self'", "'unsafe-inline'", 'use.typekit.net', 'use.fontawesome.com'],
+      'style-src': [
+        "'self'",
+        "'unsafe-inline'",
+        'use.typekit.net',
+        'use.fontawesome.com',
+      ],
       'media-src': ["'self'"],
       'frame-src': [
         // iframe used in application template of dummy app

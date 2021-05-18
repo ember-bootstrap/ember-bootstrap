@@ -6,5 +6,5 @@ export default Route.extend({
 
   model() {
     return this.get('component').findAll();
-  }
+  },
 });
