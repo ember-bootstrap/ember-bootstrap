@@ -7,23 +7,20 @@ const Validations = buildValidations({
     validator('presence', true),
     validator('length', {
       min: 4,
-      max: 8
+      max: 8,
     }),
     validator('length', {
       isWarning: true,
       min: 6,
-      message: 'Password is weak'
-    })
+      message: 'Password is weak',
+    }),
   ],
-  email: [
-    validator('presence', true),
-    validator('format', { type: 'email' })
-  ]
+  email: [validator('presence', true), validator('format', { type: 'email' })],
 });
 
 export default EmberObject.extend(Validations, {
   email: null,
   password: null,
-  rememberMe: false
+  rememberMe: false,
 });
 // END-SNIPPET

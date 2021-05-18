@@ -19,7 +19,13 @@ module.exports = {
   env: {
     browser: true,
   },
-  rules: {},
+  rules: {
+    // TODO: Fix all this outdated patterns
+    'ember/no-actions-hash': 'warn',
+    'ember/no-classic-classes': 'warn',
+    'ember/no-get': 'warn',
+    'ember/require-tagless-components': 'warn',
+  },
   overrides: [
     // node files
     {

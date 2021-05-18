@@ -5,5 +5,5 @@ import { match } from '@ember/object/computed';
 export default Controller.extend({
   router: service(),
 
-  hideNav: match('router.currentRouteName', /acceptance/)
+  hideNav: match('router.currentRouteName', /acceptance/),
 });
