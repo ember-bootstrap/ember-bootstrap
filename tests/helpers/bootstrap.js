@@ -125,7 +125,11 @@ export function popoverPositionClass(pos) {
 }
 
 export function tooltipArrowClass() {
-  return versionDependent('tooltip-arrow', 'arrow');
+  return versionDependent('tooltip-arrow', 'arrow', 'tooltip-arrow');
+}
+
+export function popoverArrowClass() {
+  return versionDependent('arrow', 'arrow', 'popover-arrow');
 }
 
 export function isVisible(el) {

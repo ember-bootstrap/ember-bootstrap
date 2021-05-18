@@ -1,4 +1,5 @@
 import ContextualHelpElement from '../bs-contextual-help/element';
+import { getOwnConfig, macroCondition } from '@embroider/macros';
 
 /**
  Internal component for popover's markup. Should not be used directly.
@@ -14,4 +15,8 @@ export default class PopoverElement extends ContextualHelpElement {
    * @type string
    * @public
    */
+
+  arrowClass = macroCondition(getOwnConfig().isBS5) ? 'popover-arrow' : 'arrow';
+  placementClassPrefix = 'bs-popover-';
+  offset = [0, macroCondition(getOwnConfig().isBS5) ? 8 : 0];
 }

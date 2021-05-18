@@ -10,5 +10,6 @@ import { getOwnConfig, macroCondition } from '@embroider/macros';
  @private
  */
 export default class TooltipElement extends ContextualHelpElement {
-  arrowClass = macroCondition(getOwnConfig().isBS3) ? 'tooltip-arrow' : 'arrow';
+  arrowClass = macroCondition(getOwnConfig().isBS4) ? 'arrow' : 'tooltip-arrow';
+  placementClassPrefix = 'bs-tooltip-';
 }

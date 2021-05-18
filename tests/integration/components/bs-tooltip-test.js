@@ -46,7 +46,7 @@ module('Integration | Component | bs-tooltip', function (hooks) {
     assert.dom('.tooltip').hasClass('fade', 'has fade class');
     assert.dom('.tooltip').hasClass(visibilityClass(), 'has visibility class');
     assert.equal(this.element.querySelector('.tooltip').getAttribute('role'), 'tooltip', 'has ARIA role');
-    assert.dom(versionDependent('.tooltip-arrow', '.arrow')).exists({ count: 1 }, 'has arrow');
+    assert.dom(`.${tooltipArrowClass()}`).exists({ count: 1 }, 'has arrow');
     assert.dom('.tooltip-inner').hasText('template block text', 'shows title');
   });
 
@@ -385,8 +385,7 @@ module('Integration | Component | bs-tooltip', function (hooks) {
   test('should position tooltip arrow centered', async function (assert) {
     this.insertCSSRule('.margin-top { margin-top: 200px; }');
 
-    // @todo v5 needs changes in markup
-    let expectedArrowPosition = versionDependent(95, 94, 0);
+    let expectedArrowPosition = versionDependent(95, 94, 94);
     await render(hbs`
       <div id="ember-bootstrap-wormhole"></div>
       <div id="wrapper">
@@ -409,15 +408,15 @@ module('Integration | Component | bs-tooltip', function (hooks) {
 
   test('should adjust tooltip arrow', async function (assert) {
     this.insertCSSRule('.margin-top { margin-top: 200px; }');
+    this.insertCSSRule('#target { width: 100px; padding: 0; border: none; }');
 
-    // @todo v5 needs changes in markup
-    let expectedArrowPosition = versionDependent(155, 150, 0);
+    let expectedArrowPosition = versionDependent(145, 144, 144);
 
     await render(hbs`
       <div id="ember-bootstrap-wormhole"></div>
       <div id="wrapper">
         <p class="margin-top">
-          <button type="button" class="btn" id="target">
+          <button type="button" id="target">
             Click me<BsTooltip @autoPlacement={{true}} @viewportSelector="#wrapper" @placement="top" @title="very very very very very very very long tooltip" @fade={{false}} />
           </button>
         </p>
