@@ -1,78 +1,73 @@
 {{#unless this.hideNav}}
-  <BsNavbar
-    @fluid={{false}}
-    @type='dark'
-    @backgroundColor='primary'
-    as |navbar|
-  >
-    <LinkTo @route='index' class='navbar-brand'>
+  <BsNavbar @fluid={{false}} @type="dark" @backgroundColor="primary" as |navbar|>
+    <LinkTo @route="index" class="navbar-brand">
       ember-bootstrap
     </LinkTo>
     {{navbar.toggle}}
     <navbar.content>
-      <navbar.nav class='mr-auto' as |nav|>
+      <navbar.nav class="mr-auto" as |nav|>
         <nav.item>
-          <nav.linkTo @route='getting-started'>
+          <nav.link-to @route="getting-started">
             Getting Started
-          </nav.linkTo>
+          </nav.link-to>
         </nav.item>
         <nav.item>
-          <nav.linkTo @route='demo'>
+          <nav.link-to @route="demo">
             Components
-          </nav.linkTo>
+          </nav.link-to>
         </nav.item>
         <nav.item>
-          <a href='/api' class='nav-link'>
+          <a href="/api" class="nav-link">
             API
           </a>
         </nav.item>
         <nav.item>
-          <nav.linkTo @route='addons'>
+          <nav.link-to @route="addons">
             Addons
-          </nav.linkTo>
+          </nav.link-to>
         </nav.item>
       </navbar.nav>
       <navbar.nav as |nav|>
         <nav.item>
           <a
-            href='https://discord.gg/zT3asNS'
-            class='nav-link'
-            target='_blank'
-            rel='noopener noreferrer'
+            href="https://discord.gg/zT3asNS"
+            class="nav-link"
+            target="_blank"
+            rel="noopener noreferrer"
           >
-            <i class='fab fa-discord'></i>
+            <i class="fab fa-discord"></i>
             e-bootstrap
           </a>
         </nav.item>
         <nav.item>
           <a
-            href='https://twitter.com/simonihmig'
-            class='nav-link'
-            target='_blank'
-            rel='noopener noreferrer'
+            href="https://twitter.com/simonihmig"
+            class="nav-link"
+            target="_blank"
+            rel="noopener noreferrer"
           >
-            <i class='fab fa-twitter'></i>
+            <i class="fab fa-twitter"></i>
           </a>
         </nav.item>
-        <nav.item class='visible-sm-block visible-xs-block'>
+        <nav.item class="visible-sm-block visible-xs-block">
           <a
-            href='https://github.com/kaliber5/ember-bootstrap'
-            class='nav-link'
-            target='_blank'
-            rel='noopener noreferrer'
+            href="https://github.com/kaliber5/ember-bootstrap"
+            class="nav-link"
+            target="_blank"
+            rel="noopener noreferrer"
           >
-            <i class='fab fa-github'></i>
+            <i class="fab fa-github"></i>
           </a>
         </nav.item>
-        <nav.item class='hidden-sm hidden-xs'>
-          <div class='navbar-text'>
+        <nav.item class="hidden-sm hidden-xs">
+          <div class="navbar-text">
             <iframe
-              src='https://ghbtns.com/github-btn.html?user=kaliber5&repo=ember-bootstrap&type=star&count=true'
-              frameborder='0'
-              scrolling='0'
-              width='100px'
-              height='20px'
-              title='Github Stars'
+              src="https://ghbtns.com/github-btn.html?user=kaliber5&repo=ember-bootstrap&type=star&count=true"
+              frameborder="0"
+              scrolling="0"
+              width="100px"
+              height="20px"
+              title="Github Stars"
             ></iframe>
           </div>
         </nav.item>
@@ -80,6 +75,6 @@
     </navbar.content>
   </BsNavbar>
 {{/unless}}
-<div class='container mt-4'>
+<div class="container mt-4">
   {{outlet}}
 </div>
