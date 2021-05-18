@@ -7,6 +7,8 @@ import setupNoDeprecations from '../../../../helpers/setup-no-deprecations';
 
 module('Integration | Component | bs-dropdown/menu/link-to', function (hooks) {
   setupRenderingTest(hooks);
+  setupNoDeprecations(hooks);
+
   hooks.beforeEach(function () {
     this.owner.setupRouter();
   });
@@ -39,7 +41,11 @@ module('Integration | Component | bs-dropdown/menu/link-to', function (hooks) {
     assert.dom('a.dropdown-item').exists({ count: 1 }, 'renders as plain element with dropdown item class');
   });
 
-  module('positional params', function () {
+  module('positional params', function (hooks) {
+    hooks.afterEach(function (assert) {
+      assert.deprecationsInclude(`Positional arguments for ember-bootstrap's link-to components are deprecated.`);
+      assert.deprecations();
+    });
     test('simple route link', async function (assert) {
       await render(hbs`
         <BsDropdown as |dd|>
@@ -83,9 +89,7 @@ module('Integration | Component | bs-dropdown/menu/link-to', function (hooks) {
     });
   });
 
-  module('<LinkTo> properties', function (hooks) {
-    setupNoDeprecations(hooks);
-
+  module('<LinkTo> properties', function () {
     test('simple route link', async function (assert) {
       await render(hbs`
         <BsDropdown as |dd|>
