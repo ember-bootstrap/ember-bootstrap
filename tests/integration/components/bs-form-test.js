@@ -21,6 +21,7 @@ import {
   formFeedbackElement,
   test,
   testBS3,
+  testBS4,
   testNotBS3,
   testRequiringFocus,
   validationErrorClass,
@@ -65,7 +66,7 @@ module('Integration | Component | bs-form', function (hooks) {
     }
   });
 
-  testNotBS3('form has correct markup', async function (assert) {
+  testBS4('form has correct markup', async function (assert) {
     let classSpec = {
       vertical: ['form', false],
       horizontal: ['form-horizontal', false],
