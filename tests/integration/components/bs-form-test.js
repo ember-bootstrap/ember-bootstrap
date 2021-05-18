@@ -86,9 +86,9 @@ module('Integration | Component | bs-form', function (hooks) {
   });
 
   test('it yields form element component', async function (assert) {
-    await render(hbs`<BsForm as |form|>{{form.element}}</BsForm>`);
+    await render(hbs`<BsForm as |form|><form.element data-test-form-element/></BsForm>`);
 
-    assert.dom('.form-group').exists({ count: 1 }, 'form has element');
+    assert.dom('[data-test-form-element]').exists({ count: 1 }, 'form has element');
   });
 
   test('Submitting the form calls onBeforeSubmit and onSubmit action', async function (assert) {
@@ -934,22 +934,22 @@ module('Integration | Component | bs-form', function (hooks) {
     await render(
       hbs`
         <BsForm @model={{this}} @disabled={{true}} as |form|>
-          <form.element @property="dummy" />
+          <form.element @property="dummy" data-test-form-element />
         </BsForm>`
     );
 
-    assert.dom('.form-group input').hasAttribute('disabled');
+    assert.dom('[data-test-form-element] input').hasAttribute('disabled');
   });
 
   test('readOnly property propagates to all its elements', async function (assert) {
     await render(
       hbs`
         <BsForm @model={{this}} @readonly={{true}} as |form|>
-          <form.element @property="dummy" />
+          <form.element @property="dummy" data-test-form-element />
         </BsForm>`
     );
 
-    assert.dom('.form-group input').hasAttribute('readonly');
+    assert.dom('[data-test-form-element] input').hasAttribute('readonly');
   });
 
   test('it passes accessibility checks', async function (assert) {

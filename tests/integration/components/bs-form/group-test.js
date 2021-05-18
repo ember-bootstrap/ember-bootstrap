@@ -1,7 +1,7 @@
 import { module } from 'qunit';
 import { setupRenderingTest } from 'ember-qunit';
 import { render } from '@ember/test-helpers';
-import { test, testBS3, testNotBS3, validationErrorClass } from '../../../helpers/bootstrap';
+import { testBS3, testBS5, testForBootstrap, testNotBS3, validationErrorClass } from '../../../helpers/bootstrap';
 import hbs from 'htmlbars-inline-precompile';
 import setupNoDeprecations from '../../../helpers/setup-no-deprecations';
 
@@ -24,9 +24,14 @@ module('Integration | Component | bs-form/group', function (hooks) {
   setupRenderingTest(hooks);
   setupNoDeprecations(hooks);
 
-  test('component has form-group bootstrap class', async function (assert) {
-    await render(hbs`<BsForm::Group />`);
-    assert.dom('.form-group').exists('component has form-group class');
+  testForBootstrap([3, 4], 'component has form-group bootstrap class', async function (assert) {
+    await render(hbs`<BsForm::Group data-test-form-group />`);
+    assert.dom('[data-test-form-group]').hasClass('form-group', 'component has form-group class');
+  });
+
+  testBS5('component has no form-group bootstrap class', async function (assert) {
+    await render(hbs`<BsForm::Group data-test-form-group />`);
+    assert.dom('[data-test-form-group]').hasNoClass('form-group', 'component has no form-group class');
   });
 
   testNotBS3('component has row class for horizontal layouts', async function (assert) {
@@ -35,19 +40,19 @@ module('Integration | Component | bs-form/group', function (hooks) {
   });
 
   testBS3('support size classes', async function (assert) {
-    await render(hbs`<BsForm::Group @size="lg" />`);
-    assert.dom('.form-group').hasClass('form-group-lg', 'form-group has large class');
+    await render(hbs`<BsForm::Group @size="lg" data-test-form-group />`);
+    assert.dom('[data-test-form-group]').hasClass('form-group-lg', 'form-group has large class');
 
-    await render(hbs`<BsForm::Group @size="sm" />`);
-    assert.dom('.form-group').hasClass('form-group-sm', 'form-group has small class');
+    await render(hbs`<BsForm::Group @size="sm" data-test-form-group />`);
+    assert.dom('[data-test-form-group]').hasClass('form-group-sm', 'form-group has small class');
   });
 
   testNotBS3('does not set size class for BS4', async function (assert) {
-    await render(hbs`<BsForm::Group @size="lg" />`);
-    assert.dom('.form-group').hasNoClass('form-group-lg', 'form-group has not large class');
+    await render(hbs`<BsForm::Group @size="lg" data-test-form-group />`);
+    assert.dom('[data-test-form-group]').hasNoClass('form-group-lg', 'form-group has not large class');
 
-    await render(hbs`<BsForm::Group @size="sm" />`);
-    assert.dom('.form-group').hasNoClass('form-group-sm', 'form-group has not small class');
+    await render(hbs`<BsForm::Group @size="sm" data-test-form-group />`);
+    assert.dom('[data-test-form-group]').hasNoClass('form-group-sm', 'form-group has not small class');
   });
 
   async function testValidationState(assert, state) {

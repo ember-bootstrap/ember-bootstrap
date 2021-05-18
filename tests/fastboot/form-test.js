@@ -8,8 +8,7 @@ module('FastBoot | form', function (hooks) {
     await visit('/fastboot/forms');
 
     assert.dom('form').exists();
-    assert.dom('form .form-group').exists();
-    assert.dom('form .form-group label').exists();
-    assert.dom('form .form-group input').hasAttribute('type', 'email');
+    assert.dom('form label').exists();
+    assert.dom('form input').hasAttribute('type', 'email');
   });
 });

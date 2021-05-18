@@ -4,7 +4,7 @@ import { Promise } from 'rsvp';
 
 const currentBootstrapVersion = parseInt(config.bootstrapVersion);
 
-function testForBootstrap(bsVersion, name, fn) {
+export function testForBootstrap(bsVersion, name, fn) {
   if (!Array.isArray(bsVersion)) {
     bsVersion = [bsVersion];
   }
