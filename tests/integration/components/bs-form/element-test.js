@@ -4,21 +4,21 @@ import EmberObject from '@ember/object';
 import { A, isArray } from '@ember/array';
 import { module, skip } from 'qunit';
 import { setupRenderingTest } from 'ember-qunit';
-import { render, click, fillIn, triggerEvent, focus, blur, settled } from '@ember/test-helpers';
+import { blur, click, fillIn, focus, render, settled, triggerEvent } from '@ember/test-helpers';
 import {
   formFeedbackClass,
-  test,
-  testBS3,
-  testBS4,
-  testNotBS3,
-  testRequiringFocus,
-  testBS3RequiringFocus,
-  testNotBS3RequiringFocus,
-  validationSuccessClass,
-  validationErrorClass,
-  validationWarningClass,
   formFeedbackElement,
   formHelpTextClass,
+  test,
+  testBS3,
+  testBS3RequiringFocus,
+  testBS4,
+  testNotBS3,
+  testNotBS3RequiringFocus,
+  testRequiringFocus,
+  validationErrorClass,
+  validationSuccessClass,
+  validationWarningClass,
 } from '../../../helpers/bootstrap';
 import hbs from 'htmlbars-inline-precompile';
 import setupNoDeprecations from '../../../helpers/setup-no-deprecations';
