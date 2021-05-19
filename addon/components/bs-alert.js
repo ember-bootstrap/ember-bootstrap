@@ -104,6 +104,8 @@ export default class Alert extends Component {
    * @default true
    * @public
    */
+  @arg
+  fade = true;
 
   get showAlert() {
     return this._visible && this.args.fade !== false;
