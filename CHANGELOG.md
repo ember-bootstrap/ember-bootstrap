@@ -1,3 +1,43 @@
+## v4.7.0 (2021-05-19)
+
+#### Features
+* [#1512](https://github.com/kaliber5/ember-bootstrap/pull/1512) Update forms for Bootstrap v5 ([@simonihmig](https://github.com/simonihmig))
+* [#1504](https://github.com/kaliber5/ember-bootstrap/pull/1504) Deprecate positional arguments for link-to components ([@simonihmig](https://github.com/simonihmig))
+* [#1502](https://github.com/kaliber5/ember-bootstrap/pull/1502) Update Tooltips and Popovers for Bootstrap v5 ([@simonihmig](https://github.com/simonihmig))
+* [#1455](https://github.com/kaliber5/ember-bootstrap/pull/1455) Refactor Nav/Navbar/Dropdown's LinkTo components to not extend from Ember's LinkComponent ([@simonihmig](https://github.com/simonihmig))
+* [#1495](https://github.com/kaliber5/ember-bootstrap/pull/1495) Support switch control in forms (BS4 only) ([@lindyhopchris](https://github.com/lindyhopchris))
+* [#1499](https://github.com/kaliber5/ember-bootstrap/pull/1499) Add experimental/incomplete Bootstrap 5 support to existing components ([@simonihmig](https://github.com/simonihmig))
+* [#1497](https://github.com/kaliber5/ember-bootstrap/pull/1497) Support Bootstrap v5 in default blueprint ([@simonihmig](https://github.com/simonihmig))
+* [#1496](https://github.com/kaliber5/ember-bootstrap/pull/1496) Support Bootstrap v5 in addon index.js ([@simonihmig](https://github.com/simonihmig))
+* [#1468](https://github.com/kaliber5/ember-bootstrap/pull/1468) Altered hasBlock in favor for has-block helper ([@bgantzler](https://github.com/bgantzler))
+
+> Note that Bootstrap v5 support added here is still experimental and incomplete!
+
+#### Bug Fixes
+* [#1517](https://github.com/kaliber5/ember-bootstrap/pull/1517) Fixed component dependencies when using `whitelist` to "tree-shake" components ([@simonihmig](https://github.com/simonihmig))
+* [#1513](https://github.com/kaliber5/ember-bootstrap/pull/1513) forward arguments in <BsNavbar::LinkTo> to <BsLinkTo> ([@jelhan](https://github.com/jelhan))
+* [#1500](https://github.com/kaliber5/ember-bootstrap/pull/1500) Re-add broken fade arg to BsAlert component ([@gfmartinez](https://github.com/gfmartinez))
+* [#1516](https://github.com/kaliber5/ember-bootstrap/pull/1516) Fix horizontal form layout for checkbox elements ([@simonihmig](https://github.com/simonihmig))
+* [#1477](https://github.com/kaliber5/ember-bootstrap/pull/1477) Fix deprecations ([@simonihmig](https://github.com/simonihmig))
+* [#1421](https://github.com/kaliber5/ember-bootstrap/pull/1421) Do not use implicit this fallback in templates ([@jelhan](https://github.com/jelhan))
+
+#### Documentation
+* [#1514](https://github.com/kaliber5/ember-bootstrap/pull/1514) Fix docs app by upgrading dependencies ([@jelhan](https://github.com/jelhan))
+
+#### Internal
+* [#1510](https://github.com/kaliber5/ember-bootstrap/pull/1510) Fix CI for running Firefox ([@simonihmig](https://github.com/simonihmig))
+* [#1507](https://github.com/kaliber5/ember-bootstrap/pull/1507) Update to Ember 3.26 blueprint ([@simonihmig](https://github.com/simonihmig))
+* [#1448](https://github.com/kaliber5/ember-bootstrap/pull/1448) Fix deprecations failing the build ([@simonihmig](https://github.com/simonihmig))
+
+#### Committers: 6
+- Christopher Gammie ([@lindyhopchris](https://github.com/lindyhopchris))
+- Gabriel Martinez ([@gfmartinez](https://github.com/gfmartinez))
+- Jeldrik Hanschke ([@jelhan](https://github.com/jelhan))
+- Simon Ihmig ([@simonihmig](https://github.com/simonihmig))
+- [@bgantzler](https://github.com/bgantzler)
+- [@dependabot-preview[bot]](https://github.com/apps/dependabot-preview)
+
+
 ## v4.6.3 (2021-02-01)
 
 #### Bug Fixes
