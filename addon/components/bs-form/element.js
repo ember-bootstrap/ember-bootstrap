@@ -13,6 +13,7 @@ import ControlInput from './element/control/input';
 import ControlCheckbox from './element/control/checkbox';
 import ControlTextarea from './element/control/textarea';
 import ControlRadio from './element/control/radio';
+import ControlSwitch from './element/control/switch';
 import arg from 'ember-bootstrap/utils/decorators/arg';
 
 /**
@@ -735,6 +736,8 @@ export default class FormElement extends FormGroup {
       return ControlTextarea;
     } else if (this.controlType === 'radio') {
       return ControlRadio;
+    } else if (this.controlType === 'switch') {
+      return ControlSwitch;
     } else {
       return ControlInput;
     }
