@@ -4,7 +4,7 @@ import { Promise } from 'rsvp';
 
 const currentBootstrapVersion = parseInt(config.bootstrapVersion);
 
-function testForBootstrap(bsVersion, name, fn) {
+export function testForBootstrap(bsVersion, name, fn) {
   if (!Array.isArray(bsVersion)) {
     bsVersion = [bsVersion];
   }
@@ -13,6 +13,10 @@ function testForBootstrap(bsVersion, name, fn) {
     return;
   }
   return test(`${name} [BS${bsVersion}]`, fn);
+}
+
+export function isBootstrap(version) {
+  return currentBootstrapVersion === version;
 }
 
 export function testBS3() {
@@ -32,11 +36,11 @@ export function testNotBS3() {
 }
 
 export function versionDependent(v3, v4, v5) {
-  if (currentBootstrapVersion === 3) {
+  if (isBootstrap(3)) {
     return v3;
   }
 
-  if (currentBootstrapVersion === 5) {
+  if (isBootstrap(5)) {
     return v5 ?? v4;
   }
 
