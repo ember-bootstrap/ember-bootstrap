@@ -402,6 +402,8 @@ module('Integration | Component | bs-navbar', function (hooks) {
     let collapseAction = sinon.spy();
     this.actions.collapseAction = collapseAction;
 
+    this.owner.setupRouter();
+
     await render(hbs`
       <BsNavbar @collapsed={{false}} @onCollapse={{action "collapseAction"}} as |navbar|>
         <div class="navbar-header">
@@ -421,6 +423,8 @@ module('Integration | Component | bs-navbar', function (hooks) {
   });
 
   test('it passes accessibility checks', async function (assert) {
+    this.owner.setupRouter();
+
     await render(hbs`
       <BsNavbar as |navbar|>
         <div class="navbar-header">

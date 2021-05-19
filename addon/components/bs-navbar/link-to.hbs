@@ -1,10 +1,10 @@
 <BsLinkTo
-  @route={{this.route}}
-  @model={{this.model}}
-  @models={{this.models}}
-  @query={{this.query}}
+  @route={{@route}}
+  @model={{@model}}
+  @models={{@models}}
+  @query={{@query}}
   @disabled={{@disabled}}
-  {{on "click" this.onClick}}
+  {{on 'click' this.onClick}}
   ...attributes
 >
   {{yield}}
