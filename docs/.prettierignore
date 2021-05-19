@@ -1,8 +1,6 @@
 # unconventional js
 /blueprints/*/files/
 /vendor/
-/api
-/yuidoc-theme
 
 # compiled output
 /dist/

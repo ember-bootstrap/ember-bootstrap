@@ -1,13 +1,13 @@
 import EmberRouter from '@ember/routing/router';
-import config from './config/environment';
+import config from 'ember-bootstrap-docs/config/environment';
 
 export default class Router extends EmberRouter {
   location = config.locationType;
   rootURL = config.rootURL;
 }
 
-Router.map(function() {
-  this.route('demo', { path: '/components' }, function() {
+Router.map(function () {
+  this.route('demo', { path: '/components' }, function () {
     this.route('accordion');
     this.route('alert');
     this.route('button');
@@ -21,12 +21,12 @@ Router.map(function() {
     this.route('navs');
     this.route('popover');
     this.route('progress');
-    this.route('tabs', function() {
+    this.route('tabs', function () {
       this.route('other');
     });
     this.route('tooltip');
   });
-  this.route('getting-started', function() {
+  this.route('getting-started', function () {
     this.route('setup');
     this.route('assets');
     this.route('bootstrap-4');
