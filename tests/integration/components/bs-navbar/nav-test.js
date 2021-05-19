@@ -43,6 +43,8 @@ module('Integration | Component | bs-navbar/nav', function (hooks) {
   });
 
   testNotBS3('link has nav-link class', async function (assert) {
+    this.owner.setupRouter();
+
     await render(hbs`
       <BsNavbar as |navbar|>
         <navbar.nav as |nav|>
