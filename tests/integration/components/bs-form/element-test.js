@@ -132,48 +132,140 @@ module('Integration | Component | bs-form/element', function (hooks) {
     });
   }
 
-  test('controlType "text" is supported', async function (assert) {
-    await controlTypeLayoutTest.call(this, assert, 'text', 'input[type=text]');
-    await controlTypeValueTest.call(this, assert, 'text', 'input[type=text]', ['myValue', undefined]);
-    await controlTypeUpdateTest.call(this, assert, 'text', 'input[type=text]', 'myValue');
-    await labeledControlTest.call(this, assert, 'text', 'input[type=text]');
+  module('controlType "text" is supported', function () {
+    test('controlType "text" is supported', async function (assert) {
+      await controlTypeLayoutTest.call(this, assert, 'text', 'input[type=text]');
+      await controlTypeValueTest.call(this, assert, 'text', 'input[type=text]', ['myValue', undefined]);
+      await controlTypeUpdateTest.call(this, assert, 'text', 'input[type=text]', 'myValue');
+      await labeledControlTest.call(this, assert, 'text', 'input[type=text]');
+    });
+
+    testNotBS3('supports horizontal form layout', async function (assert) {
+      await render(hbs`
+        <BsForm @formLayout="horizontal" as |form|>
+          <form.element @controlType="text" @label="some label" @options={{this.simpleOptions}} data-test-form-element />
+        </BsForm>
+      `);
+
+      assert.dom('[data-test-form-element] > label').hasClass('col-md-4');
+      assert.dom('[data-test-form-element] > div').hasClass('col-md-8');
+    });
+
+    testNotBS3('supports horizontal form layout with custom grid class', async function (assert) {
+      await render(hbs`
+        <BsForm @formLayout="horizontal" as |form|>
+          <form.element @controlType="text" @label="some label" @options={{this.simpleOptions}} @horizontalLabelGridClass="col-md-3" data-test-form-element />
+        </BsForm>
+      `);
+
+      assert.dom('[data-test-form-element] > label').hasClass('col-md-3');
+      assert.dom('[data-test-form-element] > div').hasClass('col-md-9');
+    });
   });
 
-  test('controlType "checkbox" is supported', async function (assert) {
-    await controlTypeLayoutTest.call(this, assert, 'checkbox', 'input[type=checkbox]');
-    await controlTypeValueTest.call(this, assert, 'checkbox', 'input[type=checkbox]', [true, false], function () {
-      return this.checked;
+  module('controlType "textarea" is supported', function () {
+    test('controlType "textarea" is supported', async function (assert) {
+      await controlTypeLayoutTest.call(this, assert, 'textarea', 'textarea', 'myValue');
+      await controlTypeValueTest.call(this, assert, 'textarea', 'textarea', ['myValue', undefined]);
+      await controlTypeUpdateTest.call(this, assert, 'textarea', 'textarea', 'myValue');
+      await labeledControlTest.call(this, assert, 'textarea', 'textarea');
     });
-    await controlTypeUpdateTest.call(this, assert, 'checkbox', 'input[type=checkbox]', true, false, function () {
-      return click(this);
+
+    testNotBS3('supports horizontal form layout', async function (assert) {
+      await render(hbs`
+        <BsForm @formLayout="horizontal" as |form|>
+          <form.element @controlType="textarea" @label="some label" @options={{this.simpleOptions}} data-test-form-element />
+        </BsForm>
+      `);
+
+      assert.dom('[data-test-form-element] > label').hasClass('col-md-4');
+      assert.dom('[data-test-form-element] > div').hasClass('col-md-8');
+    });
+
+    testNotBS3('supports horizontal form layout with custom grid class', async function (assert) {
+      await render(hbs`
+        <BsForm @formLayout="horizontal" as |form|>
+          <form.element @controlType="textarea" @label="some label" @options={{this.simpleOptions}} @horizontalLabelGridClass="col-md-3" data-test-form-element />
+        </BsForm>
+      `);
+
+      assert.dom('[data-test-form-element] > label').hasClass('col-md-3');
+      assert.dom('[data-test-form-element] > div').hasClass('col-md-9');
     });
   });
 
-  testBS4('controlType "switch" is supported', async function (assert) {
-    await render(hbs`
+  module('controlType "checkbox" is supported', function () {
+    test('controlType "checkbox" is supported', async function (assert) {
+      await controlTypeLayoutTest.call(this, assert, 'checkbox', 'input[type=checkbox]');
+      await controlTypeValueTest.call(this, assert, 'checkbox', 'input[type=checkbox]', [true, false], function () {
+        return this.checked;
+      });
+      await controlTypeUpdateTest.call(this, assert, 'checkbox', 'input[type=checkbox]', true, false, function () {
+        return click(this);
+      });
+    });
+
+    testNotBS3('supports horizontal form layout', async function (assert) {
+      await render(hbs`
+        <BsForm @formLayout="horizontal" as |form|>
+          <form.element @controlType="checkbox" @label="some label" @options={{this.simpleOptions}} data-test-form-element />
+        </BsForm>
+      `);
+
+      assert.dom('[data-test-form-element] > div').hasClass('col-md-8').hasClass('offset-md-4');
+    });
+
+    testNotBS3('supports horizontal form layout with custom grid class', async function (assert) {
+      await render(hbs`
+        <BsForm @formLayout="horizontal" as |form|>
+          <form.element @controlType="checkbox" @label="some label" @options={{this.simpleOptions}} @horizontalLabelGridClass="col-md-3" data-test-form-element />
+        </BsForm>
+      `);
+
+      assert.dom('[data-test-form-element] > div').hasClass('col-md-9').hasClass('offset-md-3');
+    });
+  });
+
+  module('controlType "switch" is supported', function () {
+    testBS4('controlType "switch" is supported', async function (assert) {
+      await render(hbs`
       <BsForm as |form|>
         <form.element @controlType="switch" />
       </BsForm>
     `);
 
-    assert.dom('div.custom-control.custom-switch > input[type="checkbox"].custom-control-input').exists({ count: 1 });
-    assert.dom('div.custom-control.custom-switch > label.custom-control-label').exists({ count: 1 });
-    assert.dom('div.custom-control.custom-switch').doesNotHaveClass('form-check');
+      assert.dom('div.custom-control.custom-switch > input[type="checkbox"].custom-control-input').exists({ count: 1 });
+      assert.dom('div.custom-control.custom-switch > label.custom-control-label').exists({ count: 1 });
+      assert.dom('div.custom-control.custom-switch').doesNotHaveClass('form-check');
 
-    await controlTypeLayoutTest.call(this, assert, 'switch', 'input[type=checkbox]');
-    await controlTypeValueTest.call(this, assert, 'switch', 'input[type=checkbox]', [true, false], function () {
-      return this.checked;
+      await controlTypeLayoutTest.call(this, assert, 'switch', 'input[type=checkbox]');
+      await controlTypeValueTest.call(this, assert, 'switch', 'input[type=checkbox]', [true, false], function () {
+        return this.checked;
+      });
+      await controlTypeUpdateTest.call(this, assert, 'switch', 'input[type=checkbox]', true, false, function () {
+        return click(this);
+      });
     });
-    await controlTypeUpdateTest.call(this, assert, 'switch', 'input[type=checkbox]', true, false, function () {
-      return click(this);
-    });
-  });
 
-  test('controlType "textarea" is supported', async function (assert) {
-    await controlTypeLayoutTest.call(this, assert, 'textarea', 'textarea', 'myValue');
-    await controlTypeValueTest.call(this, assert, 'textarea', 'textarea', ['myValue', undefined]);
-    await controlTypeUpdateTest.call(this, assert, 'textarea', 'textarea', 'myValue');
-    await labeledControlTest.call(this, assert, 'textarea', 'textarea');
+    testNotBS3('supports horizontal form layout', async function (assert) {
+      await render(hbs`
+        <BsForm @formLayout="horizontal" as |form|>
+          <form.element @controlType="switch" @label="some label" @options={{this.simpleOptions}} data-test-form-element />
+        </BsForm>
+      `);
+
+      assert.dom('[data-test-form-element] > div').hasClass('col-md-8').hasClass('offset-md-4');
+    });
+
+    testNotBS3('supports horizontal form layout with custom grid class', async function (assert) {
+      await render(hbs`
+        <BsForm @formLayout="horizontal" as |form|>
+          <form.element @controlType="switch" @label="some label" @options={{this.simpleOptions}} @horizontalLabelGridClass="col-md-3" data-test-form-element />
+        </BsForm>
+      `);
+
+      assert.dom('[data-test-form-element] > div').hasClass('col-md-9').hasClass('offset-md-3');
+    });
   });
 
   module('controlType "radio" is supported', function (hooks) {
@@ -316,12 +408,10 @@ module('Integration | Component | bs-form/element', function (hooks) {
     });
 
     testNotBS3('has correct markup', async function (assert) {
-      await render(
-        hbs`<BsForm::Element @controlType="radio" @label="my radio group" @options={{this.simpleOptions}} />`
-      );
+      await render(hbs`<BsForm::Element @controlType="radio" @label="some label" @options={{this.simpleOptions}} />`);
 
       assert.dom('legend').exists({ count: 1 }, 'renders a <legend> instead of a <label> for radio group');
-      assert.dom('legend').hasText('my radio group', 'renders value of label argument as text of <legend>');
+      assert.dom('legend').hasText('some label', 'renders value of label argument as text of <legend>');
       assert.dom('legend').doesNotHaveAttribute('for', '<legend> does not have a for attribute');
 
       assert.dom('.form-check').exists({ count: 2 });
@@ -329,10 +419,10 @@ module('Integration | Component | bs-form/element', function (hooks) {
       assert.dom('.form-check label').hasClass('form-check-label');
     });
 
-    testNotBS3('supports horizontal from layout', async function (assert) {
+    testNotBS3('supports horizontal form layout', async function (assert) {
       await render(hbs`
         <BsForm @formLayout="horizontal" as |form|>
-          <form.element @controlType="radio" @label="my radio group" @options={{this.simpleOptions}} />
+          <form.element @controlType="radio" @label="some label" @options={{this.simpleOptions}} />
         </BsForm>
       `);
 
