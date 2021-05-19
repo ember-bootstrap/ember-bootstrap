@@ -5,7 +5,7 @@
     content=(component (bs-default @contentComponent (component "bs-navbar/content")) collapsed=this._collapsed onHidden=this.onCollapsed onShown=this.onExpanded)
     nav=(component
       (bs-default @navComponent (component "bs-navbar/nav"))
-      linkToComponent=(component "bs-navbar/link-to" onCollapse=this.collapse)
+      linkToComponent=(component "bs-navbar/link-to" onCollapse=this.collapse class=(if (macroCondition (macroGetOwnConfig "isNotBS3")) "nav-link"))
     )
     collapse=this.collapse
     expand=this.expand
