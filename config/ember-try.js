@@ -112,10 +112,22 @@ module.exports = async function () {
         env: {
           FASTBOOT_DISABLED: true,
         },
+        npm: {
+          devDependencies: {
+            // @todo remove this once embroider 0.41.0 is released
+            webpack: '^5.0.0',
+          },
+        },
       }),
       embroiderOptimized({
         env: {
           FASTBOOT_DISABLED: true,
+        },
+        npm: {
+          devDependencies: {
+            // @todo remove this once embroider 0.41.0 is released
+            webpack: '^5.0.0',
+          },
         },
       }),
     ],
