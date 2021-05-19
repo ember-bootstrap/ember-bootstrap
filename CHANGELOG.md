@@ -1,3 +1,11 @@
+## v4.7.1 (2021-05-19)
+
+#### Bug Fixes
+* [#1519](https://github.com/kaliber5/ember-bootstrap/pull/1519) Fix Navbar link markup regression introduced in v4.7.0 ([@simonihmig](https://github.com/simonihmig))
+
+#### Committers: 1
+- Simon Ihmig ([@simonihmig](https://github.com/simonihmig))
+
 ## v4.7.0 (2021-05-19)
 
 #### Features
