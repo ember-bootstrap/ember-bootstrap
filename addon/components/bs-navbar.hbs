@@ -1,3 +1,4 @@
+{{!-- template-lint-disable no-duplicate-landmark-elements --}}
 {{#let
   (hash
     toggle=(component (ensure-safe-component (bs-default @toggleComponent (component "bs-navbar/toggle"))) onClick=this.toggleNavbar collapsed=this._collapsed)
@@ -10,7 +11,7 @@
     expand=this.expand
     toggleNavbar=this.toggleNavbar
   ) as |yieldedHash|}}
-  {{#if (macroCondition (macroGetOwnConfig "isBS4"))}}
+  {{#if (macroCondition (macroGetOwnConfig "isNotBS3"))}}
     <nav class="navbar {{this.positionClass}} {{this.typeClass}} {{this.breakpointClass}} {{this.backgroundClass}}" ...attributes>
       {{#if this.fluid}}
         {{yield yieldedHash}}

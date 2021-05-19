@@ -8,10 +8,5 @@ export default Controller.extend({
   dismissible: true,
   headerTag: 'h4',
   type: oneWay('typeChoices.firstObject'),
-  typeChoices: A([
-    'success',
-    'info',
-    'warning',
-    'danger'
-  ])
+  typeChoices: A(['success', 'info', 'warning', 'danger']),
 });

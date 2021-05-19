@@ -1,5 +1,5 @@
 <div
-  class="tab-pane {{if (macroCondition (macroGetOwnConfig "isBS4")) (if this.showContent "show")}} {{if (macroCondition (macroGetOwnConfig "isBS3")) (if this.showContent "in")}} {{if this.active "active"}} {{if this.usesTransition "fade"}}"
+  class="tab-pane {{if (macroCondition (macroGetOwnConfig "isNotBS3")) (if this.showContent "show")}} {{if (macroCondition (macroGetOwnConfig "isBS3")) (if this.showContent "in")}} {{if this.active "active"}} {{if this.usesTransition "fade"}}"
   role="tabpanel"
   ...attributes
   {{create-ref "mainNode"}}

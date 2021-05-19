@@ -1,5 +1,5 @@
 <div
-  class="{{unless this.hidden "alert"}} {{if this.fade "fade"}} {{if this.dismissible "alert-dismissible"}} {{bs-type-class "alert" @type}} {{if this.showAlert (if (macroCondition (macroGetOwnConfig "isBS4")) "show" "in")}}"
+  class="{{unless this.hidden "alert"}} {{if this.fade "fade"}} {{if this.dismissible "alert-dismissible"}} {{bs-type-class "alert" @type}} {{if this.showAlert (if (macroCondition (macroGetOwnConfig "isNotBS3")) "show" "in")}}"
   ...attributes
   {{did-update this.showOrHide this._visible}}
 >

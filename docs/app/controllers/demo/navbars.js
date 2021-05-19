@@ -5,6 +5,15 @@ export default Controller.extend({
   type: 'light',
   bg: 'light',
   typeChoices: ['light', 'dark'],
-  bgChoices: ['light', 'dark', 'primary', 'secondary', 'success', 'danger', 'warning', 'info'],
-  collapsed: true
+  bgChoices: [
+    'light',
+    'dark',
+    'primary',
+    'secondary',
+    'success',
+    'danger',
+    'warning',
+    'info',
+  ],
+  collapsed: true,
 });

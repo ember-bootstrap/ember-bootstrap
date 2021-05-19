@@ -1,4 +1,4 @@
-import FormElementLayoutVertical from '../vertical';
+import FormElementLayoutHorizontal from '../horizontal';
 
 /**
 
@@ -7,4 +7,4 @@ import FormElementLayoutVertical from '../vertical';
  @extends Components.FormElementLayout
  @private
  */
-export default class FormElementLayoutVerticalCheckbox extends FormElementLayoutVertical {}
+export default class FormElementLayoutVerticalCheckbox extends FormElementLayoutHorizontal {}

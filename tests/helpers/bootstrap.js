@@ -4,12 +4,19 @@ import { Promise } from 'rsvp';
 
 const currentBootstrapVersion = parseInt(config.bootstrapVersion);
 
-function testForBootstrap(bsVersion, name, fn) {
-  if (bsVersion !== currentBootstrapVersion) {
+export function testForBootstrap(bsVersion, name, fn) {
+  if (!Array.isArray(bsVersion)) {
+    bsVersion = [bsVersion];
+  }
+  if (!bsVersion.includes(currentBootstrapVersion)) {
     // Skip test for different Bootstrap version
     return;
   }
   return test(`${name} [BS${bsVersion}]`, fn);
+}
+
+export function isBootstrap(version) {
+  return currentBootstrapVersion === version;
 }
 
 export function testBS3() {
@@ -20,9 +27,21 @@ export function testBS4() {
   return testForBootstrap(4, ...arguments);
 }
 
-export function versionDependent(v3, v4) {
-  if (currentBootstrapVersion === 3) {
+export function testBS5() {
+  return testForBootstrap(5, ...arguments);
+}
+
+export function testNotBS3() {
+  return testForBootstrap([4, 5], ...arguments);
+}
+
+export function versionDependent(v3, v4, v5) {
+  if (isBootstrap(3)) {
     return v3;
+  }
+
+  if (isBootstrap(5)) {
+    return v5 ?? v4;
   }
 
   return v4;
@@ -110,7 +129,11 @@ export function popoverPositionClass(pos) {
 }
 
 export function tooltipArrowClass() {
-  return versionDependent('tooltip-arrow', 'arrow');
+  return versionDependent('tooltip-arrow', 'arrow', 'tooltip-arrow');
+}
+
+export function popoverArrowClass() {
+  return versionDependent('arrow', 'arrow', 'popover-arrow');
 }
 
 export function isVisible(el) {
@@ -144,6 +167,22 @@ export function testBS3RequiringFocus(name, fn) {
 export function testBS4RequiringFocus(name, fn) {
   if (document.hasFocus()) {
     return testBS4(name, fn);
+  } else {
+    skip(name);
+  }
+}
+
+export function testBS5RequiringFocus(name, fn) {
+  if (document.hasFocus()) {
+    return testBS5(name, fn);
+  } else {
+    skip(name);
+  }
+}
+
+export function testNotBS3RequiringFocus(name, fn) {
+  if (document.hasFocus()) {
+    return testNotBS3(name, fn);
   } else {
     skip(name);
   }

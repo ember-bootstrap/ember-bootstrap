@@ -69,9 +69,8 @@ variable to "3", e.g. `BOOTSTRAPVERSION=3 ember test`.
 
 ### Linting
 
-* `yarn lint:hbs`
-* `yarn lint:js`
-* `yarn lint:js --fix`
+* `yarn lint`
+* `yarn lint:fix`
 
 ### Running tests
 

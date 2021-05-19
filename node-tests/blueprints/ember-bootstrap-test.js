@@ -30,95 +30,76 @@ function createStyleFixture(name) {
   fs.writeFileSync(path.join(stylePath, name), 'body { color: red; }');
 }
 
-describe('Acceptance: ember generate ember-bootstrap', function() {
+describe('Acceptance: ember generate ember-bootstrap', function () {
   setupTestHooks(this);
 
-  describe('import styles', function() {
-
-    describe('based on existing preprocessor', function() {
-
+  describe('import styles', function () {
+    describe('based on existing preprocessor', function () {
       function runStyleImportTests(baseDir) {
-        it('creates app.scss if not existing and ember-cli-sass is present', function() {
+        it('creates app.scss if not existing and ember-cli-sass is present', function () {
           let args = ['ember-bootstrap'];
-          modifyPackages([
-            { name: 'ember-cli-sass' }
-          ]);
-          return emberGenerate(args)
-            .then(() => {
-              expect(file(`${baseDir}/app.scss`))
-                .to.contain('@import "ember-bootstrap/bootstrap";');
-              expect(file(`${baseDir}/app.less`)).to.not.exist;
-            });
+          modifyPackages([{ name: 'ember-cli-sass' }]);
+          return emberGenerate(args).then(() => {
+            expect(file(`${baseDir}/app.scss`)).to.contain('@import "ember-bootstrap/bootstrap";');
+            expect(file(`${baseDir}/app.less`)).to.not.exist;
+          });
         });
 
-        it('adds @import to existing app.scss if ember-cli-sass is present', function() {
+        it('adds @import to existing app.scss if ember-cli-sass is present', function () {
           let args = ['ember-bootstrap'];
 
-          modifyPackages([
-            { name: 'ember-cli-sass' }
-          ]);
+          modifyPackages([{ name: 'ember-cli-sass' }]);
           createStyleFixture('app.scss');
-          return emberGenerate(args)
-            .then(() => {
-              expect(file(`${baseDir}/app.scss`)).to.contain('@import "ember-bootstrap/bootstrap";');
-              expect(file(`${baseDir}/app.less`)).to.not.exist;
-            });
+          return emberGenerate(args).then(() => {
+            expect(file(`${baseDir}/app.scss`)).to.contain('@import "ember-bootstrap/bootstrap";');
+            expect(file(`${baseDir}/app.less`)).to.not.exist;
+          });
         });
 
-        it('creates app.less if not existing and ember-cli-less is present', function() {
+        it('creates app.less if not existing and ember-cli-less is present', function () {
           let args = ['ember-bootstrap', '--bootstrapVersion=3'];
 
-          modifyPackages([
-            { name: 'ember-cli-less' }
-          ]);
-          return emberGenerate(args)
-            .then(() => {
-              expect(file(`${baseDir}/app.less`))
-                .to.contain('@import "ember-bootstrap/bootstrap";');
-              expect(file(`${baseDir}/app.scss`)).to.not.exist;
-            });
+          modifyPackages([{ name: 'ember-cli-less' }]);
+          return emberGenerate(args).then(() => {
+            expect(file(`${baseDir}/app.less`)).to.contain('@import "ember-bootstrap/bootstrap";');
+            expect(file(`${baseDir}/app.scss`)).to.not.exist;
+          });
         });
 
-        it('adds @import to existing app.less if ember-cli-less is present', function() {
+        it('adds @import to existing app.less if ember-cli-less is present', function () {
           let args = ['ember-bootstrap', '--bootstrapVersion=3'];
 
-          modifyPackages([
-            { name: 'ember-cli-less' }
-          ]);
+          modifyPackages([{ name: 'ember-cli-less' }]);
           createStyleFixture('app.less');
-          return emberGenerate(args)
-            .then(() => {
-              expect(file(`${baseDir}/app.less`))
-                .to.contain('body { color: red; }')
-                .to.contain('@import "ember-bootstrap/bootstrap";');
-              expect(file(`${baseDir}/app.scss`)).to.not.exist;
-            });
+          return emberGenerate(args).then(() => {
+            expect(file(`${baseDir}/app.less`))
+              .to.contain('body { color: red; }')
+              .to.contain('@import "ember-bootstrap/bootstrap";');
+            expect(file(`${baseDir}/app.scss`)).to.not.exist;
+          });
         });
       }
 
-      describe('regular app', function() {
-
-        beforeEach(function() {
+      describe('regular app', function () {
+        beforeEach(function () {
           return emberNew();
         });
 
-        it('skips style import when no preprocessor present', function() {
+        it('skips style import when no preprocessor present', function () {
           let args = ['ember-bootstrap'];
 
-          return emberGenerate(args)
-            .then(() => {
-              expect(file('app/styles/app.scss')).to.not.exist;
-              expect(file('app/styles/app.less')).to.not.exist;
-            });
+          return emberGenerate(args).then(() => {
+            expect(file('app/styles/app.scss')).to.not.exist;
+            expect(file('app/styles/app.less')).to.not.exist;
+          });
         });
 
         runStyleImportTests('app/styles');
       });
     });
 
-    describe('based on generator option', function() {
-
-      it('skips style import when --preprocessor=none', function() {
+    describe('based on generator option', function () {
+      it('skips style import when --preprocessor=none', function () {
         let args = ['ember-bootstrap', '--preprocessor=none'];
 
         return emberNew()
@@ -129,19 +110,18 @@ describe('Acceptance: ember generate ember-bootstrap', function() {
           });
       });
 
-      it('creates app.scss if not existing and --preprocessor=sass', function() {
+      it('creates app.scss if not existing and --preprocessor=sass', function () {
         let args = ['ember-bootstrap', '--preprocessor=sass'];
 
         return emberNew()
           .then(() => emberGenerate(args))
           .then(() => {
-            expect(file('app/styles/app.scss'))
-              .to.contain('@import "ember-bootstrap/bootstrap";');
+            expect(file('app/styles/app.scss')).to.contain('@import "ember-bootstrap/bootstrap";');
             expect(file('app/styles/app.less')).to.not.exist;
           });
       });
 
-      it('adds @import to existing app.scss if --preprocessor=sass', function() {
+      it('adds @import to existing app.scss if --preprocessor=sass', function () {
         let args = ['ember-bootstrap', '--preprocessor=sass'];
 
         return emberNew()
@@ -153,19 +133,18 @@ describe('Acceptance: ember generate ember-bootstrap', function() {
           });
       });
 
-      it('creates app.less if not existing and --preprocessor=less', function() {
+      it('creates app.less if not existing and --preprocessor=less', function () {
         let args = ['ember-bootstrap', '--preprocessor=less', '--bootstrapVersion=3'];
 
         return emberNew()
           .then(() => emberGenerate(args))
           .then(() => {
-            expect(file('app/styles/app.less'))
-              .to.contain('@import "ember-bootstrap/bootstrap";');
+            expect(file('app/styles/app.less')).to.contain('@import "ember-bootstrap/bootstrap";');
             expect(file('app/styles/app.scss')).to.not.exist;
           });
       });
 
-      it('adds @import to existing app.less if --preprocessor=less', function() {
+      it('adds @import to existing app.less if --preprocessor=less', function () {
         let args = ['ember-bootstrap', '--preprocessor=less', '--bootstrapVersion=3'];
 
         return emberNew()
@@ -178,28 +157,25 @@ describe('Acceptance: ember generate ember-bootstrap', function() {
             expect(file('app/styles/app.scss')).to.not.exist;
           });
       });
-
     });
-
   });
 
-  describe('install dependencies and configuration', function() {
-
+  describe('install dependencies and configuration', function () {
     let Blueprint = require('ember-cli/lib/models/blueprint');
     let origTaskFor = Blueprint.prototype.taskFor;
     let installed = {
       npm: [],
       bower: [],
-      addon: []
+      addon: [],
     };
     let uninstalled = {
       npm: [],
-      bower: []
+      bower: [],
     };
     let buildFile = 'ember-cli-build.js';
 
-    before(function() {
-      Blueprint.prototype.taskFor = function(taskName) {
+    before(function () {
+      Blueprint.prototype.taskFor = function (taskName) {
         let match = taskName.match(/^(npm|bower|addon)-install$/);
         if (match) {
           let type = match[1];
@@ -208,7 +184,7 @@ describe('Acceptance: ember generate ember-bootstrap', function() {
               let packages = options.packages || [];
               installed[type] = installed[type].concat(packages);
               return Promise.resolve();
-            }
+            },
           };
         }
 
@@ -218,7 +194,7 @@ describe('Acceptance: ember generate ember-bootstrap', function() {
               let packages = options.packages || [];
               uninstalled.npm = uninstalled.npm.concat(packages);
               return Promise.resolve();
-            }
+            },
           };
         }
 
@@ -226,19 +202,19 @@ describe('Acceptance: ember generate ember-bootstrap', function() {
       };
     });
 
-    after(function() {
+    after(function () {
       Blueprint.prototype.taskFor = origTaskFor;
     });
 
-    beforeEach(function() {
+    beforeEach(function () {
       installed = {
         npm: [],
         bower: [],
-        addon: []
+        addon: [],
       };
       uninstalled = {
         npm: [],
-        bower: []
+        bower: [],
       };
     });
 
@@ -286,7 +262,7 @@ describe('Acceptance: ember generate ember-bootstrap', function() {
       });
     }
 
-    scenarios.forEach(function(scenario) {
+    scenarios.forEach(function (scenario) {
       let args = [];
       let options = scenario.options || {};
       let preprocessor = options.preprocessor;
@@ -305,9 +281,13 @@ describe('Acceptance: ember generate ember-bootstrap', function() {
       }
 
       let preInstalledText = npmInstalled.length > 0 ? `, preInstalled: ${npmInstalled.join(', ')}` : '';
-      let configuredVersionText = configuredBootstrapVersion ? `, configured version: ${configuredBootstrapVersion}` : '';
+      let configuredVersionText = configuredBootstrapVersion
+        ? `, configured version: ${configuredBootstrapVersion}`
+        : '';
 
-      it(`installs dependencies and config for ember g ember-bootstrap ${args.join(' ')}${preInstalledText}${configuredVersionText}`, function() {
+      it(`installs dependencies and config for ember g ember-bootstrap ${args.join(
+        ' '
+      )}${preInstalledText}${configuredVersionText}`, function () {
         args = ['ember-bootstrap'].concat(args);
 
         return emberNew()
@@ -326,7 +306,6 @@ describe('Acceptance: ember generate ember-bootstrap', function() {
             for (let pkg in scenario.dependencies.addon) {
               checkPackage('addon', pkg, scenario.dependencies.addon[pkg]);
             }
-
           })
           .then(() => checkConfiguration(config));
       });

@@ -1,6 +1,6 @@
 {{!-- template-lint-disable no-invalid-interactive --}}
 <div
-  class="form-group {{if @disabled "disabled"}} {{if @required "is-required"}} {{if this.isValidating "is-validating"}} {{if (macroCondition (macroGetOwnConfig "isBS3")) this.validationClass}} {{if (macroCondition (macroGetOwnConfig "isBS3")) (if this.hasFeedback "has-feedback")}} {{if (macroCondition (macroGetOwnConfig "isBS3")) (bs-size-class "form-group" @size)}} {{if (macroCondition (macroGetOwnConfig "isBS4")) (if (bs-eq @formLayout "horizontal") "row")}}"
+  class="{{if (macroCondition (macroGetOwnConfig "isNotBS5")) "form-group"}} {{if @disabled "disabled"}} {{if @required "is-required"}} {{if this.isValidating "is-validating"}} {{if (macroCondition (macroGetOwnConfig "isBS3")) this.validationClass}} {{if (macroCondition (macroGetOwnConfig "isBS3")) (if this.hasFeedback "has-feedback")}} {{if (macroCondition (macroGetOwnConfig "isBS3")) (bs-size-class "form-group" @size)}} {{if (macroCondition (macroGetOwnConfig "isNotBS3")) (if (bs-eq @formLayout "horizontal") (if (macroCondition (macroGetOwnConfig "isBS5")) "row mb-3" "row"))}}"
   ...attributes
   {{create-ref "mainNode"}}
   {{on "focusout" this.showValidationOnHandler}}
@@ -15,14 +15,14 @@
       (bs-default
         @layoutComponent
         (if
-          (bs-eq this.controlType "checkbox")
+          (bs-contains (array "checkbox" "switch") this.controlType)
           (if
             (bs-eq @formLayout "inline")
-            (component "bs-form/element/layout/inline/checkbox")
+            (component "bs-form/element/layout/inline/checkbox" controlType=this.controlType)
             (if
               (bs-eq @formLayout "horizontal")
-              (component "bs-form/element/layout/horizontal/checkbox")
-              (component "bs-form/element/layout/vertical/checkbox")
+              (component "bs-form/element/layout/horizontal/checkbox" controlType=this.controlType)
+              (component "bs-form/element/layout/vertical/checkbox" controlType=this.controlType)
             )
           )
           (if
@@ -101,7 +101,7 @@
         options=@options
         optionLabelPath=@optionLabelPath
         ariaDescribedBy=(if @helpText this.ariaDescribedBy)
-        onChange=(action this.doChange)
+        onChange=this.doChange
         validationType=this.validation
         size=@size
     ) as |Control|}}

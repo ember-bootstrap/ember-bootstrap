@@ -9,30 +9,29 @@ export default Controller.extend({
   email: 'foo@example.com',
   password: null,
   checkbox: false,
+  switched: false,
   radio: null,
 
-  login: computed(function() {
-    return Login.create(
-      getOwner(this).ownerInjection()
-    );
+  login: computed(function () {
+    return Login.create(getOwner(this).ownerInjection());
   }),
 
   actions: {
     submit() {
       window.alert('Successfully submitted form data!');
-    }
+    },
   },
 
   init() {
     this._super(...arguments);
     this.radioOptions = [
       {
-        label: 'foo'
+        label: 'foo',
       },
       {
-        label: 'bar'
-      }
+        label: 'bar',
+      },
     ];
-  }
+  },
 });
 // END-SNIPPET
