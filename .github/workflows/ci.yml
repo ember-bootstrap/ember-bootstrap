@@ -92,6 +92,8 @@ jobs:
           node-version: 10
       - name: Install dependencies
         uses: bahmutov/npm-install@v1
+        with:
+          useLockFile: false
       - name: Test
         run: yarn ember try:one ${{ matrix.scenario }} --- ember test --launch ${{ matrix.browser }}
         env:
