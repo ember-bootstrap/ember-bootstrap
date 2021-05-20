@@ -50,6 +50,7 @@ jobs:
   test-try:
     name: Scenario ${{ matrix.scenario }}, BS${{ matrix.bootstrap }}, ${{ matrix.browser}}
     runs-on: ubuntu-latest
+    timeout-minutes: 10
     continue-on-error: ${{ matrix.allow-failure || false }}
     needs:
       - test
