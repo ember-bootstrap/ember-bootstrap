@@ -78,7 +78,6 @@
     "ember-style-modifier": "^0.6.0",
     "findup-sync": "^4.0.0",
     "fs-extra": "^9.1.0",
-    "macro-decorators": "^0.1.2",
     "resolve": "^1.18.1",
     "rsvp": "^4.0.1",
     "silent-error": "^1.0.1",

@@ -11266,11 +11266,6 @@ macos-release@^2.2.0:
   resolved "https://registry.yarnpkg.com/macos-release/-/macos-release-2.4.1.tgz#64033d0ec6a5e6375155a74b1a1eba8e509820ac"
   integrity sha512-H/QHeBIN1fIGJX517pvK8IEK53yQOW7YcEI55oYtgjDdoCQQz7eJS94qt5kNrscReEyuD/JcdFCm2XBEcGOITg==
 
-macro-decorators@^0.1.2:
-  version "0.1.2"
-  resolved "https://registry.yarnpkg.com/macro-decorators/-/macro-decorators-0.1.2.tgz#1d5cf1276d343371040af192901947f2a0af03c1"
-  integrity sha512-BV5XPmCm9kPSMtgfZiv0vTjOooe5pTIPIVkdoqbC49H1B7z22KB39H50R2ZNclZDQlmVyviLozRatKnOYZkwzg==
-
 magic-string@^0.25.7:
   version "0.25.7"
   resolved "https://registry.yarnpkg.com/magic-string/-/magic-string-0.25.7.tgz#3f497d6fd34c669c6798dcb821f2ef31f5445051"
