@@ -64,5 +64,5 @@
  * @event onClose
  * @public
  */
- import templateOnly from '@ember/component/template-only';
- export default templateOnly();
+import templateOnly from '@ember/component/template-only';
+export default templateOnly();
