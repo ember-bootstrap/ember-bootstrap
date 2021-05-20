@@ -39,6 +39,11 @@ module.exports = function (defaults) {
   */
 
   return maybeEmbroider(app, {
+    skipBabel: [
+      {
+        package: 'qunit',
+      },
+    ],
     packageRules: [
       {
         package: 'dummy',
