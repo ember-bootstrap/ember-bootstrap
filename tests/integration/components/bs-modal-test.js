@@ -251,13 +251,28 @@ module('Integration | Component | bs-modal', function (hooks) {
     this.set('open', false);
     await render(hbs`<BsModal @open={{this.open}}>Hello world!</BsModal>`);
 
+    // record all transition events to assert against later
+    let transitionEvents = [];
+    this.element.addEventListener('transitionrun', (event) => {
+      transitionEvents.push(event);
+    });
+
     this.set('open', true);
-    await waitFor('.modal.show');
+    await waitFor('.modal');
     assert.dom('.modal').hasClass('show');
 
     await settled();
     assert.dom('.modal').hasClass('show');
     assert.dom('.modal').hasClass('in');
+
+    await waitUntil(
+      () => {
+        return transitionEvents.find((event) => event.target === find('.modal') && event.propertyName === 'opacity');
+      },
+      {
+        timeoutMessage: 'awaiting modal opening transition timed out',
+      }
+    );
 
     this.set('open', false);
     await waitUntil(() => {
@@ -274,14 +289,25 @@ module('Integration | Component | bs-modal', function (hooks) {
     this.set('open', false);
     await render(hbs`<BsModal @open={{this.open}}>Hello world!</BsModal>`);
 
+    // record all transition events to assert against later
+    let transitionEvents = [];
+    this.element.addEventListener('transitionrun', (event) => {
+      transitionEvents.push(event);
+    });
+
     this.set('open', true);
     await waitFor('.modal.show');
     assert.dom('.modal').hasClass('show');
     assert.dom('.modal').hasStyle({ display: 'block' });
 
-    await settled();
-    assert.dom('.modal').hasClass('show');
-    assert.dom('.modal').hasStyle({ display: 'block' });
+    await waitUntil(
+      () => {
+        return transitionEvents.find((event) => event.target === find('.modal') && event.propertyName === 'opacity');
+      },
+      {
+        timeoutMessage: 'awaiting modal opening transition timed out',
+      }
+    );
 
     this.set('open', false);
     await waitUntil(() => {
