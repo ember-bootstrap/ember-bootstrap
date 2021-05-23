@@ -301,5 +301,20 @@ module('Integration | Component | bs-modal', function (hooks) {
 
     await settled();
     assert.dom('.modal').doesNotExist();
+
+    await waitUntil(
+      () => {
+        return transitionEvents.find((event) => event.target === find('.modal') && event.propertyName === 'opacity');
+      },
+      {
+        timeoutMessage: 'awaiting modal closing transition timed out',
+      }
+    );
+    assert.ok(
+      // waitUntil condition already implicitly asserted that modal closing transition has run
+      // adding an explicit assertion to ease reading test log
+      true,
+      'modal closing was animated'
+    );
   });
 });
