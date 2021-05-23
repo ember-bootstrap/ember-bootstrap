@@ -2,7 +2,7 @@ import Component from '@ember/component';
 import { module } from 'qunit';
 import { setupRenderingTest } from 'ember-qunit';
 import { render, click, find, triggerEvent, settled, waitFor, waitUntil } from '@ember/test-helpers';
-import { test, testBS3, testBS4, visibilityClass } from '../../helpers/bootstrap';
+import { isBootstrap, test, visibilityClass } from '../../helpers/bootstrap';
 import hbs from 'htmlbars-inline-precompile';
 import setupNoDeprecations from '../../helpers/setup-no-deprecations';
 import sinon from 'sinon';
@@ -247,45 +247,7 @@ module('Integration | Component | bs-modal', function (hooks) {
     assert.dom('.modal').isVisible('Modal is visible again');
   });
 
-  testBS3('it animates opening and closing the modal', async function (assert) {
-    this.set('open', false);
-    await render(hbs`<BsModal @open={{this.open}}>Hello world!</BsModal>`);
-
-    // record all transition events to assert against later
-    let transitionEvents = [];
-    this.element.addEventListener('transitionrun', (event) => {
-      transitionEvents.push(event);
-    });
-
-    this.set('open', true);
-    await waitFor('.modal');
-    assert.dom('.modal').hasClass('show');
-
-    await settled();
-    assert.dom('.modal').hasClass('show');
-    assert.dom('.modal').hasClass('in');
-
-    await waitUntil(
-      () => {
-        return transitionEvents.find((event) => event.target === find('.modal') && event.propertyName === 'opacity');
-      },
-      {
-        timeoutMessage: 'awaiting modal opening transition timed out',
-      }
-    );
-
-    this.set('open', false);
-    await waitUntil(() => {
-      return !find('.modal').classList.contains('in');
-    });
-    assert.dom('.modal').hasClass('show');
-    assert.dom('.modal').doesNotHaveClass('in');
-
-    await settled();
-    assert.dom('.modal').doesNotExist();
-  });
-
-  testBS4('it animates opening and closing the modal', async function (assert) {
+  test('it animates opening and closing the modal', async function (assert) {
     this.set('open', false);
     await render(hbs`<BsModal @open={{this.open}}>Hello world!</BsModal>`);
 
@@ -298,7 +260,12 @@ module('Integration | Component | bs-modal', function (hooks) {
     this.set('open', true);
     await waitFor('.modal.show');
     assert.dom('.modal').hasClass('show');
-    assert.dom('.modal').hasStyle({ display: 'block' });
+    if (isBootstrap(3)) {
+      assert.dom('.modal').hasClass('in');
+    }
+    if (isBootstrap(4)) {
+      assert.dom('.modal').hasStyle({ display: 'block' });
+    }
 
     await waitUntil(
       () => {
@@ -308,13 +275,29 @@ module('Integration | Component | bs-modal', function (hooks) {
         timeoutMessage: 'awaiting modal opening transition timed out',
       }
     );
+    assert.ok(
+      // waitUntil condition already implicitly asserted that modal opening transition has run
+      // adding an explicit assertion to ease reading test log
+      true,
+      'modal opening was animated'
+    );
 
+    // reset logged transitions before closing model
+    transitionEvents = [];
+
+    // close modal
     this.set('open', false);
+
     await waitUntil(() => {
-      return !find('.modal').classList.contains('show');
+      return !find('.modal').classList.contains(visibilityClass());
     });
-    assert.dom('.modal').doesNotHaveClass('show');
-    assert.dom('.modal').hasStyle({ display: 'block' });
+    assert.dom('.modal').doesNotHaveClass(visibilityClass);
+    if (isBootstrap(3)) {
+      assert.dom('.modal').hasClass('show');
+    }
+    if (isBootstrap(4)) {
+      assert.dom('.modal').hasStyle({ display: 'block' });
+    }
 
     await settled();
     assert.dom('.modal').doesNotExist();
