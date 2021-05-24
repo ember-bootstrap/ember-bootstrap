@@ -248,12 +248,6 @@ module('Integration | Component | bs-modal', function (hooks) {
   });
 
   test('it animates opening the modal', async function (assert) {
-    // record all transition events to assert against later
-    const transitionEvents = [];
-    this.element.addEventListener('transitionrun', (event) => {
-      transitionEvents.push(event);
-    });
-
     this.set('open', false);
     await render(hbs`<BsModal @open={{this.open}}>Hello world!</BsModal>`);
 
@@ -267,19 +261,14 @@ module('Integration | Component | bs-modal', function (hooks) {
       assert.dom('.modal').hasStyle({ display: 'block' });
     }
 
-    await waitUntil(
-      () => {
-        return transitionEvents.find((event) => event.target === find('.modal') && event.propertyName === 'opacity');
-      },
-      {
-        timeoutMessage: 'awaiting modal opening transition timed out',
-      }
-    );
+    await waitUntil(() => {
+      return find('.modal').getAnimations().length > 0;
+    });
     assert.ok(
-      // waitUntil condition already implicitly asserted that modal opening transition has run
-      // adding an explicit assertion to ease reading test log
-      true,
-      'modal opening was animated'
+      find('.modal')
+        .getAnimations()
+        .find((animation) => animation.transitionProperty === 'opacity'),
+      'modal opening is animated'
     );
   });
 
@@ -292,13 +281,11 @@ module('Integration | Component | bs-modal', function (hooks) {
 
     // wait until modal is shown and opening transition is finished
     await waitFor('.modal.show');
-    await new Promise((resolve) => setTimeout(resolve, 1000));
-
-    // record all transition events emitted by modal to assert against later
-    let transitionEvents = [];
-    this.element.addEventListener('transitionrun', (event) => {
-      transitionEvents.push(event);
-    });
+    await Promise.all(
+      find('.modal')
+        .getAnimations()
+        .map((animation) => animation.finished)
+    );
 
     // keep reference to modal element to compare with event target after modal has been destroyed
     const modalEl = find('.modal');
@@ -317,22 +304,17 @@ module('Integration | Component | bs-modal', function (hooks) {
       assert.dom('.modal').hasStyle({ display: 'block' });
     }
 
+    await waitUntil(() => {
+      return find('.modal').getAnimations().length > 0;
+    });
+    assert.ok(
+      find('.modal')
+        .getAnimations()
+        .find((animation) => animation.transitionProperty === 'opacity'),
+      'modal closing is animated'
+    );
+
     await settled();
     assert.dom('.modal').doesNotExist();
-
-    await waitUntil(
-      () => {
-        return transitionEvents.find((event) => event.target === modalEl && event.propertyName === 'opacity');
-      },
-      {
-        timeoutMessage: 'awaiting modal closing transition timed out',
-      }
-    );
-    assert.ok(
-      // waitUntil condition already implicitly asserted that modal closing transition has run
-      // adding an explicit assertion to ease reading test log
-      true,
-      'modal closing was animated'
-    );
   });
 });
