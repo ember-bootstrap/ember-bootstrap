@@ -93,7 +93,7 @@
     "broccoli-asset-rev": "^3.0.0",
     "chai": "^4.3.4",
     "chai-things": "^0.2.0",
-    "ember-a11y-testing": "^3.0.2",
+    "ember-a11y-testing": "^4.0.7",
     "ember-cli": "~3.26.1",
     "ember-cli-app-version": "^4.0.0",
     "ember-cli-blueprint-test-helpers": "^0.19.1",
