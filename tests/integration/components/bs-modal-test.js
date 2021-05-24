@@ -247,15 +247,15 @@ module('Integration | Component | bs-modal', function (hooks) {
     assert.dom('.modal').isVisible('Modal is visible again');
   });
 
-  test('it animates opening and closing the modal', async function (assert) {
-    this.set('open', false);
-    await render(hbs`<BsModal @open={{this.open}}>Hello world!</BsModal>`);
-
+  test('it animates opening the modal', async function (assert) {
     // record all transition events to assert against later
-    let transitionEvents = [];
+    const transitionEvents = [];
     this.element.addEventListener('transitionrun', (event) => {
       transitionEvents.push(event);
     });
+
+    this.set('open', false);
+    await render(hbs`<BsModal @open={{this.open}}>Hello world!</BsModal>`);
 
     this.set('open', true);
     await waitFor('.modal.show');
@@ -281,15 +281,33 @@ module('Integration | Component | bs-modal', function (hooks) {
       true,
       'modal opening was animated'
     );
+  });
 
-    // reset logged transitions before closing model
-    transitionEvents = [];
+  test('it animates closing the modal', async function (assert) {
+    await render(hbs`
+      <BsModal as |modal|>
+        <button {{on "click" modal.close}} type="button">close</button>
+      </BsModal>
+    `);
+
+    // wait until modal is shown and opening transition is finished
+    await waitFor('.modal.show');
+    await new Promise((resolve) => setTimeout(resolve, 1000));
+
+    // record all transition events emitted by modal to assert against later
+    let transitionEvents = [];
+    this.element.addEventListener('transitionrun', (event) => {
+      transitionEvents.push(event);
+    });
+
+    // keep reference to modal element to compare with event target after modal has been destroyed
+    const modalEl = find('.modal');
 
     // close modal
-    this.set('open', false);
+    click('button');
 
     await waitUntil(() => {
-      return !find('.modal').classList.contains(visibilityClass());
+      return !modalEl.classList.contains(visibilityClass());
     });
     assert.dom('.modal').doesNotHaveClass(visibilityClass);
     if (isBootstrap(3)) {
@@ -304,7 +322,7 @@ module('Integration | Component | bs-modal', function (hooks) {
 
     await waitUntil(
       () => {
-        return transitionEvents.find((event) => event.target === find('.modal') && event.propertyName === 'opacity');
+        return transitionEvents.find((event) => event.target === modalEl && event.propertyName === 'opacity');
       },
       {
         timeoutMessage: 'awaiting modal closing transition timed out',
