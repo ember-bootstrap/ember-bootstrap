@@ -43,7 +43,7 @@ export default Controller.extend({
     },
     backdropChange(backdrop) {
       this._ignoreClose = true;
-      let fade = this.get('fade');
+      let fade = this.fade;
       this.set('fade', false);
       this.set('modal2', false);
       next(() => {
@@ -54,6 +54,6 @@ export default Controller.extend({
           this._ignoreClose = false;
         });
       });
-    }
-  }
+    },
+  },
 });

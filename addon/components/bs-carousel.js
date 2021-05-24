@@ -555,6 +555,7 @@ export default class Carousel extends Component.extend(ComponentParent) {
   /**
    * Initial page loading configuration.
    */
+  // eslint-disable-next-line ember/no-component-lifecycle-hooks
   didInsertElement() {
     super.didInsertElement(...arguments);
     this.triggerChildSlidesObserver();

@@ -10,7 +10,9 @@ module.exports = {
       legacyDecorators: true,
     },
   },
-  plugins: ['ember', 'hbs'],
+  // Disabling hbs plugin until https://github.com/ember-template-lint/eslint-plugin-hbs/issues/42 is resolved
+  // plugins: ['ember', 'hbs'],
+  plugins: ['ember'],
   extends: ['eslint:recommended', 'plugin:ember/recommended', 'plugin:prettier/recommended'],
   env: {
     browser: true,
@@ -24,7 +26,8 @@ module.exports = {
     'ember/require-tagless-components': 'error',
     'ember/no-observers': 'warn',
     'ember/no-mixins': 'warn',
-    'hbs/check-hbs-template-literals': 'error',
+    // disabled, see above
+    // 'hbs/check-hbs-template-literals': 'error',
     'no-setter-return': 'off', // computed setters may return a value!
     // turn Octane rules into warnings until all components have been refactored
     'ember/no-computed-properties-in-native-classes': 'warn',
@@ -59,6 +62,12 @@ module.exports = {
       },
       plugins: ['node'],
       extends: ['plugin:node/recommended'],
+    },
+    {
+      files: ['node-tests/**/*.js'],
+      env: {
+        mocha: true,
+      },
     },
   ],
 };

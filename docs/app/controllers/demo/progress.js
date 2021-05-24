@@ -11,12 +11,6 @@ export default Controller.extend({
   animate: false,
   roundDigits: 0,
   /* eslint-disable ember/avoid-leaking-state-in-ember-objects */
-  typeChoices: [
-    'default',
-    'success',
-    'info',
-    'warning',
-    'danger'
-  ],
-  notStriped: not('striped')
+  typeChoices: ['default', 'success', 'info', 'warning', 'danger'],
+  notStriped: not('striped'),
 });

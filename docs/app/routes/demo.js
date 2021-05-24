@@ -5,6 +5,6 @@ export default Route.extend({
   component: service(),
 
   model() {
-    return this.get('component').findAll();
-  }
+    return this.component.findAll();
+  },
 });

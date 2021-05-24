@@ -7,15 +7,12 @@ export default Controller.extend({
   stacked: false,
   justified: false,
   fill: false,
-  typeChoices: A([
-    'pills',
-    'tabs'
-  ]),
+  typeChoices: A(['pills', 'tabs']),
 
   actions: {
     updateType(type) {
       let props = {
-        type
+        type,
       };
       if (type === 'tabs') {
         props.stacked = false;
@@ -24,12 +21,12 @@ export default Controller.extend({
     },
     updateStacked(stacked) {
       let props = {
-        stacked
+        stacked,
       };
       if (stacked) {
         props.justified = false;
       }
       this.setProperties(props);
-    }
-  }
+    },
+  },
 });

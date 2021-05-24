@@ -3,18 +3,18 @@
   aria-valuenow={{this.value}}
   aria-valuemin={{this.minValue}}
   aria-valuemax={{this.maxValue}}
-  class="progress-bar {{if this.striped "progress-bar-striped"}} {{this.typeClass}} {{if this.animate (if (macroCondition (macroGetOwnConfig "isBS4")) "progress-bar-animated" "active")}}"
+  class="progress-bar {{if this.striped "progress-bar-striped"}} {{this.typeClass}} {{if this.animate (if (macroCondition (macroGetOwnConfig "isNotBS3")) "progress-bar-animated" "active")}}"
   ...attributes
   {{style width=this.percentStyleValue}}
 >
   {{#if this.showLabel}}
-    {{#if hasBlock}}
+    {{#if (has-block)}}
       {{yield this.percentRounded}}
     {{else}}
       {{this.percentRounded}}%
     {{/if}}
   {{else}}
-    {{#if hasBlock}}
+    {{#if (has-block)}}
       <span class="sr-only">{{yield this.percentRounded}}</span>
     {{else}}
       <span class="sr-only">{{this.percentRounded}}%</span>

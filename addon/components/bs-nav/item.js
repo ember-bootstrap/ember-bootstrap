@@ -4,7 +4,7 @@ import { filter, filterBy, gt } from '@ember/object/computed';
 import Component from '@ember/component';
 import { action } from '@ember/object';
 import { scheduleOnce } from '@ember/runloop';
-import LinkComponent from '@ember/routing/link-component';
+import LinkComponent from 'ember-bootstrap/components/bs-link-to';
 import ComponentParent from 'ember-bootstrap/mixins/component-parent';
 import overrideableCP from 'ember-bootstrap/utils/cp/overrideable';
 import { assert } from '@ember/debug';

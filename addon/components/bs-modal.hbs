@@ -42,7 +42,7 @@
       </Dialog>
       <div>
         {{#if this.isBackdropShown}}
-          <div class="modal-backdrop {{if this._fade "fade"}} {{if this.isShowModal (if (macroCondition (macroGetOwnConfig "isBS4")) "show" "in")}}" id={{this.backdropId}}></div>
+          <div class="modal-backdrop {{if this._fade "fade"}} {{if this.isShowModal (if (macroCondition (macroGetOwnConfig "isNotBS3")) "show" "in")}}" id={{this.backdropId}}></div>
         {{/if}}
       </div>
     {{else}}
@@ -64,7 +64,7 @@
         </Dialog>
         <div>
           {{#if this.isBackdropShown}}
-            <div class="modal-backdrop {{if this._fade "fade"}} {{if this.isShowModal (if (macroCondition (macroGetOwnConfig "isBS4")) "show" "in")}}" id={{this.backdropId}}></div>
+            <div class="modal-backdrop {{if this._fade "fade"}} {{if this.isShowModal (if (macroCondition (macroGetOwnConfig "isNotBS3")) "show" "in")}}" id={{this.backdropId}}></div>
           {{/if}}
         </div>
       {{/in-element}}

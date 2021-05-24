@@ -7,17 +7,13 @@ const path = require('path');
 const writeFile = rsvp.denodeify(fs.writeFile);
 const chalk = require('chalk');
 const BuildConfigEditor = require('ember-cli-build-config-editor');
-const SilentError = require('silent-error'); // From ember-cli
-
+const SilentError = require('silent-error');
 
 const bs3Version = '^3.4.1';
-const bs4Version = '^4.3.1';
+const bs4Version = '^4.6.0';
+const bs5Version = '^5.0.0';
 
-const validPreprocessors = [
-  'none',
-  'less',
-  'sass'
-];
+const validPreprocessors = ['none', 'less', 'sass'];
 
 module.exports = {
   name: 'ember-bootstrap',
@@ -26,13 +22,12 @@ module.exports = {
 
   availableOptions: [
     { name: 'bootstrap-version', type: Number, aliases: ['bootstrap', 'bv'] },
-    { name: 'preprocessor', type: String, aliases: ['pp'] }
+    { name: 'preprocessor', type: String, aliases: ['pp'] },
   ],
 
   works: 'insideProject',
 
-  normalizeEntityName() {
-  },
+  normalizeEntityName() {},
 
   existingConfiguration: null,
 
@@ -40,8 +35,8 @@ module.exports = {
     let bootstrapVersion = parseInt(option.bootstrapVersion, 10) || this.retrieveBootstrapVersion() || 4;
     let preprocessor = option.preprocessor;
 
-    if (bootstrapVersion !== 3 && bootstrapVersion !== 4) {
-      throw new SilentError('Bootstrap version must be 3 or 4');
+    if (![3, 4, 5].includes(bootstrapVersion)) {
+      throw new SilentError('Bootstrap version must be 3, 4 or 5');
     }
 
     if (preprocessor && validPreprocessors.indexOf(preprocessor) === -1) {
@@ -59,8 +54,8 @@ module.exports = {
       }
     }
 
-    if (bootstrapVersion === 4 && preprocessor === 'less') {
-      throw new SilentError('You cannot use LESS with Bootstrap 4');
+    if ([4, 5].includes(bootstrapVersion) && preprocessor === 'less') {
+      throw new SilentError(`You cannot use LESS with Bootstrap ${bootstrapVersion}`);
     }
 
     this.ui.writeLine(chalk.green(`Installing for Bootstrap ${bootstrapVersion} using preprocessor ${preprocessor}`));
@@ -78,7 +73,7 @@ module.exports = {
 
   removePackageFromBowerJSON(dependency) {
     this.ui.writeLine(chalk.green(`  uninstall bower package ${chalk.white(dependency)}`));
-    return new rsvp.Promise(function(resolve, reject) {
+    return new rsvp.Promise(function (resolve, reject) {
       try {
         let bowerJSONPath = 'bower.json';
         let bowerJSON = fs.readJsonSync(bowerJSONPath);
@@ -88,7 +83,7 @@ module.exports = {
         fs.writeJsonSync(bowerJSONPath, bowerJSON);
 
         resolve();
-      } catch(error) {
+      } catch (error) {
         reject(error);
       }
     });
@@ -108,11 +103,11 @@ module.exports = {
       promises.push(this.removePackageFromBowerJSON('bootstrap-sass'));
     }
 
-    if (bootstrapVersion === 4) {
+    if ([4, 5].includes(bootstrapVersion)) {
       if ('bootstrap-sass' in dependencies) {
         promises.push(this.removePackageFromProject('bootstrap-sass'));
       }
-      promises.push(this.addPackageToProject('bootstrap', bs4Version));
+      promises.push(this.addPackageToProject('bootstrap', bootstrapVersion === 5 ? bs5Version : bs4Version));
     } else if (preprocessor === 'sass') {
       if ('bootstrap' in dependencies) {
         promises.push(this.removePackageFromProject('bootstrap'));
@@ -183,16 +178,18 @@ module.exports = {
     let preprocessor = this.preprocessor;
     let config = this.retrieveExistingConfiguration();
     let settings = {
-      bootstrapVersion
+      bootstrapVersion,
     };
 
     if (bootstrapVersion === 3) {
-      settings.importBootstrapFont = Object.prototype.hasOwnProperty.call(config, 'importBootstrapFont') ? config.importBootstrapFont : true;
+      settings.importBootstrapFont = Object.prototype.hasOwnProperty.call(config, 'importBootstrapFont')
+        ? config.importBootstrapFont
+        : true;
     }
 
     if (preprocessor !== 'none') {
       settings.importBootstrapCSS = false;
-    } else if (Object.prototype.hasOwnProperty.call(config,'importBootstrapCSS')) {
+    } else if (Object.prototype.hasOwnProperty.call(config, 'importBootstrapCSS')) {
       settings.importBootstrapCSS = config.importBootstrapCSS;
     } else {
       settings.importBootstrapCSS = true;
@@ -210,9 +207,13 @@ module.exports = {
       let newBuild = build.edit(this.name, settings);
       fs.writeFileSync(file, newBuild.code());
       this.ui.writeLine(chalk.green(`Added ember-bootstrap configuration to ${file}`));
-    } catch(error) {
+    } catch (error) {
       let settingsString = JSON.stringify(settings);
-      this.ui.writeLine(chalk.red(`Configuration file could not be edited. Manually update your ember-cli-build.js to include '${this.name}': ${settingsString}`));
+      this.ui.writeLine(
+        chalk.red(
+          `Configuration file could not be edited. Manually update your ember-cli-build.js to include '${this.name}': ${settingsString}`
+        )
+      );
     }
   },
 
@@ -230,9 +231,8 @@ module.exports = {
   },
 
   retrieveBootstrapVersion() {
-
     let config = this.retrieveExistingConfiguration();
 
     return config.bootstrapVersion && parseInt(config.bootstrapVersion, 10);
-  }
+  },
 };

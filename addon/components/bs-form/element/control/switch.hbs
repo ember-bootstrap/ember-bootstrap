@@ -1,0 +1,11 @@
+<input
+  type="checkbox"
+  id={{@id}}
+  disabled={{this.disabled}}
+  readonly={{this.readonly}}
+  aria-describedby={{this.ariaDescribedBy}}
+  checked={{this.value}}
+  class="{{if (macroCondition (macroGetOwnConfig "isBS5")) "form-check-input" "custom-control-input"}} {{this.formValidationClass}}"
+  ...attributes
+  {{on "click" this.handleClick}}
+>

@@ -11,7 +11,7 @@
             type="radio"
             id={{id}}
             checked={{bs-eq option @value}}
-            onclick={{action this.onChange option}}
+            onclick={{fn this.onChange option}}
             name={{@name}}
             required={{@required}}
             disabled={{@disabled}}
@@ -21,7 +21,7 @@
             title={{@title}}
             ...attributes
           >
-          {{#if hasBlock}}
+          {{#if (has-block)}}
             {{yield option index}}
           {{else}}
             {{#if @optionLabelPath}}
@@ -41,7 +41,7 @@
               type="radio"
               id={{id}}
               checked={{bs-eq option @value}}
-              onclick={{action this.onChange option}}
+              onclick={{fn this.onChange option}}
               name={{@name}}
               required={{@required}}
               disabled={{@disabled}}
@@ -51,7 +51,7 @@
               title={{@title}}
               ...attributes
             >
-            {{#if hasBlock}}
+            {{#if (has-block)}}
               {{yield option index}}
             {{else}}
               {{#if @optionLabelPath}}
@@ -70,7 +70,7 @@
           class="form-check-input"
           id={{id}}
           checked={{bs-eq option @value}}
-          onclick={{action this.onChange option}}
+          onclick={{fn this.onChange option}}
           name={{@name}}
           required={{@required}}
           disabled={{@disabled}}
@@ -84,7 +84,7 @@
           for={{id}}
           class="form-check-label"
         >
-          {{#if hasBlock}}
+          {{#if (has-block)}}
             {{yield option index}}
           {{else}}
             {{#if @optionLabelPath}}

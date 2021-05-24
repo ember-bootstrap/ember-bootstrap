@@ -48,7 +48,7 @@ jobs:
         run: yarn test:ember
 
   test-try:
-    name: Scenario Tests
+    name: Scenario ${{ matrix.scenario }}, BS${{ matrix.bootstrap }}, ${{ matrix.browser}}
     runs-on: ubuntu-latest
     continue-on-error: ${{ matrix.allow-failure || false }}
     needs:
@@ -60,6 +60,7 @@ jobs:
           - false
         scenario:
           - ember-lts-3.16
+          - ember-lts-3.20
           - ember-release
           - ember-beta
           - ember-canary
@@ -69,9 +70,16 @@ jobs:
         bootstrap:
           - 3
           - 4
+          - 5
+        browser:
+          - Chrome
         include:
           - scenario: ember-release
-            command: ember test --launch Firefox
+            browser: Firefox
+            bootstrap: 4
+          - scenario: ember-release
+            browser: Firefox
+            bootstrap: 5
           - scenario: node-tests
 #          - scenario: embroider-safe
 #            allow-failure: true
@@ -87,7 +95,7 @@ jobs:
       - name: Install dependencies
         uses: bahmutov/npm-install@v1
       - name: Test
-        run: yarn ember try:one ${{ matrix.scenario }} --- ${{ matrix.command }}
+        run: yarn ember try:one ${{ matrix.scenario }} --- ember test --launch ${{ matrix.browser }}
         env:
           BOOTSTRAPVERSION: ${{ matrix.bootstrap }}
 

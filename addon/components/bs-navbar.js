@@ -181,7 +181,7 @@ export default class Navbar extends Component {
     let type = this.type || 'default';
     assert('The value of `type` must be a string', typeof type === 'string' && type !== '');
 
-    if (macroCondition(getOwnConfig().isBS4)) {
+    if (macroCondition(getOwnConfig().isNotBS3)) {
       // 'default` is not a valid type in BS4, but still accepted for compatibility purposes, and mapped to `light'
       if (type === 'default') {
         type = 'light';

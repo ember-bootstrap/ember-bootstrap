@@ -1,16 +1,17 @@
+{{!-- template-lint-disable no-duplicate-landmark-elements --}}
 {{#let
   (hash
     toggle=(component (bs-default @toggleComponent (component "bs-navbar/toggle")) onClick=this.toggleNavbar collapsed=this._collapsed)
     content=(component (bs-default @contentComponent (component "bs-navbar/content")) collapsed=this._collapsed onHidden=this.onCollapsed onShown=this.onExpanded)
     nav=(component
       (bs-default @navComponent (component "bs-navbar/nav"))
-      linkToComponent=(component "bs-navbar/link-to" onCollapse=this.collapse)
+      linkToComponent=(component "bs-navbar/link-to" onCollapse=this.collapse class=(if (macroCondition (macroGetOwnConfig "isNotBS3")) "nav-link"))
     )
     collapse=this.collapse
     expand=this.expand
     toggleNavbar=this.toggleNavbar
   ) as |yieldedHash|}}
-  {{#if (macroCondition (macroGetOwnConfig "isBS4"))}}
+  {{#if (macroCondition (macroGetOwnConfig "isNotBS3"))}}
     <nav class="navbar {{this.positionClass}} {{this.typeClass}} {{this.breakpointClass}} {{this.backgroundClass}}" ...attributes>
       {{#if this.fluid}}
         {{yield yieldedHash}}

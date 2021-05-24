@@ -3,10 +3,6 @@
 const path = require('path');
 const mergeTrees = require('broccoli-merge-trees');
 const Funnel = require('broccoli-funnel');
-const stew = require('broccoli-stew');
-const replace = require('broccoli-string-replace');
-const map = stew.map;
-const rename = stew.rename;
 const BroccoliDebug = require('broccoli-debug');
 const chalk = require('chalk');
 const SilentError = require('silent-error'); // From ember-cli
@@ -26,16 +22,19 @@ const supportedPreprocessors = ['less', 'sass'];
 const componentDependencies = {
   'bs-button-group': ['bs-button'],
   'bs-accordion': ['bs-collapse'],
-  'bs-dropdown': ['bs-button'],
+  'bs-dropdown': ['bs-button', 'bs-link-to'],
   'bs-form': ['bs-button'],
   'bs-modal-simple': ['bs-modal'],
-  'bs-navbar': ['bs-nav', 'bs-button'],
+  'bs-modal': ['bs-button'],
+  'bs-nav': ['bs-link-to', 'bs-dropdown'],
+  'bs-navbar': ['bs-nav', 'bs-button', 'bs-link-to'],
   'bs-popover': ['bs-contextual-help'],
   'bs-tab': ['bs-nav'],
   'bs-tooltip': ['bs-contextual-help'],
 };
 
 const minimumBS4Version = '4.0.0-beta';
+const minimumBS5Version = '5.0.0';
 
 module.exports = {
   name: require('./package').name,
@@ -58,7 +57,7 @@ module.exports = {
     this.app = app;
 
     let options = Object.assign({}, defaultOptions, app.options['ember-bootstrap']);
-    if (options.bootstrapVersion === 4 && options.importBootstrapFont) {
+    if (options.bootstrapVersion >= 4 && options.importBootstrapFont) {
       this.warn(
         'Inclusion of the Glyphicon font is only supported for Bootstrap 3. ' +
           "Set Ember Bootstrap's `importBootstrapFont` option to `false` to hide this warning."
@@ -92,12 +91,13 @@ module.exports = {
     // import custom addon CSS
     this.import(path.join(vendorPath, `bs${options.bootstrapVersion}.css`));
 
-    // register library version
-    this.import(path.join(vendorPath, 'register-version.js'));
-
     // setup config for @embroider/macros
     this.options['@embroider/macros'].setOwnConfig.isBS3 = this.getBootstrapVersion() === 3;
     this.options['@embroider/macros'].setOwnConfig.isBS4 = this.getBootstrapVersion() === 4;
+    this.options['@embroider/macros'].setOwnConfig.isBS5 = this.getBootstrapVersion() === 5;
+    this.options['@embroider/macros'].setOwnConfig.isNotBS3 = this.getBootstrapVersion() !== 3;
+    this.options['@embroider/macros'].setOwnConfig.isNotBS5 = this.getBootstrapVersion() !== 5;
+    this.options['@embroider/macros'].setOwnConfig.version = require('./package.json').version;
   },
 
   options: {
@@ -107,23 +107,21 @@ module.exports = {
   },
 
   validateDependencies() {
-    let bowerDependencies = this.app.project.bowerDependencies();
-
-    if (this.getBootstrapVersion() === 4) {
+    if (this.getBootstrapVersion() >= 4) {
       let checker = new VersionChecker(this.project);
       let dep = checker.for('bootstrap');
 
-      if (!dep.gte(minimumBS4Version)) {
+      if (this.getBootstrapVersion() === 4 && !dep.gte(minimumBS4Version)) {
         this.warn(
           `For Bootstrap 4 support this version of ember-bootstrap requires at least Bootstrap ${minimumBS4Version}, but you have ${dep.version}. Please run \`ember generate ember-bootstrap\` to update your dependencies!`
         );
       }
-    }
 
-    if ('bootstrap' in bowerDependencies || 'bootstrap-sass' in bowerDependencies) {
-      this.warn(
-        'The dependencies for ember-bootstrap may be outdated. Please run `ember generate ember-bootstrap` to install appropriate dependencies!'
-      );
+      if (this.getBootstrapVersion() === 5 && !dep.gte(minimumBS5Version)) {
+        this.warn(
+          `For Bootstrap 5 support this version of ember-bootstrap requires at least Bootstrap ${minimumBS5Version}, but you have ${dep.version}. Please run \`ember generate ember-bootstrap\` to update your dependencies!`
+        );
+      }
     }
   },
 
@@ -144,9 +142,9 @@ module.exports = {
         }
         break;
       case 'less':
-        if (this.getBootstrapVersion() === 4) {
+        if (this.getBootstrapVersion() >= 4) {
           throw new SilentError(
-            'There is no Less support for Bootstrap 4! Falling back to importing static CSS. Consider switching to Sass for preprocessor support!'
+            'There is no Less support for Bootstrap 4 or higher! Falling back to importing static CSS. Consider switching to Sass for preprocessor support!'
           );
         }
         if (!('bootstrap' in dependencies)) {
@@ -162,7 +160,7 @@ module.exports = {
   getBootstrapStylesPath() {
     switch (this.preprocessor) {
       case 'sass':
-        if (this.getBootstrapVersion() === 4) {
+        if (this.getBootstrapVersion() >= 4) {
           return this.resolvePackagePath('bootstrap/scss');
         } else {
           return this.resolvePackagePath('bootstrap-sass/assets/stylesheets');
@@ -219,14 +217,6 @@ module.exports = {
 
   treeForVendor(tree) {
     let trees = [tree];
-    let versionTree = rename(
-      map(tree, 'ember-bootstrap/register-version.template', (c) =>
-        c.replace('###VERSION###', require('./package.json').version)
-      ),
-      'register-version.template',
-      'register-version.js'
-    );
-    trees.push(versionTree);
 
     if (!this.hasPreprocessor()) {
       trees.push(
@@ -242,27 +232,12 @@ module.exports = {
     return parseInt(this.bootstrapOptions.bootstrapVersion);
   },
 
-  getOtherBootstrapVersion() {
-    return this.getBootstrapVersion() === 3 ? 4 : 3;
-  },
-
   treeForApp(tree) {
     tree = this.filterComponents(tree);
     return this._super.treeForApp.call(this, tree);
   },
 
   treeForAddon(tree) {
-    let bsVersion = this.getBootstrapVersion();
-
-    tree = this.debugTree(tree, 'addon-tree:input');
-    tree = replace(tree, {
-      files: ['compatibility-helpers.js'],
-      pattern: {
-        match: /BOOTSTRAP_VERSION/g,
-        replacement: bsVersion,
-      },
-    });
-
     tree = this.filterComponents(tree);
     tree = this.debugTree(tree, 'addon-tree:tree-shaken');
 

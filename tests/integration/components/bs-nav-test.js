@@ -1,7 +1,7 @@
 import { module } from 'qunit';
 import { setupRenderingTest } from 'ember-qunit';
 import { render } from '@ember/test-helpers';
-import { test, testBS3, testBS4 } from '../../helpers/bootstrap';
+import { test, testBS3, testNotBS3 } from '../../helpers/bootstrap';
 import hbs from 'htmlbars-inline-precompile';
 import setupNoDeprecations from '../../helpers/setup-no-deprecations';
 import a11yAudit from 'ember-a11y-testing/test-support/audit';
@@ -34,7 +34,7 @@ module('Integration | Component | bs-nav', function (hooks) {
     assert.dom('ul').hasClass('nav-stacked', 'has stacked class');
   });
 
-  testBS4('it supports bootstrap options', async function (assert) {
+  testNotBS3('it supports bootstrap options', async function (assert) {
     // Template block usage:
     await render(hbs`
       <BsNav @justified={{true}} @stacked={{true}} @fill={{true}} @type="pills" />
@@ -47,8 +47,8 @@ module('Integration | Component | bs-nav', function (hooks) {
   });
 
   test('it exposes contextual components', async function (assert) {
-    // eslint-disable-next-line ember/no-private-routing-service
-    this.owner.lookup('router:main').setupRouter();
+    this.owner.setupRouter();
+
     await render(hbs`
       <BsNav as |nav|>
         <nav.item>
@@ -73,6 +73,8 @@ module('Integration | Component | bs-nav', function (hooks) {
   });
 
   test('it passes accessibility checks', async function (assert) {
+    this.owner.setupRouter();
+
     await render(hbs`
       <BsNav as |nav|>
         <nav.item>
