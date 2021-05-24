@@ -2,7 +2,7 @@ import Component from '@ember/component';
 import { module } from 'qunit';
 import { setupRenderingTest } from 'ember-qunit';
 import { render, click, find, triggerEvent, settled, waitFor, waitUntil } from '@ember/test-helpers';
-import { isBootstrap, test, testNotBS3, visibilityClass } from '../../helpers/bootstrap';
+import { test, testNotBS3, visibilityClass } from '../../helpers/bootstrap';
 import hbs from 'htmlbars-inline-precompile';
 import setupNoDeprecations from '../../helpers/setup-no-deprecations';
 import sinon from 'sinon';
@@ -254,12 +254,7 @@ module('Integration | Component | bs-modal', function (hooks) {
     this.set('open', true);
     await waitFor('.modal.show');
     assert.dom('.modal').hasClass('show');
-    if (isBootstrap(3)) {
-      assert.dom('.modal').hasClass('in');
-    }
-    if (isBootstrap(4)) {
-      assert.dom('.modal').hasStyle({ display: 'block' });
-    }
+    assert.dom('.modal').hasStyle({ display: 'block' });
 
     await waitUntil(() => {
       return find('.modal').getAnimations().length > 0;
@@ -297,12 +292,7 @@ module('Integration | Component | bs-modal', function (hooks) {
       return !modalEl.classList.contains(visibilityClass());
     });
     assert.dom('.modal').doesNotHaveClass(visibilityClass);
-    if (isBootstrap(3)) {
-      assert.dom('.modal').hasClass('show');
-    }
-    if (isBootstrap(4)) {
-      assert.dom('.modal').hasStyle({ display: 'block' });
-    }
+    assert.dom('.modal').hasStyle({ display: 'block' });
 
     await waitUntil(() => {
       return find('.modal').getAnimations().length > 0;
