@@ -253,7 +253,6 @@ module('Integration | Component | bs-modal', function (hooks) {
 
     this.set('open', true);
     await waitFor('.modal.show');
-    assert.dom('.modal').hasClass('show');
     assert.dom('.modal').hasStyle({ display: 'block' });
 
     await waitUntil(() => {
@@ -282,16 +281,12 @@ module('Integration | Component | bs-modal', function (hooks) {
         .map((animation) => animation.finished)
     );
 
-    // keep reference to modal element to compare with event target after modal has been destroyed
-    const modalEl = find('.modal');
-
     // close modal
     click('button');
 
     await waitUntil(() => {
-      return !modalEl.classList.contains(visibilityClass());
+      return !find('.modal').classList.contains(visibilityClass());
     });
-    assert.dom('.modal').doesNotHaveClass(visibilityClass);
     assert.dom('.modal').hasStyle({ display: 'block' });
 
     await waitUntil(() => {
