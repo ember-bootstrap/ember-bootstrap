@@ -2,7 +2,7 @@ import Component from '@ember/component';
 import { module } from 'qunit';
 import { setupRenderingTest } from 'ember-qunit';
 import { render, click, find, triggerEvent, settled, waitFor, waitUntil } from '@ember/test-helpers';
-import { isBootstrap, test, visibilityClass } from '../../helpers/bootstrap';
+import { test, testNotBS3, visibilityClass } from '../../helpers/bootstrap';
 import hbs from 'htmlbars-inline-precompile';
 import setupNoDeprecations from '../../helpers/setup-no-deprecations';
 import sinon from 'sinon';
@@ -247,74 +247,59 @@ module('Integration | Component | bs-modal', function (hooks) {
     assert.dom('.modal').isVisible('Modal is visible again');
   });
 
-  test('it animates opening and closing the modal', async function (assert) {
+  testNotBS3('it animates opening the modal', async function (assert) {
     this.set('open', false);
     await render(hbs`<BsModal @open={{this.open}}>Hello world!</BsModal>`);
 
-    // record all transition events to assert against later
-    let transitionEvents = [];
-    this.element.addEventListener('transitionrun', (event) => {
-      transitionEvents.push(event);
-    });
-
     this.set('open', true);
     await waitFor('.modal.show');
-    assert.dom('.modal').hasClass('show');
-    if (isBootstrap(3)) {
-      assert.dom('.modal').hasClass('in');
-    }
-    if (isBootstrap(4)) {
-      assert.dom('.modal').hasStyle({ display: 'block' });
-    }
+    assert.dom('.modal').hasStyle({ display: 'block' });
 
-    await waitUntil(
-      () => {
-        return transitionEvents.find((event) => event.target === find('.modal') && event.propertyName === 'opacity');
-      },
-      {
-        timeoutMessage: 'awaiting modal opening transition timed out',
-      }
-    );
+    await waitUntil(() => {
+      return find('.modal').getAnimations().length > 0;
+    });
     assert.ok(
-      // waitUntil condition already implicitly asserted that modal opening transition has run
-      // adding an explicit assertion to ease reading test log
-      true,
-      'modal opening was animated'
+      find('.modal')
+        .getAnimations()
+        .find((animation) => animation.transitionProperty === 'opacity'),
+      'modal opening is animated'
     );
+  });
 
-    // reset logged transitions before closing model
-    transitionEvents = [];
+  testNotBS3('it animates closing the modal', async function (assert) {
+    await render(hbs`
+      <BsModal as |modal|>
+        <button {{on "click" modal.close}} type="button">close</button>
+      </BsModal>
+    `);
+
+    // wait until modal is shown and opening transition is finished
+    await waitFor('.modal.show');
+    await Promise.all(
+      find('.modal')
+        .getAnimations()
+        .map((animation) => animation.finished)
+    );
 
     // close modal
-    this.set('open', false);
+    click('button');
 
     await waitUntil(() => {
       return !find('.modal').classList.contains(visibilityClass());
     });
-    assert.dom('.modal').doesNotHaveClass(visibilityClass);
-    if (isBootstrap(3)) {
-      assert.dom('.modal').hasClass('show');
-    }
-    if (isBootstrap(4)) {
-      assert.dom('.modal').hasStyle({ display: 'block' });
-    }
+    assert.dom('.modal').hasStyle({ display: 'block' });
+
+    await waitUntil(() => {
+      return find('.modal').getAnimations().length > 0;
+    });
+    assert.ok(
+      find('.modal')
+        .getAnimations()
+        .find((animation) => animation.transitionProperty === 'opacity'),
+      'modal closing is animated'
+    );
 
     await settled();
     assert.dom('.modal').doesNotExist();
-
-    await waitUntil(
-      () => {
-        return transitionEvents.find((event) => event.target === find('.modal') && event.propertyName === 'opacity');
-      },
-      {
-        timeoutMessage: 'awaiting modal closing transition timed out',
-      }
-    );
-    assert.ok(
-      // waitUntil condition already implicitly asserted that modal closing transition has run
-      // adding an explicit assertion to ease reading test log
-      true,
-      'modal closing was animated'
-    );
   });
 });
