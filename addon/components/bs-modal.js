@@ -334,6 +334,13 @@ export default class Modal extends Component {
   }
 
   /**
+   * @type boolean
+   * @readonly
+   * @private
+   */
+  isFastBoot = isFastBoot(this);
+
+  /**
    * The action to be sent when the modal footer's submit button (if present) is pressed.
    * Note that if your modal body contains a form (e.g. [Components.Form](Components.Form.html)) this action will
    * not be triggered. Instead a submit event will be triggered on the form itself. See the class description for an
@@ -423,7 +430,6 @@ export default class Modal extends Component {
     this._isOpen = true;
 
     this.addBodyClass();
-    this.resize();
 
     let callback = () => {
       if (this.isDestroyed) {
@@ -469,7 +475,6 @@ export default class Modal extends Component {
     }
     this._isOpen = false;
 
-    this.resize();
     this.showModal = false;
 
     if (this.usesTransition) {
@@ -545,20 +550,6 @@ export default class Modal extends Component {
       }
     } else if (callback) {
       next(this, callback);
-    }
-  }
-
-  /**
-   * Attach/Detach resize event listeners
-   *
-   * @method resize
-   * @private
-   */
-  resize() {
-    if (this.open) {
-      window.addEventListener('resize', this.adjustDialog, false);
-    } else {
-      window.removeEventListener('resize', this.adjustDialog, false);
     }
   }
 
@@ -658,7 +649,6 @@ export default class Modal extends Component {
     super.willDestroy(...arguments);
 
     if (typeof FastBoot === 'undefined') {
-      window.removeEventListener('resize', this.adjustDialog, false);
       this.removeBodyClass();
       this.resetScrollbar();
     }
