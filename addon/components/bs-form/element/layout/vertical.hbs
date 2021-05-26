@@ -1,9 +1,9 @@
 {{#if this.hasLabel}}
-  {{component @labelComponent}}
+  <@labelComponent/>
 {{/if}}
 {{yield}}
 {{#if (macroCondition (macroGetOwnConfig "isBS3"))}}
-  {{component @feedbackIconComponent}}
+  <@feedbackIconComponent/>
 {{/if}}
-{{component @errorsComponent}}
-{{component @helpTextComponent}}
+<@errorsComponent/>
+<@helpTextComponent/>

@@ -1,6 +1,5 @@
 import { tracked } from '@glimmer/tracking';
 import { action } from '@ember/object';
-import { equal, or } from 'macro-decorators';
 import { warn } from '@ember/debug';
 import Component from '@glimmer/component';
 import arg from 'ember-bootstrap/utils/decorators/arg';
@@ -271,8 +270,9 @@ export default class Button extends Component {
    * @type Boolean
    * @private
    */
-  @equal('state', 'pending')
-  isPending;
+  get isPending() {
+    return this.state === 'pending';
+  }
 
   /**
    * Promise returned by `onClick` event has been succeeded.
@@ -281,8 +281,9 @@ export default class Button extends Component {
    * @type Boolean
    * @private
    */
-  @equal('state', 'fulfilled')
-  isFulfilled;
+  get isFulfilled() {
+    return this.state === 'fulfilled';
+  }
 
   /**
    * Promise returned by `onClick` event has been rejected.
@@ -291,8 +292,9 @@ export default class Button extends Component {
    * @type Boolean
    * @private
    */
-  @equal('state', 'rejected')
-  isRejected;
+  get isRejected() {
+    return this.state === 'rejected';
+  }
 
   /**
    * Promise returned by `onClick` event has been succeeded or rejected.
@@ -301,8 +303,9 @@ export default class Button extends Component {
    * @type Boolean
    * @private
    */
-  @or('isFulfilled', 'isRejected')
-  isSettled;
+  get isSettled() {
+    return this.isFulfilled || this.isRejected;
+  }
 
   /**
    * Set this to `true` to reset the `state`. A typical use case is to bind this attribute with ember-data isDirty flag.

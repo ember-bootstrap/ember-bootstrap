@@ -50,6 +50,7 @@ jobs:
   test-try:
     name: Scenario ${{ matrix.scenario }}, BS${{ matrix.bootstrap }}, ${{ matrix.browser}}
     runs-on: ubuntu-latest
+    timeout-minutes: 10
     continue-on-error: ${{ matrix.allow-failure || false }}
     needs:
       - test
@@ -67,6 +68,8 @@ jobs:
           - ember-default-with-jquery
           - ember-classic
           - ember-concurrency-2.x
+          - embroider-safe
+          - embroider-optimized
         bootstrap:
           - 3
           - 4
@@ -81,10 +84,6 @@ jobs:
             browser: Firefox
             bootstrap: 5
           - scenario: node-tests
-#          - scenario: embroider-safe
-#            allow-failure: true
-#          - scenario: embroider-optimized
-#            allow-failure: true
     steps:
       - name: Checkout code
         uses: actions/checkout@v2

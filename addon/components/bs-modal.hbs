@@ -1,7 +1,7 @@
 {{did-insert this.handleVisibilityChanges}}
 {{did-update this.handleVisibilityChanges @open}}
 {{#if this.inDom}}
-  {{#let (component (bs-default @dialogComponent (component "bs-modal/dialog"))
+  {{#let (component (ensure-safe-component (bs-default @dialogComponent (component "bs-modal/dialog")))
     onClose=this.close
     fade=this._fade
     showModal=this.showModal
@@ -22,9 +22,9 @@
       >
         {{yield
           (hash
-            header=(component (bs-default @headerComponent (component "bs-modal/header")) onClose=this.close)
-            body=(bs-default @bodyComponent (component "bs-modal/body"))
-            footer=(component (bs-default @footerComponent (component "bs-modal/footer")) onClose=this.close onSubmit=this.doSubmit)
+            header=(component (ensure-safe-component (bs-default @headerComponent (component "bs-modal/header"))) onClose=this.close)
+            body=(ensure-safe-component (bs-default @bodyComponent (component "bs-modal/body")))
+            footer=(component (ensure-safe-component (bs-default @footerComponent (component "bs-modal/footer"))) onClose=this.close onSubmit=this.doSubmit)
             close=this.close
             submit=this.doSubmit
           )
@@ -44,9 +44,9 @@
         >
           {{yield
             (hash
-              header=(component (bs-default @headerComponent (component "bs-modal/header")) onClose=this.close)
-              body=(bs-default @bodyComponent (component "bs-modal/body"))
-              footer=(component (bs-default @footerComponent (component "bs-modal/footer")) onClose=this.close onSubmit=this.doSubmit)
+              header=(component (ensure-safe-component (bs-default @headerComponent (component "bs-modal/header"))) onClose=this.close)
+              body=(ensure-safe-component (bs-default @bodyComponent (component "bs-modal/body")))
+              footer=(component (ensure-safe-component (bs-default @footerComponent (component "bs-modal/footer"))) onClose=this.close onSubmit=this.doSubmit)
               close=this.close
               submit=this.doSubmit
             )

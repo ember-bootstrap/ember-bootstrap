@@ -1,7 +1,7 @@
 {{! template-lint-disable no-unbound }}
 {{unbound this._parentFinder}}
 {{#if this.inDom}}
-  {{#let (bs-default @elementComponent (component "bs-tooltip/element")) as |Element|}}
+  {{#let (ensure-safe-component (bs-default @elementComponent (component "bs-tooltip/element"))) as |Element|}}
     <Element
       @placement={{this.placement}}
       @fade={{this.fade}}
