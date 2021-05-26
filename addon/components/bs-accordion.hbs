@@ -5,7 +5,7 @@
 >
   {{yield
     (hash
-      item=(component (bs-default @itemComponent (component "bs-accordion/item")) selected=this.isSelected onClick=this.doChange)
+      item=(component (ensure-safe-component (bs-default @itemComponent (component "bs-accordion/item"))) selected=this.isSelected onClick=this.doChange)
       change=this.doChange
     )
   }}

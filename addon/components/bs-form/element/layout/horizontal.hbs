@@ -1,20 +1,20 @@
 {{#if this.hasLabel}}
-  {{component @labelComponent labelClass=@horizontalLabelGridClass}}
+  <@labelComponent @labelClass={{@horizontalLabelGridClass}}/>
   <div class={{this.horizontalInputGridClass}}>
     {{yield}}
     {{#if (macroCondition (macroGetOwnConfig "isBS3"))}}
-      {{component @feedbackIconComponent}}
+      <@feedbackIconComponent/>
     {{/if}}
-    {{component @errorsComponent}}
-    {{component @helpTextComponent}}
+    <@errorsComponent/>
+    <@helpTextComponent/>
   </div>
 {{else}}
   <div class="{{this.horizontalInputGridClass}} {{this.horizontalInputOffsetGridClass}}">
     {{yield}}
     {{#if (macroCondition (macroGetOwnConfig "isBS3"))}}
-      {{component @feedbackIconComponent}}
+      <@feedbackIconComponent/>
     {{/if}}
-    {{component @errorsComponent}}
-    {{component @helpTextComponent}}
+    <@errorsComponent/>
+    <@helpTextComponent/>
   </div>
 {{/if}}

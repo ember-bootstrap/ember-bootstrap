@@ -1,32 +1,14 @@
-<form class="modal-footer" ...attributes {{on "submit" (bs-default @onSubmit (bs-noop))}}>
-  {{#if (has-block)}}
-    {{yield}}
-  {{else}}
-    {{#if @submitTitle}}
-      {{#component
-        (bs-default @buttonComponent (component "bs-button"))
-        onClick=@onClose
-      }}
-        {{bs-default @closeTitle "Ok"}}
-      {{/component}}
-      {{#let (bs-default @buttonComponent (component "bs-button")) as |Button|}}
-        <Button
-          @type={{bs-default @submitButtonType "primary"}}
-          @onClick={{@onSubmit}}
-          disabled={{bs-default @submitDisabled false}}
-        >
-        {{@submitTitle}}
-        </Button>
-      {{/let}}
+{{#let (ensure-safe-component (bs-default @buttonComponent (component "bs-button"))) as |Button|}}
+  <form class="modal-footer" ...attributes {{on "submit" (bs-default @onSubmit (bs-noop))}}>
+    {{#if (has-block)}}
+      {{yield}}
     {{else}}
-      {{#component
-        (bs-default @buttonComponent (component "bs-button"))
-        type="primary"
-        onClick=@onClose
-      }}
-        {{bs-default @closeTitle "Ok"}}
-      {{/component}}
+      {{#if @submitTitle}}
+        <Button @onClick={{@onClose}}>{{bs-default @closeTitle "Ok"}}</Button>
+        <Button @type={{bs-default @submitButtonType "primary"}} onClick={{@onSubmit}} disabled={{bs-default @submitDisabled false}}>{{@submitTitle}}</Button>
+      {{else}}
+        <Button @type="primary" @onClick={{@onClose}}>{{bs-default @closeTitle "Ok"}}</Button>
+      {{/if}}
     {{/if}}
-  {{/if}}
-
-</form>
+  </form>
+{{/let}}

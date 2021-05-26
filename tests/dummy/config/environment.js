@@ -26,18 +26,6 @@ module.exports = function (environment) {
     fastboot: {
       hostWhitelist: [/^localhost:\d+$/],
     },
-    'ember-a11y-testing': {
-      componentOptions: {
-        turnAuditOff: true,
-        axeOptions: {
-          checks: {
-            // color checks unfortunately fail for colors defined in dummy app, but are controlled at the end by
-            // the user, so not a primary concern of the addon
-            'color-contrast': { enabled: false },
-          },
-        },
-      },
-    },
   };
 
   if (environment === 'development') {
