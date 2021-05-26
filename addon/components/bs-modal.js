@@ -12,6 +12,14 @@ import deprecateSubclassing from 'ember-bootstrap/utils/deprecate-subclassing';
 import arg from '../utils/decorators/arg';
 import { tracked } from '@glimmer/tracking';
 
+function nextRunloop() {
+  return new Promise((resolve) => next(resolve));
+}
+
+function afterRender() {
+  return new Promise((resolve) => schedule('afterRender', resolve));
+}
+
 /**
   Component for creating [Bootstrap modals](http://getbootstrap.com/javascript/#modals) with custom markup.
 
@@ -416,7 +424,7 @@ export default class Modal extends Component {
    * @method show
    * @private
    */
-  show() {
+  async show() {
     if (this._isOpen) {
       return;
     }
@@ -425,36 +433,34 @@ export default class Modal extends Component {
     this.addBodyClass();
     this.resize();
 
-    let callback = () => {
-      if (this.isDestroyed) {
-        return;
-      }
-
-      this.checkScrollbar();
-      this.setScrollbar();
-
-      schedule('afterRender', () => {
-        let modalEl = this.modalElement;
-        if (!modalEl) {
-          return;
-        }
-
-        modalEl.scrollTop = 0;
-        this.adjustDialog();
-        this.showModal = true;
-        this.args.onShow?.();
-
-        if (this.usesTransition) {
-          transitionEnd(this.modalElement, this.transitionDuration).then(() => {
-            this.args.onShown?.();
-          });
-        } else {
-          this.args.onShown?.();
-        }
-      });
-    };
     this.inDom = true;
-    this.handleBackdrop(callback);
+
+    await this.handleBackdrop();
+
+    if (this.isDestroyed) {
+      return;
+    }
+
+    this.checkScrollbar();
+    this.setScrollbar();
+
+    await afterRender();
+
+    const { modalElement } = this;
+    if (!modalElement) {
+      return;
+    }
+
+    modalElement.scrollTop = 0;
+    this.adjustDialog();
+    this.showModal = true;
+    this.args.onShow?.();
+
+    if (this.usesTransition) {
+      await transitionEnd(modalElement, this.transitionDuration);
+    }
+
+    this.args.onShown?.();
   }
 
   /**
@@ -463,7 +469,7 @@ export default class Modal extends Component {
    * @method hide
    * @private
    */
-  hide() {
+  async hide() {
     if (!this._isOpen) {
       return;
     }
@@ -473,10 +479,10 @@ export default class Modal extends Component {
     this.showModal = false;
 
     if (this.usesTransition) {
-      transitionEnd(this.modalElement, this.transitionDuration).then(() => this.hideModal());
-    } else {
-      this.hideModal();
+      await transitionEnd(this.modalElement, this.transitionDuration);
     }
+
+    await this.hideModal();
   }
 
   /**
@@ -485,18 +491,18 @@ export default class Modal extends Component {
    * @method hideModal
    * @private
    */
-  hideModal() {
+  async hideModal() {
     if (this.isDestroyed) {
       return;
     }
 
-    this.handleBackdrop(() => {
-      this.removeBodyClass();
-      this.resetAdjustments();
-      this.resetScrollbar();
-      this.inDom = false;
-      this.args.onHidden?.();
-    });
+    await this.handleBackdrop();
+
+    this.removeBodyClass();
+    this.resetAdjustments();
+    this.resetScrollbar();
+    this.inDom = false;
+    this.args.onHidden?.();
   }
 
   /**
@@ -506,45 +512,33 @@ export default class Modal extends Component {
    * @param callback
    * @private
    */
-  handleBackdrop(callback) {
-    let doAnimate = this.usesTransition;
+  async handleBackdrop() {
+    const { usesTransition } = this;
 
     if (this.open && this.backdrop) {
       this.showBackdrop = true;
 
-      if (!callback) {
+      await nextRunloop();
+
+      if (usesTransition) {
+        const { backdropElement } = this;
+        assert('Backdrop element should be in DOM', backdropElement);
+
+        await transitionEnd(backdropElement, this.backdropTransitionDuration);
+      }
+    } else if (!this.open && this.backdrop) {
+      if (usesTransition) {
+        const { backdropElement } = this;
+        assert('Backdrop element should be in DOM', backdropElement);
+
+        await transitionEnd(backdropElement, this.backdropTransitionDuration);
+      }
+
+      if (this.isDestroyed) {
         return;
       }
 
-      next(() => {
-        let backdrop = this.backdropElement;
-        assert('Backdrop element should be in DOM', backdrop);
-        if (doAnimate) {
-          transitionEnd(backdrop, this.backdropTransitionDuration).then(callback);
-        } else {
-          callback();
-        }
-      });
-    } else if (!this.open && this.backdrop) {
-      let backdrop = this.backdropElement;
-      assert('Backdrop element should be in DOM', backdrop);
-
-      let callbackRemove = () => {
-        if (this.isDestroyed) {
-          return;
-        }
-        this.showBackdrop = false;
-        if (callback) {
-          callback.call(this);
-        }
-      };
-      if (doAnimate) {
-        transitionEnd(backdrop, this.backdropTransitionDuration).then(callbackRemove);
-      } else {
-        callbackRemove();
-      }
-    } else if (callback) {
-      next(this, callback);
+      this.showBackdrop = false;
     }
   }
 
