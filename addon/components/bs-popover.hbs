@@ -13,8 +13,9 @@
       @autoPlacement={{this.autoPlacement}}
       @viewportElement={{this.viewportElement}}
       @viewportPadding={{this.viewportPadding}}
-      @id={{this.overlayId}}
       @class={{@class}}
+
+      {{create-tracked-ref "overlayElement"}}
       ...attributes
     >
       {{yield

@@ -5,6 +5,7 @@ import { scheduleOnce } from '@ember/runloop';
 import arg from 'ember-bootstrap/utils/decorators/arg';
 import { tracked } from '@glimmer/tracking';
 import { getOwnConfig, macroCondition } from '@embroider/macros';
+import { trackedRef } from 'ember-ref-bucket';
 
 /**
  Internal (abstract) component for contextual help markup. Should not be used directly.
@@ -96,6 +97,8 @@ export default class ContextualHelpElement extends Component {
 
   offset = [0, 0];
 
+  @trackedRef('popperElement') popperElement;
+
   /**
    * popper.js modifier config
    *
@@ -104,15 +107,19 @@ export default class ContextualHelpElement extends Component {
    * @private
    */
   get popperModifiers() {
-    let id = this.args.id;
+    const context = this;
+
+    // We need popeerElement, so we wait for this getter to recompute once it's available
+    if (!this.popperElement) return {};
+
     return {
       arrow: {
-        element: `.${this.arrowClass}`,
+        element: this.popperElement.querySelector(`.${this.arrowClass}`),
       },
       offset: {
         offset: this.offset.join(','),
         fn(data) {
-          let tip = document.getElementById(id);
+          let tip = context.popperElement;
           assert('Contextual help element needs existing popper element', tip);
 
           // manually read margins because getBoundingClientRect includes difference

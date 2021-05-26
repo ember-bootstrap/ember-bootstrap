@@ -1,5 +1,4 @@
 import Component from '@glimmer/component';
-import { guidFor } from '@ember/object/internals';
 import { isArray } from '@ember/array';
 import { action } from '@ember/object';
 import { cancel, later, next, schedule } from '@ember/runloop';
@@ -11,6 +10,7 @@ import Ember from 'ember';
 import arg from '../utils/decorators/arg';
 import { tracked } from '@glimmer/tracking';
 import { getParentView } from '../utils/dom';
+import { ref } from 'ember-ref-bucket';
 
 const HOVERSTATE_NONE = 'none';
 const HOVERSTATE_IN = 'in';
@@ -179,16 +179,6 @@ export default class ContextualHelp extends Component {
   viewportPadding = 0;
 
   _parentFinder = self.document ? self.document.createTextNode('') : '';
-
-  /**
-   * The id of the overlay element.
-   *
-   * @property overlayId
-   * @type string
-   * @readonly
-   * @private
-   */
-  overlayId = `overlay-${guidFor(this)}`;
 
   /**
    * The DOM element of the arrow element.
@@ -360,9 +350,7 @@ export default class ContextualHelp extends Component {
    * @readonly
    * @private
    */
-  get overlayElement() {
-    return document.getElementById(this.overlayId);
-  }
+  @ref('overlayElement') overlayElement;
 
   /**
    * This action is called immediately when the tooltip/popover is about to be shown.

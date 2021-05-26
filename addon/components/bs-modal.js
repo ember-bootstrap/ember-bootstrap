@@ -5,12 +5,12 @@ import { next, schedule } from '@ember/runloop';
 import { inject as service } from '@ember/service';
 import transitionEnd from 'ember-bootstrap/utils/transition-end';
 import { getDestinationElement } from 'ember-bootstrap/utils/dom';
-import { guidFor } from '@ember/object/internals';
 import usesTransition from 'ember-bootstrap/utils/decorators/uses-transition';
 import isFastBoot from 'ember-bootstrap/utils/is-fastboot';
 import deprecateSubclassing from 'ember-bootstrap/utils/deprecate-subclassing';
 import arg from '../utils/decorators/arg';
 import { tracked } from '@glimmer/tracking';
+import { ref } from 'ember-ref-bucket';
 
 /**
   Component for creating [Bootstrap modals](http://getbootstrap.com/javascript/#modals) with custom markup.
@@ -210,30 +210,6 @@ export default class Modal extends Component {
    */
 
   /**
-   * The id of the `.modal` element.
-   *
-   * @property modalId
-   * @type string
-   * @readonly
-   * @private
-   */
-  get modalId() {
-    return `${guidFor(this)}-modal`;
-  }
-
-  /**
-   * The id of the backdrop element.
-   *
-   * @property backdropId
-   * @type string
-   * @readonly
-   * @private
-   */
-  get backdropId() {
-    return `${guidFor(this)}-backdrop`;
-  }
-
-  /**
    * Property for size styling, set to null (default), 'lg' or 'sm'
    *
    * Also see the [Bootstrap docs](http://getbootstrap.com/javascript/#modals-sizes)
@@ -313,25 +289,21 @@ export default class Modal extends Component {
    * The DOM element of the `.modal` element.
    *
    * @property modalElement
-   * @type object
+   * @type HTMLElement
    * @readonly
    * @private
    */
-  get modalElement() {
-    return document.getElementById(this.modalId);
-  }
+  @ref('modalElement') modalElement;
 
   /**
    * The DOM element of the backdrop element.
    *
    * @property backdropElement
-   * @type object
+   * @type HTMLElement
    * @readonly
    * @private
    */
-  get backdropElement() {
-    return document.getElementById(this.backdropId);
-  }
+  @ref('backdropElement') backdropElement;
 
   /**
    * The action to be sent when the modal footer's submit button (if present) is pressed.
@@ -396,9 +368,7 @@ export default class Modal extends Component {
 
   @action
   doSubmit() {
-    // replace modalId by :scope selector if supported by all target browsers
-    let modalId = this.modalId;
-    let forms = this.modalElement.querySelectorAll(`#${modalId} .modal-body form`);
+    let forms = this.modalElement.querySelectorAll('.modal-body form');
     if (forms.length > 0) {
       // trigger submit event on body forms
       let event = document.createEvent('Events');

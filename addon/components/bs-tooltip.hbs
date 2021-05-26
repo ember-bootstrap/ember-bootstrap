@@ -12,8 +12,9 @@
       @autoPlacement={{this.autoPlacement}}
       @viewportElement={{this.viewportElement}}
       @viewportPadding={{this.viewportPadding}}
-      @id={{this.overlayId}}
       @class={{@class}}
+
+      {{create-ref "overlayElement"}}
       ...attributes
     >
       {{#if (has-block)}}

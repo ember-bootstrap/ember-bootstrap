@@ -7,8 +7,9 @@
   @popperContainer={{@destinationElement}}
   @onCreate={{this.updatePlacement}}
   @onUpdate={{this.updatePlacement}}
-  @id={{@id}}
   @class="tooltip {{@class}} {{if this.fade "fade"}} {{if (macroCondition (macroGetOwnConfig "isNotBS3")) this.actualPlacementClass}} {{if (macroCondition (macroGetOwnConfig "isBS3")) this.actualPlacement}} {{if (macroCondition (macroGetOwnConfig "isNotBS3")) (if this.showHelp "show")}} {{if (macroCondition (macroGetOwnConfig "isBS3")) (if this.showHelp "in")}} {{if (macroCondition (macroGetOwnConfig "isBS3")) "ember-bootstrap-tooltip"}}"
+
+  {{create-tracked-ref "popperElement"}}
   ...attributes
 >
   <div class={{this.arrowClass}}></div>
