@@ -111,10 +111,8 @@ export default class ContextualHelpElement extends Component {
 
     // We need popeerElement, so we wait for this getter to recompute once it's available
     if (!this.popperElement) {
-      console.log('empty!');
       return {};
     }
-    console.log('not empty!');
 
     return {
       arrow: {
