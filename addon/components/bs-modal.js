@@ -16,6 +16,10 @@ function nextRunloop() {
   return new Promise((resolve) => next(resolve));
 }
 
+function afterRender() {
+  return new Promise((resolve) => schedule('afterRender', resolve));
+}
+
 /**
   Component for creating [Bootstrap modals](http://getbootstrap.com/javascript/#modals) with custom markup.
 
@@ -440,23 +444,23 @@ export default class Modal extends Component {
     this.checkScrollbar();
     this.setScrollbar();
 
-    schedule('afterRender', async () => {
-      let modalEl = this.modalElement;
-      if (!modalEl) {
-        return;
-      }
+    await afterRender();
 
-      modalEl.scrollTop = 0;
-      this.adjustDialog();
-      this.showModal = true;
-      this.args.onShow?.();
+    const { modalElement } = this;
+    if (!modalElement) {
+      return;
+    }
 
-      if (this.usesTransition) {
-        await transitionEnd(this.modalElement, this.transitionDuration);
-      }
+    modalElement.scrollTop = 0;
+    this.adjustDialog();
+    this.showModal = true;
+    this.args.onShow?.();
 
-      this.args.onShown?.();
-    });
+    if (this.usesTransition) {
+      await transitionEnd(modalElement, this.transitionDuration);
+    }
+
+    this.args.onShown?.();
   }
 
   /**
@@ -478,7 +482,7 @@ export default class Modal extends Component {
       await transitionEnd(this.modalElement, this.transitionDuration);
     }
 
-    this.hideModal();
+    await this.hideModal();
   }
 
   /**
