@@ -1,6 +1,16 @@
 {{did-insert this.handleVisibilityChanges}}
 {{did-update this.handleVisibilityChanges @open}}
+
 {{#if this.inDom}}
+  {{!
+    ember-on-helper do not support FastBoot yet. This guard can be removed as
+    soon as ember-on-helper guards for FastBoot itself. It is tracked in this
+    GitHub issue: https://github.com/buschtoens/ember-on-helper/issues/3
+  }}
+  {{#unless this.isFastBoot}}
+    {{on-window "resize" this.adjustDialog}}
+  {{/unless}}
+
   {{#let (component (ensure-safe-component (bs-default @dialogComponent (component "bs-modal/dialog")))
     onClose=this.close
     fade=this._fade
