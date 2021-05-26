@@ -6,6 +6,7 @@ import { test, testNotBS3, visibilityClass } from '../../helpers/bootstrap';
 import hbs from 'htmlbars-inline-precompile';
 import setupNoDeprecations from '../../helpers/setup-no-deprecations';
 import sinon from 'sinon';
+import { skipTransition } from 'ember-bootstrap/utils/transition-end';
 
 module('Integration | Component | bs-modal', function (hooks) {
   setupRenderingTest(hooks);
@@ -247,59 +248,69 @@ module('Integration | Component | bs-modal', function (hooks) {
     assert.dom('.modal').isVisible('Modal is visible again');
   });
 
-  testNotBS3('it animates opening the modal', async function (assert) {
-    this.set('open', false);
-    await render(hbs`<BsModal @open={{this.open}}>Hello world!</BsModal>`);
-
-    this.set('open', true);
-    await waitFor('.modal.show');
-    assert.dom('.modal').hasStyle({ display: 'block' });
-
-    await waitUntil(() => {
-      return find('.modal').getAnimations().length > 0;
+  module('it animates opening and closing the modal', function () {
+    hooks.before(function () {
+      skipTransition(false);
     });
-    assert.ok(
-      find('.modal')
-        .getAnimations()
-        .find((animation) => animation.transitionProperty === 'opacity'),
-      'modal opening is animated'
-    );
-  });
 
-  testNotBS3('it animates closing the modal', async function (assert) {
-    await render(hbs`
-      <BsModal as |modal|>
-        <button {{on "click" modal.close}} type="button">close</button>
-      </BsModal>
-    `);
-
-    // wait until modal is shown and opening transition is finished
-    await waitFor('.modal.show');
-    await Promise.all(
-      find('.modal')
-        .getAnimations()
-        .map((animation) => animation.finished)
-    );
-
-    // close modal
-    click('button');
-
-    await waitUntil(() => {
-      return !find('.modal').classList.contains(visibilityClass());
+    hooks.after(function () {
+      skipTransition(undefined);
     });
-    assert.dom('.modal').hasStyle({ display: 'block' });
 
-    await waitUntil(() => {
-      return find('.modal').getAnimations().length > 0;
+    testNotBS3('it animates opening the modal', async function (assert) {
+      this.set('open', false);
+      await render(hbs`<BsModal @open={{this.open}}>Hello world!</BsModal>`);
+
+      this.set('open', true);
+      await waitFor('.modal.show');
+      assert.dom('.modal').hasStyle({ display: 'block' });
+
+      await waitUntil(() => {
+        return find('.modal').getAnimations().length > 0;
+      });
+      assert.ok(
+        find('.modal')
+          .getAnimations()
+          .find((animation) => animation.transitionProperty === 'opacity'),
+        'modal opening is animated'
+      );
     });
-    assert.ok(
-      find('.modal')
-        .getAnimations()
-        .find((animation) => animation.transitionProperty === 'opacity'),
-      'modal closing is animated'
-    );
 
-    await settled();
-    assert.dom('.modal').doesNotExist();
+    testNotBS3('it animates closing the modal', async function (assert) {
+      await render(hbs`
+        <BsModal as |modal|>
+          <button {{on "click" modal.close}} type="button">close</button>
+        </BsModal>
+      `);
+
+      // wait until modal is shown and opening transition is finished
+      await waitFor('.modal.show');
+      await Promise.all(
+        find('.modal')
+          .getAnimations()
+          .map((animation) => animation.finished)
+      );
+
+      // close modal
+      click('button');
+
+      await waitUntil(() => {
+        return !find('.modal').classList.contains(visibilityClass());
+      });
+      assert.dom('.modal').hasStyle({ display: 'block' });
+
+      await waitUntil(() => {
+        return find('.modal').getAnimations().length > 0;
+      });
+      assert.ok(
+        find('.modal')
+          .getAnimations()
+          .find((animation) => animation.transitionProperty === 'opacity'),
+        'modal closing is animated'
+      );
+
+      await settled();
+      assert.dom('.modal').doesNotExist();
+    });
   });
 });

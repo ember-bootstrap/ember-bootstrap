@@ -151,12 +151,12 @@ export default class Modal extends Component {
   backdrop = true;
 
   /**
-   * @property showBackdrop
+   * @property shouldShowBackdrop
    * @type boolean
    * @private
    */
   @tracked
-  showBackdrop = this.open && this.backdrop;
+  shouldShowBackdrop = this.open && this.backdrop;
 
   /**
    * Closes the modal when escape key is pressed.
@@ -441,7 +441,7 @@ export default class Modal extends Component {
 
     this.inDom = true;
 
-    await this.handleBackdrop();
+    await this.showBackdrop();
 
     if (this.isDestroyed) {
       return;
@@ -501,7 +501,7 @@ export default class Modal extends Component {
       return;
     }
 
-    await this.handleBackdrop();
+    await this.hideBackdrop();
 
     this.removeBodyClass();
     this.resetAdjustments();
@@ -511,40 +511,51 @@ export default class Modal extends Component {
   }
 
   /**
-   * SHow/hide the backdrop
+   * Show the backdrop
    *
-   * @method handleBackdrop
-   * @param callback
+   * @method showBackdrop
+   * @async
    * @private
    */
-  async handleBackdrop() {
-    const { usesTransition } = this;
-
-    if (this.open && this.backdrop) {
-      this.showBackdrop = true;
-
-      await nextRunloop();
-
-      if (usesTransition) {
-        const { backdropElement } = this;
-        assert('Backdrop element should be in DOM', backdropElement);
-
-        await transitionEnd(backdropElement, this.backdropTransitionDuration);
-      }
-    } else if (!this.open && this.backdrop) {
-      if (usesTransition) {
-        const { backdropElement } = this;
-        assert('Backdrop element should be in DOM', backdropElement);
-
-        await transitionEnd(backdropElement, this.backdropTransitionDuration);
-      }
-
-      if (this.isDestroyed) {
-        return;
-      }
-
-      this.showBackdrop = false;
+  async showBackdrop() {
+    if (!this.backdrop || !this.usesTransition) {
+      return;
     }
+
+    this.shouldShowBackdrop = true;
+
+    await nextRunloop();
+
+    const { backdropElement } = this;
+    assert('Backdrop element should be in DOM', backdropElement);
+
+    await transitionEnd(backdropElement, this.backdropTransitionDuration);
+  }
+
+  /**
+   * Hide the backdrop
+   *
+   * @method hideBackdrop
+   * @async
+   * @private
+   */
+  async hideBackdrop() {
+    if (!this.backdrop) {
+      return;
+    }
+
+    if (this.usesTransition) {
+      const { backdropElement } = this;
+      assert('Backdrop element should be in DOM', backdropElement);
+
+      await transitionEnd(backdropElement, this.backdropTransitionDuration);
+    }
+
+    if (this.isDestroyed) {
+      return;
+    }
+
+    this.shouldShowBackdrop = false;
   }
 
   /**
