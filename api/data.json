@@ -2,7 +2,7 @@
     "project": {
         "name": "ember-bootstrap",
         "description": "Twitter Bootstrap components for Ember.js",
-        "version": "v4.8.0"
+        "version": "v4.8.1"
     },
     "files": {
         "addon/components/bs-accordion/item/body.js": {
@@ -6761,7 +6761,7 @@
             "file": "addon/components/bs-modal.js",
             "line": 153,
             "itemtype": "property",
-            "name": "showBackdrop",
+            "name": "shouldShowBackdrop",
             "type": "boolean",
             "access": "private",
             "tagname": "",
@@ -7073,15 +7073,10 @@
         {
             "file": "addon/components/bs-modal.js",
             "line": 483,
-            "description": "SHow/hide the backdrop",
+            "description": "Show the backdrop",
             "itemtype": "method",
-            "name": "handleBackdrop",
-            "params": [
-                {
-                    "name": "callback",
-                    "description": ""
-                }
-            ],
+            "name": "showBackdrop",
+            "async": 1,
             "access": "private",
             "tagname": "",
             "class": "Components.Modal",
@@ -7089,9 +7084,11 @@
         },
         {
             "file": "addon/components/bs-modal.js",
-            "line": 520,
+            "line": 505,
+            "description": "Hide the backdrop",
             "itemtype": "method",
-            "name": "adjustDialog",
+            "name": "hideBackdrop",
+            "async": 1,
             "access": "private",
             "tagname": "",
             "class": "Components.Modal",
@@ -7101,6 +7098,16 @@
             "file": "addon/components/bs-modal.js",
             "line": 531,
             "itemtype": "method",
+            "name": "adjustDialog",
+            "access": "private",
+            "tagname": "",
+            "class": "Components.Modal",
+            "namespace": "Components"
+        },
+        {
+            "file": "addon/components/bs-modal.js",
+            "line": 542,
+            "itemtype": "method",
             "name": "resetAdjustments",
             "access": "private",
             "tagname": "",
@@ -7109,7 +7116,7 @@
         },
         {
             "file": "addon/components/bs-modal.js",
-            "line": 540,
+            "line": 551,
             "itemtype": "method",
             "name": "checkScrollbar",
             "access": "private",
@@ -7119,7 +7126,7 @@
         },
         {
             "file": "addon/components/bs-modal.js",
-            "line": 555,
+            "line": 566,
             "itemtype": "method",
             "name": "setScrollbar",
             "access": "private",
@@ -7129,7 +7136,7 @@
         },
         {
             "file": "addon/components/bs-modal.js",
-            "line": 567,
+            "line": 578,
             "itemtype": "method",
             "name": "resetScrollbar",
             "access": "private",
@@ -7139,7 +7146,7 @@
         },
         {
             "file": "addon/components/bs-modal.js",
-            "line": 595,
+            "line": 606,
             "itemtype": "property",
             "name": "scrollbarWidth",
             "type": "number",
