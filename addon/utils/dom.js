@@ -76,7 +76,8 @@ function closest(el, selector) {
 
 export function getDestinationElement(context) {
   let dom = getDOM(context);
-  let destinationElement = findElementById(dom, 'ember-bootstrap-wormhole');
+  const id = 'ember-bootstrap-wormhole';
+  let destinationElement = findElementById(dom, id) || findElemementByIdInShadowDom(context, id);
 
   if (DEBUG && !destinationElement) {
     let config = getOwner(context).resolveRegistration('config:environment');
@@ -103,4 +104,9 @@ export function getDestinationElement(context) {
   }
 
   return destinationElement;
+}
+
+export function findElemementByIdInShadowDom(context, id) {
+  const owner = getOwner(context);
+  return owner.rootElement.querySelector && owner.rootElement.querySelector(`[id="${id}"]`);
 }
