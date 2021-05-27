@@ -41,7 +41,7 @@
         }}
       </Dialog>
       <div>
-        {{#if this.showBackdrop}}
+        {{#if this.shouldShowBackdrop}}
           <div class="modal-backdrop {{if this._fade "fade"}} {{if this.showModal (if (macroCondition (macroGetOwnConfig "isNotBS3")) "show" "in")}}" {{create-ref "backdropElement"}}></div>
         {{/if}}
       </div>
@@ -63,7 +63,7 @@
           }}
         </Dialog>
         <div>
-          {{#if this.showBackdrop}}
+          {{#if this.shouldShowBackdrop}}
             <div class="modal-backdrop {{if this._fade "fade"}} {{if this.showModal (if (macroCondition (macroGetOwnConfig "isNotBS3")) "show" "in")}}" {{create-ref "backdropElement"}}></div>
           {{/if}}
         </div>
