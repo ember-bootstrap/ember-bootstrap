@@ -1,3 +1,22 @@
+## v4.8.0 (2021-05-27)
+
+#### Features
+* [#1529](https://github.com/kaliber5/ember-bootstrap/pull/1529) Shadow DOM compatibility ([@lolmaus](https://github.com/lolmaus))
+
+#### Bug Fixes
+* [#1341](https://github.com/kaliber5/ember-bootstrap/pull/1341) Fix optimized Embroider build ([@simonihmig](https://github.com/simonihmig))
+
+#### Internal
+* [#1527](https://github.com/kaliber5/ember-bootstrap/pull/1527) register resize listener using on-window helper in BsModal ([@jelhan](https://github.com/jelhan))
+* [#1528](https://github.com/kaliber5/ember-bootstrap/pull/1528) refactor to async/await instead of callbacks in BsModal ([@jelhan](https://github.com/jelhan))
+* [#1466](https://github.com/kaliber5/ember-bootstrap/pull/1466) Add test coverage for modal animation ([@jelhan](https://github.com/jelhan))
+
+#### Committers: 4
+- Andrey Mikhaylov (lolmaus) ([@lolmaus](https://github.com/lolmaus))
+- Jeldrik Hanschke ([@jelhan](https://github.com/jelhan))
+- Simon Ihmig ([@simonihmig](https://github.com/simonihmig))
+- Travis Hoover ([@thoov](https://github.com/thoov))
+
 ## v4.7.1 (2021-05-19)
 
 #### Bug Fixes

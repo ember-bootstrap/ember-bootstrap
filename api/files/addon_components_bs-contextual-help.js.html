@@ -60,7 +60,6 @@
 <div class="file">
     <pre class="prettyprint linenums">
 import Component from &#x27;@glimmer/component&#x27;;
-import { guidFor } from &#x27;@ember/object/internals&#x27;;
 import { isArray } from &#x27;@ember/array&#x27;;
 import { action } from &#x27;@ember/object&#x27;;
 import { cancel, later, next, schedule } from &#x27;@ember/runloop&#x27;;
@@ -72,6 +71,7 @@ import Ember from &#x27;ember&#x27;;
 import arg from &#x27;../utils/decorators/arg&#x27;;
 import { tracked } from &#x27;@glimmer/tracking&#x27;;
 import { getParentView } from &#x27;../utils/dom&#x27;;
+import { ref } from &#x27;ember-ref-bucket&#x27;;
 
 const HOVERSTATE_NONE = &#x27;none&#x27;;
 const HOVERSTATE_IN = &#x27;in&#x27;;
@@ -240,16 +240,6 @@ export default class ContextualHelp extends Component {
   viewportPadding = 0;
 
   _parentFinder = self.document ? self.document.createTextNode(&#x27;&#x27;) : &#x27;&#x27;;
-
-  /**
-   * The id of the overlay element.
-   *
-   * @property overlayId
-   * @type string
-   * @readonly
-   * @private
-   */
-  overlayId = &#x60;overlay-${guidFor(this)}&#x60;;
 
   /**
    * The DOM element of the arrow element.
@@ -421,9 +411,7 @@ export default class ContextualHelp extends Component {
    * @readonly
    * @private
    */
-  get overlayElement() {
-    return document.getElementById(this.overlayId);
-  }
+  @ref(&#x27;overlayElement&#x27;) overlayElement;
 
   /**
    * This action is called immediately when the tooltip/popover is about to be shown.

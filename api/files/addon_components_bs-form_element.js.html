@@ -70,6 +70,11 @@ import FormGroup from &#x27;ember-bootstrap/components/bs-form/group&#x27;;
 import { getOwnConfig, macroCondition } from &#x27;@embroider/macros&#x27;;
 import { guidFor } from &#x27;@ember/object/internals&#x27;;
 import { ref } from &#x27;ember-ref-bucket&#x27;;
+import ControlInput from &#x27;./element/control/input&#x27;;
+import ControlCheckbox from &#x27;./element/control/checkbox&#x27;;
+import ControlTextarea from &#x27;./element/control/textarea&#x27;;
+import ControlRadio from &#x27;./element/control/radio&#x27;;
+import ControlSwitch from &#x27;./element/control/switch&#x27;;
 import arg from &#x27;ember-bootstrap/utils/decorators/arg&#x27;;
 
 /**
@@ -775,19 +780,28 @@ export default class FormElement extends FormGroup {
    */
 
   /**
-   * @property customControlComponent
-   * @type {String}
+   * @property controlComponent
    * @private
    */
-  get customControlComponent() {
-    const controlType = this.controlType;
-    const componentName = &#x60;bs-form/element/control/${controlType}&#x60;;
+  get controlComponent() {
+    let owner = getOwner(this);
+    let componentClass = owner.resolveRegistration(&#x60;component:bs-form/element/control/${this.controlType}&#x60;);
 
-    if (getOwner(this).hasRegistration(&#x60;component:${componentName}&#x60;)) {
-      return componentName;
+    if (componentClass) {
+      return componentClass;
     }
 
-    return null;
+    if (this.controlType === &#x27;checkbox&#x27;) {
+      return ControlCheckbox;
+    } else if (this.controlType === &#x27;textarea&#x27;) {
+      return ControlTextarea;
+    } else if (this.controlType === &#x27;radio&#x27;) {
+      return ControlRadio;
+    } else if (this.controlType === &#x27;switch&#x27;) {
+      return ControlSwitch;
+    } else {
+      return ControlInput;
+    }
   }
 
   /**

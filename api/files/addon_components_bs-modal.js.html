@@ -66,12 +66,20 @@ import { next, schedule } from &#x27;@ember/runloop&#x27;;
 import { inject as service } from &#x27;@ember/service&#x27;;
 import transitionEnd from &#x27;ember-bootstrap/utils/transition-end&#x27;;
 import { getDestinationElement } from &#x27;ember-bootstrap/utils/dom&#x27;;
-import { guidFor } from &#x27;@ember/object/internals&#x27;;
 import usesTransition from &#x27;ember-bootstrap/utils/decorators/uses-transition&#x27;;
 import isFastBoot from &#x27;ember-bootstrap/utils/is-fastboot&#x27;;
 import deprecateSubclassing from &#x27;ember-bootstrap/utils/deprecate-subclassing&#x27;;
 import arg from &#x27;../utils/decorators/arg&#x27;;
 import { tracked } from &#x27;@glimmer/tracking&#x27;;
+import { ref } from &#x27;ember-ref-bucket&#x27;;
+
+function nextRunloop() {
+  return new Promise((resolve) =&gt; next(resolve));
+}
+
+function afterRender() {
+  return new Promise((resolve) =&gt; schedule(&#x27;afterRender&#x27;, resolve));
+}
 
 /**
   Component for creating [Bootstrap modals](http://getbootstrap.com/javascript/#modals) with custom markup.
@@ -271,30 +279,6 @@ export default class Modal extends Component {
    */
 
   /**
-   * The id of the &#x60;.modal&#x60; element.
-   *
-   * @property modalId
-   * @type string
-   * @readonly
-   * @private
-   */
-  get modalId() {
-    return &#x60;${guidFor(this)}-modal&#x60;;
-  }
-
-  /**
-   * The id of the backdrop element.
-   *
-   * @property backdropId
-   * @type string
-   * @readonly
-   * @private
-   */
-  get backdropId() {
-    return &#x60;${guidFor(this)}-backdrop&#x60;;
-  }
-
-  /**
    * Property for size styling, set to null (default), &#x27;lg&#x27; or &#x27;sm&#x27;
    *
    * Also see the [Bootstrap docs](http://getbootstrap.com/javascript/#modals-sizes)
@@ -374,25 +358,28 @@ export default class Modal extends Component {
    * The DOM element of the &#x60;.modal&#x60; element.
    *
    * @property modalElement
-   * @type object
+   * @type HTMLElement
    * @readonly
    * @private
    */
-  get modalElement() {
-    return document.getElementById(this.modalId);
-  }
+  @ref(&#x27;modalElement&#x27;) modalElement;
 
   /**
    * The DOM element of the backdrop element.
    *
    * @property backdropElement
-   * @type object
+   * @type HTMLElement
    * @readonly
    * @private
    */
-  get backdropElement() {
-    return document.getElementById(this.backdropId);
-  }
+  @ref(&#x27;backdropElement&#x27;) backdropElement;
+
+  /**
+   * @type boolean
+   * @readonly
+   * @private
+   */
+  isFastBoot = isFastBoot(this);
 
   /**
    * The action to be sent when the modal footer&#x27;s submit button (if present) is pressed.
@@ -457,9 +444,7 @@ export default class Modal extends Component {
 
   @action
   doSubmit() {
-    // replace modalId by :scope selector if supported by all target browsers
-    let modalId = this.modalId;
-    let forms = this.modalElement.querySelectorAll(&#x60;#${modalId} .modal-body form&#x60;);
+    let forms = this.modalElement.querySelectorAll(&#x27;.modal-body form&#x27;);
     if (forms.length &gt; 0) {
       // trigger submit event on body forms
       let event = document.createEvent(&#x27;Events&#x27;);
@@ -477,45 +462,42 @@ export default class Modal extends Component {
    * @method show
    * @private
    */
-  show() {
+  async show() {
     if (this._isOpen) {
       return;
     }
     this._isOpen = true;
 
     this.addBodyClass();
-    this.resize();
 
-    let callback = () =&gt; {
-      if (this.isDestroyed) {
-        return;
-      }
-
-      this.checkScrollbar();
-      this.setScrollbar();
-
-      schedule(&#x27;afterRender&#x27;, () =&gt; {
-        let modalEl = this.modalElement;
-        if (!modalEl) {
-          return;
-        }
-
-        modalEl.scrollTop = 0;
-        this.adjustDialog();
-        this.showModal = true;
-        this.args.onShow?.();
-
-        if (this.usesTransition) {
-          transitionEnd(this.modalElement, this.transitionDuration).then(() =&gt; {
-            this.args.onShown?.();
-          });
-        } else {
-          this.args.onShown?.();
-        }
-      });
-    };
     this.inDom = true;
-    this.handleBackdrop(callback);
+
+    await this.handleBackdrop();
+
+    if (this.isDestroyed) {
+      return;
+    }
+
+    this.checkScrollbar();
+    this.setScrollbar();
+
+    await afterRender();
+
+    const { modalElement } = this;
+    if (!modalElement) {
+      return;
+    }
+
+    modalElement.scrollTop = 0;
+    this.adjustDialog();
+    this.showModal = true;
+    this.args.onShow?.();
+
+    if (this.usesTransition) {
+      await transitionEnd(modalElement, this.transitionDuration);
+    }
+
+    this.args.onShown?.();
   }
 
   /**
@@ -524,20 +506,19 @@ export default class Modal extends Component {
    * @method hide
    * @private
    */
-  hide() {
+  async hide() {
     if (!this._isOpen) {
       return;
     }
     this._isOpen = false;
 
-    this.resize();
     this.showModal = false;
 
     if (this.usesTransition) {
-      transitionEnd(this.modalElement, this.transitionDuration).then(() =&gt; this.hideModal());
-    } else {
-      this.hideModal();
+      await transitionEnd(this.modalElement, this.transitionDuration);
     }
+
+    await this.hideModal();
   }
 
   /**
@@ -546,18 +527,18 @@ export default class Modal extends Component {
    * @method hideModal
    * @private
    */
-  hideModal() {
+  async hideModal() {
     if (this.isDestroyed) {
       return;
     }
 
-    this.handleBackdrop(() =&gt; {
-      this.removeBodyClass();
-      this.resetAdjustments();
-      this.resetScrollbar();
-      this.inDom = false;
-      this.args.onHidden?.();
-    });
+    await this.handleBackdrop();
+
+    this.removeBodyClass();
+    this.resetAdjustments();
+    this.resetScrollbar();
+    this.inDom = false;
+    this.args.onHidden?.();
   }
 
   /**
@@ -567,59 +548,33 @@ export default class Modal extends Component {
    * @param callback
    * @private
    */
-  handleBackdrop(callback) {
-    let doAnimate = this.usesTransition;
+  async handleBackdrop() {
+    const { usesTransition } = this;
 
     if (this.open &amp;&amp; this.backdrop) {
       this.showBackdrop = true;
 
-      if (!callback) {
+      await nextRunloop();
+
+      if (usesTransition) {
+        const { backdropElement } = this;
+        assert(&#x27;Backdrop element should be in DOM&#x27;, backdropElement);
+
+        await transitionEnd(backdropElement, this.backdropTransitionDuration);
+      }
+    } else if (!this.open &amp;&amp; this.backdrop) {
+      if (usesTransition) {
+        const { backdropElement } = this;
+        assert(&#x27;Backdrop element should be in DOM&#x27;, backdropElement);
+
+        await transitionEnd(backdropElement, this.backdropTransitionDuration);
+      }
+
+      if (this.isDestroyed) {
         return;
       }
 
-      next(() =&gt; {
-        let backdrop = this.backdropElement;
-        assert(&#x27;Backdrop element should be in DOM&#x27;, backdrop);
-        if (doAnimate) {
-          transitionEnd(backdrop, this.backdropTransitionDuration).then(callback);
-        } else {
-          callback();
-        }
-      });
-    } else if (!this.open &amp;&amp; this.backdrop) {
-      let backdrop = this.backdropElement;
-      assert(&#x27;Backdrop element should be in DOM&#x27;, backdrop);
-
-      let callbackRemove = () =&gt; {
-        if (this.isDestroyed) {
-          return;
-        }
-        this.showBackdrop = false;
-        if (callback) {
-          callback.call(this);
-        }
-      };
-      if (doAnimate) {
-        transitionEnd(backdrop, this.backdropTransitionDuration).then(callbackRemove);
-      } else {
-        callbackRemove();
-      }
-    } else if (callback) {
-      next(this, callback);
-    }
-  }
-
-  /**
-   * Attach/Detach resize event listeners
-   *
-   * @method resize
-   * @private
-   */
-  resize() {
-    if (this.open) {
-      window.addEventListener(&#x27;resize&#x27;, this.adjustDialog, false);
-    } else {
-      window.removeEventListener(&#x27;resize&#x27;, this.adjustDialog, false);
+      this.showBackdrop = false;
     }
   }
 
@@ -719,7 +674,6 @@ export default class Modal extends Component {
     super.willDestroy(...arguments);
 
     if (typeof FastBoot === &#x27;undefined&#x27;) {
-      window.removeEventListener(&#x27;resize&#x27;, this.adjustDialog, false);
       this.removeBodyClass();
       this.resetScrollbar();
     }
