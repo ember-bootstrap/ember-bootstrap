@@ -534,6 +534,12 @@ export default class Modal extends Component {
    */
   @action
   adjustDialog() {
+    if (isFastBoot(this)) {
+      // document height is unknown if running in FastBoot
+      // therefore can not adjust dialog to fit into it
+      return;
+    }
+
     let modalIsOverflowing = this.modalElement.scrollHeight > document.documentElement.clientHeight;
     this.paddingLeft = !this.bodyIsOverflowing && modalIsOverflowing ? this.scrollbarWidth : undefined;
     this.paddingRight = this.bodyIsOverflowing && !modalIsOverflowing ? this.scrollbarWidth : undefined;
@@ -553,13 +559,13 @@ export default class Modal extends Component {
    * @private
    */
   checkScrollbar() {
-    let fullWindowWidth = window.innerWidth;
-    if (!fullWindowWidth) {
-      // workaround for missing window.innerWidth in IE8
-      let documentElementRect = document.documentElement.getBoundingClientRect();
-      fullWindowWidth = documentElementRect.right - Math.abs(documentElementRect.left);
+    if (isFastBoot(this)) {
+      // window height of client is unknown when running in FastBoot
+      // can not detect if scrollbars will be used in client or not
+      return;
     }
 
+    const fullWindowWidth = window.innerWidth;
     this.bodyIsOverflowing = document.body.clientWidth < fullWindowWidth;
   }
 
@@ -568,6 +574,12 @@ export default class Modal extends Component {
    * @private
    */
   setScrollbar() {
+    if (isFastBoot(this)) {
+      // can not detect if scrollbars will be used in client or not
+      // if running in FastBoot
+      return;
+    }
+
     let bodyPad = parseInt(document.body.style.paddingRight || 0, 10);
     this._originalBodyPad = document.body.style.paddingRight || '';
     if (this.bodyIsOverflowing) {
@@ -580,6 +592,11 @@ export default class Modal extends Component {
    * @private
    */
   resetScrollbar() {
+    if (isFastBoot(this)) {
+      // no need for FastBoot support here
+      return;
+    }
+
     document.body.style.paddingRight = this._originalBodyPad;
   }
 
@@ -599,7 +616,11 @@ export default class Modal extends Component {
   }
 
   removeBodyClass() {
-    // no need for FastBoot support here
+    if (isFastBoot(this)) {
+      // no need for FastBoot support here
+      return;
+    }
+
     document.body.classList.remove('modal-open');
   }
 
@@ -623,19 +644,12 @@ export default class Modal extends Component {
   willDestroy() {
     super.willDestroy(...arguments);
 
-    if (typeof FastBoot === 'undefined') {
-      this.removeBodyClass();
-      this.resetScrollbar();
-    }
+    this.removeBodyClass();
+    this.resetScrollbar();
   }
 
   @action
   handleVisibilityChanges() {
-    if (isFastBoot(this)) {
-      this.addBodyClass();
-      return;
-    }
-
     if (this.args.open !== false) {
       this.show();
     } else {
