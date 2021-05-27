@@ -1,3 +1,14 @@
+## v4.8.1 (2021-05-27)
+
+#### Bug Fixes
+* [#1532](https://github.com/kaliber5/ember-bootstrap/pull/1532) remove trailing bracket in <BsModal::Header> ([@jelhan](https://github.com/jelhan))
+
+#### Internal
+* [#1531](https://github.com/kaliber5/ember-bootstrap/pull/1531) refactor handleBackdrop method of <BsModal> into separate show and hide methods ([@jelhan](https://github.com/jelhan))
+
+#### Committers: 1
+- Jeldrik Hanschke ([@jelhan](https://github.com/jelhan))
+
 ## v4.8.0 (2021-05-27)
 
 #### Features
