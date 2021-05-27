@@ -27,7 +27,7 @@
     {{#if this._renderInPlace}}
       <Dialog
         class={{@class}}
-        id={{this.modalId}}
+        {{create-ref "modalElement"}}
         ...attributes
       >
         {{yield
@@ -42,14 +42,14 @@
       </Dialog>
       <div>
         {{#if this.showBackdrop}}
-          <div class="modal-backdrop {{if this._fade "fade"}} {{if this.showModal (if (macroCondition (macroGetOwnConfig "isNotBS3")) "show" "in")}}" id={{this.backdropId}}></div>
+          <div class="modal-backdrop {{if this._fade "fade"}} {{if this.showModal (if (macroCondition (macroGetOwnConfig "isNotBS3")) "show" "in")}}" {{create-ref "backdropElement"}}></div>
         {{/if}}
       </div>
     {{else}}
       {{#in-element this.destinationElement insertBefore=null}}
         <Dialog
           class={{@class}}
-          id={{this.modalId}}
+          {{create-ref "modalElement"}}
           ...attributes
         >
           {{yield
@@ -64,7 +64,7 @@
         </Dialog>
         <div>
           {{#if this.showBackdrop}}
-            <div class="modal-backdrop {{if this._fade "fade"}} {{if this.showModal (if (macroCondition (macroGetOwnConfig "isNotBS3")) "show" "in")}}" id={{this.backdropId}}></div>
+            <div class="modal-backdrop {{if this._fade "fade"}} {{if this.showModal (if (macroCondition (macroGetOwnConfig "isNotBS3")) "show" "in")}}" {{create-ref "backdropElement"}}></div>
           {{/if}}
         </div>
       {{/in-element}}
