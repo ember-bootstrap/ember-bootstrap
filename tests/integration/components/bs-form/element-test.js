@@ -776,6 +776,34 @@ module('Integration | Component | bs-form/element', function (hooks) {
       .hasNoClass(validationWarningClass(), "form group isn't shown as having warnings if there are't any");
   });
 
+  testRequiringFocus('does not throw when focusout is triggered twice', async function (assert) {
+    // This covers a very rare edge case scenario:
+    // A form element contains its input *and* some other focusable element, here a submit button
+    // The input is focused, then the button clicked. This triggers a focusout event, which renders validations
+    // by setting `this.showOwnValidation=true`. In the same event loop, this causes disabling the button, which
+    // causes the button to again loose focus, thus triggering a focusout event again
+    // Setting showOwnValidation again will then cause a Glimmer assertion like
+    // `You attempted to update showOwnValidation on ..., but it had already been used previously in the same computation.`
+
+    this.set('model', { name: null });
+    await render(hbs`
+      <BsForm @model={{this.model}} as |form|>
+        <form.element @property="name" @hasValidator={{true}} @model={{this.model}} data-test-form-element as |el|>
+          <el.control data-test-first/>
+          <button type="submit" disabled={{if el.validation true false}}>Send</button>
+        </form.element>
+      </BsForm>
+    `);
+
+    focus('input');
+    click('button');
+
+    await settled();
+
+    // test that no Glimmer assertion is thrown
+    assert.ok(true);
+  });
+
   test('shows custom error immediately', async function (assert) {
     this.set('model', EmberObject.create({ name: null }));
     this.set('error', 'some error');
