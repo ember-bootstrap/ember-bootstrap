@@ -160,6 +160,9 @@ export default class ButtonGroup extends Component {
     let newValue;
 
     if (this.args.type === 'radio') {
+      if (pressedValue === this.args.value) {
+        return;
+      }
       newValue = pressedValue;
     } else {
       if (!isArray(this.args.value)) {

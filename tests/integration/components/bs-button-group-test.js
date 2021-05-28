@@ -19,7 +19,13 @@ module('Integration | Component | bs-button-group', function (hooks) {
 
   test('button group has correct CSS classes', async function (assert) {
     await render(
-      hbs`{{#bs-button-group size="lg" justified=true as |bg|}}{{#bg.button value=1}}1{{/bg.button}}{{#bg.button value=2}}2{{/bg.button}}{{#bg.button value=3}}3{{/bg.button}}{{/bs-button-group}}`
+      hbs`
+        <BsButtonGroup @size="lg" as |bg|>
+          <bg.button @value={{1}}>1</bg.button>
+          <bg.button @value={{2}}>2</bg.button>
+          <bg.button @value={{3}}>3</bg.button>
+        </BsButtonGroup>
+      `
     );
 
     assert.dom('.btn-group').exists('has btn-group class');
@@ -28,7 +34,13 @@ module('Integration | Component | bs-button-group', function (hooks) {
 
   testBS3('button group supports justified layout', async function (assert) {
     await render(
-      hbs`{{#bs-button-group justified=true as |bg|}}{{#bg.button value=1}}1{{/bg.button}}{{#bg.button value=2}}2{{/bg.button}}{{#bg.button value=3}}3{{/bg.button}}{{/bs-button-group}}`
+      hbs`
+        <BsButtonGroup @justified={{true}} as |bg|>
+          <bg.button @value={{1}}>1</bg.button>
+          <bg.button @value={{2}}>2</bg.button>
+          <bg.button @value={{3}}>3</bg.button>
+        </BsButtonGroup>
+      `
     );
 
     assert.dom('.btn-group').exists('has btn-group class');
@@ -37,7 +49,13 @@ module('Integration | Component | bs-button-group', function (hooks) {
 
   test('button group supports vertical layout', async function (assert) {
     await render(
-      hbs`{{#bs-button-group vertical=true as |bg|}}{{#bg.button value=1}}1{{/bg.button}}{{#bg.button value=2}}2{{/bg.button}}{{#bg.button value=3}}3{{/bg.button}}{{/bs-button-group}}`
+      hbs`
+        <BsButtonGroup @vertical={{true}} as |bg|>
+          <bg.button @value={{1}}>1</bg.button>
+          <bg.button @value={{2}}>2</bg.button>
+          <bg.button @value={{3}}>3</bg.button>
+        </BsButtonGroup>
+      `
     );
 
     assert.dom('.btn-group').doesNotExist('has not btn-group class');
@@ -46,9 +64,15 @@ module('Integration | Component | bs-button-group', function (hooks) {
 
   test('radio button group calls onChange with value of selected button', async function (assert) {
     let action = sinon.spy();
-    this.actions.change = action;
+    this.change = action;
     await render(
-      hbs`{{#bs-button-group type="radio" value=this.value onChange=(action "change") as |bg|}}{{#bg.button value=1}}1{{/bg.button}}{{#bg.button value=2}}2{{/bg.button}}{{#bg.button value=3}}3{{/bg.button}}{{/bs-button-group}}`
+      hbs`
+        <BsButtonGroup @type="radio" @value={{this.value}} @onChange={{this.change}} as |bg|>
+          <bg.button @value={{1}}>1</bg.button>
+          <bg.button @value={{2}}>2</bg.button>
+          <bg.button @value={{3}}>3</bg.button>
+        </BsButtonGroup>
+      `
     );
 
     for (let i = 0; i < 3; i++) {
@@ -60,11 +84,17 @@ module('Integration | Component | bs-button-group', function (hooks) {
   test('checkbox button group calls onChange with value of all selected buttons', async function (assert) {
     assert.expect(1);
     let expectedValue = [1, 2];
-    this.actions.change = (value) => {
+    this.change = (value) => {
       assert.deepEqual(value, expectedValue);
     };
     await render(
-      hbs`{{#bs-button-group type="checkbox" value=this.value onChange=(action "change") as |bg|}}{{#bg.button value=1}}1{{/bg.button}}{{#bg.button value=2}}2{{/bg.button}}{{#bg.button value=3}}3{{/bg.button}}{{/bs-button-group}}`
+      hbs`
+        <BsButtonGroup @type="checkbox" @value={{this.value}} @onChange={{this.change}} as |bg|>
+          <bg.button @value={{1}}>1</bg.button>
+          <bg.button @value={{2}}>2</bg.button>
+          <bg.button @value={{3}}>3</bg.button>
+        </BsButtonGroup>
+      `
     );
     this.set('value', [1]);
     await click('button:nth-child(2)');
@@ -72,7 +102,13 @@ module('Integration | Component | bs-button-group', function (hooks) {
 
   test('radio button group with value set activates button with same value', async function (assert) {
     await render(
-      hbs`{{#bs-button-group type="radio" value=this.value as |bg|}}{{#bg.button value=1}}1{{/bg.button}}{{#bg.button value=2}}2{{/bg.button}}{{#bg.button value=3}}3{{/bg.button}}{{/bs-button-group}}`
+      hbs`
+        <BsButtonGroup @type="radio" @value={{this.value}} as |bg|>
+          <bg.button @value={{1}}>1</bg.button>
+          <bg.button @value={{2}}>2</bg.button>
+          <bg.button @value={{3}}>3</bg.button>
+        </BsButtonGroup>
+      `
     );
     this.set('value', 1);
 
@@ -91,7 +127,13 @@ module('Integration | Component | bs-button-group', function (hooks) {
   test('checkbox button group with value set activates buttons with same value', async function (assert) {
     let value = A([1, 3]);
     await render(
-      hbs`{{#bs-button-group type="checkbox" value=this.value as |bg|}}{{#bg.button value=1}}1{{/bg.button}}{{#bg.button value=2}}2{{/bg.button}}{{#bg.button value=3}}3{{/bg.button}}{{/bs-button-group}}`
+      hbs`
+        <BsButtonGroup @type="checkbox" @value={{this.value}} as |bg|>
+          <bg.button @value={{1}}>1</bg.button>
+          <bg.button @value={{2}}>2</bg.button>
+          <bg.button @value={{3}}>3</bg.button>
+        </BsButtonGroup>
+      `
     );
     this.set('value', value);
 
@@ -109,7 +151,13 @@ module('Integration | Component | bs-button-group', function (hooks) {
 
   test('setting radio button group value activates button with same value', async function (assert) {
     await render(
-      hbs`{{#bs-button-group type="radio" value=this.value as |bg|}}{{#bg.button value=1}}1{{/bg.button}}{{#bg.button value=2}}2{{/bg.button}}{{#bg.button value=3}}3{{/bg.button}}{{/bs-button-group}}`
+      hbs`
+        <BsButtonGroup @type="radio" @value={{this.value}} as |bg|>
+          <bg.button @value={{1}}>1</bg.button>
+          <bg.button @value={{2}}>2</bg.button>
+          <bg.button @value={{3}}>3</bg.button>
+        </BsButtonGroup>
+      `
     );
 
     for (let i = 0; i < 3; i++) {
@@ -129,7 +177,13 @@ module('Integration | Component | bs-button-group', function (hooks) {
 
   test('setting checkbox button group value with array of values activates buttons with same value', async function (assert) {
     await render(
-      hbs`{{#bs-button-group type="checkbox" value=this.value as |bg|}}{{#bg.button value=1}}1{{/bg.button}}{{#bg.button value=2}}2{{/bg.button}}{{#bg.button value=3}}3{{/bg.button}}{{/bs-button-group}}`
+      hbs`
+        <BsButtonGroup @type="checkbox" @value={{this.value}} as |bg|>
+          <bg.button @value={{1}}>1</bg.button>
+          <bg.button @value={{2}}>2</bg.button>
+          <bg.button @value={{3}}>3</bg.button>
+        </BsButtonGroup>
+      `
     );
 
     let value = A([1, 3]);
@@ -148,9 +202,15 @@ module('Integration | Component | bs-button-group', function (hooks) {
 
   test('when clicking active radio button, onChange must not be called', async function (assert) {
     let action = sinon.spy();
-    this.actions.change = action;
+    this.change = action;
     await render(
-      hbs`{{#bs-button-group type="radio" value=1 as |bg|}}{{#bg.button value=1}}1{{/bg.button}}{{#bg.button value=2}}2{{/bg.button}}{{#bg.button value=3}}3{{/bg.button}}{{/bs-button-group}}`
+      hbs`
+        <BsButtonGroup @type="radio" @value={{1}} @onChange={{this.change}} as |bg|>
+          <bg.button @value={{1}}>1</bg.button>
+          <bg.button @value={{2}}>2</bg.button>
+          <bg.button @value={{3}}>3</bg.button>
+        </BsButtonGroup>
+      `
     );
 
     await click('button:nth-child(1)');
@@ -159,7 +219,13 @@ module('Integration | Component | bs-button-group', function (hooks) {
 
   test('setting radio button group value to null sets buttons active state to false', async function (assert) {
     await render(
-      hbs`{{#bs-button-group type="radio" value=this.value as |bg|}}{{#bg.button value=1}}1{{/bg.button}}{{#bg.button value=2}}2{{/bg.button}}{{#bg.button value=3}}3{{/bg.button}}{{/bs-button-group}}`
+      hbs`
+        <BsButtonGroup @type="radio" @value={{this.value}} as |bg|>
+          <bg.button @value={{1}}>1</bg.button>
+          <bg.button @value={{2}}>2</bg.button>
+          <bg.button @value={{3}}>3</bg.button>
+        </BsButtonGroup>
+      `
     );
 
     for (let i = 0; i < 3; i++) {
@@ -173,11 +239,17 @@ module('Integration | Component | bs-button-group', function (hooks) {
     }
   });
 
-  test('clicking button group does not change public value porperty', async function (assert) {
+  test('clicking button group does not change public value property', async function (assert) {
     let value = A([1]);
     this.set('value', value);
     await render(
-      hbs`{{#bs-button-group type="checkbox" value=this.value as |bg|}}{{#bg.button value=1}}1{{/bg.button}}{{#bg.button value=2}}2{{/bg.button}}{{#bg.button value=3}}3{{/bg.button}}{{/bs-button-group}}`
+      hbs`
+        <BsButtonGroup @type="checkbox" @value={{this.value}} @onChange={{this.change}} as |bg|>
+          <bg.button @value={{1}}>1</bg.button>
+          <bg.button @value={{2}}>2</bg.button>
+          <bg.button @value={{3}}>3</bg.button>
+        </BsButtonGroup>
+      `
     );
 
     await click('button:nth-child(3)');
@@ -186,7 +258,13 @@ module('Integration | Component | bs-button-group', function (hooks) {
 
   test('it passes accessibility checks', async function (assert) {
     await render(
-      hbs`{{#bs-button-group as |bg|}}{{#bg.button value=1}}1{{/bg.button}}{{#bg.button value=2}}2{{/bg.button}}{{#bg.button value=3}}3{{/bg.button}}{{/bs-button-group}}`
+      hbs`
+        <BsButtonGroup as |bg|>
+          <bg.button @value={{1}}>1</bg.button>
+          <bg.button @value={{2}}>2</bg.button>
+          <bg.button @value={{3}}>3</bg.button>
+        </BsButtonGroup>
+      `
     );
 
     await a11yAudit();
