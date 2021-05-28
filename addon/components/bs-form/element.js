@@ -15,6 +15,7 @@ import ControlTextarea from './element/control/textarea';
 import ControlRadio from './element/control/radio';
 import ControlSwitch from './element/control/switch';
 import arg from 'ember-bootstrap/utils/decorators/arg';
+import { dedupeTracked } from 'tracked-toolbox';
 
 /**
   Sub class of `Components.FormGroup` that adds automatic form layout markup and form validation features.
@@ -498,7 +499,7 @@ export default class FormElement extends FormGroup {
    * @default false
    * @private
    */
-  @tracked showOwnValidation = false;
+  @dedupeTracked showOwnValidation = false;
 
   /**
    * @property showAllValidations
