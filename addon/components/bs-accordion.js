@@ -1,7 +1,6 @@
 import { action } from '@ember/object';
 import Component from '@glimmer/component';
 import deprecateSubclassing from 'ember-bootstrap/utils/deprecate-subclassing';
-import arg from '../utils/decorators/arg';
 import { localCopy } from 'tracked-toolbox';
 
 /**
