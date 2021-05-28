@@ -1,7 +1,7 @@
 import { action } from '@ember/object';
 import Component from '@glimmer/component';
 import deprecateSubclassing from 'ember-bootstrap/utils/deprecate-subclassing';
-import { localCopy } from 'tracked-toolbox';
+import { tracked } from '@glimmer/tracking';
 
 /**
   Bootstrap-style [accordion group](http://getbootstrap.com/javascript/#collapse-example-accordion),
@@ -56,14 +56,37 @@ export default class Accordion extends Component {
    * @private
    */
 
+  @tracked
+  _isSelected = this.args.selected;
+  _isSelectedNonTracked = this.args.selected;
+
+  _prevSelected = this.args.selected;
+
   /**
    * The value of the currently selected accordion item
    *
    * @property isSelected
    * @private
    */
-  @localCopy('args.selected')
-  isSelected;
+  get isSelected() {
+    // ideally we would have used @localCopy here, but unfortunately this fails for Ember 3.16 in this special case
+    // see https://github.com/pzuraq/tracked-toolbox/issues/17
+    // So don't look at this, it is going to get ugly...
+    this._isSelected; // just consume this to invalidate the getter when this changes
+
+    if (this.args.selected && this._prevSelected !== this.args.selected) {
+      // eslint-disable-next-line ember/no-side-effects
+      this._isSelectedNonTracked = this._prevSelected = this.args.selected;
+
+      return this._isSelectedNonTracked;
+    }
+
+    return this._isSelectedNonTracked;
+  }
+  set isSelected(value) {
+    this._isSelectedNonTracked = value;
+    this._isSelected = value;
+  }
 
   /**
    * Action when the selected accordion item is about to be changed.
