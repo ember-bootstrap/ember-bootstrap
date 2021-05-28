@@ -136,6 +136,10 @@ export function popoverArrowClass() {
   return versionDependent('arrow', 'arrow', 'popover-arrow');
 }
 
+export function visuallyHiddenClass() {
+  return versionDependent('sr-only', 'sr-only', 'visually-hidden');
+}
+
 export function isVisible(el) {
   return !isHidden(el);
 }

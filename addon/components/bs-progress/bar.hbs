@@ -15,9 +15,9 @@
     {{/if}}
   {{else}}
     {{#if (has-block)}}
-      <span class="sr-only">{{yield this.percentRounded}}</span>
+      <span class={{if (macroCondition (macroGetOwnConfig "isBS5")) "visually-hidden" "sr-only"}}>{{yield this.percentRounded}}</span>
     {{else}}
-      <span class="sr-only">{{this.percentRounded}}%</span>
+      <span class={{if (macroCondition (macroGetOwnConfig "isBS5")) "visually-hidden" "sr-only"}}>{{this.percentRounded}}%</span>
     {{/if}}
   {{/if}}
 </div>

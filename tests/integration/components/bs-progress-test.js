@@ -1,7 +1,7 @@
 import { module } from 'qunit';
 import { setupRenderingTest } from 'ember-qunit';
 import { render } from '@ember/test-helpers';
-import { test, testBS3, testNotBS3 } from '../../helpers/bootstrap';
+import { test, testBS3, testNotBS3, visuallyHiddenClass } from '../../helpers/bootstrap';
 import hbs from 'htmlbars-inline-precompile';
 import setupStylesheetSupport from '../../helpers/setup-stylesheet-support';
 import setupNoDeprecations from '../../helpers/setup-no-deprecations';
@@ -85,7 +85,7 @@ module('Integration | Component | bs-progress', function (hooks) {
     `);
 
     assert.equal(
-      this.element.querySelector('.progress-bar .sr-only').innerHTML.trim(),
+      this.element.querySelector(`.progress-bar .${visuallyHiddenClass()}`).innerHTML.trim(),
       '50%',
       'Progress bar shows correct default label'
     );
@@ -97,7 +97,7 @@ module('Integration | Component | bs-progress', function (hooks) {
     `);
 
     assert.equal(
-      this.element.querySelector('.progress-bar .sr-only').innerHTML.trim(),
+      this.element.querySelector(`.progress-bar .${visuallyHiddenClass()}`).innerHTML.trim(),
       '5 (50%)',
       'Progress bar shows correct custom label'
     );

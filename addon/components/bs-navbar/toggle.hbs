@@ -5,7 +5,7 @@
     {{#if (macroCondition (macroGetOwnConfig "isNotBS3"))}}
       <span class="navbar-toggler-icon"></span>
     {{else}}
-      <span class="sr-only">Toggle navigation</span>
+      <span class={{if (macroCondition (macroGetOwnConfig "isBS5")) "visually-hidden" "sr-only"}}>Toggle navigation</span>
       <span class="icon-bar"></span>
       <span class="icon-bar"></span>
       <span class="icon-bar"></span>

@@ -5,10 +5,10 @@
       {{@label}}
     </label>
   {{else}}
-    <label class="control-label {{if this.invisibleLabel "sr-only"}} {{this.labelClass}}" for={{@formElementId}}>{{@label}}</label>
+    <label class="control-label {{if this.invisibleLabel (if (macroCondition (macroGetOwnConfig "isBS5")) "visually-hidden" "sr-only")}} {{this.labelClass}}" for={{@formElementId}}>{{@label}}</label>
   {{/if}}
 {{else}}
-  <label class="{{if (macroCondition (macroGetOwnConfig "isBS5")) "form-label"}} {{if this.invisibleLabel "sr-only"}} {{this.labelClass}} {{if this.isHorizontalAndNotCheckbox "col-form-label"}} {{if this.isCheckbox "form-check-label"}} {{if (bs-eq "switch" @controlType) (if (macroCondition (macroGetOwnConfig "isBS5")) "form-check-label" "custom-control-label")}} {{this.sizeClass}}" for={{@formElementId}}>
+  <label class="{{if (macroCondition (macroGetOwnConfig "isBS5")) "form-label"}} {{if this.invisibleLabel (if (macroCondition (macroGetOwnConfig "isBS5")) "visually-hidden" "sr-only")}} {{this.labelClass}} {{if this.isHorizontalAndNotCheckbox "col-form-label"}} {{if this.isCheckbox "form-check-label"}} {{if (bs-eq "switch" @controlType) (if (macroCondition (macroGetOwnConfig "isBS5")) "form-check-label" "custom-control-label")}} {{this.sizeClass}}" for={{@formElementId}}>
     {{#if (has-block)}}
       {{yield}}
     {{/if}}
