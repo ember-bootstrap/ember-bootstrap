@@ -134,7 +134,7 @@
     "gulp-insert": "^0.5.0",
     "gulp-rename": "^2.0.0",
     "gulp-transform": "^3.0.5",
-    "husky": ">=4",
+    "husky": ">=6",
     "lint-staged": ">=11",
     "loader.js": "^4.7.0",
     "merge-stream": "^2.0.0",
