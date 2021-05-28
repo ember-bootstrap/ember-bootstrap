@@ -343,7 +343,7 @@ export default class Button extends Component {
   /**
    * Property to create outline buttons (BS4+ only)
    *
-   * @property disabled
+   * @property outline
    * @type boolean
    * @default false
    * @public
