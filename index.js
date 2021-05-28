@@ -4,7 +4,6 @@ const path = require('path');
 const mergeTrees = require('broccoli-merge-trees');
 const Funnel = require('broccoli-funnel');
 const BroccoliDebug = require('broccoli-debug');
-const chalk = require('chalk');
 const SilentError = require('silent-error'); // From ember-cli
 const VersionChecker = require('ember-cli-version-checker');
 const resolve = require('resolve');
@@ -57,6 +56,13 @@ module.exports = {
     this.app = app;
 
     let options = Object.assign({}, defaultOptions, app.options['ember-bootstrap']);
+
+    if (options.bootstrapVersion === 3) {
+      this.warn(
+        'Support for Bootstrap 3 has been deprecated and will be removed in ember-bootstrap v5! Consider migrating to Bootstrap v4 or v5!'
+      );
+    }
+
     if (options.bootstrapVersion >= 4 && options.importBootstrapFont) {
       this.warn(
         'Inclusion of the Glyphicon font is only supported for Bootstrap 3. ' +
@@ -268,7 +274,7 @@ module.exports = {
   },
 
   warn(message) {
-    this.ui.writeLine(chalk.yellow(message));
+    this.ui.writeWarnLine(message);
   },
 
   filterComponents(tree) {
