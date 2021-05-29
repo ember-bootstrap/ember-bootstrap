@@ -77,8 +77,6 @@ export default class Accordion extends Component {
     if (this.args.selected && this._prevSelected !== this.args.selected) {
       // eslint-disable-next-line ember/no-side-effects
       this._isSelectedNonTracked = this._prevSelected = this.args.selected;
-
-      return this._isSelectedNonTracked;
     }
 
     return this._isSelectedNonTracked;
