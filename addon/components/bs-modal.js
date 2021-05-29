@@ -417,8 +417,10 @@ export default class Modal extends Component {
       return;
     }
 
-    this.checkScrollbar();
-    this.setScrollbar();
+    if (!isFastBoot(this)) {
+      this.checkScrollbar();
+      this.setScrollbar();
+    }
 
     await afterRender();
 
@@ -427,8 +429,11 @@ export default class Modal extends Component {
       return;
     }
 
-    modalElement.scrollTop = 0;
-    this.adjustDialog();
+    if (!isFastBoot(this)) {
+      modalElement.scrollTop = 0;
+      this.adjustDialog();
+    }
+
     this.showModal = true;
     this.args.onShow?.();
 
@@ -474,8 +479,12 @@ export default class Modal extends Component {
     await this.hideBackdrop();
 
     this.removeBodyClass();
-    this.resetAdjustments();
-    this.resetScrollbar();
+
+    if (!isFastBoot(this)) {
+      this.resetAdjustments();
+      this.resetScrollbar();
+    }
+
     this.inDom = false;
     this.args.onHidden?.();
   }
@@ -553,13 +562,7 @@ export default class Modal extends Component {
    * @private
    */
   checkScrollbar() {
-    let fullWindowWidth = window.innerWidth;
-    if (!fullWindowWidth) {
-      // workaround for missing window.innerWidth in IE8
-      let documentElementRect = document.documentElement.getBoundingClientRect();
-      fullWindowWidth = documentElementRect.right - Math.abs(documentElementRect.left);
-    }
-
+    const fullWindowWidth = window.innerWidth;
     this.bodyIsOverflowing = document.body.clientWidth < fullWindowWidth;
   }
 
@@ -599,7 +602,11 @@ export default class Modal extends Component {
   }
 
   removeBodyClass() {
-    // no need for FastBoot support here
+    if (isFastBoot(this)) {
+      // no need for FastBoot support here
+      return;
+    }
+
     document.body.classList.remove('modal-open');
   }
 
@@ -623,19 +630,15 @@ export default class Modal extends Component {
   willDestroy() {
     super.willDestroy(...arguments);
 
-    if (typeof FastBoot === 'undefined') {
-      this.removeBodyClass();
+    this.removeBodyClass();
+
+    if (!isFastBoot(this)) {
       this.resetScrollbar();
     }
   }
 
   @action
   handleVisibilityChanges() {
-    if (isFastBoot(this)) {
-      this.addBodyClass();
-      return;
-    }
-
     if (this.args.open !== false) {
       this.show();
     } else {
