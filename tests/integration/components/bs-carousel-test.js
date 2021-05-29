@@ -2,7 +2,7 @@ import hbs from 'htmlbars-inline-precompile';
 import { module } from 'qunit';
 import { render, click, triggerEvent, getContext } from '@ember/test-helpers';
 import { setupRenderingTest } from 'ember-qunit';
-import { test, testBS3, testNotBS3, delay } from '../../helpers/bootstrap';
+import { test, testBS3, testNotBS3, delay, visuallyHiddenClass } from '../../helpers/bootstrap';
 import { skip } from 'qunit';
 import setupNoDeprecations from '../../helpers/setup-no-deprecations';
 import a11yAudit from 'ember-a11y-testing/test-support/audit';
@@ -78,8 +78,8 @@ module('Integration | Component | bs-carousel', function (hooks) {
     let right = this.element.querySelector('.right');
     assert.dom(left).hasClass('carousel-control', 'has left control class names');
     assert.dom(right).hasClass('carousel-control', 'has right control class names');
-    assert.ok(left.querySelector('.sr-only'), 'left control has sr-only');
-    assert.ok(right.querySelector('.sr-only'), 'right control has sr-only');
+    assert.ok(left.querySelector(`.${visuallyHiddenClass()}`), 'left control has sr-only');
+    assert.ok(right.querySelector(`.${visuallyHiddenClass()}`), 'right control has sr-only');
   });
 
   testNotBS3('carousel has correct controls markup', async function (assert) {
@@ -89,8 +89,8 @@ module('Integration | Component | bs-carousel', function (hooks) {
     let next = this.element.querySelectorAll('.carousel-control-next');
     assert.equal(prev.length, 1, 'has left control class names');
     assert.equal(next.length, 1, 'has right control class names');
-    assert.ok(prev[0].querySelector('.sr-only'), 'left control has sr-only');
-    assert.ok(next[0].querySelector('.sr-only'), 'right control has sr-only');
+    assert.ok(prev[0].querySelector(`.${visuallyHiddenClass()}`), 'left control has sr-only');
+    assert.ok(next[0].querySelector(`.${visuallyHiddenClass()}`), 'right control has sr-only');
   });
 
   testBS3('carousel has correct indicators and slides markup', async function (assert) {

@@ -22,6 +22,7 @@ import {
   validationErrorClass,
   validationSuccessClass,
   validationWarningClass,
+  visuallyHiddenClass,
 } from '../../../helpers/bootstrap';
 import hbs from 'htmlbars-inline-precompile';
 import setupNoDeprecations from '../../../helpers/setup-no-deprecations';
@@ -610,24 +611,24 @@ module('Integration | Component | bs-form/element', function (hooks) {
     assert.dom('[data-test-form-element]').hasClass('disabled', 'component has disabled class');
   });
 
-  test('if invisibleLabel is true sr-only class is added to label', async function (assert) {
+  test('if invisibleLabel is true visually hidden class is added to label', async function (assert) {
     await render(hbs`<BsForm::Element @label="myLabel" />`);
-    assert.dom('label').hasNoClass('sr-only', 'sr-only class is not present as defaultText');
+    assert.dom('label').hasNoClass(visuallyHiddenClass(), 'sr-only class is not present as defaultText');
 
     await render(
       hbs`<BsForm @formLayout="vertical"><BsForm::Element @label="myLabel" @invisibleLabel={{true}} /></BsForm>`
     );
-    assert.dom('label').hasClass('sr-only', 'sr-only class is present for formLayout vertical');
+    assert.dom('label').hasClass(visuallyHiddenClass(), 'sr-only class is present for formLayout vertical');
 
     await render(
       hbs`<BsForm @formLayout="horizontal"><BsForm::Element @label="myLabel" @invisibleLabel={{true}} /></BsForm>`
     );
-    assert.dom('label').hasClass('sr-only', 'sr-only class is present for formLayout horizontal');
+    assert.dom('label').hasClass(visuallyHiddenClass(), 'sr-only class is present for formLayout horizontal');
 
     await render(
       hbs`<BsForm @formLayout="inline"><BsForm::Element @label="myLabel" @invisibleLabel={{true}} /></BsForm>`
     );
-    assert.dom('label').hasClass('sr-only', 'sr-only class is present for formLayout inline');
+    assert.dom('label').hasClass(visuallyHiddenClass(), 'sr-only class is present for formLayout inline');
   });
 
   testBS3('adjusts validation icon position if there is an input group', async function (assert) {

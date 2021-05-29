@@ -32,11 +32,11 @@
   {{#if this.showControls}}
     <a class="{{if (macroCondition (macroGetOwnConfig "isNotBS3")) "carousel-control-prev"}}{{if (macroCondition (macroGetOwnConfig "isBS3")) "carousel-control left"}}" href="#{{this.elementId}}" {{on "click" this.toPrevSlide}} role="button">
       <span aria-hidden="true" class="{{if (macroCondition (macroGetOwnConfig "isNotBS3")) "carousel-control-prev-icon"}}{{if (macroCondition (macroGetOwnConfig "isBS3")) "icon-prev"}}"></span>
-      <span class="sr-only">{{this.prevControlLabel}}</span>
+      <span class={{if (macroCondition (macroGetOwnConfig "isBS5")) "visually-hidden" "sr-only"}}>{{this.prevControlLabel}}</span>
     </a>
     <a class="{{if (macroCondition (macroGetOwnConfig "isNotBS3")) "carousel-control-next"}}{{if (macroCondition (macroGetOwnConfig "isBS3")) "carousel-control right"}}" href="#{{this.elementId}}" {{on "click" this.toNextSlide}} role="button">
       <span aria-hidden="true" class="{{if (macroCondition (macroGetOwnConfig "isNotBS3")) "carousel-control-next-icon"}}{{if (macroCondition (macroGetOwnConfig "isBS3")) "icon-next"}}"></span>
-      <span class="sr-only">{{this.nextControlLabel}}</span>
+      <span class={{if (macroCondition (macroGetOwnConfig "isBS5")) "visually-hidden" "sr-only"}}>{{this.nextControlLabel}}</span>
     </a>
   {{/if}}
 

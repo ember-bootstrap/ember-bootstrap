@@ -1,4 +1,4 @@
-<legend class="{{if this.invisibleLabel "sr-only"}} {{this.labelClass}} {{if this.isHorizontalAndNotCheckbox "col-form-label"}} {{this.sizeClass}}">
+<legend class="{{if this.invisibleLabel (if (macroCondition (macroGetOwnConfig "isBS5")) "visually-hidden" "sr-only")}} {{this.labelClass}} {{if this.isHorizontalAndNotCheckbox "col-form-label"}} {{this.sizeClass}}">
   {{#if (has-block)}}
     {{yield}}
   {{/if}}
