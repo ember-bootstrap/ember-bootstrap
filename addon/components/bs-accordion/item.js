@@ -1,12 +1,9 @@
-import { tagName } from '@ember-decorators/component';
-import { computed } from '@ember/object';
-import { not } from '@ember/object/computed';
-import Component from '@ember/component';
-import defaultValue from 'ember-bootstrap/utils/default-decorator';
+import Component from '@glimmer/component';
 import typeClass from 'ember-bootstrap/utils/cp/type-class';
-import { macroCondition, getOwnConfig } from '@embroider/macros';
+import { getOwnConfig, macroCondition } from '@embroider/macros';
 import { guidFor } from '@ember/object/internals';
 import deprecateSubclassing from 'ember-bootstrap/utils/deprecate-subclassing';
+import arg from '../../utils/decorators/arg';
 
 /**
  A collapsible/expandable item within an accordion
@@ -18,7 +15,6 @@ import deprecateSubclassing from 'ember-bootstrap/utils/deprecate-subclassing';
  @extends Ember.Component
  @public
  */
-@tagName('')
 @deprecateSubclassing
 export default class AccordionItem extends Component {
   /**
@@ -35,14 +31,13 @@ export default class AccordionItem extends Component {
    * @property value
    * @public
    */
+  @arg
   value = guidFor(this);
 
   /**
    * @property selected
    * @private
    */
-  @defaultValue
-  selected = null;
 
   /**
    * @property titleComponent
@@ -62,27 +57,15 @@ export default class AccordionItem extends Component {
    * @readonly
    * @private
    */
-  @(computed('value', 'selected').readOnly())
   get collapsed() {
-    return this.value !== this.selected;
+    return this.value !== this.args.selected;
   }
-
-  /**
-   * @property active
-   * @type boolean
-   * @readonly
-   * @private
-   */
-  @not('collapsed')
-  active;
 
   /**
    * @property disabled
    * @type boolean
    * @public
    */
-  @defaultValue
-  disabled = false;
 
   /**
    * Property for type styling
@@ -94,7 +77,7 @@ export default class AccordionItem extends Component {
    * @default 'default'
    * @public
    */
-  @defaultValue
+  @arg
   type = 'default';
 
   @typeClass(macroCondition(getOwnConfig().isNotBS3) ? 'bg' : 'panel', 'type')
@@ -111,5 +94,4 @@ export default class AccordionItem extends Component {
    * @event onClick
    * @public
    */
-  onClick() {}
 }

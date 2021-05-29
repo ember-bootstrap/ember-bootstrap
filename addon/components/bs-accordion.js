@@ -1,9 +1,7 @@
 import { action } from '@ember/object';
-import { tagName } from '@ember-decorators/component';
-import Component from '@ember/component';
-import listenTo from 'ember-bootstrap/utils/cp/listen-to';
-import defaultValue from 'ember-bootstrap/utils/default-decorator';
+import Component from '@glimmer/component';
 import deprecateSubclassing from 'ember-bootstrap/utils/deprecate-subclassing';
+import { tracked } from '@glimmer/tracking';
 
 /**
   Bootstrap-style [accordion group](http://getbootstrap.com/javascript/#collapse-example-accordion),
@@ -37,10 +35,9 @@ import deprecateSubclassing from 'ember-bootstrap/utils/deprecate-subclassing';
 
   @class Accordion
   @namespace Components
-  @extends Ember.Component
+  @extends Glimmer.Component
   @public
 */
-@tagName('')
 @deprecateSubclassing
 export default class Accordion extends Component {
   /**
@@ -52,8 +49,6 @@ export default class Accordion extends Component {
    * @property selected
    * @public
    */
-  @defaultValue
-  selected = null;
 
   /**
    * @property itemComponent
@@ -61,14 +56,35 @@ export default class Accordion extends Component {
    * @private
    */
 
+  @tracked
+  _isSelected = this.args.selected;
+  _isSelectedNonTracked = this.args.selected;
+
+  _prevSelected = this.args.selected;
+
   /**
    * The value of the currently selected accordion item
    *
    * @property isSelected
    * @private
    */
-  @listenTo('selected')
-  isSelected;
+  get isSelected() {
+    // ideally we would have used @localCopy here, but unfortunately this fails for Ember 3.16 in this special case
+    // see https://github.com/pzuraq/tracked-toolbox/issues/17
+    // So don't look at this, it is going to get ugly...
+    this._isSelected; // just consume this to invalidate the getter when this changes
+
+    if (this.args.selected && this._prevSelected !== this.args.selected) {
+      // eslint-disable-next-line ember/no-side-effects
+      this._isSelectedNonTracked = this._prevSelected = this.args.selected;
+    }
+
+    return this._isSelectedNonTracked;
+  }
+  set isSelected(value) {
+    this._isSelectedNonTracked = value;
+    this._isSelected = value;
+  }
 
   /**
    * Action when the selected accordion item is about to be changed.
@@ -88,8 +104,8 @@ export default class Accordion extends Component {
     if (oldValue === newValue) {
       newValue = null;
     }
-    if (this.onChange?.(newValue, oldValue) !== false) {
-      this.set('isSelected', newValue);
+    if (this.args.onChange?.(newValue, oldValue) !== false) {
+      this.isSelected = newValue;
     }
   }
 }

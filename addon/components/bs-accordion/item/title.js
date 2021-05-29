@@ -1,6 +1,5 @@
 import { action } from '@ember/object';
-import { tagName } from '@ember-decorators/component';
-import Component from '@ember/component';
+import Component from '@glimmer/component';
 import deprecateSubclassing from 'ember-bootstrap/utils/deprecate-subclassing';
 
 /**
@@ -10,10 +9,9 @@ import deprecateSubclassing from 'ember-bootstrap/utils/deprecate-subclassing';
 
  @class AccordionItemTitle
  @namespace Components
- @extends Ember.Component
+ @extends Glimmer.Component
  @public
  */
-@tagName('')
 @deprecateSubclassing
 export default class AccordionItemTitle extends Component {
   /**
@@ -32,13 +30,12 @@ export default class AccordionItemTitle extends Component {
    * @event onClick
    * @public
    */
-  onClick() {}
 
   @action
   handleClick(e) {
     e.preventDefault();
-    if (!this.disabled) {
-      this.onClick();
+    if (!this.args.disabled) {
+      this.args.onClick?.();
     }
   }
 }
