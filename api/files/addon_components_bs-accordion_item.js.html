@@ -59,15 +59,12 @@
 
 <div class="file">
     <pre class="prettyprint linenums">
-import { tagName } from &#x27;@ember-decorators/component&#x27;;
-import { computed } from &#x27;@ember/object&#x27;;
-import { not } from &#x27;@ember/object/computed&#x27;;
-import Component from &#x27;@ember/component&#x27;;
-import defaultValue from &#x27;ember-bootstrap/utils/default-decorator&#x27;;
+import Component from &#x27;@glimmer/component&#x27;;
 import typeClass from &#x27;ember-bootstrap/utils/cp/type-class&#x27;;
-import { macroCondition, getOwnConfig } from &#x27;@embroider/macros&#x27;;
+import { getOwnConfig, macroCondition } from &#x27;@embroider/macros&#x27;;
 import { guidFor } from &#x27;@ember/object/internals&#x27;;
 import deprecateSubclassing from &#x27;ember-bootstrap/utils/deprecate-subclassing&#x27;;
+import arg from &#x27;../../utils/decorators/arg&#x27;;
 
 /**
  A collapsible/expandable item within an accordion
@@ -79,7 +76,6 @@ import deprecateSubclassing from &#x27;ember-bootstrap/utils/deprecate-subclassi
  @extends Ember.Component
  @public
  */
-@tagName(&#x27;&#x27;)
 @deprecateSubclassing
 export default class AccordionItem extends Component {
   /**
@@ -96,14 +92,13 @@ export default class AccordionItem extends Component {
    * @property value
    * @public
    */
+  @arg
   value = guidFor(this);
 
   /**
    * @property selected
    * @private
    */
-  @defaultValue
-  selected = null;
 
   /**
    * @property titleComponent
@@ -123,27 +118,15 @@ export default class AccordionItem extends Component {
    * @readonly
    * @private
    */
-  @(computed(&#x27;value&#x27;, &#x27;selected&#x27;).readOnly())
   get collapsed() {
-    return this.value !== this.selected;
+    return this.value !== this.args.selected;
   }
-
-  /**
-   * @property active
-   * @type boolean
-   * @readonly
-   * @private
-   */
-  @not(&#x27;collapsed&#x27;)
-  active;
 
   /**
    * @property disabled
    * @type boolean
    * @public
    */
-  @defaultValue
-  disabled = false;
 
   /**
    * Property for type styling
@@ -155,7 +138,7 @@ export default class AccordionItem extends Component {
    * @default &#x27;default&#x27;
    * @public
    */
-  @defaultValue
+  @arg
   type = &#x27;default&#x27;;
 
   @typeClass(macroCondition(getOwnConfig().isNotBS3) ? &#x27;bg&#x27; : &#x27;panel&#x27;, &#x27;type&#x27;)
@@ -172,7 +155,6 @@ export default class AccordionItem extends Component {
    * @event onClick
    * @public
    */
-  onClick() {}
 }
 
     </pre>

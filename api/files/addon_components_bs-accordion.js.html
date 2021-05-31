@@ -60,11 +60,9 @@
 <div class="file">
     <pre class="prettyprint linenums">
 import { action } from &#x27;@ember/object&#x27;;
-import { tagName } from &#x27;@ember-decorators/component&#x27;;
-import Component from &#x27;@ember/component&#x27;;
-import listenTo from &#x27;ember-bootstrap/utils/cp/listen-to&#x27;;
-import defaultValue from &#x27;ember-bootstrap/utils/default-decorator&#x27;;
+import Component from &#x27;@glimmer/component&#x27;;
 import deprecateSubclassing from &#x27;ember-bootstrap/utils/deprecate-subclassing&#x27;;
+import { tracked } from &#x27;@glimmer/tracking&#x27;;
 
 /**
   Bootstrap-style [accordion group](http://getbootstrap.com/javascript/#collapse-example-accordion),
@@ -98,10 +96,9 @@ import deprecateSubclassing from &#x27;ember-bootstrap/utils/deprecate-subclassi
 
   @class Accordion
   @namespace Components
-  @extends Ember.Component
+  @extends Glimmer.Component
   @public
 */
-@tagName(&#x27;&#x27;)
 @deprecateSubclassing
 export default class Accordion extends Component {
   /**
@@ -113,8 +110,6 @@ export default class Accordion extends Component {
    * @property selected
    * @public
    */
-  @defaultValue
-  selected = null;
 
   /**
    * @property itemComponent
@@ -122,14 +117,35 @@ export default class Accordion extends Component {
    * @private
    */
 
+  @tracked
+  _isSelected = this.args.selected;
+  _isSelectedNonTracked = this.args.selected;
+
+  _prevSelected = this.args.selected;
+
   /**
    * The value of the currently selected accordion item
    *
    * @property isSelected
    * @private
    */
-  @listenTo(&#x27;selected&#x27;)
-  isSelected;
+  get isSelected() {
+    // ideally we would have used @localCopy here, but unfortunately this fails for Ember 3.16 in this special case
+    // see https://github.com/pzuraq/tracked-toolbox/issues/17
+    // So don&#x27;t look at this, it is going to get ugly...
+    this._isSelected; // just consume this to invalidate the getter when this changes
+
+    if (this.args.selected &amp;&amp; this._prevSelected !== this.args.selected) {
+      // eslint-disable-next-line ember/no-side-effects
+      this._isSelectedNonTracked = this._prevSelected = this.args.selected;
+    }
+
+    return this._isSelectedNonTracked;
+  }
+  set isSelected(value) {
+    this._isSelectedNonTracked = value;
+    this._isSelected = value;
+  }
 
   /**
    * Action when the selected accordion item is about to be changed.
@@ -149,8 +165,8 @@ export default class Accordion extends Component {
     if (oldValue === newValue) {
       newValue = null;
     }
-    if (this.onChange?.(newValue, oldValue) !== false) {
-      this.set(&#x27;isSelected&#x27;, newValue);
+    if (this.args.onChange?.(newValue, oldValue) !== false) {
+      this.isSelected = newValue;
     }
   }
 }

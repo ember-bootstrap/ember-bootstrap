@@ -76,6 +76,7 @@ import ControlTextarea from &#x27;./element/control/textarea&#x27;;
 import ControlRadio from &#x27;./element/control/radio&#x27;;
 import ControlSwitch from &#x27;./element/control/switch&#x27;;
 import arg from &#x27;ember-bootstrap/utils/decorators/arg&#x27;;
+import { dedupeTracked } from &#x27;tracked-toolbox&#x27;;
 
 /**
   Sub class of &#x60;Components.FormGroup&#x60; that adds automatic form layout markup and form validation features.
@@ -559,7 +560,7 @@ export default class FormElement extends FormGroup {
    * @default false
    * @private
    */
-  @tracked showOwnValidation = false;
+  @dedupeTracked showOwnValidation = false;
 
   /**
    * @property showAllValidations
