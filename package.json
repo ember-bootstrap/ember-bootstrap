@@ -57,7 +57,7 @@
     "@glimmer/component": "^1.0.4",
     "@glimmer/tracking": "^1.0.4",
     "broccoli-debug": "^0.6.3",
-    "broccoli-funnel": "^3.0.2",
+    "broccoli-funnel": "^3.0.6",
     "broccoli-merge-trees": "^4.2.0",
     "chalk": "^4.1.1",
     "ember-auto-import": "^1.11.2",
