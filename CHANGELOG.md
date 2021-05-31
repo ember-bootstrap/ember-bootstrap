@@ -1,3 +1,23 @@
+## v4.9.0 (2021-05-31)
+
+#### Features
+* [#1226](https://github.com/kaliber5/ember-bootstrap/pull/1226) Refactor BsAccordion to Glimmer component ([@simonihmig](https://github.com/simonihmig))
+* [#1541](https://github.com/kaliber5/ember-bootstrap/pull/1541) Change `.sr-only` utility to `.visually-hidden` for Bootstrap v5 ([@simonihmig](https://github.com/simonihmig))
+* [#1536](https://github.com/kaliber5/ember-bootstrap/pull/1536) Deprecate Bootstrap 3 support ([@simonihmig](https://github.com/simonihmig))
+
+#### Bug Fixes
+* [#1538](https://github.com/kaliber5/ember-bootstrap/pull/1538) Fix BsButtonGroup radio to not trigger onChange when clicking active button ([@simonihmig](https://github.com/simonihmig))
+* [#1535](https://github.com/kaliber5/ember-bootstrap/pull/1535) Fix BsForm element causing "same computation" Glimmer assertion in rare edge case ([@simonihmig](https://github.com/simonihmig))
+
+#### Internal
+* [#1533](https://github.com/kaliber5/ember-bootstrap/pull/1533) harmonize code paths used in FastBoot and non-FastBoot of <BsModal> ([@jelhan](https://github.com/jelhan))
+* [#1534](https://github.com/kaliber5/ember-bootstrap/pull/1534) Update ember-focus-trap ([@simonihmig](https://github.com/simonihmig))
+
+#### Committers: 3
+- Jeldrik Hanschke ([@jelhan](https://github.com/jelhan))
+- Simon Ihmig ([@simonihmig](https://github.com/simonihmig))
+- [@dependabot-preview[bot]](https://github.com/apps/dependabot-preview)
+
 ## v4.8.1 (2021-05-27)
 
 #### Bug Fixes
