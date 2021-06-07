@@ -1,5 +1,7 @@
 import { isArray } from '@ember/array';
 import Button from 'ember-bootstrap/components/bs-button';
+import { guidFor } from '@ember/object/internals';
+import { getOwnConfig, macroCondition } from '@embroider/macros';
 
 /**
  Internal component for button-group buttons
@@ -11,6 +13,8 @@ import Button from 'ember-bootstrap/components/bs-button';
  */
 export default class ButtonGroupButton extends Button {
   '__ember-bootstrap_subclass' = true;
+
+  formId = guidFor(this);
 
   /**
    * @property groupValue
@@ -39,5 +43,13 @@ export default class ButtonGroupButton extends Button {
       }
     }
     return false;
+  }
+
+  get isBS5ToggleButton() {
+    if (macroCondition(getOwnConfig().isBS5)) {
+      return this.args.buttonGroupType === 'radio' || this.args.buttonGroupType === 'checkbox';
+    } else {
+      return false;
+    }
   }
 }
