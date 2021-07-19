@@ -1,6 +1,6 @@
 # ember-bootstrap
 
-![CI](https://github.com/kaliber5/ember-bootstrap/workflows/CI/badge.svg)
+[![CI](https://github.com/kaliber5/ember-bootstrap/actions/workflows/ci.yml/badge.svg)](https://github.com/kaliber5/ember-bootstrap/actions/workflows/ci.yml)
 [![BrowserStack Status](https://www.browserstack.com/automate/badge.svg?badge_key=UzdFQU9hSW1FdjhLU3hDU0I3ZXF6WG1YSWp2TGRHaU9tYmhNT0pPdUNhQT0tLWZqTkNQUzBjNFUvcFhlWTA0YitETmc9PQ==--2f9e373be422d4fcc56c8d658afc55f1938a721e)](https://www.browserstack.com/automate/public-build/UzdFQU9hSW1FdjhLU3hDU0I3ZXF6WG1YSWp2TGRHaU9tYmhNT0pPdUNhQT0tLWZqTkNQUzBjNFUvcFhlWTA0YitETmc9PQ==--2f9e373be422d4fcc56c8d658afc55f1938a721e)
 [![Ember Observer Score](http://emberobserver.com/badges/ember-bootstrap.svg)](http://emberobserver.com/addons/ember-bootstrap)
 [![npm version](https://badge.fury.io/js/ember-bootstrap.svg)](https://badge.fury.io/js/ember-bootstrap)
