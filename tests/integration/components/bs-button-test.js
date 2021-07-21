@@ -17,12 +17,12 @@ module('Integration | Component | bs-button', function (hooks) {
 
   hooks.beforeEach(function (assert) {
     /*
-     * The custom assertions `rejectsErrorNotGoinghThroughEmberOnError` allows to test
+     * The custom assertions `rejectsErrorNotGoingThroughEmberOnError` allows to test
      * functionality, which rejects intentionally. It serves a similar use case as
      * `assert.throws` and `setupOnerror` utility provided by `@ember/test-helpers`.
      * Sadly for some use cases none of them is working.
      *
-     * `rejectsErrorNotGoinghThroughEmberOnError` should only be used for cases in which
+     * `rejectsErrorNotGoingThroughEmberOnError` should only be used for cases in which
      * neither  `assert.throws` nor `setupOnerror` could be used. Otherwise these two
      * methods to test rejecting promises should be preferred.
      */
