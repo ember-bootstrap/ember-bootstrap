@@ -7,45 +7,14 @@ import { test, testNotBS3, defaultButtonClass } from '../../helpers/bootstrap';
 import { gte } from 'ember-compatibility-helpers';
 import hbs from 'htmlbars-inline-precompile';
 import setupNoDeprecations from '../../helpers/setup-no-deprecations';
+import { setupAssertionsForErrorsNotHandledByEmberOnError } from '../../helpers/assert-errors';
 import a11yAudit from 'ember-a11y-testing/test-support/audit';
 import sinon from 'sinon';
-/* global QUnit */
 
 module('Integration | Component | bs-button', function (hooks) {
   setupRenderingTest(hooks);
   setupNoDeprecations(hooks);
-
-  hooks.beforeEach(function (assert) {
-    /*
-     * The custom assertions `rejectsErrorNotGoingThroughEmberOnError` allows to test
-     * functionality, which rejects intentionally. It serves a similar use case as
-     * `assert.throws` and `setupOnerror` utility provided by `@ember/test-helpers`.
-     * Sadly for some use cases none of them is working.
-     *
-     * `rejectsErrorNotGoingThroughEmberOnError` should only be used for cases in which
-     * neither  `assert.throws` nor `setupOnerror` could be used. Otherwise these two
-     * methods to test rejecting promises should be preferred.
-     */
-    assert.rejectsErrorNotGoingThroughEmberOnError = async function (callback, expectedError) {
-      // https://github.com/qunitjs/qunit/issues/1419#issuecomment-561739486
-      const ORIG_QUNIT_UNHANDLED_REJECTION = QUnit.onUnhandledRejection;
-      QUnit.onUnhandledRejection = (reason) => {
-        if (reason === expectedError) {
-          assert.step('error is thrown');
-          assert.equal(reason, expectedError);
-        } else {
-          // QUnit should report all other unhandled rejections and mark
-          // the test as failed
-          return ORIG_QUNIT_UNHANDLED_REJECTION.call(QUnit, reason);
-        }
-      };
-
-      await callback();
-
-      assert.verifySteps(['error is thrown']);
-      QUnit.onUnhandledRejection = ORIG_QUNIT_UNHANDLED_REJECTION;
-    };
-  });
+  setupAssertionsForErrorsNotHandledByEmberOnError(hooks);
 
   hooks.beforeEach(function () {
     this.actions = {};
@@ -184,7 +153,7 @@ module('Integration | Component | bs-button', function (hooks) {
     });
 
     const expectedError = new Error('error thrown for testing');
-    await assert.rejectsErrorNotGoingThroughEmberOnError(async () => {
+    await assert.rejectsErrorNotHandledByEmberOnError(async () => {
       deferredClickAction.reject(expectedError);
       await settled();
     }, expectedError);
@@ -216,7 +185,7 @@ module('Integration | Component | bs-button', function (hooks) {
     });
 
     const expectedError = new Error('error thrown for testing');
-    await assert.rejectsErrorNotGoingThroughEmberOnError(async () => {
+    await assert.rejectsErrorNotHandledByEmberOnError(async () => {
       deferredClickAction.reject(expectedError);
       await settled();
     }, expectedError);
@@ -317,7 +286,7 @@ module('Integration | Component | bs-button', function (hooks) {
     });
 
     const expectedError = new Error('error thrown for testing');
-    await assert.rejectsErrorNotGoingThroughEmberOnError(async () => {
+    await assert.rejectsErrorNotHandledByEmberOnError(async () => {
       deferredClickAction.reject(expectedError);
       await settled();
     }, expectedError);
@@ -350,7 +319,7 @@ module('Integration | Component | bs-button', function (hooks) {
     this.set('clickAction', async () => {
       throw expectedError;
     });
-    await assert.rejectsErrorNotGoingThroughEmberOnError(async () => {
+    await assert.rejectsErrorNotHandledByEmberOnError(async () => {
       await click('button');
     }, expectedError);
     assert.dom('button').hasText('isSettled');
@@ -457,7 +426,7 @@ module('Integration | Component | bs-button', function (hooks) {
 
     await render(hbs`<BsButton @onClick={{this.clickHandler}} />`);
 
-    await assert.rejectsErrorNotGoingThroughEmberOnError(async () => {
+    await assert.rejectsErrorNotHandledByEmberOnError(async () => {
       await click('button');
     }, expectedError);
   });
