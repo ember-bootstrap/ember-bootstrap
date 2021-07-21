@@ -5,11 +5,11 @@ export function setupAssertionsForErrorsNotHandledByEmberOnError(hooks) {
     /*
      * The custom assertion `rejectsErrorNotHandledByEmberOnError` allows to test
      * functionality, which rejects intentionally. It serves a similar use case as
-     * `assert.throws` and `setupOnerror` utility provided by `@ember/test-helpers`.
+     * `assert.rejects` and `setupOnerror` utility provided by `@ember/test-helpers`.
      * Sadly for some use cases none of them is working.
      *
      * `rejectsErrorNotHandledByEmberOnError` should only be used for cases in which
-     * neither  `assert.throws` nor `setupOnerror` could be used. Otherwise these two
+     * neither  `assert.rejects` nor `setupOnerror` could be used. Otherwise these two
      * methods to test rejecting promises should be preferred.
      */
     assert.rejectsErrorNotHandledByEmberOnError = async function (callback, expectedError) {
