@@ -1,5 +1,5 @@
 import { run } from '@ember/runloop';
-import { defer, reject, resolve } from 'rsvp';
+import { defer, resolve } from 'rsvp';
 import { module, skip } from 'qunit';
 import { setupRenderingTest } from 'ember-qunit';
 import { find, render, click, settled, waitUntil } from '@ember/test-helpers';
@@ -7,12 +7,14 @@ import { test, testNotBS3, defaultButtonClass } from '../../helpers/bootstrap';
 import { gte } from 'ember-compatibility-helpers';
 import hbs from 'htmlbars-inline-precompile';
 import setupNoDeprecations from '../../helpers/setup-no-deprecations';
+import { setupAssertionsForErrorsNotHandledByEmberOnError } from '../../helpers/assert-errors';
 import a11yAudit from 'ember-a11y-testing/test-support/audit';
 import sinon from 'sinon';
 
 module('Integration | Component | bs-button', function (hooks) {
   setupRenderingTest(hooks);
   setupNoDeprecations(hooks);
+  setupAssertionsForErrorsNotHandledByEmberOnError(hooks);
 
   hooks.beforeEach(function () {
     this.actions = {};
@@ -150,8 +152,11 @@ module('Integration | Component | bs-button', function (hooks) {
       return find('button').textContent.trim() === 'text for pending state';
     });
 
-    deferredClickAction.reject();
-    await settled();
+    const expectedError = new Error('error thrown for testing');
+    await assert.rejectsErrorNotHandledByEmberOnError(async () => {
+      deferredClickAction.reject(expectedError);
+      await settled();
+    }, expectedError);
     assert.dom('button').hasText('text for rejected state');
   });
 
@@ -179,8 +184,11 @@ module('Integration | Component | bs-button', function (hooks) {
       return find('button').textContent.trim() === 'default text';
     });
 
-    deferredClickAction.reject();
-    await settled();
+    const expectedError = new Error('error thrown for testing');
+    await assert.rejectsErrorNotHandledByEmberOnError(async () => {
+      deferredClickAction.reject(expectedError);
+      await settled();
+    }, expectedError);
     assert.dom('button').hasText('default text');
   });
 
@@ -277,8 +285,11 @@ module('Integration | Component | bs-button', function (hooks) {
       return find('button').textContent.trim() === 'isPending';
     });
 
-    deferredClickAction.reject();
-    await settled();
+    const expectedError = new Error('error thrown for testing');
+    await assert.rejectsErrorNotHandledByEmberOnError(async () => {
+      deferredClickAction.reject(expectedError);
+      await settled();
+    }, expectedError);
     assert.dom('button').hasText('isRejected');
 
     run(() => this.set('reset', true));
@@ -304,10 +315,13 @@ module('Integration | Component | bs-button', function (hooks) {
     run(() => this.set('reset', true));
     assert.dom('button').hasText('');
 
-    this.set('clickAction', () => {
-      return reject();
+    const expectedError = new Error('error thrown for testing');
+    this.set('clickAction', async () => {
+      throw expectedError;
     });
-    await click('button');
+    await assert.rejectsErrorNotHandledByEmberOnError(async () => {
+      await click('button');
+    }, expectedError);
     assert.dom('button').hasText('isSettled');
   });
 
@@ -401,6 +415,20 @@ module('Integration | Component | bs-button', function (hooks) {
     assert.equal(clickActionExecutionCount, 2);
 
     deferredClickAction.resolve();
+  });
+
+  test('it does not catch errors throws by @onClick event handlers', async function (assert) {
+    const expectedError = new Error('error thrown for testing');
+
+    this.set('clickHandler', async () => {
+      throw expectedError;
+    });
+
+    await render(hbs`<BsButton @onClick={{this.clickHandler}} />`);
+
+    await assert.rejectsErrorNotHandledByEmberOnError(async () => {
+      await click('button');
+    }, expectedError);
   });
 
   test('it passes accessibility checks', async function (assert) {
