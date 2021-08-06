@@ -11,6 +11,7 @@ import {
   test,
   visibilityClass,
   accordionItemClass,
+  testNotBS3,
 } from '../../../helpers/bootstrap';
 import setupNoDeprecations from '../../../helpers/setup-no-deprecations';
 import sinon from 'sinon';
@@ -61,7 +62,7 @@ module('Integration | Component | bs-accordion-item', function (hooks) {
     assert.dom(`.${accordionItemBodyClass()}`).hasText('CONTENT', `${accordionItemBodyClass()} has correct content`);
   });
 
-  test('accordion items can be disabled', async function (assert) {
+  testNotBS3('accordion items can be disabled', async function (assert) {
     let action = sinon.spy();
     this.actions.click = action;
     await render(
