@@ -27,7 +27,7 @@ Ember Bootstrap works and is fully [tested](https://github.com/kaliber5/ember-bo
 * Ember.js 3.16+ (including all optional features)
 * Ember CLI 3.15+
 * Bootstrap 3 and 4
-* all modern evergreen browsers (Chrome, Firefox, Safari, Edge) and IE 11 (the latter requires the use of the [Babel polyfill](https://github.com/babel/ember-cli-babel#polyfill)).
+* all modern evergreen browsers (Chrome, Firefox, Safari, Edge)
 * node.js 12+
 * FastBoot 1.0+
 * Embroider: we strive (and test) for maximum compatibility with Embroider, including the most aggressive setting 
