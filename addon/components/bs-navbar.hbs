@@ -13,10 +13,16 @@
   ) as |yieldedHash|}}
   {{#if (macroCondition (macroGetOwnConfig "isNotBS3"))}}
     <nav class="navbar {{this.positionClass}} {{this.typeClass}} {{this.breakpointClass}} {{this.backgroundClass}}" ...attributes>
-      {{#if this.fluid}}
-        {{yield yieldedHash}}
+      {{#if (macroCondition (macroGetOwnConfig "isBS4"))}}
+        {{#if this.fluid}}
+          {{yield yieldedHash}}
+        {{else}}
+          <div class="container">
+            {{yield yieldedHash}}
+          </div>
+        {{/if}}
       {{else}}
-        <div class="container">
+        <div class={{this.containerClass}}>
           {{yield yieldedHash}}
         </div>
       {{/if}}
