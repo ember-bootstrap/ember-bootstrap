@@ -95,6 +95,14 @@ export function formHelpTextClass() {
   return versionDependent('help-block', 'form-text');
 }
 
+export function accordionClass() {
+  return versionDependent('panel-group', 'accordion');
+}
+
+export function accordionItemClass() {
+  return versionDependent('panel', 'card');
+}
+
 export function accordionClassFor(type) {
   type = type ? `-${type}` : '';
   return versionDependent(`panel${type}`, type ? `bg${type}` : 'card');
