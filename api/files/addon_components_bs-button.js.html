@@ -404,7 +404,7 @@ export default class Button extends Component {
   /**
    * Property to create outline buttons (BS4+ only)
    *
-   * @property disabled
+   * @property outline
    * @type boolean
    * @default false
    * @public
@@ -445,35 +445,36 @@ export default class Button extends Component {
    * @private
    */
   @action
-  handleClick(e) {
-    let onClick = this.args.onClick;
-    let preventConcurrency = this.args.preventConcurrency;
+  async handleClick(e) {
+    const { bubble, onClick, preventConcurrency } = this.args;
 
     if (typeof onClick !== &#x27;function&#x27;) {
       return;
     }
 
-    if (!preventConcurrency || !this.isPending) {
-      let promise = onClick(this.args.value);
-      if (promise &amp;&amp; typeof promise.then === &#x27;function&#x27; &amp;&amp; !this.isDestroyed) {
-        this.state = &#x27;pending&#x27;;
-        promise.then(
-          () =&gt; {
-            if (!this.isDestroyed) {
-              this.state = &#x27;fulfilled&#x27;;
-            }
-          },
-          () =&gt; {
-            if (!this.isDestroyed) {
-              this.state = &#x27;rejected&#x27;;
-            }
-          }
-        );
-      }
+    // Shouldn&#x27;t we prevent propagation regardless if &#x60;@onClick&#x60; is a function?
+    if (!bubble) {
+      e.stopPropagation();
     }
 
-    if (!this.args.bubble) {
-      e.stopPropagation();
+    if (preventConcurrency &amp;&amp; this.isPending) {
+      return;
+    }
+
+    this.state = &#x27;pending&#x27;;
+
+    try {
+      await onClick(this.args.value);
+
+      if (!this.isDestroyed) {
+        this.state = &#x27;fulfilled&#x27;;
+      }
+    } catch (error) {
+      if (!this.isDestroyed) {
+        this.state = &#x27;rejected&#x27;;
+      }
+
+      throw error;
     }
   }
 

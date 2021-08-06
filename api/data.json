@@ -2,7 +2,7 @@
     "project": {
         "name": "ember-bootstrap",
         "description": "Twitter Bootstrap components for Ember.js",
-        "version": "v4.9.0"
+        "version": "v5.0.0-alpha.0"
     },
     "files": {
         "addon/components/bs-accordion/item/_body.js": {
@@ -775,7 +775,7 @@
             "extension_for": [],
             "namespace": "Components",
             "file": "addon/components/bs-button-group/button.js",
-            "line": 4,
+            "line": 6,
             "description": "Internal component for button-group buttons",
             "extends": "Components.Button",
             "access": "private",
@@ -1877,7 +1877,7 @@
         },
         {
             "file": "addon/components/bs-button-group/button.js",
-            "line": 15,
+            "line": 19,
             "itemtype": "property",
             "name": "groupValue",
             "access": "private",
@@ -1887,7 +1887,7 @@
         },
         {
             "file": "addon/components/bs-button-group/button.js",
-            "line": 20,
+            "line": 24,
             "itemtype": "property",
             "name": "buttonGroupType",
             "type": "string",
@@ -1898,7 +1898,7 @@
         },
         {
             "file": "addon/components/bs-button-group/button.js",
-            "line": 26,
+            "line": 30,
             "itemtype": "property",
             "name": "active",
             "type": "boolean",
@@ -4589,7 +4589,7 @@
             "line": 343,
             "description": "Property to create outline buttons (BS4+ only)",
             "itemtype": "property",
-            "name": "disabled",
+            "name": "outline",
             "type": "boolean",
             "default": "false",
             "access": "public",

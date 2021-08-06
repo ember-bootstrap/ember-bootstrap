@@ -61,6 +61,8 @@
     <pre class="prettyprint linenums">
 import { isArray } from &#x27;@ember/array&#x27;;
 import Button from &#x27;ember-bootstrap/components/bs-button&#x27;;
+import { guidFor } from &#x27;@ember/object/internals&#x27;;
+import { getOwnConfig, macroCondition } from &#x27;@embroider/macros&#x27;;
 
 /**
  Internal component for button-group buttons
@@ -72,6 +74,8 @@ import Button from &#x27;ember-bootstrap/components/bs-button&#x27;;
  */
 export default class ButtonGroupButton extends Button {
   &#x27;__ember-bootstrap_subclass&#x27; = true;
+
+  formId = guidFor(this);
 
   /**
    * @property groupValue
@@ -100,6 +104,14 @@ export default class ButtonGroupButton extends Button {
       }
     }
     return false;
+  }
+
+  get isBS5ToggleButton() {
+    if (macroCondition(getOwnConfig().isBS5)) {
+      return this.args.buttonGroupType === &#x27;radio&#x27; || this.args.buttonGroupType === &#x27;checkbox&#x27;;
+    } else {
+      return false;
+    }
   }
 }
 
