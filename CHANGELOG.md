@@ -1,3 +1,19 @@
+## v5.0.0-alpha.0 (2021-08-06)
+
+#### :boom: Breaking Change
+* [#1581](https://github.com/kaliber5/ember-bootstrap/pull/1581) BsButton should not silenty catch errors thrown by @onClick handler ([@jelhan](https://github.com/jelhan))
+
+#### Features
+* [#1540](https://github.com/kaliber5/ember-bootstrap/pull/1540) Add Bootstrap v5 support for ButtonGroup ([@simonihmig](https://github.com/simonihmig))
+
+#### Bug Fixes
+* [#1581](https://github.com/kaliber5/ember-bootstrap/pull/1581) BsButton should not silenty catch errors thrown by @onClick handler ([@jelhan](https://github.com/jelhan))
+
+#### Committers: 3
+- Jeldrik Hanschke ([@jelhan](https://github.com/jelhan))
+- Simon Ihmig ([@simonihmig](https://github.com/simonihmig))
+- [@dependabot-preview[bot]](https://github.com/apps/dependabot-preview)
+
 ## v4.9.0 (2021-05-31)
 
 #### Features
