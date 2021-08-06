@@ -70,7 +70,6 @@ jobs:
           #- ember-canary
           - ember-default-with-jquery
           - ember-classic
-          - ember-concurrency-2.x
           - embroider-safe
           - embroider-optimized
         bootstrap:

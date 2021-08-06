@@ -114,18 +114,6 @@ module.exports = async function () {
         name: 'node-tests',
         command: 'yarn run nodetest',
       },
-      {
-        name: 'ember-concurrency-2.x',
-        npm: {
-          devDependencies: {
-            'ember-concurrency': '^2.0.0-beta.1',
-            bootstrap: bootstrapVersion,
-          },
-          resolutions: {
-            'ember-concurrency': '^2.0.0-beta.1',
-          },
-        },
-      },
       embroiderSafe({
         env: {
           FASTBOOT_DISABLED: true,

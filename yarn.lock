@@ -1257,10 +1257,10 @@
     "@handlebars/parser" "^1.1.0"
     simple-html-tokenizer "^0.5.10"
 
-"@glimmer/tracking@^1.0.4":
-  version "1.1.2"
-  resolved "https://registry.yarnpkg.com/@glimmer/tracking/-/tracking-1.1.2.tgz#74e71be07b0a7066518d24044d2665d0cf8281eb"
-  integrity sha512-cyV32zsHh+CnftuRX84ALZpd2rpbDrhLhJnTXn9W//QpqdRZ5rdMsxSY9fOsj0CKEc706tmEU299oNnDc0d7tA==
+"@glimmer/tracking@^1.0.2", "@glimmer/tracking@^1.0.4":
+  version "1.0.4"
+  resolved "https://registry.yarnpkg.com/@glimmer/tracking/-/tracking-1.0.4.tgz#f1bc1412fe5e2236d0f8d502994a8f88af1bbb21"
+  integrity sha512-F+oT8I55ba2puSGIzInmVrv/8QA2PcK1VD+GWgFMhF6WC97D+uZX7BFg+a3s/2N4FVBq5KHE+QxZzgazM151Yw==
   dependencies:
     "@glimmer/env" "^0.1.7"
     "@glimmer/validator" "^0.44.0"
@@ -5941,10 +5941,10 @@ ember-cli-htmlbars@^4.2.0:
     strip-bom "^4.0.0"
     walk-sync "^2.0.2"
 
-ember-cli-htmlbars@^5.1.0, ember-cli-htmlbars@^5.3.1, ember-cli-htmlbars@^5.7.1:
-  version "5.7.2"
-  resolved "https://registry.yarnpkg.com/ember-cli-htmlbars/-/ember-cli-htmlbars-5.7.2.tgz#e0cd2fb3c20d85fe4c3e228e6f0590ee1c645ba8"
-  integrity sha512-Uj6R+3TtBV5RZoJY14oZn/sNPnc+UgmC8nb5rI4P3fR/gYoyTFIZSXiIM7zl++IpMoIrocxOrgt+mhonKphgGg==
+ember-cli-htmlbars@^5.1.0, ember-cli-htmlbars@^5.3.1, ember-cli-htmlbars@^5.6.3, ember-cli-htmlbars@^5.7.1:
+  version "5.7.1"
+  resolved "https://registry.yarnpkg.com/ember-cli-htmlbars/-/ember-cli-htmlbars-5.7.1.tgz#eb5b88c7d9083bc27665fb5447a9b7503b32ce4f"
+  integrity sha512-9laCgL4tSy48orNoQgQKEHp93MaqAs9ZOl7or5q+8iyGGJHW6sVXIYrVv5/5O9HfV6Ts8/pW1rSoaeKyLUE+oA==
   dependencies:
     "@ember/edition-utils" "^1.2.0"
     babel-plugin-htmlbars-inline-precompile "^5.0.0"
@@ -6283,25 +6283,16 @@ ember-compatibility-helpers@^1.1.2, ember-compatibility-helpers@^1.2.0, ember-co
     fs-extra "^9.1.0"
     semver "^5.4.1"
 
-"ember-concurrency@>=1.3.0 <3":
-  version "2.2.1"
-  resolved "https://registry.yarnpkg.com/ember-concurrency/-/ember-concurrency-2.2.1.tgz#4ed2e167036d00f7142312bc93c16f13ed9a259c"
-  integrity sha512-a4283Yq+jimxqoD5YaxQu7cXePHKqkNQfsT4fs0nYTz5PYbUd6wzUtelp6k8R1JTNPwDdxyVvUgu7yYoC8Sk5A==
+ember-concurrency@^2.1.2:
+  version "2.1.2"
+  resolved "https://registry.yarnpkg.com/ember-concurrency/-/ember-concurrency-2.1.2.tgz#a27178fb24951933fa72dd7cf1dca852693cc5c1"
+  integrity sha512-xC6L/SKuM08e9TK5igkSEwbAtkX2sqrj9Xap9G3zYSYdAIO7fcS6ZNEaD5e+dVXwPqH3tOIq41ZT7fqQ7mQ0KQ==
   dependencies:
-    "@glimmer/tracking" "^1.0.4"
-    ember-cli-babel "^7.26.6"
-    ember-cli-htmlbars "^5.7.1"
+    "@glimmer/tracking" "^1.0.2"
+    ember-cli-babel "^7.22.1"
+    ember-cli-htmlbars "^5.6.3"
     ember-compatibility-helpers "^1.2.0"
     ember-destroyable-polyfill "^2.0.2"
-
-ember-concurrency@^1.3.0:
-  version "1.3.0"
-  resolved "https://registry.yarnpkg.com/ember-concurrency/-/ember-concurrency-1.3.0.tgz#66f90fb792687470bcee1172adc0ebf33f5e8b9c"
-  integrity sha512-DwGlfWFpYyAkTwsedlEtK4t1DznJSculAW6Vq5S1C0shVPc5b6tTpHB2FFYisannSYkm+wpm1f1Pd40qiNPtOQ==
-  dependencies:
-    ember-cli-babel "^7.7.3"
-    ember-compatibility-helpers "^1.2.0"
-    ember-maybe-import-regenerator "^0.1.6"
 
 ember-decorators@^6.1.0:
   version "6.1.1"
