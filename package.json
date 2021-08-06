@@ -84,7 +84,7 @@
   },
   "devDependencies": {
     "@ember/optional-features": "^2.0.0",
-    "@ember/test-helpers": "^2.2.5",
+    "@ember/test-helpers": "^2.3.0",
     "@embroider/test-setup": "^0.41.0",
     "babel-eslint": "^10.1.0",
     "bootstrap": "^4.6.0",
@@ -99,7 +99,7 @@
     "ember-cli-browserstack": "^1.1.0",
     "ember-cli-content-security-policy": "^2.0.0-4",
     "ember-cli-dependency-checker": "^3.2.0",
-    "ember-cli-fastboot": "^2.2.3",
+    "ember-cli-fastboot": "https://gitpkg.now.sh/ember-fastboot/ember-cli-fastboot/packages/ember-cli-fastboot?master",
     "ember-cli-fastboot-testing": "^0.5.0",
     "ember-cli-inject-live-reload": "^2.0.2",
     "ember-cli-sri": "^2.1.1",

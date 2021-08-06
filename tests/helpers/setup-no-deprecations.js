@@ -11,6 +11,7 @@ const ignoredDeprecations = [
   /Versions of modifier manager capabilities prior to 3\.22 have been deprecated/,
   /Usage of the Ember Global is deprecated./,
   /import .* directly from/,
+  /Use of `assign` has been deprecated/,
 ];
 
 export default function setupNoDeprecations({ beforeEach, afterEach }) {
