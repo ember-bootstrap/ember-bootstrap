@@ -136,6 +136,25 @@ export default class Navbar extends Component {
   fluid = true;
 
   /**
+   * BS5 only: Allows to override the container layout, see https://getbootstrap.com/docs/5.0/components/navbar/#containers.
+   * Allowed values: `'sm'`, `'md'`, `'lg'`, `'xl'`, `'xxl'`, `'fluid'`, see https://getbootstrap.com/docs/5.0/layout/containers/.
+   * By default it is `.container-fluid`, or `.container` if the `@fluid` argument is set to false.
+   *
+   * @property container
+   * @type string
+   * @public
+   */
+
+  @computed('fluid', 'container')
+  get containerClass() {
+    if (this.container) {
+      return `container-${this.container}`;
+    }
+
+    return this.fluid ? 'container-fluid' : 'container';
+  }
+
+  /**
    * Specifies the position classes for the navbar, currently supporting none, "fixed-top", "fixed-bottom", and
    * either "static-top" (BS3) or "sticky-top" (BS4).
    * See the [bootstrap docs](http://getbootstrap.com/components/#navbar-fixed-top) for details.

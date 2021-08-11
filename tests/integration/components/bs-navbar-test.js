@@ -6,6 +6,8 @@ import {
   positionStickyClass,
   test,
   testBS3,
+  testBS4,
+  testBS5,
   testNotBS3,
   visibilityClass,
 } from '../../helpers/bootstrap';
@@ -33,13 +35,23 @@ module('Integration | Component | bs-navbar', function (hooks) {
     assert.dom('nav > div').hasClass('container-fluid', 'the div is a fluid container');
   });
 
-  testNotBS3('it has correct default markup', async function (assert) {
+  testBS4('it has correct default markup', async function (assert) {
     await render(hbs`<BsNavbar />`);
 
     assert.dom('nav').exists({ count: 1 }, 'there is only one nav element');
     assert.dom('nav').hasClass('navbar', 'the navbar has the navbar class');
     assert.dom('nav').hasClass('navbar-light', 'the navbar has the navbar-default class');
     // No container by default because fluid is automatic
+  });
+
+  testBS5('it has correct default markup', async function (assert) {
+    await render(hbs`<BsNavbar />`);
+
+    assert.dom('nav').exists({ count: 1 }, 'there is only one nav element');
+    assert.dom('nav').hasClass('navbar', 'the navbar has the navbar class');
+    assert.dom('nav').hasClass('navbar-light', 'the navbar has the navbar-default class');
+    assert.dom('nav > div').exists({ count: 1 }, 'there is a div right under the nav element');
+    assert.dom('nav > div').hasClass('container-fluid', 'the div is a fluid container');
   });
 
   test('it handles inverse navbars properly', async function (assert) {
@@ -53,6 +65,13 @@ module('Integration | Component | bs-navbar', function (hooks) {
     await render(hbs`<BsNavbar @fluid={{false}} />`);
 
     assert.dom('nav > div').hasClass('container', 'the wrapping div has the container class');
+    assert.dom('nav > div').hasNoClass('container-fluid', 'the wrapping div does not have the container-fluid class');
+  });
+
+  testBS5('it supports custom containers', async function (assert) {
+    await render(hbs`<BsNavbar @container="md" />`);
+
+    assert.dom('nav > div').hasClass('container-md', 'the wrapping div has the container class');
     assert.dom('nav > div').hasNoClass('container-fluid', 'the wrapping div does not have the container-fluid class');
   });
 
