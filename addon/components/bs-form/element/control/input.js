@@ -1,7 +1,6 @@
 import { tagName } from '@ember-decorators/component';
-import { computed, action } from '@ember/object';
+import { action } from '@ember/object';
 import Control from '../control';
-import { isEmpty } from '@ember/utils';
 import sizeClass from 'ember-bootstrap/utils/cp/size-class';
 import defaultValue from 'ember-bootstrap/utils/default-decorator';
 import deprecateSubclassing from 'ember-bootstrap/utils/deprecate-subclassing';
