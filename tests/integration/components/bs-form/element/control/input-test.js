@@ -1,7 +1,7 @@
 import { module, test } from 'qunit';
 import { testNotBS3 } from '../../../../../helpers/bootstrap';
 import { setupRenderingTest } from 'ember-qunit';
-import { render, find } from '@ember/test-helpers';
+import { render } from '@ember/test-helpers';
 import hbs from 'htmlbars-inline-precompile';
 import setupNoDeprecations from '../../../../../helpers/setup-no-deprecations';
 
