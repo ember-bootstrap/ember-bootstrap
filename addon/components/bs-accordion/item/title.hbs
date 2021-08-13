@@ -31,7 +31,7 @@
     {{/if}}
     {{#if (macroCondition (macroGetOwnConfig "isBS3"))}}
       <h4 class="panel-title">
-        <a href="#" class="{{if @disabled "disabled"}} {{if @collapsed "collapsed" "expanded"}}" disabled={{@disabled}}>
+        <a href="#" class="{{if @disabled "disabled"}} {{if @collapsed "collapsed" "expanded"}}">
           {{yield}}
         </a>
       </h4>
