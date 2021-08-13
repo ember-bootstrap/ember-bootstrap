@@ -10,6 +10,8 @@ import {
   accordionItemClickableSelector,
   test,
   visibilityClass,
+  accordionItemClass,
+  testNotBS3,
 } from '../../../helpers/bootstrap';
 import setupNoDeprecations from '../../../helpers/setup-no-deprecations';
 import sinon from 'sinon';
@@ -25,11 +27,12 @@ module('Integration | Component | bs-accordion-item', function (hooks) {
 
   test('accordion item has correct default markup', async function (assert) {
     await render(hbs`<BsAccordion::Item @title="TITLE">CONTENT</BsAccordion::Item>`);
-    assert.dom(`.${accordionClassFor()}`).exists(`has ${accordionClassFor()} class`);
+    assert.dom(`.${accordionItemClass()}`).exists(`has ${accordionItemClass()} class`);
     assert
-      .dom(`.${accordionClassFor()}`)
+      .dom(`.${accordionItemClass()}`)
       .hasClass(accordionClassFor('default'), `has ${accordionClassFor('default')} class`);
-    assert.dom(`.${accordionItemHeadClass()}`).hasClass('collapsed', `has collapsed class`);
+    assert.dom(`.${accordionItemClass()} .${accordionItemHeadClass()}`).exists();
+    assert.dom(accordionItemClickableSelector()).hasClass('collapsed', `has collapsed class`);
     assert.dom('.collapse').exists();
     assert.dom('.collapse').hasNoClass(visibilityClass(), '.collapse is hidden');
     assert.dom(accordionTitleSelector()).hasText('TITLE', `${accordionTitleSelector()} has correct title`);
@@ -43,7 +46,7 @@ module('Integration | Component | bs-accordion-item', function (hooks) {
       hbs`<BsAccordion::Item @value={{1}} @onClick={{action "click"}} @title="TITLE">CONTENT</BsAccordion::Item>`
     );
 
-    await click(`.${accordionItemHeadClass()}`);
+    await click(accordionItemClickableSelector());
     assert.ok(action.calledWith(1), 'onClick action has been called.');
   });
 
@@ -59,7 +62,7 @@ module('Integration | Component | bs-accordion-item', function (hooks) {
     assert.dom(`.${accordionItemBodyClass()}`).hasText('CONTENT', `${accordionItemBodyClass()} has correct content`);
   });
 
-  test('accordion items can be disabled', async function (assert) {
+  testNotBS3('accordion items can be disabled', async function (assert) {
     let action = sinon.spy();
     this.actions.click = action;
     await render(
@@ -67,8 +70,9 @@ module('Integration | Component | bs-accordion-item', function (hooks) {
     );
     assert
       .dom(accordionItemClickableSelector())
-      .hasClass('disabled', 'Clickable accordion selector has `.disabled` class');
-    assert.dom(`.${accordionClassFor()}`).hasClass('disabled', 'entire item has `.disabled` class');
+      .hasClass('disabled', 'Clickable accordion selector has `.disabled` class')
+      .hasAttribute('disabled');
+    assert.dom(`.${accordionItemClass()}`).hasClass('disabled', 'entire item has `.disabled` class');
     try {
       await click(accordionItemClickableSelector());
     } catch (e) {

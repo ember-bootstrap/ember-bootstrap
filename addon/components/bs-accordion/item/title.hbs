@@ -1,21 +1,21 @@
 {{!-- template-lint-disable no-nested-interactive --}}
 {{!-- @todo fix this, see https://github.com/kaliber5/ember-bootstrap/issues/999 --}}
 <div
-  class="{{if @collapsed "collapsed" "expanded"}} {{if (macroCondition (macroGetOwnConfig "isNotBS3")) "card-header"}} {{if (macroCondition (macroGetOwnConfig "isBS3")) "panel-heading"}}"
+  class="{{if (macroCondition (macroGetOwnConfig "isNotBS3")) "card-header"}} {{if (macroCondition (macroGetOwnConfig "isBS3")) "panel-heading"}}"
   role="tab"
   ...attributes
   {{on "click" this.handleClick}}
 >
   {{#if (macroCondition (macroGetOwnConfig "isNotBS3"))}}
     <h5 class="mb-0">
-      <button class="btn btn-link {{if @disabled "disabled"}}" type="button" disabled={{@disabled}}>
+      <button class="btn btn-link {{if @disabled "disabled"}} {{if @collapsed "collapsed" "expanded"}}" type="button" disabled={{@disabled}}>
         {{yield}}
       </button>
     </h5>
   {{/if}}
   {{#if (macroCondition (macroGetOwnConfig "isBS3"))}}
     <h4 class="panel-title">
-      <a href="#" class={{if @disabled "disabled"}}>
+      <a href="#" class="{{if @disabled "disabled"}} {{if @collapsed "collapsed" "expanded"}}" >
         {{yield}}
       </a>
     </h4>
