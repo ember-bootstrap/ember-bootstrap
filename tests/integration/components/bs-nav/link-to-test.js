@@ -3,7 +3,6 @@ import { setupRenderingTest } from 'ember-qunit';
 import { render } from '@ember/test-helpers';
 import hbs from 'htmlbars-inline-precompile';
 import setupNoDeprecations from '../../../helpers/setup-no-deprecations';
-import { testNotBS3 } from '../../../helpers/bootstrap';
 
 module('Integration | Component | bs-nav/link-to', function (hooks) {
   setupRenderingTest(hooks);
@@ -44,7 +43,7 @@ module('Integration | Component | bs-nav/link-to', function (hooks) {
       assert.dom('a').hasAttribute('href', '/acceptance/link/1?foo=bar');
     });
 
-    testNotBS3('link has nav-link class', async function (assert) {
+    test('link has nav-link class', async function (assert) {
       await render(hbs`
         <BsNav as |nav|>
           <nav.item>
@@ -95,7 +94,7 @@ module('Integration | Component | bs-nav/link-to', function (hooks) {
       assert.dom('a').hasAttribute('href', '/acceptance/link/1?foo=bar');
     });
 
-    testNotBS3('link has nav-link class', async function (assert) {
+    test('link has nav-link class', async function (assert) {
       await render(hbs`
         <BsNav as |nav|>
           <nav.item>

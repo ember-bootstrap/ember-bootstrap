@@ -1,7 +1,7 @@
 import { module } from 'qunit';
 import { setupRenderingTest } from 'ember-qunit';
 import { render } from '@ember/test-helpers';
-import { test, testBS3, testNotBS3 } from '../../helpers/bootstrap';
+import { test } from '../../helpers/bootstrap';
 import hbs from 'htmlbars-inline-precompile';
 import setupNoDeprecations from '../../helpers/setup-no-deprecations';
 import a11yAudit from 'ember-a11y-testing/test-support/audit';
@@ -23,18 +23,7 @@ module('Integration | Component | bs-nav', function (hooks) {
     assert.dom('ul').hasClass('nav', 'has nav class');
   });
 
-  testBS3('it supports bootstrap options', async function (assert) {
-    // Template block usage:
-    await render(hbs`
-      <BsNav @justified={{true}} @stacked={{true}} @type="pills" />
-    `);
-
-    assert.dom('ul').hasClass('nav-pills', 'has pills class');
-    assert.dom('ul').hasClass('nav-justified', 'has justified class');
-    assert.dom('ul').hasClass('nav-stacked', 'has stacked class');
-  });
-
-  testNotBS3('it supports bootstrap options', async function (assert) {
+  test('it supports bootstrap options', async function (assert) {
     // Template block usage:
     await render(hbs`
       <BsNav @justified={{true}} @stacked={{true}} @fill={{true}} @type="pills" />

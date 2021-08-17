@@ -1,18 +1,18 @@
 import Component from '@ember/component';
 import { module, skip } from 'qunit';
 import { setupRenderingTest } from 'ember-qunit';
-import { render, click, focus, blur, triggerEvent, waitUntil, settled } from '@ember/test-helpers';
+import { blur, click, focus, render, settled, triggerEvent, waitUntil } from '@ember/test-helpers';
 import hbs from 'htmlbars-inline-precompile';
 import {
-  test,
-  versionDependent,
-  testRequiringFocus,
-  visibilityClass,
-  tooltipPositionClass,
-  tooltipArrowClass,
   delay,
+  test,
+  testRequiringFocus,
+  tooltipArrowClass,
+  tooltipPositionClass,
+  versionDependent,
+  visibilityClass,
 } from '../../helpers/bootstrap';
-import { setupForPositioning, assertPositioning } from '../../helpers/contextual-help';
+import { assertPositioning, setupForPositioning } from '../../helpers/contextual-help';
 import setupStylesheetSupport from '../../helpers/setup-stylesheet-support';
 import setupNoDeprecations from '../../helpers/setup-no-deprecations';
 import { gte } from 'ember-compatibility-helpers';
@@ -385,7 +385,7 @@ module('Integration | Component | bs-tooltip', function (hooks) {
   test('should position tooltip arrow centered', async function (assert) {
     this.insertCSSRule('.margin-top { margin-top: 200px; }');
 
-    let expectedArrowPosition = versionDependent(95, 94, 94);
+    let expectedArrowPosition = versionDependent(94, 94);
     await render(hbs`
       <div id="ember-bootstrap-wormhole"></div>
       <div id="wrapper">
@@ -410,7 +410,7 @@ module('Integration | Component | bs-tooltip', function (hooks) {
     this.insertCSSRule('.margin-top { margin-top: 200px; }');
     this.insertCSSRule('#target { width: 100px; padding: 0; border: none; }');
 
-    let expectedArrowPosition = versionDependent(145, 144, 144);
+    let expectedArrowPosition = versionDependent(144, 144);
 
     await render(hbs`
       <div id="ember-bootstrap-wormhole"></div>

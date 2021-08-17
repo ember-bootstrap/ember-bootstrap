@@ -21,9 +21,7 @@ import {
   formFeedbackClass,
   formFeedbackElement,
   test,
-  testBS3,
   testBS4,
-  testNotBS3,
   testRequiringFocus,
   validationErrorClass,
   validationSuccessClass,
@@ -51,20 +49,6 @@ module('Integration | Component | bs-form', function (hooks) {
   hooks.beforeEach(function () {
     this.actions = {};
     this.send = (actionName, ...args) => this.actions[actionName].apply(this, args);
-  });
-
-  testBS3('form has correct CSS class', async function (assert) {
-    let classSpec = {
-      vertical: 'form',
-      horizontal: 'form-horizontal',
-      inline: 'form-inline',
-    };
-
-    for (let layout in classSpec) {
-      this.set('formLayout', layout);
-      await render(hbs`<BsForm @formLayout={{this.formLayout}}>Test</BsForm>`);
-      assert.dom('form').hasClass(classSpec[layout], `form has expected class for ${layout}`);
-    }
   });
 
   testBS4('form has correct markup', async function (assert) {
@@ -1102,15 +1086,7 @@ module('Integration | Component | bs-form', function (hooks) {
     assert.dom('input').doesNotHaveAttribute('disabled');
   });
 
-  testBS3('it uses default value for formLayout argument if undefined', async function (assert) {
-    this.set('formLayout', undefined);
-    await render(hbs`
-        <BsForm @formLayout={{this.formLayout}} />
-      `);
-    assert.dom('form').hasClass('form');
-  });
-
-  testNotBS3('it uses default value for formLayout argument if undefined', async function (assert) {
+  test('it uses default value for formLayout argument if undefined', async function (assert) {
     this.set('formLayout', undefined);
     await render(hbs`
         <BsForm @formLayout={{this.formLayout}} />

@@ -1,5 +1,4 @@
 import { module, test } from 'qunit';
-import { testNotBS3 } from '../../../../../helpers/bootstrap';
 import { setupRenderingTest } from 'ember-qunit';
 import { render } from '@ember/test-helpers';
 import hbs from 'htmlbars-inline-precompile';
@@ -21,7 +20,7 @@ module('Integration | Component | bs form/element/control/input', function (hook
     assert.dom('input[type=text]').hasValue('FOO');
   });
 
-  testNotBS3('support size classes', async function (assert) {
+  test('support size classes', async function (assert) {
     await render(hbs`<BsForm::Element::Control::Input @size="lg" />`);
     assert.dom('input').hasClass('form-control-lg', 'input has large class');
 

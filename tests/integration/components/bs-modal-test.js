@@ -1,8 +1,8 @@
 import Component from '@ember/component';
 import { module } from 'qunit';
 import { setupRenderingTest } from 'ember-qunit';
-import { render, click, find, triggerEvent, settled, waitFor, waitUntil } from '@ember/test-helpers';
-import { test, testNotBS3, visibilityClass } from '../../helpers/bootstrap';
+import { click, find, render, settled, triggerEvent, waitFor, waitUntil } from '@ember/test-helpers';
+import { test, visibilityClass } from '../../helpers/bootstrap';
 import hbs from 'htmlbars-inline-precompile';
 import setupNoDeprecations from '../../helpers/setup-no-deprecations';
 import sinon from 'sinon';
@@ -257,7 +257,7 @@ module('Integration | Component | bs-modal', function (hooks) {
       skipTransition(undefined);
     });
 
-    testNotBS3('it animates opening the modal', async function (assert) {
+    test('it animates opening the modal', async function (assert) {
       this.set('open', false);
       await render(hbs`<BsModal @open={{this.open}}>Hello world!</BsModal>`);
 
@@ -276,7 +276,7 @@ module('Integration | Component | bs-modal', function (hooks) {
       );
     });
 
-    testNotBS3('it animates closing the modal', async function (assert) {
+    test('it animates closing the modal', async function (assert) {
       await render(hbs`
         <BsModal as |modal|>
           <button {{on "click" modal.close}} type="button">close</button>

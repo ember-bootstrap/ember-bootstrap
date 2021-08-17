@@ -1,9 +1,8 @@
 import hbs from 'htmlbars-inline-precompile';
-import { module } from 'qunit';
-import { render, click, triggerEvent, getContext } from '@ember/test-helpers';
+import { module, skip } from 'qunit';
+import { click, getContext, render, triggerEvent } from '@ember/test-helpers';
 import { setupRenderingTest } from 'ember-qunit';
-import { test, testBS3, testNotBS3, delay, visuallyHiddenClass } from '../../helpers/bootstrap';
-import { skip } from 'qunit';
+import { delay, test, visuallyHiddenClass } from '../../helpers/bootstrap';
 import setupNoDeprecations from '../../helpers/setup-no-deprecations';
 import a11yAudit from 'ember-a11y-testing/test-support/audit';
 import sinon from 'sinon';
@@ -71,18 +70,7 @@ module('Integration | Component | bs-carousel', function (hooks) {
     assert.dom('.carousel-inner').exists({ count: 1 }, 'has carousel-inner');
   });
 
-  testBS3('carousel has correct controls markup', async function (assert) {
-    await render(hbs`<BsCarousel @interval={{0}}></BsCarousel>`);
-
-    let left = this.element.querySelector('.left');
-    let right = this.element.querySelector('.right');
-    assert.dom(left).hasClass('carousel-control', 'has left control class names');
-    assert.dom(right).hasClass('carousel-control', 'has right control class names');
-    assert.ok(left.querySelector(`.${visuallyHiddenClass()}`), 'left control has sr-only');
-    assert.ok(right.querySelector(`.${visuallyHiddenClass()}`), 'right control has sr-only');
-  });
-
-  testNotBS3('carousel has correct controls markup', async function (assert) {
+  test('carousel has correct controls markup', async function (assert) {
     await render(hbs`<BsCarousel @interval={{0}}></BsCarousel>`);
 
     let prev = this.element.querySelectorAll('.carousel-control-prev');
@@ -93,14 +81,7 @@ module('Integration | Component | bs-carousel', function (hooks) {
     assert.ok(next[0].querySelector(`.${visuallyHiddenClass()}`), 'right control has sr-only');
   });
 
-  testBS3('carousel has correct indicators and slides markup', async function (assert) {
-    await render(hbs`<BsCarousel @interval={{0}} as |car|>{{car.slide}}{{car.slide}}</BsCarousel>`);
-
-    assert.dom('.carousel-indicators li').exists({ count: 2 }, 'has right number of indicators');
-    assert.dom('.carousel-inner .item').exists({ count: 2 }, 'has right number of slides');
-  });
-
-  testNotBS3('carousel has correct indicators and slides markup', async function (assert) {
+  test('carousel has correct indicators and slides markup', async function (assert) {
     await render(hbs`<BsCarousel @interval={{0}} as |car|>{{car.slide}}{{car.slide}}</BsCarousel>`);
 
     assert.dom('.carousel-indicators li').exists({ count: 2 }, 'has right number of indicators');
@@ -109,7 +90,7 @@ module('Integration | Component | bs-carousel', function (hooks) {
 
   // Parameters
 
-  testNotBS3('carousel transition="fade" has correct markup', async function (assert) {
+  test('carousel transition="fade" has correct markup', async function (assert) {
     await render(hbs`<BsCarousel @interval={{0}} @transition="fade" />`);
     assert.dom('.carousel').hasClass('carousel-fade', 'has carousel-fade class');
   });

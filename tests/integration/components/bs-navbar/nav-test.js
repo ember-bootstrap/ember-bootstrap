@@ -3,7 +3,6 @@ import { setupRenderingTest } from 'ember-qunit';
 import { render } from '@ember/test-helpers';
 import hbs from 'htmlbars-inline-precompile';
 import setupNoDeprecations from '../../../helpers/setup-no-deprecations';
-import { testNotBS3 } from '../../../helpers/bootstrap';
 
 module('Integration | Component | bs-navbar/nav', function (hooks) {
   setupRenderingTest(hooks);
@@ -42,7 +41,7 @@ module('Integration | Component | bs-navbar/nav', function (hooks) {
     assert.dom('.navbar-justified').doesNotExist('the justified class was not applied');
   });
 
-  testNotBS3('link has nav-link class', async function (assert) {
+  test('link has nav-link class', async function (assert) {
     this.owner.setupRouter();
 
     await render(hbs`
