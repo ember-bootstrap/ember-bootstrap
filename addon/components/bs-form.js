@@ -142,9 +142,7 @@ export default class Form extends Component {
   @computed('formLayout')
   get layoutClass() {
     let layout = this.formLayout;
-    if (macroCondition(getOwnConfig().isBS3)) {
-      return layout === 'vertical' ? 'form' : `form-${layout}`;
-    } else if (macroCondition(getOwnConfig().isBS4)) {
+    if (macroCondition(getOwnConfig().isBS4)) {
       return layout === 'inline' ? 'form-inline' : null;
     } else {
       return null;

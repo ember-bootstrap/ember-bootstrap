@@ -619,9 +619,7 @@ export default class FormElement extends FormGroup {
    * @public
    */
   @arg
-  doNotShowValidationForEventTargets = macroCondition(getOwnConfig().isBS3)
-    ? ['.input-group-addon', '.input-group-btn']
-    : ['.input-group-append', '.input-group-prepend'];
+  doNotShowValidationForEventTargets = ['.input-group-append', '.input-group-prepend'];
 
   /**
    * The validation ("error" (BS3)/"danger" (BS4), "warning", or "success") or null if no validation is to be shown. Automatically computed from the
@@ -860,49 +858,6 @@ export default class FormElement extends FormGroup {
           id: `ember-bootstrap.removed-argument.form-element#${argument}`,
         });
       });
-    }
-  }
-
-  /*
-   * adjust feedback icon position
-   *
-   * Bootstrap documentation:
-   *  Manual positioning of feedback icons is required for [...] input groups
-   *  with an add-on on the right. [...] For input groups, adjust the right
-   *  value to an appropriate pixel value depending on the width of your addon.
-   */
-  @action
-  adjustFeedbackIcons(el) {
-    if (macroCondition(getOwnConfig().isBS3)) {
-      let feedbackIcon;
-      // validation state icons are only shown if form element has feedback
-      if (
-        !this.isDestroying &&
-        this.hasFeedback &&
-        // and form group element has
-        // an input-group
-        el.querySelector('.input-group') &&
-        // an addon or button on right side
-        el.querySelector('.input-group input + .input-group-addon, .input-group input + .input-group-btn') &&
-        // an icon showing validation state
-        (feedbackIcon = el.querySelector('.form-control-feedback'))
-      ) {
-        // clear existing adjustment
-        feedbackIcon.style.right = '';
-
-        let defaultPosition = 0;
-        let match = getComputedStyle(feedbackIcon).right.match(/^(\d+)px$/);
-        if (match) {
-          defaultPosition = parseInt(match[1]);
-        }
-        // Bootstrap documentation:
-        //  We do not support multiple add-ons (.input-group-addon or .input-group-btn) on a single side.
-        // therefore we could rely on having only one input-group-addon or input-group-btn
-        let inputGroupWidth = el.querySelector('input + .input-group-addon, input + .input-group-btn').offsetWidth;
-        let adjustedPosition = defaultPosition + inputGroupWidth;
-
-        feedbackIcon.style.right = `${adjustedPosition}px`;
-      }
     }
   }
 

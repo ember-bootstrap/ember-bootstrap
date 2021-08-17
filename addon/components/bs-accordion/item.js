@@ -80,7 +80,7 @@ export default class AccordionItem extends Component {
   @arg
   type = 'default';
 
-  @typeClass(macroCondition(getOwnConfig().isNotBS3) ? 'bg' : 'panel', 'type')
+  @typeClass('bg', 'type')
   typeClass;
 
   /**

@@ -1,7 +1,7 @@
 <div
   {{!-- template-lint-disable no-positive-tabindex --}}{{!-- @todo --}}
   tabindex={{this.tabindex}}
-  class="carousel slide {{if (macroCondition (macroGetOwnConfig "isNotBS3")) (if this.carouselFade "carousel-fade")}}"
+  class="carousel slide {{if this.carouselFade "carousel-fade"}}"
   ...attributes
   {{on "keydown" this.handleKeyDown}}
   {{on "mouseenter" this.handleMouseEnter}}
@@ -30,12 +30,12 @@
   </div>
 
   {{#if this.showControls}}
-    <a class="{{if (macroCondition (macroGetOwnConfig "isNotBS3")) "carousel-control-prev"}}{{if (macroCondition (macroGetOwnConfig "isBS3")) "carousel-control left"}}" href="#{{this.elementId}}" {{on "click" this.toPrevSlide}} role="button">
-      <span aria-hidden="true" class="{{if (macroCondition (macroGetOwnConfig "isNotBS3")) "carousel-control-prev-icon"}}{{if (macroCondition (macroGetOwnConfig "isBS3")) "icon-prev"}}"></span>
+    <a class="carousel-control-prev" href="#{{this.elementId}}" {{on "click" this.toPrevSlide}} role="button">
+      <span aria-hidden="true" class="carousel-control-prev-icon"></span>
       <span class={{if (macroCondition (macroGetOwnConfig "isBS5")) "visually-hidden" "sr-only"}}>{{this.prevControlLabel}}</span>
     </a>
-    <a class="{{if (macroCondition (macroGetOwnConfig "isNotBS3")) "carousel-control-next"}}{{if (macroCondition (macroGetOwnConfig "isBS3")) "carousel-control right"}}" href="#{{this.elementId}}" {{on "click" this.toNextSlide}} role="button">
-      <span aria-hidden="true" class="{{if (macroCondition (macroGetOwnConfig "isNotBS3")) "carousel-control-next-icon"}}{{if (macroCondition (macroGetOwnConfig "isBS3")) "icon-next"}}"></span>
+    <a class="carousel-control-next" href="#{{this.elementId}}" {{on "click" this.toNextSlide}} role="button">
+      <span aria-hidden="true" class="carousel-control-next-icon"></span>
       <span class={{if (macroCondition (macroGetOwnConfig "isBS5")) "visually-hidden" "sr-only"}}>{{this.nextControlLabel}}</span>
     </a>
   {{/if}}

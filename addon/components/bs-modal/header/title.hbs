@@ -1,10 +1,3 @@
-{{#if (macroCondition (macroGetOwnConfig "isNotBS3"))}}
-  <h5 class="modal-title" ...attributes>
-    {{yield}}
-  </h5>
-{{/if}}
-{{#if (macroCondition (macroGetOwnConfig "isBS3"))}}
-  <h4 class="modal-title" ...attributes>
-    {{yield}}
-  </h4>
-{{/if}}
+<h5 class="modal-title" ...attributes>
+  {{yield}}
+</h5>
