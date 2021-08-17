@@ -58,8 +58,8 @@ module.exports = {
     let options = Object.assign({}, defaultOptions, app.options['ember-bootstrap']);
 
     if (options.bootstrapVersion === 3) {
-      this.warn(
-        'Support for Bootstrap 3 has been deprecated and will be removed in ember-bootstrap v5! Consider migrating to Bootstrap v4 or v5!'
+      throw new SilentError(
+        'Support for Bootstrap 3 has been removed as of ember-bootstrap v5! Consider migrating to Bootstrap v4 or v5, or downgrade ember-bootstrap to v4!'
       );
     }
 
@@ -98,10 +98,8 @@ module.exports = {
     this.import(path.join(vendorPath, `bs${options.bootstrapVersion}.css`));
 
     // setup config for @embroider/macros
-    this.options['@embroider/macros'].setOwnConfig.isBS3 = this.getBootstrapVersion() === 3;
     this.options['@embroider/macros'].setOwnConfig.isBS4 = this.getBootstrapVersion() === 4;
     this.options['@embroider/macros'].setOwnConfig.isBS5 = this.getBootstrapVersion() === 5;
-    this.options['@embroider/macros'].setOwnConfig.isNotBS3 = this.getBootstrapVersion() !== 3;
     this.options['@embroider/macros'].setOwnConfig.isNotBS5 = this.getBootstrapVersion() !== 5;
     this.options['@embroider/macros'].setOwnConfig.version = require('./package.json').version;
   },
@@ -113,21 +111,19 @@ module.exports = {
   },
 
   validateDependencies() {
-    if (this.getBootstrapVersion() >= 4) {
-      let checker = new VersionChecker(this.project);
-      let dep = checker.for('bootstrap');
+    let checker = new VersionChecker(this.project);
+    let dep = checker.for('bootstrap');
 
-      if (this.getBootstrapVersion() === 4 && !dep.gte(minimumBS4Version)) {
-        this.warn(
-          `For Bootstrap 4 support this version of ember-bootstrap requires at least Bootstrap ${minimumBS4Version}, but you have ${dep.version}. Please run \`ember generate ember-bootstrap\` to update your dependencies!`
-        );
-      }
+    if (this.getBootstrapVersion() === 4 && !dep.gte(minimumBS4Version)) {
+      this.warn(
+        `For Bootstrap 4 support this version of ember-bootstrap requires at least Bootstrap ${minimumBS4Version}, but you have ${dep.version}. Please run \`ember generate ember-bootstrap\` to update your dependencies!`
+      );
+    }
 
-      if (this.getBootstrapVersion() === 5 && !dep.gte(minimumBS5Version)) {
-        this.warn(
-          `For Bootstrap 5 support this version of ember-bootstrap requires at least Bootstrap ${minimumBS5Version}, but you have ${dep.version}. Please run \`ember generate ember-bootstrap\` to update your dependencies!`
-        );
-      }
+    if (this.getBootstrapVersion() === 5 && !dep.gte(minimumBS5Version)) {
+      this.warn(
+        `For Bootstrap 5 support this version of ember-bootstrap requires at least Bootstrap ${minimumBS5Version}, but you have ${dep.version}. Please run \`ember generate ember-bootstrap\` to update your dependencies!`
+      );
     }
   },
 
@@ -147,18 +143,6 @@ module.exports = {
           );
         }
         break;
-      case 'less':
-        if (this.getBootstrapVersion() >= 4) {
-          throw new SilentError(
-            'There is no Less support for Bootstrap 4 or higher! Falling back to importing static CSS. Consider switching to Sass for preprocessor support!'
-          );
-        }
-        if (!('bootstrap' in dependencies)) {
-          this.warn(
-            'Npm package "bootstrap" is missing, but is typically required for Less support. Please run `ember generate ember-bootstrap` to install the missing dependencies!'
-          );
-        }
-        break;
     }
     return true;
   },
@@ -166,25 +150,9 @@ module.exports = {
   getBootstrapStylesPath() {
     switch (this.preprocessor) {
       case 'sass':
-        if (this.getBootstrapVersion() >= 4) {
-          return this.resolvePackagePath('bootstrap/scss');
-        } else {
-          return this.resolvePackagePath('bootstrap-sass/assets/stylesheets');
-        }
-      case 'less':
-        return this.resolvePackagePath('bootstrap/less');
+        return this.resolvePackagePath('bootstrap/scss');
       default:
         return this.resolvePackagePath('bootstrap/dist/css');
-    }
-  },
-
-  getBootstrapFontPath() {
-    switch (this.preprocessor) {
-      case 'sass':
-        return this.resolvePackagePath('bootstrap-sass/assets/fonts');
-      case 'less':
-      default:
-        return this.resolvePackagePath('bootstrap/fonts');
     }
   },
 
@@ -209,14 +177,6 @@ module.exports = {
     if (this.hasPreprocessor()) {
       return new Funnel(this.getBootstrapStylesPath(), {
         destDir: 'ember-bootstrap',
-      });
-    }
-  },
-
-  treeForPublic() {
-    if (this.getBootstrapVersion() === 3 && this.bootstrapOptions.importBootstrapFont) {
-      return new Funnel(this.getBootstrapFontPath(), {
-        destDir: 'fonts',
       });
     }
   },
