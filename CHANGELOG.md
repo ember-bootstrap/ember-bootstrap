@@ -1,3 +1,25 @@
+
+## v5.0.0-alpha.1 (2021-08-17)
+
+#### :boom: Breaking Change
+* [#1596](https://github.com/kaliber5/ember-bootstrap/pull/1596) Drop IE11 support ([@simonihmig](https://github.com/simonihmig))
+* [#1595](https://github.com/kaliber5/ember-bootstrap/pull/1595) Drop node 10 support ([@simonihmig](https://github.com/simonihmig))
+* [#1593](https://github.com/kaliber5/ember-bootstrap/pull/1593) Drop support for ember-concurrency 1.x as a dependency ([@simonihmig](https://github.com/simonihmig))
+
+#### Features
+* [#1561](https://github.com/kaliber5/ember-bootstrap/pull/1561) Add Bootstrap v5 support for accordions ([@simonihmig](https://github.com/simonihmig))
+* [#1537](https://github.com/kaliber5/ember-bootstrap/pull/1537) Remove `.btn-block` support for Bootstrap 5 ([@simonihmig](https://github.com/simonihmig))
+* [#1597](https://github.com/kaliber5/ember-bootstrap/pull/1597) Add Bootstrap v5 support for Navbars ([@simonihmig](https://github.com/simonihmig))
+
+#### Bug Fixes
+* [#1590](https://github.com/kaliber5/ember-bootstrap/pull/1590) Fix `.collapsed` markup for accordions ([@simonihmig](https://github.com/simonihmig))
+
+#### Internal
+* [#1594](https://github.com/kaliber5/ember-bootstrap/pull/1594) Fix tests for Ember 4.0 Canary ([@simonihmig](https://github.com/simonihmig))
+
+#### Committers: 1
+- Simon Ihmig ([@simonihmig](https://github.com/simonihmig))
+
 ## v5.0.0-alpha.0 (2021-08-06)
 
 #### :boom: Breaking Change
