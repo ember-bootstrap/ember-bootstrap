@@ -1,24 +1,9 @@
 import { module, test } from 'qunit';
 import { setupRenderingTest } from 'ember-qunit';
 import { render } from '@ember/test-helpers';
-import { testBS4, testBS5, validationErrorClass } from '../../../helpers/bootstrap';
+import { testBS4, testBS5 } from '../../../helpers/bootstrap';
 import hbs from 'htmlbars-inline-precompile';
 import setupNoDeprecations from '../../../helpers/setup-no-deprecations';
-
-const validations = {
-  success: {
-    formGroupClasses: ['has-feedback', 'has-success'],
-    iconClasses: ['glyphicon', 'glyphicon-ok'],
-  },
-  warning: {
-    formGroupClasses: ['has-feedback', 'has-warning'],
-    iconClasses: ['glyphicon', 'glyphicon-warning-sign'],
-  },
-  error: {
-    formGroupClasses: ['has-feedback', validationErrorClass()],
-    iconClasses: ['glyphicon', 'glyphicon-remove'],
-  },
-};
 
 module('Integration | Component | bs-form/group', function (hooks) {
   setupRenderingTest(hooks);
@@ -46,17 +31,4 @@ module('Integration | Component | bs-form/group', function (hooks) {
     await render(hbs`<BsForm::Group @size="sm" data-test-form-group />`);
     assert.dom('[data-test-form-group]').hasNoClass('form-group-sm', 'form-group has not small class');
   });
-
-  async function testValidationState(assert, state) {
-    let validationConfig = validations[state];
-    await render(hbs`<BsForm::Group @validation={{this.validation}}></BsForm::Group>`);
-    this.set('validation', state);
-    validationConfig.formGroupClasses.forEach((className) => {
-      assert.dom(`.${className}`).exists(`component has ${className} class`);
-    });
-    assert.dom('.form-control-feedback').exists({ count: 1 }, 'component has feedback icon');
-    validationConfig.iconClasses.forEach((className) => {
-      assert.dom('.form-control-feedback').hasClass(className, `icon has ${className} class`);
-    });
-  }
 });

@@ -1,6 +1,6 @@
 import { module } from 'qunit';
 import { setup, visit } from 'ember-cli-fastboot-testing/test-support';
-import { test, testBS4 } from '../helpers/bootstrap';
+import { test } from '../helpers/bootstrap';
 
 module('FastBoot | accordion', function (hooks) {
   setup(hooks);

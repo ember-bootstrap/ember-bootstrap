@@ -5,7 +5,6 @@ import Component from '@ember/component';
 import listenTo from 'ember-bootstrap/utils/cp/listen-to';
 import defaultValue from 'ember-bootstrap/utils/default-decorator';
 import { assert } from '@ember/debug';
-import { macroCondition, getOwnConfig } from '@embroider/macros';
 import { isBlank } from '@ember/utils';
 import deprecateSubclassing from 'ember-bootstrap/utils/deprecate-subclassing';
 

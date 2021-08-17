@@ -6,7 +6,6 @@ import { isBlank, isPresent, typeOf } from '@ember/utils';
 import { A, isArray } from '@ember/array';
 import { getOwner } from '@ember/application';
 import FormGroup from 'ember-bootstrap/components/bs-form/group';
-import { getOwnConfig, macroCondition } from '@embroider/macros';
 import { guidFor } from '@ember/object/internals';
 import { ref } from 'ember-ref-bucket';
 import ControlInput from './element/control/input';

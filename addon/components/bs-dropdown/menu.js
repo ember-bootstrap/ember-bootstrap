@@ -1,5 +1,5 @@
 import { tagName } from '@ember-decorators/component';
-import { computed, action } from '@ember/object';
+import { action, computed } from '@ember/object';
 import Component from '@ember/component';
 import { next } from '@ember/runloop';
 import { getDestinationElement } from 'ember-bootstrap/utils/dom';

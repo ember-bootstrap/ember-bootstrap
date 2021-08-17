@@ -1,6 +1,5 @@
 import Component from '@glimmer/component';
 import typeClass from 'ember-bootstrap/utils/cp/type-class';
-import { getOwnConfig, macroCondition } from '@embroider/macros';
 import { guidFor } from '@ember/object/internals';
 import deprecateSubclassing from 'ember-bootstrap/utils/deprecate-subclassing';
 import arg from '../../utils/decorators/arg';
