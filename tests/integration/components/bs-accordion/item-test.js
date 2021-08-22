@@ -1,17 +1,16 @@
 import { module } from 'qunit';
 import { setupRenderingTest } from 'ember-qunit';
-import { render, click } from '@ember/test-helpers';
+import { click, render } from '@ember/test-helpers';
 import hbs from 'htmlbars-inline-precompile';
 import {
   accordionClassFor,
   accordionItemBodyClass,
+  accordionItemClass,
+  accordionItemClickableSelector,
   accordionItemHeadClass,
   accordionTitleSelector,
-  accordionItemClickableSelector,
   test,
   visibilityClass,
-  accordionItemClass,
-  testNotBS3,
 } from '../../../helpers/bootstrap';
 import setupNoDeprecations from '../../../helpers/setup-no-deprecations';
 import sinon from 'sinon';
@@ -62,7 +61,7 @@ module('Integration | Component | bs-accordion-item', function (hooks) {
     assert.dom(`.${accordionItemBodyClass()}`).hasText('CONTENT', `${accordionItemBodyClass()} has correct content`);
   });
 
-  testNotBS3('accordion items can be disabled', async function (assert) {
+  test('accordion items can be disabled', async function (assert) {
     let action = sinon.spy();
     this.actions.click = action;
     await render(

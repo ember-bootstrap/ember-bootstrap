@@ -1,16 +1,6 @@
-{{#if (macroCondition (macroGetOwnConfig "isBS3"))}}
-  <div class="checkbox">
-    <@labelComponent>
-      {{yield}}
-    </@labelComponent>
-  </div>
+<div class="{{if (bs-eq "switch" @controlType) (if (macroCondition (macroGetOwnConfig "isBS5")) "form-check form-switch" "custom-control custom-switch") "form-check"}}">
+  {{yield}}
+  <@labelComponent/>
   <@errorsComponent/>
   <@helpTextComponent/>
-{{else}}
-  <div class="{{if (bs-eq "switch" @controlType) (if (macroCondition (macroGetOwnConfig "isBS5")) "form-check form-switch" "custom-control custom-switch") "form-check"}}">
-    {{yield}}
-    <@labelComponent/>
-    <@errorsComponent/>
-    <@helpTextComponent/>
-  </div>
-{{/if}}
+</div>

@@ -1,7 +1,7 @@
 import { tagName } from '@ember-decorators/component';
 import Component from '@ember/component';
 import defaultValue from 'ember-bootstrap/utils/default-decorator';
-import { computed, action } from '@ember/object';
+import { action, computed } from '@ember/object';
 import deprecateSubclassing from 'ember-bootstrap/utils/deprecate-subclassing';
 
 /**

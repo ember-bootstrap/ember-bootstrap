@@ -1,7 +1,6 @@
 import { module, test } from 'qunit';
 import { setupRenderingTest } from 'ember-qunit';
 import { click, render } from '@ember/test-helpers';
-import { testBS3, testNotBS3 } from '../../../../helpers/bootstrap';
 import hbs from 'htmlbars-inline-precompile';
 import setupNoDeprecations from '../../../../helpers/setup-no-deprecations';
 
@@ -13,21 +12,7 @@ module('Integration | Component | bs-dropdown/menu/link-to', function (hooks) {
     this.owner.setupRouter();
   });
 
-  testBS3('it has correct markup', async function (assert) {
-    await render(hbs`
-      <BsDropdown as |dd|>
-        <dd.button>Dropdown</dd.button>
-        <dd.menu as |menu|>
-          <menu.item><menu.link-to @route="index">template block text</menu.link-to></menu.item>
-        </dd.menu>
-      </BsDropdown>`);
-    await click('button');
-
-    assert.dom('a').hasText('template block text');
-    assert.dom('a.dropdown-item').doesNotExist('renders as plain element with no dropdown item class');
-  });
-
-  testNotBS3('it has correct markup', async function (assert) {
+  test('it has correct markup', async function (assert) {
     await render(hbs`
       <BsDropdown as |dd|>
         <dd.button>Dropdown</dd.button>

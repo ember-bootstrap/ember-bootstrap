@@ -2,18 +2,12 @@
   <@labelComponent @labelClass={{@horizontalLabelGridClass}}/>
   <div class={{this.horizontalInputGridClass}}>
     {{yield}}
-    {{#if (macroCondition (macroGetOwnConfig "isBS3"))}}
-      <@feedbackIconComponent/>
-    {{/if}}
     <@errorsComponent/>
     <@helpTextComponent/>
   </div>
 {{else}}
   <div class="{{this.horizontalInputGridClass}} {{this.horizontalInputOffsetGridClass}}">
     {{yield}}
-    {{#if (macroCondition (macroGetOwnConfig "isBS3"))}}
-      <@feedbackIconComponent/>
-    {{/if}}
     <@errorsComponent/>
     <@helpTextComponent/>
   </div>

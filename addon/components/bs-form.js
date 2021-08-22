@@ -1,13 +1,13 @@
 import { tagName } from '@ember-decorators/component';
 import { gt } from '@ember/object/computed';
 import Component from '@ember/component';
-import { computed, action, set } from '@ember/object';
+import { action, computed, set } from '@ember/object';
 import { assert, warn } from '@ember/debug';
 import { isPresent } from '@ember/utils';
 import { schedule } from '@ember/runloop';
 import RSVP from 'rsvp';
 import defaultValue from 'ember-bootstrap/utils/default-decorator';
-import { macroCondition, getOwnConfig } from '@embroider/macros';
+import { getOwnConfig, macroCondition } from '@embroider/macros';
 import { DEBUG } from '@glimmer/env';
 import deprecateSubclassing from 'ember-bootstrap/utils/deprecate-subclassing';
 
@@ -142,9 +142,7 @@ export default class Form extends Component {
   @computed('formLayout')
   get layoutClass() {
     let layout = this.formLayout;
-    if (macroCondition(getOwnConfig().isBS3)) {
-      return layout === 'vertical' ? 'form' : `form-${layout}`;
-    } else if (macroCondition(getOwnConfig().isBS4)) {
+    if (macroCondition(getOwnConfig().isBS4)) {
       return layout === 'inline' ? 'form-inline' : null;
     } else {
       return null;

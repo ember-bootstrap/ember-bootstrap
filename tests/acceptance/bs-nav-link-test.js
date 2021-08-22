@@ -1,5 +1,5 @@
 import { visit } from '@ember/test-helpers';
-import { test, module } from 'qunit';
+import { module, test } from 'qunit';
 import { setupApplicationTest } from 'ember-qunit';
 
 module('Acceptance | bs-nav-link', function (hooks) {

@@ -3,7 +3,6 @@ import { computed } from '@ember/object';
 import Component from '@ember/component';
 import defaultValue from 'ember-bootstrap/utils/default-decorator';
 import typeClass from 'ember-bootstrap/utils/cp/type-class';
-import { macroCondition, getOwnConfig } from '@embroider/macros';
 import deprecateSubclassing from 'ember-bootstrap/utils/deprecate-subclassing';
 
 /**
@@ -118,7 +117,7 @@ export default class ProgressBar extends Component {
   @defaultValue
   type = 'default';
 
-  @typeClass(macroCondition(getOwnConfig().isNotBS3) ? 'bg' : 'progress-bar', 'type')
+  @typeClass('bg', 'type')
   typeClass;
 
   /**

@@ -1,10 +1,10 @@
 import { A } from '@ember/array';
 import { module, test } from 'qunit';
 import { setupRenderingTest } from 'ember-qunit';
-import { render, click } from '@ember/test-helpers';
+import { click, render } from '@ember/test-helpers';
 import hbs from 'htmlbars-inline-precompile';
 import setupNoDeprecations from '../../helpers/setup-no-deprecations';
-import { testBS3, testBS5, testForBootstrap } from '../../helpers/bootstrap';
+import { testBS5, testForBootstrap } from '../../helpers/bootstrap';
 import a11yAudit from 'ember-a11y-testing/test-support/audit';
 import sinon from 'sinon';
 
@@ -99,20 +99,6 @@ module('Integration | Component | bs-button-group', function (hooks) {
       this.element.querySelector('label').getAttribute('for'),
       `component and label ids match`
     );
-  });
-
-  testBS3('button group supports justified layout', async function (assert) {
-    await render(
-      hbs`
-        <BsButtonGroup @justified={{true}} as |bg|>
-          <bg.button @value={{1}}>1</bg.button>
-          <bg.button @value={{2}}>2</bg.button>
-          <bg.button @value={{3}}>3</bg.button>
-        </BsButtonGroup>
-      `
-    );
-
-    assert.dom('.btn-group').exists('has btn-group class');
   });
 
   test('button group supports vertical layout', async function (assert) {

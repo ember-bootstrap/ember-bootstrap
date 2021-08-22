@@ -3,7 +3,6 @@ import { assert } from '@ember/debug';
 import { isBlank } from '@ember/utils';
 import FormElementLayout from '../layout';
 import defaultValue from 'ember-bootstrap/utils/default-decorator';
-import { macroCondition, getOwnConfig } from '@embroider/macros';
 
 /**
 
@@ -57,11 +56,8 @@ export default class FormElementLayoutHorizontal extends FormElementLayout {
       return undefined;
     }
     let parts = this.horizontalLabelGridClass.split('-');
-    if (macroCondition(getOwnConfig().isBS3)) {
-      parts.splice(2, 0, 'offset');
-    } else {
-      parts.splice(0, 1, 'offset');
-    }
+    parts.splice(0, 1, 'offset');
+
     return parts.join('-');
   }
 }

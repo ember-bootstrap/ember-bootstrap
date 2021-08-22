@@ -1,13 +1,11 @@
 {{!-- template-lint-disable no-invalid-interactive --}}
 <div
-  class="{{if (macroCondition (macroGetOwnConfig "isNotBS5")) "form-group"}} {{if @disabled "disabled"}} {{if @required "is-required"}} {{if this.isValidating "is-validating"}} {{if (macroCondition (macroGetOwnConfig "isBS3")) this.validationClass}} {{if (macroCondition (macroGetOwnConfig "isBS3")) (if this.hasFeedback "has-feedback")}} {{if (macroCondition (macroGetOwnConfig "isBS3")) (bs-size-class "form-group" @size)}} {{if (macroCondition (macroGetOwnConfig "isNotBS3")) (if (bs-eq @formLayout "horizontal") (if (macroCondition (macroGetOwnConfig "isBS5")) "row mb-3" "row"))}}"
+  class="{{if (macroCondition (macroGetOwnConfig "isNotBS5")) "form-group"}} {{if @disabled "disabled"}} {{if @required "is-required"}} {{if this.isValidating "is-validating"}} {{if (bs-eq @formLayout "horizontal") (if (macroCondition (macroGetOwnConfig "isBS5")) "row mb-3" "row")}}"
   ...attributes
   {{create-ref "mainNode"}}
   {{on "focusout" this.showValidationOnHandler}}
   {{on "change" this.showValidationOnHandler}}
   {{on "input" this.showValidationOnHandler}}
-  {{did-insert this.adjustFeedbackIcons}}
-  {{did-update this.adjustFeedbackIcons this.hasFeedback @formLayout}}
   {{did-update this.handleShowAllValidationsChange this.showAllValidations}}
 >
   {{#component
@@ -54,13 +52,9 @@
         (bs-default
           @labelComponent
           (if
-            (macroCondition (macroGetOwnConfig "isBS3"))
+            (bs-eq this.controlType "radio")
+            (component "bs-form/element/legend")
             (component "bs-form/element/label")
-            (if
-              (bs-eq this.controlType "radio")
-              (component "bs-form/element/legend")
-              (component "bs-form/element/label")
-            )
           )
         )
       )

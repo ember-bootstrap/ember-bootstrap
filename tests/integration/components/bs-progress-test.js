@@ -1,7 +1,7 @@
 import { module } from 'qunit';
 import { setupRenderingTest } from 'ember-qunit';
 import { render } from '@ember/test-helpers';
-import { test, testBS3, testNotBS3, visuallyHiddenClass } from '../../helpers/bootstrap';
+import { test, visuallyHiddenClass } from '../../helpers/bootstrap';
 import hbs from 'htmlbars-inline-precompile';
 import setupStylesheetSupport from '../../helpers/setup-stylesheet-support';
 import setupNoDeprecations from '../../helpers/setup-no-deprecations';
@@ -143,17 +143,7 @@ module('Integration | Component | bs-progress', function (hooks) {
     );
   });
 
-  testBS3('progress bar supports type class', async function (assert) {
-    await render(hbs`
-      <BsProgress as |p|>
-        <p.bar @value={{50}} @type="success" />
-      </BsProgress>
-    `);
-
-    assert.dom('.progress-bar').hasClass('progress-bar-success', 'Progress bar has type class');
-  });
-
-  testNotBS3('progress bar supports type class', async function (assert) {
+  test('progress bar supports type class', async function (assert) {
     await render(hbs`
       <BsProgress as |p|>
         <p.bar @value={{50}} @type="success" />
@@ -173,18 +163,7 @@ module('Integration | Component | bs-progress', function (hooks) {
     assert.dom('.progress-bar').hasClass('progress-bar-striped', 'Progress bar has type class');
   });
 
-  testBS3('progress bar supports animated stripes', async function (assert) {
-    await render(hbs`
-      <BsProgress as |p|>
-        <p.bar @value={{50}} @type="success" @striped={{true}} @animate={{true}} />
-      </BsProgress>
-    `);
-
-    assert.dom('.progress-bar').hasClass('progress-bar-striped', 'Progress bar has type class');
-    assert.dom('.progress-bar').hasClass('active', 'Progress bar has active class');
-  });
-
-  testNotBS3('progress bar supports animated stripes', async function (assert) {
+  test('progress bar supports animated stripes', async function (assert) {
     await render(hbs`
       <BsProgress as |p|>
         <p.bar @value={{50}} @type="success" @striped={{true}} @animate={{true}} />

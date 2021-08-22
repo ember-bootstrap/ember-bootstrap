@@ -1,7 +1,6 @@
-import { module, test, skip } from 'qunit';
+import { module, skip, test } from 'qunit';
 import { setupRenderingTest } from 'ember-qunit';
 import { render } from '@ember/test-helpers';
-import { testBS3, testNotBS3 } from '../../../helpers/bootstrap';
 import hbs from 'htmlbars-inline-precompile';
 import setupNoDeprecations from '../../../helpers/setup-no-deprecations';
 import { gte } from 'ember-compatibility-helpers';
@@ -10,23 +9,7 @@ module('Integration | Component | bs-dropdown/menu', function (hooks) {
   setupRenderingTest(hooks);
   setupNoDeprecations(hooks);
 
-  testBS3('dropdown menu has correct markup', async function (assert) {
-    await render(
-      hbs`<BsDropdown as |dd|><dd.menu @align="right" @isOpen={{true}} @toggleElement={{this.element}}>Something</dd.menu></BsDropdown>`
-    );
-
-    assert.equal(
-      this.element.querySelector('.dropdown-menu').tagName,
-      'UL',
-      'menu is an unordered list (<ul>) by default'
-    );
-    assert.dom('.dropdown-menu').exists('menu has dropdown-menu class');
-    assert.dom('.dropdown-menu').exists('menu has dropdown-menu class');
-    assert.dom('.dropdown-menu').hasClass('dropdown-menu-right', 'menu has dropdown-menu-right class');
-    assert.dom('.dropdown-menu').hasText('Something');
-  });
-
-  testNotBS3('dropdown menu has correct markup', async function (assert) {
+  test('dropdown menu has correct markup', async function (assert) {
     await render(
       hbs`<BsDropdown as |dd|><dd.menu @align="right" @isOpen={{true}} @toggleElement={{this.element}}>Something</dd.menu></BsDropdown>`
     );
@@ -37,15 +20,7 @@ module('Integration | Component | bs-dropdown/menu', function (hooks) {
     assert.dom('.dropdown-menu').hasText('Something');
   });
 
-  testBS3('dropdown menu yields item component', async function (assert) {
-    await render(
-      hbs`<BsDropdown as |dd|><dd.menu @toggleElement={{this.element}} @isOpen={{true}} as |ddm|><ddm.item>Dummy</ddm.item></dd.menu></BsDropdown>`
-    );
-
-    assert.dom('li').exists({ count: 1 }, 'has item component');
-  });
-
-  testNotBS3('dropdown menu yields item component', async function (assert) {
+  test('dropdown menu yields item component', async function (assert) {
     await render(
       hbs`<BsDropdown as |dd|><dd.menu @toggleElement={{this.element}} @isOpen={{true}} as |ddm|><ddm.item>Dummy</ddm.item></dd.menu></BsDropdown>`
     );

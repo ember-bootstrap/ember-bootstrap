@@ -12,25 +12,13 @@ as |Title Close|
         )
       }}
     {{else}}
-      {{#if (macroCondition (macroGetOwnConfig "isNotBS3"))}}
-        {{#if (has-block)}}
-          {{yield}}
-        {{else}}
-          <Title>{{@title}}</Title>
-        {{/if}}
-        {{#if (bs-default @closeButton true)}}
-          <Close/>
-        {{/if}}
+      {{#if (has-block)}}
+        {{yield}}
+      {{else}}
+        <Title>{{@title}}</Title>
       {{/if}}
-      {{#if (macroCondition (macroGetOwnConfig "isBS3"))}}
-        {{#if (bs-default @closeButton true)}}
-          <Close/>
-        {{/if}}
-        {{#if (has-block)}}
-          {{yield}}
-        {{else}}
-          <Title>{{@title}}</Title>
-        {{/if}}
+      {{#if (bs-default @closeButton true)}}
+        <Close/>
       {{/if}}
     {{/if}}
   </div>

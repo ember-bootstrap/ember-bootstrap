@@ -5,7 +5,6 @@ import Component from '@ember/component';
 import listenTo from 'ember-bootstrap/utils/cp/listen-to';
 import defaultValue from 'ember-bootstrap/utils/default-decorator';
 import { assert } from '@ember/debug';
-import { macroCondition, getOwnConfig } from '@embroider/macros';
 import { isBlank } from '@ember/utils';
 import deprecateSubclassing from 'ember-bootstrap/utils/deprecate-subclassing';
 
@@ -170,16 +169,13 @@ export default class Navbar extends Component {
   @computed('position')
   get positionClass() {
     let position = this.position;
-    let validPositions = macroCondition(getOwnConfig().isBS3)
-      ? ['fixed-top', 'fixed-bottom', 'static-top']
-      : ['fixed-top', 'fixed-bottom', 'sticky-top'];
-    let positionPrefix = macroCondition(getOwnConfig().isBS3) ? 'navbar-' : '';
+    let validPositions = ['fixed-top', 'fixed-bottom', 'sticky-top'];
 
     if (validPositions.indexOf(position) === -1) {
       return null;
     }
 
-    return `${positionPrefix}${position}`;
+    return position;
   }
 
   /**
@@ -189,23 +185,17 @@ export default class Navbar extends Component {
    *
    * @property type
    * @type String
-   * @default 'default'
+   * @default 'light'
    * @public
    */
   @defaultValue
-  type = 'default';
+  type = 'light';
 
   @computed('type')
   get typeClass() {
-    let type = this.type || 'default';
+    let type = this.type || 'light';
     assert('The value of `type` must be a string', typeof type === 'string' && type !== '');
 
-    if (macroCondition(getOwnConfig().isNotBS3)) {
-      // 'default` is not a valid type in BS4, but still accepted for compatibility purposes, and mapped to `light'
-      if (type === 'default') {
-        type = 'light';
-      }
-    }
     return `navbar-${type}`;
   }
 
@@ -320,26 +310,18 @@ export default class Navbar extends Component {
 
   @computed('toggleBreakpoint')
   get breakpointClass() {
-    if (macroCondition(getOwnConfig().isBS3)) {
-      return undefined;
-    } else {
-      let toggleBreakpoint = this.toggleBreakpoint;
+    let toggleBreakpoint = this.toggleBreakpoint;
 
-      if (isBlank(toggleBreakpoint)) {
-        return 'navbar-expand';
-      } else {
-        return `navbar-expand-${toggleBreakpoint}`;
-      }
+    if (isBlank(toggleBreakpoint)) {
+      return 'navbar-expand';
+    } else {
+      return `navbar-expand-${toggleBreakpoint}`;
     }
   }
 
   @computed('backgroundColor')
   get backgroundClass() {
-    if (macroCondition(getOwnConfig().isBS3)) {
-      return undefined;
-    } else {
-      return `bg-${this.backgroundColor}`;
-    }
+    return `bg-${this.backgroundColor}`;
   }
 
   /**

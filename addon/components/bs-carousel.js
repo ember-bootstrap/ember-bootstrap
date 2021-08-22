@@ -1,7 +1,7 @@
 import { tagName } from '@ember-decorators/component';
 import { observes } from '@ember-decorators/object';
 import { action, computed } from '@ember/object';
-import { filter, gt, lte, readOnly } from '@ember/object/computed';
+import { equal, filter, gt, lte, readOnly } from '@ember/object/computed';
 import CarouselSlide from 'ember-bootstrap/components/bs-carousel/slide';
 import Component from '@ember/component';
 import ComponentParent from 'ember-bootstrap/mixins/component-parent';
@@ -9,7 +9,6 @@ import { schedule, scheduleOnce } from '@ember/runloop';
 import { task, timeout } from 'ember-concurrency';
 import RSVP from 'rsvp';
 import defaultValue from 'ember-bootstrap/utils/default-decorator';
-import { equal } from '@ember/object/computed';
 import deprecateSubclassing from 'ember-bootstrap/utils/deprecate-subclassing';
 
 /**

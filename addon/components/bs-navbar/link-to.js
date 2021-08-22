@@ -1,5 +1,6 @@
 import Component from '@glimmer/component';
 import { action } from '@ember/object';
+
 /**
  * Extended `{{link-to}}` component for use within Navbars.
  *

@@ -1,15 +1,15 @@
 import { module, skip } from 'qunit';
 import { setupRenderingTest } from 'ember-qunit';
-import { render, click, triggerEvent, settled } from '@ember/test-helpers';
+import { click, render, settled, triggerEvent } from '@ember/test-helpers';
 import hbs from 'htmlbars-inline-precompile';
 import {
+  popoverArrowClass,
+  popoverPositionClass,
   test,
   versionDependent,
   visibilityClass,
-  popoverPositionClass,
-  popoverArrowClass,
 } from '../../helpers/bootstrap';
-import { setupForPositioning, assertPositioning } from '../../helpers/contextual-help';
+import { assertPositioning, setupForPositioning } from '../../helpers/contextual-help';
 import setupStylesheetSupport from '../../helpers/setup-stylesheet-support';
 import setupNoDeprecations from '../../helpers/setup-no-deprecations';
 import { gte } from 'ember-compatibility-helpers';
@@ -35,8 +35,8 @@ module('Integration | Component | bs-popover', function (hooks) {
     assert.dom('.popover').hasClass(visibilityClass(), 'has visibility class');
     assert.equal(this.element.querySelector('.popover').getAttribute('role'), 'tooltip', 'has ARIA role');
     assert.dom(`.${popoverArrowClass()}`).exists({ count: 1 }, 'has arrow');
-    assert.dom(versionDependent('.popover-title', '.popover-header')).hasText('dummy title', 'shows title');
-    assert.dom(versionDependent('.popover-content', '.popover-body')).hasText('template block text', 'shows content');
+    assert.dom(versionDependent('.popover-header')).hasText('dummy title', 'shows title');
+    assert.dom(versionDependent('.popover-body')).hasText('template block text', 'shows content');
   });
 
   skip('it supports different placements', async function (assert) {
@@ -75,14 +75,14 @@ module('Integration | Component | bs-popover', function (hooks) {
     setupForPositioning();
 
     await click('#target');
-    assertPositioning(assert, '.popover', versionDependent(0, 0, 8));
+    assertPositioning(assert, '.popover', versionDependent(0, 8));
   });
 
   test('should adjust popover arrow', async function (assert) {
     this.insertCSSRule('#wrapper p { margin-top: 200px }');
     this.insertCSSRule('#target { width: 100px; padding: 0; border: none; }');
 
-    let expectedArrowPosition = versionDependent(214, 213, 217);
+    let expectedArrowPosition = versionDependent(213, 217);
 
     await render(hbs`
       <div id="ember-bootstrap-wormhole"></div>

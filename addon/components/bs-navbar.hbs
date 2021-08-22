@@ -5,33 +5,25 @@
     content=(component (ensure-safe-component (bs-default @contentComponent (component "bs-navbar/content"))) collapsed=this._collapsed onHidden=this.onCollapsed onShown=this.onExpanded)
     nav=(component
       (ensure-safe-component (bs-default @navComponent (component "bs-navbar/nav")))
-      linkToComponent=(component "bs-navbar/link-to" onCollapse=this.collapse class=(if (macroCondition (macroGetOwnConfig "isNotBS3")) "nav-link"))
+      linkToComponent=(component "bs-navbar/link-to" onCollapse=this.collapse class="nav-link")
     )
     collapse=this.collapse
     expand=this.expand
     toggleNavbar=this.toggleNavbar
   ) as |yieldedHash|}}
-  {{#if (macroCondition (macroGetOwnConfig "isNotBS3"))}}
-    <nav class="navbar {{this.positionClass}} {{this.typeClass}} {{this.breakpointClass}} {{this.backgroundClass}}" ...attributes>
-      {{#if (macroCondition (macroGetOwnConfig "isBS4"))}}
-        {{#if this.fluid}}
-          {{yield yieldedHash}}
-        {{else}}
-          <div class="container">
-            {{yield yieldedHash}}
-          </div>
-        {{/if}}
+  <nav class="navbar {{this.positionClass}} {{this.typeClass}} {{this.breakpointClass}} {{this.backgroundClass}}" ...attributes>
+    {{#if (macroCondition (macroGetOwnConfig "isBS4"))}}
+      {{#if this.fluid}}
+        {{yield yieldedHash}}
       {{else}}
-        <div class={{this.containerClass}}>
+        <div class="container">
           {{yield yieldedHash}}
         </div>
       {{/if}}
-    </nav>
-  {{else}}
-    <nav class="navbar {{this.positionClass}} {{this.typeClass}}" ...attributes>
-      <div class={{if this.fluid "container-fluid" "container"}}>
+    {{else}}
+      <div class={{this.containerClass}}>
         {{yield yieldedHash}}
       </div>
-    </nav>
-  {{/if}}
+    {{/if}}
+  </nav>
 {{/let}}

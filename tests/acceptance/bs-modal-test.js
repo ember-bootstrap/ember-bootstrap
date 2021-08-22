@@ -1,5 +1,5 @@
 import { click, visit } from '@ember/test-helpers';
-import { test, module } from 'qunit';
+import { module, test } from 'qunit';
 import { setupApplicationTest } from 'ember-qunit';
 
 module('Acceptance | bs-modal', function (hooks) {

@@ -1,6 +1,5 @@
 import Component from '@glimmer/component';
 import typeClass from 'ember-bootstrap/utils/cp/type-class';
-import { getOwnConfig, macroCondition } from '@embroider/macros';
 import { guidFor } from '@ember/object/internals';
 import deprecateSubclassing from 'ember-bootstrap/utils/deprecate-subclassing';
 import arg from '../../utils/decorators/arg';
@@ -80,7 +79,7 @@ export default class AccordionItem extends Component {
   @arg
   type = 'default';
 
-  @typeClass(macroCondition(getOwnConfig().isNotBS3) ? 'bg' : 'panel', 'type')
+  @typeClass('bg', 'type')
   typeClass;
 
   /**

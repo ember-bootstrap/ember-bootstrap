@@ -2,8 +2,8 @@ import { run } from '@ember/runloop';
 import { defer, resolve } from 'rsvp';
 import { module, skip } from 'qunit';
 import { setupRenderingTest } from 'ember-qunit';
-import { find, render, click, settled, waitUntil } from '@ember/test-helpers';
-import { test, testNotBS3, defaultButtonClass, testForBootstrap } from '../../helpers/bootstrap';
+import { click, find, render, settled, waitUntil } from '@ember/test-helpers';
+import { defaultButtonClass, test, testForBootstrap } from '../../helpers/bootstrap';
 import { gte } from 'ember-compatibility-helpers';
 import hbs from 'htmlbars-inline-precompile';
 import setupNoDeprecations from '../../helpers/setup-no-deprecations';
@@ -87,7 +87,7 @@ module('Integration | Component | bs-button', function (hooks) {
     assert.dom('button i').hasClass('fa-check');
   });
 
-  testNotBS3('button with outline property shows as outline', async function (assert) {
+  test('button with outline property shows as outline', async function (assert) {
     await render(hbs`<BsButton @type="primary" @outline={{true}} />`);
     assert.dom('button').hasClass('btn-outline-primary');
     assert.dom('button').doesNotHaveClass('btn-primary');
