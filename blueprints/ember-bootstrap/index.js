@@ -9,7 +9,6 @@ const chalk = require('chalk');
 const BuildConfigEditor = require('ember-cli-build-config-editor');
 const SilentError = require('silent-error');
 
-const bs3Version = '^3.4.1';
 const bs4Version = '^4.6.0';
 const bs5Version = '^5.0.0';
 
@@ -35,8 +34,8 @@ module.exports = {
     let bootstrapVersion = parseInt(option.bootstrapVersion, 10) || this.retrieveBootstrapVersion() || 4;
     let preprocessor = option.preprocessor;
 
-    if (![3, 4, 5].includes(bootstrapVersion)) {
-      throw new SilentError('Bootstrap version must be 3, 4 or 5');
+    if (![4, 5].includes(bootstrapVersion)) {
+      throw new SilentError('Bootstrap version must be 4 or 5');
     }
 
     if (preprocessor && validPreprocessors.indexOf(preprocessor) === -1) {
@@ -54,7 +53,7 @@ module.exports = {
       }
     }
 
-    if ([4, 5].includes(bootstrapVersion) && preprocessor === 'less') {
+    if (preprocessor === 'less') {
       throw new SilentError(`You cannot use LESS with Bootstrap ${bootstrapVersion}`);
     }
 
@@ -71,54 +70,15 @@ module.exports = {
       .then(() => this.addBuildConfiguration());
   },
 
-  removePackageFromBowerJSON(dependency) {
-    this.ui.writeLine(chalk.green(`  uninstall bower package ${chalk.white(dependency)}`));
-    return new rsvp.Promise(function (resolve, reject) {
-      try {
-        let bowerJSONPath = 'bower.json';
-        let bowerJSON = fs.readJsonSync(bowerJSONPath);
-
-        delete bowerJSON.dependencies[dependency];
-
-        fs.writeJsonSync(bowerJSONPath, bowerJSON);
-
-        resolve();
-      } catch (error) {
-        reject(error);
-      }
-    });
-  },
-
   adjustBootstrapDependencies() {
     let bootstrapVersion = this.bootstrapVersion;
-    let preprocessor = this.preprocessor;
     let dependencies = this.project.dependencies();
-    let bowerDependencies = this.project.bowerDependencies();
     let promises = [];
 
-    if ('bootstrap' in bowerDependencies) {
-      promises.push(this.removePackageFromBowerJSON('bootstrap'));
+    if ('bootstrap-sass' in dependencies) {
+      promises.push(this.removePackageFromProject('bootstrap-sass'));
     }
-    if ('bootstrap-sass' in bowerDependencies) {
-      promises.push(this.removePackageFromBowerJSON('bootstrap-sass'));
-    }
-
-    if ([4, 5].includes(bootstrapVersion)) {
-      if ('bootstrap-sass' in dependencies) {
-        promises.push(this.removePackageFromProject('bootstrap-sass'));
-      }
-      promises.push(this.addPackageToProject('bootstrap', bootstrapVersion === 5 ? bs5Version : bs4Version));
-    } else if (preprocessor === 'sass') {
-      if ('bootstrap' in dependencies) {
-        promises.push(this.removePackageFromProject('bootstrap'));
-      }
-      promises.push(this.addPackageToProject('bootstrap-sass', bs3Version));
-    } else {
-      if ('bootstrap-sass' in dependencies) {
-        promises.push(this.removePackageFromProject('bootstrap-sass'));
-      }
-      promises.push(this.addPackageToProject('bootstrap', bs3Version));
-    }
+    promises.push(this.addPackageToProject('bootstrap', bootstrapVersion === 5 ? bs5Version : bs4Version));
 
     return rsvp.all(promises);
   },
@@ -128,16 +88,8 @@ module.exports = {
     let dependencies = this.project.dependencies();
     let promises = [];
 
-    if (preprocessor !== 'less' && 'ember-cli-less' in dependencies) {
-      promises.push(this.removePackageFromProject('ember-cli-less'));
-    }
-
     if (preprocessor !== 'sass' && 'ember-cli-sass' in dependencies) {
       promises.push(this.removePackageFromProject('ember-cli-sass'));
-    }
-
-    if (preprocessor === 'less' && !('ember-cli-less' in dependencies)) {
-      promises.push(this.addAddonToProject('ember-cli-less'));
     }
 
     if (preprocessor === 'sass' && !('ember-cli-sass' in dependencies)) {

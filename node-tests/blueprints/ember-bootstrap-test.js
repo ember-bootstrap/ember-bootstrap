@@ -55,29 +55,6 @@ describe('Acceptance: ember generate ember-bootstrap', function () {
             expect(file(`${baseDir}/app.less`)).to.not.exist;
           });
         });
-
-        it('creates app.less if not existing and ember-cli-less is present', function () {
-          let args = ['ember-bootstrap', '--bootstrapVersion=3'];
-
-          modifyPackages([{ name: 'ember-cli-less' }]);
-          return emberGenerate(args).then(() => {
-            expect(file(`${baseDir}/app.less`)).to.contain('@import "ember-bootstrap/bootstrap";');
-            expect(file(`${baseDir}/app.scss`)).to.not.exist;
-          });
-        });
-
-        it('adds @import to existing app.less if ember-cli-less is present', function () {
-          let args = ['ember-bootstrap', '--bootstrapVersion=3'];
-
-          modifyPackages([{ name: 'ember-cli-less' }]);
-          createStyleFixture('app.less');
-          return emberGenerate(args).then(() => {
-            expect(file(`${baseDir}/app.less`))
-              .to.contain('body { color: red; }')
-              .to.contain('@import "ember-bootstrap/bootstrap";');
-            expect(file(`${baseDir}/app.scss`)).to.not.exist;
-          });
-        });
       }
 
       describe('regular app', function () {
@@ -132,31 +109,6 @@ describe('Acceptance: ember generate ember-bootstrap', function () {
             expect(file('app/styles/app.less')).to.not.exist;
           });
       });
-
-      it('creates app.less if not existing and --preprocessor=less', function () {
-        let args = ['ember-bootstrap', '--preprocessor=less', '--bootstrapVersion=3'];
-
-        return emberNew()
-          .then(() => emberGenerate(args))
-          .then(() => {
-            expect(file('app/styles/app.less')).to.contain('@import "ember-bootstrap/bootstrap";');
-            expect(file('app/styles/app.scss')).to.not.exist;
-          });
-      });
-
-      it('adds @import to existing app.less if --preprocessor=less', function () {
-        let args = ['ember-bootstrap', '--preprocessor=less', '--bootstrapVersion=3'];
-
-        return emberNew()
-          .then(() => createStyleFixture('app.less'))
-          .then(() => emberGenerate(args))
-          .then(() => {
-            expect(file('app/styles/app.less'))
-              .to.contain('body { color: red; }')
-              .to.contain('@import "ember-bootstrap/bootstrap";');
-            expect(file('app/styles/app.scss')).to.not.exist;
-          });
-      });
     });
   });
 
@@ -165,18 +117,16 @@ describe('Acceptance: ember generate ember-bootstrap', function () {
     let origTaskFor = Blueprint.prototype.taskFor;
     let installed = {
       npm: [],
-      bower: [],
       addon: [],
     };
     let uninstalled = {
       npm: [],
-      bower: [],
     };
     let buildFile = 'ember-cli-build.js';
 
     before(function () {
       Blueprint.prototype.taskFor = function (taskName) {
-        let match = taskName.match(/^(npm|bower|addon)-install$/);
+        let match = taskName.match(/^(npm|addon)-install$/);
         if (match) {
           let type = match[1];
           return {
@@ -209,12 +159,10 @@ describe('Acceptance: ember generate ember-bootstrap', function () {
     beforeEach(function () {
       installed = {
         npm: [],
-        bower: [],
         addon: [],
       };
       uninstalled = {
         npm: [],
-        bower: [],
       };
     });
 
@@ -222,9 +170,6 @@ describe('Acceptance: ember generate ember-bootstrap', function () {
       let installedPackages = installed[type];
       let uninstalledPackages = uninstalled[type === 'addon' ? 'npm' : type];
       if (version === null) {
-        if (type === 'bower') {
-          return; // not yet implemented
-        }
         expect(uninstalledPackages).to.include.some.that.equal(pkg);
         if (type === 'addon') {
           expect(installedPackages).to.not.include.some.that.equal(pkg);
@@ -295,10 +240,6 @@ describe('Acceptance: ember generate ember-bootstrap', function () {
           .then(() => editConfiguration(installedConfig))
           .then(() => emberGenerate(args))
           .then(() => {
-            for (let pkg in scenario.dependencies.bower) {
-              checkPackage('bower', pkg, scenario.dependencies.bower[pkg]);
-            }
-
             for (let pkg in scenario.dependencies.npm) {
               checkPackage('npm', pkg, scenario.dependencies.npm[pkg]);
             }
