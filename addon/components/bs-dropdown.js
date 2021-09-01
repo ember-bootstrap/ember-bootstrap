@@ -274,6 +274,7 @@ export default class Dropdown extends Component {
 
   /**
    * Action is called when dropdown is about to be hidden
+   * Returning `false` will block closing the dropdown
    *
    * @event onHide
    * @param {*} value
@@ -298,8 +299,9 @@ export default class Dropdown extends Component {
 
   @action
   closeDropdown() {
+    if (this.onHide() === false) return;
+
     this.set('isOpen', false);
-    this.onHide();
   }
 
   /**
