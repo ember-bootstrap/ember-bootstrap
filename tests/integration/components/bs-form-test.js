@@ -32,8 +32,7 @@ import { next, run } from '@ember/runloop';
 import setupNoDeprecations from '../../helpers/setup-no-deprecations';
 import a11yAudit from 'ember-a11y-testing/test-support/audit';
 import sinon from 'sinon';
-
-/* global Ember */
+import Ember from 'ember';
 
 const nextRunloop = function () {
   return new Promise((resolve) => {
