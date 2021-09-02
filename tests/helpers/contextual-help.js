@@ -9,6 +9,7 @@ export function setupForPositioning(align = 'left') {
     textAlign: 'right',
     width: '300px',
     height: '300px',
+    overflow: 'hidden',
   });
 
   assign(document.getElementById('ember-testing').style, {
