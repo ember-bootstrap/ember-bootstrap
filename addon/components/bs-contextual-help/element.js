@@ -1,7 +1,5 @@
 import { action } from '@ember/object';
 import Component from '@glimmer/component';
-import { assert } from '@ember/debug';
-import { scheduleOnce } from '@ember/runloop';
 import arg from 'ember-bootstrap/utils/decorators/arg';
 import { tracked } from '@glimmer/tracking';
 import { getOwnConfig, macroCondition } from '@embroider/macros';
@@ -106,54 +104,51 @@ export default class ContextualHelpElement extends Component {
    * @type {object}
    * @private
    */
-  get popperModifiers() {
-    const context = this;
+  get popperOptions() {
+    let options = {
+      placement: this.placement,
+      onFirstUpdate: this.updatePlacement,
+    };
 
-    // We need popeerElement, so we wait for this getter to recompute once it's available
+    // We need popperElement, so we wait for this getter to recompute once it's available
     if (!this.popperElement) {
-      return {};
+      return options;
     }
 
-    return {
-      arrow: {
-        element: this.popperElement.querySelector(`.${this.arrowClass}`),
-      },
-      offset: {
-        offset: this.offset.join(','),
-        fn(data) {
-          let tip = context.popperElement;
-          assert('Contextual help element needs existing popper element', tip);
-
-          // manually read margins because getBoundingClientRect includes difference
-          let marginTop = parseInt(window.getComputedStyle(tip).marginTop, 10);
-          let marginLeft = parseInt(window.getComputedStyle(tip).marginLeft, 10);
-
-          // we must check for NaN for ie 8/9
-          if (isNaN(marginTop) || marginTop > 0) {
-            marginTop = 0;
-          }
-          if (isNaN(marginLeft) || marginLeft > 0) {
-            marginLeft = 0;
-          }
-
-          data.offsets.popper.top += marginTop;
-          data.offsets.popper.left += marginLeft;
-
-          return window.Popper.Defaults.modifiers.offset.fn.apply(this, arguments);
+    options.modifiers = [
+      {
+        name: 'arrow',
+        options: {
+          element: this.popperElement.querySelector(`.${this.arrowClass}`),
         },
       },
-      preventOverflow: {
-        enabled: this.args.autoPlacement,
-        boundariesElement: this.args.viewportElement,
-        padding: this.args.viewportPadding,
+      {
+        name: 'offset',
+        options: {
+          offset: this.offset,
+        },
       },
-      hide: {
+      {
+        name: 'preventOverflow',
+        enabled: this.args.autoPlacement,
+        options: {
+          boundary: this.args.viewportElement,
+          padding: this.args.viewportPadding,
+        },
+      },
+      {
+        name: 'flip',
         enabled: this.args.autoPlacement,
       },
-      flip: {
-        enabled: this.args.autoPlacement,
+      {
+        name: 'onChange',
+        enabled: true,
+        phase: 'afterWrite',
+        fn: this.updatePlacement,
       },
-    };
+    ];
+
+    return options;
   }
 
   get actualPlacementClass() {
@@ -173,11 +168,13 @@ export default class ContextualHelpElement extends Component {
   }
 
   @action
-  updatePlacement(popperDataObject) {
-    if (this.actualPlacement === popperDataObject.placement) {
+  updatePlacement(state) {
+    // normalize argument
+    state = state.state ?? state;
+
+    if (this.actualPlacement === state.placement) {
       return;
     }
-    this.actualPlacement = popperDataObject.placement;
-    scheduleOnce('afterRender', popperDataObject.instance, popperDataObject.instance.scheduleUpdate);
+    this.actualPlacement = state.placement;
   }
 }
