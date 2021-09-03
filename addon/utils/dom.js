@@ -61,19 +61,6 @@ export function getDOM(context) {
   }
 }
 
-export function getParentView(el) {
-  return closest(el, '.ember-view');
-}
-
-// taken from https://developer.mozilla.org/en-US/docs/Web/API/Element/closest#Polyfill
-function closest(el, selector) {
-  do {
-    if (el.matches(selector)) return el;
-    el = el.parentElement || el.parentNode;
-  } while (el !== null && el.nodeType === 1);
-  return null;
-}
-
 export function getDestinationElement(context) {
   let dom = getDOM(context);
   const id = 'ember-bootstrap-wormhole';

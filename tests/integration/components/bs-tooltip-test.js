@@ -1,4 +1,3 @@
-import Component from '@ember/component';
 import { module, skip } from 'qunit';
 import { setupRenderingTest } from 'ember-qunit';
 import { blur, click, focus, render, settled, triggerEvent, waitUntil } from '@ember/test-helpers';
@@ -143,28 +142,6 @@ module('Integration | Component | bs-tooltip', function (hooks) {
 
     await triggerEvent('#target', 'mouseleave');
     assert.dom('.tooltip').doesNotExist('tooltip is not visible');
-  });
-
-  test('it allows changing the trigger element to the parent view', async function (assert) {
-    // eslint-disable-next-line ember/require-tagless-components
-    class DummyComponent extends Component {
-      layout = hbs`<div>{{yield}}</div>`;
-    }
-    this.owner.register('component:test-component', DummyComponent);
-
-    await render(
-      hbs`{{#test-component id="target"}}<div><BsTooltip @title="Dummy" @fade={{false}} @triggerElement="parentView" /></div>{{/test-component}}`
-    );
-
-    await triggerEvent('#target', 'mouseenter');
-    assert.dom('.tooltip').exists({ count: 1 }, 'tooltip is visible');
-
-    await triggerEvent('#target', 'mouseleave');
-    assert.dom('.tooltip').doesNotExist('tooltip is not visible');
-
-    assert.deprecationsInclude(
-      '@triggerElement="parentView" is deprecated. Please remove the @triggerElement argument to target the parent DOM element, or use a CSS selector'
-    );
   });
 
   test('it calls onShow/onShown actions when showing tooltip [fade=false]', async function (assert) {

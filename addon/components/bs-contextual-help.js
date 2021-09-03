@@ -5,11 +5,10 @@ import { cancel, later, next, schedule } from '@ember/runloop';
 import transitionEnd from 'ember-bootstrap/utils/transition-end';
 import { getDestinationElement } from 'ember-bootstrap/utils/dom';
 import usesTransition from 'ember-bootstrap/utils/decorators/uses-transition';
-import { assert, deprecate } from '@ember/debug';
+import { assert } from '@ember/debug';
 import Ember from 'ember';
 import arg from '../utils/decorators/arg';
 import { tracked } from '@glimmer/tracking';
-import { getParentView } from '../utils/dom';
 import { ref } from 'ember-ref-bucket';
 
 const HOVERSTATE_NONE = 'none';
@@ -235,18 +234,6 @@ export default class ContextualHelp extends Component {
 
     if (!triggerElement) {
       el = this._parent;
-    } else if (triggerElement === 'parentView') {
-      deprecate(
-        '@triggerElement="parentView" is deprecated. Please remove the @triggerElement argument to target the parent DOM element, or use a CSS selector',
-        false,
-        {
-          id: `ember-bootstrap.contextual-help.parent-view`,
-          until: '5.0.0',
-          since: '4.2.0',
-          for: 'ember-bootstrap',
-        }
-      );
-      el = getParentView(this._parent);
     } else {
       el = document.querySelector(triggerElement);
     }
