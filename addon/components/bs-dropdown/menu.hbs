@@ -1,44 +1,11 @@
 {{#if this._isOpen}}
   {{#if (macroCondition (macroGetOwnConfig "isNotBS3"))}}
-    <EmberPopper
-      class="dropdown-menu {{this.alignClass}} {{if this.isOpen "show"}} {{@class}}"
-      @placement={{this.popperPlacement}}
-      @popperTarget={{this.toggleElement}}
-      @renderInPlace={{this._renderInPlace}}
-      @popperContainer={{this.destinationElement}}
-      @modifiers={{this.popperModifiers}}
-      @onCreate={{this.setFocus}}
-      tabindex="-1"
-      ...attributes
-      {{did-insert @registerChildElement "menu"}}
-      {{will-destroy @unregisterChildElement "menu"}}
-      {{create-ref "menuElement"}}
-    >
-      {{yield
-        (hash
-          item=(ensure-safe-component (bs-default @itemComponent (component "bs-dropdown/menu/item")))
-          link-to=(ensure-safe-component (bs-default @linkToComponent (component "bs-link-to" class=(if (macroCondition (macroGetOwnConfig "isNotBS3")) "dropdown-item"))))
-          linkTo=(ensure-safe-component (bs-default @linkToComponent (component "bs-link-to" class=(if (macroCondition (macroGetOwnConfig "isNotBS3")) "dropdown-item"))))
-          divider=(ensure-safe-component (bs-default @dividerComponent (component "bs-dropdown/menu/divider")))
-        )
-      }}
-    </EmberPopper>
-  {{/if}}
-  {{#if (macroCondition (macroGetOwnConfig "isBS3"))}}
-    <EmberPopper
-      class="ember-bootstrap-dropdown-bs3-popper"
-      @placement={{this.popperPlacement}}
-      @popperTarget={{this.toggleElement}}
-      @renderInPlace={{this._renderInPlace}}
-      @popperContainer={{this.destinationElement}}
-      @modifiers={{this.popperModifiers}}
-      @onCreate={{this.setFocus}}
-    >
-      <ul
+    {{#if this._renderInPlace}}
+      <div
         class="dropdown-menu {{this.alignClass}} {{if this.isOpen "show"}} {{@class}}"
-        role={{this.ariaRole}}
         tabindex="-1"
         ...attributes
+        {{popper-tooltip this.toggleElement this.popperOptions}}
         {{did-insert @registerChildElement "menu"}}
         {{will-destroy @unregisterChildElement "menu"}}
         {{create-ref "menuElement"}}
@@ -46,12 +13,77 @@
         {{yield
           (hash
             item=(ensure-safe-component (bs-default @itemComponent (component "bs-dropdown/menu/item")))
-            link-to=(ensure-safe-component (bs-default @linkToComponent (component "bs-link-to" class=(if (macroCondition (macroGetOwnConfig "isNotBS3")) "dropdown-item"))))
-            linkTo=(ensure-safe-component (bs-default @linkToComponent (component "bs-link-to" class=(if (macroCondition (macroGetOwnConfig "isNotBS3")) "dropdown-item"))))
+            link-to=(ensure-safe-component (bs-default @linkToComponent (component "bs-link-to" class="dropdown-item")))
+            linkTo=(ensure-safe-component (bs-default @linkToComponent (component "bs-link-to" class="dropdown-item")))
+            divider=(ensure-safe-component (bs-default @dividerComponent (component "bs-dropdown/menu/divider")))
+          )
+        }}
+      </div>
+    {{else}}
+      {{#in-element this.destinationElement insertBefore=null}}
+        <div
+          class="dropdown-menu {{this.alignClass}} {{if this.isOpen "show"}} {{@class}}"
+          tabindex="-1"
+          ...attributes
+          {{popper-tooltip this.toggleElement this.popperOptions}}
+          {{did-insert @registerChildElement "menu"}}
+          {{will-destroy @unregisterChildElement "menu"}}
+          {{create-ref "menuElement"}}
+        >
+          {{yield
+            (hash
+              item=(ensure-safe-component (bs-default @itemComponent (component "bs-dropdown/menu/item")))
+              link-to=(ensure-safe-component (bs-default @linkToComponent (component "bs-link-to" class="dropdown-item")))
+              linkTo=(ensure-safe-component (bs-default @linkToComponent (component "bs-link-to" class="dropdown-item")))
+              divider=(ensure-safe-component (bs-default @dividerComponent (component "bs-dropdown/menu/divider")))
+            )
+          }}
+        </div>
+      {{/in-element}}
+    {{/if}}
+  {{/if}}
+
+  {{#if (macroCondition (macroGetOwnConfig "isBS3"))}}
+    {{#if this._renderInPlace}}
+      <ul>
+        class="dropdown-menu {{this.alignClass}} {{if this.isOpen "show"}} {{@class}}"
+        tabindex="-1"
+        ...attributes
+        {{popper-tooltip this.toggleElement this.popperOptions}}
+        {{did-insert @registerChildElement "menu"}}
+        {{will-destroy @unregisterChildElement "menu"}}
+        {{create-ref "menuElement"}}
+      >
+        {{yield
+          (hash
+            item=(ensure-safe-component (bs-default @itemComponent (component "bs-dropdown/menu/item")))
+            link-to=(ensure-safe-component (bs-default @linkToComponent (component "bs-link-to")))
+            linkTo=(ensure-safe-component (bs-default @linkToComponent (component "bs-link-to")))
             divider=(ensure-safe-component (bs-default @dividerComponent (component "bs-dropdown/menu/divider")))
           )
         }}
       </ul>
-    </EmberPopper>
+    {{else}}
+      {{#in-element this.destinationElement insertBefore=null}}
+        <ul>
+          class="dropdown-menu {{this.alignClass}} {{if this.isOpen "show"}} {{@class}}"
+          tabindex="-1"
+          ...attributes
+          {{popper-tooltip this.toggleElement this.popperOptions}}
+          {{did-insert @registerChildElement "menu"}}
+          {{will-destroy @unregisterChildElement "menu"}}
+          {{create-ref "menuElement"}}
+        >
+          {{yield
+            (hash
+              item=(ensure-safe-component (bs-default @itemComponent (component "bs-dropdown/menu/item")))
+              link-to=(ensure-safe-component (bs-default @linkToComponent (component "bs-link-to")))
+              linkTo=(ensure-safe-component (bs-default @linkToComponent (component "bs-link-to")))
+              divider=(ensure-safe-component (bs-default @dividerComponent (component "bs-dropdown/menu/divider")))
+            )
+          }}
+        </ul>
+      {{/in-element}}
+    {{/if}}
   {{/if}}
 {{/if}}
