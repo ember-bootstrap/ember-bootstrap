@@ -9,7 +9,6 @@ import {
   testRequiringFocus,
   tooltipArrowClass,
   tooltipPositionClass,
-  versionDependent,
   visibilityClass,
 } from '../../helpers/bootstrap';
 import { assertPositioning, setupForPositioning } from '../../helpers/contextual-help';
@@ -385,7 +384,7 @@ module('Integration | Component | bs-tooltip', function (hooks) {
   test('should position tooltip arrow centered', async function (assert) {
     this.insertCSSRule('.margin-top { margin-top: 200px; }');
 
-    let expectedArrowPosition = versionDependent(94, 94);
+    let expectedArrowPosition = 94;
     await render(hbs`
       <div id="ember-bootstrap-wormhole"></div>
       <div id="wrapper">
@@ -402,7 +401,7 @@ module('Integration | Component | bs-tooltip', function (hooks) {
     let arrowPosition = parseInt(
       this.element
         .querySelector(`.${tooltipArrowClass()}`)
-        .style.transform.match(/translate\(([0-9]+)px, ([0-9]+)px\)/)[1],
+        .style.transform.match(/translate(?:3d)?\(([0-9]+)px.*\)/)[1],
       10
     );
     assert.ok(
@@ -415,7 +414,7 @@ module('Integration | Component | bs-tooltip', function (hooks) {
     this.insertCSSRule('.margin-top { margin-top: 200px; }');
     this.insertCSSRule('#target { width: 100px; padding: 0; border: none; }');
 
-    let expectedArrowPosition = versionDependent(144, 144);
+    let expectedArrowPosition = 144;
 
     await render(hbs`
       <div id="ember-bootstrap-wormhole"></div>
@@ -433,7 +432,7 @@ module('Integration | Component | bs-tooltip', function (hooks) {
     let arrowPosition = parseInt(
       this.element
         .querySelector(`.${tooltipArrowClass()}`)
-        .style.transform.match(/translate\(([0-9]+)px, ([0-9]+)px\)/)[1],
+        .style.transform.match(/translate(?:3d)?\(([0-9]+)px.*\)/)[1],
       10
     );
 
@@ -445,10 +444,11 @@ module('Integration | Component | bs-tooltip', function (hooks) {
     // check again to prevent regression of https://github.com/kaliber5/ember-bootstrap/issues/361
     await click('#target');
     await click('#target');
+
     arrowPosition = parseInt(
       this.element
         .querySelector(`.${tooltipArrowClass()}`)
-        .style.transform.match(/translate\(([0-9]+)px, ([0-9]+)px\)/)[1],
+        .style.transform.match(/translate(?:3d)?\(([0-9]+)px.*\)/)[1],
       10
     );
     assert.ok(
