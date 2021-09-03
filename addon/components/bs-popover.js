@@ -21,13 +21,6 @@ import deprecateSubclassing from 'ember-bootstrap/utils/deprecate-subclassing';
   "click".
 
   The `triggerElement` property accepts any CSS selector to attach the popover to any other existing DOM element.
-  With the special value "parentView" you can attach the popover to the DOM element of the parent component:
-
-  ```hbs
-  <MyComponent>
-    <BsPopover @triggerElement="parentView">This is a popover</BsPopover>
-  </MyComponent>
-  ```
 
   To customize the events that will trigger the popover use the `triggerEvents` property, that accepts an array or a
   string of events, with "hover", "focus" and "click" being supported.

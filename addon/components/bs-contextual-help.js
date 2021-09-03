@@ -215,7 +215,6 @@ export default class ContextualHelp extends Component {
   /**
    * The DOM element that triggers the tooltip/popover. By default it is the parent element of this component.
    * You can set this to any CSS selector to have any other element trigger the tooltip/popover.
-   * With the special value of "parentView" you can attach the tooltip/popover to the parent component's element.
    *
    * @property triggerElement
    * @type string | null
