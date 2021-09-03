@@ -2,3 +2,13 @@
 .card-header[role='tab'] {
     cursor: pointer;
 }
+
+/* popper.js v2 ignores margin and expects us to use the `padding` property of the `arrow` modifier. Thus we must remove margin to not cause mis-alignment
+Using these selectors intentionally to increase specificity, so we can override Bootstrap's original styles without using !important.
+*/
+.popover.bs-popover-top > .arrow,
+.popover.bs-popover-left > .arrow,
+.popover.bs-popover-right > .arrow,
+.popover.bs-popover-bottom > .arrow {
+  margin: 0;
+}

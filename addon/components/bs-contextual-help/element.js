@@ -120,6 +120,7 @@ export default class ContextualHelpElement extends Component {
         name: 'arrow',
         options: {
           element: this.popperElement.querySelector(`.${this.arrowClass}`),
+          padding: 4,
         },
       },
       {
