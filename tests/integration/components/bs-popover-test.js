@@ -97,7 +97,12 @@ module('Integration | Component | bs-popover', function (hooks) {
     setupForPositioning('right');
 
     await click('#target');
-    let arrowPosition = parseInt(this.element.querySelector(`.${popoverArrowClass()}`).style.left, 10);
+    let arrowPosition = parseInt(
+      this.element
+        .querySelector(`.${popoverArrowClass()}`)
+        .style.transform.match(/translate\(([0-9]+)px, ([0-9]+)px\)/)[1],
+      10
+    );
     assert.ok(
       Math.abs(arrowPosition - expectedArrowPosition) <= 2,
       `Expected position: ${expectedArrowPosition}, actual: ${arrowPosition}`
@@ -106,7 +111,12 @@ module('Integration | Component | bs-popover', function (hooks) {
     // check again to prevent regression of https://github.com/kaliber5/ember-bootstrap/issues/361
     await click('#target');
     await click('#target');
-    arrowPosition = parseInt(this.element.querySelector(`.${popoverArrowClass()}`).style.left, 10);
+    arrowPosition = parseInt(
+      this.element
+        .querySelector(`.${popoverArrowClass()}`)
+        .style.transform.match(/translate\(([0-9]+)px, ([0-9]+)px\)/)[1],
+      10
+    );
     assert.ok(
       Math.abs(arrowPosition - expectedArrowPosition) <= 2,
       `Expected position: ${expectedArrowPosition}, actual: ${arrowPosition}`

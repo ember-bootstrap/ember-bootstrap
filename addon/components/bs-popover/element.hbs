@@ -1,20 +1,42 @@
-<EmberPopper
-  @ariaRole="tooltip"
-  @placement={{this.placement}}
-  @renderInPlace={{@renderInPlace}}
-  @popperTarget={{@popperTarget}}
-  @modifiers={{this.popperModifiers}}
-  @popperContainer={{@destinationElement}}
-  @onCreate={{this.updatePlacement}}
-  @onUpdate={{this.updatePlacement}}
-  @class="popover {{@class}} {{if this.fade "fade"}} {{if (macroCondition (macroGetOwnConfig "isNotBS3")) this.actualPlacementClass}} {{if (macroCondition (macroGetOwnConfig "isBS3")) this.actualPlacement}} {{if (macroCondition (macroGetOwnConfig "isNotBS3")) (if this.showHelp "show")}} {{if (macroCondition (macroGetOwnConfig "isBS3")) (if this.showHelp "in")}} {{if (macroCondition (macroGetOwnConfig "isBS3")) "ember-bootstrap-popover"}}"
+{{#if @renderInPlace}}
+  <div
+    class="popover {{@class}} {{if this.fade "fade"}}
+      {{if (macroCondition (macroGetOwnConfig "isNotBS3")) this.actualPlacementClass}}
+      {{if (macroCondition (macroGetOwnConfig "isBS3")) this.actualPlacement}}
+      {{if (macroCondition (macroGetOwnConfig "isNotBS3")) (if this.showHelp "show")}}
+      {{if (macroCondition (macroGetOwnConfig "isBS3")) (if this.showHelp "in")}}
+      {{if (macroCondition (macroGetOwnConfig "isBS3")) "ember-bootstrap-popover"}}"
+    role="tooltip"
+    ...attributes
+    {{popper-tooltip @popperTarget this.popperOptions}}
+    {{create-ref "popperElement"}}
+  >
+    <div class={{this.arrowClass}}></div>
+    {{#if @title}}
+      <h3 class="popover-header">{{@title}}</h3>
+    {{/if}}
+    <div class="popover-body">{{yield}}</div>
+  </div>
+{{else}}
+  {{#in-element @destinationElement insertBefore=null}}
+    <div
+      class="popover {{@class}} {{if this.fade "fade"}}
+        {{if (macroCondition (macroGetOwnConfig "isNotBS3")) this.actualPlacementClass}}
+        {{if (macroCondition (macroGetOwnConfig "isBS3")) this.actualPlacement}}
+        {{if (macroCondition (macroGetOwnConfig "isNotBS3")) (if this.showHelp "show")}}
+        {{if (macroCondition (macroGetOwnConfig "isBS3")) (if this.showHelp "in")}}
+        {{if (macroCondition (macroGetOwnConfig "isBS3")) "ember-bootstrap-popover"}}"
+      role="tooltip"
+      ...attributes
+      {{popper-tooltip @popperTarget this.popperOptions}}
+      {{create-ref "popperElement"}}
+    >
+      <div class={{this.arrowClass}}></div>
+      {{#if @title}}
+        <h3 class="{{if (macroCondition (macroGetOwnConfig "isNotBS3")) "popover-header"}}{{if (macroCondition (macroGetOwnConfig "isBS3")) "popover-title"}}">{{@title}}</h3>
+      {{/if}}
+      <div class="{{if (macroCondition (macroGetOwnConfig "isNotBS3")) "popover-body"}}{{if (macroCondition (macroGetOwnConfig "isBS3")) "popover-content"}}">{{yield}}</div>
+    </div>
+  {{/in-element}}
+{{/if}}
 
-  {{create-ref "popperElement"}}
-  ...attributes
->
-  <div class={{this.arrowClass}}></div>
-  {{#if @title}}
-    <h3 class="{{if (macroCondition (macroGetOwnConfig "isNotBS3")) "popover-header"}}{{if (macroCondition (macroGetOwnConfig "isBS3")) "popover-title"}}">{{@title}}</h3>
-  {{/if}}
-  <div class="{{if (macroCondition (macroGetOwnConfig "isNotBS3")) "popover-body"}}{{if (macroCondition (macroGetOwnConfig "isBS3")) "popover-content"}}">{{yield}}</div>
-</EmberPopper>
