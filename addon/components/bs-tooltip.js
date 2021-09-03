@@ -30,13 +30,6 @@ import deprecateSubclassing from 'ember-bootstrap/utils/deprecate-subclassing';
   "hover" and "focus".
 
   The `triggerElement` property accepts any CSS selector to attach the tooltip to any other existing DOM element.
-  With the special value "parentView" you can attach the tooltip to the DOM element of the parent component:
-
-  ```hbs
-  <MyComponent>
-    <BsTooltip @title="This is a toolip" @triggerElement="parentView"/>
-  </MyComponent>
-  ```
 
   To customize the events that will trigger the tooltip use the `triggerEvents` property, that accepts an array or a
   string of events, with "hover", "focus" and "click" being supported.
