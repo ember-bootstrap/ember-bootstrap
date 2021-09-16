@@ -1,19 +1,30 @@
-<EmberPopper
-  @ariaRole="tooltip"
-  @placement={{this.placement}}
-  @renderInPlace={{@renderInPlace}}
-  @popperTarget={{@popperTarget}}
-  @modifiers={{this.popperModifiers}}
-  @popperContainer={{@destinationElement}}
-  @onCreate={{this.updatePlacement}}
-  @onUpdate={{this.updatePlacement}}
-  @class="tooltip {{@class}} {{if this.fade "fade"}} {{this.actualPlacementClass}} {{if this.showHelp "show"}}"
-
-  {{create-ref "popperElement"}}
-  ...attributes
->
-  <div class={{this.arrowClass}}></div>
-  <div class="tooltip-inner">
-    {{yield}}
+{{#if @renderInPlace}}
+  <div
+    class="tooltip {{@class}} {{if this.fade "fade"}} {{this.actualPlacementClass}} {{if this.showHelp "show"}}"
+    role="tooltip"
+    ...attributes
+    {{popper-tooltip @popperTarget this.popperOptions}}
+    {{create-ref "popperElement"}}
+  >
+    <div class={{this.arrowClass}}></div>
+    <div class="tooltip-inner">
+      {{yield}}
+    </div>
   </div>
-</EmberPopper>
+{{else}}
+  {{#in-element @destinationElement insertBefore=null}}
+    <div
+      class="tooltip {{@class}} {{if this.fade "fade"}} {{this.actualPlacementClass}} {{if this.showHelp "show"}}"
+      role="tooltip"
+      ...attributes
+      {{popper-tooltip @popperTarget this.popperOptions}}
+      {{create-ref "popperElement"}}
+    >
+      <div class={{this.arrowClass}}></div>
+      <div class="tooltip-inner">
+        {{yield}}
+      </div>
+    </div>
+  {{/in-element}}
+{{/if}}
+

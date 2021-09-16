@@ -75,14 +75,15 @@ module('Integration | Component | bs-popover', function (hooks) {
     setupForPositioning();
 
     await click('#target');
-    assertPositioning(assert, '.popover', versionDependent(0, 8));
+
+    assertPositioning(assert, '.popover', 8);
   });
 
   test('should adjust popover arrow', async function (assert) {
     this.insertCSSRule('#wrapper p { margin-top: 200px }');
     this.insertCSSRule('#target { width: 100px; padding: 0; border: none; }');
 
-    let expectedArrowPosition = versionDependent(213, 217);
+    let expectedArrowPosition = 217;
 
     await render(hbs`
       <div id="ember-bootstrap-wormhole"></div>
@@ -97,7 +98,12 @@ module('Integration | Component | bs-popover', function (hooks) {
     setupForPositioning('right');
 
     await click('#target');
-    let arrowPosition = parseInt(this.element.querySelector(`.${popoverArrowClass()}`).style.left, 10);
+    let arrowPosition = parseInt(
+      this.element
+        .querySelector(`.${popoverArrowClass()}`)
+        .style.transform.match(/translate(?:3d)?\(([0-9]+)px.*\)/)[1],
+      10
+    );
     assert.ok(
       Math.abs(arrowPosition - expectedArrowPosition) <= 2,
       `Expected position: ${expectedArrowPosition}, actual: ${arrowPosition}`
@@ -106,7 +112,12 @@ module('Integration | Component | bs-popover', function (hooks) {
     // check again to prevent regression of https://github.com/kaliber5/ember-bootstrap/issues/361
     await click('#target');
     await click('#target');
-    arrowPosition = parseInt(this.element.querySelector(`.${popoverArrowClass()}`).style.left, 10);
+    arrowPosition = parseInt(
+      this.element
+        .querySelector(`.${popoverArrowClass()}`)
+        .style.transform.match(/translate(?:3d)?\(([0-9]+)px.*\)/)[1],
+      10
+    );
     assert.ok(
       Math.abs(arrowPosition - expectedArrowPosition) <= 2,
       `Expected position: ${expectedArrowPosition}, actual: ${arrowPosition}`

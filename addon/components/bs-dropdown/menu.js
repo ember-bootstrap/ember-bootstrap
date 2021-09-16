@@ -56,13 +56,6 @@ export default class DropdownMenu extends Component {
   direction = 'down';
 
   /**
-   * @property inNav
-   * @type {boolean}
-   * @private
-   */
-  inNav = false;
-
-  /**
    * By default the menu is rendered in the same place as the dropdown. If you experience clipping
    * issues, you can set this to false to render the menu in a wormhole at the top of the DOM.
    *
@@ -155,16 +148,17 @@ export default class DropdownMenu extends Component {
     }
   }
 
-  @computed('inNav', 'flip')
-  get popperModifiers() {
+  @computed('flip', 'popperPlacement')
+  get popperOptions() {
     return {
-      // @todo add offset config
-      applyStyle: {
-        enabled: !this.inNav,
-      },
-      flip: {
-        enabled: this.flip,
-      },
+      placement: this.popperPlacement,
+      onFirstUpdate: () => this.setFocus(),
+      modifiers: [
+        {
+          name: 'flip',
+          enabled: this.flip,
+        },
+      ],
     };
   }
 
