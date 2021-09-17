@@ -1,11 +1,13 @@
 import Controller from '@ember/controller';
+import { action } from '@ember/object';
+import { tracked } from '@glimmer/tracking';
 
-export default Controller.extend({
-  blueprintDetailsCollapsed: true,
+export default class SetupController extends Controller {
+  @tracked
+  blueprintDetailsCollapsed = true;
 
-  actions: {
-    toggleBlueprintDetails() {
-      this.toggleProperty('blueprintDetailsCollapsed');
-    },
-  },
-});
+  @action
+  toggleBlueprintDetails() {
+    this.blueprintDetailsCollapsed = !this.blueprintDetailsCollapsed;
+  }
+}

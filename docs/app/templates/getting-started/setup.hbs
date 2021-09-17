@@ -6,22 +6,6 @@
 
 <pre class="highlight">ember install ember-bootstrap</pre>
 
-<BsAlert @type="warning" @dismissible={{false}}>
-  <h4 class="alert-heading">Additional dependencies</h4>
-  <ul>
-    <li>
-      If you need to support Internet Explorer 11, be sure to include the
-      <a href="https://github.com/babel/ember-cli-babel#polyfill" class="alert-link">Babel polyfill</a>!
-    </li>
-    <li>
-      The examples in these docs use angle bracket invocation. If you are still using an Ember version less than v3.4,
-      you will need to install
-      <a href="https://github.com/rwjblue/ember-angle-bracket-invocation-polyfill" class="alert-link">ember-angle-bracket-invocation-polyfill</a>.
-      The older curly syntax still works without the polyfill.
-    </li>
-  </ul>
-</BsAlert>
-
 <h2>Configuration</h2>
 
 <h3>Using the default blueprint</h3>
@@ -33,30 +17,26 @@
 
 <h4>Use a CSS preprocessor</h4>
 
-<p>To use a CSS preprocessor like Sass or Less instead of plain CSS (highly recommended!), you can use this command to install and set this up:</p>
+<p>To use a Sass as a CSS preprocessor instead of plain CSS (highly recommended!), you can use this command to install and set this up:</p>
 
-<pre class="highlight">ember generate ember-bootstrap --preprocessor=sass // or --preprocessor=less</pre>
+<pre class="highlight">ember generate ember-bootstrap --preprocessor=sass</pre>
 
-<p>See the {{#link-to "getting-started.assets"}}Assets guide{{/link-to}} for details.</p>
+<p>See the <LinkTo @route="getting-started.assets">Assets guide</LinkTo> for details.</p>
 
-<h4>Switch to Bootstrap 3</h4>
+<h4>Switch to Bootstrap 5</h4>
 
-<p>You can switch to Bootstrap 3 by running this command:</p>
+<p>You can switch to Bootstrap 5 by running this command:</p>
 
-<pre class="highlight">ember generate ember-bootstrap --bootstrap-version=3</pre>
+<pre class="highlight">ember generate ember-bootstrap --bootstrap-version=5</pre>
 
-<p>As Bootstrap 3 includes Less support, you can enable that as well in your Ember app:</p>
-
-<pre class="highlight">ember generate ember-bootstrap --bootstrap-version=3 --preprocessor=less</pre>
-
-{{#bs-button type="info" onClick=(action "toggleBlueprintDetails")}}
+<BsButton @type="info" @onClick={{this.toggleBlueprintDetails}}>
   About the default blueprint
-{{/bs-button}}
+</BsButton>
 
 
-{{#bs-collapse collapsed=blueprintDetailsCollapsed}}
+<BsCollapse @collapsed={{this.blueprintDetailsCollapsed}}>
 
-  {{#bs-alert class="mt-4" type="info" dismissible=false}}
+  <BsAlert class="mt-4" @type="info" @dismissible={{false}}>
 
     <h4>About the default blueprint</h4>
 
@@ -74,13 +54,10 @@
         Removes unneeded dependencies on ember-cli-less and ember-cli-sass
       </li>
       <li>
-        Installs ember-cli-less or ember-cli-sass if appropriate
+        Installs <code>ember-cli-sass</code> and <code>app.scss</code> if appropriate
       </li>
       <li>
-        Creates <code>app.less</code> or <code>app.scss</code> if appropriate and it doesn't exist
-      </li>
-      <li>
-        Adds the appropriate "@import" statement to your <code>app.less</code> or <code>app.scss</code> if it&apos;s
+        Adds the appropriate "@import" statement to your <code>app.scss</code> if it&apos;s
         not there already
       </li>
       <li>
@@ -88,8 +65,8 @@
         <code>ember-cli-build.js</code> to ensure the proper ember-bootstrap settings for your configuration
       </li>
     </ul>
-  {{/bs-alert}}
-{{/bs-collapse}}
+  </BsAlert>
+</BsCollapse>
 
 <hr>
 
@@ -112,27 +89,13 @@
   <tbody>
     <tr>
       <td>bootstrapVersion</td>
-      <td>3 / 4</td>
+      <td>4 / 5</td>
       <td>4</td>
       <td>
         <p>
           Specify the Bootstrap version to use. To make sure you have the right dependencies installed, you should use the
           default blueprint mentioned above to set this!
         </p>
-        <p>See the {{#link-to "getting-started.bootstrap-4"}}Bootstrap 4 guide{{/link-to}} for more details.</p>
-      </td>
-    </tr>
-    <tr>
-      <td>importBootstrapTheme</td>
-      <td><code>true</code> / <code>false</code></td>
-      <td><code>false</code></td>
-      <td>
-        <p>
-          Include the optional <code>bootstrap-theme.css</code>. Only applicable for Bootstrap 3 and when not using a
-          preprocessor.
-        </p>
-
-        <p>See the {{#link-to "getting-started.assets"}}Assets guide{{/link-to}} for more details.</p>
       </td>
     </tr>
     <tr>
@@ -141,16 +104,7 @@
       <td><code>true</code> if no preprocessor</td>
       <td>
         <p>Include the default static <code>bootstrap.css</code>. Only applicable when not using a preprocessor.</p>
-        <p>See the {{#link-to "getting-started.assets"}}Assets guide{{/link-to}} for more details.</p>
-      </td>
-    </tr>
-    <tr>
-      <td>importBootstrapFont</td>
-      <td><code>true</code> / <code>false</code></td>
-      <td><code>true</code> if Bootstrap 3</td>
-      <td>
-        <p>Include the Glyphicons font. Only applicable for Bootstrap 3.</p>
-        <p>See the {{#link-to "getting-started.assets"}}Assets guide{{/link-to}} for more details.</p>
+        <p>See the <LinkTo @route="getting-started.assets">Assets guide</LinkTo> for more details.</p>
       </td>
     </tr>
     <tr>
