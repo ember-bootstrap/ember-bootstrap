@@ -5,18 +5,18 @@
     in <code>bootstrap.js</code>, such as toggle, navbar, modal, etc., with equivalent, CSS class-compatible
     native Ember components.</p>
 
-<p>If you are not using a preprocessor, ember-bootstrap will import the static CSS files. If you are using a preprocessor
-    like LESS or SASS, ember-bootstrap imports the preprocessor-ready versions of the styles.</p>
+<p>If you are not using a preprocessor, ember-bootstrap will import the static CSS files. If you are using Sass as a preprocessor,
+  ember-bootstrap imports the preprocessor-ready versions of the styles.</p>
 
-{{#bs-alert type="warning" dismissible=false}}
+<BsAlert @type="warning" @dismissible={{false}}>
   <h4>No bootstrap.js</h4>
   ember-bootstrap deliberately excludes
   <code>bootstrap.js</code> because the jQuery and Ember ways of control flow and animation
   sometimes don't play well together, causing unpredictable results. This is the main motivation behind ember-bootstrap.
   It is possible to import
-  <code>bootstrap.js</code> from bower_components or the vendor folder. This is NOT recommended or
+  <code>bootstrap.js</code> from manually. However this is NOT recommended or
   supported, and you will be on your own. You have been warned!
-{{/bs-alert}}
+</BsAlert>
 
 <h1 id="addon-options">Importing assets</h1>
 
@@ -44,28 +44,14 @@ module.exports = function(defaults) {
   </code></pre>
 </div>
 
-<p>
-  Bootstrap comes with an optional theme CSS with various visual enhancements. To include this file you can import it
-  by setting <code>importBootstrapTheme</code> to true in the 'ember-bootstrap' config of your
-  <code>ember-cli-build.js</code>.
-</p>
-
-
-<h2>Using CSS preprocessors</h2>
+<h2>Using a CSS preprocessor</h2>
 
 <p>
-  ember-bootstrap supports <a href="http://lesscss.org/" target="_blank" rel="noopener noreferrer">Less</a> (with
-  <a href="https://github.com/gdub22/ember-cli-less" target="_blank" rel="noopener noreferrer">ember-cli-less</a>)
-  as well as <a href="http://sass-lang.com/" target="_blank" rel="noopener noreferrer">Sass</a> (with
-  <a href="https://github.com/aexmachina/ember-cli-sass" target="_blank" rel="noopener noreferrer">ember-cli-sass</a>)
-  as CSS preprocessors. When it detects one of these upon first installation of ember-bootstrap, it will install the
-  necessary packages ('bootstrap' itself or 'bootstrap-sass') and add an <code>@import</code> statement to your
-  <code>app.less</code> or <code>app.scss</code> file respectively:
+  ember-bootstrap supports <a href="http://sass-lang.com/" target="_blank" rel="noopener noreferrer">Sass</a> (with
+  <a href="https://github.com/adopted-ember-addons/ember-cli-sass" target="_blank" rel="noopener noreferrer">ember-cli-sass</a>)
+  as a CSS preprocessor. When it detects it upon first installation of ember-bootstrap, it will install the
+  necessary packages and add an <code>@import</code> statement to your <code>app.scss</code> file respectively:
 </p>
-
-<pre class="highlight"><code class="language-less">// app.less
-@import "ember-bootstrap/bootstrap";
-</code></pre>
 
 <pre class="highlight"><code class="language-sass">// app.scss
 @import "ember-bootstrap/bootstrap";
@@ -73,51 +59,16 @@ module.exports = function(defaults) {
 
 <p>This will add the whole bootstrap stylesheets allowing you to customize them easily using the available variables.</p>
 
-{{#bs-alert type="info" dismissible=false}}
+<BsAlert @type="info" @dismissible={{false}}>
   <strong>Important note:</strong> this only works when you have the CSS preprocessor addon installed before installing ember-bootstrap
-  itself. If that is not the case, make sure to run the default install blueprint after installing the preprocessor addon:
-  <code>ember generate ember-bootstrap</code>! This will execute the necessary setup steps as described above.
-{{/bs-alert}}
+  itself. If that is not the case, then run the default install blueprint using the <code>preprocessor</code> option:
+  <code>ember generate ember-bootstrap --preprocessor=sass</code>! This will execute the necessary setup steps as described above.
+</BsAlert>
 
 <p>
   It is possible to import only the assets your app needs but the definitions varies according to the chosen configuration.
 </p>
 
-<p><b>BS3 - Less</b></p>
-<pre class="highlight"><code class="language-less">// app.less
-
-// Required
-@import "ember-bootstrap/variables";
-@import "ember-bootstrap/mixins";
-
-// Optional - Bootstrapping/Resetting
-@import "ember-bootstrap/normalize";
-@import "ember-bootstrap/print";
-
-// Optional - Everything else
-@import "ember-bootstrap/scaffolding";
-@import "ember-bootstrap/type";
-@import "ember-bootstrap/buttons";
-</code></pre>
-
-<p><b>BS3 - Sass</b></p>
-<pre class="highlight"><code class="language-sass">// app.scss
-
-// Required
-@import "ember-bootstrap/bootstrap/variables";
-@import "ember-bootstrap/bootstrap/mixins";
-
-// Optional - Bootstrapping/Resetting
-@import "ember-bootstrap/bootstrap/normalize";
-@import "ember-bootstrap/bootstrap/print";
-
-// Optional - Everything else
-@import "ember-bootstrap/bootstrap/scaffolding";
-@import "ember-bootstrap/bootstrap/type";
-@import "ember-bootstrap/bootstrap/buttons";
-</code></pre>
-
-<p><b>BS4 - Sass only</b></p>
 <pre class="highlight"><code class="language-sass">// app.scss
 
 // Required
@@ -136,27 +87,5 @@ module.exports = function(defaults) {
 </code></pre>
 
 <p>
-  You can also checkout which files are avaliables for import in <code>node_modules/bootstrap/less</code> for BS3 Less,
-  <code>node_modules/bootstrap-sass/assets/stylesheets/bootstrap</code> for BS3 Sass or <code>node_modules/bootstrap/scss</code> for BS4.
+  You can also checkout which files are available for import in <code>node_modules/bootstrap/scss</code>.
 </p>
-
-<h2>Importing the Bootstrap Glyphicons font</h2>
-<p>By default the icon font that comes with Bootstrap 3(!) is added to your app's assets folder.
-  When you do not want to use it (maybe because of replacing it for
-  <a href="https://github.com/martndemus/ember-font-awesome" target="_blank" rel="noopener noreferrer">Font Awesome</a>),
-  you can opt out of the font import by setting the <code>importBootstrapFont</code> option
-  to false in your <code>ember-cli-build.js</code>:</p>
-
-<div><pre class="highlight"><code>//your-bootstrap-app/ember-cli-build.js
-
-module.exports = function(defaults) {
-  var app = new EmberApp(defaults, {
-    'ember-bootstrap': {
-      'importBootstrapFont': false
-    }
-  });
-
-  return app.toTree();
-};
-</code></pre>
-</div>

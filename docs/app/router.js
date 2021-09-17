@@ -29,7 +29,6 @@ Router.map(function () {
   this.route('getting-started', function () {
     this.route('setup');
     this.route('assets');
-    this.route('bootstrap-4');
   });
   this.route('addons');
   this.route('license');
