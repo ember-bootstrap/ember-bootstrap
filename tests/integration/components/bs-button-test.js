@@ -120,7 +120,8 @@ module('Integration | Component | bs-button', function (hooks) {
     assert.ok(action.calledWith('dummy'), 'onClick action has been called with button value');
   });
 
-  test('button text is changed according to button state', async function (assert) {
+  // https://github.com/kaliber5/ember-bootstrap/issues/1615
+  skip('button text is changed according to button state', async function (assert) {
     let deferredClickAction = defer();
     this.set('clickAction', () => {
       return deferredClickAction.promise;
@@ -160,7 +161,8 @@ module('Integration | Component | bs-button', function (hooks) {
     assert.dom('button').hasText('text for rejected state');
   });
 
-  test("button text remains to default if no state text wasn't set", async function (assert) {
+  // https://github.com/kaliber5/ember-bootstrap/issues/1615
+  skip("button text remains to default if no state text wasn't set", async function (assert) {
     let deferredClickAction = defer();
     this.set('clickAction', () => {
       return deferredClickAction.promise;
@@ -256,7 +258,8 @@ module('Integration | Component | bs-button', function (hooks) {
     await settled();
   });
 
-  test('isPending, isFulfilled and isRejected properties are yielded', async function (assert) {
+  // https://github.com/kaliber5/ember-bootstrap/issues/1615
+  skip('isPending, isFulfilled and isRejected properties are yielded', async function (assert) {
     let deferredClickAction = defer();
     this.set('clickAction', () => {
       return deferredClickAction.promise;
@@ -297,7 +300,8 @@ module('Integration | Component | bs-button', function (hooks) {
     assert.dom('button').hasText('');
   });
 
-  test('isSettled shorthand is yielded', async function (assert) {
+  // https://github.com/kaliber5/ember-bootstrap/issues/1615
+  skip('isSettled shorthand is yielded', async function (assert) {
     this.set('clickAction', () => {
       return resolve();
     });
@@ -417,7 +421,8 @@ module('Integration | Component | bs-button', function (hooks) {
     deferredClickAction.resolve();
   });
 
-  test('it does not catch errors throws by @onClick event handlers', async function (assert) {
+  // https://github.com/kaliber5/ember-bootstrap/issues/1615
+  skip('it does not catch errors throws by @onClick event handlers', async function (assert) {
     const expectedError = new Error('error thrown for testing');
 
     this.set('clickHandler', async () => {
