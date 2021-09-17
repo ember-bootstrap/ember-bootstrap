@@ -136,6 +136,10 @@ export function visuallyHiddenClass() {
   return versionDependent('sr-only', 'visually-hidden');
 }
 
+export function modalCloseClass() {
+  return versionDependent('close', 'btn-close');
+}
+
 export function isVisible(el) {
   return !isHidden(el);
 }
