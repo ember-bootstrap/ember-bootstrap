@@ -1,4 +1,31 @@
 
+
+## v5.0.0-beta.0 (2021-09-24)
+
+#### :boom: Breaking Change
+* [#1609](https://github.com/kaliber5/ember-bootstrap/pull/1609) Drop ember-popper in favor of ember-popper-modifier and popper.js v2 ([@simonihmig](https://github.com/simonihmig))
+* [#1610](https://github.com/kaliber5/ember-bootstrap/pull/1610) Remove deprecated `parentView` trigger element option for tooltips/popovers ([@simonihmig](https://github.com/simonihmig))
+* [#1604](https://github.com/kaliber5/ember-bootstrap/pull/1604) Remove BS3 support from addon blueprint ([@simonihmig](https://github.com/simonihmig))
+* [#1603](https://github.com/kaliber5/ember-bootstrap/pull/1603) Remove BS3 support from addon entrypoint ([@simonihmig](https://github.com/simonihmig))
+* [#1600](https://github.com/kaliber5/ember-bootstrap/pull/1600) Remove Bootstrap 3 support from components ([@simonihmig](https://github.com/simonihmig))
+
+#### Features
+* [#1609](https://github.com/kaliber5/ember-bootstrap/pull/1609) Drop ember-popper in favor of ember-popper-modifier and popper.js v2 ([@simonihmig](https://github.com/simonihmig))
+* [#1607](https://github.com/kaliber5/ember-bootstrap/pull/1607) Permit blocking of dropdown close if onHide returns false ([@gfmartinez](https://github.com/gfmartinez))
+* [#1608](https://github.com/kaliber5/ember-bootstrap/pull/1608) Update dependencies for Ember 4 support ([@simonihmig](https://github.com/simonihmig))
+
+#### Bug Fixes
+* [#1614](https://github.com/kaliber5/ember-bootstrap/pull/1614) Fix BS5 markup for modal close button ([@simonihmig](https://github.com/simonihmig))
+
+#### Documentation
+* [#1619](https://github.com/kaliber5/ember-bootstrap/pull/1619) Add ember-bootstrap-postcss to addons section ([@oliverlj](https://github.com/oliverlj))
+* [#1617](https://github.com/kaliber5/ember-bootstrap/pull/1617) Add BS5 and remove BS3 instructions to docs app ([@simonihmig](https://github.com/simonihmig))
+
+#### Committers: 3
+- Gabriel Martinez ([@gfmartinez](https://github.com/gfmartinez))
+- LE JACQUES Olivier ([@oliverlj](https://github.com/oliverlj))
+- Simon Ihmig ([@simonihmig](https://github.com/simonihmig))
+
 ## v5.0.0-alpha.1 (2021-08-17)
 
 #### :boom: Breaking Change
