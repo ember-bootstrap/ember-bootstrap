@@ -5,8 +5,8 @@
 >
   {{#unless this.hidden}}
     {{#if this.dismissible}}
-      <button type="button" class="close" aria-label="Close" {{on "click" this.dismiss}}>
-        <span aria-hidden="true">&times;</span>
+      <button type="button" class={{if (macroCondition (macroGetOwnConfig "isBS5")) "btn-close" "close"}} aria-label="Close" {{on "click" this.dismiss}}>
+        {{#if (macroCondition (macroGetOwnConfig "isBS4"))}}<span aria-hidden="true">&times;</span>{{/if}}
       </button>
     {{/if}}
 
