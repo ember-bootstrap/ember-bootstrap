@@ -2,7 +2,7 @@
   <BsForm @formLayout="horizontal" @model={{this}} as |form|>
     <form.element
       @controlType="power-select"
-      @options={{typeChoices}}
+      @options={{this.typeChoices}}
       @label="Type"
       @property="type" as |el|
     >
@@ -10,7 +10,7 @@
     </form.element>
     <form.element
       @controlType="power-select"
-      @options={{bgChoices}}
+      @options={{this.bgChoices}}
       @label="Background"
       @property="bg" as |el|
     >
@@ -20,22 +20,21 @@
       @controlType="checkbox"
       @label="Collapsed (on mobile)"
       @property="collapsed"
-      value={{collapsed}}
+      value={{this.collapsed}}
     />
 
   </BsForm>
   <hr>
   <!-- BEGIN-SNIPPET navbar-demo -->
   <BsNavbar
-    @type={{type}}
-    @backgroundColor={{bg}}
-    @collapsed={{collapsed}}
-    @onCollapse={{action (mut collapsed) true}}
-    @onExpand={{action (mut collapsed) false}} as |navbar|>
-    <div class="navbar-header">
-      {{navbar.toggle}}
-      {{#link-to "index" class="navbar-brand"}}Brand{{/link-to}}
-    </div>
+    @type={{this.type}}
+    @backgroundColor={{this.bg}}
+    @collapsed={{this.collapsed}}
+    @onCollapse={{action (mut this.collapsed) true}}
+    @onExpand={{action (mut this.collapsed) false}} as |navbar|
+  >
+    <LinkTo @route="index" class="navbar-brand">Brand</LinkTo>
+    <navbar.toggle/>
     <navbar.content>
       <navbar.nav as |nav|>
         <nav.item>
@@ -64,9 +63,9 @@
   <CodeSnippet
     @name="navbar-demo.hbs"
     @dynamicProperties={{hash
-      type=type
-      bg=bg
-      collapsed=collapsed
+      type=this.type
+      bg=this.bg
+      collapsed=this.collapsed
     }}
   />
 </div>
