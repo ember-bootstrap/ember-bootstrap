@@ -1,16 +1,16 @@
 <div class="row mb-4">
   <div class="col-sm-9">
-    <div class="jumbotron mb-0">
+    <div class="bg-light rounded h-100 p-5 fs-5">
       <h1>ember-bootstrap</h1>
 
-      <p class="lead">
+      <p class="lead fs-4">
         An <a href="http://www.ember-cli.com">ember-cli</a> addon for using
         <a href="http://getbootstrap.com/">Bootstrap</a> in
         <a href="http://www.emberjs.com"></a>Ember.js applications.
       </p>
 
       <p>
-        Provides a collection of native Ember {{#link-to "demo"}}components{{/link-to}} that mimic the original
+        Provides a collection of native Ember <LinkTo @route="demo">components</LinkTo> that mimic the original
         Bootstrap plugins and components in an ember friendly way, replacing the need for <code>bootstrap.js</code>.
       </p>
     </div>
@@ -32,7 +32,10 @@
           <a href="https://github.com/kaliber5/ember-bootstrap/graphs/contributors">contributors</a>!
         </p>
 
-        <p class="card-text">&copy; {{current-year}} kaliber5 GmbH. Code released under {{#link-to "license"}}MIT license{{/link-to}}.</p>
+        <p class="card-text">&copy; {{current-year}} kaliber5 GmbH. Code released under
+          <LinkTo @route="license">MIT license</LinkTo>
+          .
+        </p>
 
       </div>
     </div>
@@ -40,54 +43,61 @@
 </div>
 
 
-<div class="card-deck">
-
-  <div class="card">
-    <div class="card-body">
-      <h3 class="card-title">Getting started</h3>
-      <p class="card-text">
-        For instruction on installing and configuring the addon, see the the Getting Started
-        Guide.
-      </p>
-    </div>
-    <div class="card-footer">
-      {{#link-to "getting-started" class="btn btn-primary"}}Getting Started{{/link-to}}
-    </div>
-  </div>
-
-  <div class="card">
-    <div class="card-body">
-      <h3 class="card-title">Components</h3>
-      <p class="card-text">An overview of the available Ember.js Bootstrap components.</p>
-    </div>
-    <div class="card-footer">
-      {{#link-to "demo" class="btn btn-primary"}}Component Overview{{/link-to}}
+<div class="row row-cols-1 row-cols-sm-2 row-cols-md-4 g-4">
+  <div class="col">
+    <div class="card h-100">
+      <div class="card-body">
+        <h3 class="card-title">Getting started</h3>
+        <p class="card-text">
+          For instruction on installing and configuring the addon, see the the Getting Started
+          Guide.
+        </p>
+      </div>
+      <div class="card-footer">
+        <LinkTo @route="getting-started" class="btn btn-primary">Getting Started</LinkTo>
+      </div>
     </div>
   </div>
 
-  <div class="card">
-    <div class="card-body">
-      <h3 class="card-title">API</h3>
-      <p class="card-text">
-        An overview of all components, their usage and detailed API can be found in the API
-        documentation.
-      </p>
-    </div>
-    <div class="card-footer">
-      <a class="btn btn-primary" href="/api">API Docs</a>
+  <div class="col">
+    <div class="card h-100">
+      <div class="card-body">
+        <h3 class="card-title">Components</h3>
+        <p class="card-text">An overview of the available Ember.js Bootstrap components.</p>
+      </div>
+      <div class="card-footer">
+        <LinkTo @route="demo" class="btn btn-primary">Component Overview</LinkTo>
+      </div>
     </div>
   </div>
 
-  <div class="card">
-    <div class="card-body">
-      <h3 class="card-title">Updates</h3>
-      <p class="card-text">
-        For the latest changes see the Changelog, and follow me on Twitter:
-        <a href="https://twitter.com/simonihmig">@simonihmig</a>
-      </p>
+  <div class="col">
+    <div class="card h-100">
+      <div class="card-body">
+        <h3 class="card-title">API</h3>
+        <p class="card-text">
+          An overview of all components, their usage and detailed API can be found in the API
+          documentation.
+        </p>
+      </div>
+      <div class="card-footer">
+        <a class="btn btn-primary" href="/api">API Docs</a>
+      </div>
     </div>
-    <div class="card-footer">
-      {{#link-to "changelog" class="btn btn-primary"}}Changelog{{/link-to}}
+  </div>
+
+  <div class="col">
+    <div class="card h-100">
+      <div class="card-body">
+        <h3 class="card-title">Updates</h3>
+        <p class="card-text">
+          For the latest changes see the Changelog, and follow me on Twitter:
+          <a href="https://twitter.com/simonihmig">@simonihmig</a>
+        </p>
+      </div>
+      <div class="card-footer">
+        <LinkTo @route="changelog" class="btn btn-primary">Changelog</LinkTo>
+      </div>
     </div>
   </div>
 

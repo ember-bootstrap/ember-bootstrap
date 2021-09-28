@@ -10,3 +10,5 @@ $font-family-sans-serif: 'myriad-pro', sans-serif;
 
 // make sure this is defined so Sass compiles without errors even for BS4 build
 $zindex-modal-background:  1040;
+
+$min-contrast-ratio: 3;
