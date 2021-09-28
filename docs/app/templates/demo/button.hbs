@@ -3,7 +3,7 @@
 </h2>
 <div class="bs-example" data-test-fastboot-container>
   <!-- BEGIN-SNIPPET button-demo -->
-  <BsButton @onClick={{action "submit"}}>Button</BsButton>
+  <BsButton @onClick={{this.submit}}>Button</BsButton>
   <!-- END-SNIPPET -->
 </div>
 <div class="highlight">
@@ -16,30 +16,27 @@
   <!-- BEGIN-SNIPPET button-options -->
   <p>Solid buttons</p>
   <p>
-    <BsButton @type="primary" @onClick={{action "submit"}}>Primary</BsButton>
-    <BsButton @type="secondary" @onClick={{action "submit"}}>Secondary</BsButton>
-    <BsButton @type="success" @onClick={{action "submit"}}>Success</BsButton>
-    <BsButton @type="danger" @onClick={{action "submit"}}>Danger</BsButton>
-    <BsButton @type="warning" @onClick={{action "submit"}}>Warning</BsButton>
-    <BsButton @type="info" @onClick={{action "submit"}}>Info</BsButton>
-    <BsButton @type="light" @onClick={{action "submit"}}>Light</BsButton>
-    <BsButton @type="dark" @onClick={{action "submit"}}>Dark</BsButton>
-    <BsButton @disabled={{true}} @onClick={{action "submit"}}>Disabled</BsButton>
+    <BsButton @type="primary" @onClick={{this.submit}}>Primary</BsButton>
+    <BsButton @type="secondary" @onClick={{this.submit}}>Secondary</BsButton>
+    <BsButton @type="success" @onClick={{this.submit}}>Success</BsButton>
+    <BsButton @type="danger" @onClick={{this.submit}}>Danger</BsButton>
+    <BsButton @type="warning" @onClick={{this.submit}}>Warning</BsButton>
+    <BsButton @type="info" @onClick={{this.submit}}>Info</BsButton>
+    <BsButton @type="light" @onClick={{this.submit}}>Light</BsButton>
+    <BsButton @type="dark" @onClick={{this.submit}}>Dark</BsButton>
+    <BsButton disabled={{true}} @onClick={{this.submit}}>Disabled</BsButton>
   </p>
   <p>Outlined buttons</p>
   <p>
-    <BsButton @type="primary" @outline={{true}} @onClick={{action "submit"}}>Primary</BsButton>
-    <BsButton @type="secondary" @outline={{true}} @onClick={{action "submit"}}>Secondary</BsButton>
-    <BsButton @type="success" @outline={{true}} @onClick={{action "submit"}}>Success</BsButton>
-    <BsButton @type="danger" @outline={{true}} @onClick={{action "submit"}}>Danger</BsButton>
-    <BsButton @type="warning" @outline={{true}} @onClick={{action "submit"}}>Warning</BsButton>
-    <BsButton @type="info" @outline={{true}} @onClick={{action "submit"}}>Info</BsButton>
-    <BsButton @type="light" @outline={{true}} @onClick={{action "submit"}}>Light</BsButton>
-    <BsButton @type="dark" @outline={{true}} @onClick={{action "submit"}}>Dark</BsButton>
-    <BsButton @disabled={{true}} @outline={{true}} @onClick={{action "submit"}}>Disabled</BsButton>
-  </p>
-  <p>
-    <BsButton @block={{true}} @onClick={{action "submit"}}>Block Button</BsButton>
+    <BsButton @type="primary" @outline={{true}} @onClick={{this.submit}}>Primary</BsButton>
+    <BsButton @type="secondary" @outline={{true}} @onClick={{this.submit}}>Secondary</BsButton>
+    <BsButton @type="success" @outline={{true}} @onClick={{this.submit}}>Success</BsButton>
+    <BsButton @type="danger" @outline={{true}} @onClick={{this.submit}}>Danger</BsButton>
+    <BsButton @type="warning" @outline={{true}} @onClick={{this.submit}}>Warning</BsButton>
+    <BsButton @type="info" @outline={{true}} @onClick={{this.submit}}>Info</BsButton>
+    <BsButton @type="light" @outline={{true}} @onClick={{this.submit}}>Light</BsButton>
+    <BsButton @type="dark" @outline={{true}} @onClick={{this.submit}}>Dark</BsButton>
+    <BsButton disabled={{true}} @outline={{true}} @onClick={{this.submit}}>Disabled</BsButton>
   </p>
   <!-- END-SNIPPET -->
 </div>
@@ -61,9 +58,9 @@
   <BsButton
     @defaultText="Start download"
     @pendingText="Downloading..."
-    @resolvedText="Download complete!"
-    @onClick={{action "download"}}
-   />
+    @fulfilledText="Download complete!"
+    @onClick={{this.download}}
+  />
 
   <!-- END-SNIPPET -->
 </div>
