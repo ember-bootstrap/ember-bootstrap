@@ -1,11 +1,15 @@
-/* eslint-disable ember/avoid-leaking-state-in-ember-objects */
 import Controller from '@ember/controller';
+import { tracked } from '@glimmer/tracking';
 
-export default Controller.extend({
-  type: 'light',
-  bg: 'light',
-  typeChoices: ['light', 'dark'],
-  bgChoices: [
+export default class NavbarsController extends Controller {
+  @tracked
+  type = 'light';
+
+  @tracked
+  bg = 'light';
+
+  typeChoices = ['light', 'dark'];
+  bgChoices = [
     'light',
     'dark',
     'primary',
@@ -14,6 +18,5 @@ export default Controller.extend({
     'danger',
     'warning',
     'info',
-  ],
-  collapsed: true,
-});
+  ];
+}

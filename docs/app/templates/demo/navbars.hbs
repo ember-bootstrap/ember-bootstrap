@@ -16,22 +16,13 @@
     >
       <el.control @searchEnabled/>
     </form.element>
-    <form.element
-      @controlType="checkbox"
-      @label="Collapsed (on mobile)"
-      @property="collapsed"
-      value={{this.collapsed}}
-    />
-
   </BsForm>
   <hr>
   <!-- BEGIN-SNIPPET navbar-demo -->
   <BsNavbar
     @type={{this.type}}
     @backgroundColor={{this.bg}}
-    @collapsed={{this.collapsed}}
-    @onCollapse={{action (mut this.collapsed) true}}
-    @onExpand={{action (mut this.collapsed) false}} as |navbar|
+    as |navbar|
   >
     <LinkTo @route="index" class="navbar-brand">Brand</LinkTo>
     <navbar.toggle/>
