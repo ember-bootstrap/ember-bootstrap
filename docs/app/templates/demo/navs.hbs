@@ -2,41 +2,50 @@
   <BsForm @formLayout="inline" @model={{this}} as |form|>
     <form.element
       @controlType="power-select"
-      @options={{typeChoices}}
+      @options={{this.typeChoices}}
       @label="Type"
-      @property="type" as |el|>
+      @property="type"
+      @onChange={{this.updateType}}
+      as |el|
+    >
       <el.control @searchEnabled @class="ml-sm-1"/>
     </form.element>
     <form.element
       @controlType="checkbox"
-      @disabled={{bs-eq type tabs}}
       @label="Stacked"
       @property="stacked"
-      @onChange={{action "updateStacked"}}
+      @onChange={{this.updateStacked}}
       class="ml-sm-2"
-    />
+      as |el|
+    >
+      <el.control disabled={{bs-eq this.type "tabs"}}/>
+    </form.element>
     <form.element
       @controlType="checkbox"
-      @disabled={{stacked}}
       @label="Justified"
       @property="justified"
       class="ml-sm-2"
-    />
+      as |el|
+    >
+      <el.control disabled={{this.stacked}}/>
+    </form.element>
     <form.element
       @controlType="checkbox"
-      @disabled={{stacked}}
       @label="Fill"
       @property="fill"
       class="ml-sm-2"
-    />
+      as |el|
+    >
+      <el.control disabled={{this.stacked}}/>
+    </form.element>
   </BsForm>
   <hr>
   <!-- BEGIN-SNIPPET nav-demo -->
   <BsNav
-    @type={{type}}
-    @justified={{justified}}
-    @stacked={{stacked}}
-    @fill={{fill}} as |nav|
+    @type={{this.type}}
+    @justified={{this.justified}}
+    @stacked={{this.stacked}}
+    @fill={{this.fill}} as |nav|
   >
     <nav.item>
       <nav.link-to @route="index">Home</nav.link-to>
@@ -65,10 +74,10 @@
   <CodeSnippet
     @name="nav-demo.hbs"
     @dynamicProperties={{hash
-      type=type
-      stacked=stacked
-      justified=justified
-      fill=fill
+      type=this.type
+      stacked=this.stacked
+      justified=this.justified
+      fill=this.fill
     }}
   />
 </div>
