@@ -14,7 +14,7 @@
   </BsForm>
   <hr>
   <!-- BEGIN-SNIPPET form-demo -->
-  <BsForm @formLayout={{formLayout}} @model={{this}} @onSubmit={{this.submit}} as |form|>
+  <BsForm @formLayout={{this.formLayout}} @model={{this}} @onSubmit={{this.submit}} as |form|>
     <form.element @controlType="email" @label="Email" @property="email" as |el|>
       <el.control placeholder="Email" required />
     </form.element>
@@ -72,8 +72,8 @@
 <div class="bs-example">
   <!-- BEGIN-SNIPPET form-validation -->
   <BsForm @model={{this.login}} @onSubmit={{this.submit}} as |form|>
-    <form.element @controlType="email" @label="Email" @placeholder="Email" @property="email" />
-    <form.element @controlType="password" @label="Password" @placeholder="Password" @property="password" @helpText="Minimum 6 characters" />
+    <form.element @controlType="email" @label="Email" @property="email" />
+    <form.element @controlType="password" @label="Password" @property="password" @helpText="Minimum 6 characters" />
     <form.submitButton>Submit</form.submitButton>
   </BsForm>
   <!-- END-SNIPPET -->
@@ -98,15 +98,17 @@
 <div class="bs-example">
   <!-- BEGIN-SNIPPET form-custom -->
   <BsForm @model={{this.login}} @onSubmit={{this.submit}} as |form|>
-    <form.element @label="Email" @placeholder="Email" @property="email" as |el|>
+    <form.element @label="Email" @property="email" as |el|>
       <div class="input-group">
-        <el.control />
+        <el.control placeholder="Email" />
         <div class="input-group-append">
           <span class="input-group-text">@example.com</span>
         </div>
       </div>
     </form.element>
-    <form.element @size="lg" @controlType="password" @label="Password" @placeholder="Password" @property="password" @helpText="Minimum 6 characters" />
+    <form.element @size="lg" @controlType="password" @label="Password" @property="password" @helpText="Minimum 6 characters" as |el|>
+      <el.control placeholder="Password"/>
+    </form.element>
     <form.submitButton>Submit</form.submitButton>
   </BsForm>
   <!-- END-SNIPPET -->
@@ -120,8 +122,8 @@
 <div class="bs-example">
   <!-- BEGIN-SNIPPET form-customized -->
   <BsForm @model={{this}} @onSubmit={{this.submit}} as |form|>
-    <form.element @label="Email" @placeholder="Email" @property="email" as |el|>
-      <el.control class="border-info" />
+    <form.element @label="Email" @property="email" as |el|>
+      <el.control placeholder="Email" class="border-info" />
     </form.element>
     <form.submitButton>Submit</form.submitButton>
   </BsForm>
