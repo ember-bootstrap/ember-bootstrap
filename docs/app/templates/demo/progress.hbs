@@ -18,7 +18,7 @@
     <form.element @controlType="number" @label="Max" @property="maxValue" />
     <form.element
       @controlType="power-select"
-      @options={{typeChoices}}
+      @options={{this.typeChoices}}
       @label="Type"
       @property="type" as |el|>
       <el.control @searchEnabled />
@@ -36,23 +36,25 @@
     <form.element @controlType="checkbox" @label="Striped" @property="striped" />
     <form.element
       @controlType="checkbox"
-      @disabled={{notStriped}}
       @label="Animate"
       @property="animate"
-     />
+      as |el|
+     >
+      <el.control disabled={{if this.striped false true}}/>
+    </form.element>
   </BsForm>
   <hr>
   <!-- BEGIN-SNIPPET progress-options -->
   <BsProgress as |pg|>
     <pg.bar
-      @value={{value}}
-      @minValue={{minValue}}
-      @maxValue={{maxValue}}
-      @showLabel={{showLabel}}
-      @roundDigits={{roundDigits}}
-      @type={{type}}
-      @striped={{striped}}
-      @animate={{animate}}
+      @value={{this.value}}
+      @minValue={{this.minValue}}
+      @maxValue={{this.maxValue}}
+      @showLabel={{this.showLabel}}
+      @roundDigits={{this.roundDigits}}
+      @type={{this.type}}
+      @striped={{this.striped}}
+      @animate={{this.animate}}
      />
   </BsProgress>
   <!-- END-SNIPPET -->
@@ -61,14 +63,14 @@
   <CodeSnippet
     @name="progress-options.hbs"
     @dynamicProperties={{hash
-      value=value
-      minValue=minValue
-      maxValue=maxValue
-      showLabel=showLabel
-      roundDigits=roundDigits
-      striped=striped
-      animate=animate
-      type=type
+      value=this.value
+      minValue=this.minValue
+      maxValue=this.maxValue
+      showLabel=this.showLabel
+      roundDigits=this.roundDigits
+      striped=this.striped
+      animate=this.animate
+      type=this.type
     }}
   />
 </div>
@@ -79,34 +81,34 @@
   <!-- BEGIN-SNIPPET progress-stacked -->
   <BsProgress as |pg|>
     <pg.bar
-      @value={{value}}
-      @minValue={{minValue}}
-      @maxValue={{maxValue}}
-      @showLabel={{showLabel}}
-      @roundDigits={{roundDigits}}
-      @type={{type}}
-      @striped={{striped}}
-      @animate={{animate}}
+      @value={{this.value}}
+      @minValue={{this.minValue}}
+      @maxValue={{this.maxValue}}
+      @showLabel={{this.showLabel}}
+      @roundDigits={{this.roundDigits}}
+      @type={{this.type}}
+      @striped={{this.striped}}
+      @animate={{this.animate}}
     />
     <pg.bar
       @value={{20}}
-      @minValue={{minValue}}
-      @maxValue={{maxValue}}
-      @showLabel={{showLabel}}
-      @roundDigits={{roundDigits}}
+      @minValue={{this.minValue}}
+      @maxValue={{this.maxValue}}
+      @showLabel={{this.showLabel}}
+      @roundDigits={{this.roundDigits}}
       @type="warning"
-      @striped={{striped}}
-      @animate={{animate}}
+      @striped={{this.striped}}
+      @animate={{this.animate}}
     />
     <pg.bar
       @value={{5}}
-      @minValue={{minValue}}
-      @maxValue={{maxValue}}
-      @showLabel={{showLabel}}
-      @roundDigits={{roundDigits}}
+      @minValue={{this.minValue}}
+      @maxValue={{this.maxValue}}
+      @showLabel={{this.showLabel}}
+      @roundDigits={{this.roundDigits}}
       @type="danger"
-      @striped={{striped}}
-      @animate={{animate}}
+      @striped={{this.striped}}
+      @animate={{this.animate}}
     />
   </BsProgress>
   <!-- END-SNIPPET -->
@@ -115,14 +117,14 @@
   <CodeSnippet
     @name="progress-stacked.hbs"
     @dynamicProperties={{hash
-      value=value
-      minValue=minValue
-      maxValue=maxValue
-      showLabel=showLabel
-      roundDigits=roundDigits
-      striped=striped
-      animate=animate
-      type=type
+      value=this.value
+      minValue=this.minValue
+      maxValue=this.maxValue
+      showLabel=this.showLabel
+      roundDigits=this.roundDigits
+      striped=this.striped
+      animate=this.animate
+      type=this.type
     }}
   />
 </div>
