@@ -5,7 +5,7 @@
 <div class="bs-example" data-test-fastboot-container>
   <BsForm @formLayout="horizontal" @model={{this}} as |form|>
     <form.element @label="Layout" @property="formLayout" as |el|>
-      <BsButtonGroup @value={{el.value}} @type="radio" @onChange={{action (mut el.value)}} as |bg|>
+      <BsButtonGroup @value={{el.value}} @type="radio" @onChange={{el.setValue}} as |bg|>
         <bg.button @value="vertical">Vertical</bg.button>
         <bg.button @value="horizontal">Horizontal</bg.button>
         <bg.button @value="inline">Inline</bg.button>
@@ -14,14 +14,14 @@
   </BsForm>
   <hr>
   <!-- BEGIN-SNIPPET form-demo -->
-  <BsForm @formLayout={{formLayout}} @model={{this}} @onSubmit={{action "submit"}} as |form|>
+  <BsForm @formLayout={{formLayout}} @model={{this}} @onSubmit={{this.submit}} as |form|>
     <form.element @controlType="email" @label="Email" @property="email" as |el|>
       <el.control placeholder="Email" required />
     </form.element>
     <form.element @controlType="password" @label="Password" @property="password" @helpText="Minimum 6 characters" as |el|>
       <el.control placeholder="Password" required />
     </form.element>
-    <form.element @controlType="radio" @label="Radio" @property="radio" @options={{radioOptions}} @optionLabelPath="label" />
+    <form.element @controlType="radio" @label="Radio" @property="radio" @options={{this.radioOptions}} @optionLabelPath="label" />
     <form.element @controlType="checkbox" @label="Checkbox" @property="checkbox" />
     <form.element @controlType="switch" @label="Switch" @property="switched" />
     <form.element @controlType="textarea" @label="Textarea" @property="textarea" />
@@ -33,7 +33,7 @@
   <CodeSnippet
     @name="form-demo.hbs"
     @dynamicProperties={{hash
-      formLayout=formLayout
+      formLayout=this.formLayout
     }}
   />
 </div>
@@ -71,7 +71,7 @@
 
 <div class="bs-example">
   <!-- BEGIN-SNIPPET form-validation -->
-  <BsForm @model={{this.login}} @onSubmit={{action "submit"}} as |form|>
+  <BsForm @model={{this.login}} @onSubmit={{this.submit}} as |form|>
     <form.element @controlType="email" @label="Email" @placeholder="Email" @property="email" />
     <form.element @controlType="password" @label="Password" @placeholder="Password" @property="password" @helpText="Minimum 6 characters" />
     <form.submitButton>Submit</form.submitButton>
@@ -97,7 +97,7 @@
 
 <div class="bs-example">
   <!-- BEGIN-SNIPPET form-custom -->
-  <BsForm @model={{this.login}} @onSubmit={{action "submit"}} as |form|>
+  <BsForm @model={{this.login}} @onSubmit={{this.submit}} as |form|>
     <form.element @label="Email" @placeholder="Email" @property="email" as |el|>
       <div class="input-group">
         <el.control />
@@ -119,7 +119,7 @@
 
 <div class="bs-example">
   <!-- BEGIN-SNIPPET form-customized -->
-  <BsForm @model={{this}} @onSubmit={{action "submit"}} as |form|>
+  <BsForm @model={{this}} @onSubmit={{this.submit}} as |form|>
     <form.element @label="Email" @placeholder="Email" @property="email" as |el|>
       <el.control class="border-info" />
     </form.element>
