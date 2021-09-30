@@ -3,9 +3,9 @@
 <div class="bs-example" data-test-fastboot-container>
   <!-- BEGIN-SNIPPET button-group-checkbox-demo -->
   <BsButtonGroup
-    @value={{buttonGroupValue}}
+    @value={{this.buttonGroupValue}}
     @type="checkbox"
-    @onChange={{action (mut buttonGroupValue)}} as |bg|
+    @onChange={{fn (mut this.buttonGroupValue)}} as |bg|
   >
     <bg.button @value="1">1</bg.button>
     <bg.button @value="2">2</bg.button>
@@ -13,7 +13,7 @@
   </BsButtonGroup>
   <p>You selected:</p>
   <ul>
-    {{#each buttonGroupValue as |value|}}
+    {{#each this.buttonGroupValue as |value|}}
       <li>{{value}}</li>
     {{/each}}
   </ul>
@@ -28,15 +28,15 @@
 <div class="bs-example">
   <!-- BEGIN-SNIPPET button-group-radio-demo -->
   <BsButtonGroup
-    @value={{buttonGroupValue2}}
+    @value={{this.buttonGroupValue2}}
     @type="radio"
-    @onChange={{action (mut buttonGroupValue2)}} as |bg|
+    @onChange={{fn (mut this.buttonGroupValue2)}} as |bg|
   >
     <bg.button @value="1">1</bg.button>
     <bg.button @value="2">2</bg.button>
     <bg.button @value="3">3</bg.button>
   </BsButtonGroup>
-  <p>You selected: {{buttonGroupValue2}}</p>
+  <p>You selected: {{this.buttonGroupValue2}}</p>
   <!-- END-SNIPPET -->
 </div>
 <div class="highlight">
