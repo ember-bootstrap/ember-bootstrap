@@ -16,7 +16,7 @@
   Options
 </h2>
 <div class="bs-example">
-  <BsForm @formLayout="inline" @model={{this}} as |form|>
+  <BsForm @formLayout="inline" @model={{this.this}} as |form|>
     <form.element
       @controlType="checkbox"
       @label="Show/Hide"
@@ -38,7 +38,7 @@
      />
     <form.element
       @controlType="power-select"
-      @options={{typeChoices}}
+      @options={{this.this.typeChoices}}
       @label="Type"
       @property="type"
       class="ml-sm-2"
@@ -55,20 +55,20 @@
   <hr>
   <!-- BEGIN-SNIPPET alert-options -->
   <BsAlert
-    @visible={{visible}}
-    @fade={{fade}}
-    @type={{type}}
-    @dismissible={{dismissible}}
+    @visible={{this.visible}}
+    @fade={{this.fade}}
+    @type={{this.type}}
+    @dismissible={{this.dismissible}}
   >
     <strong> Well done!  </strong> You successfully read this important alert message.
   </BsAlert>
 
   <BsAlert
-    @visible={{visible}}
-    @fade={{fade}}
-    @type={{type}}
-    @dismissible={{dismissible}}
-    @headerTag={{headerTag}}
+    @visible={{this.visible}}
+    @fade={{this.fade}}
+    @type={{this.type}}
+    @dismissible={{this.dismissible}}
+    @headerTag={{this.headerTag}}
   >
     <:header>Well done!</:header>
     <:body>You successfully read this important alert message.</:body>
@@ -79,11 +79,11 @@
   <CodeSnippet
     @name="alert-options.hbs"
     @dynamicProperties={{hash
-      visible=visible
-      fade=fade
-      dismissible=dismissible
-      type=type
-      headerTag=headerTag
+      visible=this.visible
+      fade=this.fade
+      dismissible=this.dismissible
+      type=this.type
+      headerTag=this.headerTag
     }}
   />
 </div>

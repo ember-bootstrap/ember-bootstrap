@@ -16,10 +16,10 @@
   <div class="col-sm-8 col-sm-pull-4 col-md-9 col-md-pull-3">
     {{#if this.isDetailPage}}
       <h1>
-        {{currentComponent.title}}
+        {{this.currentComponent.title}}
       </h1>
       <p class="lead">
-        {{currentComponent.description}}
+        {{this.currentComponent.description}}
       </p>
       <ApiReference @component={{this.currentComponent}} />
     {{/if}}
