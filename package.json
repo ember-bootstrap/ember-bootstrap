@@ -59,7 +59,7 @@
     "broccoli-funnel": "^3.0.6",
     "broccoli-merge-trees": "^4.2.0",
     "chalk": "^4.1.1",
-    "ember-auto-import": "^1.11.2",
+    "ember-auto-import": "^2.2.0",
     "ember-cli-babel": "^7.26.4",
     "ember-cli-build-config-editor": "0.5.1",
     "ember-cli-htmlbars": "^5.7.1",
@@ -143,7 +143,8 @@
     "qunit-dom": "^1.6.0",
     "release-it": "^14.6.2",
     "release-it-lerna-changelog": "^3.1.0",
-    "striptags": "^3.0.0"
+    "striptags": "^3.0.0",
+    "webpack": "^5.56.1"
   },
   "engines": {
     "node": "12.* || >= 14.*"
