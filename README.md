@@ -5,7 +5,7 @@
 [![Ember Observer Score](http://emberobserver.com/badges/ember-bootstrap.svg)](http://emberobserver.com/addons/ember-bootstrap)
 [![npm version](https://badge.fury.io/js/ember-bootstrap.svg)](https://badge.fury.io/js/ember-bootstrap)
 
-An [ember-cli](http://www.ember-cli.com) addon for using [Bootstrap](http://getbootstrap.com/) 3 or 4 in Ember applications.
+An [ember-cli](http://www.ember-cli.com) addon for using [Bootstrap](http://getbootstrap.com/) 4 und 5 in Ember applications.
 
 The addon includes the Bootstrap CSS (or Sass, Less) in your project (can be disabled). On top of that, it provides a set of native Ember components (no use of Bootstrap JavaScript!).</p>
 
@@ -26,7 +26,7 @@ Ember Bootstrap works and is fully [tested](https://github.com/kaliber5/ember-bo
 
 * Ember.js 3.16+ (including all optional features)
 * Ember CLI 3.15+
-* Bootstrap 3 and 4
+* Bootstrap 4 and 5
 * all modern evergreen browsers (Chrome, Firefox, Safari, Edge)
 * node.js 12+
 * FastBoot 1.0+
