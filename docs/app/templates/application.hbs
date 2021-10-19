@@ -3,9 +3,9 @@
     <LinkTo @route="index" class="navbar-brand">
       ember-bootstrap
     </LinkTo>
-    {{navbar.toggle}}
-    <navbar.content>
-      <navbar.nav class="mr-auto" as |nav|>
+    <navbar.toggle/>
+    <navbar.content class="justify-content-between">
+      <navbar.nav as |nav|>
         <nav.item>
           <nav.link-to @route="getting-started">
             Getting Started

@@ -4,40 +4,52 @@
 <p>
   Use the
   <code>
-    bs-modal-simple
+    &lt;BsModalSimple&gt;
   </code>
   component for Modals with a default layout
 </p>
 <div class="bs-example">
   <!-- BEGIN-SNIPPET modal-demo -->
   <BsModalSimple
-    @open={{modal1}}
+    @open={{this.modal1}}
     @title="Simple Dialog"
     @size="sm"
-    @onHidden={{action (mut modal1) false}}>
+    @onHidden={{fn (mut this.modal1) false}}>
     Hi there
   </BsModalSimple>
   <!-- END-SNIPPET -->
-  <BsButton @onClick={{action (mut modal1) true}}>Open Modal</BsButton>
+  <BsButton @onClick={{fn (mut this.modal1) true}}>Open Modal</BsButton>
 </div>
 <div class="highlight">
-  <CodeSnippet @name="modal-demo.hbs" />
+  <CodeSnippet
+    @name="modal-demo.hbs"
+    @dynamicProperties={{hash
+      modal1=this.modal1
+    }}
+  />
 </div>
 <h3>
   Options
 </h3>
 <BsForm @formLayout="horizontal" @model={{this}} as |form|>
-  <form.element @label="Title" @property="title" />
-  <form.element @label="Close button" @property="closeTitle" />
+  <form.element
+    @label="Title"
+    @property="title"
+  />
+  <form.element
+    @label="Close button"
+    @property="closeTitle"
+  />
   <form.element
     @label="Submit button"
-    @placeholder="Enter title to add a submit button"
     @property="submitTitle"
-   />
-
+    as |el|
+   >
+    <el.control placeholder="Enter title to add a submit button"/>
+  </form.element>
   <form.element
     @controlType="power-select"
-    @options={{sizes}}
+    @options={{this.sizes}}
     @label="Size"
     @property="size" as |el|>
     <el.control @searchEnabled />
@@ -47,15 +59,11 @@
     @label="Close button"
     @property="closeButton"
    />
-
-  <form.element @controlType="checkbox" @label="Fade" @property="fade" />
   <form.element
     @controlType="checkbox"
-    @label="Backdrop"
-    @property="backdrop"
-    @onChange={{action "backdropChange"}}
-   />
-
+    @label="Fade"
+    @property="fade"
+  />
   <form.element
     @controlType="checkbox"
     @label="Backdrop close"
@@ -66,36 +74,36 @@
 <div class="bs-example bs-example__modal" data-test-fastboot-container>
   <!-- BEGIN-SNIPPET modal-options -->
   <BsModalSimple
-    @open={{modal2}}
-    @title={{title}}
-    @closeTitle={{closeTitle}}
-    @submitTitle={{submitTitle}}
-    @size={{size}}
-    @closeButton={{closeButton}}
-    @fade={{fade}}
-    @backdrop={{backdrop}}
-    @backdropClose={{backdropClose}}
-    @onSubmit={{action "submit"}}
-    @onHidden={{action "close"}}
+    @open={{this.modal2}}
+    @title={{this.title}}
+    @closeTitle={{this.closeTitle}}
+    @submitTitle={{this.submitTitle}}
+    @size={{this.size}}
+    @closeButton={{this.closeButton}}
+    @fade={{this.fade}}
+    @backdrop={{this.backdrop}}
+    @backdropClose={{this.backdropClose}}
+    @onSubmit={{this.submit}}
+    @onHide={{this.close}}
     @renderInPlace={{true}}>
     Hi there
   </BsModalSimple>
   <!-- END-SNIPPET -->
-  <BsButton @onClick={{action "open"}}>Reopen Modal</BsButton>
+  <BsButton @onClick={{this.open}}>Reopen Modal</BsButton>
 </div>
 <div class="highlight">
   <CodeSnippet
     @name="modal-options.hbs"
     @dynamicProperties={{hash
-      modal2=modal2
-      title=title
-      closeTitle=closeTitle
-      submitTitle=submitTitle
-      size=size
-      closeButton=closeButton
-      fade=fade
-      backdrop=backdrop
-      backdropClose=backdropClose
+      modal2=this.modal2
+      title=this.title
+      closeTitle=this.closeTitle
+      submitTitle=this.submitTitle
+      size=this.size
+      closeButton=this.closeButton
+      fade=this.fade
+      backdrop=this.backdrop
+      backdropClose=this.backdropClose
     }}
   />
 </div>
@@ -105,20 +113,20 @@
 <p>
   Use the
   <code>
-    bs-modal
+    &lt;BsModal&gt;
   </code>
   component for custom markup
 </p>
 <div class="bs-example">
   <!-- BEGIN-SNIPPET modal-custom -->
   <BsModal
-    @open={{modal3}}
-    @onSubmit={{action "submit"}}
-    @onHidden={{action (mut modal3) false}} as |modal|>
+    @open={{this.modal3}}
+    @onSubmit={{this.submit}}
+    @onHidden={{fn (mut this.modal3) false}} as |modal|>
     <modal.header>
       <h4 class="modal-title">
         Custom Dialog
-        <div class="badge">2</div>
+        <div class="badge bg-primary">2</div>
       </h4>
     </modal.header>
     <modal.body>
@@ -128,19 +136,19 @@
       </label>
     </modal.body>
     <modal.footer>
-      <BsButton @onClick={{action modal.close}}>Cancel</BsButton>
+      <BsButton @onClick={{modal.close}}>Cancel</BsButton>
       <BsButton @type="danger">Delete</BsButton>
-      <BsButton @type="success" @onClick={{action modal.submit}}>Save</BsButton>
+      <BsButton @type="success" @onClick={{modal.submit}}>Save</BsButton>
     </modal.footer>
   </BsModal>
   <!-- END-SNIPPET -->
-  <BsButton @onClick={{action (mut modal3) true}}>Open Modal</BsButton>
+  <BsButton @onClick={{fn (mut this.modal3) true}}>Open Modal</BsButton>
 </div>
 <div class="highlight">
   <CodeSnippet
     @name="modal-custom.hbs"
     @dynamicProperties={{hash
-      modal3=modal3
+      modal3=this.modal3
     }}
   />
 </div>
