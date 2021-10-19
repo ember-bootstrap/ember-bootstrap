@@ -1,6 +1,6 @@
 {{!-- template-lint-disable no-invalid-interactive --}}
 <div
-  class="{{if (macroCondition (macroGetOwnConfig "isNotBS5")) "form-group"}} {{if @disabled "disabled"}} {{if @required "is-required"}} {{if this.isValidating "is-validating"}} {{if (bs-eq @formLayout "horizontal") (if (macroCondition (macroGetOwnConfig "isBS5")) "row mb-3" "row")}}"
+  class="{{if (macroCondition (macroGetOwnConfig "isNotBS5")) "form-group"}} {{if @disabled "disabled"}} {{if @required "is-required"}} {{if this.isValidating "is-validating"}} {{if (macroCondition (macroGetOwnConfig "isBS5")) (if (bs-eq @formLayout "vertical") "mb-3")}} {{if (bs-eq @formLayout "horizontal") (if (macroCondition (macroGetOwnConfig "isBS5")) "row mb-3" "row")}}"
   ...attributes
   {{create-ref "mainNode"}}
   {{on "focusout" this.showValidationOnHandler}}
