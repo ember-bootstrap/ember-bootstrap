@@ -630,19 +630,31 @@ export default class FormElement extends FormGroup {
    * @private
    */
   get validation() {
-    if (!this.showValidation || !this.hasValidator || this.isValidating || this.args._disabled) {
-      return null;
-    } else if (this.showModelValidation) {
-      /* The display of model validation messages has been triggered */
-      return this.hasErrors || this.hasCustomError
-        ? 'error'
-        : this.hasWarnings || this.hasCustomWarning
-        ? 'warning'
-        : 'success';
-    } else {
-      /* If there are custom errors or warnings these should always be shown */
-      return this.hasCustomError ? 'error' : 'warning';
+    const shouldShowValidationState =
+      this.showModelValidation && this.hasValidator && !this.isValidating && !this.args._disabled;
+
+    if (
+      /* custom errors should be always shown */
+      this.hasCustomError ||
+      /* validation error should be shown in preference to warnings */
+      (shouldShowValidationState && this.hasErrors)
+    ) {
+      return 'error';
     }
+
+    if (
+      /* custom warning should be always shown unless there is a validation error */
+      this.hasCustomWarning ||
+      (shouldShowValidationState && this.hasWarnings)
+    ) {
+      return 'warning';
+    }
+
+    if (shouldShowValidationState) {
+      return 'success';
+    }
+
+    return null;
   }
 
   /**

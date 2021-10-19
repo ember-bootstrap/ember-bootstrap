@@ -677,7 +677,9 @@ module('Integration | Component | bs-form/element', function (hooks) {
     this.set('model', EmberObject.create({ name: null }));
     this.set('error', 'some error');
     await render(hbs`
-        <BsForm::Element @property="name" @hasValidator={{true}} @customError={{this.error}} @model={{this.model}} data-test-form-element />
+        <BsForm @model={{this.model}} as |form|>
+          <form.element @property="name" @customError={{this.error}} data-test-form-element />
+        </BsForm>
     `);
     assert.dom(formFeedbackElement()).hasClass(validationErrorClass(), 'custom error is shown immediately');
     assert.dom(`[data-test-form-element] .${formFeedbackClass()}`).hasText('some error');
@@ -693,7 +695,9 @@ module('Integration | Component | bs-form/element', function (hooks) {
     this.set('model', EmberObject.create({ name: null }));
     this.set('warning', 'some warning');
     await render(hbs`
-        <BsForm::Element @property="name" @hasValidator={{true}} @customWarning={{this.warning}} @model={{this.model}} data-test-form-element />
+        <BsForm @model={{this.model}} as |form|>
+          <form.element @property="name" @customWarning={{this.warning}} data-test-form-element />
+        </BsForm>
     `);
     assert.dom(formFeedbackElement()).hasClass(validationWarningClass(), 'custom warning is shown immediately');
     assert.dom(`[data-test-form-element] .${formFeedbackClass()}`).hasText('some warning');
