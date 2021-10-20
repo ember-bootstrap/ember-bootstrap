@@ -1,10 +1,8 @@
 import { tracked } from '@glimmer/tracking';
 import { action } from '@ember/object';
-import { warn } from '@ember/debug';
 import Component from '@glimmer/component';
 import arg from 'ember-bootstrap/utils/decorators/arg';
 import deprecateSubclassing from 'ember-bootstrap/utils/deprecate-subclassing';
-import { DEBUG } from '@glimmer/env';
 
 /**
   Implements a HTML button element, with support for all [Bootstrap button CSS styles](http://getbootstrap.com/css/#buttons)

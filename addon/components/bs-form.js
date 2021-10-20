@@ -2,13 +2,12 @@ import { tagName } from '@ember-decorators/component';
 import { gt } from '@ember/object/computed';
 import Component from '@ember/component';
 import { action, computed, set } from '@ember/object';
-import { assert, warn } from '@ember/debug';
+import { assert } from '@ember/debug';
 import { isPresent } from '@ember/utils';
 import { schedule } from '@ember/runloop';
 import RSVP from 'rsvp';
 import defaultValue from 'ember-bootstrap/utils/default-decorator';
 import { getOwnConfig, macroCondition } from '@embroider/macros';
-import { DEBUG } from '@glimmer/env';
 import deprecateSubclassing from 'ember-bootstrap/utils/deprecate-subclassing';
 
 /**

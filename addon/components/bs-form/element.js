@@ -1,8 +1,7 @@
 import Component from '@glimmer/component';
 import { tracked } from '@glimmer/tracking';
 import { action, get } from '@ember/object';
-import { assert, warn } from '@ember/debug';
-import { DEBUG } from '@glimmer/env';
+import { assert } from '@ember/debug';
 import { isBlank, isPresent, typeOf } from '@ember/utils';
 import { A, isArray } from '@ember/array';
 import { getOwner } from '@ember/application';
