@@ -28,7 +28,7 @@
     "@glimmer/component": "1.0.4",
     "@glimmer/tracking": "1.0.4",
     "babel-eslint": "10.1.0",
-    "bootstrap": "5.1.1",
+    "bootstrap": "5.1.3",
     "broccoli-asset-rev": "3.0.0",
     "ember-auto-import": "1.11.3",
     "ember-bootstrap-cp-validations": "2.1.0",
