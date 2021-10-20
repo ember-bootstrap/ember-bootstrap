@@ -1,3 +1,4 @@
+import Component from '@glimmer/component';
 import { tracked } from '@glimmer/tracking';
 import { action, get } from '@ember/object';
 import { assert, warn } from '@ember/debug';
@@ -5,7 +6,6 @@ import { DEBUG } from '@glimmer/env';
 import { isBlank, isPresent, typeOf } from '@ember/utils';
 import { A, isArray } from '@ember/array';
 import { getOwner } from '@ember/application';
-import FormGroup from 'ember-bootstrap/components/bs-form/group';
 import { guidFor } from '@ember/object/internals';
 import { ref } from 'ember-ref-bucket';
 import ControlInput from './element/control/input';
@@ -75,7 +75,7 @@ import { dedupeTracked } from 'tracked-toolbox';
 
   ```hbs
   <BsForm @model={{this}} @onSubmit={{action "submit"}} as |form|>
-    <form.element @label="Select-2" @property="gender" @useIcons={{false}} as |el|>
+    <form.element @label="Select-2" @property="gender" as |el|>
       <PikadayInput @value={{el.value}} @onSelection={{action el.setValue}} id={{el.id}} />
     </form.element>
   </BsForm>
@@ -87,9 +87,6 @@ import { dedupeTracked } from 'tracked-toolbox';
   * `value`: the value of the form element
   * `setValue`: function to change the value of the form element
   * `validation`: the validation state of the element, `null` if no validation is to be shown, otherwise 'success', 'error' or 'warning'
-
-  If your custom control does not render an input element, you should set `useIcons` to `false` since bootstrap only supports
-  feedback icons with textual `<input class="form-control">` elements.
 
   If you just want to customize the existing control component, you can use the aforementioned yielded `control` component
   to customize that existing component:
@@ -200,7 +197,7 @@ import { dedupeTracked } from 'tracked-toolbox';
   @extends Components.FormGroup
   @public
 */
-export default class FormElement extends FormGroup {
+export default class FormElement extends Component {
   /**
    * @property _element
    * @type null | HTMLElement
@@ -655,23 +652,6 @@ export default class FormElement extends FormGroup {
     }
 
     return null;
-  }
-
-  /**
-   * True for text field `controlType`s
-   *
-   * @property useIcons
-   * @type boolean
-   * @public
-   */
-  get useIcons() {
-    let { controlType } = this;
-    return (
-      !this.customControlComponent &&
-      controlType !== 'textarea' &&
-      controlType !== 'checkbox' &&
-      controlType !== 'radio'
-    );
   }
 
   /**
