@@ -788,68 +788,6 @@ export default class FormElement extends Component {
     if (!isBlank(this.args.property)) {
       this.setupValidations?.();
     }
-
-    // deprecate arguments used for attribute bindings only
-    if (DEBUG) {
-      [
-        ['accept', 'image/png'],
-        ['autocapitalize', 'words'],
-        ['autocomplete', 'on'],
-        ['autocorrect', 'off'],
-        ['autofocus', false],
-        ['autosave', 'someuniquevalue'],
-        ['cols', '10'],
-        ['controlSize:size', '10'],
-        ['disabled', true],
-        ['form', 'myform'],
-        ['inputmode', 'tel'],
-        ['max', '5'],
-        ['maxlength', '5'],
-        ['min', '5'],
-        ['minlength', '5'],
-        ['multiple', true],
-        ['name', 'foo'],
-        ['pattern', '^[0-9]{5}$'],
-        ['placeholder', 'foo'],
-        ['required', true],
-        ['readonly', true],
-        ['rows', '10'],
-        ['spellcheck', true],
-        ['step', '2'],
-        ['tabindex', '-1'],
-        ['title', 'foo'],
-        ['wrap', 'hard'],
-      ].forEach(([mapping, value]) => {
-        let argument = mapping.split(':')[0];
-        let attribute = mapping.includes(':') ? mapping.split(':')[1] : argument;
-        let warningMessage =
-          `Argument ${argument} of <element> component yielded by <BsForm> has been removed. ` +
-          `Its only purpose was setting the HTML attribute ${attribute} of the control element. ` +
-          `You should use angle bracket  component invocation syntax instead:\n` +
-          `Before:\n` +
-          `  {{#bs-form as |form|}}\n` +
-          `    {{form.element ${attribute}=${typeof value === 'string' ? `"${value}"` : value}}}\n` +
-          `  {{/bs-form}}\n` +
-          `  <BsForm as |form|>\n` +
-          `    <form.element as |el|>\n` +
-          `      <el.control @${attribute}=${typeof value === 'string' ? `"${value}"` : `{{${value}}}`} />\n` +
-          `    </form.element>\n` +
-          `  </BsForm>\n` +
-          `After:\n` +
-          `  <BsForm as |form|>\n` +
-          `    <form.element as |el|>\n` +
-          `      <el.control ${
-            typeof value === 'boolean' ? (value ? attribute : '') : `${attribute}="${value}"`
-          } />\n` +
-          `    </form.element>\n` +
-          `  </BsForm>\n` +
-          `A codemod is available to help with the required migration. See https://github.com/kaliber5/ember-bootstrap-codemods/blob/master/transforms/deprecated-attribute-arguments/README.md`;
-
-        warn(warningMessage, !Object.keys(this.args).includes(argument), {
-          id: `ember-bootstrap.removed-argument.form-element#${argument}`,
-        });
-      });
-    }
   }
 
   @action

@@ -419,31 +419,5 @@ export default class Button extends Component {
 
   constructor() {
     super(...arguments);
-
-    // deprecate arguments used for attribute bindings only
-    if (DEBUG) {
-      [
-        // ['buttonType:type', 'submit'],
-        ['disabled', true],
-        ['title', 'foo'],
-      ].forEach(([mapping, value]) => {
-        let argument = mapping.split(':')[0];
-        let attribute = mapping.includes(':') ? mapping.split(':')[1] : argument;
-        let warningMessage =
-          `Argument ${argument} of <BsButton> component has been removed. Its only purpose ` +
-          `was setting the HTML attribute ${attribute} of the control element. You should use ` +
-          `angle bracket component invocation syntax instead:\n` +
-          `Before:\n` +
-          `  {{bs-button ${attribute}=${typeof value === 'string' ? `"${value}"` : value}}}\n` +
-          `  <BsButton @${attribute}=${typeof value === 'string' ? `"${value}"` : `{{${value}}}`} />\n` +
-          `After:\n` +
-          `  <BsButton ${typeof value === 'boolean' ? attribute : `${attribute}="${value}"`} />\n` +
-          `A codemod is available to help withFi the required migration. See https://github.com/kaliber5/ember-bootstrap-codemods/blob/master/transforms/deprecated-attribute-arguments/README.md`;
-
-        warn(warningMessage, !Object.keys(this.args).includes(argument), {
-          id: `ember-bootstrap.removed-argument.button#${argument}`,
-        });
-      });
-    }
   }
 }
