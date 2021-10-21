@@ -1,5 +1,31 @@
 
 
+
+## v5.0.0-beta.1 (2021-10-21)
+
+#### :boom: Breaking Change
+* [#1631](https://github.com/kaliber5/ember-bootstrap/pull/1631) remove `<BsForm::Group>` component ([@jelhan](https://github.com/jelhan))
+* [#1632](https://github.com/kaliber5/ember-bootstrap/pull/1632) remove is-validating, is-required and is-disabled CSS classes from `<BsForm::Element>` ([@jelhan](https://github.com/jelhan))
+* [#1624](https://github.com/kaliber5/ember-bootstrap/pull/1624) Upgrade to ember-auto-import v2 ([@simonihmig](https://github.com/simonihmig))
+
+#### Bug Fixes
+* [#1623](https://github.com/kaliber5/ember-bootstrap/pull/1623) Add `.mb-3` margins to BS5 form elements in vertical layout ([@simonihmig](https://github.com/simonihmig))
+* [#1627](https://github.com/kaliber5/ember-bootstrap/pull/1627) show custom errors and warnings regardless if validation plugin is used ([@jelhan](https://github.com/jelhan))
+* [#1620](https://github.com/kaliber5/ember-bootstrap/pull/1620) Fix BS5 markup for alert close button ([@simonihmig](https://github.com/simonihmig))
+
+#### Documentation
+* [#1622](https://github.com/kaliber5/ember-bootstrap/pull/1622) Modernize docs app and migrate to Bootstrap 5 ([@simonihmig](https://github.com/simonihmig))
+* [#1625](https://github.com/kaliber5/ember-bootstrap/pull/1625) Reflect dropped BS 3 and added BS 5 support in readme ([@jelhan](https://github.com/jelhan))
+
+#### Internal
+* [#1635](https://github.com/kaliber5/ember-bootstrap/pull/1635) Remove deprecation messages for arguments dropped in v4 ([@murilo-goncalves](https://github.com/murilo-goncalves))
+* [#1629](https://github.com/kaliber5/ember-bootstrap/pull/1629) remove BS3-only arguments @useIcons, @validation, ... of <BsForm::Group> ([@jelhan](https://github.com/jelhan))
+
+#### Committers: 3
+- Jeldrik Hanschke ([@jelhan](https://github.com/jelhan))
+- Murilo Gonçalves ([@murilo-goncalves](https://github.com/murilo-goncalves))
+- Simon Ihmig ([@simonihmig](https://github.com/simonihmig))
+
 ## v5.0.0-beta.0 (2021-09-24)
 
 #### :boom: Breaking Change
