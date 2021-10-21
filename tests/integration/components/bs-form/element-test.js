@@ -550,16 +550,6 @@ module('Integration | Component | bs-form/element', function (hooks) {
     assert.dom('textarea').hasValue('diverse', 'value of yielded control component is updated');
   });
 
-  test('required property propagates', async function (assert) {
-    await render(hbs`<BsForm::Element @label="myLabel" @required={{true}} data-test-form-element />`);
-    assert.dom('[data-test-form-element]').hasClass('is-required', 'component has is-required class');
-  });
-
-  test('disabled property propagates', async function (assert) {
-    await render(hbs`<BsForm::Element @label="myLabel" @disabled={{true}} data-test-form-element />`);
-    assert.dom('[data-test-form-element]').hasClass('disabled', 'component has disabled class');
-  });
-
   test('if invisibleLabel is true visually hidden class is added to label', async function (assert) {
     await render(hbs`<BsForm::Element @label="myLabel" />`);
     assert.dom('label').hasNoClass(visuallyHiddenClass(), 'sr-only class is not present as defaultText');
