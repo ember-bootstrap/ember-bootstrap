@@ -111,7 +111,7 @@
     "ember-export-application-global": "2.0.1",
     "ember-load-initializers": "2.1.2",
     "ember-page-title": "6.2.2",
-    "ember-qunit": "5.1.4",
+    "ember-qunit": "5.1.5",
     "ember-resolver": "8.0.2",
     "ember-sinon": "5.0.0",
     "ember-sinon-qunit": "5.0.0",
