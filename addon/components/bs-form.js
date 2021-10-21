@@ -14,17 +14,7 @@ import deprecateSubclassing from 'ember-bootstrap/utils/deprecate-subclassing';
   Render a form with the appropriate Bootstrap layout class (see `formLayout`).
   Allows setting a `model` that nested `Components.FormElement`s can access, and that can provide form validation (see below)
 
-  You can use whatever markup you like within the form. The following shows Bootstrap 3 usage for the internal markup.
-
-  ```handlebars
-  <BsForm @onSubmit={{action "submit"}} as |form|>
-    <form.group>
-      <label class="control-label">First name</label>
-      <input value={{this.firstname}} class="form-control" oninput={{action (mut this.firstname) value="target.value"}} type="text">
-    </form.group>
-  </BsForm>
-  ```
-
+  You can use whatever markup you like within the form.
   However to benefit from features such as automatic form markup, validations and validation markup, use `Components.FormElement`
   as nested components. See below for an example.
 
@@ -196,12 +186,6 @@ export default class Form extends Component {
 
   /**
    * @property elementComponent
-   * @type {String}
-   * @private
-   */
-
-  /**
-   * @property groupComponent
    * @type {String}
    * @private
    */
