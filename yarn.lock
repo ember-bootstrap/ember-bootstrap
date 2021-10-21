@@ -6522,10 +6522,10 @@ eslint-plugin-es@^3.0.0:
     eslint-utils "^2.0.0"
     regexpp "^3.0.0"
 
-eslint-plugin-hbs@1.0.0:
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/eslint-plugin-hbs/-/eslint-plugin-hbs-1.0.0.tgz#4facf1031a8d83d5fba1a3e1bd1dea837fb91248"
-  integrity sha512-UaJYgG1xP6Mr/VuPO9G/tbReiavs8lmTUInwbomQ+FtA7C22AlDZK08FH4aRloKo70GyeJLm+SYSF6QtM/QZhQ==
+eslint-plugin-hbs@1.0.3:
+  version "1.0.3"
+  resolved "https://registry.yarnpkg.com/eslint-plugin-hbs/-/eslint-plugin-hbs-1.0.3.tgz#70b01f944630d4af550c0d71e960a85764156a77"
+  integrity sha512-l4iH4jml2ckNoJDhURf9FZO24WOC1M9M+KoBmL1hmJWczO2iCbRKCSDWRxuvoASVkYr8k2tYcb3EG1nCuG/nyQ==
   dependencies:
     requireindex "^1.2.0"
 
