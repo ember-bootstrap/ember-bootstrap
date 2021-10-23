@@ -4812,7 +4812,7 @@ cors@~2.8.5:
     object-assign "^4"
     vary "^1"
 
-cosmiconfig@7.0.1, cosmiconfig@^7.0.0, cosmiconfig@^7.0.1:
+cosmiconfig@7.0.1, cosmiconfig@^7.0.0:
   version "7.0.1"
   resolved "https://registry.yarnpkg.com/cosmiconfig/-/cosmiconfig-7.0.1.tgz#714d756522cace867867ccb4474c5d01bbae5d6d"
   integrity sha512-a1YWNUV2HwGimB7dU2s1wUMurNKjpx60HxBB6xUM8Re+2s1g1IIfJvFR0/iCF+XHdE0GMTKTuLR32UQff4TEyQ==
@@ -9449,6 +9449,13 @@ js-yaml@^3.13.1, js-yaml@^3.14.0, js-yaml@^3.2.5, js-yaml@^3.2.7:
     argparse "^1.0.7"
     esprima "^4.0.0"
 
+js-yaml@^4.1.0:
+  version "4.1.0"
+  resolved "https://registry.yarnpkg.com/js-yaml/-/js-yaml-4.1.0.tgz#c1fb65f8f5017901cdd2c951864ba18458a10602"
+  integrity sha512-wpxZs9NoxZaJESJGIZTyDEaYpl0FKSA+FB9aJiyemKhMwkxQg63h4T1KJgUGHpTqPDNRcmmYLugrRjJlBtWvRA==
+  dependencies:
+    argparse "^2.0.1"
+
 jsdom@^16.2.2, jsdom@^16.4.0:
   version "16.7.0"
   resolved "https://registry.yarnpkg.com/jsdom/-/jsdom-16.7.0.tgz#918ae71965424b197c819f8183a754e18977b710"
@@ -9752,6 +9759,11 @@ liftoff@^3.1.0:
     rechoir "^0.6.2"
     resolve "^1.1.7"
 
+lilconfig@^2.0.3:
+  version "2.0.3"
+  resolved "https://registry.yarnpkg.com/lilconfig/-/lilconfig-2.0.3.tgz#68f3005e921dafbd2a2afb48379986aa6d2579fd"
+  integrity sha512-EHKqr/+ZvdKCifpNrJCKxBTgk5XupZA3y/aCPY9mxfgBzmgh93Mt/WqjjQ38oMxXuvDokaKiM3lAgvSH2sjtHg==
+
 line-column@^1.0.2:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/line-column/-/line-column-1.0.2.tgz#d25af2936b6f4849172b312e4792d1d987bc34a2"
@@ -9793,18 +9805,19 @@ linkify-it@~1.2.0:
   dependencies:
     uc.micro "^1.0.1"
 
-lint-staged@11.2.3:
-  version "11.2.3"
-  resolved "https://registry.yarnpkg.com/lint-staged/-/lint-staged-11.2.3.tgz#fc3f4569cc4f46553309dfc1447b8aef69f744fb"
-  integrity sha512-Tfmhk8O2XFMD25EswHPv+OYhUjsijy5D7liTdxeXvhG2rsadmOLFtyj8lmlfoFFXY8oXWAIOKpoI+lJe1DB1mw==
+lint-staged@11.2.4:
+  version "11.2.4"
+  resolved "https://registry.yarnpkg.com/lint-staged/-/lint-staged-11.2.4.tgz#29bc84e0318e6e9d4a7a043513236d066e39ee1d"
+  integrity sha512-aTUqcPDSV05EyKlMT4N5h7tmnevKfAxI3xZkRb+DHfmcFaoCxfxVvpqlLMCVGy3EYle9JYER2nA5zc4eNTkZVQ==
   dependencies:
     cli-truncate "2.1.0"
     colorette "^1.4.0"
     commander "^8.2.0"
-    cosmiconfig "^7.0.1"
     debug "^4.3.2"
     enquirer "^2.3.6"
     execa "^5.1.1"
+    js-yaml "^4.1.0"
+    lilconfig "^2.0.3"
     listr2 "^3.12.2"
     micromatch "^4.0.4"
     normalize-path "^3.0.0"
