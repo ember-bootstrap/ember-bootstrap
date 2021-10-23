@@ -96,7 +96,7 @@
     "ember-cli": "3.28.3",
     "ember-cli-app-version": "4.0.0",
     "ember-cli-blueprint-test-helpers": "0.19.2",
-    "ember-cli-browserstack": "1.1.0",
+    "ember-cli-browserstack": "2.0.1",
     "ember-cli-content-security-policy": "2.0.0-4",
     "ember-cli-dependency-checker": "3.2.0",
     "ember-cli-fastboot": "https://gitpkg.now.sh/ember-fastboot/ember-cli-fastboot/packages/ember-cli-fastboot?4ad4eeb66bb9d46c0b14b6ed4601a5b5c2de7a5e",
