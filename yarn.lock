@@ -3852,7 +3852,7 @@ browserslist@^4.14.5, browserslist@^4.16.6, browserslist@^4.16.7:
     nanocolors "^0.2.12"
     node-releases "^1.1.76"
 
-browserstack-local@^1.4.2:
+browserstack-local@^1.4.8:
   version "1.4.8"
   resolved "https://registry.yarnpkg.com/browserstack-local/-/browserstack-local-1.4.8.tgz#07f74a19b324cf2de69ffe65f9c2baa3a2dd9a0e"
   integrity sha512-s+mc3gTOJwELdLWi4qFVKtGwMbb5JWsR+JxKlMaJkRJxoZ0gg3WREgPxAN0bm6iU5+S4Bi0sz0oxBRZT8BiNsQ==
@@ -3862,7 +3862,7 @@ browserstack-local@^1.4.2:
     ps-tree "=1.2.0"
     temp-fs "^0.9.9"
 
-browserstack@^1.5.3:
+browserstack@^1.6.1:
   version "1.6.1"
   resolved "https://registry.yarnpkg.com/browserstack/-/browserstack-1.6.1.tgz#e051f9733ec3b507659f395c7a4765a1b1e358b3"
   integrity sha512-GxtFjpIaKdbAyzHfFDKixKO8IBT7wR3NjbzrGc78nNs/Ciys9wU3/nBtsqsWv5nDSrdI5tz0peKuzCPuNXNUiw==
@@ -5518,15 +5518,15 @@ ember-cli-blueprint-test-helpers@0.19.2:
     testdouble "^3.2.6"
     tmp-sync "^1.0.0"
 
-ember-cli-browserstack@1.1.0:
-  version "1.1.0"
-  resolved "https://registry.yarnpkg.com/ember-cli-browserstack/-/ember-cli-browserstack-1.1.0.tgz#1d2bcf84370c196dc0c091ee65d54193072dadfc"
-  integrity sha512-nSYHa5YP0RjthfMBpasLJt4bnodV2AgKR4KZ4DaFrboiW+FVfqNZ8MRLBrTfaH3NqDWofcnCQTfqriByAcqbRA==
+ember-cli-browserstack@2.0.1:
+  version "2.0.1"
+  resolved "https://registry.yarnpkg.com/ember-cli-browserstack/-/ember-cli-browserstack-2.0.1.tgz#4bfc6bcce28dba0a8fb4409945b8f9f9ee31abf7"
+  integrity sha512-8Ki6570dTSpvYLdNZ7VvJm4Gku4ZNfF78/4BeOD2IqH/vGo80hwBNqDqRINcy8et562uEWe8gUGyeYBZ2ohhkw==
   dependencies:
-    browserstack "^1.5.3"
-    browserstack-local "^1.4.2"
+    browserstack "^1.6.1"
+    browserstack-local "^1.4.8"
     rsvp "^4.8.5"
-    yargs "^14.2.0"
+    yargs "^17.1.1"
 
 ember-cli-build-config-editor@0.5.1:
   version "0.5.1"
@@ -15348,14 +15348,6 @@ yargs-parser@^13.1.2:
     camelcase "^5.0.0"
     decamelize "^1.2.0"
 
-yargs-parser@^15.0.1:
-  version "15.0.3"
-  resolved "https://registry.yarnpkg.com/yargs-parser/-/yargs-parser-15.0.3.tgz#316e263d5febe8b38eef61ac092b33dfcc9b1115"
-  integrity sha512-/MVEVjTXy/cGAjdtQf8dW3V9b97bPN7rNn8ETj6BmAQL7ibC7O1Q9SPJbGjgh3SlwoBNXMzj/ZGIj8mBgl12YA==
-  dependencies:
-    camelcase "^5.0.0"
-    decamelize "^1.2.0"
-
 yargs-parser@^5.0.1:
   version "5.0.1"
   resolved "https://registry.yarnpkg.com/yargs-parser/-/yargs-parser-5.0.1.tgz#7ede329c1d8cdbbe209bd25cdb990e9b1ebbb394"
@@ -15403,22 +15395,18 @@ yargs@^13.0.0:
     y18n "^4.0.0"
     yargs-parser "^13.1.2"
 
-yargs@^14.2.0:
-  version "14.2.3"
-  resolved "https://registry.yarnpkg.com/yargs/-/yargs-14.2.3.tgz#1a1c3edced1afb2a2fea33604bc6d1d8d688a414"
-  integrity sha512-ZbotRWhF+lkjijC/VhmOT9wSgyBQ7+zr13+YLkhfsSiTriYsMzkTUFP18pFhWwBeMa5gUc1MzbhrO6/VB7c9Xg==
+yargs@^17.1.1:
+  version "17.2.1"
+  resolved "https://registry.yarnpkg.com/yargs/-/yargs-17.2.1.tgz#e2c95b9796a0e1f7f3bf4427863b42e0418191ea"
+  integrity sha512-XfR8du6ua4K6uLGm5S6fA+FIJom/MdJcFNVY8geLlp2v8GYbOXD4EB1tPNZsRn4vBzKGMgb5DRZMeWuFc2GO8Q==
   dependencies:
-    cliui "^5.0.0"
-    decamelize "^1.2.0"
-    find-up "^3.0.0"
-    get-caller-file "^2.0.1"
+    cliui "^7.0.2"
+    escalade "^3.1.1"
+    get-caller-file "^2.0.5"
     require-directory "^2.1.1"
-    require-main-filename "^2.0.0"
-    set-blocking "^2.0.0"
-    string-width "^3.0.0"
-    which-module "^2.0.0"
-    y18n "^4.0.0"
-    yargs-parser "^15.0.1"
+    string-width "^4.2.0"
+    y18n "^5.0.5"
+    yargs-parser "^20.2.2"
 
 yargs@^7.1.0:
   version "7.1.2"
