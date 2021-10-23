@@ -59,7 +59,7 @@
     "ember-template-lint": "3.10.0",
     "eslint": "7.26.0",
     "eslint-config-prettier": "8.3.0",
-    "eslint-plugin-ember": "10.4.2",
+    "eslint-plugin-ember": "10.5.7",
     "eslint-plugin-node": "11.1.0",
     "eslint-plugin-prettier": "3.4.1",
     "loader.js": "4.7.0",
