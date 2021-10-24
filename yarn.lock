@@ -3449,7 +3449,7 @@ broccoli-funnel@^2.0.0, broccoli-funnel@^2.0.1, broccoli-funnel@^2.0.2:
     symlink-or-copy "^1.0.0"
     walk-sync "^0.3.1"
 
-broccoli-funnel@^3.0.2, broccoli-funnel@^3.0.3, broccoli-funnel@^3.0.5, broccoli-funnel@^3.0.8:
+broccoli-funnel@^3.0.3, broccoli-funnel@^3.0.5, broccoli-funnel@^3.0.8:
   version "3.0.8"
   resolved "https://registry.yarnpkg.com/broccoli-funnel/-/broccoli-funnel-3.0.8.tgz#f5b62e2763c3918026a15a3c833edc889971279b"
   integrity sha512-ng4eIhPYiXqMw6SyGoxPHR3YAwEd2lr9FgBI1CyTbspl4txZovOsmzFkMkGAlu88xyvYXJqHiM2crfLa65T1BQ==
@@ -6142,13 +6142,13 @@ ember-router-generator@^2.0.0:
     "@babel/traverse" "^7.4.5"
     recast "^0.18.1"
 
-ember-sinon-qunit@5.0.0:
-  version "5.0.0"
-  resolved "https://registry.yarnpkg.com/ember-sinon-qunit/-/ember-sinon-qunit-5.0.0.tgz#d6585ee691f73c5733783a0583f87840d1323cb1"
-  integrity sha512-7Q938adhhHcUHFg41fwj6g5Q6Iyt8eyo7c0D1r7uOeKSFlobcm1FiD/dCmjNZx224KiI6KYh/0EwqoaIyWAawA==
+ember-sinon-qunit@6.0.0:
+  version "6.0.0"
+  resolved "https://registry.yarnpkg.com/ember-sinon-qunit/-/ember-sinon-qunit-6.0.0.tgz#42b7ff0e57bb4760edd4f1266c73f7fc57bc3f23"
+  integrity sha512-rV1KsHhALdevlZNYvDGAp/MyECrvqMv01dcaY1D4LDvKAL+9dLjDLKyI3vJDgI5G5o7whiRwDJhcDZvroq1mJg==
   dependencies:
-    broccoli-funnel "^3.0.2"
-    ember-cli-babel "^7.17.2"
+    broccoli-funnel "^3.0.3"
+    ember-cli-babel "^7.26.3"
     ember-sinon "^5.0.0"
 
 ember-sinon@5.0.0, ember-sinon@^5.0.0:
