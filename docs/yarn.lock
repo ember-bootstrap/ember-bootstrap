@@ -5733,10 +5733,10 @@ ember-style-modifier@^0.6.0:
     ember-cli-babel "^7.21.0"
     ember-modifier "^2.1.0"
 
-ember-template-lint@3.10.0:
-  version "3.10.0"
-  resolved "https://registry.yarnpkg.com/ember-template-lint/-/ember-template-lint-3.10.0.tgz#7d728dacfe787b582ff4c240b63e85e5d6200a26"
-  integrity sha512-QP6gN9FwZbK+ypDr5PLXeKMPuAvKwfOWpIoqVD6DB660evnKE+rXfAdNga3CqSC7mDekpgJoLuxVQUw9oLcnjQ==
+ember-template-lint@3.11.0:
+  version "3.11.0"
+  resolved "https://registry.yarnpkg.com/ember-template-lint/-/ember-template-lint-3.11.0.tgz#d766bf483e6bd3f0899a5ab86eeeb1288c44c7a1"
+  integrity sha512-5evTA7ddblB4x52QHwEJbyNttcf+/DWSOfqHWun2/JiQodLhh83TzcuJUktjCgHuEQwCwk5M3J5Xz35JoYKSKg==
   dependencies:
     "@ember-template-lint/todo-utils" "^10.0.0"
     chalk "^4.1.2"
