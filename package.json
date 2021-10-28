@@ -87,7 +87,7 @@
     "@ember/test-helpers": "2.5.0",
     "@embroider/test-setup": "0.47.1",
     "babel-eslint": "10.1.0",
-    "bootstrap": "4.6.0",
+    "bootstrap": "4.6.1",
     "bootstrap-sass": "3.4.1",
     "broccoli-asset-rev": "3.0.0",
     "chai": "4.3.4",
