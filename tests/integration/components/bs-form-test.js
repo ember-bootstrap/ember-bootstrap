@@ -226,7 +226,9 @@ module('Integration | Component | bs-form', function (hooks) {
     assert.dom(`.${formFeedbackClass()}`).hasText('There is an error');
   });
 
-  test('it does not catch errors thrown by synchronous @onSubmit action', async function (assert) {
+  // skipping for now due to https://github.com/kaliber5/ember-bootstrap/issues/1682
+  // @todo re-enable when this has been resolved
+  skip('it does not catch errors thrown by synchronous @onSubmit action', async function (assert) {
     let onErrorStub = sinon.stub();
     let expectedError = new Error();
 
@@ -244,7 +246,7 @@ module('Integration | Component | bs-form', function (hooks) {
     assert.ok(onErrorStub.calledOnceWith(expectedError));
   });
 
-  test('it does not catch errors thrown by async @onSubmit action', async function (assert) {
+  skip('it does not catch errors thrown by async @onSubmit action', async function (assert) {
     let onErrorStub = sinon.stub();
     let expectedError = new Error();
 
