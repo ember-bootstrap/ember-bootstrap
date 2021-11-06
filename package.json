@@ -50,9 +50,9 @@
     "ip-regex": "^2.1.0"
   },
   "dependencies": {
-    "@ember/render-modifiers": "^1.0.2",
-    "@embroider/macros": "^0.41.0",
-    "@embroider/util": "^0.41.0",
+    "@ember/render-modifiers": "^2.0.0",
+    "@embroider/macros": "^0.47.0",
+    "@embroider/util": "^0.47.0",
     "@glimmer/component": "^1.0.4",
     "@glimmer/tracking": "^1.0.4",
     "broccoli-debug": "^0.6.3",
