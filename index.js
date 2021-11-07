@@ -13,10 +13,10 @@ const defaultOptions = {
   importBootstrapCSS: true,
   importBootstrapFont: false,
   insertEmberWormholeElementToDom: true,
-  bootstrapVersion: 4,
+  bootstrapVersion: 5,
 };
 
-const supportedPreprocessors = ['less', 'sass'];
+const supportedPreprocessors = ['sass'];
 
 const componentDependencies = {
   'bs-button-group': ['bs-button'],
@@ -128,23 +128,7 @@ module.exports = {
   },
 
   findPreprocessor() {
-    return supportedPreprocessors.find(
-      (name) => !!this.app.project.findAddonByName(`ember-cli-${name}`) && this.validatePreprocessor(name)
-    );
-  },
-
-  validatePreprocessor(name) {
-    let dependencies = this.app.project.dependencies();
-    switch (name) {
-      case 'sass':
-        if (!('bootstrap-sass' in dependencies) && this.getBootstrapVersion() === 3) {
-          this.warn(
-            'Npm package "bootstrap-sass" is missing, but is typically required for SASS support. Please run `ember generate ember-bootstrap` to install the missing dependencies!'
-          );
-        }
-        break;
-    }
-    return true;
+    return supportedPreprocessors.find((name) => !!this.app.project.findAddonByName(`ember-cli-${name}`));
   },
 
   getBootstrapStylesPath() {

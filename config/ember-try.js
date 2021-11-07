@@ -103,8 +103,6 @@ module.exports = async function () {
         npm: {
           devDependencies: {
             bootstrap: bootstrapVersion,
-            // @todo remove this once embroider 0.41.0 is released
-            webpack: '^5.0.0',
           },
         },
       }),
@@ -115,8 +113,6 @@ module.exports = async function () {
         npm: {
           devDependencies: {
             bootstrap: bootstrapVersion,
-            // @todo remove this once embroider 0.41.0 is released
-            webpack: '^5.0.0',
           },
         },
       }),
