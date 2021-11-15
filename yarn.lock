@@ -1038,13 +1038,14 @@
     mkdirp "^1.0.4"
     silent-error "^1.1.1"
 
-"@ember/render-modifiers@^1.0.2":
-  version "1.0.2"
-  resolved "https://registry.yarnpkg.com/@ember/render-modifiers/-/render-modifiers-1.0.2.tgz#2e87c48db49d922ce4850d707215caaac60d8444"
-  integrity sha512-6tEnHl5+62NTSAG2mwhGMFPhUrJQjoVqV+slsn+rlTknm2Zik+iwxBQEbwaiQOU1FUYxkS8RWcieovRNMR8inQ==
+"@ember/render-modifiers@^2.0.0":
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/@ember/render-modifiers/-/render-modifiers-2.0.0.tgz#7106928078c6463bc6ee3cbffb6d71dbb8602145"
+  integrity sha512-FbvowKEnYx102MaNMrePBC7RCmuf3BaqPKbp6QP7S6oJaDMuLrGblXW4TxOrE93C6II+6D4QNB4WFGuPeQ3ZBg==
   dependencies:
-    ember-cli-babel "^7.10.0"
-    ember-modifier-manager-polyfill "^1.1.0"
+    ember-cli-babel "^7.26.6"
+    ember-compatibility-helpers "^1.2.5"
+    ember-modifier-manager-polyfill "^1.2.0"
 
 "@ember/test-helpers@2.6.0":
   version "2.6.0"
@@ -6076,7 +6077,7 @@ ember-load-initializers@2.1.2:
     ember-cli-babel "^7.13.0"
     ember-cli-typescript "^2.0.2"
 
-ember-modifier-manager-polyfill@^1.1.0, ember-modifier-manager-polyfill@^1.2.0:
+ember-modifier-manager-polyfill@^1.2.0:
   version "1.2.0"
   resolved "https://registry.yarnpkg.com/ember-modifier-manager-polyfill/-/ember-modifier-manager-polyfill-1.2.0.tgz#cf4444e11a42ac84f5c8badd85e635df57565dda"
   integrity sha512-bnaKF1LLKMkBNeDoetvIJ4vhwRPKIIumWr6dbVuW6W6p4QV8ZiO+GdF8J7mxDNlog9CeL9Z/7wam4YS86G8BYA==

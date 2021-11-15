@@ -56,7 +56,6 @@ export default class Collapse extends Component {
    * @property active
    * @private
    */
-  @tracked
   active = !this.collapsed;
 
   get collapse() {

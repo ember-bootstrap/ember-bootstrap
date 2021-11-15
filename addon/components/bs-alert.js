@@ -75,6 +75,12 @@ export default class Alert extends Component {
   hidden = !this.visible;
 
   /**
+   * This is an unfortunate duplication of the previous property, but this is untracked to avoid causing the dreaded "same computation" assertion in GlimmerVM when reading a tracked property before setting it.
+   * @private
+   */
+  _hidden = !this.visible;
+
+  /**
    * This property controls if the alert should be visible. If false it might still be in the DOM until the fade animation
    * has completed.
    *
@@ -174,7 +180,7 @@ export default class Alert extends Component {
    * @private
    */
   show() {
-    this.hidden = false;
+    this.hidden = this._hidden = false;
   }
 
   /**
@@ -185,7 +191,7 @@ export default class Alert extends Component {
    * @private
    */
   hide() {
-    if (this.hidden) {
+    if (this._hidden) {
       return;
     }
 
@@ -194,14 +200,14 @@ export default class Alert extends Component {
         this,
         function () {
           if (!this.isDestroyed) {
-            this.hidden = true;
+            this.hidden = this._hidden = true;
             this.args.onDismissed?.();
           }
         },
         this.fadeDuration
       );
     } else {
-      this.hidden = true;
+      this.hidden = this._hidden = true;
       this.args.onDismissed?.();
     }
   }
