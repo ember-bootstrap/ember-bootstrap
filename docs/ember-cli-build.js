@@ -35,7 +35,6 @@ module.exports = function (defaults) {
         '/getting-started',
         '/getting-started/setup',
         '/getting-started/assets',
-        '/getting-started/bootstrap-4',
         '/addons',
         '/license',
         '/changelog',
