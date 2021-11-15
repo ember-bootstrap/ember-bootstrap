@@ -8,11 +8,11 @@ const scenarios = [
   {
     dependencies: {
       npm: {
-        bootstrap: bs4Regex,
+        bootstrap: bs5Regex,
       },
     },
     config: {
-      bootstrapVersion: 4,
+      bootstrapVersion: 5,
       importBootstrapCSS: true,
     },
   },
@@ -26,11 +26,11 @@ const scenarios = [
     },
     dependencies: {
       npm: {
-        bootstrap: bs4Regex,
+        bootstrap: bs5Regex,
       },
     },
     config: {
-      bootstrapVersion: 4,
+      bootstrapVersion: 5,
       importBootstrapCSS: false,
     },
   },
@@ -41,11 +41,11 @@ const scenarios = [
     },
     dependencies: {
       npm: {
-        bootstrap: bs4Regex,
+        bootstrap: bs5Regex,
       },
     },
     config: {
-      bootstrapVersion: 4,
+      bootstrapVersion: 5,
       importBootstrapCSS: false,
     },
   },
@@ -56,11 +56,11 @@ const scenarios = [
     },
     dependencies: {
       npm: {
-        bootstrap: bs4Regex,
+        bootstrap: bs5Regex,
       },
     },
     config: {
-      bootstrapVersion: 4,
+      bootstrapVersion: 5,
       importBootstrapCSS: true,
     },
   },
@@ -74,12 +74,12 @@ const scenarios = [
     },
     dependencies: {
       npm: {
-        bootstrap: bs4Regex,
+        bootstrap: bs5Regex,
         'bootstrap-sass': null,
       },
     },
     config: {
-      bootstrapVersion: 4,
+      bootstrapVersion: 5,
       importBootstrapCSS: true,
     },
   },
@@ -93,7 +93,7 @@ const scenarios = [
     },
     dependencies: {
       npm: {
-        bootstrap: bs4Regex,
+        bootstrap: bs5Regex,
         'bootstrap-sass': null,
       },
       addon: {
@@ -101,7 +101,7 @@ const scenarios = [
       },
     },
     config: {
-      bootstrapVersion: 4,
+      bootstrapVersion: 5,
       importBootstrapCSS: true,
     },
   },
@@ -112,14 +112,14 @@ const scenarios = [
     },
     dependencies: {
       npm: {
-        bootstrap: bs4Regex,
+        bootstrap: bs5Regex,
       },
       addon: {
         'ember-cli-sass': true,
       },
     },
     config: {
-      bootstrapVersion: 4,
+      bootstrapVersion: 5,
       importBootstrapCSS: false,
     },
   },
@@ -133,11 +133,11 @@ const scenarios = [
     },
     dependencies: {
       npm: {
-        bootstrap: bs4Regex,
+        bootstrap: bs5Regex,
       },
     },
     config: {
-      bootstrapVersion: 4,
+      bootstrapVersion: 5,
       importBootstrapCSS: false,
     },
   },

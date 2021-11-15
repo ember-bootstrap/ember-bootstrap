@@ -11,6 +11,7 @@ const SilentError = require('silent-error');
 
 const bs4Version = '^4.6.0';
 const bs5Version = '^5.0.0';
+const defaultBsVersion = 5;
 
 const validPreprocessors = ['none', 'less', 'sass'];
 
@@ -31,7 +32,7 @@ module.exports = {
   existingConfiguration: null,
 
   beforeInstall(option) {
-    let bootstrapVersion = parseInt(option.bootstrapVersion, 10) || this.retrieveBootstrapVersion() || 4;
+    let bootstrapVersion = parseInt(option.bootstrapVersion, 10) || this.retrieveBootstrapVersion() || defaultBsVersion;
     let preprocessor = option.preprocessor;
 
     if (![4, 5].includes(bootstrapVersion)) {

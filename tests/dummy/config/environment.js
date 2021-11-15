@@ -22,7 +22,7 @@ module.exports = function (environment) {
       // when it is created
     },
 
-    bootstrapVersion: process.env.BOOTSTRAPVERSION || 4,
+    bootstrapVersion: process.env.BOOTSTRAPVERSION || 5,
     fastboot: {
       hostWhitelist: [/^localhost:\d+$/],
     },
