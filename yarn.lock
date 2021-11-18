@@ -1107,7 +1107,7 @@
     ember-cli-version-checker "^5.1.2"
     semver "^7.3.5"
 
-"@embroider/macros@0.41.0", "@embroider/macros@^0.41.0":
+"@embroider/macros@0.41.0":
   version "0.41.0"
   resolved "https://registry.yarnpkg.com/@embroider/macros/-/macros-0.41.0.tgz#3e78b6f388d7229906abf4c75edfff8bb0208aca"
   integrity sha512-QISzwEEfLsskZeL0jyZDs1RoQSotwBWj+4upTogNHuxQP5j/9H3IMG/3QB1gh8GEpbudATb/cS4NDYK3UBxufw==
@@ -1119,7 +1119,7 @@
     resolve "^1.8.1"
     semver "^7.3.2"
 
-"@embroider/macros@0.47.2", "@embroider/macros@^0.47.0":
+"@embroider/macros@0.47.2", "@embroider/macros@^0.47.0", "@embroider/macros@^0.47.2":
   version "0.47.2"
   resolved "https://registry.yarnpkg.com/@embroider/macros/-/macros-0.47.2.tgz#23cbe92cac3c24747f054e1eea2a22538bf7ebd0"
   integrity sha512-ViNWluJCeM5OPlM3rs8kdOz3RV5rpfXX5D2rDnc/q86xRS0xf4NFEjYRV7W6fBcD0b3v5jSHDTwrjq9Kee4rHg==
@@ -5527,6 +5527,44 @@ ember-auto-import@^2.2.0:
     typescript-memoize "^1.0.0-alpha.3"
     walk-sync "^0.3.3"
 
+ember-auto-import@^2.2.3:
+  version "2.2.4"
+  resolved "https://registry.yarnpkg.com/ember-auto-import/-/ember-auto-import-2.2.4.tgz#68c08cb0b7533293024c97387fc449b00561185a"
+  integrity sha512-iXHH+bSMP/uWvJmIhjt+PZz4ymqOLccIxZUouVcUFLKA5EAWE7gamlA684m0pIbSE/V9zKpOul4OfIgKXFprBg==
+  dependencies:
+    "@babel/core" "^7.1.6"
+    "@babel/plugin-proposal-class-properties" "^7.13.0"
+    "@babel/plugin-proposal-decorators" "^7.13.5"
+    "@babel/preset-env" "^7.10.2"
+    "@babel/traverse" "^7.1.6"
+    "@embroider/shared-internals" "^0.40.0"
+    babel-loader "^8.0.6"
+    babel-plugin-ember-modules-api-polyfill "^3.5.0"
+    babel-plugin-htmlbars-inline-precompile "^5.2.1"
+    babel-plugin-syntax-dynamic-import "^6.18.0"
+    broccoli-debug "^0.6.4"
+    broccoli-funnel "^3.0.8"
+    broccoli-merge-trees "^4.2.0"
+    broccoli-plugin "^4.0.0"
+    broccoli-source "^3.0.0"
+    css-loader "^5.2.0"
+    debug "^4.3.1"
+    ember-cli-babel "^7.0.0"
+    fs-extra "^6.0.1"
+    fs-tree-diff "^2.0.0"
+    handlebars "^4.3.1"
+    js-string-escape "^1.0.1"
+    lodash "^4.17.19"
+    mkdirp "^0.5.1"
+    parse5 "^6.0.1"
+    resolve "^1.20.0"
+    resolve-package-path "^3.1.0"
+    rimraf "^2.6.2"
+    semver "^7.3.4"
+    style-loader "^2.0.0"
+    typescript-memoize "^1.0.0-alpha.3"
+    walk-sync "^0.3.3"
+
 ember-cache-primitive-polyfill@^1.0.0:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/ember-cache-primitive-polyfill/-/ember-cache-primitive-polyfill-1.0.1.tgz#a27075443bd87e5af286c1cd8a7df24e3b9f6715"
@@ -6082,13 +6120,13 @@ ember-export-application-global@^2.0.1:
   resolved "https://registry.yarnpkg.com/ember-export-application-global/-/ember-export-application-global-2.0.1.tgz#b120a70e322ab208defc9e2daebe8d0dfc2dcd46"
   integrity sha512-B7wiurPgsxsSGzJuPFkpBWnaeuCu2PGpG2BjyrfA1VcL7//o+5RSnZqiCEY326y7qmxb2GoCgo0ft03KBU0rRw==
 
-ember-focus-trap@^0.7.0:
-  version "0.7.0"
-  resolved "https://registry.yarnpkg.com/ember-focus-trap/-/ember-focus-trap-0.7.0.tgz#8c3fa66a0d393dad2994db82e2fa227103875fc0"
-  integrity sha512-WHOD8jTcCzsRb0cU8J5SKObrxbdD8rPSWrSUjZ2QYu9dVbaXg6/hZxcN5JrmPY1ArnsRaLMPdOUALYeZTP29og==
+ember-focus-trap@^0.8.0:
+  version "0.8.0"
+  resolved "https://registry.yarnpkg.com/ember-focus-trap/-/ember-focus-trap-0.8.0.tgz#63a16685ba0ebd1f7d8032dab276c3d67de7e78c"
+  integrity sha512-Iaqi8lmsVXEtW5gQIWa8x3jXGhdpLrq4HRdZl1GHzHL4ys3b7oaPsJl/CS/jjeJPGSQ+tv5IT3Rn36BUZe5Pig==
   dependencies:
-    "@embroider/macros" "^0.41.0"
-    ember-auto-import "^1.11.2"
+    "@embroider/macros" "^0.47.2"
+    ember-auto-import "^2.2.3"
     ember-cli-babel "^7.26.3"
     ember-modifier-manager-polyfill "^1.2.0"
     focus-trap "^6.4.0"
