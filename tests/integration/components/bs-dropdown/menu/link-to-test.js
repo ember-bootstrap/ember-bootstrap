@@ -41,54 +41,6 @@ module('Integration | Component | bs-dropdown/menu/link-to', function (hooks) {
     assert.dom('a.dropdown-item').exists({ count: 1 }, 'renders as plain element with dropdown item class');
   });
 
-  module('positional params', function (hooks) {
-    hooks.afterEach(function (assert) {
-      assert.deprecationsInclude(`Positional arguments for ember-bootstrap's link-to components are deprecated.`);
-      assert.deprecations();
-    });
-    test('simple route link', async function (assert) {
-      await render(hbs`
-        <BsDropdown as |dd|>
-          <dd.button>Dropdown</dd.button>
-          <dd.menu as |menu|>
-            <menu.item>{{#menu.link-to "index"}}Link{{/menu.link-to}}</menu.item>
-          </dd.menu>
-        </BsDropdown>`);
-      await click('button');
-
-      assert.dom('a').exists({ count: 1 });
-      assert.dom('a').hasText('Link');
-      assert.dom('a').hasAttribute('href', '/');
-    });
-
-    test('link with model', async function (assert) {
-      await render(hbs`
-        <BsDropdown as |dd|>
-          <dd.button>Dropdown</dd.button>
-          <dd.menu as |menu|>
-            <menu.item>{{#menu.link-to "acceptance.link" "1" (query-params foo="bar")}}Link{{/menu.link-to}}</menu.item>
-          </dd.menu>
-        </BsDropdown>`);
-      await click('button');
-
-      assert.dom('a').exists({ count: 1 });
-      assert.dom('a').hasAttribute('href', '/acceptance/link/1?foo=bar');
-    });
-
-    test('disabled link', async function (assert) {
-      await render(hbs`
-        <BsDropdown as |dd|>
-          <dd.button>Dropdown</dd.button>
-          <dd.menu as |menu|>
-            <menu.item>{{#menu.link-to "index" disabled=true}}Link{{/menu.link-to}}</menu.item>
-          </dd.menu>
-        </BsDropdown>`);
-      await click('button');
-
-      assert.dom('a').hasClass('disabled');
-    });
-  });
-
   module('<LinkTo> properties', function () {
     test('simple route link', async function (assert) {
       await render(hbs`

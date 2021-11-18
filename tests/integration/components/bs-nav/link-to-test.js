@@ -12,61 +12,6 @@ module('Integration | Component | bs-nav/link-to', function (hooks) {
     this.owner.setupRouter();
   });
 
-  module('positional params', function (hooks) {
-    hooks.afterEach(function (assert) {
-      assert.deprecationsInclude(`Positional arguments for ember-bootstrap's link-to components are deprecated.`);
-      assert.deprecations();
-    });
-    test('simple route link', async function (assert) {
-      await render(hbs`
-        <BsNav as |nav|>
-          <nav.item>
-            {{#nav.link-to "index"}}Link{{/nav.link-to}}
-          </nav.item>
-        </BsNav>
-      `);
-
-      assert.dom('a').exists({ count: 1 });
-      assert.dom('a').hasText('Link');
-      assert.dom('a').hasAttribute('href', '/');
-    });
-
-    test('link with model', async function (assert) {
-      await render(hbs`
-        <BsNav as |nav|>
-          <nav.item>
-            {{#nav.link-to "acceptance.link" "1" (query-params foo="bar")}}Link{{/nav.link-to}}
-          </nav.item>
-        </BsNav>
-      `);
-
-      assert.dom('a').exists({ count: 1 });
-      assert.dom('a').hasAttribute('href', '/acceptance/link/1?foo=bar');
-    });
-
-    testNotBS3('link has nav-link class', async function (assert) {
-      await render(hbs`
-        <BsNav as |nav|>
-          <nav.item>
-            {{#nav.link-to "index"}}Link{{/nav.link-to}}
-          </nav.item>
-        </BsNav>
-      `);
-      assert.dom('a').hasClass('nav-link');
-    });
-
-    test('disabled link', async function (assert) {
-      await render(hbs`
-        <BsNav as |nav|>
-          <nav.item>
-            {{#nav.link-to "index" disabled=true}}Link{{/nav.link-to}}
-          </nav.item>
-        </BsNav>
-      `);
-      assert.dom('a').hasClass('disabled');
-    });
-  });
-
   module('<LinkTo> properties', function () {
     test('simple route link', async function (assert) {
       await render(hbs`
