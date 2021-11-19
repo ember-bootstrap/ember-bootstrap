@@ -5556,10 +5556,10 @@ ember-cli-build-config-editor@0.5.1:
   dependencies:
     recast "^0.12.0"
 
-ember-cli-content-security-policy@2.0.0-5:
-  version "2.0.0-5"
-  resolved "https://registry.yarnpkg.com/ember-cli-content-security-policy/-/ember-cli-content-security-policy-2.0.0-5.tgz#ebbd4979025720b3a860ae8dec9324379e875ab3"
-  integrity sha512-QjdJpDQTTF1gAxDjTO4WqeNPRJwZHt+M7YfFRz9flK/uy8b2iixvg4GqgnvYhXyiZ+TzEb9arNZQ4OmtO5y8yw==
+ember-cli-content-security-policy@2.0.0:
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/ember-cli-content-security-policy/-/ember-cli-content-security-policy-2.0.0.tgz#1dc0d743799e237ba84d58d5cfa227d70492be8b"
+  integrity sha512-LjV8AEvhyPzq07Pkh1DN03GMRp1IupMhPWYiOryaz8HVnAubmBprHlbBbJTSEdRxHB48Dw1Ud8jZAPiUN+4Bbg==
   dependencies:
     body-parser "^1.17.0"
     chalk "^4.1.1"
