@@ -1,6 +1,26 @@
 
 
 
+
+## v5.0.0-beta.2 (2021-11-24)
+
+#### :boom: Breaking Change
+* [#1699](https://github.com/kaliber5/ember-bootstrap/pull/1699) modal footer should not render a <form> element ([@jelhan](https://github.com/jelhan))
+
+#### Features
+* [#1689](https://github.com/kaliber5/ember-bootstrap/pull/1689) Make Bootstrap 5 the new default when adding the addon ([@simonihmig](https://github.com/simonihmig))
+
+#### Bug Fixes
+* [#1705](https://github.com/kaliber5/ember-bootstrap/pull/1705) Update ember-focus-trap, fixing Ember 4 compatibility ([@simonihmig](https://github.com/simonihmig))
+* [#1680](https://github.com/kaliber5/ember-bootstrap/pull/1680) Update to `@ember/render-modifiers` v2 ([@simonihmig](https://github.com/simonihmig))
+
+#### Internal
+* [#1706](https://github.com/kaliber5/ember-bootstrap/pull/1706) Remove use of curly component invocation for link components ([@simonihmig](https://github.com/simonihmig))
+
+#### Committers: 2
+- Jeldrik Hanschke ([@jelhan](https://github.com/jelhan))
+- Simon Ihmig ([@simonihmig](https://github.com/simonihmig))
+
 ## v5.0.0-beta.1 (2021-10-21)
 
 #### :boom: Breaking Change
