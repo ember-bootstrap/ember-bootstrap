@@ -143,7 +143,7 @@
     "release-it": "14.11.8",
     "release-it-lerna-changelog": "4.0.1",
     "striptags": "3.2.0",
-    "webpack": "5.64.2"
+    "webpack": "5.64.3"
   },
   "engines": {
     "node": "12.* || >= 14.*"
