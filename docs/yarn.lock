@@ -5360,10 +5360,10 @@ ember-cli-sass@10.0.1:
     broccoli-sass-source-maps "^4.0.0"
     ember-cli-version-checker "^2.1.0"
 
-ember-cli-showdown@6.0.0:
-  version "6.0.0"
-  resolved "https://registry.yarnpkg.com/ember-cli-showdown/-/ember-cli-showdown-6.0.0.tgz#04ba8d6590bfca461159a0181f63373b9b1de7b0"
-  integrity sha512-EwkvftojVjAXyMdRXU33YZyLAJEXD5E94D2z1J/P4O4KSg5nQzH27Pd3QEdL/tmlY0anLVKoIpom87YyTOUcuw==
+ember-cli-showdown@6.0.1:
+  version "6.0.1"
+  resolved "https://registry.yarnpkg.com/ember-cli-showdown/-/ember-cli-showdown-6.0.1.tgz#ed6407f1bb6911d197bc2257b2c7296c091703b8"
+  integrity sha512-yQJf6ffpnn/5fTiDbwL/zvfzIuRepXzUNpaE9qrI+fo3fhn6KlrbDnr+UqkWYR41DqpspVwV4/sodkyENFu9SQ==
   dependencies:
     broccoli-funnel "^2.0.0"
     broccoli-source "^1.1.0"
