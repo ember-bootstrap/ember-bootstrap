@@ -69,7 +69,7 @@
     "qunit": "2.17.2",
     "qunit-dom": "2.0.0",
     "sass": "1.44.0",
-    "webpack": "5.64.4"
+    "webpack": "5.65.0"
   },
   "engines": {
     "node": "10.* || >= 12"
