@@ -92,7 +92,7 @@
     "chai": "4.3.4",
     "chai-things": "0.2.0",
     "ember-a11y-testing": "4.3.0",
-    "ember-cli": "3.28.4",
+    "ember-cli": "3.28.5",
     "ember-cli-app-version": "5.0.0",
     "ember-cli-blueprint-test-helpers": "0.19.2",
     "ember-cli-browserstack": "2.0.1",
