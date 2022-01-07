@@ -670,17 +670,17 @@ export default class ContextualHelp extends Component {
       this.triggerTargetElement = this.getTriggerTargetElement();
       this.addListeners();
       if (this.visible) {
-        next(this, this.show, true);
+        next(this, this.show);
       }
     });
   }
 
   @action
-  showOrHide(visible) {
-    if (visible) {
-      this.show();
+  showOrHide() {
+    if (this.args.visible) {
+      next(this, this.show);
     } else {
-      this.hide();
+      next(this, this.hide);
     }
   }
 

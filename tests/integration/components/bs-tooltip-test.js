@@ -143,7 +143,7 @@ module('Integration | Component | bs-tooltip', function (hooks) {
     assert.dom('.tooltip').doesNotExist('tooltip is not visible');
   });
 
-  test('it calls onShow/onShown actions when showing tooltip [fade=false]', async function (assert) {
+  test('it calls onShow/onShown actions when showing tooltip by event [fade=false]', async function (assert) {
     let showAction = sinon.spy();
     this.actions.show = showAction;
     let shownAction = sinon.spy();
@@ -153,7 +153,22 @@ module('Integration | Component | bs-tooltip', function (hooks) {
     );
     await triggerEvent('#target', 'mouseenter');
     assert.ok(showAction.calledOnce, 'show action has been called');
-    assert.ok(shownAction.calledOnce, 'show action has been called');
+    assert.ok(shownAction.calledOnce, 'shown action has been called');
+  });
+
+  test('it calls onShow/onShown actions when showing tooltip programmatically [fade=false]', async function (assert) {
+    let showAction = sinon.spy();
+    this.actions.show = showAction;
+    let shownAction = sinon.spy();
+    this.actions.shown = shownAction;
+    this.set('show', false);
+    await render(
+      hbs`<div id="target"><BsTooltip @title="Dummy" @visible={{this.show}} @fade={{false}} @onShow={{action "show"}} @onShown={{action "shown"}} /></div>`
+    );
+    this.set('show', true);
+    await settled();
+    assert.ok(showAction.calledOnce, 'show action has been called');
+    assert.ok(shownAction.calledOnce, 'shown action has been called');
   });
 
   test('it aborts showing if onShow action returns false', async function (assert) {
@@ -171,7 +186,7 @@ module('Integration | Component | bs-tooltip', function (hooks) {
     assert.dom('.tooltip').doesNotExist('tooltip is not visible');
   });
 
-  test('it calls onHide/onHidden actions when hiding tooltip [fade=false]', async function (assert) {
+  test('it calls onHide/onHidden actions when hiding tooltip by event [fade=false]', async function (assert) {
     let hideAction = sinon.spy();
     this.actions.hide = hideAction;
     let hiddenAction = sinon.spy();
@@ -181,6 +196,21 @@ module('Integration | Component | bs-tooltip', function (hooks) {
     );
     await triggerEvent('#target', 'mouseenter');
     await triggerEvent('#target', 'mouseleave');
+    assert.ok(hideAction.calledOnce, 'hide action has been called');
+    assert.ok(hiddenAction.calledOnce, 'hidden action was called');
+  });
+
+  test('it calls onHide/onHidden actions when hiding tooltip programmatically [fade=false]', async function (assert) {
+    let hideAction = sinon.spy();
+    this.actions.hide = hideAction;
+    let hiddenAction = sinon.spy();
+    this.actions.hidden = hiddenAction;
+    this.set('show', true);
+    await render(
+      hbs`<div id="target"><BsTooltip @visible={{this.show}} @title="Dummy" @fade={{false}} @onHide={{action "hide"}} @onHidden={{action "hidden"}} /></div>`
+    );
+    this.set('show', false);
+    await settled();
     assert.ok(hideAction.calledOnce, 'hide action has been called');
     assert.ok(hiddenAction.calledOnce, 'hidden action was called');
   });
