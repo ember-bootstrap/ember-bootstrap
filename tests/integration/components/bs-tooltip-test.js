@@ -145,11 +145,11 @@ module('Integration | Component | bs-tooltip', function (hooks) {
 
   test('it calls onShow/onShown actions when showing tooltip by event [fade=false]', async function (assert) {
     let showAction = sinon.spy();
-    this.actions.show = showAction;
+    this.set('show', showAction);
     let shownAction = sinon.spy();
-    this.actions.shown = shownAction;
+    this.set('shown', shownAction);
     await render(
-      hbs`<div id="target"><BsTooltip @title="Dummy" @fade={{false}} @onShow={{action "show"}} @onShown={{action "shown"}} /></div>`
+      hbs`<div id="target"><BsTooltip @title="Dummy" @fade={{false}} @onShow={{this.show}} @onShown={{this.shown}} /></div>`
     );
     await triggerEvent('#target', 'mouseenter');
     assert.ok(showAction.calledOnce, 'show action has been called');
@@ -158,14 +158,14 @@ module('Integration | Component | bs-tooltip', function (hooks) {
 
   test('it calls onShow/onShown actions when showing tooltip programmatically [fade=false]', async function (assert) {
     let showAction = sinon.spy();
-    this.actions.show = showAction;
+    this.set('show', showAction);
     let shownAction = sinon.spy();
-    this.actions.shown = shownAction;
-    this.set('show', false);
+    this.set('shown', shownAction);
+    this.set('visible', false);
     await render(
-      hbs`<div id="target"><BsTooltip @title="Dummy" @visible={{this.show}} @fade={{false}} @onShow={{action "show"}} @onShown={{action "shown"}} /></div>`
+      hbs`<div id="target"><BsTooltip @title="Dummy" @visible={{this.visible}} @fade={{false}} @onShow={{this.show}} @onShown={{this.shown}} /></div>`
     );
-    this.set('show', true);
+    this.set('visible', true);
     await settled();
     assert.ok(showAction.calledOnce, 'show action has been called');
     assert.ok(shownAction.calledOnce, 'shown action has been called');
@@ -174,11 +174,11 @@ module('Integration | Component | bs-tooltip', function (hooks) {
   test('it aborts showing if onShow action returns false', async function (assert) {
     let showAction = sinon.stub();
     showAction.returns(false);
-    this.actions.show = showAction;
+    this.set('show', showAction);
     let shownAction = sinon.spy();
-    this.actions.shown = shownAction;
+    this.set('shown', shownAction);
     await render(
-      hbs`<div id="target"><BsTooltip @title="Dummy" @fade={{false}} @onShow={{action "show"}} @onShown={{action "shown"}} /></div>`
+      hbs`<div id="target"><BsTooltip @title="Dummy" @fade={{false}} @onShow={{this.show}} @onShown={{this.shown}} /></div>`
     );
     await triggerEvent('#target', 'mouseenter');
     assert.ok(showAction.calledOnce, 'show action has been called');
@@ -188,11 +188,11 @@ module('Integration | Component | bs-tooltip', function (hooks) {
 
   test('it calls onHide/onHidden actions when hiding tooltip by event [fade=false]', async function (assert) {
     let hideAction = sinon.spy();
-    this.actions.hide = hideAction;
+    this.set('hide', hideAction);
     let hiddenAction = sinon.spy();
-    this.actions.hidden = hiddenAction;
+    this.set('hidden', hiddenAction);
     await render(
-      hbs`<div id="target"><BsTooltip @title="Dummy" @fade={{false}} @onHide={{action "hide"}} @onHidden={{action "hidden"}} /></div>`
+      hbs`<div id="target"><BsTooltip @title="Dummy" @fade={{false}} @onHide={{this.hide}} @onHidden={{this.hidden}} /></div>`
     );
     await triggerEvent('#target', 'mouseenter');
     await triggerEvent('#target', 'mouseleave');
@@ -202,14 +202,14 @@ module('Integration | Component | bs-tooltip', function (hooks) {
 
   test('it calls onHide/onHidden actions when hiding tooltip programmatically [fade=false]', async function (assert) {
     let hideAction = sinon.spy();
-    this.actions.hide = hideAction;
+    this.set('hide', hideAction);
     let hiddenAction = sinon.spy();
-    this.actions.hidden = hiddenAction;
-    this.set('show', true);
+    this.set('hidden', hiddenAction);
+    this.set('visible', true);
     await render(
-      hbs`<div id="target"><BsTooltip @visible={{this.show}} @title="Dummy" @fade={{false}} @onHide={{action "hide"}} @onHidden={{action "hidden"}} /></div>`
+      hbs`<div id="target"><BsTooltip @visible={{this.visible}} @title="Dummy" @fade={{false}} @onHide={{this.hide}} @onHidden={{this.hidden}} /></div>`
     );
-    this.set('show', false);
+    this.set('visible', false);
     await settled();
     assert.ok(hideAction.calledOnce, 'hide action has been called');
     assert.ok(hiddenAction.calledOnce, 'hidden action was called');
@@ -218,11 +218,11 @@ module('Integration | Component | bs-tooltip', function (hooks) {
   test('it aborts hiding if onHide action returns false', async function (assert) {
     let hideAction = sinon.stub();
     hideAction.returns(false);
-    this.actions.hide = hideAction;
+    this.set('hide', hideAction);
     let hiddenAction = sinon.spy();
-    this.actions.hidden = hiddenAction;
+    this.set('hidden', hiddenAction);
     await render(
-      hbs`<div id="target"><BsTooltip @title="Dummy" @fade={{false}} @onHide={{action "hide"}} @onHidden={{action "hidden"}} /></div>`
+      hbs`<div id="target"><BsTooltip @title="Dummy" @fade={{false}} @onHide={{this.hide}} @onHidden={{this.hidden}} /></div>`
     );
     await triggerEvent('#target', 'mouseenter');
     await triggerEvent('#target', 'mouseleave');
