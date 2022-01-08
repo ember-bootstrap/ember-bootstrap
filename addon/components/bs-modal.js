@@ -639,7 +639,7 @@ export default class Modal extends Component {
 
   @action
   handleVisibilityChanges() {
-    if (this.args.open !== false) {
+    if (this.open) {
       this.show();
     } else {
       this.hide();
