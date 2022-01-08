@@ -260,6 +260,94 @@ module('Integration | Component | bs-popover', function (hooks) {
     assert.dom('#wrapper .popover').exists({ count: 1 }, 'Popover exists in place.');
   });
 
+  test('it calls onShow/onShown actions when showing popover by event [fade=false]', async function (assert) {
+    let showAction = sinon.spy();
+    this.set('show', showAction);
+    let shownAction = sinon.spy();
+    this.set('shown', shownAction);
+    await render(
+      hbs`<div id="target"><BsPopover @title="Dummy" @fade={{false}} @onShow={{this.show}} @onShown={{this.shown}} /></div>`
+    );
+    await click('#target');
+    assert.ok(showAction.calledOnce, 'show action has been called');
+    assert.ok(shownAction.calledOnce, 'shown action has been called');
+  });
+
+  test('it calls onShow/onShown actions when showing popover programmatically [fade=false]', async function (assert) {
+    let showAction = sinon.spy();
+    this.set('show', showAction);
+    let shownAction = sinon.spy();
+    this.set('shown', shownAction);
+    this.set('visible', false);
+    await render(
+      hbs`<div id="target"><BsPopover @title="Dummy" @visible={{this.visible}} @fade={{false}} @onShow={{this.show}} @onShown={{this.shown}} /></div>`
+    );
+    this.set('visible', true);
+    await settled();
+    assert.ok(showAction.calledOnce, 'show action has been called');
+    assert.ok(shownAction.calledOnce, 'shown action has been called');
+  });
+
+  test('it aborts showing if onShow action returns false', async function (assert) {
+    let showAction = sinon.stub();
+    showAction.returns(false);
+    this.set('show', showAction);
+    let shownAction = sinon.spy();
+    this.set('shown', shownAction);
+    await render(
+      hbs`<div id="target"><BsPopover @title="Dummy" @fade={{false}} @onShow={{this.show}} @onShown={{this.shown}} /></div>`
+    );
+    await click('#target');
+    assert.ok(showAction.calledOnce, 'show action has been called');
+    assert.ok(shownAction.notCalled, 'show action has not been called');
+    assert.dom('.popover').doesNotExist('popover is not visible');
+  });
+
+  test('it calls onHide/onHidden actions when hiding popover by event [fade=false]', async function (assert) {
+    let hideAction = sinon.spy();
+    this.set('hide', hideAction);
+    let hiddenAction = sinon.spy();
+    this.set('hidden', hiddenAction);
+    await render(
+      hbs`<div id="target"><BsPopover @title="Dummy" @fade={{false}} @onHide={{this.hide}} @onHidden={{this.hidden}} /></div>`
+    );
+    await click('#target');
+    await click('#target');
+    assert.ok(hideAction.calledOnce, 'hide action has been called');
+    assert.ok(hiddenAction.calledOnce, 'hidden action was called');
+  });
+
+  test('it calls onHide/onHidden actions when hiding popover programmatically [fade=false]', async function (assert) {
+    let hideAction = sinon.spy();
+    this.set('hide', hideAction);
+    let hiddenAction = sinon.spy();
+    this.set('hidden', hiddenAction);
+    this.set('visible', true);
+    await render(
+      hbs`<div id="target"><BsPopover @visible={{this.visible}} @title="Dummy" @fade={{false}} @onHide={{this.hide}} @onHidden={{this.hidden}} /></div>`
+    );
+    this.set('visible', false);
+    await settled();
+    assert.ok(hideAction.calledOnce, 'hide action has been called');
+    assert.ok(hiddenAction.calledOnce, 'hidden action was called');
+  });
+
+  test('it aborts hiding if onHide action returns false', async function (assert) {
+    let hideAction = sinon.stub();
+    hideAction.returns(false);
+    this.set('hide', hideAction);
+    let hiddenAction = sinon.spy();
+    this.set('hidden', hiddenAction);
+    await render(
+      hbs`<div id="target"><BsPopover @title="Dummy" @fade={{false}} @onHide={{this.hide}} @onHidden={{this.hidden}} /></div>`
+    );
+    await click('#target');
+    await click('#target');
+    assert.ok(hideAction.calledOnce, 'hide action has been called');
+    assert.ok(hiddenAction.notCalled, 'hidden action has not been called');
+    assert.dom('.popover').exists({ count: 1 }, 'popover is visible');
+  });
+
   test('it passes accessibility checks', async function (assert) {
     await render(hbs`
       <button type="button">
