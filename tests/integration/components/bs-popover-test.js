@@ -299,7 +299,7 @@ module('Integration | Component | bs-popover', function (hooks) {
     );
     await click('#target');
     assert.ok(showAction.calledOnce, 'show action has been called');
-    assert.notOk(shownAction.calledOnce, 'show action has not been called');
+    assert.ok(shownAction.notCalled, 'show action has not been called');
     assert.dom('.popover').doesNotExist('popover is not visible');
   });
 
@@ -344,7 +344,7 @@ module('Integration | Component | bs-popover', function (hooks) {
     await click('#target');
     await click('#target');
     assert.ok(hideAction.calledOnce, 'hide action has been called');
-    assert.notOk(hiddenAction.calledOnce, 'hidden action has not been called');
+    assert.ok(hiddenAction.notCalled, 'hidden action has not been called');
     assert.dom('.popover').exists({ count: 1 }, 'popover is visible');
   });
 
