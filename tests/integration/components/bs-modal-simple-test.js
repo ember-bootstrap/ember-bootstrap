@@ -105,6 +105,26 @@ module('Integration | Component | bs-modal-simple', function (hooks) {
     assert.dom('.modal').doesNotExist('Modal is hidden');
   });
 
+  // https://github.com/kaliber5/ember-bootstrap/issues/1612
+  test('open property accepts loosely types values', async function (assert) {
+    this.set('open', null);
+    await render(
+      hbs`<BsModalSimple @title="Simple Dialog" @fade={{false}} @open={{this.open}}>Hello world!</BsModalSimple>`
+    );
+
+    assert.dom('.modal').doesNotExist('Modal is hidden');
+
+    this.set('open', '');
+    await settled();
+    assert.dom('.modal').doesNotExist('Modal is hidden');
+
+    this.set('open', {});
+    await settled();
+
+    assert.dom('.modal').hasClass(visibilityClass(), 'Modal is visible');
+    assert.dom('.modal').isVisible();
+  });
+
   testRequiringTransitions('open property shows modal [fade]', async function (assert) {
     this.set('open', false);
     await render(hbs`<BsModalSimple @title="Simple Dialog" @open={{this.open}}>Hello world!</BsModalSimple>`);
