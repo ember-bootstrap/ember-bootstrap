@@ -5,7 +5,7 @@
 ## v5.0.0-beta.2 (2021-11-24)
 
 #### :boom: Breaking Change
-* [#1699](https://github.com/kaliber5/ember-bootstrap/pull/1699) modal footer should not render a <form> element ([@jelhan](https://github.com/jelhan))
+* [#1699](https://github.com/kaliber5/ember-bootstrap/pull/1699) modal footer should not render a `<form>` element ([@jelhan](https://github.com/jelhan))
 
 #### Features
 * [#1689](https://github.com/kaliber5/ember-bootstrap/pull/1689) Make Bootstrap 5 the new default when adding the addon ([@simonihmig](https://github.com/simonihmig))
