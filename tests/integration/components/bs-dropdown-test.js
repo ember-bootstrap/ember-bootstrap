@@ -353,7 +353,7 @@ module('Integration | Component | bs-dropdown', function (hooks) {
 
     await click('a.dropdown-toggle');
     assert.ok(isVisible(this.element.querySelector('.dropdown-menu a')));
-    assert.ok(this.element.querySelector('.dropdown-menu').offsetParent !== null);
+    assert.notStrictEqual(this.element.querySelector('.dropdown-menu').offsetParent, null);
   });
 
   test('dropdown menu can be rendered in a wormhole', async function (assert) {
