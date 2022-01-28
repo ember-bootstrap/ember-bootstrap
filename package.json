@@ -47,7 +47,7 @@
   },
   "resolutions": {
     "ember-cli-htmlbars/semver": "~7.3.0",
-    "ip-regex": "^2.1.0"
+    "@embroider/util": "^1.0.0"
   },
   "dependencies": {
     "@ember/render-modifiers": "^2.0.0",
