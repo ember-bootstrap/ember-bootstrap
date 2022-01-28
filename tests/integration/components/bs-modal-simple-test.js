@@ -2,6 +2,7 @@ import { module, skip } from 'qunit';
 import { setupRenderingTest } from 'ember-qunit';
 import { click, focus, render, settled, triggerKeyEvent, waitUntil } from '@ember/test-helpers';
 import {
+  delay,
   defaultButtonClass,
   closeButtonClass,
   test,
@@ -405,6 +406,7 @@ module('Integration | Component | bs-modal-simple', function (hooks) {
 
     this.set('open', false);
     await settled();
+    await delay(0);
 
     assert.dom('[data-test-button]').isFocused();
   });
