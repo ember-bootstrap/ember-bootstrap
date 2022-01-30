@@ -2,6 +2,22 @@
 
 
 
+
+## v5.0.0-rc.0 (2022-01-30)
+
+#### :boom: Breaking Change
+* [#1736](https://github.com/kaliber5/ember-bootstrap/pull/1736) Upgrade Ember to 4.1, drop support for Ember < 3.24 ([@simonihmig](https://github.com/simonihmig))
+
+#### Bug Fixes
+* [#1720](https://github.com/kaliber5/ember-bootstrap/pull/1720) Accept loosely typed values for modal `@open` ([@simonihmig](https://github.com/simonihmig))
+* [#1718](https://github.com/kaliber5/ember-bootstrap/pull/1718) Call onShow(n)/onHide/onHidden when controlling tooltips and popovers programmatically ([@simonihmig](https://github.com/simonihmig))
+
+#### Internal
+* [#1736](https://github.com/kaliber5/ember-bootstrap/pull/1736) Upgrade Ember to 4.1, drop support for Ember < 3.24 ([@simonihmig](https://github.com/simonihmig))
+
+#### Committers: 1
+- Simon Ihmig ([@simonihmig](https://github.com/simonihmig))
+
 ## v5.0.0-beta.2 (2021-11-24)
 
 #### :boom: Breaking Change
