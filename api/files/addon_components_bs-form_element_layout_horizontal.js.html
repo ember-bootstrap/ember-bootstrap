@@ -64,7 +64,6 @@ import { assert } from &#x27;@ember/debug&#x27;;
 import { isBlank } from &#x27;@ember/utils&#x27;;
 import FormElementLayout from &#x27;../layout&#x27;;
 import defaultValue from &#x27;ember-bootstrap/utils/default-decorator&#x27;;
-import { macroCondition, getOwnConfig } from &#x27;@embroider/macros&#x27;;
 
 /**
 
@@ -118,11 +117,8 @@ export default class FormElementLayoutHorizontal extends FormElementLayout {
       return undefined;
     }
     let parts = this.horizontalLabelGridClass.split(&#x27;-&#x27;);
-    if (macroCondition(getOwnConfig().isBS3)) {
-      parts.splice(2, 0, &#x27;offset&#x27;);
-    } else {
-      parts.splice(0, 1, &#x27;offset&#x27;);
-    }
+    parts.splice(0, 1, &#x27;offset&#x27;);
+
     return parts.join(&#x27;-&#x27;);
   }
 }
@@ -175,7 +171,6 @@ export default class FormElementLayoutHorizontal extends FormElementLayout {
             <li class="list-group-item list-group-item-private"><a href="../classes/Components.FormElementLayoutInlineCheckbox.html">Components.FormElementLayoutInlineCheckbox</a></li>
             <li class="list-group-item list-group-item-private"><a href="../classes/Components.FormElementLayoutVertical.html">Components.FormElementLayoutVertical</a></li>
             <li class="list-group-item list-group-item-private"><a href="../classes/Components.FormElementLayoutVerticalCheckbox.html">Components.FormElementLayoutVerticalCheckbox</a></li>
-            <li class="list-group-item list-group-item-public"><a href="../classes/Components.FormGroup.html">Components.FormGroup</a></li>
             <li class="list-group-item list-group-item-private"><a href="../classes/Components.LinkComponent.html">Components.LinkComponent</a></li>
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.Modal.html">Components.Modal</a></li>
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.ModalBody.html">Components.ModalBody</a></li>

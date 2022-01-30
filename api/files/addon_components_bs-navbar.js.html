@@ -66,7 +66,6 @@ import Component from &#x27;@ember/component&#x27;;
 import listenTo from &#x27;ember-bootstrap/utils/cp/listen-to&#x27;;
 import defaultValue from &#x27;ember-bootstrap/utils/default-decorator&#x27;;
 import { assert } from &#x27;@ember/debug&#x27;;
-import { macroCondition, getOwnConfig } from &#x27;@embroider/macros&#x27;;
 import { isBlank } from &#x27;@ember/utils&#x27;;
 import deprecateSubclassing from &#x27;ember-bootstrap/utils/deprecate-subclassing&#x27;;
 
@@ -197,6 +196,25 @@ export default class Navbar extends Component {
   fluid = true;
 
   /**
+   * BS5 only: Allows to override the container layout, see https://getbootstrap.com/docs/5.0/components/navbar/#containers.
+   * Allowed values: &#x60;&#x27;sm&#x27;&#x60;, &#x60;&#x27;md&#x27;&#x60;, &#x60;&#x27;lg&#x27;&#x60;, &#x60;&#x27;xl&#x27;&#x60;, &#x60;&#x27;xxl&#x27;&#x60;, &#x60;&#x27;fluid&#x27;&#x60;, see https://getbootstrap.com/docs/5.0/layout/containers/.
+   * By default it is &#x60;.container-fluid&#x60;, or &#x60;.container&#x60; if the &#x60;@fluid&#x60; argument is set to false.
+   *
+   * @property container
+   * @type string
+   * @public
+   */
+
+  @computed(&#x27;fluid&#x27;, &#x27;container&#x27;)
+  get containerClass() {
+    if (this.container) {
+      return &#x60;container-${this.container}&#x60;;
+    }
+
+    return this.fluid ? &#x27;container-fluid&#x27; : &#x27;container&#x27;;
+  }
+
+  /**
    * Specifies the position classes for the navbar, currently supporting none, &quot;fixed-top&quot;, &quot;fixed-bottom&quot;, and
    * either &quot;static-top&quot; (BS3) or &quot;sticky-top&quot; (BS4).
    * See the [bootstrap docs](http://getbootstrap.com/components/#navbar-fixed-top) for details.
@@ -212,16 +230,13 @@ export default class Navbar extends Component {
   @computed(&#x27;position&#x27;)
   get positionClass() {
     let position = this.position;
-    let validPositions = macroCondition(getOwnConfig().isBS3)
-      ? [&#x27;fixed-top&#x27;, &#x27;fixed-bottom&#x27;, &#x27;static-top&#x27;]
-      : [&#x27;fixed-top&#x27;, &#x27;fixed-bottom&#x27;, &#x27;sticky-top&#x27;];
-    let positionPrefix = macroCondition(getOwnConfig().isBS3) ? &#x27;navbar-&#x27; : &#x27;&#x27;;
+    let validPositions = [&#x27;fixed-top&#x27;, &#x27;fixed-bottom&#x27;, &#x27;sticky-top&#x27;];
 
     if (validPositions.indexOf(position) === -1) {
       return null;
     }
 
-    return &#x60;${positionPrefix}${position}&#x60;;
+    return position;
   }
 
   /**
@@ -231,23 +246,17 @@ export default class Navbar extends Component {
    *
    * @property type
    * @type String
-   * @default &#x27;default&#x27;
+   * @default &#x27;light&#x27;
    * @public
    */
   @defaultValue
-  type = &#x27;default&#x27;;
+  type = &#x27;light&#x27;;
 
   @computed(&#x27;type&#x27;)
   get typeClass() {
-    let type = this.type || &#x27;default&#x27;;
+    let type = this.type || &#x27;light&#x27;;
     assert(&#x27;The value of &#x60;type&#x60; must be a string&#x27;, typeof type === &#x27;string&#x27; &amp;&amp; type !== &#x27;&#x27;);
 
-    if (macroCondition(getOwnConfig().isNotBS3)) {
-      // &#x27;default&#x60; is not a valid type in BS4, but still accepted for compatibility purposes, and mapped to &#x60;light&#x27;
-      if (type === &#x27;default&#x27;) {
-        type = &#x27;light&#x27;;
-      }
-    }
     return &#x60;navbar-${type}&#x60;;
   }
 
@@ -362,26 +371,18 @@ export default class Navbar extends Component {
 
   @computed(&#x27;toggleBreakpoint&#x27;)
   get breakpointClass() {
-    if (macroCondition(getOwnConfig().isBS3)) {
-      return undefined;
-    } else {
-      let toggleBreakpoint = this.toggleBreakpoint;
+    let toggleBreakpoint = this.toggleBreakpoint;
 
-      if (isBlank(toggleBreakpoint)) {
-        return &#x27;navbar-expand&#x27;;
-      } else {
-        return &#x60;navbar-expand-${toggleBreakpoint}&#x60;;
-      }
+    if (isBlank(toggleBreakpoint)) {
+      return &#x27;navbar-expand&#x27;;
+    } else {
+      return &#x60;navbar-expand-${toggleBreakpoint}&#x60;;
     }
   }
 
   @computed(&#x27;backgroundColor&#x27;)
   get backgroundClass() {
-    if (macroCondition(getOwnConfig().isBS3)) {
-      return undefined;
-    } else {
-      return &#x60;bg-${this.backgroundColor}&#x60;;
-    }
+    return &#x60;bg-${this.backgroundColor}&#x60;;
   }
 
   /**
@@ -457,7 +458,6 @@ export default class Navbar extends Component {
             <li class="list-group-item list-group-item-private"><a href="../classes/Components.FormElementLayoutInlineCheckbox.html">Components.FormElementLayoutInlineCheckbox</a></li>
             <li class="list-group-item list-group-item-private"><a href="../classes/Components.FormElementLayoutVertical.html">Components.FormElementLayoutVertical</a></li>
             <li class="list-group-item list-group-item-private"><a href="../classes/Components.FormElementLayoutVerticalCheckbox.html">Components.FormElementLayoutVerticalCheckbox</a></li>
-            <li class="list-group-item list-group-item-public"><a href="../classes/Components.FormGroup.html">Components.FormGroup</a></li>
             <li class="list-group-item list-group-item-private"><a href="../classes/Components.LinkComponent.html">Components.LinkComponent</a></li>
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.Modal.html">Components.Modal</a></li>
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.ModalBody.html">Components.ModalBody</a></li>

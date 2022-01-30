@@ -64,7 +64,6 @@ import { computed } from &#x27;@ember/object&#x27;;
 import Component from &#x27;@ember/component&#x27;;
 import defaultValue from &#x27;ember-bootstrap/utils/default-decorator&#x27;;
 import typeClass from &#x27;ember-bootstrap/utils/cp/type-class&#x27;;
-import { macroCondition, getOwnConfig } from &#x27;@embroider/macros&#x27;;
 import deprecateSubclassing from &#x27;ember-bootstrap/utils/deprecate-subclassing&#x27;;
 
 /**
@@ -179,7 +178,7 @@ export default class ProgressBar extends Component {
   @defaultValue
   type = &#x27;default&#x27;;
 
-  @typeClass(macroCondition(getOwnConfig().isNotBS3) ? &#x27;bg&#x27; : &#x27;progress-bar&#x27;, &#x27;type&#x27;)
+  @typeClass(&#x27;bg&#x27;, &#x27;type&#x27;)
   typeClass;
 
   /**
@@ -267,7 +266,6 @@ export default class ProgressBar extends Component {
             <li class="list-group-item list-group-item-private"><a href="../classes/Components.FormElementLayoutInlineCheckbox.html">Components.FormElementLayoutInlineCheckbox</a></li>
             <li class="list-group-item list-group-item-private"><a href="../classes/Components.FormElementLayoutVertical.html">Components.FormElementLayoutVertical</a></li>
             <li class="list-group-item list-group-item-private"><a href="../classes/Components.FormElementLayoutVerticalCheckbox.html">Components.FormElementLayoutVerticalCheckbox</a></li>
-            <li class="list-group-item list-group-item-public"><a href="../classes/Components.FormGroup.html">Components.FormGroup</a></li>
             <li class="list-group-item list-group-item-private"><a href="../classes/Components.LinkComponent.html">Components.LinkComponent</a></li>
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.Modal.html">Components.Modal</a></li>
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.ModalBody.html">Components.ModalBody</a></li>

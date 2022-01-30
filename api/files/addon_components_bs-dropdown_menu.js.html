@@ -60,7 +60,7 @@
 <div class="file">
     <pre class="prettyprint linenums">
 import { tagName } from &#x27;@ember-decorators/component&#x27;;
-import { computed, action } from &#x27;@ember/object&#x27;;
+import { action, computed } from &#x27;@ember/object&#x27;;
 import Component from &#x27;@ember/component&#x27;;
 import { next } from &#x27;@ember/runloop&#x27;;
 import { getDestinationElement } from &#x27;ember-bootstrap/utils/dom&#x27;;
@@ -115,13 +115,6 @@ export default class DropdownMenu extends Component {
    */
   @defaultValue
   direction = &#x27;down&#x27;;
-
-  /**
-   * @property inNav
-   * @type {boolean}
-   * @private
-   */
-  inNav = false;
 
   /**
    * By default the menu is rendered in the same place as the dropdown. If you experience clipping
@@ -216,16 +209,17 @@ export default class DropdownMenu extends Component {
     }
   }
 
-  @computed(&#x27;inNav&#x27;, &#x27;flip&#x27;)
-  get popperModifiers() {
+  @computed(&#x27;flip&#x27;, &#x27;popperPlacement&#x27;)
+  get popperOptions() {
     return {
-      // @todo add offset config
-      applyStyle: {
-        enabled: !this.inNav,
-      },
-      flip: {
-        enabled: this.flip,
-      },
+      placement: this.popperPlacement,
+      onFirstUpdate: () =&gt; this.setFocus(),
+      modifiers: [
+        {
+          name: &#x27;flip&#x27;,
+          enabled: this.flip,
+        },
+      ],
     };
   }
 
@@ -296,7 +290,6 @@ export default class DropdownMenu extends Component {
             <li class="list-group-item list-group-item-private"><a href="../classes/Components.FormElementLayoutInlineCheckbox.html">Components.FormElementLayoutInlineCheckbox</a></li>
             <li class="list-group-item list-group-item-private"><a href="../classes/Components.FormElementLayoutVertical.html">Components.FormElementLayoutVertical</a></li>
             <li class="list-group-item list-group-item-private"><a href="../classes/Components.FormElementLayoutVerticalCheckbox.html">Components.FormElementLayoutVerticalCheckbox</a></li>
-            <li class="list-group-item list-group-item-public"><a href="../classes/Components.FormGroup.html">Components.FormGroup</a></li>
             <li class="list-group-item list-group-item-private"><a href="../classes/Components.LinkComponent.html">Components.LinkComponent</a></li>
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.Modal.html">Components.Modal</a></li>
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.ModalBody.html">Components.ModalBody</a></li>

@@ -61,7 +61,6 @@
     <pre class="prettyprint linenums">
 import Component from &#x27;@glimmer/component&#x27;;
 import typeClass from &#x27;ember-bootstrap/utils/cp/type-class&#x27;;
-import { getOwnConfig, macroCondition } from &#x27;@embroider/macros&#x27;;
 import { guidFor } from &#x27;@ember/object/internals&#x27;;
 import deprecateSubclassing from &#x27;ember-bootstrap/utils/deprecate-subclassing&#x27;;
 import arg from &#x27;../../utils/decorators/arg&#x27;;
@@ -141,7 +140,7 @@ export default class AccordionItem extends Component {
   @arg
   type = &#x27;default&#x27;;
 
-  @typeClass(macroCondition(getOwnConfig().isNotBS3) ? &#x27;bg&#x27; : &#x27;panel&#x27;, &#x27;type&#x27;)
+  @typeClass(&#x27;bg&#x27;, &#x27;type&#x27;)
   typeClass;
 
   /**
@@ -205,7 +204,6 @@ export default class AccordionItem extends Component {
             <li class="list-group-item list-group-item-private"><a href="../classes/Components.FormElementLayoutInlineCheckbox.html">Components.FormElementLayoutInlineCheckbox</a></li>
             <li class="list-group-item list-group-item-private"><a href="../classes/Components.FormElementLayoutVertical.html">Components.FormElementLayoutVertical</a></li>
             <li class="list-group-item list-group-item-private"><a href="../classes/Components.FormElementLayoutVerticalCheckbox.html">Components.FormElementLayoutVerticalCheckbox</a></li>
-            <li class="list-group-item list-group-item-public"><a href="../classes/Components.FormGroup.html">Components.FormGroup</a></li>
             <li class="list-group-item list-group-item-private"><a href="../classes/Components.LinkComponent.html">Components.LinkComponent</a></li>
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.Modal.html">Components.Modal</a></li>
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.ModalBody.html">Components.ModalBody</a></li>

@@ -59,15 +59,13 @@
 
 <div class="file">
     <pre class="prettyprint linenums">
+import Component from &#x27;@glimmer/component&#x27;;
 import { tracked } from &#x27;@glimmer/tracking&#x27;;
 import { action, get } from &#x27;@ember/object&#x27;;
-import { assert, warn } from &#x27;@ember/debug&#x27;;
-import { DEBUG } from &#x27;@glimmer/env&#x27;;
+import { assert } from &#x27;@ember/debug&#x27;;
 import { isBlank, isPresent, typeOf } from &#x27;@ember/utils&#x27;;
 import { A, isArray } from &#x27;@ember/array&#x27;;
 import { getOwner } from &#x27;@ember/application&#x27;;
-import FormGroup from &#x27;ember-bootstrap/components/bs-form/group&#x27;;
-import { getOwnConfig, macroCondition } from &#x27;@embroider/macros&#x27;;
 import { guidFor } from &#x27;@ember/object/internals&#x27;;
 import { ref } from &#x27;ember-ref-bucket&#x27;;
 import ControlInput from &#x27;./element/control/input&#x27;;
@@ -137,7 +135,7 @@ import { dedupeTracked } from &#x27;tracked-toolbox&#x27;;
 
   &#x60;&#x60;&#x60;hbs
   &lt;BsForm @model={{this}} @onSubmit={{action &quot;submit&quot;}} as |form|&gt;
-    &lt;form.element @label=&quot;Select-2&quot; @property=&quot;gender&quot; @useIcons={{false}} as |el|&gt;
+    &lt;form.element @label=&quot;Select-2&quot; @property=&quot;gender&quot; as |el|&gt;
       &lt;PikadayInput @value={{el.value}} @onSelection={{action el.setValue}} id={{el.id}} /&gt;
     &lt;/form.element&gt;
   &lt;/BsForm&gt;
@@ -149,9 +147,6 @@ import { dedupeTracked } from &#x27;tracked-toolbox&#x27;;
   * &#x60;value&#x60;: the value of the form element
   * &#x60;setValue&#x60;: function to change the value of the form element
   * &#x60;validation&#x60;: the validation state of the element, &#x60;null&#x60; if no validation is to be shown, otherwise &#x27;success&#x27;, &#x27;error&#x27; or &#x27;warning&#x27;
-
-  If your custom control does not render an input element, you should set &#x60;useIcons&#x60; to &#x60;false&#x60; since bootstrap only supports
-  feedback icons with textual &#x60;&lt;input class=&quot;form-control&quot;&gt;&#x60; elements.
 
   If you just want to customize the existing control component, you can use the aforementioned yielded &#x60;control&#x60; component
   to customize that existing component:
@@ -262,7 +257,7 @@ import { dedupeTracked } from &#x27;tracked-toolbox&#x27;;
   @extends Components.FormGroup
   @public
 */
-export default class FormElement extends FormGroup {
+export default class FormElement extends Component {
   /**
    * @property _element
    * @type null | HTMLElement
@@ -680,9 +675,7 @@ export default class FormElement extends FormGroup {
    * @public
    */
   @arg
-  doNotShowValidationForEventTargets = macroCondition(getOwnConfig().isBS3)
-    ? [&#x27;.input-group-addon&#x27;, &#x27;.input-group-btn&#x27;]
-    : [&#x27;.input-group-append&#x27;, &#x27;.input-group-prepend&#x27;];
+  doNotShowValidationForEventTargets = [&#x27;.input-group-append&#x27;, &#x27;.input-group-prepend&#x27;];
 
   /**
    * The validation (&quot;error&quot; (BS3)/&quot;danger&quot; (BS4), &quot;warning&quot;, or &quot;success&quot;) or null if no validation is to be shown. Automatically computed from the
@@ -694,36 +687,31 @@ export default class FormElement extends FormGroup {
    * @private
    */
   get validation() {
-    if (!this.showValidation || !this.hasValidator || this.isValidating || this.args._disabled) {
-      return null;
-    } else if (this.showModelValidation) {
-      /* The display of model validation messages has been triggered */
-      return this.hasErrors || this.hasCustomError
-        ? &#x27;error&#x27;
-        : this.hasWarnings || this.hasCustomWarning
-        ? &#x27;warning&#x27;
-        : &#x27;success&#x27;;
-    } else {
-      /* If there are custom errors or warnings these should always be shown */
-      return this.hasCustomError ? &#x27;error&#x27; : &#x27;warning&#x27;;
-    }
-  }
+    const shouldShowValidationState =
+      this.showModelValidation &amp;&amp; this.hasValidator &amp;&amp; !this.isValidating &amp;&amp; !this.args._disabled;
 
-  /**
-   * True for text field &#x60;controlType&#x60;s
-   *
-   * @property useIcons
-   * @type boolean
-   * @public
-   */
-  get useIcons() {
-    let { controlType } = this;
-    return (
-      !this.customControlComponent &amp;&amp;
-      controlType !== &#x27;textarea&#x27; &amp;&amp;
-      controlType !== &#x27;checkbox&#x27; &amp;&amp;
-      controlType !== &#x27;radio&#x27;
-    );
+    if (
+      /* custom errors should be always shown */
+      this.hasCustomError ||
+      /* validation error should be shown in preference to warnings */
+      (shouldShowValidationState &amp;&amp; this.hasErrors)
+    ) {
+      return &#x27;error&#x27;;
+    }
+
+    if (
+      /* custom warning should be always shown unless there is a validation error */
+      this.hasCustomWarning ||
+      (shouldShowValidationState &amp;&amp; this.hasWarnings)
+    ) {
+      return &#x27;warning&#x27;;
+    }
+
+    if (shouldShowValidationState) {
+      return &#x27;success&#x27;;
+    }
+
+    return null;
   }
 
   /**
@@ -860,111 +848,6 @@ export default class FormElement extends FormGroup {
     if (!isBlank(this.args.property)) {
       this.setupValidations?.();
     }
-
-    // deprecate arguments used for attribute bindings only
-    if (DEBUG) {
-      [
-        [&#x27;accept&#x27;, &#x27;image/png&#x27;],
-        [&#x27;autocapitalize&#x27;, &#x27;words&#x27;],
-        [&#x27;autocomplete&#x27;, &#x27;on&#x27;],
-        [&#x27;autocorrect&#x27;, &#x27;off&#x27;],
-        [&#x27;autofocus&#x27;, false],
-        [&#x27;autosave&#x27;, &#x27;someuniquevalue&#x27;],
-        [&#x27;cols&#x27;, &#x27;10&#x27;],
-        [&#x27;controlSize:size&#x27;, &#x27;10&#x27;],
-        [&#x27;disabled&#x27;, true],
-        [&#x27;form&#x27;, &#x27;myform&#x27;],
-        [&#x27;inputmode&#x27;, &#x27;tel&#x27;],
-        [&#x27;max&#x27;, &#x27;5&#x27;],
-        [&#x27;maxlength&#x27;, &#x27;5&#x27;],
-        [&#x27;min&#x27;, &#x27;5&#x27;],
-        [&#x27;minlength&#x27;, &#x27;5&#x27;],
-        [&#x27;multiple&#x27;, true],
-        [&#x27;name&#x27;, &#x27;foo&#x27;],
-        [&#x27;pattern&#x27;, &#x27;^[0-9]{5}$&#x27;],
-        [&#x27;placeholder&#x27;, &#x27;foo&#x27;],
-        [&#x27;required&#x27;, true],
-        [&#x27;readonly&#x27;, true],
-        [&#x27;rows&#x27;, &#x27;10&#x27;],
-        [&#x27;spellcheck&#x27;, true],
-        [&#x27;step&#x27;, &#x27;2&#x27;],
-        [&#x27;tabindex&#x27;, &#x27;-1&#x27;],
-        [&#x27;title&#x27;, &#x27;foo&#x27;],
-        [&#x27;wrap&#x27;, &#x27;hard&#x27;],
-      ].forEach(([mapping, value]) =&gt; {
-        let argument = mapping.split(&#x27;:&#x27;)[0];
-        let attribute = mapping.includes(&#x27;:&#x27;) ? mapping.split(&#x27;:&#x27;)[1] : argument;
-        let warningMessage =
-          &#x60;Argument ${argument} of &lt;element&gt; component yielded by &lt;BsForm&gt; has been removed. &#x60; +
-          &#x60;Its only purpose was setting the HTML attribute ${attribute} of the control element. &#x60; +
-          &#x60;You should use angle bracket  component invocation syntax instead:\n&#x60; +
-          &#x60;Before:\n&#x60; +
-          &#x60;  {{#bs-form as |form|}}\n&#x60; +
-          &#x60;    {{form.element ${attribute}=${typeof value === &#x27;string&#x27; ? &#x60;&quot;${value}&quot;&#x60; : value}}}\n&#x60; +
-          &#x60;  {{/bs-form}}\n&#x60; +
-          &#x60;  &lt;BsForm as |form|&gt;\n&#x60; +
-          &#x60;    &lt;form.element as |el|&gt;\n&#x60; +
-          &#x60;      &lt;el.control @${attribute}=${typeof value === &#x27;string&#x27; ? &#x60;&quot;${value}&quot;&#x60; : &#x60;{{${value}}}&#x60;} /&gt;\n&#x60; +
-          &#x60;    &lt;/form.element&gt;\n&#x60; +
-          &#x60;  &lt;/BsForm&gt;\n&#x60; +
-          &#x60;After:\n&#x60; +
-          &#x60;  &lt;BsForm as |form|&gt;\n&#x60; +
-          &#x60;    &lt;form.element as |el|&gt;\n&#x60; +
-          &#x60;      &lt;el.control ${
-            typeof value === &#x27;boolean&#x27; ? (value ? attribute : &#x27;&#x27;) : &#x60;${attribute}=&quot;${value}&quot;&#x60;
-          } /&gt;\n&#x60; +
-          &#x60;    &lt;/form.element&gt;\n&#x60; +
-          &#x60;  &lt;/BsForm&gt;\n&#x60; +
-          &#x60;A codemod is available to help with the required migration. See https://github.com/kaliber5/ember-bootstrap-codemods/blob/master/transforms/deprecated-attribute-arguments/README.md&#x60;;
-
-        warn(warningMessage, !Object.keys(this.args).includes(argument), {
-          id: &#x60;ember-bootstrap.removed-argument.form-element#${argument}&#x60;,
-        });
-      });
-    }
-  }
-
-  /*
-   * adjust feedback icon position
-   *
-   * Bootstrap documentation:
-   *  Manual positioning of feedback icons is required for [...] input groups
-   *  with an add-on on the right. [...] For input groups, adjust the right
-   *  value to an appropriate pixel value depending on the width of your addon.
-   */
-  @action
-  adjustFeedbackIcons(el) {
-    if (macroCondition(getOwnConfig().isBS3)) {
-      let feedbackIcon;
-      // validation state icons are only shown if form element has feedback
-      if (
-        !this.isDestroying &amp;&amp;
-        this.hasFeedback &amp;&amp;
-        // and form group element has
-        // an input-group
-        el.querySelector(&#x27;.input-group&#x27;) &amp;&amp;
-        // an addon or button on right side
-        el.querySelector(&#x27;.input-group input + .input-group-addon, .input-group input + .input-group-btn&#x27;) &amp;&amp;
-        // an icon showing validation state
-        (feedbackIcon = el.querySelector(&#x27;.form-control-feedback&#x27;))
-      ) {
-        // clear existing adjustment
-        feedbackIcon.style.right = &#x27;&#x27;;
-
-        let defaultPosition = 0;
-        let match = getComputedStyle(feedbackIcon).right.match(/^(\d+)px$/);
-        if (match) {
-          defaultPosition = parseInt(match[1]);
-        }
-        // Bootstrap documentation:
-        //  We do not support multiple add-ons (.input-group-addon or .input-group-btn) on a single side.
-        // therefore we could rely on having only one input-group-addon or input-group-btn
-        let inputGroupWidth = el.querySelector(&#x27;input + .input-group-addon, input + .input-group-btn&#x27;).offsetWidth;
-        let adjustedPosition = defaultPosition + inputGroupWidth;
-
-        feedbackIcon.style.right = &#x60;${adjustedPosition}px&#x60;;
-      }
-    }
   }
 
   @action
@@ -1023,7 +906,6 @@ export default class FormElement extends FormGroup {
             <li class="list-group-item list-group-item-private"><a href="../classes/Components.FormElementLayoutInlineCheckbox.html">Components.FormElementLayoutInlineCheckbox</a></li>
             <li class="list-group-item list-group-item-private"><a href="../classes/Components.FormElementLayoutVertical.html">Components.FormElementLayoutVertical</a></li>
             <li class="list-group-item list-group-item-private"><a href="../classes/Components.FormElementLayoutVerticalCheckbox.html">Components.FormElementLayoutVerticalCheckbox</a></li>
-            <li class="list-group-item list-group-item-public"><a href="../classes/Components.FormGroup.html">Components.FormGroup</a></li>
             <li class="list-group-item list-group-item-private"><a href="../classes/Components.LinkComponent.html">Components.LinkComponent</a></li>
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.Modal.html">Components.Modal</a></li>
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.ModalBody.html">Components.ModalBody</a></li>

@@ -99,7 +99,7 @@ of the yielded control component:</p>
 by invoking the component with a block template. Use whatever control you might want, for example a <code>&lt;PikadayInput&gt;</code>
 component (from the <a href="https://github.com/adopted-ember-addons/ember-pikaday">ember-pikaday addon</a>):</p>
 <pre class="code prettyprint"><code class="language-hbs">&lt;BsForm @model={{this}} @onSubmit={{action "submit"}} as |form|&gt;
-  &lt;form.element @label="Select-2" @property="gender" @useIcons={{false}} as |el|&gt;
+  &lt;form.element @label="Select-2" @property="gender" as |el|&gt;
     &lt;PikadayInput @value={{el.value}} @onSelection={{action el.setValue}} id={{el.id}} /&gt;
   &lt;/form.element&gt;
 &lt;/BsForm&gt;
@@ -112,8 +112,6 @@ component (from the <a href="https://github.com/adopted-ember-addons/ember-pikad
 <li><code>setValue</code>: function to change the value of the form element</li>
 <li><code>validation</code>: the validation state of the element, <code>null</code> if no validation is to be shown, otherwise 'success', 'error' or 'warning'</li>
 </ul>
-<p>If your custom control does not render an input element, you should set <code>useIcons</code> to <code>false</code> since bootstrap only supports
-feedback icons with textual <code>&lt;input class="form-control"&gt;</code> elements.</p>
 <p>If you just want to customize the existing control component, you can use the aforementioned yielded <code>control</code> component
 to customize that existing component:</p>
 <pre class="code prettyprint"><code class="language-hbs">&lt;BsForm @model={{this}} @onSubmit={{action "submit"}} as |form|&gt;
@@ -210,13 +208,13 @@ you can pass them to the yielded <code>control</code> component:</p>
           Extends
         </dt>
         <dd class="col-sm-9">
-          <a href="../classes/Components.FormGroup.html" class="crosslink">Components.FormGroup</a>
+          Components.FormGroup
         </dd>
         <dt class="col-sm-3">
           Defined in
         </dt>
         <dd class="col-sm-9">
-          <a href="../files/addon_components_bs-form_element.js.html#l20"><code>addon&#x2F;components&#x2F;bs-form&#x2F;element.js:20</code></a>
+          <a href="../files/addon_components_bs-form_element.js.html#l18"><code>addon&#x2F;components&#x2F;bs-form&#x2F;element.js:18</code></a>
         </dd>
 
     </dl>
@@ -306,11 +304,6 @@ you can pass them to the yielded <code>control</code> component:</p>
                      data-tablink="ariaDescribedBy">ariaDescribedBy</a>
 
                 </li>
-                <li class="index-item property private inherited">
-                  <a href="#" data-tabid="#properties" data-anchor="#property_classTypePrefix"
-                     data-tablink="classTypePrefix">classTypePrefix</a>
-
-                </li>
                 <li class="index-item property private">
                   <a href="#" data-tabid="#properties" data-anchor="#property_controlComponent"
                      data-tablink="controlComponent">controlComponent</a>
@@ -334,11 +327,6 @@ you can pass them to the yielded <code>control</code> component:</p>
                 <li class="index-item property public">
                   <a href="#" data-tabid="#properties" data-anchor="#property_doNotShowValidationForEventTargets"
                      data-tablink="doNotShowValidationForEventTargets">doNotShowValidationForEventTargets</a>
-
-                </li>
-                <li class="index-item property public inherited">
-                  <a href="#" data-tabid="#properties" data-anchor="#property_errorIcon"
-                     data-tablink="errorIcon">errorIcon</a>
 
                 </li>
                 <li class="index-item property protected">
@@ -381,21 +369,6 @@ you can pass them to the yielded <code>control</code> component:</p>
                      data-tablink="hasErrors">hasErrors</a>
 
                 </li>
-                <li class="index-item property private inherited">
-                  <a href="#" data-tabid="#properties" data-anchor="#property_hasFeedback"
-                     data-tablink="hasFeedback">hasFeedback</a>
-
-                </li>
-                <li class="index-item property private inherited">
-                  <a href="#" data-tabid="#properties" data-anchor="#property_hasIconForValidationState"
-                     data-tablink="hasIconForValidationState">hasIconForValidationState</a>
-
-                </li>
-                <li class="index-item property private inherited">
-                  <a href="#" data-tabid="#properties" data-anchor="#property_hasValidation"
-                     data-tablink="hasValidation">hasValidation</a>
-
-                </li>
                 <li class="index-item property private">
                   <a href="#" data-tabid="#properties" data-anchor="#property_hasValidationMessages"
                      data-tablink="hasValidationMessages">hasValidationMessages</a>
@@ -424,16 +397,6 @@ you can pass them to the yielded <code>control</code> component:</p>
                 <li class="index-item property public">
                   <a href="#" data-tabid="#properties" data-anchor="#property_horizontalLabelGridClass"
                      data-tablink="horizontalLabelGridClass">horizontalLabelGridClass</a>
-
-                </li>
-                <li class="index-item property private inherited">
-                  <a href="#" data-tabid="#properties" data-anchor="#property_iconName"
-                     data-tablink="iconName">iconName</a>
-
-                </li>
-                <li class="index-item property public inherited">
-                  <a href="#" data-tabid="#properties" data-anchor="#property_infoIcon"
-                     data-tablink="infoIcon">infoIcon</a>
 
                 </li>
                 <li class="index-item property public">
@@ -521,24 +484,9 @@ you can pass them to the yielded <code>control</code> component:</p>
                      data-tablink="size">size</a>
 
                 </li>
-                <li class="index-item property public inherited">
-                  <a href="#" data-tabid="#properties" data-anchor="#property_successIcon"
-                     data-tablink="successIcon">successIcon</a>
-
-                </li>
-                <li class="index-item property public inherited">
-                  <a href="#" data-tabid="#properties" data-anchor="#property_useIcons"
-                     data-tablink="useIcons">useIcons</a>
-
-                </li>
-                <li class="index-item property private inherited">
+                <li class="index-item property private">
                   <a href="#" data-tabid="#properties" data-anchor="#property_validation"
                      data-tablink="validation">validation</a>
-
-                </li>
-                <li class="index-item property private inherited">
-                  <a href="#" data-tabid="#properties" data-anchor="#property_validationClass"
-                     data-tablink="validationClass">validationClass</a>
 
                 </li>
                 <li class="index-item property private">
@@ -549,11 +497,6 @@ you can pass them to the yielded <code>control</code> component:</p>
                 <li class="index-item property public">
                   <a href="#" data-tabid="#properties" data-anchor="#property_value"
                      data-tablink="value">value</a>
-
-                </li>
-                <li class="index-item property public inherited">
-                  <a href="#" data-tabid="#properties" data-anchor="#property_warningIcon"
-                     data-tablink="warningIcon">warningIcon</a>
 
                 </li>
                 <li class="index-item property protected">
@@ -598,7 +541,7 @@ you can pass them to the yielded <code>control</code> component:</p>
                 <div class="meta">
                             <p>
                             Defined in
-                    <a href="../files/addon_components_bs-form_element.js.html#l771"><code>addon&#x2F;components&#x2F;bs-form&#x2F;element.js:771</code></a>
+                    <a href="../files/addon_components_bs-form_element.js.html#l759"><code>addon&#x2F;components&#x2F;bs-form&#x2F;element.js:759</code></a>
                     </p>
             
             
@@ -630,7 +573,7 @@ you can pass them to the yielded <code>control</code> component:</p>
                 <div class="meta">
                             <p>
                             Defined in
-                    <a href="../files/addon_components_bs-form_element.js.html#l581"><code>addon&#x2F;components&#x2F;bs-form&#x2F;element.js:581</code></a>
+                    <a href="../files/addon_components_bs-form_element.js.html#l576"><code>addon&#x2F;components&#x2F;bs-form&#x2F;element.js:576</code></a>
                     </p>
             
             
@@ -677,7 +620,7 @@ you can pass them to the yielded <code>control</code> component:</p>
               <div class="meta">
                   <p>
                       Defined in
-                  <a href="../files/addon_components_bs-form_element.js.html#l205"><code>addon&#x2F;components&#x2F;bs-form&#x2F;element.js:205</code></a>
+                  <a href="../files/addon_components_bs-form_element.js.html#l200"><code>addon&#x2F;components&#x2F;bs-form&#x2F;element.js:200</code></a>
               </p>
             
             
@@ -705,7 +648,7 @@ you can pass them to the yielded <code>control</code> component:</p>
               <div class="meta">
                   <p>
                       Defined in
-                  <a href="../files/addon_components_bs-form_element.js.html#l556"><code>addon&#x2F;components&#x2F;bs-form&#x2F;element.js:556</code></a>
+                  <a href="../files/addon_components_bs-form_element.js.html#l551"><code>addon&#x2F;components&#x2F;bs-form&#x2F;element.js:551</code></a>
               </p>
             
             
@@ -733,7 +676,7 @@ you can pass them to the yielded <code>control</code> component:</p>
               <div class="meta">
                   <p>
                       Defined in
-                  <a href="../files/addon_components_bs-form_element.js.html#l705"><code>addon&#x2F;components&#x2F;bs-form&#x2F;element.js:705</code></a>
+                  <a href="../files/addon_components_bs-form_element.js.html#l693"><code>addon&#x2F;components&#x2F;bs-form&#x2F;element.js:693</code></a>
               </p>
             
             
@@ -742,35 +685,6 @@ you can pass them to the yielded <code>control</code> component:</p>
               <div class="description">
                 <p>ID of the helpText, used for aria-describedby attribute of the control element</p>
             
-              </div>
-            
-            
-            
-            
-            </div>
-            <div id="property_classTypePrefix"
-                 class="property item private inherited">
-              <h3 class="name">classTypePrefix
-                <span class="badge badge-secondary small">String</span>
-                  <span class="badge badge-private small">private</span>
-            
-            
-            
-            
-              </h3>
-            
-              <div class="meta">
-                  <p><strong>Default:</strong> &#x27;form-group&#x27; (BS3) or &#x27;form-control&#x27; (BS4)</p>
-                  <p>Inherited from
-                    <a href="../classes/Components.FormGroup.html#property_classTypePrefix">Components.FormGroup</a>:
-                  <a href="../files/addon_components_bs-form_group.js.html#l29"><code>addon&#x2F;components&#x2F;bs-form&#x2F;group.js:29</code></a>
-              </p>
-            
-            
-              </div>
-            
-              <div class="description">
-                
               </div>
             
             
@@ -791,7 +705,7 @@ you can pass them to the yielded <code>control</code> component:</p>
               <div class="meta">
                   <p>
                       Defined in
-                  <a href="../files/addon_components_bs-form_element.js.html#l722"><code>addon&#x2F;components&#x2F;bs-form&#x2F;element.js:722</code></a>
+                  <a href="../files/addon_components_bs-form_element.js.html#l710"><code>addon&#x2F;components&#x2F;bs-form&#x2F;element.js:710</code></a>
               </p>
             
             
@@ -820,7 +734,7 @@ you can pass them to the yielded <code>control</code> component:</p>
                   <p><strong>Default:</strong> &#x27;text&#x27;</p>
                   <p>
                       Defined in
-                  <a href="../files/addon_components_bs-form_element.js.html#l233"><code>addon&#x2F;components&#x2F;bs-form&#x2F;element.js:233</code></a>
+                  <a href="../files/addon_components_bs-form_element.js.html#l228"><code>addon&#x2F;components&#x2F;bs-form&#x2F;element.js:228</code></a>
               </p>
             
             
@@ -859,7 +773,7 @@ you can pass them to the yielded <code>control</code> component:</p>
               <div class="meta">
                   <p>
                       Defined in
-                  <a href="../files/addon_components_bs-form_element.js.html#l382"><code>addon&#x2F;components&#x2F;bs-form&#x2F;element.js:382</code></a>
+                  <a href="../files/addon_components_bs-form_element.js.html#l377"><code>addon&#x2F;components&#x2F;bs-form&#x2F;element.js:377</code></a>
               </p>
             
             
@@ -889,7 +803,7 @@ you can pass them to the yielded <code>control</code> component:</p>
               <div class="meta">
                   <p>
                       Defined in
-                  <a href="../files/addon_components_bs-form_element.js.html#l401"><code>addon&#x2F;components&#x2F;bs-form&#x2F;element.js:401</code></a>
+                  <a href="../files/addon_components_bs-form_element.js.html#l396"><code>addon&#x2F;components&#x2F;bs-form&#x2F;element.js:396</code></a>
               </p>
             
             
@@ -920,7 +834,7 @@ you can pass them to the yielded <code>control</code> component:</p>
               <div class="meta">
                   <p>
                       Defined in
-                  <a href="../files/addon_components_bs-form_element.js.html#l606"><code>addon&#x2F;components&#x2F;bs-form&#x2F;element.js:606</code></a>
+                  <a href="../files/addon_components_bs-form_element.js.html#l601"><code>addon&#x2F;components&#x2F;bs-form&#x2F;element.js:601</code></a>
               </p>
             
             
@@ -934,46 +848,6 @@ you can pass them to the yielded <code>control</code> component:</p>
             <p>If <code>null</code> or an empty array is passed validation errors are shown for all events regardless
             of event target.</p>
             
-              </div>
-            
-            
-            
-            
-            </div>
-            <div id="property_errorIcon"
-                 class="property item public inherited">
-              <h3 class="name">errorIcon
-                <span class="badge badge-secondary small">string</span>
-                  <span class="badge badge-public small">public</span>
-            
-            
-            
-            
-              </h3>
-            
-              <div class="meta">
-                  <p>Inherited from
-                    <a href="../classes/Components.FormGroup.html#property_errorIcon">Components.FormGroup</a>:
-                  <a href="../files/addon_components_bs-form_group.js.html#l109"><code>addon&#x2F;components&#x2F;bs-form&#x2F;group.js:109</code></a>
-              </p>
-            
-            
-              </div>
-            
-              <div class="description">
-                [BS3 only] The icon classes to be used for a feedback icon in a "error" validation state.
-            Defaults to the usual glyphicon classes. This is ignored, and no feedback icon is
-            rendered if <code>useIcons</code> is false.
-            
-            You can change this globally by setting the <code>formValidationErrorIcon</code> property of
-            the ember-bootstrap configuration in your config/environment.js file. If your are
-            using FontAwesome for example:
-            
-            <code>&#x60;</code>js
-            ENV['ember-bootstrap'] = {
-              formValidationErrorIcon: 'fas fa-times'
-            }
-            <code>&#x60;</code>
               </div>
             
             
@@ -994,7 +868,7 @@ you can pass them to the yielded <code>control</code> component:</p>
               <div class="meta">
                   <p>
                       Defined in
-                  <a href="../files/addon_components_bs-form_element.js.html#l338"><code>addon&#x2F;components&#x2F;bs-form&#x2F;element.js:338</code></a>
+                  <a href="../files/addon_components_bs-form_element.js.html#l333"><code>addon&#x2F;components&#x2F;bs-form&#x2F;element.js:333</code></a>
               </p>
             
             
@@ -1023,7 +897,7 @@ you can pass them to the yielded <code>control</code> component:</p>
               <div class="meta">
                   <p>
                       Defined in
-                  <a href="../files/addon_components_bs-form_element.js.html#l747"><code>addon&#x2F;components&#x2F;bs-form&#x2F;element.js:747</code></a>
+                  <a href="../files/addon_components_bs-form_element.js.html#l735"><code>addon&#x2F;components&#x2F;bs-form&#x2F;element.js:735</code></a>
               </p>
             
             
@@ -1051,7 +925,7 @@ you can pass them to the yielded <code>control</code> component:</p>
               <div class="meta">
                   <p>
                       Defined in
-                  <a href="../files/addon_components_bs-form_element.js.html#l753"><code>addon&#x2F;components&#x2F;bs-form&#x2F;element.js:753</code></a>
+                  <a href="../files/addon_components_bs-form_element.js.html#l741"><code>addon&#x2F;components&#x2F;bs-form&#x2F;element.js:741</code></a>
               </p>
             
             
@@ -1079,7 +953,7 @@ you can pass them to the yielded <code>control</code> component:</p>
               <div class="meta">
                   <p>
                       Defined in
-                  <a href="../files/addon_components_bs-form_element.js.html#l694"><code>addon&#x2F;components&#x2F;bs-form&#x2F;element.js:694</code></a>
+                  <a href="../files/addon_components_bs-form_element.js.html#l682"><code>addon&#x2F;components&#x2F;bs-form&#x2F;element.js:682</code></a>
               </p>
             
             
@@ -1109,7 +983,7 @@ you can pass them to the yielded <code>control</code> component:</p>
                   <p><strong>Default:</strong> &#x27;vertical&#x27;</p>
                   <p>
                       Defined in
-                  <a href="../files/addon_components_bs-form_element.js.html#l668"><code>addon&#x2F;components&#x2F;bs-form&#x2F;element.js:668</code></a>
+                  <a href="../files/addon_components_bs-form_element.js.html#l656"><code>addon&#x2F;components&#x2F;bs-form&#x2F;element.js:656</code></a>
               </p>
             
             
@@ -1144,7 +1018,7 @@ you can pass them to the yielded <code>control</code> component:</p>
               <div class="meta">
                   <p>
                       Defined in
-                  <a href="../files/addon_components_bs-form_element.js.html#l391"><code>addon&#x2F;components&#x2F;bs-form&#x2F;element.js:391</code></a>
+                  <a href="../files/addon_components_bs-form_element.js.html#l386"><code>addon&#x2F;components&#x2F;bs-form&#x2F;element.js:386</code></a>
               </p>
             
             
@@ -1172,7 +1046,7 @@ you can pass them to the yielded <code>control</code> component:</p>
               <div class="meta">
                   <p>
                       Defined in
-                  <a href="../files/addon_components_bs-form_element.js.html#l411"><code>addon&#x2F;components&#x2F;bs-form&#x2F;element.js:411</code></a>
+                  <a href="../files/addon_components_bs-form_element.js.html#l406"><code>addon&#x2F;components&#x2F;bs-form&#x2F;element.js:406</code></a>
               </p>
             
             
@@ -1200,7 +1074,7 @@ you can pass them to the yielded <code>control</code> component:</p>
               <div class="meta">
                   <p>
                       Defined in
-                  <a href="../files/addon_components_bs-form_element.js.html#l350"><code>addon&#x2F;components&#x2F;bs-form&#x2F;element.js:350</code></a>
+                  <a href="../files/addon_components_bs-form_element.js.html#l345"><code>addon&#x2F;components&#x2F;bs-form&#x2F;element.js:345</code></a>
               </p>
             
             
@@ -1208,90 +1082,6 @@ you can pass them to the yielded <code>control</code> component:</p>
             
               <div class="description">
                 
-              </div>
-            
-            
-            
-            
-            </div>
-            <div id="property_hasFeedback"
-                 class="property item private inherited">
-              <h3 class="name">hasFeedback
-                <span class="badge badge-secondary small">boolean</span>
-                  <span class="badge badge-private small">private</span>
-            
-            
-            
-            
-              </h3>
-            
-              <div class="meta">
-                  <p>Inherited from
-                    <a href="../classes/Components.FormGroup.html#property_hasFeedback">Components.FormGroup</a>:
-                  <a href="../files/addon_components_bs-form_group.js.html#l74"><code>addon&#x2F;components&#x2F;bs-form&#x2F;group.js:74</code></a>
-              </p>
-            
-            
-              </div>
-            
-              <div class="description">
-                [BS3 only] Computed property which is true if the form group is showing a validation icon
-              </div>
-            
-            
-            
-            
-            </div>
-            <div id="property_hasIconForValidationState"
-                 class="property item private inherited">
-              <h3 class="name">hasIconForValidationState
-                <span class="badge badge-secondary small">boolean</span>
-                  <span class="badge badge-private small">private</span>
-            
-            
-            
-            
-              </h3>
-            
-              <div class="meta">
-                  <p>Inherited from
-                    <a href="../classes/Components.FormGroup.html#property_hasIconForValidationState">Components.FormGroup</a>:
-                  <a href="../files/addon_components_bs-form_group.js.html#l196"><code>addon&#x2F;components&#x2F;bs-form&#x2F;group.js:196</code></a>
-              </p>
-            
-            
-              </div>
-            
-              <div class="description">
-                [BS3 only]
-              </div>
-            
-            
-            
-            
-            </div>
-            <div id="property_hasValidation"
-                 class="property item private inherited">
-              <h3 class="name">hasValidation
-                <span class="badge badge-secondary small">boolean</span>
-                  <span class="badge badge-private small">private</span>
-            
-            
-            
-            
-              </h3>
-            
-              <div class="meta">
-                  <p>Inherited from
-                    <a href="../classes/Components.FormGroup.html#property_hasValidation">Components.FormGroup</a>:
-                  <a href="../files/addon_components_bs-form_group.js.html#l36"><code>addon&#x2F;components&#x2F;bs-form&#x2F;group.js:36</code></a>
-              </p>
-            
-            
-              </div>
-            
-              <div class="description">
-                Computed property which is true if the form group is in a validation state
               </div>
             
             
@@ -1312,7 +1102,7 @@ you can pass them to the yielded <code>control</code> component:</p>
               <div class="meta">
                   <p>
                       Defined in
-                  <a href="../files/addon_components_bs-form_element.js.html#l452"><code>addon&#x2F;components&#x2F;bs-form&#x2F;element.js:452</code></a>
+                  <a href="../files/addon_components_bs-form_element.js.html#l447"><code>addon&#x2F;components&#x2F;bs-form&#x2F;element.js:447</code></a>
               </p>
             
             
@@ -1341,7 +1131,7 @@ you can pass them to the yielded <code>control</code> component:</p>
                   <p><strong>Default:</strong> false</p>
                   <p>
                       Defined in
-                  <a href="../files/addon_components_bs-form_element.js.html#l462"><code>addon&#x2F;components&#x2F;bs-form&#x2F;element.js:462</code></a>
+                  <a href="../files/addon_components_bs-form_element.js.html#l457"><code>addon&#x2F;components&#x2F;bs-form&#x2F;element.js:457</code></a>
               </p>
             
             
@@ -1369,7 +1159,7 @@ you can pass them to the yielded <code>control</code> component:</p>
               <div class="meta">
                   <p>
                       Defined in
-                  <a href="../files/addon_components_bs-form_element.js.html#l372"><code>addon&#x2F;components&#x2F;bs-form&#x2F;element.js:372</code></a>
+                  <a href="../files/addon_components_bs-form_element.js.html#l367"><code>addon&#x2F;components&#x2F;bs-form&#x2F;element.js:367</code></a>
               </p>
             
             
@@ -1397,7 +1187,7 @@ you can pass them to the yielded <code>control</code> component:</p>
               <div class="meta">
                   <p>
                       Defined in
-                  <a href="../files/addon_components_bs-form_element.js.html#l300"><code>addon&#x2F;components&#x2F;bs-form&#x2F;element.js:300</code></a>
+                  <a href="../files/addon_components_bs-form_element.js.html#l295"><code>addon&#x2F;components&#x2F;bs-form&#x2F;element.js:295</code></a>
               </p>
             
             
@@ -1426,7 +1216,7 @@ you can pass them to the yielded <code>control</code> component:</p>
               <div class="meta">
                   <p>
                       Defined in
-                  <a href="../files/addon_components_bs-form_element.js.html#l765"><code>addon&#x2F;components&#x2F;bs-form&#x2F;element.js:765</code></a>
+                  <a href="../files/addon_components_bs-form_element.js.html#l753"><code>addon&#x2F;components&#x2F;bs-form&#x2F;element.js:753</code></a>
               </p>
             
             
@@ -1454,7 +1244,7 @@ you can pass them to the yielded <code>control</code> component:</p>
               <div class="meta">
                   <p>
                       Defined in
-                  <a href="../files/addon_components_bs-form_element.js.html#l683"><code>addon&#x2F;components&#x2F;bs-form&#x2F;element.js:683</code></a>
+                  <a href="../files/addon_components_bs-form_element.js.html#l671"><code>addon&#x2F;components&#x2F;bs-form&#x2F;element.js:671</code></a>
               </p>
             
             
@@ -1464,82 +1254,6 @@ you can pass them to the yielded <code>control</code> component:</p>
                 <p>The Bootstrap grid class for form labels within a horizontal layout form. Defaults to the value of the same
             property of the parent form. The corresponding grid class for form controls is automatically computed.</p>
             
-              </div>
-            
-            
-            
-            
-            </div>
-            <div id="property_iconName"
-                 class="property item private inherited">
-              <h3 class="name">iconName
-                <span class="badge badge-secondary small">string</span>
-                  <span class="badge badge-private small">private</span>
-            
-            
-            
-            
-              </h3>
-            
-              <div class="meta">
-                  <p>Inherited from
-                    <a href="../classes/Components.FormGroup.html#property_iconName">Components.FormGroup</a>:
-                  <a href="../files/addon_components_bs-form_group.js.html#l183"><code>addon&#x2F;components&#x2F;bs-form&#x2F;group.js:183</code></a>
-              </p>
-            
-            
-              </div>
-            
-              <div class="description">
-                [BS3 only]
-              </div>
-            
-            
-            
-            
-            </div>
-            <div id="property_infoIcon"
-                 class="property item public inherited">
-              <h3 class="name">infoIcon
-                <span class="badge badge-secondary small">string</span>
-                  <span class="badge badge-public small">public</span>
-            
-            
-            
-            
-              </h3>
-            
-              <div class="meta">
-                  <p>Inherited from
-                    <a href="../classes/Components.FormGroup.html#property_infoIcon">Components.FormGroup</a>:
-                  <a href="../files/addon_components_bs-form_group.js.html#l153"><code>addon&#x2F;components&#x2F;bs-form&#x2F;group.js:153</code></a>
-              </p>
-            
-            
-              </div>
-            
-              <div class="description">
-                [BS3 only] The icon classes to be used for a feedback icon in a "info" validation state.
-            Defaults to the usual glyphicon classes. This is ignored, and no feedback icon is
-            rendered if <code>useIcons</code> is false.
-            
-            You can change this globally by setting the <code>formValidationInfoIcon</code> property of
-            the ember-bootstrap configuration in your config/environment.js file. If your are
-            using FontAwesome for example:
-            
-            <code>&#x60;</code>js
-            ENV['ember-bootstrap'] = {
-              formValidationInfoIcon: 'fa fa-info-circle
-            }
-            <code>&#x60;</code>
-            
-            The "info" validation state is not supported in Bootstrap CSS, but can be easily added
-            using the following LESS style:
-            <code>&#x60;</code>less
-            .has-info {
-              .form-control-validation(@state-info-text; @state-info-text; @state-info-bg);
-            }
-            <code>&#x60;</code>
               </div>
             
             
@@ -1561,7 +1275,7 @@ you can pass them to the yielded <code>control</code> component:</p>
                   <p><strong>Default:</strong> false</p>
                   <p>
                       Defined in
-                  <a href="../files/addon_components_bs-form_element.js.html#l224"><code>addon&#x2F;components&#x2F;bs-form&#x2F;element.js:224</code></a>
+                  <a href="../files/addon_components_bs-form_element.js.html#l219"><code>addon&#x2F;components&#x2F;bs-form&#x2F;element.js:219</code></a>
               </p>
             
             
@@ -1591,7 +1305,7 @@ you can pass them to the yielded <code>control</code> component:</p>
                   <p><strong>Default:</strong> false</p>
                   <p>
                       Defined in
-                  <a href="../files/addon_components_bs-form_element.js.html#l474"><code>addon&#x2F;components&#x2F;bs-form&#x2F;element.js:474</code></a>
+                  <a href="../files/addon_components_bs-form_element.js.html#l469"><code>addon&#x2F;components&#x2F;bs-form&#x2F;element.js:469</code></a>
               </p>
             
             
@@ -1620,7 +1334,7 @@ you can pass them to the yielded <code>control</code> component:</p>
               <div class="meta">
                   <p>
                       Defined in
-                  <a href="../files/addon_components_bs-form_element.js.html#l212"><code>addon&#x2F;components&#x2F;bs-form&#x2F;element.js:212</code></a>
+                  <a href="../files/addon_components_bs-form_element.js.html#l207"><code>addon&#x2F;components&#x2F;bs-form&#x2F;element.js:207</code></a>
               </p>
             
             
@@ -1652,7 +1366,7 @@ you can pass them to the yielded <code>control</code> component:</p>
               <div class="meta">
                   <p>
                       Defined in
-                  <a href="../files/addon_components_bs-form_element.js.html#l759"><code>addon&#x2F;components&#x2F;bs-form&#x2F;element.js:759</code></a>
+                  <a href="../files/addon_components_bs-form_element.js.html#l747"><code>addon&#x2F;components&#x2F;bs-form&#x2F;element.js:747</code></a>
               </p>
             
             
@@ -1680,7 +1394,7 @@ you can pass them to the yielded <code>control</code> component:</p>
               <div class="meta">
                   <p>
                       Defined in
-                  <a href="../files/addon_components_bs-form_element.js.html#l716"><code>addon&#x2F;components&#x2F;bs-form&#x2F;element.js:716</code></a>
+                  <a href="../files/addon_components_bs-form_element.js.html#l704"><code>addon&#x2F;components&#x2F;bs-form&#x2F;element.js:704</code></a>
               </p>
             
             
@@ -1708,7 +1422,7 @@ you can pass them to the yielded <code>control</code> component:</p>
               <div class="meta">
                   <p>
                       Defined in
-                  <a href="../files/addon_components_bs-form_element.js.html#l293"><code>addon&#x2F;components&#x2F;bs-form&#x2F;element.js:293</code></a>
+                  <a href="../files/addon_components_bs-form_element.js.html#l288"><code>addon&#x2F;components&#x2F;bs-form&#x2F;element.js:288</code></a>
               </p>
             
             
@@ -1737,7 +1451,7 @@ you can pass them to the yielded <code>control</code> component:</p>
               <div class="meta">
                   <p>
                       Defined in
-                  <a href="../files/addon_components_bs-form_element.js.html#l330"><code>addon&#x2F;components&#x2F;bs-form&#x2F;element.js:330</code></a>
+                  <a href="../files/addon_components_bs-form_element.js.html#l325"><code>addon&#x2F;components&#x2F;bs-form&#x2F;element.js:325</code></a>
               </p>
             
             
@@ -1766,7 +1480,7 @@ you can pass them to the yielded <code>control</code> component:</p>
               <div class="meta">
                   <p>
                       Defined in
-                  <a href="../files/addon_components_bs-form_element.js.html#l320"><code>addon&#x2F;components&#x2F;bs-form&#x2F;element.js:320</code></a>
+                  <a href="../files/addon_components_bs-form_element.js.html#l315"><code>addon&#x2F;components&#x2F;bs-form&#x2F;element.js:315</code></a>
               </p>
             
             
@@ -1797,7 +1511,7 @@ you can pass them to the yielded <code>control</code> component:</p>
               <div class="meta">
                   <p>
                       Defined in
-                  <a href="../files/addon_components_bs-form_element.js.html#l281"><code>addon&#x2F;components&#x2F;bs-form&#x2F;element.js:281</code></a>
+                  <a href="../files/addon_components_bs-form_element.js.html#l276"><code>addon&#x2F;components&#x2F;bs-form&#x2F;element.js:276</code></a>
               </p>
             
             
@@ -1830,7 +1544,7 @@ you can pass them to the yielded <code>control</code> component:</p>
                   <p><strong>Default:</strong> false</p>
                   <p>
                       Defined in
-                  <a href="../files/addon_components_bs-form_element.js.html#l504"><code>addon&#x2F;components&#x2F;bs-form&#x2F;element.js:504</code></a>
+                  <a href="../files/addon_components_bs-form_element.js.html#l499"><code>addon&#x2F;components&#x2F;bs-form&#x2F;element.js:499</code></a>
               </p>
             
             
@@ -1858,7 +1572,7 @@ you can pass them to the yielded <code>control</code> component:</p>
               <div class="meta">
                   <p>
                       Defined in
-                  <a href="../files/addon_components_bs-form_element.js.html#l524"><code>addon&#x2F;components&#x2F;bs-form&#x2F;element.js:524</code></a>
+                  <a href="../files/addon_components_bs-form_element.js.html#l519"><code>addon&#x2F;components&#x2F;bs-form&#x2F;element.js:519</code></a>
               </p>
             
             
@@ -1887,7 +1601,7 @@ you can pass them to the yielded <code>control</code> component:</p>
                   <p><strong>Default:</strong> false</p>
                   <p>
                       Defined in
-                  <a href="../files/addon_components_bs-form_element.js.html#l308"><code>addon&#x2F;components&#x2F;bs-form&#x2F;element.js:308</code></a>
+                  <a href="../files/addon_components_bs-form_element.js.html#l303"><code>addon&#x2F;components&#x2F;bs-form&#x2F;element.js:303</code></a>
               </p>
             
             
@@ -1918,7 +1632,7 @@ you can pass them to the yielded <code>control</code> component:</p>
                   <p><strong>Default:</strong> false</p>
                   <p>
                       Defined in
-                  <a href="../files/addon_components_bs-form_element.js.html#l496"><code>addon&#x2F;components&#x2F;bs-form&#x2F;element.js:496</code></a>
+                  <a href="../files/addon_components_bs-form_element.js.html#l491"><code>addon&#x2F;components&#x2F;bs-form&#x2F;element.js:491</code></a>
               </p>
             
             
@@ -1947,7 +1661,7 @@ you can pass them to the yielded <code>control</code> component:</p>
                   <p><strong>Default:</strong> false</p>
                   <p>
                       Defined in
-                  <a href="../files/addon_components_bs-form_element.js.html#l484"><code>addon&#x2F;components&#x2F;bs-form&#x2F;element.js:484</code></a>
+                  <a href="../files/addon_components_bs-form_element.js.html#l479"><code>addon&#x2F;components&#x2F;bs-form&#x2F;element.js:479</code></a>
               </p>
             
             
@@ -1976,7 +1690,7 @@ you can pass them to the yielded <code>control</code> component:</p>
               <div class="meta">
                   <p>
                       Defined in
-                  <a href="../files/addon_components_bs-form_element.js.html#l534"><code>addon&#x2F;components&#x2F;bs-form&#x2F;element.js:534</code></a>
+                  <a href="../files/addon_components_bs-form_element.js.html#l529"><code>addon&#x2F;components&#x2F;bs-form&#x2F;element.js:529</code></a>
               </p>
             
             
@@ -2005,7 +1719,7 @@ you can pass them to the yielded <code>control</code> component:</p>
                   <p><strong>Default:</strong> [&#x27;focusout&#x27;]</p>
                   <p>
                       Defined in
-                  <a href="../files/addon_components_bs-form_element.js.html#l544"><code>addon&#x2F;components&#x2F;bs-form&#x2F;element.js:544</code></a>
+                  <a href="../files/addon_components_bs-form_element.js.html#l539"><code>addon&#x2F;components&#x2F;bs-form&#x2F;element.js:539</code></a>
               </p>
             
             
@@ -2035,7 +1749,7 @@ you can pass them to the yielded <code>control</code> component:</p>
               <div class="meta">
                   <p>
                       Defined in
-                  <a href="../files/addon_components_bs-form_element.js.html#l421"><code>addon&#x2F;components&#x2F;bs-form&#x2F;element.js:421</code></a>
+                  <a href="../files/addon_components_bs-form_element.js.html#l416"><code>addon&#x2F;components&#x2F;bs-form&#x2F;element.js:416</code></a>
               </p>
             
             
@@ -2043,79 +1757,6 @@ you can pass them to the yielded <code>control</code> component:</p>
             
               <div class="description">
                 <p>Property for size styling, set to 'lg', 'sm' or 'xs' (the latter only for BS3)</p>
-            
-              </div>
-            
-            
-            
-            
-            </div>
-            <div id="property_successIcon"
-                 class="property item public inherited">
-              <h3 class="name">successIcon
-                <span class="badge badge-secondary small">string</span>
-                  <span class="badge badge-public small">public</span>
-            
-            
-            
-            
-              </h3>
-            
-              <div class="meta">
-                  <p><strong>Default:</strong> &#x27;glyphicon glyphicon-ok&#x27;</p>
-                  <p>Inherited from
-                    <a href="../classes/Components.FormGroup.html#property_successIcon">Components.FormGroup</a>:
-                  <a href="../files/addon_components_bs-form_group.js.html#l86"><code>addon&#x2F;components&#x2F;bs-form&#x2F;group.js:86</code></a>
-              </p>
-            
-            
-              </div>
-            
-              <div class="description">
-                [BS3 only] The icon classes to be used for a feedback icon in a "success" validation state.
-            Defaults to the usual glyphicon classes. This is ignored, and no feedback icon is
-            rendered if <code>useIcons</code> is false.
-            
-            You can change this globally by setting the <code>formValidationSuccessIcon</code> property of
-            the ember-bootstrap configuration in your config/environment.js file. If your are
-            using FontAwesome for example:
-            
-            <code>&#x60;</code>js
-            ENV['ember-bootstrap'] = {
-              formValidationSuccessIcon: 'fas fa-check'
-            }
-            <code>&#x60;</code>
-              </div>
-            
-            
-            
-            
-            </div>
-            <div id="property_useIcons"
-                 class="property item public">
-              <h3 class="name">useIcons
-                <span class="badge badge-secondary small">boolean</span>
-                  <span class="badge badge-public small">public</span>
-            
-            
-            
-            
-              </h3>
-            
-              <div class="meta">
-                <p>Inherited from
-                  <a href="../classes/Components.FormGroup.html#property_useIcons">
-                    Components.FormGroup
-                  </a>
-                    but overwritten in
-                  <a href="../files/addon_components_bs-form_element.js.html#l651"><code>addon&#x2F;components&#x2F;bs-form&#x2F;element.js:651</code></a>
-              </p>
-            
-            
-              </div>
-            
-              <div class="description">
-                <p>True for text field <code>controlType</code>s</p>
             
               </div>
             
@@ -2135,12 +1776,9 @@ you can pass them to the yielded <code>control</code> component:</p>
               </h3>
             
               <div class="meta">
-                <p>Inherited from
-                  <a href="../classes/Components.FormGroup.html#property_validation">
-                    Components.FormGroup
-                  </a>
-                    but overwritten in
-                  <a href="../files/addon_components_bs-form_element.js.html#l626"><code>addon&#x2F;components&#x2F;bs-form&#x2F;element.js:626</code></a>
+                  <p>
+                      Defined in
+                  <a href="../files/addon_components_bs-form_element.js.html#l619"><code>addon&#x2F;components&#x2F;bs-form&#x2F;element.js:619</code></a>
               </p>
             
             
@@ -2150,34 +1788,6 @@ you can pass them to the yielded <code>control</code> component:</p>
                 <p>The validation ("error" (BS3)/"danger" (BS4), "warning", or "success") or null if no validation is to be shown. Automatically computed from the
             models validation state.</p>
             
-              </div>
-            
-            
-            
-            
-            </div>
-            <div id="property_validationClass"
-                 class="property item private inherited">
-              <h3 class="name">validationClass
-                <span class="badge badge-secondary small">string</span>
-                  <span class="badge badge-private small">private</span>
-            
-            
-            
-            
-              </h3>
-            
-              <div class="meta">
-                  <p>Inherited from
-                    <a href="../classes/Components.FormGroup.html#property_validationClass">Components.FormGroup</a>:
-                  <a href="../files/addon_components_bs-form_group.js.html#l208"><code>addon&#x2F;components&#x2F;bs-form&#x2F;group.js:208</code></a>
-              </p>
-            
-            
-              </div>
-            
-              <div class="description">
-                [BS3 only]
               </div>
             
             
@@ -2198,7 +1808,7 @@ you can pass them to the yielded <code>control</code> component:</p>
               <div class="meta">
                   <p>
                       Defined in
-                  <a href="../files/addon_components_bs-form_element.js.html#l429"><code>addon&#x2F;components&#x2F;bs-form&#x2F;element.js:429</code></a>
+                  <a href="../files/addon_components_bs-form_element.js.html#l424"><code>addon&#x2F;components&#x2F;bs-form&#x2F;element.js:424</code></a>
               </p>
             
             
@@ -2227,7 +1837,7 @@ you can pass them to the yielded <code>control</code> component:</p>
               <div class="meta">
                   <p>
                       Defined in
-                  <a href="../files/addon_components_bs-form_element.js.html#l253"><code>addon&#x2F;components&#x2F;bs-form&#x2F;element.js:253</code></a>
+                  <a href="../files/addon_components_bs-form_element.js.html#l248"><code>addon&#x2F;components&#x2F;bs-form&#x2F;element.js:248</code></a>
               </p>
             
             
@@ -2250,46 +1860,6 @@ you can pass them to the yielded <code>control</code> component:</p>
             
             
             </div>
-            <div id="property_warningIcon"
-                 class="property item public inherited">
-              <h3 class="name">warningIcon
-                <span class="badge badge-secondary small">string</span>
-                  <span class="badge badge-public small">public</span>
-            
-            
-            
-            
-              </h3>
-            
-              <div class="meta">
-                  <p>Inherited from
-                    <a href="../classes/Components.FormGroup.html#property_warningIcon">Components.FormGroup</a>:
-                  <a href="../files/addon_components_bs-form_group.js.html#l131"><code>addon&#x2F;components&#x2F;bs-form&#x2F;group.js:131</code></a>
-              </p>
-            
-            
-              </div>
-            
-              <div class="description">
-                [BS3 only] The icon classes to be used for a feedback icon in a "warning" validation state.
-            Defaults to the usual glyphicon classes. This is ignored, and no feedback icon is
-            rendered if <code>useIcons</code> is false.
-            
-            You can change this globally by setting the <code>formValidationWarningIcon</code> property of
-            the ember-bootstrap configuration in your config/environment.js file. If your are
-            using FontAwesome for example:
-            
-            <code>&#x60;</code>js
-            ENV['ember-bootstrap'] = {
-              formValidationWarningIcon: 'fas fa-exclamation-triangle'
-            }
-            <code>&#x60;</code>
-              </div>
-            
-            
-            
-            
-            </div>
             <div id="property_warnings"
                  class="property item protected">
               <h3 class="name">warnings
@@ -2304,7 +1874,7 @@ you can pass them to the yielded <code>control</code> component:</p>
               <div class="meta">
                   <p>
                       Defined in
-                  <a href="../files/addon_components_bs-form_element.js.html#l360"><code>addon&#x2F;components&#x2F;bs-form&#x2F;element.js:360</code></a>
+                  <a href="../files/addon_components_bs-form_element.js.html#l355"><code>addon&#x2F;components&#x2F;bs-form&#x2F;element.js:355</code></a>
               </p>
             
             
@@ -2335,7 +1905,7 @@ you can pass them to the yielded <code>control</code> component:</p>
                 <div class="meta">
                             <p>
                             Defined in
-                    <a href="../files/addon_components_bs-form_element.js.html#l789"><code>addon&#x2F;components&#x2F;bs-form&#x2F;element.js:789</code></a>
+                    <a href="../files/addon_components_bs-form_element.js.html#l777"><code>addon&#x2F;components&#x2F;bs-form&#x2F;element.js:777</code></a>
                     </p>
             
             
@@ -2361,7 +1931,7 @@ you can pass them to the yielded <code>control</code> component:</p>
                 <div class="meta">
                             <p>
                             Defined in
-                    <a href="../files/addon_components_bs-form_element.js.html#l779"><code>addon&#x2F;components&#x2F;bs-form&#x2F;element.js:779</code></a>
+                    <a href="../files/addon_components_bs-form_element.js.html#l767"><code>addon&#x2F;components&#x2F;bs-form&#x2F;element.js:767</code></a>
                     </p>
             
             
@@ -2464,7 +2034,6 @@ you can pass them to the yielded <code>control</code> component:</p>
             <li class="list-group-item list-group-item-private"><a href="../classes/Components.FormElementLayoutInlineCheckbox.html">Components.FormElementLayoutInlineCheckbox</a></li>
             <li class="list-group-item list-group-item-private"><a href="../classes/Components.FormElementLayoutVertical.html">Components.FormElementLayoutVertical</a></li>
             <li class="list-group-item list-group-item-private"><a href="../classes/Components.FormElementLayoutVerticalCheckbox.html">Components.FormElementLayoutVerticalCheckbox</a></li>
-            <li class="list-group-item list-group-item-public"><a href="../classes/Components.FormGroup.html">Components.FormGroup</a></li>
             <li class="list-group-item list-group-item-private"><a href="../classes/Components.LinkComponent.html">Components.LinkComponent</a></li>
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.Modal.html">Components.Modal</a></li>
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.ModalBody.html">Components.ModalBody</a></li>

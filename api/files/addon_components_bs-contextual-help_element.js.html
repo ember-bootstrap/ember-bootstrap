@@ -61,8 +61,6 @@
     <pre class="prettyprint linenums">
 import { action } from &#x27;@ember/object&#x27;;
 import Component from &#x27;@glimmer/component&#x27;;
-import { assert } from &#x27;@ember/debug&#x27;;
-import { scheduleOnce } from &#x27;@ember/runloop&#x27;;
 import arg from &#x27;ember-bootstrap/utils/decorators/arg&#x27;;
 import { tracked } from &#x27;@glimmer/tracking&#x27;;
 import { getOwnConfig, macroCondition } from &#x27;@embroider/macros&#x27;;
@@ -167,54 +165,52 @@ export default class ContextualHelpElement extends Component {
    * @type {object}
    * @private
    */
-  get popperModifiers() {
-    const context = this;
+  get popperOptions() {
+    let options = {
+      placement: this.placement,
+      onFirstUpdate: this.updatePlacement,
+    };
 
-    // We need popeerElement, so we wait for this getter to recompute once it&#x27;s available
+    // We need popperElement, so we wait for this getter to recompute once it&#x27;s available
     if (!this.popperElement) {
-      return {};
+      return options;
     }
 
-    return {
-      arrow: {
-        element: this.popperElement.querySelector(&#x60;.${this.arrowClass}&#x60;),
-      },
-      offset: {
-        offset: this.offset.join(&#x27;,&#x27;),
-        fn(data) {
-          let tip = context.popperElement;
-          assert(&#x27;Contextual help element needs existing popper element&#x27;, tip);
-
-          // manually read margins because getBoundingClientRect includes difference
-          let marginTop = parseInt(window.getComputedStyle(tip).marginTop, 10);
-          let marginLeft = parseInt(window.getComputedStyle(tip).marginLeft, 10);
-
-          // we must check for NaN for ie 8/9
-          if (isNaN(marginTop) || marginTop &gt; 0) {
-            marginTop = 0;
-          }
-          if (isNaN(marginLeft) || marginLeft &gt; 0) {
-            marginLeft = 0;
-          }
-
-          data.offsets.popper.top += marginTop;
-          data.offsets.popper.left += marginLeft;
-
-          return window.Popper.Defaults.modifiers.offset.fn.apply(this, arguments);
+    options.modifiers = [
+      {
+        name: &#x27;arrow&#x27;,
+        options: {
+          element: this.popperElement.querySelector(&#x60;.${this.arrowClass}&#x60;),
+          padding: 4,
         },
       },
-      preventOverflow: {
-        enabled: this.args.autoPlacement,
-        boundariesElement: this.args.viewportElement,
-        padding: this.args.viewportPadding,
+      {
+        name: &#x27;offset&#x27;,
+        options: {
+          offset: this.offset,
+        },
       },
-      hide: {
+      {
+        name: &#x27;preventOverflow&#x27;,
+        enabled: this.args.autoPlacement,
+        options: {
+          boundary: this.args.viewportElement,
+          padding: this.args.viewportPadding,
+        },
+      },
+      {
+        name: &#x27;flip&#x27;,
         enabled: this.args.autoPlacement,
       },
-      flip: {
-        enabled: this.args.autoPlacement,
+      {
+        name: &#x27;onChange&#x27;,
+        enabled: true,
+        phase: &#x27;afterWrite&#x27;,
+        fn: this.updatePlacement,
       },
-    };
+    ];
+
+    return options;
   }
 
   get actualPlacementClass() {
@@ -234,12 +230,14 @@ export default class ContextualHelpElement extends Component {
   }
 
   @action
-  updatePlacement(popperDataObject) {
-    if (this.actualPlacement === popperDataObject.placement) {
+  updatePlacement(state) {
+    // normalize argument
+    state = state.state ?? state;
+
+    if (this.actualPlacement === state.placement) {
       return;
     }
-    this.actualPlacement = popperDataObject.placement;
-    scheduleOnce(&#x27;afterRender&#x27;, popperDataObject.instance, popperDataObject.instance.scheduleUpdate);
+    this.actualPlacement = state.placement;
   }
 }
 
@@ -291,7 +289,6 @@ export default class ContextualHelpElement extends Component {
             <li class="list-group-item list-group-item-private"><a href="../classes/Components.FormElementLayoutInlineCheckbox.html">Components.FormElementLayoutInlineCheckbox</a></li>
             <li class="list-group-item list-group-item-private"><a href="../classes/Components.FormElementLayoutVertical.html">Components.FormElementLayoutVertical</a></li>
             <li class="list-group-item list-group-item-private"><a href="../classes/Components.FormElementLayoutVerticalCheckbox.html">Components.FormElementLayoutVerticalCheckbox</a></li>
-            <li class="list-group-item list-group-item-public"><a href="../classes/Components.FormGroup.html">Components.FormGroup</a></li>
             <li class="list-group-item list-group-item-private"><a href="../classes/Components.LinkComponent.html">Components.LinkComponent</a></li>
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.Modal.html">Components.Modal</a></li>
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.ModalBody.html">Components.ModalBody</a></li>

@@ -62,31 +62,20 @@
 import { tagName } from &#x27;@ember-decorators/component&#x27;;
 import { gt } from &#x27;@ember/object/computed&#x27;;
 import Component from &#x27;@ember/component&#x27;;
-import { computed, action, set } from &#x27;@ember/object&#x27;;
-import { assert, warn } from &#x27;@ember/debug&#x27;;
+import { action, computed, set } from &#x27;@ember/object&#x27;;
+import { assert } from &#x27;@ember/debug&#x27;;
 import { isPresent } from &#x27;@ember/utils&#x27;;
 import { schedule } from &#x27;@ember/runloop&#x27;;
 import RSVP from &#x27;rsvp&#x27;;
 import defaultValue from &#x27;ember-bootstrap/utils/default-decorator&#x27;;
-import { macroCondition, getOwnConfig } from &#x27;@embroider/macros&#x27;;
-import { DEBUG } from &#x27;@glimmer/env&#x27;;
+import { getOwnConfig, macroCondition } from &#x27;@embroider/macros&#x27;;
 import deprecateSubclassing from &#x27;ember-bootstrap/utils/deprecate-subclassing&#x27;;
 
 /**
   Render a form with the appropriate Bootstrap layout class (see &#x60;formLayout&#x60;).
   Allows setting a &#x60;model&#x60; that nested &#x60;Components.FormElement&#x60;s can access, and that can provide form validation (see below)
 
-  You can use whatever markup you like within the form. The following shows Bootstrap 3 usage for the internal markup.
-
-  &#x60;&#x60;&#x60;handlebars
-  &lt;BsForm @onSubmit={{action &quot;submit&quot;}} as |form|&gt;
-    &lt;form.group&gt;
-      &lt;label class=&quot;control-label&quot;&gt;First name&lt;/label&gt;
-      &lt;input value={{this.firstname}} class=&quot;form-control&quot; oninput={{action (mut this.firstname) value=&quot;target.value&quot;}} type=&quot;text&quot;&gt;
-    &lt;/form.group&gt;
-  &lt;/BsForm&gt;
-  &#x60;&#x60;&#x60;
-
+  You can use whatever markup you like within the form.
   However to benefit from features such as automatic form markup, validations and validation markup, use &#x60;Components.FormElement&#x60;
   as nested components. See below for an example.
 
@@ -203,9 +192,7 @@ export default class Form extends Component {
   @computed(&#x27;formLayout&#x27;)
   get layoutClass() {
     let layout = this.formLayout;
-    if (macroCondition(getOwnConfig().isBS3)) {
-      return layout === &#x27;vertical&#x27; ? &#x27;form&#x27; : &#x60;form-${layout}&#x60;;
-    } else if (macroCondition(getOwnConfig().isBS4)) {
+    if (macroCondition(getOwnConfig().isBS4)) {
       return layout === &#x27;inline&#x27; ? &#x27;form-inline&#x27; : null;
     } else {
       return null;
@@ -260,12 +247,6 @@ export default class Form extends Component {
 
   /**
    * @property elementComponent
-   * @type {String}
-   * @private
-   */
-
-  /**
-   * @property groupComponent
    * @type {String}
    * @private
    */
@@ -581,25 +562,6 @@ export default class Form extends Component {
       &#x60;Invalid formLayout property given: ${formLayout}&#x60;,
       [&#x27;vertical&#x27;, &#x27;horizontal&#x27;, &#x27;inline&#x27;].indexOf(formLayout) &gt;= 0
     );
-
-    if (DEBUG) {
-      warn(
-        &#x60;Argument novalidate of &lt;BsForm&gt; component has been removed. &#x60; +
-          &#x60;Its only purpose was setting the HTML attribute novalidate of the &lt;form&gt; element. &#x60; +
-          &#x60;You should use angle bracket component invocation syntax instead:\n&#x60; +
-          &#x60;Before:n&#x60; +
-          &#x60;  {{bs-form novalidate=true}}\n&#x60; +
-          &#x60;  &lt;BsForm @novalidate={{true}} /&gt;\n&#x60; +
-          &#x60;After:\n&#x60; +
-          &#x60;  &lt;BsForm novalidate&gt;\n&#x60; +
-          &#x60;A codemod is available to help with the required migration. See https://github.com/kaliber5/ember-bootstrap-codemods/blob/master/transforms/deprecated-attribute-arguments/README.md&#x60;,
-        // eslint-disable-next-line ember/no-attrs-in-components
-        !Object.keys(this.attrs).includes(&#x27;novalidate&#x27;),
-        {
-          id: &#x60;ember-bootstrap.removed-argument.form#novalidate&#x60;,
-        }
-      );
-    }
   }
 
   @action
@@ -675,7 +637,6 @@ export default class Form extends Component {
             <li class="list-group-item list-group-item-private"><a href="../classes/Components.FormElementLayoutInlineCheckbox.html">Components.FormElementLayoutInlineCheckbox</a></li>
             <li class="list-group-item list-group-item-private"><a href="../classes/Components.FormElementLayoutVertical.html">Components.FormElementLayoutVertical</a></li>
             <li class="list-group-item list-group-item-private"><a href="../classes/Components.FormElementLayoutVerticalCheckbox.html">Components.FormElementLayoutVerticalCheckbox</a></li>
-            <li class="list-group-item list-group-item-public"><a href="../classes/Components.FormGroup.html">Components.FormGroup</a></li>
             <li class="list-group-item list-group-item-private"><a href="../classes/Components.LinkComponent.html">Components.LinkComponent</a></li>
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.Modal.html">Components.Modal</a></li>
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.ModalBody.html">Components.ModalBody</a></li>

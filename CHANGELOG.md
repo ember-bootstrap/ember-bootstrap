@@ -1,3 +1,114 @@
+
+
+
+
+
+## v5.0.0-rc.0 (2022-01-30)
+
+#### :boom: Breaking Change
+* [#1736](https://github.com/kaliber5/ember-bootstrap/pull/1736) Upgrade Ember to 4.1, drop support for Ember < 3.24 ([@simonihmig](https://github.com/simonihmig))
+
+#### Bug Fixes
+* [#1720](https://github.com/kaliber5/ember-bootstrap/pull/1720) Accept loosely typed values for modal `@open` ([@simonihmig](https://github.com/simonihmig))
+* [#1718](https://github.com/kaliber5/ember-bootstrap/pull/1718) Call onShow(n)/onHide/onHidden when controlling tooltips and popovers programmatically ([@simonihmig](https://github.com/simonihmig))
+
+#### Internal
+* [#1736](https://github.com/kaliber5/ember-bootstrap/pull/1736) Upgrade Ember to 4.1, drop support for Ember < 3.24 ([@simonihmig](https://github.com/simonihmig))
+
+#### Committers: 1
+- Simon Ihmig ([@simonihmig](https://github.com/simonihmig))
+
+## v5.0.0-beta.2 (2021-11-24)
+
+#### :boom: Breaking Change
+* [#1699](https://github.com/kaliber5/ember-bootstrap/pull/1699) modal footer should not render a `` element ([@jelhan](https://github.com/jelhan))
+
+#### Features
+* [#1689](https://github.com/kaliber5/ember-bootstrap/pull/1689) Make Bootstrap 5 the new default when adding the addon ([@simonihmig](https://github.com/simonihmig))
+
+#### Bug Fixes
+* [#1705](https://github.com/kaliber5/ember-bootstrap/pull/1705) Update ember-focus-trap, fixing Ember 4 compatibility ([@simonihmig](https://github.com/simonihmig))
+* [#1680](https://github.com/kaliber5/ember-bootstrap/pull/1680) Update to `@ember/render-modifiers` v2 ([@simonihmig](https://github.com/simonihmig))
+
+#### Internal
+* [#1706](https://github.com/kaliber5/ember-bootstrap/pull/1706) Remove use of curly component invocation for link components ([@simonihmig](https://github.com/simonihmig))
+
+#### Committers: 2
+- Jeldrik Hanschke ([@jelhan](https://github.com/jelhan))
+- Simon Ihmig ([@simonihmig](https://github.com/simonihmig))
+
+## v5.0.0-beta.1 (2021-10-21)
+
+#### :boom: Breaking Change
+* [#1631](https://github.com/kaliber5/ember-bootstrap/pull/1631) remove `` component ([@jelhan](https://github.com/jelhan))
+* [#1632](https://github.com/kaliber5/ember-bootstrap/pull/1632) remove is-validating, is-required and is-disabled CSS classes from `` ([@jelhan](https://github.com/jelhan))
+* [#1624](https://github.com/kaliber5/ember-bootstrap/pull/1624) Upgrade to ember-auto-import v2 ([@simonihmig](https://github.com/simonihmig))
+
+#### Bug Fixes
+* [#1623](https://github.com/kaliber5/ember-bootstrap/pull/1623) Add `.mb-3` margins to BS5 form elements in vertical layout ([@simonihmig](https://github.com/simonihmig))
+* [#1627](https://github.com/kaliber5/ember-bootstrap/pull/1627) show custom errors and warnings regardless if validation plugin is used ([@jelhan](https://github.com/jelhan))
+* [#1620](https://github.com/kaliber5/ember-bootstrap/pull/1620) Fix BS5 markup for alert close button ([@simonihmig](https://github.com/simonihmig))
+
+#### Documentation
+* [#1622](https://github.com/kaliber5/ember-bootstrap/pull/1622) Modernize docs app and migrate to Bootstrap 5 ([@simonihmig](https://github.com/simonihmig))
+* [#1625](https://github.com/kaliber5/ember-bootstrap/pull/1625) Reflect dropped BS 3 and added BS 5 support in readme ([@jelhan](https://github.com/jelhan))
+
+#### Internal
+* [#1635](https://github.com/kaliber5/ember-bootstrap/pull/1635) Remove deprecation messages for arguments dropped in v4 ([@murilo-goncalves](https://github.com/murilo-goncalves))
+* [#1629](https://github.com/kaliber5/ember-bootstrap/pull/1629) remove BS3-only arguments @useIcons, @validation, ... of  ([@jelhan](https://github.com/jelhan))
+
+#### Committers: 3
+- Jeldrik Hanschke ([@jelhan](https://github.com/jelhan))
+- Murilo Gonçalves ([@murilo-goncalves](https://github.com/murilo-goncalves))
+- Simon Ihmig ([@simonihmig](https://github.com/simonihmig))
+
+## v5.0.0-beta.0 (2021-09-24)
+
+#### :boom: Breaking Change
+* [#1609](https://github.com/kaliber5/ember-bootstrap/pull/1609) Drop ember-popper in favor of ember-popper-modifier and popper.js v2 ([@simonihmig](https://github.com/simonihmig))
+* [#1610](https://github.com/kaliber5/ember-bootstrap/pull/1610) Remove deprecated `parentView` trigger element option for tooltips/popovers ([@simonihmig](https://github.com/simonihmig))
+* [#1604](https://github.com/kaliber5/ember-bootstrap/pull/1604) Remove BS3 support from addon blueprint ([@simonihmig](https://github.com/simonihmig))
+* [#1603](https://github.com/kaliber5/ember-bootstrap/pull/1603) Remove BS3 support from addon entrypoint ([@simonihmig](https://github.com/simonihmig))
+* [#1600](https://github.com/kaliber5/ember-bootstrap/pull/1600) Remove Bootstrap 3 support from components ([@simonihmig](https://github.com/simonihmig))
+
+#### Features
+* [#1609](https://github.com/kaliber5/ember-bootstrap/pull/1609) Drop ember-popper in favor of ember-popper-modifier and popper.js v2 ([@simonihmig](https://github.com/simonihmig))
+* [#1607](https://github.com/kaliber5/ember-bootstrap/pull/1607) Permit blocking of dropdown close if onHide returns false ([@gfmartinez](https://github.com/gfmartinez))
+* [#1608](https://github.com/kaliber5/ember-bootstrap/pull/1608) Update dependencies for Ember 4 support ([@simonihmig](https://github.com/simonihmig))
+
+#### Bug Fixes
+* [#1614](https://github.com/kaliber5/ember-bootstrap/pull/1614) Fix BS5 markup for modal close button ([@simonihmig](https://github.com/simonihmig))
+
+#### Documentation
+* [#1619](https://github.com/kaliber5/ember-bootstrap/pull/1619) Add ember-bootstrap-postcss to addons section ([@oliverlj](https://github.com/oliverlj))
+* [#1617](https://github.com/kaliber5/ember-bootstrap/pull/1617) Add BS5 and remove BS3 instructions to docs app ([@simonihmig](https://github.com/simonihmig))
+
+#### Committers: 3
+- Gabriel Martinez ([@gfmartinez](https://github.com/gfmartinez))
+- LE JACQUES Olivier ([@oliverlj](https://github.com/oliverlj))
+- Simon Ihmig ([@simonihmig](https://github.com/simonihmig))
+
+## v5.0.0-alpha.1 (2021-08-17)
+
+#### :boom: Breaking Change
+* [#1596](https://github.com/kaliber5/ember-bootstrap/pull/1596) Drop IE11 support ([@simonihmig](https://github.com/simonihmig))
+* [#1595](https://github.com/kaliber5/ember-bootstrap/pull/1595) Drop node 10 support ([@simonihmig](https://github.com/simonihmig))
+* [#1593](https://github.com/kaliber5/ember-bootstrap/pull/1593) Drop support for ember-concurrency 1.x as a dependency ([@simonihmig](https://github.com/simonihmig))
+
+#### Features
+* [#1561](https://github.com/kaliber5/ember-bootstrap/pull/1561) Add Bootstrap v5 support for accordions ([@simonihmig](https://github.com/simonihmig))
+* [#1537](https://github.com/kaliber5/ember-bootstrap/pull/1537) Remove `.btn-block` support for Bootstrap 5 ([@simonihmig](https://github.com/simonihmig))
+* [#1597](https://github.com/kaliber5/ember-bootstrap/pull/1597) Add Bootstrap v5 support for Navbars ([@simonihmig](https://github.com/simonihmig))
+
+#### Bug Fixes
+* [#1590](https://github.com/kaliber5/ember-bootstrap/pull/1590) Fix `.collapsed` markup for accordions ([@simonihmig](https://github.com/simonihmig))
+
+#### Internal
+* [#1594](https://github.com/kaliber5/ember-bootstrap/pull/1594) Fix tests for Ember 4.0 Canary ([@simonihmig](https://github.com/simonihmig))
+
+#### Committers: 1
+- Simon Ihmig ([@simonihmig](https://github.com/simonihmig))
+
 ## v5.0.0-alpha.0 (2021-08-06)
 
 #### :boom: Breaking Change

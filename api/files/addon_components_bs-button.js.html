@@ -61,11 +61,9 @@
     <pre class="prettyprint linenums">
 import { tracked } from &#x27;@glimmer/tracking&#x27;;
 import { action } from &#x27;@ember/object&#x27;;
-import { warn } from &#x27;@ember/debug&#x27;;
 import Component from &#x27;@glimmer/component&#x27;;
 import arg from &#x27;ember-bootstrap/utils/decorators/arg&#x27;;
 import deprecateSubclassing from &#x27;ember-bootstrap/utils/deprecate-subclassing&#x27;;
-import { DEBUG } from &#x27;@glimmer/env&#x27;;
 
 /**
   Implements a HTML button element, with support for all [Bootstrap button CSS styles](http://getbootstrap.com/css/#buttons)
@@ -235,7 +233,7 @@ export default class Button extends Component {
    */
 
   /**
-   * Property for block level buttons
+   * Property for block level buttons (BS3 and BS4 only!)
    *
    * See the [Bootstrap docs](http://getbootstrap.com/css/#buttons-sizes)
    * @property block
@@ -480,32 +478,6 @@ export default class Button extends Component {
 
   constructor() {
     super(...arguments);
-
-    // deprecate arguments used for attribute bindings only
-    if (DEBUG) {
-      [
-        // [&#x27;buttonType:type&#x27;, &#x27;submit&#x27;],
-        [&#x27;disabled&#x27;, true],
-        [&#x27;title&#x27;, &#x27;foo&#x27;],
-      ].forEach(([mapping, value]) =&gt; {
-        let argument = mapping.split(&#x27;:&#x27;)[0];
-        let attribute = mapping.includes(&#x27;:&#x27;) ? mapping.split(&#x27;:&#x27;)[1] : argument;
-        let warningMessage =
-          &#x60;Argument ${argument} of &lt;BsButton&gt; component has been removed. Its only purpose &#x60; +
-          &#x60;was setting the HTML attribute ${attribute} of the control element. You should use &#x60; +
-          &#x60;angle bracket component invocation syntax instead:\n&#x60; +
-          &#x60;Before:\n&#x60; +
-          &#x60;  {{bs-button ${attribute}=${typeof value === &#x27;string&#x27; ? &#x60;&quot;${value}&quot;&#x60; : value}}}\n&#x60; +
-          &#x60;  &lt;BsButton @${attribute}=${typeof value === &#x27;string&#x27; ? &#x60;&quot;${value}&quot;&#x60; : &#x60;{{${value}}}&#x60;} /&gt;\n&#x60; +
-          &#x60;After:\n&#x60; +
-          &#x60;  &lt;BsButton ${typeof value === &#x27;boolean&#x27; ? attribute : &#x60;${attribute}=&quot;${value}&quot;&#x60;} /&gt;\n&#x60; +
-          &#x60;A codemod is available to help withFi the required migration. See https://github.com/kaliber5/ember-bootstrap-codemods/blob/master/transforms/deprecated-attribute-arguments/README.md&#x60;;
-
-        warn(warningMessage, !Object.keys(this.args).includes(argument), {
-          id: &#x60;ember-bootstrap.removed-argument.button#${argument}&#x60;,
-        });
-      });
-    }
   }
 }
 
@@ -557,7 +529,6 @@ export default class Button extends Component {
             <li class="list-group-item list-group-item-private"><a href="../classes/Components.FormElementLayoutInlineCheckbox.html">Components.FormElementLayoutInlineCheckbox</a></li>
             <li class="list-group-item list-group-item-private"><a href="../classes/Components.FormElementLayoutVertical.html">Components.FormElementLayoutVertical</a></li>
             <li class="list-group-item list-group-item-private"><a href="../classes/Components.FormElementLayoutVerticalCheckbox.html">Components.FormElementLayoutVerticalCheckbox</a></li>
-            <li class="list-group-item list-group-item-public"><a href="../classes/Components.FormGroup.html">Components.FormGroup</a></li>
             <li class="list-group-item list-group-item-private"><a href="../classes/Components.LinkComponent.html">Components.LinkComponent</a></li>
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.Modal.html">Components.Modal</a></li>
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.ModalBody.html">Components.ModalBody</a></li>

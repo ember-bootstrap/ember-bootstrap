@@ -37,7 +37,6 @@ YUI.add("yuidoc-meta", function(Y) {
         "Components.FormElementLayoutInlineCheckbox",
         "Components.FormElementLayoutVertical",
         "Components.FormElementLayoutVerticalCheckbox",
-        "Components.FormGroup",
         "Components.LinkComponent",
         "Components.Modal",
         "Components.ModalBody",

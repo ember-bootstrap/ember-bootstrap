@@ -335,6 +335,7 @@ export default class Dropdown extends Component {
 
   /**
    * Action is called when dropdown is about to be hidden
+   * Returning &#x60;false&#x60; will block closing the dropdown
    *
    * @event onHide
    * @param {*} value
@@ -359,8 +360,9 @@ export default class Dropdown extends Component {
 
   @action
   closeDropdown() {
+    if (this.onHide() === false) return;
+
     this.set(&#x27;isOpen&#x27;, false);
-    this.onHide();
   }
 
   /**
@@ -526,7 +528,6 @@ export default class Dropdown extends Component {
             <li class="list-group-item list-group-item-private"><a href="../classes/Components.FormElementLayoutInlineCheckbox.html">Components.FormElementLayoutInlineCheckbox</a></li>
             <li class="list-group-item list-group-item-private"><a href="../classes/Components.FormElementLayoutVertical.html">Components.FormElementLayoutVertical</a></li>
             <li class="list-group-item list-group-item-private"><a href="../classes/Components.FormElementLayoutVerticalCheckbox.html">Components.FormElementLayoutVerticalCheckbox</a></li>
-            <li class="list-group-item list-group-item-public"><a href="../classes/Components.FormGroup.html">Components.FormGroup</a></li>
             <li class="list-group-item list-group-item-private"><a href="../classes/Components.LinkComponent.html">Components.LinkComponent</a></li>
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.Modal.html">Components.Modal</a></li>
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.ModalBody.html">Components.ModalBody</a></li>

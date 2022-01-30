@@ -66,11 +66,10 @@ import { cancel, later, next, schedule } from &#x27;@ember/runloop&#x27;;
 import transitionEnd from &#x27;ember-bootstrap/utils/transition-end&#x27;;
 import { getDestinationElement } from &#x27;ember-bootstrap/utils/dom&#x27;;
 import usesTransition from &#x27;ember-bootstrap/utils/decorators/uses-transition&#x27;;
-import { assert, deprecate } from &#x27;@ember/debug&#x27;;
+import { assert } from &#x27;@ember/debug&#x27;;
 import Ember from &#x27;ember&#x27;;
 import arg from &#x27;../utils/decorators/arg&#x27;;
 import { tracked } from &#x27;@glimmer/tracking&#x27;;
-import { getParentView } from &#x27;../utils/dom&#x27;;
 import { ref } from &#x27;ember-ref-bucket&#x27;;
 
 const HOVERSTATE_NONE = &#x27;none&#x27;;
@@ -277,7 +276,6 @@ export default class ContextualHelp extends Component {
   /**
    * The DOM element that triggers the tooltip/popover. By default it is the parent element of this component.
    * You can set this to any CSS selector to have any other element trigger the tooltip/popover.
-   * With the special value of &quot;parentView&quot; you can attach the tooltip/popover to the parent component&#x27;s element.
    *
    * @property triggerElement
    * @type string | null
@@ -296,18 +294,6 @@ export default class ContextualHelp extends Component {
 
     if (!triggerElement) {
       el = this._parent;
-    } else if (triggerElement === &#x27;parentView&#x27;) {
-      deprecate(
-        &#x27;@triggerElement=&quot;parentView&quot; is deprecated. Please remove the @triggerElement argument to target the parent DOM element, or use a CSS selector&#x27;,
-        false,
-        {
-          id: &#x60;ember-bootstrap.contextual-help.parent-view&#x60;,
-          until: &#x27;5.0.0&#x27;,
-          since: &#x27;4.2.0&#x27;,
-          for: &#x27;ember-bootstrap&#x27;,
-        }
-      );
-      el = getParentView(this._parent);
     } else {
       el = document.querySelector(triggerElement);
     }
@@ -745,17 +731,17 @@ export default class ContextualHelp extends Component {
       this.triggerTargetElement = this.getTriggerTargetElement();
       this.addListeners();
       if (this.visible) {
-        next(this, this.show, true);
+        next(this, this.show);
       }
     });
   }
 
   @action
-  showOrHide(visible) {
-    if (visible) {
-      this.show();
+  showOrHide() {
+    if (this.args.visible) {
+      next(this, this.show);
     } else {
-      this.hide();
+      next(this, this.hide);
     }
   }
 
@@ -813,7 +799,6 @@ export default class ContextualHelp extends Component {
             <li class="list-group-item list-group-item-private"><a href="../classes/Components.FormElementLayoutInlineCheckbox.html">Components.FormElementLayoutInlineCheckbox</a></li>
             <li class="list-group-item list-group-item-private"><a href="../classes/Components.FormElementLayoutVertical.html">Components.FormElementLayoutVertical</a></li>
             <li class="list-group-item list-group-item-private"><a href="../classes/Components.FormElementLayoutVerticalCheckbox.html">Components.FormElementLayoutVerticalCheckbox</a></li>
-            <li class="list-group-item list-group-item-public"><a href="../classes/Components.FormGroup.html">Components.FormGroup</a></li>
             <li class="list-group-item list-group-item-private"><a href="../classes/Components.LinkComponent.html">Components.LinkComponent</a></li>
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.Modal.html">Components.Modal</a></li>
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.ModalBody.html">Components.ModalBody</a></li>

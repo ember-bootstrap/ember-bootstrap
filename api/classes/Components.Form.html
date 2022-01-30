@@ -59,15 +59,8 @@
 
 <p>Render a form with the appropriate Bootstrap layout class (see <code>formLayout</code>).
 Allows setting a <code>model</code> that nested <code>Components.FormElement</code>s can access, and that can provide form validation (see below)</p>
-<p>You can use whatever markup you like within the form. The following shows Bootstrap 3 usage for the internal markup.</p>
-<pre class="code prettyprint"><code class="language-handlebars">&lt;BsForm @onSubmit={{action "submit"}} as |form|&gt;
-  &lt;form.group&gt;
-    &lt;label class="control-label"&gt;First name&lt;/label&gt;
-    &lt;input value={{this.firstname}} class="form-control" oninput={{action (mut this.firstname) value="target.value"}} type="text"&gt;
-  &lt;/form.group&gt;
-&lt;/BsForm&gt;
-</code></pre>
-<p>However to benefit from features such as automatic form markup, validations and validation markup, use <code>Components.FormElement</code>
+<p>You can use whatever markup you like within the form.
+However to benefit from features such as automatic form markup, validations and validation markup, use <code>Components.FormElement</code>
 as nested components. See below for an example.</p>
 <h3>Submitting the form</h3>
 <p>The form yields a <code>submitButton</code> component, which is a preconfigured <code>&lt;BsButton&gt;</code> with <code>@type="primary"</code> and <code>@buttonType="submit"</code>.
@@ -157,7 +150,7 @@ calling the yielded <code>resetSubmissionState</code> function.</p>
           Defined in
         </dt>
         <dd class="col-sm-9">
-          <a href="../files/addon_components_bs-form.js.html#l14"><code>addon&#x2F;components&#x2F;bs-form.js:14</code></a>
+          <a href="../files/addon_components_bs-form.js.html#l13"><code>addon&#x2F;components&#x2F;bs-form.js:13</code></a>
         </dd>
 
     </dl>
@@ -245,11 +238,6 @@ calling the yielded <code>resetSubmissionState</code> function.</p>
                 <li class="index-item property public">
                   <a href="#" data-tabid="#properties" data-anchor="#property_formLayout"
                      data-tablink="formLayout">formLayout</a>
-
-                </li>
-                <li class="index-item property private">
-                  <a href="#" data-tabid="#properties" data-anchor="#property_groupComponent"
-                     data-tablink="groupComponent">groupComponent</a>
 
                 </li>
                 <li class="index-item property protected">
@@ -368,7 +356,7 @@ calling the yielded <code>resetSubmissionState</code> function.</p>
                 <div class="meta">
                             <p>
                             Defined in
-                    <a href="../files/addon_components_bs-form.js.html#l401"><code>addon&#x2F;components&#x2F;bs-form.js:401</code></a>
+                    <a href="../files/addon_components_bs-form.js.html#l382"><code>addon&#x2F;components&#x2F;bs-form.js:382</code></a>
                     </p>
             
             
@@ -403,7 +391,7 @@ calling the yielded <code>resetSubmissionState</code> function.</p>
                 <div class="meta">
                             <p>
                             Defined in
-                    <a href="../files/addon_components_bs-form.js.html#l355"><code>addon&#x2F;components&#x2F;bs-form.js:355</code></a>
+                    <a href="../files/addon_components_bs-form.js.html#l336"><code>addon&#x2F;components&#x2F;bs-form.js:336</code></a>
                     </p>
             
             
@@ -460,7 +448,7 @@ calling the yielded <code>resetSubmissionState</code> function.</p>
                   <p><strong>Default:</strong> false</p>
                   <p>
                       Defined in
-                  <a href="../files/addon_components_bs-form.js.html#l344"><code>addon&#x2F;components&#x2F;bs-form.js:344</code></a>
+                  <a href="../files/addon_components_bs-form.js.html#l325"><code>addon&#x2F;components&#x2F;bs-form.js:325</code></a>
               </p>
             
             
@@ -489,7 +477,7 @@ calling the yielded <code>resetSubmissionState</code> function.</p>
               <div class="meta">
                   <p>
                       Defined in
-                  <a href="../files/addon_components_bs-form.js.html#l200"><code>addon&#x2F;components&#x2F;bs-form.js:200</code></a>
+                  <a href="../files/addon_components_bs-form.js.html#l187"><code>addon&#x2F;components&#x2F;bs-form.js:187</code></a>
               </p>
             
             
@@ -517,7 +505,7 @@ calling the yielded <code>resetSubmissionState</code> function.</p>
               <div class="meta">
                   <p>
                       Defined in
-                  <a href="../files/addon_components_bs-form.js.html#l169"><code>addon&#x2F;components&#x2F;bs-form.js:169</code></a>
+                  <a href="../files/addon_components_bs-form.js.html#l156"><code>addon&#x2F;components&#x2F;bs-form.js:156</code></a>
               </p>
             
             
@@ -526,34 +514,6 @@ calling the yielded <code>resetSubmissionState</code> function.</p>
               <div class="description">
                 <p>Set the layout of the form to either "vertical", "horizontal" or "inline". See <a href="http://getbootstrap.com/css/#forms-inline">http://getbootstrap.com/css/#forms-inline</a> and <a href="http://getbootstrap.com/css/#forms-horizontal">http://getbootstrap.com/css/#forms-horizontal</a></p>
             
-              </div>
-            
-            
-            
-            
-            </div>
-            <div id="property_groupComponent"
-                 class="property item private">
-              <h3 class="name">groupComponent
-                <span class="badge badge-secondary small">{String}</span>
-                  <span class="badge badge-private small">private</span>
-            
-            
-            
-            
-              </h3>
-            
-              <div class="meta">
-                  <p>
-                      Defined in
-                  <a href="../files/addon_components_bs-form.js.html#l206"><code>addon&#x2F;components&#x2F;bs-form.js:206</code></a>
-              </p>
-            
-            
-              </div>
-            
-              <div class="description">
-                
               </div>
             
             
@@ -574,7 +534,7 @@ calling the yielded <code>resetSubmissionState</code> function.</p>
               <div class="meta">
                   <p>
                       Defined in
-                  <a href="../files/addon_components_bs-form.js.html#l179"><code>addon&#x2F;components&#x2F;bs-form.js:179</code></a>
+                  <a href="../files/addon_components_bs-form.js.html#l166"><code>addon&#x2F;components&#x2F;bs-form.js:166</code></a>
               </p>
             
             
@@ -604,7 +564,7 @@ calling the yielded <code>resetSubmissionState</code> function.</p>
                   <p><strong>Default:</strong> false</p>
                   <p>
                       Defined in
-                  <a href="../files/addon_components_bs-form.js.html#l320"><code>addon&#x2F;components&#x2F;bs-form.js:320</code></a>
+                  <a href="../files/addon_components_bs-form.js.html#l301"><code>addon&#x2F;components&#x2F;bs-form.js:301</code></a>
               </p>
             
             
@@ -636,7 +596,7 @@ calling the yielded <code>resetSubmissionState</code> function.</p>
                   <p><strong>Default:</strong> &#x27;col-md-4&#x27;</p>
                   <p>
                       Defined in
-                  <a href="../files/addon_components_bs-form.js.html#l188"><code>addon&#x2F;components&#x2F;bs-form.js:188</code></a>
+                  <a href="../files/addon_components_bs-form.js.html#l175"><code>addon&#x2F;components&#x2F;bs-form.js:175</code></a>
               </p>
             
             
@@ -666,7 +626,7 @@ calling the yielded <code>resetSubmissionState</code> function.</p>
               <div class="meta">
                   <p>
                       Defined in
-                  <a href="../files/addon_components_bs-form.js.html#l246"><code>addon&#x2F;components&#x2F;bs-form.js:246</code></a>
+                  <a href="../files/addon_components_bs-form.js.html#l227"><code>addon&#x2F;components&#x2F;bs-form.js:227</code></a>
               </p>
             
             
@@ -699,7 +659,7 @@ calling the yielded <code>resetSubmissionState</code> function.</p>
               <div class="meta">
                   <p>
                       Defined in
-                  <a href="../files/addon_components_bs-form.js.html#l232"><code>addon&#x2F;components&#x2F;bs-form.js:232</code></a>
+                  <a href="../files/addon_components_bs-form.js.html#l213"><code>addon&#x2F;components&#x2F;bs-form.js:213</code></a>
               </p>
             
             
@@ -731,7 +691,7 @@ calling the yielded <code>resetSubmissionState</code> function.</p>
               <div class="meta">
                   <p>
                       Defined in
-                  <a href="../files/addon_components_bs-form.js.html#l218"><code>addon&#x2F;components&#x2F;bs-form.js:218</code></a>
+                  <a href="../files/addon_components_bs-form.js.html#l199"><code>addon&#x2F;components&#x2F;bs-form.js:199</code></a>
               </p>
             
             
@@ -762,7 +722,7 @@ calling the yielded <code>resetSubmissionState</code> function.</p>
               <div class="meta">
                   <p>
                       Defined in
-                  <a href="../files/addon_components_bs-form.js.html#l133"><code>addon&#x2F;components&#x2F;bs-form.js:133</code></a>
+                  <a href="../files/addon_components_bs-form.js.html#l122"><code>addon&#x2F;components&#x2F;bs-form.js:122</code></a>
               </p>
             
             
@@ -791,7 +751,7 @@ calling the yielded <code>resetSubmissionState</code> function.</p>
               <div class="meta">
                   <p>
                       Defined in
-                  <a href="../files/addon_components_bs-form.js.html#l154"><code>addon&#x2F;components&#x2F;bs-form.js:154</code></a>
+                  <a href="../files/addon_components_bs-form.js.html#l141"><code>addon&#x2F;components&#x2F;bs-form.js:141</code></a>
               </p>
             
             
@@ -826,7 +786,7 @@ calling the yielded <code>resetSubmissionState</code> function.</p>
               <div class="meta">
                   <p>
                       Defined in
-                  <a href="../files/addon_components_bs-form.js.html#l284"><code>addon&#x2F;components&#x2F;bs-form.js:284</code></a>
+                  <a href="../files/addon_components_bs-form.js.html#l265"><code>addon&#x2F;components&#x2F;bs-form.js:265</code></a>
               </p>
             
             
@@ -856,7 +816,7 @@ calling the yielded <code>resetSubmissionState</code> function.</p>
                   <p><strong>Default:</strong> true</p>
                   <p>
                       Defined in
-                  <a href="../files/addon_components_bs-form.js.html#l305"><code>addon&#x2F;components&#x2F;bs-form.js:305</code></a>
+                  <a href="../files/addon_components_bs-form.js.html#l286"><code>addon&#x2F;components&#x2F;bs-form.js:286</code></a>
               </p>
             
             
@@ -889,7 +849,7 @@ calling the yielded <code>resetSubmissionState</code> function.</p>
                   <p><strong>Default:</strong> false</p>
                   <p>
                       Defined in
-                  <a href="../files/addon_components_bs-form.js.html#l333"><code>addon&#x2F;components&#x2F;bs-form.js:333</code></a>
+                  <a href="../files/addon_components_bs-form.js.html#l314"><code>addon&#x2F;components&#x2F;bs-form.js:314</code></a>
               </p>
             
             
@@ -919,7 +879,7 @@ calling the yielded <code>resetSubmissionState</code> function.</p>
                   <p><strong>Default:</strong> undefined</p>
                   <p>
                       Defined in
-                  <a href="../files/addon_components_bs-form.js.html#l366"><code>addon&#x2F;components&#x2F;bs-form.js:366</code></a>
+                  <a href="../files/addon_components_bs-form.js.html#l347"><code>addon&#x2F;components&#x2F;bs-form.js:347</code></a>
               </p>
             
             
@@ -947,7 +907,7 @@ calling the yielded <code>resetSubmissionState</code> function.</p>
               <div class="meta">
                   <p>
                       Defined in
-                  <a href="../files/addon_components_bs-form.js.html#l212"><code>addon&#x2F;components&#x2F;bs-form.js:212</code></a>
+                  <a href="../files/addon_components_bs-form.js.html#l193"><code>addon&#x2F;components&#x2F;bs-form.js:193</code></a>
               </p>
             
             
@@ -975,7 +935,7 @@ calling the yielded <code>resetSubmissionState</code> function.</p>
               <div class="meta">
                   <p>
                       Defined in
-                  <a href="../files/addon_components_bs-form.js.html#l261"><code>addon&#x2F;components&#x2F;bs-form.js:261</code></a>
+                  <a href="../files/addon_components_bs-form.js.html#l242"><code>addon&#x2F;components&#x2F;bs-form.js:242</code></a>
               </p>
             
             
@@ -1005,7 +965,7 @@ calling the yielded <code>resetSubmissionState</code> function.</p>
                   <p><strong>Default:</strong> false</p>
                   <p>
                       Defined in
-                  <a href="../files/addon_components_bs-form.js.html#l294"><code>addon&#x2F;components&#x2F;bs-form.js:294</code></a>
+                  <a href="../files/addon_components_bs-form.js.html#l275"><code>addon&#x2F;components&#x2F;bs-form.js:275</code></a>
               </p>
             
             
@@ -1036,7 +996,7 @@ calling the yielded <code>resetSubmissionState</code> function.</p>
                 <div class="meta">
                             <p>
                             Defined in
-                    <a href="../files/addon_components_bs-form.js.html#l375"><code>addon&#x2F;components&#x2F;bs-form.js:375</code></a>
+                    <a href="../files/addon_components_bs-form.js.html#l356"><code>addon&#x2F;components&#x2F;bs-form.js:356</code></a>
                     </p>
             
             
@@ -1079,7 +1039,7 @@ calling the yielded <code>resetSubmissionState</code> function.</p>
                 <div class="meta">
                             <p>
                             Defined in
-                    <a href="../files/addon_components_bs-form.js.html#l392"><code>addon&#x2F;components&#x2F;bs-form.js:392</code></a>
+                    <a href="../files/addon_components_bs-form.js.html#l373"><code>addon&#x2F;components&#x2F;bs-form.js:373</code></a>
                     </p>
             
             
@@ -1132,7 +1092,7 @@ calling the yielded <code>resetSubmissionState</code> function.</p>
                 <div class="meta">
                             <p>
                             Defined in
-                    <a href="../files/addon_components_bs-form.js.html#l383"><code>addon&#x2F;components&#x2F;bs-form.js:383</code></a>
+                    <a href="../files/addon_components_bs-form.js.html#l364"><code>addon&#x2F;components&#x2F;bs-form.js:364</code></a>
                     </p>
             
             
@@ -1224,7 +1184,6 @@ calling the yielded <code>resetSubmissionState</code> function.</p>
             <li class="list-group-item list-group-item-private"><a href="../classes/Components.FormElementLayoutInlineCheckbox.html">Components.FormElementLayoutInlineCheckbox</a></li>
             <li class="list-group-item list-group-item-private"><a href="../classes/Components.FormElementLayoutVertical.html">Components.FormElementLayoutVertical</a></li>
             <li class="list-group-item list-group-item-private"><a href="../classes/Components.FormElementLayoutVerticalCheckbox.html">Components.FormElementLayoutVerticalCheckbox</a></li>
-            <li class="list-group-item list-group-item-public"><a href="../classes/Components.FormGroup.html">Components.FormGroup</a></li>
             <li class="list-group-item list-group-item-private"><a href="../classes/Components.LinkComponent.html">Components.LinkComponent</a></li>
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.Modal.html">Components.Modal</a></li>
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.ModalBody.html">Components.ModalBody</a></li>
