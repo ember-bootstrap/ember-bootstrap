@@ -6038,7 +6038,7 @@ ember-modifier-manager-polyfill@^1.2.0:
     ember-cli-version-checker "^2.1.2"
     ember-compatibility-helpers "^1.2.0"
 
-ember-modifier@^2.1.0, ember-modifier@^2.1.1:
+ember-modifier@^2.1.0:
   version "2.1.2"
   resolved "https://registry.yarnpkg.com/ember-modifier/-/ember-modifier-2.1.2.tgz#62d18faedf972dcd9d34f90d5321fbc943d139b1"
   integrity sha512-3Lsu1fV1sIGa66HOW07RZc6EHISwKt5VA5AUnFss2HX6OTfpxTJ2qvPctt2Yt0XPQXJ4G6BQasr/F35CX7UGJA==
@@ -6110,15 +6110,14 @@ ember-qunit@5.1.5:
     silent-error "^1.1.1"
     validate-peer-dependencies "^1.2.0"
 
-ember-ref-bucket@^3.1.0:
-  version "3.1.0"
-  resolved "https://registry.yarnpkg.com/ember-ref-bucket/-/ember-ref-bucket-3.1.0.tgz#c3aa3923bdedcf782923bf24e31a17fdd2f68a02"
-  integrity sha512-oO+Igh8G1UHcf7gEJdbElz/xJHjTds64DXfd+c189rHuKJ4dYMI2m2BkHPermeyUe6ZNEFwlkVe9lYm2rvmcaw==
+ember-ref-bucket@^4.0.0:
+  version "4.0.0"
+  resolved "https://registry.yarnpkg.com/ember-ref-bucket/-/ember-ref-bucket-4.0.0.tgz#54d7ee942cd5f1541801066b3d72b951f9713cea"
+  integrity sha512-j9YSKTmClgqb2aUiuDta+t4+b9v8Xc/SWMdASr3ewRPIJR0WKU5+u6cEmwN/koMe0N/O3zq7TEHxp0NDwQe2JA==
   dependencies:
-    ember-cli-babel "^7.22.1"
-    ember-cli-htmlbars "^5.3.1"
-    ember-destroyable-polyfill "^2.0.2"
-    ember-modifier "^2.1.1"
+    ember-cli-babel "^7.26.11"
+    ember-cli-htmlbars "^6.0.1"
+    ember-modifier "^3.0.0"
 
 ember-render-helpers@^0.2.0:
   version "0.2.0"
