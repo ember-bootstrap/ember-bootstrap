@@ -13,9 +13,15 @@
   {{did-insert this.getOrSetTitleId}}
   {{did-insert this.setInitialFocus}}
 >
-  <div class="modal-dialog {{this.sizeClass}} {{if @centered "modal-dialog-centered"}} {{if @scrollable "modal-dialog-scrollable"}} {{if @fullscreen (concat "modal-fullscreen-" @fullscreen "-down")}}" role="document">
-    <div class="modal-content"
-     tabindex="-1"
+  <div class="modal-dialog {{this.sizeClass}} {{if @centered "modal-dialog-centered"}} {{if @scrollable "modal-dialog-scrollable"}} 
+  {{#if @fullscreen}}
+    {{#if (bs-eq @fullscreen true)}}
+      modal-fullscreen
+    {{else}}
+      modal-fullscreen-{{@fullscreen}}-down
+    {{/if}}
+  {{/if}}" role="document">
+    <div class="modal-content" tabindex="-1"
       {{focus-trap
         shouldSelfFocus=true
         focusTrapOptions=(hash

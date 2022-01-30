@@ -193,6 +193,20 @@ export default class Modal extends Component {
   @arg
   scrollable = false;
 
+    /**
+   *  Allows adding fullscreen mode for modals. It will
+   *  apply the `modal-fullscreen' class when using 'true' and
+   *  `modal-fullscreen-[x]-down` class when using BS breakpoints
+   *   ([x] = 'sm', 'md', 'lg', 'xl', 'xxl').
+   *  
+   * @property fullscreen
+   * @type {string}
+   * @default 'true'
+   * @public
+   */
+  @arg
+  fullscreen = 'true';
+
   /**
    * @property dialogComponent
    * @type {String}
@@ -267,7 +281,6 @@ export default class Modal extends Component {
    * @public
    */
   @arg
-  transitionDuration = 300;
 
   /**
    * The duration of the backdrop fade transition
@@ -278,7 +291,6 @@ export default class Modal extends Component {
    * @public
    */
   @arg
-  backdropTransitionDuration = 150;
 
   /**
    * Use CSS transitions?

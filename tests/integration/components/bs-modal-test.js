@@ -312,5 +312,31 @@ module('Integration | Component | bs-modal', function (hooks) {
       await settled();
       assert.dom('.modal').doesNotExist();
     });
+
+    test('it passes along fullscreen class attribute', async function (assert) {
+      this.set('fullscreen', 'full');
+      await render(hbs`<BsModal @fullscreen={{this.fullscreen}}>`);
+      assert.dom('.modal-dialog').hasClass('modal-fullscreen');
+
+      this.set('fullscreen', 'sm');
+      await render(hbs`<BsModal @fullscreen={{this.fullscreen}}>`);
+      assert.dom('.modal-dialog').hasClass('modal-fullscreen-sm-down');
+
+      this.set('fullscreen', 'md');
+      await render(hbs`<BsModal @fullscreen={{this.fullscreen}}>`);
+      assert.dom('.modal-dialog').hasClass('modal-fullscreen-md-down');
+
+      this.set('fullscreen', 'lg');
+      await render(hbs`<BsModal @fullscreen={{this.fullscreen}}>`);
+      assert.dom('.modal-dialog').hasClass('modal-fullscreen-lg-down');
+
+      this.set('fullscreen', 'xl');
+      await render(hbs`<BsModal @fullscreen={{this.fullscreen}}>`);
+      assert.dom('.modal-dialog').hasClass('modal-fullscreen-xl-down');
+      
+      this.set('fullscreen', 'xxl');
+      await render(hbs`<BsModal @fullscreen={{this.fullscreen}}>`);
+      assert.dom('.modal-dialog').hasClass('modal-fullscreen-xxl-down');
+    });
   });
 });
