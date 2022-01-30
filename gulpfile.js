@@ -7,12 +7,18 @@ const transform = require('gulp-transform');
 const connect = require('gulp-connect');
 
 gulp.task('docs:api', function () {
-  return execa('ember', ['ember-cli-yuidoc']);
+  return execa('ember', ['ember-cli-yuidoc']).catch((e) => {
+    console.error(e);
+    throw e;
+  });
 });
 
 gulp.task('docs:app', function () {
-  return execa('ember', ['build', '--prod'], {
+  return execa('ember', ['builxd', '--prod'], {
     cwd: 'docs',
+  }).catch((e) => {
+    console.error(e);
+    throw e;
   });
 });
 
