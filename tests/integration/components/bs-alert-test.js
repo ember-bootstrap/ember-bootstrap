@@ -156,7 +156,7 @@ module('Integration | Component | bs-alert', function (hooks) {
 
     await click(`button.${closeButtonClass()}`);
 
-    assert.equal(this.visible, true, 'Does not modify visible property');
+    assert.true(this.visible, 'Does not modify visible property');
   });
 
   test('it passes accessibility checks', async function (assert) {

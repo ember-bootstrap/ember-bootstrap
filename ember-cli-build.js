@@ -1,5 +1,5 @@
 'use strict';
-/* eslint-env node */
+
 const EmberAddon = require('ember-cli/lib/broccoli/ember-addon');
 const { maybeEmbroider } = require('@embroider/test-setup');
 
