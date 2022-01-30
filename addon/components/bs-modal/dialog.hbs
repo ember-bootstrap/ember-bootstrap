@@ -13,7 +13,7 @@
   {{did-insert this.getOrSetTitleId}}
   {{did-insert this.setInitialFocus}}
 >
-  <div class="modal-dialog {{this.sizeClass}} {{if @centered "modal-dialog-centered"}} {{if @scrollable "modal-dialog-scrollable"}}" role="document">
+  <div class="modal-dialog {{this.sizeClass}} {{if @centered "modal-dialog-centered"}} {{if @scrollable "modal-dialog-scrollable"}} {{if @fullscreen (concat "modal-fullscreen-" @fullscreen "-down")}}" role="document">
     <div class="modal-content"
      tabindex="-1"
       {{focus-trap
