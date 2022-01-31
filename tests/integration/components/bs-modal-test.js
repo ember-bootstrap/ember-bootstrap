@@ -313,8 +313,12 @@ module('Integration | Component | bs-modal', function (hooks) {
       assert.dom('.modal').doesNotExist();
     });
 
-    test('it passes along fullscreen class attribute', async function (assert) {
-      this.set('fullscreen', 'full');
+    test('it allows to render modal in fullscreen using @fullscreen argument', async function (assert) {
+      this.set('fullscreen', null);
+      await render(hbs`<BsModal>`);
+      assert.dom('.modal-dialog').doesNotHaveClass(/modal-fullscreen/);
+
+      this.set('fullscreen', true);
       await render(hbs`<BsModal @fullscreen={{this.fullscreen}}>`);
       assert.dom('.modal-dialog').hasClass('modal-fullscreen');
 
@@ -333,7 +337,7 @@ module('Integration | Component | bs-modal', function (hooks) {
       this.set('fullscreen', 'xl');
       await render(hbs`<BsModal @fullscreen={{this.fullscreen}}>`);
       assert.dom('.modal-dialog').hasClass('modal-fullscreen-xl-down');
-      
+
       this.set('fullscreen', 'xxl');
       await render(hbs`<BsModal @fullscreen={{this.fullscreen}}>`);
       assert.dom('.modal-dialog').hasClass('modal-fullscreen-xxl-down');
