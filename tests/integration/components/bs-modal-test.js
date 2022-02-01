@@ -338,6 +338,4 @@ module('Integration | Component | bs-modal', function (hooks) {
       assert.dom('.modal').doesNotExist();
     });
   });
-
-  
 });
