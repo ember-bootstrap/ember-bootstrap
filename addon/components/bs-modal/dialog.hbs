@@ -13,8 +13,9 @@
   {{did-insert this.getOrSetTitleId}}
   {{did-insert this.setInitialFocus}}
 >
-<div class="modal-dialog {{this.sizeClass}} {{if @centered "modal-dialog-centered"}} {{if @scrollable "modal-dialog-scrollable"}} {{if (macroCondition (macroGetOwnConfig "isNotBS5")) ({{if @fullscreen (if (bs-eq @fullscreen true) "modal-fullscreen" "modal-fullscreen-{{@fullscreen}}-down")}})}}" role="document">
-    <div class="modal-content" tabindex="-1"
+<div class="modal-dialog {{this.sizeClass}} {{if @centered "modal-dialog-centered"}} {{if @scrollable "modal-dialog-scrollable"}} {{if (macroCondition (macroGetOwnConfig "isNotBS5"))}} {{if @fullscreen (if (bs-eq @fullscreen true) "modal-fullscreen" (concat "modal-fullscreen-" @fullscreen "-down"))}}" role="document">
+    <div class="modal-content"
+      tabindex="-1"
       {{focus-trap
         shouldSelfFocus=true
         focusTrapOptions=(hash
