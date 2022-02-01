@@ -127,6 +127,31 @@ module('Integration | Component | bs-modal', function (hooks) {
     assert.dom('.modal').hasAttribute('aria-labelledby', modalTitleId);
   });
 
+  test('it allows to render modal in fullscreen using @fullscreen argument', async function (assert) {
+    this.set('fullscreen', null);
+    await render(hbs`<BsModal>Hello World!</BsModal>`);
+    assert.dom('.modal-dialog').doesNotHaveClass(/modal-fullscreen/);
+
+    this.set('fullscreen', true);
+    await render(hbs`<BsModal @fullscreen={{this.fullscreen}}>Hello World!</BsModal>`);
+    assert.dom('.modal-dialog').hasClass('modal-fullscreen');
+
+    this.set('fullscreen', 'sm');
+    assert.dom('.modal-dialog').hasClass('modal-fullscreen-sm-down');
+
+    this.set('fullscreen', 'md');
+    assert.dom('.modal-dialog').hasClass('modal-fullscreen-md-down');
+
+    this.set('fullscreen', 'lg');
+    assert.dom('.modal-dialog').hasClass('modal-fullscreen-lg-down');
+
+    this.set('fullscreen', 'xl');
+    assert.dom('.modal-dialog').hasClass('modal-fullscreen-xl-down');
+
+    this.set('fullscreen', 'xxl');
+    assert.dom('.modal-dialog').hasClass('modal-fullscreen-xxl-down');
+  });
+
   test('Modal has accesibility attributes with default title', async function (assert) {
     await render(hbs`
       <BsModal as |modal|>
@@ -312,35 +337,7 @@ module('Integration | Component | bs-modal', function (hooks) {
       await settled();
       assert.dom('.modal').doesNotExist();
     });
-
-    test('it allows to render modal in fullscreen using @fullscreen argument', async function (assert) {
-      this.set('fullscreen', null);
-      await render(hbs`<BsModal>`);
-      assert.dom('.modal-dialog').doesNotHaveClass(/modal-fullscreen/);
-
-      this.set('fullscreen', true);
-      await render(hbs`<BsModal @fullscreen={{this.fullscreen}}>`);
-      assert.dom('.modal-dialog').hasClass('modal-fullscreen');
-
-      this.set('fullscreen', 'sm');
-      await render(hbs`<BsModal @fullscreen={{this.fullscreen}}>`);
-      assert.dom('.modal-dialog').hasClass('modal-fullscreen-sm-down');
-
-      this.set('fullscreen', 'md');
-      await render(hbs`<BsModal @fullscreen={{this.fullscreen}}>`);
-      assert.dom('.modal-dialog').hasClass('modal-fullscreen-md-down');
-
-      this.set('fullscreen', 'lg');
-      await render(hbs`<BsModal @fullscreen={{this.fullscreen}}>`);
-      assert.dom('.modal-dialog').hasClass('modal-fullscreen-lg-down');
-
-      this.set('fullscreen', 'xl');
-      await render(hbs`<BsModal @fullscreen={{this.fullscreen}}>`);
-      assert.dom('.modal-dialog').hasClass('modal-fullscreen-xl-down');
-
-      this.set('fullscreen', 'xxl');
-      await render(hbs`<BsModal @fullscreen={{this.fullscreen}}>`);
-      assert.dom('.modal-dialog').hasClass('modal-fullscreen-xxl-down');
-    });
   });
+
+  
 });
