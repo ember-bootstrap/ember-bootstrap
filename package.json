@@ -46,8 +46,7 @@
     "*.js": "eslint --cache --fix"
   },
   "resolutions": {
-    "ember-cli-htmlbars/semver": "~7.3.0",
-    "@embroider/util": "^1.0.0"
+    "ember-cli-htmlbars/semver": "~7.3.0"
   },
   "dependencies": {
     "@ember/render-modifiers": "^2.0.0",
@@ -66,7 +65,7 @@
     "ember-cli-version-checker": "^5.1.2",
     "ember-concurrency": "^2.1.2",
     "ember-decorators": "^6.1.0",
-    "ember-element-helper": "^0.5.0",
+    "ember-element-helper": "^0.6.0",
     "ember-focus-trap": "^1.0.0",
     "ember-in-element-polyfill": "^1.0.1",
     "ember-named-blocks-polyfill": "^0.2.4",
