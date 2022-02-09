@@ -1,6 +1,6 @@
 {
   "name": "ember-bootstrap",
-  "version": "5.0.0-rc.0",
+  "version": "5.0.0",
   "description": "Bootstrap components for Ember.js",
   "keywords": [
     "ember-addon",
