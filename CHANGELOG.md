@@ -3,6 +3,18 @@
 
 
 
+
+## v5.0.0 (2022-02-09)
+
+> See the other 5.0.0 pre-releases for the complete changelog!
+
+#### Documentation
+* [#1745](https://github.com/kaliber5/ember-bootstrap/pull/1745) Fix targets for docs app ([@simonihmig](https://github.com/simonihmig))
+
+#### Committers: 1
+- Simon Ihmig ([@simonihmig](https://github.com/simonihmig))
+
+
 ## v5.0.0-rc.0 (2022-01-30)
 
 #### :boom: Breaking Change
