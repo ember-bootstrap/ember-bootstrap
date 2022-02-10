@@ -145,6 +145,9 @@
     "striptags": "3.2.0",
     "webpack": "5.68.0"
   },
+  "peerDependencies": {
+    "ember-source": ">=3.24"
+  },
   "engines": {
     "node": "12.* || 14.* || >= 16"
   },
