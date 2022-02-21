@@ -26,7 +26,6 @@
   ) as |Dialog|}}
     {{#if this._renderInPlace}}
       <Dialog
-        class={{@class}}
         {{create-ref "modalElement"}}
         ...attributes
       >
@@ -48,7 +47,6 @@
     {{else}}
       {{#in-element this.destinationElement insertBefore=null}}
         <Dialog
-          class={{@class}}
           {{create-ref "modalElement"}}
           ...attributes
         >
