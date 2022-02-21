@@ -23,7 +23,7 @@
       {{if @centered "modal-dialog-centered"}}
       {{if @scrollable "modal-dialog-scrollable"}}
       {{if
-        (macroCondition (macroGetOwnConfig "isNotBS5"))
+        (macroCondition (macroGetOwnConfig "isBS5"))
         (if
           @fullscreen (if (bs-eq @fullscreen true) "modal-fullscreen" (concat "modal-fullscreen-" @fullscreen "-down"))
         )
