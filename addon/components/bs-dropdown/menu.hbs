@@ -1,7 +1,7 @@
 {{#if this._isOpen}}
   {{#if this._renderInPlace}}
     <div
-      class="dropdown-menu {{this.alignClass}} {{if this.isOpen "show"}} {{@class}}"
+      class="dropdown-menu {{this.alignClass}} {{if this.isOpen "show"}}"
       tabindex="-1"
       ...attributes
       {{popper-tooltip this.toggleElement this.popperOptions}}
@@ -21,7 +21,7 @@
   {{else}}
     {{#in-element this.destinationElement insertBefore=null}}
       <div
-        class="dropdown-menu {{this.alignClass}} {{if this.isOpen "show"}} {{@class}}"
+        class="dropdown-menu {{this.alignClass}} {{if this.isOpen "show"}}"
         tabindex="-1"
         ...attributes
         {{popper-tooltip this.toggleElement this.popperOptions}}
