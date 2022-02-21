@@ -1,6 +1,6 @@
 {{#if @renderInPlace}}
   <div
-    class="popover {{@class}} {{if this.fade "fade"}} {{this.actualPlacementClass}} {{if this.showHelp "show"}}"
+    class="popover {{if this.fade "fade"}} {{this.actualPlacementClass}} {{if this.showHelp "show"}}"
     role="tooltip"
     ...attributes
     {{popper-tooltip @popperTarget this.popperOptions}}
@@ -15,7 +15,7 @@
 {{else}}
   {{#in-element @destinationElement insertBefore=null}}
     <div
-      class="popover {{@class}} {{if this.fade "fade"}} {{this.actualPlacementClass}} {{if this.showHelp "show"}}"
+      class="popover {{if this.fade "fade"}} {{this.actualPlacementClass}} {{if this.showHelp "show"}}"
       role="tooltip"
       ...attributes
       {{popper-tooltip @popperTarget this.popperOptions}}

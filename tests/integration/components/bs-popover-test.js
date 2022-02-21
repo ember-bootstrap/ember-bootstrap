@@ -24,7 +24,7 @@ module('Integration | Component | bs-popover', function (hooks) {
   test('it has correct markup', async function (assert) {
     // Template block usage:
     await render(hbs`
-      <BsPopover @id="popover-element" @fade={{true}} @title="dummy title" @class="wide" @visible={{true}}>
+      <BsPopover @id="popover-element" @fade={{true}} @title="dummy title" @visible={{true}} class="wide">
         template block text
       </BsPopover>
     `);
