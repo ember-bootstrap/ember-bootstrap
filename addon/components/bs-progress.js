@@ -13,9 +13,11 @@ import deprecateSubclassing from 'ember-bootstrap/utils/deprecate-subclassing';
 
   ```hbs
   <BsProgress as |pg| >
-    <pg.bar @value={{this.progressValue}} @minValue={{0}} @maxValue={{10}} @showLabel={{true}} @type="danger" />
+    <pg.bar @value={{this.progressValue}} @minValue={{0}} @maxValue={{10}} @showLabel={{true}} @type="danger" aria-label="Loading" />
   </BsProgress>
   ```
+
+  > Don't forget to add a `aria-label` attribute to the progress bar for accessibility!
 
   ### Stacked
 
