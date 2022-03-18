@@ -23,8 +23,39 @@ import hbs from 'htmlbars-inline-precompile';
 import setupNoDeprecations from '../../../helpers/setup-no-deprecations';
 import sinon from 'sinon';
 import { tracked } from '@glimmer/tracking';
+import Form from 'ember-bootstrap/components/bs-form';
+import FormElement from 'ember-bootstrap/components/bs-form/element';
 
 const formLayouts = ['vertical', 'horizontal', 'inline'];
+
+class ValidatingForm extends Form {
+  '__ember-bootstrap_subclass' = true;
+
+  get hasValidator() {
+    return true;
+  }
+
+  async validate() {
+    const result =
+      typeof this.args.validate === 'function'
+        ? this.args.validate()
+        : (this.args.validate ?? true) === true
+        ? 'VALID'
+        : false;
+
+    if (result === false) {
+      throw 'INVALID';
+    }
+
+    return result;
+  }
+}
+
+class ValidatingFormElement extends FormElement {
+  get hasValidator() {
+    return true;
+  }
+}
 
 module('Integration | Component | bs-form/element', function (hooks) {
   setupRenderingTest(hooks);
@@ -510,15 +541,17 @@ module('Integration | Component | bs-form/element', function (hooks) {
       @tracked gender = 'male';
     })();
 
+    this.set('form', ValidatingForm);
+    this.set('formElement', ValidatingFormElement);
+
     this.set('model', model);
     await render(hbs`
-      <BsForm @model={{this.model}} as |form|>
+      <this.form @elementComponent={{this.formElement}} @model={{this.model}} as |form|>
         <form.element
           @controlType="textarea"
           @label="Gender"
           @property="gender"
           @showAllValidations={{true}}
-          @hasValidator={{true}}
           as |el|
         >
           <input
@@ -530,7 +563,7 @@ module('Integration | Component | bs-form/element', function (hooks) {
           >
           <el.control />
         </form.element>
-      </BsForm>
+      </this.form>
     `);
 
     assert.dom('input').exists({ count: 1 }, 'block template is rendered');
@@ -590,8 +623,10 @@ module('Integration | Component | bs-form/element', function (hooks) {
 
   test('shows validation success', async function (assert) {
     this.set('model', EmberObject.create({ name: null }));
+    this.set('formElement', ValidatingFormElement);
+
     await render(hbs`
-        <BsForm::Element @property="name" @showAllValidations={{true}} @hasValidator={{true}} @model={{this.model}} />
+        <this.formElement @property="name" @showAllValidations={{true}} @model={{this.model}} />
     `);
     assert
       .dom(formFeedbackElement())
@@ -601,8 +636,10 @@ module('Integration | Component | bs-form/element', function (hooks) {
   testRequiringFocus('shows validation errors', async function (assert) {
     this.set('errors', A(['Invalid']));
     this.set('model', EmberObject.create({ name: null }));
+    this.set('formElement', ValidatingFormElement);
+
     await render(hbs`
-        <BsForm::Element @property="name" @hasValidator={{true}} @errors={{this.errors}} @model={{this.model}} data-test-form-element />
+        <this.formElement @property="name" @errors={{this.errors}} @model={{this.model}} data-test-form-element />
     `);
     assert
       .dom(formFeedbackElement())
@@ -624,8 +661,10 @@ module('Integration | Component | bs-form/element', function (hooks) {
   testRequiringFocus('shows validation warnings', async function (assert) {
     this.set('warnings', A(['Insecure']));
     this.set('model', EmberObject.create({ name: null }));
+    this.set('formElement', ValidatingFormElement);
+
     await render(hbs`
-        <BsForm::Element @property="name" @hasValidator={{true}} @warnings={{this.warnings}} @model={{this.model}} data-test-form-element />
+        <this.formElement @property="name" @warnings={{this.warnings}} @model={{this.model}} data-test-form-element />
     `);
     assert
       .dom(formFeedbackElement())
@@ -657,13 +696,16 @@ module('Integration | Component | bs-form/element', function (hooks) {
     // `You attempted to update showOwnValidation on ..., but it had already been used previously in the same computation.`
 
     this.set('model', { name: null });
+    this.set('form', ValidatingForm);
+    this.set('formElement', ValidatingFormElement);
+
     await render(hbs`
-      <BsForm @model={{this.model}} as |form|>
-        <form.element @property="name" @hasValidator={{true}} @model={{this.model}} data-test-form-element as |el|>
+      <this.form @elementComponent={{this.formElement}} as |form|>
+        <form.element @property="name" @model={{this.model}} data-test-form-element as |el|>
           <el.control data-test-first/>
           <button type="submit" disabled={{if el.validation true false}}>Send</button>
         </form.element>
-      </BsForm>
+      </this.form>
     `);
 
     focus('input');
@@ -715,8 +757,10 @@ module('Integration | Component | bs-form/element', function (hooks) {
     this.set('errors', A(['Invalid']));
     this.set('warning', 'some warning');
     this.set('model', EmberObject.create({ name: null }));
+    this.set('formElement', ValidatingFormElement);
+
     await render(hbs`
-        <BsForm::Element @property="name" @hasValidator={{true}} @errors={{this.errors}} @customWarning={{this.warning}} @model={{this.model}} data-test-form-element />
+        <this.formElement @property="name" @errors={{this.errors}} @customWarning={{this.warning}} @model={{this.model}} data-test-form-element />
     `);
     assert
       .dom(formFeedbackElement())
@@ -749,8 +793,10 @@ module('Integration | Component | bs-form/element', function (hooks) {
       this.set('errors', A(['Invalid']));
       this.set('model', EmberObject.create({ name: null }));
       this.set('showValidationOn', ['change']);
+      this.set('formElement', ValidatingFormElement);
+
       await render(hbs`
-        <BsForm::Element @property="name" @hasValidator={{true}} @errors={{this.errors}} @model={{this.model}} @showValidationOn={{this.showValidationOn}} />
+        <this.formElement @property="name" @errors={{this.errors}} @model={{this.model}} @showValidationOn={{this.showValidationOn}} />
     `);
       assert
         .dom(formFeedbackElement())
@@ -773,8 +819,10 @@ module('Integration | Component | bs-form/element', function (hooks) {
     async function (assert) {
       this.set('errors', A(['Invalid']));
       this.set('model', EmberObject.create({ name: null }));
+      this.set('formElement', ValidatingFormElement);
+
       await render(hbs`
-        <BsForm::Element @property="name" @hasValidator={{true}} @errors={{this.errors}} @model={{this.model}} @showValidationOn="change" />
+        <this.formElement @property="name" @errors={{this.errors}} @model={{this.model}} @showValidationOn="change" />
     `);
       assert
         .dom(formFeedbackElement())
@@ -794,9 +842,12 @@ module('Integration | Component | bs-form/element', function (hooks) {
   testRequiringFocus('event triggered on input group button does not enable validation', async function (assert) {
     this.set('errors', A(['Invalid']));
     this.set('model', EmberObject.create({ name: null }));
+    this.set('form', ValidatingForm);
+    this.set('formElement', ValidatingFormElement);
+
     await render(hbs`
-      <BsForm as |form|>
-        <form.element @property="name" @hasValidator={{true}} @errors={{this.errors}} @model={{this.model}} as |el|>
+      <this.form @elementComponent={{this.formElement}} as |form|>
+        <form.element @property="name" @errors={{this.errors}} @model={{this.model}} as |el|>
           <div class="input-group mb-3">
             <div class="input-group-prepend">
               <button class="btn btn-outline-secondary" type="button">Button</button>
@@ -804,7 +855,7 @@ module('Integration | Component | bs-form/element', function (hooks) {
             {{el.control}}
           </div>
         </form.element>
-      </BsForm>
+      </this.form>
     `);
     await click('button');
     assert
@@ -818,14 +869,17 @@ module('Integration | Component | bs-form/element', function (hooks) {
       this.set('doNotShowValidationForEventTargets', ['[data-trigger-validation="false"]']);
       this.set('errors', A(['Invalid']));
       this.set('model', EmberObject.create({ name: null }));
+      this.set('form', ValidatingForm);
+      this.set('formElement', ValidatingFormElement);
+
       await render(hbs`
-      <BsForm as |form|>
-        <form.element @property="name" @hasValidator={{true}} @errors={{this.errors}} @model={{this.model}} @doNotShowValidationForEventTargets={{this.doNotShowValidationForEventTargets}} as |el|>
-          {{el.control}}
-          <button type="button" data-trigger-validation="false">Test</button>
-        </form.element>
-      </BsForm>
-    `);
+        <this.form @elementComponent={{this.formElement}} as |form|>
+          <form.element @property="name" @errors={{this.errors}} @model={{this.model}} @doNotShowValidationForEventTargets={{this.doNotShowValidationForEventTargets}} as |el|>
+            {{el.control}}
+            <button type="button" data-trigger-validation="false">Test</button>
+          </form.element>
+        </this.form>
+      `);
       await click('button');
       assert.dom(formFeedbackElement()).hasNoClass(validationErrorClass());
 
