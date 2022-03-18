@@ -2,7 +2,7 @@ import Component from '@ember/component';
 import { module } from 'qunit';
 import { setupRenderingTest } from 'ember-qunit';
 import { click, find, render, settled, triggerEvent, waitFor, waitUntil } from '@ember/test-helpers';
-import { test, visibilityClass } from '../../helpers/bootstrap';
+import { test, testBS5, visibilityClass } from '../../helpers/bootstrap';
 import hbs from 'htmlbars-inline-precompile';
 import setupNoDeprecations from '../../helpers/setup-no-deprecations';
 import sinon from 'sinon';
@@ -236,6 +236,34 @@ module('Integration | Component | bs-modal', function (hooks) {
     await settled();
 
     assert.dom('.modal').isVisible('Modal is visible again');
+  });
+
+  testBS5('it allows to render modal in fullscreen using @fullscreen argument', async function (assert) {
+    this.set('fullscreen', null);
+    await render(hbs`<BsModal @fullscreen={{this.fullscreen}}>Hello World!</BsModal>`);
+    assert
+      .dom('.modal-dialog')
+      .doesNotHaveClass(/modal-fullscreen/, 'it is not rendered as fullscreen if @full is undefined');
+
+    this.set('fullscreen', true);
+    assert
+      .dom('.modal-dialog')
+      .hasClass('modal-fullscreen', 'it renders in fullscreen for all breakpoints if @fullscreen is `true`');
+
+    this.set('fullscreen', 'sm');
+    assert.dom('.modal-dialog').hasClass('modal-fullscreen-sm-down', 'it supports `sm` breakpoint');
+
+    this.set('fullscreen', 'md');
+    assert.dom('.modal-dialog').hasClass('modal-fullscreen-md-down', 'it supports `md` breakpoint');
+
+    this.set('fullscreen', 'lg');
+    assert.dom('.modal-dialog').hasClass('modal-fullscreen-lg-down', 'it supports `lg` breakpoint');
+
+    this.set('fullscreen', 'xl');
+    assert.dom('.modal-dialog').hasClass('modal-fullscreen-xl-down', 'it supports `xl` breakpoint');
+
+    this.set('fullscreen', 'xxl');
+    assert.dom('.modal-dialog').hasClass('modal-fullscreen-xxl-down', 'it supports `xxl` breakpoint');
   });
 
   module('it animates opening and closing the modal', function () {

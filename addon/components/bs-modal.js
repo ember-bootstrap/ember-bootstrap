@@ -194,6 +194,20 @@ export default class Modal extends Component {
   scrollable = false;
 
   /**
+   *  [BS5 only!] Allows adding fullscreen mode for modals. It will
+   *  apply the `modal-fullscreen` class when using `true` and
+   *  `modal-fullscreen-[x]-down` class when using BS breakpoints
+   *   ([x] = `sm`, `md`, `lg`, `xl`, `xxl`).
+   *
+   * Also see the [Bootstrap docs](https://getbootstrap.com/docs/5.1/components/modal/#fullscreen-modal)
+   *
+   * @property fullscreen
+   * @type {(Boolean|String)}
+   * @default false
+   * @public
+   */
+
+  /**
    * @property dialogComponent
    * @type {String}
    * @private

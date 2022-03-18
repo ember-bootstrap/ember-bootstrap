@@ -8,21 +8,33 @@
   {{on "mousedown" this.handleMouseDown}}
   {{on "mouseup" this.handleMouseUp}}
   {{on "click" this.handleClick}}
-  {{style paddingLeft=(concat @paddingLeft "px") paddingRight=(concat @paddingRight "px") display=(if @inDom "block" "")}}
+  {{style
+    paddingLeft=(concat @paddingLeft "px")
+    paddingRight=(concat @paddingRight "px")
+    display=(if @inDom "block" "")
+  }}
   {{create-ref "mainNode"}}
   {{did-insert this.getOrSetTitleId}}
   {{did-insert this.setInitialFocus}}
 >
-  <div class="modal-dialog {{this.sizeClass}} {{if @centered "modal-dialog-centered"}} {{if @scrollable "modal-dialog-scrollable"}}" role="document">
-    <div class="modal-content"
-     tabindex="-1"
-      {{focus-trap
-        shouldSelfFocus=true
-        focusTrapOptions=(hash
-          clickOutsideDeactivates=true
-          fallbackFocus=".modal"
+  <div
+    class="modal-dialog
+      {{this.sizeClass}}
+      {{if @centered "modal-dialog-centered"}}
+      {{if @scrollable "modal-dialog-scrollable"}}
+      {{if
+        (macroCondition (macroGetOwnConfig "isBS5"))
+        (if
+          @fullscreen (if (bs-eq @fullscreen true) "modal-fullscreen" (concat "modal-fullscreen-" @fullscreen "-down"))
         )
       }}
+      "
+    role="document"
+  >
+    <div
+      class="modal-content"
+      tabindex="-1"
+      {{focus-trap shouldSelfFocus=true focusTrapOptions=(hash clickOutsideDeactivates=true fallbackFocus=".modal")}}
     >
       {{yield}}
     </div>
