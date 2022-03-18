@@ -102,14 +102,16 @@ module('Integration | Component | bs-tab', function (hooks) {
         <tab.pane @title="Tab 1">
           tabcontent 1
         </tab.pane>
+        <tab.pane @title="Tab 2">
+          tabcontent 2
+        </tab.pane>
       </BsTab>
     `);
 
     assert.dom('ul.nav.nav-tabs').hasAttribute('role', 'tablist');
-    // Should not have role="presentation" even so Bootstrap 3 docs have it.
-    // This was discussed at https://github.com/kaliber5/ember-bootstrap/pull/782.
-    assert.dom('ul.nav.nav-tabs > li').doesNotHaveAttribute('role');
     assert.dom('ul.nav.nav-tabs > li > a').hasAttribute('role', 'tab');
+    assert.dom('ul.nav.nav-tabs > li:nth-of-type(1) > a').hasAttribute('aria-selected', 'true');
+    assert.dom('ul.nav.nav-tabs > li:nth-of-type(2) > a').hasAttribute('aria-selected', 'false');
     assert.dom('.tab-pane').hasAttribute('role', 'tabpanel');
   });
 
@@ -336,14 +338,7 @@ module('Integration | Component | bs-tab', function (hooks) {
 
     await a11yAudit({
       rules: {
-        // the component generates the markup as seen in the Bootstrap example: https://getbootstrap.com/docs/4.3/components/navs/#javascript-behavior
-        // however aXe seems to not like having <li>s in a <ul> with a role of tablist
-        // disabling the rule for now, but may be revisited!
-        listitem: { enabled: false },
         'color-contrast': { enabled: false },
-        // @todo https://github.com/kaliber5/ember-bootstrap/issues/1521
-        'aria-required-parent': { enabled: false },
-        'aria-required-children': { enabled: false },
       },
     });
     assert.ok(true, 'A11y audit passed');
