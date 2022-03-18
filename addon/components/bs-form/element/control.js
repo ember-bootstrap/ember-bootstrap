@@ -1,6 +1,5 @@
-import Component from '@ember/component';
-import defaultValue from 'ember-bootstrap/utils/default-decorator';
-import formValidationClass from 'ember-bootstrap/utils/cp/form-validation-class';
+import Component from '@glimmer/component';
+import formValidationClass from 'ember-bootstrap/utils/form-validation-class';
 
 /**
 
@@ -9,23 +8,15 @@ import formValidationClass from 'ember-bootstrap/utils/cp/form-validation-class'
  @extends Ember.Component
  @private
  */
-// eslint-disable-next-line ember/require-tagless-components
 export default class FormElementControl extends Component {
   /**
    * @property value
    * @public
    */
 
-  @formValidationClass('validationType')
-  formValidationClass;
-
-  /**
-   * @property ariaDescribedBy
-   * @type {string}
-   * @public
-   */
-  @defaultValue
-  ariaDescribedBy = null;
+  get formValidationClass() {
+    return formValidationClass(this.args.validationType);
+  }
 
   /**
    * This action is called whenever the `value` changes
@@ -34,5 +25,4 @@ export default class FormElementControl extends Component {
    * @param {*} value
    * @public
    */
-  onChange() {}
 }

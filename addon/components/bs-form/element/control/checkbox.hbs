@@ -1,10 +1,10 @@
 <input
   type="checkbox"
   id={{@id}}
-  disabled={{this.disabled}}
-  readonly={{this.readonly}}
-  aria-describedby={{this.ariaDescribedBy}}
-  checked={{this.value}}
+  disabled={{@disabled}}
+  readonly={{@readonly}}
+  aria-describedby={{@ariaDescribedBy}}
+  checked={{@value}}
   class="form-check-input {{this.formValidationClass}}"
   ...attributes
   {{on "click" this.handleClick}}

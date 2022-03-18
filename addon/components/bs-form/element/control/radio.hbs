@@ -1,13 +1,13 @@
 {{!-- template-lint-disable no-positive-tabindex --}}
 {{#each @options as |option index|}}
   {{#let (concat @id "-" index) as |id|}}
-    <div class="form-check{{if this.inline " form-check-inline"}}">
+    <div class="form-check{{if @inline " form-check-inline"}}">
       <input
         type="radio"
         class="form-check-input"
         id={{id}}
         checked={{bs-eq option @value}}
-        onclick={{fn this.onChange option}}
+        onclick={{fn @onChange option}}
         name={{@name}}
         required={{@required}}
         disabled={{@disabled}}

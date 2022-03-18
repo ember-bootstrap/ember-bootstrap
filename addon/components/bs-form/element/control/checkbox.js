@@ -1,5 +1,4 @@
 import { action } from '@ember/object';
-import { tagName } from '@ember-decorators/component';
 import Control from '../control';
 import deprecateSubclassing from 'ember-bootstrap/utils/deprecate-subclassing';
 
@@ -10,11 +9,10 @@ import deprecateSubclassing from 'ember-bootstrap/utils/deprecate-subclassing';
  @extends Components.FormElementControl
  @private
  */
-@tagName('')
 @deprecateSubclassing
 export default class FormElementControlCheckbox extends Control {
   @action
   handleClick(event) {
-    this.onChange(event.target.checked);
+    this.args.onChange(event.target.checked);
   }
 }
