@@ -611,10 +611,11 @@ module('Integration | Component | bs-modal-simple', function (hooks) {
     assert.dom('.modal-dialog').hasClass('modal-dialog-centered');
   });
 
-  test('Modal has accesibility attributes with default title', async function (assert) {
+  test('Modal has accessibility attributes with default title', async function (assert) {
     await render(hbs`<BsModalSimple @open={{true}} @title="Simple Dialog">Hello world!</BsModalSimple>`);
 
     const modalTitleId = document.getElementsByClassName('modal-title')[0].id;
+    assert.notOk(modalTitleId.includes('undefined'), 'Should have a proper ID');
     assert.dom('.modal').exists({ count: 1 }, 'Modal exists.');
     assert.dom('.modal').hasAttribute('role', 'dialog');
     assert.dom('.modal-dialog').hasAttribute('role', 'document');
