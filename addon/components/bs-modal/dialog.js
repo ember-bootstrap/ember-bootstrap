@@ -5,6 +5,7 @@ import { next } from '@ember/runloop';
 import deprecateSubclassing from 'ember-bootstrap/utils/deprecate-subclassing';
 import { ref } from 'ember-ref-bucket';
 import { tracked } from '@glimmer/tracking';
+import { guidFor } from '@ember/object/internals';
 
 /**
  Internal component for modal's markup and event handling. Should not be used directly.
@@ -64,7 +65,7 @@ export default class ModalDialog extends Component {
         nodeId = titleNode.id;
         if (!nodeId) {
           //no title id so we set one
-          nodeId = `${this.id}-title`;
+          nodeId = `${guidFor(this)}-title`;
           titleNode.id = nodeId;
         }
       }
