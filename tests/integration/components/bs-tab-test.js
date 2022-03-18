@@ -226,10 +226,13 @@ module('Integration | Component | bs-tab', function (hooks) {
     );
     assert
       .dom('ul.nav.nav-tabs > li:nth-child(3) .dropdown-menu > :nth-child(1)')
-      .hasText('Tab 3', 'dropdown menu item shows pane title');
+      .hasText('Tab 3', 'dropdown menu item shows pane title')
+      .hasClass('dropdown-item', 'dropdown item has correct class');
+
     assert
       .dom('ul.nav.nav-tabs > li:nth-child(3) .dropdown-menu > :nth-child(2)')
-      .hasText('Tab 4', 'dropdown menu item shows pane title');
+      .hasText('Tab 4', 'dropdown menu item shows pane title')
+      .hasClass('dropdown-item', 'dropdown item has correct class');
   });
 
   test('customTabs disables tab navigation generation', async function (assert) {
