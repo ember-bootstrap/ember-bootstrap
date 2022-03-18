@@ -12,12 +12,17 @@
       <NavComponent @type={{this.type}} role="tablist" as |Nav|>
         {{#each this.navItems as |item|}}
           {{#if item.isGroup}}
-            <Nav.dropdown class={{if (bs-contains item.childIds this.isActiveId) "active"}} as |DD|>
+            <Nav.dropdown class={{if (bs-contains item.childIds this.isActiveId) "active"}} role="presentation" as |DD|>
               <DD.toggle>{{item.groupTitle}} <span class="caret"></span></DD.toggle>
               <DD.menu as |Menu|>
                 {{#each item.children as |subItem|}}
                   <Menu.item class={{if (bs-eq this.isActiveId subItem.id) "active"}}>
-                    <a href="#{{subItem.id}}" role="tab" class={{if (bs-eq this.isActiveId subItem.id) "nav-link active" "nav-link"}} {{on "click" (fn this.select subItem.id)}}>
+                    <a
+                      href="#{{subItem.id}}"
+                      role="tab"
+                      class={{if (bs-eq this.isActiveId subItem.id) "nav-link active" "nav-link"}}
+                      {{on "click" (fn this.select subItem.id)}}
+                    >
                       {{subItem.title}}
                     </a>
                   </Menu.item>
@@ -25,8 +30,14 @@
               </DD.menu>
             </Nav.dropdown>
           {{else}}
-            <Nav.item @active={{bs-eq item.id this.isActiveId}}>
-              <a href="#{{item.id}}" role="tab" class={{if (bs-eq this.isActiveId item.id) "nav-link active" "nav-link"}} {{on "click" (fn this.select item.id)}}>
+            <Nav.item @active={{bs-eq item.id this.isActiveId}} role="presentation">
+              <a
+                href="#{{item.id}}"
+                role="tab"
+                class={{if (bs-eq this.isActiveId item.id) "nav-link active" "nav-link"}}
+                aria-selected={{if (bs-eq this.isActiveId item.id) "true" "false"}}
+                {{on "click" (fn this.select item.id)}}
+              >
                 {{item.title}}
               </a>
             </Nav.item>
