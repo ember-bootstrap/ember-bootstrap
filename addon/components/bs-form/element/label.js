@@ -1,10 +1,6 @@
-import { tagName } from '@ember-decorators/component';
-import { computed } from '@ember/object';
-import { equal } from '@ember/object/computed';
-import Component from '@ember/component';
-import defaultValue from 'ember-bootstrap/utils/default-decorator';
-import { isBlank } from '@ember/utils';
+import Component from '@glimmer/component';
 import deprecateSubclassing from 'ember-bootstrap/utils/deprecate-subclassing';
+import arg from 'ember-bootstrap/utils/decorators/arg';
 
 /**
 
@@ -13,7 +9,6 @@ import deprecateSubclassing from 'ember-bootstrap/utils/deprecate-subclassing';
  @extends Ember.Component
  @private
  */
-@tagName('')
 @deprecateSubclassing
 export default class FormElementLabel extends Component {
   /**
@@ -27,21 +22,9 @@ export default class FormElementLabel extends Component {
    * @type boolean
    * @public
    */
-  @defaultValue
-  invisibleLabel = false;
 
-  @computed('isHorizontal', 'isCheckbox')
   get isHorizontalAndNotCheckbox() {
     return this.isHorizontal && !this.isCheckbox;
-  }
-
-  @computed('size', 'isHorizontal')
-  get sizeClass() {
-    if (!this.isHorizontal) {
-      return undefined;
-    }
-    let size = this.size;
-    return isBlank(size) ? null : `col-form-label-${size}`;
   }
 
   /**
@@ -51,8 +34,6 @@ export default class FormElementLabel extends Component {
    * @type String
    * @public
    */
-  @defaultValue
-  size = null;
 
   /**
    * @property formElementId
@@ -80,7 +61,7 @@ export default class FormElementLabel extends Component {
    * @default 'vertical'
    * @public
    */
-  @defaultValue
+  @arg
   formLayout = 'vertical';
 
   /**
@@ -98,7 +79,7 @@ export default class FormElementLabel extends Component {
    * @default 'text'
    * @public
    */
-  @defaultValue
+  @arg
   controlType = 'text';
 
   /**
@@ -108,8 +89,9 @@ export default class FormElementLabel extends Component {
    * @type boolean
    * @private
    */
-  @(equal('controlType', 'checkbox').readOnly())
-  isCheckbox;
+  get isCheckbox() {
+    return this.args.controlType === 'checkbox';
+  }
 
   /**
    * Indicates whether the form type equals `horizontal`
@@ -118,6 +100,7 @@ export default class FormElementLabel extends Component {
    * @type boolean
    * @private
    */
-  @(equal('formLayout', 'horizontal').readOnly())
-  isHorizontal;
+  get isHorizontal() {
+    return this.args.formLayout === 'horizontal';
+  }
 }
