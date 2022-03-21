@@ -1,12 +1,12 @@
-{{#if this.hasLabel}}
+{{#if @hasLabel}}
   <@labelComponent @labelClass={{@horizontalLabelGridClass}}/>
-  <div class={{this.horizontalInputGridClass}}>
+  <div class={{bs-form-horiz-input-class @horizontalLabelGridClass}}>
     {{yield}}
     <@errorsComponent/>
     <@helpTextComponent/>
   </div>
 {{else}}
-  <div class="{{this.horizontalInputGridClass}} {{this.horizontalInputOffsetGridClass}}">
+  <div class="{{bs-form-horiz-input-class @horizontalLabelGridClass}} {{bs-form-horiz-offset-class @horizontalLabelGridClass}}">
     {{yield}}
     <@errorsComponent/>
     <@helpTextComponent/>
