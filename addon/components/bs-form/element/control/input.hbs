@@ -1,10 +1,10 @@
 <input
-  type={{this.type}}
+  type={{bs-default @type "text"}}
   id={{@id}}
-  disabled={{this.disabled}}
-  readonly={{this.readonly}}
-  aria-describedby={{this.ariaDescribedBy}}
-  value={{this.value}}
+  disabled={{@disabled}}
+  readonly={{@readonly}}
+  aria-describedby={{@ariaDescribedBy}}
+  value={{@value}}
   class="form-control {{this.formValidationClass}} {{this.sizeClass}}"
   ...attributes
   {{on "change" this.handleChange}}

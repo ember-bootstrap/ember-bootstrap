@@ -1,9 +1,9 @@
 <textarea
   id={{@id}}
-  disabled={{this.disabled}}
-  readonly={{this.readonly}}
-  aria-describedby={{this.ariaDescribedBy}}
-  value={{this.value}}
+  disabled={{@disabled}}
+  readonly={{@readonly}}
+  aria-describedby={{@ariaDescribedBy}}
+  value={{@value}}
   class="form-control {{this.formValidationClass}}"
   ...attributes
   {{on "change" this.handleChange}}

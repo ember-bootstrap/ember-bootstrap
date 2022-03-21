@@ -1,8 +1,6 @@
-import { tagName } from '@ember-decorators/component';
 import { action } from '@ember/object';
 import Control from '../control';
-import sizeClass from 'ember-bootstrap/utils/cp/size-class';
-import defaultValue from 'ember-bootstrap/utils/default-decorator';
+import sizeClass from 'ember-bootstrap/utils/size-class';
 import deprecateSubclassing from 'ember-bootstrap/utils/deprecate-subclassing';
 
 /**
@@ -12,7 +10,6 @@ import deprecateSubclassing from 'ember-bootstrap/utils/deprecate-subclassing';
  @extends Components.FormElementControl
  @private
  */
-@tagName('')
 @deprecateSubclassing
 export default class FormElementControlInput extends Control {
   /**
@@ -20,16 +17,15 @@ export default class FormElementControlInput extends Control {
    * @type {String}
    * @public
    */
-  type = 'text';
 
   @action
   handleChange(event) {
-    this.onChange(event.target.value);
+    this.args.onChange(event.target.value);
   }
 
   @action
   handleInput(event) {
-    this.onChange(event.target.value);
+    this.args.onChange(event.target.value);
   }
 
   /**
@@ -41,9 +37,8 @@ export default class FormElementControlInput extends Control {
    * @type String
    * @public
    */
-  @defaultValue
-  size = null;
 
-  @sizeClass('form-control', 'size')
-  sizeClass;
+  get sizeClass() {
+    return sizeClass('form-control', this.args.size);
+  }
 }
