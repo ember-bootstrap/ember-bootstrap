@@ -188,19 +188,12 @@ module('Integration | Component | bs-progress', function (hooks) {
   test('it passes accessibility checks', async function (assert) {
     await render(hbs`
       <BsProgress as |p|>
-        <p.bar @value={{5}} @maxValue={{10}} />
+        <p.bar @value={{5}} @maxValue={{10}} aria-label="Saving..." />
       </BsProgress>
       <button type="button">Test</button>
     `);
 
-    await a11yAudit({
-      rules: {
-        // @todo fix this, see https://github.com/kaliber5/ember-bootstrap/issues/1520
-        'aria-progressbar-name': {
-          enabled: false,
-        },
-      },
-    });
+    await a11yAudit();
     assert.ok(true, 'A11y audit passed');
   });
 });
