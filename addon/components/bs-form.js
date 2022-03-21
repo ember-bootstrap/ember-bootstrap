@@ -2,7 +2,7 @@ import Component from '@glimmer/component';
 import { action, set } from '@ember/object';
 import { assert } from '@ember/debug';
 import { isPresent } from '@ember/utils';
-import { schedule } from '@ember/runloop';
+import { next } from '@ember/runloop';
 import RSVP from 'rsvp';
 import { getOwnConfig, macroCondition } from '@embroider/macros';
 import deprecateSubclassing from 'ember-bootstrap/utils/deprecate-subclassing';
@@ -437,7 +437,7 @@ export default class Form extends Component {
 
               // reset forced hiding of validations
               if (this.showAllValidations === false) {
-                schedule('afterRender', () => (this.showAllValidations = undefined));
+                next(() => (this.showAllValidations = undefined));
               }
             });
         },
