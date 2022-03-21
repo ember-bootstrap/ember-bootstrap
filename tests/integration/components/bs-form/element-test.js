@@ -25,6 +25,7 @@ import sinon from 'sinon';
 import { tracked } from '@glimmer/tracking';
 import Form from 'ember-bootstrap/components/bs-form';
 import FormElement from 'ember-bootstrap/components/bs-form/element';
+import { ensureSafeComponent } from '@embroider/util';
 
 const formLayouts = ['vertical', 'horizontal', 'inline'];
 
@@ -541,8 +542,8 @@ module('Integration | Component | bs-form/element', function (hooks) {
       @tracked gender = 'male';
     })();
 
-    this.set('form', ValidatingForm);
-    this.set('formElement', ValidatingFormElement);
+    this.set('form', ensureSafeComponent(ValidatingForm, this));
+    this.set('formElement', ensureSafeComponent(ValidatingFormElement, this));
 
     this.set('model', model);
     await render(hbs`
@@ -623,7 +624,7 @@ module('Integration | Component | bs-form/element', function (hooks) {
 
   test('shows validation success', async function (assert) {
     this.set('model', EmberObject.create({ name: null }));
-    this.set('formElement', ValidatingFormElement);
+    this.set('formElement', ensureSafeComponent(ValidatingFormElement, this));
 
     await render(hbs`
         <this.formElement @property="name" @showAllValidations={{true}} @model={{this.model}} />
@@ -636,7 +637,7 @@ module('Integration | Component | bs-form/element', function (hooks) {
   testRequiringFocus('shows validation errors', async function (assert) {
     this.set('errors', A(['Invalid']));
     this.set('model', EmberObject.create({ name: null }));
-    this.set('formElement', ValidatingFormElement);
+    this.set('formElement', ensureSafeComponent(ValidatingFormElement, this));
 
     await render(hbs`
         <this.formElement @property="name" @errors={{this.errors}} @model={{this.model}} data-test-form-element />
@@ -661,7 +662,7 @@ module('Integration | Component | bs-form/element', function (hooks) {
   testRequiringFocus('shows validation warnings', async function (assert) {
     this.set('warnings', A(['Insecure']));
     this.set('model', EmberObject.create({ name: null }));
-    this.set('formElement', ValidatingFormElement);
+    this.set('formElement', ensureSafeComponent(ValidatingFormElement, this));
 
     await render(hbs`
         <this.formElement @property="name" @warnings={{this.warnings}} @model={{this.model}} data-test-form-element />
@@ -696,8 +697,8 @@ module('Integration | Component | bs-form/element', function (hooks) {
     // `You attempted to update showOwnValidation on ..., but it had already been used previously in the same computation.`
 
     this.set('model', { name: null });
-    this.set('form', ValidatingForm);
-    this.set('formElement', ValidatingFormElement);
+    this.set('form', ensureSafeComponent(ValidatingForm, this));
+    this.set('formElement', ensureSafeComponent(ValidatingFormElement, this));
 
     await render(hbs`
       <this.form @elementComponent={{this.formElement}} as |form|>
@@ -757,7 +758,7 @@ module('Integration | Component | bs-form/element', function (hooks) {
     this.set('errors', A(['Invalid']));
     this.set('warning', 'some warning');
     this.set('model', EmberObject.create({ name: null }));
-    this.set('formElement', ValidatingFormElement);
+    this.set('formElement', ensureSafeComponent(ValidatingFormElement, this));
 
     await render(hbs`
         <this.formElement @property="name" @errors={{this.errors}} @customWarning={{this.warning}} @model={{this.model}} data-test-form-element />
@@ -793,7 +794,7 @@ module('Integration | Component | bs-form/element', function (hooks) {
       this.set('errors', A(['Invalid']));
       this.set('model', EmberObject.create({ name: null }));
       this.set('showValidationOn', ['change']);
-      this.set('formElement', ValidatingFormElement);
+      this.set('formElement', ensureSafeComponent(ValidatingFormElement, this));
 
       await render(hbs`
         <this.formElement @property="name" @errors={{this.errors}} @model={{this.model}} @showValidationOn={{this.showValidationOn}} />
@@ -819,7 +820,7 @@ module('Integration | Component | bs-form/element', function (hooks) {
     async function (assert) {
       this.set('errors', A(['Invalid']));
       this.set('model', EmberObject.create({ name: null }));
-      this.set('formElement', ValidatingFormElement);
+      this.set('formElement', ensureSafeComponent(ValidatingFormElement, this));
 
       await render(hbs`
         <this.formElement @property="name" @errors={{this.errors}} @model={{this.model}} @showValidationOn="change" />
@@ -842,8 +843,8 @@ module('Integration | Component | bs-form/element', function (hooks) {
   testRequiringFocus('event triggered on input group button does not enable validation', async function (assert) {
     this.set('errors', A(['Invalid']));
     this.set('model', EmberObject.create({ name: null }));
-    this.set('form', ValidatingForm);
-    this.set('formElement', ValidatingFormElement);
+    this.set('form', ensureSafeComponent(ValidatingForm, this));
+    this.set('formElement', ensureSafeComponent(ValidatingFormElement, this));
 
     await render(hbs`
       <this.form @elementComponent={{this.formElement}} as |form|>
@@ -869,8 +870,8 @@ module('Integration | Component | bs-form/element', function (hooks) {
       this.set('doNotShowValidationForEventTargets', ['[data-trigger-validation="false"]']);
       this.set('errors', A(['Invalid']));
       this.set('model', EmberObject.create({ name: null }));
-      this.set('form', ValidatingForm);
-      this.set('formElement', ValidatingFormElement);
+      this.set('form', ensureSafeComponent(ValidatingForm, this));
+      this.set('formElement', ensureSafeComponent(ValidatingFormElement, this));
 
       await render(hbs`
         <this.form @elementComponent={{this.formElement}} as |form|>

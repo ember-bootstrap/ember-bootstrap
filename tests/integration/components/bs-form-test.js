@@ -34,6 +34,7 @@ import sinon from 'sinon';
 import Ember from 'ember';
 import Form from 'ember-bootstrap/components/bs-form';
 import FormElement from 'ember-bootstrap/components/bs-form/element';
+import { ensureSafeComponent } from '@embroider/util';
 
 const nextRunloop = function () {
   return new Promise((resolve) => {
@@ -161,7 +162,7 @@ module('Integration | Component | bs-form', function (hooks) {
     this.actions.submit = submit;
     this.actions.invalid = invalid;
 
-    this.set('form', ValidatingForm);
+    this.set('form', ensureSafeComponent(ValidatingForm, this));
 
     await render(hbs`
       <this.form
@@ -193,7 +194,7 @@ module('Integration | Component | bs-form', function (hooks) {
     this.actions.submit = submit;
     this.actions.invalid = invalid;
 
-    this.set('form', ValidatingForm);
+    this.set('form', ensureSafeComponent(ValidatingForm, this));
 
     await render(hbs`
       <this.form @model={{this.model}} @validate={{false}} @onBefore={{action "before"}} @onSubmit={{action "submit"}} @onInvalid={{action "invalid"}}>Test</this.form>
@@ -214,8 +215,8 @@ module('Integration | Component | bs-form', function (hooks) {
     this.set('model', model);
     this.set('errors', A(['There is an error']));
 
-    this.set('form', ValidatingForm);
-    this.set('formElement', ValidatingFormElement);
+    this.set('form', ensureSafeComponent(ValidatingForm, this));
+    this.set('formElement', ensureSafeComponent(ValidatingFormElement, this));
 
     await render(
       hbs`<this.form @elementComponent={{this.formElement}} @model={{this.model}} @validate={{false}} as |form|><form.element @errors={{this.errors}} /></this.form>`
@@ -240,8 +241,8 @@ module('Integration | Component | bs-form', function (hooks) {
     let deferredInvalidAction = defer();
     this.set('invalid', () => deferredInvalidAction.promise);
 
-    this.set('form', ValidatingForm);
-    this.set('formElement', ValidatingFormElement);
+    this.set('form', ensureSafeComponent(ValidatingForm, this));
+    this.set('formElement', ensureSafeComponent(ValidatingFormElement, this));
 
     await render(
       hbs`<this.form @elementComponent={{this.formElement}} @model={{this.model}} @onInvalid={{this.invalid}} @validate={{false}} as |form|><form.element @errors={{this.errors}} /></this.form>`
@@ -303,7 +304,7 @@ module('Integration | Component | bs-form', function (hooks) {
   test('form with validation has novalidate attribute', async function (assert) {
     let model = {};
     this.set('model', model);
-    this.set('form', ValidatingForm);
+    this.set('form', ensureSafeComponent(ValidatingForm, this));
     await render(hbs`<this.form @model={{this.model}}>Test</this.form>`);
 
     assert.dom('form').hasAttribute('novalidate');
@@ -312,7 +313,7 @@ module('Integration | Component | bs-form', function (hooks) {
   test('form with validation allows overriding novalidate attribute', async function (assert) {
     let model = {};
     this.set('model', model);
-    this.set('form', ValidatingForm);
+    this.set('form', ensureSafeComponent(ValidatingForm, this));
     await render(hbs`<this.form @model={{this.model}} novalidate={{false}}>Test</this.form>`);
 
     assert.dom('form').doesNotHaveAttribute('novalidate');
@@ -328,8 +329,8 @@ module('Integration | Component | bs-form', function (hooks) {
       return deferredSubmitAction.promise;
     });
 
-    this.set('form', ValidatingForm);
-    this.set('formElement', ValidatingFormElement);
+    this.set('form', ensureSafeComponent(ValidatingForm, this));
+    this.set('formElement', ensureSafeComponent(ValidatingFormElement, this));
 
     await render(
       hbs`
@@ -374,8 +375,8 @@ module('Integration | Component | bs-form', function (hooks) {
         return deferredSubmitAction.promise;
       });
 
-      this.set('form', ValidatingForm);
-      this.set('formElement', ValidatingFormElement);
+      this.set('form', ensureSafeComponent(ValidatingForm, this));
+      this.set('formElement', ensureSafeComponent(ValidatingFormElement, this));
 
       await render(
         hbs`
@@ -427,8 +428,8 @@ module('Integration | Component | bs-form', function (hooks) {
       this.set('validateStub', () => (this.errors.length > 0 ? reject() : resolve()));
       this.set('submitAction', () => {});
 
-      this.set('form', ValidatingForm);
-      this.set('formElement', ValidatingFormElement);
+      this.set('form', ensureSafeComponent(ValidatingForm, this));
+      this.set('formElement', ensureSafeComponent(ValidatingFormElement, this));
 
       await render(
         hbs`
@@ -552,7 +553,7 @@ module('Integration | Component | bs-form', function (hooks) {
       }
     }
 
-    this.set('form', ValidForm);
+    this.set('form', ensureSafeComponent(ValidForm, this));
 
     assert.expect(scenarios.length * 2);
 
@@ -595,7 +596,7 @@ module('Integration | Component | bs-form', function (hooks) {
       }
     }
 
-    this.set('form', ValidatingForm);
+    this.set('form', ensureSafeComponent(ValidatingForm, this));
 
     assert.expect(scenarios.length);
 
@@ -679,7 +680,7 @@ module('Integration | Component | bs-form', function (hooks) {
     this.set('submitAction', () => {
       return deferredSubmitAction.promise;
     });
-    this.set('form', ValidatingForm);
+    this.set('form', ensureSafeComponent(ValidatingForm, this));
 
     await render(hbs`
       <this.form @onInvalid={{this.submitAction}} @validate={{false}} as |form|>
@@ -703,7 +704,7 @@ module('Integration | Component | bs-form', function (hooks) {
       return deferredValidateAction.promise;
     });
 
-    this.set('form', ValidatingForm);
+    this.set('form', ensureSafeComponent(ValidatingForm, this));
 
     await render(hbs`
       <this.form @validate={{this.validateAction}} as |form|>
@@ -731,7 +732,7 @@ module('Integration | Component | bs-form', function (hooks) {
       return deferredValidateAction.promise;
     });
 
-    this.set('form', ValidatingForm);
+    this.set('form', ensureSafeComponent(ValidatingForm, this));
 
     await render(hbs`
       <this.form @onSubmit={{this.submitAction}} @validate={{this.validateAction}} as |form|>
@@ -857,7 +858,7 @@ module('Integration | Component | bs-form', function (hooks) {
   });
 
   test('Yielded #isRejected is true if validation fails', async function (assert) {
-    this.set('form', ValidatingForm);
+    this.set('form', ensureSafeComponent(ValidatingForm, this));
     await render(hbs`
       <this.form @validate={{false}} as |form|>
         <button type="submit" class={{if form.isRejected "is-rejected"}}>submit</button>
@@ -994,7 +995,7 @@ module('Integration | Component | bs-form', function (hooks) {
     this.set('beforeAction', beforeActionFake);
     this.set('validate', validateFake);
 
-    this.set('form', ValidatingForm);
+    this.set('form', ensureSafeComponent(ValidatingForm, this));
 
     await render(hbs`
       <this.form @preventConcurrency={{false}} @onSubmit={{this.submitAction}} @onBefore={{this.beforeAction}} @validate={{this.validate}}>
