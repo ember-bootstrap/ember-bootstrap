@@ -16,11 +16,11 @@
               <DD.toggle>{{item.groupTitle}} <span class="caret"></span></DD.toggle>
               <DD.menu as |Menu|>
                 {{#each item.children as |subItem|}}
-                  <Menu.item class={{if (bs-eq this.isActiveId subItem.id) "active"}}>
+                  <Menu.item>
                     <a
                       href="#{{subItem.id}}"
                       role="tab"
-                      class={{if (bs-eq this.isActiveId subItem.id) "nav-link active" "nav-link"}}
+                      class="dropdown-item {{if (bs-eq this.isActiveId subItem.id) "active"}}"
                       {{on "click" (fn this.select subItem.id)}}
                     >
                       {{subItem.title}}
@@ -34,7 +34,7 @@
               <a
                 href="#{{item.id}}"
                 role="tab"
-                class={{if (bs-eq this.isActiveId item.id) "nav-link active" "nav-link"}}
+                class="nav-link {{if (bs-eq this.isActiveId item.id) "active"}}"
                 aria-selected={{if (bs-eq this.isActiveId item.id) "true" "false"}}
                 {{on "click" (fn this.select item.id)}}
               >
