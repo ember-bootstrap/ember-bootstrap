@@ -1,14 +1,14 @@
-import { tagName } from '@ember-decorators/component';
-import { gt } from '@ember/object/computed';
-import Component from '@ember/component';
-import { action, computed, set } from '@ember/object';
+import Component from '@glimmer/component';
+import { action, set } from '@ember/object';
 import { assert } from '@ember/debug';
 import { isPresent } from '@ember/utils';
-import { schedule } from '@ember/runloop';
+import { next } from '@ember/runloop';
 import RSVP from 'rsvp';
-import defaultValue from 'ember-bootstrap/utils/default-decorator';
 import { getOwnConfig, macroCondition } from '@embroider/macros';
 import deprecateSubclassing from 'ember-bootstrap/utils/deprecate-subclassing';
+import arg from '../utils/decorators/arg';
+import { tracked } from '@glimmer/tracking';
+import { cached } from 'tracked-toolbox';
 
 /**
   Render a form with the appropriate Bootstrap layout class (see `formLayout`).
@@ -116,7 +116,6 @@ import deprecateSubclassing from 'ember-bootstrap/utils/deprecate-subclassing';
   @extends Ember.Component
   @public
 */
-@tagName('')
 @deprecateSubclassing
 export default class Form extends Component {
   /**
@@ -128,7 +127,6 @@ export default class Form extends Component {
    * @protected
    *
    */
-  @computed('formLayout')
   get layoutClass() {
     let layout = this.formLayout;
     if (macroCondition(getOwnConfig().isBS4)) {
@@ -150,8 +148,10 @@ export default class Form extends Component {
    * @type object
    * @public
    */
-  @defaultValue
-  model = {};
+  @cached
+  get model() {
+    return this.args.model ?? {};
+  }
 
   /**
    * Set the layout of the form to either "vertical", "horizontal" or "inline". See http://getbootstrap.com/css/#forms-inline and http://getbootstrap.com/css/#forms-horizontal
@@ -160,7 +160,7 @@ export default class Form extends Component {
    * @type string
    * @public
    */
-  @defaultValue
+  @arg
   formLayout = 'vertical';
 
   /**
@@ -181,7 +181,7 @@ export default class Form extends Component {
    * @default 'col-md-4'
    * @public
    */
-  @defaultValue
+  @arg
   horizontalLabelGridClass = 'col-md-4';
 
   /**
@@ -207,8 +207,9 @@ export default class Form extends Component {
    * @readonly
    * @private
    */
-  @gt('pendingSubmissions', 0)
-  isSubmitting;
+  get isSubmitting() {
+    return this.pendingSubmissions > 0;
+  }
 
   /**
    * `isSubmitted` is `true` if last submission was successful.
@@ -221,7 +222,7 @@ export default class Form extends Component {
    * @type {Boolean}
    * @private
    */
-  @defaultValue
+  @tracked
   isSubmitted = false;
 
   /**
@@ -236,7 +237,7 @@ export default class Form extends Component {
    * @type {Boolean}
    * @private
    */
-  @defaultValue
+  @tracked
   isRejected = false;
 
   /**
@@ -269,7 +270,7 @@ export default class Form extends Component {
    * @type {Integer}
    * @private
    */
-  @defaultValue
+  @tracked
   pendingSubmissions = 0;
 
   /**
@@ -280,8 +281,6 @@ export default class Form extends Component {
    * @default false
    * @public
    */
-  @defaultValue
-  submitOnEnter = false;
 
   /**
    * Controls if `onSubmit` action is fired concurrently. If `true` submitting form multiple
@@ -295,7 +294,7 @@ export default class Form extends Component {
    * @default true
    * @public
    */
-  @defaultValue
+  @arg
   preventConcurrency = true;
 
   /**
@@ -308,8 +307,6 @@ export default class Form extends Component {
    * @default false
    * @public
    */
-  @defaultValue
-  hideValidationsOnSubmit = false;
 
   /**
    * If set to true the `readonly` property of all yielded form elements will be set, making their form controls read-only.
@@ -319,8 +316,6 @@ export default class Form extends Component {
    * @default false
    * @public
    */
-  @defaultValue
-  readonly = false;
 
   /**
    * If set to true the `disabled` property of all yielded form elements will be set, making their form controls disabled.
@@ -330,8 +325,6 @@ export default class Form extends Component {
    * @default false
    * @public
    */
-  @defaultValue
-  disabled = false;
 
   /**
    * Validate hook which will return a promise that will either resolve if the model is valid
@@ -350,7 +343,7 @@ export default class Form extends Component {
    * @default undefined
    * @private
    */
-  @defaultValue
+  @tracked
   showAllValidations = undefined;
 
   /**
@@ -401,11 +394,9 @@ export default class Form extends Component {
 
     let model = this.model;
 
-    this.incrementProperty('pendingSubmissions');
+    this.pendingSubmissions++;
 
-    if (typeof this.onBefore === 'function') {
-      this.onBefore(model);
-    }
+    this.args.onBefore?.(model);
 
     return RSVP.resolve()
       .then(() => {
@@ -413,29 +404,27 @@ export default class Form extends Component {
       })
       .then(
         (record) => {
-          if (this.hideValidationsOnSubmit === true) {
-            this.set('showAllValidations', false);
+          if (this.args.hideValidationsOnSubmit === true) {
+            this.showAllValidations = false;
           }
 
           return RSVP.resolve()
             .then(() => {
-              if (typeof this.onSubmit === 'function') {
-                return this.onSubmit(model, record);
-              }
+              return this.args.onSubmit?.(model, record);
             })
             .then(() => {
               if (this.isDestroyed) {
                 return;
               }
 
-              this.set('isSubmitted', true);
+              this.isSubmitted = true;
             })
             .catch((error) => {
               if (this.isDestroyed) {
                 return;
               }
 
-              this.set('isRejected', true);
+              this.isRejected = true;
 
               throw error;
             })
@@ -444,31 +433,27 @@ export default class Form extends Component {
                 return;
               }
 
-              this.decrementProperty('pendingSubmissions');
+              this.pendingSubmissions--;
 
               // reset forced hiding of validations
               if (this.showAllValidations === false) {
-                schedule('afterRender', () => this.set('showAllValidations', undefined));
+                next(() => (this.showAllValidations = undefined));
               }
             });
         },
         (error) => {
           return RSVP.resolve()
             .then(() => {
-              if (typeof this.onInvalid === 'function') {
-                return this.onInvalid(model, error);
-              }
+              return this.args.onInvalid?.(model, error);
             })
             .finally(() => {
               if (this.isDestroyed) {
                 return;
               }
 
-              this.setProperties({
-                showAllValidations: true,
-                isRejected: true,
-                pendingSubmissions: this.pendingSubmissions - 1,
-              });
+              this.showAllValidations = true;
+              this.isRejected = true;
+              this.pendingSubmissions = this.pendingSubmissions - 1;
 
               if (throwValidationErrors) {
                 throw error;
@@ -486,15 +471,15 @@ export default class Form extends Component {
   @action
   handleKeyPress(event) {
     let code = event.keyCode || event.which;
-    if (code === 13 && this.submitOnEnter) {
+    if (code === 13 && this.args.submitOnEnter) {
       let submitEvent = document.createEvent('Event');
       submitEvent.initEvent('submit', true, true);
       event.target.dispatchEvent(submitEvent);
     }
   }
 
-  init() {
-    super.init(...arguments);
+  constructor() {
+    super(...arguments);
 
     let formLayout = this.formLayout;
     assert(
@@ -518,8 +503,8 @@ export default class Form extends Component {
 
   @action
   resetSubmissionState() {
-    this.set('isSubmitted', false);
-    this.set('isRejected', false);
+    this.isSubmitted = false;
+    this.isRejected = false;
   }
 
   @action

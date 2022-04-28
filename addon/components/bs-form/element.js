@@ -455,18 +455,6 @@ export default class FormElement extends Component {
   }
 
   /**
-   * @property hasValidator
-   * @type boolean
-   * @default false
-   * @protected
-   */
-  // This shouldn't be an argument. It's only an argument because tests rely on
-  // setting it as an argument. See https://github.com/kaliber5/ember-bootstrap/issues/1338
-  // for details.
-  @arg
-  hasValidator = false;
-
-  /**
    * Set a validating state for async validations
    *
    * @property isValidating
