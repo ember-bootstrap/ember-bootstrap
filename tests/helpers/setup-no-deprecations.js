@@ -7,11 +7,8 @@ let expectedDeprecations = new Set();
 
 // Ignore deprecations that are not caused by our own code, and which we cannot fix easily.
 const ignoredDeprecations = [
-  // @todo remove when we can land https://github.com/emberjs/ember-render-modifiers/pull/33 here
-  /Versions of modifier manager capabilities prior to 3\.22 have been deprecated/,
-  /Usage of the Ember Global is deprecated./,
-  /import .* directly from/,
-  /Use of `assign` has been deprecated/,
+  // @todo remove when https://github.com/alexlafroscia/ember-popper-modifier/issues/452 is fixed
+  /ember-modifier/,
 ];
 
 export default function setupNoDeprecations({ beforeEach, afterEach }) {
