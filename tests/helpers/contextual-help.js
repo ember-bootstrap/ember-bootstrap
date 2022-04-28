@@ -1,8 +1,7 @@
-import { assign } from '@ember/polyfills';
 import { getContext } from '@ember/test-helpers';
 
 export function setupForPositioning(align = 'left') {
-  assign(getContext().element.querySelector('#wrapper').style, {
+  Object.assign(getContext().element.querySelector('#wrapper').style, {
     position: 'absolute',
     bottom: 0,
     [align]: 0,
@@ -12,13 +11,13 @@ export function setupForPositioning(align = 'left') {
     overflow: 'hidden',
   });
 
-  assign(document.getElementById('ember-testing').style, {
+  Object.assign(document.getElementById('ember-testing').style, {
     transform: 'none',
   });
 
   // popper.js v1 seems to have issues with the positioning of our testing container since ember-qunit v5
   // Could be related to https://github.com/popperjs/popper-core/issues/670
-  assign(document.getElementById('ember-testing-container').style, {
+  Object.assign(document.getElementById('ember-testing-container').style, {
     position: 'relative',
     top: 0,
   });
