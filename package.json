@@ -138,7 +138,7 @@
     "mocha": "9.2.2",
     "npm-run-all": "4.1.5",
     "prettier": "2.6.2",
-    "qunit": "2.18.0",
+    "qunit": "2.18.2",
     "qunit-dom": "2.0.0",
     "release-it": "14.13.1",
     "release-it-lerna-changelog": "4.0.1",
