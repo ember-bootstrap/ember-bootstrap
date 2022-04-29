@@ -59,11 +59,9 @@
 
 <div class="file">
     <pre class="prettyprint linenums">
-import { tagName } from &#x27;@ember-decorators/component&#x27;;
 import { action } from &#x27;@ember/object&#x27;;
 import Control from &#x27;../control&#x27;;
-import sizeClass from &#x27;ember-bootstrap/utils/cp/size-class&#x27;;
-import defaultValue from &#x27;ember-bootstrap/utils/default-decorator&#x27;;
+import sizeClass from &#x27;ember-bootstrap/utils/size-class&#x27;;
 import deprecateSubclassing from &#x27;ember-bootstrap/utils/deprecate-subclassing&#x27;;
 
 /**
@@ -73,7 +71,6 @@ import deprecateSubclassing from &#x27;ember-bootstrap/utils/deprecate-subclassi
  @extends Components.FormElementControl
  @private
  */
-@tagName(&#x27;&#x27;)
 @deprecateSubclassing
 export default class FormElementControlInput extends Control {
   /**
@@ -81,16 +78,15 @@ export default class FormElementControlInput extends Control {
    * @type {String}
    * @public
    */
-  type = &#x27;text&#x27;;
 
   @action
   handleChange(event) {
-    this.onChange(event.target.value);
+    this.args.onChange(event.target.value);
   }
 
   @action
   handleInput(event) {
-    this.onChange(event.target.value);
+    this.args.onChange(event.target.value);
   }
 
   /**
@@ -102,11 +98,10 @@ export default class FormElementControlInput extends Control {
    * @type String
    * @public
    */
-  @defaultValue
-  size = null;
 
-  @sizeClass(&#x27;form-control&#x27;, &#x27;size&#x27;)
-  sizeClass;
+  get sizeClass() {
+    return sizeClass(&#x27;form-control&#x27;, this.args.size);
+  }
 }
 
     </pre>
@@ -147,16 +142,7 @@ export default class FormElementControlInput extends Control {
             <li class="list-group-item list-group-item-private"><a href="../classes/Components.FormElementControlRadio.html">Components.FormElementControlRadio</a></li>
             <li class="list-group-item list-group-item-private"><a href="../classes/Components.FormElementControlSwitch.html">Components.FormElementControlSwitch</a></li>
             <li class="list-group-item list-group-item-private"><a href="../classes/Components.FormElementControlTextarea.html">Components.FormElementControlTextarea</a></li>
-            <li class="list-group-item list-group-item-private"><a href="../classes/Components.FormElementErrors.html">Components.FormElementErrors</a></li>
-            <li class="list-group-item list-group-item-private"><a href="../classes/Components.FormElementFeedbackIcon.html">Components.FormElementFeedbackIcon</a></li>
-            <li class="list-group-item list-group-item-private"><a href="../classes/Components.FormElementHelpText.html">Components.FormElementHelpText</a></li>
             <li class="list-group-item list-group-item-private"><a href="../classes/Components.FormElementLabel.html">Components.FormElementLabel</a></li>
-            <li class="list-group-item list-group-item-private"><a href="../classes/Components.FormElementLayout.html">Components.FormElementLayout</a></li>
-            <li class="list-group-item list-group-item-private"><a href="../classes/Components.FormElementLayoutHorizontal.html">Components.FormElementLayoutHorizontal</a></li>
-            <li class="list-group-item list-group-item-private"><a href="../classes/Components.FormElementLayoutInline.html">Components.FormElementLayoutInline</a></li>
-            <li class="list-group-item list-group-item-private"><a href="../classes/Components.FormElementLayoutInlineCheckbox.html">Components.FormElementLayoutInlineCheckbox</a></li>
-            <li class="list-group-item list-group-item-private"><a href="../classes/Components.FormElementLayoutVertical.html">Components.FormElementLayoutVertical</a></li>
-            <li class="list-group-item list-group-item-private"><a href="../classes/Components.FormElementLayoutVerticalCheckbox.html">Components.FormElementLayoutVerticalCheckbox</a></li>
             <li class="list-group-item list-group-item-private"><a href="../classes/Components.LinkComponent.html">Components.LinkComponent</a></li>
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.Modal.html">Components.Modal</a></li>
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.ModalBody.html">Components.ModalBody</a></li>

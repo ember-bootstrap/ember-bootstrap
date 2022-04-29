@@ -59,13 +59,9 @@
 
 <div class="file">
     <pre class="prettyprint linenums">
-import { tagName } from &#x27;@ember-decorators/component&#x27;;
-import { computed } from &#x27;@ember/object&#x27;;
-import { equal } from &#x27;@ember/object/computed&#x27;;
-import Component from &#x27;@ember/component&#x27;;
-import defaultValue from &#x27;ember-bootstrap/utils/default-decorator&#x27;;
-import { isBlank } from &#x27;@ember/utils&#x27;;
+import Component from &#x27;@glimmer/component&#x27;;
 import deprecateSubclassing from &#x27;ember-bootstrap/utils/deprecate-subclassing&#x27;;
+import arg from &#x27;ember-bootstrap/utils/decorators/arg&#x27;;
 
 /**
 
@@ -74,7 +70,6 @@ import deprecateSubclassing from &#x27;ember-bootstrap/utils/deprecate-subclassi
  @extends Ember.Component
  @private
  */
-@tagName(&#x27;&#x27;)
 @deprecateSubclassing
 export default class FormElementLabel extends Component {
   /**
@@ -88,21 +83,9 @@ export default class FormElementLabel extends Component {
    * @type boolean
    * @public
    */
-  @defaultValue
-  invisibleLabel = false;
 
-  @computed(&#x27;isHorizontal&#x27;, &#x27;isCheckbox&#x27;)
   get isHorizontalAndNotCheckbox() {
     return this.isHorizontal &amp;&amp; !this.isCheckbox;
-  }
-
-  @computed(&#x27;size&#x27;, &#x27;isHorizontal&#x27;)
-  get sizeClass() {
-    if (!this.isHorizontal) {
-      return undefined;
-    }
-    let size = this.size;
-    return isBlank(size) ? null : &#x60;col-form-label-${size}&#x60;;
   }
 
   /**
@@ -112,8 +95,6 @@ export default class FormElementLabel extends Component {
    * @type String
    * @public
    */
-  @defaultValue
-  size = null;
 
   /**
    * @property formElementId
@@ -141,7 +122,7 @@ export default class FormElementLabel extends Component {
    * @default &#x27;vertical&#x27;
    * @public
    */
-  @defaultValue
+  @arg
   formLayout = &#x27;vertical&#x27;;
 
   /**
@@ -159,7 +140,7 @@ export default class FormElementLabel extends Component {
    * @default &#x27;text&#x27;
    * @public
    */
-  @defaultValue
+  @arg
   controlType = &#x27;text&#x27;;
 
   /**
@@ -169,8 +150,9 @@ export default class FormElementLabel extends Component {
    * @type boolean
    * @private
    */
-  @(equal(&#x27;controlType&#x27;, &#x27;checkbox&#x27;).readOnly())
-  isCheckbox;
+  get isCheckbox() {
+    return this.args.controlType === &#x27;checkbox&#x27;;
+  }
 
   /**
    * Indicates whether the form type equals &#x60;horizontal&#x60;
@@ -179,8 +161,9 @@ export default class FormElementLabel extends Component {
    * @type boolean
    * @private
    */
-  @(equal(&#x27;formLayout&#x27;, &#x27;horizontal&#x27;).readOnly())
-  isHorizontal;
+  get isHorizontal() {
+    return this.args.formLayout === &#x27;horizontal&#x27;;
+  }
 }
 
     </pre>
@@ -221,16 +204,7 @@ export default class FormElementLabel extends Component {
             <li class="list-group-item list-group-item-private"><a href="../classes/Components.FormElementControlRadio.html">Components.FormElementControlRadio</a></li>
             <li class="list-group-item list-group-item-private"><a href="../classes/Components.FormElementControlSwitch.html">Components.FormElementControlSwitch</a></li>
             <li class="list-group-item list-group-item-private"><a href="../classes/Components.FormElementControlTextarea.html">Components.FormElementControlTextarea</a></li>
-            <li class="list-group-item list-group-item-private"><a href="../classes/Components.FormElementErrors.html">Components.FormElementErrors</a></li>
-            <li class="list-group-item list-group-item-private"><a href="../classes/Components.FormElementFeedbackIcon.html">Components.FormElementFeedbackIcon</a></li>
-            <li class="list-group-item list-group-item-private"><a href="../classes/Components.FormElementHelpText.html">Components.FormElementHelpText</a></li>
             <li class="list-group-item list-group-item-private"><a href="../classes/Components.FormElementLabel.html">Components.FormElementLabel</a></li>
-            <li class="list-group-item list-group-item-private"><a href="../classes/Components.FormElementLayout.html">Components.FormElementLayout</a></li>
-            <li class="list-group-item list-group-item-private"><a href="../classes/Components.FormElementLayoutHorizontal.html">Components.FormElementLayoutHorizontal</a></li>
-            <li class="list-group-item list-group-item-private"><a href="../classes/Components.FormElementLayoutInline.html">Components.FormElementLayoutInline</a></li>
-            <li class="list-group-item list-group-item-private"><a href="../classes/Components.FormElementLayoutInlineCheckbox.html">Components.FormElementLayoutInlineCheckbox</a></li>
-            <li class="list-group-item list-group-item-private"><a href="../classes/Components.FormElementLayoutVertical.html">Components.FormElementLayoutVertical</a></li>
-            <li class="list-group-item list-group-item-private"><a href="../classes/Components.FormElementLayoutVerticalCheckbox.html">Components.FormElementLayoutVerticalCheckbox</a></li>
             <li class="list-group-item list-group-item-private"><a href="../classes/Components.LinkComponent.html">Components.LinkComponent</a></li>
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.Modal.html">Components.Modal</a></li>
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.ModalBody.html">Components.ModalBody</a></li>
