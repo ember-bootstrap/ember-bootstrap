@@ -4,6 +4,40 @@
 
 
 
+
+## v5.1.0 (2022-04-29)
+
+#### Features
+* [#1775](https://github.com/kaliber5/ember-bootstrap/pull/1775) Convert BsForm to Glimmer component ([@simonihmig](https://github.com/simonihmig))
+* [#1774](https://github.com/kaliber5/ember-bootstrap/pull/1774) Convert remaining form components to TO/Glimmer ([@simonihmig](https://github.com/simonihmig))
+* [#1773](https://github.com/kaliber5/ember-bootstrap/pull/1773) Convert form layout components to template-only ([@simonihmig](https://github.com/simonihmig))
+* [#1772](https://github.com/kaliber5/ember-bootstrap/pull/1772) Convert form controls to Glimmer components ([@simonihmig](https://github.com/simonihmig))
+* [#1741](https://github.com/kaliber5/ember-bootstrap/pull/1741) Implement fullscreen modal with BS breakpoints ([@Ayoahha](https://github.com/Ayoahha))
+
+#### Bug Fixes
+* [#1770](https://github.com/kaliber5/ember-bootstrap/pull/1770) Fix markup of tabs with dropdowns ([@simonihmig](https://github.com/simonihmig))
+* [#1769](https://github.com/kaliber5/ember-bootstrap/pull/1769) Fix a11y markup of Tabs ([@simonihmig](https://github.com/simonihmig))
+* [#1768](https://github.com/kaliber5/ember-bootstrap/pull/1768) Fix broken aria-labelledby attribute of modals ([@simonihmig](https://github.com/simonihmig))
+* [#1750](https://github.com/kaliber5/ember-bootstrap/pull/1750) Needs peerDependency on ember-source ([@ef4](https://github.com/ef4))
+
+#### Documentation
+* [#1771](https://github.com/kaliber5/ember-bootstrap/pull/1771) Document a11y markup for progress bar ([@simonihmig](https://github.com/simonihmig))
+
+#### Internal
+* [#1783](https://github.com/kaliber5/ember-bootstrap/pull/1783) Ignore deprecations from ember-popper-modifier ([@simonihmig](https://github.com/simonihmig))
+* [#1760](https://github.com/kaliber5/ember-bootstrap/pull/1760) drop @class argument of <BsPopover> and <BsPopover::Element> ([@jelhan](https://github.com/jelhan))
+* [#1757](https://github.com/kaliber5/ember-bootstrap/pull/1757) pass class as attribute to <BsLinkTo> if possible ([@jelhan](https://github.com/jelhan))
+* [#1759](https://github.com/kaliber5/ember-bootstrap/pull/1759) drop @class argument of <BsTooltip> and <BsTooltip::Element> ([@jelhan](https://github.com/jelhan))
+* [#1755](https://github.com/kaliber5/ember-bootstrap/pull/1755) drop private @class argument of <BsModal> ([@jelhan](https://github.com/jelhan))
+* [#1756](https://github.com/kaliber5/ember-bootstrap/pull/1756) drop @class argument of <BsAccordion::Item::Body> ([@jelhan](https://github.com/jelhan))
+* [#1758](https://github.com/kaliber5/ember-bootstrap/pull/1758) drop private @class argument of <BsDropdown::Menu> ([@jelhan](https://github.com/jelhan))
+
+#### Committers: 4
+- Ayoahha ([@Ayoahha](https://github.com/Ayoahha))
+- Edward Faulkner ([@ef4](https://github.com/ef4))
+- Jeldrik Hanschke ([@jelhan](https://github.com/jelhan))
+- Simon Ihmig ([@simonihmig](https://github.com/simonihmig))
+
 ## v5.0.0 (2022-02-09)
 
 > See the other 5.0.0 pre-releases for the complete changelog!
