@@ -68,7 +68,7 @@
     "prettier": "2.6.2",
     "qunit": "2.18.2",
     "qunit-dom": "2.0.0",
-    "sass": "1.49.9",
+    "sass": "1.49.11",
     "webpack": "5.70.0"
   },
   "engines": {
