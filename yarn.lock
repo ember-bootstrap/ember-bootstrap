@@ -1052,10 +1052,10 @@
     ember-cli-babel "^7.26.11"
     ember-modifier-manager-polyfill "^1.2.0"
 
-"@ember/test-helpers@2.6.2":
-  version "2.6.2"
-  resolved "https://registry.yarnpkg.com/@ember/test-helpers/-/test-helpers-2.6.2.tgz#8b0856909bec39fcb66cc75cd429fa4a1efc78dd"
-  integrity sha512-Kp1C/PHcMJUAkLkvBQzCKmIgdS/Gm9yCeUkt1q+I7bFC1KHX2bhhKmd6Dxnwe2g6e4sU8RJbOCrJxqnEAH1vgg==
+"@ember/test-helpers@2.7.0":
+  version "2.7.0"
+  resolved "https://registry.yarnpkg.com/@ember/test-helpers/-/test-helpers-2.7.0.tgz#d8e08b614cdd5eac647689d655e78e1de725f474"
+  integrity sha512-eWFtw5+sbci1Fw+E+HoyaMxY126LvK7jul6i8tad48zlWoxrOalbhJhz1mKqIo4daHbqIZWuFgQhOib4QfTKCQ==
   dependencies:
     "@ember/test-waiters" "^3.0.0"
     broccoli-debug "^0.6.5"
