@@ -55,4 +55,19 @@ module('Integration | Component | bs-navbar/nav', function (hooks) {
     `);
     assert.dom('a').hasClass('nav-link');
   });
+
+  test('link has href attribute', async function (assert) {
+    this.owner.setupRouter();
+
+    await render(hbs`
+      <BsNavbar as |navbar|>
+        <navbar.nav as |nav|>
+          <nav.item>
+            <nav.link-to @route="acceptance.modal">Link</nav.link-to>
+          </nav.item>
+        </navbar.nav>
+      </BsNavbar>
+    `);
+    assert.dom('a').hasAttribute('href', '/acceptance/modal');
+  });
 });
