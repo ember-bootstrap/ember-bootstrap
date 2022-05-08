@@ -345,4 +345,15 @@ module('Integration | Component | bs-modal', function (hooks) {
     this.set('size', 'lg');
     assert.dom('.modal-dialog').hasClass('modal-lg');
   });
+
+  test('Modal can be centered vertically', async function (assert) {
+    this.set('position', 'top');
+    await render(hbs`
+      <BsModal @position={{this.position}} />
+    `);
+    assert.dom('.modal').exists({ count: 1 }, 'Modal exists.');
+    assert.dom('.modal-dialog').hasNoClass('modal-dialog-centered');
+    this.set('position', 'center');
+    assert.dom('.modal-dialog').hasClass('modal-dialog-centered');
+  });
 });
