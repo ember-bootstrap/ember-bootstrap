@@ -331,4 +331,18 @@ module('Integration | Component | bs-modal', function (hooks) {
       assert.dom('.modal').doesNotExist();
     });
   });
+
+  test('Modal shows appropriate size respective to @size argument', async function (assert) {
+    this.set('size', null);
+    await render(hbs`
+      <BsModal @size={{this.size}} />
+    `);
+    assert.dom('.modal').exists({ count: 1 }, 'Modal exists.');
+    assert.dom('.modal-dialog').hasNoClass('modal-lg');
+    assert.dom('.modal-dialog').hasNoClass('modal-sm');
+    this.set('size', 'sm');
+    assert.dom('.modal-dialog').hasClass('modal-sm');
+    this.set('size', 'lg');
+    assert.dom('.modal-dialog').hasClass('modal-lg');
+  });
 });
