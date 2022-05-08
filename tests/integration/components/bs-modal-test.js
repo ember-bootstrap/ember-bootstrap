@@ -385,4 +385,22 @@ module('Integration | Component | bs-modal', function (hooks) {
     await triggerKeyEvent('.modal', 'keydown', 'Escape');
     assert.dom('.modal').exists({ count: 1 }, 'Modal exists.');
   });
+
+  test('Modal closes when click is done outside the modal if @backdropClose=true', async function (assert) {
+    await render(hbs`
+      <BsModal @backdropClose={{true}} />
+    `);
+    assert.dom('.modal').exists({ count: 1 }, 'Modal exists.');
+    await click('*');
+    assert.dom('.modal').doesNotExist('Modal does not exist.');
+  });
+
+  test('Modal does not close when click is done outside the modal if @backdropClose=false', async function (assert) {
+    await render(hbs`
+      <BsModal @backdropClose={{false}} />
+    `);
+    assert.dom('.modal').exists({ count: 1 }, 'Modal exists.');
+    await click('*');
+    assert.dom('.modal').exists({ count: 1 }, 'Modal exists.');
+  });
 });
