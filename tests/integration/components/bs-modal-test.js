@@ -1,7 +1,7 @@
 import Component from '@ember/component';
 import { module } from 'qunit';
 import { setupRenderingTest } from 'ember-qunit';
-import { click, find, render, settled, triggerEvent, waitFor, waitUntil } from '@ember/test-helpers';
+import { click, find, render, settled, triggerEvent, waitFor, waitUntil, triggerKeyEvent } from '@ember/test-helpers';
 import { test, testBS5, visibilityClass } from '../../helpers/bootstrap';
 import hbs from 'htmlbars-inline-precompile';
 import setupNoDeprecations from '../../helpers/setup-no-deprecations';
@@ -366,5 +366,23 @@ module('Integration | Component | bs-modal', function (hooks) {
     assert.dom('.modal-dialog').hasNoClass('modal-dialog-scrollable');
     this.set('scrollable', true);
     assert.dom('.modal-dialog').hasClass('modal-dialog-scrollable');
+  });
+
+  test('Modal closes when escape key is pressed if @keyboard=true', async function (assert) {
+    await render(hbs`
+      <BsModal @keyboard={{true}} />
+    `);
+    assert.dom('.modal').exists({ count: 1 }, 'Modal exists.');
+    await triggerKeyEvent('.modal', 'keydown', 'Escape');
+    assert.dom('.modal').doesNotExist('Modal does not exist.');
+  });
+
+  test('Modal does not close when escape key is pressed if @keyboard=false', async function (assert) {
+    await render(hbs`
+      <BsModal @keyboard={{false}} />
+    `);
+    assert.dom('.modal').exists({ count: 1 }, 'Modal exists.');
+    await triggerKeyEvent('.modal', 'keydown', 'Escape');
+    assert.dom('.modal').exists({ count: 1 }, 'Modal exists.');
   });
 });
