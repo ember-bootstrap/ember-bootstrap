@@ -356,4 +356,15 @@ module('Integration | Component | bs-modal', function (hooks) {
     this.set('position', 'center');
     assert.dom('.modal-dialog').hasClass('modal-dialog-centered');
   });
+
+  test('shows scrollable modal with respective to @scrollable argument', async function (assert) {
+    this.set('scrollable', false);
+    await render(hbs`
+      <BsModal @scrollable={{this.scrollable}} />
+    `);
+    assert.dom('.modal').exists({ count: 1 }, 'Modal exists.');
+    assert.dom('.modal-dialog').hasNoClass('modal-dialog-scrollable');
+    this.set('scrollable', true);
+    assert.dom('.modal-dialog').hasClass('modal-dialog-scrollable');
+  });
 });
