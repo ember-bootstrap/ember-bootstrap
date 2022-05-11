@@ -52,7 +52,6 @@ import deprecateSubclassing from 'ember-bootstrap/utils/deprecate-subclassing';
   | Presentation | Represents a single transition, or a single interval, or the union of both. |
   | Cycle | Presents all slides until it reaches first or last slide. |
   | Wrap | wrap slides, cycles without stopping at first or last slide. |
-  ```
 
   *Note that only invoking the component in a template as shown above is considered part of its public API. Extending from it (subclassing) is generally not supported, and may break at any time.*
 
