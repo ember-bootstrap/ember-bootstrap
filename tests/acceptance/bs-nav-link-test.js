@@ -26,4 +26,11 @@ module('Acceptance | bs-nav-link', function (hooks) {
     assert.dom(this.element.querySelectorAll('.nav li')[1]).hasClass('active');
     assert.dom(this.element.querySelectorAll('.nav li')[2]).hasClass('active');
   });
+
+  test('href exists in anchor inside nav item', async function (assert) {
+    await visit('/acceptance/link/1');
+    assert.dom(this.element.querySelectorAll('.nav li a')[0]).hasAttribute('href', '/acceptance/link/1');
+    assert.dom(this.element.querySelectorAll('.nav li a')[1]).hasAttribute('href', '/acceptance/link/2');
+    assert.dom(this.element.querySelectorAll('.nav li a')[2]).hasAttribute('href', '/acceptance/link/1');
+  });
 });
