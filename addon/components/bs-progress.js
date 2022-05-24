@@ -7,7 +7,7 @@ import deprecateSubclassing from 'ember-bootstrap/utils/deprecate-subclassing';
 
   ### Usage
 
-  The component yields a [Components.ProgressBar)(Components.ProgressBar.html) component that represents a single bar.
+  The component yields a [Components.ProgressBar](Components.ProgressBar.html) component that represents a single bar.
   Use the `value` property to control the progress bar's width. To apply the different styling options supplied by
   Bootstrap, use the appropriate properties like `type`, `showLabel`, `striped` or `animate`.
 

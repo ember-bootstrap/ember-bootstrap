@@ -5,7 +5,7 @@ import deprecateSubclassing from 'ember-bootstrap/utils/deprecate-subclassing';
 /**
   Component that implements Bootstrap [popovers](http://getbootstrap.com/javascript/#popovers).
 
-  By default it will attach its listeners (click) to the parent DOM element to trigger
+  By default, it will attach its listeners (click) to the parent DOM element to trigger
   the popover:
 
   ```hbs
@@ -17,7 +17,7 @@ import deprecateSubclassing from 'ember-bootstrap/utils/deprecate-subclassing';
   ### Trigger
 
   The trigger element is the DOM element that will cause the popover to be shown when one of the trigger events occur on
-  that element. By default the trigger element is the parent DOM element of the component, and the trigger event will be
+  that element. By default, the trigger element is the parent DOM element of the component, and the trigger event will be
   "click".
 
   The `triggerElement` property accepts any CSS selector to attach the popover to any other existing DOM element.
@@ -27,7 +27,7 @@ import deprecateSubclassing from 'ember-bootstrap/utils/deprecate-subclassing';
 
   ### Placement options
 
-  By default the popover will show up to the right of the trigger element. Use the `placement` property to change that
+  By default, the popover will show up to the right of the trigger element. Use the `placement` property to change that
   ("top", "bottom", "left" and "right"). To make sure the popover will not exceed the viewport (see Advanced customization)
   you can set `autoPlacement` to true. A popover with `placement="right" will be placed to the right if there is enough
   space, otherwise to the left.

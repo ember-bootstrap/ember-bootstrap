@@ -12,7 +12,7 @@ import { localCopy } from 'tracked-toolbox';
 
   ### Usage
 
-  By default it is a user dismissible alert with a fade out animation, both of which can be disabled. Be sure to set the
+  By default, it is a user dismissible alert with a fade out animation, both of which can be disabled. Be sure to set the
   `type` property for proper styling.
 
   ```hbs
@@ -37,7 +37,7 @@ import { localCopy } from 'tracked-toolbox';
   The header is rendered using a `<h4>` element by default. You can customize
   that one by setting `@headerTag` argument of `<BsAlert>`.
 
-  Using named block syntax as shown above may require to install
+  Using named block syntax as shown above may require installing
   [ember-named-blocks-polyfill](https://github.com/ember-polyfills/ember-named-blocks-polyfill)
   in your project depending on the Ember version used.
 
