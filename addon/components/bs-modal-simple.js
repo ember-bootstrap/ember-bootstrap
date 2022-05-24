@@ -27,8 +27,8 @@
   ### Modals with forms
 
   There is a special case when you have a form inside your modals body: you probably do not want to have a submit button
-  within your form but instead in your modal footer. Hover pressing the submit button outside of your form would not
-  trigger the form data to be submitted. In the example below this would not trigger the submit action of the form, an
+  within your form but instead in your modal footer. Hover pressing the submit button outside your form would not
+  trigger the form data to be submitted. In the example below this would not trigger the submit action of the form, and
   thus bypass the form validation feature of the form component.
 
   ```hbs
@@ -191,7 +191,7 @@
 /**
  * The action to be sent when the modal footer's submit button (if present) is pressed.
  * Note that if your modal body contains a form (e.g. [Components.Form](Components.Form.html)) this action will
- * not be triggered. Instead a submit event will be triggered on the form itself. See the class description for an
+ * not be triggered. Instead, a submit event will be triggered on the form itself. See the class description for an
  * example.
  *
  * @property onSubmit

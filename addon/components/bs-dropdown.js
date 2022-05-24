@@ -197,7 +197,7 @@ export default class Dropdown extends Component {
   isOpen = false;
 
   /**
-   * By default clicking on an open dropdown menu will close it. Set this property to false for the menu to stay open.
+   * By default, clicking on an open dropdown menu will close it. Set this property to false for the menu to stay open.
    *
    * @property closeOnMenuClick
    * @default true
@@ -208,7 +208,7 @@ export default class Dropdown extends Component {
   closeOnMenuClick = true;
 
   /**
-   * By default the dropdown menu will expand downwards. Other options include, 'up', 'left' and 'right'
+   * By default, the dropdown menu will expand downwards. Other options include, 'up', 'left' and 'right'
    *
    * @property direction
    * @type string

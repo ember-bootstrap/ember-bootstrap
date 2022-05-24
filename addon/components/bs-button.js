@@ -221,7 +221,7 @@ export default class Button extends Component {
   }
 
   /**
-   * Supply a value that will be associated with this button. This will be send
+   * Supply a value that will be associated with this button. This will be sent
    * as a parameter of the default action triggered when clicking the button
    *
    * @property value
@@ -246,7 +246,7 @@ export default class Button extends Component {
    * `<state>Text` property.
    * This property will automatically be set when using a click action that supplies the callback with a promise.
    * Possible values are: "default" > "pending" > "fulfilled" / "rejected".
-   * It could be reseted by `reset` property.
+   * It could be resetted by `reset` property.
    *
    * @property state
    * @type String
@@ -352,7 +352,7 @@ export default class Button extends Component {
    *
    * Return a promise object, and the buttons state will automatically set to "pending", "resolved" and/or "rejected".
    * This could be used to automatically set the button's text depending on promise state (`defaultText`, `pendingText`,
-   * `fulfilledText`, `rejectedText`) and for futher customization using the yielded `isPending`, `isFulfilled`,
+   * `fulfilledText`, `rejectedText`) and for further customization using the yielded `isPending`, `isFulfilled`,
    * `isRejected` properties.
    *
    * The click event will not bubble up, unless you set `bubble` to true.
