@@ -152,6 +152,64 @@ module('Integration | Component | bs-form', function (hooks) {
     assert.verifySteps(['bubbles']);
   });
 
+  test('form that supports validation calls validate hook when submitting', async function (assert) {
+    let model = {};
+    this.set('model', model);
+
+    class ValidatingForm extends Form {
+      '__ember-bootstrap_subclass' = true;
+
+      get hasValidator() {
+        return true;
+      }
+
+      async validate(modelArg, formArg) {
+        assert.step('validate');
+        assert.strictEqual(modelArg, model, 'validate is called with model argument');
+        assert.ok(formArg instanceof HTMLFormElement, 'validate is called with form argument');
+      }
+    }
+
+    this.set('form', ensureSafeComponent(ValidatingForm, this));
+
+    await render(hbs`
+      <this.form @model={{this.model}}>Test</this.form>
+    `);
+    await triggerEvent('form', 'submit');
+
+    assert.verifySteps(['validate'], 'validate has been called');
+  });
+
+  test('form that supports validation calls validate hook when calling submit action', async function (assert) {
+    let model = {};
+    this.set('model', model);
+
+    class ValidatingForm extends Form {
+      '__ember-bootstrap_subclass' = true;
+
+      get hasValidator() {
+        return true;
+      }
+
+      async validate(modelArg, formArg) {
+        assert.step('validate');
+        assert.strictEqual(modelArg, model, 'validate is called with model argument');
+        assert.ok(formArg instanceof HTMLFormElement, 'validate is called with form argument');
+      }
+    }
+
+    this.set('form', ensureSafeComponent(ValidatingForm, this));
+
+    await render(hbs`
+      <this.form @model={{this.model}} as |form|>
+        <button type="button" {{on "click" form.submit}}>Submit</button>
+      </this.form>
+    `);
+    await click('button');
+
+    assert.verifySteps(['validate'], 'validate has been called');
+  });
+
   test('Submitting the form with valid validation calls onBeforeSubmit and onSubmit action', async function (assert) {
     let submit = sinon.spy();
     let before = sinon.spy();
