@@ -9,6 +9,7 @@ import deprecateSubclassing from 'ember-bootstrap/utils/deprecate-subclassing';
 import arg from '../utils/decorators/arg';
 import { tracked } from '@glimmer/tracking';
 import { cached } from 'tracked-toolbox';
+import { ref } from 'ember-ref-bucket';
 
 /**
   Render a form with the appropriate Bootstrap layout class (see `formLayout`).
@@ -118,6 +119,13 @@ import { cached } from 'tracked-toolbox';
 */
 @deprecateSubclassing
 export default class Form extends Component {
+  /**
+   * @property _element
+   * @type null | HTMLFormElement
+   * @private
+   */
+  @ref('formElement') _element = null;
+
   /**
    * Bootstrap form class name (computed)
    *
@@ -332,10 +340,11 @@ export default class Form extends Component {
    *
    * @method validate
    * @param {Object} model
+   * @param {HTMLFormElement} form
    * @return {Promise}
    * @public
    */
-  validate(model) {} // eslint-disable-line no-unused-vars
+  validate(model, form) {} // eslint-disable-line no-unused-vars
 
   /**
    * @property showAllValidations
@@ -400,7 +409,7 @@ export default class Form extends Component {
 
     return RSVP.resolve()
       .then(() => {
-        return this.hasValidator ? this.validate(model) : null;
+        return this.hasValidator ? this.validate(model, this._element) : null;
       })
       .then(
         (record) => {
