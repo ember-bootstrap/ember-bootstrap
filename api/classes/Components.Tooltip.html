@@ -58,28 +58,28 @@
   <div class="card-body">
 
 <p>Component that implements Bootstrap <a href="http://getbootstrap.com/javascript/#tooltips">tooltips</a>.</p>
-<p>By default it will attach its listeners (mouseover and focus) to the parent DOM element to trigger
+<p>By default, it will attach its listeners (mouseover and focus) to the parent DOM element to trigger
 the tooltip:</p>
 <pre class="code prettyprint"><code class="language-hbs">&lt;button class="btn"&gt;
-  &lt;BsTooltip @title="This is a toolip" /&gt;
+  &lt;BsTooltip @title="This is a tooltip" /&gt;
 &lt;/button&gt;
 </code></pre>
 <p>You can also use the component in a block form to set the title:</p>
 <pre class="code prettyprint"><code class="language-hbs">&lt;button class="btn"&gt;
   &lt;BsTooltip&gt;
-    This is a toolip
+    This is a tooltip
   &lt;/BsTooltip&gt;
 &lt;/button&gt;
 </code></pre>
 <h3>Trigger</h3>
 <p>The trigger element is the DOM element that will cause the tooltip to be shown when one of the trigger events occur on
-that element. By default the trigger element is the parent DOM element of the component, and the trigger events will be
+that element. By default, the trigger element is the parent DOM element of the component, and the trigger events will be
 "hover" and "focus".</p>
 <p>The <code>triggerElement</code> property accepts any CSS selector to attach the tooltip to any other existing DOM element.</p>
 <p>To customize the events that will trigger the tooltip use the <code>triggerEvents</code> property, that accepts an array or a
 string of events, with "hover", "focus" and "click" being supported.</p>
 <h3>Placement options</h3>
-<p>By default the tooltip will show up on top of the trigger element. Use the <code>placement</code> property to change that
+<p>By default, the tooltip will show up on top of the trigger element. Use the <code>placement</code> property to change that
 ("top", "bottom", "left" and "right"). To make sure the tooltip will not exceed the viewport (see Advanced customization)
 you can set <code>autoPlacement</code> to true. A tooltip with `placement="right" will be placed to the right if there is enough
 space, otherwise to the left.</p>
@@ -92,7 +92,7 @@ space, otherwise to the left.</p>
 <li><code>viewportSelector</code> and <code>viewportPadding</code> to customize the viewport that affects <code>autoPlacement</code></li>
 <li>a <code>close</code> action is yielded, that allows you to close the tooltip:</li>
 </ul>
-<pre class="code prettyprint"><code class="language-hbs">&lt;BsTooltip as |tt|&gt;This is a toolip &lt;button onclick={{action tt.close}}&gt;Close&lt;/button&gt;&lt;/BsTooltip&gt;
+<pre class="code prettyprint"><code class="language-hbs">&lt;BsTooltip as |tt|&gt;This is a tooltip &lt;button onclick={{action tt.close}}&gt;Close&lt;/button&gt;&lt;/BsTooltip&gt;
 </code></pre>
 <p>See the individual API docs for each property.</p>
 <h3>Actions</h3>
@@ -1598,6 +1598,7 @@ space, otherwise to the left.</p>
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.Button.html">Components.Button</a></li>
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.ButtonGroup.html">Components.ButtonGroup</a></li>
             <li class="list-group-item list-group-item-private"><a href="../classes/Components.ButtonGroupButton.html">Components.ButtonGroupButton</a></li>
+            <li class="list-group-item list-group-item-public"><a href="../classes/Components.Carousel.html">Components.Carousel</a></li>
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.CarouselSlide.html">Components.CarouselSlide</a></li>
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.Collapse.html">Components.Collapse</a></li>
             <li class="list-group-item list-group-item-private"><a href="../classes/Components.ContextualHelp.html">Components.ContextualHelp</a></li>

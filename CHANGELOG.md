@@ -5,6 +5,21 @@
 
 
 
+
+## v5.1.1 (2022-05-25)
+
+#### Documentation
+* [#1791](https://github.com/kaliber5/ember-bootstrap/pull/1791) Fix typos in API docs ([@simonihmig](https://github.com/simonihmig))
+* [#1790](https://github.com/kaliber5/ember-bootstrap/pull/1790) Bug fix: carousel component missing from API docs ([@bvedad](https://github.com/bvedad))
+
+#### Internal
+* [#1793](https://github.com/kaliber5/ember-bootstrap/pull/1793) Add form element to arguments passed to (private) validate hook ([@simonihmig](https://github.com/simonihmig))
+* [#1787](https://github.com/kaliber5/ember-bootstrap/pull/1787) Added missing tests for assertion of href attribute for BsNavbar ([@bvedad](https://github.com/bvedad))
+
+#### Committers: 2
+- Simon Ihmig ([@simonihmig](https://github.com/simonihmig))
+- Vedad Burgic ([@bvedad](https://github.com/bvedad))
+
 ## v5.1.0 (2022-04-29)
 
 #### Features

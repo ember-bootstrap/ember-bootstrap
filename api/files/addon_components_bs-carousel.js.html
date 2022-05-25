@@ -86,9 +86,9 @@ import deprecateSubclassing from &#x27;ember-bootstrap/utils/deprecate-subclassi
   | Pause current cycle on mouse enter. | pause=&#x27;hover&#x27;\|null | pauseOnMouseEnter=false\|true |
   | Show or hide controls  | Tag manipulation. | showControls=false\|true |
   | Show or hide indicators  | Tag manipulation. | showIndicators=false\|true |
-  | Waiting time of slides in a automatic cycle. | interval=n | interval=n |
+  | Waiting time of slides in an automatic cycle. | interval=n | interval=n |
 
-  Default settings are the same as the original so you don&#x27;t have to worry about changing parameters.
+  Default settings are the same as the original, so you don&#x27;t have to worry about changing parameters.
 
   &#x60;&#x60;&#x60;hbs
   &lt;BsCarousel as |car|&gt;
@@ -113,7 +113,6 @@ import deprecateSubclassing from &#x27;ember-bootstrap/utils/deprecate-subclassi
   | Presentation | Represents a single transition, or a single interval, or the union of both. |
   | Cycle | Presents all slides until it reaches first or last slide. |
   | Wrap | wrap slides, cycles without stopping at first or last slide. |
-  &#x60;&#x60;&#x60;
 
   *Note that only invoking the component in a template as shown above is considered part of its public API. Extending from it (subclassing) is generally not supported, and may break at any time.*
 
@@ -716,6 +715,7 @@ export default class Carousel extends Component.extend(ComponentParent) {
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.Button.html">Components.Button</a></li>
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.ButtonGroup.html">Components.ButtonGroup</a></li>
             <li class="list-group-item list-group-item-private"><a href="../classes/Components.ButtonGroupButton.html">Components.ButtonGroupButton</a></li>
+            <li class="list-group-item list-group-item-public"><a href="../classes/Components.Carousel.html">Components.Carousel</a></li>
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.CarouselSlide.html">Components.CarouselSlide</a></li>
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.Collapse.html">Components.Collapse</a></li>
             <li class="list-group-item list-group-item-private"><a href="../classes/Components.ContextualHelp.html">Components.ContextualHelp</a></li>

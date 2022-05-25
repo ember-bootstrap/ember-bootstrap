@@ -77,7 +77,7 @@ import arg from &#x27;ember-bootstrap/utils/decorators/arg&#x27;;
 import { dedupeTracked } from &#x27;tracked-toolbox&#x27;;
 
 /**
-  Sub class of &#x60;Components.FormGroup&#x60; that adds automatic form layout markup and form validation features.
+  Subclass of &#x60;Components.FormGroup&#x60; that adds automatic form layout markup and form validation features.
 
   ### Form layout
 
@@ -384,7 +384,7 @@ export default class FormElement extends Component {
    */
 
   /**
-   * Property path (e.g. &#x27;title&#x27; or &#x27;related.name&#x27;) to render the label of an selection option. See &#x60;options&#x60;.
+   * Property path (e.g. &#x27;title&#x27; or &#x27;related.name&#x27;) to render the label of a selection option. See &#x60;options&#x60;.
    *
    * @property optionLabelPath
    * @type {String}
@@ -555,7 +555,7 @@ export default class FormElement extends Component {
   showAllValidations = false;
 
   /*
-   * Resets &#x60;showOwnValidation&#x60; if &#x60;@showAllValidatoins&#x60; argument is changed to &#x60;false&#x60;.
+   * Resets &#x60;showOwnValidation&#x60; if &#x60;@showAllValidations&#x60; argument is changed to &#x60;false&#x60;.
    * Must be called whenever &#x60;@showAllValidations&#x60; argument changes.
    */
   @action
@@ -653,7 +653,7 @@ export default class FormElement extends Component {
    * It expects an array of query selectors. If event target is a children of an event that matches
    * these selectors, an event triggered for it will not trigger validation errors to be shown.
    *
-   * By default events fired on elements inside an input group are skipped.
+   * By default, events fired on elements inside an input group are skipped.
    *
    * If &#x60;null&#x60; or an empty array is passed validation errors are shown for all events regardless
    * of event target.
@@ -667,7 +667,7 @@ export default class FormElement extends Component {
 
   /**
    * The validation (&quot;error&quot; (BS3)/&quot;danger&quot; (BS4), &quot;warning&quot;, or &quot;success&quot;) or null if no validation is to be shown. Automatically computed from the
-   * models validation state.
+   * model&#x27;s validation state.
    *
    * @property validation
    * @readonly
@@ -866,6 +866,7 @@ export default class FormElement extends Component {
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.Button.html">Components.Button</a></li>
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.ButtonGroup.html">Components.ButtonGroup</a></li>
             <li class="list-group-item list-group-item-private"><a href="../classes/Components.ButtonGroupButton.html">Components.ButtonGroupButton</a></li>
+            <li class="list-group-item list-group-item-public"><a href="../classes/Components.Carousel.html">Components.Carousel</a></li>
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.CarouselSlide.html">Components.CarouselSlide</a></li>
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.Collapse.html">Components.Collapse</a></li>
             <li class="list-group-item list-group-item-private"><a href="../classes/Components.ContextualHelp.html">Components.ContextualHelp</a></li>

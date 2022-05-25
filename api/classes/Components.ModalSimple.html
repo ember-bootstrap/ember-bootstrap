@@ -75,8 +75,8 @@ the DOM until needed. Or you can bind the <code>open</code> argument to trigger 
 <p>To customize the markup within the modal you can use the <a href="Components.Modal.html"><BsModal></a> component.</p>
 <h3>Modals with forms</h3>
 <p>There is a special case when you have a form inside your modals body: you probably do not want to have a submit button
-within your form but instead in your modal footer. Hover pressing the submit button outside of your form would not
-trigger the form data to be submitted. In the example below this would not trigger the submit action of the form, an
+within your form but instead in your modal footer. Hover pressing the submit button outside your form would not
+trigger the form data to be submitted. In the example below this would not trigger the submit action of the form, and
 thus bypass the form validation feature of the form component.</p>
 <pre class="code prettyprint"><code class="language-hbs">&lt;BsModalSimple @title="Form Example" @closeTitle="Cancel" @submitTitle="Ok"&gt;
   &lt;BsForm @model={{this}} @onSubmit={{this.submit}} @submitOnEnter={{true}} as |Form|&gt;
@@ -648,7 +648,7 @@ are not effected by parent elements with <code>overflow: hidden</code> for examp
               <div class="description">
                 <p>The action to be sent when the modal footer's submit button (if present) is pressed.
             Note that if your modal body contains a form (e.g. <a href="Components.Form.html">Components.Form</a>) this action will
-            not be triggered. Instead a submit event will be triggered on the form itself. See the class description for an
+            not be triggered. Instead, a submit event will be triggered on the form itself. See the class description for an
             example.</p>
             
               </div>
@@ -954,6 +954,7 @@ are not effected by parent elements with <code>overflow: hidden</code> for examp
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.Button.html">Components.Button</a></li>
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.ButtonGroup.html">Components.ButtonGroup</a></li>
             <li class="list-group-item list-group-item-private"><a href="../classes/Components.ButtonGroupButton.html">Components.ButtonGroupButton</a></li>
+            <li class="list-group-item list-group-item-public"><a href="../classes/Components.Carousel.html">Components.Carousel</a></li>
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.CarouselSlide.html">Components.CarouselSlide</a></li>
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.Collapse.html">Components.Collapse</a></li>
             <li class="list-group-item list-group-item-private"><a href="../classes/Components.ContextualHelp.html">Components.ContextualHelp</a></li>

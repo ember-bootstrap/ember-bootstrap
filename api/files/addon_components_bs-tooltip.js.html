@@ -65,12 +65,12 @@ import deprecateSubclassing from &#x27;ember-bootstrap/utils/deprecate-subclassi
 /**
   Component that implements Bootstrap [tooltips](http://getbootstrap.com/javascript/#tooltips).
 
-  By default it will attach its listeners (mouseover and focus) to the parent DOM element to trigger
+  By default, it will attach its listeners (mouseover and focus) to the parent DOM element to trigger
   the tooltip:
 
   &#x60;&#x60;&#x60;hbs
   &lt;button class=&quot;btn&quot;&gt;
-    &lt;BsTooltip @title=&quot;This is a toolip&quot; /&gt;
+    &lt;BsTooltip @title=&quot;This is a tooltip&quot; /&gt;
   &lt;/button&gt;
   &#x60;&#x60;&#x60;
 
@@ -79,7 +79,7 @@ import deprecateSubclassing from &#x27;ember-bootstrap/utils/deprecate-subclassi
   &#x60;&#x60;&#x60;hbs
   &lt;button class=&quot;btn&quot;&gt;
     &lt;BsTooltip&gt;
-      This is a toolip
+      This is a tooltip
     &lt;/BsTooltip&gt;
   &lt;/button&gt;
   &#x60;&#x60;&#x60;
@@ -87,7 +87,7 @@ import deprecateSubclassing from &#x27;ember-bootstrap/utils/deprecate-subclassi
   ### Trigger
 
   The trigger element is the DOM element that will cause the tooltip to be shown when one of the trigger events occur on
-  that element. By default the trigger element is the parent DOM element of the component, and the trigger events will be
+  that element. By default, the trigger element is the parent DOM element of the component, and the trigger events will be
   &quot;hover&quot; and &quot;focus&quot;.
 
   The &#x60;triggerElement&#x60; property accepts any CSS selector to attach the tooltip to any other existing DOM element.
@@ -97,7 +97,7 @@ import deprecateSubclassing from &#x27;ember-bootstrap/utils/deprecate-subclassi
 
   ### Placement options
 
-  By default the tooltip will show up on top of the trigger element. Use the &#x60;placement&#x60; property to change that
+  By default, the tooltip will show up on top of the trigger element. Use the &#x60;placement&#x60; property to change that
   (&quot;top&quot;, &quot;bottom&quot;, &quot;left&quot; and &quot;right&quot;). To make sure the tooltip will not exceed the viewport (see Advanced customization)
   you can set &#x60;autoPlacement&#x60; to true. A tooltip with &#x60;placement=&quot;right&quot; will be placed to the right if there is enough
   space, otherwise to the left.
@@ -112,7 +112,7 @@ import deprecateSubclassing from &#x27;ember-bootstrap/utils/deprecate-subclassi
   * a &#x60;close&#x60; action is yielded, that allows you to close the tooltip:
 
   &#x60;&#x60;&#x60;hbs
-  &lt;BsTooltip as |tt|&gt;This is a toolip &lt;button onclick={{action tt.close}}&gt;Close&lt;/button&gt;&lt;/BsTooltip&gt;
+  &lt;BsTooltip as |tt|&gt;This is a tooltip &lt;button onclick={{action tt.close}}&gt;Close&lt;/button&gt;&lt;/BsTooltip&gt;
   &#x60;&#x60;&#x60;
 
   See the individual API docs for each property.
@@ -173,6 +173,7 @@ export default class Tooltip extends ContextualHelp {
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.Button.html">Components.Button</a></li>
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.ButtonGroup.html">Components.ButtonGroup</a></li>
             <li class="list-group-item list-group-item-private"><a href="../classes/Components.ButtonGroupButton.html">Components.ButtonGroupButton</a></li>
+            <li class="list-group-item list-group-item-public"><a href="../classes/Components.Carousel.html">Components.Carousel</a></li>
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.CarouselSlide.html">Components.CarouselSlide</a></li>
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.Collapse.html">Components.Collapse</a></li>
             <li class="list-group-item list-group-item-private"><a href="../classes/Components.ContextualHelp.html">Components.ContextualHelp</a></li>
