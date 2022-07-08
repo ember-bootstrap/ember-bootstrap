@@ -3,7 +3,7 @@ import { getOwnConfig, macroCondition } from '@embroider/macros';
 import arg from '../utils/decorators/arg';
 
 /**
- Implements a [Spinner element](https://getbootstrap.com/docs/5.2/components/spinners/)
+ Implements a [Spinner element](https://getbootstrap.com/docs/5.2/components/spinners/).
 
  ### Basic Usage
 
@@ -19,14 +19,14 @@ import arg from '../utils/decorators/arg';
 
  ### Usage with `BsButton`
 
- ```hbs
- <BsButton @onClick=(action "download") as |button|>
-  Download
-  {{#if button.isPending}}
-    <BsSpinner @size="sm"/>
-  {{/if}}
- </BsButton>
- ```
+  ```hbs
+  <BsButton @onClick=(action "download") as |button|>
+   Download
+   \{{#if button.isPending}}
+     <BsSpinner @size="sm"/>
+   {{/if}}
+  </BsButton>
+  ```
 
  @class Spinner
  @namespace Components
