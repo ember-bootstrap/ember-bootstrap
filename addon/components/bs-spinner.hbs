@@ -1,0 +1,7 @@
+<div
+  class="{{this.spinnerClass}} {{if @size (bs-size-class this.spinnerClass @size)}} {{bs-type-class "text" @type default="primary" outline=false}}"
+  role="status"
+  ...attributes>
+  <span class="{{this.accessibilityTextClass}}">{{this.accessibilityText}}</span>
+</div>
+{{yield}}
