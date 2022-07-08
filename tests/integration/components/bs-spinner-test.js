@@ -51,9 +51,9 @@ module('Integration | Component | bs-spinner', function (hooks) {
   });
 
   test('spinnerType property allows changing spinner type', async function (assert) {
-    await render(hbs`<BsSpinner @spinnerType="glow" />`);
+    await render(hbs`<BsSpinner @spinnerType="grow" />`);
 
-    assert.dom('div').hasClass('spinner-glow');
+    assert.dom('div').hasClass('spinner-grow');
   });
 
   test('accessibilityText property allows changing accessibility text', async function (assert) {

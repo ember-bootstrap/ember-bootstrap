@@ -14,7 +14,7 @@ import arg from '../utils/decorators/arg';
  ### Advanced Usage
 
  ```hbs
- <BsSpinner @type="glow" @size="sm" @type="warning"/>
+ <BsSpinner @spinnerType="grow" @size="sm" @type="warning"/>
  ```
 
  ### Usage with `BsButton`
@@ -56,7 +56,7 @@ export default class SpinnerComponent extends Component {
    */
 
   /**
-   * Spinner type - 'border' or 'glow'
+   * Spinner type - 'border' or 'grow'
    *
    * @property spinnerType
    * @type string
