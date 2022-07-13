@@ -25,22 +25,30 @@ module('Integration | Component | bs-spinner', function (hooks) {
     assert.dom('div').hasClass('text-primary', 'spinner has text-primary class');
   });
 
-  testForBootstrap(4, 'spinner has accessibility block', async function (assert) {
-    await render(hbs`<BsSpinner/>`);
+  testForBootstrap(4, 'spinner has accessibility block (block-mode)', async function (assert) {
+    await render(hbs`<BsSpinner>Loading</BsSpinner>`);
 
-    assert.dom('span').hasClass('rs-only', 'accessibility text exists');
+    assert.dom('span').hasClass('sr-only', 'accessibility block exists');
+    assert.dom('span.sr-only').hasText('Loading', 'accessibility text is shown');
   });
 
-  testForBootstrap(5, 'spinner has accessibility block', async function (assert) {
-    await render(hbs`<BsSpinner/>`);
+  testForBootstrap(4, 'spinner does not have accessibility block (blockless-mode)', async function (assert) {
+    await render(hbs`<BsSpinner />`);
 
-    assert.dom('span').hasClass('visually-hidden', 'accessibility text exists');
+    assert.dom('span.sr-only').doesNotExist('accessibility block does not exist');
   });
 
-  test('spinner has default accessibility text', async function (assert) {
-    await render(hbs`<BsSpinner/>`);
+  testForBootstrap(5, 'spinner has accessibility block (block-mode)', async function (assert) {
+    await render(hbs`<BsSpinner>Loading</BsSpinner>`);
 
-    assert.dom('span').hasText('Loading...');
+    assert.dom('span').hasClass('visually-hidden', 'accessibility block exists');
+    assert.dom('span.visually-hidden').hasText('Loading', 'accessibility text is shown');
+  });
+
+  testForBootstrap(5, 'spinner does not have accessibility block (blockless-mode)', async function (assert) {
+    await render(hbs`<BsSpinner />`);
+
+    assert.dom('span.visually-hidden').doesNotExist('accessibility block does not exist');
   });
 
   test('spinner has HTML attributes', async function (assert) {
@@ -54,17 +62,5 @@ module('Integration | Component | bs-spinner', function (hooks) {
     await render(hbs`<BsSpinner @spinnerType="grow" />`);
 
     assert.dom('div').hasClass('spinner-grow');
-  });
-
-  test('accessibilityText property allows changing accessibility text', async function (assert) {
-    await render(hbs`<BsSpinner @accessibilityText="Custom text" />`);
-
-    assert.dom('span').hasText('Custom text', 'Custom text is shown');
-  });
-
-  test('type property allows changing spinner color', async function (assert) {
-    await render(hbs`<BsSpinner @type="warning" />`);
-
-    assert.dom('div').hasClass('text-warning', 'Spinner has warning-color');
   });
 });

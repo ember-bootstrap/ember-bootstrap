@@ -1,5 +1,4 @@
 import Component from '@glimmer/component';
-import { getOwnConfig, macroCondition } from '@embroider/macros';
 import arg from '../utils/decorators/arg';
 
 /**
@@ -20,9 +19,9 @@ import arg from '../utils/decorators/arg';
  ### Usage with `BsButton`
 
   ```hbs
-  <BsButton @onClick=(action "download") as |button|>
+  <BsButton @onClick={{this.download}} as |button|>
    Download
-   \{{#if button.isPending}}
+   {{#if button.isPending}}
      <BsSpinner @size="sm"/>
    {{/if}}
   </BsButton>
@@ -76,13 +75,5 @@ export default class SpinnerComponent extends Component {
 
   get spinnerClass() {
     return `spinner-${this.spinnerType}`;
-  }
-
-  get accessibilityTextClass() {
-    if (macroCondition(getOwnConfig().isBS4)) {
-      return 'sr-only';
-    } else {
-      return 'visually-hidden';
-    }
   }
 }
