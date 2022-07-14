@@ -8,7 +8,10 @@ import arg from '../utils/decorators/arg';
 
  ```hbs
  <BsSpinner/>
+ <BsSpinner>Loading...</BsSpinner>
  ```
+
+ The (optional) component's block will render as visually invisible but accessible text for assistive technology like screen readers.
 
  ### Advanced Usage
 
@@ -64,14 +67,6 @@ export default class SpinnerComponent extends Component {
    */
   @arg
   spinnerType = 'border';
-
-  /**
-   * @property accessibilityText
-   * @type string
-   * @public
-   */
-  @arg
-  accessibilityText = 'Loading...';
 
   get spinnerClass() {
     return `spinner-${this.spinnerType}`;
