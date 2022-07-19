@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <title>addon/components/bs-contextual-help/element.js - ember-bootstrap</title>
+  <title>Components.Spinner - ember-bootstrap</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="../assets/css/api.css">
   <script type="text/javascript" src="//use.typekit.net/dkq5epu.js"></script>
@@ -53,195 +53,218 @@
       <div class="apidocs">
         <div id="docs-main">
           <div class="content">
-<div class="page-header">
-    <h1>addon/components/bs-contextual-help/element.js <small>File</small></h1>
+<div class="card">
+  <h1 class="card-header">Components.Spinner <span class="badge badge-public small">public</span></h1>
+  <div class="card-body">
+
+<p>Implements a <a href="https://getbootstrap.com/docs/5.2/components/spinners/">Spinner element</a>.</p>
+<h3>Basic Usage</h3>
+<pre class="code prettyprint"><code class="language-hbs">&lt;BsSpinner/&gt;
+&lt;BsSpinner&gt;Loading...&lt;/BsSpinner&gt;
+</code></pre>
+<p>The (optional) component's block will render as visually invisible but accessible text for assistive technology like screen readers.</p>
+<h3>Advanced Usage</h3>
+<pre class="code prettyprint"><code class="language-hbs">&lt;BsSpinner @spinnerType="grow" @size="sm" @type="warning"/&gt;
+</code></pre>
+<h3>Usage with <code>BsButton</code></h3>
+<pre class="code prettyprint"><code class="language-hbs">&lt;BsButton @onClick= as |button|&gt;
+ Download
+&lt;/BsButton&gt;
+</code></pre>
+
+
+  </div>
+
+  <div class="card-footer text-muted">
+    <dl class="row m-0">
+        <dt class="col-sm-3">
+          Extends
+        </dt>
+        <dd class="col-sm-9">
+          Glimmer.Component
+        </dd>
+        <dt class="col-sm-3">
+          Defined in
+        </dt>
+        <dd class="col-sm-9">
+          <a href="../files/addon_components_bs-spinner.js.html#l4"><code>addon&#x2F;components&#x2F;bs-spinner.js:4</code></a>
+        </dd>
+
+    </dl>
+  </div>
 </div>
 
-<div class="file">
-    <pre class="prettyprint linenums">
-import { action } from &#x27;@ember/object&#x27;;
-import Component from &#x27;@glimmer/component&#x27;;
-import arg from &#x27;ember-bootstrap/utils/decorators/arg&#x27;;
-import { tracked } from &#x27;@glimmer/tracking&#x27;;
-import { getOwnConfig, macroCondition } from &#x27;@embroider/macros&#x27;;
-import { trackedRef } from &#x27;ember-ref-bucket&#x27;;
 
-/**
- Internal (abstract) component for contextual help markup. Should not be used directly.
 
- @class ContextualHelpElement
- @namespace Components
- @extends Glimmer.Component
- @private
- */
-export default class ContextualHelpElement extends Component {
-  /**
-   * @property placement
-   * @type string
-   * @default &#x27;top&#x27;
-   * @public
-   */
-  @arg
-  placement = &#x27;top&#x27;;
+<form id="options-form" class="form-inline mb-1 mt-4">
 
-  @tracked
-  actualPlacement = this.args.placement;
+  <div class="form-check mb-2 mr-sm-2">
+    <input class="form-check-inline" type="checkbox" id="api-show-inherited" checked>
+    <label class="form-check-label" for="api-show-inherited">
+      Inherited
+    </label>
+  </div>
 
-  /**
-   * @property fade
-   * @type boolean
-   * @default true
-   * @public
-   */
-  @arg
-  fade = true;
+  <div class="form-check mb-2 mr-sm-2">
+    <input class="form-check-inline" type="checkbox" id="api-show-protected">
+    <label class="form-check-label" for="api-show-protected">
+      Protected
+    </label>
+  </div>
 
-  /**
-   * @property showHelp
-   * @type boolean
-   * @default false
-   * @public
-   */
-  @arg
-  showHelp = false;
+  <div class="form-check mb-2 mr-sm-2">
+    <input class="form-check-inline" type="checkbox" id="api-show-private">
+    <label class="form-check-label" for="api-show-private">
+      Private
+    </label>
+  </div>
 
-  /**
-   * If true component will render in place, rather than be wormholed.
-   *
-   * @property renderInPlace
-   * @type boolean
-   * @default true
-   * @public
-   */
+  <div class="form-check mb-2 mr-sm-2">
+    <input class="form-check-inline" type="checkbox" id="api-show-deprecated">
+    <label class="form-check-label" for="api-show-deprecated">
+      Deprecated
+    </label>
+  </div>
 
-  /**
-   * Which element to align to
-   *
-   * @property popperTarget
-   * @type {string|HTMLElement}
-   * @public
-   */
+</form>
 
-  /**
-   * @property autoPlacement
-   * @type boolean
-   * @default true
-   * @public
-   */
+<div class="card">
+  <div class="card-header">
+    <ul class="nav nav-tabs card-header-tabs">
+      <li class="nav-item active"><a class="nav-link" data-toggle="tab" href="#index">Index</a></li>
 
-  /**
-   * The DOM element of the viewport element.
-   *
-   * @property viewportElement
-   * @type object
-   * @public
-   */
+        <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#properties">Properties</a></li>
+    </ul>
+  </div>
+  <div class="card-body">
+    <div class="tab-content">
+      <div id="index" class="tab-pane active">
+        <h2 class="off-left">Item Index</h2>
 
-  /**
-   * Take a padding into account for keeping the tooltip/popover within the bounds of the element given by &#x60;viewportElement&#x60;.
-   *
-   * @property viewportPadding
-   * @type number
-   * @default 0
-   * @public
-   */
 
-  /**
-   * @property arrowClass
-   * @private
-   */
-  arrowClass = &#x27;arrow&#x27;;
+          <div class="index-section properties">
+            <h3>Properties</h3>
 
-  placementClassPrefix = &#x27;&#x27;;
+            <ul class="index-list properties extends">
+                <li class="index-item property public">
+                  <a href="#" data-tabid="#properties" data-anchor="#property_size"
+                     data-tablink="size">size</a>
 
-  offset = [0, 0];
+                </li>
+                <li class="index-item property public">
+                  <a href="#" data-tabid="#properties" data-anchor="#property_spinnerType"
+                     data-tablink="spinnerType">spinnerType</a>
 
-  @trackedRef(&#x27;popperElement&#x27;) popperElement;
+                </li>
+                <li class="index-item property public">
+                  <a href="#" data-tabid="#properties" data-anchor="#property_type"
+                     data-tablink="type">type</a>
 
-  /**
-   * popper.js modifier config
-   *
-   * @property popperModifiers
-   * @type {object}
-   * @private
-   */
-  get popperOptions() {
-    let options = {
-      placement: this.placement,
-      onFirstUpdate: this.updatePlacement,
-    };
+                </li>
+            </ul>
+          </div>
 
-    // We need popperElement, so we wait for this getter to recompute once it&#x27;s available
-    if (!this.popperElement) {
-      return options;
-    }
 
-    options.modifiers = [
-      {
-        name: &#x27;arrow&#x27;,
-        options: {
-          element: this.popperElement.querySelector(&#x60;.${this.arrowClass}&#x60;),
-          padding: 4,
-        },
-      },
-      {
-        name: &#x27;offset&#x27;,
-        options: {
-          offset: this.offset,
-        },
-      },
-      {
-        name: &#x27;preventOverflow&#x27;,
-        enabled: this.args.autoPlacement,
-        options: {
-          boundary: this.args.viewportElement,
-          padding: this.args.viewportPadding,
-        },
-      },
-      {
-        name: &#x27;flip&#x27;,
-        enabled: this.args.autoPlacement,
-      },
-      {
-        name: &#x27;onChange&#x27;,
-        enabled: true,
-        phase: &#x27;afterWrite&#x27;,
-        fn: this.updatePlacement,
-      },
-    ];
+      </div>
 
-    return options;
-  }
 
-  get actualPlacementClass() {
-    let ending = this.actualPlacement;
+        <div id="properties" class="tab-pane">
+            <div id="property_size"
+                 class="property item public">
+              <h3 class="name">size
+                <span class="badge badge-secondary small">String</span>
+                  <span class="badge badge-public small">public</span>
+            
+            
+            
+            
+              </h3>
+            
+              <div class="meta">
+                  <p>
+                      Defined in
+                  <a href="../files/addon_components_bs-spinner.js.html#l39"><code>addon&#x2F;components&#x2F;bs-spinner.js:39</code></a>
+              </p>
+            
+            
+              </div>
+            
+              <div class="description">
+                <p>Property for size styling, set to 'sm'</p>
+            <p>Also see the <a href="https://getbootstrap.com/docs/5.2/components/spinners/#size">Bootstrap docs</a></p>
+            
+              </div>
+            
+            
+            
+            
+            </div>
+            <div id="property_spinnerType"
+                 class="property item public">
+              <h3 class="name">spinnerType
+                <span class="badge badge-secondary small">string</span>
+                  <span class="badge badge-public small">public</span>
+            
+            
+            
+            
+              </h3>
+            
+              <div class="meta">
+                  <p><strong>Default:</strong> &#x27;border&#x27;</p>
+                  <p>
+                      Defined in
+                  <a href="../files/addon_components_bs-spinner.js.html#l60"><code>addon&#x2F;components&#x2F;bs-spinner.js:60</code></a>
+              </p>
+            
+            
+              </div>
+            
+              <div class="description">
+                <p>Spinner type - 'border' or 'grow'</p>
+            
+              </div>
+            
+            
+            
+            
+            </div>
+            <div id="property_type"
+                 class="property item public">
+              <h3 class="name">type
+                <span class="badge badge-secondary small">String</span>
+                  <span class="badge badge-public small">public</span>
+            
+            
+            
+            
+              </h3>
+            
+              <div class="meta">
+                  <p><strong>Default:</strong> &#x27;primary&#x27;</p>
+                  <p>
+                      Defined in
+                  <a href="../files/addon_components_bs-spinner.js.html#l49"><code>addon&#x2F;components&#x2F;bs-spinner.js:49</code></a>
+              </p>
+            
+            
+              </div>
+            
+              <div class="description">
+                <p>Property for type styling</p>
+            <p>For the available types see the <a href="https://getbootstrap.com/docs/5.2/components/spinners/#colors">Bootstrap docs</a></p>
+            
+              </div>
+            
+            
+            
+            
+            </div>
+        </div>
 
-    if (macroCondition(getOwnConfig().isBS5)) {
-      if (ending === &#x27;right&#x27;) {
-        ending = &#x27;end&#x27;;
-      }
 
-      if (ending === &#x27;left&#x27;) {
-        ending = &#x27;start&#x27;;
-      }
-    }
-
-    return this.placementClassPrefix + ending;
-  }
-
-  @action
-  updatePlacement(state) {
-    // normalize argument
-    state = state.state ?? state;
-
-    if (this.actualPlacement === state.placement) {
-      return;
-    }
-    this.actualPlacement = state.placement;
-  }
-}
-
-    </pre>
+    </div>
+  </div>
 </div>
           </div>
         </div>

@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <title>addon/components/bs-contextual-help/element.js - ember-bootstrap</title>
+  <title>addon/components/bs-spinner.js - ember-bootstrap</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="../assets/css/api.css">
   <script type="text/javascript" src="//use.typekit.net/dkq5epu.js"></script>
@@ -54,190 +54,83 @@
         <div id="docs-main">
           <div class="content">
 <div class="page-header">
-    <h1>addon/components/bs-contextual-help/element.js <small>File</small></h1>
+    <h1>addon/components/bs-spinner.js <small>File</small></h1>
 </div>
 
 <div class="file">
     <pre class="prettyprint linenums">
-import { action } from &#x27;@ember/object&#x27;;
 import Component from &#x27;@glimmer/component&#x27;;
-import arg from &#x27;ember-bootstrap/utils/decorators/arg&#x27;;
-import { tracked } from &#x27;@glimmer/tracking&#x27;;
-import { getOwnConfig, macroCondition } from &#x27;@embroider/macros&#x27;;
-import { trackedRef } from &#x27;ember-ref-bucket&#x27;;
+import arg from &#x27;../utils/decorators/arg&#x27;;
 
 /**
- Internal (abstract) component for contextual help markup. Should not be used directly.
+ Implements a [Spinner element](https://getbootstrap.com/docs/5.2/components/spinners/).
 
- @class ContextualHelpElement
+ ### Basic Usage
+
+ &#x60;&#x60;&#x60;hbs
+ &lt;BsSpinner/&gt;
+ &lt;BsSpinner&gt;Loading...&lt;/BsSpinner&gt;
+ &#x60;&#x60;&#x60;
+
+ The (optional) component&#x27;s block will render as visually invisible but accessible text for assistive technology like screen readers.
+
+ ### Advanced Usage
+
+ &#x60;&#x60;&#x60;hbs
+ &lt;BsSpinner @spinnerType=&quot;grow&quot; @size=&quot;sm&quot; @type=&quot;warning&quot;/&gt;
+ &#x60;&#x60;&#x60;
+
+ ### Usage with &#x60;BsButton&#x60;
+
+  &#x60;&#x60;&#x60;hbs
+  &lt;BsButton @onClick={{this.download}} as |button|&gt;
+   Download
+   {{#if button.isPending}}
+     &lt;BsSpinner @size=&quot;sm&quot;/&gt;
+   {{/if}}
+  &lt;/BsButton&gt;
+  &#x60;&#x60;&#x60;
+
+ @class Spinner
  @namespace Components
  @extends Glimmer.Component
- @private
- */
-export default class ContextualHelpElement extends Component {
+ @public
+*/
+export default class SpinnerComponent extends Component {
   /**
-   * @property placement
+   * Property for size styling, set to &#x27;sm&#x27;
+   *
+   * Also see the [Bootstrap docs](https://getbootstrap.com/docs/5.2/components/spinners/#size)
+   *
+   * @property size
+   * @type String
+   * @public
+   */
+
+  /**
+   * Property for type styling
+   *
+   * For the available types see the [Bootstrap docs](https://getbootstrap.com/docs/5.2/components/spinners/#colors)
+   *
+   * @property type
+   * @type String
+   * @default &#x27;primary&#x27;
+   * @public
+   */
+
+  /**
+   * Spinner type - &#x27;border&#x27; or &#x27;grow&#x27;
+   *
+   * @property spinnerType
    * @type string
-   * @default &#x27;top&#x27;
+   * @default &#x27;border&#x27;
    * @public
    */
   @arg
-  placement = &#x27;top&#x27;;
+  spinnerType = &#x27;border&#x27;;
 
-  @tracked
-  actualPlacement = this.args.placement;
-
-  /**
-   * @property fade
-   * @type boolean
-   * @default true
-   * @public
-   */
-  @arg
-  fade = true;
-
-  /**
-   * @property showHelp
-   * @type boolean
-   * @default false
-   * @public
-   */
-  @arg
-  showHelp = false;
-
-  /**
-   * If true component will render in place, rather than be wormholed.
-   *
-   * @property renderInPlace
-   * @type boolean
-   * @default true
-   * @public
-   */
-
-  /**
-   * Which element to align to
-   *
-   * @property popperTarget
-   * @type {string|HTMLElement}
-   * @public
-   */
-
-  /**
-   * @property autoPlacement
-   * @type boolean
-   * @default true
-   * @public
-   */
-
-  /**
-   * The DOM element of the viewport element.
-   *
-   * @property viewportElement
-   * @type object
-   * @public
-   */
-
-  /**
-   * Take a padding into account for keeping the tooltip/popover within the bounds of the element given by &#x60;viewportElement&#x60;.
-   *
-   * @property viewportPadding
-   * @type number
-   * @default 0
-   * @public
-   */
-
-  /**
-   * @property arrowClass
-   * @private
-   */
-  arrowClass = &#x27;arrow&#x27;;
-
-  placementClassPrefix = &#x27;&#x27;;
-
-  offset = [0, 0];
-
-  @trackedRef(&#x27;popperElement&#x27;) popperElement;
-
-  /**
-   * popper.js modifier config
-   *
-   * @property popperModifiers
-   * @type {object}
-   * @private
-   */
-  get popperOptions() {
-    let options = {
-      placement: this.placement,
-      onFirstUpdate: this.updatePlacement,
-    };
-
-    // We need popperElement, so we wait for this getter to recompute once it&#x27;s available
-    if (!this.popperElement) {
-      return options;
-    }
-
-    options.modifiers = [
-      {
-        name: &#x27;arrow&#x27;,
-        options: {
-          element: this.popperElement.querySelector(&#x60;.${this.arrowClass}&#x60;),
-          padding: 4,
-        },
-      },
-      {
-        name: &#x27;offset&#x27;,
-        options: {
-          offset: this.offset,
-        },
-      },
-      {
-        name: &#x27;preventOverflow&#x27;,
-        enabled: this.args.autoPlacement,
-        options: {
-          boundary: this.args.viewportElement,
-          padding: this.args.viewportPadding,
-        },
-      },
-      {
-        name: &#x27;flip&#x27;,
-        enabled: this.args.autoPlacement,
-      },
-      {
-        name: &#x27;onChange&#x27;,
-        enabled: true,
-        phase: &#x27;afterWrite&#x27;,
-        fn: this.updatePlacement,
-      },
-    ];
-
-    return options;
-  }
-
-  get actualPlacementClass() {
-    let ending = this.actualPlacement;
-
-    if (macroCondition(getOwnConfig().isBS5)) {
-      if (ending === &#x27;right&#x27;) {
-        ending = &#x27;end&#x27;;
-      }
-
-      if (ending === &#x27;left&#x27;) {
-        ending = &#x27;start&#x27;;
-      }
-    }
-
-    return this.placementClassPrefix + ending;
-  }
-
-  @action
-  updatePlacement(state) {
-    // normalize argument
-    state = state.state ?? state;
-
-    if (this.actualPlacement === state.placement) {
-      return;
-    }
-    this.actualPlacement = state.placement;
+  get spinnerClass() {
+    return &#x60;spinner-${this.spinnerType}&#x60;;
   }
 }
 

@@ -49,6 +49,7 @@ YUI.add("yuidoc-meta", function(Y) {
         "Components.PopoverElement",
         "Components.Progress",
         "Components.ProgressBar",
+        "Components.Spinner",
         "Components.Tab",
         "Components.TabPane",
         "Components.Tooltip",

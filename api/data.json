@@ -2,7 +2,7 @@
     "project": {
         "name": "ember-bootstrap",
         "description": "Twitter Bootstrap components for Ember.js",
-        "version": "v5.1.1"
+        "version": "5.1.1.bedc8007"
     },
     "files": {
         "addon/components/bs-accordion/item/body.js": {
@@ -549,6 +549,17 @@
             "modules": {},
             "classes": {
                 "Components.Progress": 1
+            },
+            "fors": {},
+            "namespaces": {
+                "Components": 1
+            }
+        },
+        "addon/components/bs-spinner.js": {
+            "name": "addon/components/bs-spinner.js",
+            "modules": {},
+            "classes": {
+                "Components.Spinner": 1
             },
             "fors": {},
             "namespaces": {
@@ -1394,6 +1405,22 @@
             "line": 5,
             "description": "Component to display a Bootstrap progress bar, see http://getbootstrap.com/components/#progress.\n\n### Usage\n\nThe component yields a [Components.ProgressBar](Components.ProgressBar.html) component that represents a single bar.\nUse the `value` property to control the progress bar's width. To apply the different styling options supplied by\nBootstrap, use the appropriate properties like `type`, `showLabel`, `striped` or `animate`.\n\n```hbs\n<BsProgress as |pg| >\n  <pg.bar @value={{this.progressValue}} @minValue={{0}} @maxValue={{10}} @showLabel={{true}} @type=\"danger\" aria-label=\"Loading\" />\n</BsProgress>\n```\n\n> Don't forget to add a `aria-label` attribute to the progress bar for accessibility!\n\n### Stacked\n\nYou can place multiple progress bar components in a single progress component to\ncreate a stack of progress bars as seen in http://getbootstrap.com/components/#progress-stacked.\n\n```hbs\n<BsProgress as |pg| >\n  <pg.bar @value={{this.progressValue1}} @type=\"success\" />\n  <pg.bar @value={{this.progressValue2}} @type=\"warning\" />\n  <pg.bar @value={{this.progressValue3}} @type=\"danger\" />\n</BsProgress>\n```\n\n*Note that only invoking the component in a template as shown above is considered part of its public API. Extending from it (subclassing) is generally not supported, and may break at any time.*",
             "extends": "Ember.Component",
+            "access": "public",
+            "tagname": ""
+        },
+        "Components.Spinner": {
+            "name": "Components.Spinner",
+            "shortname": "Components.Spinner",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "namespace": "Components",
+            "file": "addon/components/bs-spinner.js",
+            "line": 4,
+            "description": "Implements a [Spinner element](https://getbootstrap.com/docs/5.2/components/spinners/).\n\n### Basic Usage\n\n```hbs\n<BsSpinner/>\n<BsSpinner>Loading...</BsSpinner>\n```\n\nThe (optional) component's block will render as visually invisible but accessible text for assistive technology like screen readers.\n\n### Advanced Usage\n\n```hbs\n<BsSpinner @spinnerType=\"grow\" @size=\"sm\" @type=\"warning\"/>\n```\n\n### Usage with `BsButton`\n\n ```hbs\n <BsButton @onClick={{this.download}} as |button|>\n  Download\n  {{#if button.isPending}}\n    <BsSpinner @size=\"sm\"/>\n  {{/if}}\n </BsButton>\n ```",
+            "extends": "Glimmer.Component",
             "access": "public",
             "tagname": ""
         },
@@ -6906,6 +6933,44 @@
             "access": "private",
             "tagname": "",
             "class": "Components.Progress",
+            "namespace": "Components"
+        },
+        {
+            "file": "addon/components/bs-spinner.js",
+            "line": 39,
+            "description": "Property for size styling, set to 'sm'\n\nAlso see the [Bootstrap docs](https://getbootstrap.com/docs/5.2/components/spinners/#size)",
+            "itemtype": "property",
+            "name": "size",
+            "type": "String",
+            "access": "public",
+            "tagname": "",
+            "class": "Components.Spinner",
+            "namespace": "Components"
+        },
+        {
+            "file": "addon/components/bs-spinner.js",
+            "line": 49,
+            "description": "Property for type styling\n\nFor the available types see the [Bootstrap docs](https://getbootstrap.com/docs/5.2/components/spinners/#colors)",
+            "itemtype": "property",
+            "name": "type",
+            "type": "String",
+            "default": "'primary'",
+            "access": "public",
+            "tagname": "",
+            "class": "Components.Spinner",
+            "namespace": "Components"
+        },
+        {
+            "file": "addon/components/bs-spinner.js",
+            "line": 60,
+            "description": "Spinner type - 'border' or 'grow'",
+            "itemtype": "property",
+            "name": "spinnerType",
+            "type": "string",
+            "default": "'border'",
+            "access": "public",
+            "tagname": "",
+            "class": "Components.Spinner",
             "namespace": "Components"
         },
         {
