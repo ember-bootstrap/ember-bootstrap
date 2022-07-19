@@ -5404,10 +5404,10 @@ ember-cli-fastboot-testing@0.6.0:
     resolve "^1.10.0"
     whatwg-fetch "^3.0.0"
 
-ember-cli-fastboot@3.3.0:
-  version "3.3.0"
-  resolved "https://registry.yarnpkg.com/ember-cli-fastboot/-/ember-cli-fastboot-3.3.0.tgz#c0438c17a19bef704d9d62b68b5049fc017c9581"
-  integrity sha512-PgTAFWI47sLIJCl4yN7/v5PhzawSXb5ih/YPQQR6K0CX+5i17XYxKjhKE4Mp0Jtu/huURv7uACFKytmKVkcEZg==
+ember-cli-fastboot@3.3.2:
+  version "3.3.2"
+  resolved "https://registry.yarnpkg.com/ember-cli-fastboot/-/ember-cli-fastboot-3.3.2.tgz#979bb051114a3362e400efb65c29516e749b3231"
+  integrity sha512-3nPyXapAv9SwCV6KVdSg9CdjMtONkb5V8VZJiWTNMowu1HiODO5HUykaAd0niH94qnJivdpbH544S3g0TZ+Jfw==
   dependencies:
     broccoli-concat "^4.2.5"
     broccoli-file-creator "^2.1.1"
@@ -5419,8 +5419,8 @@ ember-cli-fastboot@3.3.0:
     ember-cli-lodash-subset "^2.0.1"
     ember-cli-preprocess-registry "^3.3.0"
     ember-cli-version-checker "^5.1.2"
-    fastboot "3.3.0"
-    fastboot-express-middleware "3.3.0"
+    fastboot "3.3.2"
+    fastboot-express-middleware "3.3.2"
     fastboot-transform "^0.1.3"
     fs-extra "^10.0.0"
     json-stable-stringify "^1.0.1"
@@ -6878,13 +6878,13 @@ fast-sourcemap-concat@^2.1.0:
     source-map-url "^0.3.0"
     sourcemap-validator "^1.1.0"
 
-fastboot-express-middleware@3.3.0:
-  version "3.3.0"
-  resolved "https://registry.yarnpkg.com/fastboot-express-middleware/-/fastboot-express-middleware-3.3.0.tgz#a3da82533383331bb32c6cd921a0e99705b06740"
-  integrity sha512-iLr4ncGi0gb+40O0D9VOmJ0MI/ROESuolsfNyasDHCdnz7eT+gloT9KG3h6efscCuCQ1IviuE1ynuAVTp9vX8Q==
+fastboot-express-middleware@3.3.2:
+  version "3.3.2"
+  resolved "https://registry.yarnpkg.com/fastboot-express-middleware/-/fastboot-express-middleware-3.3.2.tgz#6d78de06f1db51f47b4f66658c651a61fcf5ca96"
+  integrity sha512-/Fgr29Q1bMDiv65BeCYmFR88otTg9QJYvmVIWrgkwWSkfya5h1XzCQYEz+VqyhWT1v+BQWq98SuyKfpNrL2cRA==
   dependencies:
     chalk "^4.1.2"
-    fastboot "3.3.0"
+    fastboot "3.3.2"
 
 fastboot-transform@^0.1.3:
   version "0.1.3"
@@ -6894,10 +6894,10 @@ fastboot-transform@^0.1.3:
     broccoli-stew "^1.5.0"
     convert-source-map "^1.5.1"
 
-fastboot@3.3.0, fastboot@^3.0.3:
-  version "3.3.0"
-  resolved "https://registry.yarnpkg.com/fastboot/-/fastboot-3.3.0.tgz#e0b1cafb3fb6e89095acade221ccfbfe327b3462"
-  integrity sha512-WXgR/uKM/r6TCb99Q97vuxH16bhF1scF4LL7Uckel5dNqvvlNVpKEeuggOJafx/JtfIyrldfo7Cn9Xpaoltp7A==
+fastboot@3.3.2, fastboot@^3.0.3:
+  version "3.3.2"
+  resolved "https://registry.yarnpkg.com/fastboot/-/fastboot-3.3.2.tgz#bf1ac7b01937846b63423a88138e13eb50406d2e"
+  integrity sha512-2NKTW32GvEsDyBrdw1trW1JsbS+9/7sAQuKwkht12mNitimRrSKVLP2AxsM/HSXQE+aiET4XCfKdyeIy0kQbKQ==
   dependencies:
     chalk "^4.1.2"
     cookie "^0.4.1"
@@ -7551,7 +7551,7 @@ get-func-name@^2.0.0:
   resolved "https://registry.yarnpkg.com/get-func-name/-/get-func-name-2.0.0.tgz#ead774abee72e20409433a066366023dd6887a41"
   integrity sha1-6td0q+5y4gQJQzoGY2YCPdaIekE=
 
-get-intrinsic@^1.0.2:
+get-intrinsic@^1.0.2, get-intrinsic@^1.1.0, get-intrinsic@^1.1.1:
   version "1.1.2"
   resolved "https://registry.yarnpkg.com/get-intrinsic/-/get-intrinsic-1.1.2.tgz#336975123e05ad0b7ba41f152ee4aadbea6cf598"
   integrity sha512-Jfm3OyCxHh9DJyc28qGk+JmfkpO41A4XkneDSujN9MDXrm4oDKdHvndhZ2dN94+ERNfkYJWDclW6k2L/ZGHjXA==
@@ -7559,15 +7559,6 @@ get-intrinsic@^1.0.2:
     function-bind "^1.1.1"
     has "^1.0.3"
     has-symbols "^1.0.3"
-
-get-intrinsic@^1.1.0, get-intrinsic@^1.1.1:
-  version "1.1.1"
-  resolved "https://registry.yarnpkg.com/get-intrinsic/-/get-intrinsic-1.1.1.tgz#15f59f376f855c446963948f0d24cd3637b4abc6"
-  integrity sha512-kWZrnVM42QCiEA2Ig1bG8zjoIMOgxWwYCEeNdwY6Tv/cOSeGpcoX4pXHfKUxNKVoArnrEr2e9srnAxxGIraS9Q==
-  dependencies:
-    function-bind "^1.1.1"
-    has "^1.0.3"
-    has-symbols "^1.0.1"
 
 get-own-enumerable-property-symbols@^3.0.0:
   version "3.0.2"
@@ -11051,12 +11042,7 @@ object-hash@^1.3.1:
   resolved "https://registry.yarnpkg.com/object-hash/-/object-hash-1.3.1.tgz#fde452098a951cb145f039bb7d455449ddc126df"
   integrity sha512-OSuu/pU4ENM9kmREg0BdNrUDIl1heYa4mBZacJc+vVWz4GtAwu7jO8s4AIt2aGRUTqxykpWzI3Oqnsm13tTMDA==
 
-object-inspect@^1.12.0:
-  version "1.12.0"
-  resolved "https://registry.yarnpkg.com/object-inspect/-/object-inspect-1.12.0.tgz#6e2c120e868fd1fd18cb4f18c31741d0d6e776f0"
-  integrity sha512-Ho2z80bVIvJloH+YzRmpZVQe87+qASmBUKZDWgx9cu+KDrX2ZDH/3tMy+gXbZETVGs2M8YdxObOh7XAtim9Y0g==
-
-object-inspect@^1.9.0:
+object-inspect@^1.12.0, object-inspect@^1.9.0:
   version "1.12.2"
   resolved "https://registry.yarnpkg.com/object-inspect/-/object-inspect-1.12.2.tgz#c0641f26394532f28ab8d796ab954e43c009a8ea"
   integrity sha512-z+cPxW0QGUp0mcqcsgQyLVRDoXFQbXOwBaqyF7VIgI4TWNQsDHrBpUQslRmIfAoYWdYzs6UlKJtB2XJpTaNSpQ==
@@ -12017,14 +12003,7 @@ qs@6.9.7:
   resolved "https://registry.yarnpkg.com/qs/-/qs-6.9.7.tgz#4610846871485e1e048f44ae3b94033f0e675afe"
   integrity sha512-IhMFgUmuNpyRfxA90umL7ByLlgRXu6tIfKPpF5TmcfRLlLCckfP/g3IQmju6jjpu+Hh8rA+2p6A27ZSPOOHdKw==
 
-qs@^6.4.0:
-  version "6.10.3"
-  resolved "https://registry.yarnpkg.com/qs/-/qs-6.10.3.tgz#d6cde1b2ffca87b5aa57889816c5f81535e22e8e"
-  integrity sha512-wr7M2E0OFRfIfJZjKGieI8lBKb7fRCH4Fv5KNPEs7gJ8jadvotdsS08PzOKR7opXhZ/Xkjtt3WF9g38drmyRqQ==
-  dependencies:
-    side-channel "^1.0.4"
-
-qs@^6.9.4:
+qs@^6.4.0, qs@^6.9.4:
   version "6.11.0"
   resolved "https://registry.yarnpkg.com/qs/-/qs-6.11.0.tgz#fd0d963446f7a65e1367e01abd85429453f0c37a"
   integrity sha512-MvjoMCJwEarSbUYk5O+nmoSzSutSsTwF85zcHPQ9OrlFoZOYIjaqBAJIqIXjptyD5vThxGq52Xu/MaJzRkIk4Q==
