@@ -32,7 +32,7 @@
     "broccoli-asset-rev": "3.0.0",
     "ember-auto-import": "2.4.2",
     "ember-bootstrap-cp-validations": "2.1.0",
-    "ember-bootstrap-power-select": "3.0.1",
+    "ember-bootstrap-power-select": "4.0.1",
     "ember-cli": "3.28.5",
     "ember-cli-app-version": "5.0.0",
     "ember-cli-babel": "7.26.11",
