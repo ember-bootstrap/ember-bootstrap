@@ -25,6 +25,7 @@ Router.map(function () {
       this.route('other');
     });
     this.route('tooltip');
+    this.route('spinner');
   });
   this.route('getting-started', function () {
     this.route('setup');

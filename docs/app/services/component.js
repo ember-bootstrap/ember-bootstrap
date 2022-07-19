@@ -91,6 +91,13 @@ const componentData = A([
     bsUrl: 'https://getbootstrap.com/docs/4.3/components/progress/',
   },
   {
+    id: 'spinner',
+    title: 'Spinner',
+    description:
+      'Bootstrap “spinners” can be used to show the loading state in your projects.',
+    bsUrl: 'https://getbootstrap.com/docs/4.6/components/spinners/',
+  },
+  {
     id: 'tabs',
     title: 'Tabs',
     className: 'Tab',
