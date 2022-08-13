@@ -269,6 +269,7 @@ module('Integration | Component | bs-accordion', function (hooks) {
           enabled: false,
         },
         'color-contrast': { enabled: false },
+        'heading-order': { enabled: false },
       },
     });
     assert.ok(true, 'A11y audit passed');

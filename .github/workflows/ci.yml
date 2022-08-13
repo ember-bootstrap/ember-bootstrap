@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - master
+      - v4
     tags:
       - '*'
   pull_request:
@@ -62,9 +63,11 @@ jobs:
         scenario:
           - ember-lts-3.16
           - ember-lts-3.20
-          - ember-release
-          - ember-beta
-          - ember-canary
+          - ember-lts-3.24
+          - ember-lts-3.28
+          #- ember-release
+          #- ember-beta
+          #- ember-canary
           - ember-default-with-jquery
           - ember-classic
           - ember-concurrency-2.x
@@ -77,10 +80,13 @@ jobs:
         browser:
           - Chrome
         include:
-          - scenario: ember-release
+          - scenario: ember-lts-3.20
+            browser: Firefox
+            bootstrap: 3
+          - scenario: ember-lts-3.20
             browser: Firefox
             bootstrap: 4
-          - scenario: ember-release
+          - scenario: ember-lts-3.20
             browser: Firefox
             bootstrap: 5
           - scenario: node-tests
