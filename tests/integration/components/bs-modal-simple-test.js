@@ -629,6 +629,7 @@ module('Integration | Component | bs-modal-simple', function (hooks) {
     await a11yAudit({
       rules: {
         'heading-order': { enabled: false },
+        'color-contrast': { enabled: false },
       },
     });
     assert.ok(true, 'A11y audit passed');

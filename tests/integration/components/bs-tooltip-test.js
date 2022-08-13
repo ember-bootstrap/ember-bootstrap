@@ -385,7 +385,7 @@ module('Integration | Component | bs-tooltip', function (hooks) {
   test('should position tooltip arrow centered', async function (assert) {
     this.insertCSSRule('.margin-top { margin-top: 200px; }');
 
-    let expectedArrowPosition = versionDependent(95, 94, 94);
+    let expectedArrowPosition = versionDependent(95, 94, 100);
     await render(hbs`
       <div id="ember-bootstrap-wormhole"></div>
       <div id="wrapper">
@@ -410,7 +410,7 @@ module('Integration | Component | bs-tooltip', function (hooks) {
     this.insertCSSRule('.margin-top { margin-top: 200px; }');
     this.insertCSSRule('#target { width: 100px; padding: 0; border: none; }');
 
-    let expectedArrowPosition = versionDependent(145, 144, 144);
+    let expectedArrowPosition = versionDependent(145, 144, 157);
 
     await render(hbs`
       <div id="ember-bootstrap-wormhole"></div>
