@@ -21,7 +21,7 @@ jobs:
       - name: Setup node.js
         uses: actions/setup-node@v1
         with:
-          node-version: 10
+          node-version: 14
       - name: Install dependencies
         uses: bahmutov/npm-install@v1
       - name: Lint
@@ -40,7 +40,7 @@ jobs:
       - name: Setup node.js
         uses: actions/setup-node@v1
         with:
-          node-version: 10
+          node-version: 14
       - name: Install dependencies
         uses: bahmutov/npm-install@v1
         with:
@@ -51,7 +51,7 @@ jobs:
   test-try:
     name: Scenario ${{ matrix.scenario }}, BS${{ matrix.bootstrap }}, ${{ matrix.browser}}
     runs-on: ubuntu-latest
-    timeout-minutes: 10
+    timeout-minutes: 14
     continue-on-error: ${{ matrix.allow-failure || false }}
     needs:
       - test
@@ -96,37 +96,10 @@ jobs:
       - name: Setup node.js
         uses: actions/setup-node@v1
         with:
-          node-version: 10
+          node-version: 14
       - name: Install dependencies
         uses: bahmutov/npm-install@v1
       - name: Test
         run: yarn ember try:one ${{ matrix.scenario }} --- ember test --launch ${{ matrix.browser }}
         env:
           BOOTSTRAPVERSION: ${{ matrix.bootstrap }}
-
-#  test-browserstack:
-#    name: Browserstack Tests
-#    runs-on: ubuntu-latest
-#    needs:
-#      - test
-#    env:
-#      BROWSERSTACK_USERNAME: simonihmig1
-#      BROWSERSTACK_ACCESS_KEY: ${{ secrets.BROWSERSTACK_ACCESS_KEY }}
-#    steps:
-#      - name: Checkout code
-#        uses: actions/checkout@v2
-#      - name: Setup node.js
-#        uses: actions/setup-node@v1
-#        with:
-#          node-version: 10
-#      - name: Install dependencies
-#        uses: bahmutov/npm-install@v1
-#      - name: Connect to Browserstack
-#        run: yarn ember browserstack:connect
-#      - name: Test
-#        run: yarn ember test --filter !FastBoot --config-file testem.browserstack.js
-#        env:
-#          BABELPOLYFILL: true
-#      - name: Disconnect from Browserstack
-#        if: always()
-#        run: yarn ember browserstack:disconnect

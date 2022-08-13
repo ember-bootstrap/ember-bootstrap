@@ -148,7 +148,7 @@
     "striptags": "^3.0.0"
   },
   "engines": {
-    "node": "10.* || >= 12.*"
+    "node": "12.* || >= 14.*"
   },
   "publishConfig": {
     "registry": "https://registry.npmjs.org"
