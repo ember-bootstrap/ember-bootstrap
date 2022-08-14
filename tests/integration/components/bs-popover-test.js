@@ -75,14 +75,14 @@ module('Integration | Component | bs-popover', function (hooks) {
     setupForPositioning();
 
     await click('#target');
-    assertPositioning(assert, '.popover', versionDependent(0, 0, 8));
+    assertPositioning(assert, '.popover', 8);
   });
 
   test('should adjust popover arrow', async function (assert) {
     this.insertCSSRule('#wrapper p { margin-top: 200px }');
     this.insertCSSRule('#target { width: 100px; padding: 0; border: none; }');
 
-    let expectedArrowPosition = versionDependent(214, 213, 217);
+    let expectedArrowPosition = versionDependent(214, 217, 217);
 
     await render(hbs`
       <div id="ember-bootstrap-wormhole"></div>
@@ -100,7 +100,7 @@ module('Integration | Component | bs-popover', function (hooks) {
     let arrowPosition = parseInt(
       this.element
         .querySelector(`.${popoverArrowClass()}`)
-        .style.transform.match(/translate\(([0-9]+)px, ([0-9]+)px\)/)[1],
+        .style.transform.match(/translate(?:3d)?\(([0-9]+)px.*\)/)[1],
       10
     );
     assert.ok(
@@ -114,7 +114,7 @@ module('Integration | Component | bs-popover', function (hooks) {
     arrowPosition = parseInt(
       this.element
         .querySelector(`.${popoverArrowClass()}`)
-        .style.transform.match(/translate\(([0-9]+)px, ([0-9]+)px\)/)[1],
+        .style.transform.match(/translate(?:3d)?\(([0-9]+)px.*\)/)[1],
       10
     );
     assert.ok(

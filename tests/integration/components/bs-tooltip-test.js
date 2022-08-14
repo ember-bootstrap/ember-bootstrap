@@ -402,7 +402,7 @@ module('Integration | Component | bs-tooltip', function (hooks) {
     let arrowPosition = parseInt(
       this.element
         .querySelector(`.${tooltipArrowClass()}`)
-        .style.transform.match(/translate\(([0-9]+)px, ([0-9]+)px\)/)[1],
+        .style.transform.match(/translate(?:3d)?\(([0-9]+)px.*\)/)[1],
       10
     );
     assert.ok(
@@ -433,7 +433,7 @@ module('Integration | Component | bs-tooltip', function (hooks) {
     let arrowPosition = parseInt(
       this.element
         .querySelector(`.${tooltipArrowClass()}`)
-        .style.transform.match(/translate\(([0-9]+)px, ([0-9]+)px\)/)[1],
+        .style.transform.match(/translate(?:3d)?\(([0-9]+)px.*\)/)[1],
       10
     );
 
@@ -448,7 +448,7 @@ module('Integration | Component | bs-tooltip', function (hooks) {
     arrowPosition = parseInt(
       this.element
         .querySelector(`.${tooltipArrowClass()}`)
-        .style.transform.match(/translate\(([0-9]+)px, ([0-9]+)px\)/)[1],
+        .style.transform.match(/translate(?:3d)?\(([0-9]+)px.*\)/)[1],
       10
     );
     assert.ok(

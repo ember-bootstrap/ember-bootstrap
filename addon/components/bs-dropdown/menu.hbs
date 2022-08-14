@@ -45,7 +45,7 @@
 
   {{#if (macroCondition (macroGetOwnConfig "isBS3"))}}
     {{#if this._renderInPlace}}
-      <ul>
+      <ul
         class="dropdown-menu {{this.alignClass}} {{if this.isOpen "show"}} {{@class}}"
         tabindex="-1"
         ...attributes
@@ -65,7 +65,7 @@
       </ul>
     {{else}}
       {{#in-element this.destinationElement insertBefore=null}}
-        <ul>
+        <ul
           class="dropdown-menu {{this.alignClass}} {{if this.isOpen "show"}} {{@class}}"
           tabindex="-1"
           ...attributes
