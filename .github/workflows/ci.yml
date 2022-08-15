@@ -4,12 +4,9 @@ on:
   push:
     branches:
       - master
-      - v4
     tags:
       - '*'
   pull_request:
-  schedule:
-    - cron:  '0 4 * * 5' # Fridays at 4am
 
 jobs:
   test:
@@ -65,9 +62,10 @@ jobs:
           - ember-lts-3.20
           - ember-lts-3.24
           - ember-lts-3.28
-          #- ember-release
-          #- ember-beta
-          #- ember-canary
+          - ember-lts-4.4
+          - ember-release
+          - ember-beta
+          - ember-canary
           - ember-default-with-jquery
           - ember-classic
           - embroider-safe
@@ -79,13 +77,22 @@ jobs:
         browser:
           - Chrome
         include:
-          - scenario: ember-lts-3.20
+          - scenario: ember-lts-3.28
             browser: Firefox
             bootstrap: 3
-          - scenario: ember-lts-3.20
+          - scenario: ember-lts-3.28
             browser: Firefox
             bootstrap: 4
-          - scenario: ember-lts-3.20
+          - scenario: ember-lts-3.28
+            browser: Firefox
+            bootstrap: 5
+          - scenario: ember-lts-4.4
+            browser: Firefox
+            bootstrap: 3
+          - scenario: ember-lts-4.4
+            browser: Firefox
+            bootstrap: 4
+          - scenario: ember-lts-4.4
             browser: Firefox
             bootstrap: 5
           - scenario: node-tests
