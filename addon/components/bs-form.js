@@ -483,7 +483,7 @@ export default class Form extends Component {
     if (code === 13 && this.args.submitOnEnter) {
       let submitEvent = document.createEvent('Event');
       submitEvent.initEvent('submit', true, true);
-      event.target.dispatchEvent(submitEvent);
+      event.target.closest('form').dispatchEvent(submitEvent);
     }
   }
 
