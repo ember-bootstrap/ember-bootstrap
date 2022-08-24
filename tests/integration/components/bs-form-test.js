@@ -1269,4 +1269,17 @@ module('Integration | Component | bs-form', function (hooks) {
 
     await click('button');
   });
+
+  test('it provides model access inside form object', async function (assert) {
+    await render(hbs`
+        <BsForm @model={{this.model}} @onSubmit={{this.submitHandler}} as |form|>
+          <form.element @property="name" />
+          <label id="name">{{form.model.name}}</label>
+        </BsForm>
+      `);
+
+    assert.dom(this.element.querySelector('#name')).hasText('');
+    await fillIn('input', 'John Doe');
+    assert.dom(this.element.querySelector('#name')).hasText('John Doe');
+  });
 });
