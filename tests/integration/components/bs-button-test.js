@@ -242,9 +242,7 @@ module('Integration | Component | bs-button', function (hooks) {
     await settled();
   });
 
-  (gte('3.4.0')
-    ? test
-    : skip)('setting disabled HTML attribute to false prevents button from being disabled while in pending state', async function (assert) {
+  test('setting disabled HTML attribute to false prevents button from being disabled while in pending state', async function (assert) {
     let deferredClickAction = defer();
     this.set('clickAction', () => {
       return deferredClickAction.promise;
