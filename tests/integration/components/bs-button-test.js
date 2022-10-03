@@ -4,7 +4,6 @@ import { module, skip } from 'qunit';
 import { setupRenderingTest } from 'ember-qunit';
 import { click, find, render, settled, waitUntil } from '@ember/test-helpers';
 import { defaultButtonClass, test, testForBootstrap } from '../../helpers/bootstrap';
-import { gte } from 'ember-compatibility-helpers';
 import hbs from 'htmlbars-inline-precompile';
 import setupNoDeprecations from '../../helpers/setup-no-deprecations';
 import { setupAssertionsForErrorsNotHandledByEmberOnError } from '../../helpers/assert-errors';
