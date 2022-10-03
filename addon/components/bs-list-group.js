@@ -18,7 +18,7 @@ import arg from '../utils/decorators/arg';
 
  ```hbs
  <BsListGroup as |ListGroup|>
-  {{#let (component ListGroup.item htmlTag="a" action=true) as |ListGroupItem|}}
+  {{#let (component ListGroup.item htmlTag="a" actionable=true) as |ListGroupItem|}}
     <ListGroupItem @active={{true}}>An item</ListGroupItem>
     <ListGroupItem>A second item</ListGroupItem>
     <ListGroupItem @disabled={{true}}>A third item</ListGroupItem>

@@ -11,22 +11,6 @@ import arg from '../../utils/decorators/arg';
  */
 export default class BsListGroupItemComponent extends Component {
   /**
-   * Tag for List group item component.
-   *
-   * Setting its value to `a` will automatically add the attribute `href="#"`.
-   *
-   * Setting its value to `button` will automatically add the attribute `type="button"`.
-   *
-   * This default attributes can be overridden.
-   *
-   * @default 'li'
-   * @type string
-   * @public
-   */
-  @arg
-  htmlTag = 'li';
-
-  /**
    * On of the allowed bs-types, e.g. `primary`, `secondary` etc.
    *
    * Used to add contextual classes to style list items with a stateful background and color.
@@ -43,8 +27,6 @@ export default class BsListGroupItemComponent extends Component {
   /**
    * Used to create actionable list group items with hover, disabled, and active states.
    *
-   * `htmlTag` should be `a` or `button` in this case.
-   *
    * Also see the [Bootstrap Docs](https://getbootstrap.com/docs/5.2/components/list-group/#links-and-buttons)
    *
    * @default false
@@ -52,7 +34,7 @@ export default class BsListGroupItemComponent extends Component {
    * @public
    */
   @arg
-  action = false;
+  actionable = false;
 
   /**
    * Indicate the current active selection.
@@ -77,4 +59,17 @@ export default class BsListGroupItemComponent extends Component {
    */
   @arg
   disabled = false;
+
+  /**
+   * HTML-tag used for list-group item
+   *
+   * It depends on `actionable`.
+   *
+   * @type string
+   * @default 'li'
+   * @public
+   */
+  get htmlTag() {
+    return this.args.actionable ? 'button' : 'li';
+  }
 }

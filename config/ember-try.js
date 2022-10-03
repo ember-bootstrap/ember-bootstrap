@@ -1,7 +1,7 @@
 'use strict';
 
 const getChannelURL = require('ember-source-channel-url');
-const bootstrapVersion = `^${process.env.BOOTSTRAPVERSION}.0.0`;
+const bootstrapVersion = `^5.0.0`;
 const { embroiderSafe, embroiderOptimized } = require('@embroider/test-setup');
 
 module.exports = async function () {
