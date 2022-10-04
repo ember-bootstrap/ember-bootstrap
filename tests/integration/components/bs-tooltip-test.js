@@ -9,7 +9,7 @@ import {
   tooltipArrowClass,
   tooltipPositionClass,
   visibilityClass,
-  versionDependant,
+  versionDependent,
 } from '../../helpers/bootstrap';
 import { assertPositioning, setupForPositioning } from '../../helpers/contextual-help';
 import setupStylesheetSupport from '../../helpers/setup-stylesheet-support';
@@ -391,7 +391,7 @@ module('Integration | Component | bs-tooltip', function (hooks) {
   test('should position tooltip arrow centered', async function (assert) {
     this.insertCSSRule('.margin-top { margin-top: 200px; }');
 
-    let expectedArrowPosition = versionDependant(94, 100);
+    let expectedArrowPosition = versionDependent(94, 100);
     await render(hbs`
       <div id="ember-bootstrap-wormhole"></div>
       <div id="wrapper">
@@ -421,7 +421,7 @@ module('Integration | Component | bs-tooltip', function (hooks) {
     this.insertCSSRule('.margin-top { margin-top: 200px; }');
     this.insertCSSRule('#target { width: 100px; padding: 0; border: none; }');
 
-    let expectedArrowPosition = versionDependant(144, 156);
+    let expectedArrowPosition = versionDependent(144, 156);
 
     await render(hbs`
       <div id="ember-bootstrap-wormhole"></div>
