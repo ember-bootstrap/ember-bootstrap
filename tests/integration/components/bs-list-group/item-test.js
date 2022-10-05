@@ -1,6 +1,7 @@
-import { module, test } from 'qunit';
+import { module, test, skip } from 'qunit';
 import { setupRenderingTest } from 'ember-qunit';
 import { render } from '@ember/test-helpers';
+import { gte } from 'ember-compatibility-helpers';
 import { hbs } from 'ember-cli-htmlbars';
 
 module('Integration | Component | bs-list-group/item', function (hooks) {
@@ -90,7 +91,9 @@ module('Integration | Component | bs-list-group/item', function (hooks) {
       .doesNotHaveClass('list-group-item-action', 'Second item does not have class list-group-item-action');
   });
 
-  test('default attributes for custom HTML-tag (<button>) may be overridden', async function (assert) {
+  (gte('3.25.0')
+    ? test
+    : skip)('default attributes for custom HTML-tag (<button>) may be overridden', async function (assert) {
     await render(hbs`<BsListGroup as |ListGroup|>
       <ListGroup.item @actionable={{true}} type="submit" class="first">First</ListGroup.item>
     </BsListGroup>`);
