@@ -4478,10 +4478,10 @@ ember-bootstrap-cp-validations@2.1.0:
     ember-cli-babel "^7.23.0"
     ember-cli-htmlbars "^5.3.1"
 
-ember-bootstrap-power-select@4.0.1:
-  version "4.0.1"
-  resolved "https://registry.yarnpkg.com/ember-bootstrap-power-select/-/ember-bootstrap-power-select-4.0.1.tgz#38e91c5ee589bd990c407e93c026f6df4f3c43d9"
-  integrity sha512-MjvIsL5extnJwYP4o6uD1fCiWpXiU6kC0h/4YMcu+9FTG/5vovOx3Du/VtRYMYSnfVmx/rqQ7ZNJXrny7t0YoA==
+ember-bootstrap-power-select@4.1.0:
+  version "4.1.0"
+  resolved "https://registry.yarnpkg.com/ember-bootstrap-power-select/-/ember-bootstrap-power-select-4.1.0.tgz#e110d3a34c7379b4ee1d90248387c6a091bbe5dd"
+  integrity sha512-XR+uaeJMwUUffZwffPOpeEDYlKlvZ3Db0I9z1ctL6pSfXKWm8poTFzEZ/Ym2uS2DTNxXibRJ15ritLJy9kf9jw==
   dependencies:
     chalk "^4.1.1"
     ember-cli-babel "^7.26.10"
