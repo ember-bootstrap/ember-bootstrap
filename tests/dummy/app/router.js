@@ -22,11 +22,13 @@ Router.map(function () {
     this.route('collapse');
     this.route('dropdown');
     this.route('forms');
+    this.route('list-group');
     this.route('modal');
     this.route('navbars');
     this.route('navs');
     this.route('popover');
     this.route('progress');
+    this.route('spinner');
     this.route('tabs');
     this.route('tooltip');
   });
