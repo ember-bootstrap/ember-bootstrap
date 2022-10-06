@@ -4586,10 +4586,10 @@ ember-cli-get-component-path-option@^1.0.0:
   resolved "https://registry.yarnpkg.com/ember-cli-get-component-path-option/-/ember-cli-get-component-path-option-1.0.0.tgz#0d7b595559e2f9050abed804f1d8eff1b08bc771"
   integrity sha1-DXtZVVni+QUKvtgE8djv8bCLx3E=
 
-ember-cli-htmlbars@6.0.1, ember-cli-htmlbars@^6.0.0, ember-cli-htmlbars@^6.0.1:
-  version "6.0.1"
-  resolved "https://registry.yarnpkg.com/ember-cli-htmlbars/-/ember-cli-htmlbars-6.0.1.tgz#5487831d477e61682bc867fd138808269e5d2152"
-  integrity sha512-IDsl9uty+MXtMfp/BUTEc/Q36EmlHYj8ZdPekcoRa8hmdsigHnK4iokfaB7dJFktlf6luruei+imv7JrJrBQPQ==
+ember-cli-htmlbars@6.1.1, ember-cli-htmlbars@^6.0.0, ember-cli-htmlbars@^6.0.1:
+  version "6.1.1"
+  resolved "https://registry.yarnpkg.com/ember-cli-htmlbars/-/ember-cli-htmlbars-6.1.1.tgz#f5b588572a5d18ad087560122b8dabc90145173d"
+  integrity sha512-DKf2rjzIVw9zWCuFsBGJScrgf5Mz7dSg08Cq+FWFYIxnpssINUbNUoB0NHWnUJK4QqCvaExOyOmjm0kO455CPg==
   dependencies:
     "@ember/edition-utils" "^1.2.0"
     babel-plugin-ember-template-compilation "^1.0.0"
@@ -4601,10 +4601,9 @@ ember-cli-htmlbars@6.0.1, ember-cli-htmlbars@^6.0.0, ember-cli-htmlbars@^6.0.1:
     fs-tree-diff "^2.0.1"
     hash-for-dep "^1.5.1"
     heimdalljs-logger "^0.1.10"
-    json-stable-stringify "^1.0.1"
+    js-string-escape "^1.0.1"
     semver "^7.3.4"
     silent-error "^1.1.1"
-    strip-bom "^4.0.0"
     walk-sync "^2.2.0"
 
 ember-cli-htmlbars@^3.0.1:
