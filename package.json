@@ -46,7 +46,8 @@
     "*.js": "eslint --cache --fix"
   },
   "resolutions": {
-    "ember-cli-htmlbars/semver": "~7.3.0"
+    "ember-cli-htmlbars/semver": "~7.3.0",
+    "ember-style-modifier": "^0.8.0"
   },
   "dependencies": {
     "@ember/render-modifiers": "^2.0.0",
