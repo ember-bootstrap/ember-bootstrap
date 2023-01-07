@@ -149,7 +149,7 @@
     "ember-source": ">=3.24"
   },
   "engines": {
-    "node": "12.* || 14.* || >= 16"
+    "node": "14.* || 16.* || >= 18"
   },
   "publishConfig": {
     "registry": "https://registry.npmjs.org"
