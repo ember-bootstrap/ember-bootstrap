@@ -24,8 +24,8 @@ To switch Bootstrap version or preprocessor, see the [setup documentation](http:
 
 Ember Bootstrap works and is fully [tested](https://github.com/kaliber5/ember-bootstrap/actions?query=workflow%3ACI+branch%3Amaster) with
 
-* Ember.js 3.24+ (including all optional features)
-* Ember CLI 3.24+
+* Ember.js 3.28+ (including all optional features)
+* Ember CLI 3.28+
 * Bootstrap 4 and 5
 * all modern evergreen browsers (Chrome, Firefox, Safari, Edge)
 * node.js 12+
