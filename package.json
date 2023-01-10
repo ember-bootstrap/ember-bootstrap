@@ -71,7 +71,7 @@
     "ember-named-blocks-polyfill": "^0.2.4",
     "ember-on-helper": "^0.1.0",
     "ember-popper-modifier": "^2.0.0",
-    "ember-ref-bucket": "^4.0.0",
+    "ember-ref-bucket": "^4.0.0 || ^5.0.0",
     "ember-render-helpers": "^0.2.0",
     "ember-style-modifier": "^0.8.0",
     "findup-sync": "^5.0.0",
