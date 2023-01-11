@@ -3,13 +3,14 @@
 {{#if (macroCondition (macroGetOwnConfig "isBS5"))}}
   <h2
     class="accordion-header"
-    role="tab"
     ...attributes
   >
     <button
       class="accordion-button {{if @disabled "disabled"}} {{if @collapsed "collapsed"}}"
       type="button"
       disabled={{@disabled}}
+      aria-controls={{@controls}}
+      aria-expanded={{if @collapsed "false" "true"}}
       {{on "click" this.handleClick}}
     >
       {{yield}}
@@ -18,12 +19,17 @@
 {{else}}
   <div
     class="card-header"
-    role="tab"
     ...attributes
-    {{on "click" this.handleClick}}
   >
     <h5 class="mb-0">
-      <button class="btn btn-link {{if @disabled "disabled"}} {{if @collapsed "collapsed" "expanded"}}" type="button" disabled={{@disabled}}>
+      <button
+        class="btn btn-link {{if @disabled "disabled"}} {{if @collapsed "collapsed" "expanded"}}"
+        type="button"
+        disabled={{@disabled}}
+        aria-controls={{@controls}}
+        aria-expanded={{if @collapsed "false" "true"}}
+        {{on "click" this.handleClick}}
+      >
         {{yield}}
       </button>
     </h5>
