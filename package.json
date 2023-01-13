@@ -146,6 +146,7 @@
     "webpack": "5.74.0"
   },
   "peerDependencies": {
+    "@ember/string": "^3.0.1",
     "ember-source": ">=3.28"
   },
   "engines": {
