@@ -19,9 +19,11 @@
 {{else}}
   <div
     class="card-header"
-    ...attributes
   >
-    <h2 class="mb-0">
+    <h2
+      class="mb-0"
+      ...attributes
+    >
       <button
         class="btn btn-link {{if @disabled "disabled"}} {{if @collapsed "collapsed" "expanded"}}"
         type="button"
