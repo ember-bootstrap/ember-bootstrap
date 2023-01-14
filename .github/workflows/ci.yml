@@ -71,13 +71,13 @@ jobs:
         browser:
           - Chrome
         include:
-          - scenario: ember-release
+          - try-scenario: ember-release
             browser: Firefox
             bootstrap: 4
-          - scenario: ember-release
+          - try-scenario: ember-release
             browser: Firefox
             bootstrap: 5
-          - scenario: node-tests
+          - try-scenario: node-tests
     steps:
       - uses: actions/checkout@v3
       - name: Install Node
