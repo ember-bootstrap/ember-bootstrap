@@ -40,3 +40,6 @@
 /*.iml
 /.vscode/
 /.history/
+
+# broccoli-debug
+/DEBUG/

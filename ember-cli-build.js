@@ -4,7 +4,7 @@ const EmberAddon = require('ember-cli/lib/broccoli/ember-addon');
 const { maybeEmbroider } = require('@embroider/test-setup');
 
 module.exports = function (defaults) {
-  let trees = {};
+  const trees = {};
 
   // Exclude FastBoot tests if FASTBOOT_DISABLED is set,
   // to enable Embroider tests until https://github.com/embroider-build/embroider/issues/160 is resolved.
@@ -29,7 +29,7 @@ module.exports = function (defaults) {
     },
   };
 
-  let app = new EmberAddon(defaults, options);
+  const app = new EmberAddon(defaults, options);
 
   /*
     This build file specifies the options for the dummy test app of this

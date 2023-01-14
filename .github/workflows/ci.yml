@@ -7,7 +7,7 @@ on:
       - renovate/*
     tags:
       - '*'
-  pull_request:
+  pull_request: {}
   schedule:
     - cron:  '0 4 * * 5' # Fridays at 4am
 
@@ -15,15 +15,17 @@ jobs:
   test:
     name: Tests
     runs-on: ubuntu-latest
+    timeout-minutes: 10
+
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
-      - name: Setup node.js
+      - uses: actions/checkout@v3
+      - name: Install Node
         uses: actions/setup-node@v3
         with:
-          node-version: 14
-      - name: Install dependencies
-        uses: bahmutov/npm-install@v1
+          node-version: 14.x
+          cache: yarn
+      - name: Install Dependencies
+        run: yarn install --frozen-lockfile
       - name: Lint
         run: yarn lint
       - name: Test
@@ -32,36 +34,31 @@ jobs:
   test-no-lock:
     name: Floating Dependencies
     runs-on: ubuntu-latest
-    needs:
-      - test
+    timeout-minutes: 10
+
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
-      - name: Setup node.js
-        uses: actions/setup-node@v3
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
         with:
-          node-version: 14
-      - name: Install dependencies
-        uses: bahmutov/npm-install@v1
-        with:
-          useLockFile: false
-      - name: Test
+          node-version: 14.x
+          cache: yarn
+      - name: Install Dependencies
+        run: yarn install --no-lockfile
+      - name: Run Tests
         run: yarn test:ember
 
   test-try:
     name: Scenario ${{ matrix.scenario }}, BS${{ matrix.bootstrap }}, ${{ matrix.browser}}
     runs-on: ubuntu-latest
+    needs: "test"
     timeout-minutes: 10
-    continue-on-error: ${{ matrix.allow-failure || false }}
-    needs:
-      - test
+
     strategy:
       fail-fast: false
       matrix:
-        allow-failure:
-          - false
-        scenario:
+        try-scenario:
           - ember-lts-3.28
+          - ember-lts-4.4
           - ember-release
           - ember-beta
           - ember-canary
@@ -82,44 +79,13 @@ jobs:
             bootstrap: 5
           - scenario: node-tests
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
-      - name: Setup node.js
+      - uses: actions/checkout@v3
+      - name: Install Node
         uses: actions/setup-node@v3
         with:
-          node-version: 14
-      - name: Install dependencies
-        uses: bahmutov/npm-install@v1
-        with:
-          useLockFile: false
-      - name: Test
-        run: yarn ember try:one ${{ matrix.scenario }} --- ember test --launch ${{ matrix.browser }}
-        env:
-          BOOTSTRAPVERSION: ${{ matrix.bootstrap }}
-
-#  test-browserstack:
-#    name: Browserstack Tests
-#    runs-on: ubuntu-latest
-#    needs:
-#      - test
-#    env:
-#      BROWSERSTACK_USERNAME: simonihmig1
-#      BROWSERSTACK_ACCESS_KEY: ${{ secrets.BROWSERSTACK_ACCESS_KEY }}
-#    steps:
-#      - name: Checkout code
-#        uses: actions/checkout@v2
-#      - name: Setup node.js
-#        uses: actions/setup-node@v1
-#        with:
-#          node-version: 12
-#      - name: Install dependencies
-#        uses: bahmutov/npm-install@v1
-#      - name: Connect to Browserstack
-#        run: yarn ember browserstack:connect
-#      - name: Test
-#        run: yarn ember test --filter !FastBoot --config-file testem.browserstack.js
-#        env:
-#          BABELPOLYFILL: true
-#      - name: Disconnect from Browserstack
-#        if: always()
-#        run: yarn ember browserstack:disconnect
+          node-version: 14.x
+          cache: yarn
+      - name: Install Dependencies
+        run: yarn install --frozen-lockfile
+      - name: Run Tests
+        run: ./node_modules/.bin/ember try:one ${{ matrix.try-scenario }}
