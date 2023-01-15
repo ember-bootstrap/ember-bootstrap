@@ -9,7 +9,8 @@ let expectedDeprecations = new Set();
 const ignoredDeprecations = [
   // @todo remove when https://github.com/alexlafroscia/ember-popper-modifier/issues/452 is fixed
   /ember-modifier/,
-  // @todo remove as part of https://github.com/ember-bootstrap/ember-bootstrap/pull/1845
+  // @todo remove as soon as @ember/string deprecation has been addressed in ember-style-modifier
+  // see https://github.com/jelhan/ember-style-modifier/pull/139
   /@ember\/string/,
 ];
 
