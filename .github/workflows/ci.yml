@@ -115,7 +115,7 @@ jobs:
       - name: Run Tests
         run: yarn test
         with:
-          working-directory: docxs
+          working-directory: docs
 
 #  test-browserstack:
 #    name: Browserstack Tests
