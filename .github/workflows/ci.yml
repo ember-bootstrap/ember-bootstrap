@@ -105,7 +105,6 @@ jobs:
     defaults:
       run:
         working-directory: docs
-      test:
     steps:
       - uses: actions/checkout@v3
       - name: Install Node
