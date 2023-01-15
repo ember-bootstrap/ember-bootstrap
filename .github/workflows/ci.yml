@@ -108,7 +108,9 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: 14
-      - name: Install Dependencies
+      - name: Install Dependencies of Ember Bootstrap addon
+        uses: bahmutov/npm-install@v1
+      - name: Install Dependencies of docs app
         uses: bahmutov/npm-install@v1
         with:
           working-directory: docs
