@@ -114,8 +114,7 @@ jobs:
           working-directory: docs
       - name: Run Tests
         run: yarn test
-        with:
-          working-directory: docs
+        working-directory: docs
 
 #  test-browserstack:
 #    name: Browserstack Tests
