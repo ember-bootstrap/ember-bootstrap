@@ -9,8 +9,6 @@ let expectedDeprecations = new Set();
 const ignoredDeprecations = [
   // @todo remove when https://github.com/alexlafroscia/ember-popper-modifier/issues/452 is fixed
   /ember-modifier/,
-  // @todo remove as part of https://github.com/ember-bootstrap/ember-bootstrap/pull/1845
-  /@ember\/string/,
 ];
 
 export default function setupNoDeprecations({ beforeEach, afterEach }) {
