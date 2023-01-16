@@ -1,6 +1,6 @@
 import { module } from 'qunit';
 import { setupRenderingTest } from 'ember-qunit';
-import { click, render, settled } from '@ember/test-helpers';
+import { click, find, render, settled } from '@ember/test-helpers';
 import hbs from 'htmlbars-inline-precompile';
 import {
   accordionClass,
@@ -26,14 +26,32 @@ module('Integration | Component | bs-accordion', function (hooks) {
   test('accordion has correct default markup', async function (assert) {
     await render(hbs`
       <BsAccordion as |acc|>
-        <acc.item @value={{1}} @title="TITLE1">CONTENT1</acc.item>
+        <acc.item @value={{1}} @title="TITLE1" data-test-item="1">CONTENT1</acc.item>
         <acc.item @value={{2}} @title="TITLE2">CONTENT2</acc.item>
       </BsAccordion>
     `);
     assert.dom(`.${accordionClass()}`).exists({ count: 1 }, 'accordion has correct class');
     assert
+      .dom(`.${accordionClass()} .accordion-collapse`)
+      .exists({ count: 2 }, 'collapsable area of accordion has correct class');
+    assert
       .dom(`.${accordionClass()} .${accordionItemClass()}`)
       .exists({ count: 2 }, 'accordion item has correct class');
+    assert.dom('[data-test-item="1"] h2').hasText('TITLE1', 'renders title');
+    assert
+      .dom('[data-test-item="1"] .accordion-collapse')
+      .hasAria(
+        'describedby',
+        find('[data-test-item="1"] h2').id,
+        'aria: accordion body is described by accordion title'
+      );
+    assert
+      .dom('[data-test-item="1"] h2 button')
+      .hasAria(
+        'controls',
+        find('[data-test-item="1"] .accordion-collapse').id,
+        'aria: accordion title controls collapsable part'
+      );
   });
 
   test('accordion with preselected item has this item expanded', async function (assert) {
@@ -46,8 +64,9 @@ module('Integration | Component | bs-accordion', function (hooks) {
     `);
 
     assert
-      .dom(`.${accordionItemClass()}:first-child .${accordionItemHeadClass()}`)
-      .hasNoClass('collapsed', `${accordionItemHeadClass()} has not collapsed class`);
+      .dom(`.${accordionItemClass()}:first-child ${accordionItemClickableSelector()}`)
+      .hasNoClass('collapsed', `${accordionItemHeadClass()} has not collapsed class`)
+      .hasAria('expanded', 'true', 'aria: is expanded');
     assert.dom(`.${accordionItemClass()}:first-child .collapse`).hasClass('collapse', 'tabpanel has collapse class');
     assert
       .dom(`.${accordionItemClass()}:first-child .collapse`)
@@ -67,8 +86,9 @@ module('Integration | Component | bs-accordion', function (hooks) {
     // wait for transitions to complete
     await settled();
     assert
-      .dom(`.${accordionItemClass()}:last-child .${accordionItemHeadClass()}`)
-      .hasNoClass('collapsed', `${accordionItemHeadClass()} has not collapsed class`);
+      .dom(`.${accordionItemClass()}:last-child ${accordionItemClickableSelector()}`)
+      .hasNoClass('collapsed', `${accordionItemHeadClass()} has not collapsed class`)
+      .hasAria('expanded', 'true', 'aria: is expanded');
     assert.dom(`.${accordionItemClass()}:last-child .collapse`).hasClass('collapse', 'tabpanel has collapse class');
     assert.dom(`.${accordionItemClass()}:last-child .collapse`).hasClass(visibilityClass(), 'tabpanel is visible');
   });
@@ -83,8 +103,9 @@ module('Integration | Component | bs-accordion', function (hooks) {
     await click(`.${accordionItemClass()}:first-child ${accordionItemClickableSelector()}`);
 
     assert
-      .dom(`.${accordionItemClass()}:first-child .${accordionItemHeadClass()}`)
-      .hasNoClass('collapsed', `${accordionItemHeadClass()} has not collapsed class`);
+      .dom(`.${accordionItemClass()}:first-child ${accordionItemClickableSelector()}`)
+      .hasNoClass('collapsed', `${accordionItemHeadClass()} has not collapsed class`)
+      .hasAria('expanded', 'true', 'aria: is expanded');
     assert.dom(`.${accordionItemClass()}:first-child .collapse`).hasClass('collapse', 'tabpanel has collapse class');
     assert.dom(`.${accordionItemClass()}:first-child .collapse`).hasClass(visibilityClass(), 'tabpanel is visible');
   });
@@ -99,7 +120,8 @@ module('Integration | Component | bs-accordion', function (hooks) {
 
     assert
       .dom(`.${accordionItemClass()}:first-child ${accordionItemClickableSelector()}`)
-      .hasNoClass('collapsed', `${accordionItemHeadClass()} has not collapsed class`);
+      .hasNoClass('collapsed', `${accordionItemHeadClass()} has not collapsed class`)
+      .hasAria('expanded', 'true', 'aria: is expanded');
     assert.dom(`.${accordionItemClass()}:first-child .collapse`).hasClass('collapse', 'tabpanel has collapse class');
     assert.dom(`.${accordionItemClass()}:first-child .collapse`).hasClass(visibilityClass(), 'tabpanel is visible');
 
@@ -107,7 +129,8 @@ module('Integration | Component | bs-accordion', function (hooks) {
 
     assert
       .dom(`.${accordionItemClass()}:first-child ${accordionItemClickableSelector()}`)
-      .hasClass('collapsed', `${accordionItemHeadClass()} has collapsed class`);
+      .hasClass('collapsed', `${accordionItemHeadClass()} has collapsed class`)
+      .hasAria('expanded', 'false', 'aria: is expanded');
     assert.dom(`.${accordionItemClass()}:first-child .collapse`).hasClass('collapse', 'tabpanel has collapse class');
     assert.dom(`.${accordionItemClass()}:first-child .collapse`).hasNoClass(visibilityClass(), 'tabpanel is hidden');
   });
