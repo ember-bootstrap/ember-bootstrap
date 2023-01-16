@@ -1,4 +1,4 @@
-<BsCollapse @collapsed={{@collapsed}} role="tabpanel">
+<BsCollapse @collapsed={{@collapsed}} class="accordion-collapse" id={{@collapsableId}} aria-describedby={{@describedby}}>
   <div class="{{if (macroCondition (macroGetOwnConfig "isBS4")) "card-body"}} {{if (macroCondition (macroGetOwnConfig "isBS5")) "accordion-body"}}">
     {{yield}}
   </div>
