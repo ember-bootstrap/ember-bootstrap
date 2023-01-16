@@ -117,6 +117,7 @@
     "ember-source-channel-url": "3.0.0",
     "ember-template-lint": "3.16.0",
     "ember-try": "2.0.0",
+    "ember-unique-id-helper-polyfill": "^1.2.2",
     "eslint": "7.32.0",
     "eslint-config-prettier": "8.5.0",
     "eslint-plugin-ember": "10.6.1",
@@ -146,10 +147,10 @@
     "webpack": "5.74.0"
   },
   "peerDependencies": {
-    "ember-source": ">=3.24"
+    "ember-source": ">=3.28"
   },
   "engines": {
-    "node": "12.* || 14.* || >= 16"
+    "node": "14.* || 16.* || >= 18"
   },
   "publishConfig": {
     "registry": "https://registry.npmjs.org"
