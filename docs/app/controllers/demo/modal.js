@@ -1,6 +1,5 @@
 import { action } from '@ember/object';
 import Controller from '@ember/controller';
-import { next } from '@ember/runloop';
 import { tracked } from '@glimmer/tracking';
 
 export default class ModalController extends Controller {

@@ -97,6 +97,27 @@ jobs:
         env:
           BOOTSTRAPVERSION: ${{ matrix.bootstrap }}
 
+  test-docs:
+    name: Docs
+    runs-on: ubuntu-latest
+    needs:
+      - test
+    steps:
+      - uses: actions/checkout@v3
+      - name: Install Node
+        uses: actions/setup-node@v3
+        with:
+          node-version: 14
+      - name: Install Dependencies of Ember Bootstrap addon
+        uses: bahmutov/npm-install@v1
+      - name: Install Dependencies of docs app
+        uses: bahmutov/npm-install@v1
+        with:
+          working-directory: docs
+      - name: Run Tests
+        run: yarn test
+        working-directory: docs
+
 #  test-browserstack:
 #    name: Browserstack Tests
 #    runs-on: ubuntu-latest
