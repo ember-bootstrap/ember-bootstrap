@@ -347,13 +347,34 @@ export default class Form extends Component {
   validate(model, form) {} // eslint-disable-line no-unused-vars
 
   /**
-   * @property showAllValidations
+   * @property _showAllValidations
    * @type boolean
    * @default undefined
    * @private
    */
   @tracked
-  showAllValidations = undefined;
+  _showAllValidations = undefined;
+
+  get showAllValidations() {
+    return this.showValidations ?? this._showAllValidations;
+  }
+  set showAllValidations(showAllValidations) {
+    this._showAllValidations = showAllValidations;
+  }
+
+  /**
+   * Controls visibility of validation errors. If `null` (default) validation errors are shown after user
+   * interactions like form submission, focus out event of input fields etc. If `true` all validation errors are shown
+   * immediately independently of user interactions. If `false` validation errors are not shown in any case (but
+   * prevent form submission if form is invalid).
+   *
+   * @property showValidations
+   * @type Boolean|null
+   * @default null
+   * @public
+   */
+  @arg
+  showValidations = null;
 
   /**
    * Action is called before the form is validated (if possible) and submitted.
