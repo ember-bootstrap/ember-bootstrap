@@ -30,7 +30,7 @@
     "babel-eslint": "10.1.0",
     "bootstrap": "5.2.3",
     "broccoli-asset-rev": "3.0.0",
-    "ember-auto-import": "2.4.2",
+    "ember-auto-import": "2.4.3",
     "ember-bootstrap-cp-validations": "2.1.0",
     "ember-bootstrap-power-select": "4.1.0",
     "ember-cli": "3.28.6",
