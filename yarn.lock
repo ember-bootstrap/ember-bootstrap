@@ -1361,6 +1361,15 @@
     "@embroider/shared-internals" "^1.5.0"
     semver "^7.3.5"
 
+"@embroider/addon-shim@^1.8.4":
+  version "1.8.4"
+  resolved "https://registry.yarnpkg.com/@embroider/addon-shim/-/addon-shim-1.8.4.tgz#0e7f32c5506bf0f3eb0840506e31c36c7053763c"
+  integrity sha512-sFhfWC0vI18KxVenmswQ/ShIvBg4juL8ubI+Q3NTSdkCTeaPQ/DIOUF6oR5DCQ8eO/TkIaw+kdG3FkTY6yNJqA==
+  dependencies:
+    "@embroider/shared-internals" "^2.0.0"
+    broccoli-funnel "^3.0.8"
+    semver "^7.3.8"
+
 "@embroider/macros@1.7.1", "@embroider/macros@^1.0.0", "@embroider/macros@^1.6.0":
   version "1.7.1"
   resolved "https://registry.yarnpkg.com/@embroider/macros/-/macros-1.7.1.tgz#125b73f30f983866528b7b6ccd6d2ca565628c70"
@@ -5360,7 +5369,7 @@ ember-cli-htmlbars@^5.3.1, ember-cli-htmlbars@^5.7.1:
     strip-bom "^4.0.0"
     walk-sync "^2.2.0"
 
-ember-cli-htmlbars@^6.0.0, ember-cli-htmlbars@^6.0.1:
+ember-cli-htmlbars@^6.0.1:
   version "6.0.1"
   resolved "https://registry.yarnpkg.com/ember-cli-htmlbars/-/ember-cli-htmlbars-6.0.1.tgz#5487831d477e61682bc867fd138808269e5d2152"
   integrity sha512-IDsl9uty+MXtMfp/BUTEc/Q36EmlHYj8ZdPekcoRa8hmdsigHnK4iokfaB7dJFktlf6luruei+imv7JrJrBQPQ==
@@ -5544,22 +5553,6 @@ ember-cli-typescript@^4.0.0, ember-cli-typescript@^4.2.1:
     stagehand "^1.0.0"
     walk-sync "^2.2.0"
 
-ember-cli-typescript@^5.0.0:
-  version "5.1.0"
-  resolved "https://registry.yarnpkg.com/ember-cli-typescript/-/ember-cli-typescript-5.1.0.tgz#460eb848564e29d64f2b36b2a75bbe98172b72a4"
-  integrity sha512-wEZfJPkjqFEZAxOYkiXsDrJ1HY75e/6FoGhQFg8oNFJeGYpIS/3W0tgyl1aRkSEEN1NRlWocDubJ4aZikT+RTA==
-  dependencies:
-    ansi-to-html "^0.6.15"
-    broccoli-stew "^3.0.0"
-    debug "^4.0.0"
-    execa "^4.0.0"
-    fs-extra "^9.0.1"
-    resolve "^1.5.0"
-    rsvp "^4.8.1"
-    semver "^7.3.2"
-    stagehand "^1.0.0"
-    walk-sync "^2.2.0"
-
 ember-cli-version-checker@^2.1.2:
   version "2.2.0"
   resolved "https://registry.yarnpkg.com/ember-cli-version-checker/-/ember-cli-version-checker-2.2.0.tgz#47771b731fe0962705e27c8199a9e3825709f3b3"
@@ -5705,7 +5698,7 @@ ember-cli@4.9.2:
     workerpool "^6.2.1"
     yam "^1.0.0"
 
-ember-compatibility-helpers@1.2.6, ember-compatibility-helpers@^1.1.2, ember-compatibility-helpers@^1.2.0, ember-compatibility-helpers@^1.2.1, ember-compatibility-helpers@^1.2.5:
+ember-compatibility-helpers@1.2.6, ember-compatibility-helpers@^1.1.2, ember-compatibility-helpers@^1.2.0, ember-compatibility-helpers@^1.2.1:
   version "1.2.6"
   resolved "https://registry.yarnpkg.com/ember-compatibility-helpers/-/ember-compatibility-helpers-1.2.6.tgz#603579ab2fb14be567ef944da3fc2d355f779cd8"
   integrity sha512-2UBUa5SAuPg8/kRVaiOfTwlXdeVweal1zdNPibwItrhR0IvPrXpaqwJDlEZnWKEoB+h33V0JIfiWleSG6hGkkA==
@@ -5789,16 +5782,14 @@ ember-modifier-manager-polyfill@^1.2.0:
     ember-cli-version-checker "^2.1.2"
     ember-compatibility-helpers "^1.2.0"
 
-ember-modifier@3.2.7, ember-modifier@^3.0.0, ember-modifier@^3.1.0, "ember-modifier@^3.2.7 || ^4.0.0":
-  version "3.2.7"
-  resolved "https://registry.yarnpkg.com/ember-modifier/-/ember-modifier-3.2.7.tgz#f2d35b7c867cbfc549e1acd8d8903c5ecd02ea4b"
-  integrity sha512-ezcPQhH8jUfcJQbbHji4/ZG/h0yyj1jRDknfYue/ypQS8fM8LrGcCMo0rjDZLzL1Vd11InjNs3BD7BdxFlzGoA==
+"ember-modifier@^3.2.0 || ^4.0.0", "ember-modifier@^3.2.7 || ^4.0.0":
+  version "4.0.0"
+  resolved "https://registry.yarnpkg.com/ember-modifier/-/ember-modifier-4.0.0.tgz#0bb3fae11435fcbe0d3dfa852ce224d81d75ddb2"
+  integrity sha512-OdconmrqKP2haK4kBwNmtnA2NiC2MFmIJC3LgJ1WhwZ49GaktM+bRIuFxF/S5W0oaegzKs1qH2ZDlqMeO2L3nw==
   dependencies:
-    ember-cli-babel "^7.26.6"
+    "@embroider/addon-shim" "^1.8.4"
     ember-cli-normalize-entity-name "^1.0.0"
     ember-cli-string-utils "^1.1.0"
-    ember-cli-typescript "^5.0.0"
-    ember-compatibility-helpers "^1.2.5"
 
 ember-named-blocks-polyfill@^0.2.4:
   version "0.2.5"
@@ -5822,16 +5813,16 @@ ember-page-title@7.0.0:
   dependencies:
     ember-cli-babel "^7.26.6"
 
-ember-popper-modifier@^2.0.0:
-  version "2.0.1"
-  resolved "https://registry.yarnpkg.com/ember-popper-modifier/-/ember-popper-modifier-2.0.1.tgz#bb20b997c6cb944b66638aeda426f002a97aa423"
-  integrity sha512-NczO1m4uDFs4f4L8VEoC5MmRSZZvpTGwCWunYXQ+5vuWKIJ2KnPJQ3cRp9a1EpsWrfPwss+sB4JAEsY24ffdDA==
+"ember-popper-modifier@^2.0.0 || ^3.0.0":
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/ember-popper-modifier/-/ember-popper-modifier-3.0.0.tgz#8eabada3e0cc6a8cd96d26c6baff699fedc17090"
+  integrity sha512-pFvVYl7bPMuafLvTgnSrZXEO6oGLt2DxmGM5yGstae+jYotXOmnoqEiL/Q2FIZtUIbOZAo2BGUROe6rkoVumBg==
   dependencies:
     "@popperjs/core" "^2.4.2"
-    ember-auto-import "^2.2.3"
-    ember-cli-babel "^7.21.0"
-    ember-cli-htmlbars "^6.0.0"
-    ember-modifier "^3.1.0"
+    ember-auto-import "^2.5.0"
+    ember-cli-babel "^7.26.11"
+    ember-cli-htmlbars "^6.1.1"
+    ember-modifier "^3.2.0 || ^4.0.0"
 
 ember-qunit@6.0.0:
   version "6.0.0"
@@ -5848,14 +5839,15 @@ ember-qunit@6.0.0:
     silent-error "^1.1.1"
     validate-peer-dependencies "^2.1.0"
 
-ember-ref-bucket@^4.0.0:
-  version "4.0.0"
-  resolved "https://registry.yarnpkg.com/ember-ref-bucket/-/ember-ref-bucket-4.0.0.tgz#54d7ee942cd5f1541801066b3d72b951f9713cea"
-  integrity sha512-j9YSKTmClgqb2aUiuDta+t4+b9v8Xc/SWMdASr3ewRPIJR0WKU5+u6cEmwN/koMe0N/O3zq7TEHxp0NDwQe2JA==
+"ember-ref-bucket@^4.0.0 || ^5.0.0":
+  version "5.0.0"
+  resolved "https://registry.yarnpkg.com/ember-ref-bucket/-/ember-ref-bucket-5.0.0.tgz#38cbf75f726097a9d4c11296295d4c0163369bc7"
+  integrity sha512-QhoXUC74oS/0nwCdgNGnnoCKiZxz0GSMYLbRKV4FW20ay5OAiA8uhbVudwQJ1bD1pJ7msQdxcVipFhEQDfbf/w==
   dependencies:
+    ember-auto-import "^2.5.0"
     ember-cli-babel "^7.26.11"
     ember-cli-htmlbars "^6.0.1"
-    ember-modifier "^3.0.0"
+    ember-modifier "^3.2.7 || ^4.0.0"
 
 ember-render-helpers@^0.2.0:
   version "0.2.0"
@@ -12673,7 +12665,7 @@ semver@^6.0.0, semver@^6.1.0, semver@^6.1.1, semver@^6.1.2, semver@^6.2.0, semve
   resolved "https://registry.yarnpkg.com/semver/-/semver-6.3.0.tgz#ee0a64c8af5e8ceea67687b133761e1becbd1d3d"
   integrity sha512-b39TBaTSfV6yBrapU89p5fKekE2m/NwnDocOVruQFS1/veMgdzuPcnOM34M6CwxW8jH/lxEa5rBoDeUwu5HHTw==
 
-semver@^7.0.0, semver@^7.3.7:
+semver@^7.0.0, semver@^7.3.7, semver@^7.3.8:
   version "7.3.8"
   resolved "https://registry.yarnpkg.com/semver/-/semver-7.3.8.tgz#07a78feafb3f7b32347d725e33de7e2a2df67798"
   integrity sha512-NB1ctGL5rlHrPJtFDVIVzTyQylMLu9N9VICA6HSFJo8MCGVTMW6gfpicwKmmK/dAjTOrqu5l63JJOpDSrAis3A==
