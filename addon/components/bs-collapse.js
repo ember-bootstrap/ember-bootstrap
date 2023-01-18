@@ -2,7 +2,6 @@ import { action } from '@ember/object';
 import Component from '@glimmer/component';
 import { isNone } from '@ember/utils';
 import { next } from '@ember/runloop';
-import { camelize } from '@ember/string';
 import transitionEnd from 'ember-bootstrap/utils/transition-end';
 import deprecateSubclassing from 'ember-bootstrap/utils/deprecate-subclassing';
 import { ref } from 'ember-ref-bucket';
@@ -223,7 +222,9 @@ export default class Collapse extends Component {
 
     let collapseElement = this._element;
     let prefix = action === 'show' ? 'scroll' : 'offset';
-    let measureProperty = camelize(`${prefix}-${this.collapseDimension}`);
+    let measureProperty = `${prefix}${this.collapseDimension
+      .substring(0, 1)
+      .toUpperCase()}${this.collapseDimension.substring(1)}`;
     return collapseElement[measureProperty];
   }
 
