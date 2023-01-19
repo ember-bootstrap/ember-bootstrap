@@ -7,6 +7,18 @@
 
 
 
+
+## v6.0.0-1 (2023-01-19)
+
+#### Features
+* [#1854](https://github.com/ember-bootstrap/ember-bootstrap/pull/1854) Drop polyfills not needed anymore ([@jelhan](https://github.com/jelhan))
+
+#### Bug Fixes
+* [#1856](https://github.com/ember-bootstrap/ember-bootstrap/pull/1856) polyfill for unique-id helper is required to support Ember < 4.4 ([@jelhan](https://github.com/jelhan))
+
+#### Committers: 1
+- Jeldrik Hanschke ([@jelhan](https://github.com/jelhan))
+
 ## v6.0.0-0 (2023-01-19)
 
 #### :boom: Breaking Change
