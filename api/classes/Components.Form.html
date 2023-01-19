@@ -230,6 +230,11 @@ calling the yielded <code>resetSubmissionState</code> function.</p>
                      data-tablink="_element">_element</a>
 
                 </li>
+                <li class="index-item property private">
+                  <a href="#" data-tabid="#properties" data-anchor="#property__showAllValidations"
+                     data-tablink="_showAllValidations">_showAllValidations</a>
+
+                </li>
                 <li class="index-item property public">
                   <a href="#" data-tabid="#properties" data-anchor="#property_disabled"
                      data-tablink="disabled">disabled</a>
@@ -300,9 +305,9 @@ calling the yielded <code>resetSubmissionState</code> function.</p>
                      data-tablink="readonly">readonly</a>
 
                 </li>
-                <li class="index-item property private">
-                  <a href="#" data-tabid="#properties" data-anchor="#property_showAllValidations"
-                     data-tablink="showAllValidations">showAllValidations</a>
+                <li class="index-item property public">
+                  <a href="#" data-tabid="#properties" data-anchor="#property_showValidations"
+                     data-tablink="showValidations">showValidations</a>
 
                 </li>
                 <li class="index-item property private">
@@ -361,7 +366,7 @@ calling the yielded <code>resetSubmissionState</code> function.</p>
                 <div class="meta">
                             <p>
                             Defined in
-                    <a href="../files/addon_components_bs-form.js.html#l384"><code>addon&#x2F;components&#x2F;bs-form.js:384</code></a>
+                    <a href="../files/addon_components_bs-form.js.html#l405"><code>addon&#x2F;components&#x2F;bs-form.js:405</code></a>
                     </p>
             
             
@@ -463,6 +468,35 @@ calling the yielded <code>resetSubmissionState</code> function.</p>
                   <p>
                       Defined in
                   <a href="../files/addon_components_bs-form.js.html#l122"><code>addon&#x2F;components&#x2F;bs-form.js:122</code></a>
+              </p>
+            
+            
+              </div>
+            
+              <div class="description">
+                
+              </div>
+            
+            
+            
+            
+            </div>
+            <div id="property__showAllValidations"
+                 class="property item private">
+              <h3 class="name">_showAllValidations
+                <span class="badge badge-secondary small">boolean</span>
+                  <span class="badge badge-private small">private</span>
+            
+            
+            
+            
+              </h3>
+            
+              <div class="meta">
+                  <p><strong>Default:</strong> undefined</p>
+                  <p>
+                      Defined in
+                  <a href="../files/addon_components_bs-form.js.html#l349"><code>addon&#x2F;components&#x2F;bs-form.js:349</code></a>
               </p>
             
             
@@ -907,11 +941,11 @@ calling the yielded <code>resetSubmissionState</code> function.</p>
             
             
             </div>
-            <div id="property_showAllValidations"
-                 class="property item private">
-              <h3 class="name">showAllValidations
-                <span class="badge badge-secondary small">boolean</span>
-                  <span class="badge badge-private small">private</span>
+            <div id="property_showValidations"
+                 class="property item public">
+              <h3 class="name">showValidations
+                <span class="badge badge-secondary small">Boolean|null</span>
+                  <span class="badge badge-public small">public</span>
             
             
             
@@ -919,17 +953,21 @@ calling the yielded <code>resetSubmissionState</code> function.</p>
               </h3>
             
               <div class="meta">
-                  <p><strong>Default:</strong> undefined</p>
+                  <p><strong>Default:</strong> null</p>
                   <p>
                       Defined in
-                  <a href="../files/addon_components_bs-form.js.html#l349"><code>addon&#x2F;components&#x2F;bs-form.js:349</code></a>
+                  <a href="../files/addon_components_bs-form.js.html#l365"><code>addon&#x2F;components&#x2F;bs-form.js:365</code></a>
               </p>
             
             
               </div>
             
               <div class="description">
-                
+                <p>Controls visibility of validation errors. If <code>null</code> (default) validation errors are shown after user
+            interactions like form submission, focus out event of input fields etc. If <code>true</code> all validation errors are shown
+            immediately independently of user interactions. If <code>false</code> validation errors are not shown in any case (but
+            prevent form submission if form is invalid).</p>
+            
               </div>
             
             
@@ -1039,7 +1077,7 @@ calling the yielded <code>resetSubmissionState</code> function.</p>
                 <div class="meta">
                             <p>
                             Defined in
-                    <a href="../files/addon_components_bs-form.js.html#l358"><code>addon&#x2F;components&#x2F;bs-form.js:358</code></a>
+                    <a href="../files/addon_components_bs-form.js.html#l379"><code>addon&#x2F;components&#x2F;bs-form.js:379</code></a>
                     </p>
             
             
@@ -1082,7 +1120,7 @@ calling the yielded <code>resetSubmissionState</code> function.</p>
                 <div class="meta">
                             <p>
                             Defined in
-                    <a href="../files/addon_components_bs-form.js.html#l375"><code>addon&#x2F;components&#x2F;bs-form.js:375</code></a>
+                    <a href="../files/addon_components_bs-form.js.html#l396"><code>addon&#x2F;components&#x2F;bs-form.js:396</code></a>
                     </p>
             
             
@@ -1135,7 +1173,7 @@ calling the yielded <code>resetSubmissionState</code> function.</p>
                 <div class="meta">
                             <p>
                             Defined in
-                    <a href="../files/addon_components_bs-form.js.html#l366"><code>addon&#x2F;components&#x2F;bs-form.js:366</code></a>
+                    <a href="../files/addon_components_bs-form.js.html#l387"><code>addon&#x2F;components&#x2F;bs-form.js:387</code></a>
                     </p>
             
             
@@ -1220,6 +1258,8 @@ calling the yielded <code>resetSubmissionState</code> function.</p>
             <li class="list-group-item list-group-item-private"><a href="../classes/Components.FormElementControlTextarea.html">Components.FormElementControlTextarea</a></li>
             <li class="list-group-item list-group-item-private"><a href="../classes/Components.FormElementLabel.html">Components.FormElementLabel</a></li>
             <li class="list-group-item list-group-item-private"><a href="../classes/Components.LinkComponent.html">Components.LinkComponent</a></li>
+            <li class="list-group-item list-group-item-public"><a href="../classes/Components.ListGroup.html">Components.ListGroup</a></li>
+            <li class="list-group-item list-group-item-public"><a href="../classes/Components.ListGroupItem.html">Components.ListGroupItem</a></li>
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.Modal.html">Components.Modal</a></li>
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.ModalBody.html">Components.ModalBody</a></li>
             <li class="list-group-item list-group-item-private"><a href="../classes/Components.ModalDialog.html">Components.ModalDialog</a></li>

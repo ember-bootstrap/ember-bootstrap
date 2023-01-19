@@ -63,7 +63,6 @@ import { action } from &#x27;@ember/object&#x27;;
 import Component from &#x27;@glimmer/component&#x27;;
 import { isNone } from &#x27;@ember/utils&#x27;;
 import { next } from &#x27;@ember/runloop&#x27;;
-import { camelize } from &#x27;@ember/string&#x27;;
 import transitionEnd from &#x27;ember-bootstrap/utils/transition-end&#x27;;
 import deprecateSubclassing from &#x27;ember-bootstrap/utils/deprecate-subclassing&#x27;;
 import { ref } from &#x27;ember-ref-bucket&#x27;;
@@ -284,7 +283,9 @@ export default class Collapse extends Component {
 
     let collapseElement = this._element;
     let prefix = action === &#x27;show&#x27; ? &#x27;scroll&#x27; : &#x27;offset&#x27;;
-    let measureProperty = camelize(&#x60;${prefix}-${this.collapseDimension}&#x60;);
+    let measureProperty = &#x60;${prefix}${this.collapseDimension
+      .substring(0, 1)
+      .toUpperCase()}${this.collapseDimension.substring(1)}&#x60;;
     return collapseElement[measureProperty];
   }
 
@@ -389,6 +390,8 @@ export default class Collapse extends Component {
             <li class="list-group-item list-group-item-private"><a href="../classes/Components.FormElementControlTextarea.html">Components.FormElementControlTextarea</a></li>
             <li class="list-group-item list-group-item-private"><a href="../classes/Components.FormElementLabel.html">Components.FormElementLabel</a></li>
             <li class="list-group-item list-group-item-private"><a href="../classes/Components.LinkComponent.html">Components.LinkComponent</a></li>
+            <li class="list-group-item list-group-item-public"><a href="../classes/Components.ListGroup.html">Components.ListGroup</a></li>
+            <li class="list-group-item list-group-item-public"><a href="../classes/Components.ListGroupItem.html">Components.ListGroupItem</a></li>
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.Modal.html">Components.Modal</a></li>
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.ModalBody.html">Components.ModalBody</a></li>
             <li class="list-group-item list-group-item-private"><a href="../classes/Components.ModalDialog.html">Components.ModalDialog</a></li>

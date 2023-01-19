@@ -2,7 +2,7 @@
     "project": {
         "name": "ember-bootstrap",
         "description": "Twitter Bootstrap components for Ember.js",
-        "version": "5.1.1.bedc8007"
+        "version": "v6.0.0-1"
     },
     "files": {
         "addon/components/bs-accordion/item/body.js": {
@@ -208,6 +208,17 @@
             "modules": {},
             "classes": {
                 "Components.FormElement": 1
+            },
+            "fors": {},
+            "namespaces": {
+                "Components": 1
+            }
+        },
+        "addon/components/bs-list-group/item.js": {
+            "name": "addon/components/bs-list-group/item.js",
+            "modules": {},
+            "classes": {
+                "Components.ListGroupItem": 1
             },
             "fors": {},
             "namespaces": {
@@ -483,6 +494,17 @@
             "modules": {},
             "classes": {
                 "Components.LinkComponent": 1
+            },
+            "fors": {},
+            "namespaces": {
+                "Components": 1
+            }
+        },
+        "addon/components/bs-list-group.js": {
+            "name": "addon/components/bs-list-group.js",
+            "modules": {},
+            "classes": {
+                "Components.ListGroup": 1
             },
             "fors": {},
             "namespaces": {
@@ -910,6 +932,22 @@
             "access": "public",
             "tagname": ""
         },
+        "Components.ListGroupItem": {
+            "name": "Components.ListGroupItem",
+            "shortname": "Components.ListGroupItem",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "namespace": "Components",
+            "file": "addon/components/bs-list-group/item.js",
+            "line": 4,
+            "description": "Component to create the items for [List Group](Components.ListGroup.html).",
+            "extends": "Glimmer.Component",
+            "access": "public",
+            "tagname": ""
+        },
         "Components.ModalHeaderClose": {
             "name": "Components.ModalHeaderClose",
             "shortname": "Components.ModalHeaderClose",
@@ -1244,7 +1282,7 @@
             "extension_for": [],
             "namespace": "Components",
             "file": "addon/components/bs-collapse.js",
-            "line": 12,
+            "line": 11,
             "description": "An Ember component that mimics the behaviour of [Bootstrap's collapse.js plugin](http://getbootstrap.com/javascript/#collapse)\n\n### Usage\n\n```hbs\n<BsCollapse @collapsed={{this.collapsed}}>\n  <div class=\"well\">\n    <h2>Collapse</h2>\n    <p>This is collapsible content</p>\n  </div>\n</BsCollapse>\n```\n\n*Note that only invoking the component in a template as shown above is considered part of its public API. Extending from it (subclassing) is generally not supported, and may break at any time.*",
             "extends": "Glimmer.Component",
             "access": "public",
@@ -1311,6 +1349,22 @@
             "description": "This is largely copied from Ember.LinkComponent. It is used as extending from Ember.LinkComponent has been deprecated.\nWe need this to\n* register ourselves to a parent component that needs to know `active` state due to Bootstrap markup requirements, see Nav/LinkTo\n* continue supporting positional params until we can remove support",
             "extends": "Component",
             "access": "private",
+            "tagname": ""
+        },
+        "Components.ListGroup": {
+            "name": "Components.ListGroup",
+            "shortname": "Components.ListGroup",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "namespace": "Components",
+            "file": "addon/components/bs-list-group.js",
+            "line": 4,
+            "description": "Component for creating [Bootstrap List Groups](https://getbootstrap.com/docs/5.2/components/list-group/) with custom markup.\n\n### Usage\n\n```hbs\n<BsListGroup as |ListGroup|>\n <ListGroup.item>An item</ListGroup.item>\n <ListGroup.item>A second item</ListGroup.item>\n <ListGroup.item>A third item</ListGroup.item>\n</BsListGroup>\n```\n\n### Advanced Usage\n\n```hbs\n<BsListGroup as |ListGroup|>\n {{#let (component ListGroup.item htmlTag=\"a\" actionable=true) as |ListGroupItem|}}\n   <ListGroupItem @active={{true}}>An item</ListGroupItem>\n   <ListGroupItem>A second item</ListGroupItem>\n   <ListGroupItem @disabled={{true}}>A third item</ListGroupItem>\n {{/let}}\n</BsListGroup>\n```\n\nThe component yields references to the following contextual components, that you can use to further customize the output:\n\n* [ListGroup.item](Components.ListGroupItem.html)",
+            "extends": "Glimmer.Component",
+            "access": "public",
             "tagname": ""
         },
         "Components.ModalSimple": {
@@ -2842,6 +2896,61 @@
             "namespace": "Components"
         },
         {
+            "file": "addon/components/bs-list-group/item.js",
+            "line": 13,
+            "description": "On of the allowed bs-types, e.g. `primary`, `secondary` etc.\n\nUsed to add contextual classes to style list items with a stateful background and color.\n\nAlso see the [Bootstrap Docs](https://getbootstrap.com/docs/5.2/components/list-group/#contextual-classes)",
+            "default": "''",
+            "type": "string",
+            "access": "public",
+            "tagname": "",
+            "class": "Components.ListGroupItem",
+            "namespace": "Components"
+        },
+        {
+            "file": "addon/components/bs-list-group/item.js",
+            "line": 27,
+            "description": "Used to create actionable list group items with hover, disabled, and active states.\n\nAlso see the [Bootstrap Docs](https://getbootstrap.com/docs/5.2/components/list-group/#links-and-buttons)",
+            "default": "false",
+            "type": "boolean",
+            "access": "public",
+            "tagname": "",
+            "class": "Components.ListGroupItem",
+            "namespace": "Components"
+        },
+        {
+            "file": "addon/components/bs-list-group/item.js",
+            "line": 39,
+            "description": "Indicate the current active selection.\n\nAlso see the [Bootstrap Docs](https://getbootstrap.com/docs/5.2/components/list-group/#active-items)",
+            "default": "false",
+            "type": "boolean",
+            "access": "public",
+            "tagname": "",
+            "class": "Components.ListGroupItem",
+            "namespace": "Components"
+        },
+        {
+            "file": "addon/components/bs-list-group/item.js",
+            "line": 51,
+            "description": "Set `true` to make list group item appear disabled.\n\nAlso see the [Bootstrap Docs](https://getbootstrap.com/docs/5.2/components/list-group/#disabled-items)",
+            "default": "false",
+            "type": "boolean",
+            "access": "public",
+            "tagname": "",
+            "class": "Components.ListGroupItem",
+            "namespace": "Components"
+        },
+        {
+            "file": "addon/components/bs-list-group/item.js",
+            "line": 63,
+            "description": "HTML-tag used for list-group item\n\nIt depends on `actionable`.",
+            "type": "string",
+            "default": "'li'",
+            "access": "public",
+            "tagname": "",
+            "class": "Components.ListGroupItem",
+            "namespace": "Components"
+        },
+        {
             "file": "addon/components/bs-modal/header/close.js",
             "line": 9,
             "itemtype": "event",
@@ -3674,19 +3783,6 @@
         {
             "file": "addon/components/bs-button-group.js",
             "line": 81,
-            "description": "Set to true for the buttons to stretch at equal sizes to span the entire width of its parent. (BS3 only!)\n\n*Important*: You have to wrap every button component in a `div class=\"btn-group\">`:\n\n```handlebars\n<div class=\"btn-group\" role=\"group\">\n{{#bs-button}}My Button{{/bs-button}}\n</div>\n```\n\nSee http://getbootstrap.com/components/#btn-groups-justified",
-            "itemtype": "property",
-            "name": "justified",
-            "type": "boolean",
-            "default": "false",
-            "access": "public",
-            "tagname": "",
-            "class": "Components.ButtonGroup",
-            "namespace": "Components"
-        },
-        {
-            "file": "addon/components/bs-button-group.js",
-            "line": 100,
             "description": "The type of the button group specifies how child buttons behave and how the `value` property will be computed:\n\n### null\nIf `type` is not set (null), the button group will add no functionality besides Bootstrap styling\n\n### radio\nif `type` is set to \"radio\", the buttons will behave like radio buttons:\n* the `value` property of the button group will reflect the `value` property of the active button\n* thus only one button may be active\n\n### checkbox\nif `type` is set to \"checkbox\", the buttons will behave like checkboxes:\n* any number of buttons may be active\n* the `value` property of the button group will be an array containing the `value` properties of all active buttons",
             "itemtype": "property",
             "name": "type",
@@ -3699,7 +3795,7 @@
         },
         {
             "file": "addon/components/bs-button-group.js",
-            "line": 122,
+            "line": 103,
             "description": "The value of the button group, computed by its child buttons.\nSee the `type` property for how the value property is constructed.\n\nWhen you set the value, the corresponding buttons will be activated:\n* use a single value for a radio button group to activate the button with the same value\n* use an array of values for a checkbox button group to activate all the buttons with values contained in the array",
             "itemtype": "property",
             "name": "value",
@@ -3711,7 +3807,7 @@
         },
         {
             "file": "addon/components/bs-button-group.js",
-            "line": 135,
+            "line": 116,
             "description": "Property for size styling, set to 'lg', 'sm' or 'xs'\n\nAlso see the [Bootstrap docs](https://getbootstrap.com/docs/4.3/components/button-group/#sizing)",
             "itemtype": "property",
             "name": "size",
@@ -3723,7 +3819,7 @@
         },
         {
             "file": "addon/components/bs-button-group.js",
-            "line": 145,
+            "line": 126,
             "description": "This action is called whenever the button group's value should be changed because the user clicked a button.\nYou will receive the new value of the button group (based on the `type` property), which you should use to update the\n`value` property.",
             "itemtype": "event",
             "name": "onChange",
@@ -4588,7 +4684,7 @@
         },
         {
             "file": "addon/components/bs-collapse.js",
-            "line": 35,
+            "line": 34,
             "itemtype": "property",
             "name": "_element",
             "type": "null | HTMLElement",
@@ -4599,7 +4695,7 @@
         },
         {
             "file": "addon/components/bs-collapse.js",
-            "line": 42,
+            "line": 41,
             "description": "Collapsed/expanded state",
             "itemtype": "property",
             "name": "collapsed",
@@ -4612,7 +4708,7 @@
         },
         {
             "file": "addon/components/bs-collapse.js",
-            "line": 53,
+            "line": 52,
             "description": "True if this item is expanded",
             "itemtype": "property",
             "name": "active",
@@ -4623,7 +4719,7 @@
         },
         {
             "file": "addon/components/bs-collapse.js",
-            "line": 69,
+            "line": 68,
             "description": "true if the component is currently transitioning",
             "itemtype": "property",
             "name": "transitioning",
@@ -4635,7 +4731,7 @@
         },
         {
             "file": "addon/components/bs-collapse.js",
-            "line": 79,
+            "line": 78,
             "description": "The size of the element when collapsed. Defaults to 0.",
             "itemtype": "property",
             "name": "collapsedSize",
@@ -4648,7 +4744,7 @@
         },
         {
             "file": "addon/components/bs-collapse.js",
-            "line": 90,
+            "line": 89,
             "description": "The size of the element when expanded. When null the value is calculated automatically to fit the containing elements.",
             "itemtype": "property",
             "name": "expandedSize",
@@ -4661,14 +4757,14 @@
         },
         {
             "file": "addon/components/bs-collapse.js",
-            "line": 101,
+            "line": 100,
             "description": "Calculates a hash for style attribute.",
             "class": "Components.Collapse",
             "namespace": "Components"
         },
         {
             "file": "addon/components/bs-collapse.js",
-            "line": 114,
+            "line": 113,
             "description": "Usually the size (height) of the element is only set while transitioning, and reseted afterwards. Set to true to always set a size.",
             "itemtype": "property",
             "name": "resetSizeWhenNotCollapsing",
@@ -4681,7 +4777,7 @@
         },
         {
             "file": "addon/components/bs-collapse.js",
-            "line": 124,
+            "line": 123,
             "description": "The direction (height/width) of the collapse animation.\nWhen setting this to 'width' you should also define custom CSS transitions for the width property, as the Bootstrap\nCSS does only support collapsible elements for the height direction.",
             "itemtype": "property",
             "name": "collapseDimension",
@@ -4694,7 +4790,7 @@
         },
         {
             "file": "addon/components/bs-collapse.js",
-            "line": 137,
+            "line": 136,
             "description": "The duration of the fade transition",
             "itemtype": "property",
             "name": "transitionDuration",
@@ -4707,7 +4803,7 @@
         },
         {
             "file": "addon/components/bs-collapse.js",
-            "line": 151,
+            "line": 150,
             "description": "The action to be sent when the element is about to be hidden.",
             "itemtype": "event",
             "name": "onHide",
@@ -4718,7 +4814,7 @@
         },
         {
             "file": "addon/components/bs-collapse.js",
-            "line": 158,
+            "line": 157,
             "description": "The action to be sent after the element has been completely hidden (including the CSS transition).",
             "itemtype": "event",
             "name": "onHidden",
@@ -4729,7 +4825,7 @@
         },
         {
             "file": "addon/components/bs-collapse.js",
-            "line": 165,
+            "line": 164,
             "description": "The action to be sent when the element is about to be shown.",
             "itemtype": "event",
             "name": "onShow",
@@ -4740,7 +4836,7 @@
         },
         {
             "file": "addon/components/bs-collapse.js",
-            "line": 172,
+            "line": 171,
             "description": "The action to be sent after the element has been completely shown (including the CSS transition).",
             "itemtype": "event",
             "name": "onShown",
@@ -4751,7 +4847,7 @@
         },
         {
             "file": "addon/components/bs-collapse.js",
-            "line": 179,
+            "line": 178,
             "description": "Triggers the show transition",
             "itemtype": "method",
             "name": "show",
@@ -4762,7 +4858,7 @@
         },
         {
             "file": "addon/components/bs-collapse.js",
-            "line": 210,
+            "line": 209,
             "description": "Get the size of the element when expanded",
             "itemtype": "method",
             "name": "getExpandedSize",
@@ -4783,7 +4879,7 @@
         },
         {
             "file": "addon/components/bs-collapse.js",
-            "line": 230,
+            "line": 231,
             "description": "Triggers the hide transition",
             "itemtype": "method",
             "name": "hide",
@@ -5723,7 +5819,7 @@
             "file": "addon/components/bs-form.js",
             "line": 349,
             "itemtype": "property",
-            "name": "showAllValidations",
+            "name": "_showAllValidations",
             "type": "boolean",
             "default": "undefined",
             "access": "private",
@@ -5733,7 +5829,20 @@
         },
         {
             "file": "addon/components/bs-form.js",
-            "line": 358,
+            "line": 365,
+            "description": "Controls visibility of validation errors. If `null` (default) validation errors are shown after user\ninteractions like form submission, focus out event of input fields etc. If `true` all validation errors are shown\nimmediately independently of user interactions. If `false` validation errors are not shown in any case (but\nprevent form submission if form is invalid).",
+            "itemtype": "property",
+            "name": "showValidations",
+            "type": "Boolean|null",
+            "default": "null",
+            "access": "public",
+            "tagname": "",
+            "class": "Components.Form",
+            "namespace": "Components"
+        },
+        {
+            "file": "addon/components/bs-form.js",
+            "line": 379,
             "description": "Action is called before the form is validated (if possible) and submitted.",
             "itemtype": "event",
             "name": "onBefore",
@@ -5751,7 +5860,7 @@
         },
         {
             "file": "addon/components/bs-form.js",
-            "line": 366,
+            "line": 387,
             "description": "Action is called when submit has been triggered and the model has passed all validations (if present).",
             "itemtype": "event",
             "name": "onSubmit",
@@ -5774,7 +5883,7 @@
         },
         {
             "file": "addon/components/bs-form.js",
-            "line": 375,
+            "line": 396,
             "description": "Action is called when validation of the model has failed.",
             "itemtype": "event",
             "name": "onInvalid",
@@ -5797,13 +5906,57 @@
         },
         {
             "file": "addon/components/bs-form.js",
-            "line": 384,
+            "line": 405,
             "description": "Submit handler that will send the default action (\"action\") to the controller when submitting the form.\n\nIf there is a supplied `model` that supports validation (`hasValidator`) the model will be validated before, and\nonly if validation is successful the default action will be sent. Otherwise, an \"invalid\" action will be sent, and\nall the `showValidation` property of all child `Components.FormElement`s will be set to true, so error state and\nmessages will be shown automatically.",
             "itemtype": "method",
             "name": "submit",
             "access": "private",
             "tagname": "",
             "class": "Components.Form",
+            "namespace": "Components"
+        },
+        {
+            "file": "addon/components/bs-list-group.js",
+            "line": 39,
+            "description": "Determines if list should be numbered (e.g. `ol` or `ul` should be used)\n\nAlso see the [Bootstrap Docs](https://getbootstrap.com/docs/5.2/components/list-group/#numbered)",
+            "default": "false",
+            "type": "boolean",
+            "access": "public",
+            "tagname": "",
+            "class": "Components.ListGroup",
+            "namespace": "Components"
+        },
+        {
+            "file": "addon/components/bs-list-group.js",
+            "line": 51,
+            "description": "If `true` then some borders and rounded corners are removed\n\nAlso see the [Bootstrap Docs](https://getbootstrap.com/docs/5.2/components/list-group/#flush)",
+            "default": "false",
+            "type": "boolean",
+            "access": "public",
+            "tagname": "",
+            "class": "Components.ListGroup",
+            "namespace": "Components"
+        },
+        {
+            "file": "addon/components/bs-list-group.js",
+            "line": 63,
+            "description": "If `true` list group layout will be horizontal\n\nAlso see the [Bootstrap Docs](https://getbootstrap.com/docs/5.2/components/list-group/#horizontal)",
+            "default": "false",
+            "type": "boolean",
+            "access": "public",
+            "tagname": "",
+            "class": "Components.ListGroup",
+            "namespace": "Components"
+        },
+        {
+            "file": "addon/components/bs-list-group.js",
+            "line": 75,
+            "description": "Determines the responsive variant to make a list group horizontal starting at that breakpoint’s `min-width`.\n\nSupported values are `{sm|md|lg|xl|xxl}`\n\nLive this property empty to change the layout of list group items to horizontal across all breakpoints.\n\nAlso see the [Bootstrap Docs](https://getbootstrap.com/docs/5.2/components/list-group/#horizontal)",
+            "default": "''",
+            "type": "string",
+            "access": "public",
+            "tagname": "",
+            "class": "Components.ListGroup",
             "namespace": "Components"
         },
         {
@@ -7228,6 +7381,26 @@
             "line": " addon/components/bs-carousel/slide.js:176"
         },
         {
+            "message": "Missing item type\nOn of the allowed bs-types, e.g. `primary`, `secondary` etc.\n\nUsed to add contextual classes to style list items with a stateful background and color.\n\nAlso see the [Bootstrap Docs](https://getbootstrap.com/docs/5.2/components/list-group/#contextual-classes)",
+            "line": " addon/components/bs-list-group/item.js:13"
+        },
+        {
+            "message": "Missing item type\nUsed to create actionable list group items with hover, disabled, and active states.\n\nAlso see the [Bootstrap Docs](https://getbootstrap.com/docs/5.2/components/list-group/#links-and-buttons)",
+            "line": " addon/components/bs-list-group/item.js:27"
+        },
+        {
+            "message": "Missing item type\nIndicate the current active selection.\n\nAlso see the [Bootstrap Docs](https://getbootstrap.com/docs/5.2/components/list-group/#active-items)",
+            "line": " addon/components/bs-list-group/item.js:39"
+        },
+        {
+            "message": "Missing item type\nSet `true` to make list group item appear disabled.\n\nAlso see the [Bootstrap Docs](https://getbootstrap.com/docs/5.2/components/list-group/#disabled-items)",
+            "line": " addon/components/bs-list-group/item.js:51"
+        },
+        {
+            "message": "Missing item type\nHTML-tag used for list-group item\n\nIt depends on `actionable`.",
+            "line": " addon/components/bs-list-group/item.js:63"
+        },
+        {
             "message": "Missing item type\nThis is an unfortunate duplication of the previous property, but this is untracked to avoid causing the dreaded \"same computation\" assertion in GlimmerVM when reading a tracked property before setting it.",
             "line": " addon/components/bs-alert.js:77"
         },
@@ -7237,7 +7410,7 @@
         },
         {
             "message": "Missing item type\nCalculates a hash for style attribute.",
-            "line": " addon/components/bs-collapse.js:101"
+            "line": " addon/components/bs-collapse.js:100"
         },
         {
             "message": "Missing item type\nCurrent state for events",
@@ -7246,6 +7419,22 @@
         {
             "message": "Missing item type\nThe DOM element of the `.dropdown-menu` element",
             "line": " addon/components/bs-dropdown.js:258"
+        },
+        {
+            "message": "Missing item type\nDetermines if list should be numbered (e.g. `ol` or `ul` should be used)\n\nAlso see the [Bootstrap Docs](https://getbootstrap.com/docs/5.2/components/list-group/#numbered)",
+            "line": " addon/components/bs-list-group.js:39"
+        },
+        {
+            "message": "Missing item type\nIf `true` then some borders and rounded corners are removed\n\nAlso see the [Bootstrap Docs](https://getbootstrap.com/docs/5.2/components/list-group/#flush)",
+            "line": " addon/components/bs-list-group.js:51"
+        },
+        {
+            "message": "Missing item type\nIf `true` list group layout will be horizontal\n\nAlso see the [Bootstrap Docs](https://getbootstrap.com/docs/5.2/components/list-group/#horizontal)",
+            "line": " addon/components/bs-list-group.js:63"
+        },
+        {
+            "message": "Missing item type\nDetermines the responsive variant to make a list group horizontal starting at that breakpoint’s `min-width`.\n\nSupported values are `{sm|md|lg|xl|xxl}`\n\nLive this property empty to change the layout of list group items to horizontal across all breakpoints.\n\nAlso see the [Bootstrap Docs](https://getbootstrap.com/docs/5.2/components/list-group/#horizontal)",
+            "line": " addon/components/bs-list-group.js:75"
         },
         {
             "message": "Missing item type",

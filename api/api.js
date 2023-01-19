@@ -30,6 +30,8 @@ YUI.add("yuidoc-meta", function(Y) {
         "Components.FormElementControlTextarea",
         "Components.FormElementLabel",
         "Components.LinkComponent",
+        "Components.ListGroup",
+        "Components.ListGroupItem",
         "Components.Modal",
         "Components.ModalBody",
         "Components.ModalDialog",
