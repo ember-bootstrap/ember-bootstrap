@@ -68,7 +68,6 @@
     "ember-element-helper": "^0.6.0",
     "ember-focus-trap": "^1.0.0",
     "ember-in-element-polyfill": "^1.0.1",
-    "ember-named-blocks-polyfill": "^0.2.4",
     "ember-on-helper": "^0.1.0",
     "ember-popper-modifier": "^2.0.0 || ^3.0.0",
     "ember-ref-bucket": "^4.0.0 || ^5.0.0",
