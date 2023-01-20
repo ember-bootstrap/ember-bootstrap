@@ -5055,13 +5055,12 @@ ember-concurrency-decorators@^2.0.0:
     ember-compatibility-helpers "^1.2.0"
     ember-destroyable-polyfill "^2.0.2"
 
-ember-cp-validations@4.0.0:
-  version "4.0.0"
-  resolved "https://registry.yarnpkg.com/ember-cp-validations/-/ember-cp-validations-4.0.0.tgz#129a2672ca291cc7386f2024809f7845e7d8bd43"
-  integrity sha512-nZUwGxOtg7cu0xZb9ekEtv/pZoHMBThS5Ti3aQYY5lbeq9jQ67Kp8Rj0knq3wpQxUvIp6MQGiIQ2dD9NeP7/xQ==
+ember-cp-validations@5.0.0:
+  version "5.0.0"
+  resolved "https://registry.yarnpkg.com/ember-cp-validations/-/ember-cp-validations-5.0.0.tgz#9a81f9a6710b5571fb464afb50e63b415a2a1d12"
+  integrity sha512-9dREri8iimqNSQk48tn4uz6OMptogdzeDYhHzkQA3TIAe7BwW7971kad7GtludVG2GmO4jcfH/7hnfQuNOOi3g==
   dependencies:
     ember-cli-babel "^7.26.10"
-    ember-require-module "^0.4.0"
     ember-validators "^4.1.1"
 
 ember-destroyable-polyfill@^2.0.2, ember-destroyable-polyfill@^2.0.3:
@@ -5225,13 +5224,6 @@ ember-qunit@5.1.5:
     resolve-package-path "^3.1.0"
     silent-error "^1.1.1"
     validate-peer-dependencies "^1.2.0"
-
-ember-require-module@^0.4.0:
-  version "0.4.0"
-  resolved "https://registry.yarnpkg.com/ember-require-module/-/ember-require-module-0.4.0.tgz#2f86bae244f70c3d4cb8b9ef8abbd617e7a95218"
-  integrity sha512-P8q/F/DhEjVSNVdgbMctIZ4tEB1nTalPTd0ZrRxRYgiJE/g1B+eQ5z6GSCzxeeMFTJhVjvIRFtzlFUIRN+EDFQ==
-  dependencies:
-    ember-cli-babel "^7.26.11"
 
 ember-resolver@8.1.0:
   version "8.1.0"
