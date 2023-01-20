@@ -125,7 +125,7 @@
     "eslint-plugin-prettier": "4.2.1",
     "eslint-plugin-qunit": "7.3.4",
     "execa": "5.1.1",
-    "glob": "8.0.3",
+    "glob": "8.1.0",
     "gulp": "4.0.2",
     "gulp-connect": "5.7.0",
     "gulp-insert": "0.5.0",
