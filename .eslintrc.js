@@ -41,6 +41,7 @@ module.exports = {
     'ember/classic-decorator-no-classic-methods': 'warn',
     'ember/classic-decorator-hooks': 'warn',
     'ember/no-empty-glimmer-component-classes': 'warn',
+    'prettier/prettier': ['error', { endOfLine: 'auto' }],
   },
   overrides: [
     // node files
