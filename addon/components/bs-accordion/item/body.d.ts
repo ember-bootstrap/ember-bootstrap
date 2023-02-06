@@ -16,7 +16,7 @@ export default BsAccordionItemBody;
 
 declare module '@glint/environment-ember-loose/registry' {
   export default interface Registry {
-    BsAccordionItemBody: typeof BsAccordionItemBody;
+    'BsAccordion::Item::Body': typeof BsAccordionItemBody;
     'bs-accordion/item/body': typeof BsAccordionItemBody;
   }
 }

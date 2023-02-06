@@ -2,6 +2,10 @@ import BsTabPane from './bs-tab/pane';
 
 import Component from '@glimmer/component';
 
+export interface BsTabActions {
+  select: (id: string) => void;
+}
+
 interface BsTabSignature {
   Element: HTMLDivElement;
   Args: {
@@ -16,14 +20,12 @@ interface BsTabSignature {
     default: [
       {
         pane: typeof BsTabPane;
+        activeId: string;
+        select: typeof BsTabActions.select;
         actions: BsTabActions;
       }
     ];
   };
-}
-
-export interface BsTabActions {
-  select: (id: string) => void;
 }
 
 export declare class BsTab extends Component<BsTabSignature> {}

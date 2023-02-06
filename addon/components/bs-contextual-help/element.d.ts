@@ -18,7 +18,7 @@ export default BsContextualHelpElement;
 
 declare module '@glint/environment-ember-loose/registry' {
   export default interface Registry {
-    BsContextualHelpElement: typeof BsContextualHelpElement;
+    'BsContextualHelp::Element': typeof BsContextualHelpElement;
     'bs-contextual-help/element': typeof BsContextualHelpElement;
   }
 }

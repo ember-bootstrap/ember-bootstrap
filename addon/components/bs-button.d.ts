@@ -8,7 +8,7 @@ interface BsButtonSignature {
     active?: boolean;
     block?: boolean;
     bubble?: boolean;
-    buttonType?: 'button' | 'submit';
+    buttonType?: 'button' | 'submit' | 'reset';
     defaultText?: string;
     fulfilledText?: string;
     icon?: string;
@@ -20,9 +20,9 @@ interface BsButtonSignature {
     rejectedText?: string;
     reset?: boolean;
     size?: string;
-    type?: BsButtonType;
+    type?: string;
     value?: unknown;
-    onClick?: (e?: Event, value?: unknown) => void;
+    onClick?: (e?: Event, value?: unknown) => Promise<void> | void;
   };
   Blocks: {
     default: [

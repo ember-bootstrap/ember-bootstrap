@@ -16,6 +16,7 @@ export default BsModalHeaderClose;
 
 declare module '@glint/environment-ember-loose/registry' {
   export default interface Registry {
+    'BsModal::Header::Close': typeof BsModalHeaderClose;
     'bs-modal/header/close': typeof BsModalHeaderClose;
   }
 }

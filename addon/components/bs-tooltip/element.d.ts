@@ -6,7 +6,7 @@ export default BsTooltipElement;
 
 declare module '@glint/environment-ember-loose/registry' {
   export default interface Registry {
-    BsTooltipElement: typeof BsTooltipElement;
+    'BsTooltip::Element': typeof BsTooltipElement;
     'bs-tooltip/element': typeof BsTooltipElement;
   }
 }

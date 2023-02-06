@@ -4,9 +4,9 @@ interface BsFormElementSignature<T> {
   Element: HTMLDivElement;
   Args: {
     controlType?: 'text' | 'checkbox' | 'radio' | 'switch' | 'textarea' | string;
-    customError?: 'string';
+    customError?: string;
     customWarning?: string;
-    doNotShowValidationForEventTargets?: unknown;
+    doNotShowValidationForEventTargets?: string[];
     formLayout?: 'vertical' | 'horizontal' | 'inline';
     help?: string;
     horizontalLabelGridClass?: string;

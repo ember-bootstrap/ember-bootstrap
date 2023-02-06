@@ -21,7 +21,7 @@ export default BsListGroupItem;
 
 declare module '@glint/environment-ember-loose/registry' {
   export default interface Registry {
-    BsListGroupItem: typeof BsListGroupItem;
+    'BsListGroup::Item': typeof BsListGroupItem;
     'bs-list-group/item': typeof BsListGroupItem;
   }
 }

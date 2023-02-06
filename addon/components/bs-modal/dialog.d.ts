@@ -20,6 +20,7 @@ export default BsModalDialog;
 
 declare module '@glint/environment-ember-loose/registry' {
   export default interface Registry {
+    'BsModal::Dialog': typeof BsModalDialog;
     'bs-modal/dialog': typeof BsModalDialog;
   }
 }

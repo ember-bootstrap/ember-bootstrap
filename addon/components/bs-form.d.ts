@@ -16,7 +16,7 @@ interface BsFormSignature<T> {
     submitOnEnter?: boolean;
     onBefore?: (model: T) => void;
     onInvalid?: (model: T, error: unknown) => void;
-    onSubmit?: (model: T, result: unknown) => void;
+    onSubmit?: (model: T, result: unknown) => Promise<void> | void;
   };
   Blocks: {
     default: [

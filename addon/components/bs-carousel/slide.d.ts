@@ -14,6 +14,7 @@ export default BsCarouselSlide;
 
 declare module '@glint/environment-ember-loose/registry' {
   export default interface Registry {
+    'BsCarousel::Slide': typeof BsCarouselSlide;
     'bs-carousel/slide': typeof BsCarouselSlide;
   }
 }

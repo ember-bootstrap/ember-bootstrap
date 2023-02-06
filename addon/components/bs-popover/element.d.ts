@@ -6,7 +6,7 @@ export default BsPopoverElement;
 
 declare module '@glint/environment-ember-loose/registry' {
   export default interface Registry {
-    BsPopoverElement: typeof BsPopoverElement;
+    'BsPopover::Element': typeof BsPopoverElement;
     'bs-popover/element': typeof BsPopoverElement;
   }
 }

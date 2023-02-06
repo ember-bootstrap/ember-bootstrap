@@ -25,7 +25,7 @@ export default BsProgressBar;
 
 declare module '@glint/environment-ember-loose/registry' {
   export default interface Registry {
-    BsProgressBar: typeof BsProgressBar;
+    'BsProgress::Bar': typeof BsProgressBar;
     'bs-progress/bar': typeof BsProgressBar;
   }
 }

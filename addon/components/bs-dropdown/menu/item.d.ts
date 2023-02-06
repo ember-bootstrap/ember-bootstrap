@@ -1,6 +1,6 @@
 import Component from '@glimmer/component';
 
-interface BsDropdownItemSignature {
+interface BsDropdownMenuItemSignature {
   Element: HTMLDivElement;
   Args: {};
   Blocks: {
@@ -8,13 +8,13 @@ interface BsDropdownItemSignature {
   };
 }
 
-export declare class BsDropdownItem extends Component<BsDropdownItemSignature> {}
+export declare class BsDropdownMenuItem extends Component<BsDropdownMenuItemSignature> {}
 
-export default BsDropdownItem;
+export default BsDropdownMenuItem;
 
 declare module '@glint/environment-ember-loose/registry' {
   export default interface Registry {
-    'BsDropdown::Menu::Item': typeof BsDropdownItem;
-    'bs-dropdown/menu/item': typeof BsDropdownItem;
+    'BsDropdown::Menu::Item': typeof BsDropdownMenuItem;
+    'bs-dropdown/menu/item': typeof BsDropdownMenuItem;
   }
 }

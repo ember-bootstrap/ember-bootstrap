@@ -18,6 +18,7 @@ export default BsTabPane;
 
 declare module '@glint/environment-ember-loose/registry' {
   export default interface Registry {
+    'BsTab::Pane': typeof BsTabPane;
     'bs-tab/pane': typeof BsTabPane;
   }
 }

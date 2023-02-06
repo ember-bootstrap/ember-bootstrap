@@ -22,6 +22,7 @@ export default BsModalFooter;
 
 declare module '@glint/environment-ember-loose/registry' {
   export default interface Registry {
+    'BsModal::Footer': typeof BsModalFooter;
     'bs-modal/footer': typeof BsModalFooter;
   }
 }

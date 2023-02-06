@@ -12,6 +12,7 @@ export default BsNavbarContent;
 
 declare module '@glint/environment-ember-loose/registry' {
   export default interface Registry {
+    'BsNavbar::Content': typeof BsNavbarContent;
     'bs-navbar/content': typeof BsNavbarContent;
   }
 }

@@ -16,7 +16,7 @@ export default BsNavbarToggle;
 
 declare module '@glint/environment-ember-loose/registry' {
   export default interface Registry {
-    BsNavbarToggle: typeof BsNavbarToggle;
+    'BsNavbar::Toggle': typeof BsNavbarToggle;
     'bs-navbar/toggle': typeof BsNavbarToggle;
   }
 }

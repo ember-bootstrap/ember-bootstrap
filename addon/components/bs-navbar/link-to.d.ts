@@ -15,6 +15,7 @@ export default BsNavbarLinkTo;
 
 declare module '@glint/environment-ember-loose/registry' {
   export default interface Registry {
+    'BsNavbar::LinkTo': typeof BsNavbarLinkTo;
     'bs-navbar/link-to': typeof BsNavbarLinkTo;
   }
 }

@@ -18,6 +18,7 @@ export default BsNavItem;
 
 declare module '@glint/environment-ember-loose/registry' {
   export default interface Registry {
+    'BsNav::Item': typeof BsNavItem;
     'bs-nav/item': typeof BsNavItem;
   }
 }

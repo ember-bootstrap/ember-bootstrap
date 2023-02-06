@@ -19,6 +19,6 @@ export default BsFormElementControlTextarea;
 declare module '@glint/environment-ember-loose/registry' {
   export default interface Registry {
     'BsForm::Element::Control::Textarea': typeof BsFormElementControlTextarea;
-    'bs-form/element/control/switch': typeof BsFormElementControlTextarea;
+    'bs-form/element/control/textarea': typeof BsFormElementControlTextarea;
   }
 }

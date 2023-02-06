@@ -14,6 +14,7 @@ export default BsModalHeaderTitle;
 
 declare module '@glint/environment-ember-loose/registry' {
   export default interface Registry {
+    'BsModal::Header::Title': typeof BsModalHeaderTitle;
     'bs-modal/header/title': typeof BsModalHeaderTitle;
   }
 }

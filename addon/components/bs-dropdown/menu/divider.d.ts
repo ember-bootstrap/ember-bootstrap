@@ -1,6 +1,6 @@
 import Component from '@glimmer/component';
 
-interface BsDropdownDividerSignature {
+interface BsDropdownMenuDividerSignature {
   Element: HTMLDivElement;
   Args: {};
   Blocks: {
@@ -8,13 +8,13 @@ interface BsDropdownDividerSignature {
   };
 }
 
-export declare class BsDropdownDivider extends Component<BsDropdownDividerSignature> {}
+export declare class BsDropdownMenuDivider extends Component<BsDropdownMenuDividerSignature> {}
 
-export default BsDropdownDivider;
+export default BsDropdownMenuDivider;
 
 declare module '@glint/environment-ember-loose/registry' {
   export default interface Registry {
-    'BsDropdown::Menu::Divider': typeof BsDropdownDivider;
-    'bs-dropdown/menu/divider': typeof BsDropdownDivider;
+    'BsDropdown::Menu::Divider': typeof BsDropdownMenuDivider;
+    'bs-dropdown/menu/divider': typeof BsDropdownMenuDivider;
   }
 }
