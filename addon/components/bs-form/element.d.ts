@@ -6,7 +6,7 @@ interface BsFormElementSignature<T> {
     controlType?: 'text' | 'checkbox' | 'radio' | 'switch' | 'textarea' | string;
     customError?: string;
     customWarning?: string;
-    doNotShowValidationForEventTargets?: string[];
+    doNotShowValidationForEventTargets?: string[] | null;
     formLayout?: 'vertical' | 'horizontal' | 'inline';
     help?: string;
     horizontalLabelGridClass?: string;
