@@ -25,16 +25,12 @@ interface BsNavbarSignature {
         content: typeof BsNavbarContent;
         toggle: typeof BsNavbarToggle;
         nav: typeof BsNav;
-        actions: BsNavbarActions;
+        collapse: (e?: Event) => void;
+        expand: (e?: Event) => void;
+        toggleNavbar: (e?: Event) => void;
       }
     ];
   };
-}
-
-export interface BsNavbarActions {
-  collapse: (e?: Event) => void;
-  expand: (e?: Event) => void;
-  toggleNavbar: (e?: Event) => void;
 }
 
 export declare class BsNavbar extends Component<BsNavbarSignature> {}

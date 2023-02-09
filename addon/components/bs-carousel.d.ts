@@ -26,19 +26,9 @@ interface BsCarouselSignature {
     default: [
       {
         slide: typeof BsCarouselSlide;
-        actions: BsCarouselActions;
       }
     ];
   };
-}
-
-export interface BsCarouselActions {
-  toSlide: (toIndex: number) => void;
-  toNextSlide: () => void;
-  toPrevSlide: () => void;
-  handleMouseEnter: () => void;
-  handleMouseLeave: () => void;
-  handleKeyDown: () => void;
 }
 
 export declare class BsCarousel extends Component<BsCarouselSignature> {}

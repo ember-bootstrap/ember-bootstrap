@@ -1,16 +1,10 @@
-import { BsModalActions } from '../bs-modal';
-
 import Component from '@glimmer/component';
 
 interface BsModalDialogSignature {
   Element: HTMLDivElement;
   Args: {};
   Blocks: {
-    default: [
-      {
-        actions: BsModalActions;
-      }
-    ];
+    default: [];
   };
 }
 

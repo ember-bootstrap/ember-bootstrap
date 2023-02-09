@@ -1,6 +1,6 @@
 import templateOnlyComponent from '@ember/component/template-only';
 
-interface BsFormElementHelpTextSignature {
+export interface BsFormElementHelpTextSignature {
   Element: HTMLDivElement;
   Args: {
     id?: string;

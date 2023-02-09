@@ -39,16 +39,13 @@ interface BsDropdownSignature {
           | 'value'
         >;
         menu: typeof BsDropdownMenu;
-        actions: BsDropdownActions;
+        toggleDropdown: (e?: Event) => void;
+        openDropdown: (e?: Event) => void;
+        closeDropdown: (e?: Event) => void;
+        isOpen: boolean;
       }
     ];
   };
-}
-
-export interface BsDropdownActions {
-  toggleDropdown: (e?: Event) => void;
-  openDropdown: (e?: Event) => void;
-  closeDropdown: (e?: Event) => void;
 }
 
 export declare class BsDropdown extends Component<BsDropdownSignature> {}

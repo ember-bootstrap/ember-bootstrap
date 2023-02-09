@@ -5,7 +5,7 @@ interface BsButtonGroupSignature<T> {
   Element: HTMLDivElement;
   Args: {
     justified?: boolean;
-    size?: 'lg' | 'sm' | 'xs';
+    size?: 'lg' | 'sm' | 'xs' | null;
     type?: null | 'radio' | 'checkbox';
     value?: Array<T>;
     vertical?: boolean;
@@ -15,14 +15,9 @@ interface BsButtonGroupSignature<T> {
     default: [
       {
         button: typeof BsButtonGroupButton;
-        actions: BsButtonGroupActions<T>;
       }
     ];
   };
-}
-
-export interface BsButtonGroupActions<T> {
-  buttonPressed: (pressedValue: T) => void;
 }
 
 export declare class BsButtonGroup<T> extends Component<BsButtonGroupSignature<T>> {}

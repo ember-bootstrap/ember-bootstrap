@@ -20,7 +20,7 @@ interface BsFormElementSignature<T> {
     required?: boolean;
     showMultipleErrors?: boolean;
     showValidationOn?: ('focusout' | 'change' | 'input') | Array<'focusout' | 'change' | 'input'>;
-    size?: 'lg' | 'sm' | 'xs';
+    size?: 'lg' | 'sm' | 'xs' | null;
     value?: unknown;
     onChange?: (value: unknown, model?: T, property?: string) => void;
   };

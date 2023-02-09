@@ -1,6 +1,6 @@
 import Component from '@glimmer/component';
 
-interface BsFormElementControlSignature {
+export interface BsFormElementControlSignature {
   Element: HTMLDivElement;
   Args: {
     onChange?: (value: unknown) => void;

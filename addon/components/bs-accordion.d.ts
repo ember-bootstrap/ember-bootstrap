@@ -2,10 +2,6 @@ import BsAccordionItem from './bs-accordion/item';
 
 import Component from '@glimmer/component';
 
-export interface BsAccordionActions<T> {
-  doChange: (newValue: T) => void;
-}
-
 interface BsAccordionSignature<T> {
   Element: HTMLDivElement;
   Args: {
@@ -16,7 +12,7 @@ interface BsAccordionSignature<T> {
     default: [
       {
         item: typeof BsAccordionItem;
-        actions: BsAccordionActions<T>;
+        change: (newValue: T) => void;
       }
     ];
   };

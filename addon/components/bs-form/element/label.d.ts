@@ -1,13 +1,13 @@
 import Component from '@glimmer/component';
 
-interface BsFormElementLabelSignature {
+export interface BsFormElementLabelSignature {
   Element: HTMLDivElement;
   Args: {
     label?: string;
     invisibleLabel?: boolean;
     labelClass?: string;
     formElementId?: string;
-    size?: 'sm' | 'lg' | string;
+    size?: 'sm' | 'lg' | null;
     formLayout?: 'horizontal' | 'vertical' | 'inline';
     controlType?: 'text' | 'checkbox' | 'switch' | 'textarea';
   };

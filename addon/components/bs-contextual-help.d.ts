@@ -18,16 +18,8 @@ export interface BsContextualHelpSignature {
     triggerEvents?: string | Array<'click' | 'hover' | 'focus'>;
   };
   Blocks: {
-    default: [
-      {
-        actions: BsContextualHelpActions;
-      }
-    ];
+    default: [];
   };
-}
-
-export interface BsContextualHelpActions {
-  close: (e?: Event) => void;
 }
 
 export declare class BsContextualHelp<T extends BsContextualHelpSignature> extends Component<T> {}

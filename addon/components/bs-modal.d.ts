@@ -11,13 +11,13 @@ export interface BsModalSignature {
     backdropClose?: boolean;
     backdropTransitionDuration?: number;
     fade?: boolean;
-    fullscreen?: boolean | 'sm' | 'md' | 'lg' | 'xl' | 'xxl';
+    fullscreen?: boolean | 'sm' | 'md' | 'lg' | 'xl' | 'xxl' | null;
     keyboard?: boolean;
     open?: boolean;
     position?: 'top' | 'center';
     renderInPlace?: boolean;
     scrollable?: boolean;
-    size?: 'lg' | 'sm';
+    size?: 'lg' | 'sm' | null;
     transitionDuration?: number;
     onHidden?: (e: Event) => void;
     onHide?: (e: Event) => void;
@@ -31,15 +31,11 @@ export interface BsModalSignature {
         header: typeof BsModalHeader;
         body: typeof BsModalBody;
         footer: typeof BsModalFooter;
-        actions: BsModalActions;
+        close: (e?: Event) => void;
+        submit: (e?: Event) => void;
       }
     ];
   };
-}
-
-export interface BsModalActions {
-  close: (e?: Event) => void;
-  submit: (e?: Event) => void;
 }
 
 export declare class BsModal extends Component<BsModalSignature> {}

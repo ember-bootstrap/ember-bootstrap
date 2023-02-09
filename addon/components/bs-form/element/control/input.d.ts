@@ -6,6 +6,7 @@ interface BsFormElementControlInputSignature {
     id?: string;
     disabled?: boolean;
     readonly?: boolean;
+    size?: 'lg' | 'sm' | 'xs' | null;
     ariaDescribedBy?: string;
     value?: unknown;
   };

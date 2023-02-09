@@ -19,7 +19,7 @@ interface BsButtonSignature {
     preventConcurrency?: boolean;
     rejectedText?: string;
     reset?: boolean;
-    size?: string;
+    size?: 'lg' | 'sm' | null;
     type?: string;
     value?: unknown;
     onClick?: (e?: Event, value?: unknown) => Promise<void> | void;
@@ -31,15 +31,9 @@ interface BsButtonSignature {
         isPending: boolean;
         isRejected: boolean;
         isSettled: boolean;
-        actions: BsButtonActions;
       }
     ];
   };
-}
-
-export interface BsButtonActions {
-  resetState: () => void;
-  handleClick: (e: Event) => void;
 }
 
 export declare class BsButton extends Component<BsButtonSignature> {}

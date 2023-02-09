@@ -1,11 +1,11 @@
 import templateOnlyComponent from '@ember/component/template-only';
 
-interface BsFormElementErrorsSignature {
+export interface BsFormElementErrorsSignature {
   Element: HTMLDivElement;
   Args: {
     show?: boolean;
     showMultipleErrors?: boolean;
-    messages?: string | Array<string> | Array<unknown>;
+    messages?: Array<string | number | boolean>;
     onChange?: (value: unknown) => void;
   };
   Blocks: {

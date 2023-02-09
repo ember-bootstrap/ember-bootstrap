@@ -1,13 +1,16 @@
 import templateOnlyComponent from '@ember/component/template-only';
 import Component from '@glimmer/component';
+import { BsFormElementLabelSignature } from '../label';
+import { BsFormElementHelpTextSignature } from '../help-text';
+import { BsFormElementErrorsSignature } from '../errors';
 
 interface BsFormElementLayoutVerticalSignature {
   Element: HTMLElement | HTMLLabelElement;
   Args: {
     hasLabel?: boolean;
-    labelComponent?: typeof Component<unknown>;
-    errorsComponent?: typeof Component<unknown>;
-    helpTextComponent?: typeof Component<unknown>;
+    labelComponent?: typeof Component<BsFormElementLabelSignature>;
+    errorsComponent?: typeof Component<BsFormElementErrorsSignature>;
+    helpTextComponent?: typeof Component<BsFormElementHelpTextSignature>;
   };
   Blocks: {
     default: [];

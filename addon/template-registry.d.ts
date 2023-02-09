@@ -64,6 +64,15 @@ import type BsProgressBar from './components/bs-progress/bar';
 import type BsTabPane from './components/bs-tab/pane';
 import type BsTooltipElement from './components/bs-tooltip/element';
 
+import type BsContainsHelper from './helpers/bs-contains';
+import type BsDefaultHelper from './helpers/bs-default';
+import type BsEqHelper from './helpers/bs-eq';
+import type BsFormHorizInputClassHelper from './helpers/bs-form-horiz-input-class';
+import type BsFormHorizOffsetClassHelper from './helpers/bs-form-horiz-offset-class';
+import type BsNoopHelper from './helpers/bs-noop';
+import type BsSizeClassHelper from './helpers/bs-size-class';
+import type BsTypeClassHelper from './helpers/bs-type-class';
+
 export default interface EmberBootstrapRegistry {
   BsAccordion: typeof BsAccordion;
   'bs-accordion': typeof BsAccordion;
@@ -217,4 +226,13 @@ export default interface EmberBootstrapRegistry {
   'bs-tooltip': typeof BsTooltip;
   'BsTooltip::Element': typeof BsTooltipElement;
   'bs-tooltip/element': typeof BsTooltipElement;
+
+  'bs-contains': typeof BsContainsHelper;
+  'bs-default': typeof BsDefaultHelper;
+  'bs-eq': typeof BsEqHelper;
+  'bs-form-horiz-offset-class': typeof BsFormHorizOffsetClassHelper;
+  'bs-form-horiz-input-class': typeof BsFormHorizInputClassHelper;
+  'bs-noop': typeof BsNoopHelper;
+  'bs-size-class': typeof BsSizeClassHelper;
+  'bs-type-class': typeof BsTypeClassHelper;
 }
