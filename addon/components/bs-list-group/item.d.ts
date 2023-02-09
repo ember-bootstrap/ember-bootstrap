@@ -1,11 +1,9 @@
-import { BsButtonType } from '../bs-button';
-
 import Component from '@glimmer/component';
 
 interface BsListGroupItemSignature {
   Element: HTMLElement;
   Args: {
-    type?: BsButtonType;
+    type?: string;
     actionable?: boolean;
     active?: boolean;
     disabled?: boolean;

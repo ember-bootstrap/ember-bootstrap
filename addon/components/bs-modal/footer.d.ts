@@ -1,11 +1,10 @@
 import Component from '@glimmer/component';
-import { BsButtonType } from '../bs-button';
 
 interface BsModalFooterSignature {
   Element: HTMLDivElement;
   Args: {
     closeTitle?: string;
-    submitButtonType?: BsButtonType;
+    submitButtonType?: string;
     submitDisabled?: boolean;
     submitTitle?: string;
     onClose?: (e?: Event) => void;

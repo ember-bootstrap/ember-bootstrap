@@ -1,5 +1,3 @@
-import { BsButtonType } from './bs-button';
-
 import Component from '@glimmer/component';
 
 interface BsAlertSignature {
@@ -8,7 +6,7 @@ interface BsAlertSignature {
     dismissible?: boolean;
     fade?: boolean;
     fadeDuration?: number;
-    type?: BsButtonType;
+    type?: string;
     visible?: boolean;
     onDismiss?: (e?: Event) => void;
     onDismissed?: (e?: Event) => void;

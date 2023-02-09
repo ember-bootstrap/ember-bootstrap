@@ -1,7 +1,5 @@
 import Component from '@glimmer/component';
 
-export type BsButtonType = 'primary' | 'secondary' | 'success' | 'danger' | 'warning' | 'info' | 'light' | 'dark';
-
 interface BsButtonSignature {
   Element: HTMLButtonElement;
   Args: {

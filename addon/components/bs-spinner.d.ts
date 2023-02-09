@@ -1,5 +1,3 @@
-import { BsButtonType } from './bs-button';
-
 import Component from '@glimmer/component';
 
 interface BsSpinnerSignature {
@@ -7,7 +5,7 @@ interface BsSpinnerSignature {
   Args: {
     size?: 'sm' | string;
     spinnerType?: 'border' | 'grow';
-    type?: BsButtonType;
+    type?: string;
   };
   Blocks: {
     default: [];

@@ -22,6 +22,11 @@ interface BsFormSignature<T> {
     default: [
       {
         element: typeof BsFormElement;
+        isSubmitting: boolean;
+        isSubmitted: boolean;
+        isRejected: boolean;
+        resetSubmissionState: () => void;
+        submit: () => void;
         submitButton: typeof BsButton;
       }
     ];

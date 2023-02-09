@@ -1,5 +1,3 @@
-import { BsButtonType } from '../bs-button';
-
 import Component from '@glimmer/component';
 import BsAccordionItemBody from './item/body';
 import BsAccordionItemTitle from './item/title';
@@ -8,7 +6,7 @@ interface BsAccordionItemSignature<T> {
   Element: HTMLDivElement;
   Args: {
     title?: string;
-    type?: 'default' | 'light' | 'dark' | BsButtonType | string;
+    type?: string;
     value?: T;
     onClick?: (e?: Event, value?: T) => void;
   };

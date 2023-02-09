@@ -1,5 +1,3 @@
-import { BsButtonType } from '../bs-button';
-
 import Component from '@glimmer/component';
 
 interface BsProgressBarSignature {
@@ -11,7 +9,7 @@ interface BsProgressBarSignature {
     roundDigits?: number;
     showLabel?: boolean;
     striped?: boolean;
-    type?: BsButtonType;
+    type?: string;
     value?: number;
   };
   Blocks: {

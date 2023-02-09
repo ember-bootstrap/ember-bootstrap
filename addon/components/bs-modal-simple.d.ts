@@ -1,4 +1,3 @@
-import { BsButtonType } from './bs-button';
 import { BsModalSignature } from './bs-modal';
 
 import Component from '@glimmer/component';
@@ -8,7 +7,7 @@ export interface BsModalSimpleSignature {
   Args: {
     closeButton?: boolean;
     closeTitle?: string;
-    submitButtonType?: BsButtonType;
+    submitButtonType?: string;
     submitTitle?: string;
     title?: string;
   };
