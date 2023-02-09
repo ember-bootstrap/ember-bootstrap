@@ -1,0 +1,25 @@
+import Component from '@glimmer/component';
+
+interface BsListGroupItemSignature {
+  Element: HTMLElement;
+  Args: {
+    type?: string;
+    actionable?: boolean;
+    active?: boolean;
+    disabled?: boolean;
+  };
+  Blocks: {
+    default: [];
+  };
+}
+
+export declare class BsListGroupItem extends Component<BsListGroupItemSignature> {}
+
+export default BsListGroupItem;
+
+declare module '@glint/environment-ember-loose/registry' {
+  export default interface Registry {
+    'BsListGroup::Item': typeof BsListGroupItem;
+    'bs-list-group/item': typeof BsListGroupItem;
+  }
+}

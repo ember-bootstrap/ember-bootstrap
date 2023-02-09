@@ -2,7 +2,7 @@
 
 module.exports = {
   root: true,
-  parser: 'babel-eslint',
+  parser: '@typescript-eslint/parser',
   parserOptions: {
     ecmaVersion: 2018,
     sourceType: 'module',
@@ -12,8 +12,14 @@ module.exports = {
   },
   // Disabling hbs plugin until https://github.com/ember-template-lint/eslint-plugin-hbs/issues/42 is resolved
   // plugins: ['ember', 'hbs'],
-  plugins: ['ember'],
-  extends: ['eslint:recommended', 'plugin:ember/recommended', 'plugin:prettier/recommended'],
+  plugins: ['ember', '@typescript-eslint', 'prettier'],
+  extends: [
+    'eslint:recommended',
+    'plugin:ember/recommended',
+    'plugin:prettier/recommended',
+    'plugin:@typescript-eslint/eslint-recommended',
+    'plugin:@typescript-eslint/recommended',
+  ],
   env: {
     browser: true,
   },
@@ -34,6 +40,8 @@ module.exports = {
     'ember/no-classic-components': 'warn',
     'ember/classic-decorator-no-classic-methods': 'warn',
     'ember/classic-decorator-hooks': 'warn',
+    'ember/no-empty-glimmer-component-classes': 'warn',
+    'prettier/prettier': ['error', { endOfLine: 'auto' }],
   },
   overrides: [
     // node files
