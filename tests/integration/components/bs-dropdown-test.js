@@ -1,7 +1,7 @@
 import { module } from 'qunit';
 import { setupRenderingTest } from 'ember-qunit';
 import { click, focus, render, triggerKeyEvent } from '@ember/test-helpers';
-import { dropdownVisibilityElementSelector, isHidden, isVisible, openClass, test } from '../../helpers/bootstrap';
+import { dropdownVisibilityElementSelector, isHidden, isVisible, openClass, test, versionDependent } from '../../helpers/bootstrap';
 import hbs from 'htmlbars-inline-precompile';
 import setupNoDeprecations from '../../helpers/setup-no-deprecations';
 import a11yAudit from 'ember-a11y-testing/test-support/audit';
@@ -31,13 +31,15 @@ module('Integration | Component | bs-dropdown', function (hooks) {
   test('dropdown container supports dropright style', async function (assert) {
     await render(hbs`<BsDropdown @direction="right">Test</BsDropdown>`);
 
-    assert.dom('.dropright').exists('has dropright class');
+    let droprightClass = versionDependent('.dropright', '.dropend');
+    assert.dom(droprightClass).exists('has dropright class');
   });
 
   test('dropdown container supports dropleft style', async function (assert) {
     await render(hbs`<BsDropdown @direction="left">Test</BsDropdown>`);
 
-    assert.dom('.dropleft').exists('has dropleft class');
+    let dropleftClass = versionDependent('.dropleft', '.dropstart');
+    assert.dom(dropleftClass).exists('has dropleft class');
   });
 
   test('dropdown container with dropdown button has btn-group class', async function (assert) {
