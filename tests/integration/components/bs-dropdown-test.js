@@ -1,7 +1,14 @@
 import { module } from 'qunit';
 import { setupRenderingTest } from 'ember-qunit';
 import { click, focus, render, triggerKeyEvent } from '@ember/test-helpers';
-import { dropdownVisibilityElementSelector, isHidden, isVisible, openClass, test, versionDependent } from '../../helpers/bootstrap';
+import {
+  dropdownVisibilityElementSelector,
+  isHidden,
+  isVisible,
+  openClass,
+  test,
+  versionDependent,
+} from '../../helpers/bootstrap';
 import hbs from 'htmlbars-inline-precompile';
 import setupNoDeprecations from '../../helpers/setup-no-deprecations';
 import a11yAudit from 'ember-a11y-testing/test-support/audit';
