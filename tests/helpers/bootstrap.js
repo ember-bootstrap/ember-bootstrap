@@ -1,6 +1,5 @@
 import config from 'dummy/config/environment';
 import { skip, test } from 'qunit';
-import { Promise } from 'rsvp';
 
 const currentBootstrapVersion = parseInt(config.bootstrapVersion);
 

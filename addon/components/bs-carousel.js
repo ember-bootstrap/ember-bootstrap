@@ -7,7 +7,6 @@ import Component from '@ember/component';
 import ComponentParent from 'ember-bootstrap/mixins/component-parent';
 import { schedule, scheduleOnce } from '@ember/runloop';
 import { task, timeout } from 'ember-concurrency';
-import RSVP from 'rsvp';
 import defaultValue from 'ember-bootstrap/utils/default-decorator';
 import deprecateSubclassing from 'ember-bootstrap/utils/deprecate-subclassing';
 
@@ -481,7 +480,7 @@ export default class Carousel extends Component.extend(ComponentParent) {
     this.set('presentationState', 'didTransition');
     // Must change current index after execution of 'presentationStateObserver' method
     // from child components.
-    yield new RSVP.Promise((resolve) => {
+    yield new Promise((resolve) => {
       schedule('afterRender', this, function () {
         this.set('currentIndex', this.followingIndex);
         resolve();

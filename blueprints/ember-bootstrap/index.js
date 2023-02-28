@@ -1,10 +1,9 @@
 /* eslint-env node */
 'use strict';
 
-const rsvp = require('rsvp');
 const fs = require('fs-extra');
 const path = require('path');
-const writeFile = rsvp.denodeify(fs.writeFile);
+const fsPromises = require('fs/promises');
 const chalk = require('chalk');
 const BuildConfigEditor = require('ember-cli-build-config-editor');
 const SilentError = require('silent-error');
@@ -81,7 +80,7 @@ module.exports = {
     }
     promises.push(this.addPackageToProject('bootstrap', bootstrapVersion === 5 ? bs5Version : bs4Version));
 
-    return rsvp.all(promises);
+    return Promise.all(promises);
   },
 
   adjustPreprocessorDependencies() {
@@ -97,7 +96,7 @@ module.exports = {
       promises.push(this.addAddonToProject('ember-cli-sass'));
     }
 
-    return rsvp.all(promises);
+    return Promise.all(promises);
   },
 
   addPreprocessorStyleImport() {
@@ -121,7 +120,7 @@ module.exports = {
       return this.insertIntoFile(file, importStatement, {});
     } else {
       this.ui.writeLine(chalk.green(`Created ${file}`));
-      return writeFile(file, importStatement);
+      return fsPromises.writeFile(file, importStatement);
     }
   },
 
