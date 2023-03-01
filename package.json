@@ -52,8 +52,6 @@
     "@ember/render-modifiers": "^2.0.0",
     "@embroider/macros": "^1.0.0",
     "@embroider/util": "^1.0.0",
-    "@glimmer/component": "^1.0.4",
-    "@glimmer/tracking": "^1.0.4",
     "broccoli-debug": "^0.6.3",
     "broccoli-funnel": "^3.0.8",
     "broccoli-merge-trees": "^4.2.0",
@@ -85,6 +83,8 @@
     "@ember/string": "3.0.1",
     "@ember/test-helpers": "2.9.3",
     "@embroider/test-setup": "1.8.3",
+    "@glimmer/component": "^1.0.4",
+    "@glimmer/tracking": "^1.0.4",
     "babel-eslint": "10.1.0",
     "bootstrap": "5.2.3",
     "broccoli-asset-rev": "3.0.0",
@@ -146,6 +146,8 @@
     "webpack": "5.75.0"
   },
   "peerDependencies": {
+    "@glimmer/component": "^1.0.4",
+    "@glimmer/tracking": "^1.0.4",
     "ember-source": ">=3.28"
   },
   "engines": {
