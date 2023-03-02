@@ -53,7 +53,7 @@
     "ember-page-title": "7.0.0",
     "ember-power-select": "5.0.4",
     "ember-prism": "0.13.0",
-    "ember-qunit": "5.1.5",
+    "ember-qunit": "6.2.0",
     "ember-resolver": "8.1.0",
     "ember-source": "3.28.11",
     "ember-template-lint": "3.16.0",
