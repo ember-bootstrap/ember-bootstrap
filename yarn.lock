@@ -2520,10 +2520,10 @@ aws-sign2@~0.5.0:
   resolved "https://registry.yarnpkg.com/aws-sign2/-/aws-sign2-0.5.0.tgz#c57103f7a17fc037f02d7c2e64b602ea223f7d63"
   integrity sha1-xXED96F/wDfwLXwuZLYC6iI/fWM=
 
-axe-core@^4.5.2:
-  version "4.6.2"
-  resolved "https://registry.yarnpkg.com/axe-core/-/axe-core-4.6.2.tgz#6e566ab2a3d29e415f5115bc0fd2597a5eb3e5e3"
-  integrity sha512-b1WlTV8+XKLj9gZy2DZXgQiyDp9xkkoe2a6U6UbYccScq2wgH/YwCeI2/Jq2mgo0HzQxqJOjWZBLeA/mqsk5Mg==
+axe-core@^4.6.3:
+  version "4.6.3"
+  resolved "https://registry.yarnpkg.com/axe-core/-/axe-core-4.6.3.tgz#fc0db6fdb65cc7a80ccf85286d91d64ababa3ece"
+  integrity sha512-/BQzOX780JhsxDnPpH4ZiyrJAzcd8AfzFPkv+89veFSr1rcMjuq2JDCwypKaPeB6ljHp9KjXhPpjgCvQlWYuqg==
 
 babel-eslint@10.1.0:
   version "10.1.0"
@@ -4686,14 +4686,14 @@ electron-to-chromium@^1.4.84:
   resolved "https://registry.yarnpkg.com/electron-to-chromium/-/electron-to-chromium-1.4.96.tgz#a97438a01d5db1460343fea4a344960b09330990"
   integrity sha512-DPNjvNGPabv6FcyjzLAN4C0psN/GgD9rSGvMTuv81SeXG/EX3mCz0wiw9N1tUEnfQXYCJi3H8M0oFPRziZh7rw==
 
-ember-a11y-testing@5.1.0:
-  version "5.1.0"
-  resolved "https://registry.yarnpkg.com/ember-a11y-testing/-/ember-a11y-testing-5.1.0.tgz#15bf81179cd38852421fc41ffdc587a61d9cedf0"
-  integrity sha512-XAjFn5DwhqWUdPLqVsE4Mlq8zLlRrxJHxoIBHFYsbz5k8fCQL6qLuI+eEiMq2URkfk6LVSvarTWov8TnWplrOw==
+ember-a11y-testing@5.2.0:
+  version "5.2.0"
+  resolved "https://registry.yarnpkg.com/ember-a11y-testing/-/ember-a11y-testing-5.2.0.tgz#02c7ca08f656ed5327ae489de9ed20e478d9a847"
+  integrity sha512-dWU3+ADTL7gnm+zxFL238OZJpGvLGRGEy07Zxgd64mNIdfNYYPeXOVZ6wjKUIuDXlKzvEnrwHV9D/pcj2rq9UA==
   dependencies:
     "@ember/test-waiters" "^2.4.3 || ^3.0.0"
     "@scalvert/ember-setup-middleware-reporter" "^0.1.1"
-    axe-core "^4.5.2"
+    axe-core "^4.6.3"
     body-parser "^1.19.1"
     broccoli-persistent-filter "^3.1.2"
     ember-auto-import "^2.2.4"
