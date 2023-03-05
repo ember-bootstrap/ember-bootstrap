@@ -62,6 +62,8 @@ jobs:
           - false
         scenario:
           - ember-lts-3.28
+          - ember-lts-4.4
+          - ember-lts-4.8
           - ember-release
           - ember-beta
           - ember-canary
