@@ -4610,7 +4610,7 @@ ember-router-generator@^2.0.0:
     "@babel/traverse" "^7.4.5"
     recast "^0.18.1"
 
-ember-sinon-qunit@^7.0.0:
+ember-sinon-qunit@7.0.0:
   version "7.0.0"
   resolved "https://registry.yarnpkg.com/ember-sinon-qunit/-/ember-sinon-qunit-7.0.0.tgz#39ff5ff86e734897761a4f80f15e57014268b148"
   integrity sha512-w4PnPxpp7WzddAswtACUlHdKxQKBvRDC8+Vzw91P3It4QaKthceIsv7QiNQCkC3BqtTrCV8QNsuPik1zOXa+fw==
