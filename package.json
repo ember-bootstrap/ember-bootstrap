@@ -35,12 +35,8 @@
     "start": "ember serve",
     "test": "npm-run-all lint test:*",
     "test:ember": "ember test",
-    "test:ember-compatibility": "ember try:each"
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged"
-    }
+    "test:ember-compatibility": "ember try:each",
+    "prepare": "husky install"
   },
   "lint-staged": {
     "*.js": "eslint --cache --fix"
