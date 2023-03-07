@@ -112,7 +112,7 @@
     "ember-qunit": "6.2.0",
     "ember-resolver": "8.1.0",
     "ember-sinon": "5.0.0",
-    "ember-sinon-qunit": "6.0.0",
+    "ember-sinon-qunit": "7.0.0",
     "ember-source": "4.1.0",
     "ember-source-channel-url": "3.0.0",
     "ember-template-lint": "3.16.0",
