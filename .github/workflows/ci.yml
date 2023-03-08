@@ -83,6 +83,8 @@ jobs:
             browser: Firefox
             bootstrap: 5
           - scenario: node-tests
+          - scenario: tracked-toolbox-v1
+            bootstrap: 5
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
