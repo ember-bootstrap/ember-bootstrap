@@ -142,6 +142,7 @@
     "qunit-dom": "2.0.0",
     "release-it": "14.14.3",
     "release-it-lerna-changelog": "4.0.1",
+    "sinon": "^15.0.1",
     "striptags": "3.2.0",
     "webpack": "5.75.0"
   },
