@@ -72,7 +72,7 @@
     "ember-style-modifier": "^0.8.0 || ^1.0.0 || ^2.0.0 || ^3.0.0",
     "ember-unique-id-helper-polyfill": "1.2.2",
     "findup-sync": "^5.0.0",
-    "fs-extra": "^10.0.0",
+    "fs-extra": "^11.0.0",
     "resolve": "^1.18.1",
     "rsvp": "^4.0.1",
     "silent-error": "^1.0.1",
