@@ -140,7 +140,7 @@
     "prettier": "2.8.4",
     "qunit": "2.19.4",
     "qunit-dom": "2.0.0",
-    "release-it": "14.14.3",
+    "release-it": "15.7.0",
     "release-it-lerna-changelog": "4.0.1",
     "striptags": "3.2.0",
     "webpack": "5.75.0"
