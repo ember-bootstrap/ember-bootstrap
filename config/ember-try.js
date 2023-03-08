@@ -92,6 +92,15 @@ module.exports = async function () {
         name: 'node-tests',
         command: 'yarn run nodetest',
       },
+      {
+        name: 'tracked-toolbox-v1',
+        npm: {
+          devDependencies: {
+            bootstrap: bootstrapVersion,
+            'tracked-toolbox': '^1.2.3',
+          },
+        },
+      },
       embroiderSafe({
         env: {
           FASTBOOT_DISABLED: true,
