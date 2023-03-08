@@ -55,7 +55,7 @@ module('Integration | Component | bs-modal/header', function (hooks) {
   test('close button has expected content', async function (assert) {
     await render(hbs`<BsModal::Header @title="Header" />`);
 
-    assert.dom(`.modal-header button.${closeButtonClass()}`).hasText(versionDependent('&times;', ''));
+    assert.dom(`.modal-header button.${closeButtonClass()}`).hasText(versionDependent('×', ''));
   });
 
   test('close button can be removed', async function (assert) {
