@@ -17,6 +17,7 @@
               <DD.menu as |Menu|>
                 {{#each item.children as |subItem|}}
                   <Menu.item>
+                    {{!-- template-lint-disable require-context-role --}}
                     <a
                       href="#{{subItem.id}}"
                       role="tab"
