@@ -52,16 +52,19 @@ module('Integration | Component | bs-modal', function (hooks) {
     this.owner.register(
       'component:test-component',
       class extends Component {
-        layout = hbs`{{yield}}`;
+        layout = hbs`
+          {{! template-lint-disable no-yield-only }}
+          {{yield}}
+        `;
       }
     );
 
     await render(hbs`
       <BsModal @title="Simple Dialog" @body={{false}} @footer={{false}} as |modal|>
-        {{#test-component}}
+        <TestComponent>
           <modal.body>Hello world!</modal.body>
           <modal.footer />
-        {{/test-component}}
+        </TestComponent>
       </BsModal>
 
     `);
