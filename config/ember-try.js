@@ -14,6 +14,8 @@ module.exports = async function () {
           devDependencies: {
             'ember-source': '~3.28.0',
             bootstrap: bootstrapVersion,
+            // ember-resolver >= 9.0.0 does not support Ember 3.28
+            'ember-resolver': '^8.1.0',
           },
         },
       },
