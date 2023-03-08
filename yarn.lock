@@ -1042,7 +1042,7 @@
     ember-cli-babel "^7.26.11"
     ember-modifier-manager-polyfill "^1.2.0"
 
-"@ember/string@^3.0.1":
+"@ember/string@3.0.1":
   version "3.0.1"
   resolved "https://registry.yarnpkg.com/@ember/string/-/string-3.0.1.tgz#42cf032031a4432c2dd69c327ae1876d2c13df9c"
   integrity sha512-ntnmXS+upOWVXE+rVw2l03DjdMnaGdWbYVUxUBuPJqnIGZu2XFRsoXc7E6mOw62s8i1Xh1RgTuFHN41QGIolEQ==
@@ -12823,7 +12823,7 @@ simple-html-tokenizer@^0.5.11:
   resolved "https://registry.yarnpkg.com/simple-html-tokenizer/-/simple-html-tokenizer-0.5.11.tgz#4c5186083c164ba22a7b477b7687ac056ad6b1d9"
   integrity sha512-C2WEK/Z3HoSFbYq8tI7ni3eOo/NneSPRoPpcM7WdLjFOArFuyXEjAoCdOC3DgMfRyziZQ1hCNR4mrNdWEvD0og==
 
-sinon@^15.0.1:
+sinon@15.0.1:
   version "15.0.1"
   resolved "https://registry.yarnpkg.com/sinon/-/sinon-15.0.1.tgz#ce062611a0b131892e2c18f03055b8eb6e8dc234"
   integrity sha512-PZXKc08f/wcA/BMRGBze2Wmw50CWPiAH3E21EOi4B49vJ616vW4DQh4fQrqsYox2aNR/N3kCqLuB0PwwOucQrg==
