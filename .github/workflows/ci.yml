@@ -97,9 +97,10 @@ jobs:
         with:
           useLockFile: false
       - name: Test
-        run: yarn ember try:one ${{ matrix.scenario }} --- ember test --launch ${{ matrix.browser }}
+        run: yarn ember try:one ${{ matrix.scenario }}
         env:
           BOOTSTRAPVERSION: ${{ matrix.bootstrap }}
+          BROWSER: ${{ matrix.browser }}
 
   test-docs:
     name: Docs
