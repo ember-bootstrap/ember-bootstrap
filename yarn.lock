@@ -5667,10 +5667,10 @@ ember-router-generator@^2.0.0:
     "@babel/traverse" "^7.4.5"
     recast "^0.18.1"
 
-ember-sinon-qunit@7.1.1:
-  version "7.1.1"
-  resolved "https://registry.yarnpkg.com/ember-sinon-qunit/-/ember-sinon-qunit-7.1.1.tgz#433318f1686c862e76bacb02b36266be5864ed46"
-  integrity sha512-e3jvPDWkL5/fBSgKetsG2t/03txsbweGGZkzQnKgPwxtm1aUV57AOkMM+RrxcdsKDzoV0PGsV79X8q9Ia0xM6Q==
+ember-sinon-qunit@7.1.2:
+  version "7.1.2"
+  resolved "https://registry.yarnpkg.com/ember-sinon-qunit/-/ember-sinon-qunit-7.1.2.tgz#0983fcad27f1c7badea5edbd6ef471731ecb78ff"
+  integrity sha512-96jrZQVhV9mu4oIijH85fAALv4IZfitDd4/brAXqkEl9RHGKy2KGDY+OcNAIfjflixmxnPISLqlcFvAS87Eevw==
   dependencies:
     "@types/sinon" "^10.0.13"
     broccoli-funnel "^3.0.8"
