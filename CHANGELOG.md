@@ -8,6 +8,31 @@
 
 
 
+
+## v6.0.0-2 (2023-03-15)
+
+#### :boom: Breaking Change
+* [#1870](https://github.com/ember-bootstrap/ember-bootstrap/pull/1870) move @glimmer/component and @glimmer/tracking to peer dependencies ([@jelhan](https://github.com/jelhan))
+
+#### Features
+* [#1895](https://github.com/ember-bootstrap/ember-bootstrap/pull/1895) support tracked-toolbox v2 ([@jelhan](https://github.com/jelhan))
+
+#### Bug Fixes
+* [#1867](https://github.com/ember-bootstrap/ember-bootstrap/pull/1867) fix: correct dropdown direction class for BS5 ([@silhusk](https://github.com/silhusk))
+
+#### Documentation
+* [#1874](https://github.com/ember-bootstrap/ember-bootstrap/pull/1874) remove usage of outdated component name at demo page for BsDropdown ([@Sheikh-JamirAlam](https://github.com/Sheikh-JamirAlam))
+
+#### Internal
+* [#1901](https://github.com/ember-bootstrap/ember-bootstrap/pull/1901) should not run ember test for node-tests scenario ([@jelhan](https://github.com/jelhan))
+* [#1878](https://github.com/ember-bootstrap/ember-bootstrap/pull/1878) add basic test coverage for docs app ([@jelhan](https://github.com/jelhan))
+* [#1879](https://github.com/ember-bootstrap/ember-bootstrap/pull/1879) run tests against all supported Ember LTS versions in CI ([@jelhan](https://github.com/jelhan))
+
+#### Committers: 3
+- Jeldrik Hanschke ([@jelhan](https://github.com/jelhan))
+- Sheikh Jamir Alam ([@Sheikh-JamirAlam](https://github.com/Sheikh-JamirAlam))
+- [@silhusk](https://github.com/silhusk)
+
 ## v6.0.0-1 (2023-01-19)
 
 #### Features
