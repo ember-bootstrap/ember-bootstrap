@@ -140,7 +140,7 @@
     "release-it-lerna-changelog": "5.0.0",
     "sinon": "15.0.2",
     "striptags": "3.2.0",
-    "webpack": "5.76.1"
+    "webpack": "5.76.2"
   },
   "peerDependencies": {
     "@glimmer/component": "^1.0.4",
