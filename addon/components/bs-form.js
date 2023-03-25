@@ -19,10 +19,6 @@ import { ref } from 'ember-ref-bucket';
   However, to benefit from features such as automatic form markup, validations and validation markup, use `Components.FormElement`
   as nested components. See below for an example.
 
-  ### Form's model
-
-  Consumer can provide a
-
   ### Submitting the form
 
   The form yields a `submitButton` component, which is a preconfigured `<BsButton>` with `@type="primary"` and `@buttonType="submit"`.
