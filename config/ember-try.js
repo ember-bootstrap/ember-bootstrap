@@ -69,6 +69,7 @@ module.exports = async function () {
         },
         env: {
           // FAIL_ON_DEPRECATION: true,
+          FASTBOOT_DISABLED: true,
         },
       },
       {
