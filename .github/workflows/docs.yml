@@ -9,6 +9,8 @@ on:
   workflow_run:
     workflows:
       - CI
+    types:
+      - completed
 
 jobs:
   build:
