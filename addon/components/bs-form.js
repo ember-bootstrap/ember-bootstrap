@@ -152,6 +152,14 @@ export default class Form extends Component {
    * child `Components.FormElement`s will look at the validation information of their `property` and render their form group accordingly.
    * Moreover, the form's `submit` event handler will validate the model and deny submitting if the model is not validated successfully.
    *
+   * `<BsForm>` yields the form's model as `form` property:
+   *
+   * ```hbs
+   * <BsForm @model={{this.formModel}} as |form|>
+   *   {{! this.formModel === form.model }}
+   * </BsForm>
+   * ```
+   *
    * @property model
    * @type object
    * @public
