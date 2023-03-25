@@ -19,6 +19,10 @@ import { ref } from 'ember-ref-bucket';
   However, to benefit from features such as automatic form markup, validations and validation markup, use `Components.FormElement`
   as nested components. See below for an example.
 
+  ### Form's model
+
+  Consumer can provide a
+
   ### Submitting the form
 
   The form yields a `submitButton` component, which is a preconfigured `<BsButton>` with `@type="primary"` and `@buttonType="submit"`.
@@ -151,6 +155,14 @@ export default class Form extends Component {
    * * when the model supports validation by using the [ember-validations](https://github.com/dockyard/ember-validations) mixin,
    * child `Components.FormElement`s will look at the validation information of their `property` and render their form group accordingly.
    * Moreover, the form's `submit` event handler will validate the model and deny submitting if the model is not validated successfully.
+   *
+   * `<BsForm>` yields the form's model as `form` property:
+   *
+   * ```hbs
+   * <BsForm @model={{this.formModel}} as |form|>
+   *   {{! this.formModel === form.model }}
+   * </BsForm>
+   * ```
    *
    * @property model
    * @type object
