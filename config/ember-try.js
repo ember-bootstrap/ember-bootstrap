@@ -69,6 +69,9 @@ module.exports = async function () {
         },
         env: {
           // FAIL_ON_DEPRECATION: true,
+
+          // TODO: Enable again when FastBoot is ready for Ember 5
+          // https://github.com/ember-fastboot/ember-cli-fastboot/pull/905
           FASTBOOT_DISABLED: true,
         },
       },
