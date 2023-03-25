@@ -4,12 +4,12 @@ import deprecateSubclassing from 'ember-bootstrap/utils/deprecate-subclassing';
 /**
   Component that implements Bootstrap [tooltips](http://getbootstrap.com/javascript/#tooltips).
 
-  By default it will attach its listeners (mouseover and focus) to the parent DOM element to trigger
+  By default, it will attach its listeners (mouseover and focus) to the parent DOM element to trigger
   the tooltip:
 
   ```hbs
   <button class="btn">
-    <BsTooltip @title="This is a toolip" />
+    <BsTooltip @title="This is a tooltip" />
   </button>
   ```
 
@@ -18,7 +18,7 @@ import deprecateSubclassing from 'ember-bootstrap/utils/deprecate-subclassing';
   ```hbs
   <button class="btn">
     <BsTooltip>
-      This is a toolip
+      This is a tooltip
     </BsTooltip>
   </button>
   ```
@@ -26,7 +26,7 @@ import deprecateSubclassing from 'ember-bootstrap/utils/deprecate-subclassing';
   ### Trigger
 
   The trigger element is the DOM element that will cause the tooltip to be shown when one of the trigger events occur on
-  that element. By default the trigger element is the parent DOM element of the component, and the trigger events will be
+  that element. By default, the trigger element is the parent DOM element of the component, and the trigger events will be
   "hover" and "focus".
 
   The `triggerElement` property accepts any CSS selector to attach the tooltip to any other existing DOM element.
@@ -36,7 +36,7 @@ import deprecateSubclassing from 'ember-bootstrap/utils/deprecate-subclassing';
 
   ### Placement options
 
-  By default the tooltip will show up on top of the trigger element. Use the `placement` property to change that
+  By default, the tooltip will show up on top of the trigger element. Use the `placement` property to change that
   ("top", "bottom", "left" and "right"). To make sure the tooltip will not exceed the viewport (see Advanced customization)
   you can set `autoPlacement` to true. A tooltip with `placement="right" will be placed to the right if there is enough
   space, otherwise to the left.
@@ -51,7 +51,7 @@ import deprecateSubclassing from 'ember-bootstrap/utils/deprecate-subclassing';
   * a `close` action is yielded, that allows you to close the tooltip:
 
   ```hbs
-  <BsTooltip as |tt|>This is a toolip <button onclick={{action tt.close}}>Close</button></BsTooltip>
+  <BsTooltip as |tt|>This is a tooltip <button onclick={{action tt.close}}>Close</button></BsTooltip>
   ```
 
   See the individual API docs for each property.

@@ -3,6 +3,7 @@ import { action, computed } from '@ember/object';
 import Component from '@ember/component';
 import defaultValue from 'ember-bootstrap/utils/default-decorator';
 import { assert } from '@ember/debug';
+import { getOwnConfig, macroCondition } from '@embroider/macros';
 import deprecateSubclassing from 'ember-bootstrap/utils/deprecate-subclassing';
 
 const ESCAPE_KEYCODE = 27; // KeyboardEvent.which value for Escape (Esc) key
@@ -197,7 +198,7 @@ export default class Dropdown extends Component {
   isOpen = false;
 
   /**
-   * By default clicking on an open dropdown menu will close it. Set this property to false for the menu to stay open.
+   * By default, clicking on an open dropdown menu will close it. Set this property to false for the menu to stay open.
    *
    * @property closeOnMenuClick
    * @default true
@@ -208,7 +209,7 @@ export default class Dropdown extends Component {
   closeOnMenuClick = true;
 
   /**
-   * By default the dropdown menu will expand downwards. Other options include, 'up', 'left' and 'right'
+   * By default, the dropdown menu will expand downwards. Other options include, 'up', 'left' and 'right'
    *
    * @property direction
    * @type string
@@ -238,10 +239,18 @@ export default class Dropdown extends Component {
    */
   @computed('direction', 'hasButton', 'toggleElement.classList')
   get containerClass() {
+    let dropDirectionClass = `drop${this.direction}`;
+    if (macroCondition(getOwnConfig().isBS5)) {
+      if (this.direction === 'left') {
+        dropDirectionClass = 'dropstart';
+      } else if (this.direction === 'right') {
+        dropDirectionClass = 'dropend';
+      }
+    }
     if (this.hasButton && !this.toggleElement.classList.contains('btn-block')) {
-      return this.direction !== 'down' ? `btn-group drop${this.direction}` : 'btn-group';
+      return this.direction !== 'down' ? `btn-group ${dropDirectionClass}` : 'btn-group';
     } else {
-      return `drop${this.direction}`;
+      return dropDirectionClass;
     }
   }
 

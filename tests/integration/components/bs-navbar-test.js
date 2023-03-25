@@ -150,7 +150,7 @@ module('Integration | Component | bs-navbar', function (hooks) {
 
     this.set('collapsed', true);
     await render(hbs`
-      {{#bs-navbar collapsed=this.collapsed onExpanded=(action "expandedAction") as |navbar|}}
+      <BsNavbar @collapsed={{this.collapsed}} @onExpanded={{action "expandedAction"}} as |navbar|>
         <div class="navbar-header">
           {{navbar.toggle}}
           <a class="navbar-brand" href="#">Brand</a>
@@ -158,7 +158,7 @@ module('Integration | Component | bs-navbar', function (hooks) {
         <navbar.content>
           {{navbar.nav}}
         </navbar.content>
-      {{/bs-navbar}}
+      </BsNavbar>
     `);
     this.set('collapsed', false);
     assert.dom('.navbar-collapse').hasClass('collapsing', 'collapse has collapsing class while transition is running');
@@ -175,7 +175,7 @@ module('Integration | Component | bs-navbar', function (hooks) {
 
     this.set('collapsed', false);
     await render(hbs`
-      {{#bs-navbar collapsed=this.collapsed onCollapsed=(action "collapsedAction") as |navbar|}}
+      <BsNavbar @collapsed={{this.collapsed}} @onCollapsed={{action "collapsedAction"}} as |navbar|>
         <div class="navbar-header">
           {{navbar.toggle}}
           <a class="navbar-brand" href="#">Brand</a>
@@ -183,7 +183,7 @@ module('Integration | Component | bs-navbar', function (hooks) {
         <navbar.content>
           {{navbar.nav}}
         </navbar.content>
-      {{/bs-navbar}}
+      </BsNavbar>
     `);
     this.set('collapsed', true);
 
@@ -203,7 +203,7 @@ module('Integration | Component | bs-navbar', function (hooks) {
     this.actions.expandedAction = expandedAction;
 
     await render(hbs`
-      {{#bs-navbar collapsed=true onExpand=(action "expandAction") onExpanded=(action "expandedAction") as |navbar|}}
+      <BsNavbar @collapsed={{true}} @onExpand={{action "expandAction"}} @onExpanded={{action "expandedAction"}} as |navbar|>
         <div class="navbar-header">
           {{navbar.toggle}}
           <a class="navbar-brand" href="#">Brand</a>
@@ -211,7 +211,7 @@ module('Integration | Component | bs-navbar', function (hooks) {
         <navbar.content>
           {{navbar.nav}}
         </navbar.content>
-      {{/bs-navbar}}
+      </BsNavbar>
     `);
     await click('button');
 
@@ -231,7 +231,7 @@ module('Integration | Component | bs-navbar', function (hooks) {
     this.actions.collapsedAction = collapsedAction;
 
     await render(hbs`
-      {{#bs-navbar collapsed=false onCollapse=(action "collapseAction") onCollapsed=(action "collapsedAction") as |navbar|}}
+      <BsNavbar @collapsed={{false}} @onCollapse={{action "collapseAction"}} @onCollapsed={{action "collapsedAction"}} as |navbar|>
         <div class="navbar-header">
           {{navbar.toggle}}
           <a class="navbar-brand" href="#">Brand</a>
@@ -239,7 +239,7 @@ module('Integration | Component | bs-navbar', function (hooks) {
         <navbar.content>
           {{navbar.nav}}
         </navbar.content>
-      {{/bs-navbar}}
+      </BsNavbar>
     `);
     await click('button');
 

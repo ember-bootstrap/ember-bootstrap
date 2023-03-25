@@ -9,6 +9,9 @@ let expectedDeprecations = new Set();
 const ignoredDeprecations = [
   // @todo remove when https://github.com/alexlafroscia/ember-popper-modifier/issues/452 is fixed
   /ember-modifier/,
+  // @todo investigate what is still triggering the deprecation, might be some internals like
+  // ember-cli-app-version or ember-export-application-global
+  /@ember\/string/,
 ];
 
 export default function setupNoDeprecations({ beforeEach, afterEach }) {

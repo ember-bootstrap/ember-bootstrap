@@ -6,22 +6,34 @@ const { embroiderSafe, embroiderOptimized } = require('@embroider/test-setup');
 
 module.exports = async function () {
   return {
+    command: process.env.BROWSER ? `ember test --launch ${process.env.BROWSER}` : null,
     useYarn: true,
     scenarios: [
-      {
-        name: 'ember-lts-3.24',
-        npm: {
-          devDependencies: {
-            'ember-source': '~3.24.3',
-            bootstrap: bootstrapVersion,
-          },
-        },
-      },
       {
         name: 'ember-lts-3.28',
         npm: {
           devDependencies: {
             'ember-source': '~3.28.0',
+            bootstrap: bootstrapVersion,
+            // ember-resolver >= 9.0.0 does not support Ember 3.28
+            'ember-resolver': '^8.1.0',
+          },
+        },
+      },
+      {
+        name: 'ember-lts-4.4',
+        npm: {
+          devDependencies: {
+            'ember-source': '~4.4.0',
+            bootstrap: bootstrapVersion,
+          },
+        },
+      },
+      {
+        name: 'ember-lts-4.8',
+        npm: {
+          devDependencies: {
+            'ember-source': '~4.8.0',
             bootstrap: bootstrapVersion,
           },
         },
@@ -82,6 +94,15 @@ module.exports = async function () {
       {
         name: 'node-tests',
         command: 'yarn run nodetest',
+      },
+      {
+        name: 'tracked-toolbox-v1',
+        npm: {
+          devDependencies: {
+            bootstrap: bootstrapVersion,
+            'tracked-toolbox': '^1.2.3',
+          },
+        },
       },
       embroiderSafe({
         env: {

@@ -25,6 +25,8 @@ Router.map(function () {
       this.route('other');
     });
     this.route('tooltip');
+    this.route('spinner');
+    this.route('list-group');
   });
   this.route('getting-started', function () {
     this.route('setup');

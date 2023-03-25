@@ -21,7 +21,7 @@ jobs:
       - name: Setup node.js
         uses: actions/setup-node@v3
         with:
-          node-version: 12
+          node-version: 14
       - name: Install dependencies
         uses: bahmutov/npm-install@v1
       - name: Lint
@@ -40,7 +40,7 @@ jobs:
       - name: Setup node.js
         uses: actions/setup-node@v3
         with:
-          node-version: 12
+          node-version: 14
       - name: Install dependencies
         uses: bahmutov/npm-install@v1
         with:
@@ -61,8 +61,9 @@ jobs:
         allow-failure:
           - false
         scenario:
-          - ember-lts-3.24
           - ember-lts-3.28
+          - ember-lts-4.4
+          - ember-lts-4.8
           - ember-release
           - ember-beta
           - ember-canary
@@ -82,21 +83,45 @@ jobs:
             browser: Firefox
             bootstrap: 5
           - scenario: node-tests
+          - scenario: tracked-toolbox-v1
+            bootstrap: 5
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
       - name: Setup node.js
         uses: actions/setup-node@v3
         with:
-          node-version: 12
+          node-version: 14
       - name: Install dependencies
         uses: bahmutov/npm-install@v1
         with:
           useLockFile: false
       - name: Test
-        run: yarn ember try:one ${{ matrix.scenario }} --- ember test --launch ${{ matrix.browser }}
+        run: yarn ember try:one ${{ matrix.scenario }}
         env:
           BOOTSTRAPVERSION: ${{ matrix.bootstrap }}
+          BROWSER: ${{ matrix.browser }}
+
+  test-docs:
+    name: Docs
+    runs-on: ubuntu-latest
+    needs:
+      - test
+    steps:
+      - uses: actions/checkout@v3
+      - name: Install Node
+        uses: actions/setup-node@v3
+        with:
+          node-version: 14
+      - name: Install Dependencies of Ember Bootstrap addon
+        uses: bahmutov/npm-install@v1
+      - name: Install Dependencies of docs app
+        uses: bahmutov/npm-install@v1
+        with:
+          working-directory: docs
+      - name: Run Tests
+        run: yarn test
+        working-directory: docs
 
 #  test-browserstack:
 #    name: Browserstack Tests

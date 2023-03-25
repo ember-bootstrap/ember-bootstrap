@@ -1,0 +1,81 @@
+<h2>
+  Simple example
+</h2>
+<div class="bs-example" data-test-fastboot-container>
+  <!-- BEGIN-SNIPPET spinner-demo -->
+  <BsSpinner />
+  <!-- END-SNIPPET -->
+</div>
+<div class="highlight">
+  <CodeSnippet @name="spinner-demo.hbs" />
+</div>
+
+<div class="bs-example">
+  <!-- BEGIN-SNIPPET spinner-block-demo -->
+  <BsSpinner>Loading...</BsSpinner>
+  <!-- END-SNIPPET -->
+</div>
+<div class="highlight">
+  <CodeSnippet @name="spinner-block-demo.hbs" />
+</div>
+<p>The (optional) component's block will render as visually invisible but accessible text for assistive technology like screen readers.</p>
+
+<h2>
+  Options
+</h2>
+<div class="bs-example">
+  <!-- BEGIN-SNIPPET spinner-options -->
+  <p>
+    <BsSpinner @size="sm"/>
+  </p>
+  <p>
+    <BsSpinner @type="danger"/>
+    <BsSpinner @type="warning"/>
+    <BsSpinner @type="info"/>
+    <BsSpinner @type="success"/>
+    <BsSpinner @type="primary"/>
+    <BsSpinner @type="secondary"/>
+    <BsSpinner @type="light"/>
+    <BsSpinner @type="dark"/>
+  </p>
+  <p>
+    <BsSpinner @size="sm" @spinnerType="grow"/>
+    <BsSpinner @spinnerType="grow"/>
+  </p>
+  <p>
+    <BsSpinner @spinnerType="grow" @type="danger"/>
+    <BsSpinner @spinnerType="grow" @type="warning"/>
+    <BsSpinner @spinnerType="grow" @type="info"/>
+    <BsSpinner @spinnerType="grow" @type="success"/>
+    <BsSpinner @spinnerType="grow" @type="primary"/>
+    <BsSpinner @spinnerType="grow" @type="secondary"/>
+    <BsSpinner @spinnerType="grow" @type="light"/>
+    <BsSpinner @spinnerType="grow" @type="dark"/>
+  </p>
+  <!-- END-SNIPPET -->
+</div>
+
+<div class="highlight">
+  <CodeSnippet @name="spinner-options.hbs" />
+</div>
+
+<h2>
+  Usage with <code>BsButton</code>
+</h2>
+<div class="bs-example">
+  <!-- BEGIN-SNIPPET button-spinner-promise -->
+  <BsButton
+    @onClick={{this.download}}
+    as |button|
+  >
+    Download
+    {{#if button.isPending}}
+      <BsSpinner @size="sm"/>
+    {{/if}}
+  </BsButton>
+
+  <!-- END-SNIPPET -->
+</div>
+<div class="highlight">
+  <CodeSnippet @name="button-spinner-promise.hbs" />
+</div>

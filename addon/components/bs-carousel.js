@@ -25,9 +25,9 @@ import deprecateSubclassing from 'ember-bootstrap/utils/deprecate-subclassing';
   | Pause current cycle on mouse enter. | pause='hover'\|null | pauseOnMouseEnter=false\|true |
   | Show or hide controls  | Tag manipulation. | showControls=false\|true |
   | Show or hide indicators  | Tag manipulation. | showIndicators=false\|true |
-  | Waiting time of slides in a automatic cycle. | interval=n | interval=n |
+  | Waiting time of slides in an automatic cycle. | interval=n | interval=n |
 
-  Default settings are the same as the original so you don't have to worry about changing parameters.
+  Default settings are the same as the original, so you don't have to worry about changing parameters.
 
   ```hbs
   <BsCarousel as |car|>
@@ -52,7 +52,6 @@ import deprecateSubclassing from 'ember-bootstrap/utils/deprecate-subclassing';
   | Presentation | Represents a single transition, or a single interval, or the union of both. |
   | Cycle | Presents all slides until it reaches first or last slide. |
   | Wrap | wrap slides, cycles without stopping at first or last slide. |
-  ```
 
   *Note that only invoking the component in a template as shown above is considered part of its public API. Extending from it (subclassing) is generally not supported, and may break at any time.*
 

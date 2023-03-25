@@ -97,7 +97,7 @@ export function accordionClassFor(type) {
 }
 
 export function accordionTitleSelector() {
-  return versionDependent('h5', 'h2.accordion-header');
+  return versionDependent('.card-header h2', 'h2.accordion-header');
 }
 
 export function accordionItemHeadClass() {
@@ -105,7 +105,7 @@ export function accordionItemHeadClass() {
 }
 
 export function accordionItemClickableSelector() {
-  return versionDependent('h5 button', '.accordion-header button');
+  return versionDependent('.card-header h2 button', '.accordion-header button');
 }
 
 export function dropdownVisibilityElementSelector() {

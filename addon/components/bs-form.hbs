@@ -5,6 +5,7 @@
   ...attributes
   {{on "keypress" this.handleKeyPress}}
   {{on "submit" this.handleSubmit}}
+  {{create-ref "formElement"}}
 >
   {{yield
     (hash

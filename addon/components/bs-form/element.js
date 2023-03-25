@@ -16,7 +16,7 @@ import arg from 'ember-bootstrap/utils/decorators/arg';
 import { dedupeTracked } from 'tracked-toolbox';
 
 /**
-  Sub class of `Components.FormGroup` that adds automatic form layout markup and form validation features.
+  Subclass of `Components.FormGroup` that adds automatic form layout markup and form validation features.
 
   ### Form layout
 
@@ -323,7 +323,7 @@ export default class FormElement extends Component {
    */
 
   /**
-   * Property path (e.g. 'title' or 'related.name') to render the label of an selection option. See `options`.
+   * Property path (e.g. 'title' or 'related.name') to render the label of a selection option. See `options`.
    *
    * @property optionLabelPath
    * @type {String}
@@ -494,7 +494,7 @@ export default class FormElement extends Component {
   showAllValidations = false;
 
   /*
-   * Resets `showOwnValidation` if `@showAllValidatoins` argument is changed to `false`.
+   * Resets `showOwnValidation` if `@showAllValidations` argument is changed to `false`.
    * Must be called whenever `@showAllValidations` argument changes.
    */
   @action
@@ -592,7 +592,7 @@ export default class FormElement extends Component {
    * It expects an array of query selectors. If event target is a children of an event that matches
    * these selectors, an event triggered for it will not trigger validation errors to be shown.
    *
-   * By default events fired on elements inside an input group are skipped.
+   * By default, events fired on elements inside an input group are skipped.
    *
    * If `null` or an empty array is passed validation errors are shown for all events regardless
    * of event target.
@@ -606,7 +606,7 @@ export default class FormElement extends Component {
 
   /**
    * The validation ("error" (BS3)/"danger" (BS4), "warning", or "success") or null if no validation is to be shown. Automatically computed from the
-   * models validation state.
+   * model's validation state.
    *
    * @property validation
    * @readonly

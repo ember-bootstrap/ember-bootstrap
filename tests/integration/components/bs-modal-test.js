@@ -1,7 +1,7 @@
 import Component from '@ember/component';
 import { module } from 'qunit';
 import { setupRenderingTest } from 'ember-qunit';
-import { click, find, render, settled, triggerEvent, waitFor, waitUntil } from '@ember/test-helpers';
+import { click, find, render, settled, triggerEvent, waitFor, waitUntil, triggerKeyEvent } from '@ember/test-helpers';
 import { test, testBS5, visibilityClass } from '../../helpers/bootstrap';
 import hbs from 'htmlbars-inline-precompile';
 import setupNoDeprecations from '../../helpers/setup-no-deprecations';
@@ -52,16 +52,19 @@ module('Integration | Component | bs-modal', function (hooks) {
     this.owner.register(
       'component:test-component',
       class extends Component {
-        layout = hbs`{{yield}}`;
+        layout = hbs`
+          {{! template-lint-disable no-yield-only }}
+          {{yield}}
+        `;
       }
     );
 
     await render(hbs`
       <BsModal @title="Simple Dialog" @body={{false}} @footer={{false}} as |modal|>
-        {{#test-component}}
+        <TestComponent>
           <modal.body>Hello world!</modal.body>
           <modal.footer />
-        {{/test-component}}
+        </TestComponent>
       </BsModal>
 
     `);
@@ -330,5 +333,77 @@ module('Integration | Component | bs-modal', function (hooks) {
       await settled();
       assert.dom('.modal').doesNotExist();
     });
+  });
+
+  test('Modal shows appropriate size respective to @size argument', async function (assert) {
+    this.set('size', null);
+    await render(hbs`
+      <BsModal @size={{this.size}} />
+    `);
+    assert.dom('.modal').exists({ count: 1 }, 'Modal exists.');
+    assert.dom('.modal-dialog').hasNoClass('modal-lg');
+    assert.dom('.modal-dialog').hasNoClass('modal-sm');
+    this.set('size', 'sm');
+    assert.dom('.modal-dialog').hasClass('modal-sm');
+    this.set('size', 'lg');
+    assert.dom('.modal-dialog').hasClass('modal-lg');
+  });
+
+  test('Modal can be centered vertically', async function (assert) {
+    this.set('position', 'top');
+    await render(hbs`
+      <BsModal @position={{this.position}} />
+    `);
+    assert.dom('.modal').exists({ count: 1 }, 'Modal exists.');
+    assert.dom('.modal-dialog').hasNoClass('modal-dialog-centered');
+    this.set('position', 'center');
+    assert.dom('.modal-dialog').hasClass('modal-dialog-centered');
+  });
+
+  test('shows scrollable modal with respective to @scrollable argument', async function (assert) {
+    this.set('scrollable', false);
+    await render(hbs`
+      <BsModal @scrollable={{this.scrollable}} />
+    `);
+    assert.dom('.modal').exists({ count: 1 }, 'Modal exists.');
+    assert.dom('.modal-dialog').hasNoClass('modal-dialog-scrollable');
+    this.set('scrollable', true);
+    assert.dom('.modal-dialog').hasClass('modal-dialog-scrollable');
+  });
+
+  test('Modal closes when escape key is pressed if @keyboard=true', async function (assert) {
+    await render(hbs`
+      <BsModal @keyboard={{true}} />
+    `);
+    assert.dom('.modal').exists({ count: 1 }, 'Modal exists.');
+    await triggerKeyEvent('.modal', 'keydown', 'Escape');
+    assert.dom('.modal').doesNotExist('Modal does not exist.');
+  });
+
+  test('Modal does not close when escape key is pressed if @keyboard=false', async function (assert) {
+    await render(hbs`
+      <BsModal @keyboard={{false}} />
+    `);
+    assert.dom('.modal').exists({ count: 1 }, 'Modal exists.');
+    await triggerKeyEvent('.modal', 'keydown', 'Escape');
+    assert.dom('.modal').exists({ count: 1 }, 'Modal exists.');
+  });
+
+  test('Modal closes when click is done outside the modal if @backdropClose=true', async function (assert) {
+    await render(hbs`
+      <BsModal @backdropClose={{true}} />
+    `);
+    assert.dom('.modal').exists({ count: 1 }, 'Modal exists.');
+    await click('*');
+    assert.dom('.modal').doesNotExist('Modal does not exist.');
+  });
+
+  test('Modal does not close when click is done outside the modal if @backdropClose=false', async function (assert) {
+    await render(hbs`
+      <BsModal @backdropClose={{false}} />
+    `);
+    assert.dom('.modal').exists({ count: 1 }, 'Modal exists.');
+    await click('*');
+    assert.dom('.modal').exists({ count: 1 }, 'Modal exists.');
   });
 });

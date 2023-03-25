@@ -57,6 +57,14 @@ const componentData = A([
     bsUrl: 'https://getbootstrap.com/docs/4.3/components/forms/',
   },
   {
+    id: 'list-group',
+    title: 'List Group',
+    className: 'ListGroup',
+    description:
+      'List groups are a flexible and powerful component for displaying a series of content. Modify and extend them to support just about any content within.',
+    bsUrl: 'https://getbootstrap.com/docs/5.2/components/list-group/',
+  },
+  {
     id: 'modal',
     title: 'Modal',
     description:
@@ -89,6 +97,13 @@ const componentData = A([
     description:
       'Provide up-to-date feedback on the progress of a workflow or action with simple yet flexible progress bars.',
     bsUrl: 'https://getbootstrap.com/docs/4.3/components/progress/',
+  },
+  {
+    id: 'spinner',
+    title: 'Spinner',
+    description:
+      'Bootstrap “spinners” can be used to show the loading state in your projects.',
+    bsUrl: 'https://getbootstrap.com/docs/4.6/components/spinners/',
   },
   {
     id: 'tabs',

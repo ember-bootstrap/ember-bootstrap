@@ -9,19 +9,20 @@ import deprecateSubclassing from 'ember-bootstrap/utils/deprecate-subclassing';
 import arg from '../utils/decorators/arg';
 import { tracked } from '@glimmer/tracking';
 import { cached } from 'tracked-toolbox';
+import { ref } from 'ember-ref-bucket';
 
 /**
   Render a form with the appropriate Bootstrap layout class (see `formLayout`).
   Allows setting a `model` that nested `Components.FormElement`s can access, and that can provide form validation (see below)
 
   You can use whatever markup you like within the form.
-  However to benefit from features such as automatic form markup, validations and validation markup, use `Components.FormElement`
+  However, to benefit from features such as automatic form markup, validations and validation markup, use `Components.FormElement`
   as nested components. See below for an example.
 
   ### Submitting the form
 
   The form yields a `submitButton` component, which is a preconfigured `<BsButton>` with `@type="primary"` and `@buttonType="submit"`.
-  The button is disabled while a form submission is pending. Additionally the button state is bound to the form submission state.
+  The button is disabled while a form submission is pending. Additionally, the button state is bound to the form submission state.
 
   ```hbs
   <BsForm as |form|>
@@ -57,7 +58,7 @@ import { cached } from 'tracked-toolbox';
   ### Form validation
 
   All version of ember-bootstrap beginning from 0.7.0 do not come with built-in support for validation engines anymore.
-  Instead support is added usually by additional Ember addons, for example:
+  Instead, support is added usually by additional Ember addons, for example:
 
   * [ember-bootstrap-validations](https://github.com/kaliber5/ember-bootstrap-validations): adds support for [ember-validations](https://github.com/DockYard/ember-validations)
   * [ember-bootstrap-cp-validations](https://github.com/offirgolan/ember-bootstrap-cp-validations): adds support for [ember-cp-validations](https://github.com/offirgolan/ember-cp-validations)
@@ -72,7 +73,7 @@ import { cached } from 'tracked-toolbox';
   the validation messages are shown for each form element. In case the validation library supports it, also warning messages
   are shown. See the [Components.FormElement](Components.FormElement.html) documentation for further details.
 
-  See the above mentioned addons for examples.
+  See the above-mentioned addons for examples.
 
   The `novalidate` HTML attribute is set by default for forms that have validation.
 
@@ -106,7 +107,7 @@ import { cached } from 'tracked-toolbox';
   </BsForm>
   ```
 
-  The submission state is reset as soon as any value of a form element changes. Additionally it can be reset programatically by
+  The submission state is reset as soon as any value of a form element changes. Additionally, it can be reset programmatically by
   calling the yielded `resetSubmissionState` function.
 
   *Note that only invoking the component in a template as shown above is considered part of its public API. Extending from it (subclassing) is generally not supported, and may break at any time.*
@@ -118,6 +119,13 @@ import { cached } from 'tracked-toolbox';
 */
 @deprecateSubclassing
 export default class Form extends Component {
+  /**
+   * @property _element
+   * @type null | HTMLFormElement
+   * @private
+   */
+  @ref('formElement') _element = null;
+
   /**
    * Bootstrap form class name (computed)
    *
@@ -142,7 +150,7 @@ export default class Form extends Component {
    * * child `Components.FormElement`s can access and bind to this model by their `property`
    * * when the model supports validation by using the [ember-validations](https://github.com/dockyard/ember-validations) mixin,
    * child `Components.FormElement`s will look at the validation information of their `property` and render their form group accordingly.
-   * Moreover the form's `submit` event handler will validate the model and deny submitting if the model is not validated successfully.
+   * Moreover, the form's `submit` event handler will validate the model and deny submitting if the model is not validated successfully.
    *
    * @property model
    * @type object
@@ -213,7 +221,7 @@ export default class Form extends Component {
 
   /**
    * `isSubmitted` is `true` if last submission was successful.
-   * A change to any form element resets it's value to `false`.
+   * A change to any form element resets its value to `false`.
    *
    * If not using `Components.FormElement`, `resetSubmissionState` action must be triggered on each change to reset
    * form's submission state.
@@ -228,7 +236,7 @@ export default class Form extends Component {
   /**
    * `isRejected` is `true` if last submission was rejected.
    * A submission is considered as rejected if form is invalid as well as if `onSubmit` rejects.
-   * A change to any form element resets it's value to `false`.
+   * A change to any form element resets its value to `false`.
    *
    * If not using `Components.FormElement`, `resetSubmissionState` action must be triggered on each change to reset
    * form's submission state.
@@ -287,7 +295,7 @@ export default class Form extends Component {
    * times will not trigger `onSubmit` action if a Promise returned by previous submission is
    * not settled yet.
    *
-   * Droping a submission also prevents rerunning validation and `onBefore` hook.
+   * Dropping a submission also prevents rerunning validation and `onBefore` hook.
    *
    * @property preventConcurrency
    * @type Boolean
@@ -332,19 +340,41 @@ export default class Form extends Component {
    *
    * @method validate
    * @param {Object} model
+   * @param {HTMLFormElement} form
    * @return {Promise}
    * @public
    */
-  validate(model) {} // eslint-disable-line no-unused-vars
+  validate(model, form) {} // eslint-disable-line no-unused-vars
 
   /**
-   * @property showAllValidations
+   * @property _showAllValidations
    * @type boolean
    * @default undefined
    * @private
    */
   @tracked
-  showAllValidations = undefined;
+  _showAllValidations = undefined;
+
+  get showAllValidations() {
+    return this.showValidations ?? this._showAllValidations;
+  }
+  set showAllValidations(showAllValidations) {
+    this._showAllValidations = showAllValidations;
+  }
+
+  /**
+   * Controls visibility of validation errors. If `null` (default) validation errors are shown after user
+   * interactions like form submission, focus out event of input fields etc. If `true` all validation errors are shown
+   * immediately independently of user interactions. If `false` validation errors are not shown in any case (but
+   * prevent form submission if form is invalid).
+   *
+   * @property showValidations
+   * @type Boolean|null
+   * @default null
+   * @public
+   */
+  @arg
+  showValidations = null;
 
   /**
    * Action is called before the form is validated (if possible) and submitted.
@@ -376,7 +406,7 @@ export default class Form extends Component {
    * Submit handler that will send the default action ("action") to the controller when submitting the form.
    *
    * If there is a supplied `model` that supports validation (`hasValidator`) the model will be validated before, and
-   * only if validation is successful the default action will be sent. Otherwise an "invalid" action will be sent, and
+   * only if validation is successful the default action will be sent. Otherwise, an "invalid" action will be sent, and
    * all the `showValidation` property of all child `Components.FormElement`s will be set to true, so error state and
    * messages will be shown automatically.
    *
@@ -400,7 +430,7 @@ export default class Form extends Component {
 
     return RSVP.resolve()
       .then(() => {
-        return this.hasValidator ? this.validate(model) : null;
+        return this.hasValidator ? this.validate(model, this._element) : null;
       })
       .then(
         (record) => {
