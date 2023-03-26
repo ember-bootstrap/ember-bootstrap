@@ -481,9 +481,7 @@ export default class Form extends Component {
   handleKeyPress(event) {
     let code = event.keyCode || event.which;
     if (code === 13 && this.args.submitOnEnter) {
-      let submitEvent = document.createEvent('Event');
-      submitEvent.initEvent('submit', true, true);
-      event.target.closest('form').dispatchEvent(submitEvent);
+      this.submitHandler();
     }
   }
 
