@@ -113,7 +113,7 @@
     "ember-template-lint": "5.7.1",
     "ember-try": "2.0.0",
     "eslint": "7.32.0",
-    "eslint-config-prettier": "8.7.0",
+    "eslint-config-prettier": "8.8.0",
     "eslint-plugin-ember": "11.4.8",
     "eslint-plugin-hbs": "1.0.3",
     "eslint-plugin-node": "11.1.0",
