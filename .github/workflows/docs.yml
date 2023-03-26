@@ -3,10 +3,15 @@ name: Publish docs
 on:
   workflow_dispatch:
   release:
-    types: [published,edited]
+    types:
+      - published
+      - edited
+  workflow_run:
+    workflows:
+      - CI
 
 jobs:
-  deploy:
+  build:
     runs-on: ubuntu-18.04
     steps:
       - name: Checkout code
@@ -14,7 +19,7 @@ jobs:
       - name: Setup node.js
         uses: actions/setup-node@v3
         with:
-          node-version: 12
+          node-version: 14
       - name: Install addon dependencies
         uses: bahmutov/npm-install@v1
       - name: Install docs dependencies
@@ -23,7 +28,20 @@ jobs:
           working-directory: docs
       - name: Build docs
         run: yarn run docs:build
+      - name: Upload docs build
+        uses: actions/upload-artifact@v3
+        with:
+          name: docs-build
+          path: docs/build
 
+  deploy:
+    if: github.event.release
+    runs-on: ubuntu-18.04
+    steps:
+      - name: Download docs build
+        uses: actions/download-artifact@v3
+        with:
+          name: docs-build
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
         with:

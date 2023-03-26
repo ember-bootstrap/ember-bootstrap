@@ -321,6 +321,97 @@ module('Integration | Component | bs-form', function (hooks) {
     assert.dom(`.${formFeedbackClass()}`).hasText('There is an error');
   });
 
+  test('Form with invalid validation shows validation errors immediately when @showValidations is true', async function (assert) {
+    let model = {};
+    this.set('model', model);
+    this.set('errors', A(['There is an error']));
+
+    this.set('form', ensureSafeComponent(ValidatingForm, this));
+    this.set('formElement', ensureSafeComponent(ValidatingFormElement, this));
+
+    await render(
+      hbs`<this.form @elementComponent={{this.formElement}} @model={{this.model}} @validate={{false}} @showValidations={{true}} as |form|><form.element @errors={{this.errors}} /></this.form>`
+    );
+
+    assert
+      .dom(formFeedbackElement())
+      .hasClass(validationErrorClass(), 'validation errors are shown when @showValidations is true');
+    assert.dom(`.${formFeedbackClass()}`).hasText('There is an error');
+  });
+
+  test('Form with valid validation shows validation success immediately when @showValidations is true', async function (assert) {
+    let model = {};
+    this.set('model', model);
+    this.set('errors', A([]));
+
+    this.set('form', ensureSafeComponent(ValidatingForm, this));
+    this.set('formElement', ensureSafeComponent(ValidatingFormElement, this));
+
+    await render(
+      hbs`<this.form @elementComponent={{this.formElement}} @model={{this.model}} @validate={{false}} @showValidations={{true}} as |form|><form.element @errors={{this.errors}} /></this.form>`
+    );
+
+    assert
+      .dom(formFeedbackElement())
+      .hasClass(validationSuccessClass(), 'validation success is shown when @showValidations is true');
+  });
+
+  test('Form with invalid validation does not show validation success or errors when @showValidations is false', async function (assert) {
+    let model = {};
+    this.set('model', model);
+    this.set('errors', A(['There is an error']));
+
+    this.set('form', ensureSafeComponent(ValidatingForm, this));
+    this.set('formElement', ensureSafeComponent(ValidatingFormElement, this));
+
+    await render(
+      hbs`<this.form @elementComponent={{this.formElement}} @model={{this.model}} @validate={{false}} @showValidations={{false}} as |form|><form.element @errors={{this.errors}} /></this.form>`
+    );
+
+    assert
+      .dom(formFeedbackElement())
+      .hasNoClass(validationErrorClass(), "validation errors aren't shown before user interaction");
+    assert
+      .dom(formFeedbackElement())
+      .hasNoClass(validationSuccessClass(), "validation success isn't shown before user interaction");
+    await triggerEvent('form', 'submit');
+
+    assert
+      .dom(formFeedbackElement())
+      .hasNoClass(validationErrorClass(), "validation errors aren't shown after user interaction");
+    assert
+      .dom(formFeedbackElement())
+      .hasNoClass(validationSuccessClass(), "validation success isn't shown after user interaction");
+  });
+
+  test('Form with valid validation does not show validation success or errors when @showValidations is false', async function (assert) {
+    let model = {};
+    this.set('model', model);
+    this.set('errors', A([]));
+
+    this.set('form', ensureSafeComponent(ValidatingForm, this));
+    this.set('formElement', ensureSafeComponent(ValidatingFormElement, this));
+
+    await render(
+      hbs`<this.form @elementComponent={{this.formElement}} @model={{this.model}} @validate={{false}} @showValidations={{false}} as |form|><form.element @errors={{this.errors}} /></this.form>`
+    );
+
+    assert
+      .dom(formFeedbackElement())
+      .hasNoClass(validationErrorClass(), "validation errors aren't shown before user interaction");
+    assert
+      .dom(formFeedbackElement())
+      .hasNoClass(validationSuccessClass(), "validation success isn't shown before user interaction");
+    await triggerEvent('form', 'submit');
+
+    assert
+      .dom(formFeedbackElement())
+      .hasNoClass(validationErrorClass(), "validation errors aren't shown after user interaction");
+    assert
+      .dom(formFeedbackElement())
+      .hasNoClass(validationSuccessClass(), "validation success isn't shown after user interaction");
+  });
+
   // skipping for now due to https://github.com/kaliber5/ember-bootstrap/issues/1682
   // @todo re-enable when this has been resolved
   skip('it does not catch errors thrown by synchronous @onSubmit action', async function (assert) {
@@ -1341,5 +1432,18 @@ module('Integration | Component | bs-form', function (hooks) {
     this.set('user', { name: 'Zoey' });
 
     await click('button');
+  });
+
+  test('it provides model access inside form object', async function (assert) {
+    await render(hbs`
+        <BsForm @model={{this.model}} @onSubmit={{this.submitHandler}} as |form|>
+          <form.element @property="name" />
+          <label id="name">{{form.model.name}}</label>
+        </BsForm>
+      `);
+
+    assert.dom(this.element.querySelector('#name')).hasText('');
+    await fillIn('input', 'John Doe');
+    assert.dom(this.element.querySelector('#name')).hasText('John Doe');
   });
 });

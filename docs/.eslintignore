@@ -5,6 +5,7 @@
 /yuidoc-theme
 
 # compiled output
+/build/
 /dist/
 /tmp/
 

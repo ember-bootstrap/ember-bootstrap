@@ -1,0 +1,227 @@
+<h2>Basic example</h2>
+<p>The most basic list group is an unordered list with list items and the proper classes. Build upon it with the options that follow, or with your own CSS as needed.</p>
+<div class="bs-example">
+  {{! BEGIN-SNIPPET list-group-demo }}
+  <BsListGroup as |ListGroup|>
+    <ListGroup.item>An item</ListGroup.item>
+    <ListGroup.item>A second item</ListGroup.item>
+    <ListGroup.item>A third item</ListGroup.item>
+  </BsListGroup>
+  {{! END-SNIPPET }}
+</div>
+<div class="highlight">
+  <CodeSnippet @name="list-group-demo.hbs" />
+</div>
+
+<h2>Flush</h2>
+<p>Add <code>flush</code> to remove some borders and rounded corners to render list group items edge-to-edge in a parent container (e.g., cards).</p>
+<div class="bs-example">
+  {{! BEGIN-SNIPPET list-group-flush-demo }}
+  <BsListGroup @flush={{true}} as |ListGroup|>
+    <ListGroup.item>An item</ListGroup.item>
+    <ListGroup.item>A second item</ListGroup.item>
+    <ListGroup.item>A third item</ListGroup.item>
+  </BsListGroup>
+  {{! END-SNIPPET }}
+</div>
+<div class="highlight">
+  <CodeSnippet @name="list-group-flush-demo.hbs" />
+</div>
+
+<h2>Numbered</h2>
+<p>Add <code>numbered</code> to opt into numbered list group items.</p>
+  <div class="bs-example">
+  {{! BEGIN-SNIPPET list-group-numbered-demo }}
+  <BsListGroup @numbered={{true}} as |ListGroup|>
+    <ListGroup.item>An item</ListGroup.item>
+    <ListGroup.item>A second item</ListGroup.item>
+    <ListGroup.item>A third item</ListGroup.item>
+  </BsListGroup>
+  {{! END-SNIPPET }}
+</div>
+<div class="highlight">
+  <CodeSnippet @name="list-group-numbered-demo.hbs" />
+</div>
+
+<h2>Active items</h2>
+<p>Add <code>active</code> to an item to indicate the current active selection.</p>
+
+<div class="bs-example">
+  {{! BEGIN-SNIPPET list-group-active-demo }}
+  <BsListGroup as |ListGroup|>
+    <ListGroup.item @active={{true}}>An item</ListGroup.item>
+    <ListGroup.item>A second item</ListGroup.item>
+    <ListGroup.item>A third item</ListGroup.item>
+  </BsListGroup>
+  {{! END-SNIPPET }}
+</div>
+<div class="highlight">
+  <CodeSnippet @name="list-group-active-demo.hbs" />
+</div>
+
+<h2>Buttons</h2>
+<p>Use attribute <code>actionable</code> equal to <code>true</code> to convert list group items to <code>button</code>s.</p>
+
+<div class="bs-example">
+  {{! BEGIN-SNIPPET list-group-action-button-demo }}
+  <BsListGroup as |ListGroup|>
+    {{#let (component ListGroup.item actionable=true) as |ListGroupItem|}}
+      <ListGroupItem>An item</ListGroupItem>
+      <ListGroupItem>A second item</ListGroupItem>
+      <ListGroupItem @disabled={{true}}>A third item</ListGroupItem>
+    {{/let}}
+  </BsListGroup>
+  {{! END-SNIPPET }}
+</div>
+<div class="highlight">
+  <CodeSnippet @name="list-group-action-button-demo.hbs" />
+</div>
+
+<h2>Contextual classes</h2>
+<p>Use contextual classes to style list items with a stateful background and color.</p>
+<div class="bs-example">
+  {{! BEGIN-SNIPPET list-group-action-types-demo }}
+  <BsListGroup as |ListGroup|>
+    {{#let (component ListGroup.item actionable=true) as |ListGroupItem|}}
+      <ListGroupItem>
+        A simple default list group item
+      </ListGroupItem>
+      <ListGroupItem @type="primary">
+        A simple primary list group item
+      </ListGroupItem>
+      <ListGroupItem @type="secondary">
+        A simple secondary list group item
+      </ListGroupItem>
+      <ListGroupItem @type="success">
+        A simple success list group item
+      </ListGroupItem>
+      <ListGroupItem @type="danger">
+        A simple danger list group item
+      </ListGroupItem>
+      <ListGroupItem @type="warning">
+        A simple warning list group item
+      </ListGroupItem>
+      <ListGroupItem @type="info">
+        A simple info list group item
+      </ListGroupItem>
+      <ListGroupItem @type="light">
+        A simple light list group item
+      </ListGroupItem>
+      <ListGroupItem @type="dark">
+        A simple dark list group item
+      </ListGroupItem>
+    {{/let}}
+  </BsListGroup>
+  {{! END-SNIPPET }}
+</div>
+<div class="highlight">
+  <CodeSnippet @name="list-group-action-types-demo.hbs" />
+</div>
+
+<h2>Disabled items</h2>
+<p>Add <code>disabled</code> to an <code>ListGroup.item</code> to make it appear disabled.</p>
+<div class="bs-example">
+  {{! BEGIN-SNIPPET list-group-disabled-demo }}
+  <BsListGroup as |ListGroup|>
+    <ListGroup.item @disabled={{true}}>An item</ListGroup.item>
+    <ListGroup.item>A second item</ListGroup.item>
+    <ListGroup.item @disabled={{true}}>A third item</ListGroup.item>
+  </BsListGroup>
+  {{! END-SNIPPET }}
+</div>
+<div class="highlight">
+  <CodeSnippet @name="list-group-disabled-demo.hbs" />
+</div>
+
+<h2>Horizontal</h2>
+<p>Add <code>horizontal</code> to change the layout of list group items from vertical to horizontal across all breakpoints.</p>
+<div class="bs-example">
+  {{! BEGIN-SNIPPET list-group-horizontal-demo }}
+  <BsListGroup @horizontal={{true}} as |ListGroup|>
+    <ListGroup.item>An item</ListGroup.item>
+    <ListGroup.item>A second item</ListGroup.item>
+    <ListGroup.item>A third item</ListGroup.item>
+    <ListGroup.item>A fourth item</ListGroup.item>
+    <ListGroup.item>And a fifth on</ListGroup.item>
+  </BsListGroup>
+  {{! END-SNIPPET }}
+</div>
+<div class="highlight">
+  <CodeSnippet @name="list-group-horizontal-demo.hbs" />
+</div>
+
+<p>Alternatively, choose a responsive variant to make a list group horizontal starting at that breakpoint’s min-width.</p>
+<div class="bs-example">
+  {{! BEGIN-SNIPPET list-group-horizontal-size-demo }}
+  <BsListGroup @horizontal={{true}} @horizontalSize="xxl" as |ListGroup|>
+    <ListGroup.item>An item</ListGroup.item>
+    <ListGroup.item>A second item</ListGroup.item>
+    <ListGroup.item>A third item</ListGroup.item>
+    <ListGroup.item>A fourth item</ListGroup.item>
+    <ListGroup.item>And a fifth on</ListGroup.item>
+  </BsListGroup>
+  {{! END-SNIPPET }}
+</div>
+<div class="highlight">
+  <CodeSnippet @name="list-group-horizontal-size-demo.hbs" />
+</div>
+
+<h2>With badges</h2>
+<p>Add badges to any list group item to show unread counts, activity, and more.</p>
+<div class="bs-example">
+  {{! BEGIN-SNIPPET list-group-badges-demo }}
+  <BsListGroup as |ListGroup|>
+    <ListGroup.item class="d-flex justify-content-between align-items-center">
+      A list item
+      <span class="badge bg-primary">14</span>
+    </ListGroup.item>
+    <ListGroup.item class="d-flex justify-content-between align-items-center">
+      A second list item
+      <span class="badge bg-secondary">2</span>
+    </ListGroup.item>
+    <ListGroup.item class="d-flex justify-content-between align-items-center">
+      A third list item
+      <span class="badge bg-success">1</span>
+    </ListGroup.item>
+  </BsListGroup>
+  {{! END-SNIPPET }}
+</div>
+<div class="highlight">
+  <CodeSnippet @name="list-group-badges-demo.hbs" />
+</div>
+
+<h2>Custom content</h2>
+<p>Add nearly any HTML within, even for linked list groups like the one below.</p>
+<div class="bs-example">
+  {{! BEGIN-SNIPPET list-group-custom-content-demo }}
+  <BsListGroup as |ListGroup|>
+    <ListGroup.item>
+      <div class="d-flex justify-content-between">
+        <h5>List group item heading</h5>
+        <small>3 days ago</small>
+      </div>
+      <p>Some placeholder content in a paragraph.</p>
+      <small>And some small print.</small>
+    </ListGroup.item>
+    <ListGroup.item>
+      <div class="d-flex justify-content-between">
+        <h5>List group item heading</h5>
+        <small class="text-muted">3 days ago</small>
+      </div>
+      <p>Some placeholder content in a paragraph.</p>
+      <small class="text-muted">And some muted small print.</small>
+    </ListGroup.item>
+    <ListGroup.item>
+      <div class="d-flex justify-content-between">
+        <h5>List group item heading</h5>
+        <small class="text-muted">3 days ago</small>
+      </div>
+      <p>Some placeholder content in a paragraph.</p>
+      <small class="text-muted">And some muted small print.</small>
+    </ListGroup.item>
+  </BsListGroup>
+  {{! END-SNIPPET }}
+</div>
+<div class="highlight">
+  <CodeSnippet @name="list-group-custom-content-demo.hbs" />
+</div>
