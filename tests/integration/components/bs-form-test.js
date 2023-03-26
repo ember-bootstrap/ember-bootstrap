@@ -1088,6 +1088,21 @@ module('Integration | Component | bs-form', function (hooks) {
     assert.ok(submit.calledOnce, 'onSubmit action has been called');
   });
 
+  testRequiringFocus(
+    'Pressing enter on a form with multiple input elements and submitOnEnter submits the form',
+    async function (assert) {
+      let submit = sinon.spy();
+      this.actions.submit = submit;
+      await render(hbs`
+        <BsForm @onSubmit={{action "submit"}} @submitOnEnter={{true}} as |form|>
+          <form.element @property="input1" />
+          <form.element @property="input2" />
+        </BsForm>`);
+      await triggerKeyEvent('input', 'keypress', 13);
+      assert.ok(submit.calledOnce, 'onSubmit action has been called');
+    }
+  );
+
   test('prevents submission to be fired concurrently', async function (assert) {
     let deferredSubmitAction = defer();
     let submitActionHasBeenExecuted = false;
