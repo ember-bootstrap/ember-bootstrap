@@ -142,7 +142,6 @@ export default class Button extends Component {
    * @default null
    * @private
    */
-
   get __disabled() {
     if (this.args._disabled !== undefined) {
       return this.args._disabled;
@@ -150,17 +149,6 @@ export default class Button extends Component {
 
     return this.isPending && this.args.preventConcurrency !== false;
   }
-
-  /**
-   * Set the type of the button, either 'button' or 'submit'
-   *
-   * @property buttonType
-   * @type String
-   * @default 'button'
-   * @deprecated
-   * @public
-   */
-  @arg buttonType = 'button';
 
   /**
    * Set the 'active' class to apply active/pressed CSS styling

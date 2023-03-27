@@ -1,6 +1,6 @@
 <button
   disabled={{this.__disabled}}
-  type={{this.buttonType}}
+  type={{if @attrTypePrivateWorkaround @attrTypePrivateWorkaround "button"}}
   class="btn {{if @active "active"}} {{if (macroCondition (macroGetOwnConfig "isNotBS5")) (if this.block "btn-block")}} {{bs-size-class "btn" @size}} {{bs-type-class "btn" @type default="secondary" outline=@outline}}"
   ...attributes
   {{on "click" this.handleClick}}
