@@ -130,7 +130,7 @@ module('Integration | Component | bs-form', function (hooks) {
   test('Clicking a submit button submits the form', async function (assert) {
     let submit = sinon.spy();
     this.actions.submit = submit;
-    await render(hbs`<BsForm @onSubmit={{action "submit"}}><BsButton @buttonType="submit">Submit</BsButton></BsForm>`);
+    await render(hbs`<BsForm @onSubmit={{action "submit"}}><button type="submit">Submit</button></BsForm>`);
 
     await click('button');
     assert.ok(submit.calledOnce, 'onSubmit action has been called');

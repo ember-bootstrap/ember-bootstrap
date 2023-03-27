@@ -26,10 +26,10 @@
       resetSubmissionState=this.resetSubmissionState
       submit=this.doSubmit
       submitButton=(component (ensure-safe-component (bs-default @submitButtonComponent (component "bs-button")))
-        buttonType="submit"
         type="primary"
         state=this.submitButtonState
         _disabled=this.isSubmitting
+        attrTypePrivateWorkaround="submit"
       )
     )
   }}
