@@ -5,8 +5,13 @@ export default helper(function bsFormHorizOffsetClass([horizontalLabelGridClass]
   if (isBlank(horizontalLabelGridClass)) {
     return undefined;
   }
-  let parts = horizontalLabelGridClass.split('-');
-  parts.splice(0, 1, 'offset');
+  let originalClasses = horizontalLabelGridClass.split(' ');
+  let offsetClasses = originalClasses.map((originalClass) => {
+    let parts = originalClass.split('-');
+    parts.splice(0, 1, 'offset');
 
-  return parts.join('-');
+    return parts.join('-');
+  });
+
+  return offsetClasses.join(' ');
 });

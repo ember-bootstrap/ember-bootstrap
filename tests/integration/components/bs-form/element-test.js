@@ -251,6 +251,19 @@ module('Integration | Component | bs-form/element', function (hooks) {
       assert.dom('[data-test-form-element] > label').hasClass('col-md-3');
       assert.dom('[data-test-form-element] > div').hasClass('col-md-9');
     });
+
+    test('supports horizontal form layout with multiple custom grid classes', async function (assert) {
+      await render(hbs`
+        <BsForm @formLayout="horizontal" as |form|>
+          <form.element @controlType="text" @label="some label" @options={{this.simpleOptions}} @horizontalLabelGridClass="col-md-3 col-lg-2" data-test-form-element />
+        </BsForm>
+      `);
+
+      assert.dom('[data-test-form-element] > label').hasClass('col-md-3');
+      assert.dom('[data-test-form-element] > div').hasClass('col-md-9');
+      assert.dom('[data-test-form-element] > label').hasClass('col-lg-2');
+      assert.dom('[data-test-form-element] > div').hasClass('col-lg-10');
+    });
   });
 
   module('controlType "textarea" is supported', function () {
@@ -281,6 +294,19 @@ module('Integration | Component | bs-form/element', function (hooks) {
 
       assert.dom('[data-test-form-element] > label').hasClass('col-md-3');
       assert.dom('[data-test-form-element] > div').hasClass('col-md-9');
+    });
+
+    test('supports horizontal form layout with multiple custom grid classes', async function (assert) {
+      await render(hbs`
+        <BsForm @formLayout="horizontal" as |form|>
+          <form.element @controlType="textarea" @label="some label" @options={{this.simpleOptions}} @horizontalLabelGridClass="col-md-3 col-lg-2" data-test-form-element />
+        </BsForm>
+      `);
+
+      assert.dom('[data-test-form-element] > label').hasClass('col-md-3');
+      assert.dom('[data-test-form-element] > div').hasClass('col-md-9');
+      assert.dom('[data-test-form-element] > label').hasClass('col-lg-2');
+      assert.dom('[data-test-form-element] > div').hasClass('col-lg-10');
     });
   });
 
@@ -313,6 +339,17 @@ module('Integration | Component | bs-form/element', function (hooks) {
       `);
 
       assert.dom('[data-test-form-element] > div').hasClass('col-md-9').hasClass('offset-md-3');
+    });
+
+    test('supports horizontal form layout with multiple custom grid classes', async function (assert) {
+      await render(hbs`
+        <BsForm @formLayout="horizontal" as |form|>
+          <form.element @controlType="checkbox" @label="some label" @options={{this.simpleOptions}} @horizontalLabelGridClass="col-md-3 col-lg-2" data-test-form-element />
+        </BsForm>
+      `);
+
+      assert.dom('[data-test-form-element] > div').hasClass('col-md-9').hasClass('offset-md-3');
+      assert.dom('[data-test-form-element] > div').hasClass('col-lg-10').hasClass('offset-lg-2');
     });
   });
 
@@ -374,6 +411,17 @@ module('Integration | Component | bs-form/element', function (hooks) {
       `);
 
       assert.dom('[data-test-form-element] > div').hasClass('col-md-9').hasClass('offset-md-3');
+    });
+
+    test('supports horizontal form layout with multiple custom grid classes', async function (assert) {
+      await render(hbs`
+        <BsForm @formLayout="horizontal" as |form|>
+          <form.element @controlType="switch" @label="some label" @options={{this.simpleOptions}} @horizontalLabelGridClass="col-md-3 col-lg-2" data-test-form-element />
+        </BsForm>
+      `);
+
+      assert.dom('[data-test-form-element] > div').hasClass('col-md-9').hasClass('offset-md-3');
+      assert.dom('[data-test-form-element] > div').hasClass('col-lg-10').hasClass('offset-lg-2');
     });
   });
 
