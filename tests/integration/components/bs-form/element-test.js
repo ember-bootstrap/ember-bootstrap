@@ -259,10 +259,8 @@ module('Integration | Component | bs-form/element', function (hooks) {
         </BsForm>
       `);
 
-      assert.dom('[data-test-form-element] > label').hasClass('col-md-3');
-      assert.dom('[data-test-form-element] > div').hasClass('col-md-9');
-      assert.dom('[data-test-form-element] > label').hasClass('col-lg-2');
-      assert.dom('[data-test-form-element] > div').hasClass('col-lg-10');
+      assert.dom('[data-test-form-element] > label').hasClass('col-md-3').hasClass('col-lg-2');
+      assert.dom('[data-test-form-element] > div').hasClass('col-md-9').hasClass('col-lg-10');
     });
   });
 
@@ -303,10 +301,8 @@ module('Integration | Component | bs-form/element', function (hooks) {
         </BsForm>
       `);
 
-      assert.dom('[data-test-form-element] > label').hasClass('col-md-3');
-      assert.dom('[data-test-form-element] > div').hasClass('col-md-9');
-      assert.dom('[data-test-form-element] > label').hasClass('col-lg-2');
-      assert.dom('[data-test-form-element] > div').hasClass('col-lg-10');
+      assert.dom('[data-test-form-element] > label').hasClass('col-md-3').hasClass('col-lg-2');
+      assert.dom('[data-test-form-element] > div').hasClass('col-md-9').hasClass('col-lg-10');
     });
   });
 
@@ -348,8 +344,12 @@ module('Integration | Component | bs-form/element', function (hooks) {
         </BsForm>
       `);
 
-      assert.dom('[data-test-form-element] > div').hasClass('col-md-9').hasClass('offset-md-3');
-      assert.dom('[data-test-form-element] > div').hasClass('col-lg-10').hasClass('offset-lg-2');
+      assert
+        .dom('[data-test-form-element] > div')
+        .hasClass('col-md-9')
+        .hasClass('col-lg-10')
+        .hasClass('offset-md-3')
+        .hasClass('offset-lg-2');
     });
   });
 
@@ -420,8 +420,12 @@ module('Integration | Component | bs-form/element', function (hooks) {
         </BsForm>
       `);
 
-      assert.dom('[data-test-form-element] > div').hasClass('col-md-9').hasClass('offset-md-3');
-      assert.dom('[data-test-form-element] > div').hasClass('col-lg-10').hasClass('offset-lg-2');
+      assert
+        .dom('[data-test-form-element] > div')
+        .hasClass('col-md-9')
+        .hasClass('col-lg-10')
+        .hasClass('offset-md-3')
+        .hasClass('offset-lg-2');
     });
   });
 
