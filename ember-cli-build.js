@@ -25,7 +25,7 @@ module.exports = function (defaults) {
     },
     trees,
     addons: {
-      blacklist: process.env.FASTBOOT_DISABLED ? ['ember-cli-fastboot-testing'] : [],
+      exclude: process.env.FASTBOOT_DISABLED ? ['ember-cli-fastboot-testing'] : [],
     },
   };
 
