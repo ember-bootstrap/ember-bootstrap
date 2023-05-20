@@ -657,8 +657,8 @@ export default class FormElement extends Component {
    */
 
   /**
-   * The Bootstrap grid class for form labels within a horizontal layout form. Defaults to the value of the same
-   * property of the parent form. The corresponding grid class for form controls is automatically computed.
+   * The Bootstrap grid classes for form labels within a horizontal layout form. Defaults to the value of the same
+   * property of the parent form. The corresponding grid classes for form controls are automatically computed.
    *
    * @property horizontalLabelGridClass
    * @type string

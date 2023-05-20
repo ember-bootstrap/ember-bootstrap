@@ -189,7 +189,7 @@ export default class Form extends Component {
    */
 
   /**
-   * The Bootstrap grid class for form labels. This is used by the `Components.FormElement` class as a default for the
+   * The Bootstrap grid classes for form labels. This is used by the `Components.FormElement` class as a default for the
    * whole form.
    *
    * @property horizontalLabelGridClass
