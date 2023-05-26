@@ -5092,10 +5092,10 @@ electron-to-chromium@^1.4.284:
   resolved "https://registry.yarnpkg.com/electron-to-chromium/-/electron-to-chromium-1.4.409.tgz#33b6d83d83c2e76c3b1c1b90614147e50cc9065f"
   integrity sha512-+2mRCBG9dR66sprh2dLuO6vr+O1xqHXvhmMglfut3OmfeUVRUho2nZYxxD9pG6G4PLDkZeqhlA/Gk6LpjVSHag==
 
-ember-a11y-testing@5.2.0:
-  version "5.2.0"
-  resolved "https://registry.yarnpkg.com/ember-a11y-testing/-/ember-a11y-testing-5.2.0.tgz#02c7ca08f656ed5327ae489de9ed20e478d9a847"
-  integrity sha512-dWU3+ADTL7gnm+zxFL238OZJpGvLGRGEy07Zxgd64mNIdfNYYPeXOVZ6wjKUIuDXlKzvEnrwHV9D/pcj2rq9UA==
+ember-a11y-testing@5.2.1:
+  version "5.2.1"
+  resolved "https://registry.yarnpkg.com/ember-a11y-testing/-/ember-a11y-testing-5.2.1.tgz#abe1cabd5f692a883df91e280b9731bc4b8bf520"
+  integrity sha512-gYIqSwCw43hRxQtwauln0hChRHyelkVTtmWVYgyvkX0+YKJXz2x+IGmC1MkO62SHOjz4A9wXyNSH13jwOIbJ9A==
   dependencies:
     "@ember/test-waiters" "^2.4.3 || ^3.0.0"
     "@scalvert/ember-setup-middleware-reporter" "^0.1.1"
