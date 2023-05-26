@@ -9,7 +9,7 @@ on:
       - '*'
   pull_request:
   schedule:
-    - cron:  '0 4 * * 5' # Fridays at 4am
+    - cron: '0 4 * * 5' # Fridays at 4am
 
 jobs:
   test:
@@ -21,7 +21,7 @@ jobs:
       - name: Setup node.js
         uses: actions/setup-node@v3
         with:
-          node-version: 14
+          node-version: 16
       - name: Install dependencies
         uses: bahmutov/npm-install@v1
       - name: Lint
@@ -40,7 +40,7 @@ jobs:
       - name: Setup node.js
         uses: actions/setup-node@v3
         with:
-          node-version: 14
+          node-version: 16
       - name: Install dependencies
         uses: bahmutov/npm-install@v1
         with:
@@ -91,7 +91,7 @@ jobs:
       - name: Setup node.js
         uses: actions/setup-node@v3
         with:
-          node-version: 14
+          node-version: 16
       - name: Install dependencies
         uses: bahmutov/npm-install@v1
         with:
@@ -112,7 +112,7 @@ jobs:
       - name: Install Node
         uses: actions/setup-node@v3
         with:
-          node-version: 14
+          node-version: 16
       - name: Install Dependencies of Ember Bootstrap addon
         uses: bahmutov/npm-install@v1
       - name: Install Dependencies of docs app
@@ -122,7 +122,6 @@ jobs:
       - name: Run Tests
         run: yarn test
         working-directory: docs
-
 #  test-browserstack:
 #    name: Browserstack Tests
 #    runs-on: ubuntu-latest

@@ -9,14 +9,14 @@ An [ember-cli](http://www.ember-cli.com) addon for using [Bootstrap](http://getb
 
 The addon includes the Bootstrap CSS (or Sass, Less) in your project (can be disabled). On top of that, it provides a set of native Ember components (no use of Bootstrap JavaScript!).</p>
 
-*See [www.ember-bootstrap.com](http://www.ember-bootstrap.com/) for full documentation.*
+_See [www.ember-bootstrap.com](http://www.ember-bootstrap.com/) for full documentation._
 
 ## Installation
 
 In your application's directory:
 
     ember install ember-bootstrap
-    
+
 This will install Bootstrap 4 and will use the currently installed preprocessor or none if one is not installed.
 To switch Bootstrap version or preprocessor, see the [setup documentation](http://www.ember-bootstrap.com/#/getting-started/setup).
 
@@ -24,15 +24,15 @@ To switch Bootstrap version or preprocessor, see the [setup documentation](http:
 
 Ember Bootstrap works and is fully [tested](https://github.com/kaliber5/ember-bootstrap/actions?query=workflow%3ACI+branch%3Amaster) with
 
-* Ember.js 3.28+ (including all optional features)
-* Ember CLI 3.28+
-* Bootstrap 4 and 5
-* all modern evergreen browsers (Chrome, Firefox, Safari, Edge)
-* node.js 14+
-* FastBoot 1.0+
-* Embroider: we strive (and test) for maximum compatibility with Embroider, including the most aggressive setting 
-(`staticComponents`) for tree shaking and code splitting. However as Embroider itself is still considered beta software, 
-we won't be able to *guarantee* that for the time being.
+- Ember.js 3.28+ (including all optional features)
+- Ember CLI 3.28+
+- Bootstrap 4 and 5
+- all modern evergreen browsers (Chrome, Firefox, Safari, Edge)
+- node.js 16+
+- FastBoot 1.0+
+- Embroider: we strive (and test) for maximum compatibility with Embroider, including the most aggressive setting
+  (`staticComponents`) for tree shaking and code splitting. However as Embroider itself is still considered beta software,
+  we won't be able to _guarantee_ that for the time being.
 
 This project follows [Semantic Versioning](http://semver.org/).
 
@@ -40,14 +40,14 @@ This project follows [Semantic Versioning](http://semver.org/).
 
 See [CHANGELOG](CHANGELOG.md) for the list of all changes.
 
-If you want to keep up to date with ember-bootstrap, you may want to [follow me on Twitter](https://twitter.com/simonihmig). 
+If you want to keep up to date with ember-bootstrap, you may want to [follow me on Twitter](https://twitter.com/simonihmig).
 
 ## Author and collaborators
 
-* [Simon Ihmig](https://github.com/simonihmig)
-* [Stephen Vance](https://github.com/srvance)
-* [Jeldrik Hanschke](https://github.com/jelhan)
-* and many more [contributors](https://github.com/kaliber5/ember-bootstrap/graphs/contributors)
+- [Simon Ihmig](https://github.com/simonihmig)
+- [Stephen Vance](https://github.com/srvance)
+- [Jeldrik Hanschke](https://github.com/jelhan)
+- and many more [contributors](https://github.com/kaliber5/ember-bootstrap/graphs/contributors)
 
 ## Contributing
 
