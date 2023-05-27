@@ -4697,7 +4697,7 @@ data-urls@^3.0.1:
     whatwg-mimetype "^3.0.0"
     whatwg-url "^11.0.0"
 
-date-fns@^2.29.2:
+date-fns@^2.30.0:
   version "2.30.0"
   resolved "https://registry.yarnpkg.com/date-fns/-/date-fns-2.30.0.tgz#f367e644839ff57894ec6ac480de40cae4b0f4d0"
   integrity sha512-fnULvOpxnC5/Vg3NCiWelDsLiUc9bRwAPs/+LfTLNvetFCtCTN+yQz15C/fs4AwX1R9K5GLtLfn8QW+dWisaAw==
@@ -5893,16 +5893,16 @@ ember-template-imports@^3.4.2:
     string.prototype.matchall "^4.0.6"
     validate-peer-dependencies "^1.1.0"
 
-ember-template-lint@5.7.3:
-  version "5.7.3"
-  resolved "https://registry.yarnpkg.com/ember-template-lint/-/ember-template-lint-5.7.3.tgz#57a5b1947e65672a2acff9ee55392ba50c056cbc"
-  integrity sha512-7ev+5pSXe2qv5TFDkt7G90pfuaiGGWPCQDaNs1/9QqGW++3JiNdMdKxq1lpBcny7zRYSOWBRIN+YiVgREAxvUg==
+ember-template-lint@5.10.0:
+  version "5.10.0"
+  resolved "https://registry.yarnpkg.com/ember-template-lint/-/ember-template-lint-5.10.0.tgz#8e049e1db18b0de7ced5e6e83b94d518ca193216"
+  integrity sha512-LK+ZBXuqflI8KYXgzS5HcgkxSMAEOqilQVBMrwmWyfY7otDOL17mlPjMeB0OFUMXYKIq/qzz72HbM+J7WsBE6A==
   dependencies:
     "@lint-todo/utils" "^13.0.3"
     aria-query "^5.0.2"
     chalk "^5.2.0"
     ci-info "^3.8.0"
-    date-fns "^2.29.2"
+    date-fns "^2.30.0"
     ember-template-imports "^3.4.2"
     ember-template-recast "^6.1.4"
     eslint-formatter-kakoune "^1.0.0"
@@ -5915,7 +5915,7 @@ ember-template-lint@5.7.3:
     micromatch "^4.0.5"
     resolve "^1.22.3"
     v8-compile-cache "^2.3.0"
-    yargs "^17.7.1"
+    yargs "^17.7.2"
 
 ember-template-recast@^6.1.4:
   version "6.1.4"
@@ -15125,7 +15125,7 @@ yargs@16.2.0, yargs@^16.0.0:
     y18n "^5.0.5"
     yargs-parser "^20.2.2"
 
-yargs@^17.1.0, yargs@^17.1.1, yargs@^17.7.1:
+yargs@^17.1.0, yargs@^17.1.1, yargs@^17.7.2:
   version "17.7.2"
   resolved "https://registry.yarnpkg.com/yargs/-/yargs-17.7.2.tgz#991df39aca675a192b816e1e0363f9d75d2aa269"
   integrity sha512-7dSzzRQ++CKnNI/krKnYRV7JKKPUXMEh61soaHKg9mrWEhzFWhFnxPxGl+69cD1Ou63C13NUPCnmIcrvqCuM6w==
