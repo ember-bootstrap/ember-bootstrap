@@ -222,20 +222,20 @@ module.exports = {
   },
 
   filterComponents(tree) {
-    let whitelist = this.generateWhitelist(this.bootstrapOptions.whitelist);
-    let blacklist = this.bootstrapOptions.blacklist || [];
+    let includeList = this.generateIncludeList(this.bootstrapOptions.include);
+    let excludeList = this.bootstrapOptions.exclude || [];
 
     // exit early if no opts defined
-    if (whitelist.length === 0 && blacklist.length === 0) {
+    if (includeList.length === 0 && excludeList.length === 0) {
       return tree;
     }
 
     return new Funnel(tree, {
-      exclude: [(name) => this.excludeComponent(name, whitelist, blacklist)],
+      exclude: [(name) => this.excludeComponent(name, includeList, excludeList)],
     });
   },
 
-  excludeComponent(name, whitelist, blacklist) {
+  excludeComponent(name, includeList, excludeList) {
     let regex = /^(templates\/)?components\/(base\/)?/;
     let isComponent = regex.test(name);
     if (!isComponent) {
@@ -250,38 +250,38 @@ module.exports = {
       baseName = baseName.substring(0, baseName.lastIndexOf('.'));
     }
 
-    let isWhitelisted = whitelist.indexOf(baseName) !== -1;
-    let isBlacklisted = blacklist.indexOf(baseName) !== -1;
+    let isIncluded = includeList.indexOf(baseName) !== -1;
+    let isExcluded = excludeList.indexOf(baseName) !== -1;
 
-    if (whitelist.length === 0 && blacklist.length === 0) {
+    if (includeList.length === 0 && excludeList.length === 0) {
       return false;
     }
 
-    if (whitelist.length && blacklist.length === 0) {
-      return !isWhitelisted;
+    if (includeList.length && excludeList.length === 0) {
+      return !isIncluded;
     }
 
-    return isBlacklisted;
+    return isExcluded;
   },
 
-  generateWhitelist(whitelist) {
+  generateIncludeList(includeList) {
     let list = [];
 
-    if (!whitelist) {
+    if (!includeList) {
       return list;
     }
 
-    function _addToWhitelist(item) {
+    function _addToIncludeList(item) {
       if (list.indexOf(item) === -1) {
         list.push(item);
 
         if (componentDependencies[item]) {
-          componentDependencies[item].forEach(_addToWhitelist);
+          componentDependencies[item].forEach(_addToIncludeList);
         }
       }
     }
 
-    whitelist.forEach(_addToWhitelist);
+    includeList.forEach(_addToIncludeList);
     return list;
   },
 };

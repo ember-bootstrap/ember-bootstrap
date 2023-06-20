@@ -12,31 +12,31 @@ describe('index', function () {
       'templates/components/bs-accordion/item.hbs',
     ].forEach(function (name) {
       describe(`works for ${name}`, function () {
-        it('should return `true` if the file is in the blacklist', function () {
+        it('should return `true` if the file is in the `exclude` list', function () {
           let result = addonIndex.excludeComponent(name, [], ['bs-accordion']);
 
           expect(result).to.be.true;
         });
 
-        it('should return `false` if the file is not in the blacklist', function () {
+        it('should return `false` if the file is not in the `exclude` list', function () {
           let result = addonIndex.excludeComponent(name, [], ['bs-button']);
 
           expect(result).to.be.false;
         });
 
-        it('should return `false` if the file is in the whitelist', function () {
+        it('should return `false` if the file is in the `include` list', function () {
           let result = addonIndex.excludeComponent(name, ['bs-accordion'], []);
 
           expect(result).to.be.false;
         });
 
-        it('should return `true` if the file is not in the whitelist', function () {
+        it('should return `true` if the file is not in the `include` list', function () {
           let result = addonIndex.excludeComponent(name, ['bs-form'], []);
 
           expect(result).to.be.true;
         });
 
-        it('should return `true` if the file is in both the whitelist and blacklist', function () {
+        it('should return `true` if the file is in both the `include` list and `exclude` list', function () {
           let result = addonIndex.excludeComponent(name, ['bs-accordion'], ['bs-accordion']);
 
           expect(result).to.be.true;
@@ -51,15 +51,15 @@ describe('index', function () {
     });
   });
 
-  describe('whitelist', function () {
-    it('whitelist is correct for simple component', function () {
-      let result = addonIndex.generateWhitelist(['bs-button']);
+  describe('generateExcludeList', function () {
+    it('`include` list is correct for simple component', function () {
+      let result = addonIndex.generateExcludeList(['bs-button']);
 
       expect(result).to.deep.equal(['bs-button']);
     });
 
-    it('whitelist is correct for component with dependencies', function () {
-      let result = addonIndex.generateWhitelist(['bs-button-group']);
+    it('`include` list is correct for component with dependencies', function () {
+      let result = addonIndex.generateExcludeList(['bs-button-group']);
 
       expect(result).to.deep.equal(['bs-button-group', 'bs-button']);
     });
