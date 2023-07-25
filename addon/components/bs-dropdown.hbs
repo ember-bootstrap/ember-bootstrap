@@ -25,6 +25,7 @@
         )
         menu=(component (ensure-safe-component (bs-default @menuComponent (component "bs-dropdown/menu")))
           isOpen=this.isOpen
+          inNav=@inNav
           direction=this.direction
           toggleElement=this.toggleElement
           registerChildElement=this.registerChildElement

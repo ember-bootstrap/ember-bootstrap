@@ -71,6 +71,15 @@ export default class DropdownMenu extends Component {
   }
 
   /**
+   * @property inNav
+   * @type {boolean}
+   * @private
+   */
+  get inNav() {
+    return this.args.inNav ?? false;
+  }
+
+  /**
    * @property _renderInPlace
    * @type boolean
    * @private
@@ -151,6 +160,10 @@ export default class DropdownMenu extends Component {
         {
           name: 'flip',
           enabled: this.flip,
+        },
+        {
+          name: 'applyStyles',
+          enabled: !this.inNav,
         },
       ],
     };

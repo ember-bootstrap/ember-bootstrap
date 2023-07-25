@@ -1,6 +1,6 @@
 import { module } from 'qunit';
 import { setupRenderingTest } from 'ember-qunit';
-import { render } from '@ember/test-helpers';
+import { click, render } from '@ember/test-helpers';
 import { test } from '../../helpers/bootstrap';
 import hbs from 'htmlbars-inline-precompile';
 import setupNoDeprecations from '../../helpers/setup-no-deprecations';
@@ -59,6 +59,13 @@ module('Integration | Component | bs-nav', function (hooks) {
     assert
       .dom('.nav > li.dropdown')
       .exists({ count: 1 }, 'it has a dropdown as a nav item');
+
+    await click('.nav a.dropdown-toggle');
+    assert.equal(
+      this.element.querySelector('.nav > li.dropdown .dropdown-menu').style.length,
+      0,
+      'Dynamic positioning not applied when inNav is set to true'
+    );
   });
 
   test('it passes accessibility checks', async function (assert) {
