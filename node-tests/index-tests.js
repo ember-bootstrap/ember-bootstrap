@@ -51,15 +51,15 @@ describe('index', function () {
     });
   });
 
-  describe('generateExcludeList', function () {
+  describe('generateIncludeList', function () {
     it('`include` list is correct for simple component', function () {
-      let result = addonIndex.generateExcludeList(['bs-button']);
+      let result = addonIndex.generateIncludeList(['bs-button']);
 
       expect(result).to.deep.equal(['bs-button']);
     });
 
     it('`include` list is correct for component with dependencies', function () {
-      let result = addonIndex.generateExcludeList(['bs-button-group']);
+      let result = addonIndex.generateIncludeList(['bs-button-group']);
 
       expect(result).to.deep.equal(['bs-button-group', 'bs-button']);
     });
