@@ -51,14 +51,32 @@ describe('index', function () {
     });
   });
 
+  describe('filterComponents', function () {
+    it('throws an error if the `whitelist` option is used', function () {
+      addonIndex.bootstrapOptions = { whitelist: ['bs-button'] };
+
+      expect(addonIndex.filterComponents.bind(addonIndex)).to.throw(
+        'The `whitelist` option has been removed. Please use the `include` option instead.'
+      );
+    });
+
+    it('throws an error if the `blacklist` option is used', function () {
+      addonIndex.bootstrapOptions = { blacklist: ['bs-button'] };
+
+      expect(addonIndex.filterComponents.bind(addonIndex)).to.throw(
+        'The `blacklist` option has been removed. Please use the `exclude` option instead.'
+      );
+    });
+  });
+
   describe('generateIncludeList', function () {
-    it('`include` list is correct for simple component', function () {
+    it('include list is correct for simple component', function () {
       let result = addonIndex.generateIncludeList(['bs-button']);
 
       expect(result).to.deep.equal(['bs-button']);
     });
 
-    it('`include` list is correct for component with dependencies', function () {
+    it('include list is correct for component with dependencies', function () {
       let result = addonIndex.generateIncludeList(['bs-button-group']);
 
       expect(result).to.deep.equal(['bs-button-group', 'bs-button']);

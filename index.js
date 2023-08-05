@@ -222,6 +222,13 @@ module.exports = {
   },
 
   filterComponents(tree) {
+    if (this.bootstrapOptions.whitelist) {
+      throw new SilentError('The `whitelist` option has been removed. Please use the `include` option instead.');
+    }
+    if (this.bootstrapOptions.blacklist) {
+      throw new SilentError('The `blacklist` option has been removed. Please use the `exclude` option instead.');
+    }
+
     let includeList = this.generateIncludeList(this.bootstrapOptions.include);
     let excludeList = this.bootstrapOptions.exclude || [];
 
