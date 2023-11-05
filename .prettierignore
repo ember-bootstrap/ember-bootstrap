@@ -1,3 +1,5 @@
+*.hbs
+
 # unconventional js
 /blueprints/*/files/
 /vendor/

@@ -21,7 +21,7 @@ jobs:
       - name: Setup node.js
         uses: actions/setup-node@v3
         with:
-          node-version: 16
+          node-version: 18
       - name: Install dependencies
         uses: bahmutov/npm-install@v1
       - name: Lint
@@ -40,7 +40,7 @@ jobs:
       - name: Setup node.js
         uses: actions/setup-node@v3
         with:
-          node-version: 16
+          node-version: 18
       - name: Install dependencies
         uses: bahmutov/npm-install@v1
         with:
@@ -91,7 +91,7 @@ jobs:
       - name: Setup node.js
         uses: actions/setup-node@v3
         with:
-          node-version: 16
+          node-version: 18
       - name: Install dependencies
         uses: bahmutov/npm-install@v1
         with:
@@ -112,7 +112,7 @@ jobs:
       - name: Install Node
         uses: actions/setup-node@v3
         with:
-          node-version: 16
+          node-version: 18
       - name: Install Dependencies of Ember Bootstrap addon
         uses: bahmutov/npm-install@v1
       - name: Install Dependencies of docs app
