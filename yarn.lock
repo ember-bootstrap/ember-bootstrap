@@ -5259,9 +5259,10 @@ ember-cli-dependency-checker@3.3.1:
     resolve "^1.5.0"
     semver "^5.3.0"
 
-ember-cli-fastboot-testing@embermap/ember-cli-fastboot-testing#dbad33979d01e3e8b4f7092c5ea6f01bb77d26bf:
-  version "0.6.0"
-  resolved "https://codeload.github.com/embermap/ember-cli-fastboot-testing/tar.gz/dbad33979d01e3e8b4f7092c5ea6f01bb77d26bf"
+ember-cli-fastboot-testing@embermap/ember-cli-fastboot-testing#edcd4d4e54247840abfc6a9fec739ce9753f0cd7:
+  version "0.6.1"
+  uid edcd4d4e54247840abfc6a9fec739ce9753f0cd7
+  resolved "https://codeload.github.com/embermap/ember-cli-fastboot-testing/tar.gz/edcd4d4e54247840abfc6a9fec739ce9753f0cd7"
   dependencies:
     body-parser "^1.20.0"
     ember-auto-import "^2.6.1"
