@@ -15,6 +15,8 @@ module.exports = async function () {
           devDependencies: {
             'ember-source': '~3.28.0',
             bootstrap: bootstrapVersion,
+            // ember-pooper-modifier >= 4.0.0 does not support Ember < 4.8
+            'ember-popper-modifier': '^3.0.0',
             // ember-resolver >= 9.0.0 does not support Ember 3.28
             'ember-resolver': '^8.1.0',
           },
@@ -26,6 +28,8 @@ module.exports = async function () {
           devDependencies: {
             'ember-source': '~4.4.0',
             bootstrap: bootstrapVersion,
+            // ember-pooper-modifier >= 4.0.0 does not support Ember < 4.8
+            'ember-popper-modifier': '^3.0.0',
           },
         },
       },
@@ -89,6 +93,8 @@ module.exports = async function () {
           devDependencies: {
             'ember-source': '~3.28.0',
             bootstrap: bootstrapVersion,
+            // ember-pooper-modifier >= 4.0.0 does not support Ember < 4.8
+            'ember-popper-modifier': '^3.0.0',
           },
           ember: {
             edition: 'classic',
