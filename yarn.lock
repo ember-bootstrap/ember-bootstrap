@@ -3067,7 +3067,7 @@ boom@0.4.x:
   dependencies:
     hoek "0.9.x"
 
-bootstrap@^5.2.3:
+bootstrap@5.3.2:
   version "5.3.2"
   resolved "https://registry.yarnpkg.com/bootstrap/-/bootstrap-5.3.2.tgz#97226583f27aae93b2b28ab23f4c114757ff16ae"
   integrity sha512-D32nmNWiQHo94BKHLmOrdjlL05q1c8oxbtBphQFb9Z5to6eGRDCm0QgeaZ4zFBHzfg2++rqa2JkqCcxDy0sH0g==
