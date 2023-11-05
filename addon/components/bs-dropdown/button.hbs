@@ -1,6 +1,5 @@
 <button
   disabled={{this.__disabled}}
-  type={{this.buttonType}}
   aria-expanded={{if @isOpen "true" "false"}}
   class="btn dropdown-toggle {{if @active "active"}} {{if this.block "btn-block"}} {{bs-size-class "btn" @size}} {{bs-type-class "btn" @type default=(if (macroCondition (macroGetOwnConfig "isBS3")) "default" "secondary") outline=@outline}}"
   ...attributes
