@@ -77,7 +77,7 @@
   "devDependencies": {
     "@ember/optional-features": "2.0.0",
     "@ember/string": "3.1.1",
-    "@ember/test-helpers": "2.9.3",
+    "@ember/test-helpers": "2.9.4",
     "@embroider/test-setup": "1.8.3",
     "@glimmer/component": "1.1.2",
     "@glimmer/tracking": "1.1.2",
