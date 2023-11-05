@@ -119,9 +119,14 @@ jobs:
         uses: bahmutov/npm-install@v1
         with:
           working-directory: docs
-      - name: Run Tests
+      - name: Run Ember Tests
         run: yarn test
         working-directory: docs
+      - name: Build including API docs
+        run: yarn run docs:build
+      # TODO: Perform some basic steps that the build contains API docs
+      #       and works as expected.
+
 #  test-browserstack:
 #    name: Browserstack Tests
 #    runs-on: ubuntu-latest
