@@ -29,7 +29,7 @@
 {{else}}
   <button
     disabled={{this.__disabled}}
-    type={{this.buttonType}}
+    type="button"
     class="btn {{if this.active "active"}} {{if this.block "btn-block"}} {{bs-size-class "btn" @size}} {{bs-type-class "btn" @type default="secondary" outline=@outline}}"
     ...attributes
     {{on "click" this.handleClick}}

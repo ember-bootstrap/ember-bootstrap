@@ -57,7 +57,7 @@
     "ember-cli-build-config-editor": "0.5.1",
     "ember-cli-htmlbars": "^6.0.1",
     "ember-cli-version-checker": "^5.1.2",
-    "ember-concurrency": "^2.1.2",
+    "ember-concurrency": "^2.1.2 || ^3.0.0",
     "ember-decorators": "^6.1.0",
     "ember-element-helper": "^0.6.0 || ^0.7.0 || ^0.8.0",
     "ember-focus-trap": "^1.0.0",
@@ -77,14 +77,14 @@
   "devDependencies": {
     "@ember/optional-features": "2.0.0",
     "@ember/string": "3.1.1",
-    "@ember/test-helpers": "2.9.3",
+    "@ember/test-helpers": "2.9.4",
     "@embroider/test-setup": "1.8.3",
     "@glimmer/component": "1.1.2",
     "@glimmer/tracking": "1.1.2",
     "babel-eslint": "10.1.0",
-    "bootstrap": "5.2.3",
+    "bootstrap": "5.3.2",
     "broccoli-asset-rev": "3.0.0",
-    "chai": "4.3.7",
+    "chai": "4.3.10",
     "chai-things": "0.2.0",
     "ember-a11y-testing": "5.2.1",
     "ember-cli": "4.12.1",
@@ -94,7 +94,7 @@
     "ember-cli-content-security-policy": "2.0.3",
     "ember-cli-dependency-checker": "3.3.1",
     "ember-cli-fastboot": "4.1.1",
-    "ember-cli-fastboot-testing": "embermap/ember-cli-fastboot-testing#dbad33979d01e3e8b4f7092c5ea6f01bb77d26bf",
+    "ember-cli-fastboot-testing": "^0.6.1",
     "ember-cli-inject-live-reload": "2.1.0",
     "ember-cli-sri": "2.1.1",
     "ember-cli-terser": "4.0.2",
@@ -147,7 +147,7 @@
     "ember-source": ">=3.28"
   },
   "engines": {
-    "node": "16.* || >= 18"
+    "node": "18.* || >= 20"
   },
   "publishConfig": {
     "registry": "https://registry.npmjs.org"

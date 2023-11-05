@@ -113,7 +113,7 @@ import { dedupeTracked } from 'tracked-toolbox';
     <form.element @controlType="email" @label="Email" @property="email" />
     <form.element @controlType="password" @label="Password" @property="password" />
     <form.element @controlType="checkbox" @label="Remember me" @property="rememberMe" />
-    <BsButton @defaultText="Submit" @type="primary" @buttonType="submit" />
+    <form.submitButton>Submit</form.submitButton>
   </BsForm>
   ```
 
