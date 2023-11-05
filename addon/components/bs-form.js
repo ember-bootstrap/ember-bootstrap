@@ -21,7 +21,7 @@ import { ref } from 'ember-ref-bucket';
 
   ### Submitting the form
 
-  The form yields a `submitButton` component, which is a preconfigured `<BsButton>` with `@type="primary"` and `@buttonType="submit"`.
+  The form yields a `submitButton` component, which is a preconfigured `<BsButton>` with `@type="primary"` and `type="submit"`.
   The button is disabled while a form submission is pending. Additionally, the button state is bound to the form submission state.
 
   ```hbs
