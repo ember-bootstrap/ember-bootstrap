@@ -3067,10 +3067,10 @@ boom@0.4.x:
   dependencies:
     hoek "0.9.x"
 
-bootstrap@5.2.3:
-  version "5.2.3"
-  resolved "https://registry.yarnpkg.com/bootstrap/-/bootstrap-5.2.3.tgz#54739f4414de121b9785c5da3c87b37ff008322b"
-  integrity sha512-cEKPM+fwb3cT8NzQZYEu4HilJ3anCrWqh3CHAok1p9jXqMPsPTBhU25fBckEJHJ/p+tTxTFTsFQGM+gaHpi3QQ==
+bootstrap@^5.2.3:
+  version "5.3.2"
+  resolved "https://registry.yarnpkg.com/bootstrap/-/bootstrap-5.3.2.tgz#97226583f27aae93b2b28ab23f4c114757ff16ae"
+  integrity sha512-D32nmNWiQHo94BKHLmOrdjlL05q1c8oxbtBphQFb9Z5to6eGRDCm0QgeaZ4zFBHzfg2++rqa2JkqCcxDy0sH0g==
 
 bower-config@^1.4.3:
   version "1.4.3"
@@ -5261,7 +5261,6 @@ ember-cli-dependency-checker@3.3.1:
 
 ember-cli-fastboot-testing@embermap/ember-cli-fastboot-testing#dbad33979d01e3e8b4f7092c5ea6f01bb77d26bf:
   version "0.6.0"
-  uid dbad33979d01e3e8b4f7092c5ea6f01bb77d26bf
   resolved "https://codeload.github.com/embermap/ember-cli-fastboot-testing/tar.gz/dbad33979d01e3e8b4f7092c5ea6f01bb77d26bf"
   dependencies:
     body-parser "^1.20.0"
