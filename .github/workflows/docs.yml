@@ -8,13 +8,13 @@ on:
       - edited
 
 jobs:
-  build:
+  deploy:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v3
       - name: Setup node.js
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v3
         with:
           node-version: 18
       - name: Install addon dependencies
@@ -25,20 +25,6 @@ jobs:
           working-directory: docs
       - name: Build docs
         run: yarn run docs:build
-      - name: Upload docs build
-        uses: actions/upload-artifact@v3
-        with:
-          name: docs-build
-          path: docs/build
-
-  deploy:
-    if: github.event.release
-    runs-on: ubuntu-latest
-    steps:
-      - name: Download docs build
-        uses: actions/download-artifact@v3
-        with:
-          name: docs-build
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
         with:
