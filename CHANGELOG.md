@@ -12,7 +12,12 @@
 
 ## v6.0.0-6 (2023-11-06)
 
-Fixing issues with docs app...
+Fixes deployment of docs only.
+
+
+## v6.0.0-5 (2023-11-06)
+
+Fixes deployment of docs only.
 
 
 ## v6.0.0-4 (2023-11-06)
