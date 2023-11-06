@@ -1,6 +1,7 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "extends": [
-    "local>kaliber5/renovate-config:ember-addon"
+    "local>kaliber5/renovate-config:ember-addon",
+    ":preserveSemverRanges"
   ]
 }
