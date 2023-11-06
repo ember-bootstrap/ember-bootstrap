@@ -131,7 +131,7 @@ To do so, you need to provide a component <code>{{bs-form/element/control/my-cus
   &lt;form.element @controlType="email" @label="Email" @property="email" /&gt;
   &lt;form.element @controlType="password" @label="Password" @property="password" /&gt;
   &lt;form.element @controlType="checkbox" @label="Remember me" @property="rememberMe" /&gt;
-  &lt;BsButton @defaultText="Submit" @type="primary" @buttonType="submit" /&gt;
+  &lt;form.submitButton&gt;Submit&lt;/form.submitButton&gt;
 &lt;/BsForm&gt;
 </code></pre>
 <p>By using this indirection in comparison to directly binding the <code>value</code> property, you get the benefit of automatic
@@ -1217,8 +1217,8 @@ you can pass them to the yielded <code>control</code> component:</p>
               </div>
             
               <div class="description">
-                <p>The Bootstrap grid class for form labels within a horizontal layout form. Defaults to the value of the same
-            property of the parent form. The corresponding grid class for form controls is automatically computed.</p>
+                <p>The Bootstrap grid classes for form labels within a horizontal layout form. Defaults to the value of the same
+            property of the parent form. The corresponding grid classes for form controls are automatically computed.</p>
             
               </div>
             

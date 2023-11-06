@@ -82,7 +82,7 @@ import { ref } from &#x27;ember-ref-bucket&#x27;;
 
   ### Submitting the form
 
-  The form yields a &#x60;submitButton&#x60; component, which is a preconfigured &#x60;&lt;BsButton&gt;&#x60; with &#x60;@type=&quot;primary&quot;&#x60; and &#x60;@buttonType=&quot;submit&quot;&#x60;.
+  The form yields a &#x60;submitButton&#x60; component, which is a preconfigured &#x60;&lt;BsButton&gt;&#x60; with &#x60;@type=&quot;primary&quot;&#x60; and &#x60;type=&quot;submit&quot;&#x60;.
   The button is disabled while a form submission is pending. Additionally, the button state is bound to the form submission state.
 
   &#x60;&#x60;&#x60;hbs
@@ -213,6 +213,14 @@ export default class Form extends Component {
    * child &#x60;Components.FormElement&#x60;s will look at the validation information of their &#x60;property&#x60; and render their form group accordingly.
    * Moreover, the form&#x27;s &#x60;submit&#x60; event handler will validate the model and deny submitting if the model is not validated successfully.
    *
+   * &#x60;&lt;BsForm&gt;&#x60; yields the form&#x27;s model as &#x60;form&#x60; property:
+   *
+   * &#x60;&#x60;&#x60;hbs
+   * &lt;BsForm @model={{this.formModel}} as |form|&gt;
+   *   {{! this.formModel === form.model }}
+   * &lt;/BsForm&gt;
+   * &#x60;&#x60;&#x60;
+   *
    * @property model
    * @type object
    * @public
@@ -242,7 +250,7 @@ export default class Form extends Component {
    */
 
   /**
-   * The Bootstrap grid class for form labels. This is used by the &#x60;Components.FormElement&#x60; class as a default for the
+   * The Bootstrap grid classes for form labels. This is used by the &#x60;Components.FormElement&#x60; class as a default for the
    * whole form.
    *
    * @property horizontalLabelGridClass
@@ -563,9 +571,7 @@ export default class Form extends Component {
   handleKeyPress(event) {
     let code = event.keyCode || event.which;
     if (code === 13 &amp;&amp; this.args.submitOnEnter) {
-      let submitEvent = document.createEvent(&#x27;Event&#x27;);
-      submitEvent.initEvent(&#x27;submit&#x27;, true, true);
-      event.target.dispatchEvent(submitEvent);
+      this.submitHandler();
     }
   }
 

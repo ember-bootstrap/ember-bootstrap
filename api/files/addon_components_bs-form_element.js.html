@@ -174,7 +174,7 @@ import { dedupeTracked } from &#x27;tracked-toolbox&#x27;;
     &lt;form.element @controlType=&quot;email&quot; @label=&quot;Email&quot; @property=&quot;email&quot; /&gt;
     &lt;form.element @controlType=&quot;password&quot; @label=&quot;Password&quot; @property=&quot;password&quot; /&gt;
     &lt;form.element @controlType=&quot;checkbox&quot; @label=&quot;Remember me&quot; @property=&quot;rememberMe&quot; /&gt;
-    &lt;BsButton @defaultText=&quot;Submit&quot; @type=&quot;primary&quot; @buttonType=&quot;submit&quot; /&gt;
+    &lt;form.submitButton&gt;Submit&lt;/form.submitButton&gt;
   &lt;/BsForm&gt;
   &#x60;&#x60;&#x60;
 
@@ -718,8 +718,8 @@ export default class FormElement extends Component {
    */
 
   /**
-   * The Bootstrap grid class for form labels within a horizontal layout form. Defaults to the value of the same
-   * property of the parent form. The corresponding grid class for form controls is automatically computed.
+   * The Bootstrap grid classes for form labels within a horizontal layout form. Defaults to the value of the same
+   * property of the parent form. The corresponding grid classes for form controls are automatically computed.
    *
    * @property horizontalLabelGridClass
    * @type string

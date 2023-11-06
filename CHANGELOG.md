@@ -8,6 +8,76 @@
 
 
 
+
+
+## v6.0.0-6 (2023-11-06)
+
+Fixing issues with docs app...
+
+
+## v6.0.0-4 (2023-11-06)
+
+Fixes deployment of docs only.
+
+
+## v6.0.0-3 (2023-11-06)
+
+#### :boom: Breaking Change
+* [#1961](https://github.com/ember-bootstrap/ember-bootstrap/pull/1961) drop support for node 16 ([@jelhan](https://github.com/jelhan))
+* [#1935](https://github.com/ember-bootstrap/ember-bootstrap/pull/1935) Replace blacklist/whitelist with include/exclude in config (Closes [#1154](https://github.com/kaliber5/ember-bootstrap/issues/1154)) ([@seanCodes](https://github.com/seanCodes))
+* [#1929](https://github.com/ember-bootstrap/ember-bootstrap/pull/1929) Drop node 14 support ([@simonihmig](https://github.com/simonihmig))
+* [#1913](https://github.com/ember-bootstrap/ember-bootstrap/pull/1913) remove buttonType argument of  ([@jelhan](https://github.com/jelhan))
+
+#### Features
+* [#1950](https://github.com/ember-bootstrap/ember-bootstrap/pull/1950) Support ember-element-helper v0.7.0 and v0.8.0 ([@SaumyaBhushan](https://github.com/SaumyaBhushan))
+* [#1958](https://github.com/ember-bootstrap/ember-bootstrap/pull/1958) support ember-popper-modifier v4 ([@jelhan](https://github.com/jelhan))
+* [#1952](https://github.com/ember-bootstrap/ember-bootstrap/pull/1952) support ember-concurrency v3 ([@jelhan](https://github.com/jelhan))
+* [#1919](https://github.com/ember-bootstrap/ember-bootstrap/pull/1919) Allow multiple custom grid classes in horizontal layout ([@dagroe](https://github.com/dagroe))
+* [#1811](https://github.com/ember-bootstrap/ember-bootstrap/pull/1811) Yield form's model from  ([@bvedad](https://github.com/bvedad))
+
+#### Bug Fixes
+* [#1911](https://github.com/ember-bootstrap/ember-bootstrap/pull/1911) Fix submitOnEnter when multiple input elements are present ([@jelhan](https://github.com/jelhan))
+
+#### Documentation
+* [#1962](https://github.com/ember-bootstrap/ember-bootstrap/pull/1962) clean-up leftovers from removed @buttonType argument of BsButton ([@jelhan](https://github.com/jelhan))
+
+#### Internal
+* [#1956](https://github.com/ember-bootstrap/ember-bootstrap/pull/1956) fix failing tests in CI due to change in recent Bootstrap version ([@jelhan](https://github.com/jelhan))
+* [#1909](https://github.com/ember-bootstrap/ember-bootstrap/pull/1909) Disable fastboot tests for ember canary ([@jelhan](https://github.com/jelhan))
+* [#1908](https://github.com/ember-bootstrap/ember-bootstrap/pull/1908) remove ember-export-application-global dev dependency ([@jelhan](https://github.com/jelhan))
+
+#### Committers: 6
+- Daniel Gröger ([@dagroe](https://github.com/dagroe))
+- Jeldrik Hanschke ([@jelhan](https://github.com/jelhan))
+- Saumya ([@SaumyaBhushan](https://github.com/SaumyaBhushan))
+- Sean Juarez ([@seanCodes](https://github.com/seanCodes))
+- Simon Ihmig ([@simonihmig](https://github.com/simonihmig))
+- Vedad Burgic ([@bvedad](https://github.com/bvedad))
+
+## v6.0.0-2 (2023-03-15)
+
+#### :boom: Breaking Change
+* [#1870](https://github.com/ember-bootstrap/ember-bootstrap/pull/1870) move @glimmer/component and @glimmer/tracking to peer dependencies ([@jelhan](https://github.com/jelhan))
+
+#### Features
+* [#1895](https://github.com/ember-bootstrap/ember-bootstrap/pull/1895) support tracked-toolbox v2 ([@jelhan](https://github.com/jelhan))
+
+#### Bug Fixes
+* [#1867](https://github.com/ember-bootstrap/ember-bootstrap/pull/1867) fix: correct dropdown direction class for BS5 ([@silhusk](https://github.com/silhusk))
+
+#### Documentation
+* [#1874](https://github.com/ember-bootstrap/ember-bootstrap/pull/1874) remove usage of outdated component name at demo page for BsDropdown ([@Sheikh-JamirAlam](https://github.com/Sheikh-JamirAlam))
+
+#### Internal
+* [#1901](https://github.com/ember-bootstrap/ember-bootstrap/pull/1901) should not run ember test for node-tests scenario ([@jelhan](https://github.com/jelhan))
+* [#1878](https://github.com/ember-bootstrap/ember-bootstrap/pull/1878) add basic test coverage for docs app ([@jelhan](https://github.com/jelhan))
+* [#1879](https://github.com/ember-bootstrap/ember-bootstrap/pull/1879) run tests against all supported Ember LTS versions in CI ([@jelhan](https://github.com/jelhan))
+
+#### Committers: 3
+- Jeldrik Hanschke ([@jelhan](https://github.com/jelhan))
+- Sheikh Jamir Alam ([@Sheikh-JamirAlam](https://github.com/Sheikh-JamirAlam))
+- [@silhusk](https://github.com/silhusk)
+
 ## v6.0.0-1 (2023-01-19)
 
 #### Features

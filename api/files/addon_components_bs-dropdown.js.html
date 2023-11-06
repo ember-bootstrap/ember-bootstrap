@@ -64,6 +64,7 @@ import { action, computed } from &#x27;@ember/object&#x27;;
 import Component from &#x27;@ember/component&#x27;;
 import defaultValue from &#x27;ember-bootstrap/utils/default-decorator&#x27;;
 import { assert } from &#x27;@ember/debug&#x27;;
+import { getOwnConfig, macroCondition } from &#x27;@embroider/macros&#x27;;
 import deprecateSubclassing from &#x27;ember-bootstrap/utils/deprecate-subclassing&#x27;;
 
 const ESCAPE_KEYCODE = 27; // KeyboardEvent.which value for Escape (Esc) key
@@ -299,10 +300,18 @@ export default class Dropdown extends Component {
    */
   @computed(&#x27;direction&#x27;, &#x27;hasButton&#x27;, &#x27;toggleElement.classList&#x27;)
   get containerClass() {
+    let dropDirectionClass = &#x60;drop${this.direction}&#x60;;
+    if (macroCondition(getOwnConfig().isBS5)) {
+      if (this.direction === &#x27;left&#x27;) {
+        dropDirectionClass = &#x27;dropstart&#x27;;
+      } else if (this.direction === &#x27;right&#x27;) {
+        dropDirectionClass = &#x27;dropend&#x27;;
+      }
+    }
     if (this.hasButton &amp;&amp; !this.toggleElement.classList.contains(&#x27;btn-block&#x27;)) {
-      return this.direction !== &#x27;down&#x27; ? &#x60;btn-group drop${this.direction}&#x60; : &#x27;btn-group&#x27;;
+      return this.direction !== &#x27;down&#x27; ? &#x60;btn-group ${dropDirectionClass}&#x60; : &#x27;btn-group&#x27;;
     } else {
-      return &#x60;drop${this.direction}&#x60;;
+      return dropDirectionClass;
     }
   }
 
