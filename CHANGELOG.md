@@ -10,6 +10,11 @@
 
 
 
+## v6.0.0-4 (2023-11-06)
+
+Fixes deployment of docs only.
+
+
 ## v6.0.0-3 (2023-11-06)
 
 #### :boom: Breaking Change
