@@ -1097,7 +1097,7 @@
   resolved "https://registry.yarnpkg.com/@ember/edition-utils/-/edition-utils-1.2.0.tgz#a039f542dc14c8e8299c81cd5abba95e2459cfa6"
   integrity sha512-VmVq/8saCaPdesQmftPqbFtxJWrzxNGSQ+e8x8LLe3Hjm36pJ04Q8LeORGZkAeOhldoUX9seLGmSaHeXkIqoog==
 
-"@ember/optional-features@2.0.0":
+"@ember/optional-features@^2.0.0":
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/@ember/optional-features/-/optional-features-2.0.0.tgz#c809abd5a27d5b0ef3c6de3941334ab6153313f0"
   integrity sha512-4gkvuGRYfpAh1nwAz306cmMeC1mG7wxZnbsBZ09mMaMX/W7IyKOKc/38JwrDPUFUalmNEM7q7JEPcmew2M3Dog==
@@ -1118,14 +1118,14 @@
     ember-cli-babel "^7.26.11"
     ember-modifier-manager-polyfill "^1.2.0"
 
-"@ember/string@3.1.1":
+"@ember/string@^3.1.1":
   version "3.1.1"
   resolved "https://registry.yarnpkg.com/@ember/string/-/string-3.1.1.tgz#0a5ac0d1e4925259e41d5c8d55ef616117d47ff0"
   integrity sha512-UbXJ+k3QOrYN4SRPHgXCqYIJ+yWWUg1+vr0H4DhdQPTy8LJfyqwZ2tc5uqpSSnEXE+/1KopHBE5J8GDagAg5cg==
   dependencies:
     ember-cli-babel "^7.26.6"
 
-"@ember/test-helpers@2.9.4":
+"@ember/test-helpers@^2.9.4":
   version "2.9.4"
   resolved "https://registry.yarnpkg.com/@ember/test-helpers/-/test-helpers-2.9.4.tgz#985022e9ba05cfc918bcf08b77cbb355f85b723e"
   integrity sha512-z+Qs1NYWyIVDmrY6WdmOS5mdG1lJ5CFfzh6dRhLfs9lq45deDaDrVNcaCYhnNeJZTvUBK2XR2SvPcZm0RloXdA==
@@ -1209,7 +1209,7 @@
     semver "^7.3.5"
     typescript-memoize "^1.0.1"
 
-"@embroider/test-setup@1.8.3":
+"@embroider/test-setup@^1.8.3":
   version "1.8.3"
   resolved "https://registry.yarnpkg.com/@embroider/test-setup/-/test-setup-1.8.3.tgz#445b9fe5a363ce50367ac2114750597f98d7806d"
   integrity sha512-BCCbBG7UWkCw+cQ401Ip6LnqTRaQDeKImxR+e7Q4oP6H4EBj7p4iGR1z6fhMy4NNyXKPB6jk3bGa9bTiiNoEAw==
@@ -5151,7 +5151,7 @@ electron-to-chromium@^1.4.535:
   resolved "https://registry.yarnpkg.com/electron-to-chromium/-/electron-to-chromium-1.4.576.tgz#0c6940fdc0d60f7e34bd742b29d8fa847c9294d1"
   integrity sha512-yXsZyXJfAqzWk1WKryr0Wl0MN2D47xodPvEEwlVePBnhU5E7raevLQR+E6b9JAD3GfL/7MbAL9ZtWQQPcLx7wA==
 
-ember-a11y-testing@5.2.1:
+ember-a11y-testing@^5.2.1:
   version "5.2.1"
   resolved "https://registry.yarnpkg.com/ember-a11y-testing/-/ember-a11y-testing-5.2.1.tgz#abe1cabd5f692a883df91e280b9731bc4b8bf520"
   integrity sha512-gYIqSwCw43hRxQtwauln0hChRHyelkVTtmWVYgyvkX0+YKJXz2x+IGmC1MkO62SHOjz4A9wXyNSH13jwOIbJ9A==
@@ -5216,7 +5216,7 @@ ember-cache-primitive-polyfill@^1.0.0:
     ember-compatibility-helpers "^1.2.1"
     silent-error "^1.1.1"
 
-ember-cli-app-version@6.0.1:
+ember-cli-app-version@^6.0.1:
   version "6.0.1"
   resolved "https://registry.yarnpkg.com/ember-cli-app-version/-/ember-cli-app-version-6.0.1.tgz#401cdd440c7fef2059aa54bbadae9ca581d4faa0"
   integrity sha512-XA1FwkWA5QytmWF0jcJqEr3jcZoiCl9Fb33TZgOVfClL7Voxe+/RwzISEprBRQgbf7j8z1xf8/RJCKfclUy3rQ==
@@ -5298,7 +5298,7 @@ ember-cli-babel@^8.2.0:
     resolve-package-path "^4.0.3"
     semver "^7.3.8"
 
-ember-cli-blueprint-test-helpers@0.19.2:
+ember-cli-blueprint-test-helpers@^0.19.2:
   version "0.19.2"
   resolved "https://registry.yarnpkg.com/ember-cli-blueprint-test-helpers/-/ember-cli-blueprint-test-helpers-0.19.2.tgz#9e563cd81ab39931253ced0982c5d02475895401"
   integrity sha512-otCKdGcNFK0+MkQo+LLjYbRD9EerApH6Z/odvvlL1hxrN+owHMV5E+jI2rbtdvNEH0/6w5ZqjH4kS232fvtCxQ==
@@ -5312,7 +5312,7 @@ ember-cli-blueprint-test-helpers@0.19.2:
     testdouble "^3.2.6"
     tmp-sync "^1.0.0"
 
-ember-cli-browserstack@2.0.1:
+ember-cli-browserstack@^2.0.1:
   version "2.0.1"
   resolved "https://registry.yarnpkg.com/ember-cli-browserstack/-/ember-cli-browserstack-2.0.1.tgz#4bfc6bcce28dba0a8fb4409945b8f9f9ee31abf7"
   integrity sha512-8Ki6570dTSpvYLdNZ7VvJm4Gku4ZNfF78/4BeOD2IqH/vGo80hwBNqDqRINcy8et562uEWe8gUGyeYBZ2ohhkw==
@@ -5329,7 +5329,7 @@ ember-cli-build-config-editor@^0.5.1:
   dependencies:
     recast "^0.12.0"
 
-ember-cli-content-security-policy@2.0.3:
+ember-cli-content-security-policy@^2.0.3:
   version "2.0.3"
   resolved "https://registry.yarnpkg.com/ember-cli-content-security-policy/-/ember-cli-content-security-policy-2.0.3.tgz#833eca6be4d625f8b1b85cf5bad62544b535b483"
   integrity sha512-tSGRbR2XiOjHk7oEH7LVF1y5S643rUEjl3mujI6EYPkrQbHaV0WdLyIWJkLvuP1KGnjBfvnLCyiKDFu6z2PjVg==
@@ -5340,7 +5340,7 @@ ember-cli-content-security-policy@2.0.3:
     ember-cli-babel "^7.26.3"
     ember-cli-version-checker "^5.0.2"
 
-ember-cli-dependency-checker@3.3.2:
+ember-cli-dependency-checker@^3.3.2:
   version "3.3.2"
   resolved "https://registry.yarnpkg.com/ember-cli-dependency-checker/-/ember-cli-dependency-checker-3.3.2.tgz#94ed7e8e3d47e494082eb9ccfaa489d603ab6017"
   integrity sha512-PwkrW5oYsdPWwt+0Tojufmv/hxVETTjkrEdK7ANQB2VSnqpA5UcYubwpQM9ONuR2J8wyNDMwEHlqIrk/FYtBsQ==
@@ -5351,7 +5351,7 @@ ember-cli-dependency-checker@3.3.2:
     resolve "^1.22.0"
     semver "^5.7.1"
 
-ember-cli-fastboot-testing@0.6.1:
+ember-cli-fastboot-testing@^0.6.1:
   version "0.6.1"
   resolved "https://registry.yarnpkg.com/ember-cli-fastboot-testing/-/ember-cli-fastboot-testing-0.6.1.tgz#6ecfcd6ee96817d90d14c3e72ccb6064d23412f5"
   integrity sha512-nevPv77Wjk0Mslb0AF0wgHfbjki6Fi3/dapTrFz17WLX6n5maLr/MTL1hZcZdbT+69DHdgckCza8Z1WyxiUbBA==
@@ -5366,7 +5366,7 @@ ember-cli-fastboot-testing@0.6.1:
     resolve "^1.22.0"
     whatwg-fetch "^3.0.0"
 
-ember-cli-fastboot@4.1.1:
+ember-cli-fastboot@^4.1.1:
   version "4.1.1"
   resolved "https://registry.yarnpkg.com/ember-cli-fastboot/-/ember-cli-fastboot-4.1.1.tgz#a16db66c7dce32c5450d7a4c34e3e96792c3ae31"
   integrity sha512-9B/qJUfDVqRmZlXxP23V2AZ3hiez99DKT2cPJ0MWkjwRom/kmVJHvv5X4fxvT7MCokjOVFvzas79D5toV4GLIA==
@@ -5595,7 +5595,7 @@ ember-cli-yuidoc@^0.9.1:
     rsvp "3.0.14"
     yuidocjs "^0.10.0"
 
-ember-cli@4.12.2:
+ember-cli@~4.12.2:
   version "4.12.2"
   resolved "https://registry.yarnpkg.com/ember-cli/-/ember-cli-4.12.2.tgz#a9d2dd191093fcf18122732fae8999c9ca873447"
   integrity sha512-990UglceEsB3nd/pTI08wL+hbApICrd6P4BO88486rSf9r3XjZ7LBcD318N8I1AGe5IUDkbccMrOQxoHge6zNg==
@@ -5888,7 +5888,7 @@ ember-source-channel-url@^3.0.0:
   dependencies:
     node-fetch "^2.6.0"
 
-ember-source@4.1.0:
+ember-source@~4.1.0:
   version "4.1.0"
   resolved "https://registry.yarnpkg.com/ember-source/-/ember-source-4.1.0.tgz#0d272202c25f582f360d208002056e42315dac66"
   integrity sha512-y0gKasW2YBYYB+S8GTZjRC9r2xVNI9PySRUXkQH4+WbouXzQtcbKUqc4RVczYboFHLB4qQoz5yNZuIoogVhsLQ==
@@ -9576,7 +9576,7 @@ loader-utils@^2.0.0:
     emojis-list "^3.0.0"
     json5 "^2.1.2"
 
-loader.js@4.7.0:
+loader.js@^4.7.0:
   version "4.7.0"
   resolved "https://registry.yarnpkg.com/loader.js/-/loader.js-4.7.0.tgz#a1a52902001c83631efde9688b8ab3799325ef1f"
   integrity sha512-9M2KvGT6duzGMgkOcTkWb+PR/Q2Oe54df/tLgHGVmFpAmtqJ553xJh6N63iFYI2yjo2PeJXbS5skHi/QpJq4vA==
