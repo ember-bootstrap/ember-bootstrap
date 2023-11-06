@@ -5318,7 +5318,7 @@ ember-cli-browserstack@2.0.1:
     rsvp "^4.8.5"
     yargs "^17.1.1"
 
-ember-cli-build-config-editor@0.5.1:
+ember-cli-build-config-editor@^0.5.1:
   version "0.5.1"
   resolved "https://registry.yarnpkg.com/ember-cli-build-config-editor/-/ember-cli-build-config-editor-0.5.1.tgz#0847d07b6cb6c80bc64d47c2b9dbe0d484707395"
   integrity sha512-wNGVcpHbp6R+DeDHdpx+w4M+F+2cjaFDvf4ZV3VeIcHXLoxYlo0duXkbOLVKalHK/al6xO+rlZt5KqjK5Cyp0w==
@@ -6044,7 +6044,7 @@ ember-try@2.0.0:
     rimraf "^3.0.2"
     walk-sync "^2.2.0"
 
-ember-unique-id-helper-polyfill@1.2.2:
+ember-unique-id-helper-polyfill@^1.2.2:
   version "1.2.2"
   resolved "https://registry.yarnpkg.com/ember-unique-id-helper-polyfill/-/ember-unique-id-helper-polyfill-1.2.2.tgz#64ab71b378cca117aa7d56d4275f47ff3b830b6d"
   integrity sha512-gjcwTBkCDUA0iYFS7aArfJub+eos/itxEsC399JUbdKNIBJLesB/1OHnmxLLwExZHp7gyHuiDFOPcknafhFm3g==
