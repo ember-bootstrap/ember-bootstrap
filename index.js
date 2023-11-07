@@ -84,11 +84,13 @@ module.exports = {
     if (!this.hasPreprocessor()) {
       // / Import css from bootstrap
       if (options.importBootstrapCSS) {
+        this.needsBootstrapStyles = true;
         this.import(path.join(vendorPath, 'bootstrap.css'));
         this.import(path.join(vendorPath, 'bootstrap.css.map'), { destDir: 'assets' });
       }
 
       if (options.importBootstrapTheme) {
+        this.needsBootstrapStyles = true;
         this.import(path.join(vendorPath, 'bootstrap-theme.css'));
         this.import(path.join(vendorPath, 'bootstrap-theme.css.map'), { destDir: 'assets' });
       }
@@ -168,7 +170,7 @@ module.exports = {
   treeForVendor(tree) {
     let trees = [tree];
 
-    if (!this.hasPreprocessor()) {
+    if (!this.hasPreprocessor() && this.needsBootstrapStyles) {
       trees.push(
         new Funnel(this.getBootstrapStylesPath(), {
           destDir: 'ember-bootstrap',
