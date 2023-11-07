@@ -144,7 +144,7 @@
   "peerDependencies": {
     "@glimmer/component": "^1.0.4",
     "@glimmer/tracking": "^1.0.4",
-    "ember-source": ">=3.28"
+    "ember-source": ">=4.8.0"
   },
   "engines": {
     "node": "18.* || >= 20"

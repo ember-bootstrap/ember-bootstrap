@@ -10,34 +10,19 @@ module.exports = async function () {
     useYarn: true,
     scenarios: [
       {
-        name: 'ember-lts-3.28',
-        npm: {
-          devDependencies: {
-            'ember-source': '~3.28.0',
-            bootstrap: bootstrapVersion,
-            // ember-pooper-modifier >= 4.0.0 does not support Ember < 4.8
-            'ember-popper-modifier': '^3.0.0',
-            // ember-resolver >= 9.0.0 does not support Ember 3.28
-            'ember-resolver': '^8.1.0',
-          },
-        },
-      },
-      {
-        name: 'ember-lts-4.4',
-        npm: {
-          devDependencies: {
-            'ember-source': '~4.4.0',
-            bootstrap: bootstrapVersion,
-            // ember-pooper-modifier >= 4.0.0 does not support Ember < 4.8
-            'ember-popper-modifier': '^3.0.0',
-          },
-        },
-      },
-      {
         name: 'ember-lts-4.8',
         npm: {
           devDependencies: {
             'ember-source': '~4.8.0',
+            bootstrap: bootstrapVersion,
+          },
+        },
+      },
+      {
+        name: 'ember-lts-5.4',
+        npm: {
+          devDependencies: {
+            'ember-source': '~5.4.0',
             bootstrap: bootstrapVersion,
           },
         },
