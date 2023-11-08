@@ -225,10 +225,14 @@ module.exports = {
 
   filterComponents(tree) {
     if (this.bootstrapOptions.whitelist) {
-      throw new SilentError('The `whitelist` option has been removed. Please use the `include` option instead.');
+      throw new SilentError(
+        "Ember Bootstrap's `whitelist` option been renamed to `include`. Please update your ember-cli-build.js accordingly."
+      );
     }
     if (this.bootstrapOptions.blacklist) {
-      throw new SilentError('The `blacklist` option has been removed. Please use the `exclude` option instead.');
+      throw new SilentError(
+        "Ember Bootstrap's `blacklist` option has been renamed to `exclude`. Please update your ember-cli-build.js accordingly."
+      );
     }
 
     let includeList = this.generateIncludeList(this.bootstrapOptions.include);
