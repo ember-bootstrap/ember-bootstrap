@@ -8,6 +8,7 @@ module.exports = {
     'no-action': 'warn',
     'no-autofocus-attribute': 'warn',
     'no-curly-component-invocation': 'warn',
+    'no-implicit-this': { allow: ['current-year'] },
     'no-invalid-link-text': 'warn',
     'no-link-to-positional-params': 'warn',
     'no-valueless-arguments': 'warn',

@@ -1,27 +1,30 @@
-import { reads } from '@ember/object/computed';
-import EmberObject, { computed } from '@ember/object';
 import config from 'ember-bootstrap-docs/config/environment';
 
-export default EmberObject.extend({
-  id: null,
-  title: null,
-  description: null,
+export default class Component {
+  id = null;
+  title = null;
+  description = null;
+  className = null;
+  bsUrl = null;
 
-  className: reads('title'),
-  nameSpace: 'Components',
+  get apiUrl() {
+    let { className } = this;
+    return `${config.rootURL}api/classes/Components.${className}.html`;
+  }
 
-  bsUrl: null,
-
-  apiUrl: computed('nameSpace', 'className', function () {
-    let { nameSpace, className } = this.getProperties('nameSpace', 'className');
-    return `${config.rootURL}api/classes/${nameSpace}.${className}.html`;
-  }),
-
-  demoRoute: computed('id', function () {
+  get demoRoute() {
     return `demo.${this.id}`;
-  }),
+  }
 
-  templateName: computed('className', function () {
+  get templateName() {
     return `Bs${this.className}`;
-  }),
-});
+  }
+
+  constructor({ id, title, description, bsUrl, className }) {
+    this.id = id;
+    this.title = title;
+    this.description = description;
+    this.className = className ?? title;
+    this.bsUrl = bsUrl;
+  }
+}
