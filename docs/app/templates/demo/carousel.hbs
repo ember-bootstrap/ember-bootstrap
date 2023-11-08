@@ -66,18 +66,18 @@
   <!-- BEGIN-SNIPPET carousel-demo -->
   <BsCarousel
     @autoPlay={{true}}
-    @wrap={{wrap}}
-    @index={{integerIndex}}
-    @interval={{integerInterval}}
-    @keyboard={{keyboard}}
-    @ltr={{ltr}}
-    @pauseOnMouseEnter={{pauseOnMouseEnter}}
-    @showControls={{showControls}}
-    @showIndicators={{showIndicators}}
+    @wrap={{this.wrap}}
+    @index={{this.integerIndex}}
+    @interval={{this.integerInterval}}
+    @keyboard={{this.keyboard}}
+    @ltr={{this.ltr}}
+    @pauseOnMouseEnter={{this.pauseOnMouseEnter}}
+    @showControls={{this.showControls}}
+    @showIndicators={{this.showIndicators}}
     data-test-example="main"
     as |car|
   >
-    {{#each slides as |slide|}}
+    {{#each this.slides as |slide|}}
       <car.slide>
         <img alt={{slide.alt}} src={{slide.src}} />
       </car.slide>
@@ -89,14 +89,14 @@
   <CodeSnippet
     @name="carousel-demo.hbs"
     @dynamicProperties={{hash
-      wrap=wrap
-      integerIndex=integerIndex
-      integerInterval=integerInterval
-      keyboard=keyboard
-      ltr=ltr
-      pauseOnMouseEnter=pauseOnMouseEnter
-      showControls=showControls
-      showIndicators=showIndicators
+      wrap=this.wrap
+      integerIndex=this.integerIndex
+      integerInterval=this.integerInterval
+      keyboard=this.keyboard
+      ltr=this.ltr
+      pauseOnMouseEnter=this.pauseOnMouseEnter
+      showControls=this.showControls
+      showIndicators=this.showIndicators
     }}
   />
 </div>

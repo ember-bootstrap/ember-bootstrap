@@ -29,7 +29,7 @@ module('Acceptance | components/carousel', function (hooks) {
       .hasAttribute('alt', 'First slide', 'shows the first slide');
 
     const intervalBetweenSlides = find(
-      '[data-test-option="interval"] input',
+      '[data-test-option="interval"] input'
     ).value;
 
     // Stop carousel from playing to enter settled state

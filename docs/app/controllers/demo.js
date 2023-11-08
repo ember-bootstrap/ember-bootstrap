@@ -20,6 +20,6 @@ export default Controller.extend({
         routeName = routeParts.slice(0, 2).join('.');
       }
       return this.component.models.findBy('demoRoute', routeName);
-    },
+    }
   ),
 });
