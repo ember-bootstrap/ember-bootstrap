@@ -19,7 +19,7 @@ export default Controller.extend({
       if (routeParts.length > 2) {
         routeName = routeParts.slice(0, 2).join('.');
       }
-      return this.get('component.models').findBy('demoRoute', routeName);
-    }
+      return this.component.models.findBy('demoRoute', routeName);
+    },
   ),
 });

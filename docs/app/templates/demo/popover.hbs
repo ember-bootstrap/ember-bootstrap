@@ -3,31 +3,36 @@
   <BsButton class="mb-1">
     Popover on left
     <BsPopover @placement="left" title="Popover on left">
-      Lorem ipsum dolor sit amet, consectetur adipisicing elit. Explicabo magnam similique voluptate!
+      Lorem ipsum dolor sit amet, consectetur adipisicing elit. Explicabo magnam
+      similique voluptate!
     </BsPopover>
   </BsButton>
   <BsButton class="mb-1">
     Popover on top
     <BsPopover @placement="top" title="Popover on top">
-      Lorem ipsum dolor sit amet, consectetur adipisicing elit. Explicabo magnam similique voluptate!
+      Lorem ipsum dolor sit amet, consectetur adipisicing elit. Explicabo magnam
+      similique voluptate!
     </BsPopover>
   </BsButton>
   <BsButton class="mb-1">
     Popover on bottom
     <BsPopover @placement="bottom" title="Popover on bottom">
-      Lorem ipsum dolor sit amet, consectetur adipisicing elit. Explicabo magnam similique voluptate!
+      Lorem ipsum dolor sit amet, consectetur adipisicing elit. Explicabo magnam
+      similique voluptate!
     </BsPopover>
   </BsButton>
   <BsButton class="mb-1">
     Popover on right
     <BsPopover @placement="right" title="Popover on right">
-      Lorem ipsum dolor sit amet, consectetur adipisicing elit. Explicabo magnam similique voluptate!
+      Lorem ipsum dolor sit amet, consectetur adipisicing elit. Explicabo magnam
+      similique voluptate!
     </BsPopover>
   </BsButton>
   <BsButton class="mb-1">
     Hover Popover
     <BsPopover @triggerEvents="hover" title="Hover Popover">
-      Lorem ipsum dolor sit amet, consectetur adipisicing elit. Explicabo magnam similique voluptate!
+      Lorem ipsum dolor sit amet, consectetur adipisicing elit. Explicabo magnam
+      similique voluptate!
     </BsPopover>
   </BsButton>
   <!-- END-SNIPPET -->
@@ -39,21 +44,24 @@
   Popover trigger
 </h2>
 <p>
-  By default the popover will attach itself to the parent DOM element, but there are ways to customize this:
+  By default the popover will attach itself to the parent DOM element, but there
+  are ways to customize this:
 </p>
 <div class="bs-example">
   <!-- BEGIN-SNIPPET popover-target -->
   <button type="button" class="btn btn-secondary">
     DOM parent
     <BsPopover title="DOM parent">
-      Lorem ipsum dolor sit amet, consectetur adipisicing elit. Explicabo magnam similique voluptate!
+      Lorem ipsum dolor sit amet, consectetur adipisicing elit. Explicabo magnam
+      similique voluptate!
     </BsPopover>
   </button>
   <button type="button" id="popover-button" class="btn btn-secondary">
     CSS selector
   </button>
   <BsPopover @triggerElement="#popover-button" title="CSS selector">
-    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Explicabo magnam similique voluptate!
+    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Explicabo magnam
+    similique voluptate!
   </BsPopover>
   <!-- END-SNIPPET -->
 </div>
@@ -64,18 +72,25 @@
   Dismiss on next click
 </h2>
 <p>
-  Use the focus trigger to dismiss popovers on the user’s next click of a different element than the toggle element.
+  Use the focus trigger to dismiss popovers on the user’s next click of a
+  different element than the toggle element.
 </p>
 <BsAlert @type="info" @dismissible={{false}}>
-  For proper cross-browser and cross-platform behavior, you must use the <code>&lt;a&gt;</code> tag, not the <code>&lt;button&gt;</code>
-  tag, and you also must include a <code>tabindex</code> attribute.
+  For proper cross-browser and cross-platform behavior, you must use the
+  <code>&lt;a&gt;</code>
+  tag, not the
+  <code>&lt;button&gt;</code>
+  tag, and you also must include a
+  <code>tabindex</code>
+  attribute.
 </BsAlert>
 <div class="bs-example">
   <!-- BEGIN-SNIPPET popover-focus -->
   <a href="#" role="button" tabindex="0" class="btn btn-primary">
     Focus me
     <BsPopover @triggerEvents="focus" title="Focused">
-      Lorem ipsum dolor sit amet, consectetur adipisicing elit. Explicabo magnam similiquevoluptate!
+      Lorem ipsum dolor sit amet, consectetur adipisicing elit. Explicabo magnam
+      similiquevoluptate!
     </BsPopover>
   </a>
   <!-- END-SNIPPET -->

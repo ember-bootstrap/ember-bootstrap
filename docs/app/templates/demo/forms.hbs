@@ -1,30 +1,61 @@
 <h2>Simple form</h2>
 
-<p>The forms component lets you easily create forms with automatic markup generation based on the chosen form layout:</p>
+<p>The forms component lets you easily create forms with automatic markup
+  generation based on the chosen form layout:</p>
 
 <div class="bs-example" data-test-fastboot-container>
   <BsForm @formLayout="horizontal" @model={{this}} as |form|>
     <form.element @label="Layout" @property="formLayout" as |el|>
-      <BsButtonGroup @value={{el.value}} @type="radio" @onChange={{el.setValue}} as |bg|>
+      <BsButtonGroup
+        @value={{el.value}}
+        @type="radio"
+        @onChange={{el.setValue}}
+        as |bg|
+      >
         <bg.button @value="vertical">Vertical</bg.button>
         <bg.button @value="horizontal">Horizontal</bg.button>
         <bg.button @value="inline">Inline</bg.button>
       </BsButtonGroup>
     </form.element>
   </BsForm>
-  <hr>
+  <hr />
   <!-- BEGIN-SNIPPET form-demo -->
-  <BsForm @formLayout={{this.formLayout}} @model={{this}} @onSubmit={{this.submit}} as |form|>
+  <BsForm
+    @formLayout={{this.formLayout}}
+    @model={{this}}
+    @onSubmit={{this.submit}}
+    as |form|
+  >
     <form.element @controlType="email" @label="Email" @property="email" as |el|>
       <el.control placeholder="Email" required />
     </form.element>
-    <form.element @controlType="password" @label="Password" @property="password" @helpText="Minimum 6 characters" as |el|>
+    <form.element
+      @controlType="password"
+      @label="Password"
+      @property="password"
+      @helpText="Minimum 6 characters"
+      as |el|
+    >
       <el.control placeholder="Password" required />
     </form.element>
-    <form.element @controlType="radio" @label="Radio" @property="radio" @options={{this.radioOptions}} @optionLabelPath="label" />
-    <form.element @controlType="checkbox" @label="Checkbox" @property="checkbox" />
+    <form.element
+      @controlType="radio"
+      @label="Radio"
+      @property="radio"
+      @options={{this.radioOptions}}
+      @optionLabelPath="label"
+    />
+    <form.element
+      @controlType="checkbox"
+      @label="Checkbox"
+      @property="checkbox"
+    />
     <form.element @controlType="switch" @label="Switch" @property="switched" />
-    <form.element @controlType="textarea" @label="Textarea" @property="textarea" />
+    <form.element
+      @controlType="textarea"
+      @label="Textarea"
+      @property="textarea"
+    />
     <form.submitButton>Submit</form.submitButton>
   </BsForm>
   <!-- END-SNIPPET -->
@@ -32,48 +63,86 @@
 <div class="highlight">
   <CodeSnippet
     @name="form-demo.hbs"
-    @dynamicProperties={{hash
-      formLayout=this.formLayout
-    }}
+    @dynamicProperties={{hash formLayout=this.formLayout}}
   />
 </div>
 <p>The controller below shows the default states for the form properties above.</p>
 <div class="highlight">
   {{#let (get-code-snippet "form-controller.js") as |snippet|}}
-    <CodeBlock @code={{snippet.source}} @language={{snippet.language}} class="line-numbers" />
+    <CodeBlock
+      @code={{snippet.source}}
+      @language={{snippet.language}}
+      class="line-numbers"
+    />
   {{/let}}
 </div>
 
-
 <h2>Validation</h2>
 
-<p>Add support for forms validation by using one of the available additional addons depending on your favourite form validation library:</p>
+<p>Add support for forms validation by using one of the available additional
+  addons depending on your favourite form validation library:</p>
 
 <ul>
   <li>
-    <a href="https://github.com/offirgolan/ember-bootstrap-cp-validations" target="_blank" rel="noopener noreferrer">ember-bootstrap-cp-validations</a> for
-    <a href="https://github.com/offirgolan/ember-cp-validations" target="_blank" rel="noopener noreferrer">ember-cp-validations</a> support
+    <a
+      href="https://github.com/offirgolan/ember-bootstrap-cp-validations"
+      target="_blank"
+      rel="noopener noreferrer"
+    >ember-bootstrap-cp-validations</a>
+    for
+    <a
+      href="https://github.com/offirgolan/ember-cp-validations"
+      target="_blank"
+      rel="noopener noreferrer"
+    >ember-cp-validations</a>
+    support
   </li>
   <li>
-    <a href="https://github.com/kaliber5/ember-bootstrap-changeset-validations" target="_blank" rel="noopener noreferrer">ember-bootstrap-changeset-validations</a> for
-    <a href="https://github.com/DockYard/ember-changeset-validations" target="_blank" rel="noopener noreferrer">ember-changeset</a> support
+    <a
+      href="https://github.com/kaliber5/ember-bootstrap-changeset-validations"
+      target="_blank"
+      rel="noopener noreferrer"
+    >ember-bootstrap-changeset-validations</a>
+    for
+    <a
+      href="https://github.com/DockYard/ember-changeset-validations"
+      target="_blank"
+      rel="noopener noreferrer"
+    >ember-changeset</a>
+    support
   </li>
   <li>
-    <a href="https://github.com/kaliber5/ember-bootstrap-validations" target="_blank" rel="noopener noreferrer">ember-bootstrap-validations</a> for
-    <a href="https://github.com/DockYard/ember-validations" target="_blank" rel="noopener noreferrer">ember-validations</a> support
+    <a
+      href="https://github.com/kaliber5/ember-bootstrap-validations"
+      target="_blank"
+      rel="noopener noreferrer"
+    >ember-bootstrap-validations</a>
+    for
+    <a
+      href="https://github.com/DockYard/ember-validations"
+      target="_blank"
+      rel="noopener noreferrer"
+    >ember-validations</a>
+    support
   </li>
 </ul>
 
 <p>
-  Just add validations to your model assigned to your form. It will then force validation on submit and show the eventual validation errors.
-  The following example uses ember-cp-validations:
+  Just add validations to your model assigned to your form. It will then force
+  validation on submit and show the eventual validation errors. The following
+  example uses ember-cp-validations:
 </p>
 
 <div class="bs-example">
   <!-- BEGIN-SNIPPET form-validation -->
   <BsForm @model={{this.login}} @onSubmit={{this.submit}} as |form|>
     <form.element @controlType="email" @label="Email" @property="email" />
-    <form.element @controlType="password" @label="Password" @property="password" @helpText="Minimum 6 characters" />
+    <form.element
+      @controlType="password"
+      @label="Password"
+      @property="password"
+      @helpText="Minimum 6 characters"
+    />
     <form.submitButton>Submit</form.submitButton>
   </BsForm>
   <!-- END-SNIPPET -->
@@ -106,8 +175,15 @@
         </div>
       </div>
     </form.element>
-    <form.element @size="lg" @controlType="password" @label="Password" @property="password" @helpText="Minimum 6 characters" as |el|>
-      <el.control placeholder="Password"/>
+    <form.element
+      @size="lg"
+      @controlType="password"
+      @label="Password"
+      @property="password"
+      @helpText="Minimum 6 characters"
+      as |el|
+    >
+      <el.control placeholder="Password" />
     </form.element>
     <form.submitButton>Submit</form.submitButton>
   </BsForm>
@@ -135,11 +211,21 @@
 
 <h3>Custom control addons</h3>
 
-<p>Support for popular control components can be added through additional addons:</p>
+<p>Support for popular control components can be added through additional
+  addons:</p>
 
 <ul>
   <li>
-    <a href="https://github.com/kaliber5/ember-bootstrap-power-select" target="_blank" rel="noopener noreferrer">ember-bootstrap-power-select</a> adds support for
-    <a href="http://www.ember-power-select.com" target="_blank" rel="noopener noreferrer">ember-power-select</a>
+    <a
+      href="https://github.com/kaliber5/ember-bootstrap-power-select"
+      target="_blank"
+      rel="noopener noreferrer"
+    >ember-bootstrap-power-select</a>
+    adds support for
+    <a
+      href="http://www.ember-power-select.com"
+      target="_blank"
+      rel="noopener noreferrer"
+    >ember-power-select</a>
   </li>
 </ul>

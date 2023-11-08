@@ -40,7 +40,9 @@ module.exports = {
 
   init() {
     this._super.init.apply(this, arguments);
-    this.debugTree = BroccoliDebug.buildDebugCallback(`ember-bootstrap:${this.name}`);
+    this.debugTree = BroccoliDebug.buildDebugCallback(
+      `ember-bootstrap:${this.name}`,
+    );
   },
 
   includedCommands() {
@@ -55,18 +57,22 @@ module.exports = {
     let app = this._findHost(this);
     this.app = app;
 
-    let options = Object.assign({}, defaultOptions, app.options['ember-bootstrap']);
+    let options = Object.assign(
+      {},
+      defaultOptions,
+      app.options['ember-bootstrap'],
+    );
 
     if (options.bootstrapVersion === 3) {
       throw new SilentError(
-        'Support for Bootstrap 3 has been removed as of ember-bootstrap v5! Consider migrating to Bootstrap v4 or v5, or downgrade ember-bootstrap to v4!'
+        'Support for Bootstrap 3 has been removed as of ember-bootstrap v5! Consider migrating to Bootstrap v4 or v5, or downgrade ember-bootstrap to v4!',
       );
     }
 
     if (options.bootstrapVersion >= 4 && options.importBootstrapFont) {
       this.warn(
         'Inclusion of the Glyphicon font is only supported for Bootstrap 3. ' +
-          "Set Ember Bootstrap's `importBootstrapFont` option to `false` to hide this warning."
+          "Set Ember Bootstrap's `importBootstrapFont` option to `false` to hide this warning.",
       );
     }
     if (process.env.BOOTSTRAPVERSION) {
@@ -86,13 +92,17 @@ module.exports = {
       if (options.importBootstrapCSS) {
         this.needsBootstrapStyles = true;
         this.import(path.join(vendorPath, 'bootstrap.css'));
-        this.import(path.join(vendorPath, 'bootstrap.css.map'), { destDir: 'assets' });
+        this.import(path.join(vendorPath, 'bootstrap.css.map'), {
+          destDir: 'assets',
+        });
       }
 
       if (options.importBootstrapTheme) {
         this.needsBootstrapStyles = true;
         this.import(path.join(vendorPath, 'bootstrap-theme.css'));
-        this.import(path.join(vendorPath, 'bootstrap-theme.css.map'), { destDir: 'assets' });
+        this.import(path.join(vendorPath, 'bootstrap-theme.css.map'), {
+          destDir: 'assets',
+        });
       }
     }
 
@@ -100,10 +110,14 @@ module.exports = {
     this.import(path.join(vendorPath, `bs${options.bootstrapVersion}.css`));
 
     // setup config for @embroider/macros
-    this.options['@embroider/macros'].setOwnConfig.isBS4 = this.getBootstrapVersion() === 4;
-    this.options['@embroider/macros'].setOwnConfig.isBS5 = this.getBootstrapVersion() === 5;
-    this.options['@embroider/macros'].setOwnConfig.isNotBS5 = this.getBootstrapVersion() !== 5;
-    this.options['@embroider/macros'].setOwnConfig.version = require('./package.json').version;
+    this.options['@embroider/macros'].setOwnConfig.isBS4 =
+      this.getBootstrapVersion() === 4;
+    this.options['@embroider/macros'].setOwnConfig.isBS5 =
+      this.getBootstrapVersion() === 5;
+    this.options['@embroider/macros'].setOwnConfig.isNotBS5 =
+      this.getBootstrapVersion() !== 5;
+    this.options['@embroider/macros'].setOwnConfig.version =
+      require('./package.json').version;
   },
 
   options: {
@@ -118,19 +132,21 @@ module.exports = {
 
     if (this.getBootstrapVersion() === 4 && !dep.gte(minimumBS4Version)) {
       this.warn(
-        `For Bootstrap 4 support this version of ember-bootstrap requires at least Bootstrap ${minimumBS4Version}, but you have ${dep.version}. Please run \`ember generate ember-bootstrap\` to update your dependencies!`
+        `For Bootstrap 4 support this version of ember-bootstrap requires at least Bootstrap ${minimumBS4Version}, but you have ${dep.version}. Please run \`ember generate ember-bootstrap\` to update your dependencies!`,
       );
     }
 
     if (this.getBootstrapVersion() === 5 && !dep.gte(minimumBS5Version)) {
       this.warn(
-        `For Bootstrap 5 support this version of ember-bootstrap requires at least Bootstrap ${minimumBS5Version}, but you have ${dep.version}. Please run \`ember generate ember-bootstrap\` to update your dependencies!`
+        `For Bootstrap 5 support this version of ember-bootstrap requires at least Bootstrap ${minimumBS5Version}, but you have ${dep.version}. Please run \`ember generate ember-bootstrap\` to update your dependencies!`,
       );
     }
   },
 
   findPreprocessor() {
-    return supportedPreprocessors.find((name) => !!this.app.project.findAddonByName(`ember-cli-${name}`));
+    return supportedPreprocessors.find(
+      (name) => !!this.app.project.findAddonByName(`ember-cli-${name}`),
+    );
   },
 
   getBootstrapStylesPath() {
@@ -145,7 +161,9 @@ module.exports = {
   resolvePackagePath(pkgPath) {
     let parts = pkgPath.split('/');
     let pkg = parts[0];
-    let result = path.dirname(resolve.sync(`${pkg}/package.json`, { basedir: this.app.project.root }));
+    let result = path.dirname(
+      resolve.sync(`${pkg}/package.json`, { basedir: this.app.project.root }),
+    );
 
     // add sub folders to path
     if (parts.length > 1) {
@@ -174,7 +192,7 @@ module.exports = {
       trees.push(
         new Funnel(this.getBootstrapStylesPath(), {
           destDir: 'ember-bootstrap',
-        })
+        }),
       );
     }
     return mergeTrees(trees, { overwrite: true });
@@ -225,10 +243,14 @@ module.exports = {
 
   filterComponents(tree) {
     if (this.bootstrapOptions.whitelist) {
-      throw new SilentError('The `whitelist` option has been removed. Please use the `include` option instead.');
+      throw new SilentError(
+        'The `whitelist` option has been removed. Please use the `include` option instead.',
+      );
     }
     if (this.bootstrapOptions.blacklist) {
-      throw new SilentError('The `blacklist` option has been removed. Please use the `exclude` option instead.');
+      throw new SilentError(
+        'The `blacklist` option has been removed. Please use the `exclude` option instead.',
+      );
     }
 
     let includeList = this.generateIncludeList(this.bootstrapOptions.include);
@@ -240,7 +262,9 @@ module.exports = {
     }
 
     return new Funnel(tree, {
-      exclude: [(name) => this.excludeComponent(name, includeList, excludeList)],
+      exclude: [
+        (name) => this.excludeComponent(name, includeList, excludeList),
+      ],
     });
   },
 

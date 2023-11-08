@@ -5,7 +5,8 @@
   <BsButtonGroup
     @value={{this.buttonGroupValue}}
     @type="checkbox"
-    @onChange={{fn (mut this.buttonGroupValue)}} as |bg|
+    @onChange={{fn (mut this.buttonGroupValue)}}
+    as |bg|
   >
     <bg.button @value="1">1</bg.button>
     <bg.button @value="2">2</bg.button>
@@ -20,7 +21,7 @@
   <!-- END-SNIPPET -->
 </div>
 <div class="highlight">
-  <CodeSnippet @name="button-group-checkbox-demo.hbs"/>
+  <CodeSnippet @name="button-group-checkbox-demo.hbs" />
 </div>
 <h2>
   Radio type
@@ -30,7 +31,8 @@
   <BsButtonGroup
     @value={{this.buttonGroupValue2}}
     @type="radio"
-    @onChange={{fn (mut this.buttonGroupValue2)}} as |bg|
+    @onChange={{fn (mut this.buttonGroupValue2)}}
+    as |bg|
   >
     <bg.button @value="1">1</bg.button>
     <bg.button @value="2">2</bg.button>
@@ -40,5 +42,5 @@
   <!-- END-SNIPPET -->
 </div>
 <div class="highlight">
-  <CodeSnippet @name="button-group-radio-demo.hbs"/>
+  <CodeSnippet @name="button-group-radio-demo.hbs" />
 </div>

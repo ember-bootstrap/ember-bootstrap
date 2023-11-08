@@ -1,5 +1,7 @@
 <h2>Basic example</h2>
-<p>The most basic list group is an unordered list with list items and the proper classes. Build upon it with the options that follow, or with your own CSS as needed.</p>
+<p>The most basic list group is an unordered list with list items and the proper
+  classes. Build upon it with the options that follow, or with your own CSS as
+  needed.</p>
 <div class="bs-example">
   {{! BEGIN-SNIPPET list-group-demo }}
   <BsListGroup as |ListGroup|>
@@ -14,7 +16,10 @@
 </div>
 
 <h2>Flush</h2>
-<p>Add <code>flush</code> to remove some borders and rounded corners to render list group items edge-to-edge in a parent container (e.g., cards).</p>
+<p>Add
+  <code>flush</code>
+  to remove some borders and rounded corners to render list group items
+  edge-to-edge in a parent container (e.g., cards).</p>
 <div class="bs-example">
   {{! BEGIN-SNIPPET list-group-flush-demo }}
   <BsListGroup @flush={{true}} as |ListGroup|>
@@ -30,7 +35,7 @@
 
 <h2>Numbered</h2>
 <p>Add <code>numbered</code> to opt into numbered list group items.</p>
-  <div class="bs-example">
+<div class="bs-example">
   {{! BEGIN-SNIPPET list-group-numbered-demo }}
   <BsListGroup @numbered={{true}} as |ListGroup|>
     <ListGroup.item>An item</ListGroup.item>
@@ -44,7 +49,9 @@
 </div>
 
 <h2>Active items</h2>
-<p>Add <code>active</code> to an item to indicate the current active selection.</p>
+<p>Add
+  <code>active</code>
+  to an item to indicate the current active selection.</p>
 
 <div class="bs-example">
   {{! BEGIN-SNIPPET list-group-active-demo }}
@@ -60,7 +67,12 @@
 </div>
 
 <h2>Buttons</h2>
-<p>Use attribute <code>actionable</code> equal to <code>true</code> to convert list group items to <code>button</code>s.</p>
+<p>Use attribute
+  <code>actionable</code>
+  equal to
+  <code>true</code>
+  to convert list group items to
+  <code>button</code>s.</p>
 
 <div class="bs-example">
   {{! BEGIN-SNIPPET list-group-action-button-demo }}
@@ -78,7 +90,8 @@
 </div>
 
 <h2>Contextual classes</h2>
-<p>Use contextual classes to style list items with a stateful background and color.</p>
+<p>Use contextual classes to style list items with a stateful background and
+  color.</p>
 <div class="bs-example">
   {{! BEGIN-SNIPPET list-group-action-types-demo }}
   <BsListGroup as |ListGroup|>
@@ -119,7 +132,11 @@
 </div>
 
 <h2>Disabled items</h2>
-<p>Add <code>disabled</code> to an <code>ListGroup.item</code> to make it appear disabled.</p>
+<p>Add
+  <code>disabled</code>
+  to an
+  <code>ListGroup.item</code>
+  to make it appear disabled.</p>
 <div class="bs-example">
   {{! BEGIN-SNIPPET list-group-disabled-demo }}
   <BsListGroup as |ListGroup|>
@@ -134,7 +151,10 @@
 </div>
 
 <h2>Horizontal</h2>
-<p>Add <code>horizontal</code> to change the layout of list group items from vertical to horizontal across all breakpoints.</p>
+<p>Add
+  <code>horizontal</code>
+  to change the layout of list group items from vertical to horizontal across
+  all breakpoints.</p>
 <div class="bs-example">
   {{! BEGIN-SNIPPET list-group-horizontal-demo }}
   <BsListGroup @horizontal={{true}} as |ListGroup|>
@@ -150,7 +170,8 @@
   <CodeSnippet @name="list-group-horizontal-demo.hbs" />
 </div>
 
-<p>Alternatively, choose a responsive variant to make a list group horizontal starting at that breakpoint’s min-width.</p>
+<p>Alternatively, choose a responsive variant to make a list group horizontal
+  starting at that breakpoint’s min-width.</p>
 <div class="bs-example">
   {{! BEGIN-SNIPPET list-group-horizontal-size-demo }}
   <BsListGroup @horizontal={{true}} @horizontalSize="xxl" as |ListGroup|>

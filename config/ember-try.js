@@ -6,7 +6,9 @@ const { embroiderSafe, embroiderOptimized } = require('@embroider/test-setup');
 
 module.exports = async function () {
   return {
-    command: process.env.BROWSER ? `ember test --launch ${process.env.BROWSER}` : null,
+    command: process.env.BROWSER
+      ? `ember test --launch ${process.env.BROWSER}`
+      : null,
     useYarn: true,
     scenarios: [
       {

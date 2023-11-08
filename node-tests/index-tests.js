@@ -37,7 +37,11 @@ describe('index', function () {
         });
 
         it('should return `true` if the file is in both the `include` list and `exclude` list', function () {
-          let result = addonIndex.excludeComponent(name, ['bs-accordion'], ['bs-accordion']);
+          let result = addonIndex.excludeComponent(
+            name,
+            ['bs-accordion'],
+            ['bs-accordion'],
+          );
 
           expect(result).to.be.true;
         });
@@ -56,7 +60,7 @@ describe('index', function () {
       addonIndex.bootstrapOptions = { whitelist: ['bs-button'] };
 
       expect(addonIndex.filterComponents.bind(addonIndex)).to.throw(
-        'The `whitelist` option has been removed. Please use the `include` option instead.'
+        'The `whitelist` option has been removed. Please use the `include` option instead.',
       );
     });
 
@@ -64,7 +68,7 @@ describe('index', function () {
       addonIndex.bootstrapOptions = { blacklist: ['bs-button'] };
 
       expect(addonIndex.filterComponents.bind(addonIndex)).to.throw(
-        'The `blacklist` option has been removed. Please use the `exclude` option instead.'
+        'The `blacklist` option has been removed. Please use the `exclude` option instead.',
       );
     });
   });

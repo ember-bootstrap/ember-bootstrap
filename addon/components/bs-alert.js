@@ -204,7 +204,7 @@ export default class Alert extends Component {
             this.args.onDismissed?.();
           }
         },
-        this.fadeDuration
+        this.fadeDuration,
       );
     } else {
       this.hidden = this._hidden = true;

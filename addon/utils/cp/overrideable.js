@@ -11,7 +11,10 @@ import { assert } from '@ember/debug';
 export default function overrideableCP() {
   let fn = Array.prototype.slice.call(arguments, -1)[0];
   let args = Array.prototype.slice.call(arguments, 0, arguments.length - 1);
-  assert('Last argument for overrideableCP must be a function', typeof fn === 'function');
+  assert(
+    'Last argument for overrideableCP must be a function',
+    typeof fn === 'function',
+  );
 
   return computed(...args, {
     get(key) {

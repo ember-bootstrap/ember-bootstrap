@@ -9,7 +9,10 @@ import {
   versionDependent,
   visibilityClass,
 } from '../../helpers/bootstrap';
-import { assertPositioning, setupForPositioning } from '../../helpers/contextual-help';
+import {
+  assertPositioning,
+  setupForPositioning,
+} from '../../helpers/contextual-help';
 import setupStylesheetSupport from '../../helpers/setup-stylesheet-support';
 import setupNoDeprecations from '../../helpers/setup-no-deprecations';
 import a11yAudit from 'ember-a11y-testing/test-support/audit';
@@ -22,20 +25,34 @@ module('Integration | Component | bs-popover', function (hooks) {
 
   test('it has correct markup', async function (assert) {
     // Template block usage:
-    await render(hbs`
-      <BsPopover @id="popover-element" @fade={{true}} @title="dummy title" @visible={{true}} class="wide">
-        template block text
-      </BsPopover>
-    `);
+    await render(hbs`<BsPopover
+  @id='popover-element'
+  @fade={{true}}
+  @title='dummy title'
+  @visible={{true}}
+  class='wide'
+>
+  template block text
+</BsPopover>`);
 
     assert.dom('.popover').exists({ count: 1 }, 'has popover class');
-    assert.dom('.popover.wide').exists({ count: 1 }, 'it passes along class attribute');
+    assert
+      .dom('.popover.wide')
+      .exists({ count: 1 }, 'it passes along class attribute');
     assert.dom('.popover').hasClass('fade', 'has fade class');
     assert.dom('.popover').hasClass(visibilityClass(), 'has visibility class');
-    assert.equal(this.element.querySelector('.popover').getAttribute('role'), 'tooltip', 'has ARIA role');
+    assert.equal(
+      this.element.querySelector('.popover').getAttribute('role'),
+      'tooltip',
+      'has ARIA role',
+    );
     assert.dom(`.${popoverArrowClass()}`).exists({ count: 1 }, 'has arrow');
-    assert.dom(versionDependent('.popover-header')).hasText('dummy title', 'shows title');
-    assert.dom(versionDependent('.popover-body')).hasText('template block text', 'shows content');
+    assert
+      .dom(versionDependent('.popover-header'))
+      .hasText('dummy title', 'shows title');
+    assert
+      .dom(versionDependent('.popover-body'))
+      .hasText('template block text', 'shows content');
   });
 
   skip('it supports different placements', async function (assert) {
@@ -43,33 +60,40 @@ module('Integration | Component | bs-popover', function (hooks) {
 
     let placements = ['top', 'left', 'bottom', 'right'];
     this.set('placement', placements[0]);
-    await render(hbs`
-      <div id="wrapper">
-        <BsPopover::Element @id="popover-element" @placement={{this.placement}} @title="dummy title">
-          template block text
-        </BsPopover::Element>
-      </div>
-    `);
+    await render(hbs`<div id='wrapper'>
+  <BsPopover::Element
+    @id='popover-element'
+    @placement={{this.placement}}
+    @title='dummy title'
+  >
+    template block text
+  </BsPopover::Element>
+</div>`);
 
     for (let placement of placements) {
       this.set('placement', placement);
       let placementClass = popoverPositionClass(placement);
-      assert.dom('.popover').hasClass(placementClass, `has ${placementClass} class`);
+      assert
+        .dom('.popover')
+        .hasClass(placementClass, `has ${placementClass} class`);
     }
   });
 
   test('should place popover on top of element', async function (assert) {
     this.insertCSSRule('#wrapper p { margin-top: 200px }');
 
-    await render(hbs`
-      <div id="ember-bootstrap-wormhole"></div>
-      <div id="wrapper">
-        <p>
-          <button type="button" class="btn" id="target">
-            Click me<BsPopover @placement="top" @title="very very very very very very very long popover" @fade={{false}}>very very very very very very very long popover</BsPopover>
-          </button>
-        </p>
-      </div>`);
+    await render(hbs`<div id='ember-bootstrap-wormhole'></div>
+<div id='wrapper'>
+  <p>
+    <button type='button' class='btn' id='target'>
+      Click me<BsPopover
+        @placement='top'
+        @title='very very very very very very very long popover'
+        @fade={{false}}
+      >very very very very very very very long popover</BsPopover>
+    </button>
+  </p>
+</div>`);
 
     setupForPositioning();
 
@@ -84,15 +108,20 @@ module('Integration | Component | bs-popover', function (hooks) {
 
     let expectedArrowPosition = 217;
 
-    await render(hbs`
-      <div id="ember-bootstrap-wormhole"></div>
-      <div id="wrapper">
-        <p>
-          <button type="button" id="target">
-            Click me<BsPopover @placement="top" @autoPlacement={{true}} @viewportSelector="#wrapper" @title="very very very very very very very long popover" @fade={{false}}>very very very very very very very long popover</BsPopover>
-          </button>
-        </p>
-      </div>`);
+    await render(hbs`<div id='ember-bootstrap-wormhole'></div>
+<div id='wrapper'>
+  <p>
+    <button type='button' id='target'>
+      Click me<BsPopover
+        @placement='top'
+        @autoPlacement={{true}}
+        @viewportSelector='#wrapper'
+        @title='very very very very very very very long popover'
+        @fade={{false}}
+      >very very very very very very very long popover</BsPopover>
+    </button>
+  </p>
+</div>`);
 
     setupForPositioning('right');
 
@@ -101,11 +130,11 @@ module('Integration | Component | bs-popover', function (hooks) {
       this.element
         .querySelector(`.${popoverArrowClass()}`)
         .style.transform.match(/translate(?:3d)?\(([0-9]+)px.*\)/)[1],
-      10
+      10,
     );
     assert.ok(
       Math.abs(arrowPosition - expectedArrowPosition) <= 2,
-      `Expected position: ${expectedArrowPosition}, actual: ${arrowPosition}`
+      `Expected position: ${expectedArrowPosition}, actual: ${arrowPosition}`,
     );
 
     // check again to prevent regression of https://github.com/kaliber5/ember-bootstrap/issues/361
@@ -115,22 +144,20 @@ module('Integration | Component | bs-popover', function (hooks) {
       this.element
         .querySelector(`.${popoverArrowClass()}`)
         .style.transform.match(/translate(?:3d)?\(([0-9]+)px.*\)/)[1],
-      10
+      10,
     );
     assert.ok(
       Math.abs(arrowPosition - expectedArrowPosition) <= 2,
-      `Expected position: ${expectedArrowPosition}, actual: ${arrowPosition}`
+      `Expected position: ${expectedArrowPosition}, actual: ${arrowPosition}`,
     );
   });
 
   test('it stays open when clicked when rendered in place', async function (assert) {
-    await render(hbs`
-      <div id="target">
-        <BsPopover>
-          <div id="content">Content</div>
-        </BsPopover>
-      </div>
-    `);
+    await render(hbs`<div id='target'>
+  <BsPopover>
+    <div id='content'>Content</div>
+  </BsPopover>
+</div>`);
 
     await click('#target');
     assert.dom('.popover').exists('popover is visible');
@@ -143,13 +170,16 @@ module('Integration | Component | bs-popover', function (hooks) {
     this.set('hide', hideAction);
     let hiddenAction = sinon.spy();
     this.set('hidden', hiddenAction);
-    await render(hbs`
-      <div id="target">
-        <BsPopover @visible={{true}} @onHide={{action this.hide}} @onHidden={{action this.hidden}} as |po|>
-          <div id="hide" {{action po.close}} role="button">Hide</div>
-        </BsPopover>
-      </div>
-    `);
+    await render(hbs`<div id='target'>
+  <BsPopover
+    @visible={{true}}
+    @onHide={{action this.hide}}
+    @onHidden={{action this.hidden}}
+    as |po|
+  >
+    <div id='hide' {{action po.close}} role='button'>Hide</div>
+  </BsPopover>
+</div>`);
     await click('#hide');
     assert.ok(hideAction.calledOnce, 'hide action has been called');
     assert.ok(hiddenAction.calledOnce, 'hidden action was called');
@@ -157,13 +187,11 @@ module('Integration | Component | bs-popover', function (hooks) {
   });
 
   test('click-initiated close action does not interfere with click-to-open', async function (assert) {
-    await render(hbs`
-      <div id="target">
-        <BsPopover as |po|>
-          <div id="hide" onclick={{action po.close}} role="button">Hide</div>
-        </BsPopover>
-      </div>
-    `);
+    await render(hbs`<div id='target'>
+  <BsPopover as |po|>
+    <div id='hide' onclick={{action po.close}} role='button'>Hide</div>
+  </BsPopover>
+</div>`);
     await click('#target');
     assert.dom('.popover').exists('popover is visible');
     await click('#hide');
@@ -173,12 +201,14 @@ module('Integration | Component | bs-popover', function (hooks) {
   });
 
   test('click-initiated close action does not interfere with click-to-open when wormholed', async function (assert) {
-    await render(hbs`
-      <div id="ember-bootstrap-wormhole"></div>
-      <div id="target">
-        <BsPopover as |po|><div id="hide" onclick={{action po.close}} role="button">Hide</div></BsPopover>
-      </div>
-    `);
+    await render(hbs`<div id='ember-bootstrap-wormhole'></div>
+<div id='target'>
+  <BsPopover as |po|><div
+      id='hide'
+      onclick={{action po.close}}
+      role='button'
+    >Hide</div></BsPopover>
+</div>`);
     await click('#target');
     assert.dom('.popover').exists('popover is visible');
     await click('#hide');
@@ -189,7 +219,10 @@ module('Integration | Component | bs-popover', function (hooks) {
 
   test('non-click-initiated close action does not interfere with click-to-open', async function (assert) {
     await render(
-      hbs`<div id="target"><BsPopover as |po|><input id="hide" onblur={{action po.close}}></BsPopover></div>`
+      hbs`<div id='target'><BsPopover as |po|><input
+      id='hide'
+      onblur={{action po.close}}
+    /></BsPopover></div>`,
     );
     await click('#target');
     assert.dom('.popover').exists('popover is visible');
@@ -201,7 +234,9 @@ module('Integration | Component | bs-popover', function (hooks) {
 
   test('non-click-initiated close action does not interfere with click-to-open when wormholed', async function (assert) {
     await render(
-      hbs`<div id="ember-bootstrap-wormhole"></div><div id="target"><BsPopover as |po|><input id="hide" onblur={{action po.close}}></BsPopover></div>`
+      hbs`<div id='ember-bootstrap-wormhole'></div><div id='target'><BsPopover
+    as |po|
+  ><input id='hide' onblur={{action po.close}} /></BsPopover></div>`,
     );
     await click('#target');
     assert.dom('.popover').exists('popover is visible');
@@ -213,7 +248,12 @@ module('Integration | Component | bs-popover', function (hooks) {
 
   test('it passes all HTML attribute', async function (assert) {
     await render(
-      hbs`<div id="target"><BsPopover @title="Dummy" class="wide" data-test role="foo">test</BsPopover></div>`
+      hbs`<div id='target'><BsPopover
+    @title='Dummy'
+    class='wide'
+    data-test
+    role='foo'
+  >test</BsPopover></div>`,
     );
     await click('#target');
     assert.dom('.popover').hasClass('wide');
@@ -224,17 +264,29 @@ module('Integration | Component | bs-popover', function (hooks) {
   test("Renders in wormhole's default destination if renderInPlace is not set", async function (assert) {
     this.set('show', false);
     await render(
-      hbs`<div id="ember-bootstrap-wormhole"></div>{{#if this.show}}<BsPopover @title="Simple popover" @visible={{true}} @fade={{false}} />{{/if}}`
+      hbs`<div id='ember-bootstrap-wormhole'></div>{{#if this.show}}<BsPopover
+    @title='Simple popover'
+    @visible={{true}}
+    @fade={{false}}
+  />{{/if}}`,
     );
     this.set('show', true);
     await settled();
 
-    assert.dom('#ember-bootstrap-wormhole .popover').exists({ count: 1 }, 'Popover exists in wormhole');
+    assert
+      .dom('#ember-bootstrap-wormhole .popover')
+      .exists({ count: 1 }, 'Popover exists in wormhole');
   });
 
   test('Renders in test container if renderInPlace is not set', async function (assert) {
     this.set('show', false);
-    await render(hbs`{{#if this.show}}<BsPopover @title="Simple popover" @visible={{true}} @fade={{false}} />{{/if}}`);
+    await render(
+      hbs`{{#if this.show}}<BsPopover
+    @title='Simple popover'
+    @visible={{true}}
+    @fade={{false}}
+  />{{/if}}`,
+    );
     this.set('show', true);
     await settled();
 
@@ -245,12 +297,21 @@ module('Integration | Component | bs-popover', function (hooks) {
   test('Renders in place (no wormhole) if renderInPlace is set', async function (assert) {
     this.set('show', false);
     await render(
-      hbs`<div id="ember-bootstrap-wormhole"></div><div id="wrapper">{{#if this.show}}<BsPopover @title="Simple popover" @visible={{true}} @fade={{false}} @renderInPlace={{true}} />{{/if}}</div>`
+      hbs`<div id='ember-bootstrap-wormhole'></div><div id='wrapper'>{{#if
+    this.show
+  }}<BsPopover
+      @title='Simple popover'
+      @visible={{true}}
+      @fade={{false}}
+      @renderInPlace={{true}}
+    />{{/if}}</div>`,
     );
     this.set('show', true);
     await settled();
 
-    assert.dom('#wrapper .popover').exists({ count: 1 }, 'Popover exists in place.');
+    assert
+      .dom('#wrapper .popover')
+      .exists({ count: 1 }, 'Popover exists in place.');
   });
 
   test('it calls onShow/onShown actions when showing popover by event [fade=false]', async function (assert) {
@@ -259,7 +320,12 @@ module('Integration | Component | bs-popover', function (hooks) {
     let shownAction = sinon.spy();
     this.set('shown', shownAction);
     await render(
-      hbs`<div id="target"><BsPopover @title="Dummy" @fade={{false}} @onShow={{this.show}} @onShown={{this.shown}} /></div>`
+      hbs`<div id='target'><BsPopover
+    @title='Dummy'
+    @fade={{false}}
+    @onShow={{this.show}}
+    @onShown={{this.shown}}
+  /></div>`,
     );
     await click('#target');
     assert.ok(showAction.calledOnce, 'show action has been called');
@@ -273,7 +339,13 @@ module('Integration | Component | bs-popover', function (hooks) {
     this.set('shown', shownAction);
     this.set('visible', false);
     await render(
-      hbs`<div id="target"><BsPopover @title="Dummy" @visible={{this.visible}} @fade={{false}} @onShow={{this.show}} @onShown={{this.shown}} /></div>`
+      hbs`<div id='target'><BsPopover
+    @title='Dummy'
+    @visible={{this.visible}}
+    @fade={{false}}
+    @onShow={{this.show}}
+    @onShown={{this.shown}}
+  /></div>`,
     );
     this.set('visible', true);
     await settled();
@@ -288,7 +360,12 @@ module('Integration | Component | bs-popover', function (hooks) {
     let shownAction = sinon.spy();
     this.set('shown', shownAction);
     await render(
-      hbs`<div id="target"><BsPopover @title="Dummy" @fade={{false}} @onShow={{this.show}} @onShown={{this.shown}} /></div>`
+      hbs`<div id='target'><BsPopover
+    @title='Dummy'
+    @fade={{false}}
+    @onShow={{this.show}}
+    @onShown={{this.shown}}
+  /></div>`,
     );
     await click('#target');
     assert.ok(showAction.calledOnce, 'show action has been called');
@@ -302,7 +379,12 @@ module('Integration | Component | bs-popover', function (hooks) {
     let hiddenAction = sinon.spy();
     this.set('hidden', hiddenAction);
     await render(
-      hbs`<div id="target"><BsPopover @title="Dummy" @fade={{false}} @onHide={{this.hide}} @onHidden={{this.hidden}} /></div>`
+      hbs`<div id='target'><BsPopover
+    @title='Dummy'
+    @fade={{false}}
+    @onHide={{this.hide}}
+    @onHidden={{this.hidden}}
+  /></div>`,
     );
     await click('#target');
     await click('#target');
@@ -317,7 +399,13 @@ module('Integration | Component | bs-popover', function (hooks) {
     this.set('hidden', hiddenAction);
     this.set('visible', true);
     await render(
-      hbs`<div id="target"><BsPopover @visible={{this.visible}} @title="Dummy" @fade={{false}} @onHide={{this.hide}} @onHidden={{this.hidden}} /></div>`
+      hbs`<div id='target'><BsPopover
+    @visible={{this.visible}}
+    @title='Dummy'
+    @fade={{false}}
+    @onHide={{this.hide}}
+    @onHidden={{this.hidden}}
+  /></div>`,
     );
     this.set('visible', false);
     await settled();
@@ -332,7 +420,12 @@ module('Integration | Component | bs-popover', function (hooks) {
     let hiddenAction = sinon.spy();
     this.set('hidden', hiddenAction);
     await render(
-      hbs`<div id="target"><BsPopover @title="Dummy" @fade={{false}} @onHide={{this.hide}} @onHidden={{this.hidden}} /></div>`
+      hbs`<div id='target'><BsPopover
+    @title='Dummy'
+    @fade={{false}}
+    @onHide={{this.hide}}
+    @onHidden={{this.hidden}}
+  /></div>`,
     );
     await click('#target');
     await click('#target');
@@ -342,14 +435,12 @@ module('Integration | Component | bs-popover', function (hooks) {
   });
 
   test('it passes accessibility checks', async function (assert) {
-    await render(hbs`
-      <button type="button">
-        Test
-        <BsPopover @title="dummy title" @visible={{true}}>
-          template block text
-        </BsPopover>
-      </button>
-    `);
+    await render(hbs`<button type='button'>
+  Test
+  <BsPopover @title='dummy title' @visible={{true}}>
+    template block text
+  </BsPopover>
+</button>`);
 
     await a11yAudit();
     assert.ok(true, 'A11y audit passed');
