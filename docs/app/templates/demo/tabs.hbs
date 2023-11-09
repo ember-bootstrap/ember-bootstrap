@@ -192,7 +192,9 @@
   <code>&lt;BsTab&gt;</code>
   component is to be used for tab content that is rendered on a single page. If
   you want to have the tab content be loaded from a nested route, simply use the
-  {{#link-to "demo.navs"}}<code>&lt;BsNav&gt;</code>{{/link-to}}
+  <LinkTo @route="demo.navs">
+    <code>&lt;BsNav&gt;</code>
+  </LinkTo>
   component and a
   <code>outlet</code>
   :
