@@ -19,27 +19,27 @@ export default helper(function ([source], { language, dynamic, quote = '"' }) {
         source = source.replace(
           new RegExp(
             `(<\\w*[^>]*\\s)(@[^=]+)={{(?:this\\.)?${property}}}([^>]*>)`,
-            'g'
+            'g',
           ),
           hasValue
             ? type === 'string'
               ? `$1$2=${quotedValue}$3`
               : `$1$2={{${propertyValue}}}$3`
-            : '$1$3'
+            : '$1$3',
         );
         source = source.replace(
           new RegExp(`{{${property}}}`, 'g'),
-          propertyValue
+          propertyValue,
         );
         source = source.replace(
           new RegExp(`=${property}`, 'g'),
-          `=${quotedValue}`
+          `=${quotedValue}`,
         );
         break;
       default:
         source = source.replace(
           new RegExp(`{{${property}}}`, 'g'),
-          quotedValue
+          quotedValue,
         );
     }
   });
