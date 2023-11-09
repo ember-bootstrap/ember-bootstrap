@@ -4,7 +4,7 @@
 <p>
   The following components are currently available as native Ember components:
 </p>
-<table class='table'>
+<table class="table">
   <thead>
     <tr>
       <th>
@@ -24,11 +24,11 @@
   <tbody>
     {{#each this.model as |comp|}}
       <tr>
-        <th scope='row'>
+        <th scope="row">
           {{comp.title}}
         </th>
         <td>
-          <LinkTo @route={{comp.demoRoute}}>Demo</LinkTo>
+          {{#link-to comp.demoRoute}}Demo{{/link-to}}
         </td>
         <td>
           <a href={{comp.apiUrl}}>

@@ -28,9 +28,9 @@ gulp.task(
     return merge(
       gulp.src('docs/api/**/*', { base: 'docs' }),
       gulp.src('docs/dist/**/*'),
-      gulp.src('CHANGELOG.md').pipe(transform(striptags, { encoding: 'utf8' }))
+      gulp.src('CHANGELOG.md').pipe(transform(striptags, { encoding: 'utf8' })),
     ).pipe(gulp.dest('docs/build'));
-  })
+  }),
 );
 
 gulp.task('connect', function () {

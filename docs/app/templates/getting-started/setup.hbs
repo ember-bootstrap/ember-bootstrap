@@ -11,17 +11,21 @@
 <h3>Using the default blueprint</h3>
 
 <p>
-  By default, ember-bootstrap installs Bootstrap 4 and uses the installed preprocessor if there is one. You can use
-  the ember-bootstrap default blueprint to switch the Bootstrap version or preprocessor.
+  By default, ember-bootstrap installs Bootstrap 4 and uses the installed
+  preprocessor if there is one. You can use the ember-bootstrap default
+  blueprint to switch the Bootstrap version or preprocessor.
 </p>
 
 <h4>Use a CSS preprocessor</h4>
 
-<p>To use a Sass as a CSS preprocessor instead of plain CSS (highly recommended!), you can use this command to install and set this up:</p>
+<p>To use a Sass as a CSS preprocessor instead of plain CSS (highly
+  recommended!), you can use this command to install and set this up:</p>
 
 <pre class="highlight">ember generate ember-bootstrap --preprocessor=sass</pre>
 
-<p>See the <LinkTo @route="getting-started.assets">Assets guide</LinkTo> for details.</p>
+<p>See the
+  <LinkTo @route="getting-started.assets">Assets guide</LinkTo>
+  for details.</p>
 
 <h4>Switch to Bootstrap 5</h4>
 
@@ -33,7 +37,6 @@
   About the default blueprint
 </BsButton>
 
-
 <BsCollapse @collapsed={{this.blueprintDetailsCollapsed}}>
 
   <BsAlert class="mt-4" @type="info" @dismissible={{false}}>
@@ -44,37 +47,47 @@
 
     <ul>
       <li>
-        Removes any unneeded versions of bootstrap and bootstrap-sass from <code>package.json</code>
-        and <code>bower.json</code>
+        Removes any unneeded versions of bootstrap and bootstrap-sass from
+        <code>package.json</code>
+        and
+        <code>bower.json</code>
       </li>
       <li>
-        Installs the appropriate version of bootstrap or bootstrap-sass as an npm package
+        Installs the appropriate version of bootstrap or bootstrap-sass as an
+        npm package
       </li>
       <li>
         Removes unneeded dependencies on ember-cli-less and ember-cli-sass
       </li>
       <li>
-        Installs <code>ember-cli-sass</code> and <code>app.scss</code> if appropriate
+        Installs
+        <code>ember-cli-sass</code>
+        and
+        <code>app.scss</code>
+        if appropriate
       </li>
       <li>
-        Adds the appropriate "@import" statement to your <code>app.scss</code> if it&apos;s
-        not there already
+        Adds the appropriate "@import" statement to your
+        <code>app.scss</code>
+        if it&apos;s not there already
       </li>
       <li>
         Safely edits your
-        <code>ember-cli-build.js</code> to ensure the proper ember-bootstrap settings for your configuration
+        <code>ember-cli-build.js</code>
+        to ensure the proper ember-bootstrap settings for your configuration
       </li>
     </ul>
   </BsAlert>
 </BsCollapse>
 
-<hr>
+<hr />
 
 <h2>All configuration options</h2>
 
 <p>
-  Besides the above mentioned configuration options that are handled explicitly using the default blueprint, you can
-  further customize your setup with the following options:
+  Besides the above mentioned configuration options that are handled explicitly
+  using the default blueprint, you can further customize your setup with the
+  following options:
 </p>
 
 <table class="table table-striped">
@@ -93,8 +106,9 @@
       <td>4</td>
       <td>
         <p>
-          Specify the Bootstrap version to use. To make sure you have the right dependencies installed, you should use the
-          default blueprint mentioned above to set this!
+          Specify the Bootstrap version to use. To make sure you have the right
+          dependencies installed, you should use the default blueprint mentioned
+          above to set this!
         </p>
       </td>
     </tr>
@@ -103,8 +117,12 @@
       <td><code>true</code> / <code>false</code></td>
       <td><code>true</code> if no preprocessor</td>
       <td>
-        <p>Include the default static <code>bootstrap.css</code>. Only applicable when not using a preprocessor.</p>
-        <p>See the <LinkTo @route="getting-started.assets">Assets guide</LinkTo> for more details.</p>
+        <p>Include the default static
+          <code>bootstrap.css</code>. Only applicable when not using a
+          preprocessor.</p>
+        <p>See the
+          <LinkTo @route="getting-started.assets">Assets guide</LinkTo>
+          for more details.</p>
       </td>
     </tr>
     <tr>
@@ -113,14 +131,17 @@
       <td><code>true</code></td>
       <td>
         <p>
-          Will automatically insert a div into your index.html, where Bootstrap's modals and tooltips will be rendered to.
-          If you set this to false, you will have to add an
-          <code>&lt;div id=&quot;ember-bootstrap-wormhole&quot;&gt;&lt;/div&gt;</code> element by yourself, e.g. into your
+          Will automatically insert a div into your index.html, where
+          Bootstrap's modals and tooltips will be rendered to. If you set this
+          to false, you will have to add an
+          <code>&lt;div id=&quot;ember-bootstrap-wormhole&quot;&gt;&lt;/div&gt;</code>
+          element by yourself, e.g. into your
           <code>application.hbs</code>.
         </p>
         <p>
-          This is especially required if you render your Ember app into a custom application root element, e.g. on an
-          server rendered page, where the default div is not available.
+          This is especially required if you render your Ember app into a custom
+          application root element, e.g. on an server rendered page, where the
+          default div is not available.
         </p>
       </td>
     </tr>
@@ -130,12 +151,17 @@
       <td></td>
       <td>
         <p>
-          Component tree shaking: include only the listed components into your build, to reduce your JavaScript bundle size. Components not listed here will not be available.
-          You should use either <code>include</code> or <code>exclude</code>, not both.
+          Component tree shaking: include only the listed components into your
+          build, to reduce your JavaScript bundle size. Components not listed
+          here will not be available. You should use either
+          <code>include</code>
+          or
+          <code>exclude</code>, not both.
         </p>
 
         <p>Example:</p>
-        <pre class="highlight"><code>include: ['bs-button', 'bs-modal', 'bs-form']</code></pre>
+        <pre class="highlight"><code>include: ['bs-button', 'bs-modal',
+            'bs-form']</code></pre>
       </td>
     </tr>
     <tr>
@@ -144,7 +170,8 @@
       <td></td>
       <td>
         <p>
-          Exclude the listed components from your build, to reduce your JavaScript bundle size. See
+          Exclude the listed components from your build, to reduce your
+          JavaScript bundle size. See
           <code>include</code>.
         </p>
       </td>
@@ -157,15 +184,7 @@
 
 {{! template-lint-disable block-indentation }}
 <pre class="highlight"><code>//your-bootstrap-app/ember-cli-build.js
-
-module.exports = function(defaults) {
-  let app = new EmberApp(defaults, {
-    'ember-bootstrap': {
-      importBootstrapCSS: false,
-      exclude: ['bs-popover', 'bs-accordion']
-    }
-  });
-
-  return app.toTree();
-};
-</code></pre>
+    module.exports = function(defaults) { let app = new EmberApp(defaults, {
+    'ember-bootstrap': { importBootstrapCSS: false, exclude: ['bs-popover',
+    'bs-accordion'] } }); return app.toTree(); };
+  </code></pre>

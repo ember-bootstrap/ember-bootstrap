@@ -13,13 +13,11 @@ module('Integration | Component | bs-nav/link-to', function (hooks) {
 
   module('<LinkTo> properties', function () {
     test('simple route link', async function (assert) {
-      await render(hbs`
-        <BsNav as |nav|>
-          <nav.item>
-            <nav.link-to @route="index">Link</nav.link-to>
-          </nav.item>
-        </BsNav>
-      `);
+      await render(hbs`<BsNav as |nav|>
+  <nav.item>
+    <nav.link-to @route='index'>Link</nav.link-to>
+  </nav.item>
+</BsNav>`);
 
       assert.dom('a').exists({ count: 1 });
       assert.dom('a').hasText('Link');
@@ -27,38 +25,36 @@ module('Integration | Component | bs-nav/link-to', function (hooks) {
     });
 
     test('link with model', async function (assert) {
-      await render(hbs`
-        <BsNav as |nav|>
-          <nav.item>
-            <nav.link-to @route="acceptance.link" @model="1" @query={{hash foo="bar"}}>Link</nav.link-to>
-          </nav.item>
-        </BsNav>
-      `);
+      await render(hbs`<BsNav as |nav|>
+  <nav.item>
+    <nav.link-to
+      @route='acceptance.link'
+      @model='1'
+      @query={{hash foo='bar'}}
+    >Link</nav.link-to>
+  </nav.item>
+</BsNav>`);
 
       assert.dom('a').exists({ count: 1 });
       assert.dom('a').hasAttribute('href', '/acceptance/link/1?foo=bar');
     });
 
     test('link has nav-link class', async function (assert) {
-      await render(hbs`
-        <BsNav as |nav|>
-          <nav.item>
-            <nav.link-to @route="index">Link</nav.link-to>
-          </nav.item>
-        </BsNav>
-      `);
+      await render(hbs`<BsNav as |nav|>
+  <nav.item>
+    <nav.link-to @route='index'>Link</nav.link-to>
+  </nav.item>
+</BsNav>`);
 
       assert.dom('a').hasClass('nav-link');
     });
 
     test('disabled link', async function (assert) {
-      await render(hbs`
-        <BsNav as |nav|>
-          <nav.item>
-            <nav.link-to @route="index" @disabled={{true}}>Link</nav.link-to>
-          </nav.item>
-        </BsNav>
-      `);
+      await render(hbs`<BsNav as |nav|>
+  <nav.item>
+    <nav.link-to @route='index' @disabled={{true}}>Link</nav.link-to>
+  </nav.item>
+</BsNav>`);
       assert.dom('a').hasClass('disabled');
     });
   });

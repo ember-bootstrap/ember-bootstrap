@@ -20,30 +20,36 @@
       @controlType="power-select"
       @options={{this.typeChoices}}
       @label="Type"
-      @property="type" as |el|>
+      @property="type"
+      as |el|
+    >
       <el.control @searchEnabled />
     </form.element>
     <form.element
       @controlType="checkbox"
       @label="Show label"
       @property="showLabel"
-     />
+    />
     <form.element
       @controlType="number"
       @label="Round to digits"
       @property="roundDigits"
-     />
-    <form.element @controlType="checkbox" @label="Striped" @property="striped" />
+    />
+    <form.element
+      @controlType="checkbox"
+      @label="Striped"
+      @property="striped"
+    />
     <form.element
       @controlType="checkbox"
       @label="Animate"
       @property="animate"
       as |el|
-     >
-      <el.control disabled={{if this.striped false true}}/>
+    >
+      <el.control disabled={{if this.striped false true}} />
     </form.element>
   </BsForm>
-  <hr>
+  <hr />
   <!-- BEGIN-SNIPPET progress-options -->
   <BsProgress as |pg|>
     <pg.bar
@@ -55,7 +61,7 @@
       @type={{this.type}}
       @striped={{this.striped}}
       @animate={{this.animate}}
-     />
+    />
   </BsProgress>
   <!-- END-SNIPPET -->
 </div>

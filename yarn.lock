@@ -1728,6 +1728,18 @@
   resolved "https://registry.yarnpkg.com/@pkgjs/parseargs/-/parseargs-0.11.0.tgz#a77ea742fab25775145434eb1d2328cf5013ac33"
   integrity sha512-+1VkjdD0QBLPodGrJUeqarH8VAIvQODIbwh9XpP5Syisf7YoQgsJKPNFoqqLQlu+VQ/tVSshMR6loPMn8U+dPg==
 
+"@pkgr/utils@^2.3.1":
+  version "2.4.2"
+  resolved "https://registry.yarnpkg.com/@pkgr/utils/-/utils-2.4.2.tgz#9e638bbe9a6a6f165580dc943f138fd3309a2cbc"
+  integrity sha512-POgTXhjrTfbTV63DiFXav4lBHiICLKKwDeaKn9Nphwj7WH6m0hMMCaJkMyRWjgtPFyRKRVoMXXjczsTQRDEhYw==
+  dependencies:
+    cross-spawn "^7.0.3"
+    fast-glob "^3.3.0"
+    is-glob "^4.0.3"
+    open "^9.1.0"
+    picocolors "^1.0.0"
+    tslib "^2.6.0"
+
 "@pnpm/config.env-replace@^1.1.0":
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/@pnpm/config.env-replace/-/config.env-replace-1.1.0.tgz#ab29da53df41e8948a00f2433f085f54de8b3a4c"
@@ -1753,6 +1765,11 @@
   version "2.11.8"
   resolved "https://registry.yarnpkg.com/@popperjs/core/-/core-2.11.8.tgz#6b79032e760a0899cd4204710beede972a3a185f"
   integrity sha512-P1st0aksCrn9sGZhp8GMYwBnQsbvAWsZAX44oXNNvLHGqAOcoVxmjZiohstwQ7SqKnbR47akdNi+uleWD8+g6A==
+
+"@prettier/sync@^0.2.1":
+  version "0.2.1"
+  resolved "https://registry.yarnpkg.com/@prettier/sync/-/sync-0.2.1.tgz#00f628a394247cc18535b3cce0b9756b352a09e0"
+  integrity sha512-7ls1R6//+GPYD9vof1XaL5psViv83CwpdwlS8oUkWldYgbPhzZ3WgxIQMWqGyBmWPmoBfQg8C7jj7KI/ZuDHhQ==
 
 "@scalvert/ember-setup-middleware-reporter@^0.1.1":
   version "0.1.1"
@@ -6128,6 +6145,14 @@ ember-template-imports@^3.4.2:
     string.prototype.matchall "^4.0.6"
     validate-peer-dependencies "^1.1.0"
 
+ember-template-lint-plugin-prettier@5.0.0:
+  version "5.0.0"
+  resolved "https://registry.yarnpkg.com/ember-template-lint-plugin-prettier/-/ember-template-lint-plugin-prettier-5.0.0.tgz#1a2c8c87fee54347997c20017f7842b052a78f54"
+  integrity sha512-aXUYM4yuIdPZ80+AsAU8QBwGSJJ/aAkRsNcQ5vI5HmXiBjzHlDc/ZhmP6iVcYuCmoA/3iKcssMAYwIDbuby4pg==
+  dependencies:
+    "@prettier/sync" "^0.2.1"
+    prettier-linter-helpers "^1.0.0"
+
 ember-template-lint@5.12.0:
   version "5.12.0"
   resolved "https://registry.yarnpkg.com/ember-template-lint/-/ember-template-lint-5.12.0.tgz#aeb93e41c002c1da3a5a8f91439d68f4db4da12a"
@@ -6567,17 +6592,18 @@ eslint-plugin-node@11.1.0:
     resolve "^1.10.1"
     semver "^6.1.0"
 
-eslint-plugin-prettier@4.2.1:
-  version "4.2.1"
-  resolved "https://registry.yarnpkg.com/eslint-plugin-prettier/-/eslint-plugin-prettier-4.2.1.tgz#651cbb88b1dab98bfd42f017a12fa6b2d993f94b"
-  integrity sha512-f/0rXLXUt0oFYs8ra4w49wYZBG5GKZpAYsJSm6rnYL5uVDjd+zowwMwVZHnAjf4edNrKpCDYfXDgmRE/Ak7QyQ==
+eslint-plugin-prettier@5.0.1:
+  version "5.0.1"
+  resolved "https://registry.yarnpkg.com/eslint-plugin-prettier/-/eslint-plugin-prettier-5.0.1.tgz#a3b399f04378f79f066379f544e42d6b73f11515"
+  integrity sha512-m3u5RnR56asrwV/lDC4GHorlW75DsFfmUcjfCYylTUs85dBRnB7VM6xG8eCMJdeDRnppzmxZVf1GEPJvl1JmNg==
   dependencies:
     prettier-linter-helpers "^1.0.0"
+    synckit "^0.8.5"
 
-eslint-plugin-qunit@7.3.4:
-  version "7.3.4"
-  resolved "https://registry.yarnpkg.com/eslint-plugin-qunit/-/eslint-plugin-qunit-7.3.4.tgz#2465b6f29ff56fbe9b741bde2740dec109ee9bec"
-  integrity sha512-EbDM0zJerH9zVdUswMJpcFF7wrrpvsGuYfNexUpa5hZkkdFhaFcX+yD+RSK4Nrauw4psMGlcqeWUMhaVo+Manw==
+eslint-plugin-qunit@8.0.1:
+  version "8.0.1"
+  resolved "https://registry.yarnpkg.com/eslint-plugin-qunit/-/eslint-plugin-qunit-8.0.1.tgz#4969c2a5a13c7362cee1b38a2c0c06b60437a931"
+  integrity sha512-3bFOPryXoQOez95oP/JfWTxHBc/bgDQQZqTuv9uYTwH5sdIvSM2TES1iHDcy/F/LvqiqIpscDAOPAjlqSCnNPg==
   dependencies:
     eslint-utils "^3.0.0"
     requireindex "^1.2.0"
@@ -11410,7 +11436,7 @@ onetime@^6.0.0:
   dependencies:
     mimic-fn "^4.0.0"
 
-open@9.1.0:
+open@9.1.0, open@^9.1.0:
   version "9.1.0"
   resolved "https://registry.yarnpkg.com/open/-/open-9.1.0.tgz#684934359c90ad25742f5a26151970ff8c6c80b6"
   integrity sha512-OS+QTnw1/4vrf+9hh1jc1jnYjzSG4ttTBB8UxOwAnInG3Uo4ssetzC1ihqaIHjLJnA5GGlRl6QlZXOTQhRBUvg==
@@ -12051,7 +12077,12 @@ prettier-linter-helpers@^1.0.0:
   dependencies:
     fast-diff "^1.1.2"
 
-prettier@2.8.8, prettier@^2.5.1:
+prettier@3.0.3:
+  version "3.0.3"
+  resolved "https://registry.yarnpkg.com/prettier/-/prettier-3.0.3.tgz#432a51f7ba422d1469096c0fdc28e235db8f9643"
+  integrity sha512-L/4pUDMxcNa8R/EthV08Zt42WBO4h1rarVtK0K+QJG0X187OLo7l699jWw0GKuwzkPQ//jMFA/8Xm6Fh3J/DAg==
+
+prettier@^2.5.1:
   version "2.8.8"
   resolved "https://registry.yarnpkg.com/prettier/-/prettier-2.8.8.tgz#e8c5d7e98a4305ffe3de2e1fc4aca1a71c28b1da"
   integrity sha512-tdN8qQGvNjw4CHbY+XXk0JgCXn9QiF21a55rBe5LJAU+kDyC4WQn4+awm2Xfk2lQMk5fKup9XgzTZtGkjBdP9Q==
@@ -14019,6 +14050,14 @@ sync-disk-cache@^2.0.0:
     rimraf "^3.0.0"
     username-sync "^1.0.2"
 
+synckit@^0.8.5:
+  version "0.8.5"
+  resolved "https://registry.yarnpkg.com/synckit/-/synckit-0.8.5.tgz#b7f4358f9bb559437f9f167eb6bc46b3c9818fa3"
+  integrity sha512-L1dapNV6vu2s/4Sputv8xGsCdAVlb5nRDMFU/E27D44l5U6cw1g0dGd45uLc+OXjNMmF4ntiMdCimzcjFKQI8Q==
+  dependencies:
+    "@pkgr/utils" "^2.3.1"
+    tslib "^2.5.0"
+
 tabbable@^5.3.3:
   version "5.3.3"
   resolved "https://registry.yarnpkg.com/tabbable/-/tabbable-5.3.3.tgz#aac0ff88c73b22d6c3c5a50b1586310006b47fbf"
@@ -14402,7 +14441,7 @@ tslib@^1.7.1, tslib@^1.9.0:
   resolved "https://registry.yarnpkg.com/tslib/-/tslib-1.14.1.tgz#cf2d38bdc34a134bcaf1091c41f6619e2f672d00"
   integrity sha512-Xni35NKzjgMrwevysHTCArtLDpPvye8zV/0E4EyYn43P7/7qvQwPh9BGkHewbMulVntbigmcT7rdX3BNo9wRJg==
 
-tslib@^2.0.1, tslib@^2.0.3, tslib@^2.1.0, tslib@^2.4.1:
+tslib@^2.0.1, tslib@^2.0.3, tslib@^2.1.0, tslib@^2.4.1, tslib@^2.5.0, tslib@^2.6.0:
   version "2.6.2"
   resolved "https://registry.yarnpkg.com/tslib/-/tslib-2.6.2.tgz#703ac29425e7b37cd6fd456e92404d46d1f3e4ae"
   integrity sha512-AEYxH93jGFPn/a2iVAwW87VuUIkR1FVUKB77NwMF7nBTDkDrrT/Hpt/IrCJ0QXhW27jTBDcf5ZY7w6RiqTMw2Q==

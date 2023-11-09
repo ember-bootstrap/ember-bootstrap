@@ -205,7 +205,10 @@ export default class Button extends Component {
    * @public
    */
   get icon() {
-    return this.args.icon || (this.args.active ? this.args.iconActive : this.args.iconInactive);
+    return (
+      this.args.icon ||
+      (this.args.active ? this.args.iconActive : this.args.iconInactive)
+    );
   }
 
   /**

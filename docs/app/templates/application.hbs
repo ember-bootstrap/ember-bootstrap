@@ -1,9 +1,14 @@
 {{#unless this.hideNav}}
-  <BsNavbar @fluid={{false}} @type="dark" @backgroundColor="primary" as |navbar|>
+  <BsNavbar
+    @fluid={{false}}
+    @type="dark"
+    @backgroundColor="primary"
+    as |navbar|
+  >
     <LinkTo @route="index" class="navbar-brand">
       ember-bootstrap
     </LinkTo>
-    <navbar.toggle/>
+    <navbar.toggle />
     <navbar.content class="justify-content-between">
       <navbar.nav as |nav|>
         <nav.item>

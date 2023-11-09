@@ -4,27 +4,30 @@ import { render } from '@ember/test-helpers';
 import hbs from 'htmlbars-inline-precompile';
 import setupNoDeprecations from '../../../../../helpers/setup-no-deprecations';
 
-module('Integration | Component | bs form/element/control/input', function (hooks) {
-  setupRenderingTest(hooks);
-  setupNoDeprecations(hooks);
+module(
+  'Integration | Component | bs form/element/control/input',
+  function (hooks) {
+    setupRenderingTest(hooks);
+    setupNoDeprecations(hooks);
 
-  test('it renders', async function (assert) {
-    await render(hbs`<BsForm::Element::Control::Input />`);
+    test('it renders', async function (assert) {
+      await render(hbs`<BsForm::Element::Control::Input />`);
 
-    assert.dom('input[type=text]').exists({ count: 1 });
-  });
+      assert.dom('input[type=text]').exists({ count: 1 });
+    });
 
-  test('it sets value', async function (assert) {
-    await render(hbs`<BsForm::Element::Control::Input @value="FOO" />`);
+    test('it sets value', async function (assert) {
+      await render(hbs`<BsForm::Element::Control::Input @value='FOO' />`);
 
-    assert.dom('input[type=text]').hasValue('FOO');
-  });
+      assert.dom('input[type=text]').hasValue('FOO');
+    });
 
-  test('support size classes', async function (assert) {
-    await render(hbs`<BsForm::Element::Control::Input @size="lg" />`);
-    assert.dom('input').hasClass('form-control-lg', 'input has large class');
+    test('support size classes', async function (assert) {
+      await render(hbs`<BsForm::Element::Control::Input @size='lg' />`);
+      assert.dom('input').hasClass('form-control-lg', 'input has large class');
 
-    await render(hbs`<BsForm::Element::Control::Input @size="sm" />`);
-    assert.dom('input').hasClass('form-control-sm', 'input has small class');
-  });
-});
+      await render(hbs`<BsForm::Element::Control::Input @size='sm' />`);
+      assert.dom('input').hasClass('form-control-sm', 'input has small class');
+    });
+  },
+);

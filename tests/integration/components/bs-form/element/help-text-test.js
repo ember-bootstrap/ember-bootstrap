@@ -10,9 +10,7 @@ module('Integration | Component | bs form/element/help text', function (hooks) {
   setupNoDeprecations(hooks);
 
   test('it renders help text', async function (assert) {
-    await render(hbs`
-      <BsForm::Element::HelpText @text="foo bar" />
-    `);
+    await render(hbs`<BsForm::Element::HelpText @text='foo bar' />`);
 
     assert.dom(`.${formHelpTextClass()}`).exists();
     assert.dom('*').hasText('foo bar');
