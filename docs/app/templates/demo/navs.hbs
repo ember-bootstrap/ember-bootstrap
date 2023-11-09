@@ -8,7 +8,7 @@
       @onChange={{this.updateType}}
       as |el|
     >
-      <el.control @searchEnabled @class="ml-sm-1"/>
+      <el.control @searchEnabled @class="ml-sm-1" />
     </form.element>
     <form.element
       @controlType="checkbox"
@@ -18,7 +18,7 @@
       class="ml-sm-2"
       as |el|
     >
-      <el.control disabled={{bs-eq this.type "tabs"}}/>
+      <el.control disabled={{bs-eq this.type "tabs"}} />
     </form.element>
     <form.element
       @controlType="checkbox"
@@ -27,7 +27,7 @@
       class="ml-sm-2"
       as |el|
     >
-      <el.control disabled={{this.stacked}}/>
+      <el.control disabled={{this.stacked}} />
     </form.element>
     <form.element
       @controlType="checkbox"
@@ -36,16 +36,17 @@
       class="ml-sm-2"
       as |el|
     >
-      <el.control disabled={{this.stacked}}/>
+      <el.control disabled={{this.stacked}} />
     </form.element>
   </BsForm>
-  <hr>
+  <hr />
   <!-- BEGIN-SNIPPET nav-demo -->
   <BsNav
     @type={{this.type}}
     @justified={{this.justified}}
     @stacked={{this.stacked}}
-    @fill={{this.fill}} as |nav|
+    @fill={{this.fill}}
+    as |nav|
   >
     <nav.item>
       <nav.link-to @route="index">Home</nav.link-to>

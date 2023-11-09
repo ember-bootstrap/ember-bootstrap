@@ -4,28 +4,26 @@
       @controlType="power-select"
       @options={{this.typeChoices}}
       @label="Type"
-      @property="type" as |el|
+      @property="type"
+      as |el|
     >
-      <el.control @searchEnabled/>
+      <el.control @searchEnabled />
     </form.element>
     <form.element
       @controlType="power-select"
       @options={{this.bgChoices}}
       @label="Background"
-      @property="bg" as |el|
+      @property="bg"
+      as |el|
     >
-      <el.control @searchEnabled/>
+      <el.control @searchEnabled />
     </form.element>
   </BsForm>
-  <hr>
+  <hr />
   <!-- BEGIN-SNIPPET navbar-demo -->
-  <BsNavbar
-    @type={{this.type}}
-    @backgroundColor={{this.bg}}
-    as |navbar|
-  >
+  <BsNavbar @type={{this.type}} @backgroundColor={{this.bg}} as |navbar|>
     <LinkTo @route="index" class="navbar-brand">Brand</LinkTo>
-    <navbar.toggle/>
+    <navbar.toggle />
     <navbar.content>
       <navbar.nav as |nav|>
         <nav.item>

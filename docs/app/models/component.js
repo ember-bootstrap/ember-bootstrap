@@ -13,7 +13,7 @@ export default EmberObject.extend({
   bsUrl: null,
 
   apiUrl: computed('nameSpace', 'className', function () {
-    let { nameSpace, className } = this.getProperties('nameSpace', 'className');
+    let { nameSpace, className } = this;
     return `${config.rootURL}api/classes/${nameSpace}.${className}.html`;
   }),
 

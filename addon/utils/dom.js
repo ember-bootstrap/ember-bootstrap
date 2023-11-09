@@ -64,7 +64,8 @@ export function getDOM(context) {
 export function getDestinationElement(context) {
   let dom = getDOM(context);
   const id = 'ember-bootstrap-wormhole';
-  let destinationElement = findElementById(dom, id) || findElemementByIdInShadowDom(context, id);
+  let destinationElement =
+    findElementById(dom, id) || findElemementByIdInShadowDom(context, id);
 
   if (DEBUG && !destinationElement) {
     let config = getOwner(context).resolveRegistration('config:environment');
@@ -72,7 +73,8 @@ export function getDestinationElement(context) {
       let id;
       if (requirejs.has('@ember/test-helpers/dom/get-root-element')) {
         try {
-          id = requirejs('@ember/test-helpers/dom/get-root-element').default().id;
+          id = requirejs('@ember/test-helpers/dom/get-root-element').default()
+            .id;
         } catch (ex) {
           // no op
         }
@@ -86,7 +88,7 @@ export function getDestinationElement(context) {
     warn(
       `No wormhole destination element found for component ${context}. If you have set \`insertEmberWormholeElementToDom\` to false, you should insert a \`div#ember-bootstrap-wormhole\` manually!`,
       false,
-      { id: 'ember-bootstrap.no-destination-element' }
+      { id: 'ember-bootstrap.no-destination-element' },
     );
   }
 
@@ -95,5 +97,8 @@ export function getDestinationElement(context) {
 
 export function findElemementByIdInShadowDom(context, id) {
   const owner = getOwner(context);
-  return owner.rootElement.querySelector && owner.rootElement.querySelector(`[id="${id}"]`);
+  return (
+    owner.rootElement.querySelector &&
+    owner.rootElement.querySelector(`[id="${id}"]`)
+  );
 }

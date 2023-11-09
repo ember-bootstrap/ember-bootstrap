@@ -11,7 +11,10 @@ Config.reopenClass({
 
   load(config = {}) {
     for (let property in config) {
-      if (Object.prototype.hasOwnProperty.call(this, property) && typeof this[property] !== 'function') {
+      if (
+        Object.prototype.hasOwnProperty.call(this, property) &&
+        typeof this[property] !== 'function'
+      ) {
         this[property] = config[property];
       }
     }

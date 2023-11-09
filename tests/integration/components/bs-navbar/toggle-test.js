@@ -16,11 +16,9 @@ module('Integration | Component | bs-navbar/toggle', function (hooks) {
   });
 
   test('it renders block usage', async function (assert) {
-    await render(hbs`
-      <BsNavbar::Toggle>
-        template block text
-      </BsNavbar::Toggle>
-    `);
+    await render(hbs`<BsNavbar::Toggle>
+  template block text
+</BsNavbar::Toggle>`);
 
     assert.dom('*').hasText('template block text');
   });
@@ -28,9 +26,20 @@ module('Integration | Component | bs-navbar/toggle', function (hooks) {
   test('it has correct markup', async function (assert) {
     await render(hbs`<BsNavbar::Toggle />`);
 
-    assert.dom('button').exists({ count: 1 }, 'there is exactly one button element');
-    assert.dom('button').hasClass(versionDependent('navbar-toggler'), 'the toggle has the appropriate toggle class');
-    assert.dom('button').hasClass('collapsed', 'the toggle has the collapsed class');
-    assert.dom('button').doesNotHaveClass('btn', 'the toggle is a simple button without .btn');
+    assert
+      .dom('button')
+      .exists({ count: 1 }, 'there is exactly one button element');
+    assert
+      .dom('button')
+      .hasClass(
+        versionDependent('navbar-toggler'),
+        'the toggle has the appropriate toggle class',
+      );
+    assert
+      .dom('button')
+      .hasClass('collapsed', 'the toggle has the collapsed class');
+    assert
+      .dom('button')
+      .doesNotHaveClass('btn', 'the toggle is a simple button without .btn');
   });
 });

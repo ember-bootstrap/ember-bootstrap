@@ -12,7 +12,10 @@ export function setupAssertionsForErrorsNotHandledByEmberOnError(hooks) {
      * neither  `assert.rejects` nor `setupOnerror` could be used. Otherwise these two
      * methods to test rejecting promises should be preferred.
      */
-    assert.rejectsErrorNotHandledByEmberOnError = async function (callback, expectedError) {
+    assert.rejectsErrorNotHandledByEmberOnError = async function (
+      callback,
+      expectedError,
+    ) {
       // https://github.com/qunitjs/qunit/issues/1419#issuecomment-561739486
       const ORIG_QUNIT_UNHANDLED_REJECTION = QUnit.onUnhandledRejection;
       QUnit.onUnhandledRejection = (reason) => {

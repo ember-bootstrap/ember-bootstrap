@@ -97,7 +97,7 @@ module('Integration | subclassing', function (hooks) {
         await render(hbs`<TestComponent />`);
 
         assert.deprecationsInclude(
-          `Extending from ember-bootstrap component classes is not supported, and might break anytime. Detected subclassing of <${name}> component.`
+          `Extending from ember-bootstrap component classes is not supported, and might break anytime. Detected subclassing of <${name}> component.`,
         );
       });
 

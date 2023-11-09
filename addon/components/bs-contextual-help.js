@@ -399,7 +399,7 @@ export default class ContextualHelp extends Component {
           this.show();
         }
       },
-      this.delayShow
+      this.delayShow,
     );
   }
 
@@ -503,7 +503,9 @@ export default class ContextualHelp extends Component {
     };
 
     if (skipTransition === false && this.usesTransition) {
-      transitionEnd(this.overlayElement, this.transitionDuration).then(tooltipShowComplete);
+      transitionEnd(this.overlayElement, this.transitionDuration).then(
+        tooltipShowComplete,
+      );
     } else {
       tooltipShowComplete();
     }
@@ -561,7 +563,9 @@ export default class ContextualHelp extends Component {
     }
 
     if (this.usesTransition) {
-      transitionEnd(this.overlayElement, this.transitionDuration).then(tooltipHideComplete);
+      transitionEnd(this.overlayElement, this.transitionDuration).then(
+        tooltipHideComplete,
+      );
     } else {
       tooltipHideComplete();
     }

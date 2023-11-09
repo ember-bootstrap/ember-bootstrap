@@ -12,7 +12,11 @@ const TAB_KEYCODE = 9; // KeyboardEvent.which value for tab key
 const ARROW_UP_KEYCODE = 38; // KeyboardEvent.which value for up arrow key
 const ARROW_DOWN_KEYCODE = 40; // KeyboardEvent.which value for down arrow key
 
-const SUPPORTED_KEYCODES = [ESCAPE_KEYCODE, ARROW_DOWN_KEYCODE, ARROW_UP_KEYCODE];
+const SUPPORTED_KEYCODES = [
+  ESCAPE_KEYCODE,
+  ARROW_DOWN_KEYCODE,
+  ARROW_UP_KEYCODE,
+];
 
 /**
   Bootstrap style [dropdown menus](http://getbootstrap.com/components/#dropdowns), consisting
@@ -248,7 +252,9 @@ export default class Dropdown extends Component {
       }
     }
     if (this.hasButton && !this.toggleElement.classList.contains('btn-block')) {
-      return this.direction !== 'down' ? `btn-group ${dropDirectionClass}` : 'btn-group';
+      return this.direction !== 'down'
+        ? `btn-group ${dropDirectionClass}`
+        : 'btn-group';
     } else {
       return dropDirectionClass;
     }
@@ -327,11 +333,15 @@ export default class Dropdown extends Component {
 
     if (
       !this.isDestroyed &&
-      ((e.type === 'keyup' && e.which === TAB_KEYCODE && menuElement && !menuElement.contains(target)) ||
+      ((e.type === 'keyup' &&
+        e.which === TAB_KEYCODE &&
+        menuElement &&
+        !menuElement.contains(target)) ||
         (e.type === 'click' &&
           toggleElement &&
           !toggleElement.contains(target) &&
-          ((menuElement && !menuElement.contains(target)) || this.closeOnMenuClick)))
+          ((menuElement && !menuElement.contains(target)) ||
+            this.closeOnMenuClick)))
     ) {
       this.closeDropdown();
     }
@@ -350,7 +360,8 @@ export default class Dropdown extends Component {
       ['input', 'textarea'].includes(event.target.tagName.toLowerCase())
         ? event.which === SPACE_KEYCODE ||
           (event.which !== ESCAPE_KEYCODE &&
-            ((event.which !== ARROW_DOWN_KEYCODE && event.which !== ARROW_UP_KEYCODE) ||
+            ((event.which !== ARROW_DOWN_KEYCODE &&
+              event.which !== ARROW_UP_KEYCODE) ||
               this.menuElement.contains(event.target)))
         : !SUPPORTED_KEYCODES.includes(event.which)
     ) {
@@ -363,13 +374,20 @@ export default class Dropdown extends Component {
     if (!this.isOpen) {
       this.openDropdown();
       return;
-    } else if (event.which === ESCAPE_KEYCODE || event.which === SPACE_KEYCODE) {
+    } else if (
+      event.which === ESCAPE_KEYCODE ||
+      event.which === SPACE_KEYCODE
+    ) {
       this.closeDropdown();
       this.toggleElement.focus();
       return;
     }
 
-    let items = [].slice.call(this.menuElement.querySelectorAll('.dropdown-item:not(.disabled):not(:disabled)'));
+    let items = [].slice.call(
+      this.menuElement.querySelectorAll(
+        '.dropdown-item:not(.disabled):not(:disabled)',
+      ),
+    );
 
     if (items.length === 0) {
       return;
@@ -396,15 +414,24 @@ export default class Dropdown extends Component {
 
   @action
   registerChildElement(element, [type]) {
-    assert(`Unknown child element type "${type}"`, type === 'toggle' || type === 'menu');
-    assert(`Registered ${type} element must be an HTMLElement`, element instanceof HTMLElement);
+    assert(
+      `Unknown child element type "${type}"`,
+      type === 'toggle' || type === 'menu',
+    );
+    assert(
+      `Registered ${type} element must be an HTMLElement`,
+      element instanceof HTMLElement,
+    );
 
     this.set(`${type}Element`, element);
   }
 
   @action
   unregisterChildElement(element, [type]) {
-    assert(`Unknown child element type "${type}"`, type === 'toggle' || type === 'menu');
+    assert(
+      `Unknown child element type "${type}"`,
+      type === 'toggle' || type === 'menu',
+    );
 
     this.set(`${type}Element`, null);
   }
