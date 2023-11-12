@@ -66,7 +66,7 @@
     "eslint": "8.53.0",
     "eslint-config-prettier": "9.0.0",
     "eslint-plugin-ember": "11.11.1",
-    "eslint-plugin-n": "15.7.0",
+    "eslint-plugin-n": "16.3.1",
     "eslint-plugin-prettier": "5.0.1",
     "eslint-plugin-qunit": "7.3.4",
     "loader.js": "4.7.0",
