@@ -134,7 +134,9 @@ export default class ProgressBar extends Component {
     let minValue = parseFloat(this.minValue);
     let maxValue = parseFloat(this.maxValue);
 
-    return Math.min(Math.max((value - minValue) / (maxValue - minValue), 0), 1) * 100;
+    return (
+      Math.min(Math.max((value - minValue) / (maxValue - minValue), 0), 1) * 100
+    );
   }
 
   /**

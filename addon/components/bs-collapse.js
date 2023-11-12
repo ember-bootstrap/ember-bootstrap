@@ -275,14 +275,22 @@ export default class Collapse extends Component {
 
   @action
   _updateCollapsedSize() {
-    if (!this.resetSizeWhenNotCollapsing && this.collapsed && !this.collapsing) {
+    if (
+      !this.resetSizeWhenNotCollapsing &&
+      this.collapsed &&
+      !this.collapsing
+    ) {
       this.collapseSize = this.collapsedSize;
     }
   }
 
   @action
   _updateExpandedSize() {
-    if (!this.resetSizeWhenNotCollapsing && !this.collapsed && !this.collapsing) {
+    if (
+      !this.resetSizeWhenNotCollapsing &&
+      !this.collapsed &&
+      !this.collapsing
+    ) {
       this.collapseSize = this.expandedSize;
     }
   }

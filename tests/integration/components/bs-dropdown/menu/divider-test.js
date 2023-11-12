@@ -10,15 +10,19 @@ module('Integration | Component | bs-dropdown/menu/divider', function (hooks) {
 
   test('it has correct markup', async function (assert) {
     // Template inline usage:
-    await render(hbs`<BsDropdown::Menu::Divider/>`);
+    await render(hbs`<BsDropdown::Menu::Divider />`);
 
-    assert.dom('div').hasClass('dropdown-divider', 'renders as <div> with correct class');
+    assert
+      .dom('div')
+      .hasClass('dropdown-divider', 'renders as <div> with correct class');
   });
 
   test('it support custom html attributes', async function (assert) {
     // Template inline usage:
-    await render(hbs`<BsDropdown::Menu::Divider data-custom-html-attribute/>`);
+    await render(hbs`<BsDropdown::Menu::Divider data-custom-html-attribute />`);
 
-    assert.dom('div[data-custom-html-attribute]').exists({ count: 1 }, 'renders as <div> with custom html attributes');
+    assert
+      .dom('div[data-custom-html-attribute]')
+      .exists({ count: 1 }, 'renders as <div> with custom html attributes');
   });
 });

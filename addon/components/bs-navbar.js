@@ -194,7 +194,10 @@ export default class Navbar extends Component {
   @computed('type')
   get typeClass() {
     let type = this.type || 'light';
-    assert('The value of `type` must be a string', typeof type === 'string' && type !== '');
+    assert(
+      'The value of `type` must be a string',
+      typeof type === 'string' && type !== '',
+    );
 
     return `navbar-${type}`;
   }

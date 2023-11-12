@@ -9,7 +9,9 @@ export function skipTransition(bool) {
 }
 
 function _isSkipped() {
-  return (_skipTransition === true) | (_skipTransition !== false) && Ember.testing;
+  return (
+    (_skipTransition === true) | (_skipTransition !== false) && Ember.testing
+  );
 }
 
 export default function waitForTransitionEnd(node, duration = 0) {

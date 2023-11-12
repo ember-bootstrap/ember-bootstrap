@@ -22,19 +22,26 @@ module('Integration | Component | bs-collapse', function (hooks) {
 
   hooks.beforeEach(function () {
     this.actions = {};
-    this.send = (actionName, ...args) => this.actions[actionName].apply(this, args);
+    this.send = (actionName, ...args) =>
+      this.actions[actionName].apply(this, args);
   });
 
   test('collapse has correct default markup', async function (assert) {
     await render(hbs`<BsCollapse><p>Just some content</p></BsCollapse>`);
     assert.dom('.collapse').exists('collapse has collapse class');
-    assert.dom('.collapse').hasNoClass(visibilityClass(), 'collapse does not have visibility class');
+    assert
+      .dom('.collapse')
+      .hasNoClass(visibilityClass(), 'collapse does not have visibility class');
   });
 
   test('expanded collapse has correct default markup', async function (assert) {
-    await render(hbs`<BsCollapse @collapsed={{false}}><p>Just some content</p></BsCollapse>`);
+    await render(
+      hbs`<BsCollapse @collapsed={{false}}><p>Just some content</p></BsCollapse>`,
+    );
     assert.dom('.collapse').hasClass('collapse', 'collapse has collapse class');
-    assert.dom('.collapse').hasClass(visibilityClass(), 'collapse has visibility class');
+    assert
+      .dom('.collapse')
+      .hasClass(visibilityClass(), 'collapse has visibility class');
   });
 
   test('setting collapse to false expands this item', async function (assert) {
@@ -45,19 +52,27 @@ module('Integration | Component | bs-collapse', function (hooks) {
 
     this.set('collapsed', true);
     await render(
-      hbs`<BsCollapse @collapsed={{this.collapsed}} @onShow={{action "show"}} @onShown={{action "shown"}}><p>Just some content</p></BsCollapse>`
+      hbs`<BsCollapse
+  @collapsed={{this.collapsed}}
+  @onShow={{action 'show'}}
+  @onShown={{action 'shown'}}
+><p>Just some content</p></BsCollapse>`,
     );
     this.set('collapsed', false);
 
     assert.ok(showAction.calledOnce, 'onShow action has been called');
     assert.notOk(shownAction.called, 'onShown action has not been called');
-    assert.dom('.collapsing').exists('collapse has collapsing class while transition is running');
+    assert
+      .dom('.collapsing')
+      .exists('collapse has collapsing class while transition is running');
 
     // wait for transitions to complete
     await settled();
     assert.ok(shownAction.calledOnce, 'onShown action has been called');
     assert.dom('.collapse').exists('collapse has collapse class');
-    assert.dom('.collapse').hasClass(visibilityClass(), 'collapse has visibility class');
+    assert
+      .dom('.collapse')
+      .hasClass(visibilityClass(), 'collapse has visibility class');
   });
 
   test('setting collapse to true collapses this item', async function (assert) {
@@ -68,13 +83,19 @@ module('Integration | Component | bs-collapse', function (hooks) {
 
     this.set('collapsed', false);
     await render(
-      hbs`<BsCollapse @collapsed={{this.collapsed}} @onHide={{action "hide"}} @onHidden={{action "hidden"}}><p>Just some content</p></BsCollapse>`
+      hbs`<BsCollapse
+  @collapsed={{this.collapsed}}
+  @onHide={{action 'hide'}}
+  @onHidden={{action 'hidden'}}
+><p>Just some content</p></BsCollapse>`,
     );
     this.set('collapsed', true);
 
     assert.ok(hideAction.calledOnce, 'onHide action has been called');
     assert.notOk(hiddenAction.called, 'onHidden action has not been called');
-    assert.dom('.collapsing').exists('collapse has collapsing class while transition is running');
+    assert
+      .dom('.collapsing')
+      .exists('collapse has collapsing class while transition is running');
 
     // wait for transitions to complete
     await settled();
@@ -86,7 +107,11 @@ module('Integration | Component | bs-collapse', function (hooks) {
   test('after collapsing/expanding height/width is set correctly ', async function (assert) {
     this.set('collapsed', true);
     await render(
-      hbs`<BsCollapse @expandedSize={{200}} @transitionDuration={{200}} @collapsed={{this.collapsed}}><p>Just some content</p></BsCollapse>`
+      hbs`<BsCollapse
+  @expandedSize={{200}}
+  @transitionDuration={{200}}
+  @collapsed={{this.collapsed}}
+><p>Just some content</p></BsCollapse>`,
     );
     this.set('collapsed', false);
 
@@ -101,7 +126,9 @@ module('Integration | Component | bs-collapse', function (hooks) {
   });
 
   test('it passes accessibility checks', async function (assert) {
-    await render(hbs`<button type="button">Test</button><BsCollapse><p>Just some content</p></BsCollapse>`);
+    await render(
+      hbs`<button type='button'>Test</button><BsCollapse><p>Just some content</p></BsCollapse>`,
+    );
 
     await a11yAudit();
     assert.ok(true, 'A11y audit passed');

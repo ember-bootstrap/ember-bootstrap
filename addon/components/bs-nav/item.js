@@ -95,7 +95,10 @@ export default class NavItem extends Component.extend(ComponentParent) {
   init() {
     super.init(...arguments);
     let { model, models } = this;
-    assert('You cannot pass both `@model` and `@models` to a nav item component!', !model || !models);
+    assert(
+      'You cannot pass both `@model` and `@models` to a nav item component!',
+      !model || !models,
+    );
 
     this.activeChildLinks;
     this.disabledChildLinks;

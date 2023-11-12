@@ -402,7 +402,9 @@ export default class Modal extends Component {
       // trigger submit event on body forms
       let event = document.createEvent('Events');
       event.initEvent('submit', true, true);
-      Array.prototype.slice.call(forms).forEach((form) => form.dispatchEvent(event));
+      Array.prototype.slice
+        .call(forms)
+        .forEach((form) => form.dispatchEvent(event));
     } else {
       // if we have no form, we send a submit action
       this.args.onSubmit?.();
@@ -557,9 +559,16 @@ export default class Modal extends Component {
    */
   @action
   adjustDialog() {
-    let modalIsOverflowing = this.modalElement.scrollHeight > document.documentElement.clientHeight;
-    this.paddingLeft = !this.bodyIsOverflowing && modalIsOverflowing ? this.scrollbarWidth : undefined;
-    this.paddingRight = this.bodyIsOverflowing && !modalIsOverflowing ? this.scrollbarWidth : undefined;
+    let modalIsOverflowing =
+      this.modalElement.scrollHeight > document.documentElement.clientHeight;
+    this.paddingLeft =
+      !this.bodyIsOverflowing && modalIsOverflowing
+        ? this.scrollbarWidth
+        : undefined;
+    this.paddingRight =
+      this.bodyIsOverflowing && !modalIsOverflowing
+        ? this.scrollbarWidth
+        : undefined;
   }
 
   /**

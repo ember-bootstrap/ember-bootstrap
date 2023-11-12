@@ -6,7 +6,9 @@ const { embroiderSafe, embroiderOptimized } = require('@embroider/test-setup');
 
 module.exports = async function () {
   return {
-    command: process.env.BROWSER ? `ember test --launch ${process.env.BROWSER}` : null,
+    command: process.env.BROWSER
+      ? `ember test --launch ${process.env.BROWSER}`
+      : null,
     useYarn: true,
     scenarios: [
       {
@@ -62,28 +64,6 @@ module.exports = async function () {
           // TODO: Enable again when FastBoot is ready for Ember 5
           // https://github.com/ember-fastboot/ember-cli-fastboot/pull/905
           FASTBOOT_DISABLED: true,
-        },
-      },
-      {
-        name: 'ember-classic',
-        env: {
-          EMBER_OPTIONAL_FEATURES: JSON.stringify({
-            // TODO: tests fail if optional feature application-template-wrapper is enabled
-            // 'application-template-wrapper': true,
-            'default-async-observers': false,
-            'template-only-glimmer-components': false,
-          }),
-        },
-        npm: {
-          devDependencies: {
-            'ember-source': '~3.28.0',
-            bootstrap: bootstrapVersion,
-            // ember-pooper-modifier >= 4.0.0 does not support Ember < 4.8
-            'ember-popper-modifier': '^3.0.0',
-          },
-          ember: {
-            edition: 'classic',
-          },
         },
       },
       {

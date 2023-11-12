@@ -34,9 +34,11 @@ export default function setupNoDeprecations({ beforeEach, afterEach }) {
     if (deprecations.size > expectedDeprecations.size) {
       assert.ok(
         false,
-        `Expected ${expectedDeprecations.size} deprecations, found: ${[...deprecations]
+        `Expected ${expectedDeprecations.size} deprecations, found: ${[
+          ...deprecations,
+        ]
           .map((msg) => `"${msg}"`)
-          .join(', ')}`
+          .join(', ')}`,
       );
     }
   });
@@ -45,18 +47,26 @@ export default function setupNoDeprecations({ beforeEach, afterEach }) {
     if (count === undefined) {
       this.ok(deprecations.size, 'Expected deprecations during test.');
     } else {
-      this.equal(deprecations.size, count, `Expected ${count} deprecation(s) during test.`);
+      this.equal(
+        deprecations.size,
+        count,
+        `Expected ${count} deprecation(s) during test.`,
+      );
     }
 
     deprecations.forEach((d) => expectedDeprecations.add(d));
   };
 
   QUnit.assert.deprecationsInclude = function (expected) {
-    let found = [...deprecations].find((deprecation) => deprecation.includes(expected));
+    let found = [...deprecations].find((deprecation) =>
+      deprecation.includes(expected),
+    );
     this.pushResult({
       result: !!found,
       actual: deprecations,
-      message: `expected to find \`${expected}\` deprecation. Found ${[...deprecations]
+      message: `expected to find \`${expected}\` deprecation. Found ${[
+        ...deprecations,
+      ]
         .map((d) => `"${d}"`)
         .join(', ')}`,
     });

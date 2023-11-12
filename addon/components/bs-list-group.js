@@ -92,7 +92,9 @@ export default class BsListGroupComponent extends Component {
 
   get horizontalClass() {
     if (this.horizontal) {
-      return this.horizontalSize ? `list-group-horizontal-${this.horizontalSize}` : 'list-group-horizontal';
+      return this.horizontalSize
+        ? `list-group-horizontal-${this.horizontalSize}`
+        : 'list-group-horizontal';
     }
     return '';
   }

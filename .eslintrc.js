@@ -13,7 +13,11 @@ module.exports = {
   // Disabling hbs plugin until https://github.com/ember-template-lint/eslint-plugin-hbs/issues/42 is resolved
   // plugins: ['ember', 'hbs'],
   plugins: ['ember'],
-  extends: ['eslint:recommended', 'plugin:ember/recommended', 'plugin:prettier/recommended'],
+  extends: [
+    'eslint:recommended',
+    'plugin:ember/recommended',
+    'plugin:prettier/recommended',
+  ],
   env: {
     browser: true,
   },

@@ -14,16 +14,16 @@ module('Integration | Component | bs-progress', function (hooks) {
 
   test('bs-progress has correct markup', async function (assert) {
     // Template block usage:
-    await render(hbs`
-      <BsProgress as |p|>
-        <p.bar @value={{5}} @minValue={{0}} @maxValue={{10}} />
-      </BsProgress>
-    `);
+    await render(hbs`<BsProgress as |p|>
+  <p.bar @value={{5}} @minValue={{0}} @maxValue={{10}} />
+</BsProgress>`);
 
     assert.dom('div.progress').exists({ count: 1 }, 'Has progress class');
     assert.dom('div.progress-bar').hasAttribute('role', 'progressbar');
 
-    assert.dom('div.progress-bar').exists({ count: 1 }, 'Has progress-bar class');
+    assert
+      .dom('div.progress-bar')
+      .exists({ count: 1 }, 'Has progress-bar class');
     assert.dom('div.progress-bar').hasAttribute('aria-valuenow', '5');
     assert.dom('div.progress-bar').hasAttribute('aria-valuemin', '0');
     assert.dom('div.progress-bar').hasAttribute('aria-valuemax', '10');
@@ -53,145 +53,142 @@ module('Integration | Component | bs-progress', function (hooks) {
     this.insertCSSRule('.progress-bar { transition: none; }');
     this.insertCSSRule('.width-500 { width: 500px }');
 
-    await render(hbs`
-      <div class="width-500">
-        <BsProgress as |p|>
-          <p.bar @value={{this.value}} @minValue={{this.minValue}} @maxValue={{this.maxValue}} />
-        </BsProgress>
-      </div>
-    `);
+    await render(hbs`<div class='width-500'>
+  <BsProgress as |p|>
+    <p.bar
+      @value={{this.value}}
+      @minValue={{this.minValue}}
+      @maxValue={{this.maxValue}}
+    />
+  </BsProgress>
+</div>`);
 
     testData.forEach((data) => {
       let { value } = data;
       let minValue = data.minValue || 0;
       let maxValue = data.maxValue || 100;
-      let expectedWidth = ((value - minValue) / (maxValue - minValue)) * baseSize;
+      let expectedWidth =
+        ((value - minValue) / (maxValue - minValue)) * baseSize;
 
       this.setProperties(data);
 
       assert.equal(
         this.element.querySelector('.progress-bar').offsetWidth,
         expectedWidth,
-        'Progress bar has expected width.'
+        'Progress bar has expected width.',
       );
     });
   });
 
   test('progress bar has invisible label for screen readers', async function (assert) {
-    await render(hbs`
-      <BsProgress as |p|>
-        <p.bar @value={{5}} @maxValue={{10}} />
-      </BsProgress>
-    `);
+    await render(hbs`<BsProgress as |p|>
+  <p.bar @value={{5}} @maxValue={{10}} />
+</BsProgress>`);
 
     assert.equal(
-      this.element.querySelector(`.progress-bar .${visuallyHiddenClass()}`).innerHTML.trim(),
+      this.element
+        .querySelector(`.progress-bar .${visuallyHiddenClass()}`)
+        .innerHTML.trim(),
       '50%',
-      'Progress bar shows correct default label'
+      'Progress bar shows correct default label',
     );
 
-    await render(hbs`
-      <BsProgress as |p|>
-        <p.bar @value={{5}} @maxValue={{10}} as |percent|>5 ({{percent}}%)</p.bar>
-      </BsProgress>
-    `);
+    await render(hbs`<BsProgress as |p|>
+  <p.bar @value={{5}} @maxValue={{10}} as |percent|>5 ({{percent}}%)</p.bar>
+</BsProgress>`);
 
     assert.equal(
-      this.element.querySelector(`.progress-bar .${visuallyHiddenClass()}`).innerHTML.trim(),
+      this.element
+        .querySelector(`.progress-bar .${visuallyHiddenClass()}`)
+        .innerHTML.trim(),
       '5 (50%)',
-      'Progress bar shows correct custom label'
+      'Progress bar shows correct custom label',
     );
   });
 
   test('progress bar can show label', async function (assert) {
-    await render(hbs`
-      <BsProgress as |p|>
-        <p.bar @value={{5}} @maxValue={{10}} @showLabel={{true}} />
-      </BsProgress>
-    `);
+    await render(hbs`<BsProgress as |p|>
+  <p.bar @value={{5}} @maxValue={{10}} @showLabel={{true}} />
+</BsProgress>`);
 
     assert.equal(
       this.element.querySelector('.progress-bar').innerHTML.trim(),
       '50%',
-      'Progress bar shows correct default label'
+      'Progress bar shows correct default label',
     );
 
-    await render(hbs`
-      <BsProgress as |p|>
-        <p.bar @value={{5}} @maxValue={{10}} @showLabel={{true}} as |percent|>5 ({{percent}}%)</p.bar>
-      </BsProgress>
-    `);
+    await render(hbs`<BsProgress as |p|>
+  <p.bar @value={{5}} @maxValue={{10}} @showLabel={{true}} as |percent|>5 ({{percent}}%)</p.bar>
+</BsProgress>`);
 
     assert.equal(
       this.element.querySelector('.progress-bar').innerHTML.trim(),
       '5 (50%)',
-      'Progress bar shows correct custom label'
+      'Progress bar shows correct custom label',
     );
   });
 
   test("progress bar can round label's percent value", async function (assert) {
-    await render(hbs`
-      <BsProgress as |p|>
-        <p.bar @value={{5}} @maxValue={{6}} @roundDigits={{2}} @showLabel={{true}} />
-      </BsProgress>
-    `);
+    await render(hbs`<BsProgress as |p|>
+  <p.bar @value={{5}} @maxValue={{6}} @roundDigits={{2}} @showLabel={{true}} />
+</BsProgress>`);
 
     assert.equal(
       this.element.querySelector('.progress-bar').innerHTML.trim(),
       '83.33%',
-      'Progress bar shows correct default label'
+      'Progress bar shows correct default label',
     );
   });
 
   test('progress bar supports type class', async function (assert) {
-    await render(hbs`
-      <BsProgress as |p|>
-        <p.bar @value={{50}} @type="success" />
-      </BsProgress>
-    `);
+    await render(hbs`<BsProgress as |p|>
+  <p.bar @value={{50}} @type='success' />
+</BsProgress>`);
 
-    assert.dom('.progress-bar').hasClass('bg-success', 'Progress bar has type class');
+    assert
+      .dom('.progress-bar')
+      .hasClass('bg-success', 'Progress bar has type class');
   });
 
   test('progress bar supports striped style', async function (assert) {
-    await render(hbs`
-      <BsProgress as |p|>
-        <p.bar @value={{50}} @type="success" @striped={{true}} />
-      </BsProgress>
-    `);
+    await render(hbs`<BsProgress as |p|>
+  <p.bar @value={{50}} @type='success' @striped={{true}} />
+</BsProgress>`);
 
-    assert.dom('.progress-bar').hasClass('progress-bar-striped', 'Progress bar has type class');
+    assert
+      .dom('.progress-bar')
+      .hasClass('progress-bar-striped', 'Progress bar has type class');
   });
 
   test('progress bar supports animated stripes', async function (assert) {
-    await render(hbs`
-      <BsProgress as |p|>
-        <p.bar @value={{50}} @type="success" @striped={{true}} @animate={{true}} />
-      </BsProgress>
-    `);
+    await render(hbs`<BsProgress as |p|>
+  <p.bar @value={{50}} @type='success' @striped={{true}} @animate={{true}} />
+</BsProgress>`);
 
-    assert.dom('.progress-bar').hasClass('progress-bar-striped', 'Progress bar has type class');
-    assert.dom('.progress-bar').hasClass('progress-bar-animated', 'Progress bar has animated class');
+    assert
+      .dom('.progress-bar')
+      .hasClass('progress-bar-striped', 'Progress bar has type class');
+    assert
+      .dom('.progress-bar')
+      .hasClass('progress-bar-animated', 'Progress bar has animated class');
   });
 
   test('progress bar supports stacked bars', async function (assert) {
-    await render(hbs`
-      <BsProgress as |p|>
-        <p.bar @value={{50}} @type="success" />
-        <p.bar @value={{30}} @type="info" />
-      </BsProgress>
-    `);
+    await render(hbs`<BsProgress as |p|>
+  <p.bar @value={{50}} @type='success' />
+  <p.bar @value={{30}} @type='info' />
+</BsProgress>`);
 
-    assert.dom('.progress-bar').exists({ count: 2 }, 'Progress bar has two bars');
+    assert
+      .dom('.progress-bar')
+      .exists({ count: 2 }, 'Progress bar has two bars');
   });
 
   test('it passes accessibility checks', async function (assert) {
-    await render(hbs`
-      <BsProgress as |p|>
-        <p.bar @value={{5}} @maxValue={{10}} aria-label="Saving..." />
-      </BsProgress>
-      <button type="button">Test</button>
-    `);
+    await render(hbs`<BsProgress as |p|>
+  <p.bar @value={{5}} @maxValue={{10}} aria-label='Saving...' />
+</BsProgress>
+<button type='button'>Test</button>`);
 
     await a11yAudit();
     assert.ok(true, 'A11y audit passed');

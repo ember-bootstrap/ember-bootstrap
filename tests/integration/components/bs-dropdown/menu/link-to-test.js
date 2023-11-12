@@ -13,28 +13,31 @@ module('Integration | Component | bs-dropdown/menu/link-to', function (hooks) {
   });
 
   test('it has correct markup', async function (assert) {
-    await render(hbs`
-      <BsDropdown as |dd|>
-        <dd.button>Dropdown</dd.button>
-        <dd.menu as |menu|>
-          <menu.item><menu.link-to @route="index">template block text</menu.link-to></menu.item>
-        </dd.menu>
-      </BsDropdown>`);
+    await render(hbs`<BsDropdown as |dd|>
+  <dd.button>Dropdown</dd.button>
+  <dd.menu as |menu|>
+    <menu.item><menu.link-to @route='index'>template block text</menu.link-to></menu.item>
+  </dd.menu>
+</BsDropdown>`);
     await click('button');
 
     assert.dom('a').hasText('template block text');
-    assert.dom('a.dropdown-item').exists({ count: 1 }, 'renders as plain element with dropdown item class');
+    assert
+      .dom('a.dropdown-item')
+      .exists(
+        { count: 1 },
+        'renders as plain element with dropdown item class',
+      );
   });
 
   module('<LinkTo> properties', function () {
     test('simple route link', async function (assert) {
-      await render(hbs`
-        <BsDropdown as |dd|>
-          <dd.button>Dropdown</dd.button>
-          <dd.menu as |menu|>
-            <menu.item><menu.link-to @route="index">Link</menu.link-to></menu.item>
-          </dd.menu>
-        </BsDropdown>`);
+      await render(hbs`<BsDropdown as |dd|>
+  <dd.button>Dropdown</dd.button>
+  <dd.menu as |menu|>
+    <menu.item><menu.link-to @route='index'>Link</menu.link-to></menu.item>
+  </dd.menu>
+</BsDropdown>`);
       await click('button');
 
       assert.dom('a').exists({ count: 1 });
@@ -43,13 +46,16 @@ module('Integration | Component | bs-dropdown/menu/link-to', function (hooks) {
     });
 
     test('link with model', async function (assert) {
-      await render(hbs`
-        <BsDropdown as |dd|>
-          <dd.button>Dropdown</dd.button>
-          <dd.menu as |menu|>
-            <menu.item><menu.link-to @route="acceptance.link" @model="1" @query={{hash foo="bar"}}>Link</menu.link-to></menu.item>
-          </dd.menu>
-        </BsDropdown>`);
+      await render(hbs`<BsDropdown as |dd|>
+  <dd.button>Dropdown</dd.button>
+  <dd.menu as |menu|>
+    <menu.item><menu.link-to
+        @route='acceptance.link'
+        @model='1'
+        @query={{hash foo='bar'}}
+      >Link</menu.link-to></menu.item>
+  </dd.menu>
+</BsDropdown>`);
       await click('button');
 
       assert.dom('a').exists({ count: 1 });
@@ -57,13 +63,15 @@ module('Integration | Component | bs-dropdown/menu/link-to', function (hooks) {
     });
 
     test('disabled link', async function (assert) {
-      await render(hbs`
-        <BsDropdown as |dd|>
-          <dd.button>Dropdown</dd.button>
-          <dd.menu as |menu|>
-            <menu.item><menu.link-to @route="index" @disabled={{true}}>Link</menu.link-to></menu.item>
-          </dd.menu>
-        </BsDropdown>`);
+      await render(hbs`<BsDropdown as |dd|>
+  <dd.button>Dropdown</dd.button>
+  <dd.menu as |menu|>
+    <menu.item><menu.link-to
+        @route='index'
+        @disabled={{true}}
+      >Link</menu.link-to></menu.item>
+  </dd.menu>
+</BsDropdown>`);
       await click('button');
 
       assert.dom('a').hasClass('disabled');

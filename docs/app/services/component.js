@@ -121,7 +121,7 @@ const componentData = A([
   },
 ]);
 
-const components = A(componentData.map((data) => Component.create(data)));
+const components = A(componentData.map((data) => new Component(data)));
 
 export default Service.extend({
   models: components,

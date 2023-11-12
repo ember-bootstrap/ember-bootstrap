@@ -47,7 +47,10 @@ export default class ButtonGroupButton extends Button {
 
   get isBS5ToggleButton() {
     if (macroCondition(getOwnConfig().isBS5)) {
-      return this.args.buttonGroupType === 'radio' || this.args.buttonGroupType === 'checkbox';
+      return (
+        this.args.buttonGroupType === 'radio' ||
+        this.args.buttonGroupType === 'checkbox'
+      );
     } else {
       return false;
     }

@@ -14,7 +14,8 @@
     @open={{this.modal1}}
     @title="Simple Dialog"
     @size="sm"
-    @onHidden={{fn (mut this.modal1) false}}>
+    @onHidden={{fn (mut this.modal1) false}}
+  >
     Hi there
   </BsModalSimple>
   <!-- END-SNIPPET -->
@@ -23,52 +24,38 @@
 <div class="highlight">
   <CodeSnippet
     @name="modal-demo.hbs"
-    @dynamicProperties={{hash
-      modal1=this.modal1
-    }}
+    @dynamicProperties={{hash modal1=this.modal1}}
   />
 </div>
 <h3>
   Options
 </h3>
 <BsForm @formLayout="horizontal" @model={{this}} as |form|>
-  <form.element
-    @label="Title"
-    @property="title"
-  />
-  <form.element
-    @label="Close button"
-    @property="closeTitle"
-  />
-  <form.element
-    @label="Submit button"
-    @property="submitTitle"
-    as |el|
-   >
-    <el.control placeholder="Enter title to add a submit button"/>
+  <form.element @label="Title" @property="title" />
+  <form.element @label="Close button" @property="closeTitle" />
+  <form.element @label="Submit button" @property="submitTitle" as |el|>
+    <el.control placeholder="Enter title to add a submit button" />
   </form.element>
   <form.element
     @controlType="power-select"
     @options={{this.sizes}}
     @label="Size"
-    @property="size" as |el|>
+    @property="size"
+    as |el|
+  >
     <el.control @searchEnabled />
   </form.element>
   <form.element
     @controlType="checkbox"
     @label="Close button"
     @property="closeButton"
-   />
-  <form.element
-    @controlType="checkbox"
-    @label="Fade"
-    @property="fade"
   />
+  <form.element @controlType="checkbox" @label="Fade" @property="fade" />
   <form.element
     @controlType="checkbox"
     @label="Backdrop close"
     @property="backdropClose"
-   />
+  />
 
 </BsForm>
 <div class="bs-example bs-example__modal" data-test-fastboot-container>
@@ -85,7 +72,8 @@
     @backdropClose={{this.backdropClose}}
     @onSubmit={{this.submit}}
     @onHide={{this.close}}
-    @renderInPlace={{true}}>
+    @renderInPlace={{true}}
+  >
     Hi there
   </BsModalSimple>
   <!-- END-SNIPPET -->
@@ -122,7 +110,9 @@
   <BsModal
     @open={{this.modal3}}
     @onSubmit={{this.submit}}
-    @onHidden={{fn (mut this.modal3) false}} as |modal|>
+    @onHidden={{fn (mut this.modal3) false}}
+    as |modal|
+  >
     <modal.header>
       <h4 class="modal-title">
         Custom Dialog
@@ -132,7 +122,7 @@
     <modal.body>
       <label>
         Search:
-        <input type="text" autofocus="autofocus">
+        <input type="text" autofocus="autofocus" />
       </label>
     </modal.body>
     <modal.footer>
@@ -147,8 +137,6 @@
 <div class="highlight">
   <CodeSnippet
     @name="modal-custom.hbs"
-    @dynamicProperties={{hash
-      modal3=this.modal3
-    }}
+    @dynamicProperties={{hash modal3=this.modal3}}
   />
 </div>

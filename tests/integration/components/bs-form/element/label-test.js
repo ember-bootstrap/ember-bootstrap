@@ -18,11 +18,9 @@ module('Integration | Component | bs form/element/label', function (hooks) {
     assert.dom('*').hasText('');
 
     // Template block usage:
-    await render(hbs`
-      <BsForm::Element::Label>
-        template block text
-      </BsForm::Element::Label>
-    `);
+    await render(hbs`<BsForm::Element::Label>
+  template block text
+</BsForm::Element::Label>`);
 
     assert.dom('*').hasText('template block text');
   });
@@ -33,39 +31,58 @@ module('Integration | Component | bs form/element/label', function (hooks) {
   });
 
   test('label has col-form-label class when using horizontal forms', async function (assert) {
-    await render(hbs`<BsForm::Element::Label @formLayout="horizontal" />`);
-    assert.dom('label').hasClass('col-form-label', 'label has col-form-label class');
+    await render(hbs`<BsForm::Element::Label @formLayout='horizontal' />`);
+    assert
+      .dom('label')
+      .hasClass('col-form-label', 'label has col-form-label class');
   });
 
   test('label has form-check-label class when using control type checkbox', async function (assert) {
-    await render(hbs`<BsForm::Element::Label @controlType="checkbox" />`);
-    assert.dom('label').hasClass('form-check-label', 'label has form-check-label class');
-  });
-
-  testBS4('label has custom-control-label class when using control type switch', async function (assert) {
-    await render(hbs`
-      <BsForm as |form|>
-        <form.element @label="Switch" @controlType="switch" />
-      </BsForm>
-    `);
-
+    await render(hbs`<BsForm::Element::Label @controlType='checkbox' />`);
     assert
       .dom('label')
-      .hasClass('custom-control-label', 'label has custom-control-label class')
-      .doesNotHaveClass('form-check-label', 'label does not have form-check-label class');
+      .hasClass('form-check-label', 'label has form-check-label class');
   });
 
+  testBS4(
+    'label has custom-control-label class when using control type switch',
+    async function (assert) {
+      await render(hbs`<BsForm as |form|>
+  <form.element @label='Switch' @controlType='switch' />
+</BsForm>`);
+
+      assert
+        .dom('label')
+        .hasClass(
+          'custom-control-label',
+          'label has custom-control-label class',
+        )
+        .doesNotHaveClass(
+          'form-check-label',
+          'label does not have form-check-label class',
+        );
+    },
+  );
+
   test('support size classes when using horizontal forms', async function (assert) {
-    await render(hbs`<BsForm::Element::Label @size="lg" @formLayout="horizontal" />`);
+    await render(
+      hbs`<BsForm::Element::Label @size='lg' @formLayout='horizontal' />`,
+    );
     assert.dom('label').hasClass('col-form-label-lg', 'label has large class');
 
-    await render(hbs`<BsForm::Element::Label @size="sm" @formLayout="horizontal" />`);
+    await render(
+      hbs`<BsForm::Element::Label @size='sm' @formLayout='horizontal' />`,
+    );
     assert.dom('label').hasClass('col-form-label-sm', 'label has small class');
 
-    await render(hbs`<BsForm::Element::Label @size="lg" />`);
-    assert.dom('label').hasNoClass('col-form-label-lg', 'label does not have large class');
+    await render(hbs`<BsForm::Element::Label @size='lg' />`);
+    assert
+      .dom('label')
+      .hasNoClass('col-form-label-lg', 'label does not have large class');
 
-    await render(hbs`<BsForm::Element::Label @size="sm" />`);
-    assert.dom('label').hasNoClass('col-form-label-sm', 'label does not have small class');
+    await render(hbs`<BsForm::Element::Label @size='sm' />`);
+    assert
+      .dom('label')
+      .hasNoClass('col-form-label-sm', 'label does not have small class');
   });
 });

@@ -13,7 +13,9 @@ module('Integration | Component | bs form/element/errors', function (hooks) {
   test('is empty by default', async function (assert) {
     this.set('messages', ['foo', 'bar']);
 
-    await render(hbs`<BsForm::Element::Errors @show={{false}} @messages={{this.messages}} />`);
+    await render(
+      hbs`<BsForm::Element::Errors @show={{false}} @messages={{this.messages}} />`,
+    );
 
     assert.dom(`.${formFeedbackClass()}`).doesNotExist();
   });
@@ -21,7 +23,9 @@ module('Integration | Component | bs form/element/errors', function (hooks) {
   test('shows first message', async function (assert) {
     this.set('messages', A(['foo', 'bar']));
 
-    await render(hbs`<BsForm::Element::Errors @show={{true}} @messages={{this.messages}} />`);
+    await render(
+      hbs`<BsForm::Element::Errors @show={{true}} @messages={{this.messages}} />`,
+    );
 
     assert.dom(`.${formFeedbackClass()}`).exists({ count: 1 });
     assert.dom(`.${formFeedbackClass()}`).hasText('foo');
@@ -30,7 +34,11 @@ module('Integration | Component | bs form/element/errors', function (hooks) {
   test('shows multiple errors', async function (assert) {
     this.set('messages', A(['foo', 'bar']));
     await render(
-      hbs`<BsForm::Element::Errors @messages={{this.messages}} @show={{true}} @showMultipleErrors={{true}} />`
+      hbs`<BsForm::Element::Errors
+  @messages={{this.messages}}
+  @show={{true}}
+  @showMultipleErrors={{true}}
+/>`,
     );
     assert.dom(`.${formFeedbackClass()}`).exists({ count: 2 });
     assert.dom(`.${formFeedbackClass()}:first-child`).hasText('foo');
