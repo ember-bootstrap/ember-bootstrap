@@ -67,28 +67,6 @@ module.exports = async function () {
         },
       },
       {
-        name: 'ember-classic',
-        env: {
-          EMBER_OPTIONAL_FEATURES: JSON.stringify({
-            // TODO: tests fail if optional feature application-template-wrapper is enabled
-            // 'application-template-wrapper': true,
-            'default-async-observers': false,
-            'template-only-glimmer-components': false,
-          }),
-        },
-        npm: {
-          devDependencies: {
-            'ember-source': '~3.28.0',
-            bootstrap: bootstrapVersion,
-            // ember-pooper-modifier >= 4.0.0 does not support Ember < 4.8
-            'ember-popper-modifier': '^3.0.0',
-          },
-          ember: {
-            edition: 'classic',
-          },
-        },
-      },
-      {
         name: 'node-tests',
         command: 'yarn run nodetest',
       },
