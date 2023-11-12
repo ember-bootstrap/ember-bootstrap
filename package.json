@@ -8,11 +8,11 @@
   ],
   "homepage": "https://www.ember-bootstrap.com/",
   "bugs": {
-    "url": "https://github.com/kaliber5/ember-bootstrap/issues"
+    "url": "https://github.com/ember-bootstrap/ember-bootstrap/issues"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/kaliber5/ember-bootstrap"
+    "url": "https://github.com/ember-bootstrap/ember-bootstrap"
   },
   "license": "MIT",
   "author": "Simon Ihmig <ihmig@kaliber5.de>",
