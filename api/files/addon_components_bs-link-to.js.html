@@ -102,7 +102,9 @@ class LinkComponent extends Component.extend(ComponentChild) {
     // router.currentRouteName has (e.g. loading and error states)
     this.router.currentRouteName;
 
-    return this.router.isActive(this.route, ...this._models, { queryParams: this._query });
+    return this.router.isActive(this.route, ...this._models, {
+      queryParams: this._query,
+    });
   }
 
   get _models() {
@@ -139,7 +141,7 @@ class LinkComponent extends Component.extend(ComponentChild) {
         until: &#x27;5.0.0&#x27;,
         since: &#x27;4.7.0&#x27;,
         for: &#x27;ember-bootstrap&#x27;,
-      }
+      },
     );
 
     params = params.slice();

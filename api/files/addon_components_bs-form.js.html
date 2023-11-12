@@ -558,7 +558,7 @@ export default class Form extends Component {
                 throw error;
               }
             });
-        }
+        },
       );
   }
 
@@ -581,7 +581,7 @@ export default class Form extends Component {
     let formLayout = this.formLayout;
     assert(
       &#x60;Invalid formLayout property given: ${formLayout}&#x60;,
-      [&#x27;vertical&#x27;, &#x27;horizontal&#x27;, &#x27;inline&#x27;].indexOf(formLayout) &gt;= 0
+      [&#x27;vertical&#x27;, &#x27;horizontal&#x27;, &#x27;inline&#x27;].indexOf(formLayout) &gt;= 0,
     );
   }
 
@@ -589,7 +589,7 @@ export default class Form extends Component {
   elementChanged(value, model, property) {
     assert(
       &quot;You cannot use the form element&#x27;s default onChange action for form elements if not using a model or setting the value directly on a form element. You must add your own onChange action to the form element in this case!&quot;,
-      isPresent(model) &amp;&amp; isPresent(property)
+      isPresent(model) &amp;&amp; isPresent(property),
     );
     if (typeof model.set === &#x27;function&#x27;) {
       model.set(property, value);

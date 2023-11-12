@@ -324,7 +324,7 @@ export default class FormElement extends Component {
   get value() {
     assert(
       &#x27;You can not set both property and value on a form element&#x27;,
-      isBlank(this.args.property) || isBlank(this.args.value)
+      isBlank(this.args.property) || isBlank(this.args.value),
     );
 
     if (this.args.property &amp;&amp; this.args.model) {
@@ -512,7 +512,10 @@ export default class FormElement extends Component {
    * @private
    */
   get hasValidationMessages() {
-    return Array.isArray(this.validationMessages) &amp;&amp; this.validationMessages.length &gt; 0;
+    return (
+      Array.isArray(this.validationMessages) &amp;&amp;
+      this.validationMessages.length &gt; 0
+    );
   }
 
   /**
@@ -534,7 +537,12 @@ export default class FormElement extends Component {
    * @private
    */
   get showValidation() {
-    return this.showOwnValidation || this.showAllValidations || this.hasCustomError || this.hasCustomWarning;
+    return (
+      this.showOwnValidation ||
+      this.showAllValidations ||
+      this.hasCustomError ||
+      this.hasCustomWarning
+    );
   }
 
   /**
@@ -608,7 +616,7 @@ export default class FormElement extends Component {
 
     assert(
       &#x27;showValidationOn must be a String or an Array&#x27;,
-      isArray(showValidationOn) || typeOf(showValidationOn) === &#x27;string&#x27;
+      isArray(showValidationOn) || typeOf(showValidationOn) === &#x27;string&#x27;,
     );
     if (isArray(showValidationOn)) {
       return showValidationOn.map((type) =&gt; {
@@ -637,9 +645,11 @@ export default class FormElement extends Component {
       (isArray(this.doNotShowValidationForEventTargets) &amp;&amp;
         this.doNotShowValidationForEventTargets.length &gt; 0 &amp;&amp;
         this._element &amp;&amp;
-        [...this._element.querySelectorAll(this.doNotShowValidationForEventTargets.join(&#x27;,&#x27;))].some((el) =&gt;
-          el.contains(target)
-        ))
+        [
+          ...this._element.querySelectorAll(
+            this.doNotShowValidationForEventTargets.join(&#x27;,&#x27;),
+          ),
+        ].some((el) =&gt; el.contains(target)))
     ) {
       return;
     }
@@ -663,7 +673,10 @@ export default class FormElement extends Component {
    * @public
    */
   @arg
-  doNotShowValidationForEventTargets = [&#x27;.input-group-append&#x27;, &#x27;.input-group-prepend&#x27;];
+  doNotShowValidationForEventTargets = [
+    &#x27;.input-group-append&#x27;,
+    &#x27;.input-group-prepend&#x27;,
+  ];
 
   /**
    * The validation (&quot;error&quot; (BS3)/&quot;danger&quot; (BS4), &quot;warning&quot;, or &quot;success&quot;) or null if no validation is to be shown. Automatically computed from the
@@ -676,7 +689,10 @@ export default class FormElement extends Component {
    */
   get validation() {
     const shouldShowValidationState =
-      this.showModelValidation &amp;&amp; this.hasValidator &amp;&amp; !this.isValidating &amp;&amp; !this.args._disabled;
+      this.showModelValidation &amp;&amp;
+      this.hasValidator &amp;&amp;
+      !this.isValidating &amp;&amp;
+      !this.args._disabled;
 
     if (
       /* custom errors should be always shown */
@@ -762,7 +778,9 @@ export default class FormElement extends Component {
    */
   get controlComponent() {
     let owner = getOwner(this);
-    let componentClass = owner.resolveRegistration(&#x60;component:bs-form/element/control/${this.controlType}&#x60;);
+    let componentClass = owner.resolveRegistration(
+      &#x60;component:bs-form/element/control/${this.controlType}&#x60;,
+    );
 
     if (componentClass) {
       return componentClass;

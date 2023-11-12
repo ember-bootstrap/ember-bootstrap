@@ -631,7 +631,11 @@ export default class Carousel extends Component.extend(ComponentParent) {
 
   @action
   handleMouseLeave() {
-    if (this.pauseOnMouseEnter &amp;&amp; (this.transitioner.last !== null || this.waitIntervalToInitCycle.last !== null)) {
+    if (
+      this.pauseOnMouseEnter &amp;&amp;
+      (this.transitioner.last !== null ||
+        this.waitIntervalToInitCycle.last !== null)
+    ) {
       this.set(&#x27;isMouseHovering&#x27;, false);
       this.waitIntervalToInitCycle.perform();
     }

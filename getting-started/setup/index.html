@@ -2,17 +2,15 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>ember-bootstrap</title>
+    <title>Ember Bootstrap</title>
     <meta name="description" content="An ember-cli addon for using Bootstrap in Ember.js applications.">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    
-<meta name="ember-bootstrap-docs/config/environment" content="%7B%22modulePrefix%22%3A%22ember-bootstrap-docs%22%2C%22environment%22%3A%22production%22%2C%22rootURL%22%3A%22%2F%22%2C%22locationType%22%3A%22auto%22%2C%22EmberENV%22%3A%7B%22FEATURES%22%3A%7B%7D%2C%22_APPLICATION_TEMPLATE_WRAPPER%22%3Afalse%2C%22_DEFAULT_ASYNC_OBSERVERS%22%3Atrue%2C%22_JQUERY_INTEGRATION%22%3Afalse%2C%22_TEMPLATE_ONLY_GLIMMER_COMPONENTS%22%3Atrue%7D%2C%22APP%22%3A%7B%22name%22%3A%22ember-bootstrap-docs%22%2C%22version%22%3A%22v6.0.0-6%2B3a6bf8f1%22%7D%2C%22contentSecurityPolicy%22%3A%7B%22default-src%22%3A%5B%22'none'%22%5D%2C%22script-src%22%3A%5B%22'self'%22%2C%22'sha256-1xtiB6mV1iIKZ5iz9CxA5lEnfEg8d0XEH3FL9L8NBqo%3D'%22%2C%22use.typekit.net%22%5D%2C%22font-src%22%3A%5B%22'self'%22%2C%22use.typekit.net%22%2C%22use.fontawesome.com%22%5D%2C%22connect-src%22%3A%5B%22'self'%22%2C%22performance.typekit.net%22%5D%2C%22img-src%22%3A%5B%22'self'%22%2C%22data%3A%22%2C%22p.typekit.net%22%5D%2C%22style-src%22%3A%5B%22'self'%22%2C%22'unsafe-inline'%22%2C%22use.typekit.net%22%2C%22use.fontawesome.com%22%5D%2C%22media-src%22%3A%5B%22'self'%22%5D%2C%22frame-src%22%3A%5B%22https%3A%2F%2Fghbtns.com%2F%22%5D%7D%2C%22fastboot%22%3A%7B%22hostWhitelist%22%3A%5B%7B%7D%5D%7D%7D" />
+    <meta name="ember-bootstrap-docs/config/environment" content="%7B%22modulePrefix%22%3A%22ember-bootstrap-docs%22%2C%22environment%22%3A%22production%22%2C%22rootURL%22%3A%22%2F%22%2C%22locationType%22%3A%22history%22%2C%22EmberENV%22%3A%7B%22EXTEND_PROTOTYPES%22%3Afalse%2C%22FEATURES%22%3A%7B%7D%2C%22_APPLICATION_TEMPLATE_WRAPPER%22%3Afalse%2C%22_DEFAULT_ASYNC_OBSERVERS%22%3Atrue%2C%22_JQUERY_INTEGRATION%22%3Afalse%2C%22_TEMPLATE_ONLY_GLIMMER_COMPONENTS%22%3Atrue%7D%2C%22APP%22%3A%7B%22name%22%3A%22ember-bootstrap-docs%22%2C%22version%22%3A%22v6.0.0%2Bee1ee4bd%22%7D%2C%22contentSecurityPolicy%22%3A%7B%22default-src%22%3A%5B%22'none'%22%5D%2C%22script-src%22%3A%5B%22'self'%22%2C%22'sha256-1xtiB6mV1iIKZ5iz9CxA5lEnfEg8d0XEH3FL9L8NBqo%3D'%22%2C%22use.typekit.net%22%5D%2C%22font-src%22%3A%5B%22'self'%22%2C%22use.typekit.net%22%2C%22use.fontawesome.com%22%5D%2C%22connect-src%22%3A%5B%22'self'%22%2C%22performance.typekit.net%22%5D%2C%22img-src%22%3A%5B%22'self'%22%2C%22data%3A%22%2C%22p.typekit.net%22%5D%2C%22style-src%22%3A%5B%22'self'%22%2C%22'unsafe-inline'%22%2C%22use.typekit.net%22%2C%22use.fontawesome.com%22%5D%2C%22media-src%22%3A%5B%22'self'%22%5D%2C%22frame-src%22%3A%5B%22https%3A%2F%2Fghbtns.com%2F%22%5D%7D%2C%22fastboot%22%3A%7B%22hostWhitelist%22%3A%5B%7B%7D%5D%7D%7D" />
 <!-- EMBER_CLI_FASTBOOT_TITLE -->
 
-    <link integrity="" rel="stylesheet" href="/assets/vendor-6d47b13b3758191c10c4b7377a83634f.css">
-    <link integrity="" rel="stylesheet" href="/assets/ember-bootstrap-docs-53a64316dcbfe9324f751d6e7da13df3.css">
+    <link integrity="" rel="stylesheet" href="/assets/vendor-59748aafe551f9ea09e7ba5ee997e867.css">
+    <link integrity="" rel="stylesheet" href="/assets/ember-bootstrap-docs-770ae5a8ef05c1105458ee71d41de5d1.css">
 
     <script type="text/javascript" src="https://use.typekit.net/dkq5epu.js"></script>
     <script type="text/javascript">try{Typekit.load();}catch(e){}</script>
@@ -133,17 +131,21 @@
 <h3>Using the default blueprint</h3>
 
 <p>
-  By default, ember-bootstrap installs Bootstrap 4 and uses the installed preprocessor if there is one. You can use
-  the ember-bootstrap default blueprint to switch the Bootstrap version or preprocessor.
+  By default, ember-bootstrap installs Bootstrap 4 and uses the installed
+  preprocessor if there is one. You can use the ember-bootstrap default
+  blueprint to switch the Bootstrap version or preprocessor.
 </p>
 
 <h4>Use a CSS preprocessor</h4>
 
-<p>To use a Sass as a CSS preprocessor instead of plain CSS (highly recommended!), you can use this command to install and set this up:</p>
+<p>To use a Sass as a CSS preprocessor instead of plain CSS (highly
+  recommended!), you can use this command to install and set this up:</p>
 
 <pre class="highlight">ember generate ember-bootstrap --preprocessor=sass</pre>
 
-<p>See the <a id="ember1748" class="ember-view" href="/getting-started/assets">Assets guide</a> for details.</p>
+<p>See the
+  <a id="ember1748" class="ember-view" href="/getting-started/assets">Assets guide</a>
+  for details.</p>
 
 <h4>Switch to Bootstrap 5</h4>
 
@@ -156,7 +158,6 @@
   About the default blueprint
 
 </button>
-
 
 
 <div class="collapse  ">
@@ -173,25 +174,34 @@
 
     <ul>
       <li>
-        Removes any unneeded versions of bootstrap and bootstrap-sass from <code>package.json</code>
-        and <code>bower.json</code>
+        Removes any unneeded versions of bootstrap and bootstrap-sass from
+        <code>package.json</code>
+        and
+        <code>bower.json</code>
       </li>
       <li>
-        Installs the appropriate version of bootstrap or bootstrap-sass as an npm package
+        Installs the appropriate version of bootstrap or bootstrap-sass as an
+        npm package
       </li>
       <li>
         Removes unneeded dependencies on ember-cli-less and ember-cli-sass
       </li>
       <li>
-        Installs <code>ember-cli-sass</code> and <code>app.scss</code> if appropriate
+        Installs
+        <code>ember-cli-sass</code>
+        and
+        <code>app.scss</code>
+        if appropriate
       </li>
       <li>
-        Adds the appropriate "@import" statement to your <code>app.scss</code> if it's
-        not there already
+        Adds the appropriate "@import" statement to your
+        <code>app.scss</code>
+        if it's not there already
       </li>
       <li>
         Safely edits your
-        <code>ember-cli-build.js</code> to ensure the proper ember-bootstrap settings for your configuration
+        <code>ember-cli-build.js</code>
+        to ensure the proper ember-bootstrap settings for your configuration
       </li>
     </ul>
   
@@ -205,8 +215,9 @@
 <h2>All configuration options</h2>
 
 <p>
-  Besides the above mentioned configuration options that are handled explicitly using the default blueprint, you can
-  further customize your setup with the following options:
+  Besides the above mentioned configuration options that are handled explicitly
+  using the default blueprint, you can further customize your setup with the
+  following options:
 </p>
 
 <table class="table table-striped">
@@ -225,8 +236,9 @@
       <td>4</td>
       <td>
         <p>
-          Specify the Bootstrap version to use. To make sure you have the right dependencies installed, you should use the
-          default blueprint mentioned above to set this!
+          Specify the Bootstrap version to use. To make sure you have the right
+          dependencies installed, you should use the default blueprint mentioned
+          above to set this!
         </p>
       </td>
     </tr>
@@ -235,8 +247,12 @@
       <td><code>true</code> / <code>false</code></td>
       <td><code>true</code> if no preprocessor</td>
       <td>
-        <p>Include the default static <code>bootstrap.css</code>. Only applicable when not using a preprocessor.</p>
-        <p>See the <a id="ember1749" class="ember-view" href="/getting-started/assets">Assets guide</a> for more details.</p>
+        <p>Include the default static
+          <code>bootstrap.css</code>. Only applicable when not using a
+          preprocessor.</p>
+        <p>See the
+          <a id="ember1749" class="ember-view" href="/getting-started/assets">Assets guide</a>
+          for more details.</p>
       </td>
     </tr>
     <tr>
@@ -245,14 +261,17 @@
       <td><code>true</code></td>
       <td>
         <p>
-          Will automatically insert a div into your index.html, where Bootstrap's modals and tooltips will be rendered to.
-          If you set this to false, you will have to add an
-          <code>&lt;div id="ember-bootstrap-wormhole"&gt;&lt;/div&gt;</code> element by yourself, e.g. into your
+          Will automatically insert a div into your index.html, where
+          Bootstrap's modals and tooltips will be rendered to. If you set this
+          to false, you will have to add an
+          <code>&lt;div id="ember-bootstrap-wormhole"&gt;&lt;/div&gt;</code>
+          element by yourself, e.g. into your
           <code>application.hbs</code>.
         </p>
         <p>
-          This is especially required if you render your Ember app into a custom application root element, e.g. on an
-          server rendered page, where the default div is not available.
+          This is especially required if you render your Ember app into a custom
+          application root element, e.g. on an server rendered page, where the
+          default div is not available.
         </p>
       </td>
     </tr>
@@ -262,12 +281,17 @@
       <td></td>
       <td>
         <p>
-          Component tree shaking: include only the listed components into your build, to reduce your JavaScript bundle size. Components not listed here will not be available.
-          You should use either <code>include</code> or <code>exclude</code>, not both.
+          Component tree shaking: include only the listed components into your
+          build, to reduce your JavaScript bundle size. Components not listed
+          here will not be available. You should use either
+          <code>include</code>
+          or
+          <code>exclude</code>, not both.
         </p>
 
         <p>Example:</p>
-        <pre class="highlight"><code>include: ['bs-button', 'bs-modal', 'bs-form']</code></pre>
+        <pre class="highlight"><code>include: ['bs-button', 'bs-modal',
+            'bs-form']</code></pre>
       </td>
     </tr>
     <tr>
@@ -276,7 +300,8 @@
       <td></td>
       <td>
         <p>
-          Exclude the listed components from your build, to reduce your JavaScript bundle size. See
+          Exclude the listed components from your build, to reduce your
+          JavaScript bundle size. See
           <code>include</code>.
         </p>
       </td>
@@ -288,26 +313,16 @@
 <p>These options can be set in your <code>ember-cli-build.js</code> file:</p>
 
 <pre class="highlight"><code>//your-bootstrap-app/ember-cli-build.js
+    module.exports = function(defaults) { let app = new EmberApp(defaults, {
+    'ember-bootstrap': { importBootstrapCSS: false, exclude: ['bs-popover',
+    'bs-accordion'] } }); return app.toTree(); };
+  </code></pre>
+</div><script type="x/boundary" id="fastboot-body-end"></script>
 
-module.exports = function(defaults) {
-  let app = new EmberApp(defaults, {
-    'ember-bootstrap': {
-      importBootstrapCSS: false,
-      exclude: ['bs-popover', 'bs-accordion']
-    }
-  });
-
-  return app.toTree();
-};
-</code></pre>
-
-</div>
-<script type="x/boundary" id="fastboot-body-end"></script>
-
-    <script src="/assets/vendor-b3d11f835e29bb4ef5881c632e01e7c6.js"></script>
-<script src="/assets/chunk.189.49e74fd2703c117067c8.js"></script>
-<script src="/assets/chunk.143.6eafb3be855465613b16.js"></script>
-    <script src="/assets/ember-bootstrap-docs-0623e5167498243e7c7958a0faa731d6.js"></script>
+    <script src="/assets/vendor-8fec323f932a63ec2b26a10a2542fbf8.js"></script>
+<script src="/assets/chunk.371.b4581b152e263b3b8aa8.js"></script>
+<script src="/assets/chunk.143.b9b8b0113fcb8af82520.js"></script>
+    <script src="/assets/ember-bootstrap-docs-2b16155ce1d6604f0713e1c368e07a62.js"></script>
 
     <div id="ember-bootstrap-wormhole"></div>
 <div id="ember-basic-dropdown-wormhole"></div>

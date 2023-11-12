@@ -189,7 +189,13 @@ export default class CarouselSlide extends Component.extend(ComponentChild) {
 
   init() {
     super.init(...arguments);
-    addObserver(this, &#x27;presentationState&#x27;, null, this.presentationStateObserver, true);
+    addObserver(
+      this,
+      &#x27;presentationState&#x27;,
+      null,
+      this.presentationStateObserver,
+      true,
+    );
   }
 
   /**

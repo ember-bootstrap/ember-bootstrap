@@ -10,9 +10,43 @@
 
 
 
+
+## v6.0.0 (2023-11-12)
+
+#### :boom: Breaking Change
+* [#2008](https://github.com/ember-bootstrap/ember-bootstrap/pull/2008) drop support for Ember classic (optional features) ([@jelhan](https://github.com/jelhan))
+* [#1996](https://github.com/ember-bootstrap/ember-bootstrap/pull/1996) drop support for Ember < 4.8 ([@jelhan](https://github.com/jelhan))
+
+#### Features
+* [#2011](https://github.com/ember-bootstrap/ember-bootstrap/pull/2011) ember-unique-id-helper-polyfill is not needed anymove ([@jelhan](https://github.com/jelhan))
+* [#2001](https://github.com/ember-bootstrap/ember-bootstrap/pull/2001) improve wording of error message for removed whitelist / blacklist option ([@jelhan](https://github.com/jelhan))
+
+#### Bug Fixes
+* [#1997](https://github.com/ember-bootstrap/ember-bootstrap/pull/1997) do not require Bootstrap dep unless importing it through this addon ([@jelhan](https://github.com/jelhan))
+
+#### Documentation
+* [#2016](https://github.com/ember-bootstrap/ember-bootstrap/pull/2016) Fix outdated repository URLs in package.json ([@jelhan](https://github.com/jelhan))
+
+#### Internal
+* [#2017](https://github.com/ember-bootstrap/ember-bootstrap/pull/2017) Drop dependency resolution overwrite not needed anymore ([@jelhan](https://github.com/jelhan))
+* [#2015](https://github.com/ember-bootstrap/ember-bootstrap/pull/2015) migrate to actievely maintained lerna-changelog release-it plugin ([@jelhan](https://github.com/jelhan))
+* [#2010](https://github.com/ember-bootstrap/ember-bootstrap/pull/2010) upgrade addon with Ember CLI v4.12 blueprints ([@jelhan](https://github.com/jelhan))
+* [#2009](https://github.com/ember-bootstrap/ember-bootstrap/pull/2009) upgrade docs app with Ember CLI 4.12 blueprints ([@jelhan](https://github.com/jelhan))
+* [#2003](https://github.com/ember-bootstrap/ember-bootstrap/pull/2003) upgrade docs app to Ember 4.12 ([@jelhan](https://github.com/jelhan))
+* [#2004](https://github.com/ember-bootstrap/ember-bootstrap/pull/2004) use Prettier for Glimmer templates ([@jelhan](https://github.com/jelhan))
+
+#### Committers: 1
+- Jeldrik Hanschke ([@jelhan](https://github.com/jelhan))
+
+
 ## v6.0.0-6 (2023-11-06)
 
-Fixing issues with docs app...
+Fixes deployment of docs only.
+
+
+## v6.0.0-5 (2023-11-06)
+
+Fixes deployment of docs only.
 
 
 ## v6.0.0-4 (2023-11-06)
