@@ -41,9 +41,6 @@
   "lint-staged": {
     "*.js": "eslint --cache --fix"
   },
-  "resolutions": {
-    "ember-cli-htmlbars/semver": "~7.5.0"
-  },
   "dependencies": {
     "@ember/render-modifiers": "^2.0.0",
     "@embroider/macros": "^1.0.0",
