@@ -4980,7 +4980,7 @@ ember-prism@0.13.0:
     prismjs "^1.22.0"
     prismjs-glimmer "^1.1.1"
 
-ember-qunit@^7.0.0:
+ember-qunit@7.0.0:
   version "7.0.0"
   resolved "https://registry.yarnpkg.com/ember-qunit/-/ember-qunit-7.0.0.tgz#658aa51dcb376b5eda7fa77c83be89aaf0bedbd1"
   integrity sha512-KhrndHYEXsHnXvmsGyJLJQ6VCudXaRs5dzPZBsdttZJIhsB6PmYAvq2Q+mh3GRDT/59T/sRDrB3FD3/lATS8aA==
