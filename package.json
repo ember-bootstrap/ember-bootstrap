@@ -82,6 +82,7 @@
     "@embroider/test-setup": "2.1.1",
     "@glimmer/component": "1.1.2",
     "@glimmer/tracking": "1.1.2",
+    "@release-it-plugins/lerna-changelog": "^6.0.0",
     "bootstrap": "5.3.2",
     "broccoli-asset-rev": "3.0.0",
     "chai": "4.3.10",
@@ -136,7 +137,6 @@
     "qunit": "2.20.0",
     "qunit-dom": "3.0.0",
     "release-it": "16.2.1",
-    "release-it-lerna-changelog": "5.0.0",
     "sinon": "17.0.1",
     "striptags": "3.2.0",
     "webpack": "5.89.0"
@@ -173,7 +173,7 @@
   },
   "release-it": {
     "plugins": {
-      "release-it-lerna-changelog": {
+      "@release-it-plugins/lerna-changelog": {
         "infile": "CHANGELOG.md",
         "launchEditor": true
       }

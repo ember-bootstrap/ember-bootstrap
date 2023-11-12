@@ -1840,6 +1840,19 @@
   resolved "https://registry.yarnpkg.com/@prettier/sync/-/sync-0.2.1.tgz#00f628a394247cc18535b3cce0b9756b352a09e0"
   integrity sha512-7ls1R6//+GPYD9vof1XaL5psViv83CwpdwlS8oUkWldYgbPhzZ3WgxIQMWqGyBmWPmoBfQg8C7jj7KI/ZuDHhQ==
 
+"@release-it-plugins/lerna-changelog@^6.0.0":
+  version "6.0.0"
+  resolved "https://registry.yarnpkg.com/@release-it-plugins/lerna-changelog/-/lerna-changelog-6.0.0.tgz#f6c163a2b929c67c6878ae5a034dab08e23c17d9"
+  integrity sha512-/1xNLriHKKTdM+/LSQIng5V25gipw0brAXtWVQcOBR63NmW/Ftnd2IJpnM5WzFkOCcL9hoqc8rcIMMv1EOcaIg==
+  dependencies:
+    execa "^5.1.1"
+    lerna-changelog "^2.2.0"
+    lodash.template "^4.5.0"
+    mdast-util-from-markdown "^1.2.0"
+    tmp "^0.2.1"
+    validate-peer-dependencies "^2.0.0"
+    which "^2.0.2"
+
 "@scalvert/ember-setup-middleware-reporter@^0.1.1":
   version "0.1.1"
   resolved "https://registry.yarnpkg.com/@scalvert/ember-setup-middleware-reporter/-/ember-setup-middleware-reporter-0.1.1.tgz#bdd74c19d99feeef8807dea9c9ee2d272b6c1923"
@@ -12507,19 +12520,6 @@ regjsparser@^0.9.1:
   integrity sha512-dQUtn90WanSNl+7mQKcXAgZxvUe7Z0SqXlgzv0za4LwiUhyzBC58yQO3liFoUgu8GiJVInAhJjkj1N0EtQ5nkQ==
   dependencies:
     jsesc "~0.5.0"
-
-release-it-lerna-changelog@5.0.0:
-  version "5.0.0"
-  resolved "https://registry.yarnpkg.com/release-it-lerna-changelog/-/release-it-lerna-changelog-5.0.0.tgz#2df62efc4c7435959201e7d4b50e72db4c111d0e"
-  integrity sha512-s/rHzwAwp878bivWKsJKNya9SRVKYZjgpyyGzg5ddBKZY5u5lhTWhxHtld7mHTRg4azIN7YypPH3rGaOfVmNVw==
-  dependencies:
-    execa "^5.1.1"
-    lerna-changelog "^2.2.0"
-    lodash.template "^4.5.0"
-    mdast-util-from-markdown "^1.2.0"
-    tmp "^0.2.1"
-    validate-peer-dependencies "^2.0.0"
-    which "^2.0.2"
 
 release-it@16.2.1:
   version "16.2.1"
