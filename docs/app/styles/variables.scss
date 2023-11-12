@@ -1,14 +1,11 @@
-$primary: #EF5A31;
+$primary: #ef5a31;
 $secondary: #ccc;
+$navbar-dark-color: rgba(#fff, 0.8) !default;
+$navbar-dark-hover-color: rgba(#fff, 0.9) !default;
 
-$navbar-dark-color:                 rgba(#fff, .8) !default;
-$navbar-dark-hover-color:           rgba(#fff, .9) !default;
-
-
-//$font-size-base: 16px;
-$font-family-sans-serif: 'myriad-pro', sans-serif;
+// $font-size-base: 16px;
+$font-family-sans-serif: "myriad-pro", sans-serif;
 
 // make sure this is defined so Sass compiles without errors even for BS4 build
-$zindex-modal-background:  1040;
-
+$zindex-modal-background: 1040;
 $min-contrast-ratio: 3;

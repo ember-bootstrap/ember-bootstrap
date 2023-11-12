@@ -1,20 +1,21 @@
-@import 'variables';
-@import 'ember-bootstrap/bootstrap';
-@import 'bs-example';
+@import "variables";
+@import "ember-bootstrap/bootstrap";
+@import "highlight";
+@import "bs-example";
 @import "ember-power-select/themes/bootstrap";
 @import "ember-power-select";
 
 body {
-  //position: relative;
+  // position: relative;
   overflow: auto !important; // for modals in bs-example
 }
 
-.is-required > label:after {
-  content: '*';
+.is-required > label::after {
+  content: "*";
 }
 
 body > div > .navbar {
-  border-bottom: solid 3px #7BBA1D;
+  border-bottom: solid 3px #7bba1d;
   margin-bottom: 20px;
 }
 
@@ -29,9 +30,8 @@ body > div > .navbar {
     background-color: $primary;
     color: #fff;
     border: none;
-    border-bottom: solid 3px #7BBA1D;
-
-    border-radius: .25rem;
+    border-bottom: solid 3px #7bba1d;
+    border-radius: 0.25rem;
   }
 }
 
