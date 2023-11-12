@@ -11,6 +11,15 @@
 
 
 
+
+## v6.0.1 (2023-11-12)
+
+#### Documentation
+* [#2018](https://github.com/ember-bootstrap/ember-bootstrap/pull/2018) fix broken readme due to merge conflicts ([@jelhan](https://github.com/jelhan))
+
+#### Committers: 1
+- Jeldrik Hanschke ([@jelhan](https://github.com/jelhan))
+
 ## v6.0.0 (2023-11-12)
 
 #### :boom: Breaking Change

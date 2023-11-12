@@ -4294,7 +4294,7 @@ let a
 return new n.Promise((function(t){let n=function(){a&&((0,r.cancel)(a),a=null),e.removeEventListener("transitionend",n),t()}
 e.addEventListener("transitionend",n,!1),a=(0,r.later)(this,n,o)}))},e.skipTransition=function(e){i=e}})),define("ember-bootstrap/version",["exports","ember"],(function(e,t){"use strict"
 Object.defineProperty(e,"__esModule",{value:!0}),e.VERSION=void 0,e.registerLibrary=function(){t.default.libraries.register("Ember Bootstrap",r)}
-const r=e.VERSION="6.0.0"})),define("ember-cli-app-version/initializer-factory",["exports","ember"],(function(e,t){"use strict"
+const r=e.VERSION="6.0.1"})),define("ember-cli-app-version/initializer-factory",["exports","ember"],(function(e,t){"use strict"
 Object.defineProperty(e,"__esModule",{value:!0}),e.default=function(e,t){let n=!1
 return function(){!n&&e&&t&&(r.register(e,t),n=!0)}}
 const{libraries:r}=t.default})),define("ember-cli-app-version/utils/regexp",["exports"],(function(e){"use strict"
