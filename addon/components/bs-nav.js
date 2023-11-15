@@ -1,7 +1,4 @@
-import { tagName } from '@ember-decorators/component';
-import { computed } from '@ember/object';
-import Component from '@ember/component';
-import defaultValue from 'ember-bootstrap/utils/default-decorator';
+import Component from '@glimmer/component';
 import deprecateSubclassing from 'ember-bootstrap/utils/deprecate-subclassing';
 
 /**
@@ -83,10 +80,8 @@ import deprecateSubclassing from 'ember-bootstrap/utils/deprecate-subclassing';
   @public
 
  */
-@tagName('')
 @deprecateSubclassing
 export default class Nav extends Component {
-  @computed('type')
   get typeClass() {
     let type = this.type;
     return type ? `nav-${type}` : undefined;
@@ -100,8 +95,9 @@ export default class Nav extends Component {
    * @default null
    * @public
    */
-  @defaultValue
-  type = null;
+  get type() {
+    return this.args.type ?? null;
+  }
 
   /**
    * Make the nav justified, see [bootstrap docs](http://getbootstrap.com/components/#nav-justified)
@@ -111,8 +107,9 @@ export default class Nav extends Component {
    * @default false
    * @public
    */
-  @defaultValue
-  justified = false;
+  get justified() {
+    return this.args.justified ?? false;
+  }
 
   /**
    * Make the nav pills stacked, see [bootstrap docs](http://getbootstrap.com/components/#nav-pills)
@@ -122,8 +119,9 @@ export default class Nav extends Component {
    * @default false
    * @public
    */
-  @defaultValue
-  stacked = false;
+  get stacked() {
+    return this.args.stacked ?? false;
+  }
 
   /**
    * Make the nav flex fill (BS4 only), see [bootstrap docs](http://getbootstrap.com/docs/4.1/components/navs/#fill-and-justify)
@@ -133,8 +131,9 @@ export default class Nav extends Component {
    * @default false
    * @public
    */
-  @defaultValue
-  fill = false;
+  get fill() {
+    return this.args.fill ?? false;
+  }
 
   /**
    * @property itemComponent
