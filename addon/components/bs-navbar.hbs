@@ -1,8 +1,8 @@
 {{!-- template-lint-disable no-duplicate-landmark-elements --}}
 {{#let
   (hash
-    toggle=(component (ensure-safe-component (bs-default @toggleComponent (component "bs-navbar/toggle"))) onClick=this.toggleNavbar collapsed=this._collapsed)
-    content=(component (ensure-safe-component (bs-default @contentComponent (component "bs-navbar/content"))) collapsed=this._collapsed onHidden=this.onCollapsed onShown=this.onExpanded)
+    toggle=(component (ensure-safe-component (bs-default @toggleComponent (component "bs-navbar/toggle"))) onClick=this.toggleNavbar collapsed=this.collapsed)
+    content=(component (ensure-safe-component (bs-default @contentComponent (component "bs-navbar/content"))) collapsed=this.collapsed onHidden=this.onCollapsed onShown=this.onExpanded)
     nav=(component
       (ensure-safe-component (bs-default @navComponent (component "bs-navbar/nav")))
       linkToComponent=(component "bs-navbar/link-to" onCollapse=this.collapse class="nav-link")

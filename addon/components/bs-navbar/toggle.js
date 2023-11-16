@@ -1,7 +1,5 @@
 import { action } from '@ember/object';
-import { tagName } from '@ember-decorators/component';
-import Component from '@ember/component';
-import defaultValue from 'ember-bootstrap/utils/default-decorator';
+import Component from '@glimmer/component';
 import deprecateSubclassing from 'ember-bootstrap/utils/deprecate-subclassing';
 
 /**
@@ -18,17 +16,19 @@ import deprecateSubclassing from 'ember-bootstrap/utils/deprecate-subclassing';
  * @extends Ember.Component
  * @public
  */
-@tagName('')
 @deprecateSubclassing
 export default class NavbarToggle extends Component {
-  @defaultValue
-  collapsed = true;
+  get collapsed() {
+    return this.args.collapsed ?? true;
+  }
 
   /**
    * @event onClick
    * @public
    */
-  onClick() {}
+  get onClick() {
+    return this.args.onClick ?? (() => {});
+  }
 
   @action
   handleClick() {
