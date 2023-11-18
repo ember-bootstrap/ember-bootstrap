@@ -202,6 +202,16 @@ export default class Navbar extends Component {
   }
 
   /**
+   * The action to be sent when the navbar is about to be collapsed.
+   *
+   * You can return false to prevent collapsing the navbar automatically, and do that in your action by
+   * setting `collapsed` to true.
+   *
+   * @event onCollapse
+   * @public
+   */
+
+  /**
    * The action to be sent after the navbar has been collapsed (including the CSS transition).
    *
    * @event onCollapsed
@@ -210,6 +220,16 @@ export default class Navbar extends Component {
   get onCollapsed() {
     return this.args.onCollapsed ?? (() => {});
   }
+
+  /**
+   * The action to be sent when the navbar is about to be expanded.
+   *
+   * You can return false to prevent expanding the navbar automatically, and do that in your action by
+   * setting `collapsed` to false.
+   *
+   * @event onExpand
+   * @public
+   */
 
   /**
    * The action to be sent after the navbar has been expanded (including the CSS transition).
@@ -323,25 +343,5 @@ export default class Navbar extends Component {
    * @property linkToComponent
    * @type {String}
    * @private
-   */
-
-  /**
-   * The action to be sent when the navbar is about to be collapsed.
-   *
-   * You can return false to prevent collapsing the navbar automatically, and do that in your action by
-   * setting `collapsed` to true.
-   *
-   * @event onCollapse
-   * @public
-   */
-
-  /**
-   * The action to be sent when the navbar is about to be expanded.
-   *
-   * You can return false to prevent expanding the navbar automatically, and do that in your action by
-   * setting `collapsed` to false.
-   *
-   * @event onExpand
-   * @public
    */
 }
