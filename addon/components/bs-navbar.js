@@ -324,4 +324,24 @@ export default class Navbar extends Component {
    * @type {String}
    * @private
    */
+
+  /**
+   * The action to be sent when the navbar is about to be collapsed.
+   *
+   * You can return false to prevent collapsing the navbar automatically, and do that in your action by
+   * setting `collapsed` to true.
+   *
+   * @event onCollapse
+   * @public
+   */
+
+  /**
+   * The action to be sent when the navbar is about to be expanded.
+   *
+   * You can return false to prevent expanding the navbar automatically, and do that in your action by
+   * setting `collapsed` to false.
+   *
+   * @event onExpand
+   * @public
+   */
 }
