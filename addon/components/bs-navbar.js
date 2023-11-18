@@ -1,9 +1,6 @@
-import { tagName } from '@ember-decorators/component';
-import { observes } from '@ember-decorators/object';
-import { action, computed } from '@ember/object';
-import Component from '@ember/component';
-import listenTo from 'ember-bootstrap/utils/cp/listen-to';
-import defaultValue from 'ember-bootstrap/utils/default-decorator';
+import { action } from '@ember/object';
+import Component from '@glimmer/component';
+import { tracked } from '@glimmer/tracking';
 import { assert } from '@ember/debug';
 import { isBlank } from '@ember/utils';
 import deprecateSubclassing from 'ember-bootstrap/utils/deprecate-subclassing';
@@ -43,7 +40,7 @@ import deprecateSubclassing from 'ember-bootstrap/utils/deprecate-subclassing';
   * [Components.NavbarToggle](Components.NavbarToggle.html)
   * [Components.NavbarNav](Components.NavbarNav.html)
 
-  Furthermore references to the following actions are yielded:
+  Furthermore, references to the following actions are yielded:
 
   * `collapse`: triggers the `onCollapse` action and collapses the navbar (mobile)
   * `expand`: triggers the `onExpand` action and expands the navbar (mobile)
@@ -52,7 +49,7 @@ import deprecateSubclassing from 'ember-bootstrap/utils/deprecate-subclassing';
   ### Responsive Design
 
   For the mobile breakpoint the Bootstrap styles will hide the navbar content (`{{navbar.content}}`). Clicking on the
-  navbar toggle button (`{{navbar.toggle}}`) will expand the menu. By default all nav links (`<nav.linkTo @route="...">`) are already
+  navbar toggle button (`{{navbar.toggle}}`) will expand the menu. By default, all nav links (`<nav.linkTo @route="...">`) are already
   wired up to call the navbar's `collapse` action, so clicking any of them will collapse the navbar. To selectively
   prevent that, you can set its `collapseNavbar` property to false:
 
@@ -102,7 +99,6 @@ import deprecateSubclassing from 'ember-bootstrap/utils/deprecate-subclassing';
   @extends Ember.Component
   @public
 */
-@tagName('')
 @deprecateSubclassing
 export default class Navbar extends Component {
   /**
@@ -113,15 +109,16 @@ export default class Navbar extends Component {
    * @default true
    * @public
    */
-  @defaultValue
-  collapsed = true;
+  get collapsed() {
+    return this._toggledCollapse ?? this.args.collapsed ?? true;
+  }
 
   /**
-   * @property _collapsed
+   * @property _toggledCollapse
    * @private
    */
-  @listenTo('collapsed')
-  _collapsed;
+  @tracked
+  _toggledCollapse;
 
   /**
    * Controls whether the wrapping div is a fluid container or not.
@@ -131,23 +128,25 @@ export default class Navbar extends Component {
    * @default true
    * @public
    */
-  @defaultValue
-  fluid = true;
+  get fluid() {
+    return this.args.fluid ?? true;
+  }
 
   /**
    * BS5 only: Allows to override the container layout, see https://getbootstrap.com/docs/5.0/components/navbar/#containers.
    * Allowed values: `'sm'`, `'md'`, `'lg'`, `'xl'`, `'xxl'`, `'fluid'`, see https://getbootstrap.com/docs/5.0/layout/containers/.
-   * By default it is `.container-fluid`, or `.container` if the `@fluid` argument is set to false.
+   * By default, it is `.container-fluid`, or `.container` if the `@fluid` argument is set to false.
    *
    * @property container
    * @type string
    * @public
    */
 
-  @computed('fluid', 'container')
   get containerClass() {
-    if (this.container) {
-      return `container-${this.container}`;
+    const { container } = this.args;
+
+    if (container) {
+      return `container-${container}`;
     }
 
     return this.fluid ? 'container-fluid' : 'container';
@@ -163,10 +162,10 @@ export default class Navbar extends Component {
    * @default null
    * @public
    */
-  @defaultValue
-  position = null;
+  get position() {
+    return this.args.position ?? null;
+  }
 
-  @computed('position')
   get positionClass() {
     let position = this.position;
     let validPositions = ['fixed-top', 'fixed-bottom', 'sticky-top'];
@@ -188,10 +187,10 @@ export default class Navbar extends Component {
    * @default 'light'
    * @public
    */
-  @defaultValue
-  type = 'light';
+  get type() {
+    return this.args.type ?? 'light';
+  }
 
-  @computed('type')
   get typeClass() {
     let type = this.type || 'light';
     assert(
@@ -211,7 +210,6 @@ export default class Navbar extends Component {
    * @event onCollapse
    * @public
    */
-  onCollapse() {}
 
   /**
    * The action to be sent after the navbar has been collapsed (including the CSS transition).
@@ -219,7 +217,9 @@ export default class Navbar extends Component {
    * @event onCollapsed
    * @public
    */
-  onCollapsed() {}
+  get onCollapsed() {
+    return this.args.onCollapsed ?? (() => {});
+  }
 
   /**
    * The action to be sent when the navbar is about to be expanded.
@@ -230,7 +230,6 @@ export default class Navbar extends Component {
    * @event onExpand
    * @public
    */
-  onExpand() {}
 
   /**
    * The action to be sent after the navbar has been expanded (including the CSS transition).
@@ -238,20 +237,8 @@ export default class Navbar extends Component {
    * @event onExpanded
    * @public
    */
-  onExpanded() {}
-
-  @observes('_collapsed')
-  _onCollapsedChange() {
-    let collapsed = this._collapsed;
-    let active = this.active;
-    if (collapsed !== active) {
-      return;
-    }
-    if (collapsed === false) {
-      this.show();
-    } else {
-      this.hide();
-    }
+  get onExpanded() {
+    return this.args.onExpanded ?? (() => {});
   }
 
   /**
@@ -260,9 +247,11 @@ export default class Navbar extends Component {
    */
   @action
   expand() {
-    if (this.onExpand() !== false) {
-      this.set('_collapsed', false);
+    if (this.args.onExpand?.() === false) {
+      return;
     }
+
+    this._toggledCollapse = false;
   }
 
   /**
@@ -271,14 +260,16 @@ export default class Navbar extends Component {
    */
   @action
   collapse() {
-    if (this.onCollapse() !== false) {
-      this.set('_collapsed', true);
+    if (this.args.onCollapse?.() === false) {
+      return;
     }
+
+    this._toggledCollapse = true;
   }
 
   @action
   toggleNavbar() {
-    if (this._collapsed) {
+    if (this.collapsed) {
       this.expand();
     } else {
       this.collapse();
@@ -295,8 +286,12 @@ export default class Navbar extends Component {
    * @default 'lg'
    * @public
    */
-  @defaultValue
-  toggleBreakpoint = 'lg';
+  get toggleBreakpoint() {
+    if (this.args.toggleBreakpoint === undefined) {
+      return 'lg';
+    }
+    return this.args.toggleBreakpoint;
+  }
 
   /**
    * Bootstrap 4 Only: Sets the background color for the navbar. Can be any color
@@ -308,10 +303,10 @@ export default class Navbar extends Component {
    * @default 'light'
    * @public
    */
-  @defaultValue
-  backgroundColor = 'light';
+  get backgroundColor() {
+    return this.args.backgroundColor ?? 'light';
+  }
 
-  @computed('toggleBreakpoint')
   get breakpointClass() {
     let toggleBreakpoint = this.toggleBreakpoint;
 
@@ -322,7 +317,6 @@ export default class Navbar extends Component {
     }
   }
 
-  @computed('backgroundColor')
   get backgroundClass() {
     return `bg-${this.backgroundColor}`;
   }

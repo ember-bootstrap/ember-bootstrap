@@ -1,8 +1,6 @@
-import { action } from '@ember/object';
-import { tagName } from '@ember-decorators/component';
-import Component from '@ember/component';
-import defaultValue from 'ember-bootstrap/utils/default-decorator';
+import Component from '@glimmer/component';
 import deprecateSubclassing from 'ember-bootstrap/utils/deprecate-subclassing';
+import { on } from '@ember/modifier';
 
 /**
  * Component to implement the responsive menu toggle behavior in a [Components.Navbar](Components.Navbar.html)
@@ -18,20 +16,7 @@ import deprecateSubclassing from 'ember-bootstrap/utils/deprecate-subclassing';
  * @extends Ember.Component
  * @public
  */
-@tagName('')
 @deprecateSubclassing
 export default class NavbarToggle extends Component {
-  @defaultValue
-  collapsed = true;
-
-  /**
-   * @event onClick
-   * @public
-   */
-  onClick() {}
-
-  @action
-  handleClick() {
-    this.onClick();
-  }
+  on = on;
 }
