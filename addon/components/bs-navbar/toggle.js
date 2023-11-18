@@ -1,6 +1,6 @@
-import { action } from '@ember/object';
 import Component from '@glimmer/component';
 import deprecateSubclassing from 'ember-bootstrap/utils/deprecate-subclassing';
+import { on } from '@ember/modifier';
 
 /**
  * Component to implement the responsive menu toggle behavior in a [Components.Navbar](Components.Navbar.html)
@@ -18,20 +18,5 @@ import deprecateSubclassing from 'ember-bootstrap/utils/deprecate-subclassing';
  */
 @deprecateSubclassing
 export default class NavbarToggle extends Component {
-  get collapsed() {
-    return this.args.collapsed ?? true;
-  }
-
-  /**
-   * @event onClick
-   * @public
-   */
-  get onClick() {
-    return this.args.onClick ?? (() => {});
-  }
-
-  @action
-  handleClick() {
-    this.onClick();
-  }
+  on = on;
 }

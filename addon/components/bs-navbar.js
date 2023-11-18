@@ -143,8 +143,10 @@ export default class Navbar extends Component {
    */
 
   get containerClass() {
-    if (this.args.container) {
-      return `container-${this.args.container}`;
+    const { container } = this.args;
+
+    if (container) {
+      return `container-${container}`;
     }
 
     return this.fluid ? 'container-fluid' : 'container';
@@ -200,19 +202,6 @@ export default class Navbar extends Component {
   }
 
   /**
-   * The action to be sent when the navbar is about to be collapsed.
-   *
-   * You can return false to prevent collapsing the navbar automatically, and do that in your action by
-   * setting `collapsed` to true.
-   *
-   * @event onCollapse
-   * @public
-   */
-  get onCollapse() {
-    return this.args.onCollapse ?? (() => {});
-  }
-
-  /**
    * The action to be sent after the navbar has been collapsed (including the CSS transition).
    *
    * @event onCollapsed
@@ -220,19 +209,6 @@ export default class Navbar extends Component {
    */
   get onCollapsed() {
     return this.args.onCollapsed ?? (() => {});
-  }
-
-  /**
-   * The action to be sent when the navbar is about to be expanded.
-   *
-   * You can return false to prevent expanding the navbar automatically, and do that in your action by
-   * setting `collapsed` to false.
-   *
-   * @event onExpand
-   * @public
-   */
-  get onExpand() {
-    return this.args.onExpand ?? (() => {});
   }
 
   /**
@@ -251,9 +227,11 @@ export default class Navbar extends Component {
    */
   @action
   expand() {
-    if (this.onExpand() !== false) {
-      this._toggledCollapse = false;
+    if (this.args.onExpand?.() === false) {
+      return;
     }
+
+    this._toggledCollapse = false;
   }
 
   /**
@@ -262,9 +240,11 @@ export default class Navbar extends Component {
    */
   @action
   collapse() {
-    if (this.onCollapse() !== false) {
-      this._toggledCollapse = true;
+    if (this.args.onCollapse?.() === false) {
+      return;
     }
+
+    this._toggledCollapse = true;
   }
 
   @action
