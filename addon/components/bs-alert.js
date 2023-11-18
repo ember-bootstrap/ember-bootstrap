@@ -5,7 +5,6 @@ import { later } from '@ember/runloop';
 import usesTransition from 'ember-bootstrap/utils/decorators/uses-transition';
 import deprecateSubclassing from 'ember-bootstrap/utils/deprecate-subclassing';
 import arg from 'ember-bootstrap/utils/decorators/arg';
-import { localCopy } from 'tracked-toolbox';
 
 /**
   Implements [Bootstrap alerts](http://getbootstrap.com/components/#alerts)
@@ -75,12 +74,6 @@ export default class Alert extends Component {
   hidden = !this.visible;
 
   /**
-   * This is an unfortunate duplication of the previous property, but this is untracked to avoid causing the dreaded "same computation" assertion in GlimmerVM when reading a tracked property before setting it.
-   * @private
-   */
-  _hidden = !this.visible;
-
-  /**
    * This property controls if the alert should be visible. If false it might still be in the DOM until the fade animation
    * has completed.
    *
@@ -92,14 +85,15 @@ export default class Alert extends Component {
    * @default true
    * @public
    */
-  @arg
-  visible = true;
+  get visible() {
+    return this._visible ?? this.args.visible ?? true;
+  }
 
   /**
    * @property _visible
    * @private
    */
-  @localCopy('visible')
+  @tracked
   _visible;
 
   /**
@@ -114,7 +108,7 @@ export default class Alert extends Component {
   fade = true;
 
   get showAlert() {
-    return this._visible && this.args.fade !== false;
+    return this.visible && this.args.fade !== false;
   }
 
   /**
@@ -180,7 +174,7 @@ export default class Alert extends Component {
    * @private
    */
   show() {
-    this.hidden = this._hidden = false;
+    this.hidden = false;
   }
 
   /**
@@ -191,7 +185,7 @@ export default class Alert extends Component {
    * @private
    */
   hide() {
-    if (this._hidden) {
+    if (this.hidden) {
       return;
     }
 
@@ -200,21 +194,21 @@ export default class Alert extends Component {
         this,
         function () {
           if (!this.isDestroyed) {
-            this.hidden = this._hidden = true;
+            this.hidden = true;
             this.args.onDismissed?.();
           }
         },
         this.fadeDuration,
       );
     } else {
-      this.hidden = this._hidden = true;
+      this.hidden = true;
       this.args.onDismissed?.();
     }
   }
 
   @action
   showOrHide() {
-    if (this._visible) {
+    if (this.visible) {
       this.show();
     } else {
       this.hide();
