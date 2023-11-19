@@ -80,7 +80,7 @@
     "@glimmer/component": "1.1.2",
     "@glimmer/tracking": "1.1.2",
     "@release-it-plugins/lerna-changelog": "6.0.0",
-    "bootstrap": "5.3.2",
+    "bootstrap": "^5.3.2",
     "broccoli-asset-rev": "3.0.0",
     "chai": "4.3.10",
     "chai-things": "0.2.0",
@@ -182,5 +182,9 @@
       "release": true,
       "tokenRef": "GITHUB_AUTH"
     }
+  },
+  "volta": {
+    "node": "18.18.2",
+    "pnpm": "8.10.5"
   }
 }

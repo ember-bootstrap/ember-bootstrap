@@ -9,7 +9,7 @@ module.exports = async function () {
     command: process.env.BROWSER
       ? `ember test --launch ${process.env.BROWSER}`
       : null,
-    useYarn: true,
+    usePnpm: true,
     scenarios: [
       {
         name: 'ember-lts-4.8',
@@ -68,7 +68,7 @@ module.exports = async function () {
       },
       {
         name: 'node-tests',
-        command: 'yarn run nodetest',
+        command: 'pnpm run nodetest',
       },
       {
         name: 'tracked-toolbox-v1',

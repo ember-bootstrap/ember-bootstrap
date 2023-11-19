@@ -17,17 +17,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
-        uses: actions/checkout@v4
-      - name: Setup node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: 18
-      - name: Install dependencies
-        uses: bahmutov/npm-install@v1
+        uses: wyvox/action@v1
       - name: Lint
-        run: yarn lint
+        run: pnpm lint
       - name: Test
-        run: yarn test:ember
+        run: pnpm test:ember
 
   test-no-lock:
     name: Floating Dependencies
@@ -36,17 +30,11 @@ jobs:
       - test
     steps:
       - name: Checkout code
-        uses: actions/checkout@v4
-      - name: Setup node.js
-        uses: actions/setup-node@v4
+        uses: wyvox/action@v1
         with:
-          node-version: 18
-      - name: Install dependencies
-        uses: bahmutov/npm-install@v1
-        with:
-          useLockFile: false
+          pnpm-args: --frozen-lockfile=false
       - name: Test
-        run: yarn test:ember
+        run: pnpm test:ember
 
   test-try:
     name: Scenario ${{ matrix.scenario }}, BS${{ matrix.bootstrap }}, ${{ matrix.browser}}
@@ -85,17 +73,9 @@ jobs:
             bootstrap: 5
     steps:
       - name: Checkout code
-        uses: actions/checkout@v4
-      - name: Setup node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: 18
-      - name: Install dependencies
-        uses: bahmutov/npm-install@v1
-        with:
-          useLockFile: false
+        uses: wyvox/action@v1
       - name: Test
-        run: yarn ember try:one ${{ matrix.scenario }}
+        run: pnpm ember try:one ${{ matrix.scenario }}
         env:
           BOOTSTRAPVERSION: ${{ matrix.bootstrap }}
           BROWSER: ${{ matrix.browser }}
@@ -106,22 +86,16 @@ jobs:
     needs:
       - test
     steps:
-      - uses: actions/checkout@v4
-      - name: Install Node
-        uses: actions/setup-node@v4
-        with:
-          node-version: 18
-      - name: Install Dependencies of Ember Bootstrap addon
-        uses: bahmutov/npm-install@v1
-      - name: Install Dependencies of docs app
-        uses: bahmutov/npm-install@v1
-        with:
-          working-directory: docs
+      - name: Checkout code
+        uses: wyvox/action@v1
+      - name: Checkout code
+        working-directory: docs
+        run: pnpm install
       - name: Run Ember Tests
-        run: yarn test
+        run: pnpm test
         working-directory: docs
       - name: Build including API docs
-        run: yarn run docs:build
+        run: pnpm run docs:build
       # TODO: Perform some basic steps that the build contains API docs
       #       and works as expected.
 
