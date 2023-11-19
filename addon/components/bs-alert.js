@@ -86,7 +86,7 @@ export default class Alert extends Component {
    * @public
    */
   get visible() {
-    return this._visible ?? this.args.visible ?? true;
+    return this._visible ?? true;
   }
 
   /**
@@ -94,7 +94,7 @@ export default class Alert extends Component {
    * @private
    */
   @tracked
-  _visible;
+  _visible = this.args.visible;
 
   /**
    * Set to false to disable the fade out animation when hiding the alert.
@@ -213,5 +213,10 @@ export default class Alert extends Component {
     } else {
       this.hide();
     }
+  }
+
+  @action
+  updateVisibility() {
+    this._visible = this.args.visible;
   }
 }

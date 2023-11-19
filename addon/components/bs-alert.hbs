@@ -1,7 +1,8 @@
 <div
   class="{{unless this.hidden "alert"}} {{if this.fade "fade"}} {{if this.dismissible "alert-dismissible"}} {{bs-type-class "alert" @type}} {{if this.showAlert "show"}}"
   ...attributes
-  {{did-update this.showOrHide this.visible}}
+  {{did-update this.showOrHide this._visible}}
+  {{did-update this.updateVisibility @visible}}
 >
   {{#unless this.hidden}}
     {{#if this.dismissible}}

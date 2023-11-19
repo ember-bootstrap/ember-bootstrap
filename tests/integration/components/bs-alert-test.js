@@ -207,6 +207,33 @@ module('Integration | Component | bs-alert', function (hooks) {
     assert.dom('.alert').hasClass('alert-success', 'alert has type class');
   });
 
+  test('alert can be made visible when setting visible=true after manually dismissing it', async function (assert) {
+    this.set('visible', true);
+
+    this.set('handleOnDismissed', () => {
+      this.set('visible', false);
+    });
+
+    await render(hbs`<BsAlert
+  @type='success'
+  @fade={{false}}
+  @visible={{this.visible}}
+  @onDismissed={{this.handleOnDismissed}}
+>
+  Test
+</BsAlert>`);
+
+    assert.dom('.alert').exists('alert has alert class');
+
+    await click(`button.${closeButtonClass()}`);
+    assert.dom('.alert').doesNotExist('alert has no alert class');
+    assert.dom('*').hasText('', 'alert has no content');
+
+    this.set('visible', true);
+
+    assert.dom('.alert').exists('alert has alert class');
+  });
+
   test('dismissing alert does not change public visible property (DDAU)', async function (assert) {
     this.set('visible', true);
     await render(
