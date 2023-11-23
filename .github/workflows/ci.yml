@@ -32,7 +32,7 @@ jobs:
       - name: Checkout code
         uses: wyvox/action@v1
         with:
-          pnpm-args: --frozen-lockfile=false
+          pnpm-args: --no-lockfile
       - name: Test
         run: pnpm test:ember
 
