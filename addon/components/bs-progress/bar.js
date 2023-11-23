@@ -1,12 +1,7 @@
-import { tagName } from '@ember-decorators/component';
-import { computed } from '@ember/object';
-import Component from '@ember/component';
-import defaultValue from 'ember-bootstrap/utils/default-decorator';
-import typeClass from 'ember-bootstrap/utils/cp/type-class';
+import Component from '@glimmer/component';
 import deprecateSubclassing from 'ember-bootstrap/utils/deprecate-subclassing';
 
 /**
-
  Component for a single progress bar, see [Components.Progress](Components.Progress.html) for more examples.
 
  @class ProgressBar
@@ -14,7 +9,6 @@ import deprecateSubclassing from 'ember-bootstrap/utils/deprecate-subclassing';
  @extends Ember.Component
  @public
  */
-@tagName('')
 @deprecateSubclassing
 export default class ProgressBar extends Component {
   /**
@@ -25,8 +19,9 @@ export default class ProgressBar extends Component {
    * @default 0
    * @public
    */
-  @defaultValue
-  minValue = 0;
+  get minValue() {
+    return this.args.minValue ?? 0;
+  }
 
   /**
    * The upper limit of the value range
@@ -36,8 +31,9 @@ export default class ProgressBar extends Component {
    * @default 100
    * @public
    */
-  @defaultValue
-  maxValue = 100;
+  get maxValue() {
+    return this.args.maxValue ?? 100;
+  }
 
   /**
    * The value the progress bar should represent
@@ -47,8 +43,9 @@ export default class ProgressBar extends Component {
    * @default 0
    * @public
    */
-  @defaultValue
-  value = 0;
+  get value() {
+    return this.args.value ?? 0;
+  }
 
   /**
    If true a label will be shown inside the progress bar.
@@ -68,8 +65,9 @@ export default class ProgressBar extends Component {
    @default false
    @public
    */
-  @defaultValue
-  showLabel = false;
+  get showLabel() {
+    return this.args.showLabel ?? false;
+  }
 
   /**
    * Create a striped effect, see http://getbootstrap.com/components/#progress-striped
@@ -79,8 +77,9 @@ export default class ProgressBar extends Component {
    * @default false
    * @public
    */
-  @defaultValue
-  striped = false;
+  get striped() {
+    return this.args.striped ?? false;
+  }
 
   /**
    * Animate the stripes, see http://getbootstrap.com/components/#progress-animated
@@ -90,8 +89,9 @@ export default class ProgressBar extends Component {
    * @default false
    * @public
    */
-  @defaultValue
-  animate = false;
+  get animate() {
+    return this.args.animate ?? false;
+  }
 
   /**
    * Specify to how many digits the progress bar label should be rounded.
@@ -101,8 +101,9 @@ export default class ProgressBar extends Component {
    * @default 0
    * @public
    */
-  @defaultValue
-  roundDigits = 0;
+  get roundDigits() {
+    return this.args.roundDigits ?? 0;
+  }
 
   /**
    * Property for type styling
@@ -114,11 +115,13 @@ export default class ProgressBar extends Component {
    * @default 'default'
    * @public
    */
-  @defaultValue
-  type = 'default';
+  get type() {
+    return this.args.type ?? 'default';
+  }
 
-  @typeClass('bg', 'type')
-  typeClass;
+  get typeClass() {
+    return `bg-${this.type}`;
+  }
 
   /**
    * The percentage of `value`
@@ -128,7 +131,6 @@ export default class ProgressBar extends Component {
    * @protected
    * @readonly
    */
-  @(computed('value', 'minValue', 'maxValue').readOnly())
   get percent() {
     let value = parseFloat(this.value);
     let minValue = parseFloat(this.minValue);
@@ -147,7 +149,6 @@ export default class ProgressBar extends Component {
    * @protected
    * @readonly
    */
-  @(computed('percent', 'roundDigits').readOnly())
   get percentRounded() {
     let roundFactor = Math.pow(10, this.roundDigits);
     return Math.round(this.percent * roundFactor) / roundFactor;
