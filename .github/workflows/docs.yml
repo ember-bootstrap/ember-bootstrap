@@ -12,19 +12,13 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
-        uses: actions/checkout@v4
-      - name: Setup node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: 18
-      - name: Install addon dependencies
-        uses: bahmutov/npm-install@v1
-      - name: Install docs dependencies
-        uses: bahmutov/npm-install@v1
+        uses: wyvox/action@v1
+      - name: Checkout code
+        uses: wyvox/action@v1
         with:
           working-directory: docs
       - name: Build docs
-        run: yarn run docs:build
+        run: pnpm run docs:build
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
         with:

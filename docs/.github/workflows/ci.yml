@@ -18,16 +18,10 @@ jobs:
     timeout-minutes: 10
 
     steps:
-      - uses: actions/checkout@v4
-      - name: Install Node
-        uses: actions/setup-node@v4
-        with:
-          node-version: 14.x
-          cache: yarn
-      - name: Install Dependencies
-        run: yarn install --frozen-lockfile
+      - name: Checkout code
+        uses: wyvox/action@v1
       - name: Lint
-        run: yarn lint
+        run: pnpm run lint
 
   test:
     name: "Test"
@@ -35,13 +29,7 @@ jobs:
     timeout-minutes: 10
 
     steps:
-      - uses: actions/checkout@v4
-      - name: Install Node
-        uses: actions/setup-node@v4
-        with:
-          node-version: 14.x
-          cache: yarn
-      - name: Install Dependencies
-        run: yarn install --frozen-lockfile
+      - name: Checkout code
+        uses: wyvox/action@v1
       - name: Run Tests
-        run: yarn test
+        run: pnpm test
