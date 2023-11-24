@@ -165,8 +165,8 @@ devDependencies:
     specifier: 11.1.0
     version: 11.1.0(postcss@8.4.31)(stylelint@15.11.0)
   stylelint-prettier:
-    specifier: 4.0.2
-    version: 4.0.2(prettier@3.0.3)(stylelint@15.11.0)
+    specifier: 4.1.0
+    version: 4.1.0(prettier@3.0.3)(stylelint@15.11.0)
   tracked-built-ins:
     specifier: 3.3.0
     version: 3.3.0
@@ -11627,8 +11627,8 @@ packages:
       stylelint-config-recommended: 13.0.0(stylelint@15.11.0)
     dev: true
 
-  /stylelint-prettier@4.0.2(prettier@3.0.3)(stylelint@15.11.0):
-    resolution: {integrity: sha512-EoHnR2PiaWgpGtoI4VW7AzneMfwmwQsNwQ+3/E2k/a+ju5yO6rfPfop4vzPQKcJN4ZM1YbspEOPu88D8538sbg==}
+  /stylelint-prettier@4.1.0(prettier@3.0.3)(stylelint@15.11.0):
+    resolution: {integrity: sha512-dd653q/d1IfvsSQshz1uAMe+XDm6hfM/7XiFH0htYY8Lse/s5ERTg7SURQehZPwVvm/rs7AsFhda9EQ2E9TS0g==}
     engines: {node: ^14.17.0 || >=16.0.0}
     peerDependencies:
       prettier: '>=3.0.0'
