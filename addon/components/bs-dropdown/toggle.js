@@ -1,7 +1,5 @@
-import { tagName } from '@ember-decorators/component';
-import Component from '@ember/component';
-import defaultValue from 'ember-bootstrap/utils/default-decorator';
-import { action, computed } from '@ember/object';
+import Component from '@glimmer/component';
+import { action } from '@ember/object';
 import deprecateSubclassing from 'ember-bootstrap/utils/deprecate-subclassing';
 
 /**
@@ -12,10 +10,9 @@ import deprecateSubclassing from 'ember-bootstrap/utils/deprecate-subclassing';
 
  @class DropdownToggle
  @namespace Components
- @extends Ember.Component
+ @extends Component
  @publicø
  */
-@tagName('')
 @deprecateSubclassing
 export default class DropdownToggle extends Component {
   /**
@@ -23,12 +20,12 @@ export default class DropdownToggle extends Component {
    * @type {boolean}
    * @private
    */
-  @defaultValue
-  inNav = false;
+  get inNav() {
+    return this.args.inNav ?? false;
+  }
 
-  @computed('isOpen')
   get 'aria-expanded'() {
-    return this.isOpen ? 'true' : 'false';
+    return this.args.isOpen ? 'true' : 'false';
   }
 
   /**
@@ -38,16 +35,15 @@ export default class DropdownToggle extends Component {
    * @param {*} value
    * @public
    */
-  onClick() {}
 
   @action
   handleClick(e) {
     e.preventDefault();
-    this.onClick();
+    this.args.onClick?.();
   }
 
   @action
   handleKeyDown(e) {
-    this.onKeyDown(e);
+    this.args.onKeyDown(e);
   }
 }

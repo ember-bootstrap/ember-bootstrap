@@ -1,10 +1,9 @@
-import { tagName } from '@ember-decorators/component';
-import { action, computed } from '@ember/object';
-import Component from '@ember/component';
-import defaultValue from 'ember-bootstrap/utils/default-decorator';
+import { action } from '@ember/object';
+import Component from '@glimmer/component';
 import { assert } from '@ember/debug';
 import { getOwnConfig, macroCondition } from '@embroider/macros';
 import deprecateSubclassing from 'ember-bootstrap/utils/deprecate-subclassing';
+import { tracked } from '@glimmer/tracking';
 
 const ESCAPE_KEYCODE = 27; // KeyboardEvent.which value for Escape (Esc) key
 const SPACE_KEYCODE = 32; // KeyboardEvent.which value for space key
@@ -173,10 +172,9 @@ const SUPPORTED_KEYCODES = [
 
   @class Dropdown
   @namespace Components
-  @extends Ember.Component
+  @extends Component
   @public
 s*/
-@tagName('')
 @deprecateSubclassing
 export default class Dropdown extends Component {
   /**
@@ -187,8 +185,9 @@ export default class Dropdown extends Component {
    * @type {string}
    * @public
    */
-  @defaultValue
-  htmlTag = 'div';
+  get htmlTag() {
+    return this.args.htmlTag ?? 'div';
+  }
 
   /**
    * This property reflects the state of the dropdown, whether it is open or closed.
@@ -198,8 +197,7 @@ export default class Dropdown extends Component {
    * @type boolean
    * @private
    */
-  @defaultValue
-  isOpen = false;
+  @tracked isOpen = this.args.isOpen ?? false;
 
   /**
    * By default, clicking on an open dropdown menu will close it. Set this property to false for the menu to stay open.
@@ -209,8 +207,9 @@ export default class Dropdown extends Component {
    * @type boolean
    * @public
    */
-  @defaultValue
-  closeOnMenuClick = true;
+  get closeOnMenuClick() {
+    return this.args.closeOnMenuClick ?? true;
+  }
 
   /**
    * By default, the dropdown menu will expand downwards. Other options include, 'up', 'left' and 'right'
@@ -220,8 +219,9 @@ export default class Dropdown extends Component {
    * @default 'down'
    * @public
    */
-  @defaultValue
-  direction = 'down';
+  get direction() {
+    return this.args.direction ?? 'down';
+  }
 
   /**
    * Indicates the dropdown is being used as a navigation item dropdown.
@@ -241,7 +241,6 @@ export default class Dropdown extends Component {
    * @readonly
    * @private
    */
-  @computed('direction', 'hasButton', 'toggleElement.classList')
   get containerClass() {
     let dropDirectionClass = `drop${this.direction}`;
     if (macroCondition(getOwnConfig().isBS5)) {
@@ -268,6 +267,7 @@ export default class Dropdown extends Component {
    * @property toggleElement
    * @private
    */
+  @tracked
   toggleElement = null;
 
   /**
@@ -276,6 +276,7 @@ export default class Dropdown extends Component {
    * @readonly
    * @private
    */
+  @tracked
   menuElement = null;
 
   /**
@@ -285,7 +286,6 @@ export default class Dropdown extends Component {
    * @param {*} value
    * @public
    */
-  onShow(value) {} // eslint-disable-line no-unused-vars
 
   /**
    * Action is called when dropdown is about to be hidden
@@ -295,7 +295,6 @@ export default class Dropdown extends Component {
    * @param {*} value
    * @public
    */
-  onHide(value) {} // eslint-disable-line no-unused-vars
 
   @action
   toggleDropdown() {
@@ -308,15 +307,15 @@ export default class Dropdown extends Component {
 
   @action
   openDropdown() {
-    this.set('isOpen', true);
-    this.onShow();
+    this.isOpen = true;
+    this.args.onShow?.();
   }
 
   @action
   closeDropdown() {
-    if (this.onHide() === false) return;
+    if (this.args.onHide?.() === false) return;
 
-    this.set('isOpen', false);
+    this.isOpen = false;
   }
 
   /**
@@ -423,7 +422,7 @@ export default class Dropdown extends Component {
       element instanceof HTMLElement,
     );
 
-    this.set(`${type}Element`, element);
+    this[`${type}Element`] = element;
   }
 
   @action
@@ -433,7 +432,12 @@ export default class Dropdown extends Component {
       type === 'toggle' || type === 'menu',
     );
 
-    this.set(`${type}Element`, null);
+    this[`${type}Element`] = null;
+  }
+
+  @action
+  updateIsOpen(open) {
+    this.isOpen = open;
   }
 
   /**
