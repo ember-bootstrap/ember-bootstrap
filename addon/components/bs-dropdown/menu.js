@@ -100,6 +100,8 @@ export default class DropdownMenu extends Component {
 
   @action
   updateIsOpen(value) {
+    // delay removing the menu from DOM to allow (delegated Ember) event to fire for the menu's children
+    // Fixes https://github.com/kaliber5/ember-bootstrap/issues/660
     next(() => {
       if (this.isDestroying || this.isDestroyed) {
         return;
@@ -109,9 +111,6 @@ export default class DropdownMenu extends Component {
   }
 
   flip = true;
-
-  @tracked
-  _popperApi = null;
 
   get popperPlacement() {
     let placement = 'bottom-start';
