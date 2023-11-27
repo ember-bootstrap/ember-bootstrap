@@ -1,12 +1,13 @@
-{{#if this._isOpen}}
+{{#if @isOpen}}
   {{#if this._renderInPlace}}
     <div
       class="dropdown-menu {{this.alignClass}} {{if this.isOpen "show"}}"
       tabindex="-1"
       ...attributes
-      {{popper-tooltip this.toggleElement this.popperOptions}}
+      {{popper-tooltip @toggleElement this.popperOptions}}
       {{did-insert @registerChildElement "menu"}}
       {{will-destroy @unregisterChildElement "menu"}}
+      {{did-update this.updateIsOpen @open}}
       {{create-ref "menuElement"}}
     >
       {{yield
@@ -24,9 +25,10 @@
         class="dropdown-menu {{this.alignClass}} {{if this.isOpen "show"}}"
         tabindex="-1"
         ...attributes
-        {{popper-tooltip this.toggleElement this.popperOptions}}
+        {{popper-tooltip @toggleElement this.popperOptions}}
         {{did-insert @registerChildElement "menu"}}
         {{will-destroy @unregisterChildElement "menu"}}
+        {{did-update this.updateIsOpen @open}}
         {{create-ref "menuElement"}}
       >
         {{yield

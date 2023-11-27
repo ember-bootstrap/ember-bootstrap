@@ -1,11 +1,10 @@
-import { tagName } from '@ember-decorators/component';
-import { action, computed } from '@ember/object';
-import Component from '@ember/component';
+import { action } from '@ember/object';
+import Component from '@glimmer/component';
 import { next } from '@ember/runloop';
 import { getDestinationElement } from 'ember-bootstrap/utils/dom';
-import defaultValue from 'ember-bootstrap/utils/default-decorator';
 import deprecateSubclassing from 'ember-bootstrap/utils/deprecate-subclassing';
 import { ref } from 'ember-ref-bucket';
+import { tracked } from '@glimmer/tracking';
 
 /**
  Component for the dropdown menu.
@@ -14,10 +13,9 @@ import { ref } from 'ember-ref-bucket';
 
  @class DropdownMenu
  @namespace Components
- @extends Ember.Component
+ @extends Component
  @public
  */
-@tagName('')
 @deprecateSubclassing
 export default class DropdownMenu extends Component {
   /**
@@ -33,7 +31,9 @@ export default class DropdownMenu extends Component {
    * @type string
    * @protected
    */
-  ariaRole = 'menu';
+  get ariaRole() {
+    return this.args.ariaRole ?? 'menu';
+  }
 
   /**
    * Alignment of the menu, either "left" or "right"
@@ -43,8 +43,9 @@ export default class DropdownMenu extends Component {
    * @default left
    * @public
    */
-  @defaultValue
-  align = 'left';
+  get align() {
+    return this.args.align ?? 'false';
+  }
 
   /**
    * @property direction
@@ -52,11 +53,12 @@ export default class DropdownMenu extends Component {
    * @type string
    * @private
    */
-  @defaultValue
-  direction = 'down';
+  get direction() {
+    return this.args.direction ?? 'down';
+  }
 
   /**
-   * By default the menu is rendered in the same place as the dropdown. If you experience clipping
+   * By default, the menu is rendered in the same place as the dropdown. If you experience clipping
    * issues, you can set this to false to render the menu in a wormhole at the top of the DOM.
    *
    * @property renderInPlace
@@ -64,15 +66,15 @@ export default class DropdownMenu extends Component {
    * @default true
    * @public
    */
-  @defaultValue
-  renderInPlace = true;
+  get renderInPlace() {
+    return this.args.renderInPlace ?? true;
+  }
 
   /**
    * @property _renderInPlace
    * @type boolean
    * @private
    */
-  @computed('destinationElement', 'renderInPlace')
   get _renderInPlace() {
     return this.renderInPlace || !this.destinationElement;
   }
@@ -85,38 +87,31 @@ export default class DropdownMenu extends Component {
    * @readonly
    * @private
    */
-  @computed
   get destinationElement() {
     return getDestinationElement(this);
   }
 
-  @computed('align')
   get alignClass() {
     return this.align !== 'left' ? `dropdown-menu-${this.align}` : undefined;
   }
 
-  @computed
-  get isOpen() {
-    return false;
-  }
+  @tracked
+  isOpen = this.args.isOpen;
 
-  set isOpen(value) {
+  @action
+  updateIsOpen(value) {
     // delay removing the menu from DOM to allow (delegated Ember) event to fire for the menu's children
     // Fixes https://github.com/kaliber5/ember-bootstrap/issues/660
     next(() => {
       if (this.isDestroying || this.isDestroyed) {
         return;
       }
-      this.set('_isOpen', value);
+      this.isOpen = value;
     });
-    return value;
   }
 
-  _isOpen = false;
   flip = true;
-  _popperApi = null;
 
-  @computed('direction', 'align')
   get popperPlacement() {
     let placement = 'bottom-start';
     let { direction, align } = this;
@@ -148,7 +143,6 @@ export default class DropdownMenu extends Component {
     }
   }
 
-  @computed('flip', 'popperPlacement')
   get popperOptions() {
     return {
       placement: this.popperPlacement,

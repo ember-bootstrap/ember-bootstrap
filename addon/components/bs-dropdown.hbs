@@ -1,5 +1,11 @@
 {{#let (element this.htmlTag) as |Tag|}}
-  <Tag class="{{this.containerClass}} {{if this.inNav "nav-item"}} {{if this.isOpen "show"}}" ...attributes>
+  <Tag
+    class="{{this.containerClass}}
+      {{if this.inNav "nav-item"}}
+      {{if this.isOpen "show"}}"
+    ...attributes
+    {{did-update this.updateIsOpen @open}}
+  >
     {{yield
       (hash
         button=(component (ensure-safe-component (bs-default @buttonComponent (component "bs-dropdown/button")))
