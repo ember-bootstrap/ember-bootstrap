@@ -65,12 +65,12 @@ variable to "3", e.g. `BOOTSTRAPVERSION=3 ember test`.
 
 * `git clone https://github.com/kaliber5/ember-bootstrap`
 * `cd ember-bootstrap`
-* `yarn`
+* `pnpm`
 
 ### Linting
 
-* `yarn lint`
-* `yarn lint:fix`
+* `pnpm lint`
+* `pnpm lint:fix`
 
 ### Running tests
 
