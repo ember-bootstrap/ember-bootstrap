@@ -46,7 +46,7 @@ module('Integration | Component | bs-nav', function (hooks) {
   <nav.dropdown as |dd|>
     <dd.toggle>Dropdown <span class='caret'></span></dd.toggle>
     <dd.menu as |ddm|>
-      <ddm.item>{{#ddm.link-to 'index'}}Home{{/ddm.link-to}}</ddm.item>
+      <ddm.item><ddm.link-to @route='index'>Home</ddm.link-to></ddm.item>
     </dd.menu>
   </nav.dropdown>
 </BsNav>`);
@@ -61,10 +61,11 @@ module('Integration | Component | bs-nav', function (hooks) {
       .exists({ count: 1 }, 'it has a dropdown as a nav item');
 
     await click('.nav a.dropdown-toggle');
-    assert.equal(
-      this.element.querySelector('.nav > li.dropdown .dropdown-menu').style.length,
+    assert.strictEqual(
+      this.element.querySelector('.nav > li.dropdown .dropdown-menu').style
+        .length,
       0,
-      'Dynamic positioning not applied when inNav is set to true'
+      'Dynamic positioning not applied when inNav is set to true',
     );
   });
 

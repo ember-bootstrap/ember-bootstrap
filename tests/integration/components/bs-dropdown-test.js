@@ -442,22 +442,30 @@ module('Integration | Component | bs-dropdown', function (hooks) {
   });
 
   test('dropdown in nav disables dynamic positioning', async function (assert) {
-    await render(hbs`
-    <BsDropdown @inNav={{true}} as |dd|>
-      <dd.toggle>Dropdown</dd.toggle>
-      <dd.menu as |menu|>
-        <menu.item>
-          <menu.link-to @route="index">Home</menu.link-to>
-        </menu.item>
-      </dd.menu>
-    </BsDropdown>`);
+    this.set('inNav', false);
+
+    await render(hbs`<BsDropdown @inNav={{this.inNav}} as |dd|>
+  <dd.toggle>Dropdown</dd.toggle>
+  <dd.menu as |menu|>
+    <menu.item>
+      <menu.link-to @route='index'>Home</menu.link-to>
+    </menu.item>
+  </dd.menu>
+</BsDropdown>`);
 
     await click('a.dropdown-toggle');
 
-    assert.equal(
+    assert.ok(
+      this.element.querySelector('.dropdown-menu').style.length > 0,
+      'Dynamic positioning applied when inNav is set to false',
+    );
+
+    this.set('inNav', true);
+
+    assert.strictEqual(
       this.element.querySelector('.dropdown-menu').style.length,
       0,
-      'Dynamic positioning not applied when inNav is set to true'
+      'Dynamic positioning not applied when inNav is set to true',
     );
   });
 
