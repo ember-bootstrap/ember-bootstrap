@@ -441,6 +441,34 @@ module('Integration | Component | bs-dropdown', function (hooks) {
     );
   });
 
+  test('dropdown in nav disables dynamic positioning', async function (assert) {
+    this.set('inNav', false);
+
+    await render(hbs`<BsDropdown @inNav={{this.inNav}} as |dd|>
+  <dd.toggle>Dropdown</dd.toggle>
+  <dd.menu as |menu|>
+    <menu.item>
+      <menu.link-to @route='index'>Home</menu.link-to>
+    </menu.item>
+  </dd.menu>
+</BsDropdown>`);
+
+    await click('a.dropdown-toggle');
+
+    assert.ok(
+      this.element.querySelector('.dropdown-menu').style.length > 0,
+      'Dynamic positioning applied when inNav is set to false',
+    );
+
+    this.set('inNav', true);
+
+    assert.strictEqual(
+      this.element.querySelector('.dropdown-menu').style.length,
+      0,
+      'Dynamic positioning not applied when inNav is set to true',
+    );
+  });
+
   test('dropdown menu can be rendered in a wormhole', async function (assert) {
     await render(
       hbs`<div id='ember-bootstrap-wormhole'></div>
