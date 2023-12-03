@@ -1,15 +1,12 @@
-import { tagName } from '@ember-decorators/component';
-import { computed } from '@ember/object';
-import { addObserver } from '@ember/object/observers';
-import Component from '@ember/component';
+import Component from '@glimmer/component';
 import { scheduleOnce } from '@ember/runloop';
-import ComponentChild from 'ember-bootstrap/mixins/component-child';
 import transitionEnd from 'ember-bootstrap/utils/transition-end';
-import usesTransition from 'ember-bootstrap/utils/cp/uses-transition';
-import defaultValue from 'ember-bootstrap/utils/default-decorator';
+import usesTransition from 'ember-bootstrap/utils/decorators/uses-transition';
 import { guidFor } from '@ember/object/internals';
 import deprecateSubclassing from 'ember-bootstrap/utils/deprecate-subclassing';
 import { ref } from 'ember-ref-bucket';
+import { action } from '@ember/object';
+import { tracked } from '@glimmer/tracking';
 
 /**
  The tab pane of a tab component.
@@ -17,13 +14,11 @@ import { ref } from 'ember-ref-bucket';
 
  @class TabPane
  @namespace Components
- @extends Ember.Component
- @uses Mixins.ComponentChild
+ @extends Component
  @public
  */
-@tagName('')
 @deprecateSubclassing
-export default class TabPane extends Component.extend(ComponentChild) {
+export default class TabPane extends Component {
   /**
    * @property id
    * @type null | HTMLElement
@@ -34,14 +29,17 @@ export default class TabPane extends Component.extend(ComponentChild) {
    * @type string
    * @public
    */
-  id = guidFor(this);
+  get id() {
+    return this.args.id ?? guidFor(this);
+  }
 
   /**
    * @property activeId
    * @private
    */
-  @defaultValue
-  activeId = null;
+  get activeId() {
+    return this.args.activeId ?? null;
+  }
 
   /**
    * True if this pane is active (visible)
@@ -51,7 +49,6 @@ export default class TabPane extends Component.extend(ComponentChild) {
    * @readonly
    * @private
    */
-  @(computed('activeId', 'id').readOnly())
   get isActive() {
     return this.activeId === this.id;
   }
@@ -64,8 +61,8 @@ export default class TabPane extends Component.extend(ComponentChild) {
    * @default false
    * @private
    */
-  @defaultValue
-  active = false;
+  @tracked
+  active = this.args.active ?? false;
 
   /**
    * Used to trigger the Bootstrap visibility classes.
@@ -75,8 +72,8 @@ export default class TabPane extends Component.extend(ComponentChild) {
    * @default false
    * @private
    */
-  @defaultValue
-  showContent = false;
+  @tracked
+  showContent = this.args.showContent ?? false;
 
   /**
    * The title for this tab pane. This is used by the `bs-tab` component to automatically generate
@@ -88,8 +85,9 @@ export default class TabPane extends Component.extend(ComponentChild) {
    * @default null
    * @public
    */
-  @defaultValue
-  title = null;
+  get title() {
+    return this.args.title ?? null;
+  }
 
   /**
    * An optional group title used by the `bs-tab` component to group all panes with the same group title
@@ -101,8 +99,9 @@ export default class TabPane extends Component.extend(ComponentChild) {
    * @default null
    * @public
    */
-  @defaultValue
-  groupTitle = null;
+  get groupTitle() {
+    return this.args.groupTitle ?? null;
+  }
 
   /**
    * Use fade animation when switching tabs.
@@ -111,19 +110,21 @@ export default class TabPane extends Component.extend(ComponentChild) {
    * @type boolean
    * @private
    */
-  @defaultValue
-  fade = true;
+  get fade() {
+    return this.args.fade ?? true;
+  }
 
   /**
    * The duration of the fade out animation
    *
    * @property fadeDuration
-   * @type integer
+   * @type number
    * @default 150
    * @private
    */
-  @defaultValue
-  fadeDuration = 150;
+  get fadeDuration() {
+    return this.args.fadeDuration ?? 150;
+  }
 
   /**
    * Use CSS transitions?
@@ -146,22 +147,18 @@ export default class TabPane extends Component.extend(ComponentChild) {
     if (this.usesTransition) {
       if (!this._element) {
         // _element is initially set by `{{create-ref}}` which happens in next run loop, so can be undefined here.
-        this.setProperties({
-          active: true,
-          showContent: true,
-        });
+        this.active = true;
+        this.showContent = true;
       } else {
         transitionEnd(this._element, this.fadeDuration).then(() => {
           if (!this.isDestroyed) {
-            this.setProperties({
-              active: true,
-              showContent: true,
-            });
+            this.active = true;
+            this.showContent = true;
           }
         });
       }
     } else {
-      this.set('active', true);
+      this.active = true;
     }
   }
 
@@ -175,16 +172,17 @@ export default class TabPane extends Component.extend(ComponentChild) {
     if (this.usesTransition) {
       transitionEnd(this._element, this.fadeDuration).then(() => {
         if (!this.isDestroyed) {
-          this.set('active', false);
+          this.active = false;
         }
       });
-      this.set('showContent', false);
+      this.showContent = false;
     } else {
-      this.set('active', false);
+      this.active = false;
     }
   }
 
-  _showHide() {
+  @action
+  showHide() {
     if (this.isActive) {
       this.show();
     } else {
@@ -193,16 +191,31 @@ export default class TabPane extends Component.extend(ComponentChild) {
   }
 
   _setActive() {
-    this.set('active', this.isActive);
-    this.set('showContent', this.isActive && this.fade);
+    this.active = this.isActive;
+    this.showContent = this.isActive && this.fade;
   }
 
-  init() {
-    super.init(...arguments);
+  constructor(owner, args) {
+    super(owner, args);
+
+    args.registerChild?.(this);
 
     // isActive comes from parent component, so only available after render...
     scheduleOnce('afterRender', this, this._setActive);
+  }
 
-    addObserver(this, 'isActive', null, this._showHide, true);
+  willDestroy() {
+    super.willDestroy();
+    this.args.unregisterChild?.(this);
+  }
+
+  @action
+  updateActive() {
+    this.active = this.args.active;
+  }
+
+  @action
+  updateShowContent() {
+    this.showContent = this.args.showContent;
   }
 }

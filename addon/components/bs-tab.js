@@ -1,14 +1,10 @@
-import { tagName } from '@ember-decorators/component';
-import { action, computed } from '@ember/object';
-import { filter, oneWay } from '@ember/object/computed';
-import Component from '@ember/component';
+import { action } from '@ember/object';
+import Component from '@glimmer/component';
 import { isPresent } from '@ember/utils';
-import { A } from '@ember/array';
-import ComponentParent from 'ember-bootstrap/mixins/component-parent';
 import TabPane from 'ember-bootstrap/components/bs-tab/pane';
-import listenTo from 'ember-bootstrap/utils/cp/listen-to';
-import defaultValue from 'ember-bootstrap/utils/default-decorator';
 import deprecateSubclassing from 'ember-bootstrap/utils/deprecate-subclassing';
+import { tracked } from '@glimmer/tracking';
+import { schedule } from '@ember/runloop';
 
 /**
   Tab component for dynamic tab functionality that mimics the behaviour of Bootstrap's tab.js plugin,
@@ -56,10 +52,10 @@ import deprecateSubclassing from 'ember-bootstrap/utils/deprecate-subclassing';
   ### Custom tabs
 
   When having the tab pane's `title` as the tab navigation title is not sufficient, for example because you want to
-  integrate some other dynamic content, maybe even other components in the tab navigation item, then you have to setup
+  integrate some other dynamic content, maybe even other components in the tab navigation item, then you have to set up
   your navigation by yourself.
 
-  Set `customTabs` to true to deactivate the automatic tab navigation generation. Then setup your navigation, probably
+  Set `customTabs` to true to deactivate the automatic tab navigation generation. Then set up your navigation, probably
   using a [Components.Nav](Components.Nav.html) component. The tab component yields the `activeId` property as well as
   its `select` action, which you would have to use to manually set the `active` state of the navigation items and to
   trigger the selection of the different tab panes, using their ids:
@@ -110,13 +106,11 @@ import deprecateSubclassing from 'ember-bootstrap/utils/deprecate-subclassing';
 
   @class Tab
   @namespace Components
-  @extends Ember.Component
-  @uses Mixins.ComponentParent
+  @extends Component
   @public
 */
-@tagName('')
 @deprecateSubclassing
-export default class Tab extends Component.extend(ComponentParent) {
+export default class Tab extends Component {
   /**
    * Type of nav, either "pills" or "tabs"
    *
@@ -125,8 +119,9 @@ export default class Tab extends Component.extend(ComponentParent) {
    * @default 'tabs'
    * @public
    */
-  @defaultValue
-  type = 'tabs';
+  get type() {
+    return this.args.type ?? 'tabs';
+  }
 
   /**
    * @property paneComponent
@@ -141,20 +136,24 @@ export default class Tab extends Component.extend(ComponentParent) {
    */
 
   /**
-   * By default the tabs will be automatically generated using the available [TabPane](Components.TabPane.html)
-   * components. If set to true, you can deactivate this and setup the tabs manually. See the example above.
+   * By default, the tabs will be automatically generated using the available [TabPane](Components.TabPane.html)
+   * components. If set to true, you can deactivate this and set up the tabs manually. See the example above.
    *
    * @property customTabs
    * @type boolean
    * @default false
    * @public
    */
-  @defaultValue
-  customTabs = false;
+  get customTabs() {
+    return this.args.customTabs ?? false;
+  }
+
+  @tracked
+  children = [];
 
   /**
    * The id (`id`) of the active [TabPane](Components.TabPane.html).
-   * By default the first tab will be active, but this can be changed by setting this property
+   * By default, the first tab will be active, but this can be changed by setting this property
    *
    * ```hbs
    * {{#bs-tab activeId="pane2"}}
@@ -174,15 +173,16 @@ export default class Tab extends Component.extend(ComponentParent) {
    * @type string
    * @public
    */
-  @oneWay('childPanes.firstObject.id')
-  activeId;
+  get activeId() {
+    return this.selectedId ?? this.childPanes[0]?.id;
+  }
 
   /**
-   * @property isActiveId
+   * @property selectedId
    * @private
    */
-  @listenTo('activeId')
-  isActiveId;
+  @tracked
+  selectedId;
 
   /**
    * Set to false to disable the fade animation when switching tabs.
@@ -192,19 +192,21 @@ export default class Tab extends Component.extend(ComponentParent) {
    * @default true
    * @public
    */
-  @defaultValue
-  fade = true;
+  get fade() {
+    return this.args.fade ?? true;
+  }
 
   /**
    * The duration of the fade animation
    *
    * @property fadeDuration
-   * @type integer
+   * @type number
    * @default 150
    * @public
    */
-  @defaultValue
-  fadeDuration = 150;
+  get fadeDuration() {
+    return this.args.fadeDuration ?? 150;
+  }
 
   /**
    * This action is called when switching the active tab, with the new and previous pane id
@@ -215,7 +217,6 @@ export default class Tab extends Component.extend(ComponentParent) {
    * @event onChange
    * @public
    */
-  onChange() {}
 
   /**
    * All `TabPane` child components
@@ -225,10 +226,9 @@ export default class Tab extends Component.extend(ComponentParent) {
    * @readonly
    * @private
    */
-  @filter('children', function (view) {
-    return view instanceof TabPane;
-  })
-  childPanes;
+  get childPanes() {
+    return this.children.filter((view) => view instanceof TabPane);
+  }
 
   /**
    * Array of objects that define the tab structure
@@ -238,14 +238,13 @@ export default class Tab extends Component.extend(ComponentParent) {
    * @readonly
    * @private
    */
-  @computed('childPanes.@each.{id,title,group}')
   get navItems() {
-    let items = A();
+    let items = [];
     this.childPanes.forEach((pane) => {
-      let groupTitle = pane.get('groupTitle');
-      let item = pane.getProperties('id', 'title');
+      let groupTitle = pane.groupTitle;
+      let item = { id: pane.id, title: pane.title };
       if (isPresent(groupTitle)) {
-        let group = items.findBy('groupTitle', groupTitle);
+        let group = items.filter((item) => item.groupTitle === groupTitle)[0];
         if (group) {
           group.children.push(item);
           group.childIds.push(item.id);
@@ -253,8 +252,8 @@ export default class Tab extends Component.extend(ComponentParent) {
           items.push({
             isGroup: true,
             groupTitle,
-            children: A([item]),
-            childIds: A([item.id]),
+            children: [item],
+            childIds: [item.id],
           });
         }
       } else {
@@ -266,10 +265,29 @@ export default class Tab extends Component.extend(ComponentParent) {
 
   @action
   select(id) {
-    let previous = this.isActiveId;
-    if (this.onChange(id, previous) !== false) {
+    let previous = this.activeId;
+    if (this.args.onChange?.(id, previous) !== false) {
       // change active tab when `onChange` does not return false
-      this.set('isActiveId', id);
+      this.selectedId = id;
     }
+  }
+
+  @action
+  registerChild(element) {
+    schedule('actions', this, () => {
+      this.children = [...this.children, element];
+    });
+  }
+
+  @action
+  unregisterChild(element) {
+    schedule('actions', this, () => {
+      this.children = this.children.filter((value) => value !== element);
+    });
+  }
+
+  @action
+  listenToActiveId() {
+    this.selectedId = this.args.activeId;
   }
 }
