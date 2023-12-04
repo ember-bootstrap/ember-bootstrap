@@ -227,7 +227,7 @@ export default class Tab extends Component {
    * @private
    */
   get childPanes() {
-    return this.children.filter((view) => view instanceof TabPane);
+    return this.children.filter((child) => child instanceof TabPane);
   }
 
   /**
