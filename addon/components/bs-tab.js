@@ -244,7 +244,7 @@ export default class Tab extends Component {
       let groupTitle = pane.groupTitle;
       let item = { id: pane.id, title: pane.title };
       if (isPresent(groupTitle)) {
-        let group = items.filter((item) => item.groupTitle === groupTitle)[0];
+        let group = items.find((item) => item.groupTitle === groupTitle);
         if (group) {
           group.children.push(item);
           group.childIds.push(item.id);
