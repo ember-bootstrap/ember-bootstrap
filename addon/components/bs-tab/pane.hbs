@@ -3,6 +3,8 @@
   role="tabpanel"
   ...attributes
   {{create-ref "mainNode"}}
+  {{did-insert this.updateActive @active}}
+  {{did-update this.showHide this.isActive}}
 >
   {{yield}}
 </div>
