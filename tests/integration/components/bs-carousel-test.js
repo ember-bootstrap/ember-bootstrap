@@ -123,8 +123,7 @@ module('Integration | Component | bs-carousel', function (hooks) {
     assert.notOk(getActivatedSlide(2), 'autoPlay has correct behavior');
   });
 
-  // very flakey :-(
-  skip('carousel autoPlay=true must start sliding', async function (assert) {
+  test('carousel autoPlay=true must start sliding', async function (assert) {
     render(
       hbs`<BsCarousel
   @autoPlay={{true}}
@@ -236,8 +235,7 @@ module('Integration | Component | bs-carousel', function (hooks) {
     assert.notOk(getActivatedSlide(2), 'interval has correct behavior');
   });
 
-  // very flakey :-(
-  skip('carousel ltr=false does right-to-left automatic sliding', async function (assert) {
+  test('carousel ltr=false does right-to-left automatic sliding', async function (assert) {
     render(
       hbs`<BsCarousel
   @autoPlay={{true}}
@@ -254,8 +252,7 @@ module('Integration | Component | bs-carousel', function (hooks) {
     this.stopCarousel();
   });
 
-  // very flakey :-(
-  skip('carousel ltr=true does left-to-right automatic sliding', async function (assert) {
+  test('carousel ltr=true does left-to-right automatic sliding', async function (assert) {
     render(
       hbs`<BsCarousel
   @autoPlay={{true}}
