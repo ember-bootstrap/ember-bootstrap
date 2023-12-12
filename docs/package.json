@@ -78,7 +78,7 @@
     "sinon": "17.0.1",
     "stylelint": "16.0.2",
     "stylelint-config-standard-scss": "12.0.0",
-    "stylelint-prettier": "4.1.0",
+    "stylelint-prettier": "5.0.0",
     "tracked-built-ins": "3.3.0",
     "webpack": "5.89.0"
   },
