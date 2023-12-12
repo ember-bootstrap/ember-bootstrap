@@ -76,7 +76,7 @@
     "qunit-dom": "3.0.0",
     "sass": "1.69.5",
     "sinon": "17.0.1",
-    "stylelint": "15.11.0",
+    "stylelint": "16.0.2",
     "stylelint-config-standard-scss": "12.0.0",
     "stylelint-prettier": "4.1.0",
     "tracked-built-ins": "3.3.0",
