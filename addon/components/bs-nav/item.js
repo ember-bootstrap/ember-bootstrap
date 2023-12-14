@@ -1,5 +1,4 @@
-import { tagName } from '@ember-decorators/component';
-import Component from '@ember/component';
+import Component from '@glimmer/component';
 import { action } from '@ember/object';
 import { assert } from '@ember/debug';
 import deprecateSubclassing from 'ember-bootstrap/utils/deprecate-subclassing';
@@ -9,11 +8,9 @@ import deprecateSubclassing from 'ember-bootstrap/utils/deprecate-subclassing';
 
  @class NavItem
  @namespace Components
- @extends Ember.Component
- @uses Mixins.ComponentParent
+ @extends Component
  @public
  */
-@tagName('')
 @deprecateSubclassing
 export default class NavItem extends Component {
   /**
@@ -22,15 +19,14 @@ export default class NavItem extends Component {
    * @event onClick
    * @public
    */
-  onClick() {}
 
   @action
   handleClick() {
-    this.onClick();
+    this.args.onClick?.();
   }
 
-  init() {
-    super.init(...arguments);
+  constructor(owner, args) {
+    super(owner, args);
     let { model, models } = this;
     assert(
       'You cannot pass both `@model` and `@models` to a nav item component!',
