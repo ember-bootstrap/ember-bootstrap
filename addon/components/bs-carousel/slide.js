@@ -4,6 +4,7 @@ import deprecateSubclassing from 'ember-bootstrap/utils/deprecate-subclassing';
 import { ref } from 'ember-ref-bucket';
 import { tracked } from '@glimmer/tracking';
 import { action } from '@ember/object';
+import { registerDestructor } from '@ember/destroyable';
 
 /**
   A visible user-defined slide.
@@ -32,7 +33,7 @@ export default class CarouselSlide extends Component {
    * @private
    */
   @tracked
-  active;
+  active = this.isCurrentSlide && this.args.presentationState === null;
 
   /**
    * @private
@@ -91,13 +92,10 @@ export default class CarouselSlide extends Component {
   constructor(owner, args) {
     super(owner, args);
 
-    this.active = this.isCurrentSlide && args.presentationState === null;
     args.registerChild?.(this);
-  }
-
-  willDestroy() {
-    super.willDestroy();
-    this.args.unregisterChild?.(this);
+    registerDestructor(this, () => {
+      this.args.unregisterChild?.(this);
+    });
   }
 
   /**

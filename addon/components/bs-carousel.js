@@ -212,6 +212,7 @@ export default class Carousel extends Component {
    * @private
    * @type boolean
    */
+  @tracked
   isMouseHovering = this.args.isMouseHovering ?? false;
 
   /**
@@ -467,7 +468,7 @@ export default class Carousel extends Component {
    * @this Carousel
    * @private
    */
-  cycle = task(async () => {
+  cycle = task({ restartable: true }, async () => {
     await this.transitioner.perform();
     await timeout(this.interval);
     this.toAppropriateSlide();
@@ -478,7 +479,7 @@ export default class Carousel extends Component {
    * @this Carousel
    * @private
    */
-  transitioner = task(async () => {
+  transitioner = task({ drop: true }, async () => {
     this.presentationState = 'willTransit';
     await timeout(this.transitionDuration);
     this.presentationState = 'didTransition';
@@ -499,7 +500,7 @@ export default class Carousel extends Component {
    * @this Carousel
    * @private
    */
-  waitIntervalToInitCycle = task(async () => {
+  waitIntervalToInitCycle = task({ restartable: true }, async () => {
     if (this.shouldRunAutomatically === false) {
       return;
     }
@@ -620,15 +621,6 @@ export default class Carousel extends Component {
     } else {
       this.toPrevSlide();
     }
-  }
-
-  /**
-   * @method triggerChildSlidesObserver
-   * @private
-   */
-  @action
-  triggerChildSlidesObserver() {
-    this.childSlides;
   }
 
   @action
