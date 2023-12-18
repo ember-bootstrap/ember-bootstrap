@@ -9,7 +9,7 @@ module('FastBoot | tab', function (hooks) {
 
     assert.dom('ul.nav.nav-tabs').exists();
     assert.dom('ul.nav li').exists({ count: 2 });
-    assert.dom('ul.nav li.active').exists({ count: 1 });
+    assert.dom('ul.nav li a.active').exists({ count: 1 });
     assert.dom('.tab-pane').exists({ count: 2 });
     assert.dom('.tab-pane.active').exists({ count: 1 });
   });

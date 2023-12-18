@@ -3,7 +3,6 @@ import Component from '@ember/component';
 import { tagName } from '@ember-decorators/component';
 import { inject as service } from '@ember/service';
 import { assert, deprecate } from '@ember/debug';
-import ComponentChild from '../mixins/component-child';
 import { dependentKeyCompat } from '@ember/object/compat';
 
 /**
@@ -18,7 +17,7 @@ import { dependentKeyCompat } from '@ember/object/compat';
  @private
 */
 @tagName('')
-class LinkComponent extends Component.extend(ComponentChild) {
+class LinkComponent extends Component {
   @service('router')
   router;
 

@@ -17,10 +17,10 @@ module('Integration | Component | bs-tab', function (hooks) {
   });
 
   function assertActiveTab(assert, tabIndex, active = true) {
-    if (this.element.querySelectorAll('ul.nav.nav-tabs li').length > 0) {
+    if (this.element.querySelectorAll('ul.nav.nav-tabs li a').length > 0) {
       assert.equal(
         this.element
-          .querySelector(`ul.nav.nav-tabs li:nth-child(${tabIndex + 1})`)
+          .querySelector(`ul.nav.nav-tabs li:nth-child(${tabIndex + 1}) a`)
           .classList.contains('active'),
         active,
         active ? 'tab is active' : 'tab is inactive',

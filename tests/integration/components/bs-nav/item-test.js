@@ -47,33 +47,6 @@ module('Integration | Component | bs-nav/item', function (hooks) {
     assert.dom('li').doesNotHaveAttribute('role');
   });
 
-  test('can be disabled', async function (assert) {
-    await render(hbs`<BsNav as |nav|>
-  <nav.item @disabled={{true}}>
-    template block text
-  </nav.item>
-</BsNav>`);
-    assert.dom('li').hasClass('disabled', 'has disabled class');
-  });
-
-  test('can be active', async function (assert) {
-    await render(hbs`<BsNav as |nav|>
-  <nav.item @active={{true}}>
-    template block text
-  </nav.item>
-</BsNav>`);
-    assert.dom('li').hasClass('active', 'has active class');
-  });
-
-  test('disabled link makes nav item disabled', async function (assert) {
-    await render(hbs`<BsNav as |nav|>
-  <nav.item>
-    <nav.link-to @route='application' @disabled={{true}}>Link</nav.link-to>
-  </nav.item>
-</BsNav>`);
-    assert.dom('li').hasClass('disabled', 'has disabled class');
-  });
-
   test('clicking item calls onClick action', async function (assert) {
     let action = sinon.spy();
     this.actions.click = action;
