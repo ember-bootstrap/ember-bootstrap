@@ -213,7 +213,7 @@ export default class Carousel extends Component {
    * @type boolean
    */
   @tracked
-  isMouseHovering = this.args.isMouseHovering ?? false;
+  isMouseHovering = false;
 
   /**
    * The class name to append to the next control link element.
