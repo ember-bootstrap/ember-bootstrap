@@ -2,6 +2,7 @@
   class="carousel-item {{if this.active "active"}} {{if this.left "carousel-item-left"}} {{if this.next "carousel-item-next"}} {{if this.prev "carousel-item-prev"}} {{if this.right "carousel-item-right"}}"
   ...attributes
   {{create-ref "mainNode"}}
+  {{did-update this.presentationStateObserver @presentationState @currentSlide}}
 >
   {{yield}}
 </div>

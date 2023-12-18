@@ -1,11 +1,13 @@
 <div
-  {{!-- template-lint-disable no-positive-tabindex --}}{{!-- @todo --}}
+  {{!-- template-lint-disable no-positive-tabindex --}}
   tabindex={{this.tabindex}}
   class="carousel slide {{if this.carouselFade "carousel-fade"}}"
   ...attributes
   {{on "keydown" this.handleKeyDown}}
   {{on "mouseenter" this.handleMouseEnter}}
   {{on "mouseleave" this.handleMouseLeave}}
+  {{did-update this.childSlidesObserver this.childSlides this.autoPlay}}
+  {{did-update this.indexObserver this.index}}
 >
   {{#if this.showIndicators}}
     <ol class="carousel-indicators">
@@ -24,6 +26,8 @@
           followingSlide=this.followingSlide
           orderClassName=this.orderClassName
           presentationState=this.presentationState
+          registerChild=this.registerChild
+          unregisterChild=this.unregisterChild
         )
       )
     }}
