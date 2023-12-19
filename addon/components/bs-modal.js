@@ -1,4 +1,4 @@
-import { action, computed } from '@ember/object';
+import { action } from '@ember/object';
 import { assert } from '@ember/debug';
 import Component from '@glimmer/component';
 import { next, schedule } from '@ember/runloop';
@@ -9,7 +9,7 @@ import usesTransition from 'ember-bootstrap/utils/decorators/uses-transition';
 import isFastBoot from 'ember-bootstrap/utils/is-fastboot';
 import deprecateSubclassing from 'ember-bootstrap/utils/deprecate-subclassing';
 import arg from '../utils/decorators/arg';
-import { tracked } from '@glimmer/tracking';
+import { cached, tracked } from '@glimmer/tracking';
 import { ref } from 'ember-ref-bucket';
 
 function nextRunloop() {
@@ -639,7 +639,7 @@ export default class Modal extends Component {
    * @readonly
    * @private
    */
-  @computed('modalElement')
+  @cached
   get scrollbarWidth() {
     let scrollDiv = document.createElement('div');
     scrollDiv.className = 'modal-scrollbar-measure';
