@@ -96,7 +96,7 @@ import deprecateSubclassing from 'ember-bootstrap/utils/deprecate-subclassing';
 
   @class Navbar
   @namespace Components
-  @extends Ember.Component
+  @extends Component
   @public
 */
 @deprecateSubclassing
