@@ -12,6 +12,41 @@
 
 
 
+
+## v6.1.0 (2023-12-20)
+
+This is primarily a maintenance release modernizing the code. It refactors remaining components to `@glimmer/component`,
+drops remaining observers, and refactors away from remaining computed properties usage. Thanks a lot to [@SanderKnauff](https://github.com/SanderKnauff)
+for doing most of the hard work.
+
+Additionally it includes a bug fix for using a dropdown within a navbar on small screen sizes.
+
+#### Features
+* [#2038](https://github.com/ember-bootstrap/ember-bootstrap/pull/2038) Refactor bs-carousel and related components to Glimmer components ([@SanderKnauff](https://github.com/SanderKnauff))
+* [#2034](https://github.com/ember-bootstrap/ember-bootstrap/pull/2034) Refactor bs-tab and related components to Glimmer component ([@SanderKnauff](https://github.com/SanderKnauff))
+* [#2031](https://github.com/ember-bootstrap/ember-bootstrap/pull/2031) Refactor bs-dropdown and related components to Glimmer component ([@SanderKnauff](https://github.com/SanderKnauff))
+* [#2030](https://github.com/ember-bootstrap/ember-bootstrap/pull/2030) Refactor bs-progress and bs-progress/bar to Glimmer components ([@SanderKnauff](https://github.com/SanderKnauff))
+* [#2025](https://github.com/ember-bootstrap/ember-bootstrap/pull/2025) Refactor BsNavbar, BsNavbar::Content and BSNavbar::Toggle to Glimmer components ([@SanderKnauff](https://github.com/SanderKnauff))
+* [#2020](https://github.com/ember-bootstrap/ember-bootstrap/pull/2020) Refactor BsNav to Glimmer component ([@SanderKnauff](https://github.com/SanderKnauff))
+
+#### Bug Fixes
+* [#2040](https://github.com/ember-bootstrap/ember-bootstrap/pull/2040) Drop .active and .disabled CSS classes from .nav-item only expected for BS3 ([@SanderKnauff](https://github.com/SanderKnauff))
+* [#1946](https://github.com/ember-bootstrap/ember-bootstrap/pull/1946) bs-dropdown dynamic positioning should not be used when in a navbar ([@craigteegarden](https://github.com/craigteegarden))
+* [#2027](https://github.com/ember-bootstrap/ember-bootstrap/pull/2027) Refactor bs-alert to remove @localCopy and avoid mutation after consumption error in Ember canary ([@SanderKnauff](https://github.com/SanderKnauff))
+
+#### Internal
+* [#2041](https://github.com/ember-bootstrap/ember-bootstrap/pull/2041) Run tests on Safari in CI (again) ([@SanderKnauff](https://github.com/SanderKnauff))
+* [#2047](https://github.com/ember-bootstrap/ember-bootstrap/pull/2047) remove unused mixins for component parent <-> child relationship ([@jelhan](https://github.com/jelhan))
+* [#2044](https://github.com/ember-bootstrap/ember-bootstrap/pull/2044) remove unused computed property utils ([@jelhan](https://github.com/jelhan))
+* [#2042](https://github.com/ember-bootstrap/ember-bootstrap/pull/2042) refactor from computed property to glimmer tracking caching ([@jelhan](https://github.com/jelhan))
+* [#2028](https://github.com/ember-bootstrap/ember-bootstrap/pull/2028) Migrate project to pnpm ([@SanderKnauff](https://github.com/SanderKnauff))
+
+#### Committers: 3
+- Craig Teegarden ([@craigteegarden](https://github.com/craigteegarden))
+- Jeldrik Hanschke ([@jelhan](https://github.com/jelhan))
+- Sander Knauff ([@SanderKnauff](https://github.com/SanderKnauff))
+
+
 ## v6.0.1 (2023-11-12)
 
 #### Documentation
