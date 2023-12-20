@@ -224,8 +224,8 @@ devDependencies:
     specifier: 16.4.0
     version: 16.4.0(eslint@8.56.0)
   eslint-plugin-prettier:
-    specifier: 5.0.1
-    version: 5.0.1(eslint-config-prettier@9.1.0)(eslint@8.56.0)(prettier@3.0.3)
+    specifier: 5.1.0
+    version: 5.1.0(eslint-config-prettier@9.1.0)(eslint@8.56.0)(prettier@3.0.3)
   eslint-plugin-qunit:
     specifier: 8.0.1
     version: 8.0.1(eslint@8.56.0)
@@ -7403,8 +7403,8 @@ packages:
       semver: 7.5.4
     dev: true
 
-  /eslint-plugin-prettier@5.0.1(eslint-config-prettier@9.1.0)(eslint@8.56.0)(prettier@3.0.3):
-    resolution: {integrity: sha512-m3u5RnR56asrwV/lDC4GHorlW75DsFfmUcjfCYylTUs85dBRnB7VM6xG8eCMJdeDRnppzmxZVf1GEPJvl1JmNg==}
+  /eslint-plugin-prettier@5.1.0(eslint-config-prettier@9.1.0)(eslint@8.56.0)(prettier@3.0.3):
+    resolution: {integrity: sha512-hQc+2zbnMeXcIkg+pKZtVa+3Yqx4WY7SMkn1PLZ4VbBEU7jJIpVn9347P8BBhTbz6ne85aXvQf30kvexcqBeWw==}
     engines: {node: ^14.18.0 || >=16.0.0}
     peerDependencies:
       '@types/eslint': '>=8.0.0'
@@ -12725,6 +12725,7 @@ packages:
 
   /psl@1.9.0:
     resolution: {integrity: sha512-E/ZsdU4HLs/68gYzgGTkMicWTLPdAftJLfJFlLUAAKZGkStNU72sZjT66SnMDVOfOWY/YAoiD7Jxa9iHvngcag==}
+    requiresBuild: true
     dev: true
 
   /pump@2.0.1:
@@ -12779,6 +12780,7 @@ packages:
 
   /querystringify@2.2.0:
     resolution: {integrity: sha512-FIqgj2EUvTa7R50u0rGsyTftzjYmv/a3hO345bZNrqabNqjtgiDMgmo4mkUjd+nzU5oF3dClKqFIPUKybUyqoQ==}
+    requiresBuild: true
     dev: true
 
   /queue-microtask@1.2.3:
@@ -15143,6 +15145,7 @@ packages:
   /universalify@0.2.0:
     resolution: {integrity: sha512-CJ1QgKmNg3CwvAv/kOFmtnEN05f0D/cn9QntgNOQlQF9dgvVTHj3t+8JPdjqawCHk7V/KA+fbUqzZ9XWhcqPUg==}
     engines: {node: '>= 4.0.0'}
+    requiresBuild: true
     dev: true
 
   /universalify@2.0.1:
@@ -15231,6 +15234,7 @@ packages:
 
   /url-parse@1.5.10:
     resolution: {integrity: sha512-WypcfiRhfeUP9vvF0j6rw0J3hrWrw6iZv3+22h6iRMJ/8z1Tj6XfLP4DsUix5MhMPnXpiHDoKyoZ/bdCkwBCiQ==}
+    requiresBuild: true
     dependencies:
       querystringify: 2.2.0
       requires-port: 1.0.0
