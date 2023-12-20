@@ -1,6 +1,5 @@
 import { action } from '@ember/object';
 import Component from '@glimmer/component';
-import deprecateSubclassing from 'ember-bootstrap/utils/deprecate-subclassing';
 
 /**
  Component for an accordion item title.
@@ -12,7 +11,6 @@ import deprecateSubclassing from 'ember-bootstrap/utils/deprecate-subclassing';
  @extends Glimmer.Component
  @public
  */
-@deprecateSubclassing
 export default class AccordionItemTitle extends Component {
   /**
    * @property collapsed

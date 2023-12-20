@@ -13,8 +13,6 @@ import BsNavComponent from 'ember-bootstrap/components/bs-nav';
  * @public
  */
 export default class NavbarNav extends BsNavComponent {
-  '__ember-bootstrap_subclass' = true;
-
   get justified() {
     return this.args.justified ?? false;
   }

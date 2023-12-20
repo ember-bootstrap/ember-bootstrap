@@ -1,6 +1,5 @@
 import ContextualHelp from './bs-contextual-help';
 import arg from '../utils/decorators/arg';
-import deprecateSubclassing from 'ember-bootstrap/utils/deprecate-subclassing';
 
 /**
   Component that implements Bootstrap [popovers](http://getbootstrap.com/javascript/#popovers).
@@ -62,7 +61,6 @@ import deprecateSubclassing from 'ember-bootstrap/utils/deprecate-subclassing';
   @extends Components.ContextualHelp
   @public
 */
-@deprecateSubclassing
 export default class Popover extends ContextualHelp {
   /**
    * @property placement

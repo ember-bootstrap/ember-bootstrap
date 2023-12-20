@@ -1,7 +1,6 @@
 import Component from '@glimmer/component';
 import { action } from '@ember/object';
 import { assert } from '@ember/debug';
-import deprecateSubclassing from 'ember-bootstrap/utils/deprecate-subclassing';
 
 /**
  Component for each item within a [Components.Nav](Components.Nav.html) component. Have a look there for examples.
@@ -11,7 +10,6 @@ import deprecateSubclassing from 'ember-bootstrap/utils/deprecate-subclassing';
  @extends Component
  @public
  */
-@deprecateSubclassing
 export default class NavItem extends Component {
   /**
    * Called when clicking the nav item

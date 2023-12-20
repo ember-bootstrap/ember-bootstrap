@@ -2,7 +2,6 @@ import { action } from '@ember/object';
 import Component from '@glimmer/component';
 import { isPresent } from '@ember/utils';
 import TabPane from 'ember-bootstrap/components/bs-tab/pane';
-import deprecateSubclassing from 'ember-bootstrap/utils/deprecate-subclassing';
 import { tracked } from '@glimmer/tracking';
 import { schedule } from '@ember/runloop';
 
@@ -109,7 +108,6 @@ import { schedule } from '@ember/runloop';
   @extends Component
   @public
 */
-@deprecateSubclassing
 export default class Tab extends Component {
   /**
    * Type of nav, either "pills" or "tabs"

@@ -3,7 +3,6 @@ import Component from '@glimmer/component';
 import { tracked } from '@glimmer/tracking';
 import { later } from '@ember/runloop';
 import usesTransition from 'ember-bootstrap/utils/decorators/uses-transition';
-import deprecateSubclassing from 'ember-bootstrap/utils/deprecate-subclassing';
 import arg from 'ember-bootstrap/utils/decorators/arg';
 
 /**
@@ -47,7 +46,6 @@ import arg from 'ember-bootstrap/utils/decorators/arg';
   @extends Glimmer.Component
   @public
 */
-@deprecateSubclassing
 export default class Alert extends Component {
   /**
    * A dismissible alert will have a close button in the upper right corner, that the user can click to dismiss

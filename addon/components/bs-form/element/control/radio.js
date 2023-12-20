@@ -1,5 +1,4 @@
 import Control from '../control';
-import deprecateSubclassing from 'ember-bootstrap/utils/deprecate-subclassing';
 
 /**
 
@@ -8,7 +7,6 @@ import deprecateSubclassing from 'ember-bootstrap/utils/deprecate-subclassing';
  @extends Components.FormElementControl
  @private
  */
-@deprecateSubclassing
 export default class FormElementControlRadio extends Control {
   /**
    * @property inline

@@ -1,6 +1,5 @@
 import Component from '@glimmer/component';
 import { next } from '@ember/runloop';
-import deprecateSubclassing from 'ember-bootstrap/utils/deprecate-subclassing';
 import { ref } from 'ember-ref-bucket';
 import { tracked } from '@glimmer/tracking';
 import { action } from '@ember/object';
@@ -16,7 +15,6 @@ import { registerDestructor } from '@ember/destroyable';
   @extends Component
   @public
  */
-@deprecateSubclassing
 export default class CarouselSlide extends Component {
   /**
    * @property _element

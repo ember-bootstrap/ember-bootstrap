@@ -1,5 +1,4 @@
 import Component from '@glimmer/component';
-import deprecateSubclassing from 'ember-bootstrap/utils/deprecate-subclassing';
 import { on } from '@ember/modifier';
 
 /**
@@ -16,7 +15,6 @@ import { on } from '@ember/modifier';
  * @extends Ember.Component
  * @public
  */
-@deprecateSubclassing
 export default class NavbarToggle extends Component {
   on = on;
 }

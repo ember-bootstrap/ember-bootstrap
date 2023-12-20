@@ -2,7 +2,6 @@ import { action } from '@ember/object';
 import Component from '@glimmer/component';
 import { next } from '@ember/runloop';
 import { getDestinationElement } from 'ember-bootstrap/utils/dom';
-import deprecateSubclassing from 'ember-bootstrap/utils/deprecate-subclassing';
 import { ref } from 'ember-ref-bucket';
 import { tracked } from '@glimmer/tracking';
 
@@ -16,7 +15,6 @@ import { tracked } from '@glimmer/tracking';
  @extends Component
  @public
  */
-@deprecateSubclassing
 export default class DropdownMenu extends Component {
   /**
    * @property _element

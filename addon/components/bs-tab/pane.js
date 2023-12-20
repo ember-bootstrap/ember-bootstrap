@@ -3,7 +3,6 @@ import { scheduleOnce } from '@ember/runloop';
 import transitionEnd from 'ember-bootstrap/utils/transition-end';
 import usesTransition from 'ember-bootstrap/utils/decorators/uses-transition';
 import { guidFor } from '@ember/object/internals';
-import deprecateSubclassing from 'ember-bootstrap/utils/deprecate-subclassing';
 import { ref } from 'ember-ref-bucket';
 import { action } from '@ember/object';
 import { tracked } from '@glimmer/tracking';
@@ -17,7 +16,6 @@ import { tracked } from '@glimmer/tracking';
  @extends Component
  @public
  */
-@deprecateSubclassing
 export default class TabPane extends Component {
   /**
    * @property id

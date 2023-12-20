@@ -12,8 +12,6 @@ import { getOwnConfig, macroCondition } from '@embroider/macros';
  @private
  */
 export default class ButtonGroupButton extends Button {
-  '__ember-bootstrap_subclass' = true;
-
   formId = guidFor(this);
 
   /**

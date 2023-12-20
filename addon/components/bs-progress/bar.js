@@ -1,5 +1,4 @@
 import Component from '@glimmer/component';
-import deprecateSubclassing from 'ember-bootstrap/utils/deprecate-subclassing';
 
 /**
  Component for a single progress bar, see [Components.Progress](Components.Progress.html) for more examples.
@@ -9,7 +8,6 @@ import deprecateSubclassing from 'ember-bootstrap/utils/deprecate-subclassing';
  @extends Ember.Component
  @public
  */
-@deprecateSubclassing
 export default class ProgressBar extends Component {
   /**
    * The lower limit of the value range

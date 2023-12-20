@@ -5,7 +5,6 @@ import { isPresent } from '@ember/utils';
 import { next } from '@ember/runloop';
 import RSVP from 'rsvp';
 import { getOwnConfig, macroCondition } from '@embroider/macros';
-import deprecateSubclassing from 'ember-bootstrap/utils/deprecate-subclassing';
 import arg from '../utils/decorators/arg';
 import { tracked } from '@glimmer/tracking';
 import { cached } from 'tracked-toolbox';
@@ -117,7 +116,6 @@ import { ref } from 'ember-ref-bucket';
   @extends Ember.Component
   @public
 */
-@deprecateSubclassing
 export default class Form extends Component {
   /**
    * @property _element
