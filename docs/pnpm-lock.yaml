@@ -43,7 +43,7 @@ devDependencies:
     version: 2.1.0
   ember-bootstrap-power-select:
     specifier: 5.0.0
-    version: 5.0.0(ember-bootstrap@6.0.1)(ember-power-select@7.2.0)(ember-source@5.5.0)
+    version: 5.0.0(ember-bootstrap@6.1.0)(ember-power-select@7.2.0)(ember-source@5.5.0)
   ember-cli:
     specifier: 5.5.0
     version: 5.5.0
@@ -129,8 +129,8 @@ devDependencies:
     specifier: 11.12.0
     version: 11.12.0(eslint@8.56.0)
   eslint-plugin-n:
-    specifier: 16.4.0
-    version: 16.4.0(eslint@8.56.0)
+    specifier: 16.5.0
+    version: 16.5.0(eslint@8.56.0)
   eslint-plugin-prettier:
     specifier: 5.1.0
     version: 5.1.0(eslint-config-prettier@9.1.0)(eslint@8.56.0)(prettier@3.0.3)
@@ -5133,7 +5133,7 @@ packages:
       - supports-color
     dev: true
 
-  /ember-bootstrap-power-select@5.0.0(ember-bootstrap@6.0.1)(ember-power-select@7.2.0)(ember-source@5.5.0):
+  /ember-bootstrap-power-select@5.0.0(ember-bootstrap@6.1.0)(ember-power-select@7.2.0)(ember-source@5.5.0):
     resolution: {integrity: sha512-GJVzwN//fG1D/vuvyL7pxA3qaNtUc9q2Uj9JhlE/KD0KxJlap6eTKvuwibyB80JUJqENzoTffnEcinM+6avU3Q==}
     engines: {node: 14.* || 16.* || >= 18}
     peerDependencies:
@@ -5142,7 +5142,7 @@ packages:
       ember-source: '>3.28'
     dependencies:
       chalk: 5.3.0
-      ember-bootstrap: 6.0.1(@babel/core@7.23.6)(@ember/string@3.1.1)(@glimmer/component@1.1.2)(@glimmer/tracking@1.1.2)(ember-source@5.5.0)(webpack@5.89.0)
+      ember-bootstrap: 6.1.0(@babel/core@7.23.6)(@ember/string@3.1.1)(@glimmer/component@1.1.2)(@glimmer/tracking@1.1.2)(ember-source@5.5.0)(webpack@5.89.0)
       ember-cli-babel: 7.26.11
       ember-cli-build-config-editor: 0.5.1
       ember-cli-htmlbars: 6.3.0
@@ -5154,8 +5154,8 @@ packages:
       - supports-color
     dev: true
 
-  /ember-bootstrap@6.0.1(@babel/core@7.23.6)(@ember/string@3.1.1)(@glimmer/component@1.1.2)(@glimmer/tracking@1.1.2)(ember-source@5.5.0)(webpack@5.89.0):
-    resolution: {integrity: sha512-jBRXClBd7Dm6Q6OXuTyTGM+QnZoM1CwQ3VPQha/MGoskDQYIF9dTDo81+CXd+z8id8NaknYG0uqfWOwci0g9hw==}
+  /ember-bootstrap@6.1.0(@babel/core@7.23.6)(@ember/string@3.1.1)(@glimmer/component@1.1.2)(@glimmer/tracking@1.1.2)(ember-source@5.5.0)(webpack@5.89.0):
+    resolution: {integrity: sha512-c15ynEWmBx3LrSK4uHdN2+8J+TxhvGz9bPWPe2izBlM73GpjOAXf0qvO7X435YK9TGSECpUFEm55kv8IR4+3Mg==}
     engines: {node: 18.* || >= 20}
     peerDependencies:
       '@glimmer/component': ^1.0.4
@@ -6691,8 +6691,8 @@ packages:
       eslint-compat-utils: 0.1.2(eslint@8.56.0)
     dev: true
 
-  /eslint-plugin-n@16.4.0(eslint@8.56.0):
-    resolution: {integrity: sha512-IkqJjGoWYGskVaJA7WQuN8PINIxc0N/Pk/jLeYT4ees6Fo5lAhpwGsYek6gS9tCUxgDC4zJ+OwY2bY/6/9OMKQ==}
+  /eslint-plugin-n@16.5.0(eslint@8.56.0):
+    resolution: {integrity: sha512-Hw02Bj1QrZIlKyj471Tb1jSReTl4ghIMHGuBGiMVmw+s0jOPbI4CBuYpGbZr+tdQ+VAvSK6FDSta3J4ib/SKHQ==}
     engines: {node: '>=16.0.0'}
     peerDependencies:
       eslint: '>=7.0.0'
