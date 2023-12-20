@@ -23,6 +23,17 @@ jobs:
       - name: Test
         run: pnpm test:ember
 
+  test-safari:
+    name: Test Safari
+    runs-on: macos-latest
+    steps:
+      - name: Checkout code
+        uses: wyvox/action@v1
+      - name: Lint
+        run: pnpm lint
+      - name: Test
+        run: pnpm test:ember --config-file testem.safari.js
+
   test-no-lock:
     name: Floating Dependencies
     runs-on: ubuntu-latest
@@ -98,30 +109,3 @@ jobs:
         run: pnpm run docs:build
       # TODO: Perform some basic steps that the build contains API docs
       #       and works as expected.
-
-#  test-browserstack:
-#    name: Browserstack Tests
-#    runs-on: ubuntu-latest
-#    needs:
-#      - test
-#    env:
-#      BROWSERSTACK_USERNAME: simonihmig1
-#      BROWSERSTACK_ACCESS_KEY: ${{ secrets.BROWSERSTACK_ACCESS_KEY }}
-#    steps:
-#      - name: Checkout code
-#        uses: actions/checkout@v2
-#      - name: Setup node.js
-#        uses: actions/setup-node@v1
-#        with:
-#          node-version: 12
-#      - name: Install dependencies
-#        uses: bahmutov/npm-install@v1
-#      - name: Connect to Browserstack
-#        run: yarn ember browserstack:connect
-#      - name: Test
-#        run: yarn ember test --filter !FastBoot --config-file testem.browserstack.js
-#        env:
-#          BABELPOLYFILL: true
-#      - name: Disconnect from Browserstack
-#        if: always()
-#        run: yarn ember browserstack:disconnect
