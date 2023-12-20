@@ -26,7 +26,7 @@ const componentDependencies = {
   'bs-modal-simple': ['bs-modal'],
   'bs-modal': ['bs-button'],
   'bs-nav': ['bs-link-to', 'bs-dropdown'],
-  'bs-navbar': ['bs-nav', 'bs-button', 'bs-link-to'],
+  'bs-navbar': ['bs-nav', 'bs-button', 'bs-link-to', 'bs-collapse'],
   'bs-popover': ['bs-contextual-help'],
   'bs-tab': ['bs-nav'],
   'bs-tooltip': ['bs-contextual-help'],
