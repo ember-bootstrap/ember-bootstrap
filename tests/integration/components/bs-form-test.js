@@ -34,7 +34,7 @@ import sinon from 'sinon';
 import Form from 'ember-bootstrap/components/bs-form';
 import FormElement from 'ember-bootstrap/components/bs-form/element';
 import { ensureSafeComponent } from '@embroider/util';
-import { setupUnhandledRejectionListener } from '../../helpers/setup-unhandled-exception-listener';
+import { setupAssertionsForErrorsNotHandledByEmberOnError } from '../../helpers/assert-errors';
 
 const nextRunloop = function () {
   return new Promise((resolve) => {
@@ -76,7 +76,7 @@ class ValidatingFormElement extends FormElement {
 module('Integration | Component | bs-form', function (hooks) {
   setupRenderingTest(hooks);
   setupNoDeprecations(hooks);
-  const expectException = setupUnhandledRejectionListener(hooks);
+  setupAssertionsForErrorsNotHandledByEmberOnError(hooks);
 
   hooks.beforeEach(function () {
     this.actions = {};
@@ -1153,8 +1153,6 @@ module('Integration | Component | bs-form', function (hooks) {
     // tests fail by default on unhandled errors
     let expectedError = new Error();
 
-    expectException(expectedError);
-
     this.actions.submit = sinon.fake.rejects(expectedError);
     await render(hbs`<BsForm @onSubmit={{action 'submit'}} as |form|>
   <button
@@ -1163,8 +1161,11 @@ module('Integration | Component | bs-form', function (hooks) {
   >submit</button>
 </BsForm>`);
 
-    await triggerEvent('form', 'submit'),
-      assert.dom('form button').hasClass('is-rejected');
+    await assert.rejectsErrorNotHandledByEmberOnError(async () => {
+      await triggerEvent('form', 'submit');
+    }, expectedError);
+
+    assert.dom('form button').hasClass('is-rejected');
   });
 
   test('Yielded #isRejected is true if validation fails', async function (assert) {
@@ -1183,7 +1184,6 @@ module('Integration | Component | bs-form', function (hooks) {
   test('A change to a form elements resets yielded #isRejected', async function (assert) {
     // tests fail by default on unhandled errors
     let expectedError = new Error();
-    expectException(expectedError);
 
     this.model = {};
     this.actions.submit = sinon.fake.rejects(expectedError);
@@ -1195,7 +1195,10 @@ module('Integration | Component | bs-form', function (hooks) {
   >submit</button>
 </BsForm>`);
 
-    await triggerEvent('form', 'submit');
+    await assert.rejectsErrorNotHandledByEmberOnError(async () => {
+      await triggerEvent('form', 'submit');
+    }, expectedError);
+
     assert.dom('form button').hasClass('is-rejected', 'assumption');
 
     await fillIn('input', 'bar');
@@ -1475,9 +1478,11 @@ module('Integration | Component | bs-form', function (hooks) {
           assert.dom('button[type="submit"]').hasAttribute('disabled', '');
 
           const expectedError = new Error();
-          expectException(expectedError);
-          deferredSubmitAction.reject(expectedError);
-          await settled();
+          await assert.rejectsErrorNotHandledByEmberOnError(async () => {
+            deferredSubmitAction.reject(expectedError);
+            await settled();
+          }, expectedError);
+
           assert.dom('button[type="submit"]').hasText('isRejected isSettled');
           assert.dom('button[type="submit"]').hasNoAttribute('disabled');
         });
