@@ -6,8 +6,7 @@ import { next } from '@ember/runloop';
 import RSVP from 'rsvp';
 import { getOwnConfig, macroCondition } from '@embroider/macros';
 import arg from '../utils/decorators/arg';
-import { tracked } from '@glimmer/tracking';
-import { cached } from 'tracked-toolbox';
+import { cached, tracked } from '@glimmer/tracking';
 import { ref } from 'ember-ref-bucket';
 
 /**
