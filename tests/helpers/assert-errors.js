@@ -16,9 +16,16 @@ export function setupAssertionsForErrorsNotHandledByEmberOnError(hooks) {
       callback,
       expectedError,
     ) {
+      const unhandledRejectionListener = (event) => {
+        if (event.reason === expectedError) {
+          event.preventDefault();
+        }
+      };
+      window.addEventListener('unhandledrejection', unhandledRejectionListener);
+
       // https://github.com/qunitjs/qunit/issues/1419#issuecomment-561739486
-      const ORIG_QUNIT_UNHANDLED_REJECTION = QUnit.onUnhandledRejection;
-      QUnit.onUnhandledRejection = (reason) => {
+      const ORIG_QUNIT_UNHANDLED_REJECTION = QUnit.onUncaughtException;
+      QUnit.onUncaughtException = (reason) => {
         if (reason === expectedError) {
           assert.step('error is thrown');
           assert.equal(reason, expectedError);
@@ -32,7 +39,11 @@ export function setupAssertionsForErrorsNotHandledByEmberOnError(hooks) {
       await callback();
 
       assert.verifySteps(['error is thrown']);
-      QUnit.onUnhandledRejection = ORIG_QUNIT_UNHANDLED_REJECTION;
+      window.removeEventListener(
+        'unhandledrejection',
+        unhandledRejectionListener,
+      );
+      QUnit.onUncaughtException = ORIG_QUNIT_UNHANDLED_REJECTION;
     };
   });
 }

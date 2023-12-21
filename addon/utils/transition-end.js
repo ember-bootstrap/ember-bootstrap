@@ -1,6 +1,5 @@
 import Ember from 'ember';
 import { cancel, later } from '@ember/runloop';
-import { Promise, reject } from 'rsvp';
 
 let _skipTransition;
 
@@ -16,7 +15,7 @@ function _isSkipped() {
 
 export default function waitForTransitionEnd(node, duration = 0) {
   if (!node) {
-    return reject();
+    return Promise.reject();
   }
   let backup;
 
