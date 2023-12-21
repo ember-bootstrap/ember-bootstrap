@@ -44,9 +44,6 @@ dependencies:
   ember-concurrency:
     specifier: ^2.1.2 || ^3.0.0
     version: 3.1.1(@babel/core@7.23.6)(ember-source@5.5.0)
-  ember-decorators:
-    specifier: ^6.1.0
-    version: 6.1.1
   ember-element-helper:
     specifier: ^0.6.0 || ^0.7.0 || ^0.8.0
     version: 0.8.5(ember-source@5.5.0)
@@ -1553,35 +1550,6 @@ packages:
 
   /@ember-data/rfc395-data@0.0.4:
     resolution: {integrity: sha512-tGRdvgC9/QMQSuSuJV45xoyhI0Pzjm7A9o/MVVA3HakXIImJbbzx/k/6dO9CUEQXIyS2y0fW6C1XaYOG7rY0FQ==}
-
-  /@ember-decorators/component@6.1.1:
-    resolution: {integrity: sha512-Cj8tY/c0MC/rsipqsiWLh3YVN72DK92edPYamD/HzvftwzC6oDwawWk8RmStiBnG9PG/vntAt41l3S7HSSA+1Q==}
-    engines: {node: '>= 8.*'}
-    dependencies:
-      '@ember-decorators/utils': 6.1.1
-      ember-cli-babel: 7.26.11
-    transitivePeerDependencies:
-      - supports-color
-    dev: false
-
-  /@ember-decorators/object@6.1.1:
-    resolution: {integrity: sha512-cb4CNR9sRoA31J3FCOFLDuR9ztM4wO9w1WlS4JeNRS7Z69SlB/XSXB/vplA3i9OOaXEy/zKWbu5ndZrHz0gvLw==}
-    engines: {node: '>= 8.*'}
-    dependencies:
-      '@ember-decorators/utils': 6.1.1
-      ember-cli-babel: 7.26.11
-    transitivePeerDependencies:
-      - supports-color
-    dev: false
-
-  /@ember-decorators/utils@6.1.1:
-    resolution: {integrity: sha512-0KqnoeoLKb6AyoSU65TRF5T85wmS4uDn06oARddwNPxxf/lt5jQlh41uX3W7V/fWL9tPu8x1L1Vvpc80MN1+YA==}
-    engines: {node: '>= 8.*'}
-    dependencies:
-      ember-cli-babel: 7.26.11
-    transitivePeerDependencies:
-      - supports-color
-    dev: false
 
   /@ember/edition-utils@1.2.0:
     resolution: {integrity: sha512-VmVq/8saCaPdesQmftPqbFtxJWrzxNGSQ+e8x8LLe3Hjm36pJ04Q8LeORGZkAeOhldoUX9seLGmSaHeXkIqoog==}
@@ -6549,17 +6517,6 @@ packages:
       ember-source: 5.5.0(@babel/core@7.23.6)(@glimmer/component@1.1.2)(rsvp@4.8.5)(webpack@5.89.0)
     transitivePeerDependencies:
       - '@babel/core'
-      - supports-color
-    dev: false
-
-  /ember-decorators@6.1.1:
-    resolution: {integrity: sha512-63vZPntPn1aqMyeNRLoYjJD+8A8obd+c2iZkJflswpDRNVIsp2m7aQdSCtPt4G0U/TEq2251g+N10maHX3rnJQ==}
-    engines: {node: '>= 8.*'}
-    dependencies:
-      '@ember-decorators/component': 6.1.1
-      '@ember-decorators/object': 6.1.1
-      ember-cli-babel: 7.26.11
-    transitivePeerDependencies:
       - supports-color
     dev: false
 
