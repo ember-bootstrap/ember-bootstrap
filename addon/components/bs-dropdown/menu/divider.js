@@ -1,5 +1,4 @@
-import Component from '@glimmer/component';
-import deprecateSubclassing from 'ember-bootstrap/utils/deprecate-subclassing';
+import templateOnly from '@ember/component/template-only';
 
 /**
  Component for a dropdown menu divider.
@@ -11,5 +10,4 @@ import deprecateSubclassing from 'ember-bootstrap/utils/deprecate-subclassing';
  @extends Component
  @public
  */
-@deprecateSubclassing
-export default class DropdownMenuDivider extends Component {}
+export default templateOnly();

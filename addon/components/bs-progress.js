@@ -1,5 +1,4 @@
-import Component from '@glimmer/component';
-import deprecateSubclassing from 'ember-bootstrap/utils/deprecate-subclassing';
+import templateOnly from '@ember/component/template-only';
 
 /**
   Component to display a Bootstrap progress bar, see http://getbootstrap.com/components/#progress.
@@ -38,11 +37,10 @@ import deprecateSubclassing from 'ember-bootstrap/utils/deprecate-subclassing';
   @extends Ember.Component
   @public
 */
-@deprecateSubclassing
-export default class Progress extends Component {
-  /**
-   * @property progressBarComponent
-   * @type {String}
-   * @private
-   */
-}
+export default templateOnly();
+
+/**
+ * @property progressBarComponent
+ * @type {String}
+ * @private
+ */

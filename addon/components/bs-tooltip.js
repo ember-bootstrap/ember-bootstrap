@@ -1,5 +1,4 @@
 import ContextualHelp from './bs-contextual-help';
-import deprecateSubclassing from 'ember-bootstrap/utils/deprecate-subclassing';
 
 /**
   Component that implements Bootstrap [tooltips](http://getbootstrap.com/javascript/#tooltips).
@@ -71,7 +70,6 @@ import deprecateSubclassing from 'ember-bootstrap/utils/deprecate-subclassing';
   @extends Components.ContextualHelp
   @public
 */
-@deprecateSubclassing
 export default class Tooltip extends ContextualHelp {
   /**
    * @property elementComponent

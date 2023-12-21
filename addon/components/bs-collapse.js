@@ -3,7 +3,6 @@ import Component from '@glimmer/component';
 import { isNone } from '@ember/utils';
 import { next } from '@ember/runloop';
 import transitionEnd from 'ember-bootstrap/utils/transition-end';
-import deprecateSubclassing from 'ember-bootstrap/utils/deprecate-subclassing';
 import { ref } from 'ember-ref-bucket';
 import arg from '../utils/decorators/arg';
 import { tracked } from '@glimmer/tracking';
@@ -29,7 +28,6 @@ import { tracked } from '@glimmer/tracking';
   @extends Glimmer.Component
   @public
 */
-@deprecateSubclassing
 export default class Collapse extends Component {
   /**
    * @property _element

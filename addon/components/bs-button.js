@@ -2,7 +2,6 @@ import { tracked } from '@glimmer/tracking';
 import { action } from '@ember/object';
 import Component from '@glimmer/component';
 import arg from 'ember-bootstrap/utils/decorators/arg';
-import deprecateSubclassing from 'ember-bootstrap/utils/deprecate-subclassing';
 
 /**
   Implements a HTML button element, with support for all [Bootstrap button CSS styles](http://getbootstrap.com/css/#buttons)
@@ -96,7 +95,6 @@ import deprecateSubclassing from 'ember-bootstrap/utils/deprecate-subclassing';
   @extends Glimmer.Component
   @public
 */
-@deprecateSubclassing
 export default class Button extends Component {
   /**
    * Default label of the button. Not need if used as a block component

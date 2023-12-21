@@ -2,7 +2,6 @@ import { action } from '@ember/object';
 import { isBlank } from '@ember/utils';
 import Component from '@glimmer/component';
 import { next } from '@ember/runloop';
-import deprecateSubclassing from 'ember-bootstrap/utils/deprecate-subclassing';
 import { ref } from 'ember-ref-bucket';
 import { tracked } from '@glimmer/tracking';
 import { guidFor } from '@ember/object/internals';
@@ -15,7 +14,6 @@ import { guidFor } from '@ember/object/internals';
  @extends Glimmer.Component
  @private
  */
-@deprecateSubclassing
 export default class ModalDialog extends Component {
   /**
    * @property id

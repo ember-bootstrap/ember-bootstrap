@@ -2,7 +2,6 @@ import { action } from '@ember/object';
 import Component from '@glimmer/component';
 import { assert } from '@ember/debug';
 import { getOwnConfig, macroCondition } from '@embroider/macros';
-import deprecateSubclassing from 'ember-bootstrap/utils/deprecate-subclassing';
 import { tracked } from '@glimmer/tracking';
 
 const ESCAPE_KEYCODE = 27; // KeyboardEvent.which value for Escape (Esc) key
@@ -175,7 +174,6 @@ const SUPPORTED_KEYCODES = [
   @extends Component
   @public
 s*/
-@deprecateSubclassing
 export default class Dropdown extends Component {
   /**
    * The tag name used for the dropdown element.

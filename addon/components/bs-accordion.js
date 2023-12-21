@@ -1,6 +1,5 @@
 import { action } from '@ember/object';
 import Component from '@glimmer/component';
-import deprecateSubclassing from 'ember-bootstrap/utils/deprecate-subclassing';
 import { tracked } from '@glimmer/tracking';
 
 /**
@@ -38,7 +37,6 @@ import { tracked } from '@glimmer/tracking';
   @extends Glimmer.Component
   @public
 */
-@deprecateSubclassing
 export default class Accordion extends Component {
   /**
    * The value of the currently selected accordion item. Set this to change selection programmatically.

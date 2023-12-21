@@ -1,5 +1,4 @@
 import Component from '@glimmer/component';
-import deprecateSubclassing from 'ember-bootstrap/utils/deprecate-subclassing';
 
 /**
   Component to generate [bootstrap navs](http://getbootstrap.com/components/#nav)
@@ -80,7 +79,6 @@ import deprecateSubclassing from 'ember-bootstrap/utils/deprecate-subclassing';
   @public
 
  */
-@deprecateSubclassing
 export default class Nav extends Component {
   get typeClass() {
     let type = this.type;

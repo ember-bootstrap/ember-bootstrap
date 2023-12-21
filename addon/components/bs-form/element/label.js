@@ -1,5 +1,4 @@
 import Component from '@glimmer/component';
-import deprecateSubclassing from 'ember-bootstrap/utils/deprecate-subclassing';
 import arg from 'ember-bootstrap/utils/decorators/arg';
 
 /**
@@ -9,7 +8,6 @@ import arg from 'ember-bootstrap/utils/decorators/arg';
  @extends Ember.Component
  @private
  */
-@deprecateSubclassing
 export default class FormElementLabel extends Component {
   /**
    * @property label

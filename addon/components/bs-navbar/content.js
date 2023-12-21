@@ -1,5 +1,4 @@
-import Component from '@glimmer/component';
-import deprecateSubclassing from 'ember-bootstrap/utils/deprecate-subclassing';
+import templateOnly from '@ember/component/template-only';
 
 /**
  * Component to wrap the collapsible content of a [Components.Navbar](Components.Navbar.html) component.
@@ -10,5 +9,4 @@ import deprecateSubclassing from 'ember-bootstrap/utils/deprecate-subclassing';
  * @extends Components.Collapse
  * @public
  */
-@deprecateSubclassing
-export default class NavbarContent extends Component {}
+export default templateOnly();

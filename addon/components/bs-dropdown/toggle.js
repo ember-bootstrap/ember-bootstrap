@@ -1,6 +1,5 @@
 import Component from '@glimmer/component';
 import { action } from '@ember/object';
-import deprecateSubclassing from 'ember-bootstrap/utils/deprecate-subclassing';
 
 /**
  Anchor element that triggers the parent dropdown to open.
@@ -13,7 +12,6 @@ import deprecateSubclassing from 'ember-bootstrap/utils/deprecate-subclassing';
  @extends Component
  @publicø
  */
-@deprecateSubclassing
 export default class DropdownToggle extends Component {
   /**
    * @property inNav

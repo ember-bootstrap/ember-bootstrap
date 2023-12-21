@@ -3,7 +3,6 @@ import Component from '@glimmer/component';
 import { tracked } from '@glimmer/tracking';
 import { assert } from '@ember/debug';
 import { isBlank } from '@ember/utils';
-import deprecateSubclassing from 'ember-bootstrap/utils/deprecate-subclassing';
 
 /**
   Component to generate [Bootstrap navbars](http://getbootstrap.com/components/#navbar).
@@ -99,7 +98,6 @@ import deprecateSubclassing from 'ember-bootstrap/utils/deprecate-subclassing';
   @extends Component
   @public
 */
-@deprecateSubclassing
 export default class Navbar extends Component {
   /**
    * Manages the state for the responsive menu between the toggle and the content.

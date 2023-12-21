@@ -3,7 +3,6 @@ import CarouselSlide from 'ember-bootstrap/components/bs-carousel/slide';
 import Component from '@glimmer/component';
 import { schedule } from '@ember/runloop';
 import { task, timeout } from 'ember-concurrency';
-import deprecateSubclassing from 'ember-bootstrap/utils/deprecate-subclassing';
 import { tracked } from '@glimmer/tracking';
 
 /**
@@ -55,7 +54,6 @@ import { tracked } from '@glimmer/tracking';
   @extends Component
   @public
 */
-@deprecateSubclassing
 export default class Carousel extends Component {
   tabindex = '1';
 

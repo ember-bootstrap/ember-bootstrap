@@ -7,7 +7,6 @@ import transitionEnd from 'ember-bootstrap/utils/transition-end';
 import { getDestinationElement } from 'ember-bootstrap/utils/dom';
 import usesTransition from 'ember-bootstrap/utils/decorators/uses-transition';
 import isFastBoot from 'ember-bootstrap/utils/is-fastboot';
-import deprecateSubclassing from 'ember-bootstrap/utils/deprecate-subclassing';
 import arg from '../utils/decorators/arg';
 import { cached, tracked } from '@glimmer/tracking';
 import { ref } from 'ember-ref-bucket';
@@ -62,7 +61,6 @@ function afterRender() {
   @extends Glimmer.Component
   @public
 */
-@deprecateSubclassing
 export default class Modal extends Component {
   @service('-document')
   document;
