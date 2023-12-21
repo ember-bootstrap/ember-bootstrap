@@ -1,7 +1,6 @@
 import EmberObject from '@ember/object';
 import Component from '@ember/component';
 import { A } from '@ember/array';
-import RSVP, { defer, reject, resolve } from 'rsvp';
 import { module, skip } from 'qunit';
 import { setupRenderingTest } from 'ember-qunit';
 import {
@@ -26,15 +25,16 @@ import {
   validationErrorClass,
   validationSuccessClass,
 } from '../../helpers/bootstrap';
+import { defer } from '../../helpers/defer';
 import hbs from 'htmlbars-inline-precompile';
 import { next, run } from '@ember/runloop';
 import setupNoDeprecations from '../../helpers/setup-no-deprecations';
 import a11yAudit from 'ember-a11y-testing/test-support/audit';
 import sinon from 'sinon';
-import Ember from 'ember';
 import Form from 'ember-bootstrap/components/bs-form';
 import FormElement from 'ember-bootstrap/components/bs-form/element';
 import { ensureSafeComponent } from '@embroider/util';
+import { setupUnhandledRejectionListener } from '../../helpers/setup-unhandled-exception-listener';
 
 const nextRunloop = function () {
   return new Promise((resolve) => {
@@ -76,6 +76,7 @@ class ValidatingFormElement extends FormElement {
 module('Integration | Component | bs-form', function (hooks) {
   setupRenderingTest(hooks);
   setupNoDeprecations(hooks);
+  const expectException = setupUnhandledRejectionListener(hooks);
 
   hooks.beforeEach(function () {
     this.actions = {};
@@ -653,7 +654,7 @@ module('Integration | Component | bs-form', function (hooks) {
       this.set('model', model);
       this.set('errors', A([]));
       this.set('validateStub', () =>
-        this.errors.length > 0 ? reject() : resolve(),
+        this.errors.length > 0 ? Promise.reject() : Promise.resolve(),
       );
       let deferredSubmitAction = defer();
       this.set('submitAction', () => {
@@ -729,7 +730,7 @@ module('Integration | Component | bs-form', function (hooks) {
       this.set('model', model);
       this.set('errors', A([]));
       this.set('validateStub', () =>
-        this.errors.length > 0 ? reject() : resolve(),
+        this.errors.length > 0 ? Promise.reject() : Promise.resolve(),
       );
       this.set('submitAction', () => {});
 
@@ -820,7 +821,7 @@ module('Integration | Component | bs-form', function (hooks) {
 
       click() {
         let ret = this.onClick();
-        assert.ok(ret instanceof RSVP.Promise);
+        assert.ok(ret instanceof Promise);
       }
     }
     this.owner.register('component:test-component', TestComponent);
@@ -863,7 +864,7 @@ module('Integration | Component | bs-form', function (hooks) {
       }
 
       validate() {
-        return this.args.resolve ? resolve() : undefined;
+        return this.args.resolve ? Promise.resolve() : undefined;
       }
     }
 
@@ -1151,11 +1152,8 @@ module('Integration | Component | bs-form', function (hooks) {
   test('Yielded #isRejected is true if onSubmit action rejects', async function (assert) {
     // tests fail by default on unhandled errors
     let expectedError = new Error();
-    Ember.onerror = (error) => {
-      if (error !== expectedError) {
-        throw error;
-      }
-    };
+
+    expectException(expectedError);
 
     this.actions.submit = sinon.fake.rejects(expectedError);
     await render(hbs`<BsForm @onSubmit={{action 'submit'}} as |form|>
@@ -1165,8 +1163,8 @@ module('Integration | Component | bs-form', function (hooks) {
   >submit</button>
 </BsForm>`);
 
-    await triggerEvent('form', 'submit');
-    assert.dom('form button').hasClass('is-rejected');
+    await triggerEvent('form', 'submit'),
+      assert.dom('form button').hasClass('is-rejected');
   });
 
   test('Yielded #isRejected is true if validation fails', async function (assert) {
@@ -1185,11 +1183,7 @@ module('Integration | Component | bs-form', function (hooks) {
   test('A change to a form elements resets yielded #isRejected', async function (assert) {
     // tests fail by default on unhandled errors
     let expectedError = new Error();
-    Ember.onerror = (error) => {
-      if (error !== expectedError) {
-        throw error;
-      }
-    };
+    expectException(expectedError);
 
     this.model = {};
     this.actions.submit = sinon.fake.rejects(expectedError);
@@ -1277,7 +1271,7 @@ module('Integration | Component | bs-form', function (hooks) {
     });
     this.set('beforeAction', () => {});
     this.set('validate', () => {
-      return resolve();
+      return Promise.resolve();
     });
     await render(hbs`<BsForm
   @onSubmit={{this.submitAction}}
@@ -1312,7 +1306,7 @@ module('Integration | Component | bs-form', function (hooks) {
     });
     this.set('beforeAction', () => {});
     this.set('validate', () => {
-      return resolve();
+      return Promise.resolve();
     });
     await triggerEvent('form', 'submit');
     assert.verifySteps(
@@ -1480,7 +1474,9 @@ module('Integration | Component | bs-form', function (hooks) {
           assert.dom('button[type="submit"]').hasText('isPending');
           assert.dom('button[type="submit"]').hasAttribute('disabled', '');
 
-          deferredSubmitAction.reject();
+          const expectedError = new Error();
+          expectException(expectedError);
+          deferredSubmitAction.reject(expectedError);
           await settled();
           assert.dom('button[type="submit"]').hasText('isRejected isSettled');
           assert.dom('button[type="submit"]').hasNoAttribute('disabled');

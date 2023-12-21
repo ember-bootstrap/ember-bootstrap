@@ -16,7 +16,6 @@ const chai = require('ember-cli-blueprint-test-helpers/chai');
 const file = chai.file;
 const chaiThings = require('chai-things');
 const expect = chai.expect;
-const Promise = require('rsvp');
 
 const scenarios = require('./dependencyScenarios');
 

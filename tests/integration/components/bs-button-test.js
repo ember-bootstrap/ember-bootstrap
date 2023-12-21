@@ -1,5 +1,4 @@
 import { run } from '@ember/runloop';
-import { defer, resolve } from 'rsvp';
 import { module, skip } from 'qunit';
 import { setupRenderingTest } from 'ember-qunit';
 import { click, find, render, settled, waitUntil } from '@ember/test-helpers';
@@ -8,6 +7,7 @@ import {
   test,
   testForBootstrap,
 } from '../../helpers/bootstrap';
+import { defer } from '../../helpers/defer';
 import hbs from 'htmlbars-inline-precompile';
 import setupNoDeprecations from '../../helpers/setup-no-deprecations';
 import { setupAssertionsForErrorsNotHandledByEmberOnError } from '../../helpers/assert-errors';
@@ -227,7 +227,7 @@ module('Integration | Component | bs-button', function (hooks) {
 
   test('setting reset to true resets button text', async function (assert) {
     this.set('clickAction', () => {
-      return resolve();
+      return Promise.resolve();
     });
 
     await render(hbs`<BsButton
@@ -337,7 +337,7 @@ module('Integration | Component | bs-button', function (hooks) {
   // https://github.com/kaliber5/ember-bootstrap/issues/1615
   skip('isSettled shorthand is yielded', async function (assert) {
     this.set('clickAction', () => {
-      return resolve();
+      return Promise.resolve();
     });
     await render(hbs`<BsButton @reset={{this.reset}} @onClick={{this.clickAction}} as |button|>
   {{#if button.isSettled}}isSettled{{/if}}
