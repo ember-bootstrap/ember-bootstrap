@@ -1,7 +1,9 @@
 'use strict';
 
+// eslint-disable-next-line n/no-unpublished-require
 const getChannelURL = require('ember-source-channel-url');
 const bootstrapVersion = `^${process.env.BOOTSTRAPVERSION}.0.0`;
+// eslint-disable-next-line n/no-unpublished-require
 const { embroiderSafe, embroiderOptimized } = require('@embroider/test-setup');
 
 module.exports = async function () {

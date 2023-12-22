@@ -42,7 +42,7 @@ module.exports = function (environment) {
       ],
       'media-src': ["'self'"],
       'frame-src': [
-        // iframe used in application template of dummy app
+        // iframe used in application template of test-app
         'https://ghbtns.com/',
       ],
     },

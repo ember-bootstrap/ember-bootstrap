@@ -52,12 +52,9 @@ module.exports = {
         './.template-lintrc.js',
         './ember-cli-build.js',
         './index.js',
-        './testem.js',
         './blueprints/*/index.js',
         './config/**/*.js',
-        './tests/dummy/config/**/*.js',
         './lib/**/*.js',
-        './node-tests/**/*.js',
       ],
       parserOptions: {
         sourceType: 'script',
@@ -68,20 +65,6 @@ module.exports = {
         node: true,
       },
       extends: ['plugin:n/recommended'],
-    },
-    {
-      // test files
-      files: ['tests/**/*-test.{js,ts}'],
-      extends: [
-        // @todo enable this while fixing linting errors in tests...
-        // 'plugin:qunit/recommended'
-      ],
-    },
-    {
-      files: ['node-tests/**/*.js'],
-      env: {
-        mocha: true,
-      },
     },
   ],
 };

@@ -1,4 +1,4 @@
-import config from 'dummy/config/environment';
+import config from 'test-app/config/environment';
 import { skip, test } from 'qunit';
 
 const currentBootstrapVersion = parseInt(config.bootstrapVersion);

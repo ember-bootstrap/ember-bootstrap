@@ -1,6 +1,6 @@
 'use strict';
 
-const addonIndex = require('../index');
+const addonIndex = require('../../addon/index');
 const expect = require('chai').expect;
 
 describe('index', function () {

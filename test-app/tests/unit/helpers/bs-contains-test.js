@@ -1,4 +1,4 @@
-import { bsContains } from 'dummy/helpers/bs-contains';
+import { bsContains } from 'ember-bootstrap/helpers/bs-contains';
 import { module, test } from 'qunit';
 
 module('Unit | Helper | bs contains', function () {

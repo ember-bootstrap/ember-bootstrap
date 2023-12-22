@@ -1,0 +1,4 @@
+packages:
+  - addon
+  - test-app
+  - docs
