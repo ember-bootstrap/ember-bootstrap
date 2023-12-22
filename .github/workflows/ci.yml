@@ -18,8 +18,12 @@ jobs:
     steps:
       - name: Checkout code
         uses: wyvox/action@v1
-      - name: Lint
+      - name: Lint addon
         run: pnpm lint
+        working-directory: addon
+      - name: Lint test-app
+        run: pnpm lint
+        working-directory: test-app
       - name: Test
         run: pnpm test:ember
 
@@ -29,8 +33,6 @@ jobs:
     steps:
       - name: Checkout code
         uses: wyvox/action@v1
-      - name: Lint
-        run: pnpm lint
       - name: Test
         run: pnpm test:ember --config-file testem.safari.js
 
@@ -86,6 +88,7 @@ jobs:
       - name: Checkout code
         uses: wyvox/action@v1
       - name: Test
+        working-directory: test-app
         run: pnpm ember try:one ${{ matrix.scenario }}
         env:
           BOOTSTRAPVERSION: ${{ matrix.bootstrap }}
@@ -99,9 +102,6 @@ jobs:
     steps:
       - name: Checkout code
         uses: wyvox/action@v1
-      - name: Checkout code
-        working-directory: docs
-        run: pnpm install
       - name: Run Ember Tests
         run: pnpm test
         working-directory: docs

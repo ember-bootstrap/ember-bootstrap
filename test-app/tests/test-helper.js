@@ -1,5 +1,5 @@
-import Application from 'dummy/app';
-import config from 'dummy/config/environment';
+import Application from 'test-app/app';
+import config from 'test-app/config/environment';
 import * as QUnit from 'qunit';
 import { setApplication } from '@ember/test-helpers';
 import { setup } from 'qunit-dom';
@@ -15,7 +15,7 @@ setupSinon();
 
 setRunOptions({
   rules: {
-    // color checks unfortunately fail for colors defined in dummy app, but are controlled at the end by
+    // color checks unfortunately fail for colors defined in test-app, but are controlled at the end by
     // the user, so not a primary concern of the addon
     'color-contrast': { enabled: false },
   },
