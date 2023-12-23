@@ -107,5 +107,6 @@ jobs:
         working-directory: docs
       - name: Build including API docs
         run: pnpm run docs:build
+        working-directory: docs
       # TODO: Perform some basic steps that the build contains API docs
       #       and works as expected.

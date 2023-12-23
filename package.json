@@ -12,6 +12,33 @@
   "lint-staged": {
     "*.js": "eslint --cache --fix"
   },
+  "changelog": {
+    "labels": {
+      "breaking": ":boom: Breaking Change",
+      "enhancement": "Features",
+      "bug": "Bug Fixes",
+      "documentation": "Documentation",
+      "internal": "Internal"
+    }
+  },
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org"
+  },
+  "release-it": {
+    "plugins": {
+      "@release-it-plugins/lerna-changelog": {
+        "infile": "CHANGELOG.md",
+        "launchEditor": true
+      }
+    },
+    "git": {
+      "tagName": "v${version}"
+    },
+    "github": {
+      "release": true,
+      "tokenRef": "GITHUB_AUTH"
+    }
+  },
   "volta": {
     "node": "18.19.0",
     "pnpm": "8.14.1"
