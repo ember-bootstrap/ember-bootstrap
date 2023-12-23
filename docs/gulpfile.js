@@ -14,9 +14,7 @@ gulp.task('docs:api', function () {
 });
 
 gulp.task('docs:app', function () {
-  return execa('ember', ['build', '--prod'], {
-    cwd: 'docs',
-  }).catch((e) => {
+  return execa('ember', ['build', '--prod']).catch((e) => {
     console.error(e);
     throw e;
   });

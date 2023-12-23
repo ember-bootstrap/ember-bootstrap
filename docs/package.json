@@ -1,6 +1,6 @@
 {
   "name": "ember-bootstrap-docs",
-  "version": "0.0.0",
+  "version": "6.1.0",
   "private": true,
   "description": "ember-bootstrap docs",
   "repository": "https://github.com/kaliber5/ember-bootstrap",
@@ -11,6 +11,8 @@
     "test": "tests"
   },
   "scripts": {
+    "docs:build": "gulp docs:build",
+    "docs:serve": "gulp docs:serve",
     "build": "ember build --environment=production",
     "lint": "concurrently \"npm:lint:*(!fix)\" --names \"lint:\"",
     "lint:css": "stylelint \"**/*.scss\"",
@@ -49,6 +51,7 @@
     "ember-cli-showdown": "7.0.0",
     "ember-cli-sri": "2.1.1",
     "ember-cli-terser": "4.0.2",
+    "ember-cli-yuidoc": "0.9.1",
     "ember-code-snippet": "3.0.0",
     "ember-cp-validations": "6.0.0",
     "ember-fetch": "8.1.2",
@@ -69,13 +72,21 @@
     "eslint-plugin-n": "16.6.1",
     "eslint-plugin-prettier": "5.1.2",
     "eslint-plugin-qunit": "8.0.1",
+    "execa": "5.1.1",
+    "gulp": "4.0.2",
+    "gulp-connect": "5.7.0",
+    "gulp-insert": "0.5.0",
+    "gulp-rename": "2.0.0",
+    "gulp-transform": "3.0.5",
     "loader.js": "4.7.0",
+    "merge-stream": "2.0.0",
     "prember": "2.0.0",
     "prettier": "3.0.3",
     "qunit": "2.20.0",
     "qunit-dom": "3.0.0",
     "sass": "1.69.7",
     "sinon": "17.0.1",
+    "striptags": "3.2.0",
     "stylelint": "16.1.0",
     "stylelint-config-standard-scss": "12.0.0",
     "stylelint-prettier": "5.0.0",
@@ -90,7 +101,7 @@
   },
   "ember-addon": {
     "paths": [
-      ".."
+      "../addon"
     ]
   },
   "volta": {
