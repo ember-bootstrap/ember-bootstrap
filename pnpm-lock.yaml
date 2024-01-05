@@ -116,8 +116,8 @@ devDependencies:
     specifier: 3.0.0
     version: 3.0.0
   chai:
-    specifier: 4.3.10
-    version: 4.3.10
+    specifier: 4.4.0
+    version: 4.4.0
   chai-things:
     specifier: 0.2.0
     version: 0.2.0
@@ -4502,12 +4502,12 @@ packages:
       check-error: 1.0.3
     dev: true
 
-  /chai-as-promised@7.1.1(chai@4.3.10):
+  /chai-as-promised@7.1.1(chai@4.4.0):
     resolution: {integrity: sha512-azL6xMoi+uxu6z4rhWQ1jbdUhOMhis2PvscD/xjLqNMkv3BPPp2JyyuTHOrf9BOosGpNQ11v6BKv/g57RXbiaA==}
     peerDependencies:
       chai: '>= 2.1.2 < 5'
     dependencies:
-      chai: 4.3.10
+      chai: 4.4.0
       check-error: 1.0.3
     dev: true
 
@@ -4530,8 +4530,8 @@ packages:
       type-detect: 1.0.0
     dev: true
 
-  /chai@4.3.10:
-    resolution: {integrity: sha512-0UXG04VuVbruMUYbJ6JctvH0YnC/4q3/AkT18q4NaITo91CUm0liMS9VqzT9vZhVQ/1eqPanMWjBM+Juhfb/9g==}
+  /chai@4.4.0:
+    resolution: {integrity: sha512-x9cHNq1uvkCdU+5xTkNh5WtgD4e4yDFCsp9jVc7N7qVeKeftv3gO/ZrviX5d+3ZfxdYnZXZYujjRInu1RogU6A==}
     engines: {node: '>=4'}
     dependencies:
       assertion-error: 1.1.0
@@ -5993,8 +5993,8 @@ packages:
     resolution: {integrity: sha512-otCKdGcNFK0+MkQo+LLjYbRD9EerApH6Z/odvvlL1hxrN+owHMV5E+jI2rbtdvNEH0/6w5ZqjH4kS232fvtCxQ==}
     engines: {node: 6.* || 8.* || >= 10.*}
     dependencies:
-      chai: 4.3.10
-      chai-as-promised: 7.1.1(chai@4.3.10)
+      chai: 4.4.0
+      chai-as-promised: 7.1.1(chai@4.4.0)
       chai-files: 1.4.0
       debug: 4.3.4(supports-color@8.1.1)
       ember-cli-internal-test-helpers: 0.9.1
