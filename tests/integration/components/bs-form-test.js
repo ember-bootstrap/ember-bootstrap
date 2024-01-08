@@ -824,7 +824,7 @@ module('Integration | Component | bs-form', function (hooks) {
       }
     }
     setComponentTemplate(
-      hbs`<button {{on "click" this.click}}/>`,
+      hbs`<button type='button' {{on 'click' this.click}} />`,
       TestComponent,
     );
     this.set('testComponent', TestComponent);
@@ -856,7 +856,7 @@ module('Integration | Component | bs-form', function (hooks) {
       }
     }
     setComponentTemplate(
-      hbs`<button {{on "click" this.click}}/>`,
+      hbs`<button type='button' {{on 'click' this.click}} />`,
       TestComponent,
     );
     this.set('testComponent', TestComponent);
@@ -903,7 +903,7 @@ module('Integration | Component | bs-form', function (hooks) {
       }
     }
     setComponentTemplate(
-      hbs`<button {{on "click" this.click}}/>`,
+      hbs`<button type='button' {{on 'click' this.click}} />`,
       TestComponent,
     );
     this.set('testComponent', TestComponent);

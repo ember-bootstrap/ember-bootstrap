@@ -70,7 +70,10 @@ module('Integration | Component | bs-modal', function (hooks) {
   test('clicking ok button closes modal when autoClose=true with custom component hierarchy', async function (assert) {
     // eslint-disable-next-line ember/no-empty-glimmer-component-classes
     class TestComponent extends Component {}
-    setComponentTemplate(hbs`{{yield}}`, TestComponent);
+    setComponentTemplate(
+      hbs`{{! template-lint-disable no-yield-only }}{{yield}}`,
+      TestComponent,
+    );
     this.set('testComponent', TestComponent);
 
     await render(hbs`<BsModal @title='Simple Dialog' @body={{false}} @footer={{false}} as |modal|>
