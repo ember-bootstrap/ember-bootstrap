@@ -16,7 +16,7 @@ import setupNoDeprecations from '../../helpers/setup-no-deprecations';
 import sinon from 'sinon';
 import { skipTransition } from 'ember-bootstrap/utils/transition-end';
 import { setComponentTemplate } from '@ember/component';
-import Component from '@glimmer/component';
+import templateOnly from '@ember/component/template-only';
 
 module('Integration | Component | bs-modal', function (hooks) {
   setupRenderingTest(hooks);
@@ -68,13 +68,12 @@ module('Integration | Component | bs-modal', function (hooks) {
   });
 
   test('clicking ok button closes modal when autoClose=true with custom component hierarchy', async function (assert) {
-    // eslint-disable-next-line ember/no-empty-glimmer-component-classes
-    class TestComponent extends Component {}
+    const testComponent = templateOnly();
     setComponentTemplate(
       hbs`{{! template-lint-disable no-yield-only }}{{yield}}`,
-      TestComponent,
+      testComponent,
     );
-    this.set('testComponent', TestComponent);
+    this.set('testComponent', testComponent);
 
     await render(hbs`<BsModal @title='Simple Dialog' @body={{false}} @footer={{false}} as |modal|>
   <this.testComponent>
