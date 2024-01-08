@@ -1,5 +1,4 @@
-import EmberObject from '@ember/object';
-import Component from '@ember/component';
+import EmberObject, { action } from '@ember/object';
 import { A } from '@ember/array';
 import { module, skip } from 'qunit';
 import { setupRenderingTest } from 'ember-qunit';
@@ -35,6 +34,8 @@ import Form from 'ember-bootstrap/components/bs-form';
 import FormElement from 'ember-bootstrap/components/bs-form/element';
 import { ensureSafeComponent } from '@embroider/util';
 import { setupAssertionsForErrorsNotHandledByEmberOnError } from '../../helpers/assert-errors';
+import { setComponentTemplate } from '@ember/component';
+import Component from '@glimmer/component';
 
 const nextRunloop = function () {
   return new Promise((resolve) => {
@@ -816,18 +817,20 @@ module('Integration | Component | bs-form', function (hooks) {
 
   test('yielded submit action returns a promise', async function (assert) {
     class TestComponent extends Component {
-      // eslint-disable-next-line ember/require-tagless-components
-      tagName = 'button';
-
+      @action
       click() {
-        let ret = this.onClick();
+        let ret = this.args.onClick();
         assert.ok(ret instanceof Promise);
       }
     }
-    this.owner.register('component:test-component', TestComponent);
+    setComponentTemplate(
+      hbs`<button type='button' {{on 'click' this.click}} />`,
+      TestComponent,
+    );
+    this.set('testComponent', TestComponent);
 
     await render(hbs`<BsForm as |form|>
-  {{test-component onClick=form.submit}}
+  <this.testComponent @onClick={{form.submit}} />
 </BsForm>`);
     await click('button');
   });
@@ -841,12 +844,10 @@ module('Integration | Component | bs-form', function (hooks) {
     ];
 
     class TestComponent extends Component {
-      // eslint-disable-next-line ember/require-tagless-components
-      tagName = 'button';
-
+      @action
       async click() {
         try {
-          let ret = await this.onClick();
+          let ret = await this.args.onClick();
           assert.ok(true, 'resolves');
           assert.strictEqual(ret, undefined, 'resolves with undefined');
         } catch (err) {
@@ -854,11 +855,13 @@ module('Integration | Component | bs-form', function (hooks) {
         }
       }
     }
-    this.owner.register('component:test-component', TestComponent);
+    setComponentTemplate(
+      hbs`<button type='button' {{on 'click' this.click}} />`,
+      TestComponent,
+    );
+    this.set('testComponent', TestComponent);
 
     class ValidForm extends Form {
-      '__ember-bootstrap_subclass' = true;
-
       get hasValidator() {
         return true;
       }
@@ -868,14 +871,14 @@ module('Integration | Component | bs-form', function (hooks) {
       }
     }
 
-    this.set('form', ensureSafeComponent(ValidForm, this));
+    this.set('form', ValidForm);
 
     assert.expect(scenarios.length * 2);
 
     for (let i = 0; i < scenarios.length; i++) {
       this.setProperties(scenarios[i]);
       await render(hbs`<this.form @onSubmit={{this.onSubmit}} @resolve={{this.resolve}} as |form|>
-  {{test-component onClick=form.submit}}
+  <this.testComponent @onClick={{form.submit}} />
 </this.form>`);
       await click('button');
     }
@@ -894,18 +897,18 @@ module('Integration | Component | bs-form', function (hooks) {
     ];
 
     class TestComponent extends Component {
-      // eslint-disable-next-line ember/require-tagless-components
-      tagName = 'button';
-
+      @action
       click() {
-        assert.rejects(this.onSubmit(), 'rejected value');
+        assert.rejects(this.args.onSubmit(), 'rejected value');
       }
     }
-    this.owner.register('component:test-component', TestComponent);
+    setComponentTemplate(
+      hbs`<button type='button' {{on 'click' this.click}} />`,
+      TestComponent,
+    );
+    this.set('testComponent', TestComponent);
 
     class ValidatingForm extends Form {
-      '__ember-bootstrap_subclass' = true;
-
       get hasValidator() {
         return true;
       }
@@ -915,14 +918,14 @@ module('Integration | Component | bs-form', function (hooks) {
       }
     }
 
-    this.set('form', ensureSafeComponent(ValidatingForm, this));
+    this.set('form', ValidatingForm);
 
     assert.expect(scenarios.length);
 
     for (let i = 0; i < scenarios.length; i++) {
       this.setProperties(scenarios[i]);
       await render(hbs`<this.form @onSubmit={{this.onSubmit}} @validate={{this.validate}} as |form|>
-  {{test-component onSubmit=form.submit}}
+  <this.testComponent @onSubmit={{form.submit}} />
 </this.form>`);
       await click('button');
     }
@@ -992,7 +995,7 @@ module('Integration | Component | bs-form', function (hooks) {
     this.set('submitAction', () => {
       return deferredSubmitAction.promise;
     });
-    this.set('form', ensureSafeComponent(ValidatingForm, this));
+    this.set('form', ValidatingForm);
 
     await render(hbs`<this.form @onInvalid={{this.submitAction}} @validate={{false}} as |form|>
   <div class='state {{if form.isSubmitting "is-submitting"}}'></div>

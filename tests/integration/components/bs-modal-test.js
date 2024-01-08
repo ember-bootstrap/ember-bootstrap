@@ -1,4 +1,3 @@
-import Component from '@ember/component';
 import { module } from 'qunit';
 import { setupRenderingTest } from 'ember-qunit';
 import {
@@ -16,6 +15,8 @@ import hbs from 'htmlbars-inline-precompile';
 import setupNoDeprecations from '../../helpers/setup-no-deprecations';
 import sinon from 'sinon';
 import { skipTransition } from 'ember-bootstrap/utils/transition-end';
+import { setComponentTemplate } from '@ember/component';
+import templateOnly from '@ember/component/template-only';
 
 module('Integration | Component | bs-modal', function (hooks) {
   setupRenderingTest(hooks);
@@ -67,19 +68,18 @@ module('Integration | Component | bs-modal', function (hooks) {
   });
 
   test('clicking ok button closes modal when autoClose=true with custom component hierarchy', async function (assert) {
-    this.owner.register(
-      'component:test-component',
-      class extends Component {
-        layout = hbs`{{! template-lint-disable no-yield-only }}
-{{yield}}`;
-      },
+    const testComponent = templateOnly();
+    setComponentTemplate(
+      hbs`{{! template-lint-disable no-yield-only }}{{yield}}`,
+      testComponent,
     );
+    this.set('testComponent', testComponent);
 
     await render(hbs`<BsModal @title='Simple Dialog' @body={{false}} @footer={{false}} as |modal|>
-  <TestComponent>
+  <this.testComponent>
     <modal.body>Hello world!</modal.body>
     <modal.footer />
-  </TestComponent>
+  </this.testComponent>
 </BsModal>`);
 
     await click('.modal .modal-footer button');

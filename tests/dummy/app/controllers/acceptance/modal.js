@@ -1,18 +1,21 @@
 import Controller from '@ember/controller';
 import { action } from '@ember/object';
+import { tracked } from '@glimmer/tracking';
 
 export default class extends Controller {
+  @tracked
   modal = true;
+  @tracked
   hasModal = false;
 
   @action
   addModal() {
-    this.set('hasModal', true);
-    this.set('modal', true);
+    this.hasModal = true;
+    this.modal = true;
   }
 
   @action
   removeModal() {
-    this.set('hasModal', false);
+    this.hasModal = false;
   }
 }
