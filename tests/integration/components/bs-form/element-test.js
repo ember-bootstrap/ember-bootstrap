@@ -1,4 +1,3 @@
-import Component from '@ember/component';
 import { run } from '@ember/runloop';
 import EmberObject from '@ember/object';
 import { A, isArray } from '@ember/array';
@@ -34,6 +33,8 @@ import { tracked } from '@glimmer/tracking';
 import Form from 'ember-bootstrap/components/bs-form';
 import FormElement from 'ember-bootstrap/components/bs-form/element';
 import { ensureSafeComponent } from '@embroider/util';
+import { setComponentTemplate } from '@ember/component';
+import Component from '@glimmer/component';
 
 const formLayouts = ['vertical', 'horizontal', 'inline'];
 
@@ -1450,13 +1451,11 @@ module('Integration | Component | bs-form/element', function (hooks) {
   );
 
   test('it uses custom control component when registered in DI container', async function (assert) {
-    this.owner.register(
-      'component:bs-form/element/control/foo',
-      class extends Component {
-        tagName = '';
-        layout = hbs`<div id='foo'></div>`;
-      },
-    );
+    // eslint-disable-next-line ember/no-empty-glimmer-component-classes
+    class TestComponent extends Component {}
+    setComponentTemplate(hbs`<div id='foo' />`, TestComponent);
+    this.owner.register('component:bs-form/element/control/foo', TestComponent);
+
     await render(hbs`<BsForm::Element @controlType='foo' />`);
     assert.dom('#foo').exists({ count: 1 }, 'Custom control is used');
   });
