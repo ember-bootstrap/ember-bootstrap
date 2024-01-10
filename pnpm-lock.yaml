@@ -63,8 +63,8 @@ dependencies:
     specifier: ^0.2.0
     version: 0.2.0
   ember-style-modifier:
-    specifier: ^0.8.0 || ^1.0.0 || ^2.0.0 || ^3.0.0
-    version: 3.0.1(@ember/string@3.1.1)(ember-source@5.5.0)(webpack@5.89.0)
+    specifier: ^4.0.0
+    version: 4.0.0(@ember/string@3.1.1)(ember-source@5.5.0)(webpack@5.89.0)
   findup-sync:
     specifier: ^5.0.0
     version: 5.0.0
@@ -6803,19 +6803,21 @@ packages:
       - supports-color
       - webpack
 
-  /ember-style-modifier@3.0.1(@ember/string@3.1.1)(ember-source@5.5.0)(webpack@5.89.0):
-    resolution: {integrity: sha512-WHRVIiqY/dpwDtVWlnHW0P4Z+Jha8QEwfaQdIF2ckJL77ZKdjbV2j1XZymS0Nzj61EGx5BM+YEsGL16r3hLv2A==}
-    engines: {node: 14.* || 16.* || >= 18}
+  /ember-style-modifier@4.0.0(@ember/string@3.1.1)(ember-source@5.5.0)(webpack@5.89.0):
+    resolution: {integrity: sha512-6AQ+NmBF85JsA8j2Y4XY3WvJMxTqhPpiJek6YBoj7JFM/A756NSgjAynJh1Shy3WDgp8qHDpb3u2kGoz1p9CUg==}
+    engines: {node: 18.* || >= 20}
     peerDependencies:
       '@ember/string': ^3.0.1
+      ember-source: '>= 4.12.0'
     dependencies:
+      '@babel/core': 7.23.7
       '@ember/string': 3.1.1
       ember-auto-import: 2.7.2(webpack@5.89.0)
-      ember-cli-babel: 7.26.11
+      ember-cli-babel: 8.2.0(@babel/core@7.23.7)
       ember-modifier: 4.1.0(ember-source@5.5.0)
+      ember-source: 5.5.0(@babel/core@7.23.7)(@glimmer/component@1.1.2)(rsvp@4.8.5)(webpack@5.89.0)
     transitivePeerDependencies:
       - '@glint/template'
-      - ember-source
       - supports-color
       - webpack
     dev: false
