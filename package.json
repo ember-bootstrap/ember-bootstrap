@@ -27,7 +27,7 @@
   "release-it": {
     "plugins": {
       "@release-it-plugins/lerna-changelog": {
-        "infile": "CHANGELOG.md",
+        "infile": "../CHANGELOG.md",
         "launchEditor": true
       }
     },

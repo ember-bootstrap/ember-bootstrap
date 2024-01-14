@@ -24,16 +24,18 @@ gulp.task(
   'docs:build',
   gulp.series(gulp.parallel('docs:api', 'docs:app'), function () {
     return merge(
-      gulp.src('docs/api/**/*', { base: 'docs' }),
-      gulp.src('docs/dist/**/*'),
-      gulp.src('CHANGELOG.md').pipe(transform(striptags, { encoding: 'utf8' })),
-    ).pipe(gulp.dest('docs/build'));
+      gulp.src('api/**/*', { base: 'docs' }),
+      gulp.src('dist/**/*'),
+      gulp
+        .src('../CHANGELOG.md')
+        .pipe(transform(striptags, { encoding: 'utf8' })),
+    ).pipe(gulp.dest('build'));
   }),
 );
 
 gulp.task('connect', function () {
   connect.server({
-    root: 'docs/build',
+    root: 'build',
   });
 });
 
