@@ -1,4 +1,5 @@
 {
+  "private": true,
   "name": "test-app",
   "version": "6.1.0",
   "description": "Bootstrap components for Ember.js",
