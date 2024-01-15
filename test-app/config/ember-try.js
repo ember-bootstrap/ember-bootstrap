@@ -67,10 +67,6 @@ module.exports = async function () {
         },
       },
       {
-        name: 'node-tests',
-        command: 'pnpm run nodetest',
-      },
-      {
         name: 'tracked-toolbox-v1',
         npm: {
           devDependencies: {
