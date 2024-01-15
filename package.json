@@ -2,6 +2,8 @@
   "private": true,
   "scripts": {
     "prepare": "husky install",
+    "lint": "pnpm --filter * lint",
+    "lint:fix": "pnpm --filter * lint:fix",
     "test": "concurrently \"npm:test:*\"",
     "test:ember": "pnpm --filter test-app test:ember",
     "test:node": "pnpm --filter ember-bootstrap nodetest"
