@@ -76,11 +76,5 @@ module.exports = {
         // 'plugin:qunit/recommended'
       ],
     },
-    {
-      files: ['node-tests/**/*.js'],
-      env: {
-        mocha: true,
-      },
-    },
   ],
 };

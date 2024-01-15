@@ -1,6 +1,7 @@
 'use strict';
 
-const addonIndex = require('../../addon/index');
+const addonIndex = require('../index');
+// eslint-disable-next-line n/no-unpublished-require
 const expect = require('chai').expect;
 
 describe('index', function () {

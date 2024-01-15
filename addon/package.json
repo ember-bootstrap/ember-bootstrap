@@ -26,7 +26,8 @@
     "lint:hbs": "ember-template-lint .",
     "lint:hbs:fix": "ember-template-lint . --fix",
     "lint:js": "eslint . --cache",
-    "lint:js:fix": "eslint . --fix"
+    "lint:js:fix": "eslint . --fix",
+    "nodetest": "mocha node-tests --recursive"
   },
   "dependencies": {
     "@ember/render-modifiers": "^2.0.0",
@@ -57,7 +58,12 @@
   "devDependencies": {
     "@babel/eslint-parser": "7.23.3",
     "@babel/plugin-proposal-decorators": "7.23.7",
+    "chai": "4.4.1",
+    "chai-things": "0.2.0",
     "concurrently": "8.2.2",
+    "ember-cli": "5.5.0",
+    "ember-cli-blueprint-test-helpers": "0.19.2",
+    "ember-cli-build-config-editor": "^0.5.1",
     "ember-template-lint": "5.13.0",
     "ember-template-lint-plugin-prettier": "5.0.0",
     "eslint": "8.56.0",
@@ -66,12 +72,16 @@
     "eslint-plugin-hbs": "1.0.3",
     "eslint-plugin-n": "16.6.2",
     "eslint-plugin-prettier": "5.1.3",
-    "eslint-plugin-qunit": "8.0.1"
+    "eslint-plugin-qunit": "8.0.1",
+    "mocha": "10.2.0"
   },
   "peerDependencies": {
     "@glimmer/component": "^1.0.4",
     "@glimmer/tracking": "^1.0.4",
     "ember-source": ">=4.8.0"
+  },
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org"
   },
   "engines": {
     "node": "18.* || >= 20"

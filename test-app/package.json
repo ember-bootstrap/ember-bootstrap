@@ -28,7 +28,6 @@
     "lint:hbs:fix": "ember-template-lint . --fix",
     "lint:js": "eslint . --cache",
     "lint:js:fix": "eslint . --fix",
-    "nodetest": "mocha node-tests --recursive",
     "start": "ember serve",
     "testa": "concurrently \"npm:lint\" \"npm:test:*\" --names \"lint,test:\"",
     "test:ember": "ember test",
@@ -44,7 +43,6 @@
     "chalk": "^4.1.1",
     "ember-auto-import": "^2.6.3",
     "ember-cli-babel": "^8.0.0",
-    "ember-cli-build-config-editor": "^0.5.1",
     "ember-cli-htmlbars": "^6.2.0",
     "ember-cli-version-checker": "^5.1.2",
     "ember-concurrency": "^2.1.2 || ^3.0.0",
@@ -73,14 +71,11 @@
     "@release-it-plugins/lerna-changelog": "6.0.0",
     "bootstrap": "5.3.2",
     "broccoli-asset-rev": "3.0.0",
-    "chai": "4.4.1",
-    "chai-things": "0.2.0",
     "concurrently": "8.2.2",
     "ember-a11y-testing": "6.1.1",
     "ember-bootstrap": "workspace:*",
     "ember-cli": "5.5.0",
     "ember-cli-app-version": "6.0.1",
-    "ember-cli-blueprint-test-helpers": "0.19.2",
     "ember-cli-content-security-policy": "2.0.3",
     "ember-cli-dependency-checker": "3.3.2",
     "ember-cli-fastboot": "4.1.2",
@@ -111,7 +106,6 @@
     "eslint-plugin-qunit": "8.0.1",
     "findup-sync": "^5.0.0",
     "loader.js": "4.7.0",
-    "mocha": "10.2.0",
     "prettier": "3.0.3",
     "qunit": "2.20.0",
     "qunit-dom": "3.0.0",
@@ -119,11 +113,6 @@
     "sinon": "17.0.1",
     "tracked-toolbox": "^1.2.3 || ^2.0.0",
     "webpack": "5.89.0"
-  },
-  "peerDependencies": {
-    "@glimmer/component": "^1.0.4",
-    "@glimmer/tracking": "^1.0.4",
-    "ember-source": ">=4.8.0"
   },
   "engines": {
     "node": "18.* || >= 20"

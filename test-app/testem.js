@@ -3,11 +3,11 @@
 module.exports = {
   test_page: 'tests/index.html?hidepassed',
   disable_watching: true,
-  launch_in_ci: ['Chrome'],
-  launch_in_dev: ['Chrome'],
+  launch_in_ci: ['Edge'],
+  launch_in_dev: ['Edge'],
   browser_start_timeout: 120,
   browser_args: {
-    Chrome: {
+    Edge: {
       ci: [
         // --no-sandbox is needed when running Chrome inside a container
         process.env.CI ? '--no-sandbox' : null,

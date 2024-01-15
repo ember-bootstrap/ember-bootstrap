@@ -55,6 +55,7 @@ module.exports = {
         './blueprints/*/index.js',
         './config/**/*.js',
         './lib/**/*.js',
+        './node-tests/**/*.js',
       ],
       parserOptions: {
         sourceType: 'script',
@@ -65,6 +66,12 @@ module.exports = {
         node: true,
       },
       extends: ['plugin:n/recommended'],
+    },
+    {
+      files: ['node-tests/**/*.js'],
+      env: {
+        mocha: true,
+      },
     },
   ],
 };

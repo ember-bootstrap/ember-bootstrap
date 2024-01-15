@@ -2,10 +2,12 @@
   "private": true,
   "scripts": {
     "prepare": "husky install",
-    "test": "pnpm --filter 'test-app' test",
-    "test:ember": "pnpm --filter 'test-app' test:ember"
+    "test": "concurrently \"npm:test:*\"",
+    "test:ember": "pnpm --filter test-app test:ember",
+    "test:node": "pnpm --filter ember-bootstrap nodetest"
   },
   "devDependencies": {
+    "concurrently": "^8.2.2",
     "husky": "8.0.3",
     "lint-staged": "15.2.0"
   },
@@ -20,9 +22,6 @@
       "documentation": "Documentation",
       "internal": "Internal"
     }
-  },
-  "publishConfig": {
-    "registry": "https://registry.npmjs.org"
   },
   "release-it": {
     "plugins": {
