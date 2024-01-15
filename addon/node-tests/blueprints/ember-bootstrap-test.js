@@ -3,7 +3,6 @@
 const fs = require('fs');
 const path = require('path');
 
-// eslint-disable-next-line n/no-unpublished-require
 const blueprintHelpers = require('ember-cli-blueprint-test-helpers/helpers');
 const setupTestHooks = blueprintHelpers.setupTestHooks;
 const emberNew = blueprintHelpers.emberNew;
@@ -12,10 +11,8 @@ const modifyPackages = blueprintHelpers.modifyPackages;
 
 const BuildConfigEditor = require('ember-cli-build-config-editor');
 
-// eslint-disable-next-line n/no-unpublished-require
 const chai = require('ember-cli-blueprint-test-helpers/chai');
 const file = chai.file;
-// eslint-disable-next-line n/no-unpublished-require
 const chaiThings = require('chai-things');
 const expect = chai.expect;
 
@@ -122,7 +119,6 @@ describe('Acceptance: ember generate ember-bootstrap', function () {
   });
 
   describe('install dependencies and configuration', function () {
-    // eslint-disable-next-line n/no-unpublished-require
     let Blueprint = require('ember-cli/lib/models/blueprint');
     let origTaskFor = Blueprint.prototype.taskFor;
     let installed = {
