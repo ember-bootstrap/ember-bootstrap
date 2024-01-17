@@ -1,4 +1,4 @@
 packages:
-  - addon
+  - ember-bootstrap
   - test-app
   - docs
