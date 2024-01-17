@@ -20,7 +20,7 @@ jobs:
         uses: wyvox/action@v1
       - name: Lint addon
         run: pnpm lint
-        working-directory: addon
+        working-directory: ember-bootstrap
       - name: Lint test-app
         run: pnpm lint
         working-directory: test-app
@@ -103,7 +103,7 @@ jobs:
         uses: wyvox/action@v1
       - name: Run Node Tests
         run: pnpm nodetest
-        working-directory: addon
+        working-directory: ember-bootstrap
 
   test-docs:
     name: Docs
