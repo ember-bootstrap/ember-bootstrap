@@ -38,6 +38,7 @@
     "broccoli-asset-rev": "3.0.0",
     "concurrently": "8.2.2",
     "ember-auto-import": "2.7.2",
+    "ember-bootstrap": "workspace:*",
     "ember-bootstrap-cp-validations": "2.1.0",
     "ember-bootstrap-power-select": "5.0.0",
     "ember-cli": "5.5.0",
@@ -98,11 +99,6 @@
   },
   "ember": {
     "edition": "octane"
-  },
-  "ember-addon": {
-    "paths": [
-      "../addon"
-    ]
   },
   "volta": {
     "extends": "../package.json"
