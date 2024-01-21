@@ -24,7 +24,7 @@ gulp.task(
   'docs:build',
   gulp.series(gulp.parallel('docs:api', 'docs:app'), function () {
     return merge(
-      gulp.src('api/**/*', { base: 'docs' }),
+      gulp.src('api/**/*', { base: '.' }),
       gulp.src('dist/**/*'),
       gulp
         .src('../CHANGELOG.md')
