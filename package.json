@@ -1,6 +1,7 @@
 {
   "private": true,
   "scripts": {
+    "docs:build": "pnpm --filter ember-bootstrap-docs docs:build",
     "prepare": "husky install",
     "lint": "pnpm --filter * lint",
     "lint:fix": "pnpm --filter * lint:fix",

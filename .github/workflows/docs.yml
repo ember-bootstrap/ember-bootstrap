@@ -13,10 +13,6 @@ jobs:
     steps:
       - name: Checkout code
         uses: wyvox/action@v1
-      - name: Checkout code
-        uses: wyvox/action@v1
-        with:
-          working-directory: docs
       - name: Build docs
         run: pnpm run docs:build
       - name: Deploy
