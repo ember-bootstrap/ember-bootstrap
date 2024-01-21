@@ -11,7 +11,8 @@
   "devDependencies": {
     "concurrently": "^8.2.2",
     "husky": "8.0.3",
-    "lint-staged": "15.2.0"
+    "lint-staged": "15.2.0",
+    "release-it": "^17.0.1"
   },
   "lint-staged": {
     "*.js": "eslint --cache --fix"
@@ -28,7 +29,7 @@
   "release-it": {
     "plugins": {
       "@release-it-plugins/lerna-changelog": {
-        "infile": "../CHANGELOG.md",
+        "infile": "./CHANGELOG.md",
         "launchEditor": true
       }
     },
