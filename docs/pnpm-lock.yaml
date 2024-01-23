@@ -45,8 +45,8 @@ devDependencies:
     specifier: 5.0.0
     version: 5.0.0(ember-bootstrap@6.1.0)(ember-power-select@7.2.0)(ember-source@5.6.0)
   ember-cli:
-    specifier: 5.5.0
-    version: 5.5.0
+    specifier: 5.6.0
+    version: 5.6.0
   ember-cli-app-version:
     specifier: 6.0.1
     version: 6.0.1(ember-source@5.6.0)
@@ -55,7 +55,7 @@ devDependencies:
     version: 8.2.0(@babel/core@7.23.7)
   ember-cli-dependency-checker:
     specifier: 3.3.2
-    version: 3.3.2(ember-cli@5.5.0)
+    version: 3.3.2(ember-cli@5.6.0)
   ember-cli-fastboot:
     specifier: 4.1.2
     version: 4.1.2
@@ -5354,14 +5354,14 @@ packages:
       recast: 0.12.9
     dev: true
 
-  /ember-cli-dependency-checker@3.3.2(ember-cli@5.5.0):
+  /ember-cli-dependency-checker@3.3.2(ember-cli@5.6.0):
     resolution: {integrity: sha512-PwkrW5oYsdPWwt+0Tojufmv/hxVETTjkrEdK7ANQB2VSnqpA5UcYubwpQM9ONuR2J8wyNDMwEHlqIrk/FYtBsQ==}
     engines: {node: '>= 6'}
     peerDependencies:
       ember-cli: ^3.2.0 || >=4.0.0
     dependencies:
       chalk: 2.4.2
-      ember-cli: 5.5.0
+      ember-cli: 5.6.0
       find-yarn-workspace-root: 1.2.1
       is-git-url: 1.0.0
       resolve: 1.22.8
@@ -5731,8 +5731,8 @@ packages:
       - supports-color
     dev: true
 
-  /ember-cli@5.5.0:
-    resolution: {integrity: sha512-D3Q+mq5yOpZB1pJu4aOnVj5+LTwXmd5sJhXqZxc9Y0JFRYinl4h0HHGUMUvtV7obo811gf13ObDAaUmSfVPQbQ==}
+  /ember-cli@5.6.0:
+    resolution: {integrity: sha512-9ARiTnNgQDX6RPC37PjlEc58/e8p7pgmNu6GcmARq4iBLeTWWW+2mgw3HKoFd91ob1EdRiglskLYzgboRxtBBw==}
     engines: {node: '>= 18'}
     hasBin: true
     dependencies:
