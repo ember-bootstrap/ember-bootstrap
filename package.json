@@ -103,7 +103,7 @@
     "ember-resolver": "11.0.1",
     "ember-sinon": "5.0.0",
     "ember-sinon-qunit": "7.4.0",
-    "ember-source": "5.5.0",
+    "ember-source": "5.6.0",
     "ember-source-channel-url": "3.0.0",
     "ember-template-lint": "5.13.0",
     "ember-template-lint-plugin-prettier": "5.0.0",
