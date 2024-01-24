@@ -27,7 +27,8 @@
     "lint:hbs:fix": "ember-template-lint . --fix",
     "lint:js": "eslint . --cache",
     "lint:js:fix": "eslint . --fix",
-    "nodetest": "mocha node-tests --recursive"
+    "nodetest": "mocha node-tests --recursive",
+    "release": "release-it"
   },
   "dependencies": {
     "@ember/render-modifiers": "^2.0.0",
@@ -58,6 +59,7 @@
   "devDependencies": {
     "@babel/eslint-parser": "7.23.3",
     "@babel/plugin-proposal-decorators": "7.23.7",
+    "@release-it-plugins/lerna-changelog": "6.1.0",
     "chai": "4.4.1",
     "chai-things": "0.2.0",
     "concurrently": "8.2.2",
@@ -80,9 +82,6 @@
     "@glimmer/tracking": "^1.0.4",
     "ember-source": ">=4.8.0"
   },
-  "publishConfig": {
-    "registry": "https://registry.npmjs.org"
-  },
   "engines": {
     "node": "18.* || >= 20"
   },
@@ -94,6 +93,33 @@
       "ember": ">=4.8.0"
     },
     "demoURL": "https://www.ember-bootstrap.com"
+  },
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org"
+  },
+  "changelog": {
+    "labels": {
+      "breaking": ":boom: Breaking Change",
+      "enhancement": "Features",
+      "bug": "Bug Fixes",
+      "documentation": "Documentation",
+      "internal": "Internal"
+    }
+  },
+  "release-it": {
+    "plugins": {
+      "@release-it-plugins/lerna-changelog": {
+        "infile": "./CHANGELOG.md",
+        "launchEditor": true
+      }
+    },
+    "git": {
+      "tagName": "v${version}"
+    },
+    "github": {
+      "release": true,
+      "tokenRef": "GITHUB_AUTH"
+    }
   },
   "volta": {
     "extends": "../package.json"

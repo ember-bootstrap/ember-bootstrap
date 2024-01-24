@@ -1,5 +1,9 @@
 {
   "private": true,
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ember-bootstrap/ember-bootstrap"
+  },
   "scripts": {
     "docs:build": "pnpm --filter ember-bootstrap-docs docs:build",
     "prepare": "husky install",
@@ -7,41 +11,14 @@
     "lint:fix": "pnpm --recursive lint:fix",
     "test": "concurrently \"npm:test:*\"",
     "test:ember": "pnpm --filter test-app test:ember",
-    "test:node": "pnpm --filter ember-bootstrap nodetest"
+    "test:node": "pnpm --filter ember-bootstrap nodetest",
+    "release": "pnpm --filter ember-bootstrap release"
   },
   "devDependencies": {
     "concurrently": "^8.2.2",
     "husky": "8.0.3",
     "lint-staged": "15.2.0",
-    "release-it": "^17.0.3",
-    "@release-it-plugins/lerna-changelog": "6.1.0"
-  },
-  "lint-staged": {
-    "*.js": "eslint --cache --fix"
-  },
-  "changelog": {
-    "labels": {
-      "breaking": ":boom: Breaking Change",
-      "enhancement": "Features",
-      "bug": "Bug Fixes",
-      "documentation": "Documentation",
-      "internal": "Internal"
-    }
-  },
-  "release-it": {
-    "plugins": {
-      "@release-it-plugins/lerna-changelog": {
-        "infile": "./CHANGELOG.md",
-        "launchEditor": true
-      }
-    },
-    "git": {
-      "tagName": "v${version}"
-    },
-    "github": {
-      "release": true,
-      "tokenRef": "GITHUB_AUTH"
-    }
+    "release-it": "^17.0.3"
   },
   "volta": {
     "node": "18.19.0",
