@@ -46,7 +46,6 @@
     "@embroider/util": "1.12.1",
     "@glimmer/component": "1.1.2",
     "@glimmer/tracking": "1.1.2",
-    "@release-it-plugins/lerna-changelog": "6.0.0",
     "bootstrap": "5.3.2",
     "broccoli-asset-rev": "3.0.0",
     "broccoli-debug": "0.6.5",
@@ -57,7 +56,7 @@
     "ember-a11y-testing": "6.1.1",
     "ember-auto-import": "2.7.2",
     "ember-bootstrap": "workspace:*",
-    "ember-cli": "5.5.0",
+    "ember-cli": "5.6.0",
     "ember-cli-app-version": "6.0.1",
     "ember-cli-babel": "8.2.0",
     "ember-cli-content-security-policy": "2.0.3",
@@ -76,7 +75,7 @@
     "ember-focus-trap": "1.1.0",
     "ember-load-initializers": "2.1.2",
     "ember-on-helper": "0.1.0",
-    "ember-page-title": "8.2.0",
+    "ember-page-title": "8.2.1",
     "ember-popper-modifier": "4.0.0",
     "ember-qunit": "7.0.0",
     "ember-ref-bucket": "5.0.7",
@@ -84,7 +83,7 @@
     "ember-resolver": "11.0.1",
     "ember-sinon": "5.0.0",
     "ember-sinon-qunit": "7.4.0",
-    "ember-source": "5.5.0",
+    "ember-source": "5.6.0",
     "ember-source-channel-url": "3.0.0",
     "ember-style-modifier": "4.1.0",
     "ember-template-lint": "5.13.0",
@@ -108,7 +107,7 @@
     "silent-error": "1.1.1",
     "sinon": "17.0.1",
     "tracked-toolbox": "^1.2.3 || ^2.0.0",
-    "webpack": "5.89.0"
+    "webpack": "5.90.0"
   },
   "engines": {
     "node": "18.* || >= 20"

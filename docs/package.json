@@ -40,7 +40,7 @@
     "ember-bootstrap": "workspace:*",
     "ember-bootstrap-cp-validations": "2.1.0",
     "ember-bootstrap-power-select": "5.0.0",
-    "ember-cli": "5.5.0",
+    "ember-cli": "5.6.0",
     "ember-cli-app-version": "6.0.1",
     "ember-cli-babel": "8.2.0",
     "ember-cli-dependency-checker": "3.3.2",
@@ -57,13 +57,13 @@
     "ember-fetch": "8.1.2",
     "ember-load-initializers": "2.1.2",
     "ember-modifier": "4.1.0",
-    "ember-page-title": "8.2.0",
+    "ember-page-title": "8.2.1",
     "ember-power-select": "7.2.0",
     "ember-prism": "0.13.0",
     "ember-qunit": "7.0.0",
     "ember-resolver": "11.0.1",
     "ember-sinon-qunit": "7.4.0",
-    "ember-source": "5.5.0",
+    "ember-source": "5.6.0",
     "ember-template-lint": "5.13.0",
     "ember-template-lint-plugin-prettier": "5.0.0",
     "eslint": "8.56.0",
@@ -91,7 +91,7 @@
     "stylelint-config-standard-scss": "13.0.0",
     "stylelint-prettier": "5.0.0",
     "tracked-built-ins": "3.3.0",
-    "webpack": "5.89.0"
+    "webpack": "5.90.0"
   },
   "engines": {
     "node": "18.* || >= 20"

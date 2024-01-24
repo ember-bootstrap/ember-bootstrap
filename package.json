@@ -13,7 +13,8 @@
     "concurrently": "^8.2.2",
     "husky": "8.0.3",
     "lint-staged": "15.2.0",
-    "release-it": "^17.0.1"
+    "release-it": "^17.0.3",
+    "@release-it-plugins/lerna-changelog": "6.1.0"
   },
   "lint-staged": {
     "*.js": "eslint --cache --fix"
@@ -44,6 +45,6 @@
   },
   "volta": {
     "node": "18.19.0",
-    "pnpm": "8.14.1"
+    "pnpm": "8.14.3"
   }
 }
