@@ -18,12 +18,8 @@ jobs:
     steps:
       - name: Checkout code
         uses: wyvox/action@v1
-      - name: Lint addon
+      - name: Lint
         run: pnpm lint
-        working-directory: ember-bootstrap
-      - name: Lint test-app
-        run: pnpm lint
-        working-directory: test-app
       - name: Test
         run: pnpm test:ember
 
