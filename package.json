@@ -3,8 +3,8 @@
   "scripts": {
     "docs:build": "pnpm --filter ember-bootstrap-docs docs:build",
     "prepare": "husky install",
-    "lint": "pnpm --filter * lint",
-    "lint:fix": "pnpm --filter * lint:fix",
+    "lint": "pnpm --recursive lint",
+    "lint:fix": "pnpm --recursive lint:fix",
     "test": "concurrently \"npm:test:*\"",
     "test:ember": "pnpm --filter test-app test:ember",
     "test:node": "pnpm --filter ember-bootstrap nodetest"
