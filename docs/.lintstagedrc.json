@@ -1,4 +1,4 @@
 {
   "*.js": "eslint --cache --fix",
-  "*.hbs": "ember-template-lint"
+  "*.hbs": "ember-template-lint --fix"
 }

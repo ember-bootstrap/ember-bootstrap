@@ -17,6 +17,9 @@ importers:
       lint-staged:
         specifier: 15.2.0
         version: 15.2.0
+      release-it:
+        specifier: ^17.0.3
+        version: 17.0.3
 
   docs:
     devDependencies:
@@ -357,9 +360,6 @@ importers:
       mocha:
         specifier: 10.2.0
         version: 10.2.0
-      release-it:
-        specifier: ^17.0.3
-        version: 17.0.3
 
   test-app:
     devDependencies:
