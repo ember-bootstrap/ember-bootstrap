@@ -1,25 +1,6 @@
 {
   "private": true,
   "name": "test-app",
-  "version": "6.1.0",
-  "description": "Bootstrap components for Ember.js",
-  "keywords": [
-    "bootstrap"
-  ],
-  "homepage": "https://www.ember-bootstrap.com/",
-  "bugs": {
-    "url": "https://github.com/ember-bootstrap/ember-bootstrap/issues"
-  },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/ember-bootstrap/ember-bootstrap"
-  },
-  "license": "MIT",
-  "author": "Simon Ihmig <ihmig@kaliber5.de>",
-  "directories": {
-    "doc": "docs",
-    "test": "tests"
-  },
   "scripts": {
     "build": "ember build --environment=production",
     "changelog": "lerna-changelog",
@@ -30,7 +11,7 @@
     "lint:js": "eslint . --cache",
     "lint:js:fix": "eslint . --fix",
     "start": "ember serve",
-    "testa": "concurrently \"npm:lint\" \"npm:test:*\" --names \"lint,test:\"",
+    "test": "concurrently \"npm:lint\" \"npm:test:*\" --names \"lint,test:\"",
     "test:ember": "ember test",
     "test:ember-compatibility": "ember try:each"
   },

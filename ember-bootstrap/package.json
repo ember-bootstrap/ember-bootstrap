@@ -16,10 +16,6 @@
   },
   "license": "MIT",
   "author": "Simon Ihmig <ihmig@kaliber5.de>",
-  "directories": {
-    "doc": "docs",
-    "test": "tests"
-  },
   "scripts": {
     "lint": "concurrently \"npm:lint:*(!fix)\" --names \"lint:\"",
     "lint:fix": "concurrently \"npm:lint:*:fix\" --names \"fix:\"",
@@ -59,6 +55,7 @@
   "devDependencies": {
     "@babel/eslint-parser": "7.23.3",
     "@babel/plugin-proposal-decorators": "7.23.7",
+    "@embroider/test-setup": "2.1.1",
     "@release-it-plugins/lerna-changelog": "6.1.0",
     "chai": "4.4.1",
     "chai-things": "0.2.0",

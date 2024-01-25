@@ -1,14 +1,6 @@
 {
   "name": "ember-bootstrap-docs",
   "private": true,
-  "description": "ember-bootstrap docs",
-  "repository": "https://github.com/kaliber5/ember-bootstrap",
-  "license": "MIT",
-  "author": "Simon Ihmig <ihmig@kaliber5.de>",
-  "directories": {
-    "doc": "doc",
-    "test": "tests"
-  },
   "scripts": {
     "docs:build": "gulp docs:build",
     "docs:serve": "gulp docs:serve",

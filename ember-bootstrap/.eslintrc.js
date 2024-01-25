@@ -66,6 +66,9 @@ module.exports = {
         node: true,
       },
       extends: ['plugin:n/recommended'],
+      rules: {
+        'n/no-unpublished-require': 'off',
+      },
     },
     {
       files: ['node-tests/**/*.js'],
