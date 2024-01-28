@@ -1,12 +1,22 @@
-import { oneWay } from '@ember/object/computed';
 import Controller from '@ember/controller';
-import { A } from '@ember/array';
+import { tracked } from '@glimmer/tracking';
 
-export default Controller.extend({
-  visible: true,
-  fade: true,
-  dismissible: true,
-  headerTag: 'h4',
-  type: oneWay('typeChoices.firstObject'),
-  typeChoices: A(['success', 'info', 'warning', 'danger']),
-});
+export default class AlertController extends Controller {
+  @tracked
+  visible = true;
+
+  @tracked
+  fade = true;
+
+  @tracked
+  dismissible = true;
+
+  @tracked
+  headerTag = 'h4';
+
+  @tracked
+  typeChoices = ['success', 'info', 'warning', 'danger'];
+
+  @tracked
+  type = this.typeChoices[0];
+}
