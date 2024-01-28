@@ -53,14 +53,14 @@
   </div>
 
   {{#if this.showControls}}
-    <a class="carousel-control-prev" href="#{{this.elementId}}" {{on "click" this.toPrevSlide}} role="button">
+    <button class="carousel-control-prev" type="button" {{on "click" this.toPrevSlide}}>
       <span aria-hidden="true" class="carousel-control-prev-icon"></span>
       <span class={{if (macroCondition (macroGetOwnConfig "isBS5")) "visually-hidden" "sr-only"}}>{{this.prevControlLabel}}</span>
-    </a>
-    <a class="carousel-control-next" href="#{{this.elementId}}" {{on "click" this.toNextSlide}} role="button">
+    </button>
+    <button class="carousel-control-next" type="button" {{on "click" this.toNextSlide}}>
       <span aria-hidden="true" class="carousel-control-next-icon"></span>
       <span class={{if (macroCondition (macroGetOwnConfig "isBS5")) "visually-hidden" "sr-only"}}>{{this.nextControlLabel}}</span>
-    </a>
+    </button>
   {{/if}}
 
 </div>
