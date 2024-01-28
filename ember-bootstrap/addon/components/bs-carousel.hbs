@@ -10,11 +10,30 @@
   {{did-update this.indexObserver this.index}}
 >
   {{#if this.showIndicators}}
-    <ol class="carousel-indicators">
-      {{#each this.indicators as |indicator _index|}}
-        <li class={{if (bs-eq this.currentIndex _index) "active"}} {{on "click" (fn this.toSlide _index)}} role="button"></li>
-      {{/each}}
-    </ol>
+    {{#if (macroCondition (macroGetOwnConfig "isBS5"))}}
+      <div class="carousel-indicators">
+        {{#each this.indicators as |indicator _index|}}
+          <button
+            data-bs-target
+            type="button"
+            class={{if (bs-eq this.currentIndex _index) "active"}}
+            aria-current="{{bs-eq this.currentIndex _index}}"
+            {{on "click" (fn this.toSlide _index)}}
+          />
+        {{/each}}
+      </div>
+    {{else}}
+      <ol class="carousel-indicators">
+        {{#each this.indicators as |indicator _index|}}
+          <li
+            role="button"
+            class={{if (bs-eq this.currentIndex _index) "active"}}
+            {{on "click" (fn this.toSlide _index)}}
+          />
+        {{/each}}
+      </ol>
+    {{/if}}
+
   {{/if}}
 
   <div class="carousel-inner" role="listbox">
