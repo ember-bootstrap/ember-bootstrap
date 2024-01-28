@@ -1,0 +1,4 @@
+packages:
+  - ember-bootstrap
+  - test-app
+  - docs

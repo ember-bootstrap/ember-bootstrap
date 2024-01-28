@@ -1,0 +1,17 @@
+{
+  "name": "ember-bootstrap",
+  "description": "Twitter Bootstrap components for Ember.js",
+  "version": "3.1.3",
+  "options": {
+    "paths": [
+      "../ember-bootstrap/addon/components",
+      "../ember-bootstrap/addon/mixins"
+    ],
+    "exclude": "vendor",
+    "outdir": "api",
+    "themedir": "yuidoc-theme",
+    "helpers": [
+      "yuidoc-theme/helpers/index.js"
+    ]
+  }
+}
