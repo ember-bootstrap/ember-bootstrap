@@ -5,6 +5,8 @@ import { tracked } from '@glimmer/tracking';
 import { action } from '@ember/object';
 import { registerDestructor } from '@ember/destroyable';
 
+// TODO BS5: Add right classes on transition (bs-carousel-start/bs-carousel-end)
+
 /**
   A visible user-defined slide.
 
