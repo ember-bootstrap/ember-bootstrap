@@ -228,6 +228,8 @@ export default class Carousel extends Component {
    * @private
    * @type string
    */
+  @tracked
+  orderClassName = this.args.orderClassName ?? null;
 
   /**
    * The current state of the current presentation, can be either "didTransition"
