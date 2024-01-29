@@ -6,11 +6,16 @@ import { delay, test, visuallyHiddenClass } from '../../helpers/bootstrap';
 import setupNoDeprecations from '../../helpers/setup-no-deprecations';
 import a11yAudit from 'ember-a11y-testing/test-support/audit';
 import sinon from 'sinon';
+import { getConfig, macroCondition } from '@embroider/macros';
 
 const TRANSITION_DURATION = 50;
 
+const INDICATOR_ELEMENT = macroCondition(getConfig('ember-bootstrap').isBS5)
+  ? 'button'
+  : 'li';
+
 function clickIndicator(index) {
-  return click(`.carousel-indicators li:nth-child(${index})`);
+  return click(`.carousel-indicators ${INDICATOR_ELEMENT}:nth-child(${index})`);
 }
 
 function clickToNextSlide() {
@@ -93,7 +98,7 @@ module('Integration | Component | bs-carousel', function (hooks) {
     );
 
     assert
-      .dom('.carousel-indicators li')
+      .dom(`.carousel-indicators ${INDICATOR_ELEMENT}`)
       .exists({ count: 2 }, 'has right number of indicators');
     assert
       .dom('.carousel-inner .carousel-item')
@@ -348,7 +353,7 @@ module('Integration | Component | bs-carousel', function (hooks) {
     );
     await clickIndicator(2);
     assert
-      .dom('.carousel-indicators > li:nth-child(2).active')
+      .dom(`.carousel-indicators > ${INDICATOR_ELEMENT}:nth-child(2).active`)
       .exists('indicators changes indicator index');
     assert.notOk(getActivatedSlide(1), 'indicators changes slide index');
     assert.ok(getActivatedSlide(2), 'indicators changes slide index');
