@@ -23,11 +23,11 @@ const INDICATOR_ELEMENT = macroCondition(getConfig('ember-bootstrap').isBS5)
 
 const DIRECTION_NEXT = macroCondition(getConfig('ember-bootstrap').isBS5)
   ? 'start'
-  : 'right';
+  : 'left';
 
 const DIRECTION_PREVIOUS = macroCondition(getConfig('ember-bootstrap').isBS5)
   ? 'end'
-  : 'left';
+  : 'right';
 
 function clickIndicator(index) {
   return click(`.carousel-indicators ${INDICATOR_ELEMENT}:nth-child(${index})`);
