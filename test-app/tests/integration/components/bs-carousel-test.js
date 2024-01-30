@@ -21,6 +21,14 @@ const INDICATOR_ELEMENT = macroCondition(getConfig('ember-bootstrap').isBS5)
   ? 'button'
   : 'li';
 
+const DIRECTION_NEXT = macroCondition(getConfig('ember-bootstrap').isBS5)
+  ? 'start'
+  : 'right';
+
+const DIRECTION_PREVIOUS = macroCondition(getConfig('ember-bootstrap').isBS5)
+  ? 'end'
+  : 'left';
+
 function clickIndicator(index) {
   return click(`.carousel-indicators ${INDICATOR_ELEMENT}:nth-child(${index})`);
 }
@@ -332,17 +340,17 @@ module('Integration | Component | bs-carousel', function (hooks) {
 >{{car.slide}}{{car.slide}}</BsCarousel>`,
     );
     clickToNextSlide();
-    await waitFor('.carousel-item-start');
+    await waitFor(`.carousel-item-${DIRECTION_NEXT}`);
     assert
       .dom('.carousel-inner div:nth-child(1)')
       .hasClass(
-        'carousel-item-start',
+        `carousel-item-${DIRECTION_NEXT}`,
         'transition to next slide sets correct direction class to source slide',
       );
     assert
       .dom('.carousel-inner div:nth-child(2)')
       .hasClass(
-        'carousel-item-start',
+        `carousel-item-${DIRECTION_NEXT}`,
         'transition to next slide sets correct direction class to target slide',
       )
       .hasClass(
@@ -364,17 +372,17 @@ module('Integration | Component | bs-carousel', function (hooks) {
 >{{car.slide}}{{car.slide}}</BsCarousel>`,
     );
     clickToPrevSlide();
-    await waitFor('.carousel-item-end');
+    await waitFor(`.carousel-item-${DIRECTION_PREVIOUS}`);
     assert
       .dom('.carousel-inner div:nth-child(2)')
       .hasClass(
-        'carousel-item-end',
+        `carousel-item-${DIRECTION_PREVIOUS}`,
         'transition to previous slide sets correct direction class to source slide',
       );
     assert
       .dom('.carousel-inner div:nth-child(1)')
       .hasClass(
-        'carousel-item-end',
+        `carousel-item-${DIRECTION_PREVIOUS}`,
         'transition to previous slide sets correct direction class to target slide',
       )
       .hasClass(
