@@ -53,8 +53,8 @@
     "tracked-toolbox": "^1.2.3 || ^2.0.0"
   },
   "devDependencies": {
-    "@babel/eslint-parser": "7.23.3",
-    "@babel/plugin-proposal-decorators": "7.23.7",
+    "@babel/eslint-parser": "7.23.10",
+    "@babel/plugin-proposal-decorators": "7.23.9",
     "@embroider/test-setup": "2.1.1",
     "@release-it-plugins/lerna-changelog": "6.1.0",
     "chai": "4.4.1",
