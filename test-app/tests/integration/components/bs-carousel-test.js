@@ -1,6 +1,13 @@
 import hbs from 'htmlbars-inline-precompile';
 import { module, skip } from 'qunit';
-import { click, getContext, render, triggerEvent } from '@ember/test-helpers';
+import {
+  click,
+  getContext,
+  render,
+  settled,
+  triggerEvent,
+  waitFor,
+} from '@ember/test-helpers';
 import { setupRenderingTest } from 'ember-qunit';
 import { delay, test, visuallyHiddenClass } from '../../helpers/bootstrap';
 import setupNoDeprecations from '../../helpers/setup-no-deprecations';
@@ -13,6 +20,14 @@ const TRANSITION_DURATION = 50;
 const INDICATOR_ELEMENT = macroCondition(getConfig('ember-bootstrap').isBS5)
   ? 'button'
   : 'li';
+
+const DIRECTION_NEXT = macroCondition(getConfig('ember-bootstrap').isBS5)
+  ? 'start'
+  : 'left';
+
+const DIRECTION_PREVIOUS = macroCondition(getConfig('ember-bootstrap').isBS5)
+  ? 'end'
+  : 'right';
 
 function clickIndicator(index) {
   return click(`.carousel-indicators ${INDICATOR_ELEMENT}:nth-child(${index})`);
@@ -324,7 +339,25 @@ module('Integration | Component | bs-carousel', function (hooks) {
   as |car|
 >{{car.slide}}{{car.slide}}</BsCarousel>`,
     );
-    await clickToNextSlide();
+    clickToNextSlide();
+    await waitFor(`.carousel-item-${DIRECTION_NEXT}`);
+    assert
+      .dom('.carousel-inner div:nth-child(1)')
+      .hasClass(
+        `carousel-item-${DIRECTION_NEXT}`,
+        'transition to next slide sets correct direction class to source slide',
+      );
+    assert
+      .dom('.carousel-inner div:nth-child(2)')
+      .hasClass(
+        `carousel-item-${DIRECTION_NEXT}`,
+        'transition to next slide sets correct direction class to target slide',
+      )
+      .hasClass(
+        'carousel-item-next',
+        'transition to next slide sets correct order class to target slide',
+      );
+    await settled();
     assert.notOk(getActivatedSlide(1), 'right control changes slide');
     assert.ok(getActivatedSlide(2), 'right control changes slide');
   });
@@ -338,7 +371,25 @@ module('Integration | Component | bs-carousel', function (hooks) {
   as |car|
 >{{car.slide}}{{car.slide}}</BsCarousel>`,
     );
-    await clickToPrevSlide();
+    clickToPrevSlide();
+    await waitFor(`.carousel-item-${DIRECTION_PREVIOUS}`);
+    assert
+      .dom('.carousel-inner div:nth-child(2)')
+      .hasClass(
+        `carousel-item-${DIRECTION_PREVIOUS}`,
+        'transition to previous slide sets correct direction class to source slide',
+      );
+    assert
+      .dom('.carousel-inner div:nth-child(1)')
+      .hasClass(
+        `carousel-item-${DIRECTION_PREVIOUS}`,
+        'transition to previous slide sets correct direction class to target slide',
+      )
+      .hasClass(
+        'carousel-item-prev',
+        'transition to previous slide sets correct order class to target slide',
+      );
+    await settled();
     assert.ok(getActivatedSlide(1), 'left control changes slide');
     assert.notOk(getActivatedSlide(2), 'autoPlay has correct behavior');
   });
