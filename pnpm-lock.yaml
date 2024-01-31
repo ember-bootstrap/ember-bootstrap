@@ -9,7 +9,7 @@ importers:
   .:
     devDependencies:
       concurrently:
-        specifier: ^8.2.2
+        specifier: 8.2.2
         version: 8.2.2
       husky:
         specifier: 9.0.7
@@ -382,7 +382,7 @@ importers:
         specifier: 3.2.1
         version: 3.2.1(ember-source@5.6.0)(webpack@5.90.0)
       '@embroider/addon-dev':
-        specifier: ^4.1.3
+        specifier: 4.1.3
         version: 4.1.3(rollup@4.9.6)
       '@embroider/macros':
         specifier: 1.13.4
@@ -580,7 +580,7 @@ importers:
         specifier: 17.0.1
         version: 17.0.1
       tracked-toolbox:
-        specifier: ^1.2.3 || ^2.0.0
+        specifier: 2.0.0
         version: 2.0.0(@babel/core@7.23.6)(ember-source@5.6.0)
       webpack:
         specifier: 5.90.0
