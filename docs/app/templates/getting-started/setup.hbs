@@ -6,6 +6,15 @@
 
 <pre class="highlight">ember install ember-bootstrap</pre>
 
+<p>
+  To allow Bootstrap to render modals and tooltips, add
+  <code>&lt;div id=&quot;ember-bootstrap-wormhole&quot;&gt;&lt;/div&gt;</code>
+  to either the
+  <code>app/index.html</code>
+  or
+  <code>app/templates/application.hbs</code>.
+</p>
+
 <h2>Configuration</h2>
 
 <h3>Using the default blueprint</h3>
@@ -85,7 +94,7 @@
 <h2>All configuration options</h2>
 
 <p>
-  Besides the above mentioned configuration options that are handled explicitly
+  Besides the above-mentioned configuration options that are handled explicitly
   using the default blueprint, you can further customize your setup with the
   following options:
 </p>
@@ -123,26 +132,6 @@
         <p>See the
           <LinkTo @route="getting-started.assets">Assets guide</LinkTo>
           for more details.</p>
-      </td>
-    </tr>
-    <tr>
-      <td>insertEmberWormholeElementToDom</td>
-      <td><code>true</code> / <code>false</code></td>
-      <td><code>true</code></td>
-      <td>
-        <p>
-          Will automatically insert a div into your index.html, where
-          Bootstrap's modals and tooltips will be rendered to. If you set this
-          to false, you will have to add an
-          <code>&lt;div id=&quot;ember-bootstrap-wormhole&quot;&gt;&lt;/div&gt;</code>
-          element by yourself, e.g. into your
-          <code>application.hbs</code>.
-        </p>
-        <p>
-          This is especially required if you render your Ember app into a custom
-          application root element, e.g. on an server rendered page, where the
-          default div is not available.
-        </p>
       </td>
     </tr>
     <tr>
