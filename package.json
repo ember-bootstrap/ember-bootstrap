@@ -16,7 +16,7 @@
   },
   "devDependencies": {
     "concurrently": "8.2.2",
-    "husky": "9.0.7",
+    "husky": "9.0.10",
     "lint-staged": "15.2.1"
   },
   "volta": {
