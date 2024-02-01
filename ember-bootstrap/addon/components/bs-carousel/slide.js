@@ -58,6 +58,7 @@ export default class CarouselSlide extends Component {
    * @type boolean
    * @private
    */
+  @tracked
   left = false;
 
   /**
@@ -67,6 +68,7 @@ export default class CarouselSlide extends Component {
    * @type boolean
    * @private
    */
+  @tracked
   next = false;
 
   /**
@@ -76,6 +78,7 @@ export default class CarouselSlide extends Component {
    * @type boolean
    * @private
    */
+  @tracked
   prev = false;
 
   /**
@@ -85,6 +88,7 @@ export default class CarouselSlide extends Component {
    * @type boolean
    * @private
    */
+  @tracked
   right = false;
 
   constructor(owner, args) {
@@ -135,7 +139,7 @@ export default class CarouselSlide extends Component {
    * @private
    */
   currentSlideDidTransition() {
-    this.directionalClassName = false;
+    this[this.args.directionalClassName] = false;
     this.active = false;
   }
 
@@ -146,7 +150,7 @@ export default class CarouselSlide extends Component {
   currentSlideWillTransit() {
     this.active = true;
     next(this, function () {
-      this.directionalClassName = true;
+      this[this.args.directionalClassName] = true;
     });
   }
 
@@ -156,8 +160,8 @@ export default class CarouselSlide extends Component {
    */
   followingSlideDidTransition() {
     this.active = true;
-    this.directionalClassName = false;
-    this.orderClassName = false;
+    this[this.args.directionalClassName] = false;
+    this[this.args.orderClassName] = false;
   }
 
   /**
@@ -165,10 +169,10 @@ export default class CarouselSlide extends Component {
    * @private
    */
   followingSlideWillTransit() {
-    this.orderClassName = true;
+    this[this.args.orderClassName] = true;
     next(this, () => {
       this.reflow();
-      this.directionalClassName = true;
+      this[this.args.directionalClassName] = true;
     });
   }
 

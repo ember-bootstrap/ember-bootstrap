@@ -131,7 +131,7 @@ export default class Carousel extends Component {
    * @private
    */
   @tracked
-  currentIndex = this.args.currentIndex ?? this.index;
+  currentIndex = this.index;
 
   /**
    * The current slide object that is going to be used by the nested slides components.
@@ -152,7 +152,7 @@ export default class Carousel extends Component {
    * @type { 'left' | 'right' | null }
    */
   @tracked
-  directionalClassName = this.args.directionalClassName ?? null;
+  directionalClassName = null;
 
   /**
    * Indicates the next slide index to move into.
@@ -162,7 +162,7 @@ export default class Carousel extends Component {
    * @type number
    */
   @tracked
-  followingIndex = this.args.followingIndex ?? null;
+  followingIndex = null;
 
   /**
    * The following slide object that is going to be used by the nested slides components.
@@ -228,6 +228,8 @@ export default class Carousel extends Component {
    * @private
    * @type string
    */
+  @tracked
+  orderClassName = null;
 
   /**
    * The current state of the current presentation, can be either "didTransition"
@@ -238,7 +240,7 @@ export default class Carousel extends Component {
    * @type { 'didTransition' | 'willTransit' | null }
    */
   @tracked
-  presentationState = this.args.presentationState ?? null;
+  presentationState = null;
 
   /**
    * The class name to append to the previous control link element.
