@@ -86,7 +86,7 @@ export function getDestinationElement(context) {
     }
 
     warn(
-      `No wormhole destination element found for component ${context}. If you have set \`insertEmberWormholeElementToDom\` to false, you should insert a \`div#ember-bootstrap-wormhole\` manually!`,
+      `No wormhole destination element found for component ${context}. Add \`<div id="ember-bootstrap-wormhole"></div>\` to \`app/index.html\` or \`app/templates/application.hbs\`!`,
       false,
       { id: 'ember-bootstrap.no-destination-element' },
     );
