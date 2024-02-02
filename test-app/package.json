@@ -89,7 +89,7 @@
     "silent-error": "1.1.1",
     "sinon": "17.0.1",
     "tracked-toolbox": "2.0.0",
-    "webpack": "5.90.0"
+    "webpack": "5.90.1"
   },
   "engines": {
     "node": "18.* || >= 20"
