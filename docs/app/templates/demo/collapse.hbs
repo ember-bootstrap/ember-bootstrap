@@ -1,5 +1,5 @@
 <div class="bs-example" data-test-fastboot-container>
-  <BsButton @active={{this.notCollapsed}} @onClick={{action "toggle"}}>
+  <BsButton @active={{this.notCollapsed}} @onClick={{this.toggle}}>
     {{#if this.collapsed}}
       Show
     {{else}}
