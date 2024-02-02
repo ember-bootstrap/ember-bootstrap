@@ -1,10 +1,10 @@
-import { inject as service } from '@ember/service';
+import { service } from '@ember/service';
 import Route from '@ember/routing/route';
 
-export default Route.extend({
-  component: service(),
+export default class DemoRoute extends Route {
+  @service component;
 
   model() {
     return this.component.findAll();
-  },
-});
+  }
+}
