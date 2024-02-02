@@ -123,14 +123,14 @@ const componentData = A([
 
 const components = A(componentData.map((data) => new Component(data)));
 
-export default Service.extend({
-  models: components,
+export default class ComponentService extends Service {
+  models = components;
 
   findAll() {
     return components;
-  },
+  }
 
   find(id) {
     return components.findBy('id', id);
-  },
-});
+  }
+}
