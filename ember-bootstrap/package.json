@@ -72,7 +72,8 @@
     "eslint-plugin-n": "16.6.2",
     "eslint-plugin-prettier": "5.1.3",
     "eslint-plugin-qunit": "8.0.1",
-    "mocha": "10.2.0"
+    "mocha": "10.2.0",
+    "release-it": "17.0.3"
   },
   "peerDependencies": {
     "@glimmer/component": "^1.0.4",
