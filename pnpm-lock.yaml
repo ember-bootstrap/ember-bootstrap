@@ -289,7 +289,7 @@ importers:
         version: 5.6.0(@babel/core@7.23.9)(@glimmer/component@1.1.2)(rsvp@4.8.5)(webpack@5.90.1)
       ember-style-modifier:
         specifier: ^0.8.0 || ^1.0.0 || ^2.0.0 || ^3.0.0 || ^4.0.0
-        version: 4.1.0(@ember/string@3.1.1)(ember-source@5.6.0)(webpack@5.90.1)
+        version: 4.2.0(@ember/string@3.1.1)(ember-source@5.6.0)
       findup-sync:
         specifier: ^5.0.0
         version: 5.0.0
@@ -520,8 +520,8 @@ importers:
         specifier: 3.0.0
         version: 3.0.0
       ember-style-modifier:
-        specifier: 4.1.0
-        version: 4.1.0(@ember/string@3.1.1)(ember-source@5.6.0)(webpack@5.90.1)
+        specifier: 4.2.0
+        version: 4.2.0(@ember/string@3.1.1)(ember-source@5.6.0)
       ember-template-lint:
         specifier: 5.13.0
         version: 5.13.0
@@ -6233,6 +6233,14 @@ packages:
       mimic-response: 3.1.0
     dev: true
 
+  /decorator-transforms@1.1.0(@babel/core@7.23.9):
+    resolution: {integrity: sha512-n3WCgc3PB2t9mLV4SJd87IjTbKeFUGw2sU5eEBYczSmcvj3guX4eMW4XOowlQqGk7I/da6+bwv1ydw1ZtNqWaw==}
+    dependencies:
+      '@babel/plugin-syntax-decorators': 7.23.3(@babel/core@7.23.9)
+      babel-import-util: 2.0.1
+    transitivePeerDependencies:
+      - '@babel/core'
+
   /deep-eql@0.1.3:
     resolution: {integrity: sha512-6sEotTRGBFiNcqVoeHwnfopbSpi5NbH1VWJmYCVkmxMmaVTT0bUTrNaGyBwhgP4MZL012W/mkzIn3Da+iDYweg==}
     dependencies:
@@ -7860,24 +7868,21 @@ packages:
       - webpack
     dev: true
 
-  /ember-style-modifier@4.1.0(@ember/string@3.1.1)(ember-source@5.6.0)(webpack@5.90.1):
-    resolution: {integrity: sha512-np1rRP6hpCQSwFL1bUv1+2K/lnRCLSoR12UItcI253vwneSL7YKiNoQExOfSlrPOJA6g1pXl1VoD22cYy+cYGg==}
-    engines: {node: 18.* || >= 20}
+  /ember-style-modifier@4.2.0(@ember/string@3.1.1)(ember-source@5.6.0):
+    resolution: {integrity: sha512-BkVoyhi6P6SY+1aaC4oGrdUSqGw7mFPWNsHLgP/wYgEPWpBWYEWtEdqkrgoWz66Yw8zye9qo9PTUH7JL9eiiZA==}
     peerDependencies:
       '@ember/string': ^3.0.1
-      ember-source: '>= 4.12.0'
+      ember-source: ^3.28.0 || ^4.0.0 || >=5.0.0
     dependencies:
       '@babel/core': 7.23.9
       '@ember/string': 3.1.1
+      '@embroider/addon-shim': 1.8.7
       csstype: 3.1.3
-      ember-auto-import: 2.7.2(webpack@5.90.1)
-      ember-cli-babel: 8.2.0(@babel/core@7.23.9)
+      decorator-transforms: 1.1.0(@babel/core@7.23.9)
       ember-modifier: 4.1.0(ember-source@5.6.0)
       ember-source: 5.6.0(@babel/core@7.23.9)(@glimmer/component@1.1.2)(rsvp@4.8.5)(webpack@5.90.1)
     transitivePeerDependencies:
-      - '@glint/template'
       - supports-color
-      - webpack
 
   /ember-template-imports@3.4.2:
     resolution: {integrity: sha512-OS8TUVG2kQYYwP3netunLVfeijPoOKIs1SvPQRTNOQX4Pu8xGGBEZmrv0U1YTnQn12Eg+p6w/0UdGbUnITjyzw==}
@@ -13972,6 +13977,7 @@ packages:
 
   /psl@1.9.0:
     resolution: {integrity: sha512-E/ZsdU4HLs/68gYzgGTkMicWTLPdAftJLfJFlLUAAKZGkStNU72sZjT66SnMDVOfOWY/YAoiD7Jxa9iHvngcag==}
+    requiresBuild: true
     dev: true
 
   /pump@2.0.1:
@@ -14026,6 +14032,7 @@ packages:
 
   /querystringify@2.2.0:
     resolution: {integrity: sha512-FIqgj2EUvTa7R50u0rGsyTftzjYmv/a3hO345bZNrqabNqjtgiDMgmo4mkUjd+nzU5oF3dClKqFIPUKybUyqoQ==}
+    requiresBuild: true
     dev: true
 
   /queue-microtask@1.2.3:
@@ -16668,6 +16675,7 @@ packages:
   /universalify@0.2.0:
     resolution: {integrity: sha512-CJ1QgKmNg3CwvAv/kOFmtnEN05f0D/cn9QntgNOQlQF9dgvVTHj3t+8JPdjqawCHk7V/KA+fbUqzZ9XWhcqPUg==}
     engines: {node: '>= 4.0.0'}
+    requiresBuild: true
     dev: true
 
   /universalify@2.0.1:
@@ -16749,6 +16757,7 @@ packages:
 
   /url-parse@1.5.10:
     resolution: {integrity: sha512-WypcfiRhfeUP9vvF0j6rw0J3hrWrw6iZv3+22h6iRMJ/8z1Tj6XfLP4DsUix5MhMPnXpiHDoKyoZ/bdCkwBCiQ==}
+    requiresBuild: true
     dependencies:
       querystringify: 2.2.0
       requires-port: 1.0.0
