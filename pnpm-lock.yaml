@@ -385,8 +385,8 @@ importers:
         specifier: 3.2.1
         version: 3.2.1(ember-source@5.6.0)(webpack@5.90.1)
       '@embroider/addon-dev':
-        specifier: 4.2.0
-        version: 4.2.0(rollup@4.9.6)
+        specifier: 4.2.1
+        version: 4.2.1(rollup@4.9.6)
       '@embroider/macros':
         specifier: 1.13.5
         version: 1.13.5
@@ -1962,8 +1962,8 @@ packages:
       - supports-color
     dev: true
 
-  /@embroider/addon-dev@4.2.0(rollup@4.9.6):
-    resolution: {integrity: sha512-sXCTu4KAdjBv0gf8bglFirYFe4n0sfshszBoD3uRbX0VMVxfX1Yy6+Op5kOHcj3y9aD/MsxSDhYF7but8N/sRw==}
+  /@embroider/addon-dev@4.2.1(rollup@4.9.6):
+    resolution: {integrity: sha512-oMNlVqsqNjtNu7sFGGgo4igOy+Xa7g1I1aXMf7XRbYKWBCiYKX7C7lDKZ65qgsEpRKV3LtbC+XIYiGfHiqhFAg==}
     engines: {node: 12.* || 14.* || >= 16}
     hasBin: true
     dependencies:
