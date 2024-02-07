@@ -87,8 +87,8 @@ importers:
         specifier: 11.0.1
         version: 11.0.1
       ember-cli-showdown:
-        specifier: 8.0.0
-        version: 8.0.0(ember-source@5.6.0)(webpack@5.90.1)
+        specifier: 8.1.0
+        version: 8.1.0(ember-source@5.6.0)(webpack@5.90.1)
       ember-cli-sri:
         specifier: 2.1.1
         version: 2.1.1
@@ -7067,8 +7067,8 @@ packages:
       - supports-color
     dev: true
 
-  /ember-cli-showdown@8.0.0(ember-source@5.6.0)(webpack@5.90.1):
-    resolution: {integrity: sha512-77/r5rdrG4+kizaM1RYuybAbUPrTgsRkC12hc4zF/MvvfAvOAmVqzbKF6yS9BzlKxkjTZa0DesBWOxRw6N94uA==}
+  /ember-cli-showdown@8.1.0(ember-source@5.6.0)(webpack@5.90.1):
+    resolution: {integrity: sha512-+SEDp4ZlR7IfswamHY4nVYwIgMXk0t0rPmekxuHYb4MxcaEIw7J1Db+jBMuchs2PMq2XJjZH9hwAtY94ccouiQ==}
     engines: {node: 14.* || 16.* || >= 18}
     peerDependencies:
       ember-source: ^3.12.0 || >4.0.0
