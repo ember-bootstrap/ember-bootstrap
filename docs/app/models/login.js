@@ -1,6 +1,7 @@
 // BEGIN-SNIPPET login-model
 import EmberObject from '@ember/object';
 import { validator, buildValidations } from 'ember-cp-validations';
+import { tracked } from '@glimmer/tracking';
 
 const Validations = buildValidations({
   password: [
@@ -18,9 +19,8 @@ const Validations = buildValidations({
   email: [validator('presence', true), validator('format', { type: 'email' })],
 });
 
-export default EmberObject.extend(Validations, {
-  email: null,
-  password: null,
-  rememberMe: false,
-});
+export default class Login extends EmberObject.extend(Validations) {
+  @tracked email = null;
+  @tracked password = null;
+}
 // END-SNIPPET
