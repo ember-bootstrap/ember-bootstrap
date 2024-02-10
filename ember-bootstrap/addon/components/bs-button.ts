@@ -1,7 +1,54 @@
 import { tracked } from '@glimmer/tracking';
 import { action } from '@ember/object';
 import Component from '@glimmer/component';
-import arg from 'ember-bootstrap/utils/decorators/arg';
+import arg from '../utils/decorators/arg';
+
+type ButtonState = 'default' | 'pending' | 'fulfilled' | 'rejected';
+
+interface ButtonSignature<VALUE = undefined> {
+  Element: HTMLButtonElement;
+  Args: {
+    active?: boolean;
+    block?: boolean;
+    bubble?: boolean;
+    buttonType?: 'button' | 'submit' | 'reset';
+    defaultText?: string;
+    fulfilledText?: string;
+    icon?: string;
+    iconActive?: string;
+    iconInactive?: string;
+    outline?: boolean;
+    pendingText?: string;
+    preventConcurrency?: boolean;
+    rejectedText?: string;
+    reset?: boolean;
+    size?: 'lg' | 'sm' | null;
+    type?: string;
+    value: VALUE;
+    onClick?: (value: VALUE) => Promise<void> | void;
+
+    // private args, for internal use only!
+    /**
+     * @internal
+     */
+    _disabled?: boolean;
+
+    /**
+     * @internal
+     */
+    state?: ButtonState;
+  };
+  Blocks: {
+    default: [
+      {
+        isFulfilled: boolean;
+        isPending: boolean;
+        isRejected: boolean;
+        isSettled: boolean;
+      },
+    ];
+  };
+}
 
 /**
   Implements a HTML button element, with support for all [Bootstrap button CSS styles](http://getbootstrap.com/css/#buttons)
@@ -95,7 +142,7 @@ import arg from 'ember-bootstrap/utils/decorators/arg';
   @extends Glimmer.Component
   @public
 */
-export default class Button extends Component {
+export default class Button<VALUE> extends Component<ButtonSignature<VALUE>> {
   /**
    * Default label of the button. Not need if used as a block component
    *
@@ -242,11 +289,11 @@ export default class Button extends Component {
    * @default 'default'
    * @private
    */
-  @tracked _state = 'default';
+  @tracked _state: ButtonState = 'default';
   get state() {
     return this.args.state ?? this._state;
   }
-  set state(state) {
+  set state(state: ButtonState) {
     this._state = state;
   }
 
@@ -371,7 +418,7 @@ export default class Button extends Component {
    * @private
    */
   @action
-  async handleClick(e) {
+  async handleClick(e: MouseEvent) {
     const { bubble, onClick, preventConcurrency } = this.args;
 
     if (typeof onClick !== 'function') {
@@ -402,9 +449,5 @@ export default class Button extends Component {
 
       throw error;
     }
-  }
-
-  constructor() {
-    super(...arguments);
   }
 }
