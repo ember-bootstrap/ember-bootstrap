@@ -1,3 +1,4 @@
+{{! @glint-nocheck}}
 <div class="{{bs-form-horiz-input-class @horizontalLabelGridClass}} {{bs-form-horiz-offset-class @horizontalLabelGridClass}}">
   <div class="{{if (bs-eq "switch" @controlType) (if (macroCondition (macroGetOwnConfig "isBS5")) "form-check form-switch" "custom-control custom-switch") "form-check"}}">
     {{yield}}
