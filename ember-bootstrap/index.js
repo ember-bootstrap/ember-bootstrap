@@ -124,6 +124,7 @@ module.exports = {
     '@embroider/macros': {
       setOwnConfig: {},
     },
+    'ember-cli-babel': { enableTypeScriptTransform: true },
   },
 
   validateDependencies() {

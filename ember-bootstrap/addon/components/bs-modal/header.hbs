@@ -1,3 +1,4 @@
+{{! @glint-nocheck}}
 {{#let
   (ensure-safe-component (bs-default @titleComponent (component "bs-modal/header/title")))
   (component (ensure-safe-component (bs-default @closeComponent (component "bs-modal/header/close"))) onClick=@onClose)
