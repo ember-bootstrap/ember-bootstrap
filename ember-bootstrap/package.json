@@ -16,6 +16,14 @@
   },
   "license": "MIT",
   "author": "Simon Ihmig <ihmig@kaliber5.de>",
+  "typesVersions": {
+    "*": {
+      "*": [
+        "declarations/addon/*",
+        "declarations/addon/*/index.d.ts"
+      ]
+    }
+  },
   "scripts": {
     "lint": "concurrently \"npm:lint:*(!fix)\" --names \"lint:\"",
     "lint:fix": "concurrently \"npm:lint:*:fix\" --names \"fix:\"",
