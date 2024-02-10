@@ -37,6 +37,11 @@ interface ButtonSignature<VALUE = undefined> {
      * @internal
      */
     state?: ButtonState;
+
+    /**
+     * @internal
+     */
+    attrTypePrivateWorkaround?: 'button' | 'submit';
   };
   Blocks: {
     default: [

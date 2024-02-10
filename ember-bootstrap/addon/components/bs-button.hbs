@@ -1,8 +1,14 @@
-{{! @glint-nocheck }}
 <button
   disabled={{this.__disabled}}
   type={{if @attrTypePrivateWorkaround @attrTypePrivateWorkaround "button"}}
-  class="btn {{if @active "active"}} {{if (macroCondition (macroGetOwnConfig "isNotBS5")) (if this.block "btn-block")}} {{bs-size-class "btn" @size}} {{bs-type-class "btn" @type default="secondary" outline=@outline}}"
+  class="btn
+    {{if @active 'active'}}
+    {{if
+      (macroCondition (macroGetOwnConfig 'isNotBS5'))
+      (if this.block 'btn-block')
+    }}
+    {{bs-size-class 'btn' @size}}
+    {{bs-type-class 'btn' @type default="secondary" outline=@outline}}"
   ...attributes
   {{on "click" this.handleClick}}
   {{did-update this.resetState @reset}}
