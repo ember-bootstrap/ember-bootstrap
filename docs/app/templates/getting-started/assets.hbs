@@ -91,18 +91,18 @@ module.exports = function(defaults) {
 {{! prettier-ignore }}
 <pre class="highlight"><code class="language-sass">// app.scss
 // Required
-@import "ember-bootstrap/functions";
-@import "ember-bootstrap/variables";
-@import "ember-bootstrap/mixins";
+@import "node_modules/bootstrap/scss/functions";
+@import "node_modules/bootstrap/scss/variables";
+@import "node_modules/bootstrap/scss/mixins";
 
 // Optional - Bootstrapping/Resetting
-@import "ember-bootstrap/root";
-@import "ember-bootstrap/print";
-@import "ember-bootstrap/reboot";
+@import "node_modules/bootstrap/scss/root";
+@import "node_modules/bootstrap/scss/print"; // Bootstrap 4 only
+@import "node_modules/bootstrap/scss/reboot";
 
 // Optional - Everything else
-@import "ember-bootstrap/type";
-@import "ember-bootstrap/buttons";
+@import "node_modules/bootstrap/scss/type";
+@import "node_modules/bootstrap/scss/buttons";
 </code></pre>
 
 <p>
