@@ -8,6 +8,6 @@ module('Acceptance | components/popover', function (hooks) {
   test('visiting /components/popover', async function (assert) {
     await visit('/components/popover');
 
-    assert.equal(currentURL(), '/components/popover');
+    assert.strictEqual(currentURL(), '/components/popover');
   });
 });

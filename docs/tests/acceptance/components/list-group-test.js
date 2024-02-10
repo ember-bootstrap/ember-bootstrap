@@ -8,6 +8,6 @@ module('Acceptance | components/list group', function (hooks) {
   test('visiting /components/list-group', async function (assert) {
     await visit('/components/list-group');
 
-    assert.equal(currentURL(), '/components/list-group');
+    assert.strictEqual(currentURL(), '/components/list-group');
   });
 });

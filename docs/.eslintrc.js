@@ -22,13 +22,6 @@ module.exports = {
   env: {
     browser: true,
   },
-  rules: {
-    // TODO: Fix all this outdated patterns
-    'ember/no-actions-hash': 'warn',
-    'ember/no-classic-classes': 'warn',
-    'ember/no-get': 'warn',
-    'ember/require-tagless-components': 'warn',
-  },
   overrides: [
     // node files
     {
@@ -57,10 +50,6 @@ module.exports = {
       // test files
       files: ['tests/**/*-test.{js,ts}'],
       extends: ['plugin:qunit/recommended'],
-      rules: {
-        // TODO: Fix this outdated patterns
-        'qunit/no-assert-equal': 'warn',
-      },
     },
   ],
 };

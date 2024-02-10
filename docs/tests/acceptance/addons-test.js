@@ -8,6 +8,6 @@ module('Acceptance | addons', function (hooks) {
   test('visiting /addons', async function (assert) {
     await visit('/addons');
 
-    assert.equal(currentURL(), '/addons');
+    assert.strictEqual(currentURL(), '/addons');
   });
 });
