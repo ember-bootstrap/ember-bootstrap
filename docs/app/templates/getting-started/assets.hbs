@@ -33,12 +33,8 @@
 
 <div>
   {{! prettier-ignore }}
-  <pre class="highlight"><code>//your-bootstrap-app/ember-cli-build.js
-module.exports = function(defaults) {
-  let app = new EmberApp(defaults, { /* Configuration */ });
-  app.import('node_modules/bootstrap/dist/css/bootstrap.css');
-  app.toTree();
-};</code></pre>
+  <pre class="highlight"><code>// app/app.js
+import 'bootstrap/dist/css/bootstrap.css';</code></pre>
 </div>
 
 <h2>Using a CSS preprocessor</h2>
