@@ -27,21 +27,17 @@
 <h2 id="importing-css-assets">Importing static CSS Assets</h2>
 
 <p>
-  When not using a CSS preprocessor (see below) ember-bootstrap will
-  automatically import the static Bootstrap CSS into your ember-cli build. In
-  situations where you prefer to use another strategy for importing Bootstrap
-  CSS, you can opt out of CSS import by setting the
-  <code>importBootstrapCSS</code>
-  option to false in your
-  <code>ember-cli-build.js</code>:
+  When not using a CSS preprocessor (see below) you will need to import the
+  static Bootstrap CSS into your ember-cli build:
 </p>
 
 <div>
-  <pre class="highlight"><code>//your-bootstrap-app/ember-cli-build.js
-      module.exports = function(defaults) { let app = new EmberApp(defaults, {
-      'ember-bootstrap': { 'importBootstrapCSS': false } }); return
-      app.toTree(); };
-    </code></pre>
+  <pre class="highlight"><code
+      class="language-js"
+    >//your-bootstrap-app/ember-cli-build.js module.exports = function(defaults)
+      { let app = new EmberApp(defaults, { /* Configuration */ });
+      app.import('node_modules/bootstrap/dist/css/bootstrap.css'); app.toTree();
+      };</code></pre>
 </div>
 
 <h2>Using a CSS preprocessor</h2>
@@ -68,8 +64,8 @@
 </p>
 
 <pre class="highlight"><code class="language-sass">// app.scss @import
-    "ember-bootstrap/bootstrap";
-  </code></pre>
+    "node_modules/bootstrap/scss/bootstrap";</code>
+</pre>
 
 <p>This will add the whole bootstrap stylesheets allowing you to customize them
   easily using the available variables.</p>

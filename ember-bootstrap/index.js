@@ -9,9 +9,7 @@ const VersionChecker = require('ember-cli-version-checker');
 const resolve = require('resolve');
 
 const defaultOptions = {
-  importBootstrapTheme: false,
   importBootstrapCSS: true,
-  importBootstrapFont: false,
   insertEmberWormholeElementToDom: true,
   bootstrapVersion: 5,
 };
@@ -69,12 +67,6 @@ module.exports = {
       );
     }
 
-    if (options.bootstrapVersion >= 4 && options.importBootstrapFont) {
-      this.warn(
-        'Inclusion of the Glyphicon font is only supported for Bootstrap 3. ' +
-          "Set Ember Bootstrap's `importBootstrapFont` option to `false` to hide this warning.",
-      );
-    }
     if (process.env.BOOTSTRAPVERSION) {
       // override bootstrapVersion config when environment variable is set
       options.bootstrapVersion = parseInt(process.env.BOOTSTRAPVERSION);
@@ -90,17 +82,17 @@ module.exports = {
     if (!this.hasPreprocessor()) {
       // / Import css from bootstrap
       if (options.importBootstrapCSS) {
+        this.warn(`\
+Importing Bootstrap CSS through Ember Bootstrap is deprecated. Applications should import Bootstrap's CSS explicitly.
+Please find information how to do so in the Ember guides: https://guides.emberjs.com/release/addons-and-dependencies/#toc_css.
+Additionally set importBootstrapCSS configuration of Ember Bootstrap in your app's ember-cli-build.js to false. Please find more information about Ember Bootstrap's configuration here: https://www.ember-bootstrap.com/getting-started/setup
+
+Until: 7.0.0
+`);
+
         this.needsBootstrapStyles = true;
         this.import(path.join(vendorPath, 'bootstrap.css'));
         this.import(path.join(vendorPath, 'bootstrap.css.map'), {
-          destDir: 'assets',
-        });
-      }
-
-      if (options.importBootstrapTheme) {
-        this.needsBootstrapStyles = true;
-        this.import(path.join(vendorPath, 'bootstrap-theme.css'));
-        this.import(path.join(vendorPath, 'bootstrap-theme.css.map'), {
           destDir: 'assets',
         });
       }

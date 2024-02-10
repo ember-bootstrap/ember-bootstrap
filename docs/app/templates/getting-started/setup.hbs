@@ -17,10 +17,20 @@
 
 <h2>Configuration</h2>
 
+<h3>Using plain css</h3>
+
+<p>
+  To use ember-bootstrap, you need to include Bootstrap's style sheets into your
+  app's build configuration. Add the following line to
+  <code>ember-cli-build.js</code>.
+  <pre class="highlight"><code
+    >app.import('node_modules/bootstrap/dist/css/bootstrap.css');</code></pre>
+</p>
+
 <h3>Using the default blueprint</h3>
 
 <p>
-  By default, ember-bootstrap installs Bootstrap 4 and uses the installed
+  By default, ember-bootstrap installs Bootstrap 5 and uses the installed
   preprocessor if there is one. You can use the ember-bootstrap default
   blueprint to switch the Bootstrap version or preprocessor.
 </p>
@@ -112,7 +122,7 @@
     <tr>
       <td>bootstrapVersion</td>
       <td>4 / 5</td>
-      <td>4</td>
+      <td>5</td>
       <td>
         <p>
           Specify the Bootstrap version to use. To make sure you have the right
