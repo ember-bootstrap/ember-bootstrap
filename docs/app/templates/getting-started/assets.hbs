@@ -32,12 +32,13 @@
 </p>
 
 <div>
-  <pre class="highlight"><code
-      class="language-js"
-    >//your-bootstrap-app/ember-cli-build.js module.exports = function(defaults)
-      { let app = new EmberApp(defaults, { /* Configuration */ });
-      app.import('node_modules/bootstrap/dist/css/bootstrap.css'); app.toTree();
-      };</code></pre>
+  {{! prettier-ignore }}
+  <pre class="highlight"><code>//your-bootstrap-app/ember-cli-build.js
+module.exports = function(defaults) {
+  let app = new EmberApp(defaults, { /* Configuration */ });
+  app.import('node_modules/bootstrap/dist/css/bootstrap.css');
+  app.toTree();
+};</code></pre>
 </div>
 
 <h2>Using a CSS preprocessor</h2>
@@ -63,8 +64,9 @@
   file respectively:
 </p>
 
-<pre class="highlight"><code class="language-sass">// app.scss @import
-    "node_modules/bootstrap/scss/bootstrap";</code>
+{{! prettier-ignore }}
+<pre class="highlight"><code class="language-sass">// app.scss
+@import "node_modules/bootstrap/scss/bootstrap";</code>
 </pre>
 
 <p>This will add the whole bootstrap stylesheets allowing you to customize them
@@ -86,13 +88,22 @@
   varies according to the chosen configuration.
 </p>
 
-<pre class="highlight"><code class="language-sass">// app.scss // Required
-    @import "ember-bootstrap/functions"; @import "ember-bootstrap/variables";
-    @import "ember-bootstrap/mixins"; // Optional - Bootstrapping/Resetting
-    @import "ember-bootstrap/root"; @import "ember-bootstrap/print"; @import
-    "ember-bootstrap/reboot"; // Optional - Everything else @import
-    "ember-bootstrap/type"; @import "ember-bootstrap/buttons";
-  </code></pre>
+{{! prettier-ignore }}
+<pre class="highlight"><code class="language-sass">// app.scss
+// Required
+@import "ember-bootstrap/functions";
+@import "ember-bootstrap/variables";
+@import "ember-bootstrap/mixins";
+
+// Optional - Bootstrapping/Resetting
+@import "ember-bootstrap/root";
+@import "ember-bootstrap/print";
+@import "ember-bootstrap/reboot";
+
+// Optional - Everything else
+@import "ember-bootstrap/type";
+@import "ember-bootstrap/buttons";
+</code></pre>
 
 <p>
   You can also checkout which files are available for import in
