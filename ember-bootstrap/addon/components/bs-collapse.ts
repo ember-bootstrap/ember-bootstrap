@@ -240,14 +240,14 @@ export default class Collapse extends Component<BsCollapseSignature> {
       throw new Error('Reference to collapse div element is missing.');
     }
 
-    let expandedSize = this.expandedSize;
+    const expandedSize = this.expandedSize;
     if (expandedSize != null) {
       return expandedSize;
     }
 
-    let collapseElement = this._element;
-    let prefix = action === 'show' ? 'scroll' : 'offset';
-    let measureProperty = `${prefix}${this.collapseDimension
+    const collapseElement = this._element;
+    const prefix = action === 'show' ? 'scroll' : 'offset';
+    const measureProperty = `${prefix}${this.collapseDimension
       .substring(0, 1)
       .toUpperCase()}${this.collapseDimension.substring(1)}` as
       | 'scrollHeight'
@@ -294,8 +294,8 @@ export default class Collapse extends Component<BsCollapseSignature> {
 
   @action
   _onCollapsedChange() {
-    let collapsed = this.collapsed;
-    let active = this.active;
+    const collapsed = this.collapsed;
+    const active = this.active;
     if (collapsed !== active) {
       return;
     }

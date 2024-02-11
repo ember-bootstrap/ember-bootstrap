@@ -9,11 +9,14 @@ export function skipTransition(bool?: boolean) {
 
 function _isSkipped() {
   return (
-    (_skipTransition === true) || (_skipTransition !== false && Ember.testing)
+    _skipTransition === true || (_skipTransition !== false && Ember.testing)
   );
 }
 
-export default function waitForTransitionEnd(node: HTMLElement, duration = 0): Promise<void> {
+export default function waitForTransitionEnd(
+  node: HTMLElement,
+  duration = 0,
+): Promise<void> {
   if (!node) {
     return Promise.reject();
   }
@@ -24,7 +27,7 @@ export default function waitForTransitionEnd(node: HTMLElement, duration = 0): P
   }
 
   return new Promise(function (this: unknown, resolve) {
-    let done = function () {
+    const done = function () {
       if (backup) {
         cancel(backup);
         backup = null;
