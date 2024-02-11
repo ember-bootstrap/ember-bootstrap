@@ -7,9 +7,9 @@ import { start } from 'ember-qunit';
 import setupSinon from 'ember-sinon-qunit';
 import { setRunOptions } from 'ember-a11y-testing/test-support';
 
-setApplication(Application.create(config.APP));
-
 setup(QUnit.assert);
+
+setApplication(Application.create(config.APP));
 
 setupSinon();
 

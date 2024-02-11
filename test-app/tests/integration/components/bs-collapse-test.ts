@@ -1,12 +1,22 @@
 import { module } from 'qunit';
 import { setupRenderingTest } from 'ember-qunit';
-import { render, settled, waitFor } from '@ember/test-helpers';
-import hbs from 'htmlbars-inline-precompile';
+import { render, settled, waitFor, type TestContext } from '@ember/test-helpers';
+import { hbs } from 'ember-cli-htmlbars';
 import { delay, test, visibilityClass } from '../../helpers/bootstrap';
 import setupNoDeprecations from '../../helpers/setup-no-deprecations';
 import a11yAudit from 'ember-a11y-testing/test-support/audit';
 import { skipTransition } from 'ember-bootstrap/utils/transition-end';
 import sinon from 'sinon';
+
+interface Context extends TestContext {
+  actions: {
+    hide?: () => void;
+    hidden?: () => void;
+    show?: () => void;
+    shown?: () => void;
+  },
+  send: (actionName: string, ...args: unknown[]) => void;
+}
 
 module('Integration | Component | bs-collapse', function (hooks) {
   setupRenderingTest(hooks);
@@ -20,7 +30,7 @@ module('Integration | Component | bs-collapse', function (hooks) {
     skipTransition(undefined);
   });
 
-  hooks.beforeEach(function () {
+  hooks.beforeEach(function (this: Context) {
     this.actions = {};
     this.send = (actionName, ...args) =>
       this.actions[actionName].apply(this, args);
@@ -44,7 +54,7 @@ module('Integration | Component | bs-collapse', function (hooks) {
       .hasClass(visibilityClass(), 'collapse has visibility class');
   });
 
-  test('setting collapse to false expands this item', async function (assert) {
+  test('setting collapse to false expands this item', async function (this: Context, assert) {
     let showAction = sinon.spy();
     let shownAction = sinon.spy();
     this.actions.show = showAction;
@@ -75,7 +85,7 @@ module('Integration | Component | bs-collapse', function (hooks) {
       .hasClass(visibilityClass(), 'collapse has visibility class');
   });
 
-  test('setting collapse to true collapses this item', async function (assert) {
+  test('setting collapse to true collapses this item', async function (this: Context, assert) {
     let hideAction = sinon.spy();
     let hiddenAction = sinon.spy();
     this.actions.hide = hideAction;

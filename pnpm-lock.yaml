@@ -426,6 +426,9 @@ importers:
       '@glimmer/tracking':
         specifier: 1.1.2
         version: 1.1.2
+      '@types/qunit':
+        specifier: ^2.19.10
+        version: 2.19.10
       bootstrap:
         specifier: 5.3.2
         version: 5.3.2(@popperjs/core@2.11.8)
@@ -3222,6 +3225,10 @@ packages:
 
   /@types/qs@6.9.11:
     resolution: {integrity: sha512-oGk0gmhnEJK4Yyk+oI7EfXsLayXatCWPHary1MtcmbAifkobT9cM9yutG/hZKIseOU0MqbIwQ/u2nn/Gb+ltuQ==}
+    dev: true
+
+  /@types/qunit@2.19.10:
+    resolution: {integrity: sha512-gVB+rxvxmbyPFWa6yjjKgcumWal3hyqoTXI0Oil161uWfo1OCzWZ/rnEumsx+6uVgrwPrCrhpQbLkzfildkSbg==}
     dev: true
 
   /@types/range-parser@1.2.7:
