@@ -1,1 +1,1 @@
-{"version":3,"file":"transition-end.d.ts","sourceRoot":"","sources":["../../addon/utils/transition-end.ts"],"names":[],"mappings":"AAKA,wBAAgB,cAAc,CAAC,IAAI,CAAC,EAAE,OAAO,QAE5C;AAQD,MAAM,CAAC,OAAO,UAAU,oBAAoB,CAAC,IAAI,EAAE,WAAW,EAAE,QAAQ,SAAI,GAAG,OAAO,CAAC,IAAI,CAAC,CAuB3F"}
+{"version":3,"file":"transition-end.d.ts","sourceRoot":"","sources":["../../addon/utils/transition-end.ts"],"names":[],"mappings":"AAKA,wBAAgB,cAAc,CAAC,IAAI,CAAC,EAAE,OAAO,QAE5C;AAQD,MAAM,CAAC,OAAO,UAAU,oBAAoB,CAC1C,IAAI,EAAE,WAAW,EACjB,QAAQ,SAAI,GACX,OAAO,CAAC,IAAI,CAAC,CAuBf"}

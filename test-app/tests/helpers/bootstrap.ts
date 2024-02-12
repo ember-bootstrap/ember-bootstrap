@@ -1,9 +1,11 @@
 import config from 'test-app/config/environment';
 import { skip, test } from 'qunit';
 
-const currentBootstrapVersion = parseInt(config.bootstrapVersion);
+type BootstrapVersion = 4 | 5;
 
-export function testForBootstrap(bsVersion, name, fn) {
+const currentBootstrapVersion = parseInt(config.bootstrapVersion) as BootstrapVersion;
+
+export function testForBootstrap(bsVersion: BootstrapVersion | BootstrapVersion[], name: string, fn: () => void) {
   if (!Array.isArray(bsVersion)) {
     bsVersion = [bsVersion];
   }
@@ -14,19 +16,19 @@ export function testForBootstrap(bsVersion, name, fn) {
   return test(`${name} [BS${bsVersion}]`, fn);
 }
 
-export function isBootstrap(version) {
+export function isBootstrap(version: BootstrapVersion) {
   return currentBootstrapVersion === version;
 }
 
-export function testBS4() {
-  return testForBootstrap(4, ...arguments);
+export function testBS4(name: string, fn: () => void) {
+  return testForBootstrap(4, name, fn);
 }
 
-export function testBS5() {
-  return testForBootstrap(5, ...arguments);
+export function testBS5(name: string, fn: () => void) {
+  return testForBootstrap(5, name, fn);
 }
 
-export function versionDependent(v4, v5) {
+export function versionDependent(v4: string, v5?: string) {
   if (isBootstrap(5)) {
     return v5 ?? v4;
   }
@@ -66,11 +68,11 @@ export function validationWarningClass() {
   return versionDependent('is-warning');
 }
 
-export function placementClassFor(type, placement) {
+export function placementClassFor(type: string, placement: string) {
   return versionDependent(`${type}-${placement}`);
 }
 
-export function positionClassFor(position) {
+export function positionClassFor(position: string) {
   return versionDependent(position);
 }
 
@@ -90,7 +92,7 @@ export function accordionItemClass() {
   return versionDependent('card', 'accordion-item');
 }
 
-export function accordionClassFor(type) {
+export function accordionClassFor(type?: string) {
   type = type ? `-${type}` : '';
   return versionDependent(type ? `bg${type}` : 'card');
 }
@@ -115,11 +117,11 @@ export function accordionItemBodyClass() {
   return versionDependent('card-body', 'accordion-body');
 }
 
-export function tooltipPositionClass(pos) {
+export function tooltipPositionClass(pos: string) {
   return versionDependent(`bs-tooltip-${pos}`);
 }
 
-export function popoverPositionClass(pos) {
+export function popoverPositionClass(pos: string) {
   return versionDependent(`bs-popover-${pos}`);
 }
 
@@ -139,11 +141,11 @@ export function closeButtonClass() {
   return versionDependent('close', 'btn-close');
 }
 
-export function isVisible(el) {
+export function isVisible(el: HTMLElement) {
   return !isHidden(el);
 }
 
-export function isHidden(el) {
+export function isHidden(el: HTMLElement) {
   // A bit of an odd test, but taken from https://stackoverflow.com/questions/19669786/check-if-element-is-visible-in-dom
   // referencing https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/offsetParent
   return !el || el.offsetParent === null;
@@ -151,7 +153,7 @@ export function isHidden(el) {
 
 export { test };
 
-export function testRequiringFocus(name, fn) {
+export function testRequiringFocus(name: string, fn: () => void) {
   if (document.hasFocus()) {
     return test(name, fn);
   } else {
@@ -159,10 +161,10 @@ export function testRequiringFocus(name, fn) {
   }
 }
 
-export function testRequiringTransitions(name, fn) {
+export function testRequiringTransitions(name: string, fn: () => void) {
   return test(name, fn);
 }
 
-export function delay(delay) {
+export function delay(delay: number) {
   return new Promise((resolve) => setTimeout(resolve, delay));
 }

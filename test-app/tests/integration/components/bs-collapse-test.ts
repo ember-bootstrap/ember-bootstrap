@@ -1,6 +1,11 @@
 import { module } from 'qunit';
 import { setupRenderingTest } from 'ember-qunit';
-import { render, settled, waitFor, type TestContext } from '@ember/test-helpers';
+import {
+  render,
+  settled,
+  waitFor,
+  type TestContext,
+} from '@ember/test-helpers';
 import { hbs } from 'ember-cli-htmlbars';
 import { delay, test, visibilityClass } from '../../helpers/bootstrap';
 import setupNoDeprecations from '../../helpers/setup-no-deprecations';
@@ -9,13 +14,11 @@ import { skipTransition } from 'ember-bootstrap/utils/transition-end';
 import sinon from 'sinon';
 
 interface Context extends TestContext {
-  actions: {
-    hide?: () => void;
-    hidden?: () => void;
-    show?: () => void;
-    shown?: () => void;
-  },
-  send: (actionName: string, ...args: unknown[]) => void;
+  collapsed?: boolean;
+  hide?: () => void;
+  hidden?: () => void;
+  show?: () => void;
+  shown?: () => void;
 }
 
 module('Integration | Component | bs-collapse', function (hooks) {
@@ -28,12 +31,6 @@ module('Integration | Component | bs-collapse', function (hooks) {
 
   hooks.after(function () {
     skipTransition(undefined);
-  });
-
-  hooks.beforeEach(function (this: Context) {
-    this.actions = {};
-    this.send = (actionName, ...args) =>
-      this.actions[actionName].apply(this, args);
   });
 
   test('collapse has correct default markup', async function (assert) {
@@ -55,17 +52,17 @@ module('Integration | Component | bs-collapse', function (hooks) {
   });
 
   test('setting collapse to false expands this item', async function (this: Context, assert) {
-    let showAction = sinon.spy();
-    let shownAction = sinon.spy();
-    this.actions.show = showAction;
-    this.actions.shown = shownAction;
+    const showAction = sinon.spy();
+    const shownAction = sinon.spy();
+    this.show = showAction;
+    this.shown = shownAction;
 
     this.set('collapsed', true);
-    await render(
+    await render<Context>(
       hbs`<BsCollapse
   @collapsed={{this.collapsed}}
-  @onShow={{action 'show'}}
-  @onShown={{action 'shown'}}
+  @onShow={{this.show}}
+  @onShown={{this.shown}}
 ><p>Just some content</p></BsCollapse>`,
     );
     this.set('collapsed', false);
@@ -86,17 +83,17 @@ module('Integration | Component | bs-collapse', function (hooks) {
   });
 
   test('setting collapse to true collapses this item', async function (this: Context, assert) {
-    let hideAction = sinon.spy();
-    let hiddenAction = sinon.spy();
-    this.actions.hide = hideAction;
-    this.actions.hidden = hiddenAction;
+    const hideAction = sinon.spy();
+    const hiddenAction = sinon.spy();
+    this.hide = hideAction;
+    this.hidden = hiddenAction;
 
     this.set('collapsed', false);
-    await render(
+    await render<Context>(
       hbs`<BsCollapse
   @collapsed={{this.collapsed}}
-  @onHide={{action 'hide'}}
-  @onHidden={{action 'hidden'}}
+  @onHide={{this.hide}}
+  @onHidden={{this.hidden}}
 ><p>Just some content</p></BsCollapse>`,
     );
     this.set('collapsed', true);
@@ -114,9 +111,9 @@ module('Integration | Component | bs-collapse', function (hooks) {
     assert.dom('.collapse').hasNoClass('in', 'collapse does not have in class');
   });
 
-  test('after collapsing/expanding height/width is set correctly ', async function (assert) {
+  test('after collapsing/expanding height/width is set correctly ', async function (this: Context, assert) {
     this.set('collapsed', true);
-    await render(
+    await render<Context>(
       hbs`<BsCollapse
   @expandedSize={{200}}
   @transitionDuration={{200}}
