@@ -25,6 +25,7 @@
     }
   },
   "scripts": {
+    "build": "concurrently \"npm:build:*(!fix)\" --names \"build:\"",
     "build:types": "glint --declaration",
     "lint": "concurrently \"npm:lint:*(!fix)\" --names \"lint:\"",
     "lint:fix": "concurrently \"npm:lint:*:fix\" --names \"fix:\"",
