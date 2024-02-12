@@ -1,5 +1,5 @@
-import type BsCollapse from "./components/bs-collapse";
+import type BsCollapse from './components/bs-collapse';
 export default interface EmberBootstrapRegistry {
-    BsCollapse: typeof BsCollapse;
+  BsCollapse: typeof BsCollapse;
 }
 //# sourceMappingURL=template-registry.d.ts.map

@@ -3,9 +3,15 @@ import { skip, test } from 'qunit';
 
 type BootstrapVersion = 4 | 5;
 
-const currentBootstrapVersion = parseInt(config.bootstrapVersion) as BootstrapVersion;
+const currentBootstrapVersion = parseInt(
+  config.bootstrapVersion,
+) as BootstrapVersion;
 
-export function testForBootstrap(bsVersion: BootstrapVersion | BootstrapVersion[], name: string, fn: () => void) {
+export function testForBootstrap(
+  bsVersion: BootstrapVersion | BootstrapVersion[],
+  name: string,
+  fn: () => void,
+) {
   if (!Array.isArray(bsVersion)) {
     bsVersion = [bsVersion];
   }
