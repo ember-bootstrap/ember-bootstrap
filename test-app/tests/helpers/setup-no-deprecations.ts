@@ -66,7 +66,7 @@ export default function setupNoDeprecations({
   (QUnit.assert as CustomAssert).deprecationsInclude = function (
     expected: string,
   ) {
-    let found = [...deprecations].find((deprecation) =>
+    const found = [...deprecations].find((deprecation) =>
       deprecation.includes(expected),
     );
     this.pushResult({
