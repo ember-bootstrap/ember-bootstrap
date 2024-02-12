@@ -19,7 +19,7 @@ module.exports = function (environment) {
       // when it is created
     },
 
-    bootstrapVersion: process.env.BOOTSTRAPVERSION || 5,
+    bootstrapVersion: parseInt(process.env.BOOTSTRAPVERSION, 10) || 5,
     fastboot: {
       hostWhitelist: [/^localhost:\d+$/],
     },

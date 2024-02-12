@@ -24,8 +24,8 @@ interface ButtonSignature<VALUE = undefined> {
     reset?: boolean;
     size?: 'lg' | 'sm' | null;
     type?: string;
-    value: VALUE;
-    onClick?: (value: VALUE) => Promise<void> | void;
+    value?: VALUE;
+    onClick?: (value?: VALUE) => Promise<void> | void;
 
     // private args, for internal use only!
     /**

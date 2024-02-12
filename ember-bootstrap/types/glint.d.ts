@@ -1,3 +1,5 @@
+import '@glint/environment-ember-loose';
+
 import type EmberBootstrapRegistry from 'ember-bootstrap/template-registry';
 import type { EmbroiderMacrosRegistry } from '@embroider/macros';
 import type RenderModifiersRegistry from '@ember/render-modifiers/template-registry';
