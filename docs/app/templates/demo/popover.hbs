@@ -86,7 +86,14 @@
 </BsAlert>
 <div class="bs-example">
   <!-- BEGIN-SNIPPET popover-focus -->
-  <a href="#" role="button" tabindex="0" class="btn btn-primary">
+  {{! Due to the above mentioned rule, this must be an <a> tag.
+      Clicking a <a href="#"> will jump to the top of the page however.
+      By removing it, we get the expected behaviour. }}
+  {{! template-lint-disable link-href-attributes }}
+  {{! The popover is not rendered inside the <a> tag,
+    so it is okay not to have the 'presentational' role. }}
+  {{! template-lint-disable require-presentational-children }}
+  <a role="button" tabindex="0" class="btn btn-primary">
     Focus me
     <BsPopover @triggerEvents="focus" title="Focused">
       Lorem ipsum dolor sit amet, consectetur adipisicing elit. Explicabo magnam

@@ -8,6 +8,6 @@ module('Acceptance | getting started', function (hooks) {
   test('visiting /getting-started', async function (assert) {
     await visit('/getting-started');
 
-    assert.equal(currentURL(), '/getting-started');
+    assert.strictEqual(currentURL(), '/getting-started');
   });
 });

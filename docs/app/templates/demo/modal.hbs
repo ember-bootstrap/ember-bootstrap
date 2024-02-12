@@ -43,7 +43,7 @@
     @property="size"
     as |el|
   >
-    <el.control @searchEnabled />
+    <el.control @searchEnabled={{true}} />
   </form.element>
   <form.element
     @controlType="checkbox"
@@ -122,6 +122,9 @@
     <modal.body>
       <label>
         Search:
+        {{! This rule is meant to prevent page loads moving users without warning.
+            As this will only trigger when the modal opens, it should be safe to use here. }}
+        {{! template-lint-disable no-autofocus-attribute }}
         <input type="text" autofocus="autofocus" />
       </label>
     </modal.body>

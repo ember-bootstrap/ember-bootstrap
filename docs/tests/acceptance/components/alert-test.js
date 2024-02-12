@@ -8,6 +8,6 @@ module('Acceptance | components/alert', function (hooks) {
   test('visiting /components/alert', async function (assert) {
     await visit('/components/alert');
 
-    assert.equal(currentURL(), '/components/alert');
+    assert.strictEqual(currentURL(), '/components/alert');
   });
 });

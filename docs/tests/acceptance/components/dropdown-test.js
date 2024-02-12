@@ -8,6 +8,6 @@ module('Acceptance | components/dropdown', function (hooks) {
   test('visiting /components/dropdown', async function (assert) {
     await visit('/components/dropdown');
 
-    assert.equal(currentURL(), '/components/dropdown');
+    assert.strictEqual(currentURL(), '/components/dropdown');
   });
 });

@@ -8,6 +8,6 @@ module('Acceptance | components/navbars', function (hooks) {
   test('visiting /components/navbars', async function (assert) {
     await visit('/components/navbars');
 
-    assert.equal(currentURL(), '/components/navbars');
+    assert.strictEqual(currentURL(), '/components/navbars');
   });
 });
