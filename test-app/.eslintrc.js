@@ -2,7 +2,7 @@
 
 module.exports = {
   root: true,
-  parser: '@babel/eslint-parser',
+  parser: '@typescript-eslint/parser',
   parserOptions: {
     ecmaVersion: 'latest',
     sourceType: 'module',
@@ -15,7 +15,7 @@ module.exports = {
   },
   // Disabling hbs plugin until https://github.com/ember-template-lint/eslint-plugin-hbs/issues/42 is resolved
   // plugins: ['ember', 'hbs'],
-  plugins: ['ember'],
+  plugins: ['ember', '@typescript-eslint'],
   extends: [
     'eslint:recommended',
     'plugin:ember/recommended',
@@ -36,13 +36,22 @@ module.exports = {
     // disabled, see above
     // 'hbs/check-hbs-template-literals': 'error',
     'no-setter-return': 'off', // computed setters may return a value!
-    // turn Octane rules into warnings until all components have been refactored
+    // TODO turn Octane rules into warnings until all components have been refactored
     'ember/no-computed-properties-in-native-classes': 'warn',
     'ember/no-classic-components': 'warn',
     'ember/classic-decorator-no-classic-methods': 'warn',
     'ember/classic-decorator-hooks': 'warn',
   },
   overrides: [
+    // ts files
+    {
+      files: ['**/*.ts'],
+      extends: [
+        'plugin:@typescript-eslint/eslint-recommended',
+        'plugin:@typescript-eslint/recommended',
+      ],
+      rules: {},
+    },
     // node files
     {
       files: [
