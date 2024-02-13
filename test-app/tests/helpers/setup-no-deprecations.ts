@@ -1,9 +1,10 @@
 import QUnit from 'qunit';
 import { registerDeprecationHandler } from '@ember/debug';
+import type { CustomAssert } from '.';
 
 let isRegistered = false;
-let deprecations = new Set();
-let expectedDeprecations = new Set();
+const deprecations = new Set<string>();
+const expectedDeprecations = new Set<string>();
 
 // Ignore deprecations that are not caused by our own code, and which we cannot fix easily.
 const ignoredDeprecations = [
@@ -14,7 +15,10 @@ const ignoredDeprecations = [
   /@ember\/string/,
 ];
 
-export default function setupNoDeprecations({ beforeEach, afterEach }) {
+export default function setupNoDeprecations({
+  beforeEach,
+  afterEach,
+}: NestedHooks) {
   beforeEach(function () {
     deprecations.clear();
     expectedDeprecations.clear();
@@ -29,7 +33,7 @@ export default function setupNoDeprecations({ beforeEach, afterEach }) {
     }
   });
 
-  afterEach(function (assert) {
+  afterEach(function (assert: Assert) {
     // guard in if instead of using assert.equal(), to not make assert.expect() fail
     if (deprecations.size > expectedDeprecations.size) {
       assert.ok(
@@ -43,7 +47,8 @@ export default function setupNoDeprecations({ beforeEach, afterEach }) {
     }
   });
 
-  QUnit.assert.deprecations = function (count) {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  (QUnit.assert as CustomAssert).deprecations = function (count?: number) {
     if (count === undefined) {
       this.ok(deprecations.size, 'Expected deprecations during test.');
     } else {
@@ -57,13 +62,17 @@ export default function setupNoDeprecations({ beforeEach, afterEach }) {
     deprecations.forEach((d) => expectedDeprecations.add(d));
   };
 
-  QUnit.assert.deprecationsInclude = function (expected) {
-    let found = [...deprecations].find((deprecation) =>
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  (QUnit.assert as CustomAssert).deprecationsInclude = function (
+    expected: string,
+  ) {
+    const found = [...deprecations].find((deprecation) =>
       deprecation.includes(expected),
     );
     this.pushResult({
       result: !!found,
       actual: deprecations,
+      expected: 'deprecation to be raised',
       message: `expected to find \`${expected}\` deprecation. Found ${[
         ...deprecations,
       ]
