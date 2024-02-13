@@ -19,12 +19,14 @@
   "typesVersions": {
     "*": {
       "*": [
-        "declarations/addon/*",
-        "declarations/addon/*/index.d.ts"
+        "declarations/*",
+        "declarations/*/index.d.ts"
       ]
     }
   },
   "scripts": {
+    "build": "concurrently \"npm:build:*(!fix)\" --names \"build:\"",
+    "build:types": "glint --declaration",
     "lint": "concurrently \"npm:lint:*(!fix)\" --names \"lint:\"",
     "lint:fix": "concurrently \"npm:lint:*:fix\" --names \"fix:\"",
     "lint:hbs": "ember-template-lint .",
@@ -33,6 +35,7 @@
     "lint:js:fix": "eslint . --fix",
     "lint:types": "glint",
     "nodetest": "mocha node-tests --recursive",
+    "prepack": "pnpm run build:types",
     "release": "release-it"
   },
   "dependencies": {

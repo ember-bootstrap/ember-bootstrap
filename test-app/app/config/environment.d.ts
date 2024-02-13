@@ -5,6 +5,7 @@ declare const config: {
   locationType: 'history' | 'hash' | 'none';
   rootURL: string;
   APP: Record<string, unknown>;
+  bootstrapVersion: number;
 };
 
 export default config;

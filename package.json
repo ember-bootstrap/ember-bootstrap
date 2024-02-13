@@ -6,7 +6,8 @@
   },
   "scripts": {
     "docs:build": "pnpm --filter ember-bootstrap-docs docs:build",
-    "prepare": "husky",
+    "prepare": "husky && pnpm build",
+    "build": "pnpm --filter ember-bootstrap build",
     "lint": "pnpm --recursive lint",
     "lint:fix": "pnpm --recursive lint:fix",
     "test": "concurrently \"npm:test:*\"",
