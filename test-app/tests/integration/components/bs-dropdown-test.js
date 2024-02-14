@@ -328,6 +328,29 @@ module('Integration | Component | bs-dropdown', function (hooks) {
     assert.dom('#toggleText').hasText('closed', 'Dropdown is closed');
   });
 
+  test('clicking on a menu item with an action will perform that action before closing the dropdown', async function (assert) {
+    const actionStub = this.set('action', sinon.stub());
+
+    await render(hbs`<BsDropdown as |dd|>
+  <dd.toggle data-test-dropdown-toggle>
+    Dropdown
+    <span class='caret'></span>
+  </dd.toggle>
+  <dd.menu>
+    <li><a
+        href='#'
+        role='button'
+        data-test-dropdown-item
+        {{on 'click' this.action}}
+      >Something</a></li>
+  </dd.menu>
+</BsDropdown>`);
+    await click('[data-test-dropdown-toggle]');
+    await click('[data-test-dropdown-item]');
+
+    assert.true(actionStub.calledOnce, 'The "click" handler is called once');
+  });
+
   test('opening dropdown calls onShow action', async function (assert) {
     let action = sinon.spy();
     this.actions.show = action;
@@ -399,26 +422,36 @@ module('Integration | Component | bs-dropdown', function (hooks) {
   });
 
   test('dropdown yields the toggleDropdown action', async function (assert) {
-    let show = sinon.spy();
-    let hide = sinon.spy();
-    this.actions.hide = hide;
-    this.actions.show = show;
-    await render(hbs`<BsDropdown @onShow={{action 'show'}} @onHide={{action 'hide'}} as |dd|>
+    const show = this.set('show', sinon.stub());
+    const hide = this.set('hide', sinon.stub());
+    await render(hbs`<BsDropdown
+  @closeOnMenuClick={{false}}
+  @onShow={{this.show}}
+  @onHide={{this.hide}}
+  as |dd|
+>
   <dd.toggle>Dropdown <span class='caret'></span></dd.toggle>
-  <dd.menu><li><a href='#'>Something</a></li></dd.menu>
+  <dd.menu><li><a
+        href='#'
+        data-test-dropdown-menu-toggle
+        {{on 'click' dd.toggleDropdown}}
+      >Something</a></li></dd.menu>
   <a
     href='#'
-    {{action dd.toggleDropdown}}
+    data-test-dropdown-outside-toggle
+    {{on 'click' dd.toggleDropdown}}
     role='button'
-    class='custom-toggle'
   >Custom toggle link</a>
 </BsDropdown>`);
 
-    await click('a.custom-toggle');
-    assert.ok(show.calledOnce);
+    await click('[data-test-dropdown-outside-toggle]');
+    assert.ok(show.calledOnce, 'Show callback was called');
 
-    await click('a.custom-toggle');
-    assert.ok(hide.calledOnce);
+    // Test the toggle yield by clicking a button in the menu.
+    // If we don't, the event that closes the dropdown will be the 'outside click', which is not tested here.
+    // For this reason, if [data-test-dropdown-outside-toggle] is clicked, hide will get called twice.
+    await click('[data-test-dropdown-menu-toggle]');
+    assert.ok(hide.calledOnce, 'Hide callback was called');
   });
 
   test('opening dropdown makes the menu visible', async function (assert) {

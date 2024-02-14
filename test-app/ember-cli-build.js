@@ -23,6 +23,7 @@ module.exports = function (defaults) {
     },
     autoImport: {
       forbidEval: true,
+      watchDependencies: ['ember-bootstrap'],
     },
     trees,
     addons: {

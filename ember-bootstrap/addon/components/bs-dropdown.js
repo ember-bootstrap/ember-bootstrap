@@ -3,6 +3,7 @@ import Component from '@glimmer/component';
 import { assert } from '@ember/debug';
 import { getOwnConfig, macroCondition } from '@embroider/macros';
 import { tracked } from '@glimmer/tracking';
+import { next } from '@ember/runloop';
 
 const ESCAPE_KEYCODE = 27; // KeyboardEvent.which value for Escape (Esc) key
 const SPACE_KEYCODE = 32; // KeyboardEvent.which value for space key
@@ -313,7 +314,11 @@ export default class Dropdown extends Component {
   closeDropdown() {
     if (this.args.onHide?.() === false) return;
 
-    this.isOpen = false;
+    // When closing the dropdown immediately, any click event from dropdown items will be discarded.
+    // By deferring the close action to the next render cycle, we ensure that no events get lost.
+    next(this, () => {
+      this.isOpen = false;
+    });
   }
 
   /**
