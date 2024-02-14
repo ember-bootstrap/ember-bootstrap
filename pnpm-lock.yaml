@@ -439,13 +439,13 @@ importers:
         specifier: 3.0.3
         version: 3.0.3
       '@types/qunit':
-        specifier: ^2.19.5
+        specifier: 2.19.10
         version: 2.19.10
       '@types/rsvp':
         specifier: 4.0.9
         version: 4.0.9
       '@types/sinon':
-        specifier: ^17.0.3
+        specifier: 17.0.3
         version: 17.0.3
       '@typescript-eslint/eslint-plugin':
         specifier: 6.21.0
