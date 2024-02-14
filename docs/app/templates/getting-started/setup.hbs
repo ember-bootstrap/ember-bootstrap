@@ -20,12 +20,34 @@
 <h3>Using plain css</h3>
 
 <p>
-  To use ember-bootstrap, you need to include Bootstrap's style sheets into your
-  app's build configuration. Add the following line to
+  To use ember-bootstrap, include Bootstrap's style sheets into your app's build
+  configuration.
+</p>
+
+<p>
+  For classic apps, add the following to your
+  <code>ember-cli-build.js</code>:
+
+  {{! prettier-ignore }}
+  <pre class="highlight"><code
+>let app = new EmberApp(defaults, { /* Configuration */ });
+app.import('node_modules/bootstrap/dist/css/bootstrap.css');
+app.toTree();
+</code></pre>
+</p>
+
+<p>
+  For apps using Embroider, import the CSS in
   <code>app/app.js</code>.
   {{! prettier-ignore }}
   <pre class="highlight"><code>import 'bootstrap/dist/css/bootstrap.css';</code></pre>
 </p>
+
+See the
+<a
+  href="https://guides.emberjs.com/release/addons-and-dependencies/#toc_css"
+>Ember documentation</a>
+for more information about including assets into your app.
 
 <h3>Using the default blueprint</h3>
 

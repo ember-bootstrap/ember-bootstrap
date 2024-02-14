@@ -28,14 +28,27 @@
 
 <p>
   When not using a CSS preprocessor (see below) you will need to import the
-  static Bootstrap CSS into your ember-cli build:
+  static Bootstrap CSS into yourself.
+</p>
+<p>
+  For classic apps, add the following lines to
+  <code>ember-cli-build.js</code>
+
+  {{! prettier-ignore }}
+  <pre class="highlight"><code>//your-bootstrap-app/ember-cli-build.js
+module.exports = function(defaults) {
+  let app = new EmberApp(defaults, { /* Configuration */ });
+  app.import('node_modules/bootstrap/dist/css/bootstrap.css');
+  app.toTree();
+};</code></pre>
 </p>
 
-<div>
+<p>
+  For Embroider apps, import the CSS file in
+  <code>app/app.js</code>.
   {{! prettier-ignore }}
-  <pre class="highlight"><code>// app/app.js
-import 'bootstrap/dist/css/bootstrap.css';</code></pre>
-</div>
+  <pre class="highlight"><code>import 'bootstrap/dist/css/bootstrap.css';</code></pre>
+</p>
 
 <h2>Using a CSS preprocessor</h2>
 
