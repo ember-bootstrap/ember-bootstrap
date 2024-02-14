@@ -1,6 +1,22 @@
 import Component from '@glimmer/component';
 import { inject as service } from '@ember/service';
 import { assert } from '@ember/debug';
+import type RouterService from '@ember/routing/router-service';
+
+export interface BsLinkToSignature {
+  // TODO: Should rely on Element of LinkTo signature instead
+  Element: HTMLAnchorElement;
+  Args: {
+    route?: string;
+    model?: unknown;
+    models?: unknown[];
+    query?: string;
+    disabled?: boolean;
+  };
+  Blocks: {
+    default: [];
+  };
+}
 
 /**
  This is largely copied from Ember.LinkComponent. It is used as extending from Ember.LinkComponent has been deprecated.
@@ -13,9 +29,8 @@ import { assert } from '@ember/debug';
  @extends Component
  @private
 */
-export default class LinkComponent extends Component {
-  @service('router')
-  router;
+export default class LinkComponent extends Component<BsLinkToSignature> {
+  @service declare router: RouterService;
 
   get active() {
     if (!this.args.route) {
@@ -28,7 +43,7 @@ export default class LinkComponent extends Component {
   }
 
   get models() {
-    let { model, models } = this.args;
+    const { model, models } = this.args;
 
     if (model !== undefined) {
       return [model];
