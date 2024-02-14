@@ -8,6 +8,6 @@ module('Acceptance | components/spinner', function (hooks) {
   test('visiting /components/spinner', async function (assert) {
     await visit('/components/spinner');
 
-    assert.equal(currentURL(), '/components/spinner');
+    assert.strictEqual(currentURL(), '/components/spinner');
   });
 });

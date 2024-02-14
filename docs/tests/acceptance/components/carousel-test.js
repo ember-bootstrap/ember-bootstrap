@@ -23,7 +23,7 @@ module('Acceptance | components/carousel', function (hooks) {
 
     // Wait until Ember rendered the UI
     await waitFor('[data-test-option="interval"] input');
-    assert.equal(currentURL(), '/components/carousel');
+    assert.strictEqual(currentURL(), '/components/carousel');
     assert
       .dom('[data-test-example="main"] .carousel-item.active img')
       .hasAttribute('alt', 'First slide', 'shows the first slide');

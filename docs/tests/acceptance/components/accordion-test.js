@@ -8,6 +8,6 @@ module('Acceptance | components/accordion', function (hooks) {
   test('visiting /components/accordion', async function (assert) {
     await visit('/components/accordion');
 
-    assert.equal(currentURL(), '/components/accordion');
+    assert.strictEqual(currentURL(), '/components/accordion');
   });
 });

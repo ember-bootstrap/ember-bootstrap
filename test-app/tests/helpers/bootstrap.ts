@@ -1,16 +1,20 @@
 import config from 'test-app/config/environment';
-import { skip, test } from 'qunit';
+import { skip, test as qunitTest } from 'qunit';
+import type { CustomAssert, CustomTestContext } from '.';
 
-type BootstrapVersion = 4 | 5;
+const currentBootstrapVersion = config.bootstrapVersion;
 
-const currentBootstrapVersion = parseInt(
-  config.bootstrapVersion,
-) as BootstrapVersion;
+function test<TC extends CustomTestContext>(
+  name: string,
+  callback: (this: TC, assert: CustomAssert) => void | Promise<unknown>,
+) {
+  qunitTest(name, callback);
+}
 
 export function testForBootstrap(
-  bsVersion: BootstrapVersion | BootstrapVersion[],
+  bsVersion: number | number[],
   name: string,
-  fn: () => void,
+  fn: Parameters<typeof test>[1],
 ) {
   if (!Array.isArray(bsVersion)) {
     bsVersion = [bsVersion];
@@ -22,72 +26,68 @@ export function testForBootstrap(
   return test(`${name} [BS${bsVersion}]`, fn);
 }
 
-export function isBootstrap(version: BootstrapVersion) {
+export function isBootstrap(version: number) {
   return currentBootstrapVersion === version;
 }
 
-export function testBS4(name: string, fn: () => void) {
+export function testBS4(name: string, fn: Parameters<typeof test>[1]) {
   return testForBootstrap(4, name, fn);
 }
 
-export function testBS5(name: string, fn: () => void) {
+export function testBS5(name: string, fn: Parameters<typeof test>[1]) {
   return testForBootstrap(5, name, fn);
 }
 
-export function versionDependent(v4: string, v5?: string) {
-  if (isBootstrap(5)) {
-    return v5 ?? v4;
-  }
-
-  return v4;
+export function versionDependent<T>(v4: T, v5?: T): T {
+  return isBootstrap(5) ? v5 ?? v4 : v4;
 }
 
 export function visibilityClass() {
-  return versionDependent('show');
+  return 'show';
 }
 
 export function openClass() {
-  return versionDependent('show');
+  return 'show';
 }
 
 export function defaultButtonClass() {
-  return versionDependent('btn-secondary');
+  return 'btn-secondary';
 }
 
 export function formFeedbackClass() {
-  return versionDependent('invalid-feedback');
+  return 'invalid-feedback';
 }
 
 export function formFeedbackElement() {
-  return versionDependent('.form-control');
+  return '.form-control';
 }
 
 export function validationSuccessClass() {
-  return versionDependent('is-valid');
+  return 'is-valid';
 }
 
 export function validationErrorClass() {
-  return versionDependent('is-invalid');
+  return 'is-invalid';
 }
 
 export function validationWarningClass() {
-  return versionDependent('is-warning');
+  return 'is-warning';
 }
 
 export function placementClassFor(type: string, placement: string) {
-  return versionDependent(`${type}-${placement}`);
+  return `${type}-${placement}`;
 }
 
 export function positionClassFor(position: string) {
-  return versionDependent(position);
+  return position;
 }
 
 export function positionStickyClass() {
-  return versionDependent('sticky-top');
+  return 'sticky-top';
 }
 
 export function formHelpTextClass() {
-  return versionDependent('form-text');
+  return 'form-text';
 }
 
 export function accordionClass() {
@@ -100,7 +100,7 @@ export function accordionItemClass() {
 
 export function accordionClassFor(type?: string) {
   type = type ? `-${type}` : '';
-  return versionDependent(type ? `bg${type}` : 'card');
+  return type ? `bg${type}` : 'card';
 }
 
 export function accordionTitleSelector() {
@@ -116,7 +116,7 @@ export function accordionItemClickableSelector() {
 }
 
 export function dropdownVisibilityElementSelector() {
-  return versionDependent('.dropdown-menu');
+  return '.dropdown-menu';
 }
 
 export function accordionItemBodyClass() {
@@ -124,11 +124,11 @@ export function accordionItemBodyClass() {
 }
 
 export function tooltipPositionClass(pos: string) {
-  return versionDependent(`bs-tooltip-${pos}`);
+  return `bs-tooltip-${pos}`;
 }
 
 export function popoverPositionClass(pos: string) {
-  return versionDependent(`bs-popover-${pos}`);
+  return `bs-popover-${pos}`;
 }
 
 export function tooltipArrowClass() {
@@ -159,7 +159,10 @@ export function isHidden(el: HTMLElement) {
 
 export { test };
 
-export function testRequiringFocus(name: string, fn: () => void) {
+export function testRequiringFocus(
+  name: string,
+  fn: Parameters<typeof test>[1],
+) {
   if (document.hasFocus()) {
     return test(name, fn);
   } else {
@@ -167,7 +170,10 @@ export function testRequiringFocus(name: string, fn: () => void) {
   }
 }
 
-export function testRequiringTransitions(name: string, fn: () => void) {
+export function testRequiringTransitions(
+  name: string,
+  fn: Parameters<typeof test>[1],
+) {
   return test(name, fn);
 }
 
