@@ -12,6 +12,12 @@ export interface BsLinkToSignature {
     models?: unknown[];
     query?: string;
     disabled?: boolean;
+
+    // private args, for internal use only!
+    /**
+     * @internal
+     */
+    attrClassInternal?: string;
   };
   Blocks: {
     default: [];

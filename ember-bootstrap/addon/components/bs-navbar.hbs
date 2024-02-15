@@ -6,7 +6,7 @@
     content=(component (ensure-safe-component (bs-default @contentComponent (component "bs-navbar/content"))) collapsed=this.collapsed onHidden=this.onCollapsed onShown=this.onExpanded)
     nav=(component
       (ensure-safe-component (bs-default @navComponent (component "bs-navbar/nav")))
-      linkToComponent=(component "bs-navbar/link-to" onCollapse=this.collapse class="nav-link")
+      linkToComponent=(component "bs-navbar/link-to" onCollapse=this.collapse attrClassInternal="nav-link")
     )
     collapse=this.collapse
     expand=this.expand
