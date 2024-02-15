@@ -99,7 +99,7 @@
     "sinon": "17.0.1",
     "tracked-toolbox": "2.0.0",
     "typescript": "5.3.3",
-    "webpack": "5.90.1"
+    "webpack": "5.90.2"
   },
   "engines": {
     "node": "18.* || >= 20"
