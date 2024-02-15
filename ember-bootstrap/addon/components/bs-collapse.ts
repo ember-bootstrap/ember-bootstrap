@@ -6,6 +6,26 @@ import transitionEnd from 'ember-bootstrap/utils/transition-end';
 import { ref } from 'ember-ref-bucket';
 import arg from '../utils/decorators/arg';
 import { tracked } from '@glimmer/tracking';
+import { assert } from '@ember/debug';
+
+export interface BsCollapseSignature {
+  Element: HTMLDivElement;
+  Args: {
+    collapsed?: boolean;
+    collapseDimension?: 'height' | 'width';
+    collapsedSize?: number;
+    expandedSize?: number;
+    transitionDuration?: number;
+
+    onHidden?: (e?: Event) => void;
+    onHide?: (e?: Event) => void;
+    onShow?: (e?: Event) => void;
+    onShown?: (e?: Event) => void;
+  };
+  Blocks: {
+    default: [];
+  };
+}
 
 /**
   An Ember component that mimics the behaviour of [Bootstrap's collapse.js plugin](http://getbootstrap.com/javascript/#collapse)
@@ -28,13 +48,13 @@ import { tracked } from '@glimmer/tracking';
   @extends Glimmer.Component
   @public
 */
-export default class Collapse extends Component {
+export default class Collapse extends Component<BsCollapseSignature> {
   /**
    * @property _element
    * @type null | HTMLElement
    * @private
    */
-  @ref('mainNode') _element = null;
+  @ref('mainNode') _element: HTMLElement | null = null;
 
   /**
    * Collapsed/expanded state
@@ -71,7 +91,7 @@ export default class Collapse extends Component {
    * @private
    */
   @tracked
-  transitioning = false;
+  transitioning: boolean = false;
 
   /**
    * The size of the element when collapsed. Defaults to 0.
@@ -129,7 +149,7 @@ export default class Collapse extends Component {
    * @public
    */
   @arg
-  collapseDimension = 'height';
+  collapseDimension: 'height' | 'width' = 'height';
 
   /**
    * The duration of the fade transition
@@ -143,7 +163,7 @@ export default class Collapse extends Component {
   transitionDuration = 350;
 
   @tracked
-  collapseSize = null;
+  collapseSize: number | null = null;
 
   /**
    * The action to be sent when the element is about to be hidden.
@@ -180,6 +200,8 @@ export default class Collapse extends Component {
    * @protected
    */
   show() {
+    assert('Reference to collapse div element exists.', this._element);
+
     this.args.onShow?.();
 
     this.transitioning = true;
@@ -212,17 +234,23 @@ export default class Collapse extends Component {
    * @return {Number}
    * @private
    */
-  getExpandedSize(action) {
-    let expandedSize = this.expandedSize;
+  getExpandedSize(action: 'show' | 'hide') {
+    assert('Reference to collapse div element exists.', this._element);
+
+    const expandedSize = this.expandedSize;
     if (expandedSize != null) {
       return expandedSize;
     }
 
-    let collapseElement = this._element;
-    let prefix = action === 'show' ? 'scroll' : 'offset';
-    let measureProperty = `${prefix}${this.collapseDimension
+    const collapseElement = this._element;
+    const prefix = action === 'show' ? 'scroll' : 'offset';
+    const measureProperty = `${prefix}${this.collapseDimension
       .substring(0, 1)
-      .toUpperCase()}${this.collapseDimension.substring(1)}`;
+      .toUpperCase()}${this.collapseDimension.substring(1)}` as
+      | 'scrollHeight'
+      | 'scrollWidth'
+      | 'offsetHeight'
+      | 'offsetWidth';
     return collapseElement[measureProperty];
   }
 
@@ -233,6 +261,8 @@ export default class Collapse extends Component {
    * @protected
    */
   hide() {
+    assert('Reference to collapse div element exists.', this._element);
+
     this.args.onHide?.();
 
     this.transitioning = true;
@@ -259,8 +289,8 @@ export default class Collapse extends Component {
 
   @action
   _onCollapsedChange() {
-    let collapsed = this.collapsed;
-    let active = this.active;
+    const collapsed = this.collapsed;
+    const active = this.active;
     if (collapsed !== active) {
       return;
     }
@@ -276,7 +306,7 @@ export default class Collapse extends Component {
     if (
       !this.resetSizeWhenNotCollapsing &&
       this.collapsed &&
-      !this.collapsing
+      !this.transitioning
     ) {
       this.collapseSize = this.collapsedSize;
     }
@@ -287,7 +317,7 @@ export default class Collapse extends Component {
     if (
       !this.resetSizeWhenNotCollapsing &&
       !this.collapsed &&
-      !this.collapsing
+      !this.transitioning
     ) {
       this.collapseSize = this.expandedSize;
     }
