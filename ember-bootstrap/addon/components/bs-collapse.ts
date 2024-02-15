@@ -6,6 +6,7 @@ import transitionEnd from 'ember-bootstrap/utils/transition-end';
 import { ref } from 'ember-ref-bucket';
 import arg from '../utils/decorators/arg';
 import { tracked } from '@glimmer/tracking';
+import { assert } from '@ember/debug';
 
 export interface BsCollapseSignature {
   Element: HTMLDivElement;
@@ -199,9 +200,7 @@ export default class Collapse extends Component<BsCollapseSignature> {
    * @protected
    */
   show() {
-    if (!this._element) {
-      throw new Error('Reference to collapse div element is missing.');
-    }
+    assert('Reference to collapse div element exists.', this._element);
 
     this.args.onShow?.();
 
@@ -236,9 +235,7 @@ export default class Collapse extends Component<BsCollapseSignature> {
    * @private
    */
   getExpandedSize(action: 'show' | 'hide') {
-    if (!this._element) {
-      throw new Error('Reference to collapse div element is missing.');
-    }
+    assert('Reference to collapse div element exists.', this._element);
 
     const expandedSize = this.expandedSize;
     if (expandedSize != null) {
@@ -264,9 +261,7 @@ export default class Collapse extends Component<BsCollapseSignature> {
    * @protected
    */
   hide() {
-    if (!this._element) {
-      throw new Error('Reference to collapse div element is missing.');
-    }
+    assert('Reference to collapse div element exists.', this._element);
 
     this.args.onHide?.();
 
