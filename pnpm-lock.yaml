@@ -159,8 +159,8 @@ importers:
         specifier: 8.1.1
         version: 8.1.1(eslint@8.56.0)
       execa:
-        specifier: 5.1.1
-        version: 5.1.1
+        specifier: 8.0.1
+        version: 8.0.1
       gulp:
         specifier: 4.0.2
         version: 4.0.2
