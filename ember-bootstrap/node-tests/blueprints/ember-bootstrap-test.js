@@ -39,7 +39,7 @@ describe('Acceptance: ember generate ember-bootstrap', function () {
           modifyPackages([{ name: 'ember-cli-sass' }]);
           return emberGenerate(args).then(() => {
             expect(file(`${baseDir}/app.scss`)).to.contain(
-              '@import "ember-bootstrap/bootstrap";',
+              '@import "node_modules/bootstrap/scss/bootstrap";',
             );
             expect(file(`${baseDir}/app.less`)).to.not.exist;
           });
@@ -52,7 +52,7 @@ describe('Acceptance: ember generate ember-bootstrap', function () {
           createStyleFixture('app.scss');
           return emberGenerate(args).then(() => {
             expect(file(`${baseDir}/app.scss`)).to.contain(
-              '@import "ember-bootstrap/bootstrap";',
+              '@import "node_modules/bootstrap/scss/bootstrap";',
             );
             expect(file(`${baseDir}/app.less`)).to.not.exist;
           });
@@ -96,7 +96,7 @@ describe('Acceptance: ember generate ember-bootstrap', function () {
           .then(() => emberGenerate(args))
           .then(() => {
             expect(file('app/styles/app.scss')).to.contain(
-              '@import "ember-bootstrap/bootstrap";',
+              '@import "node_modules/bootstrap/scss/bootstrap";',
             );
             expect(file('app/styles/app.less')).to.not.exist;
           });
@@ -110,7 +110,7 @@ describe('Acceptance: ember generate ember-bootstrap', function () {
           .then(() => emberGenerate(args))
           .then(() => {
             expect(file('app/styles/app.scss')).to.contain(
-              '@import "ember-bootstrap/bootstrap";',
+              '@import "node_modules/bootstrap/scss/bootstrap";',
             );
             expect(file('app/styles/app.less')).to.not.exist;
           });

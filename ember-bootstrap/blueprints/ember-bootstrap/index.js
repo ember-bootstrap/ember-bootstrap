@@ -117,7 +117,8 @@ module.exports = {
 
   addPreprocessorStyleImport() {
     let preprocessor = this.preprocessor;
-    let importStatement = '\n@import "ember-bootstrap/bootstrap";\n';
+    let importStatement =
+      '\n@import "node_modules/bootstrap/scss/bootstrap";\n';
 
     if (preprocessor === 'none') {
       return;
@@ -148,15 +149,6 @@ module.exports = {
     let settings = {
       bootstrapVersion,
     };
-
-    if (bootstrapVersion === 3) {
-      settings.importBootstrapFont = Object.prototype.hasOwnProperty.call(
-        config,
-        'importBootstrapFont',
-      )
-        ? config.importBootstrapFont
-        : true;
-    }
 
     if (preprocessor !== 'none') {
       settings.importBootstrapCSS = false;
