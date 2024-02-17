@@ -50,7 +50,7 @@ pnpm install
 * And last (but not least 😁) do your release.
 
 ```sh
-pnpm release-it
+pnpm run release
 ```
 
 [release-it](https://github.com/release-it/release-it/) manages the actual
