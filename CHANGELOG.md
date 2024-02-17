@@ -12,6 +12,91 @@
 
 
 
+
+
+## v6.2.0 (2024-02-17)
+
+We started converting Ember Bootstrap to TypeScript and shipping types for Glint. The types are work in progress. They are neither complete nor considered stable.
+Nevertheless, we appreiate early adopters testing them out and providing feedback. A template registry for Glint can be imported from `ember-bootstrap/template-registry`.
+The template registry currently covers ``, ``, and ``.
+
+Help converting the remaining components to TypeScript and publishing types for them is highly appreciated. Please find details in the
+[TypeScript tracking issue](https://github.com/ember-bootstrap/ember-bootstrap/issues/2053) on GitHub and feel free reaching out to us in `#e-bootstrap` channel on
+Ember Discord.
+
+Additionally, we welcome [@SanderKnauff](https://github.com/SanderKnauff) as a new maintainer of Ember Bootstrap.
+
+#### :rocket: Enhancement
+* [#2091](https://github.com/ember-bootstrap/ember-bootstrap/pull/2091) Deprecate `importBootstrapCSS`, remove `importBootstrapTheme` and `importBootstrapFont` ([@SanderKnauff](https://github.com/SanderKnauff))
+* [#2099](https://github.com/ember-bootstrap/ember-bootstrap/pull/2099) Convert BsLinkTo to TypeScript ([@jelhan](https://github.com/jelhan))
+* [#2095](https://github.com/ember-bootstrap/ember-bootstrap/pull/2095) Convert BsCollapse to TypeScript ([@jelhan](https://github.com/jelhan))
+* [#2093](https://github.com/ember-bootstrap/ember-bootstrap/pull/2093) Convert BsButton to TypeScript ([@simonihmig](https://github.com/simonihmig))
+* [#2083](https://github.com/ember-bootstrap/ember-bootstrap/pull/2083) Deprecate inserting wormhole target ([@SanderKnauff](https://github.com/SanderKnauff))
+* [#2068](https://github.com/ember-bootstrap/ember-bootstrap/pull/2068) Support ember-style-modifier v4 ([@jelhan](https://github.com/jelhan))
+* [#2065](https://github.com/ember-bootstrap/ember-bootstrap/pull/2065) Clean-up unused custom CSS ([@jelhan](https://github.com/jelhan))
+* [#2055](https://github.com/ember-bootstrap/ember-bootstrap/pull/2055) Drop RSVP dependency ([@SanderKnauff](https://github.com/SanderKnauff))
+* [#2052](https://github.com/ember-bootstrap/ember-bootstrap/pull/2052) Remove unused dependency on ember-decorators ([@jelhan](https://github.com/jelhan))
+* [#2049](https://github.com/ember-bootstrap/ember-bootstrap/pull/2049) Drop component subclassing deprecation ([@SanderKnauff](https://github.com/SanderKnauff))
+
+#### :bug: Bug Fix
+* [#2100](https://github.com/ember-bootstrap/ember-bootstrap/pull/2100) Fix click events inside `bs-dropdown`s not activating ([@SanderKnauff](https://github.com/SanderKnauff))
+* [#2077](https://github.com/ember-bootstrap/ember-bootstrap/pull/2077) Fix several issues with BsCarousel component ([@SanderKnauff](https://github.com/SanderKnauff))
+* [#2048](https://github.com/ember-bootstrap/ember-bootstrap/pull/2048) Add bs-collapse to the include list of bs-navbar ([@SanderKnauff](https://github.com/SanderKnauff))
+
+#### :memo: Documentation
+* [#2083](https://github.com/ember-bootstrap/ember-bootstrap/pull/2083) Deprecate inserting wormhole target ([@SanderKnauff](https://github.com/SanderKnauff))
+* [#2050](https://github.com/ember-bootstrap/ember-bootstrap/pull/2050) Remove browserstack from README.md ([@SanderKnauff](https://github.com/SanderKnauff))
+
+#### :house: Internal
+* [#2094](https://github.com/ember-bootstrap/ember-bootstrap/pull/2094) Resolve remaining lint warnings in docs app ([@SanderKnauff](https://github.com/SanderKnauff))
+* [#2097](https://github.com/ember-bootstrap/ember-bootstrap/pull/2097) Run Safari tests after basic tests ([@simonihmig](https://github.com/simonihmig))
+* [#2096](https://github.com/ember-bootstrap/ember-bootstrap/pull/2096) Add initial typescript configuration to test-app project ([@SanderKnauff](https://github.com/SanderKnauff))
+* [#2092](https://github.com/ember-bootstrap/ember-bootstrap/pull/2092) Add initial typescript configuration to addon project ([@SanderKnauff](https://github.com/SanderKnauff))
+* [#2073](https://github.com/ember-bootstrap/ember-bootstrap/pull/2073) Convert to monorepo ([@SanderKnauff](https://github.com/SanderKnauff))
+* [#2062](https://github.com/ember-bootstrap/ember-bootstrap/pull/2062) Resolve ESLint warnings in test app ([@SanderKnauff](https://github.com/SanderKnauff))
+* [#2061](https://github.com/ember-bootstrap/ember-bootstrap/pull/2061) Add @sanderknauff as maintainer ([@SanderKnauff](https://github.com/SanderKnauff))
+* [#2054](https://github.com/ember-bootstrap/ember-bootstrap/pull/2054) Use @cached decorator from @glimmer/tracking rather than 3rd party library ([@jelhan](https://github.com/jelhan))
+
+#### Committers: 3
+- Jeldrik Hanschke ([@jelhan](https://github.com/jelhan))
+- Sander Knauff ([@SanderKnauff](https://github.com/SanderKnauff))
+- Simon Ihmig ([@simonihmig](https://github.com/simonihmig))
+
+
+## v6.1.0 (2023-12-20)
+
+This is primarily a maintenance release modernizing the code. It refactors remaining components to `@glimmer/component`,
+drops remaining observers, and refactors away from remaining computed properties usage. Thanks a lot to [@SanderKnauff](https://github.com/SanderKnauff)
+for doing most of the hard work.
+
+Additionally it includes a bug fix for using a dropdown within a navbar on small screen sizes.
+
+#### Features
+* [#2038](https://github.com/ember-bootstrap/ember-bootstrap/pull/2038) Refactor bs-carousel and related components to Glimmer components ([@SanderKnauff](https://github.com/SanderKnauff))
+* [#2034](https://github.com/ember-bootstrap/ember-bootstrap/pull/2034) Refactor bs-tab and related components to Glimmer component ([@SanderKnauff](https://github.com/SanderKnauff))
+* [#2031](https://github.com/ember-bootstrap/ember-bootstrap/pull/2031) Refactor bs-dropdown and related components to Glimmer component ([@SanderKnauff](https://github.com/SanderKnauff))
+* [#2030](https://github.com/ember-bootstrap/ember-bootstrap/pull/2030) Refactor bs-progress and bs-progress/bar to Glimmer components ([@SanderKnauff](https://github.com/SanderKnauff))
+* [#2025](https://github.com/ember-bootstrap/ember-bootstrap/pull/2025) Refactor BsNavbar, BsNavbar::Content and BSNavbar::Toggle to Glimmer components ([@SanderKnauff](https://github.com/SanderKnauff))
+* [#2020](https://github.com/ember-bootstrap/ember-bootstrap/pull/2020) Refactor BsNav to Glimmer component ([@SanderKnauff](https://github.com/SanderKnauff))
+
+#### Bug Fixes
+* [#2040](https://github.com/ember-bootstrap/ember-bootstrap/pull/2040) Drop .active and .disabled CSS classes from .nav-item only expected for BS3 ([@SanderKnauff](https://github.com/SanderKnauff))
+* [#1946](https://github.com/ember-bootstrap/ember-bootstrap/pull/1946) bs-dropdown dynamic positioning should not be used when in a navbar ([@craigteegarden](https://github.com/craigteegarden))
+* [#2027](https://github.com/ember-bootstrap/ember-bootstrap/pull/2027) Refactor bs-alert to remove @localCopy and avoid mutation after consumption error in Ember canary ([@SanderKnauff](https://github.com/SanderKnauff))
+
+#### Internal
+* [#2041](https://github.com/ember-bootstrap/ember-bootstrap/pull/2041) Run tests on Safari in CI (again) ([@SanderKnauff](https://github.com/SanderKnauff))
+* [#2047](https://github.com/ember-bootstrap/ember-bootstrap/pull/2047) remove unused mixins for component parent  child relationship ([@jelhan](https://github.com/jelhan))
+* [#2044](https://github.com/ember-bootstrap/ember-bootstrap/pull/2044) remove unused computed property utils ([@jelhan](https://github.com/jelhan))
+* [#2042](https://github.com/ember-bootstrap/ember-bootstrap/pull/2042) refactor from computed property to glimmer tracking caching ([@jelhan](https://github.com/jelhan))
+* [#2028](https://github.com/ember-bootstrap/ember-bootstrap/pull/2028) Migrate project to pnpm ([@SanderKnauff](https://github.com/SanderKnauff))
+
+#### Committers: 3
+- Craig Teegarden ([@craigteegarden](https://github.com/craigteegarden))
+- Jeldrik Hanschke ([@jelhan](https://github.com/jelhan))
+- Sander Knauff ([@SanderKnauff](https://github.com/SanderKnauff))
+
+
 ## v6.0.1 (2023-11-12)
 
 #### Documentation
@@ -774,8 +859,8 @@ Fixes deployment of docs only.
 
   This deprecates *all* component arguments that are used to set HTML attributes. All of these will be removed in the next major version v4.0.
   A deprecation warning will be issued in development for most arguments when used.
-  
-  The migration path is to use angle bracket invocation (available since Ember 3.4 or by installing [ember-angle-bracket-invocation-polyfill](https://github.com/rwjblue/ember-angle-bracket-invocation-polyfill)) to set them directly. 
+
+  The migration path is to use angle bracket invocation (available since Ember 3.4 or by installing [ember-angle-bracket-invocation-polyfill](https://github.com/rwjblue/ember-angle-bracket-invocation-polyfill)) to set them directly.
   E.g. use `Ok` instead of `{{#bs-button type="primary" title="foo"}}Ok{{/bs-button}}` to set `title`.
 
 #### Bug Fixes
@@ -879,7 +964,7 @@ Fixes deployment of docs only.
 
 #### :boom: Breaking Change
 * [#879](https://github.com/kaliber5/ember-bootstrap/pull/879) Revert the link support of nav.item and the deprecation of nav.link-to ([@simonihmig](https://github.com/simonihmig))
-  
+
   *Note: this is a breaking change only compared to `3.0.0-rc.x`, but not compared to previous versions, as it reverts the changes in `3.0.0-rc.0`*
 
 #### Features
@@ -940,7 +1025,7 @@ Fixes deployment of docs only.
 * [#788](https://github.com/kaliber5/ember-bootstrap/pull/788) Drop node 6 support ([@simonihmig](https://github.com/simonihmig))
 * [#787](https://github.com/kaliber5/ember-bootstrap/pull/787) Dropped support for Ember < 2.18 ([@simonihmig](https://github.com/simonihmig))
 * [#795](https://github.com/kaliber5/ember-bootstrap/pull/795) Modals are tagless (wrapping div has been removed), which might break when setting an ID or `ember-test-selectors` attribute on curly component invocation.
- Angle bracket component invocation syntax should be used for that use case. E.g. `{{#bs-modal data-test-foo=true}}` should be refactored to ``.
+  Angle bracket component invocation syntax should be used for that use case. E.g. `{{#bs-modal data-test-foo=true}}` should be refactored to ``.
 
 #### Features
 * [#842](https://github.com/kaliber5/ember-bootstrap/pull/842) Button is disabled by default if in pending state ([@jelhan](https://github.com/jelhan))
@@ -1187,8 +1272,8 @@ Fixes deployment of docs only.
 ### BREAKING CHANGES
 
 * **Setup:** If you are using Bootstrap 3 and you don't have `bootstrapVersion` explicitly in the bootstrap config of your
-`ember-cli-build.js`, then this change will implicitly switch to Bootstrap 4. In this case please run
-`ember g ember-bootstrap --bootstrapVersion=3` to fix it at version 3!
+  `ember-cli-build.js`, then this change will implicitly switch to Bootstrap 4. In this case please run
+  `ember g ember-bootstrap --bootstrapVersion=3` to fix it at version 3!
 * **Build:** Support for node.js 4 has been dropped!
 
 
@@ -1304,10 +1389,10 @@ Fixes deployment of docs only.
 #### Features
 
 * **Bootstrap 4: Added support for the most recent Bootstrap 4.0.0-beta release!**
-  The Bootstrap 4 beta release contained a lot of breaking changes compared to the alpha releases, which required a lot 
+  The Bootstrap 4 beta release contained a lot of breaking changes compared to the alpha releases, which required a lot
   of updates to the markup generated by the various Ember components. Because of that, you cannot use this release of
-  ember-bootstrap with Bootstrap 4.0.0-alpha. To make sure you have the right version of the `bootstrap` npm package 
-  installed, run `ember generate ember-bootstrap` after updating! 
+  ember-bootstrap with Bootstrap 4.0.0-alpha. To make sure you have the right version of the `bootstrap` npm package
+  installed, run `ember generate ember-bootstrap` after updating!
 
 
 
@@ -1513,7 +1598,7 @@ Fixes deployment of docs only.
 * **Installation:** Improved default blueprint (`ember g ember-bootstrap`) for addon installation. Installs only the necessary
   dependencies, based on your chosen Bootstrap version and optional CSS preprocessor. Introduces new options `--bootstrapVersion`
   to easily switch Bootstrap version (3/4) and `--preprocessor` to choose the CSS preprocessor (Sass/Less), including
-  installation of the preprocessor addon itself if required. Also does not require Bower anymore! 
+  installation of the preprocessor addon itself if required. Also does not require Bower anymore!
   Find all details at the [Getting started](http://www.ember-bootstrap.com/#/getting-started/assets) guide.
   Thanks to [srvance](https://github.com/srvance)!
 * **Dropdown:** Adds isOpen to dropdown template hash. Thanks to [@theroncross](https://github.com/theroncross) ([58abd4b](https://github.com/kaliber5/ember-bootstrap/commit/58abd4b)), closes [#251](https://github.com/kaliber5/ember-bootstrap/issues/251)
@@ -1702,17 +1787,17 @@ See the following list for details.
 #### Breaking Changes
 
 * **Form:** the signature of the default action that is called when submitting the form has changed.
-    The form's model is always the first parameter, with an optional validation result as the second parameter
+  The form's model is always the first parameter, with an optional validation result as the second parameter
 
-    Before:
+  Before:
 
         submit(validationResult) { ... }
 
-    After:
+  After:
 
         submit(model, validationResult) { ... }
 
- ([6c9282a7](https://github.com/kaliber5/ember-bootstrap/commit/6c9282a7))
+([6c9282a7](https://github.com/kaliber5/ember-bootstrap/commit/6c9282a7))
 
 
 
@@ -1911,7 +1996,7 @@ Additional support for [ember-cp-validations](https://github.com/offirgolan/embe
 
 * If you rely on ember-bootstrap components to use the old ember-i18n TranslatableProperties mixin, you should update ember-i18n to the latest version and use the "t" helper to supply already translated strings to ember-bootstrap component properties in your templates.
 
- ([a5ade3c1](https://github.com/kaliber5/ember-bootstrap/commit/a5ade3c1))
+([a5ade3c1](https://github.com/kaliber5/ember-bootstrap/commit/a5ade3c1))
 
 
 
@@ -1984,7 +2069,7 @@ Additional support for [ember-cp-validations](https://github.com/offirgolan/embe
 
 #### Bug Fixes
 
-* **Ember:** Updated to Ember-cli 0.2.7, fixed deprecation warnings in Ember 1.13 ([1fc78c4](https://github.com/kaliber5/ember-bootstrap/commit/1fc78c41cfd4f7f72095825e14c813d62d772dae)) 
+* **Ember:** Updated to Ember-cli 0.2.7, fixed deprecation warnings in Ember 1.13 ([1fc78c4](https://github.com/kaliber5/ember-bootstrap/commit/1fc78c41cfd4f7f72095825e14c813d62d772dae))
 * **Ember:** Updated to Ember-cli 0.2.5 / Ember.js 1.12. Fixed test failures because of missi ([45e59f03](https://github.com/kaliber5/ember-bootstrap/commit/45e59f03))
 
 
