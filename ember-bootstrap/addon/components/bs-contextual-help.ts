@@ -11,6 +11,7 @@ import { ref } from 'ember-ref-bucket';
 import isFastBoot from '../utils/is-fastboot';
 
 import type { Timer } from '@ember/runloop';
+import type { ComponentLike } from '@glint/template';
 
 const HOVERSTATE_NONE = 'none';
 const HOVERSTATE_IN = 'in';
@@ -39,9 +40,14 @@ export interface ContextualHelpSignature {
     onShown?: () => unknown;
     onHide?: () => unknown;
     onHidden?: () => unknown;
+    elementComponent?: ComponentLike;
   };
   Blocks: {
-    default: [];
+    default: [
+      {
+        close: () => void;
+      },
+    ];
   };
 }
 
@@ -51,7 +57,7 @@ export interface ContextualHelpSignature {
   @extends Glimmer.Component
   @private
 */
-export default class ContextualHelp extends Component<ContextualHelpSignature> {
+export default abstract class ContextualHelp extends Component<ContextualHelpSignature> {
   /**
    * @property title
    * @type string
@@ -217,7 +223,7 @@ export default class ContextualHelp extends Component<ContextualHelpSignature> {
    * @readonly
    * @private
    */
-  declare arrowElement?: HTMLElement;
+  abstract arrowElement?: HTMLElement | null;
 
   /**
    * The wormhole destinationElement
