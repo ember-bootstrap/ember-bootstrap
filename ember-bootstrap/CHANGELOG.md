@@ -13,6 +13,56 @@
 
 
 
+
+## v6.2.0 (2024-02-17)
+
+We started converting Ember Bootstrap to TypeScript and shipping types for Glint. The types are work in progress. They are neither complete nor considered stable.
+Nevertheless, we appreiate early adopters testing them out and providing feedback. A template registry for Glint can be imported from `ember-bootstrap/template-registry`.
+The template registry currently covers `<BsButton>`, `<BsCollapse>`, and `<BsLinkTo>`.
+
+Help converting the remaining components to TypeScript and publishing types for them is highly appreciated. Please find details in the
+[TypeScript tracking issue](https://github.com/ember-bootstrap/ember-bootstrap/issues/2053) on GitHub and feel free reaching out to us in `#e-bootstrap` channel on
+Ember Discord.
+
+Additionally, we welcome [@SanderKnauff](https://github.com/SanderKnauff) as a new maintainer of Ember Bootstrap.
+
+#### :rocket: Enhancement
+* [#2091](https://github.com/ember-bootstrap/ember-bootstrap/pull/2091) Deprecate `importBootstrapCSS`, remove `importBootstrapTheme` and `importBootstrapFont` ([@SanderKnauff](https://github.com/SanderKnauff))
+* [#2099](https://github.com/ember-bootstrap/ember-bootstrap/pull/2099) Convert BsLinkTo to TypeScript ([@jelhan](https://github.com/jelhan))
+* [#2095](https://github.com/ember-bootstrap/ember-bootstrap/pull/2095) Convert BsCollapse to TypeScript ([@jelhan](https://github.com/jelhan))
+* [#2093](https://github.com/ember-bootstrap/ember-bootstrap/pull/2093) Convert BsButton to TypeScript ([@simonihmig](https://github.com/simonihmig))
+* [#2083](https://github.com/ember-bootstrap/ember-bootstrap/pull/2083) Deprecate inserting wormhole target ([@SanderKnauff](https://github.com/SanderKnauff))
+* [#2068](https://github.com/ember-bootstrap/ember-bootstrap/pull/2068) Support ember-style-modifier v4 ([@jelhan](https://github.com/jelhan))
+* [#2065](https://github.com/ember-bootstrap/ember-bootstrap/pull/2065) Clean-up unused custom CSS ([@jelhan](https://github.com/jelhan))
+* [#2055](https://github.com/ember-bootstrap/ember-bootstrap/pull/2055) Drop RSVP dependency ([@SanderKnauff](https://github.com/SanderKnauff))
+* [#2052](https://github.com/ember-bootstrap/ember-bootstrap/pull/2052) Remove unused dependency on ember-decorators ([@jelhan](https://github.com/jelhan))
+* [#2049](https://github.com/ember-bootstrap/ember-bootstrap/pull/2049) Drop component subclassing deprecation ([@SanderKnauff](https://github.com/SanderKnauff))
+
+#### :bug: Bug Fix
+* [#2100](https://github.com/ember-bootstrap/ember-bootstrap/pull/2100) Fix click events inside `bs-dropdown`s not activating ([@SanderKnauff](https://github.com/SanderKnauff))
+* [#2077](https://github.com/ember-bootstrap/ember-bootstrap/pull/2077) Fix several issues with BsCarousel component ([@SanderKnauff](https://github.com/SanderKnauff))
+* [#2048](https://github.com/ember-bootstrap/ember-bootstrap/pull/2048) Add bs-collapse to the include list of bs-navbar ([@SanderKnauff](https://github.com/SanderKnauff))
+
+#### :memo: Documentation
+* [#2083](https://github.com/ember-bootstrap/ember-bootstrap/pull/2083) Deprecate inserting wormhole target ([@SanderKnauff](https://github.com/SanderKnauff))
+* [#2050](https://github.com/ember-bootstrap/ember-bootstrap/pull/2050) Remove browserstack from README.md ([@SanderKnauff](https://github.com/SanderKnauff))
+
+#### :house: Internal
+* [#2094](https://github.com/ember-bootstrap/ember-bootstrap/pull/2094) Resolve remaining lint warnings in docs app ([@SanderKnauff](https://github.com/SanderKnauff))
+* [#2097](https://github.com/ember-bootstrap/ember-bootstrap/pull/2097) Run Safari tests after basic tests ([@simonihmig](https://github.com/simonihmig))
+* [#2096](https://github.com/ember-bootstrap/ember-bootstrap/pull/2096) Add initial typescript configuration to test-app project ([@SanderKnauff](https://github.com/SanderKnauff))
+* [#2092](https://github.com/ember-bootstrap/ember-bootstrap/pull/2092) Add initial typescript configuration to addon project ([@SanderKnauff](https://github.com/SanderKnauff))
+* [#2073](https://github.com/ember-bootstrap/ember-bootstrap/pull/2073) Convert to monorepo ([@SanderKnauff](https://github.com/SanderKnauff))
+* [#2062](https://github.com/ember-bootstrap/ember-bootstrap/pull/2062) Resolve ESLint warnings in test app ([@SanderKnauff](https://github.com/SanderKnauff))
+* [#2061](https://github.com/ember-bootstrap/ember-bootstrap/pull/2061) Add @sanderknauff as maintainer ([@SanderKnauff](https://github.com/SanderKnauff))
+* [#2054](https://github.com/ember-bootstrap/ember-bootstrap/pull/2054) Use @cached decorator from @glimmer/tracking rather than 3rd party library ([@jelhan](https://github.com/jelhan))
+
+#### Committers: 3
+- Jeldrik Hanschke ([@jelhan](https://github.com/jelhan))
+- Sander Knauff ([@SanderKnauff](https://github.com/SanderKnauff))
+- Simon Ihmig ([@simonihmig](https://github.com/simonihmig))
+
+
 ## v6.1.0 (2023-12-20)
 
 This is primarily a maintenance release modernizing the code. It refactors remaining components to `@glimmer/component`,
