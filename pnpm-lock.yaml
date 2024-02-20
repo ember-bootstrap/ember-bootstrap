@@ -42,8 +42,8 @@ importers:
         specifier: 1.1.2
         version: 1.1.2
       bootstrap:
-        specifier: 5.3.2
-        version: 5.3.2(@popperjs/core@2.11.8)
+        specifier: 5.3.3
+        version: 5.3.3(@popperjs/core@2.11.8)
       broccoli-asset-rev:
         specifier: 3.0.0
         version: 3.0.0
@@ -454,8 +454,8 @@ importers:
         specifier: 7.0.2
         version: 7.0.2(eslint@8.56.0)(typescript@5.3.3)
       bootstrap:
-        specifier: 5.3.2
-        version: 5.3.2(@popperjs/core@2.11.8)
+        specifier: 5.3.3
+        version: 5.3.3(@popperjs/core@2.11.8)
       broccoli-asset-rev:
         specifier: 3.0.0
         version: 3.0.0
@@ -4512,8 +4512,8 @@ packages:
     dev: true
     optional: true
 
-  /bootstrap@5.3.2(@popperjs/core@2.11.8):
-    resolution: {integrity: sha512-D32nmNWiQHo94BKHLmOrdjlL05q1c8oxbtBphQFb9Z5to6eGRDCm0QgeaZ4zFBHzfg2++rqa2JkqCcxDy0sH0g==}
+  /bootstrap@5.3.3(@popperjs/core@2.11.8):
+    resolution: {integrity: sha512-8HLCdWgyoMguSO9o+aH+iuZ+aht+mzW0u3HIMzVu7Srrpv7EBBxTnrFlSCskwdY1+EOFQSm7uMJhNQHkdPcmjg==}
     peerDependencies:
       '@popperjs/core': ^2.11.8
     dependencies:
