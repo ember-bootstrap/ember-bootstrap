@@ -102,8 +102,8 @@ importers:
         specifier: 3.0.0
         version: 3.0.0
       ember-cp-validations:
-        specifier: 6.0.0
-        version: 6.0.0(ember-source@5.6.0)
+        specifier: 6.0.1
+        version: 6.0.1(ember-source@5.6.0)
       ember-fetch:
         specifier: 8.1.2
         version: 8.1.2
@@ -7727,8 +7727,8 @@ packages:
       - '@babel/core'
       - supports-color
 
-  /ember-cp-validations@6.0.0(ember-source@5.6.0):
-    resolution: {integrity: sha512-9w/SuCU/i47Y0E+ZvrPJvFuy1GlNept4V3g1AbXgufCeD9vYnPzk20ALPw3LpZwHZDoLkZF7icTGgRZWzFPw8g==}
+  /ember-cp-validations@6.0.1(ember-source@5.6.0):
+    resolution: {integrity: sha512-OGxAsbb3thKE5SLsALFHQuTfOgshf2BCWY6FhK4TZatuu2G4cGD8f+Ys7Y4Yqx6ikfhjkTDVcZuU75+hHanVZA==}
     engines: {node: 14.* || 16.* || >= 18}
     peerDependencies:
       ember-data: '*'
