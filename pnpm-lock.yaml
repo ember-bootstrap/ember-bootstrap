@@ -7758,7 +7758,7 @@ packages:
       '@glint/template': '>= 1.0.0'
       ember-source: ^3.28.0 || ^4.0.0 || >=5.0.0
     dependencies:
-      '@babel/helper-plugin-utils': 7.22.5
+      '@babel/helper-plugin-utils': 7.24.0
       '@babel/types': 7.23.9
       '@embroider/addon-shim': 1.8.7
       '@glimmer/tracking': 1.1.2
