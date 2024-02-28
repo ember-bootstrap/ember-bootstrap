@@ -4,9 +4,9 @@ import arg from '../utils/decorators/arg';
 interface BsSpinnerSignature {
   Element: HTMLDivElement;
   Args: {
-    size: 'sm' | null;
-    type: string;
-    spinnerType: 'border' | 'grow';
+    size?: 'sm' | null;
+    type?: string;
+    spinnerType?: 'border' | 'grow';
   };
   Blocks: {
     default: [];
