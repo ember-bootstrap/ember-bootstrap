@@ -84,11 +84,8 @@ module('Integration | Component | bs-spinner', function (hooks) {
   test('spinner has HTML attributes', async function (assert) {
     await render(hbs`<BsSpinner id='test' />`);
 
-    assert.equal(this.element.querySelector('div')?.getAttribute('id'), 'test');
-    assert.equal(
-      this.element.querySelector('div')?.getAttribute('role'),
-      'status',
-    );
+    assert.dom('div').hasAttribute('id', 'test');
+    assert.dom('div').hasAttribute('role', 'status');
   });
 
   test('spinnerType property allows changing spinner type', async function (assert) {
