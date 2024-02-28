@@ -1,5 +1,12 @@
 import templateOnly from '@ember/component/template-only';
 
+interface DropdownMenuDividerSignature {
+  Element: HTMLDivElement;
+  Blocks: {
+    default: [];
+  };
+}
+
 /**
  Component for a dropdown menu divider.
 
@@ -10,4 +17,4 @@ import templateOnly from '@ember/component/template-only';
  @extends Component
  @public
  */
-export default templateOnly();
+export default templateOnly<DropdownMenuDividerSignature>();
