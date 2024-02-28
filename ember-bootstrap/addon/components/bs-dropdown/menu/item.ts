@@ -1,5 +1,11 @@
 import templateOnly from '@ember/component/template-only';
 
+interface DropdownMenuItemSignature {
+  Blocks: {
+    default: [];
+  };
+}
+
 /**
  Component for a dropdown menu item.
 
@@ -10,4 +16,4 @@ import templateOnly from '@ember/component/template-only';
  @extends Component
  @public
  */
-export default templateOnly();
+export default templateOnly<DropdownMenuItemSignature>();
