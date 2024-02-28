@@ -1,21 +1,11 @@
 import Component from '@glimmer/component';
 import arg from '../utils/decorators/arg';
 
-type SpinnerTypeColor =
-  | 'primary'
-  | 'secondary'
-  | 'success'
-  | 'danger'
-  | 'warning'
-  | 'info'
-  | 'light'
-  | 'dark';
-
 interface BsSpinnerSignature {
   Element: HTMLDivElement;
   Args: {
-    size: 'sm' | undefined;
-    type: SpinnerTypeColor;
+    size: 'sm' | null;
+    type: string;
     spinnerType: 'border' | 'grow';
   };
   Blocks: {
