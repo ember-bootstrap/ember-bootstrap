@@ -24,16 +24,6 @@ export default class DropdownMenu extends Component {
   @ref('menuElement') menuElement = null;
 
   /**
-   * @property ariaRole
-   * @default menu
-   * @type string
-   * @protected
-   */
-  get ariaRole() {
-    return this.args.ariaRole ?? 'menu';
-  }
-
-  /**
    * Alignment of the menu, either "left" or "right"
    *
    * @property align
