@@ -42,7 +42,7 @@ export default class DropdownMenu extends Component {
    * @public
    */
   get align() {
-    return this.args.align ?? 'false';
+    return this.args.align ?? 'left';
   }
 
   /**
