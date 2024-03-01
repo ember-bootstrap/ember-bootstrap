@@ -17,11 +17,6 @@ module.exports = function (defaults) {
 
   const options = {
     'ember-bootstrap': {},
-    babel: {
-      plugins: [
-        require.resolve('ember-concurrency/async-arrow-task-transform'),
-      ],
-    },
     'ember-cli-babel': {
       includePolyfill: !!process.env.BABELPOLYFILL,
       enableTypeScriptTransform: true,
