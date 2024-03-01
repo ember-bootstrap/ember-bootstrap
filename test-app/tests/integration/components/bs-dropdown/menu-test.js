@@ -91,9 +91,9 @@ module('Integration | Component | bs-dropdown/menu', function (hooks) {
   });
 
   test('dropdown menu can be right aligned', async function (assert) {
-    await render(hbs`
-      <BsDropdown as |dd|><dd.menu @align="right" @isOpen={{true}}></dd.menu></BsDropdown>
-    `);
+    await render(
+      hbs`<BsDropdown as |dd|><dd.menu @align='right' @isOpen={{true}} /></BsDropdown>`,
+    );
 
     assert
       .dom('.dropdown-menu')
