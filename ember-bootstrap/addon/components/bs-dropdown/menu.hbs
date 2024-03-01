@@ -4,6 +4,7 @@
     <div
       class="dropdown-menu {{this.alignClass}} {{if this.isOpen "show"}}"
       tabindex="-1"
+      data-bs-popper
       ...attributes
       {{popper-tooltip @toggleElement this.popperOptions}}
       {{did-insert @registerChildElement "menu"}}
@@ -25,6 +26,7 @@
       <div
         class="dropdown-menu {{this.alignClass}} {{if this.isOpen "show"}}"
         tabindex="-1"
+        data-bs-popper
         ...attributes
         {{popper-tooltip @toggleElement this.popperOptions}}
         {{did-insert @registerChildElement "menu"}}
