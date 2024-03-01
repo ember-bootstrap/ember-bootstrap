@@ -104,7 +104,7 @@ Until: 7.0.0
     if (
       VersionChecker.forProject(this.parent).check({
         'ember-concurrency': '>= 4.0.0',
-      })
+      }).isSatisfied
     ) {
       this.options.babel.plugins.unshift(
         require.resolve('ember-concurrency/async-arrow-task-transform'),
