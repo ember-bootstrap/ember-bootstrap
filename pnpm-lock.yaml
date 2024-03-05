@@ -63,8 +63,8 @@ importers:
         specifier: 5.0.0
         version: 5.0.0(ember-bootstrap@ember-bootstrap)(ember-power-select@7.2.0)(ember-source@5.7.0)
       ember-cli:
-        specifier: 5.6.0
-        version: 5.6.0
+        specifier: 5.7.0
+        version: 5.7.0
       ember-cli-app-version:
         specifier: 6.0.1
         version: 6.0.1(ember-source@5.7.0)
@@ -73,7 +73,7 @@ importers:
         version: 8.2.0(@babel/core@7.24.0)
       ember-cli-dependency-checker:
         specifier: 3.3.2
-        version: 3.3.2(ember-cli@5.6.0)
+        version: 3.3.2(ember-cli@5.7.0)
       ember-cli-fastboot:
         specifier: 4.1.2
         version: 4.1.2
@@ -346,8 +346,8 @@ importers:
         specifier: 8.2.2
         version: 8.2.2
       ember-cli:
-        specifier: 5.6.0
-        version: 5.6.0
+        specifier: 5.7.0
+        version: 5.7.0
       ember-cli-blueprint-test-helpers:
         specifier: 0.19.2
         version: 0.19.2
@@ -484,8 +484,8 @@ importers:
         specifier: workspace:*
         version: link:../ember-bootstrap
       ember-cli:
-        specifier: 5.6.0
-        version: 5.6.0
+        specifier: 5.7.0
+        version: 5.7.0
       ember-cli-app-version:
         specifier: 6.0.1
         version: 6.0.1(ember-source@5.7.0)
@@ -497,7 +497,7 @@ importers:
         version: 2.0.3
       ember-cli-dependency-checker:
         specifier: 3.3.2
-        version: 3.3.2(ember-cli@5.6.0)
+        version: 3.3.2(ember-cli@5.7.0)
       ember-cli-fastboot:
         specifier: 4.1.2
         version: 4.1.2
@@ -7091,14 +7091,14 @@ packages:
       - supports-color
     dev: true
 
-  /ember-cli-dependency-checker@3.3.2(ember-cli@5.6.0):
+  /ember-cli-dependency-checker@3.3.2(ember-cli@5.7.0):
     resolution: {integrity: sha512-PwkrW5oYsdPWwt+0Tojufmv/hxVETTjkrEdK7ANQB2VSnqpA5UcYubwpQM9ONuR2J8wyNDMwEHlqIrk/FYtBsQ==}
     engines: {node: '>= 6'}
     peerDependencies:
       ember-cli: ^3.2.0 || >=4.0.0
     dependencies:
       chalk: 2.4.2
-      ember-cli: 5.6.0
+      ember-cli: 5.7.0
       find-yarn-workspace-root: 1.2.1
       is-git-url: 1.0.0
       resolve: 1.22.8
@@ -7513,8 +7513,8 @@ packages:
       - supports-color
     dev: true
 
-  /ember-cli@5.6.0:
-    resolution: {integrity: sha512-9ARiTnNgQDX6RPC37PjlEc58/e8p7pgmNu6GcmARq4iBLeTWWW+2mgw3HKoFd91ob1EdRiglskLYzgboRxtBBw==}
+  /ember-cli@5.7.0:
+    resolution: {integrity: sha512-MKHVcRpDk1ENUCCRGGqZ8yfkCsszvSUbwO09h14vqcfaqcJkOWI+p0oynmdZQMM8OkZp484oLe3+CZCsXO9LfA==}
     engines: {node: '>= 18'}
     hasBin: true
     dependencies:
@@ -14199,6 +14199,7 @@ packages:
 
   /psl@1.9.0:
     resolution: {integrity: sha512-E/ZsdU4HLs/68gYzgGTkMicWTLPdAftJLfJFlLUAAKZGkStNU72sZjT66SnMDVOfOWY/YAoiD7Jxa9iHvngcag==}
+    requiresBuild: true
     dev: true
 
   /pump@2.0.1:
@@ -16887,6 +16888,7 @@ packages:
   /universalify@0.2.0:
     resolution: {integrity: sha512-CJ1QgKmNg3CwvAv/kOFmtnEN05f0D/cn9QntgNOQlQF9dgvVTHj3t+8JPdjqawCHk7V/KA+fbUqzZ9XWhcqPUg==}
     engines: {node: '>= 4.0.0'}
+    requiresBuild: true
     dev: true
 
   /universalify@2.0.1:
@@ -16968,6 +16970,7 @@ packages:
 
   /url-parse@1.5.10:
     resolution: {integrity: sha512-WypcfiRhfeUP9vvF0j6rw0J3hrWrw6iZv3+22h6iRMJ/8z1Tj6XfLP4DsUix5MhMPnXpiHDoKyoZ/bdCkwBCiQ==}
+    requiresBuild: true
     dependencies:
       querystringify: 2.2.0
       requires-port: 1.0.0
