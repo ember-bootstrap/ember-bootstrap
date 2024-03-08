@@ -87,8 +87,8 @@ importers:
         specifier: 11.0.1
         version: 11.0.1
       ember-cli-showdown:
-        specifier: 9.0.0
-        version: 9.0.0(ember-source@5.7.0)(webpack@5.90.3)
+        specifier: 9.0.1
+        version: 9.0.1(ember-source@5.7.0)(webpack@5.90.3)
       ember-cli-sri:
         specifier: 2.1.1
         version: 2.1.1
@@ -7359,11 +7359,11 @@ packages:
       - supports-color
     dev: true
 
-  /ember-cli-showdown@9.0.0(ember-source@5.7.0)(webpack@5.90.3):
-    resolution: {integrity: sha512-lpU3PfY/C4RxXlV3S/iVIxSKr6m5mESoOCyqFjFwBWd2tEPS4iBtY9a9JBE4Moify2im/0SS6780yU0Rbhw/8Q==}
+  /ember-cli-showdown@9.0.1(ember-source@5.7.0)(webpack@5.90.3):
+    resolution: {integrity: sha512-m7CtTlWP/8E4T2hr6fayXqqWuuUGibwdwCF5a/Y/W2juDkHk+yQnVllZuwg4gFa4xNcyFkN10Ly28flFsz0CFw==}
     engines: {node: '>= 18'}
     peerDependencies:
-      ember-source: '>= 4.0.0'
+      ember-source: '>= 3.12.0'
     dependencies:
       '@babel/core': 7.24.0
       ember-auto-import: 2.7.2(@glint/template@1.3.0)(webpack@5.90.3)
