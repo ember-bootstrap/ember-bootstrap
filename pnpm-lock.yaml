@@ -289,7 +289,7 @@ importers:
         version: 5.7.0(@babel/core@7.24.0)(@glimmer/component@1.1.2)(@glint/template@1.3.0)(rsvp@4.8.5)(webpack@5.90.3)
       ember-style-modifier:
         specifier: ^0.8.0 || ^1.0.0 || ^2.0.0 || ^3.0.0 || ^4.0.0
-        version: 4.3.0(@ember/string@3.1.1)(ember-source@5.7.0)
+        version: 4.3.1(@babel/core@7.24.0)(@ember/string@3.1.1)(ember-source@5.7.0)
       findup-sync:
         specifier: ^5.0.0
         version: 5.0.0
@@ -571,8 +571,8 @@ importers:
         specifier: 3.0.0
         version: 3.0.0
       ember-style-modifier:
-        specifier: 4.3.0
-        version: 4.3.0(@ember/string@3.1.1)(ember-source@5.7.0)
+        specifier: 4.3.1
+        version: 4.3.1(@babel/core@7.24.0)(@ember/string@3.1.1)(ember-source@5.7.0)
       ember-template-lint:
         specifier: 5.13.0
         version: 5.13.0
@@ -8161,13 +8161,12 @@ packages:
       - webpack
     dev: true
 
-  /ember-style-modifier@4.3.0(@ember/string@3.1.1)(ember-source@5.7.0):
-    resolution: {integrity: sha512-fL82w/sYu5LibLcM2t7K3CjE+SacgHYX7+ovSHBT5L2HJf1Mjnx5/UNe4/1zdwWqyw2mtik3qJdUpJjP+MSeNg==}
+  /ember-style-modifier@4.3.1(@babel/core@7.24.0)(@ember/string@3.1.1)(ember-source@5.7.0):
+    resolution: {integrity: sha512-QO7w7WX0nbM9L2XGjsTuLDWOvh073XXSLUXRnuKRGbG2iLHDuoCXZsRCZu2Ov6yFt9vB7vnNszQ+C0bUxqloeg==}
     peerDependencies:
       '@ember/string': ^3.0.1
       ember-source: ^3.28.0 || ^4.0.0 || >=5.0.0
     dependencies:
-      '@babel/core': 7.24.0
       '@ember/string': 3.1.1
       '@embroider/addon-shim': 1.8.7
       csstype: 3.1.3
@@ -8175,6 +8174,7 @@ packages:
       ember-modifier: 4.1.0(ember-source@5.7.0)
       ember-source: 5.7.0(@babel/core@7.24.0)(@glimmer/component@1.1.2)(@glint/template@1.3.0)(rsvp@4.8.5)(webpack@5.90.3)
     transitivePeerDependencies:
+      - '@babel/core'
       - supports-color
 
   /ember-template-imports@3.4.2:
