@@ -1,4 +1,3 @@
-{{! @glint-nocheck }}
 {{#let (ensure-safe-component (bs-default @buttonComponent (component "bs-button"))) as |Button|}}
   <div class="modal-footer" ...attributes {{on "submit" (bs-default @onSubmit (bs-noop))}}>
     {{#if (has-block)}}
