@@ -9,4 +9,11 @@
  */
 import templateOnly from '@ember/component/template-only';
 
-export default templateOnly();
+interface BsModalBodySignature {
+  Blocks: {
+    default: [];
+  };
+  Element: HTMLDivElement;
+}
+
+export default templateOnly<BsModalBodySignature>();

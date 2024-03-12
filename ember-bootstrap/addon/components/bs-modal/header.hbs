@@ -1,4 +1,3 @@
-{{! @glint-nocheck }}
 {{#let
   (ensure-safe-component (bs-default @titleComponent (component "bs-modal/header/title")))
   (component (ensure-safe-component (bs-default @closeComponent (component "bs-modal/header/close"))) onClick=@onClose)
@@ -6,15 +5,11 @@ as |Title Close|
 }}
   <div class="modal-header" ...attributes>
     {{#if (has-block-params)}}
-      {{yield
-        (hash
-          title=Title
-          close=Close
-        )
+      {{yield (hash title=Title close=Close)
       }}
     {{else}}
       {{#if (has-block)}}
-        {{yield}}
+        {{yield (hash title=Title close=Close)}}
       {{else}}
         <Title>{{@title}}</Title>
       {{/if}}
