@@ -2,9 +2,13 @@ import '@glint/environment-ember-loose';
 
 import type EmberBootstrapRegistry from 'ember-bootstrap/template-registry';
 import type { EmbroiderMacrosRegistry } from '@embroider/macros';
+import type { EmbroiderUtilRegistry } from '@embroider/util';
 import type RenderModifiersRegistry from '@ember/render-modifiers/template-registry';
+import type RenderHelpersRegistry from 'ember-render-helpers/template-registry';
 import type EmberStyleModifierRegistry from 'ember-style-modifier/template-registry';
 import type defaultHelper from 'ember-bootstrap/helpers/bs-default';
+import type eqHelper from 'ember-bootstrap/helpers/bs-eq';
+import type noopHelper from 'ember-bootstrap/helpers/bs-noop';
 import type sizeClassHelper from 'ember-bootstrap/helpers/bs-size-class';
 import type typeClassHelper from 'ember-bootstrap/helpers/bs-type-class';
 import type BsConditionalAttribute from 'ember-bootstrap/modifiers/bs-conditional-attribute';
@@ -24,9 +28,13 @@ declare module '@glint/environment-ember-loose/registry' {
   export default interface Registry
     extends EmberBootstrapRegistry,
       EmberStyleModifierRegistry,
-      RenderModifiersRegistry {
+      EmbroiderUtilRegistry,
+      RenderModifiersRegistry,
+      RenderHelpersRegistry {
     'bs-progress/bar': typeof BsProgressBar;
     'bs-default': typeof defaultHelper;
+    'bs-eq': typeof eqHelper;
+    'bs-noop': typeof noopHelper;
     'bs-size-class': typeof sizeClassHelper;
     'bs-type-class': typeof typeClassHelper;
     'bs-conditional-attribute': typeof BsConditionalAttribute;
