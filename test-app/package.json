@@ -91,7 +91,7 @@
     "findup-sync": "5.0.0",
     "fs-extra": "11.2.0",
     "loader.js": "4.7.0",
-    "prettier": "3.0.3",
+    "prettier": "3.2.5",
     "qunit": "2.20.1",
     "qunit-dom": "3.0.0",
     "resolve": "1.22.8",
