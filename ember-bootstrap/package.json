@@ -51,7 +51,7 @@
     "ember-cli-build-config-editor": "^0.5.1",
     "ember-cli-htmlbars": "^6.2.0",
     "ember-cli-version-checker": "^5.1.2",
-    "ember-concurrency": "^2.1.2 || ^3.0.0",
+    "ember-concurrency": "^4.0.0",
     "ember-element-helper": "^0.6.0 || ^0.7.0 || ^0.8.0",
     "ember-focus-trap": "^1.0.0",
     "ember-on-helper": "^0.1.0",
