@@ -101,16 +101,6 @@ Until: 7.0.0
     // import custom addon CSS
     this.import(path.join(vendorPath, `bs${options.bootstrapVersion}.css`));
 
-    if (
-      VersionChecker.forProject(this.parent).check({
-        'ember-concurrency': '>= 4.0.0',
-      }).isSatisfied
-    ) {
-      this.options.babel.plugins.unshift(
-        require.resolve('ember-concurrency/async-arrow-task-transform'),
-      );
-    }
-
     // setup config for @embroider/macros
     this.options['@embroider/macros'].setOwnConfig.isBS4 =
       this.getBootstrapVersion() === 4;
@@ -128,7 +118,9 @@ Until: 7.0.0
     },
     'ember-cli-babel': { enableTypeScriptTransform: true },
     babel: {
-      plugins: [],
+      plugins: [
+        require.resolve('ember-concurrency/async-arrow-task-transform'),
+      ],
     },
   },
 
