@@ -86,6 +86,6 @@ export default class Tooltip extends ContextualHelp {
    * @private
    */
   get arrowElement() {
-    return this.overlayElement.querySelector('.tooltip-arrow');
+    return this.overlayElement?.querySelector('div');
   }
 }

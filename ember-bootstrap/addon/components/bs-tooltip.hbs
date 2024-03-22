@@ -1,8 +1,12 @@
-{{! @glint-nocheck }}
 {{! template-lint-disable no-unbound }}
 {{unbound this._parentFinder}}
 {{#if this.inDom}}
-  {{#let (ensure-safe-component (bs-default @elementComponent (component "bs-tooltip/element"))) as |Element|}}
+  {{#let
+    (ensure-safe-component
+      (bs-default @elementComponent (component "bs-tooltip/element"))
+    )
+    as |Element|
+  }}
     <Element
       @placement={{this.placement}}
       @fade={{this.fade}}
@@ -13,16 +17,11 @@
       @autoPlacement={{this.autoPlacement}}
       @viewportElement={{this.viewportElement}}
       @viewportPadding={{this.viewportPadding}}
-
       {{create-ref "overlayElement"}}
       ...attributes
     >
       {{#if (has-block)}}
-        {{yield
-          (hash
-            close=this.close
-          )
-        }}
+        {{yield (hash close=this.close)}}
       {{else}}
         {{@title}}
       {{/if}}
