@@ -4,6 +4,7 @@ import { next } from '@ember/runloop';
 import { getDestinationElement } from 'ember-bootstrap/utils/dom';
 import { ref } from 'ember-ref-bucket';
 import { tracked } from '@glimmer/tracking';
+import { macroCondition, getOwnConfig } from '@embroider/macros';
 
 /**
  Component for the dropdown menu.
@@ -32,7 +33,7 @@ export default class DropdownMenu extends Component {
    * @public
    */
   get align() {
-    return this.args.align ?? 'false';
+    return this.args.align ?? 'left';
   }
 
   /**
@@ -89,7 +90,13 @@ export default class DropdownMenu extends Component {
   }
 
   get alignClass() {
-    return this.align !== 'left' ? `dropdown-menu-${this.align}` : undefined;
+    if (this.align === 'right') {
+      return macroCondition(getOwnConfig().isBS5)
+        ? 'dropdown-menu-end'
+        : 'dropdown-menu-right';
+    }
+
+    return undefined;
   }
 
   @tracked
