@@ -117,11 +117,6 @@ Until: 7.0.0
       setOwnConfig: {},
     },
     'ember-cli-babel': { enableTypeScriptTransform: true },
-    babel: {
-      plugins: [
-        require.resolve('ember-concurrency/async-arrow-task-transform'),
-      ],
-    },
   },
 
   validateDependencies() {

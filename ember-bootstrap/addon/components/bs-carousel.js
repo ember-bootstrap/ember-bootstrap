@@ -468,30 +468,30 @@ export default class Carousel extends Component {
    * @this Carousel
    * @private
    */
-  cycle = task({ restartable: true }, async () => {
-    await this.transitioner.perform();
-    await timeout(this.interval);
+  @task({ restartable: true }) *cycle() {
+    yield this.transitioner.perform();
+    yield timeout(this.interval);
     this.toAppropriateSlide();
-  });
+  }
 
   /**
    * @method transitioner
    * @this Carousel
    * @private
    */
-  transitioner = task({ drop: true }, async () => {
+  @task({ drop: true }) *transitioner() {
     this.presentationState = 'willTransit';
-    await timeout(this.transitionDuration);
+    yield timeout(this.transitionDuration);
     this.presentationState = 'didTransition';
     // Must change current index after execution of 'presentationStateObserver' method
     // from child components.
-    await new Promise((resolve) => {
+    yield new Promise((resolve) => {
       schedule('afterRender', this, () => {
         this.currentIndex = this.followingIndex;
         resolve();
       });
     });
-  });
+  }
 
   /**
    * Waits an interval time to start a cycle.
@@ -500,13 +500,13 @@ export default class Carousel extends Component {
    * @this Carousel
    * @private
    */
-  waitIntervalToInitCycle = task({ restartable: true }, async () => {
+  @task({ restartable: true }) *waitIntervalToInitCycle() {
     if (this.shouldRunAutomatically === false) {
       return;
     }
-    await timeout(this.interval);
+    yield timeout(this.interval);
     this.toAppropriateSlide();
-  });
+  }
 
   @action
   toSlide(toIndex) {
