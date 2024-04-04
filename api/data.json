@@ -2,7 +2,7 @@
     "project": {
         "name": "ember-bootstrap",
         "description": "Twitter Bootstrap components for Ember.js",
-        "version": "v6.2.0"
+        "version": "v6.3.0"
     },
     "files": {
         "../ember-bootstrap/addon/components/bs-accordion/item/body.js": {
@@ -538,17 +538,6 @@
             "modules": {},
             "classes": {
                 "Components.Progress": 1
-            },
-            "fors": {},
-            "namespaces": {
-                "Components": 1
-            }
-        },
-        "../ember-bootstrap/addon/components/bs-spinner.js": {
-            "name": "../ember-bootstrap/addon/components/bs-spinner.js",
-            "modules": {},
-            "classes": {
-                "Components.Spinner": 1
             },
             "fors": {},
             "namespaces": {
@@ -1353,22 +1342,6 @@
             "access": "public",
             "tagname": ""
         },
-        "Components.Spinner": {
-            "name": "Components.Spinner",
-            "shortname": "Components.Spinner",
-            "classitems": [],
-            "plugins": [],
-            "extensions": [],
-            "plugin_for": [],
-            "extension_for": [],
-            "namespace": "Components",
-            "file": "../ember-bootstrap/addon/components/bs-spinner.js",
-            "line": 4,
-            "description": "Implements a [Spinner element](https://getbootstrap.com/docs/5.2/components/spinners/).\n\n### Basic Usage\n\n```hbs\n<BsSpinner/>\n<BsSpinner>Loading...</BsSpinner>\n```\n\nThe (optional) component's block will render as visually invisible but accessible text for assistive technology like screen readers.\n\n### Advanced Usage\n\n```hbs\n<BsSpinner @spinnerType=\"grow\" @size=\"sm\" @type=\"warning\"/>\n```\n\n### Usage with `BsButton`\n\n ```hbs\n <BsButton @onClick={{this.download}} as |button|>\n  Download\n  {{#if button.isPending}}\n    <BsSpinner @size=\"sm\"/>\n  {{/if}}\n </BsButton>\n ```",
-            "extends": "Glimmer.Component",
-            "access": "public",
-            "tagname": ""
-        },
         "Components.Tab": {
             "name": "Components.Tab",
             "shortname": "Components.Tab",
@@ -1877,18 +1850,6 @@
         {
             "file": "../ember-bootstrap/addon/components/bs-dropdown/menu.js",
             "line": 26,
-            "itemtype": "property",
-            "name": "ariaRole",
-            "default": "menu",
-            "type": "string",
-            "access": "protected",
-            "tagname": "",
-            "class": "Components.DropdownMenu",
-            "namespace": "Components"
-        },
-        {
-            "file": "../ember-bootstrap/addon/components/bs-dropdown/menu.js",
-            "line": 36,
             "description": "Alignment of the menu, either \"left\" or \"right\"",
             "itemtype": "property",
             "name": "align",
@@ -1901,7 +1862,7 @@
         },
         {
             "file": "../ember-bootstrap/addon/components/bs-dropdown/menu.js",
-            "line": 48,
+            "line": 38,
             "itemtype": "property",
             "name": "direction",
             "default": "'down'",
@@ -1913,7 +1874,7 @@
         },
         {
             "file": "../ember-bootstrap/addon/components/bs-dropdown/menu.js",
-            "line": 58,
+            "line": 48,
             "description": "By default, the menu is rendered in the same place as the dropdown. If you experience clipping\nissues, you can set this to false to render the menu in a wormhole at the top of the DOM.",
             "itemtype": "property",
             "name": "renderInPlace",
@@ -1926,7 +1887,7 @@
         },
         {
             "file": "../ember-bootstrap/addon/components/bs-dropdown/menu.js",
-            "line": 71,
+            "line": 61,
             "itemtype": "property",
             "name": "inNav",
             "type": "{boolean}",
@@ -1937,7 +1898,7 @@
         },
         {
             "file": "../ember-bootstrap/addon/components/bs-dropdown/menu.js",
-            "line": 80,
+            "line": 70,
             "itemtype": "property",
             "name": "_renderInPlace",
             "type": "boolean",
@@ -1948,7 +1909,7 @@
         },
         {
             "file": "../ember-bootstrap/addon/components/bs-dropdown/menu.js",
-            "line": 89,
+            "line": 79,
             "description": "The wormhole destinationElement",
             "itemtype": "property",
             "name": "destinationElement",
@@ -1961,7 +1922,7 @@
         },
         {
             "file": "../ember-bootstrap/addon/components/bs-dropdown/menu.js",
-            "line": 170,
+            "line": 160,
             "itemtype": "property",
             "name": "itemComponent",
             "type": "{String}",
@@ -1972,7 +1933,7 @@
         },
         {
             "file": "../ember-bootstrap/addon/components/bs-dropdown/menu.js",
-            "line": 176,
+            "line": 166,
             "itemtype": "property",
             "name": "linkToComponent",
             "type": "{String}",
@@ -1983,7 +1944,7 @@
         },
         {
             "file": "../ember-bootstrap/addon/components/bs-dropdown/menu.js",
-            "line": 182,
+            "line": 172,
             "itemtype": "property",
             "name": "dividerComponent",
             "type": "{String}",
@@ -6351,44 +6312,6 @@
             "access": "private",
             "tagname": "",
             "class": "Components.Progress",
-            "namespace": "Components"
-        },
-        {
-            "file": "../ember-bootstrap/addon/components/bs-spinner.js",
-            "line": 39,
-            "description": "Property for size styling, set to 'sm'\n\nAlso see the [Bootstrap docs](https://getbootstrap.com/docs/5.2/components/spinners/#size)",
-            "itemtype": "property",
-            "name": "size",
-            "type": "String",
-            "access": "public",
-            "tagname": "",
-            "class": "Components.Spinner",
-            "namespace": "Components"
-        },
-        {
-            "file": "../ember-bootstrap/addon/components/bs-spinner.js",
-            "line": 49,
-            "description": "Property for type styling\n\nFor the available types see the [Bootstrap docs](https://getbootstrap.com/docs/5.2/components/spinners/#colors)",
-            "itemtype": "property",
-            "name": "type",
-            "type": "String",
-            "default": "'primary'",
-            "access": "public",
-            "tagname": "",
-            "class": "Components.Spinner",
-            "namespace": "Components"
-        },
-        {
-            "file": "../ember-bootstrap/addon/components/bs-spinner.js",
-            "line": 60,
-            "description": "Spinner type - 'border' or 'grow'",
-            "itemtype": "property",
-            "name": "spinnerType",
-            "type": "string",
-            "default": "'border'",
-            "access": "public",
-            "tagname": "",
-            "class": "Components.Spinner",
             "namespace": "Components"
         },
         {

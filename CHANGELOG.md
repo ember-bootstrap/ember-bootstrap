@@ -14,6 +14,26 @@
 
 
 
+
+## v6.3.0 (2024-04-04)
+
+This release fixes a wrong placement of tooltips if using Bootstrap >= 5.3. The fixes causes a slightly to high padding of tooltips if using Bootstrap < 5.3. It is recommended to upgrade Bootstrap to >= 5.3 at the same time.
+
+#### :rocket: Enhancement
+* [#2108](https://github.com/ember-bootstrap/ember-bootstrap/pull/2108) Convert BsSpinner to TypeScript ([@Baltazore](https://github.com/Baltazore))
+
+#### :bug: Bug Fix
+* [#2119](https://github.com/ember-bootstrap/ember-bootstrap/pull/2119) Fix tooltip offset when using Bootstrap >= 5.3 ([@SanderKnauff](https://github.com/SanderKnauff))
+
+#### :house: Internal
+* [#2113](https://github.com/ember-bootstrap/ember-bootstrap/pull/2113) Drop unused argument @ariaRole from  ([@jelhan](https://github.com/jelhan))
+
+#### Committers: 3
+- Jeldrik Hanschke ([@jelhan](https://github.com/jelhan))
+- Kirill Shaplyko ([@Baltazore](https://github.com/Baltazore))
+- Sander Knauff ([@SanderKnauff](https://github.com/SanderKnauff))
+
+
 ## v6.2.0 (2024-02-17)
 
 We started converting Ember Bootstrap to TypeScript and shipping types for Glint. The types are work in progress. They are neither complete nor considered stable.
