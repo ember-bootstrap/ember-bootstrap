@@ -27,6 +27,19 @@ module('Integration | Component | bs-dropdown/menu', function (hooks) {
       .hasText('Something', 'renders text content');
   });
 
+  test('dropdown has no align class for @align="left"', async function (assert) {
+    await render(
+      hbs`<BsDropdown as |dd|><dd.menu
+    @align='left'
+    @isOpen={{true}}
+    @toggleElement={{this.element}}
+  >Something</dd.menu></BsDropdown>`,
+    );
+
+    const element = document.querySelector('.dropdown-menu');
+    assert.deepEqual([...element.classList], ['dropdown-menu', 'show']);
+  });
+
   test('dropdown menu yields item component', async function (assert) {
     await render(
       hbs`<BsDropdown as |dd|><dd.menu

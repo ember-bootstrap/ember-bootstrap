@@ -4,7 +4,7 @@ import { next } from '@ember/runloop';
 import { getDestinationElement } from 'ember-bootstrap/utils/dom';
 import { ref } from 'ember-ref-bucket';
 import { tracked } from '@glimmer/tracking';
-import { macroCondition, getOwnConfig } from '@embroider/macros';
+import { getOwnConfig, macroCondition } from '@embroider/macros';
 
 /**
  Component for the dropdown menu.
@@ -23,16 +23,6 @@ export default class DropdownMenu extends Component {
    * @private
    */
   @ref('menuElement') menuElement = null;
-
-  /**
-   * @property ariaRole
-   * @default menu
-   * @type string
-   * @protected
-   */
-  get ariaRole() {
-    return this.args.ariaRole ?? 'menu';
-  }
 
   /**
    * Alignment of the menu, either "left" or "right"
@@ -101,9 +91,8 @@ export default class DropdownMenu extends Component {
 
   get alignClass() {
     if (this.align === 'right') {
-      return macroCondition(getOwnConfig().isBS5)
-        ? 'dropdown-menu-end'
-        : 'dropdown-menu-right';
+      const alignClass = macroCondition(getOwnConfig().isBS4) ? 'right' : 'end';
+      return `dropdown-menu-${alignClass}`;
     }
 
     return undefined;

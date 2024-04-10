@@ -2,10 +2,9 @@
 {{#if @isOpen}}
   {{#if this._renderInPlace}}
     <div
-      class="dropdown-menu {{this.alignClass}} {{if this.isOpen "show"}}"
-      tabindex="-1"
       data-bs-popper
-      ...attributes
+      class="dropdown-menu {{this.alignClass}} {{if this.isOpen "show"}}"
+      tabindex="-1" ...attributes
       {{popper-tooltip @toggleElement this.popperOptions}}
       {{did-insert @registerChildElement "menu"}}
       {{will-destroy @unregisterChildElement "menu"}}
@@ -24,10 +23,9 @@
   {{else}}
     {{#in-element this.destinationElement insertBefore=null}}
       <div
-        class="dropdown-menu {{this.alignClass}} {{if this.isOpen "show"}}"
-        tabindex="-1"
         data-bs-popper
-        ...attributes
+        class="dropdown-menu {{this.alignClass}} {{if this.isOpen "show"}}"
+        tabindex="-1" ...attributes
         {{popper-tooltip @toggleElement this.popperOptions}}
         {{did-insert @registerChildElement "menu"}}
         {{will-destroy @unregisterChildElement "menu"}}
