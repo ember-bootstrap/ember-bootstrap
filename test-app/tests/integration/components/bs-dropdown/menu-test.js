@@ -4,6 +4,7 @@ import { render } from '@ember/test-helpers';
 import hbs from 'htmlbars-inline-precompile';
 import setupNoDeprecations from '../../../helpers/setup-no-deprecations';
 import { gte } from 'ember-compatibility-helpers';
+import { versionDependent } from '../../../helpers/bootstrap';
 
 module('Integration | Component | bs-dropdown/menu', function (hooks) {
   setupRenderingTest(hooks);
@@ -18,6 +19,10 @@ module('Integration | Component | bs-dropdown/menu', function (hooks) {
   >Something</dd.menu></BsDropdown>`,
     );
 
+    let alignmentClass = versionDependent(
+      'dropdown-menu-right',
+      'dropdown-menu-end',
+    );
     assert.equal(
       this.element.querySelector('.dropdown-menu').tagName,
       'DIV',
@@ -26,8 +31,21 @@ module('Integration | Component | bs-dropdown/menu', function (hooks) {
     assert.dom('.dropdown-menu').exists('menu has dropdown-menu class');
     assert
       .dom('.dropdown-menu')
-      .hasClass('dropdown-menu-right', 'menu has dropdown-menu-right class');
+      .hasClass(alignmentClass, `menu has ${alignmentClass} class`);
     assert.dom('.dropdown-menu').hasText('Something');
+  });
+
+  test('dropdown has no align class for @align="left"', async function (assert) {
+    await render(
+      hbs`<BsDropdown as |dd|><dd.menu
+    @align='left'
+    @isOpen={{true}}
+    @toggleElement={{this.element}}
+  >Something</dd.menu></BsDropdown>`,
+    );
+
+    const element = document.querySelector('.dropdown-menu');
+    assert.deepEqual([...element.classList], ['dropdown-menu', 'show']);
   });
 
   test('dropdown menu yields item component', async function (assert) {
