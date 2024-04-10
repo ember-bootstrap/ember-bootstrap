@@ -26,7 +26,7 @@ import {
   validationWarningClass,
   visuallyHiddenClass,
 } from '../../../helpers/bootstrap';
-import hbs from 'htmlbars-inline-precompile';
+import { hbs } from 'ember-cli-htmlbars';
 import setupNoDeprecations from '../../../helpers/setup-no-deprecations';
 import sinon from 'sinon';
 import { tracked } from '@glimmer/tracking';

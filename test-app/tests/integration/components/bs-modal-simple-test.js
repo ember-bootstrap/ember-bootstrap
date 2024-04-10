@@ -17,7 +17,7 @@ import {
   testRequiringTransitions,
   visibilityClass,
 } from '../../helpers/bootstrap';
-import hbs from 'htmlbars-inline-precompile';
+import { hbs } from 'ember-cli-htmlbars';
 import setupNoDeprecations from '../../helpers/setup-no-deprecations';
 import a11yAudit from 'ember-a11y-testing/test-support/audit';
 import sinon from 'sinon';
