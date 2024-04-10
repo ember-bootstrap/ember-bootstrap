@@ -25,7 +25,7 @@ import {
   validationSuccessClass,
 } from '../../helpers/bootstrap';
 import { defer } from '../../helpers/defer';
-import hbs from 'htmlbars-inline-precompile';
+import { hbs } from 'ember-cli-htmlbars';
 import { next, run } from '@ember/runloop';
 import setupNoDeprecations from '../../helpers/setup-no-deprecations';
 import a11yAudit from 'ember-a11y-testing/test-support/audit';

@@ -9,7 +9,7 @@ import {
   triggerEvent,
   waitUntil,
 } from '@ember/test-helpers';
-import hbs from 'htmlbars-inline-precompile';
+import { hbs } from 'ember-cli-htmlbars';
 import {
   delay,
   test,
