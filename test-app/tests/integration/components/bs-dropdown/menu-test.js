@@ -1,9 +1,8 @@
-import { module, skip, test } from 'qunit';
+import { module, test } from 'qunit';
 import { setupRenderingTest } from 'ember-qunit';
 import { render } from '@ember/test-helpers';
 import hbs from 'htmlbars-inline-precompile';
 import setupNoDeprecations from '../../../helpers/setup-no-deprecations';
-import { gte } from 'ember-compatibility-helpers';
 import { versionDependent } from '../../../helpers/bootstrap';
 
 module('Integration | Component | bs-dropdown/menu', function (hooks) {
@@ -13,26 +12,19 @@ module('Integration | Component | bs-dropdown/menu', function (hooks) {
   test('dropdown menu has correct markup', async function (assert) {
     await render(
       hbs`<BsDropdown as |dd|><dd.menu
-    @align='right'
     @isOpen={{true}}
     @toggleElement={{this.element}}
   >Something</dd.menu></BsDropdown>`,
     );
 
-    let alignmentClass = versionDependent(
-      'dropdown-menu-right',
-      'dropdown-menu-end',
-    );
-    assert.equal(
-      this.element.querySelector('.dropdown-menu').tagName,
-      'DIV',
-      'menu is a div (<div>) by default',
-    );
-    assert.dom('.dropdown-menu').exists('menu has dropdown-menu class');
     assert
       .dom('.dropdown-menu')
-      .hasClass(alignmentClass, `menu has ${alignmentClass} class`);
-    assert.dom('.dropdown-menu').hasText('Something');
+      .exists('menu has dropdown-menu class')
+      .hasTagName('DIV', 'menu is a div (<div>) by default')
+      .hasClass('show', 'menu has show class when being open')
+      .doesNotHaveClass('dropdown-menu-end', 'menu is left aligned (BS5)')
+      .doesNotHaveClass('dropdown-menu-right', 'menu is left aligned (BS4)')
+      .hasText('Something', 'renders text content');
   });
 
   test('dropdown has no align class for @align="left"', async function (assert) {
@@ -62,7 +54,7 @@ module('Integration | Component | bs-dropdown/menu', function (hooks) {
       .doesNotExist('has item component with no markup');
   });
 
-  test('dropdown menu `yields linkTo component', async function (assert) {
+  test('dropdown menu yields linkTo component', async function (assert) {
     await render(
       hbs`<BsDropdown as |dd|>
   <dd.menu @toggleElement={{this.element}} @isOpen={{true}} as |ddm|>
@@ -94,23 +86,33 @@ module('Integration | Component | bs-dropdown/menu', function (hooks) {
       .hasClass('custom-class-2', 'menu has custom-class-2 class');
   });
 
-  (gte('3.4.0') ? test : skip)(
-    'dropdown menu supports arbitrary attributes w/ angle brackets',
-    async function (assert) {
-      await render(
-        hbs`<BsDropdown as |dd|><dd.menu
+  test('dropdown menu supports arbitrary attributes w/ angle brackets', async function (assert) {
+    await render(
+      hbs`<BsDropdown as |dd|><dd.menu
     @isOpen={{true}}
     @toggleElement={{this.element}}
     class='custom-class-1'
     data-test-menu
   >Something</dd.menu></BsDropdown>`,
-      );
+    );
 
-      assert.dom('.dropdown-menu').exists('menu has dropdown-menu class');
-      assert
-        .dom('.dropdown-menu')
-        .hasClass('custom-class-1', 'menu has custom-class-1 class');
-      assert.dom('.dropdown-menu').hasAttribute('data-test-menu');
-    },
-  );
+    assert
+      .dom('.dropdown-menu')
+      .exists('menu has dropdown-menu class')
+      .hasClass('custom-class-1', 'menu has custom-class-1 class')
+      .hasAttribute('data-test-menu');
+  });
+
+  test('dropdown menu can be right aligned', async function (assert) {
+    await render(
+      hbs`<BsDropdown as |dd|><dd.menu @align='right' @isOpen={{true}} /></BsDropdown>`,
+    );
+
+    assert
+      .dom('.dropdown-menu')
+      .hasClass(
+        versionDependent('dropdown-menu-right', 'dropdown-menu-end'),
+        'dropdown menu has CSS class for alignment within navbar',
+      );
+  });
 });
