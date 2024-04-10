@@ -83,11 +83,11 @@ module('Integration | Component | bs-dropdown/menu', function (hooks) {
   >Something</dd.menu></BsDropdown>`,
     );
 
-    assert.dom('.dropdown-menu').exists('menu has dropdown-menu class');
     assert
       .dom('.dropdown-menu')
-      .hasClass('custom-class-1', 'menu has custom-class-1 class');
-    assert.dom('.dropdown-menu').hasAttribute('data-test-menu');
+      .exists('menu has dropdown-menu class')
+      .hasClass('custom-class-1', 'menu has custom-class-1 class')
+      .hasAttribute('data-test-menu');
   });
 
   test('dropdown menu can be right aligned', async function (assert) {
