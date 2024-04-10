@@ -40,7 +40,11 @@ module('Integration | Component | bs-modal/footer', function (hooks) {
     const submit = this.set('submit', stub());
 
     await render(
-      hbs`<BsModal::Footer @onSubmit={{this.submit}} @closeTitle='close' @submitTitle='submit'/>`,
+      hbs`<BsModal::Footer
+  @onSubmit={{this.submit}}
+  @closeTitle='close'
+  @submitTitle='submit'
+/>`,
     );
     await click('.modal-footer button:last-child');
 
