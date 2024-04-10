@@ -387,7 +387,7 @@ module('Integration | Component | bs-tooltip', function (hooks) {
     setupForPositioning();
 
     await triggerEvent('#target', 'mouseenter');
-    assertPositioning(assert);
+    assertPositioning(assert, '.tooltip', 6);
   });
 
   test('should place tooltip on top of element if already visible', async function (assert) {
@@ -410,7 +410,7 @@ module('Integration | Component | bs-tooltip', function (hooks) {
     setupForPositioning();
     this.set('visible', true);
     await settled();
-    assertPositioning(assert);
+    assertPositioning(assert, '.tooltip', 6);
   });
 
   test('should place tooltip on top of element if visible is set to true', async function (assert) {
@@ -433,7 +433,7 @@ module('Integration | Component | bs-tooltip', function (hooks) {
 
     this.set('visible', true);
     await settled();
-    assertPositioning(assert);
+    assertPositioning(assert, '.tooltip', 6);
   });
 
   test("should show tooltip if leave event hasn't occurred before delay expires", async function (assert) {
@@ -630,7 +630,7 @@ module('Integration | Component | bs-tooltip', function (hooks) {
     await delay(50);
 
     assert.dom('.tooltip').hasClass(tooltipPositionClass('top'));
-    assertPositioning(assert);
+    assertPositioning(assert, '.tooltip', 6);
   });
 
   test('it yields close action', async function (assert) {
