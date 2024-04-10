@@ -2,6 +2,7 @@
 {{#if @isOpen}}
   {{#if this._renderInPlace}}
     <div
+      data-bs-popper
       class="dropdown-menu {{this.alignClass}} {{if this.isOpen "show"}}"
       tabindex="-1"
       ...attributes
@@ -23,6 +24,7 @@
   {{else}}
     {{#in-element this.destinationElement insertBefore=null}}
       <div
+        data-bs-popper
         class="dropdown-menu {{this.alignClass}} {{if this.isOpen "show"}}"
         tabindex="-1"
         ...attributes
