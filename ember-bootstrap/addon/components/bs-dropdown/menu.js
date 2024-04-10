@@ -90,18 +90,12 @@ export default class DropdownMenu extends Component {
   }
 
   get alignClass() {
-    if (macroCondition(getOwnConfig().isBS4)) {
-      return this.align !== 'left' ? `dropdown-menu-${this.align}` : undefined;
+    if (this.align === 'right') {
+      const alignClass = macroCondition(getOwnConfig().isBS4) ? 'right' : 'end';
+      return `dropdown-menu-${alignClass}`;
     }
 
-    switch (this.align) {
-      case 'left':
-        return 'dropdown-menu-start';
-      case 'right':
-        return 'dropdown-menu-end';
-      default:
-        return undefined;
-    }
+    return undefined;
   }
 
   @tracked

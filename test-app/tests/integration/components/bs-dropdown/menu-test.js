@@ -35,7 +35,7 @@ module('Integration | Component | bs-dropdown/menu', function (hooks) {
     assert.dom('.dropdown-menu').hasText('Something');
   });
 
-  test('dropdown has correct class for @align="left"', async function (assert) {
+  test('dropdown has no align class for @align="left"', async function (assert) {
     await render(
       hbs`<BsDropdown as |dd|><dd.menu
     @align='left'
@@ -44,13 +44,8 @@ module('Integration | Component | bs-dropdown/menu', function (hooks) {
   >Something</dd.menu></BsDropdown>`,
     );
 
-    let alignmentClass = versionDependent(
-      'dropdown-menu-left',
-      'dropdown-menu-start',
-    );
-    assert
-      .dom('.dropdown-menu')
-      .hasClass(alignmentClass, `menu has ${alignmentClass} class`);
+    const element = document.querySelector('.dropdown-menu');
+    assert.deepEqual([...element.classList], ['dropdown-menu', 'show']);
   });
 
   test('dropdown menu yields item component', async function (assert) {
