@@ -4,7 +4,8 @@
     <div
       data-bs-popper
       class="dropdown-menu {{this.alignClass}} {{if this.isOpen "show"}}"
-      tabindex="-1" ...attributes
+      tabindex="-1"
+      ...attributes
       {{popper-tooltip @toggleElement this.popperOptions}}
       {{did-insert @registerChildElement "menu"}}
       {{will-destroy @unregisterChildElement "menu"}}
@@ -25,7 +26,8 @@
       <div
         data-bs-popper
         class="dropdown-menu {{this.alignClass}} {{if this.isOpen "show"}}"
-        tabindex="-1" ...attributes
+        tabindex="-1"
+        ...attributes
         {{popper-tooltip @toggleElement this.popperOptions}}
         {{did-insert @registerChildElement "menu"}}
         {{will-destroy @unregisterChildElement "menu"}}
