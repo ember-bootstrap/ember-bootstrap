@@ -1,19 +1,14 @@
 import { module, test } from 'qunit';
 import { setupRenderingTest } from 'ember-qunit';
 import { click, render } from '@ember/test-helpers';
-import hbs from 'htmlbars-inline-precompile';
+import { hbs } from 'ember-cli-htmlbars';
 import setupNoDeprecations from '../../../helpers/setup-no-deprecations';
 import sinon from 'sinon';
+import { CustomTestContext } from 'ember-bootstrap/tests/helpers';
 
 module('Integration | Component | bs-dropdown/toggle', function (hooks) {
   setupRenderingTest(hooks);
   setupNoDeprecations(hooks);
-
-  hooks.beforeEach(function () {
-    this.actions = {};
-    this.send = (actionName, ...args) =>
-      this.actions[actionName].apply(this, args);
-  });
 
   test('toggle has correct default markup', async function (assert) {
     await render(
@@ -26,15 +21,17 @@ module('Integration | Component | bs-dropdown/toggle', function (hooks) {
     assert.dom('a').hasAttribute('role', 'button', 'has role=button');
   });
 
-  test('clicking toggle sends onClick action', async function (assert) {
-    let action = sinon.spy();
-    this.actions.click = action;
-    await render(
+  test<
+    CustomTestContext & { clickHandler: () => void }
+  >('clicking toggle sends onClick action', async function (assert) {
+    const clickHandler = sinon.spy();
+    this.set('clickHandler', clickHandler);
+    await render<typeof this>(
       hbs`<BsDropdown as |dd|><dd.toggle
-    @onClick={{action 'click'}}
+    @onClick={{this.clickHandler}}
   >Test</dd.toggle></BsDropdown>`,
     );
     await click('a');
-    assert.ok(action.calledOnce, 'onClick action has been called.');
+    assert.ok(clickHandler.calledOnce, 'onClick action has been called.');
   });
 });
