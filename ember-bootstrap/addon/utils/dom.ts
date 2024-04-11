@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 /*
  * Implement some helpers methods for interacting with the DOM,
  * be it Fastboot's SimpleDOM or the browser's version.
@@ -5,33 +6,36 @@
  * Credit to https://github.com/yapplabs/ember-wormhole, from where this has been shamelessly stolen.
  */
 
-import { getOwner } from '@ember/application';
+import { getOwner } from '@ember/owner';
+// @ts-expect-error not typed
 import { DEBUG } from '@glimmer/env';
 import requirejs from 'require';
-import { warn } from '@ember/debug';
+import { assert, warn } from '@ember/debug';
+import type Component from '@glimmer/component';
+import type ApplicationInstance from '@ember/application/instance';
 
-function childNodesOfElement(element) {
-  let children = [];
-  let child = element.firstChild;
+function childNodesOfElement(element: HTMLElement) {
+  const children: HTMLElement[] = [];
+  let child = element.firstChild as HTMLElement;
   while (child) {
     children.push(child);
-    child = child.nextSibling;
+    child = child.nextSibling as HTMLElement;
   }
   return children;
 }
 
-export function findElementById(doc, id) {
+export function findElementById(doc: any, id: string) {
   if (doc.getElementById) {
     return doc.getElementById(id);
   }
 
   let nodes = childNodesOfElement(doc);
-  let node;
+  let node: HTMLElement;
 
   while (nodes.length) {
-    node = nodes.shift();
+    node = nodes.shift()!;
 
-    if (node.getAttribute && node.getAttribute('id') === id) {
+    if (node?.getAttribute && node.getAttribute('id') === id) {
       return node;
     }
     nodes = childNodesOfElement(node).concat(nodes);
@@ -40,12 +44,12 @@ export function findElementById(doc, id) {
 
 // Private Ember API usage. Get the dom implementation used by the current
 // renderer, be it native browser DOM or Fastboot SimpleDOM
-export function getDOM(context) {
+export function getDOM(context: any) {
   let { renderer } = context;
   if (!renderer?._dom) {
     // pre glimmer2
-    let container = getOwner ? getOwner(context) : context.container;
-    let documentService = container.lookup('service:-document');
+    const container = getOwner ? getOwner(context) : context.container;
+    const documentService = container.lookup('service:-document');
 
     if (documentService) {
       return documentService;
@@ -61,16 +65,19 @@ export function getDOM(context) {
   }
 }
 
-export function getDestinationElement(context) {
-  let dom = getDOM(context);
+export function getDestinationElement(context: Component<any>) {
+  const dom = getDOM(context);
   const id = 'ember-bootstrap-wormhole';
-  let destinationElement =
+  const destinationElement =
     findElementById(dom, id) || findElemementByIdInShadowDom(context, id);
 
   if (DEBUG && !destinationElement) {
-    let config = getOwner(context).resolveRegistration('config:environment');
-    if (config.environment === 'test' && typeof FastBoot === 'undefined') {
+    const config = (
+      getOwner(context) as ApplicationInstance
+    ).resolveRegistration('config:environment') as { environment?: string };
+    if (config?.environment === 'test' && typeof FastBoot === 'undefined') {
       let id;
+      // @ts-expect-error TODO get rid of require
       if (requirejs.has('@ember/test-helpers/dom/get-root-element')) {
         try {
           id = requirejs('@ember/test-helpers/dom/get-root-element').default()
@@ -95,8 +102,15 @@ export function getDestinationElement(context) {
   return destinationElement;
 }
 
-export function findElemementByIdInShadowDom(context, id) {
-  const owner = getOwner(context);
+export function findElemementByIdInShadowDom(
+  context: Component<any>,
+  id: string,
+) {
+  const owner = getOwner(context) as ApplicationInstance;
+  assert(
+    'Expected Element as rootElement',
+    owner.rootElement instanceof Element,
+  );
   return (
     owner.rootElement.querySelector &&
     owner.rootElement.querySelector(`[id="${id}"]`)

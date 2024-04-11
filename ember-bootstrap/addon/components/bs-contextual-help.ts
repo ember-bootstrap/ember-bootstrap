@@ -1,15 +1,17 @@
 import Component from '@glimmer/component';
-import { isArray } from '@ember/array';
 import { action } from '@ember/object';
 import { cancel, later, next, schedule } from '@ember/runloop';
-import transitionEnd from 'ember-bootstrap/utils/transition-end';
-import { getDestinationElement } from 'ember-bootstrap/utils/dom';
-import usesTransition from 'ember-bootstrap/utils/decorators/uses-transition';
+import transitionEnd from '../utils/transition-end';
+import { getDestinationElement } from '../utils/dom';
 import { assert } from '@ember/debug';
 import Ember from 'ember';
 import arg from '../utils/decorators/arg';
 import { tracked } from '@glimmer/tracking';
 import { ref } from 'ember-ref-bucket';
+import isFastBoot from '../utils/is-fastboot';
+
+import type { Timer } from '@ember/runloop';
+import type { ComponentLike } from '@glint/template';
 
 const HOVERSTATE_NONE = 'none';
 const HOVERSTATE_IN = 'in';
@@ -17,13 +19,45 @@ const HOVERSTATE_OUT = 'out';
 
 function noop() {}
 
+export interface ContextualHelpSignature {
+  Element: HTMLDivElement;
+  Args: {
+    title?: string;
+    placement?: 'top' | 'bottom' | 'left' | 'right';
+    autoPlacement?: boolean;
+    visible?: boolean;
+    fade?: boolean;
+    delay?: number;
+    delayShow?: number;
+    delayHide?: number;
+    transitionDuration?: number;
+    viewportSelector?: string;
+    viewportPadding?: number;
+    triggerElement?: string;
+    triggerEvents?: string | Array<'click' | 'hover' | 'focus'>;
+    renderInPlace?: boolean;
+    onShow?: () => unknown;
+    onShown?: () => unknown;
+    onHide?: () => unknown;
+    onHidden?: () => unknown;
+    elementComponent?: ComponentLike;
+  };
+  Blocks: {
+    default: [
+      {
+        close: () => void;
+      },
+    ];
+  };
+}
+
 /**
   @class ContextualHelp
   @namespace Components
   @extends Glimmer.Component
   @private
 */
-export default class ContextualHelp extends Component {
+export default abstract class ContextualHelp extends Component<ContextualHelpSignature> {
   /**
    * @property title
    * @type string
@@ -71,7 +105,7 @@ export default class ContextualHelp extends Component {
    * @private
    */
   @tracked
-  _inDom;
+  _inDom?: boolean;
 
   get inDom() {
     return this._inDom ?? !!(this.visible && this.triggerTargetElement);
@@ -177,7 +211,9 @@ export default class ContextualHelp extends Component {
   @arg
   viewportPadding = 0;
 
-  _parentFinder = self.document ? self.document.createTextNode('') : '';
+  _parent?: HTMLElement;
+
+  _parentFinder = self.document ? self.document.createTextNode('') : undefined;
 
   /**
    * The DOM element of the arrow element.
@@ -187,6 +223,7 @@ export default class ContextualHelp extends Component {
    * @readonly
    * @private
    */
+  abstract arrowElement?: HTMLElement | null;
 
   /**
    * The wormhole destinationElement
@@ -221,20 +258,22 @@ export default class ContextualHelp extends Component {
    * @public
    */
   @arg
-  triggerElement = null;
+  triggerElement: string | null = null;
+
+  triggerTargetElement?: HTMLElement;
 
   /**
    * @method getTriggerTargetElement
    * @private
    */
   getTriggerTargetElement() {
-    let triggerElement = this.triggerElement;
-    let el;
+    const triggerElement = this.triggerElement;
+    let el: HTMLElement | null | undefined;
 
     if (!triggerElement) {
       el = this._parent;
     } else {
-      el = document.querySelector(triggerElement);
+      el = document.querySelector<HTMLHtmlElement>(triggerElement);
     }
 
     assert('Could not find trigger element for tooltip/popover component', el);
@@ -251,20 +290,21 @@ export default class ContextualHelp extends Component {
    * @public
    */
   @arg
-  triggerEvents = 'hover focus';
+  triggerEvents: NonNullable<ContextualHelpSignature['Args']['triggerEvents']> =
+    'hover focus';
 
   get _triggerEvents() {
-    let events = this.triggerEvents;
-    if (!isArray(events)) {
-      events = events.split(' ');
-    }
+    const { triggerEvents } = this;
+    const events = Array.isArray(triggerEvents)
+      ? triggerEvents
+      : triggerEvents.split(' ');
 
     return events.map((event) => {
       switch (event) {
         case 'hover':
-          return ['mouseenter', 'mouseleave'];
+          return ['mouseenter', 'mouseleave'] as const;
         case 'focus':
-          return ['focusin', 'focusout'];
+          return ['focusin', 'focusout'] as const;
         default:
           return event;
       }
@@ -315,7 +355,7 @@ export default class ContextualHelp extends Component {
    * @property timer
    * @private
    */
-  timer = null;
+  timer: Timer | null = null;
 
   /**
    * Use CSS transitions?
@@ -325,8 +365,9 @@ export default class ContextualHelp extends Component {
    * @readonly
    * @private
    */
-  @usesTransition('fade')
-  usesTransition;
+  get usesTransition() {
+    return !isFastBoot(this) && this.args.fade !== false;
+  }
 
   /**
    * The DOM element of the overlay element.
@@ -336,7 +377,8 @@ export default class ContextualHelp extends Component {
    * @readonly
    * @private
    */
-  @ref('overlayElement') overlayElement;
+  @ref('overlayElement')
+  declare overlayElement?: HTMLDivElement;
 
   /**
    * This action is called immediately when the tooltip/popover is about to be shown.
@@ -373,9 +415,9 @@ export default class ContextualHelp extends Component {
    * @param e
    * @private
    */
-  enter(e) {
+  enter(e?: Event) {
     if (e) {
-      let eventType = e.type === 'focusin' ? 'focus' : 'hover';
+      const eventType = e.type === 'focusin' ? 'focus' : 'hover';
       this[eventType] = true;
     }
 
@@ -384,7 +426,9 @@ export default class ContextualHelp extends Component {
       return;
     }
 
-    cancel(this.timer);
+    if (this.timer) {
+      cancel(this.timer);
+    }
 
     this.hoverState = HOVERSTATE_IN;
 
@@ -410,9 +454,9 @@ export default class ContextualHelp extends Component {
    * @param e
    * @private
    */
-  leave(e) {
+  leave(e?: Event) {
     if (e) {
-      let eventType = e.type === 'focusout' ? 'focus' : 'hover';
+      const eventType = e.type === 'focusout' ? 'focus' : 'hover';
       this[eventType] = false;
     }
 
@@ -420,7 +464,9 @@ export default class ContextualHelp extends Component {
       return;
     }
 
-    cancel(this.timer);
+    if (this.timer) {
+      cancel(this.timer);
+    }
 
     this.hoverState = HOVERSTATE_OUT;
 
@@ -461,7 +507,7 @@ export default class ContextualHelp extends Component {
       return;
     }
 
-    if (false === this.args.onShow?.(this)) {
+    if (false === this.args.onShow?.()) {
       return;
     }
 
@@ -482,19 +528,19 @@ export default class ContextualHelp extends Component {
 
     // See https://github.com/twbs/bootstrap/pull/22481
     if ('ontouchstart' in document.documentElement) {
-      let { children } = document.body;
-      for (let i = 0; i < children.length; i++) {
-        children[i].addEventListener('mouseover', noop);
+      const { children } = document.body;
+      for (const child of children) {
+        child.addEventListener('mouseover', noop);
       }
     }
 
-    let tooltipShowComplete = () => {
+    const tooltipShowComplete = () => {
       if (this.isDestroyed) {
         return;
       }
-      let prevHoverState = this.hoverState;
+      const prevHoverState = this.hoverState;
 
-      this.args.onShown?.(this);
+      this.args.onShown?.();
       this.hoverState = HOVERSTATE_NONE;
 
       if (prevHoverState === HOVERSTATE_OUT) {
@@ -502,28 +548,17 @@ export default class ContextualHelp extends Component {
       }
     };
 
-    if (skipTransition === false && this.usesTransition) {
+    if (
+      skipTransition === false &&
+      this.usesTransition &&
+      this.overlayElement
+    ) {
       transitionEnd(this.overlayElement, this.transitionDuration).then(
         tooltipShowComplete,
       );
     } else {
       tooltipShowComplete();
     }
-  }
-
-  /**
-   * Position the tooltip/popover's arrow
-   *
-   * @method replaceArrow
-   * @param delta
-   * @param dimension
-   * @param isVertical
-   * @private
-   */
-  replaceArrow(delta, dimension, isVertical) {
-    let el = this.arrowElement;
-    el.style[isVertical ? 'left' : 'top'] = `${50 * (1 - delta / dimension)}%`;
-    el.style[isVertical ? 'top' : 'left'] = null;
   }
 
   /**
@@ -537,18 +572,18 @@ export default class ContextualHelp extends Component {
       return;
     }
 
-    if (false === this.args.onHide?.(this)) {
+    if (false === this.args.onHide?.()) {
       return;
     }
 
-    let tooltipHideComplete = () => {
+    const tooltipHideComplete = () => {
       if (this.isDestroyed) {
         return;
       }
       if (this.hoverState !== HOVERSTATE_IN) {
         this.inDom = false;
       }
-      this.args.onHidden?.(this);
+      this.args.onHidden?.();
     };
 
     this.showHelp = false;
@@ -556,13 +591,13 @@ export default class ContextualHelp extends Component {
     // if this is a touch-enabled device we remove the extra
     // empty mouseover listeners we added for iOS support
     if ('ontouchstart' in document.documentElement) {
-      let { children } = document.body;
-      for (let i = 0; i < children.length; i++) {
-        children[i].removeEventListener('mouseover', noop);
+      const { children } = document.body;
+      for (const child of children) {
+        child.removeEventListener('mouseover', noop);
       }
     }
 
-    if (this.usesTransition) {
+    if (this.usesTransition && this.overlayElement) {
       transitionEnd(this.overlayElement, this.transitionDuration).then(
         tooltipHideComplete,
       );
@@ -578,15 +613,16 @@ export default class ContextualHelp extends Component {
    * @private
    */
   addListeners() {
-    let target = this.triggerTargetElement;
+    const target = this.triggerTargetElement;
+    assert('triggerTargetElement expected.', target);
 
     this._triggerEvents.forEach((event) => {
-      if (isArray(event)) {
-        let [inEvent, outEvent] = event;
+      if (typeof event === 'string') {
+        target.addEventListener(event, this._handleToggle);
+      } else {
+        const [inEvent, outEvent] = event;
         target.addEventListener(inEvent, this._handleEnter);
         target.addEventListener(outEvent, this._handleLeave);
-      } else {
-        target.addEventListener(event, this._handleToggle);
       }
     });
   }
@@ -597,14 +633,16 @@ export default class ContextualHelp extends Component {
    */
   removeListeners() {
     try {
-      let target = this.triggerTargetElement;
+      const target = this.triggerTargetElement;
+      assert('triggerTargetElement expected.', target);
+
       this._triggerEvents.forEach((event) => {
-        if (isArray(event)) {
-          let [inEvent, outEvent] = event;
+        if (typeof event === 'string') {
+          target.removeEventListener(event, this._handleToggle);
+        } else {
+          const [inEvent, outEvent] = event;
           target.removeEventListener(inEvent, this._handleEnter);
           target.removeEventListener(outEvent, this._handleLeave);
-        } else {
-          target.removeEventListener(event, this._handleToggle);
         }
       });
     } catch (e) {} // eslint-disable-line no-empty
@@ -614,26 +652,26 @@ export default class ContextualHelp extends Component {
    * @method handleTriggerEvent
    * @private
    */
-  handleTriggerEvent(handler, e) {
-    let overlayElement = this.overlayElement;
-    if (overlayElement && overlayElement.contains(e.target)) {
+  handleTriggerEvent(handler: (e: Event) => void, e: Event) {
+    const overlayElement = this.overlayElement;
+    if (overlayElement && overlayElement.contains(e.target as Element)) {
       return;
     }
     return handler.call(this, e);
   }
 
   @action
-  _handleEnter(e) {
+  _handleEnter(e: Event) {
     this.handleTriggerEvent(this.enter, e);
   }
 
   @action
-  _handleLeave(e) {
+  _handleLeave(e: Event) {
     this.handleTriggerEvent(this.leave, e);
   }
 
   @action
-  _handleToggle(e) {
+  _handleToggle(e: Event) {
     this.handleTriggerEvent(this.toggle, e);
   }
 
@@ -653,13 +691,14 @@ export default class ContextualHelp extends Component {
       // ember-render-helpers calls this also in FastBoot, so guard against this
       return;
     }
-    let parent = this._parentFinder.parentNode;
+    let parent = this._parentFinder?.parentNode as HTMLElement | undefined;
     // In the rare case of using FastBoot w/ rehydration, the parent finder TextNode rendered by FastBoot will be reused,
     // so our own instance on the component is not rendered, only exists here as detached from DOM and thus has no parent.
     // In this case we try to use Ember's private API as a fallback.
     // Related: https://github.com/emberjs/rfcs/issues/168
     if (!parent) {
       try {
+        // @ts-expect-error getViewBounds' type does not allow passing a Glimmer component
         parent = Ember.ViewUtils.getViewBounds(this).parentElement;
       } catch (e) {
         // we catch the possibly broken private API call, the component can still work if the trigger element is defined
@@ -689,7 +728,7 @@ export default class ContextualHelp extends Component {
   }
 
   willDestroy() {
-    super.willDestroy(...arguments);
+    super.willDestroy();
     this.removeListeners();
   }
 }
