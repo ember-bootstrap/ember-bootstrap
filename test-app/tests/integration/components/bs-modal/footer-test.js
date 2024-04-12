@@ -1,9 +1,10 @@
 import { module } from 'qunit';
 import { setupRenderingTest } from 'ember-qunit';
-import { click, render } from '@ember/test-helpers';
+import { click, render, settled } from '@ember/test-helpers';
 import { defaultButtonClass, test } from '../../../helpers/bootstrap';
 import hbs from 'htmlbars-inline-precompile';
 import setupNoDeprecations from '../../../helpers/setup-no-deprecations';
+import { defer } from '../../../helpers/defer';
 import { stub } from 'sinon';
 
 module('Integration | Component | bs-modal/footer', function (hooks) {
@@ -77,6 +78,31 @@ module('Integration | Component | bs-modal/footer', function (hooks) {
     assert
       .dom('.modal-footer button:last-child')
       .hasText('submit', 'Submit button title is correct.');
+    assert.strictEqual(submit.callCount, 1, '@onSubmit is called exactly once');
+  });
+
+  test('Footer submit button gets disabled when `onSubmit` returns a pending promise', async function (assert) {
+    const { promise, resolve } = defer();
+    const submit = this.set('submit', stub().returns(promise));
+
+    await render(
+      hbs`<BsModal::Footer
+  @onSubmit={{this.submit}}
+  @closeTitle='close'
+  @submitTitle='submit'
+/>`,
+    );
+    await click('.modal-footer button:last-child');
+    assert
+      .dom('.modal-footer button:last-child')
+      .isDisabled('Submit button is disabled');
+
+    resolve();
+    await settled();
+    assert
+      .dom('.modal-footer button:last-child')
+      .isNotDisabled('Submit button is active');
+
     assert.strictEqual(submit.callCount, 1, '@onSubmit is called exactly once');
   });
 

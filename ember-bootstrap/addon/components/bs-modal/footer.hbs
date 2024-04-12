@@ -6,7 +6,13 @@
     {{else}}
       {{#if @submitTitle}}
         <Button @onClick={{@onClose}}>{{bs-default @closeTitle "Ok"}}</Button>
-        <Button @type={{bs-default @submitButtonType "primary"}} @onClick={{@onSubmit}} disabled={{bs-default @submitDisabled false}}>{{@submitTitle}}</Button>
+        <Button
+          @type={{bs-default @submitButtonType "primary"}}
+          @onClick={{@onSubmit}}
+          {{bs-conditional-attribute "disabled" @submitDisabled @submitDisabled}}
+        >
+          {{@submitTitle}}
+        </Button>
       {{else}}
         <Button @type="primary" @onClick={{@onClose}}>{{bs-default @closeTitle "Ok"}}</Button>
       {{/if}}
