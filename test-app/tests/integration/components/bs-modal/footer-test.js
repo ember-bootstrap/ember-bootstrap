@@ -1,16 +1,23 @@
 import { module } from 'qunit';
 import { setupRenderingTest } from 'ember-qunit';
-import { render } from '@ember/test-helpers';
+import { click, render, settled } from '@ember/test-helpers';
 import { defaultButtonClass, test } from '../../../helpers/bootstrap';
 import { hbs } from 'ember-cli-htmlbars';
 import setupNoDeprecations from '../../../helpers/setup-no-deprecations';
+import { defer } from '../../../helpers/defer';
+import { stub } from 'sinon';
 
 module('Integration | Component | bs-modal/footer', function (hooks) {
   setupRenderingTest(hooks);
   setupNoDeprecations(hooks);
 
   test('Footer has close button', async function (assert) {
-    await render(hbs`<BsModal::Footer @closeTitle='close' />`);
+    const close = this.set('close', stub());
+
+    await render(
+      hbs`<BsModal::Footer @onClose={{this.close}} @closeTitle='close' />`,
+    );
+    await click('.modal-footer button');
 
     assert.dom('.modal-footer').exists({ count: 1 }, 'Modal footer exists.');
     assert
@@ -27,12 +34,20 @@ module('Integration | Component | bs-modal/footer', function (hooks) {
     assert
       .dom('.modal-footer button')
       .hasText('close', 'Button title is correct.');
+    assert.strictEqual(close.callCount, 1, '@onClose is called exactly once');
   });
 
   test('Footer can have submit button', async function (assert) {
+    const submit = this.set('submit', stub());
+
     await render(
-      hbs`<BsModal::Footer @closeTitle='close' @submitTitle='submit' />`,
+      hbs`<BsModal::Footer
+  @onSubmit={{this.submit}}
+  @closeTitle='close'
+  @submitTitle='submit'
+/>`,
     );
+    await click('.modal-footer button:last-child');
 
     assert
       .dom('.modal-footer button')
@@ -63,6 +78,32 @@ module('Integration | Component | bs-modal/footer', function (hooks) {
     assert
       .dom('.modal-footer button:last-child')
       .hasText('submit', 'Submit button title is correct.');
+    assert.strictEqual(submit.callCount, 1, '@onSubmit is called exactly once');
+  });
+
+  test('Footer submit button gets disabled when `onSubmit` returns a pending promise', async function (assert) {
+    const { promise, resolve } = defer();
+    const submit = this.set('submit', stub().returns(promise));
+
+    await render(
+      hbs`<BsModal::Footer
+  @onSubmit={{this.submit}}
+  @closeTitle='close'
+  @submitTitle='submit'
+/>`,
+    );
+    await click('.modal-footer button:last-child');
+    assert
+      .dom('.modal-footer button:last-child')
+      .isDisabled('Submit button is disabled');
+
+    resolve();
+    await settled();
+    assert
+      .dom('.modal-footer button:last-child')
+      .isNotDisabled('Submit button is active');
+
+    assert.strictEqual(submit.callCount, 1, '@onSubmit is called exactly once');
   });
 
   test('Footer can have a custom submitButtonType', async function (assert) {
