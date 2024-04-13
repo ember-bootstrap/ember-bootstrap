@@ -54,7 +54,6 @@
     "ember-concurrency": "^2.1.2 || ^3.0.0",
     "ember-element-helper": "^0.6.0 || ^0.7.0 || ^0.8.0",
     "ember-focus-trap": "^1.0.0",
-    "ember-modifier": "^3.2.7 || ^4.0.0",
     "ember-on-helper": "^0.1.0",
     "ember-popper-modifier": "^2.0.0 || ^3.0.0 || ^4.0.0",
     "ember-ref-bucket": "^4.0.0 || ^5.0.0",
@@ -99,7 +98,8 @@
   "peerDependencies": {
     "@glimmer/component": "^1.0.4",
     "@glimmer/tracking": "^1.0.4",
-    "ember-source": ">=4.8.0"
+    "ember-source": ">=4.8.0",
+    "ember-modifier": "^3.2.7 || ^4.0.0"
   },
   "engines": {
     "node": "18.* || >= 20"
