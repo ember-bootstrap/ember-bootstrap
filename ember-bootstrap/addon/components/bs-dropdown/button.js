@@ -1,4 +1,4 @@
-import Component from '@glimmer/component';
+import templateOnly from '@ember/component/template-only';
 
 /**
  Button component with that can act as a dropdown toggler.
@@ -10,4 +10,4 @@ import Component from '@glimmer/component';
  @extends Components.Button
  @public
  */
-export default class DrodownButton extends Component {}
+export default templateOnly();
