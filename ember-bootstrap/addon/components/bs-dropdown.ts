@@ -266,8 +266,12 @@ export default class Dropdown extends Component<DropdownSignature> {
    */
 
   /**
-   * A computed property to generate the suiting class for the dropdown container, either "dropdown", "dropup" or "btn-group".
-   * BS4 only: "dropleft", "dropright"
+   * A computed property to generate the suiting class for the dropdown container, either
+   *
+   * - "dropdown"
+   * - "dropup"
+   * - "dropstart" (BS5) or "dropleft" (BS4)
+   * - "dropend" (BS5) or "dropright" (BS4)
    *
    * @property containerClass
    * @type string
@@ -275,28 +279,15 @@ export default class Dropdown extends Component<DropdownSignature> {
    * @private
    */
   get containerClass() {
-    let dropDirectionClass = `drop${this.direction}`;
     if (macroCondition(getOwnConfig().isBS5)) {
       if (this.direction === 'left') {
-        dropDirectionClass = 'dropstart';
+        return 'dropstart';
       } else if (this.direction === 'right') {
-        dropDirectionClass = 'dropend';
+        return 'dropend';
       }
     }
-    if (
-      this.hasButton &&
-      !this.toggleElement?.classList.contains('btn-block')
-    ) {
-      return this.direction !== 'down'
-        ? `btn-group ${dropDirectionClass}`
-        : 'btn-group';
-    } else {
-      return dropDirectionClass;
-    }
-  }
 
-  get hasButton() {
-    return this.toggleElement && this.toggleElement.tagName === 'BUTTON';
+    return `drop${this.direction}`;
   }
 
   /**

@@ -9,6 +9,7 @@ import type EmberStyleModifierRegistry from 'ember-style-modifier/template-regis
 import type bsDefaultHelper from 'ember-bootstrap/helpers/bs-default';
 import type sizeClassHelper from 'ember-bootstrap/helpers/bs-size-class';
 import type typeClassHelper from 'ember-bootstrap/helpers/bs-type-class';
+import type BsConditionalAttribute from 'ember-bootstrap/modifiers/bs-conditional-attribute';
 
 import type { HelperLike } from '@glint/template';
 import type { EmberBootstrapMacrosConfig } from './macros-config';
@@ -30,6 +31,7 @@ declare module '@glint/environment-ember-loose/registry' {
     'bs-default': typeof bsDefaultHelper;
     'bs-size-class': typeof sizeClassHelper;
     'bs-type-class': typeof typeClassHelper;
+    'bs-conditional-attribute': typeof BsConditionalAttribute;
 
     macroGetOwnConfig: macroGetOwnConfig;
     macroCondition: EmbroiderMacrosRegistry['macroCondition'];
