@@ -5,6 +5,46 @@ import { getDestinationElement } from 'ember-bootstrap/utils/dom';
 import { ref } from 'ember-ref-bucket';
 import { tracked } from '@glimmer/tracking';
 import { getOwnConfig, macroCondition } from '@embroider/macros';
+import type { Placement as PopperPlacement } from '@popperjs/core';
+import type BsDropdownMenuDividerComponent from './menu/divider';
+import type BsDropdownMenuItemComponent from './menu/item';
+import type BsLinkToComponent from '../bs-link-to';
+import type { ComponentLike } from '@glint/template';
+
+interface DropdownMenuSignature {
+  Element: HTMLDivElement;
+  Args: {
+    align?: 'left' | 'right';
+    dividerComponent: ComponentLike<typeof BsDropdownMenuDividerComponent>;
+    isOpen?: boolean;
+    itemComponent: ComponentLike<typeof BsDropdownMenuItemComponent>;
+    linkToComponent: ComponentLike<BsLinkToComponent>;
+    registerChildElement: (element: HTMLDivElement, [type]: ['menu']) => void;
+    renderInPlace?: boolean;
+    toggleElement: HTMLAnchorElement;
+    unregisterChildElement: (element: HTMLDivElement, [type]: ['menu']) => void;
+
+    /**
+     * @internal
+     */
+    direction?: 'up' | 'down' | 'left' | 'right';
+
+    /**
+     * @internal
+     */
+    inNav?: boolean;
+  };
+  Blocks: {
+    default: [
+      {
+        divider: ComponentLike<typeof BsDropdownMenuDividerComponent>;
+        item: ComponentLike<typeof BsDropdownMenuItemComponent>;
+        linkTo: ComponentLike<BsLinkToComponent>;
+        'link-to': ComponentLike<BsLinkToComponent>;
+      },
+    ];
+  };
+}
 
 /**
  Component for the dropdown menu.
@@ -16,13 +56,13 @@ import { getOwnConfig, macroCondition } from '@embroider/macros';
  @extends Component
  @public
  */
-export default class DropdownMenu extends Component {
+export default class DropdownMenu extends Component<DropdownMenuSignature> {
   /**
    * @property _element
    * @type null | HTMLElement
    * @private
    */
-  @ref('menuElement') menuElement = null;
+  @ref('menuElement') menuElement: HTMLDivElement | null = null;
 
   /**
    * Alignment of the menu, either "left" or "right"
@@ -102,7 +142,7 @@ export default class DropdownMenu extends Component {
   isOpen = this.args.isOpen;
 
   @action
-  updateIsOpen(value) {
+  updateIsOpen(value: boolean) {
     // delay removing the menu from DOM to allow (delegated Ember) event to fire for the menu's children
     // Fixes https://github.com/kaliber5/ember-bootstrap/issues/660
     next(() => {
@@ -115,9 +155,9 @@ export default class DropdownMenu extends Component {
 
   flip = true;
 
-  get popperPlacement() {
-    let placement = 'bottom-start';
-    let { direction, align } = this;
+  get popperPlacement(): PopperPlacement {
+    let placement: PopperPlacement = 'bottom-start';
+    const { direction, align } = this;
 
     if (direction === 'up') {
       placement = 'top-start';
