@@ -5,6 +5,7 @@ import { getOwnConfig, macroCondition } from '@embroider/macros';
 import { tracked } from '@glimmer/tracking';
 import { next } from '@ember/runloop';
 import type { ComponentLike } from '@glint/template';
+import type BsDropdownMenuComponent from './bs-dropdown/menu';
 import type BsDropdownToggleComponent from './bs-dropdown/toggle';
 import type EmbroiderConfig from '../utils/embroider-config';
 
@@ -28,10 +29,10 @@ interface DropdownSignature {
     direction?: 'down' | 'up' | 'left' | 'right';
     htmlTag?: string;
     isOpen?: boolean;
-    menuComponent: ComponentLike<unknown>;
+    menuComponent: ComponentLike<BsDropdownMenuComponent>;
     onHide: () => undefined | false;
     onShow: () => void;
-    toggleComponent?: ComponentLike<unknown>;
+    toggleComponent?: ComponentLike<BsDropdownToggleComponent>;
 
     // TODO: Clarify usage of `open` and `isOpen` arguments. Likely one is a typo.
     open: boolean;
@@ -44,9 +45,12 @@ interface DropdownSignature {
       {
         // TODO: improve typing
         button: ComponentLike<unknown>;
-        // TODO: improve typing
-        menu: ComponentLike<unknown>;
-        toggle: BsDropdownToggleComponent;
+        closeDropdown: () => void;
+        isOpen: boolean;
+        menu: ComponentLike<BsDropdownMenuComponent>;
+        openDropdown: () => void;
+        toggle: ComponentLike<BsDropdownToggleComponent>;
+        toggleDropdown: () => void;
       },
     ];
   };
