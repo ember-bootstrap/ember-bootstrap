@@ -6,6 +6,7 @@ import { tracked } from '@glimmer/tracking';
 import { next } from '@ember/runloop';
 import type { ComponentLike } from '@glint/template';
 import type BsDropdownToggleComponent from './bs-dropdown/toggle';
+import type EmbroiderConfig from '../utils/embroider-config';
 
 const ESCAPE_KEYCODE = 27; // KeyboardEvent.which value for Escape (Esc) key
 const SPACE_KEYCODE = 32; // KeyboardEvent.which value for space key
@@ -279,7 +280,7 @@ export default class Dropdown extends Component<DropdownSignature> {
    * @private
    */
   get containerClass() {
-    if (macroCondition(getOwnConfig().isBS5)) {
+    if (macroCondition(getOwnConfig<EmbroiderConfig>().isBS5)) {
       if (this.direction === 'left') {
         return 'dropstart';
       } else if (this.direction === 'right') {

@@ -10,6 +10,7 @@ import type BsDropdownMenuDividerComponent from './menu/divider';
 import type BsDropdownMenuItemComponent from './menu/item';
 import type BsLinkToComponent from '../bs-link-to';
 import type { ComponentLike } from '@glint/template';
+import type EmbroiderConfig from '../../utils/embroider-config';
 
 interface DropdownMenuSignature {
   Element: HTMLDivElement;
@@ -131,7 +132,9 @@ export default class DropdownMenu extends Component<DropdownMenuSignature> {
 
   get alignClass() {
     if (this.align === 'right') {
-      const alignClass = macroCondition(getOwnConfig().isBS4) ? 'right' : 'end';
+      const alignClass = macroCondition(getOwnConfig<EmbroiderConfig>().isBS4)
+        ? 'right'
+        : 'end';
       return `dropdown-menu-${alignClass}`;
     }
 
