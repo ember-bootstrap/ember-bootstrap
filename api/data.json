@@ -2,7 +2,7 @@
     "project": {
         "name": "ember-bootstrap",
         "description": "Twitter Bootstrap components for Ember.js",
-        "version": "v6.3.0"
+        "version": "v6.3.1"
     },
     "files": {
         "../ember-bootstrap/addon/components/bs-accordion/item/body.js": {
@@ -723,7 +723,7 @@
             "extension_for": [],
             "namespace": "Components",
             "file": "../ember-bootstrap/addon/components/bs-dropdown/menu.js",
-            "line": 8,
+            "line": 9,
             "description": "Component for the dropdown menu.\n\nSee [Components.Dropdown](Components.Dropdown.html) for examples.",
             "extends": "Component",
             "access": "public",
@@ -1838,7 +1838,7 @@
         },
         {
             "file": "../ember-bootstrap/addon/components/bs-dropdown/menu.js",
-            "line": 19,
+            "line": 20,
             "itemtype": "property",
             "name": "_element",
             "type": "null | HTMLElement",
@@ -1849,7 +1849,7 @@
         },
         {
             "file": "../ember-bootstrap/addon/components/bs-dropdown/menu.js",
-            "line": 26,
+            "line": 27,
             "description": "Alignment of the menu, either \"left\" or \"right\"",
             "itemtype": "property",
             "name": "align",
@@ -1862,7 +1862,7 @@
         },
         {
             "file": "../ember-bootstrap/addon/components/bs-dropdown/menu.js",
-            "line": 38,
+            "line": 39,
             "itemtype": "property",
             "name": "direction",
             "default": "'down'",
@@ -1874,7 +1874,7 @@
         },
         {
             "file": "../ember-bootstrap/addon/components/bs-dropdown/menu.js",
-            "line": 48,
+            "line": 49,
             "description": "By default, the menu is rendered in the same place as the dropdown. If you experience clipping\nissues, you can set this to false to render the menu in a wormhole at the top of the DOM.",
             "itemtype": "property",
             "name": "renderInPlace",
@@ -1887,7 +1887,7 @@
         },
         {
             "file": "../ember-bootstrap/addon/components/bs-dropdown/menu.js",
-            "line": 61,
+            "line": 62,
             "itemtype": "property",
             "name": "inNav",
             "type": "{boolean}",
@@ -1898,7 +1898,7 @@
         },
         {
             "file": "../ember-bootstrap/addon/components/bs-dropdown/menu.js",
-            "line": 70,
+            "line": 71,
             "itemtype": "property",
             "name": "_renderInPlace",
             "type": "boolean",
@@ -1909,7 +1909,7 @@
         },
         {
             "file": "../ember-bootstrap/addon/components/bs-dropdown/menu.js",
-            "line": 79,
+            "line": 80,
             "description": "The wormhole destinationElement",
             "itemtype": "property",
             "name": "destinationElement",
@@ -1922,7 +1922,7 @@
         },
         {
             "file": "../ember-bootstrap/addon/components/bs-dropdown/menu.js",
-            "line": 160,
+            "line": 166,
             "itemtype": "property",
             "name": "itemComponent",
             "type": "{String}",
@@ -1933,7 +1933,7 @@
         },
         {
             "file": "../ember-bootstrap/addon/components/bs-dropdown/menu.js",
-            "line": 166,
+            "line": 172,
             "itemtype": "property",
             "name": "linkToComponent",
             "type": "{String}",
@@ -1944,7 +1944,7 @@
         },
         {
             "file": "../ember-bootstrap/addon/components/bs-dropdown/menu.js",
-            "line": 172,
+            "line": 178,
             "itemtype": "property",
             "name": "dividerComponent",
             "type": "{String}",
@@ -4675,7 +4675,7 @@
         {
             "file": "../ember-bootstrap/addon/components/bs-dropdown.js",
             "line": 234,
-            "description": "A computed property to generate the suiting class for the dropdown container, either \"dropdown\", \"dropup\" or \"btn-group\".\nBS4 only: \"dropleft\", \"dropright\"",
+            "description": "A computed property to generate the suiting class for the dropdown container, either\n\n- \"dropdown\"\n- \"dropup\"\n- \"dropstart\" (BS5) or \"dropleft\" (BS4)\n- \"dropend\" (BS5) or \"dropright\" (BS4)",
             "itemtype": "property",
             "name": "containerClass",
             "type": "string",
@@ -4687,7 +4687,7 @@
         },
         {
             "file": "../ember-bootstrap/addon/components/bs-dropdown.js",
-            "line": 265,
+            "line": 259,
             "itemtype": "property",
             "name": "toggleElement",
             "access": "private",
@@ -4697,7 +4697,7 @@
         },
         {
             "file": "../ember-bootstrap/addon/components/bs-dropdown.js",
-            "line": 272,
+            "line": 266,
             "description": "The DOM element of the `.dropdown-menu` element",
             "type": "object",
             "readonly": "",
@@ -4708,7 +4708,7 @@
         },
         {
             "file": "../ember-bootstrap/addon/components/bs-dropdown.js",
-            "line": 281,
+            "line": 275,
             "description": "Action is called when dropdown is about to be shown",
             "itemtype": "event",
             "name": "onShow",
@@ -4726,7 +4726,7 @@
         },
         {
             "file": "../ember-bootstrap/addon/components/bs-dropdown.js",
-            "line": 289,
+            "line": 283,
             "description": "Action is called when dropdown is about to be hidden\nReturning `false` will block closing the dropdown",
             "itemtype": "event",
             "name": "onHide",
@@ -4744,7 +4744,7 @@
         },
         {
             "file": "../ember-bootstrap/addon/components/bs-dropdown.js",
-            "line": 324,
+            "line": 318,
             "description": "Handler for click events to close the dropdown",
             "itemtype": "method",
             "name": "closeOnClickHandler",
@@ -4761,7 +4761,7 @@
         },
         {
             "file": "../ember-bootstrap/addon/components/bs-dropdown.js",
-            "line": 446,
+            "line": 440,
             "itemtype": "property",
             "name": "buttonComponent",
             "type": "{String}",
@@ -4772,7 +4772,7 @@
         },
         {
             "file": "../ember-bootstrap/addon/components/bs-dropdown.js",
-            "line": 452,
+            "line": 446,
             "itemtype": "property",
             "name": "toggleComponent",
             "type": "{String}",
@@ -4783,7 +4783,7 @@
         },
         {
             "file": "../ember-bootstrap/addon/components/bs-dropdown.js",
-            "line": 458,
+            "line": 452,
             "itemtype": "property",
             "name": "menuComponent",
             "type": "{String}",
@@ -6515,7 +6515,7 @@
         },
         {
             "message": "Missing item type\nThe DOM element of the `.dropdown-menu` element",
-            "line": " ../ember-bootstrap/addon/components/bs-dropdown.js:272"
+            "line": " ../ember-bootstrap/addon/components/bs-dropdown.js:266"
         },
         {
             "message": "Missing item type\nDetermines if list should be numbered (e.g. `ol` or `ul` should be used)\n\nAlso see the [Bootstrap Docs](https://getbootstrap.com/docs/5.2/components/list-group/#numbered)",

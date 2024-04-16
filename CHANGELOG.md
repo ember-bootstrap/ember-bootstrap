@@ -15,6 +15,24 @@
 
 
 
+
+## v6.3.1 (2024-04-16)
+
+#### :bug: Bug Fix
+* [#2123](https://github.com/ember-bootstrap/ember-bootstrap/pull/2123) Add @ to `onClick` in BsModal::Footer submit button ([@SanderKnauff](https://github.com/SanderKnauff))
+* [#2110](https://github.com/ember-bootstrap/ember-bootstrap/pull/2110) Dropdown should not add .btn-group class ([@jelhan](https://github.com/jelhan))
+* [#2120](https://github.com/ember-bootstrap/ember-bootstrap/pull/2120) Fix alignment of dropdown menus when using Bootstrap 5 ([@SanderKnauff](https://github.com/SanderKnauff))
+
+#### :house: Internal
+* [#2111](https://github.com/ember-bootstrap/ember-bootstrap/pull/2111) Extend `` component by invoking it in template rather than extending JS class ([@jelhan](https://github.com/jelhan))
+* [#2122](https://github.com/ember-bootstrap/ember-bootstrap/pull/2122) Modernize hbs import in tests ([@jelhan](https://github.com/jelhan))
+* [#2114](https://github.com/ember-bootstrap/ember-bootstrap/pull/2114) Refactor tests for dropdown menu ([@jelhan](https://github.com/jelhan))
+
+#### Committers: 2
+- Jeldrik Hanschke ([@jelhan](https://github.com/jelhan))
+- Sander Knauff ([@SanderKnauff](https://github.com/SanderKnauff))
+
+
 ## v6.3.0 (2024-04-04)
 
 This release fixes a wrong placement of tooltips if using Bootstrap >= 5.3. The fixes causes a slightly to high padding of tooltips if using Bootstrap < 5.3. It is recommended to upgrade Bootstrap to >= 5.3 at the same time.
