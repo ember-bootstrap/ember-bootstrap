@@ -1,4 +1,4 @@
-import Button from 'ember-bootstrap/components/bs-button';
+import templateOnly from '@ember/component/template-only';
 
 /**
  Button component with that can act as a dropdown toggler.
@@ -10,4 +10,4 @@ import Button from 'ember-bootstrap/components/bs-button';
  @extends Components.Button
  @public
  */
-export default class DropdownButton extends Button {}
+export default templateOnly();
