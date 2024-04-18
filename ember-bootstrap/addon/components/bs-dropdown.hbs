@@ -1,10 +1,15 @@
-{{! @glint-nocheck }}
 {{#let (element this.htmlTag) as |Tag|}}
   <Tag
     class="{{this.containerClass}}
-      {{if this.inNav "nav-item"}}
       {{if this.isOpen "show"}}"
     ...attributes
+    {{!
+      TODO: Implementation is likely broken.
+
+      1. `@open` argument seems to be a typo. The documented argument is `isOpen`.
+      2. `updateIsOpen` function expect value of open as first argument. But it gets
+         the element instead.
+    }}
     {{did-update this.updateIsOpen @open}}
   >
     {{yield
