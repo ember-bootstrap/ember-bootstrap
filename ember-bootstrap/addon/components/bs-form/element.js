@@ -25,7 +25,7 @@ import { dedupeTracked } from 'tracked-toolbox';
 
   ```handlebars
   <BsForm @formLayout="horizontal" @model={{this}} @onSubmit={{action "submit"}} as |form|>
-    <form.element @controlType="email" @label="Email" @value={{this.email}}" />
+    <form.element @controlType="email" @label="Email" @value={{this.email}} />
     <form.element @controlType="password" @label="Password" @value={{this.password}} />
     <form.element @controlType="checkbox" @label="Remember me" @value={{this.rememberMe}} />
     <BsButton @defaultText="Submit" @type="primary" type="submit" />
