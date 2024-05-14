@@ -97,7 +97,7 @@ import { ref } from 'ember-ref-bucket';
   It could be used for visual feedback about last submission:
 
   ```hbs
-  <BsForm @onSubmit={{action 'save}} as |form|>
+  <BsForm @onSubmit={{action "save"}} as |form|>
     <form.submitButton @type={{if form.isRejected "danger" "primary"}}>
       Save
     </form.submitButton>
