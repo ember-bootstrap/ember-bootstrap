@@ -25,7 +25,7 @@
     "@ember/test-helpers": "3.3.0",
     "@embroider/addon-dev": "4.2.1",
     "@embroider/macros": "1.15.1",
-    "@embroider/test-setup": "2.1.1",
+    "@embroider/test-setup": "4.0.0",
     "@embroider/util": "1.13.1",
     "@glimmer/component": "1.1.2",
     "@glimmer/tracking": "1.1.2",
