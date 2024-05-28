@@ -19,7 +19,7 @@ module('Integration | Component | bs-dropdown/button', function (hooks) {
 
   test('dropdown button has coorect css type class', async function (assert) {
     await render(
-      hbs`<BsDropdown as |dd|><dd.button @type="primary">Test</dd.button></BsDropdown>`,
+      hbs`<BsDropdown as |dd|><dd.button @type='primary'>Test</dd.button></BsDropdown>`,
     );
 
     assert
@@ -42,7 +42,7 @@ module('Integration | Component | bs-dropdown/button', function (hooks) {
 
   test('dropdown button has correct size', async function (assert) {
     await render(
-      hbs`<BsDropdown as |dd|><dd.button @size="lg">Test</dd.button></BsDropdown>`,
+      hbs`<BsDropdown as |dd|><dd.button @size='lg'>Test</dd.button></BsDropdown>`,
     );
 
     assert.dom('button').hasClass('btn-lg', 'dropdown button has large size');
