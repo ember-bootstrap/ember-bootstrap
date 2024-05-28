@@ -13,6 +13,10 @@ const ignoredDeprecations = [
   // @todo investigate what is still triggering the deprecation, might be some internals like
   // ember-cli-app-version or ember-export-application-global
   /@ember\/string/,
+  // @todo ADD LINK TO GITHUB ISSUE
+  /Usage of the `\(action\)` helper is deprecated/,
+  // @todo ADD LINK TO GITHUB ISSUE
+  /Usage of the `{{action}}` modifier is deprecated/,
 ];
 
 export default function setupNoDeprecations({
