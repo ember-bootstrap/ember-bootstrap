@@ -29,7 +29,7 @@ module('Integration | Component | bs-dropdown/button', function (hooks) {
 
   test('dropdown button has correct css outline class', async function (assert) {
     await render(
-      hbs`<BsDropdown as |dd|><dd.button @outline="true">Test</dd.button></BsDropdown>`,
+      hbs`<BsDropdown as |dd|><dd.button @outline={{true}}>Test</dd.button></BsDropdown>`,
     );
 
     assert
@@ -46,5 +46,13 @@ module('Integration | Component | bs-dropdown/button', function (hooks) {
     );
 
     assert.dom('button').hasClass('btn-lg', 'dropdown button has large size');
+  });
+
+  test('dropdown button has correct css active class', async function (assert) {
+    await render(
+      hbs`<BsDropdown as |dd|><dd.button @active={{true}}>Test</dd.button></BsDropdown>`,
+    );
+
+    assert.dom('button').hasClass('active', 'dropdown button is active');
   });
 });
