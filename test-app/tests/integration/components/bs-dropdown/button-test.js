@@ -17,7 +17,7 @@ module('Integration | Component | bs-dropdown/button', function (hooks) {
     assert.dom('.dropdown-toggle').exists('has dropdown-toggle class');
   });
 
-  test('dropdown button has coorect css type class', async function (assert) {
+  test('dropdown button has correct css type class', async function (assert) {
     await render(
       hbs`<BsDropdown as |dd|><dd.button @type='primary'>Test</dd.button></BsDropdown>`,
     );
