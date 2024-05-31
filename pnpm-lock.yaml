@@ -328,8 +328,8 @@ importers:
         specifier: 6.1.0
         version: 6.1.0(release-it@17.1.1)
       '@tsconfig/ember':
-        specifier: 3.0.6
-        version: 3.0.6
+        specifier: 3.0.8
+        version: 3.0.8
       '@types/rsvp':
         specifier: 4.0.9
         version: 4.0.9
@@ -439,8 +439,8 @@ importers:
         specifier: 1.3.0
         version: 1.3.0
       '@tsconfig/ember':
-        specifier: 3.0.6
-        version: 3.0.6
+        specifier: 3.0.8
+        version: 3.0.8
       '@types/qunit':
         specifier: 2.19.10
         version: 2.19.10
@@ -3150,8 +3150,8 @@ packages:
     resolution: {integrity: sha512-C5Mc6rdnsaJDjO3UpGW/CQTHtCKaYlScZTly4JIu97Jxo/odCiH0ITnDXSJPTOrEKk/ycSZ0AOgTmkDtkOsvIA==}
     dev: true
 
-  /@tsconfig/ember@3.0.6:
-    resolution: {integrity: sha512-b1LmFAL5suTpQsaoG5NYpKAU8XfqQcob9gPu4xQlS/sNGD8Pp+vx+jI30Cy01+mxTBsQPig2kOwFpTD2b2qwtw==}
+  /@tsconfig/ember@3.0.8:
+    resolution: {integrity: sha512-OVnIsZIt/8q0VEtcdz3rRryNrm6gdJTxXlxefkGIrkZnME0wqslmwHlUEZ7mvh377df9FqBhNKrYNarhCW8zJA==}
     dev: true
 
   /@types/acorn@4.0.6:
