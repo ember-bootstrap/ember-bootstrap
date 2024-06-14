@@ -65,5 +65,31 @@
  * @public
  */
 import templateOnly from '@ember/component/template-only';
+import type { ComponentLike } from '@glint/template';
 
-export default templateOnly();
+interface BsModalFooterSignature {
+  Args: {
+    buttonComponent?: ComponentLike<{
+      Element: Element;
+      Args: {
+        type?: string;
+        onClick?: () => void;
+      };
+      Blocks: {
+        default: [unknown];
+      };
+    }>;
+    closeTitle?: string;
+    onClose?: (event?: MouseEvent) => void;
+    onSubmit?: (event?: SubmitEvent) => void;
+    submitButtonType?: string;
+    submitDisabled?: boolean;
+    submitTitle?: string;
+  };
+  Blocks: {
+    default: [];
+  };
+  Element: HTMLDivElement;
+}
+
+export default templateOnly<BsModalFooterSignature>();
