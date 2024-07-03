@@ -16,6 +16,25 @@
 
 
 
+
+## v6.3.2 (2024-07-03)
+
+#### :bug: Bug Fix
+* [#2129](https://github.com/ember-bootstrap/ember-bootstrap/pull/2129) Styling of toggle button yielded by BsDropdown via arguments is ignored  ([@zfir](https://github.com/zfir))
+
+#### :memo: Documentation
+* [#2127](https://github.com/ember-bootstrap/ember-bootstrap/pull/2127) Fix syntax in BsForm API docs ([@bracke](https://github.com/bracke))
+* [#2125](https://github.com/ember-bootstrap/ember-bootstrap/pull/2125) invalid syntax in docs example for form component  ([@craigteegarden](https://github.com/craigteegarden))
+
+#### :house: Internal
+* [#2130](https://github.com/ember-bootstrap/ember-bootstrap/pull/2130) allow action helper and modifier deprecation for now ([@jelhan](https://github.com/jelhan))
+
+#### Committers: 4
+- Bent Bracke ([@bracke](https://github.com/bracke))
+- Craig Teegarden ([@craigteegarden](https://github.com/craigteegarden))
+- Jeldrik Hanschke ([@jelhan](https://github.com/jelhan))
+- Zafir Sk Heerah ([@zfir](https://github.com/zfir))
+
 ## v6.3.1 (2024-04-16)
 
 #### :bug: Bug Fix
