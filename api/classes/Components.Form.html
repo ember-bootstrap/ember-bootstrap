@@ -125,7 +125,7 @@ by <code>onSubmit</code> is fulfilled. It could be used to show a loading spinne
 <p>Additionaly <code>isSubmitted</code> and <code>isRejected</code> properties are yielded. <code>isSubmitted</code> is <code>true</code> if last submission was successful.
 <code>isRejected</code> is <code>true</code> if last submission was rejected due to validation errors or by an action bound to <code>onSubmit</code> event, returning a rejected promise.
 It could be used for visual feedback about last submission:</p>
-<pre class="code prettyprint"><code class="language-hbs">&lt;BsForm @onSubmit={{action 'save}} as |form|&gt;
+<pre class="code prettyprint"><code class="language-hbs">&lt;BsForm @onSubmit={{action "save"}} as |form|&gt;
   &lt;form.submitButton @type={{if form.isRejected "danger" "primary"}}&gt;
     Save
   &lt;/form.submitButton&gt;

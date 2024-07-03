@@ -62,7 +62,7 @@
 <p>The appropriate Bootstrap markup for the given <code>formLayout</code> and <code>controlType</code> is automatically generated to easily
 create forms without coding the default Bootstrap form markup by hand:</p>
 <pre class="code prettyprint"><code class="language-handlebars">&lt;BsForm @formLayout="horizontal" @model={{this}} @onSubmit={{action "submit"}} as |form|&gt;
-  &lt;form.element @controlType="email" @label="Email" @value={{this.email}}" /&gt;
+  &lt;form.element @controlType="email" @label="Email" @value={{this.email}} /&gt;
   &lt;form.element @controlType="password" @label="Password" @value={{this.password}} /&gt;
   &lt;form.element @controlType="checkbox" @label="Remember me" @value={{this.rememberMe}} /&gt;
   &lt;BsButton @defaultText="Submit" @type="primary" type="submit" /&gt;
