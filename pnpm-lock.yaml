@@ -195,8 +195,8 @@ importers:
         specifier: 3.2.0
         version: 3.2.0
       sass:
-        specifier: 1.71.1
-        version: 1.71.1
+        specifier: 1.77.6
+        version: 1.77.6
       sinon:
         specifier: 17.0.2
         version: 17.0.2
@@ -15043,8 +15043,8 @@ packages:
       walker: 1.0.8
     dev: true
 
-  /sass@1.71.1:
-    resolution: {integrity: sha512-wovtnV2PxzteLlfNzbgm1tFXPLoZILYAMJtvoXXkD7/+1uP41eKkIt1ypWq5/q2uT94qHjXehEYfmjKOvjL9sg==}
+  /sass@1.77.6:
+    resolution: {integrity: sha512-ByXE1oLD79GVq9Ht1PeHWCPMPB8XHpBuz1r85oByKHjZY6qV6rWnQovQzXJXuQ/XyE1Oj3iPk3lo28uzaRA2/Q==}
     engines: {node: '>=14.0.0'}
     hasBin: true
     dependencies:
