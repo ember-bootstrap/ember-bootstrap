@@ -192,8 +192,8 @@ importers:
         specifier: 2.21.0
         version: 2.21.0
       qunit-dom:
-        specifier: 3.0.0
-        version: 3.0.0
+        specifier: 3.2.0
+        version: 3.2.0
       sass:
         specifier: 1.71.1
         version: 1.71.1
@@ -622,8 +622,8 @@ importers:
         specifier: 2.21.0
         version: 2.21.0
       qunit-dom:
-        specifier: 3.0.0
-        version: 3.0.0
+        specifier: 3.2.0
+        version: 3.2.0
       resolve:
         specifier: 1.22.8
         version: 1.22.8
@@ -2020,7 +2020,7 @@ packages:
       '@simple-dom/interface': 1.4.0
       broccoli-debug: 0.6.5
       broccoli-funnel: 3.0.8
-      dom-element-descriptors: 0.5.0
+      dom-element-descriptors: 0.5.1
       ember-auto-import: 2.7.2(@glint/template@1.4.0)(webpack@5.90.3)
       ember-cli-babel: 7.26.11
       ember-cli-htmlbars: 6.3.0
@@ -6776,8 +6776,8 @@ packages:
       esutils: 2.0.3
     dev: true
 
-  /dom-element-descriptors@0.5.0:
-    resolution: {integrity: sha512-CVzntLid1oFVHTKdTp/Qu7Kz+wSm8uO30TSQyAJ6n4Dz09yTzVQn3S1oRhVhUubxdMuKs1DjDqt88pubHagbPw==}
+  /dom-element-descriptors@0.5.1:
+    resolution: {integrity: sha512-DLayMRQ+yJaziF4JJX1FMjwjdr7wdTr1y9XvZ+NfHELfOMcYDnCHneAYXAS4FT1gLILh4V0juMZohhH1N5FsoQ==}
     dev: true
 
   /domexception@2.0.1:
@@ -14351,8 +14351,10 @@ packages:
       rimraf: 2.7.1
       underscore.string: 3.3.6
 
-  /qunit-dom@3.0.0:
-    resolution: {integrity: sha512-rqGZ9ZgOvtOY+Ph2ElCJ4pRIHouMZmI3DWK35Xr3x3c17/gIwOHHyKAQk6XetqhqepS6p+oXvK6Bx1uZu5jJuw==}
+  /qunit-dom@3.2.0:
+    resolution: {integrity: sha512-VYFXbwod2sis16Nzgx5UrdCvjNUPYIAbTwEGv7hF1RfgJaVgG5ASVaQz9en0ZRvlybtql0LrVuAbleJU/57zQQ==}
+    dependencies:
+      dom-element-descriptors: 0.5.1
     dev: true
 
   /qunit@2.21.0:
