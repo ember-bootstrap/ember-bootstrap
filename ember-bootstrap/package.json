@@ -93,7 +93,7 @@
     "eslint-plugin-qunit": "8.1.1",
     "mocha": "10.6.0",
     "release-it": "17.4.1",
-    "typescript": "5.4.5"
+    "typescript": "5.5.3"
   },
   "peerDependencies": {
     "@glimmer/component": "^1.0.4",
