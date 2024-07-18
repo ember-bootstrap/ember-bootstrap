@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <title>Components.ModalHeaderClose - ember-bootstrap</title>
+  <title>Components.LinkComponent - ember-bootstrap</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="../assets/css/api.css">
   <script type="text/javascript" src="//use.typekit.net/dkq5epu.js"></script>
@@ -54,9 +54,15 @@
         <div id="docs-main">
           <div class="content">
 <div class="card">
-  <h1 class="card-header">Components.ModalHeaderClose <span class="badge badge-private small">private</span></h1>
+  <h1 class="card-header">Components.LinkComponent <span class="badge badge-private small">private</span></h1>
   <div class="card-body">
 
+<p>This is largely copied from Ember.LinkComponent. It is used as extending from Ember.LinkComponent has been deprecated.
+We need this to</p>
+<ul>
+<li>register ourselves to a parent component that needs to know <code>active</code> state due to Bootstrap markup requirements, see Nav/LinkTo</li>
+<li>continue supporting positional params until we can remove support</li>
+</ul>
 
 
   </div>
@@ -67,13 +73,13 @@
           Extends
         </dt>
         <dd class="col-sm-9">
-          Glimmer.Component
+          Component
         </dd>
         <dt class="col-sm-3">
           Defined in
         </dt>
         <dd class="col-sm-9">
-          <a href="../files/.._ember-bootstrap_addon_components_bs-modal_header_close.js.html#l1"><code>..&#x2F;ember-bootstrap&#x2F;addon&#x2F;components&#x2F;bs-modal&#x2F;header&#x2F;close.js:1</code></a>
+          <a href="../files/.._ember-bootstrap_addon_components_bs-link-to.ts.html#l27"><code>..&#x2F;ember-bootstrap&#x2F;addon&#x2F;components&#x2F;bs-link-to.ts:27</code></a>
         </dd>
 
     </dl>
@@ -119,7 +125,6 @@
     <ul class="nav nav-tabs card-header-tabs">
       <li class="nav-item active"><a class="nav-link" data-toggle="tab" href="#index">Index</a></li>
 
-        <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#events">Events</a></li>
     </ul>
   </div>
   <div class="card-body">
@@ -130,48 +135,11 @@
 
 
 
-          <div class="index-section events">
-            <h3>Events</h3>
-
-            <ul class="index-list events extends">
-                <li class="index-item event public">
-                  <a href="#" data-tabid="#events" data-anchor="#event_onClick" data-tablink="onClick">onClick</a>
-
-                </li>
-            </ul>
-          </div>
       </div>
 
 
 
 
-        <div id="events" class="tab-pane">
-            <div id="event_onClick" class="events item public">
-                <h3 class="name"><code>onClick</code></h3>
-                <span class="type"></span>
-            
-            
-                    <span class="flag public">public</span>
-            
-            
-            
-                <div class="meta">
-                            <p>
-                            Defined in
-                    <a href="../files/.._ember-bootstrap_addon_components_bs-modal_header_close.js.html#l9"><code>..&#x2F;ember-bootstrap&#x2F;addon&#x2F;components&#x2F;bs-modal&#x2F;header&#x2F;close.js:9</code></a>
-                    </p>
-            
-            
-                </div>
-            
-                <div class="description">
-                    
-                </div>
-            
-            
-            
-            </div>
-        </div>
     </div>
   </div>
 </div>

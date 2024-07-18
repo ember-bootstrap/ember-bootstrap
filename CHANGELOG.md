@@ -17,6 +17,15 @@
 
 
 
+
+## v6.3.3 (2024-07-18)
+
+#### :memo: Documentation
+* [#2135](https://github.com/ember-bootstrap/ember-bootstrap/pull/2135) Fix API page generation of TypeScript components ([@SanderKnauff](https://github.com/SanderKnauff))
+
+#### Committers: 1
+- Sander Knauff ([@SanderKnauff](https://github.com/SanderKnauff))
+
 ## v6.3.2 (2024-07-03)
 
 #### :bug: Bug Fix

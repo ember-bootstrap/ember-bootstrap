@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <title>Components.ModalHeaderClose - ember-bootstrap</title>
+  <title>Components.Spinner - ember-bootstrap</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="../assets/css/api.css">
   <script type="text/javascript" src="//use.typekit.net/dkq5epu.js"></script>
@@ -54,9 +54,23 @@
         <div id="docs-main">
           <div class="content">
 <div class="card">
-  <h1 class="card-header">Components.ModalHeaderClose <span class="badge badge-private small">private</span></h1>
+  <h1 class="card-header">Components.Spinner <span class="badge badge-public small">public</span></h1>
   <div class="card-body">
 
+<p>Implements a <a href="https://getbootstrap.com/docs/5.2/components/spinners/">Spinner element</a>.</p>
+<h3>Basic Usage</h3>
+<pre class="code prettyprint"><code class="language-hbs">&lt;BsSpinner/&gt;
+&lt;BsSpinner&gt;Loading...&lt;/BsSpinner&gt;
+</code></pre>
+<p>The (optional) component's block will render as visually invisible but accessible text for assistive technology like screen readers.</p>
+<h3>Advanced Usage</h3>
+<pre class="code prettyprint"><code class="language-hbs">&lt;BsSpinner @spinnerType="grow" @size="sm" @type="warning"/&gt;
+</code></pre>
+<h3>Usage with <code>BsButton</code></h3>
+<pre class="code prettyprint"><code class="language-hbs">&lt;BsButton @onClick= as |button|&gt;
+  Download
+&lt;/BsButton&gt;
+</code></pre>
 
 
   </div>
@@ -73,7 +87,7 @@
           Defined in
         </dt>
         <dd class="col-sm-9">
-          <a href="../files/.._ember-bootstrap_addon_components_bs-modal_header_close.js.html#l1"><code>..&#x2F;ember-bootstrap&#x2F;addon&#x2F;components&#x2F;bs-modal&#x2F;header&#x2F;close.js:1</code></a>
+          <a href="../files/.._ember-bootstrap_addon_components_bs-spinner.ts.html#l16"><code>..&#x2F;ember-bootstrap&#x2F;addon&#x2F;components&#x2F;bs-spinner.ts:16</code></a>
         </dd>
 
     </dl>
@@ -119,7 +133,7 @@
     <ul class="nav nav-tabs card-header-tabs">
       <li class="nav-item active"><a class="nav-link" data-toggle="tab" href="#index">Index</a></li>
 
-        <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#events">Events</a></li>
+        <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#properties">Properties</a></li>
     </ul>
   </div>
   <div class="card-body">
@@ -128,50 +142,127 @@
         <h2 class="off-left">Item Index</h2>
 
 
+          <div class="index-section properties">
+            <h3>Properties</h3>
 
+            <ul class="index-list properties extends">
+                <li class="index-item property public">
+                  <a href="#" data-tabid="#properties" data-anchor="#property_size"
+                     data-tablink="size">size</a>
 
-          <div class="index-section events">
-            <h3>Events</h3>
+                </li>
+                <li class="index-item property public">
+                  <a href="#" data-tabid="#properties" data-anchor="#property_spinnerType"
+                     data-tablink="spinnerType">spinnerType</a>
 
-            <ul class="index-list events extends">
-                <li class="index-item event public">
-                  <a href="#" data-tabid="#events" data-anchor="#event_onClick" data-tablink="onClick">onClick</a>
+                </li>
+                <li class="index-item property public">
+                  <a href="#" data-tabid="#properties" data-anchor="#property_type"
+                     data-tablink="type">type</a>
 
                 </li>
             </ul>
           </div>
+
+
       </div>
 
 
-
-
-        <div id="events" class="tab-pane">
-            <div id="event_onClick" class="events item public">
-                <h3 class="name"><code>onClick</code></h3>
-                <span class="type"></span>
-            
-            
-                    <span class="flag public">public</span>
+        <div id="properties" class="tab-pane">
+            <div id="property_size"
+                 class="property item public">
+              <h3 class="name">size
+                <span class="badge badge-secondary small">String</span>
+                  <span class="badge badge-public small">public</span>
             
             
             
-                <div class="meta">
-                            <p>
-                            Defined in
-                    <a href="../files/.._ember-bootstrap_addon_components_bs-modal_header_close.js.html#l9"><code>..&#x2F;ember-bootstrap&#x2F;addon&#x2F;components&#x2F;bs-modal&#x2F;header&#x2F;close.js:9</code></a>
-                    </p>
+            
+              </h3>
+            
+              <div class="meta">
+                  <p>
+                      Defined in
+                  <a href="../files/.._ember-bootstrap_addon_components_bs-spinner.ts.html#l51"><code>..&#x2F;ember-bootstrap&#x2F;addon&#x2F;components&#x2F;bs-spinner.ts:51</code></a>
+              </p>
             
             
-                </div>
+              </div>
             
-                <div class="description">
-                    
-                </div>
+              <div class="description">
+                <p>Property for size styling, set to 'sm'</p>
+            <p>Also see the <a href="https://getbootstrap.com/docs/5.2/components/spinners/#size">Bootstrap docs</a></p>
+            
+              </div>
+            
+            
+            
+            
+            </div>
+            <div id="property_spinnerType"
+                 class="property item public">
+              <h3 class="name">spinnerType
+                <span class="badge badge-secondary small">string</span>
+                  <span class="badge badge-public small">public</span>
+            
+            
+            
+            
+              </h3>
+            
+              <div class="meta">
+                  <p><strong>Default:</strong> &#x27;border&#x27;</p>
+                  <p>
+                      Defined in
+                  <a href="../files/.._ember-bootstrap_addon_components_bs-spinner.ts.html#l72"><code>..&#x2F;ember-bootstrap&#x2F;addon&#x2F;components&#x2F;bs-spinner.ts:72</code></a>
+              </p>
+            
+            
+              </div>
+            
+              <div class="description">
+                <p>Spinner type - 'border' or 'grow'</p>
+            
+              </div>
+            
+            
+            
+            
+            </div>
+            <div id="property_type"
+                 class="property item public">
+              <h3 class="name">type
+                <span class="badge badge-secondary small">String</span>
+                  <span class="badge badge-public small">public</span>
+            
+            
+            
+            
+              </h3>
+            
+              <div class="meta">
+                  <p><strong>Default:</strong> &#x27;primary&#x27;</p>
+                  <p>
+                      Defined in
+                  <a href="../files/.._ember-bootstrap_addon_components_bs-spinner.ts.html#l61"><code>..&#x2F;ember-bootstrap&#x2F;addon&#x2F;components&#x2F;bs-spinner.ts:61</code></a>
+              </p>
+            
+            
+              </div>
+            
+              <div class="description">
+                <p>Property for type styling</p>
+            <p>For the available types see the <a href="https://getbootstrap.com/docs/5.2/components/spinners/#colors">Bootstrap docs</a></p>
+            
+              </div>
+            
             
             
             
             </div>
         </div>
+
+
     </div>
   </div>
 </div>

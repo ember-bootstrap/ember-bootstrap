@@ -2,7 +2,7 @@
     "project": {
         "name": "ember-bootstrap",
         "description": "Twitter Bootstrap components for Ember.js",
-        "version": "v6.3.2"
+        "version": "v6.3.3"
     },
     "files": {
         "../ember-bootstrap/addon/components/bs-accordion/item/body.js": {
@@ -423,11 +423,33 @@
                 "Components": 1
             }
         },
+        "../ember-bootstrap/addon/components/bs-button.ts": {
+            "name": "../ember-bootstrap/addon/components/bs-button.ts",
+            "modules": {},
+            "classes": {
+                "Components.Button": 1
+            },
+            "fors": {},
+            "namespaces": {
+                "Components": 1
+            }
+        },
         "../ember-bootstrap/addon/components/bs-carousel.js": {
             "name": "../ember-bootstrap/addon/components/bs-carousel.js",
             "modules": {},
             "classes": {
                 "Components.Carousel": 1
+            },
+            "fors": {},
+            "namespaces": {
+                "Components": 1
+            }
+        },
+        "../ember-bootstrap/addon/components/bs-collapse.ts": {
+            "name": "../ember-bootstrap/addon/components/bs-collapse.ts",
+            "modules": {},
+            "classes": {
+                "Components.Collapse": 1
             },
             "fors": {},
             "namespaces": {
@@ -461,6 +483,17 @@
             "modules": {},
             "classes": {
                 "Components.Form": 1
+            },
+            "fors": {},
+            "namespaces": {
+                "Components": 1
+            }
+        },
+        "../ember-bootstrap/addon/components/bs-link-to.ts": {
+            "name": "../ember-bootstrap/addon/components/bs-link-to.ts",
+            "modules": {},
+            "classes": {
+                "Components.LinkComponent": 1
             },
             "fors": {},
             "namespaces": {
@@ -538,6 +571,17 @@
             "modules": {},
             "classes": {
                 "Components.Progress": 1
+            },
+            "fors": {},
+            "namespaces": {
+                "Components": 1
+            }
+        },
+        "../ember-bootstrap/addon/components/bs-spinner.ts": {
+            "name": "../ember-bootstrap/addon/components/bs-spinner.ts",
+            "modules": {},
+            "classes": {
+                "Components.Spinner": 1
             },
             "fors": {},
             "namespaces": {
@@ -1168,6 +1212,22 @@
             "access": "public",
             "tagname": ""
         },
+        "Components.Button": {
+            "name": "Components.Button",
+            "shortname": "Components.Button",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "namespace": "Components",
+            "file": "../ember-bootstrap/addon/components/bs-button.ts",
+            "line": 58,
+            "description": "Implements a HTML button element, with support for all [Bootstrap button CSS styles](http://getbootstrap.com/css/#buttons)\nas well as advanced functionality such as button states.\n\n### Basic Usage\n\n```hbs\n<BsButton @type=\"primary\" @icon=\"glyphicon glyphicon-download\">\n  Downloads\n</BsButton>\n```\n\n### Actions\n\nUse the `onClick` property of the component to send an action to your controller. It will receive the button's value\n(see the `value` property) as an argument.\n\n```hbs\n<BsButton @type=\"primary\" @icon=\"glyphicon glyphicon-download\" @onClick=(action \"download\")>\n  Downloads\n</BsButton>\n```\n\n### Promise support for automatic state change\n\nWhen returning a Promise for any asynchronous operation from the `onClick` closure action the button will\nmanage an internal state (\"default\" > \"pending\" > \"fulfilled\"/\"rejected\") automatically.\n\nThe button is disabled by default if it's in pending state. You could override this behavior by passing\nthe `disabled` HTML attribute or by setting `@preventConcurrency` to false.\n\n```hbs\n<BsButton\n  disabled={{false}}\n/>\n```\n\n```hbs\n<BsButton\n  @preventConcurrency={{false}}\n/>\n```\n\nThe label could be changed automatically according to the state of the promise with `@defaultText`,\n`@pendingText`, `@fulfilledText` and `@rejectedText` arguments:\n\n```hbs\n<BsButton\n  @type=\"primary\"\n  @icon=\"glyphicon glyphicon-download\"\n  @defaultText=\"Download\"\n  @pendingText=\"Loading...\"\n  @fulfilledText=\"Completed!\"\n  @rejectedText=\"Oups!?\"\n  @onClick={{this.download}}\n/>\n```\n\n```js\n// controller.js\nimport { Controller } from '@ember/controller';\nimport { action } from '@ember/object';\n\nexport default class MyController extends Controller {\n  @action\n  download(value) {\n    return new Promise(...);\n  }\n});\n```\n\nFor further customization `isPending`, `isFulfilled`, `isRejected` and `isSettled` properties are yielded:\n\n```hbs\n<BsButton @onClick=(action \"download\") as |button|>\n  Download\n  {{#if button.isPending}}\n    <span class=\"loading-spinner\"></span>\n  {{/if}}\n</BsButton>\n```\n\nYou can `reset` the state represented by these properties and used for button's text by setting `reset` property to\n`true`.\n\n*Note that only invoking the component in a template as shown above is considered part of its public API. Extending from it (subclassing) is generally not supported, and may break at any time.*",
+            "extends": "Glimmer.Component",
+            "access": "public",
+            "tagname": ""
+        },
         "Components.Carousel": {
             "name": "Components.Carousel",
             "shortname": "Components.Carousel",
@@ -1181,6 +1241,22 @@
             "line": 8,
             "description": "Ember implementation of Bootstrap's Carousel. Supports all original features but API is partially different:\n\n| Description | Original | Component |\n| ------ | ------ | ------ |\n| Autoplays after first user event or on page load. | ride='carousel'\\|false | autoPlay=false\\|true |\n| Disable automatic cycle. | interval=false | interval=0 |\n| If first slide should follow last slide on \"previous\" event, the opposite will also be true for \"next\" event. | wrap=false\\|true | wrap=false\\|true |\n| Jumps into specific slide index | data-slide-to=n | index=n |\n| Keyboard events. | keyboard=false\\|true | keyboard=false\\|true |\n| Left-to-right or right-to-left sliding. | N/A |  ltr=false\\|true |\n| Pause current cycle on mouse enter. | pause='hover'\\|null | pauseOnMouseEnter=false\\|true |\n| Show or hide controls  | Tag manipulation. | showControls=false\\|true |\n| Show or hide indicators  | Tag manipulation. | showIndicators=false\\|true |\n| Waiting time of slides in an automatic cycle. | interval=n | interval=n |\n\nDefault settings are the same as the original, so you don't have to worry about changing parameters.\n\n```hbs\n<BsCarousel as |car|>\n  <car.slide>\n    <img alt=\"First slide\" src=\"slide1.jpg\">\n  </car.slide>\n  <car.slide>\n    <img alt=\"Second slide\" src=\"slide2.jpg\">\n  </car.slide>\n  <car.slide>\n    <img alt=\"Third slide\" src=\"slide3.jpg\">\n  </car.slide>\n</BsCarousel>\n```\n\nTo better understand the whole documentation, you should be aware of the following operations:\n\n| Operation | Description |\n| ------ | ------ |\n| Transition | Swaps two slides. |\n| Interval | Waiting time after a transition. |\n| Presentation | Represents a single transition, or a single interval, or the union of both. |\n| Cycle | Presents all slides until it reaches first or last slide. |\n| Wrap | wrap slides, cycles without stopping at first or last slide. |\n\n*Note that only invoking the component in a template as shown above is considered part of its public API. Extending from it (subclassing) is generally not supported, and may break at any time.*",
             "extends": "Component",
+            "access": "public",
+            "tagname": ""
+        },
+        "Components.Collapse": {
+            "name": "Components.Collapse",
+            "shortname": "Components.Collapse",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "namespace": "Components",
+            "file": "../ember-bootstrap/addon/components/bs-collapse.ts",
+            "line": 30,
+            "description": "An Ember component that mimics the behaviour of [Bootstrap's collapse.js plugin](http://getbootstrap.com/javascript/#collapse)\n\n### Usage\n\n```hbs\n<BsCollapse @collapsed={{this.collapsed}}>\n  <div class=\"well\">\n    <h2>Collapse</h2>\n    <p>This is collapsible content</p>\n  </div>\n</BsCollapse>\n```\n\n*Note that only invoking the component in a template as shown above is considered part of its public API. Extending from it (subclassing) is generally not supported, and may break at any time.*",
+            "extends": "Glimmer.Component",
             "access": "public",
             "tagname": ""
         },
@@ -1229,6 +1305,22 @@
             "description": "Render a form with the appropriate Bootstrap layout class (see `formLayout`).\nAllows setting a `model` that nested `Components.FormElement`s can access, and that can provide form validation (see below)\n\nYou can use whatever markup you like within the form.\nHowever, to benefit from features such as automatic form markup, validations and validation markup, use `Components.FormElement`\nas nested components. See below for an example.\n\n### Submitting the form\n\nThe form yields a `submitButton` component, which is a preconfigured `<BsButton>` with `@type=\"primary\"` and `type=\"submit\"`.\nThe button is disabled while a form submission is pending. Additionally, the button state is bound to the form submission state.\n\n```hbs\n<BsForm as |form|>\n  <form.submitButton>Submit</form.submitButton>\n</BsForm>\n```\n\nWhen the form is submitted (e.g. by clicking the submit button), the event will be intercepted and the `onSubmit` action\nwill be sent to the controller or parent component.\nIn case the form supports validation (see \"Form validation\" below), the `onBefore` action is called (which allows you to\ndo e.g. model data normalization), then the available validation rules are evaluated, and if those fail, the `onInvalid`\naction is sent instead of `onSubmit`.\n\n### Use with Components.FormElement\n\nWhen using `Components.FormElement`s with their `property` set to property names of the form's validation enabled\n`model`, you gain some additional powerful features:\n* the appropriate Bootstrap markup for the given `formLayout` and the form element's `controlType` is automatically generated\n* markup for validation states and error messages is generated based on the model's validation (if available), when submitting the form\nwith an invalid validation, or when focusing out of invalid inputs\n\n```handlebars\n<BsForm @formLayout=\"horizontal\" @model={{this}} @onSubmit={{action \"submit\"}} as |form|>\n  <form.element @controlType=\"email\" @label=\"Email\" @placeholder=\"Email\" @property=\"email\" />\n  <form.element @controlType=\"password\" @label=\"Password\" @placeholder=\"Password\" @property=\"password\" />\n  <form.element @controlType=\"checkbox\" @label=\"Remember me\" @property=\"rememberMe\" />\n  <form.submitButton>Submit</form.submitButton>\n</BsForm>\n```\n\nSee the [Components.FormElement](Components.FormElement.html) API docs for further information.\n\n### Form validation\n\nAll version of ember-bootstrap beginning from 0.7.0 do not come with built-in support for validation engines anymore.\nInstead, support is added usually by additional Ember addons, for example:\n\n* [ember-bootstrap-validations](https://github.com/kaliber5/ember-bootstrap-validations): adds support for [ember-validations](https://github.com/DockYard/ember-validations)\n* [ember-bootstrap-cp-validations](https://github.com/offirgolan/ember-bootstrap-cp-validations): adds support for [ember-cp-validations](https://github.com/offirgolan/ember-cp-validations)\n* [ember-bootstrap-changeset-validations](https://github.com/kaliber5/ember-bootstrap-changeset-validations): adds support for [ember-changeset](https://github.com/poteto/ember-changeset)\n\nTo add your own validation support, you have to:\n\n* extend this component, setting `hasValidator` to true if validations are available (by means of a computed property for example), and implementing the `validate` method\n* extend the [Components.FormElement](Components.FormElement.html) component and implement the `setupValidations` hook or simply override the `errors` property to add the validation error messages to be displayed\n\nWhen validation fails, the appropriate Bootstrap markup is added automatically, i.e. the error classes are applied and\nthe validation messages are shown for each form element. In case the validation library supports it, also warning messages\nare shown. See the [Components.FormElement](Components.FormElement.html) documentation for further details.\n\nSee the above-mentioned addons for examples.\n\nThe `novalidate` HTML attribute is set by default for forms that have validation.\n\n### Submission state\n\nA `isSubmitting` property is yielded, which is `true` after submit has been triggered and before the Promise returned\nby `onSubmit` is fulfilled. It could be used to show a loading spinner instead of the form while it's submitting for example:\n\n```hbs\n<BsForm @onSubmit={{action \"save\"}} as |form|>\n  {{#if form.isSubmitting}}\n    <span class=\"spinner-border spinner-border-sm\" role=\"status\" aria-hidden=\"true\"></span>\n    Logging in...\n  {{else}}\n    <form.element @property=\"email\" @label=\"email\" />\n    <form.element @property=\"password\" @label=\"password\" @controlType=\"password\" />\n    <form.submitButton>Login</form.submitButton>\n  {{/if}}\n</BsForm>\n```\n\nAdditionaly `isSubmitted` and `isRejected` properties are yielded. `isSubmitted` is `true` if last submission was successful.\n`isRejected` is `true` if last submission was rejected due to validation errors or by an action bound to `onSubmit` event, returning a rejected promise.\nIt could be used for visual feedback about last submission:\n\n```hbs\n<BsForm @onSubmit={{action \"save\"}} as |form|>\n  <form.submitButton @type={{if form.isRejected \"danger\" \"primary\"}}>\n    Save\n  </form.submitButton>\n</BsForm>\n```\n\nThe submission state is reset as soon as any value of a form element changes. Additionally, it can be reset programmatically by\ncalling the yielded `resetSubmissionState` function.\n\n*Note that only invoking the component in a template as shown above is considered part of its public API. Extending from it (subclassing) is generally not supported, and may break at any time.*",
             "extends": "Ember.Component",
             "access": "public",
+            "tagname": ""
+        },
+        "Components.LinkComponent": {
+            "name": "Components.LinkComponent",
+            "shortname": "Components.LinkComponent",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "namespace": "Components",
+            "file": "../ember-bootstrap/addon/components/bs-link-to.ts",
+            "line": 27,
+            "description": "This is largely copied from Ember.LinkComponent. It is used as extending from Ember.LinkComponent has been deprecated.\nWe need this to\n* register ourselves to a parent component that needs to know `active` state due to Bootstrap markup requirements, see Nav/LinkTo\n* continue supporting positional params until we can remove support",
+            "extends": "Component",
+            "access": "private",
             "tagname": ""
         },
         "Components.ListGroup": {
@@ -1339,6 +1431,22 @@
             "line": 3,
             "description": "Component to display a Bootstrap progress bar, see http://getbootstrap.com/components/#progress.\n\n### Usage\n\nThe component yields a [Components.ProgressBar](Components.ProgressBar.html) component that represents a single bar.\nUse the `value` property to control the progress bar's width. To apply the different styling options supplied by\nBootstrap, use the appropriate properties like `type`, `showLabel`, `striped` or `animate`.\n\n```hbs\n<BsProgress as |pg| >\n  <pg.bar @value={{this.progressValue}} @minValue={{0}} @maxValue={{10}} @showLabel={{true}} @type=\"danger\" aria-label=\"Loading\" />\n</BsProgress>\n```\n\n> Don't forget to add a `aria-label` attribute to the progress bar for accessibility!\n\n### Stacked\n\nYou can place multiple progress bar components in a single progress component to\ncreate a stack of progress bars as seen in http://getbootstrap.com/components/#progress-stacked.\n\n```hbs\n<BsProgress as |pg| >\n  <pg.bar @value={{this.progressValue1}} @type=\"success\" />\n  <pg.bar @value={{this.progressValue2}} @type=\"warning\" />\n  <pg.bar @value={{this.progressValue3}} @type=\"danger\" />\n</BsProgress>\n```\n\n*Note that only invoking the component in a template as shown above is considered part of its public API. Extending from it (subclassing) is generally not supported, and may break at any time.*",
             "extends": "Ember.Component",
+            "access": "public",
+            "tagname": ""
+        },
+        "Components.Spinner": {
+            "name": "Components.Spinner",
+            "shortname": "Components.Spinner",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "namespace": "Components",
+            "file": "../ember-bootstrap/addon/components/bs-spinner.ts",
+            "line": 16,
+            "description": "Implements a [Spinner element](https://getbootstrap.com/docs/5.2/components/spinners/).\n\n### Basic Usage\n\n```hbs\n<BsSpinner/>\n<BsSpinner>Loading...</BsSpinner>\n```\n\nThe (optional) component's block will render as visually invisible but accessible text for assistive technology like screen readers.\n\n### Advanced Usage\n\n```hbs\n<BsSpinner @spinnerType=\"grow\" @size=\"sm\" @type=\"warning\"/>\n```\n\n### Usage with `BsButton`\n\n```hbs\n<BsButton @onClick={{this.download}} as |button|>\n  Download\n  {{#if button.isPending}}\n    <BsSpinner @size=\"sm\"/>\n  {{/if}}\n</BsButton>\n```",
+            "extends": "Glimmer.Component",
             "access": "public",
             "tagname": ""
         },
@@ -3607,6 +3715,338 @@
             "namespace": "Components"
         },
         {
+            "file": "../ember-bootstrap/addon/components/bs-button.ts",
+            "line": 31,
+            "internal": "",
+            "class": "Components.Button",
+            "namespace": "Components"
+        },
+        {
+            "file": "../ember-bootstrap/addon/components/bs-button.ts",
+            "line": 36,
+            "internal": "",
+            "class": "Components.Button",
+            "namespace": "Components"
+        },
+        {
+            "file": "../ember-bootstrap/addon/components/bs-button.ts",
+            "line": 41,
+            "internal": "",
+            "class": "Components.Button",
+            "namespace": "Components"
+        },
+        {
+            "file": "../ember-bootstrap/addon/components/bs-button.ts",
+            "line": 151,
+            "description": "Default label of the button. Not need if used as a block component",
+            "itemtype": "property",
+            "name": "defaultText",
+            "type": "string",
+            "access": "public",
+            "tagname": "",
+            "class": "Components.Button",
+            "namespace": "Components"
+        },
+        {
+            "file": "../ember-bootstrap/addon/components/bs-button.ts",
+            "line": 159,
+            "description": "Label of the button used if `onClick` event has returned a Promise which is pending.\nNot considered if used as a block component.",
+            "itemtype": "property",
+            "name": "pendingText",
+            "type": "string",
+            "access": "public",
+            "tagname": "",
+            "class": "Components.Button",
+            "namespace": "Components"
+        },
+        {
+            "file": "../ember-bootstrap/addon/components/bs-button.ts",
+            "line": 168,
+            "description": "Label of the button used if `onClick` event has returned a Promise which succeeded.\nNot considered if used as a block component.",
+            "itemtype": "property",
+            "name": "fulfilledText",
+            "type": "string",
+            "access": "public",
+            "tagname": "",
+            "class": "Components.Button",
+            "namespace": "Components"
+        },
+        {
+            "file": "../ember-bootstrap/addon/components/bs-button.ts",
+            "line": 177,
+            "description": "Label of the button used if `onClick` event has returned a Promise which failed.\nNot considered if used as a block component.",
+            "itemtype": "property",
+            "name": "rejectedText",
+            "type": "string",
+            "access": "public",
+            "tagname": "",
+            "class": "Components.Button",
+            "namespace": "Components"
+        },
+        {
+            "file": "../ember-bootstrap/addon/components/bs-button.ts",
+            "line": 186,
+            "description": "Property to disable the button only used in internal communication\nbetween Ember Boostrap components.",
+            "itemtype": "property",
+            "name": "_disabled",
+            "type": "?boolean",
+            "default": "null",
+            "access": "private",
+            "tagname": "",
+            "class": "Components.Button",
+            "namespace": "Components"
+        },
+        {
+            "file": "../ember-bootstrap/addon/components/bs-button.ts",
+            "line": 203,
+            "description": "Set the 'active' class to apply active/pressed CSS styling",
+            "itemtype": "property",
+            "name": "active",
+            "type": "boolean",
+            "default": "false",
+            "access": "public",
+            "tagname": "",
+            "class": "Components.Button",
+            "namespace": "Components"
+        },
+        {
+            "file": "../ember-bootstrap/addon/components/bs-button.ts",
+            "line": 212,
+            "description": "Property for block level buttons (BS3 and BS4 only!)\n\nSee the [Bootstrap docs](http://getbootstrap.com/css/#buttons-sizes)",
+            "itemtype": "property",
+            "name": "block",
+            "type": "boolean",
+            "default": "false",
+            "access": "public",
+            "tagname": "",
+            "class": "Components.Button",
+            "namespace": "Components"
+        },
+        {
+            "file": "../ember-bootstrap/addon/components/bs-button.ts",
+            "line": 223,
+            "description": "A click event on a button will not bubble up the DOM tree if it has an `onClick` action handler. Set to true to\nenable the event to bubble",
+            "itemtype": "property",
+            "name": "bubble",
+            "type": "boolean",
+            "default": "false",
+            "access": "public",
+            "tagname": "",
+            "class": "Components.Button",
+            "namespace": "Components"
+        },
+        {
+            "file": "../ember-bootstrap/addon/components/bs-button.ts",
+            "line": 233,
+            "description": "If button is active and this is set, the icon property will match this property",
+            "itemtype": "property",
+            "name": "iconActive",
+            "type": "String",
+            "access": "public",
+            "tagname": "",
+            "class": "Components.Button",
+            "namespace": "Components"
+        },
+        {
+            "file": "../ember-bootstrap/addon/components/bs-button.ts",
+            "line": 241,
+            "description": "If button is inactive and this is set, the icon property will match this property",
+            "itemtype": "property",
+            "name": "iconInactive",
+            "type": "String",
+            "access": "public",
+            "tagname": "",
+            "class": "Components.Button",
+            "namespace": "Components"
+        },
+        {
+            "file": "../ember-bootstrap/addon/components/bs-button.ts",
+            "line": 249,
+            "description": "Class(es) (e.g. glyphicons or font awesome) to use as a button icon\nThis will render a <i class=\"{{icon}}\"></i> element in front of the button's label",
+            "itemtype": "property",
+            "name": "icon",
+            "type": "String",
+            "access": "public",
+            "tagname": "",
+            "class": "Components.Button",
+            "namespace": "Components"
+        },
+        {
+            "file": "../ember-bootstrap/addon/components/bs-button.ts",
+            "line": 264,
+            "description": "Supply a value that will be associated with this button. This will be sent\nas a parameter of the default action triggered when clicking the button",
+            "itemtype": "property",
+            "name": "value",
+            "type": "any",
+            "access": "public",
+            "tagname": "",
+            "class": "Components.Button",
+            "namespace": "Components"
+        },
+        {
+            "file": "../ember-bootstrap/addon/components/bs-button.ts",
+            "line": 273,
+            "description": "Controls if `onClick` action is fired concurrently. If `true` clicking button multiple times will not trigger\n`onClick` action if a Promise returned by previous click is not settled yet.\n\nThis does not affect event bubbling.",
+            "itemtype": "property",
+            "name": "preventConcurrency",
+            "type": "Boolean",
+            "default": "true",
+            "access": "public",
+            "tagname": "",
+            "class": "Components.Button",
+            "namespace": "Components"
+        },
+        {
+            "file": "../ember-bootstrap/addon/components/bs-button.ts",
+            "line": 285,
+            "description": "State of the button. The button's label (if not used as a block component) will be set to the\n`<state>Text` property.\nThis property will automatically be set when using a click action that supplies the callback with a promise.\nPossible values are: \"default\" > \"pending\" > \"fulfilled\" / \"rejected\".\nIt could be resetted by `reset` property.",
+            "itemtype": "property",
+            "name": "state",
+            "type": "String",
+            "default": "'default'",
+            "access": "private",
+            "tagname": "",
+            "class": "Components.Button",
+            "namespace": "Components"
+        },
+        {
+            "file": "../ember-bootstrap/addon/components/bs-button.ts",
+            "line": 305,
+            "description": "Promise returned by `onClick` event is pending.",
+            "itemtype": "property",
+            "name": "isPending",
+            "type": "Boolean",
+            "access": "private",
+            "tagname": "",
+            "class": "Components.Button",
+            "namespace": "Components"
+        },
+        {
+            "file": "../ember-bootstrap/addon/components/bs-button.ts",
+            "line": 316,
+            "description": "Promise returned by `onClick` event has been succeeded.",
+            "itemtype": "property",
+            "name": "isFulfilled",
+            "type": "Boolean",
+            "access": "private",
+            "tagname": "",
+            "class": "Components.Button",
+            "namespace": "Components"
+        },
+        {
+            "file": "../ember-bootstrap/addon/components/bs-button.ts",
+            "line": 327,
+            "description": "Promise returned by `onClick` event has been rejected.",
+            "itemtype": "property",
+            "name": "isRejected",
+            "type": "Boolean",
+            "access": "private",
+            "tagname": "",
+            "class": "Components.Button",
+            "namespace": "Components"
+        },
+        {
+            "file": "../ember-bootstrap/addon/components/bs-button.ts",
+            "line": 338,
+            "description": "Promise returned by `onClick` event has been succeeded or rejected.",
+            "itemtype": "property",
+            "name": "isSettled",
+            "type": "Boolean",
+            "access": "private",
+            "tagname": "",
+            "class": "Components.Button",
+            "namespace": "Components"
+        },
+        {
+            "file": "../ember-bootstrap/addon/components/bs-button.ts",
+            "line": 349,
+            "description": "Set this to `true` to reset the `state`. A typical use case is to bind this attribute with ember-data isDirty flag.\n\nThe old value is not taken into consideration. Setting a `true` value to `true` again will also reset `state`.\nIn that case it's even to notify the observer system that the property has changed by calling\n[`notifyPropertyChange()`](https://www.emberjs.com/api/ember/3.2/classes/EmberObject/methods/notifyPropertyChange?anchor=notifyPropertyChange).",
+            "itemtype": "property",
+            "name": "reset",
+            "type": "boolean",
+            "access": "public",
+            "tagname": "",
+            "class": "Components.Button",
+            "namespace": "Components"
+        },
+        {
+            "file": "../ember-bootstrap/addon/components/bs-button.ts",
+            "line": 361,
+            "description": "Property for size styling, set to 'lg', 'sm' or 'xs'\n\nAlso see the [Bootstrap docs](https://getbootstrap.com/docs/4.3/components/buttons/#sizes)",
+            "itemtype": "property",
+            "name": "size",
+            "type": "String",
+            "access": "public",
+            "tagname": "",
+            "class": "Components.Button",
+            "namespace": "Components"
+        },
+        {
+            "file": "../ember-bootstrap/addon/components/bs-button.ts",
+            "line": 371,
+            "description": "Property for type styling\n\nFor the available types see the [Bootstrap docs](https://getbootstrap.com/docs/4.3/components/buttons/)",
+            "itemtype": "property",
+            "name": "type",
+            "type": "String",
+            "default": "'secondary'",
+            "access": "public",
+            "tagname": "",
+            "class": "Components.Button",
+            "namespace": "Components"
+        },
+        {
+            "file": "../ember-bootstrap/addon/components/bs-button.ts",
+            "line": 382,
+            "description": "Property to create outline buttons (BS4+ only)",
+            "itemtype": "property",
+            "name": "outline",
+            "type": "boolean",
+            "default": "false",
+            "access": "public",
+            "tagname": "",
+            "class": "Components.Button",
+            "namespace": "Components"
+        },
+        {
+            "file": "../ember-bootstrap/addon/components/bs-button.ts",
+            "line": 391,
+            "description": "When clicking the button this action is called with the value of the button (that is the value of the \"value\" property).\n\nReturn a promise object, and the buttons state will automatically set to \"pending\", \"resolved\" and/or \"rejected\".\nThis could be used to automatically set the button's text depending on promise state (`defaultText`, `pendingText`,\n`fulfilledText`, `rejectedText`) and for further customization using the yielded `isPending`, `isFulfilled`,\n`isRejected` properties.\n\nThe click event will not bubble up, unless you set `bubble` to true.",
+            "itemtype": "event",
+            "name": "onClick",
+            "params": [
+                {
+                    "name": "value",
+                    "description": "",
+                    "type": "*"
+                }
+            ],
+            "access": "public",
+            "tagname": "",
+            "class": "Components.Button",
+            "namespace": "Components"
+        },
+        {
+            "file": "../ember-bootstrap/addon/components/bs-button.ts",
+            "line": 406,
+            "description": "This will reset the state property to 'default', and with that the button's label to defaultText",
+            "itemtype": "method",
+            "name": "resetState",
+            "access": "private",
+            "tagname": "",
+            "class": "Components.Button",
+            "namespace": "Components"
+        },
+        {
+            "file": "../ember-bootstrap/addon/components/bs-button.ts",
+            "line": 421,
+            "itemtype": "method",
+            "name": "click",
+            "access": "private",
+            "tagname": "",
+            "class": "Components.Button",
+            "namespace": "Components"
+        },
+        {
             "file": "../ember-bootstrap/addon/components/bs-carousel.js",
             "line": 60,
             "itemtype": "property",
@@ -4112,6 +4552,212 @@
             "access": "private",
             "tagname": "",
             "class": "Components.Carousel",
+            "namespace": "Components"
+        },
+        {
+            "file": "../ember-bootstrap/addon/components/bs-collapse.ts",
+            "line": 52,
+            "itemtype": "property",
+            "name": "_element",
+            "type": "null | HTMLElement",
+            "access": "private",
+            "tagname": "",
+            "class": "Components.Collapse",
+            "namespace": "Components"
+        },
+        {
+            "file": "../ember-bootstrap/addon/components/bs-collapse.ts",
+            "line": 59,
+            "description": "Collapsed/expanded state",
+            "itemtype": "property",
+            "name": "collapsed",
+            "type": "boolean",
+            "default": "true",
+            "access": "public",
+            "tagname": "",
+            "class": "Components.Collapse",
+            "namespace": "Components"
+        },
+        {
+            "file": "../ember-bootstrap/addon/components/bs-collapse.ts",
+            "line": 70,
+            "description": "True if this item is expanded",
+            "itemtype": "property",
+            "name": "active",
+            "access": "private",
+            "tagname": "",
+            "class": "Components.Collapse",
+            "namespace": "Components"
+        },
+        {
+            "file": "../ember-bootstrap/addon/components/bs-collapse.ts",
+            "line": 86,
+            "description": "true if the component is currently transitioning",
+            "itemtype": "property",
+            "name": "transitioning",
+            "type": "boolean",
+            "access": "private",
+            "tagname": "",
+            "class": "Components.Collapse",
+            "namespace": "Components"
+        },
+        {
+            "file": "../ember-bootstrap/addon/components/bs-collapse.ts",
+            "line": 96,
+            "description": "The size of the element when collapsed. Defaults to 0.",
+            "itemtype": "property",
+            "name": "collapsedSize",
+            "type": "number",
+            "default": "0",
+            "access": "public",
+            "tagname": "",
+            "class": "Components.Collapse",
+            "namespace": "Components"
+        },
+        {
+            "file": "../ember-bootstrap/addon/components/bs-collapse.ts",
+            "line": 107,
+            "description": "The size of the element when expanded. When null the value is calculated automatically to fit the containing elements.",
+            "itemtype": "property",
+            "name": "expandedSize",
+            "type": "number",
+            "default": "null",
+            "access": "public",
+            "tagname": "",
+            "class": "Components.Collapse",
+            "namespace": "Components"
+        },
+        {
+            "file": "../ember-bootstrap/addon/components/bs-collapse.ts",
+            "line": 118,
+            "description": "Calculates a hash for style attribute.",
+            "class": "Components.Collapse",
+            "namespace": "Components"
+        },
+        {
+            "file": "../ember-bootstrap/addon/components/bs-collapse.ts",
+            "line": 131,
+            "description": "Usually the size (height) of the element is only set while transitioning, and reseted afterwards. Set to true to always set a size.",
+            "itemtype": "property",
+            "name": "resetSizeWhenNotCollapsing",
+            "type": "boolean",
+            "default": "true",
+            "access": "private",
+            "tagname": "",
+            "class": "Components.Collapse",
+            "namespace": "Components"
+        },
+        {
+            "file": "../ember-bootstrap/addon/components/bs-collapse.ts",
+            "line": 141,
+            "description": "The direction (height/width) of the collapse animation.\nWhen setting this to 'width' you should also define custom CSS transitions for the width property, as the Bootstrap\nCSS does only support collapsible elements for the height direction.",
+            "itemtype": "property",
+            "name": "collapseDimension",
+            "type": "string",
+            "default": "'height'",
+            "access": "public",
+            "tagname": "",
+            "class": "Components.Collapse",
+            "namespace": "Components"
+        },
+        {
+            "file": "../ember-bootstrap/addon/components/bs-collapse.ts",
+            "line": 154,
+            "description": "The duration of the fade transition",
+            "itemtype": "property",
+            "name": "transitionDuration",
+            "type": "number",
+            "default": "350",
+            "access": "public",
+            "tagname": "",
+            "class": "Components.Collapse",
+            "namespace": "Components"
+        },
+        {
+            "file": "../ember-bootstrap/addon/components/bs-collapse.ts",
+            "line": 168,
+            "description": "The action to be sent when the element is about to be hidden.",
+            "itemtype": "event",
+            "name": "onHide",
+            "access": "public",
+            "tagname": "",
+            "class": "Components.Collapse",
+            "namespace": "Components"
+        },
+        {
+            "file": "../ember-bootstrap/addon/components/bs-collapse.ts",
+            "line": 175,
+            "description": "The action to be sent after the element has been completely hidden (including the CSS transition).",
+            "itemtype": "event",
+            "name": "onHidden",
+            "access": "public",
+            "tagname": "",
+            "class": "Components.Collapse",
+            "namespace": "Components"
+        },
+        {
+            "file": "../ember-bootstrap/addon/components/bs-collapse.ts",
+            "line": 182,
+            "description": "The action to be sent when the element is about to be shown.",
+            "itemtype": "event",
+            "name": "onShow",
+            "access": "public",
+            "tagname": "",
+            "class": "Components.Collapse",
+            "namespace": "Components"
+        },
+        {
+            "file": "../ember-bootstrap/addon/components/bs-collapse.ts",
+            "line": 189,
+            "description": "The action to be sent after the element has been completely shown (including the CSS transition).",
+            "itemtype": "event",
+            "name": "onShown",
+            "access": "public",
+            "tagname": "",
+            "class": "Components.Collapse",
+            "namespace": "Components"
+        },
+        {
+            "file": "../ember-bootstrap/addon/components/bs-collapse.ts",
+            "line": 196,
+            "description": "Triggers the show transition",
+            "itemtype": "method",
+            "name": "show",
+            "access": "protected",
+            "tagname": "",
+            "class": "Components.Collapse",
+            "namespace": "Components"
+        },
+        {
+            "file": "../ember-bootstrap/addon/components/bs-collapse.ts",
+            "line": 229,
+            "description": "Get the size of the element when expanded",
+            "itemtype": "method",
+            "name": "getExpandedSize",
+            "params": [
+                {
+                    "name": "action",
+                    "description": ""
+                }
+            ],
+            "return": {
+                "description": "",
+                "type": "Number"
+            },
+            "access": "private",
+            "tagname": "",
+            "class": "Components.Collapse",
+            "namespace": "Components"
+        },
+        {
+            "file": "../ember-bootstrap/addon/components/bs-collapse.ts",
+            "line": 257,
+            "description": "Triggers the hide transition",
+            "itemtype": "method",
+            "name": "hide",
+            "access": "protected",
+            "tagname": "",
+            "class": "Components.Collapse",
             "namespace": "Components"
         },
         {
@@ -5139,6 +5785,13 @@
             "access": "private",
             "tagname": "",
             "class": "Components.Form",
+            "namespace": "Components"
+        },
+        {
+            "file": "../ember-bootstrap/addon/components/bs-link-to.ts",
+            "line": 17,
+            "internal": "",
+            "class": "Components.LinkComponent",
             "namespace": "Components"
         },
         {
@@ -6315,6 +6968,44 @@
             "namespace": "Components"
         },
         {
+            "file": "../ember-bootstrap/addon/components/bs-spinner.ts",
+            "line": 51,
+            "description": "Property for size styling, set to 'sm'\n\nAlso see the [Bootstrap docs](https://getbootstrap.com/docs/5.2/components/spinners/#size)",
+            "itemtype": "property",
+            "name": "size",
+            "type": "String",
+            "access": "public",
+            "tagname": "",
+            "class": "Components.Spinner",
+            "namespace": "Components"
+        },
+        {
+            "file": "../ember-bootstrap/addon/components/bs-spinner.ts",
+            "line": 61,
+            "description": "Property for type styling\n\nFor the available types see the [Bootstrap docs](https://getbootstrap.com/docs/5.2/components/spinners/#colors)",
+            "itemtype": "property",
+            "name": "type",
+            "type": "String",
+            "default": "'primary'",
+            "access": "public",
+            "tagname": "",
+            "class": "Components.Spinner",
+            "namespace": "Components"
+        },
+        {
+            "file": "../ember-bootstrap/addon/components/bs-spinner.ts",
+            "line": 72,
+            "description": "Spinner type - 'border' or 'grow'",
+            "itemtype": "property",
+            "name": "spinnerType",
+            "type": "string",
+            "default": "'border'",
+            "access": "public",
+            "tagname": "",
+            "class": "Components.Spinner",
+            "namespace": "Components"
+        },
+        {
             "file": "../ember-bootstrap/addon/components/bs-tab.js",
             "line": 112,
             "description": "Type of nav, either \"pills\" or \"tabs\"",
@@ -6474,6 +7165,18 @@
     ],
     "warnings": [
         {
+            "message": "unknown tag: internal",
+            "line": " ../ember-bootstrap/addon/components/bs-button.ts:31"
+        },
+        {
+            "message": "unknown tag: internal",
+            "line": " ../ember-bootstrap/addon/components/bs-button.ts:36"
+        },
+        {
+            "message": "unknown tag: internal",
+            "line": " ../ember-bootstrap/addon/components/bs-button.ts:41"
+        },
+        {
             "message": "unknown tag: this",
             "line": " ../ember-bootstrap/addon/components/bs-carousel.js:464"
         },
@@ -6484,6 +7187,10 @@
         {
             "message": "unknown tag: this",
             "line": " ../ember-bootstrap/addon/components/bs-carousel.js:496"
+        },
+        {
+            "message": "unknown tag: internal",
+            "line": " ../ember-bootstrap/addon/components/bs-link-to.ts:17"
         },
         {
             "message": "Missing item type\nMakes things more stable, especially when fast changing.",
@@ -6510,12 +7217,32 @@
             "line": " ../ember-bootstrap/addon/components/bs-list-group/item.js:63"
         },
         {
+            "message": "Missing item type",
+            "line": " ../ember-bootstrap/addon/components/bs-button.ts:31"
+        },
+        {
+            "message": "Missing item type",
+            "line": " ../ember-bootstrap/addon/components/bs-button.ts:36"
+        },
+        {
+            "message": "Missing item type",
+            "line": " ../ember-bootstrap/addon/components/bs-button.ts:41"
+        },
+        {
+            "message": "Missing item type\nCalculates a hash for style attribute.",
+            "line": " ../ember-bootstrap/addon/components/bs-collapse.ts:118"
+        },
+        {
             "message": "Missing item type\nCurrent state for events",
             "line": " ../ember-bootstrap/addon/components/bs-contextual-help.js:301"
         },
         {
             "message": "Missing item type\nThe DOM element of the `.dropdown-menu` element",
             "line": " ../ember-bootstrap/addon/components/bs-dropdown.js:266"
+        },
+        {
+            "message": "Missing item type",
+            "line": " ../ember-bootstrap/addon/components/bs-link-to.ts:17"
         },
         {
             "message": "Missing item type\nDetermines if list should be numbered (e.g. `ol` or `ul` should be used)\n\nAlso see the [Bootstrap Docs](https://getbootstrap.com/docs/5.2/components/list-group/#numbered)",

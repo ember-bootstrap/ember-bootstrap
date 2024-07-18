@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <title>Components.Navbar - ember-bootstrap</title>
+  <title>Components.Collapse - ember-bootstrap</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="../assets/css/api.css">
   <script type="text/javascript" src="//use.typekit.net/dkq5epu.js"></script>
@@ -54,76 +54,18 @@
         <div id="docs-main">
           <div class="content">
 <div class="card">
-  <h1 class="card-header">Components.Navbar <span class="badge badge-public small">public</span></h1>
+  <h1 class="card-header">Components.Collapse <span class="badge badge-public small">public</span></h1>
   <div class="card-body">
 
-<p>Component to generate <a href="http://getbootstrap.com/components/#navbar">Bootstrap navbars</a>.</p>
+<p>An Ember component that mimics the behaviour of <a href="http://getbootstrap.com/javascript/#collapse">Bootstrap's collapse.js plugin</a></p>
 <h3>Usage</h3>
-<p>Uses the following components by a contextual reference:</p>
-<pre class="code prettyprint"><code class="language-hbs">&lt;BsNavbar as |navbar|&gt;
-  &lt;div class="navbar-header"&gt;
-    &lt;navbar.toggle /&gt;
-    &lt;a class="navbar-brand" href="#"&gt;Brand&lt;/a&gt;
+<pre class="code prettyprint"><code class="language-hbs">&lt;BsCollapse @collapsed=&gt;
+  &lt;div class="well"&gt;
+    &lt;h2&gt;Collapse&lt;/h2&gt;
+    &lt;p&gt;This is collapsible content&lt;/p&gt;
   &lt;/div&gt;
-  &lt;navbar.content&gt;
-    &lt;navbar.nav as |nav|&gt;
-      &lt;nav.item&gt;
-        &lt;nav.linkTo @route="home"&gt;Home&lt;/nav.linkTo&gt;
-      &lt;/nav.item&gt;
-      &lt;nav.item&gt;
-        &lt;nav.linkTo @route="navbars"&gt;Navbars&lt;/nav.linkTo&gt;
-      &lt;/nav.item&gt;
-    &lt;/navbar.nav&gt;
-  &lt;/navbar.content&gt;
-&lt;/BsNavbar&gt;
+&lt;/BsCollapse&gt;
 </code></pre>
-<p><strong>Note:</strong> the <code>&lt;div class="navbar-header"&gt;</code> is required for BS3 to hold the elements visible on a mobile breakpoint,
-when the actual content is collapsed. It should <em>not</em> be used for BS4!</p>
-<p>The component yields references to the following contextual components:</p>
-<ul>
-<li><a href="Components.NavbarContent.html">Components.NavbarContent</a></li>
-<li><a href="Components.NavbarToggle.html">Components.NavbarToggle</a></li>
-<li><a href="Components.NavbarNav.html">Components.NavbarNav</a></li>
-</ul>
-<p>Furthermore, references to the following actions are yielded:</p>
-<ul>
-<li><code>collapse</code>: triggers the <code>onCollapse</code> action and collapses the navbar (mobile)</li>
-<li><code>expand</code>: triggers the <code>onExpand</code> action and expands the navbar (mobile)</li>
-<li><code>toggleNavbar</code>: triggers the <code>toggleNavbar</code> action and toggles the navbar (mobile)</li>
-</ul>
-<h3>Responsive Design</h3>
-<p>For the mobile breakpoint the Bootstrap styles will hide the navbar content (<code>{{navbar.content}}</code>). Clicking on the
-navbar toggle button (<code>{{navbar.toggle}}</code>) will expand the menu. By default, all nav links (<code>&lt;nav.linkTo @route="..."&gt;</code>) are already
-wired up to call the navbar's <code>collapse</code> action, so clicking any of them will collapse the navbar. To selectively
-prevent that, you can set its <code>collapseNavbar</code> property to false:</p>
-<pre class="code prettyprint"><code class="language-hbs">&lt;nav.item&gt;
-  &lt;nav.linkTo @route="index" @collapseNavbar={{false}}&gt;Don't collapse&lt;/nav.linkTo&gt;
-&lt;/nav.item&gt;
-</code></pre>
-<p>To collapse the navbar when clicking on some nav items that are not internal links, you can use the yielded <code>collapse</code>
-action:</p>
-<pre class="code prettyprint"><code class="language-hbs">&lt;BsNavbar as |navbar|&gt;
-  &lt;navbar.content&gt;
-    &lt;navbar.nav as |nav|&gt;
-      &lt;nav.item&gt;
-        &lt;a onclick={{action navbar.collapse}}&gt;Collapse&lt;/a&gt;
-      &lt;/nav.item&gt;
-    &lt;/navbar.nav&gt;
-  &lt;/navbar.content&gt;
-&lt;/BsNavbar&gt;
-</code></pre>
-<h3>Navbar styles</h3>
-<p>The component supports the default bootstrap navbar styling options through the <code>type</code>
-property. Bootstrap navbars <a href="http://getbootstrap.com/components/#navbar-default">do not currently support justified nav links</a>,
-so those are explicitly disallowed.</p>
-<p>Other bootstrap navbar variations, such as forms, buttons, etc. can be supported through direct use of
-bootstrap styles applied through the <code>class</code> attribute on the components.</p>
-<h3>Bootstrap 3/4 Notes</h3>
-<p>Bootstrap 4 changed the default navbar styling option from <code>navbar-default</code> to <code>navbar-light</code>.
-If you explicitly specified "default" in Bootstrap 3 and are migrating, you will need to change
-this in your code. Bootstrap 4 changes <code>navbar-inverse</code> to <code>navbar-dark</code>.</p>
-<p>Bootstrap 4 navbars are fluid by default without the need for an additional container. An
-additional container is added like with Bootstrap 3 if <code>fluid</code> is <code>false</code>.</p>
 <p><em>Note that only invoking the component in a template as shown above is considered part of its public API. Extending from it (subclassing) is generally not supported, and may break at any time.</em></p>
 
 
@@ -135,13 +77,13 @@ additional container is added like with Bootstrap 3 if <code>fluid</code> is <co
           Extends
         </dt>
         <dd class="col-sm-9">
-          Component
+          Glimmer.Component
         </dd>
         <dt class="col-sm-3">
           Defined in
         </dt>
         <dd class="col-sm-9">
-          <a href="../files/.._ember-bootstrap_addon_components_bs-navbar.js.html#l7"><code>..&#x2F;ember-bootstrap&#x2F;addon&#x2F;components&#x2F;bs-navbar.js:7</code></a>
+          <a href="../files/.._ember-bootstrap_addon_components_bs-collapse.ts.html#l30"><code>..&#x2F;ember-bootstrap&#x2F;addon&#x2F;components&#x2F;bs-collapse.ts:30</code></a>
         </dd>
 
     </dl>
@@ -202,11 +144,15 @@ additional container is added like with Bootstrap 3 if <code>fluid</code> is <co
 
             <ul class="index-list methods extends">
                 <li class="index-item method private">
-                  <a href="#" data-tabid="#methods" data-anchor="#method_collapse" data-tablink="collapse">collapse</a>
+                  <a href="#" data-tabid="#methods" data-anchor="#method_getExpandedSize" data-tablink="getExpandedSize">getExpandedSize</a>
 
                 </li>
-                <li class="index-item method private">
-                  <a href="#" data-tabid="#methods" data-anchor="#method_expand" data-tablink="expand">expand</a>
+                <li class="index-item method protected">
+                  <a href="#" data-tabid="#methods" data-anchor="#method_hide" data-tablink="hide">hide</a>
+
+                </li>
+                <li class="index-item method protected">
+                  <a href="#" data-tabid="#methods" data-anchor="#method_show" data-tablink="show">show</a>
 
                 </li>
             </ul>
@@ -217,13 +163,13 @@ additional container is added like with Bootstrap 3 if <code>fluid</code> is <co
 
             <ul class="index-list properties extends">
                 <li class="index-item property private">
-                  <a href="#" data-tabid="#properties" data-anchor="#property__toggledCollapse"
-                     data-tablink="_toggledCollapse">_toggledCollapse</a>
+                  <a href="#" data-tabid="#properties" data-anchor="#property__element"
+                     data-tablink="_element">_element</a>
 
                 </li>
-                <li class="index-item property public">
-                  <a href="#" data-tabid="#properties" data-anchor="#property_backgroundColor"
-                     data-tablink="backgroundColor">backgroundColor</a>
+                <li class="index-item property private">
+                  <a href="#" data-tabid="#properties" data-anchor="#property_active"
+                     data-tablink="active">active</a>
 
                 </li>
                 <li class="index-item property public">
@@ -232,48 +178,33 @@ additional container is added like with Bootstrap 3 if <code>fluid</code> is <co
 
                 </li>
                 <li class="index-item property public">
-                  <a href="#" data-tabid="#properties" data-anchor="#property_container"
-                     data-tablink="container">container</a>
-
-                </li>
-                <li class="index-item property private">
-                  <a href="#" data-tabid="#properties" data-anchor="#property_contentComponent"
-                     data-tablink="contentComponent">contentComponent</a>
+                  <a href="#" data-tabid="#properties" data-anchor="#property_collapseDimension"
+                     data-tablink="collapseDimension">collapseDimension</a>
 
                 </li>
                 <li class="index-item property public">
-                  <a href="#" data-tabid="#properties" data-anchor="#property_fluid"
-                     data-tablink="fluid">fluid</a>
-
-                </li>
-                <li class="index-item property private">
-                  <a href="#" data-tabid="#properties" data-anchor="#property_linkToComponent"
-                     data-tablink="linkToComponent">linkToComponent</a>
-
-                </li>
-                <li class="index-item property private">
-                  <a href="#" data-tabid="#properties" data-anchor="#property_navComponent"
-                     data-tablink="navComponent">navComponent</a>
+                  <a href="#" data-tabid="#properties" data-anchor="#property_collapsedSize"
+                     data-tablink="collapsedSize">collapsedSize</a>
 
                 </li>
                 <li class="index-item property public">
-                  <a href="#" data-tabid="#properties" data-anchor="#property_position"
-                     data-tablink="position">position</a>
-
-                </li>
-                <li class="index-item property public">
-                  <a href="#" data-tabid="#properties" data-anchor="#property_toggleBreakpoint"
-                     data-tablink="toggleBreakpoint">toggleBreakpoint</a>
+                  <a href="#" data-tabid="#properties" data-anchor="#property_expandedSize"
+                     data-tablink="expandedSize">expandedSize</a>
 
                 </li>
                 <li class="index-item property private">
-                  <a href="#" data-tabid="#properties" data-anchor="#property_toggleComponent"
-                     data-tablink="toggleComponent">toggleComponent</a>
+                  <a href="#" data-tabid="#properties" data-anchor="#property_resetSizeWhenNotCollapsing"
+                     data-tablink="resetSizeWhenNotCollapsing">resetSizeWhenNotCollapsing</a>
 
                 </li>
                 <li class="index-item property public">
-                  <a href="#" data-tabid="#properties" data-anchor="#property_type"
-                     data-tablink="type">type</a>
+                  <a href="#" data-tabid="#properties" data-anchor="#property_transitionDuration"
+                     data-tablink="transitionDuration">transitionDuration</a>
+
+                </li>
+                <li class="index-item property private">
+                  <a href="#" data-tabid="#properties" data-anchor="#property_transitioning"
+                     data-tablink="transitioning">transitioning</a>
 
                 </li>
             </ul>
@@ -285,19 +216,19 @@ additional container is added like with Bootstrap 3 if <code>fluid</code> is <co
 
             <ul class="index-list events extends">
                 <li class="index-item event public">
-                  <a href="#" data-tabid="#events" data-anchor="#event_onCollapse" data-tablink="onCollapse">onCollapse</a>
+                  <a href="#" data-tabid="#events" data-anchor="#event_onHidden" data-tablink="onHidden">onHidden</a>
 
                 </li>
                 <li class="index-item event public">
-                  <a href="#" data-tabid="#events" data-anchor="#event_onCollapsed" data-tablink="onCollapsed">onCollapsed</a>
+                  <a href="#" data-tabid="#events" data-anchor="#event_onHide" data-tablink="onHide">onHide</a>
 
                 </li>
                 <li class="index-item event public">
-                  <a href="#" data-tabid="#events" data-anchor="#event_onExpand" data-tablink="onExpand">onExpand</a>
+                  <a href="#" data-tabid="#events" data-anchor="#event_onShow" data-tablink="onShow">onShow</a>
 
                 </li>
                 <li class="index-item event public">
-                  <a href="#" data-tabid="#events" data-anchor="#event_onExpanded" data-tablink="onExpanded">onExpanded</a>
+                  <a href="#" data-tabid="#events" data-anchor="#event_onShown" data-tablink="onShown">onShown</a>
 
                 </li>
             </ul>
@@ -305,9 +236,9 @@ additional container is added like with Bootstrap 3 if <code>fluid</code> is <co
       </div>
 
         <div id="methods" class="tab-pane">
-            <div id="method_collapse" class="method item private">
-                <h3 class="name">collapse
-                <span class="small"> </span>
+            <div id="method_getExpandedSize" class="method item private">
+                <h3 class="name">getExpandedSize
+                <span class="small">Number</span>
                 </h3>
             
             
@@ -321,7 +252,7 @@ additional container is added like with Bootstrap 3 if <code>fluid</code> is <co
                 <div class="meta">
                             <p>
                             Defined in
-                    <a href="../files/.._ember-bootstrap_addon_components_bs-navbar.js.html#l255"><code>..&#x2F;ember-bootstrap&#x2F;addon&#x2F;components&#x2F;bs-navbar.js:255</code></a>
+                    <a href="../files/.._ember-bootstrap_addon_components_bs-collapse.ts.html#l229"><code>..&#x2F;ember-bootstrap&#x2F;addon&#x2F;components&#x2F;bs-collapse.ts:229</code></a>
                     </p>
             
             
@@ -329,20 +260,75 @@ additional container is added like with Bootstrap 3 if <code>fluid</code> is <co
                 </div>
             
                 <div class="description">
-                    
+                    <p>Get the size of the element when expanded</p>
+            
+                </div>
+            
+                    <div class="params">
+                        <h4>Parameters:</h4>
+            
+                        <ul class="params-list">
+                            <li class="param">
+                                    <code class="param-name">action</code>
+                                    <span class="type">Object</span>
+            
+            
+                                <div class="param-description">
+                                    
+                                </div>
+            
+                            </li>
+                        </ul>
+                    </div>
+            
+                    <div class="returns">
+                        <h4>Returns:</h4>
+            
+                        <div class="returns-description">
+                                    <span class="type">Number</span>:
+                        </div>
+                    </div>
+            
+            </div>
+            <div id="method_hide" class="method item protected">
+                <h3 class="name">hide
+                <span class="small"> </span>
+                </h3>
+            
+            
+            
+                    <span class="label label-protected">protected</span>
+            
+            
+            
+            
+            
+                <div class="meta">
+                            <p>
+                            Defined in
+                    <a href="../files/.._ember-bootstrap_addon_components_bs-collapse.ts.html#l257"><code>..&#x2F;ember-bootstrap&#x2F;addon&#x2F;components&#x2F;bs-collapse.ts:257</code></a>
+                    </p>
+            
+            
+            
+                </div>
+            
+                <div class="description">
+                    <p>Triggers the hide transition</p>
+            
                 </div>
             
             
             
             </div>
-            <div id="method_expand" class="method item private">
-                <h3 class="name">expand
+            <div id="method_show" class="method item protected">
+                <h3 class="name">show
                 <span class="small"> </span>
                 </h3>
             
             
             
-                    <span class="label label-private">private</span>
+                    <span class="label label-protected">protected</span>
             
             
             
@@ -351,7 +337,7 @@ additional container is added like with Bootstrap 3 if <code>fluid</code> is <co
                 <div class="meta">
                             <p>
                             Defined in
-                    <a href="../files/.._ember-bootstrap_addon_components_bs-navbar.js.html#l242"><code>..&#x2F;ember-bootstrap&#x2F;addon&#x2F;components&#x2F;bs-navbar.js:242</code></a>
+                    <a href="../files/.._ember-bootstrap_addon_components_bs-collapse.ts.html#l196"><code>..&#x2F;ember-bootstrap&#x2F;addon&#x2F;components&#x2F;bs-collapse.ts:196</code></a>
                     </p>
             
             
@@ -359,7 +345,8 @@ additional container is added like with Bootstrap 3 if <code>fluid</code> is <co
                 </div>
             
                 <div class="description">
-                    
+                    <p>Triggers the show transition</p>
+            
                 </div>
             
             
@@ -368,10 +355,10 @@ additional container is added like with Bootstrap 3 if <code>fluid</code> is <co
         </div>
 
         <div id="properties" class="tab-pane">
-            <div id="property__toggledCollapse"
+            <div id="property__element"
                  class="property item private">
-              <h3 class="name">_toggledCollapse
-                <span class="badge badge-secondary small">unknown</span>
+              <h3 class="name">_element
+                <span class="badge badge-secondary small">null | HTMLElement</span>
                   <span class="badge badge-private small">private</span>
             
             
@@ -382,7 +369,7 @@ additional container is added like with Bootstrap 3 if <code>fluid</code> is <co
               <div class="meta">
                   <p>
                       Defined in
-                  <a href="../files/.._ember-bootstrap_addon_components_bs-navbar.js.html#l114"><code>..&#x2F;ember-bootstrap&#x2F;addon&#x2F;components&#x2F;bs-navbar.js:114</code></a>
+                  <a href="../files/.._ember-bootstrap_addon_components_bs-collapse.ts.html#l52"><code>..&#x2F;ember-bootstrap&#x2F;addon&#x2F;components&#x2F;bs-collapse.ts:52</code></a>
               </p>
             
             
@@ -396,11 +383,11 @@ additional container is added like with Bootstrap 3 if <code>fluid</code> is <co
             
             
             </div>
-            <div id="property_backgroundColor"
-                 class="property item public">
-              <h3 class="name">backgroundColor
-                <span class="badge badge-secondary small">String</span>
-                  <span class="badge badge-public small">public</span>
+            <div id="property_active"
+                 class="property item private">
+              <h3 class="name">active
+                <span class="badge badge-secondary small">unknown</span>
+                  <span class="badge badge-private small">private</span>
             
             
             
@@ -408,19 +395,16 @@ additional container is added like with Bootstrap 3 if <code>fluid</code> is <co
               </h3>
             
               <div class="meta">
-                  <p><strong>Default:</strong> &#x27;light&#x27;</p>
                   <p>
                       Defined in
-                  <a href="../files/.._ember-bootstrap_addon_components_bs-navbar.js.html#l294"><code>..&#x2F;ember-bootstrap&#x2F;addon&#x2F;components&#x2F;bs-navbar.js:294</code></a>
+                  <a href="../files/.._ember-bootstrap_addon_components_bs-collapse.ts.html#l70"><code>..&#x2F;ember-bootstrap&#x2F;addon&#x2F;components&#x2F;bs-collapse.ts:70</code></a>
               </p>
             
             
               </div>
             
               <div class="description">
-                <p>Bootstrap 4 Only: Sets the background color for the navbar. Can be any color
-            in the set that composes the <code>bg-*</code> classes and can be extended by creating your
-            own <code>bg-*</code> classes.</p>
+                <p>True if this item is expanded</p>
             
               </div>
             
@@ -443,14 +427,14 @@ additional container is added like with Bootstrap 3 if <code>fluid</code> is <co
                   <p><strong>Default:</strong> true</p>
                   <p>
                       Defined in
-                  <a href="../files/.._ember-bootstrap_addon_components_bs-navbar.js.html#l102"><code>..&#x2F;ember-bootstrap&#x2F;addon&#x2F;components&#x2F;bs-navbar.js:102</code></a>
+                  <a href="../files/.._ember-bootstrap_addon_components_bs-collapse.ts.html#l59"><code>..&#x2F;ember-bootstrap&#x2F;addon&#x2F;components&#x2F;bs-collapse.ts:59</code></a>
               </p>
             
             
               </div>
             
               <div class="description">
-                <p>Manages the state for the responsive menu between the toggle and the content.</p>
+                <p>Collapsed/expanded state</p>
             
               </div>
             
@@ -458,9 +442,9 @@ additional container is added like with Bootstrap 3 if <code>fluid</code> is <co
             
             
             </div>
-            <div id="property_container"
+            <div id="property_collapseDimension"
                  class="property item public">
-              <h3 class="name">container
+              <h3 class="name">collapseDimension
                 <span class="badge badge-secondary small">string</span>
                   <span class="badge badge-public small">public</span>
             
@@ -470,18 +454,19 @@ additional container is added like with Bootstrap 3 if <code>fluid</code> is <co
               </h3>
             
               <div class="meta">
+                  <p><strong>Default:</strong> &#x27;height&#x27;</p>
                   <p>
                       Defined in
-                  <a href="../files/.._ember-bootstrap_addon_components_bs-navbar.js.html#l133"><code>..&#x2F;ember-bootstrap&#x2F;addon&#x2F;components&#x2F;bs-navbar.js:133</code></a>
+                  <a href="../files/.._ember-bootstrap_addon_components_bs-collapse.ts.html#l141"><code>..&#x2F;ember-bootstrap&#x2F;addon&#x2F;components&#x2F;bs-collapse.ts:141</code></a>
               </p>
             
             
               </div>
             
               <div class="description">
-                <p>BS5 only: Allows to override the container layout, see <a href="https://getbootstrap.com/docs/5.0/components/navbar/#containers">https://getbootstrap.com/docs/5.0/components/navbar/#containers</a>.
-            Allowed values: <code>'sm'</code>, <code>'md'</code>, <code>'lg'</code>, <code>'xl'</code>, <code>'xxl'</code>, <code>'fluid'</code>, see <a href="https://getbootstrap.com/docs/5.0/layout/containers/">https://getbootstrap.com/docs/5.0/layout/containers/</a>.
-            By default, it is <code>.container-fluid</code>, or <code>.container</code> if the <code>@fluid</code> argument is set to false.</p>
+                <p>The direction (height/width) of the collapse animation.
+            When setting this to 'width' you should also define custom CSS transitions for the width property, as the Bootstrap
+            CSS does only support collapsible elements for the height direction.</p>
             
               </div>
             
@@ -489,38 +474,10 @@ additional container is added like with Bootstrap 3 if <code>fluid</code> is <co
             
             
             </div>
-            <div id="property_contentComponent"
-                 class="property item private">
-              <h3 class="name">contentComponent
-                <span class="badge badge-secondary small">{String}</span>
-                  <span class="badge badge-private small">private</span>
-            
-            
-            
-            
-              </h3>
-            
-              <div class="meta">
-                  <p>
-                      Defined in
-                  <a href="../files/.._ember-bootstrap_addon_components_bs-navbar.js.html#l328"><code>..&#x2F;ember-bootstrap&#x2F;addon&#x2F;components&#x2F;bs-navbar.js:328</code></a>
-              </p>
-            
-            
-              </div>
-            
-              <div class="description">
-                
-              </div>
-            
-            
-            
-            
-            </div>
-            <div id="property_fluid"
+            <div id="property_collapsedSize"
                  class="property item public">
-              <h3 class="name">fluid
-                <span class="badge badge-secondary small">boolean</span>
+              <h3 class="name">collapsedSize
+                <span class="badge badge-secondary small">number</span>
                   <span class="badge badge-public small">public</span>
             
             
@@ -529,17 +486,17 @@ additional container is added like with Bootstrap 3 if <code>fluid</code> is <co
               </h3>
             
               <div class="meta">
-                  <p><strong>Default:</strong> true</p>
+                  <p><strong>Default:</strong> 0</p>
                   <p>
                       Defined in
-                  <a href="../files/.._ember-bootstrap_addon_components_bs-navbar.js.html#l121"><code>..&#x2F;ember-bootstrap&#x2F;addon&#x2F;components&#x2F;bs-navbar.js:121</code></a>
+                  <a href="../files/.._ember-bootstrap_addon_components_bs-collapse.ts.html#l96"><code>..&#x2F;ember-bootstrap&#x2F;addon&#x2F;components&#x2F;bs-collapse.ts:96</code></a>
               </p>
             
             
               </div>
             
               <div class="description">
-                <p>Controls whether the wrapping div is a fluid container or not.</p>
+                <p>The size of the element when collapsed. Defaults to 0.</p>
             
               </div>
             
@@ -547,66 +504,10 @@ additional container is added like with Bootstrap 3 if <code>fluid</code> is <co
             
             
             </div>
-            <div id="property_linkToComponent"
-                 class="property item private">
-              <h3 class="name">linkToComponent
-                <span class="badge badge-secondary small">{String}</span>
-                  <span class="badge badge-private small">private</span>
-            
-            
-            
-            
-              </h3>
-            
-              <div class="meta">
-                  <p>
-                      Defined in
-                  <a href="../files/.._ember-bootstrap_addon_components_bs-navbar.js.html#l340"><code>..&#x2F;ember-bootstrap&#x2F;addon&#x2F;components&#x2F;bs-navbar.js:340</code></a>
-              </p>
-            
-            
-              </div>
-            
-              <div class="description">
-                
-              </div>
-            
-            
-            
-            
-            </div>
-            <div id="property_navComponent"
-                 class="property item private">
-              <h3 class="name">navComponent
-                <span class="badge badge-secondary small">{String}</span>
-                  <span class="badge badge-private small">private</span>
-            
-            
-            
-            
-              </h3>
-            
-              <div class="meta">
-                  <p>
-                      Defined in
-                  <a href="../files/.._ember-bootstrap_addon_components_bs-navbar.js.html#l334"><code>..&#x2F;ember-bootstrap&#x2F;addon&#x2F;components&#x2F;bs-navbar.js:334</code></a>
-              </p>
-            
-            
-              </div>
-            
-              <div class="description">
-                
-              </div>
-            
-            
-            
-            
-            </div>
-            <div id="property_position"
+            <div id="property_expandedSize"
                  class="property item public">
-              <h3 class="name">position
-                <span class="badge badge-secondary small">String</span>
+              <h3 class="name">expandedSize
+                <span class="badge badge-secondary small">number</span>
                   <span class="badge badge-public small">public</span>
             
             
@@ -618,16 +519,14 @@ additional container is added like with Bootstrap 3 if <code>fluid</code> is <co
                   <p><strong>Default:</strong> null</p>
                   <p>
                       Defined in
-                  <a href="../files/.._ember-bootstrap_addon_components_bs-navbar.js.html#l153"><code>..&#x2F;ember-bootstrap&#x2F;addon&#x2F;components&#x2F;bs-navbar.js:153</code></a>
+                  <a href="../files/.._ember-bootstrap_addon_components_bs-collapse.ts.html#l107"><code>..&#x2F;ember-bootstrap&#x2F;addon&#x2F;components&#x2F;bs-collapse.ts:107</code></a>
               </p>
             
             
               </div>
             
               <div class="description">
-                <p>Specifies the position classes for the navbar, currently supporting none, "fixed-top", "fixed-bottom", and
-            either "static-top" (BS3) or "sticky-top" (BS4).
-            See the <a href="http://getbootstrap.com/components/#navbar-fixed-top">bootstrap docs</a> for details.</p>
+                <p>The size of the element when expanded. When null the value is calculated automatically to fit the containing elements.</p>
             
               </div>
             
@@ -635,10 +534,40 @@ additional container is added like with Bootstrap 3 if <code>fluid</code> is <co
             
             
             </div>
-            <div id="property_toggleBreakpoint"
+            <div id="property_resetSizeWhenNotCollapsing"
+                 class="property item private">
+              <h3 class="name">resetSizeWhenNotCollapsing
+                <span class="badge badge-secondary small">boolean</span>
+                  <span class="badge badge-private small">private</span>
+            
+            
+            
+            
+              </h3>
+            
+              <div class="meta">
+                  <p><strong>Default:</strong> true</p>
+                  <p>
+                      Defined in
+                  <a href="../files/.._ember-bootstrap_addon_components_bs-collapse.ts.html#l131"><code>..&#x2F;ember-bootstrap&#x2F;addon&#x2F;components&#x2F;bs-collapse.ts:131</code></a>
+              </p>
+            
+            
+              </div>
+            
+              <div class="description">
+                <p>Usually the size (height) of the element is only set while transitioning, and reseted afterwards. Set to true to always set a size.</p>
+            
+              </div>
+            
+            
+            
+            
+            </div>
+            <div id="property_transitionDuration"
                  class="property item public">
-              <h3 class="name">toggleBreakpoint
-                <span class="badge badge-secondary small">String</span>
+              <h3 class="name">transitionDuration
+                <span class="badge badge-secondary small">number</span>
                   <span class="badge badge-public small">public</span>
             
             
@@ -647,19 +576,17 @@ additional container is added like with Bootstrap 3 if <code>fluid</code> is <co
               </h3>
             
               <div class="meta">
-                  <p><strong>Default:</strong> &#x27;lg&#x27;</p>
+                  <p><strong>Default:</strong> 350</p>
                   <p>
                       Defined in
-                  <a href="../files/.._ember-bootstrap_addon_components_bs-navbar.js.html#l277"><code>..&#x2F;ember-bootstrap&#x2F;addon&#x2F;components&#x2F;bs-navbar.js:277</code></a>
+                  <a href="../files/.._ember-bootstrap_addon_components_bs-collapse.ts.html#l154"><code>..&#x2F;ember-bootstrap&#x2F;addon&#x2F;components&#x2F;bs-collapse.ts:154</code></a>
               </p>
             
             
               </div>
             
               <div class="description">
-                <p>Bootstrap 4 Only: Defines the responsive toggle breakpoint size. Options are the standard
-            two character Bootstrap size abbreviations. Used to set the <code>navbar-expand-*</code>
-            class. Set to <code>null</code> to disable collapsing.</p>
+                <p>The duration of the fade transition</p>
             
               </div>
             
@@ -667,10 +594,10 @@ additional container is added like with Bootstrap 3 if <code>fluid</code> is <co
             
             
             </div>
-            <div id="property_toggleComponent"
+            <div id="property_transitioning"
                  class="property item private">
-              <h3 class="name">toggleComponent
-                <span class="badge badge-secondary small">{String}</span>
+              <h3 class="name">transitioning
+                <span class="badge badge-secondary small">boolean</span>
                   <span class="badge badge-private small">private</span>
             
             
@@ -681,44 +608,14 @@ additional container is added like with Bootstrap 3 if <code>fluid</code> is <co
               <div class="meta">
                   <p>
                       Defined in
-                  <a href="../files/.._ember-bootstrap_addon_components_bs-navbar.js.html#l322"><code>..&#x2F;ember-bootstrap&#x2F;addon&#x2F;components&#x2F;bs-navbar.js:322</code></a>
+                  <a href="../files/.._ember-bootstrap_addon_components_bs-collapse.ts.html#l86"><code>..&#x2F;ember-bootstrap&#x2F;addon&#x2F;components&#x2F;bs-collapse.ts:86</code></a>
               </p>
             
             
               </div>
             
               <div class="description">
-                
-              </div>
-            
-            
-            
-            
-            </div>
-            <div id="property_type"
-                 class="property item public">
-              <h3 class="name">type
-                <span class="badge badge-secondary small">String</span>
-                  <span class="badge badge-public small">public</span>
-            
-            
-            
-            
-              </h3>
-            
-              <div class="meta">
-                  <p><strong>Default:</strong> &#x27;light&#x27;</p>
-                  <p>
-                      Defined in
-                  <a href="../files/.._ember-bootstrap_addon_components_bs-navbar.js.html#l178"><code>..&#x2F;ember-bootstrap&#x2F;addon&#x2F;components&#x2F;bs-navbar.js:178</code></a>
-              </p>
-            
-            
-              </div>
-            
-              <div class="description">
-                <p>Property for type styling</p>
-            <p>For the available types see the <a href="https://getbootstrap.com/docs/4.3/components/navbar/#color-schemes">Bootstrap docs</a></p>
+                <p>true if the component is currently transitioning</p>
             
               </div>
             
@@ -730,8 +627,8 @@ additional container is added like with Bootstrap 3 if <code>fluid</code> is <co
 
 
         <div id="events" class="tab-pane">
-            <div id="event_onCollapse" class="events item public">
-                <h3 class="name"><code>onCollapse</code></h3>
+            <div id="event_onHidden" class="events item public">
+                <h3 class="name"><code>onHidden</code></h3>
                 <span class="type"></span>
             
             
@@ -742,24 +639,22 @@ additional container is added like with Bootstrap 3 if <code>fluid</code> is <co
                 <div class="meta">
                             <p>
                             Defined in
-                    <a href="../files/.._ember-bootstrap_addon_components_bs-navbar.js.html#l202"><code>..&#x2F;ember-bootstrap&#x2F;addon&#x2F;components&#x2F;bs-navbar.js:202</code></a>
+                    <a href="../files/.._ember-bootstrap_addon_components_bs-collapse.ts.html#l175"><code>..&#x2F;ember-bootstrap&#x2F;addon&#x2F;components&#x2F;bs-collapse.ts:175</code></a>
                     </p>
             
             
                 </div>
             
                 <div class="description">
-                    <p>The action to be sent when the navbar is about to be collapsed.</p>
-            <p>You can return false to prevent collapsing the navbar automatically, and do that in your action by
-            setting <code>collapsed</code> to true.</p>
+                    <p>The action to be sent after the element has been completely hidden (including the CSS transition).</p>
             
                 </div>
             
             
             
             </div>
-            <div id="event_onCollapsed" class="events item public">
-                <h3 class="name"><code>onCollapsed</code></h3>
+            <div id="event_onHide" class="events item public">
+                <h3 class="name"><code>onHide</code></h3>
                 <span class="type"></span>
             
             
@@ -770,22 +665,22 @@ additional container is added like with Bootstrap 3 if <code>fluid</code> is <co
                 <div class="meta">
                             <p>
                             Defined in
-                    <a href="../files/.._ember-bootstrap_addon_components_bs-navbar.js.html#l212"><code>..&#x2F;ember-bootstrap&#x2F;addon&#x2F;components&#x2F;bs-navbar.js:212</code></a>
+                    <a href="../files/.._ember-bootstrap_addon_components_bs-collapse.ts.html#l168"><code>..&#x2F;ember-bootstrap&#x2F;addon&#x2F;components&#x2F;bs-collapse.ts:168</code></a>
                     </p>
             
             
                 </div>
             
                 <div class="description">
-                    <p>The action to be sent after the navbar has been collapsed (including the CSS transition).</p>
+                    <p>The action to be sent when the element is about to be hidden.</p>
             
                 </div>
             
             
             
             </div>
-            <div id="event_onExpand" class="events item public">
-                <h3 class="name"><code>onExpand</code></h3>
+            <div id="event_onShow" class="events item public">
+                <h3 class="name"><code>onShow</code></h3>
                 <span class="type"></span>
             
             
@@ -796,24 +691,22 @@ additional container is added like with Bootstrap 3 if <code>fluid</code> is <co
                 <div class="meta">
                             <p>
                             Defined in
-                    <a href="../files/.._ember-bootstrap_addon_components_bs-navbar.js.html#l222"><code>..&#x2F;ember-bootstrap&#x2F;addon&#x2F;components&#x2F;bs-navbar.js:222</code></a>
+                    <a href="../files/.._ember-bootstrap_addon_components_bs-collapse.ts.html#l182"><code>..&#x2F;ember-bootstrap&#x2F;addon&#x2F;components&#x2F;bs-collapse.ts:182</code></a>
                     </p>
             
             
                 </div>
             
                 <div class="description">
-                    <p>The action to be sent when the navbar is about to be expanded.</p>
-            <p>You can return false to prevent expanding the navbar automatically, and do that in your action by
-            setting <code>collapsed</code> to false.</p>
+                    <p>The action to be sent when the element is about to be shown.</p>
             
                 </div>
             
             
             
             </div>
-            <div id="event_onExpanded" class="events item public">
-                <h3 class="name"><code>onExpanded</code></h3>
+            <div id="event_onShown" class="events item public">
+                <h3 class="name"><code>onShown</code></h3>
                 <span class="type"></span>
             
             
@@ -824,14 +717,14 @@ additional container is added like with Bootstrap 3 if <code>fluid</code> is <co
                 <div class="meta">
                             <p>
                             Defined in
-                    <a href="../files/.._ember-bootstrap_addon_components_bs-navbar.js.html#l232"><code>..&#x2F;ember-bootstrap&#x2F;addon&#x2F;components&#x2F;bs-navbar.js:232</code></a>
+                    <a href="../files/.._ember-bootstrap_addon_components_bs-collapse.ts.html#l189"><code>..&#x2F;ember-bootstrap&#x2F;addon&#x2F;components&#x2F;bs-collapse.ts:189</code></a>
                     </p>
             
             
                 </div>
             
                 <div class="description">
-                    <p>The action to be sent after the navbar has been expanded (including the CSS transition).</p>
+                    <p>The action to be sent after the element has been completely shown (including the CSS transition).</p>
             
                 </div>
             

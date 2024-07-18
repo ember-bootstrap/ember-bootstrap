@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <title>Components.DropdownButton - ember-bootstrap</title>
+  <title>Components.Button - ember-bootstrap</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="../assets/css/api.css">
   <script type="text/javascript" src="//use.typekit.net/dkq5epu.js"></script>
@@ -54,11 +54,70 @@
         <div id="docs-main">
           <div class="content">
 <div class="card">
-  <h1 class="card-header">Components.DropdownButton <span class="badge badge-public small">public</span></h1>
+  <h1 class="card-header">Components.Button <span class="badge badge-public small">public</span></h1>
   <div class="card-body">
 
-<p>Button component with that can act as a dropdown toggler.</p>
-<p>See <a href="Components.Dropdown.html">Components.Dropdown</a> for examples.</p>
+<p>Implements a HTML button element, with support for all <a href="http://getbootstrap.com/css/#buttons">Bootstrap button CSS styles</a>
+as well as advanced functionality such as button states.</p>
+<h3>Basic Usage</h3>
+<pre class="code prettyprint"><code class="language-hbs">&lt;BsButton @type="primary" @icon="glyphicon glyphicon-download"&gt;
+  Downloads
+&lt;/BsButton&gt;
+</code></pre>
+<h3>Actions</h3>
+<p>Use the <code>onClick</code> property of the component to send an action to your controller. It will receive the button's value
+(see the <code>value</code> property) as an argument.</p>
+<pre class="code prettyprint"><code class="language-hbs">&lt;BsButton @type="primary" @icon="glyphicon glyphicon-download" @onClick=(action "download")&gt;
+  Downloads
+&lt;/BsButton&gt;
+</code></pre>
+<h3>Promise support for automatic state change</h3>
+<p>When returning a Promise for any asynchronous operation from the <code>onClick</code> closure action the button will
+manage an internal state ("default" &gt; "pending" &gt; "fulfilled"/"rejected") automatically.</p>
+<p>The button is disabled by default if it's in pending state. You could override this behavior by passing
+the <code>disabled</code> HTML attribute or by setting <code>@preventConcurrency</code> to false.</p>
+<pre class="code prettyprint"><code class="language-hbs">&lt;BsButton
+  disabled={{false}}
+/&gt;
+</code></pre>
+<pre class="code prettyprint"><code class="language-hbs">&lt;BsButton
+  @preventConcurrency={{false}}
+/&gt;
+</code></pre>
+<p>The label could be changed automatically according to the state of the promise with <code>@defaultText</code>,
+<code>@pendingText</code>, <code>@fulfilledText</code> and <code>@rejectedText</code> arguments:</p>
+<pre class="code prettyprint"><code class="language-hbs">&lt;BsButton
+  @type="primary"
+  @icon="glyphicon glyphicon-download"
+  @defaultText="Download"
+  @pendingText="Loading..."
+  @fulfilledText="Completed!"
+  @rejectedText="Oups!?"
+  @onClick={{this.download}}
+/&gt;
+</code></pre>
+<pre class="code prettyprint"><code class="language-js">// controller.js
+import { Controller } from '@ember/controller';
+import { action } from '@ember/object';
+
+export default class MyController extends Controller {
+  @action
+  download(value) {
+    return new Promise(...);
+  }
+});
+</code></pre>
+<p>For further customization <code>isPending</code>, <code>isFulfilled</code>, <code>isRejected</code> and <code>isSettled</code> properties are yielded:</p>
+<pre class="code prettyprint"><code class="language-hbs">&lt;BsButton @onClick=(action "download") as |button|&gt;
+  Download
+  {{#if button.isPending}}
+    &lt;span class="loading-spinner"&gt;&lt;/span&gt;
+  {{/if}}
+&lt;/BsButton&gt;
+</code></pre>
+<p>You can <code>reset</code> the state represented by these properties and used for button's text by setting <code>reset</code> property to
+<code>true</code>.</p>
+<p><em>Note that only invoking the component in a template as shown above is considered part of its public API. Extending from it (subclassing) is generally not supported, and may break at any time.</em></p>
 
 
   </div>
@@ -69,13 +128,13 @@
           Extends
         </dt>
         <dd class="col-sm-9">
-          <a href="../classes/Components.Button.html" class="crosslink">Components.Button</a>
+          Glimmer.Component
         </dd>
         <dt class="col-sm-3">
           Defined in
         </dt>
         <dd class="col-sm-9">
-          <a href="../files/.._ember-bootstrap_addon_components_bs-dropdown_button.js.html#l3"><code>..&#x2F;ember-bootstrap&#x2F;addon&#x2F;components&#x2F;bs-dropdown&#x2F;button.js:3</code></a>
+          <a href="../files/.._ember-bootstrap_addon_components_bs-button.ts.html#l58"><code>..&#x2F;ember-bootstrap&#x2F;addon&#x2F;components&#x2F;bs-button.ts:58</code></a>
         </dd>
 
     </dl>
@@ -135,11 +194,11 @@
             <h3>Methods</h3>
 
             <ul class="index-list methods extends">
-                <li class="index-item method private inherited">
+                <li class="index-item method private">
                   <a href="#" data-tabid="#methods" data-anchor="#method_click" data-tablink="click">click</a>
 
                 </li>
-                <li class="index-item method private inherited">
+                <li class="index-item method private">
                   <a href="#" data-tabid="#methods" data-anchor="#method_resetState" data-tablink="resetState">resetState</a>
 
                 </li>
@@ -150,112 +209,112 @@
             <h3>Properties</h3>
 
             <ul class="index-list properties extends">
-                <li class="index-item property private inherited">
+                <li class="index-item property private">
                   <a href="#" data-tabid="#properties" data-anchor="#property__disabled"
                      data-tablink="_disabled">_disabled</a>
 
                 </li>
-                <li class="index-item property public inherited">
+                <li class="index-item property public">
                   <a href="#" data-tabid="#properties" data-anchor="#property_active"
                      data-tablink="active">active</a>
 
                 </li>
-                <li class="index-item property public inherited">
+                <li class="index-item property public">
                   <a href="#" data-tabid="#properties" data-anchor="#property_block"
                      data-tablink="block">block</a>
 
                 </li>
-                <li class="index-item property public inherited">
+                <li class="index-item property public">
                   <a href="#" data-tabid="#properties" data-anchor="#property_bubble"
                      data-tablink="bubble">bubble</a>
 
                 </li>
-                <li class="index-item property public inherited">
+                <li class="index-item property public">
                   <a href="#" data-tabid="#properties" data-anchor="#property_defaultText"
                      data-tablink="defaultText">defaultText</a>
 
                 </li>
-                <li class="index-item property public inherited">
+                <li class="index-item property public">
                   <a href="#" data-tabid="#properties" data-anchor="#property_fulfilledText"
                      data-tablink="fulfilledText">fulfilledText</a>
 
                 </li>
-                <li class="index-item property public inherited">
+                <li class="index-item property public">
                   <a href="#" data-tabid="#properties" data-anchor="#property_icon"
                      data-tablink="icon">icon</a>
 
                 </li>
-                <li class="index-item property public inherited">
+                <li class="index-item property public">
                   <a href="#" data-tabid="#properties" data-anchor="#property_iconActive"
                      data-tablink="iconActive">iconActive</a>
 
                 </li>
-                <li class="index-item property public inherited">
+                <li class="index-item property public">
                   <a href="#" data-tabid="#properties" data-anchor="#property_iconInactive"
                      data-tablink="iconInactive">iconInactive</a>
 
                 </li>
-                <li class="index-item property private inherited">
+                <li class="index-item property private">
                   <a href="#" data-tabid="#properties" data-anchor="#property_isFulfilled"
                      data-tablink="isFulfilled">isFulfilled</a>
 
                 </li>
-                <li class="index-item property private inherited">
+                <li class="index-item property private">
                   <a href="#" data-tabid="#properties" data-anchor="#property_isPending"
                      data-tablink="isPending">isPending</a>
 
                 </li>
-                <li class="index-item property private inherited">
+                <li class="index-item property private">
                   <a href="#" data-tabid="#properties" data-anchor="#property_isRejected"
                      data-tablink="isRejected">isRejected</a>
 
                 </li>
-                <li class="index-item property private inherited">
+                <li class="index-item property private">
                   <a href="#" data-tabid="#properties" data-anchor="#property_isSettled"
                      data-tablink="isSettled">isSettled</a>
 
                 </li>
-                <li class="index-item property public inherited">
+                <li class="index-item property public">
                   <a href="#" data-tabid="#properties" data-anchor="#property_outline"
                      data-tablink="outline">outline</a>
 
                 </li>
-                <li class="index-item property public inherited">
+                <li class="index-item property public">
                   <a href="#" data-tabid="#properties" data-anchor="#property_pendingText"
                      data-tablink="pendingText">pendingText</a>
 
                 </li>
-                <li class="index-item property public inherited">
+                <li class="index-item property public">
                   <a href="#" data-tabid="#properties" data-anchor="#property_preventConcurrency"
                      data-tablink="preventConcurrency">preventConcurrency</a>
 
                 </li>
-                <li class="index-item property public inherited">
+                <li class="index-item property public">
                   <a href="#" data-tabid="#properties" data-anchor="#property_rejectedText"
                      data-tablink="rejectedText">rejectedText</a>
 
                 </li>
-                <li class="index-item property public inherited">
+                <li class="index-item property public">
                   <a href="#" data-tabid="#properties" data-anchor="#property_reset"
                      data-tablink="reset">reset</a>
 
                 </li>
-                <li class="index-item property public inherited">
+                <li class="index-item property public">
                   <a href="#" data-tabid="#properties" data-anchor="#property_size"
                      data-tablink="size">size</a>
 
                 </li>
-                <li class="index-item property private inherited">
+                <li class="index-item property private">
                   <a href="#" data-tabid="#properties" data-anchor="#property_state"
                      data-tablink="state">state</a>
 
                 </li>
-                <li class="index-item property public inherited">
+                <li class="index-item property public">
                   <a href="#" data-tabid="#properties" data-anchor="#property_type"
                      data-tablink="type">type</a>
 
                 </li>
-                <li class="index-item property public inherited">
+                <li class="index-item property public">
                   <a href="#" data-tabid="#properties" data-anchor="#property_value"
                      data-tablink="value">value</a>
 
@@ -268,7 +327,7 @@
             <h3>Events</h3>
 
             <ul class="index-list events extends">
-                <li class="index-item event public inherited">
+                <li class="index-item event public">
                   <a href="#" data-tabid="#events" data-anchor="#event_onClick" data-tablink="onClick">onClick</a>
 
                 </li>
@@ -277,7 +336,7 @@
       </div>
 
         <div id="methods" class="tab-pane">
-            <div id="method_click" class="method item private inherited">
+            <div id="method_click" class="method item private">
                 <h3 class="name">click
                 <span class="small"> </span>
                 </h3>
@@ -291,8 +350,8 @@
             
             
                 <div class="meta">
-                            <p>Inherited from
-                            <a href="../classes/Components.Button.html#method_click">Components.Button</a>:
+                            <p>
+                            Defined in
                     <a href="../files/.._ember-bootstrap_addon_components_bs-button.ts.html#l421"><code>..&#x2F;ember-bootstrap&#x2F;addon&#x2F;components&#x2F;bs-button.ts:421</code></a>
                     </p>
             
@@ -307,7 +366,7 @@
             
             
             </div>
-            <div id="method_resetState" class="method item private inherited">
+            <div id="method_resetState" class="method item private">
                 <h3 class="name">resetState
                 <span class="small"> </span>
                 </h3>
@@ -321,8 +380,8 @@
             
             
                 <div class="meta">
-                            <p>Inherited from
-                            <a href="../classes/Components.Button.html#method_resetState">Components.Button</a>:
+                            <p>
+                            Defined in
                     <a href="../files/.._ember-bootstrap_addon_components_bs-button.ts.html#l406"><code>..&#x2F;ember-bootstrap&#x2F;addon&#x2F;components&#x2F;bs-button.ts:406</code></a>
                     </p>
             
@@ -331,7 +390,8 @@
                 </div>
             
                 <div class="description">
-                    This will reset the state property to 'default', and with that the button's label to defaultText
+                    <p>This will reset the state property to 'default', and with that the button's label to defaultText</p>
+            
                 </div>
             
             
@@ -341,7 +401,7 @@
 
         <div id="properties" class="tab-pane">
             <div id="property__disabled"
-                 class="property item private inherited">
+                 class="property item private">
               <h3 class="name">_disabled
                 <span class="badge badge-secondary small">?boolean</span>
                   <span class="badge badge-private small">private</span>
@@ -353,8 +413,8 @@
             
               <div class="meta">
                   <p><strong>Default:</strong> null</p>
-                  <p>Inherited from
-                    <a href="../classes/Components.Button.html#property__disabled">Components.Button</a>:
+                  <p>
+                      Defined in
                   <a href="../files/.._ember-bootstrap_addon_components_bs-button.ts.html#l186"><code>..&#x2F;ember-bootstrap&#x2F;addon&#x2F;components&#x2F;bs-button.ts:186</code></a>
               </p>
             
@@ -362,8 +422,9 @@
               </div>
             
               <div class="description">
-                Property to disable the button only used in internal communication
-            between Ember Boostrap components.
+                <p>Property to disable the button only used in internal communication
+            between Ember Boostrap components.</p>
+            
               </div>
             
             
@@ -371,7 +432,7 @@
             
             </div>
             <div id="property_active"
-                 class="property item public inherited">
+                 class="property item public">
               <h3 class="name">active
                 <span class="badge badge-secondary small">boolean</span>
                   <span class="badge badge-public small">public</span>
@@ -383,8 +444,8 @@
             
               <div class="meta">
                   <p><strong>Default:</strong> false</p>
-                  <p>Inherited from
-                    <a href="../classes/Components.Button.html#property_active">Components.Button</a>:
+                  <p>
+                      Defined in
                   <a href="../files/.._ember-bootstrap_addon_components_bs-button.ts.html#l203"><code>..&#x2F;ember-bootstrap&#x2F;addon&#x2F;components&#x2F;bs-button.ts:203</code></a>
               </p>
             
@@ -392,7 +453,8 @@
               </div>
             
               <div class="description">
-                Set the 'active' class to apply active/pressed CSS styling
+                <p>Set the 'active' class to apply active/pressed CSS styling</p>
+            
               </div>
             
             
@@ -400,7 +462,7 @@
             
             </div>
             <div id="property_block"
-                 class="property item public inherited">
+                 class="property item public">
               <h3 class="name">block
                 <span class="badge badge-secondary small">boolean</span>
                   <span class="badge badge-public small">public</span>
@@ -412,8 +474,8 @@
             
               <div class="meta">
                   <p><strong>Default:</strong> false</p>
-                  <p>Inherited from
-                    <a href="../classes/Components.Button.html#property_block">Components.Button</a>:
+                  <p>
+                      Defined in
                   <a href="../files/.._ember-bootstrap_addon_components_bs-button.ts.html#l212"><code>..&#x2F;ember-bootstrap&#x2F;addon&#x2F;components&#x2F;bs-button.ts:212</code></a>
               </p>
             
@@ -421,9 +483,9 @@
               </div>
             
               <div class="description">
-                Property for block level buttons (BS3 and BS4 only!)
+                <p>Property for block level buttons (BS3 and BS4 only!)</p>
+            <p>See the <a href="http://getbootstrap.com/css/#buttons-sizes">Bootstrap docs</a></p>
             
-            See the [Bootstrap docs](http://getbootstrap.com/css/#buttons-sizes)
               </div>
             
             
@@ -431,7 +493,7 @@
             
             </div>
             <div id="property_bubble"
-                 class="property item public inherited">
+                 class="property item public">
               <h3 class="name">bubble
                 <span class="badge badge-secondary small">boolean</span>
                   <span class="badge badge-public small">public</span>
@@ -443,8 +505,8 @@
             
               <div class="meta">
                   <p><strong>Default:</strong> false</p>
-                  <p>Inherited from
-                    <a href="../classes/Components.Button.html#property_bubble">Components.Button</a>:
+                  <p>
+                      Defined in
                   <a href="../files/.._ember-bootstrap_addon_components_bs-button.ts.html#l223"><code>..&#x2F;ember-bootstrap&#x2F;addon&#x2F;components&#x2F;bs-button.ts:223</code></a>
               </p>
             
@@ -452,8 +514,9 @@
               </div>
             
               <div class="description">
-                A click event on a button will not bubble up the DOM tree if it has an <code>onClick</code> action handler. Set to true to
-            enable the event to bubble
+                <p>A click event on a button will not bubble up the DOM tree if it has an <code>onClick</code> action handler. Set to true to
+            enable the event to bubble</p>
+            
               </div>
             
             
@@ -461,7 +524,7 @@
             
             </div>
             <div id="property_defaultText"
-                 class="property item public inherited">
+                 class="property item public">
               <h3 class="name">defaultText
                 <span class="badge badge-secondary small">string</span>
                   <span class="badge badge-public small">public</span>
@@ -472,8 +535,8 @@
               </h3>
             
               <div class="meta">
-                  <p>Inherited from
-                    <a href="../classes/Components.Button.html#property_defaultText">Components.Button</a>:
+                  <p>
+                      Defined in
                   <a href="../files/.._ember-bootstrap_addon_components_bs-button.ts.html#l151"><code>..&#x2F;ember-bootstrap&#x2F;addon&#x2F;components&#x2F;bs-button.ts:151</code></a>
               </p>
             
@@ -481,7 +544,8 @@
               </div>
             
               <div class="description">
-                Default label of the button. Not need if used as a block component
+                <p>Default label of the button. Not need if used as a block component</p>
+            
               </div>
             
             
@@ -489,7 +553,7 @@
             
             </div>
             <div id="property_fulfilledText"
-                 class="property item public inherited">
+                 class="property item public">
               <h3 class="name">fulfilledText
                 <span class="badge badge-secondary small">string</span>
                   <span class="badge badge-public small">public</span>
@@ -500,8 +564,8 @@
               </h3>
             
               <div class="meta">
-                  <p>Inherited from
-                    <a href="../classes/Components.Button.html#property_fulfilledText">Components.Button</a>:
+                  <p>
+                      Defined in
                   <a href="../files/.._ember-bootstrap_addon_components_bs-button.ts.html#l168"><code>..&#x2F;ember-bootstrap&#x2F;addon&#x2F;components&#x2F;bs-button.ts:168</code></a>
               </p>
             
@@ -509,8 +573,9 @@
               </div>
             
               <div class="description">
-                Label of the button used if <code>onClick</code> event has returned a Promise which succeeded.
-            Not considered if used as a block component.
+                <p>Label of the button used if <code>onClick</code> event has returned a Promise which succeeded.
+            Not considered if used as a block component.</p>
+            
               </div>
             
             
@@ -518,7 +583,7 @@
             
             </div>
             <div id="property_icon"
-                 class="property item public inherited">
+                 class="property item public">
               <h3 class="name">icon
                 <span class="badge badge-secondary small">String</span>
                   <span class="badge badge-public small">public</span>
@@ -529,8 +594,8 @@
               </h3>
             
               <div class="meta">
-                  <p>Inherited from
-                    <a href="../classes/Components.Button.html#property_icon">Components.Button</a>:
+                  <p>
+                      Defined in
                   <a href="../files/.._ember-bootstrap_addon_components_bs-button.ts.html#l249"><code>..&#x2F;ember-bootstrap&#x2F;addon&#x2F;components&#x2F;bs-button.ts:249</code></a>
               </p>
             
@@ -538,8 +603,9 @@
               </div>
             
               <div class="description">
-                Class(es) (e.g. glyphicons or font awesome) to use as a button icon
-            This will render a <i class="{{icon}}"></i> element in front of the button's label
+                <p>Class(es) (e.g. glyphicons or font awesome) to use as a button icon
+            This will render a <i class=""></i> element in front of the button's label</p>
+            
               </div>
             
             
@@ -547,7 +613,7 @@
             
             </div>
             <div id="property_iconActive"
-                 class="property item public inherited">
+                 class="property item public">
               <h3 class="name">iconActive
                 <span class="badge badge-secondary small">String</span>
                   <span class="badge badge-public small">public</span>
@@ -558,8 +624,8 @@
               </h3>
             
               <div class="meta">
-                  <p>Inherited from
-                    <a href="../classes/Components.Button.html#property_iconActive">Components.Button</a>:
+                  <p>
+                      Defined in
                   <a href="../files/.._ember-bootstrap_addon_components_bs-button.ts.html#l233"><code>..&#x2F;ember-bootstrap&#x2F;addon&#x2F;components&#x2F;bs-button.ts:233</code></a>
               </p>
             
@@ -567,7 +633,8 @@
               </div>
             
               <div class="description">
-                If button is active and this is set, the icon property will match this property
+                <p>If button is active and this is set, the icon property will match this property</p>
+            
               </div>
             
             
@@ -575,7 +642,7 @@
             
             </div>
             <div id="property_iconInactive"
-                 class="property item public inherited">
+                 class="property item public">
               <h3 class="name">iconInactive
                 <span class="badge badge-secondary small">String</span>
                   <span class="badge badge-public small">public</span>
@@ -586,8 +653,8 @@
               </h3>
             
               <div class="meta">
-                  <p>Inherited from
-                    <a href="../classes/Components.Button.html#property_iconInactive">Components.Button</a>:
+                  <p>
+                      Defined in
                   <a href="../files/.._ember-bootstrap_addon_components_bs-button.ts.html#l241"><code>..&#x2F;ember-bootstrap&#x2F;addon&#x2F;components&#x2F;bs-button.ts:241</code></a>
               </p>
             
@@ -595,7 +662,8 @@
               </div>
             
               <div class="description">
-                If button is inactive and this is set, the icon property will match this property
+                <p>If button is inactive and this is set, the icon property will match this property</p>
+            
               </div>
             
             
@@ -603,7 +671,7 @@
             
             </div>
             <div id="property_isFulfilled"
-                 class="property item private inherited">
+                 class="property item private">
               <h3 class="name">isFulfilled
                 <span class="badge badge-secondary small">Boolean</span>
                   <span class="badge badge-private small">private</span>
@@ -614,8 +682,8 @@
               </h3>
             
               <div class="meta">
-                  <p>Inherited from
-                    <a href="../classes/Components.Button.html#property_isFulfilled">Components.Button</a>:
+                  <p>
+                      Defined in
                   <a href="../files/.._ember-bootstrap_addon_components_bs-button.ts.html#l316"><code>..&#x2F;ember-bootstrap&#x2F;addon&#x2F;components&#x2F;bs-button.ts:316</code></a>
               </p>
             
@@ -623,7 +691,8 @@
               </div>
             
               <div class="description">
-                Promise returned by <code>onClick</code> event has been succeeded.
+                <p>Promise returned by <code>onClick</code> event has been succeeded.</p>
+            
               </div>
             
             
@@ -631,7 +700,7 @@
             
             </div>
             <div id="property_isPending"
-                 class="property item private inherited">
+                 class="property item private">
               <h3 class="name">isPending
                 <span class="badge badge-secondary small">Boolean</span>
                   <span class="badge badge-private small">private</span>
@@ -642,8 +711,8 @@
               </h3>
             
               <div class="meta">
-                  <p>Inherited from
-                    <a href="../classes/Components.Button.html#property_isPending">Components.Button</a>:
+                  <p>
+                      Defined in
                   <a href="../files/.._ember-bootstrap_addon_components_bs-button.ts.html#l305"><code>..&#x2F;ember-bootstrap&#x2F;addon&#x2F;components&#x2F;bs-button.ts:305</code></a>
               </p>
             
@@ -651,7 +720,8 @@
               </div>
             
               <div class="description">
-                Promise returned by <code>onClick</code> event is pending.
+                <p>Promise returned by <code>onClick</code> event is pending.</p>
+            
               </div>
             
             
@@ -659,7 +729,7 @@
             
             </div>
             <div id="property_isRejected"
-                 class="property item private inherited">
+                 class="property item private">
               <h3 class="name">isRejected
                 <span class="badge badge-secondary small">Boolean</span>
                   <span class="badge badge-private small">private</span>
@@ -670,8 +740,8 @@
               </h3>
             
               <div class="meta">
-                  <p>Inherited from
-                    <a href="../classes/Components.Button.html#property_isRejected">Components.Button</a>:
+                  <p>
+                      Defined in
                   <a href="../files/.._ember-bootstrap_addon_components_bs-button.ts.html#l327"><code>..&#x2F;ember-bootstrap&#x2F;addon&#x2F;components&#x2F;bs-button.ts:327</code></a>
               </p>
             
@@ -679,7 +749,8 @@
               </div>
             
               <div class="description">
-                Promise returned by <code>onClick</code> event has been rejected.
+                <p>Promise returned by <code>onClick</code> event has been rejected.</p>
+            
               </div>
             
             
@@ -687,7 +758,7 @@
             
             </div>
             <div id="property_isSettled"
-                 class="property item private inherited">
+                 class="property item private">
               <h3 class="name">isSettled
                 <span class="badge badge-secondary small">Boolean</span>
                   <span class="badge badge-private small">private</span>
@@ -698,8 +769,8 @@
               </h3>
             
               <div class="meta">
-                  <p>Inherited from
-                    <a href="../classes/Components.Button.html#property_isSettled">Components.Button</a>:
+                  <p>
+                      Defined in
                   <a href="../files/.._ember-bootstrap_addon_components_bs-button.ts.html#l338"><code>..&#x2F;ember-bootstrap&#x2F;addon&#x2F;components&#x2F;bs-button.ts:338</code></a>
               </p>
             
@@ -707,7 +778,8 @@
               </div>
             
               <div class="description">
-                Promise returned by <code>onClick</code> event has been succeeded or rejected.
+                <p>Promise returned by <code>onClick</code> event has been succeeded or rejected.</p>
+            
               </div>
             
             
@@ -715,7 +787,7 @@
             
             </div>
             <div id="property_outline"
-                 class="property item public inherited">
+                 class="property item public">
               <h3 class="name">outline
                 <span class="badge badge-secondary small">boolean</span>
                   <span class="badge badge-public small">public</span>
@@ -727,8 +799,8 @@
             
               <div class="meta">
                   <p><strong>Default:</strong> false</p>
-                  <p>Inherited from
-                    <a href="../classes/Components.Button.html#property_outline">Components.Button</a>:
+                  <p>
+                      Defined in
                   <a href="../files/.._ember-bootstrap_addon_components_bs-button.ts.html#l382"><code>..&#x2F;ember-bootstrap&#x2F;addon&#x2F;components&#x2F;bs-button.ts:382</code></a>
               </p>
             
@@ -736,7 +808,8 @@
               </div>
             
               <div class="description">
-                Property to create outline buttons (BS4+ only)
+                <p>Property to create outline buttons (BS4+ only)</p>
+            
               </div>
             
             
@@ -744,7 +817,7 @@
             
             </div>
             <div id="property_pendingText"
-                 class="property item public inherited">
+                 class="property item public">
               <h3 class="name">pendingText
                 <span class="badge badge-secondary small">string</span>
                   <span class="badge badge-public small">public</span>
@@ -755,8 +828,8 @@
               </h3>
             
               <div class="meta">
-                  <p>Inherited from
-                    <a href="../classes/Components.Button.html#property_pendingText">Components.Button</a>:
+                  <p>
+                      Defined in
                   <a href="../files/.._ember-bootstrap_addon_components_bs-button.ts.html#l159"><code>..&#x2F;ember-bootstrap&#x2F;addon&#x2F;components&#x2F;bs-button.ts:159</code></a>
               </p>
             
@@ -764,8 +837,9 @@
               </div>
             
               <div class="description">
-                Label of the button used if <code>onClick</code> event has returned a Promise which is pending.
-            Not considered if used as a block component.
+                <p>Label of the button used if <code>onClick</code> event has returned a Promise which is pending.
+            Not considered if used as a block component.</p>
+            
               </div>
             
             
@@ -773,7 +847,7 @@
             
             </div>
             <div id="property_preventConcurrency"
-                 class="property item public inherited">
+                 class="property item public">
               <h3 class="name">preventConcurrency
                 <span class="badge badge-secondary small">Boolean</span>
                   <span class="badge badge-public small">public</span>
@@ -785,8 +859,8 @@
             
               <div class="meta">
                   <p><strong>Default:</strong> true</p>
-                  <p>Inherited from
-                    <a href="../classes/Components.Button.html#property_preventConcurrency">Components.Button</a>:
+                  <p>
+                      Defined in
                   <a href="../files/.._ember-bootstrap_addon_components_bs-button.ts.html#l273"><code>..&#x2F;ember-bootstrap&#x2F;addon&#x2F;components&#x2F;bs-button.ts:273</code></a>
               </p>
             
@@ -794,10 +868,10 @@
               </div>
             
               <div class="description">
-                Controls if <code>onClick</code> action is fired concurrently. If <code>true</code> clicking button multiple times will not trigger
-            <code>onClick</code> action if a Promise returned by previous click is not settled yet.
+                <p>Controls if <code>onClick</code> action is fired concurrently. If <code>true</code> clicking button multiple times will not trigger
+            <code>onClick</code> action if a Promise returned by previous click is not settled yet.</p>
+            <p>This does not affect event bubbling.</p>
             
-            This does not affect event bubbling.
               </div>
             
             
@@ -805,7 +879,7 @@
             
             </div>
             <div id="property_rejectedText"
-                 class="property item public inherited">
+                 class="property item public">
               <h3 class="name">rejectedText
                 <span class="badge badge-secondary small">string</span>
                   <span class="badge badge-public small">public</span>
@@ -816,8 +890,8 @@
               </h3>
             
               <div class="meta">
-                  <p>Inherited from
-                    <a href="../classes/Components.Button.html#property_rejectedText">Components.Button</a>:
+                  <p>
+                      Defined in
                   <a href="../files/.._ember-bootstrap_addon_components_bs-button.ts.html#l177"><code>..&#x2F;ember-bootstrap&#x2F;addon&#x2F;components&#x2F;bs-button.ts:177</code></a>
               </p>
             
@@ -825,8 +899,9 @@
               </div>
             
               <div class="description">
-                Label of the button used if <code>onClick</code> event has returned a Promise which failed.
-            Not considered if used as a block component.
+                <p>Label of the button used if <code>onClick</code> event has returned a Promise which failed.
+            Not considered if used as a block component.</p>
+            
               </div>
             
             
@@ -834,7 +909,7 @@
             
             </div>
             <div id="property_reset"
-                 class="property item public inherited">
+                 class="property item public">
               <h3 class="name">reset
                 <span class="badge badge-secondary small">boolean</span>
                   <span class="badge badge-public small">public</span>
@@ -845,8 +920,8 @@
               </h3>
             
               <div class="meta">
-                  <p>Inherited from
-                    <a href="../classes/Components.Button.html#property_reset">Components.Button</a>:
+                  <p>
+                      Defined in
                   <a href="../files/.._ember-bootstrap_addon_components_bs-button.ts.html#l349"><code>..&#x2F;ember-bootstrap&#x2F;addon&#x2F;components&#x2F;bs-button.ts:349</code></a>
               </p>
             
@@ -854,11 +929,11 @@
               </div>
             
               <div class="description">
-                Set this to <code>true</code> to reset the <code>state</code>. A typical use case is to bind this attribute with ember-data isDirty flag.
-            
-            The old value is not taken into consideration. Setting a <code>true</code> value to <code>true</code> again will also reset <code>state</code>.
+                <p>Set this to <code>true</code> to reset the <code>state</code>. A typical use case is to bind this attribute with ember-data isDirty flag.</p>
+            <p>The old value is not taken into consideration. Setting a <code>true</code> value to <code>true</code> again will also reset <code>state</code>.
             In that case it's even to notify the observer system that the property has changed by calling
-            [<code>notifyPropertyChange()</code>](https://www.emberjs.com/api/ember/3.2/classes/EmberObject/methods/notifyPropertyChange?anchor=notifyPropertyChange).
+            <a href="https://www.emberjs.com/api/ember/3.2/classes/EmberObject/methods/notifyPropertyChange?anchor=notifyPropertyChange"><code>notifyPropertyChange()</code></a>.</p>
+            
               </div>
             
             
@@ -866,7 +941,7 @@
             
             </div>
             <div id="property_size"
-                 class="property item public inherited">
+                 class="property item public">
               <h3 class="name">size
                 <span class="badge badge-secondary small">String</span>
                   <span class="badge badge-public small">public</span>
@@ -877,8 +952,8 @@
               </h3>
             
               <div class="meta">
-                  <p>Inherited from
-                    <a href="../classes/Components.Button.html#property_size">Components.Button</a>:
+                  <p>
+                      Defined in
                   <a href="../files/.._ember-bootstrap_addon_components_bs-button.ts.html#l361"><code>..&#x2F;ember-bootstrap&#x2F;addon&#x2F;components&#x2F;bs-button.ts:361</code></a>
               </p>
             
@@ -886,9 +961,9 @@
               </div>
             
               <div class="description">
-                Property for size styling, set to 'lg', 'sm' or 'xs'
+                <p>Property for size styling, set to 'lg', 'sm' or 'xs'</p>
+            <p>Also see the <a href="https://getbootstrap.com/docs/4.3/components/buttons/#sizes">Bootstrap docs</a></p>
             
-            Also see the [Bootstrap docs](https://getbootstrap.com/docs/4.3/components/buttons/#sizes)
               </div>
             
             
@@ -896,7 +971,7 @@
             
             </div>
             <div id="property_state"
-                 class="property item private inherited">
+                 class="property item private">
               <h3 class="name">state
                 <span class="badge badge-secondary small">String</span>
                   <span class="badge badge-private small">private</span>
@@ -908,8 +983,8 @@
             
               <div class="meta">
                   <p><strong>Default:</strong> &#x27;default&#x27;</p>
-                  <p>Inherited from
-                    <a href="../classes/Components.Button.html#property_state">Components.Button</a>:
+                  <p>
+                      Defined in
                   <a href="../files/.._ember-bootstrap_addon_components_bs-button.ts.html#l285"><code>..&#x2F;ember-bootstrap&#x2F;addon&#x2F;components&#x2F;bs-button.ts:285</code></a>
               </p>
             
@@ -917,11 +992,12 @@
               </div>
             
               <div class="description">
-                State of the button. The button's label (if not used as a block component) will be set to the
+                <p>State of the button. The button's label (if not used as a block component) will be set to the
             <code>&lt;state&gt;Text</code> property.
             This property will automatically be set when using a click action that supplies the callback with a promise.
-            Possible values are: "default" > "pending" > "fulfilled" / "rejected".
-            It could be resetted by <code>reset</code> property.
+            Possible values are: "default" &gt; "pending" &gt; "fulfilled" / "rejected".
+            It could be resetted by <code>reset</code> property.</p>
+            
               </div>
             
             
@@ -929,7 +1005,7 @@
             
             </div>
             <div id="property_type"
-                 class="property item public inherited">
+                 class="property item public">
               <h3 class="name">type
                 <span class="badge badge-secondary small">String</span>
                   <span class="badge badge-public small">public</span>
@@ -941,8 +1017,8 @@
             
               <div class="meta">
                   <p><strong>Default:</strong> &#x27;secondary&#x27;</p>
-                  <p>Inherited from
-                    <a href="../classes/Components.Button.html#property_type">Components.Button</a>:
+                  <p>
+                      Defined in
                   <a href="../files/.._ember-bootstrap_addon_components_bs-button.ts.html#l371"><code>..&#x2F;ember-bootstrap&#x2F;addon&#x2F;components&#x2F;bs-button.ts:371</code></a>
               </p>
             
@@ -950,9 +1026,9 @@
               </div>
             
               <div class="description">
-                Property for type styling
+                <p>Property for type styling</p>
+            <p>For the available types see the <a href="https://getbootstrap.com/docs/4.3/components/buttons/">Bootstrap docs</a></p>
             
-            For the available types see the [Bootstrap docs](https://getbootstrap.com/docs/4.3/components/buttons/)
               </div>
             
             
@@ -960,7 +1036,7 @@
             
             </div>
             <div id="property_value"
-                 class="property item public inherited">
+                 class="property item public">
               <h3 class="name">value
                 <span class="badge badge-secondary small">any</span>
                   <span class="badge badge-public small">public</span>
@@ -971,8 +1047,8 @@
               </h3>
             
               <div class="meta">
-                  <p>Inherited from
-                    <a href="../classes/Components.Button.html#property_value">Components.Button</a>:
+                  <p>
+                      Defined in
                   <a href="../files/.._ember-bootstrap_addon_components_bs-button.ts.html#l264"><code>..&#x2F;ember-bootstrap&#x2F;addon&#x2F;components&#x2F;bs-button.ts:264</code></a>
               </p>
             
@@ -980,8 +1056,9 @@
               </div>
             
               <div class="description">
-                Supply a value that will be associated with this button. This will be sent
-            as a parameter of the default action triggered when clicking the button
+                <p>Supply a value that will be associated with this button. This will be sent
+            as a parameter of the default action triggered when clicking the button</p>
+            
               </div>
             
             
@@ -992,7 +1069,7 @@
 
 
         <div id="events" class="tab-pane">
-            <div id="event_onClick" class="events item public inherited">
+            <div id="event_onClick" class="events item public">
                 <h3 class="name"><code>onClick</code></h3>
                 <span class="type"></span>
             
@@ -1002,8 +1079,8 @@
             
             
                 <div class="meta">
-                            <p>Inherited from
-                            <a href="../classes/Components.Button.html#event_onClick">Components.Button</a>:
+                            <p>
+                            Defined in
                     <a href="../files/.._ember-bootstrap_addon_components_bs-button.ts.html#l391"><code>..&#x2F;ember-bootstrap&#x2F;addon&#x2F;components&#x2F;bs-button.ts:391</code></a>
                     </p>
             
@@ -1011,14 +1088,13 @@
                 </div>
             
                 <div class="description">
-                    When clicking the button this action is called with the value of the button (that is the value of the "value" property).
-            
-            Return a promise object, and the buttons state will automatically set to "pending", "resolved" and/or "rejected".
+                    <p>When clicking the button this action is called with the value of the button (that is the value of the "value" property).</p>
+            <p>Return a promise object, and the buttons state will automatically set to "pending", "resolved" and/or "rejected".
             This could be used to automatically set the button's text depending on promise state (<code>defaultText</code>, <code>pendingText</code>,
             <code>fulfilledText</code>, <code>rejectedText</code>) and for further customization using the yielded <code>isPending</code>, <code>isFulfilled</code>,
-            <code>isRejected</code> properties.
+            <code>isRejected</code> properties.</p>
+            <p>The click event will not bubble up, unless you set <code>bubble</code> to true.</p>
             
-            The click event will not bubble up, unless you set <code>bubble</code> to true.
                 </div>
             
                     <div class="params">
@@ -1031,7 +1107,7 @@
             
             
                                 <div class="param-description">
-                                     
+                                    
                                 </div>
             
                             </li>
