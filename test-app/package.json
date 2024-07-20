@@ -92,7 +92,7 @@
     "fs-extra": "11.2.0",
     "loader.js": "4.7.0",
     "prettier": "3.0.3",
-    "qunit": "2.21.0",
+    "qunit": "2.21.1",
     "qunit-dom": "3.2.0",
     "resolve": "1.22.8",
     "silent-error": "1.1.1",
