@@ -292,7 +292,7 @@ importers:
         version: 5.10.1(@glimmer/component@1.1.2)(@glint/template@1.4.0)(rsvp@4.8.5)(webpack@5.92.1)
       ember-style-modifier:
         specifier: ^0.8.0 || ^1.0.0 || ^2.0.0 || ^3.0.0 || ^4.0.0
-        version: 4.3.1(@babel/core@7.24.9)(@ember/string@3.1.1)(ember-source@5.10.1)
+        version: 4.4.0(@babel/core@7.24.9)(@ember/string@3.1.1)(ember-source@5.10.1)
       findup-sync:
         specifier: ^5.0.0
         version: 5.0.0
@@ -574,8 +574,8 @@ importers:
         specifier: 3.0.0
         version: 3.0.0
       ember-style-modifier:
-        specifier: 4.3.1
-        version: 4.3.1(@babel/core@7.24.9)(@ember/string@3.1.1)(ember-source@5.10.1)
+        specifier: 4.4.0
+        version: 4.4.0(@babel/core@7.24.9)(@ember/string@3.1.1)(ember-source@5.10.1)
       ember-template-lint:
         specifier: 5.13.0
         version: 5.13.0
@@ -6494,14 +6494,6 @@ packages:
       mimic-response: 3.1.0
     dev: true
 
-  /decorator-transforms@1.1.0(@babel/core@7.24.9):
-    resolution: {integrity: sha512-n3WCgc3PB2t9mLV4SJd87IjTbKeFUGw2sU5eEBYczSmcvj3guX4eMW4XOowlQqGk7I/da6+bwv1ydw1ZtNqWaw==}
-    dependencies:
-      '@babel/plugin-syntax-decorators': 7.24.7(@babel/core@7.24.9)
-      babel-import-util: 2.0.1
-    transitivePeerDependencies:
-      - '@babel/core'
-
   /decorator-transforms@2.0.0(@babel/core@7.24.9):
     resolution: {integrity: sha512-ETfQccGcotK01YJsoB0AGTdUp7kS9jI93mBzrRY5Oyo+bOJfa2UKTSjCNf+iRNwAWBmBKlbiCcyL4tkY4C4dZQ==}
     dependencies:
@@ -8139,16 +8131,16 @@ packages:
       - webpack
     dev: true
 
-  /ember-style-modifier@4.3.1(@babel/core@7.24.9)(@ember/string@3.1.1)(ember-source@5.10.1):
-    resolution: {integrity: sha512-QO7w7WX0nbM9L2XGjsTuLDWOvh073XXSLUXRnuKRGbG2iLHDuoCXZsRCZu2Ov6yFt9vB7vnNszQ+C0bUxqloeg==}
+  /ember-style-modifier@4.4.0(@babel/core@7.24.9)(@ember/string@3.1.1)(ember-source@5.10.1):
+    resolution: {integrity: sha512-gT1ckbhl1KSj5sWTo/8UChj98eZeE+mUmYoXw8VjwJgWP0wiTCibGZjVbC0WlIUd7umxuG61OQ/ivfF+sAiOEQ==}
     peerDependencies:
-      '@ember/string': ^3.0.1
+      '@ember/string': ^3.1.1 || ^4.0.0
       ember-source: ^3.28.0 || ^4.0.0 || >=5.0.0
     dependencies:
       '@ember/string': 3.1.1
       '@embroider/addon-shim': 1.8.9
       csstype: 3.1.3
-      decorator-transforms: 1.1.0(@babel/core@7.24.9)
+      decorator-transforms: 2.0.0(@babel/core@7.24.9)
       ember-modifier: 4.2.0(@babel/core@7.24.9)(ember-source@5.10.1)
       ember-source: 5.10.1(@glimmer/component@1.1.2)(@glint/template@1.4.0)(rsvp@4.8.5)(webpack@5.92.1)
     transitivePeerDependencies:
