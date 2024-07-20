@@ -382,8 +382,8 @@ importers:
         specifier: 8.1.1
         version: 8.1.1(eslint@8.57.0)
       mocha:
-        specifier: 10.6.1
-        version: 10.6.1
+        specifier: 10.7.0
+        version: 10.7.0
       release-it:
         specifier: 17.4.2
         version: 17.4.2(typescript@5.5.3)
@@ -12847,8 +12847,8 @@ packages:
     resolution: {integrity: sha512-IXnMcJ6ZyTuhRmJSjzvHSRhlVPiN9Jwc6e59V0bEJ0ba6OBeX2L0E+mRN1QseeOF4mM+F1Rit6Nh7o+rl2Yn/A==}
     engines: {node: '>0.9'}
 
-  /mocha@10.6.1:
-    resolution: {integrity: sha512-3DI5OWZGF2kRsNS2JV1GBU9YOwljNy0aBj8cJM3ndartWTd6iRwKleO00XB5/mAzzkUZ5h40Z0DcbswsQZ/Gvw==}
+  /mocha@10.7.0:
+    resolution: {integrity: sha512-v8/rBWr2VO5YkspYINnvu81inSz2y3ODJrhO175/Exzor1RcEZZkizgE2A+w/CAXXoESS8Kys5E62dOHGHzULA==}
     engines: {node: '>= 14.0.0'}
     hasBin: true
     dependencies:
