@@ -72,7 +72,7 @@
     "gulp-transform": "3.0.5",
     "loader.js": "4.7.0",
     "merge-stream": "2.0.0",
-    "prember": "2.0.0",
+    "prember": "2.1.0",
     "prettier": "3.0.3",
     "qunit": "2.21.1",
     "qunit-dom": "3.2.0",

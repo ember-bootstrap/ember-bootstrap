@@ -183,8 +183,8 @@ importers:
         specifier: 2.0.0
         version: 2.0.0
       prember:
-        specifier: 2.0.0
-        version: 2.0.0
+        specifier: 2.1.0
+        version: 2.1.0
       prettier:
         specifier: 3.0.3
         version: 3.0.3
@@ -13928,8 +13928,8 @@ packages:
     engines: {node: '>= 0.8.0'}
     dev: true
 
-  /prember@2.0.0:
-    resolution: {integrity: sha512-mNlTBBTC6ToJAqTG98pPAw9Kbg/yrRql21PoHMn0/MMQvFszR5e6w1NuOP76mfKQLFkHvxsKZcgibwjnRAKeMg==}
+  /prember@2.1.0:
+    resolution: {integrity: sha512-bK3lwDIm9lP1YemNy1cLImpxT0a4XYWJ8WHztUtGtLrXPJuRGtNUXbHx9d73Pf3RfhqY4fzSQCbR2HEtBcG8jQ==}
     engines: {node: 12.* || 14.* || >= 16}
     dependencies:
       broccoli-debug: 0.6.5
