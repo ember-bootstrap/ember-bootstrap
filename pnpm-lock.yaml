@@ -340,8 +340,8 @@ importers:
         specifier: 7.16.1
         version: 7.16.1(eslint@8.57.0)(typescript@5.5.4)
       chai:
-        specifier: 4.4.1
-        version: 4.4.1
+        specifier: 4.5.0
+        version: 4.5.0
       chai-things:
         specifier: 0.2.0
         version: 0.2.0
@@ -3064,7 +3064,7 @@ packages:
     dependencies:
       '@sinonjs/commons': 1.8.6
       lodash.get: 4.4.2
-      type-detect: 4.0.8
+      type-detect: 4.1.0
     dev: true
 
   /@sinonjs/samsam@8.0.0:
@@ -3072,7 +3072,7 @@ packages:
     dependencies:
       '@sinonjs/commons': 2.0.0
       lodash.get: 4.4.2
-      type-detect: 4.0.8
+      type-detect: 4.1.0
     dev: true
 
   /@sinonjs/text-encoding@0.7.2:
@@ -5418,12 +5418,12 @@ packages:
       check-error: 1.0.3
     dev: true
 
-  /chai-as-promised@7.1.1(chai@4.4.1):
+  /chai-as-promised@7.1.1(chai@4.5.0):
     resolution: {integrity: sha512-azL6xMoi+uxu6z4rhWQ1jbdUhOMhis2PvscD/xjLqNMkv3BPPp2JyyuTHOrf9BOosGpNQ11v6BKv/g57RXbiaA==}
     peerDependencies:
       chai: '>= 2.1.2 < 5'
     dependencies:
-      chai: 4.4.1
+      chai: 4.5.0
       check-error: 1.0.3
     dev: true
 
@@ -5446,8 +5446,8 @@ packages:
       type-detect: 1.0.0
     dev: true
 
-  /chai@4.4.1:
-    resolution: {integrity: sha512-13sOfMv2+DWduEU+/xbun3LScLoqN17nBeTLUsmDfKdoiC1fr0n9PU4guu4AhRcOVFk/sW8LyZWHuhWtQZiF+g==}
+  /chai@4.5.0:
+    resolution: {integrity: sha512-RITGBfijLkBddZvnn8jdqoTypxvqbOLYQkGGxXzeFjVHvudaPw0HNFD9x928/eUwYWd2dPCugVqspGALTZZQKw==}
     engines: {node: '>=4'}
     dependencies:
       assertion-error: 1.1.0
@@ -5456,7 +5456,7 @@ packages:
       get-func-name: 2.0.2
       loupe: 2.3.7
       pathval: 1.1.1
-      type-detect: 4.0.8
+      type-detect: 4.1.0
     dev: true
 
   /chalk@1.1.3:
@@ -6513,7 +6513,7 @@ packages:
     resolution: {integrity: sha512-WaEtAOpRA1MQ0eohqZjpGD8zdI0Ovsm8mmFhaDN8dvDZzyoUMcYDnf5Y6iu7HTXxf8JDS23qWa4a+hKCDyOPzw==}
     engines: {node: '>=6'}
     dependencies:
-      type-detect: 4.0.8
+      type-detect: 4.1.0
     dev: true
 
   /deep-extend@0.6.0:
@@ -7054,8 +7054,8 @@ packages:
     resolution: {integrity: sha512-otCKdGcNFK0+MkQo+LLjYbRD9EerApH6Z/odvvlL1hxrN+owHMV5E+jI2rbtdvNEH0/6w5ZqjH4kS232fvtCxQ==}
     engines: {node: 6.* || 8.* || >= 10.*}
     dependencies:
-      chai: 4.4.1
-      chai-as-promised: 7.1.1(chai@4.4.1)
+      chai: 4.5.0
+      chai-as-promised: 7.1.1(chai@4.5.0)
       chai-files: 1.4.0
       debug: 4.3.5(supports-color@8.1.1)
       ember-cli-internal-test-helpers: 0.9.1
@@ -16521,6 +16521,11 @@ packages:
 
   /type-detect@4.0.8:
     resolution: {integrity: sha512-0fr/mIH1dlO+x7TlcMy+bIDqKPsw/70tVyeHW787goQjhmqaZe10uwLujubK9q9Lg6Fiho1KUKDYz0Z7k7g5/g==}
+    engines: {node: '>=4'}
+    dev: true
+
+  /type-detect@4.1.0:
+    resolution: {integrity: sha512-Acylog8/luQ8L7il+geoSxhEkazvkslg7PSNKOX59mbB9cOveP5aq9h74Y7YU8yDpJwetzQQrfIwtf4Wp4LKcw==}
     engines: {node: '>=4'}
     dev: true
 
