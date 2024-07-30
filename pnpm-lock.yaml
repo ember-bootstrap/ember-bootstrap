@@ -30,8 +30,8 @@ importers:
         specifier: 2.1.0
         version: 2.1.0
       '@ember/string':
-        specifier: 3.1.1
-        version: 3.1.1
+        specifier: 4.0.0
+        version: 4.0.0
       '@ember/test-helpers':
         specifier: 3.3.1
         version: 3.3.1(@babel/core@7.24.9)(@glint/template@1.4.0)(ember-source@5.10.1)(webpack@5.93.0)
@@ -292,7 +292,7 @@ importers:
         version: 5.10.1(@glimmer/component@1.1.2)(@glint/template@1.4.0)(rsvp@4.8.5)(webpack@5.93.0)
       ember-style-modifier:
         specifier: ^0.8.0 || ^1.0.0 || ^2.0.0 || ^3.0.0 || ^4.0.0
-        version: 4.4.0(@babel/core@7.24.9)(@ember/string@3.1.1)(ember-source@5.10.1)
+        version: 4.4.0(@babel/core@7.24.9)(@ember/string@4.0.0)(ember-source@5.10.1)
       findup-sync:
         specifier: ^5.0.0
         version: 5.0.0
@@ -406,8 +406,8 @@ importers:
         specifier: 2.1.0
         version: 2.1.0(@babel/core@7.24.9)(@glint/template@1.4.0)(ember-source@5.10.1)
       '@ember/string':
-        specifier: 3.1.1
-        version: 3.1.1
+        specifier: 4.0.0
+        version: 4.0.0
       '@ember/test-helpers':
         specifier: 3.3.1
         version: 3.3.1(@babel/core@7.24.9)(@glint/template@1.4.0)(ember-source@5.10.1)(webpack@5.93.0)
@@ -575,7 +575,7 @@ importers:
         version: 3.0.0
       ember-style-modifier:
         specifier: 4.4.0
-        version: 4.4.0(@babel/core@7.24.9)(@ember/string@3.1.1)(ember-source@5.10.1)
+        version: 4.4.0(@babel/core@7.24.9)(@ember/string@4.0.0)(ember-source@5.10.1)
       ember-template-lint:
         specifier: 5.13.0
         version: 5.13.0
@@ -2027,6 +2027,10 @@ packages:
       ember-cli-babel: 7.26.11
     transitivePeerDependencies:
       - supports-color
+    dev: true
+
+  /@ember/string@4.0.0:
+    resolution: {integrity: sha512-IMVyVE72twuAMSYcHzWSgtgYTtzlHlKSGW8vEbztnnmkU6uo7kVHmiqSN9R4RkBhzvh0VD4G76Eph+55t3iNIA==}
 
   /@ember/test-helpers@3.3.1(@babel/core@7.24.9)(@glint/template@1.4.0)(ember-source@5.10.1)(webpack@5.93.0):
     resolution: {integrity: sha512-h4uFBy4pquBtHsHI+tx9S0wtMmn1L+8dkXiDiyoqG1+3e0Awk6GBujiFM9s4ANq6wC8uIhC3wEFyts10h2OAoQ==}
@@ -8132,13 +8136,13 @@ packages:
       - webpack
     dev: true
 
-  /ember-style-modifier@4.4.0(@babel/core@7.24.9)(@ember/string@3.1.1)(ember-source@5.10.1):
+  /ember-style-modifier@4.4.0(@babel/core@7.24.9)(@ember/string@4.0.0)(ember-source@5.10.1):
     resolution: {integrity: sha512-gT1ckbhl1KSj5sWTo/8UChj98eZeE+mUmYoXw8VjwJgWP0wiTCibGZjVbC0WlIUd7umxuG61OQ/ivfF+sAiOEQ==}
     peerDependencies:
       '@ember/string': ^3.1.1 || ^4.0.0
       ember-source: ^3.28.0 || ^4.0.0 || >=5.0.0
     dependencies:
-      '@ember/string': 3.1.1
+      '@ember/string': 4.0.0
       '@embroider/addon-shim': 1.8.9
       csstype: 3.1.3
       decorator-transforms: 2.0.0(@babel/core@7.24.9)
