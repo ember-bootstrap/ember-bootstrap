@@ -65,7 +65,7 @@
     "tracked-toolbox": "^1.2.3 || ^2.0.0"
   },
   "devDependencies": {
-    "@babel/eslint-parser": "7.24.8",
+    "@babel/eslint-parser": "7.25.1",
     "@babel/plugin-proposal-decorators": "7.24.7",
     "@embroider/test-setup": "4.0.0",
     "@glint/core": "1.4.0",
