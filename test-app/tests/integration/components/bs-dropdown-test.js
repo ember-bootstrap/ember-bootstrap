@@ -9,7 +9,7 @@ import {
   test,
   versionDependent,
 } from '../../helpers/bootstrap';
-import hbs from 'htmlbars-inline-precompile';
+import { hbs } from 'ember-cli-htmlbars';
 import setupNoDeprecations from '../../helpers/setup-no-deprecations';
 import a11yAudit from 'ember-a11y-testing/test-support/audit';
 import sinon from 'sinon';
@@ -50,35 +50,14 @@ module('Integration | Component | bs-dropdown', function (hooks) {
     assert.dom(dropleftClass).exists('has dropleft class');
   });
 
-  test('dropdown container with dropdown button has btn-group class', async function (assert) {
+  test('supports setting btn-group class', async function (assert) {
     await render(
-      hbs`<BsDropdown as |dd|><dd.button>Dropdown
+      hbs`<BsDropdown class='btn-group' as |dd|><dd.button>Dropdown
     <span class='caret'></span></dd.button><dd.menu><li><a
         href='#'
       >Something</a></li></dd.menu></BsDropdown>`,
     );
     assert.dom('.btn-group').exists('has btn-group class');
-  });
-
-  test('dropdown container with block dropdown button has dropdown class', async function (assert) {
-    await render(
-      hbs`<BsDropdown as |dd|><dd.button @block={{true}}>Dropdown
-    <span class='caret'></span></dd.button><dd.menu><li><a
-        href='#'
-      >Something</a></li></dd.menu></BsDropdown>`,
-    );
-    assert.dom('.dropdown').exists('has dropdown class');
-  });
-
-  test('dropdown container with dropdown button supports dropup style', async function (assert) {
-    await render(
-      hbs`<BsDropdown @direction='up' as |dd|><dd.button>Dropdown
-    <span class='caret'></span></dd.button><dd.menu><li><a
-        href='#'
-      >Something</a></li></dd.menu></BsDropdown>`,
-    );
-    assert.dom('.btn-group').exists('has btn-group class');
-    assert.dom('.dropup').exists('has dropup class');
   });
 
   test('dropdown-toggle toggles dropdown visibility', async function (assert) {

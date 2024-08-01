@@ -6,7 +6,7 @@ import {
   testRequiringTransitions,
   visibilityClass,
 } from '../../../helpers/bootstrap';
-import hbs from 'htmlbars-inline-precompile';
+import { hbs } from 'ember-cli-htmlbars';
 import setupNoDeprecations from '../../../helpers/setup-no-deprecations';
 
 module('Integration | Component | bs-tab/pane', function (hooks) {

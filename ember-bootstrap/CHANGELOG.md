@@ -14,6 +14,72 @@
 
 
 
+
+
+
+
+## v6.3.3 (2024-07-18)
+
+#### :memo: Documentation
+* [#2135](https://github.com/ember-bootstrap/ember-bootstrap/pull/2135) Fix API page generation of TypeScript components ([@SanderKnauff](https://github.com/SanderKnauff))
+
+#### Committers: 1
+- Sander Knauff ([@SanderKnauff](https://github.com/SanderKnauff))
+
+## v6.3.2 (2024-07-03)
+
+#### :bug: Bug Fix
+* [#2129](https://github.com/ember-bootstrap/ember-bootstrap/pull/2129) Styling of toggle button yielded by BsDropdown via arguments is ignored  ([@zfir](https://github.com/zfir))
+
+#### :memo: Documentation
+* [#2127](https://github.com/ember-bootstrap/ember-bootstrap/pull/2127) Fix syntax in BsForm API docs ([@bracke](https://github.com/bracke))
+* [#2125](https://github.com/ember-bootstrap/ember-bootstrap/pull/2125) invalid syntax in docs example for form component  ([@craigteegarden](https://github.com/craigteegarden))
+
+#### :house: Internal
+* [#2130](https://github.com/ember-bootstrap/ember-bootstrap/pull/2130) allow action helper and modifier deprecation for now ([@jelhan](https://github.com/jelhan))
+
+#### Committers: 4
+- Bent Bracke ([@bracke](https://github.com/bracke))
+- Craig Teegarden ([@craigteegarden](https://github.com/craigteegarden))
+- Jeldrik Hanschke ([@jelhan](https://github.com/jelhan))
+- Zafir Sk Heerah ([@zfir](https://github.com/zfir))
+
+## v6.3.1 (2024-04-16)
+
+#### :bug: Bug Fix
+* [#2123](https://github.com/ember-bootstrap/ember-bootstrap/pull/2123) Add @ to `onClick` in BsModal::Footer submit button ([@SanderKnauff](https://github.com/SanderKnauff))
+* [#2110](https://github.com/ember-bootstrap/ember-bootstrap/pull/2110) Dropdown should not add .btn-group class ([@jelhan](https://github.com/jelhan))
+* [#2120](https://github.com/ember-bootstrap/ember-bootstrap/pull/2120) Fix alignment of dropdown menus when using Bootstrap 5 ([@SanderKnauff](https://github.com/SanderKnauff))
+
+#### :house: Internal
+* [#2111](https://github.com/ember-bootstrap/ember-bootstrap/pull/2111) Extend `<BsButton>` component by invoking it in template rather than extending JS class ([@jelhan](https://github.com/jelhan))
+* [#2122](https://github.com/ember-bootstrap/ember-bootstrap/pull/2122) Modernize hbs import in tests ([@jelhan](https://github.com/jelhan))
+* [#2114](https://github.com/ember-bootstrap/ember-bootstrap/pull/2114) Refactor tests for dropdown menu ([@jelhan](https://github.com/jelhan))
+
+#### Committers: 2
+- Jeldrik Hanschke ([@jelhan](https://github.com/jelhan))
+- Sander Knauff ([@SanderKnauff](https://github.com/SanderKnauff))
+
+
+## v6.3.0 (2024-04-04)
+
+This release fixes a wrong placement of tooltips if using Bootstrap >= 5.3. The fixes causes a slightly to high padding of tooltips if using Bootstrap < 5.3. It is recommended to upgrade Bootstrap to >= 5.3 at the same time.
+
+#### :rocket: Enhancement
+* [#2108](https://github.com/ember-bootstrap/ember-bootstrap/pull/2108) Convert BsSpinner to TypeScript ([@Baltazore](https://github.com/Baltazore))
+
+#### :bug: Bug Fix
+* [#2119](https://github.com/ember-bootstrap/ember-bootstrap/pull/2119) Fix tooltip offset when using Bootstrap >= 5.3 ([@SanderKnauff](https://github.com/SanderKnauff))
+
+#### :house: Internal
+* [#2113](https://github.com/ember-bootstrap/ember-bootstrap/pull/2113) Drop unused argument @ariaRole from <BsDropdown::Menu> ([@jelhan](https://github.com/jelhan))
+
+#### Committers: 3
+- Jeldrik Hanschke ([@jelhan](https://github.com/jelhan))
+- Kirill Shaplyko ([@Baltazore](https://github.com/Baltazore))
+- Sander Knauff ([@SanderKnauff](https://github.com/SanderKnauff))
+
+
 ## v6.2.0 (2024-02-17)
 
 We started converting Ember Bootstrap to TypeScript and shipping types for Glint. The types are work in progress. They are neither complete nor considered stable.

@@ -1,21 +1,19 @@
 {{! @glint-nocheck }}
-<button
-  disabled={{this.__disabled}}
+<BsButton
+  {{! cannot pass @block directly because that triggers reserved keyword assertion when compiling the template }}
+  {{! template-lint-disable no-capital-arguments no-args-paths }}
+  @block={{this.args.block}}
+  @onClick={{@onClick}}
+  @active={{@active}}
+  @size={{@size}}
+  @type={{@type}}
+  @outline={{@outline}}
   aria-expanded={{if @isOpen "true" "false"}}
-  class="btn dropdown-toggle {{if @active "active"}} {{if this.block "btn-block"}} {{bs-size-class "btn" @size}} {{bs-type-class "btn" @type default=(if (macroCondition (macroGetOwnConfig "isBS3")) "default" "secondary") outline=@outline}}"
-  type="button"
+  class="dropdown-toggle"
   ...attributes
-  {{on "click" this.handleClick}}
   {{on "keydown" @onKeyDown}}
   {{did-insert @registerChildElement "toggle"}}
   {{will-destroy @unregisterChildElement "toggle"}}
 >
-  {{#if this.icon}}<i class={{this.icon}}></i> {{/if}}{{this.text}}{{yield
-    (hash
-      isFulfilled=this.isFulfilled
-      isPending=this.isPending
-      isRejected=this.isRejected
-      isSettled=this.isSettled
-    )
-  }}
-</button>
+  {{yield}}
+</BsButton>
