@@ -1,6 +1,6 @@
 {{! @glint-nocheck }}
-{{did-insert this.handleVisibilityChanges}}
-{{did-update this.handleVisibilityChanges @open}}
+{{did-insert-helper this.handleVisibilityChanges}}
+{{did-update-helper this.handleVisibilityChanges @open}}
 
 {{#if this.inDom}}
   {{!
