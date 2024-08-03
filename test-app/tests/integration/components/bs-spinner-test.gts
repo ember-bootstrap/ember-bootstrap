@@ -1,14 +1,14 @@
 import { render } from '@ember/test-helpers';
-import { hbs } from 'ember-cli-htmlbars';
 import { setupRenderingTest } from 'ember-qunit';
 import { module } from 'qunit';
 import { test, testForBootstrap } from '../../helpers/bootstrap';
+import BsSpinner from 'ember-bootstrap/components/bs-spinner';
 
 module('Integration | Component | bs-spinner', function (hooks) {
   setupRenderingTest(hooks);
 
   test('spinner has correct default markup', async function (assert) {
-    await render(hbs`<BsSpinner />`);
+    await render(<template><BsSpinner /></template>);
 
     assert
       .dom('div')
@@ -16,13 +16,13 @@ module('Integration | Component | bs-spinner', function (hooks) {
   });
 
   test('spinner has correct size', async function (assert) {
-    await render(hbs`<BsSpinner @size='sm' />`);
+    await render(<template><BsSpinner @size='sm' /></template>);
 
     assert.dom('div').hasClass('spinner-border-sm', 'spinner has size class');
   });
 
   test('spinner has correct type', async function (assert) {
-    await render(hbs`<BsSpinner @type='primary' />`);
+    await render(<template><BsSpinner @type='primary' /></template>);
 
     assert
       .dom('div')
@@ -33,7 +33,11 @@ module('Integration | Component | bs-spinner', function (hooks) {
     4,
     'spinner has accessibility block (block-mode)',
     async function (assert) {
-      await render(hbs`<BsSpinner>Loading</BsSpinner>`);
+      await render(
+        <template>
+          <BsSpinner>Loading</BsSpinner>
+        </template>,
+      );
 
       assert.dom('span').hasClass('sr-only', 'accessibility block exists');
       assert
@@ -46,7 +50,7 @@ module('Integration | Component | bs-spinner', function (hooks) {
     4,
     'spinner does not have accessibility block (blockless-mode)',
     async function (assert) {
-      await render(hbs`<BsSpinner />`);
+      await render(<template><BsSpinner /></template>);
 
       assert
         .dom('span.sr-only')
@@ -58,7 +62,11 @@ module('Integration | Component | bs-spinner', function (hooks) {
     5,
     'spinner has accessibility block (block-mode)',
     async function (assert) {
-      await render(hbs`<BsSpinner>Loading</BsSpinner>`);
+      await render(
+        <template>
+          <BsSpinner>Loading</BsSpinner>
+        </template>,
+      );
 
       assert
         .dom('span')
@@ -73,7 +81,7 @@ module('Integration | Component | bs-spinner', function (hooks) {
     5,
     'spinner does not have accessibility block (blockless-mode)',
     async function (assert) {
-      await render(hbs`<BsSpinner />`);
+      await render(<template><BsSpinner /></template>);
 
       assert
         .dom('span.visually-hidden')
@@ -82,14 +90,14 @@ module('Integration | Component | bs-spinner', function (hooks) {
   );
 
   test('spinner has HTML attributes', async function (assert) {
-    await render(hbs`<BsSpinner id='test' />`);
+    await render(<template><BsSpinner id='test' /></template>);
 
     assert.dom('div').hasAttribute('id', 'test');
     assert.dom('div').hasAttribute('role', 'status');
   });
 
   test('spinnerType property allows changing spinner type', async function (assert) {
-    await render(hbs`<BsSpinner @spinnerType='grow' />`);
+    await render(<template><BsSpinner @spinnerType='grow' /></template>);
 
     assert.dom('div').hasClass('spinner-grow');
   });
