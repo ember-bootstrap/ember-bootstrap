@@ -72,9 +72,6 @@ module.exports = async function () {
         },
       },
       embroiderSafe({
-        env: {
-          FASTBOOT_DISABLED: true,
-        },
         npm: {
           devDependencies: {
             bootstrap: bootstrapVersion,
@@ -82,9 +79,6 @@ module.exports = async function () {
         },
       }),
       embroiderOptimized({
-        env: {
-          FASTBOOT_DISABLED: true,
-        },
         npm: {
           devDependencies: {
             bootstrap: bootstrapVersion,

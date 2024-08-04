@@ -6,15 +6,6 @@ const { maybeEmbroider } = require('@embroider/test-setup');
 module.exports = function (defaults) {
   const trees = {};
 
-  // Exclude FastBoot tests if FASTBOOT_DISABLED is set,
-  // to enable Embroider tests until https://github.com/embroider-build/embroider/issues/160 is resolved.
-  if (process.env.FASTBOOT_DISABLED) {
-    const Funnel = require('broccoli-funnel');
-    trees.tests = new Funnel('tests', {
-      exclude: ['fastboot/**'],
-    });
-  }
-
   const options = {
     'ember-bootstrap': {},
     'ember-cli-babel': {
@@ -26,11 +17,6 @@ module.exports = function (defaults) {
       watchDependencies: ['ember-bootstrap'],
     },
     trees,
-    addons: {
-      exclude: process.env.FASTBOOT_DISABLED
-        ? ['ember-cli-fastboot-testing']
-        : [],
-    },
   };
 
   const app = new EmberApp(defaults, options);
