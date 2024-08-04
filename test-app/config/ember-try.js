@@ -16,6 +16,9 @@ module.exports = async function () {
         npm: {
           devDependencies: {
             'ember-source': '~4.8.0',
+            // ember-resolver 11 is required for ember < 4.12
+            // See: https://github.com/ember-cli/ember-resolver/releases/tag/v12.0.0
+            'ember-resolver': '11.0.1',
             bootstrap: bootstrapVersion,
           },
         },
