@@ -1,23 +1,19 @@
 import { module, test } from 'qunit';
 import { setupRenderingTest } from 'ember-qunit';
 import { click, render } from '@ember/test-helpers';
-import { hbs } from 'ember-cli-htmlbars';
 import setupNoDeprecations from '../../../helpers/setup-no-deprecations';
 import sinon from 'sinon';
+import BsDropdown from 'ember-bootstrap/components/bs-dropdown';
 
 module('Integration | Component | bs-dropdown/toggle', function (hooks) {
   setupRenderingTest(hooks);
   setupNoDeprecations(hooks);
 
-  hooks.beforeEach(function () {
-    this.actions = {};
-    this.send = (actionName, ...args) =>
-      this.actions[actionName].apply(this, args);
-  });
-
   test('toggle has correct default markup', async function (assert) {
     await render(
-      hbs`<BsDropdown as |dd|><dd.toggle>Test</dd.toggle></BsDropdown>`,
+      <template>
+        <BsDropdown as |dd|><dd.toggle>Test</dd.toggle></BsDropdown>
+      </template>,
     );
 
     assert.dom('a').exists('toggle is an anchor tag by default');
@@ -27,14 +23,15 @@ module('Integration | Component | bs-dropdown/toggle', function (hooks) {
   });
 
   test('clicking toggle sends onClick action', async function (assert) {
-    let action = sinon.spy();
-    this.actions.click = action;
+    const onClick = sinon.stub();
     await render(
-      hbs`<BsDropdown as |dd|><dd.toggle
-    @onClick={{action 'click'}}
-  >Test</dd.toggle></BsDropdown>`,
+      <template>
+        <BsDropdown as |dd|>
+          <dd.toggle @onClick={{onClick}}>Test</dd.toggle>
+        </BsDropdown>
+      </template>,
     );
     await click('a');
-    assert.ok(action.calledOnce, 'onClick action has been called.');
+    assert.ok(onClick.calledOnce, 'onClick action has been called.');
   });
 });
