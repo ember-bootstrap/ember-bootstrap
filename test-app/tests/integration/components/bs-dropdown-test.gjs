@@ -585,9 +585,7 @@ module('Integration | Component | bs-dropdown', function (hooks) {
   });
 
   module('keyboard control', function () {
-    let renderInPlace;
-
-    function keyboardTest() {
+    function keyboardTest(renderInPlace) {
       test(`should have correct default element focused`, async function (assert) {
         await render(
           <template>
@@ -848,18 +846,12 @@ module('Integration | Component | bs-dropdown', function (hooks) {
       });
     }
 
-    module('in place', function (hooks) {
-      hooks.beforeEach(function () {
-        renderInPlace = true;
-      });
-      keyboardTest();
+    module('in place', function () {
+      keyboardTest(true);
     });
 
     module('in wormhole', function () {
-      hooks.beforeEach(function () {
-        renderInPlace = false;
-      });
-      keyboardTest();
+      keyboardTest(false);
     });
   });
 
