@@ -1,6 +1,6 @@
 import { module } from 'qunit';
 import { setupRenderingTest } from 'ember-qunit';
-import { click, render, settled } from '@ember/test-helpers';
+import { click, render, settled, waitFor } from '@ember/test-helpers';
 import {
   positionClassFor,
   positionStickyClass,
@@ -9,23 +9,19 @@ import {
   testBS5,
   visibilityClass,
 } from '../../helpers/bootstrap';
-import { hbs } from 'ember-cli-htmlbars';
 import setupNoDeprecations from '../../helpers/setup-no-deprecations';
 import a11yAudit from 'ember-a11y-testing/test-support/audit';
 import sinon from 'sinon';
+import BsNavbar from 'ember-bootstrap/components/bs-navbar';
+import { tracked } from '@glimmer/tracking';
+import { on } from '@ember/modifier';
 
 module('Integration | Component | bs-navbar', function (hooks) {
   setupRenderingTest(hooks);
   setupNoDeprecations(hooks);
 
-  hooks.beforeEach(function () {
-    this.actions = {};
-    this.send = (actionName, ...args) =>
-      this.actions[actionName].apply(this, args);
-  });
-
   testBS4('it has correct default markup', async function (assert) {
-    await render(hbs`<BsNavbar />`);
+    await render(<template><BsNavbar /></template>);
 
     assert.dom('nav').exists({ count: 1 }, 'there is only one nav element');
     assert.dom('nav').hasClass('navbar', 'the navbar has the navbar class');
@@ -36,7 +32,7 @@ module('Integration | Component | bs-navbar', function (hooks) {
   });
 
   testBS5('it has correct default markup', async function (assert) {
-    await render(hbs`<BsNavbar />`);
+    await render(<template><BsNavbar /></template>);
 
     assert.dom('nav').exists({ count: 1 }, 'there is only one nav element');
     assert.dom('nav').hasClass('navbar', 'the navbar has the navbar class');
@@ -52,7 +48,7 @@ module('Integration | Component | bs-navbar', function (hooks) {
   });
 
   test('it handles inverse navbars properly', async function (assert) {
-    await render(hbs`<BsNavbar @type='inverse' />`);
+    await render(<template><BsNavbar @type='inverse' /></template>);
 
     assert
       .dom('nav')
@@ -66,7 +62,7 @@ module('Integration | Component | bs-navbar', function (hooks) {
   });
 
   test('it handles fluid containers properly', async function (assert) {
-    await render(hbs`<BsNavbar @fluid={{false}} />`);
+    await render(<template><BsNavbar @fluid={{false}} /></template>);
 
     assert
       .dom('nav > div')
@@ -80,7 +76,7 @@ module('Integration | Component | bs-navbar', function (hooks) {
   });
 
   testBS5('it supports custom containers', async function (assert) {
-    await render(hbs`<BsNavbar @container='md' />`);
+    await render(<template><BsNavbar @container='md' /></template>);
 
     assert
       .dom('nav > div')
@@ -94,9 +90,13 @@ module('Integration | Component | bs-navbar', function (hooks) {
   });
 
   test('it handles the toggling action properly', async function (assert) {
-    await render(hbs`<BsNavbar as |navbar|>
-  <navbar.toggle @class='clickme'>Button</navbar.toggle>
-</BsNavbar>`);
+    await render(
+      <template>
+        <BsNavbar as |navbar|>
+          <navbar.toggle @class='clickme'>Button</navbar.toggle>
+        </BsNavbar>
+      </template>,
+    );
 
     assert
       .dom('button.navbar-toggler')
@@ -115,15 +115,19 @@ module('Integration | Component | bs-navbar', function (hooks) {
   });
 
   test('it exposes all the requisite contextual components', async function (assert) {
-    await render(hbs`<BsNavbar as |navbar|>
-  <div class='navbar-header'>
-    {{navbar.toggle}}
-    <a class='navbar-brand' href='#'>Brand</a>
-  </div>
-  <navbar.content>
-    {{navbar.nav}}
-  </navbar.content>
-</BsNavbar>`);
+    await render(
+      <template>
+        <BsNavbar as |navbar|>
+          <div class='navbar-header'>
+            {{navbar.toggle}}
+            <a class='navbar-brand' href='#'>Brand</a>
+          </div>
+          <navbar.content>
+            {{navbar.nav}}
+          </navbar.content>
+        </BsNavbar>
+      </template>,
+    );
 
     assert.dom('nav.navbar-light').exists({ count: 1 }, 'it has the navbar');
     assert
@@ -138,7 +142,7 @@ module('Integration | Component | bs-navbar', function (hooks) {
   });
 
   test('it nas no positional classes when position is not specified', async function (assert) {
-    await render(hbs`<BsNavbar />`);
+    await render(<template><BsNavbar /></template>);
 
     assert
       .dom('nav')
@@ -161,7 +165,7 @@ module('Integration | Component | bs-navbar', function (hooks) {
   });
 
   test('it handles fixed-top properly', async function (assert) {
-    await render(hbs`<BsNavbar @position='fixed-top' />`);
+    await render(<template><BsNavbar @position='fixed-top' /></template>);
 
     assert
       .dom('nav')
@@ -181,7 +185,7 @@ module('Integration | Component | bs-navbar', function (hooks) {
   });
 
   test('it handles fixed-bottom properly', async function (assert) {
-    await render(hbs`<BsNavbar @position='fixed-bottom' />`);
+    await render(<template><BsNavbar @position='fixed-bottom' /></template>);
 
     assert
       .dom('nav')
@@ -204,7 +208,7 @@ module('Integration | Component | bs-navbar', function (hooks) {
   });
 
   test('it handles navbar-expand[-*] properly', async function (assert) {
-    await render(hbs`<BsNavbar @toggleBreakpoint='sm' />`);
+    await render(<template><BsNavbar @toggleBreakpoint='sm' /></template>);
     assert
       .dom('nav')
       .hasNoClass(
@@ -215,12 +219,12 @@ module('Integration | Component | bs-navbar', function (hooks) {
   });
 
   test('it handles navbar-expand properly', async function (assert) {
-    await render(hbs`<BsNavbar @toggleBreakpoint={{null}} />`);
+    await render(<template><BsNavbar @toggleBreakpoint={{null}} /></template>);
     assert.dom('nav').hasClass('navbar-expand', 'it has navbar-expand');
   });
 
   test('it handles sticky-top properly', async function (assert) {
-    await render(hbs`<BsNavbar @position='sticky-top' />`);
+    await render(<template><BsNavbar @position='sticky-top' /></template>);
 
     assert
       .dom('nav')
@@ -240,24 +244,32 @@ module('Integration | Component | bs-navbar', function (hooks) {
   });
 
   test('setting collapse to false expands the navbar', async function (assert) {
-    let expandedAction = sinon.spy();
-    this.actions.expandedAction = expandedAction;
+    const expandedAction = sinon.spy();
+    class State {
+      @tracked collapsed = true;
+    }
+    const state = new State();
 
-    this.set('collapsed', true);
-    await render(hbs`<BsNavbar
-  @collapsed={{this.collapsed}}
-  @onExpanded={{action 'expandedAction'}}
-  as |navbar|
->
-  <div class='navbar-header'>
-    {{navbar.toggle}}
-    <a class='navbar-brand' href='#'>Brand</a>
-  </div>
-  <navbar.content>
-    {{navbar.nav}}
-  </navbar.content>
-</BsNavbar>`);
-    this.set('collapsed', false);
+    await render(
+      <template>
+        <BsNavbar
+          @collapsed={{state.collapsed}}
+          @onExpanded={{expandedAction}}
+          as |navbar|
+        >
+          <div class='navbar-header'>
+            {{navbar.toggle}}
+            <a class='navbar-brand' href='#'>Brand</a>
+          </div>
+          <navbar.content>
+            {{navbar.nav}}
+          </navbar.content>
+        </BsNavbar>
+      </template>,
+    );
+    state.collapsed = false;
+    await waitFor('.collapsing');
+
     assert
       .dom('.navbar-collapse')
       .hasClass(
@@ -276,24 +288,31 @@ module('Integration | Component | bs-navbar', function (hooks) {
   });
 
   test('setting collapse to true collapses the navbar', async function (assert) {
-    let collapsedAction = sinon.spy();
-    this.actions.collapsedAction = collapsedAction;
+    const collapsedAction = sinon.spy();
+    class State {
+      @tracked collapsed = false;
+    }
+    const state = new State();
 
-    this.set('collapsed', false);
-    await render(hbs`<BsNavbar
-  @collapsed={{this.collapsed}}
-  @onCollapsed={{action 'collapsedAction'}}
-  as |navbar|
->
-  <div class='navbar-header'>
-    {{navbar.toggle}}
-    <a class='navbar-brand' href='#'>Brand</a>
-  </div>
-  <navbar.content>
-    {{navbar.nav}}
-  </navbar.content>
-</BsNavbar>`);
-    this.set('collapsed', true);
+    await render(
+      <template>
+        <BsNavbar
+          @collapsed={{state.collapsed}}
+          @onCollapsed={{collapsedAction}}
+          as |navbar|
+        >
+          <div class='navbar-header'>
+            {{navbar.toggle}}
+            <a class='navbar-brand' href='#'>Brand</a>
+          </div>
+          <navbar.content>
+            {{navbar.nav}}
+          </navbar.content>
+        </BsNavbar>
+      </template>,
+    );
+    state.collapsed = true;
+    await waitFor('.collapsing');
 
     assert
       .dom('.navbar-collapse')
@@ -314,25 +333,27 @@ module('Integration | Component | bs-navbar', function (hooks) {
   });
 
   test('Expanding the navbar calls onExpand/onExpanded actions', async function (assert) {
-    let expandAction = sinon.spy();
-    let expandedAction = sinon.spy();
-    this.actions.expandAction = expandAction;
-    this.actions.expandedAction = expandedAction;
+    const expandAction = sinon.spy();
+    const expandedAction = sinon.spy();
 
-    await render(hbs`<BsNavbar
-  @collapsed={{true}}
-  @onExpand={{action 'expandAction'}}
-  @onExpanded={{action 'expandedAction'}}
-  as |navbar|
->
-  <div class='navbar-header'>
-    {{navbar.toggle}}
-    <a class='navbar-brand' href='#'>Brand</a>
-  </div>
-  <navbar.content>
-    {{navbar.nav}}
-  </navbar.content>
-</BsNavbar>`);
+    await render(
+      <template>
+        <BsNavbar
+          @collapsed={{true}}
+          @onExpand={{expandAction}}
+          @onExpanded={{expandedAction}}
+          as |navbar|
+        >
+          <div class='navbar-header'>
+            {{navbar.toggle}}
+            <a class='navbar-brand' href='#'>Brand</a>
+          </div>
+          <navbar.content>
+            {{navbar.nav}}
+          </navbar.content>
+        </BsNavbar>
+      </template>,
+    );
     await click('button');
 
     assert.ok(expandAction.calledOnce, 'onExpand action has been called');
@@ -349,25 +370,27 @@ module('Integration | Component | bs-navbar', function (hooks) {
   });
 
   test('Collapsing the navbar calls onCollapse/onCollapsed actions', async function (assert) {
-    let collapseAction = sinon.spy();
-    let collapsedAction = sinon.spy();
-    this.actions.collapseAction = collapseAction;
-    this.actions.collapsedAction = collapsedAction;
+    const collapseAction = sinon.spy();
+    const collapsedAction = sinon.spy();
 
-    await render(hbs`<BsNavbar
-  @collapsed={{false}}
-  @onCollapse={{action 'collapseAction'}}
-  @onCollapsed={{action 'collapsedAction'}}
-  as |navbar|
->
-  <div class='navbar-header'>
-    {{navbar.toggle}}
-    <a class='navbar-brand' href='#'>Brand</a>
-  </div>
-  <navbar.content>
-    {{navbar.nav}}
-  </navbar.content>
-</BsNavbar>`);
+    await render(
+      <template>
+        <BsNavbar
+          @collapsed={{false}}
+          @onCollapse={{collapseAction}}
+          @onCollapsed={{collapsedAction}}
+          as |navbar|
+        >
+          <div class='navbar-header'>
+            {{navbar.toggle}}
+            <a class='navbar-brand' href='#'>Brand</a>
+          </div>
+          <navbar.content>
+            {{navbar.nav}}
+          </navbar.content>
+        </BsNavbar>
+      </template>,
+    );
     await click('button');
 
     assert.ok(collapseAction.calledOnce, 'onCollapse action has been called');
@@ -384,101 +407,126 @@ module('Integration | Component | bs-navbar', function (hooks) {
   });
 
   test('navbar is not expanded when onExpand action returns false', async function (assert) {
-    let action = sinon.stub();
-    action.returns(false);
-    this.actions.expandAction = action;
+    const expandAction = sinon.stub().returns(false);
 
-    await render(hbs`<BsNavbar @collapsed={{true}} @onExpand={{action 'expandAction'}} as |navbar|>
-  <div class='navbar-header'>
-    {{navbar.toggle}}
-    <a class='navbar-brand' href='#'>Brand</a>
-  </div>
-  <navbar.content>
-    {{navbar.nav}}
-  </navbar.content>
-</BsNavbar>`);
+    await render(
+      <template>
+        <BsNavbar @collapsed={{true}} @onExpand={{expandAction}} as |navbar|>
+          <div class='navbar-header'>
+            {{navbar.toggle}}
+            <a class='navbar-brand' href='#'>Brand</a>
+          </div>
+          <navbar.content>
+            {{navbar.nav}}
+          </navbar.content>
+        </BsNavbar>
+      </template>,
+    );
     await click('button');
-    assert.ok(action.calledOnce, 'onExpand has been called.');
+    assert.ok(expandAction.calledOnce, 'onExpand has been called.');
 
     assert.dom('.collapsing').doesNotExist('no transition');
   });
 
   test('navbar is not collapsed when onCollapse action returns false', async function (assert) {
-    let action = sinon.stub();
-    action.returns(false);
-    this.actions.collapseAction = action;
+    const collapseAction = sinon.stub().returns(false);
 
-    await render(hbs`<BsNavbar
-  @collapsed={{false}}
-  @onCollapse={{action 'collapseAction'}}
-  as |navbar|
->
-  <div class='navbar-header'>
-    {{navbar.toggle}}
-    <a class='navbar-brand' href='#'>Brand</a>
-  </div>
-  <navbar.content>
-    {{navbar.nav}}
-  </navbar.content>
-</BsNavbar>`);
+    await render(
+      <template>
+        <BsNavbar
+          @collapsed={{false}}
+          @onCollapse={{collapseAction}}
+          as |navbar|
+        >
+          <div class='navbar-header'>
+            {{navbar.toggle}}
+            <a class='navbar-brand' href='#'>Brand</a>
+          </div>
+          <navbar.content>
+            {{navbar.nav}}
+          </navbar.content>
+        </BsNavbar>
+      </template>,
+    );
     await click('button');
-    assert.ok(action.calledOnce, 'onCollapse has been called.');
+    assert.ok(collapseAction.calledOnce, 'onCollapse has been called.');
 
     assert.dom('.collapsing').doesNotExist('no transition');
   });
 
   test('clicking the toggle does not modify the public collapsed property', async function (assert) {
-    this.set('collapsed', true);
-    await render(hbs`<BsNavbar @collapsed={{this.collapsed}} as |navbar|>
-  <div class='navbar-header'>
-    {{navbar.toggle}}
-    <a class='navbar-brand' href='#'>Brand</a>
-  </div>
-</BsNavbar>`);
+    class State {
+      @tracked collapsed = true;
+    }
+    const state = new State();
+    await render(
+      <template>
+        <BsNavbar @collapsed={{state.collapsed}} as |navbar|>
+          <div class='navbar-header'>
+            {{navbar.toggle}}
+            <a class='navbar-brand' href='#'>Brand</a>
+          </div>
+        </BsNavbar>
+      </template>,
+    );
 
     await click('button');
-    assert.true(this.collapsed, 'collapse property did not change');
+    assert.true(state.collapsed, 'collapse property did not change');
   });
 
   test('Navbar yields collapse action', async function (assert) {
-    let action = sinon.spy();
-    this.actions.action = action;
+    const collapseAction = sinon.spy();
 
-    await render(hbs`<BsNavbar @collapsed={{false}} @onCollapse={{action 'action'}} as |navbar|>
-  <button type='button' {{action navbar.collapse}}>Collapse</button>
-</BsNavbar>`);
+    await render(
+      <template>
+        <BsNavbar
+          @collapsed={{false}}
+          @onCollapse={{collapseAction}}
+          as |navbar|
+        >
+          <button type='button' {{on 'click' navbar.collapse}}>Collapse</button>
+        </BsNavbar>
+      </template>,
+    );
 
     await click('button');
-    assert.ok(action.calledOnce, 'onCollapse action has been called.');
+    assert.ok(collapseAction.calledOnce, 'onCollapse action has been called.');
   });
 
   test('Navbar yields expand action', async function (assert) {
-    let action = sinon.spy();
-    this.actions.action = action;
+    const expandAction = sinon.spy();
 
-    await render(hbs`<BsNavbar @collapsed={{true}} @onExpand={{action 'action'}} as |navbar|>
-  <button type='button' {{action navbar.expand}}>Expand</button>
-</BsNavbar>`);
+    await render(
+      <template>
+        <BsNavbar @collapsed={{true}} @onExpand={{expandAction}} as |navbar|>
+          <button type='button' {{on 'click' navbar.expand}}>Expand</button>
+        </BsNavbar>
+      </template>,
+    );
 
     await click('button');
-    assert.ok(action.calledOnce, 'onExpand action has been called.');
+    assert.ok(expandAction.calledOnce, 'onExpand action has been called.');
   });
 
   test('Navbar yields toggleNavbar action', async function (assert) {
-    let expanded = sinon.spy();
-    this.actions.expanded = expanded;
+    const expanded = sinon.spy();
+    const collapsed = sinon.spy();
 
-    let collapsed = sinon.spy();
-    this.actions.collapsed = collapsed;
-
-    await render(hbs`<BsNavbar
-  @collapsed={{true}}
-  @onExpand={{action 'expanded'}}
-  @onCollapse={{action 'collapsed'}}
-  as |navbar|
->
-  <button type='button' {{action navbar.toggleNavbar}}>Expand</button>
-</BsNavbar>`);
+    await render(
+      <template>
+        <BsNavbar
+          @collapsed={{true}}
+          @onExpand={{expanded}}
+          @onCollapse={{collapsed}}
+          as |navbar|
+        >
+          <button
+            type='button'
+            {{on 'click' navbar.toggleNavbar}}
+          >Expand</button>
+        </BsNavbar>
+      </template>,
+    );
 
     await click('button');
     assert.ok(expanded.calledOnce, 'onExpand action has been called.');
@@ -488,30 +536,33 @@ module('Integration | Component | bs-navbar', function (hooks) {
   });
 
   test('Clicking expanded navbar link collapses navbar', async function (assert) {
-    let collapseAction = sinon.spy();
-    this.actions.collapseAction = collapseAction;
+    const collapseAction = sinon.spy();
 
     this.owner.setupRouter();
 
-    await render(hbs`<BsNavbar
-  @collapsed={{false}}
-  @onCollapse={{action 'collapseAction'}}
-  as |navbar|
->
-  <div class='navbar-header'>
-    {{navbar.toggle}}
-    <a class='navbar-brand' href='#'>Brand</a>
-  </div>
-  <navbar.content>
-    <navbar.nav as |nav|>
-      <nav.item><nav.linkTo
-          @route='index'
-          id='link'
-          @disabled={{true}}
-        >Home</nav.linkTo></nav.item>
-    </navbar.nav>
-  </navbar.content>
-</BsNavbar>`);
+    await render(
+      <template>
+        <BsNavbar
+          @collapsed={{false}}
+          @onCollapse={{collapseAction}}
+          as |navbar|
+        >
+          <div class='navbar-header'>
+            {{navbar.toggle}}
+            <a class='navbar-brand' href='#'>Brand</a>
+          </div>
+          <navbar.content>
+            <navbar.nav as |nav|>
+              <nav.item><nav.linkTo
+                  @route='index'
+                  id='link'
+                  @disabled={{true}}
+                >Home</nav.linkTo></nav.item>
+            </navbar.nav>
+          </navbar.content>
+        </BsNavbar>
+      </template>,
+    );
     await click('#link');
 
     assert.ok(collapseAction.calledOnce, 'onCollapse action has been called');
@@ -520,17 +571,21 @@ module('Integration | Component | bs-navbar', function (hooks) {
   test('it passes accessibility checks', async function (assert) {
     this.owner.setupRouter();
 
-    await render(hbs`<BsNavbar as |navbar|>
-  <div class='navbar-header'>
-    {{navbar.toggle}}
-    <a class='navbar-brand' href='#'>Brand</a>
-  </div>
-  <navbar.content>
-    <navbar.nav as |nav|>
-      <nav.item><nav.linkTo @route='index'>Home</nav.linkTo></nav.item>
-    </navbar.nav>
-  </navbar.content>
-</BsNavbar>`);
+    await render(
+      <template>
+        <BsNavbar as |navbar|>
+          <div class='navbar-header'>
+            {{navbar.toggle}}
+            <a class='navbar-brand' href='#'>Brand</a>
+          </div>
+          <navbar.content>
+            <navbar.nav as |nav|>
+              <nav.item><nav.linkTo @route='index'>Home</nav.linkTo></nav.item>
+            </navbar.nav>
+          </navbar.content>
+        </BsNavbar>
+      </template>,
+    );
 
     await a11yAudit();
     assert.ok(true, 'A11y audit passed');
