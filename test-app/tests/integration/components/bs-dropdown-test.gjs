@@ -585,7 +585,7 @@ module('Integration | Component | bs-dropdown', function (hooks) {
   });
 
   module('keyboard control', function () {
-    let renderInPlace = undefined;
+    let renderInPlace;
 
     function keyboardTest() {
       test(`should have correct default element focused`, async function (assert) {
