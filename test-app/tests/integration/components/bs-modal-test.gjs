@@ -11,29 +11,27 @@ import {
   triggerKeyEvent,
 } from '@ember/test-helpers';
 import { test, testBS5, visibilityClass } from '../../helpers/bootstrap';
-import { hbs } from 'ember-cli-htmlbars';
 import setupNoDeprecations from '../../helpers/setup-no-deprecations';
 import sinon from 'sinon';
 import { skipTransition } from 'ember-bootstrap/utils/transition-end';
-import { setComponentTemplate } from '@ember/component';
-import templateOnly from '@ember/component/template-only';
+import BsModal from 'ember-bootstrap/components/bs-modal';
+import { tracked } from '@glimmer/tracking';
+import { on } from '@ember/modifier';
 
 module('Integration | Component | bs-modal', function (hooks) {
   setupRenderingTest(hooks);
   setupNoDeprecations(hooks);
 
-  hooks.beforeEach(function () {
-    this.actions = {};
-    this.send = (actionName, ...args) =>
-      this.actions[actionName].apply(this, args);
-  });
-
   test('Modal yields header, footer and body components', async function (assert) {
-    await render(hbs`<BsModal as |modal|>
-  <modal.header @title='Dialog' />
-  <modal.body>Hello world!</modal.body>
-  <modal.footer />
-</BsModal>`);
+    await render(
+      <template>
+        <BsModal as |modal|>
+          <modal.header @title='Dialog' />
+          <modal.body>Hello world!</modal.body>
+          <modal.footer />
+        </BsModal>
+      </template>,
+    );
 
     assert.dom('.modal').exists({ count: 1 }, 'Modal exists.');
     assert
@@ -58,76 +56,104 @@ module('Integration | Component | bs-modal', function (hooks) {
   });
 
   test('Hidden modal does not render', async function (assert) {
-    await render(hbs`<BsModal @open={{false}} as |modal|>
-  <modal.header @title='Dialog' />
-  <modal.body>Hello world!</modal.body>
-  <modal.footer />
-</BsModal>`);
+    await render(
+      <template>
+        <BsModal @open={{false}} as |modal|>
+          <modal.header @title='Dialog' />
+          <modal.body>Hello world!</modal.body>
+          <modal.footer />
+        </BsModal>
+      </template>,
+    );
 
     assert.dom('.modal *').doesNotExist('Modal does not exist.');
   });
 
   test('clicking ok button closes modal when autoClose=true with custom component hierarchy', async function (assert) {
-    const testComponent = templateOnly();
-    setComponentTemplate(
-      hbs`{{! template-lint-disable no-yield-only }}{{yield}}`,
-      testComponent,
-    );
-    this.set('testComponent', testComponent);
+    const testComponent = <template>
+      {{! template-lint-disable no-yield-only }}{{yield}}
+    </template>;
 
-    await render(hbs`<BsModal @title='Simple Dialog' @body={{false}} @footer={{false}} as |modal|>
-  <this.testComponent>
-    <modal.body>Hello world!</modal.body>
-    <modal.footer />
-  </this.testComponent>
-</BsModal>`);
+    await render(
+      <template>
+        <BsModal
+          @title='Simple Dialog'
+          @body={{false}}
+          @footer={{false}}
+          as |modal|
+        >
+          <testComponent>
+            <modal.body>Hello world!</modal.body>
+            <modal.footer />
+          </testComponent>
+        </BsModal>
+      </template>,
+    );
 
     await click('.modal .modal-footer button');
     assert.dom('.modal').doesNotExist('Modal is hidden');
   });
 
   test('Modal yields close action', async function (assert) {
-    let closeAction = sinon.spy();
-    this.actions.close = closeAction;
+    const closeAction = sinon.spy();
 
-    await render(hbs`<BsModal @onHide={{action 'close'}} as |modal|>
-  <modal.header @title='Dialog' />
-  <modal.body>Hello world!</modal.body>
-  <modal.footer>
-    <button type='button' id='close' {{action modal.close}}>Close</button>
-  </modal.footer>
-</BsModal>`);
+    await render(
+      <template>
+        <BsModal @onHide={{closeAction}} as |modal|>
+          <modal.header @title='Dialog' />
+          <modal.body>Hello world!</modal.body>
+          <modal.footer>
+            <button
+              type='button'
+              id='close'
+              {{on 'click' modal.close}}
+            >Close</button>
+          </modal.footer>
+        </BsModal>
+      </template>,
+    );
 
     await click('#close');
     assert.ok(closeAction.calledOnce, 'close action has been called.');
   });
 
   test('Modal yields submit action', async function (assert) {
-    let submitAction = sinon.spy();
-    this.actions.submit = submitAction;
+    const submitAction = sinon.spy();
 
-    await render(hbs`<BsModal @onSubmit={{action 'submit'}} as |modal|>
-  <modal.header @title='Dialog' />
-  <modal.body>Hello world!</modal.body>
-  <modal.footer>
-    <button type='button' id='submit' {{action modal.submit}}>Submit</button>
-  </modal.footer>
-</BsModal>`);
+    await render(
+      <template>
+        <BsModal @onSubmit={{submitAction}} as |modal|>
+          <modal.header @title='Dialog' />
+          <modal.body>Hello world!</modal.body>
+          <modal.footer>
+            <button
+              type='button'
+              id='submit'
+              {{on 'click' modal.submit}}
+            >Submit</button>
+          </modal.footer>
+        </BsModal>
+      </template>,
+    );
 
     await click('#submit');
     assert.ok(submitAction.calledOnce, 'submit action has been called.');
   });
 
   test('Modal has accesibility attributes with custom title', async function (assert) {
-    await render(hbs`<BsModal as |modal|>
-  <modal.header>
-    <h4 class='modal-title'>
-      Custom Dialog title
-    </h4>
-  </modal.header>
-  <modal.body>Hello world!</modal.body>
-  <modal.footer />
-</BsModal>`);
+    await render(
+      <template>
+        <BsModal as |modal|>
+          <modal.header>
+            <h4 class='modal-title'>
+              Custom Dialog title
+            </h4>
+          </modal.header>
+          <modal.body>Hello world!</modal.body>
+          <modal.footer />
+        </BsModal>
+      </template>,
+    );
 
     const modalTitleId = document.getElementsByClassName('modal-title')[0].id;
 
@@ -138,11 +164,15 @@ module('Integration | Component | bs-modal', function (hooks) {
   });
 
   test('Modal has accesibility attributes with default title', async function (assert) {
-    await render(hbs`<BsModal as |modal|>
-  <modal.header @title='Some title' />
-  <modal.body>Hello world!</modal.body>
-  <modal.footer />
-</BsModal>`);
+    await render(
+      <template>
+        <BsModal as |modal|>
+          <modal.header @title='Some title' />
+          <modal.body>Hello world!</modal.body>
+          <modal.footer />
+        </BsModal>
+      </template>,
+    );
 
     const modalTitleId = document.getElementsByClassName('modal-title')[0].id;
 
@@ -153,9 +183,13 @@ module('Integration | Component | bs-modal', function (hooks) {
   });
 
   test('it passes along HTML attributes', async function (assert) {
-    await render(hbs`<BsModal @fade={{false}} class='custom' role='alert' data-test>
-  template block text
-</BsModal>`);
+    await render(
+      <template>
+        <BsModal @fade={{false}} class='custom' role='alert' data-test>
+          template block text
+        </BsModal>
+      </template>,
+    );
 
     assert.dom('.modal').exists({ count: 1 });
     assert.dom('.modal').hasClass('custom');
@@ -165,9 +199,13 @@ module('Integration | Component | bs-modal', function (hooks) {
 
   test('it keeps itself visible when mouse click is started from inside of the modal \
     and dragged outside of the modal', async function (assert) {
-    await render(hbs`<BsModal>
-  template block text
-</BsModal>`);
+    await render(
+      <template>
+        <BsModal>
+          template block text
+        </BsModal>
+      </template>,
+    );
     await triggerEvent('.modal-content', 'mousedown');
     await triggerEvent('.modal', 'mouseup');
     await triggerEvent('.modal', 'click');
@@ -176,16 +214,24 @@ module('Integration | Component | bs-modal', function (hooks) {
   });
 
   test('it closes itself when backdrop is clicked', async function (assert) {
-    await render(hbs`<BsModal>
-  template block text
-</BsModal>`);
+    await render(
+      <template>
+        <BsModal>
+          template block text
+        </BsModal>
+      </template>,
+    );
     await click('.modal');
 
     assert.dom('.modal').doesNotExist('Modal closes itself as normal');
   });
 
   test('backdrop=true adds backdrop element, renderInPlace = false', async function (assert) {
-    await render(hbs`<BsModal @backdrop={{true}}>Hello world!</BsModal>`);
+    await render(
+      <template>
+        <BsModal @backdrop={{true}}>Hello world!</BsModal>
+      </template>,
+    );
 
     assert
       .dom('.modal-backdrop')
@@ -197,7 +243,9 @@ module('Integration | Component | bs-modal', function (hooks) {
 
   test('backdrop=true adds backdrop element, renderInPlace = true', async function (assert) {
     await render(
-      hbs`<BsModal @backdrop={{true}} @renderInPlace={{true}}>Hello world!</BsModal>`,
+      <template>
+        <BsModal @backdrop={{true}} @renderInPlace={{true}}>Hello world!</BsModal>
+      </template>,
     );
 
     assert
@@ -209,14 +257,22 @@ module('Integration | Component | bs-modal', function (hooks) {
   });
 
   test('it can reopen after closing by clicking the backdrop', async function (assert) {
-    this.set('open', false);
-    this.set('close', () => this.set('open', false));
+    class State {
+      @tracked open = false;
+    }
+
+    const state = new State();
+    const close = () => (state.open = false);
+
     await render(
-      hbs`<BsModal @open={{this.open}} @onHidden={{action this.close}}>Hello world!</BsModal>`,
+      <template>
+        <BsModal @open={{state.open}} @onHidden={{close}}>Hello world!</BsModal>
+      </template>,
     );
 
     assert.dom('.modal').doesNotExist('Modal is hidden');
-    this.set('open', true);
+
+    state.open = true;
     await settled();
 
     assert.dom('.modal').hasClass(visibilityClass(), 'Modal is visible');
@@ -225,28 +281,37 @@ module('Integration | Component | bs-modal', function (hooks) {
     await click('.modal');
     assert.dom('.modal').doesNotExist('Modal is hidden');
 
-    this.set('open', true);
+    state.open = true;
     await settled();
 
     assert.dom('.modal').isVisible('Modal is visible again');
   });
 
   test('it can reopen after closing by setting the `open` state to false', async function (assert) {
-    this.set('open', false);
-    await render(hbs`<BsModal @open={{this.open}}>Hello world!</BsModal>`);
+    class State {
+      @tracked open = false;
+    }
+
+    const state = new State();
+
+    await render(
+      <template>
+        <BsModal @open={{state.open}}>Hello world!</BsModal>
+      </template>,
+    );
 
     assert.dom('.modal').doesNotExist('Modal is hidden');
-    this.set('open', true);
+    state.open = true;
     await settled();
 
     assert.dom('.modal').hasClass(visibilityClass(), 'Modal is visible');
     assert.dom('.modal').isVisible();
 
-    this.set('open', false);
+    state.open = false;
     await settled();
     assert.dom('.modal').doesNotExist('Modal is hidden');
 
-    this.set('open', true);
+    state.open = true;
     await settled();
 
     assert.dom('.modal').isVisible('Modal is visible again');
@@ -255,9 +320,15 @@ module('Integration | Component | bs-modal', function (hooks) {
   testBS5(
     'it allows to render modal in fullscreen using @fullscreen argument',
     async function (assert) {
-      this.set('fullscreen', null);
+      class State {
+        @tracked fullscreen = null;
+      }
+
+      const state = new State();
       await render(
-        hbs`<BsModal @fullscreen={{this.fullscreen}}>Hello World!</BsModal>`,
+        <template>
+          <BsModal @fullscreen={{state.fullscreen}}>Hello World!</BsModal>
+        </template>,
       );
       assert
         .dom('.modal-dialog')
@@ -266,7 +337,8 @@ module('Integration | Component | bs-modal', function (hooks) {
           'it is not rendered as fullscreen if @full is undefined',
         );
 
-      this.set('fullscreen', true);
+      state.fullscreen = true;
+      await settled();
       assert
         .dom('.modal-dialog')
         .hasClass(
@@ -274,27 +346,32 @@ module('Integration | Component | bs-modal', function (hooks) {
           'it renders in fullscreen for all breakpoints if @fullscreen is `true`',
         );
 
-      this.set('fullscreen', 'sm');
+      state.fullscreen = 'sm';
+      await settled();
       assert
         .dom('.modal-dialog')
         .hasClass('modal-fullscreen-sm-down', 'it supports `sm` breakpoint');
 
-      this.set('fullscreen', 'md');
+      state.fullscreen = 'md';
+      await settled();
       assert
         .dom('.modal-dialog')
         .hasClass('modal-fullscreen-md-down', 'it supports `md` breakpoint');
 
-      this.set('fullscreen', 'lg');
+      state.fullscreen = 'lg';
+      await settled();
       assert
         .dom('.modal-dialog')
         .hasClass('modal-fullscreen-lg-down', 'it supports `lg` breakpoint');
 
-      this.set('fullscreen', 'xl');
+      state.fullscreen = 'xl';
+      await settled();
       assert
         .dom('.modal-dialog')
         .hasClass('modal-fullscreen-xl-down', 'it supports `xl` breakpoint');
 
-      this.set('fullscreen', 'xxl');
+      state.fullscreen = 'xxl';
+      await settled();
       assert
         .dom('.modal-dialog')
         .hasClass('modal-fullscreen-xxl-down', 'it supports `xxl` breakpoint');
@@ -311,10 +388,18 @@ module('Integration | Component | bs-modal', function (hooks) {
     });
 
     test('it animates opening the modal', async function (assert) {
-      this.set('open', false);
-      await render(hbs`<BsModal @open={{this.open}}>Hello world!</BsModal>`);
+      class State {
+        @tracked open = false;
+      }
 
-      this.set('open', true);
+      const state = new State();
+      await render(
+        <template>
+          <BsModal @open={{state.open}}>Hello world!</BsModal>
+        </template>,
+      );
+
+      state.open = true;
       await waitFor('.modal.show');
       assert.dom('.modal').hasStyle({ display: 'block' });
 
@@ -330,9 +415,13 @@ module('Integration | Component | bs-modal', function (hooks) {
     });
 
     test('it animates closing the modal', async function (assert) {
-      await render(hbs`<BsModal as |modal|>
-  <button {{on 'click' modal.close}} type='button'>close</button>
-</BsModal>`);
+      await render(
+        <template>
+          <BsModal as |modal|>
+            <button {{on 'click' modal.close}} type='button'>close</button>
+          </BsModal>
+        </template>,
+      );
 
       // wait until modal is shown and opening transition is finished
       await waitFor('.modal.show');
@@ -366,58 +455,74 @@ module('Integration | Component | bs-modal', function (hooks) {
   });
 
   test('Modal shows appropriate size respective to @size argument', async function (assert) {
-    this.set('size', null);
-    await render(hbs`<BsModal @size={{this.size}} />`);
+    class State {
+      @tracked size = null;
+    }
+
+    const state = new State();
+    await render(<template><BsModal @size={{state.size}} /></template>);
     assert.dom('.modal').exists({ count: 1 }, 'Modal exists.');
     assert.dom('.modal-dialog').hasNoClass('modal-lg');
     assert.dom('.modal-dialog').hasNoClass('modal-sm');
-    this.set('size', 'sm');
+    state.size = 'sm';
+    await settled();
     assert.dom('.modal-dialog').hasClass('modal-sm');
-    this.set('size', 'lg');
+    state.size = 'lg';
+    await settled();
     assert.dom('.modal-dialog').hasClass('modal-lg');
   });
 
   test('Modal can be centered vertically', async function (assert) {
-    this.set('position', 'top');
-    await render(hbs`<BsModal @position={{this.position}} />`);
+    class State {
+      @tracked position = 'top';
+    }
+    const state = new State();
+    await render(<template><BsModal @position={{state.position}} /></template>);
     assert.dom('.modal').exists({ count: 1 }, 'Modal exists.');
     assert.dom('.modal-dialog').hasNoClass('modal-dialog-centered');
-    this.set('position', 'center');
+    state.position = 'center';
+    await settled();
     assert.dom('.modal-dialog').hasClass('modal-dialog-centered');
   });
 
   test('shows scrollable modal with respective to @scrollable argument', async function (assert) {
-    this.set('scrollable', false);
-    await render(hbs`<BsModal @scrollable={{this.scrollable}} />`);
+    class State {
+      @tracked scrollable = false;
+    }
+    const state = new State();
+    await render(
+      <template><BsModal @scrollable={{state.scrollable}} /></template>,
+    );
     assert.dom('.modal').exists({ count: 1 }, 'Modal exists.');
     assert.dom('.modal-dialog').hasNoClass('modal-dialog-scrollable');
-    this.set('scrollable', true);
+    state.scrollable = true;
+    await settled();
     assert.dom('.modal-dialog').hasClass('modal-dialog-scrollable');
   });
 
   test('Modal closes when escape key is pressed if @keyboard=true', async function (assert) {
-    await render(hbs`<BsModal @keyboard={{true}} />`);
+    await render(<template><BsModal @keyboard={{true}} /></template>);
     assert.dom('.modal').exists({ count: 1 }, 'Modal exists.');
     await triggerKeyEvent('.modal', 'keydown', 'Escape');
     assert.dom('.modal').doesNotExist('Modal does not exist.');
   });
 
   test('Modal does not close when escape key is pressed if @keyboard=false', async function (assert) {
-    await render(hbs`<BsModal @keyboard={{false}} />`);
+    await render(<template><BsModal @keyboard={{false}} /></template>);
     assert.dom('.modal').exists({ count: 1 }, 'Modal exists.');
     await triggerKeyEvent('.modal', 'keydown', 'Escape');
     assert.dom('.modal').exists({ count: 1 }, 'Modal exists.');
   });
 
   test('Modal closes when click is done outside the modal if @backdropClose=true', async function (assert) {
-    await render(hbs`<BsModal @backdropClose={{true}} />`);
+    await render(<template><BsModal @backdropClose={{true}} /></template>);
     assert.dom('.modal').exists({ count: 1 }, 'Modal exists.');
     await click('*');
     assert.dom('.modal').doesNotExist('Modal does not exist.');
   });
 
   test('Modal does not close when click is done outside the modal if @backdropClose=false', async function (assert) {
-    await render(hbs`<BsModal @backdropClose={{false}} />`);
+    await render(<template><BsModal @backdropClose={{false}} /></template>);
     assert.dom('.modal').exists({ count: 1 }, 'Modal exists.');
     await click('*');
     assert.dom('.modal').exists({ count: 1 }, 'Modal exists.');
