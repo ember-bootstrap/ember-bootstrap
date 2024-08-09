@@ -585,10 +585,7 @@ module('Integration | Component | bs-dropdown', function (hooks) {
   });
 
   module('keyboard control', function () {
-    class State {
-      @tracked renderInPlace = false;
-    }
-    const state = new State();
+    let renderInPlace = undefined;
 
     function keyboardTest() {
       test(`should have correct default element focused`, async function (assert) {
@@ -596,7 +593,7 @@ module('Integration | Component | bs-dropdown', function (hooks) {
           <template>
             <BsDropdown as |dd|>
               <dd.toggle>Dropdown</dd.toggle>
-              <dd.menu @renderInPlace={{state.renderInPlace}} as |menu|>
+              <dd.menu @renderInPlace={{renderInPlace}} as |menu|>
                 <menu.item><a
                     class='dropdown-item'
                     href='#'
@@ -607,7 +604,7 @@ module('Integration | Component | bs-dropdown', function (hooks) {
         );
 
         await click('a.dropdown-toggle');
-        let expectedFocusElement = state.renderInPlace
+        let expectedFocusElement = renderInPlace
           ? 'a.dropdown-toggle'
           : '.dropdown-menu';
 
@@ -619,7 +616,7 @@ module('Integration | Component | bs-dropdown', function (hooks) {
           <template>
             <BsDropdown as |dd|>
               <dd.toggle>Dropdown</dd.toggle>
-              <dd.menu @renderInPlace={{state.renderInPlace}} as |menu|>
+              <dd.menu @renderInPlace={{renderInPlace}} as |menu|>
                 <menu.item><a
                     class='dropdown-item'
                     href='#'
@@ -640,7 +637,7 @@ module('Integration | Component | bs-dropdown', function (hooks) {
           <template>
             <BsDropdown as |dd|>
               <dd.button>Dropdown</dd.button>
-              <dd.menu @renderInPlace={{state.renderInPlace}} as |menu|>
+              <dd.menu @renderInPlace={{renderInPlace}} as |menu|>
                 <menu.item><a
                     class='dropdown-item'
                     href='#'
@@ -661,7 +658,7 @@ module('Integration | Component | bs-dropdown', function (hooks) {
           <template>
             <BsDropdown as |dd|>
               <dd.toggle>Dropdown</dd.toggle>
-              <dd.menu @renderInPlace={{state.renderInPlace}} as |menu|>
+              <dd.menu @renderInPlace={{renderInPlace}} as |menu|>
                 <menu.item><a
                     class='dropdown-item'
                     href='#'
@@ -688,7 +685,7 @@ module('Integration | Component | bs-dropdown', function (hooks) {
           <template>
             <BsDropdown as |dd|>
               <dd.toggle>Dropdown</dd.toggle>
-              <dd.menu @renderInPlace={{state.renderInPlace}} as |menu|>
+              <dd.menu @renderInPlace={{renderInPlace}} as |menu|>
                 <menu.item><a
                     class='dropdown-item'
                     href='#'
@@ -712,7 +709,7 @@ module('Integration | Component | bs-dropdown', function (hooks) {
           <template>
             <BsDropdown as |dd|>
               <dd.toggle>Dropdown</dd.toggle>
-              <dd.menu @renderInPlace={{state.renderInPlace}} as |menu|>
+              <dd.menu @renderInPlace={{renderInPlace}} as |menu|>
                 <menu.item><a
                     class='dropdown-item'
                     href='#'
@@ -736,7 +733,7 @@ module('Integration | Component | bs-dropdown', function (hooks) {
           <template>
             <BsDropdown as |dd|>
               <dd.toggle>Dropdown</dd.toggle>
-              <dd.menu @renderInPlace={{state.renderInPlace}} as |menu|>
+              <dd.menu @renderInPlace={{renderInPlace}} as |menu|>
                 <menu.item><a
                     class='dropdown-item'
                     href='#'
@@ -769,7 +766,7 @@ module('Integration | Component | bs-dropdown', function (hooks) {
           <template>
             <BsDropdown as |dd|>
               <dd.toggle>Dropdown</dd.toggle>
-              <dd.menu @renderInPlace={{state.renderInPlace}} as |menu|>
+              <dd.menu @renderInPlace={{renderInPlace}} as |menu|>
                 <menu.item><a
                     class='dropdown-item'
                     href='#'
@@ -805,7 +802,7 @@ module('Integration | Component | bs-dropdown', function (hooks) {
           <template>
             <BsDropdown as |dd|>
               <dd.toggle>Dropdown</dd.toggle>
-              <dd.menu @renderInPlace={{state.renderInPlace}}>
+              <dd.menu @renderInPlace={{renderInPlace}}>
                 <a class='dropdown-item' href='#' id='item1'>Something</a>
                 <input type='text' />
                 <textarea></textarea>
@@ -834,7 +831,7 @@ module('Integration | Component | bs-dropdown', function (hooks) {
           <template>
             <BsDropdown as |dd|>
               <dd.toggle>Dropdown</dd.toggle>
-              <dd.menu @renderInPlace={{state.renderInPlace}}>
+              <dd.menu @renderInPlace={{renderInPlace}}>
                 <a class='dropdown-item disabled' href='#sub1'>Submenu 1</a>
                 <button class='dropdown-item' type='button' disabled>Disabled
                   button</button>
@@ -853,14 +850,14 @@ module('Integration | Component | bs-dropdown', function (hooks) {
 
     module('in place', function (hooks) {
       hooks.beforeEach(function () {
-        state.renderInPlace = true;
+        renderInPlace = true;
       });
       keyboardTest();
     });
 
     module('in wormhole', function () {
       hooks.beforeEach(function () {
-        state.renderInPlace = false;
+        renderInPlace = false;
       });
       keyboardTest();
     });
