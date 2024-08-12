@@ -1435,8 +1435,8 @@ module('Integration | Component | bs-form', function (hooks) {
     let deferredSubmitAction = defer();
     let submitActionExecutionCounter = 0;
 
-    let beforeAction = sinon.fake();
-    let validateAction = sinon.fake();
+    const beforeAction = sinon.fake();
+    const validateAction = sinon.fake();
 
     const submitAction = () => {
       submitActionExecutionCounter++;
