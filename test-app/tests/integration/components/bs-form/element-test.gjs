@@ -1501,10 +1501,7 @@ module('Integration | Component | bs-form/element', function (hooks) {
   testRequiringFocus(
     'events enabling validation rendering are configurable per `showValidationOn` (array)',
     async function (assert) {
-      class State {
-        @tracked errors = A(['Invalid']);
-      }
-      const state = new State();
+      const errors = A(['Invalid']);
       class Model {
         @tracked name = null;
       }
@@ -1515,7 +1512,7 @@ module('Integration | Component | bs-form/element', function (hooks) {
         <template>
           <ValidatingFormElement
             @property='name'
-            @errors={{state.errors}}
+            @errors={{errors}}
             @model={{model}}
             @showValidationOn={{showValidationOn}}
           />
@@ -1549,10 +1546,7 @@ module('Integration | Component | bs-form/element', function (hooks) {
   testRequiringFocus(
     'events enabling validation rendering are configurable per `showValidationOn` (string)',
     async function (assert) {
-      class State {
-        @tracked errors = A(['Invalid']);
-      }
-      const state = new State();
+      const errors = A(['Invalid']);
       class Model {
         @tracked name = null;
       }
@@ -1562,7 +1556,7 @@ module('Integration | Component | bs-form/element', function (hooks) {
         <template>
           <ValidatingFormElement
             @property='name'
-            @errors={{state.errors}}
+            @errors={{errors}}
             @model={{model}}
             @showValidationOn='change'
           />
@@ -1595,10 +1589,7 @@ module('Integration | Component | bs-form/element', function (hooks) {
   testRequiringFocus(
     'event triggered on input group button does not enable validation',
     async function (assert) {
-      class State {
-        @tracked errors = A(['Invalid']);
-      }
-      const state = new State();
+      const errors = A(['Invalid']);
       class Model {
         @tracked name = null;
       }
@@ -1611,7 +1602,7 @@ module('Integration | Component | bs-form/element', function (hooks) {
           <ValidatingForm @elementComponent={{formElement}} as |form|>
             <form.element
               @property='name'
-              @errors={{state.errors}}
+              @errors={{errors}}
               @model={{model}}
               as |el|
             >
@@ -1642,12 +1633,12 @@ module('Integration | Component | bs-form/element', function (hooks) {
     'event targets not enabling validation are configurable per `doNotShowValidationForEventTargets`',
     async function (assert) {
       class State {
-        @tracked errors = A(['Invalid']);
         @tracked doNotShowValidationForEventTargets = [
           '[data-trigger-validation="false"]',
         ];
       }
       const state = new State();
+      const errors = A(['Invalid']);
       class Model {
         @tracked name = null;
       }
@@ -1660,7 +1651,7 @@ module('Integration | Component | bs-form/element', function (hooks) {
           <ValidatingForm @elementComponent={{formElement}} as |form|>
             <form.element
               @property='name'
-              @errors={{state.errors}}
+              @errors={{errors}}
               @model={{model}}
               @doNotShowValidationForEventTargets={{state.doNotShowValidationForEventTargets}}
               as |el|

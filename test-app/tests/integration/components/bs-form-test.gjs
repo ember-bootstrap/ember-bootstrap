@@ -1435,15 +1435,13 @@ module('Integration | Component | bs-form', function (hooks) {
     let deferredSubmitAction = defer();
     let submitActionExecutionCounter = 0;
 
-    let beforeActionFake = sinon.fake();
-    let validateFake = sinon.fake();
+    let beforeAction = sinon.fake();
+    let validateAction = sinon.fake();
 
     const submitAction = () => {
       submitActionExecutionCounter++;
       return deferredSubmitAction.promise;
     };
-    const beforeAction = beforeActionFake;
-    const validate = validateFake;
 
     await render(
       <template>
@@ -1451,7 +1449,7 @@ module('Integration | Component | bs-form', function (hooks) {
           @preventConcurrency={{false}}
           @onSubmit={{submitAction}}
           @onBefore={{beforeAction}}
-          @validate={{validate}}
+          @validate={{validateAction}}
         />
       </template>,
     );
@@ -1462,8 +1460,8 @@ module('Integration | Component | bs-form', function (hooks) {
     await triggerEvent('form', 'submit');
     assert.equal(submitActionExecutionCounter, 2);
 
-    assert.ok(beforeActionFake.calledTwice);
-    assert.ok(validateFake.calledTwice);
+    assert.ok(beforeAction.calledTwice);
+    assert.ok(validateAction.calledTwice);
 
     deferredSubmitAction.resolve();
   });
