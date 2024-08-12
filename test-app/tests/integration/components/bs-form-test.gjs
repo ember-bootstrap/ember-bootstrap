@@ -25,7 +25,6 @@ import {
   validationSuccessClass,
 } from '../../helpers/bootstrap';
 import { defer } from '../../helpers/defer';
-import { hbs } from 'ember-cli-htmlbars';
 import { next, run } from '@ember/runloop';
 import setupNoDeprecations from '../../helpers/setup-no-deprecations';
 import a11yAudit from 'ember-a11y-testing/test-support/audit';
@@ -34,11 +33,15 @@ import Form from 'ember-bootstrap/components/bs-form';
 import FormElement from 'ember-bootstrap/components/bs-form/element';
 import { ensureSafeComponent } from '@embroider/util';
 import { setupAssertionsForErrorsNotHandledByEmberOnError } from '../../helpers/assert-errors';
-import { setComponentTemplate } from '@ember/component';
 import Component from '@glimmer/component';
+import BsForm from 'ember-bootstrap/components/bs-form';
+import { hash } from '@ember/helper';
+import { on } from '@ember/modifier';
+import { tracked } from '@glimmer/tracking';
 
 const nextRunloop = function () {
   return new Promise((resolve) => {
+    // eslint-disable-next-line ember/no-runloop
     next(() => {
       resolve();
     });
@@ -57,8 +60,8 @@ class ValidatingForm extends Form {
       typeof this.args.validate === 'function'
         ? this.args.validate()
         : (this.args.validate ?? true) === true
-        ? 'VALID'
-        : false;
+          ? 'VALID'
+          : false;
 
     if (result === false) {
       throw 'INVALID';
@@ -79,12 +82,6 @@ module('Integration | Component | bs-form', function (hooks) {
   setupNoDeprecations(hooks);
   setupAssertionsForErrorsNotHandledByEmberOnError(hooks);
 
-  hooks.beforeEach(function () {
-    this.actions = {};
-    this.send = (actionName, ...args) =>
-      this.actions[actionName].apply(this, args);
-  });
-
   testBS4('form has correct markup', async function (assert) {
     let classSpec = {
       vertical: ['form', false],
@@ -92,9 +89,12 @@ module('Integration | Component | bs-form', function (hooks) {
       inline: ['form-inline', true],
     };
 
-    for (let layout in classSpec) {
-      this.set('formLayout', layout);
-      await render(hbs`<BsForm @formLayout={{this.formLayout}}>Test</BsForm>`);
+    for (const layout in classSpec) {
+      await render(
+        <template>
+          <BsForm @formLayout={{layout}}>Test</BsForm>
+        </template>,
+      );
 
       let expectation = classSpec[layout];
       assert.equal(
@@ -107,7 +107,9 @@ module('Integration | Component | bs-form', function (hooks) {
 
   test('it yields form element component', async function (assert) {
     await render(
-      hbs`<BsForm as |form|><form.element data-test-form-element /></BsForm>`,
+      <template>
+        <BsForm as |form|><form.element data-test-form-element /></BsForm>
+      </template>,
     );
 
     assert
@@ -116,21 +118,19 @@ module('Integration | Component | bs-form', function (hooks) {
   });
 
   test('Submitting the form calls onBeforeSubmit and onSubmit action', async function (assert) {
-    let submit = sinon.spy();
-    let before = sinon.spy();
-    let invalid = sinon.spy();
-    let model = {};
-    this.set('model', model);
-    this.actions.before = before;
-    this.actions.submit = submit;
-    this.actions.invalid = invalid;
+    const submit = sinon.spy();
+    const before = sinon.spy();
+    const invalid = sinon.spy();
+    const model = {};
     await render(
-      hbs`<BsForm
-  @model={{this.model}}
-  @onBefore={{action 'before'}}
-  @onSubmit={{action 'submit'}}
-  @onInvalid={{action 'invalid'}}
->Test</BsForm>`,
+      <template>
+        <BsForm
+          @model={{model}}
+          @onBefore={{before}}
+          @onSubmit={{submit}}
+          @onInvalid={{invalid}}
+        >Test</BsForm>
+      </template>,
     );
 
     await triggerEvent('form', 'submit');
@@ -146,12 +146,13 @@ module('Integration | Component | bs-form', function (hooks) {
   });
 
   test('Clicking a submit button submits the form', async function (assert) {
-    let submit = sinon.spy();
-    this.actions.submit = submit;
+    const submit = sinon.spy();
     await render(
-      hbs`<BsForm @onSubmit={{action 'submit'}}><button
-    type='submit'
-  >Submit</button></BsForm>`,
+      <template>
+        <BsForm @onSubmit={{submit}}><button
+            type='submit'
+          >Submit</button></BsForm>
+      </template>,
     );
 
     await click('button');
@@ -159,22 +160,25 @@ module('Integration | Component | bs-form', function (hooks) {
   });
 
   test('Submit event bubbles', async function (assert) {
-    this.set('action', () => assert.step('bubbles'));
+    const submitAction = () => assert.step('bubbles');
 
     // Enable again when hbs plugin works again _eslint-disable-next-line hbs/check-hbs-template-literals
-    await render(hbs`<div {{on 'submit' this.action}}>
-  <BsForm>
-    <button type='submit'>submit</button>
-  </BsForm>
-</div>`);
+    await render(
+      <template>
+        <div {{on 'submit' submitAction}}>
+          <BsForm>
+            <button type='submit'>submit</button>
+          </BsForm>
+        </div>
+      </template>,
+    );
     await click('button');
 
     assert.verifySteps(['bubbles']);
   });
 
   test('form that supports validation calls validate hook when submitting', async function (assert) {
-    let model = {};
-    this.set('model', model);
+    const model = {};
 
     class ValidatingForm extends Form {
       '__ember-bootstrap_subclass' = true;
@@ -197,17 +201,18 @@ module('Integration | Component | bs-form', function (hooks) {
       }
     }
 
-    this.set('form', ensureSafeComponent(ValidatingForm, this));
-
-    await render(hbs`<this.form @model={{this.model}}>Test</this.form>`);
+    await render(
+      <template>
+        <ValidatingForm @model={{model}}>Test</ValidatingForm>
+      </template>,
+    );
     await triggerEvent('form', 'submit');
 
     assert.verifySteps(['validate'], 'validate has been called');
   });
 
   test('form that supports validation calls validate hook when calling submit action', async function (assert) {
-    let model = {};
-    this.set('model', model);
+    const model = {};
 
     class ValidatingForm extends Form {
       '__ember-bootstrap_subclass' = true;
@@ -230,36 +235,36 @@ module('Integration | Component | bs-form', function (hooks) {
       }
     }
 
-    this.set('form', ensureSafeComponent(ValidatingForm, this));
-
-    await render(hbs`<this.form @model={{this.model}} as |form|>
-  <button type='button' {{on 'click' form.submit}}>Submit</button>
-</this.form>`);
+    await render(
+      <template>
+        <ValidatingForm @model={{model}} as |form|>
+          <button type='button' {{on 'click' form.submit}}>Submit</button>
+        </ValidatingForm>
+      </template>,
+    );
     await click('button');
 
     assert.verifySteps(['validate'], 'validate has been called');
   });
 
   test('Submitting the form with valid validation calls onBeforeSubmit and onSubmit action', async function (assert) {
-    let submit = sinon.spy();
-    let before = sinon.spy();
-    let invalid = sinon.spy();
-    let model = {};
-    this.set('model', model);
-    this.actions.before = before;
-    this.actions.submit = submit;
-    this.actions.invalid = invalid;
+    const submit = sinon.spy();
+    const before = sinon.spy();
+    const invalid = sinon.spy();
+    const model = {};
 
-    this.set('form', ensureSafeComponent(ValidatingForm, this));
-
-    await render(hbs`<this.form
-  @model={{this.model}}
-  @onBefore={{action 'before'}}
-  @onSubmit={{action 'submit'}}
-  @onInvalid={{action 'invalid'}}
->
-  Test
-</this.form>`);
+    await render(
+      <template>
+        <ValidatingForm
+          @model={{model}}
+          @onBefore={{before}}
+          @onSubmit={{submit}}
+          @onInvalid={{invalid}}
+        >
+          Test
+        </ValidatingForm>
+      </template>,
+    );
 
     await triggerEvent('form', 'submit');
     assert.ok(
@@ -274,24 +279,22 @@ module('Integration | Component | bs-form', function (hooks) {
   });
 
   test('Submitting the form with invalid validation calls onBeforeSubmit and onInvalid action', async function (assert) {
-    let submit = sinon.spy();
-    let before = sinon.spy();
-    let invalid = sinon.spy();
-    let model = {};
-    this.set('model', model);
-    this.actions.before = before;
-    this.actions.submit = submit;
-    this.actions.invalid = invalid;
+    const submit = sinon.spy();
+    const before = sinon.spy();
+    const invalid = sinon.spy();
+    const model = {};
 
-    this.set('form', ensureSafeComponent(ValidatingForm, this));
-
-    await render(hbs`<this.form
-  @model={{this.model}}
-  @validate={{false}}
-  @onBefore={{action 'before'}}
-  @onSubmit={{action 'submit'}}
-  @onInvalid={{action 'invalid'}}
->Test</this.form>`);
+    await render(
+      <template>
+        <ValidatingForm
+          @model={{model}}
+          @validate={{false}}
+          @onBefore={{before}}
+          @onSubmit={{submit}}
+          @onInvalid={{invalid}}
+        >Test</ValidatingForm>
+      </template>,
+    );
 
     await triggerEvent('form', 'submit');
 
@@ -307,20 +310,19 @@ module('Integration | Component | bs-form', function (hooks) {
   });
 
   test('Submitting the form with invalid validation shows validation errors', async function (assert) {
-    let model = {};
-    this.set('model', model);
-    this.set('errors', A(['There is an error']));
-
-    this.set('form', ensureSafeComponent(ValidatingForm, this));
-    this.set('formElement', ensureSafeComponent(ValidatingFormElement, this));
+    const model = {};
+    const errors = ['There is an error'];
+    const formElement = ensureSafeComponent(ValidatingFormElement, this);
 
     await render(
-      hbs`<this.form
-  @elementComponent={{this.formElement}}
-  @model={{this.model}}
-  @validate={{false}}
-  as |form|
-><form.element @errors={{this.errors}} /></this.form>`,
+      <template>
+        <ValidatingForm
+          @elementComponent={{formElement}}
+          @model={{model}}
+          @validate={{false}}
+          as |form|
+        ><form.element @errors={{errors}} /></ValidatingForm>
+      </template>,
     );
 
     assert
@@ -341,24 +343,23 @@ module('Integration | Component | bs-form', function (hooks) {
   });
 
   test('Submitting the form with invalid validation shows validation errors only after onInvalid promise resolves', async function (assert) {
-    let model = {};
-    this.set('model', model);
-    this.set('errors', A(['There is an error']));
-    this.set('validateStub', sinon.fake.rejects());
-    let deferredInvalidAction = defer();
-    this.set('invalid', () => deferredInvalidAction.promise);
+    const model = {};
+    const errors = ['There is an error'];
+    const deferredInvalidAction = defer();
+    const invalid = () => deferredInvalidAction.promise;
 
-    this.set('form', ensureSafeComponent(ValidatingForm, this));
-    this.set('formElement', ensureSafeComponent(ValidatingFormElement, this));
+    const formElement = ensureSafeComponent(ValidatingFormElement, this);
 
     await render(
-      hbs`<this.form
-  @elementComponent={{this.formElement}}
-  @model={{this.model}}
-  @onInvalid={{this.invalid}}
-  @validate={{false}}
-  as |form|
-><form.element @errors={{this.errors}} /></this.form>`,
+      <template>
+        <ValidatingForm
+          @elementComponent={{formElement}}
+          @model={{model}}
+          @onInvalid={{invalid}}
+          @validate={{false}}
+          as |form|
+        ><form.element @errors={{errors}} /></ValidatingForm>
+      </template>,
     );
 
     await triggerEvent('form', 'submit');
@@ -383,21 +384,20 @@ module('Integration | Component | bs-form', function (hooks) {
   });
 
   test('Form with invalid validation shows validation errors immediately when @showValidations is true', async function (assert) {
-    let model = {};
-    this.set('model', model);
-    this.set('errors', A(['There is an error']));
-
-    this.set('form', ensureSafeComponent(ValidatingForm, this));
-    this.set('formElement', ensureSafeComponent(ValidatingFormElement, this));
+    const model = {};
+    const errors = A(['There is an error']);
+    const formElement = ensureSafeComponent(ValidatingFormElement, this);
 
     await render(
-      hbs`<this.form
-  @elementComponent={{this.formElement}}
-  @model={{this.model}}
-  @validate={{false}}
-  @showValidations={{true}}
-  as |form|
-><form.element @errors={{this.errors}} /></this.form>`,
+      <template>
+        <ValidatingForm
+          @elementComponent={{formElement}}
+          @model={{model}}
+          @validate={{false}}
+          @showValidations={{true}}
+          as |form|
+        ><form.element @errors={{errors}} /></ValidatingForm>
+      </template>,
     );
 
     assert
@@ -410,21 +410,20 @@ module('Integration | Component | bs-form', function (hooks) {
   });
 
   test('Form with valid validation shows validation success immediately when @showValidations is true', async function (assert) {
-    let model = {};
-    this.set('model', model);
-    this.set('errors', A([]));
-
-    this.set('form', ensureSafeComponent(ValidatingForm, this));
-    this.set('formElement', ensureSafeComponent(ValidatingFormElement, this));
+    const model = {};
+    const errors = [];
+    const formElement = ensureSafeComponent(ValidatingFormElement, this);
 
     await render(
-      hbs`<this.form
-  @elementComponent={{this.formElement}}
-  @model={{this.model}}
-  @validate={{false}}
-  @showValidations={{true}}
-  as |form|
-><form.element @errors={{this.errors}} /></this.form>`,
+      <template>
+        <ValidatingForm
+          @elementComponent={{formElement}}
+          @model={{model}}
+          @validate={{false}}
+          @showValidations={{true}}
+          as |form|
+        ><form.element @errors={{errors}} /></ValidatingForm>
+      </template>,
     );
 
     assert
@@ -436,21 +435,20 @@ module('Integration | Component | bs-form', function (hooks) {
   });
 
   test('Form with invalid validation does not show validation success or errors when @showValidations is false', async function (assert) {
-    let model = {};
-    this.set('model', model);
-    this.set('errors', A(['There is an error']));
-
-    this.set('form', ensureSafeComponent(ValidatingForm, this));
-    this.set('formElement', ensureSafeComponent(ValidatingFormElement, this));
+    const model = {};
+    const errors = ['There is an error'];
+    const formElement = ensureSafeComponent(ValidatingFormElement, this);
 
     await render(
-      hbs`<this.form
-  @elementComponent={{this.formElement}}
-  @model={{this.model}}
-  @validate={{false}}
-  @showValidations={{false}}
-  as |form|
-><form.element @errors={{this.errors}} /></this.form>`,
+      <template>
+        <ValidatingForm
+          @elementComponent={{formElement}}
+          @model={{model}}
+          @validate={{false}}
+          @showValidations={{false}}
+          as |form|
+        ><form.element @errors={{errors}} /></ValidatingForm>
+      </template>,
     );
 
     assert
@@ -482,21 +480,20 @@ module('Integration | Component | bs-form', function (hooks) {
   });
 
   test('Form with valid validation does not show validation success or errors when @showValidations is false', async function (assert) {
-    let model = {};
-    this.set('model', model);
-    this.set('errors', A([]));
-
-    this.set('form', ensureSafeComponent(ValidatingForm, this));
-    this.set('formElement', ensureSafeComponent(ValidatingFormElement, this));
+    const model = {};
+    const errors = A([]);
+    const formElement = ensureSafeComponent(ValidatingFormElement, this);
 
     await render(
-      hbs`<this.form
-  @elementComponent={{this.formElement}}
-  @model={{this.model}}
-  @validate={{false}}
-  @showValidations={{false}}
-  as |form|
-><form.element @errors={{this.errors}} /></this.form>`,
+      <template>
+        <ValidatingForm
+          @elementComponent={{formElement}}
+          @model={{model}}
+          @validate={{false}}
+          @showValidations={{false}}
+          as |form|
+        ><form.element @errors={{errors}} /></ValidatingForm>
+      </template>,
     );
 
     assert
@@ -530,52 +527,65 @@ module('Integration | Component | bs-form', function (hooks) {
   // skipping for now due to https://github.com/kaliber5/ember-bootstrap/issues/1682
   // @todo re-enable when this has been resolved
   skip('it does not catch errors thrown by synchronous @onSubmit action', async function (assert) {
-    let onErrorStub = sinon.stub();
-    let expectedError = new Error();
+    const onErrorStub = sinon.stub();
+    const expectedError = new Error();
 
-    this.set('submitAction', () => {
+    const submitAction = () => {
       throw expectedError;
-    });
+    };
     setupOnerror(onErrorStub);
 
-    await render(hbs`<BsForm @onSubmit={{this.submitAction}}>
-  <button type='submit'>submit</button>
-</BsForm>`);
+    await render(
+      <template>
+        <BsForm @onSubmit={{submitAction}}>
+          <button type='submit'>submit</button>
+        </BsForm>
+      </template>,
+    );
     await click('button');
     assert.ok(onErrorStub.calledOnceWith(expectedError));
   });
 
   skip('it does not catch errors thrown by async @onSubmit action', async function (assert) {
-    let onErrorStub = sinon.stub();
-    let expectedError = new Error();
+    const onErrorStub = sinon.stub();
+    const expectedError = new Error();
 
-    this.set('submitAction', async () => {
+    const submitAction = async () => {
       throw expectedError;
-    });
+    };
     setupOnerror(onErrorStub);
 
-    await render(hbs`<BsForm @onSubmit={{this.submitAction}}>
-  <button type='submit'>submit</button>
-</BsForm>`);
+    await render(
+      <template>
+        <BsForm @onSubmit={{submitAction}}>
+          <button type='submit'>submit</button>
+        </BsForm>
+      </template>,
+    );
     await click('button');
     assert.ok(onErrorStub.calledOnceWith(expectedError));
   });
 
   test('form with validation has novalidate attribute', async function (assert) {
-    let model = {};
-    this.set('model', model);
-    this.set('form', ensureSafeComponent(ValidatingForm, this));
-    await render(hbs`<this.form @model={{this.model}}>Test</this.form>`);
+    const model = {};
+    await render(
+      <template>
+        <ValidatingForm @model={{model}}>Test</ValidatingForm>
+      </template>,
+    );
 
     assert.dom('form').hasAttribute('novalidate');
   });
 
   test('form with validation allows overriding novalidate attribute', async function (assert) {
-    let model = {};
-    this.set('model', model);
-    this.set('form', ensureSafeComponent(ValidatingForm, this));
+    const model = {};
     await render(
-      hbs`<this.form @model={{this.model}} novalidate={{false}}>Test</this.form>`,
+      <template>
+        <ValidatingForm
+          @model={{model}}
+          novalidate={{false}}
+        >Test</ValidatingForm>
+      </template>,
     );
 
     assert.dom('form').doesNotHaveAttribute('novalidate');
@@ -584,27 +594,30 @@ module('Integration | Component | bs-form', function (hooks) {
   testRequiringFocus(
     'Submitting a form continues to show validations',
     async function (assert) {
-      let model = {};
-      this.set('model', model);
-      let errors = A([]);
-      this.set('errors', errors);
-      let deferredSubmitAction = defer();
-      this.set('submitAction', () => {
-        return deferredSubmitAction.promise;
-      });
+      class State {
+        @tracked errors = A([]);
+      }
+      const state = new State();
 
-      this.set('form', ensureSafeComponent(ValidatingForm, this));
-      this.set('formElement', ensureSafeComponent(ValidatingFormElement, this));
+      const model = {};
+      const deferredSubmitAction = defer();
+      const submitAction = () => {
+        return deferredSubmitAction.promise;
+      };
+
+      const formElement = ensureSafeComponent(ValidatingFormElement, this);
 
       await render(
-        hbs`<this.form
-  @elementComponent={{this.formElement}}
-  @model={{this.model}}
-  @onSubmit={{this.submitAction}}
-  as |form|
->
-  <form.element @property='dummy' @errors={{this.errors}} />
-</this.form>`,
+        <template>
+          <ValidatingForm
+            @elementComponent={{formElement}}
+            @model={{model}}
+            @onSubmit={{submitAction}}
+            as |form|
+          >
+            <form.element @property='dummy' @errors={{state.errors}} />
+          </ValidatingForm>
+        </template>,
       );
 
       assert
@@ -626,7 +639,8 @@ module('Integration | Component | bs-form', function (hooks) {
         );
 
       // simulate validation errors being added while a submission is ongoing
-      run(() => this.errors.pushObject('There is an error'));
+      // eslint-disable-next-line ember/no-runloop
+      run(() => state.errors.pushObject('There is an error'));
       await settled();
 
       assert
@@ -651,31 +665,33 @@ module('Integration | Component | bs-form', function (hooks) {
   testRequiringFocus(
     'Submitting a hideValidationsOnSubmit form with an async onSubmit does not show validation errors when submitting',
     async function (assert) {
-      let model = {};
-      this.set('model', model);
-      this.set('errors', A([]));
-      this.set('validateStub', () =>
-        this.errors.length > 0 ? Promise.reject() : Promise.resolve(),
-      );
-      let deferredSubmitAction = defer();
-      this.set('submitAction', () => {
+      class State {
+        @tracked errors = A([]);
+      }
+      const state = new State();
+      const model = {};
+      const validateStub = () =>
+        state.errors.length > 0 ? Promise.reject() : Promise.resolve();
+      const deferredSubmitAction = defer();
+      const submitAction = () => {
         return deferredSubmitAction.promise;
-      });
+      };
 
-      this.set('form', ensureSafeComponent(ValidatingForm, this));
-      this.set('formElement', ensureSafeComponent(ValidatingFormElement, this));
+      const formElement = ensureSafeComponent(ValidatingFormElement, this);
 
       await render(
-        hbs`<this.form
-  @elementComponent={{this.formElement}}
-  @hideValidationsOnSubmit={{true}}
-  @model={{this.model}}
-  @onSubmit={{this.submitAction}}
-  @validate={{this.validateStub}}
-  as |form|
->
-  <form.element @property='dummy' @errors={{this.errors}} />
-</this.form>`,
+        <template>
+          <ValidatingForm
+            @elementComponent={{formElement}}
+            @hideValidationsOnSubmit={{true}}
+            @model={{model}}
+            @onSubmit={{submitAction}}
+            @validate={{validateStub}}
+            as |form|
+          >
+            <form.element @property='dummy' @errors={{state.errors}} />
+          </ValidatingForm>
+        </template>,
       );
 
       assert
@@ -690,7 +706,8 @@ module('Integration | Component | bs-form', function (hooks) {
       await triggerEvent('form', 'submit');
 
       // simulate validation errors being added while a submission is ongoing
-      run(() => this.errors.pushObject('There is an error'));
+      // eslint-disable-next-line ember/no-runloop
+      run(() => state.errors.pushObject('There is an error'));
       await settled();
 
       assert
@@ -727,28 +744,29 @@ module('Integration | Component | bs-form', function (hooks) {
   testRequiringFocus(
     'Submitting a hideValidationsOnSubmit form does not show validation errors when submitting',
     async function (assert) {
-      let model = {};
-      this.set('model', model);
-      this.set('errors', A([]));
-      this.set('validateStub', () =>
-        this.errors.length > 0 ? Promise.reject() : Promise.resolve(),
-      );
-      this.set('submitAction', () => {});
-
-      this.set('form', ensureSafeComponent(ValidatingForm, this));
-      this.set('formElement', ensureSafeComponent(ValidatingFormElement, this));
+      class State {
+        @tracked errors = A([]);
+      }
+      const state = new State();
+      const model = {};
+      const validateStub = () =>
+        state.errors.length > 0 ? Promise.reject() : Promise.resolve();
+      const submitAction = () => {};
+      const formElement = ensureSafeComponent(ValidatingFormElement, this);
 
       await render(
-        hbs`<this.form
-  @elementComponent={{this.formElement}}
-  @hideValidationsOnSubmit={{true}}
-  @model={{this.model}}
-  @onSubmit={{this.submitAction}}
-  @validate={{this.validateStub}}
-  as |form|
->
-  <form.element @property='dummy' @errors={{this.errors}} />
-</this.form>`,
+        <template>
+          <ValidatingForm
+            @elementComponent={{formElement}}
+            @hideValidationsOnSubmit={{true}}
+            @model={{model}}
+            @onSubmit={{submitAction}}
+            @validate={{validateStub}}
+            as |form|
+          >
+            <form.element @property='dummy' @errors={{state.errors}} />
+          </ValidatingForm>
+        </template>,
       );
 
       assert
@@ -763,7 +781,8 @@ module('Integration | Component | bs-form', function (hooks) {
       await triggerEvent('form', 'submit');
 
       // simulate validation errors being added while a submission is ongoing
-      run(() => this.errors.pushObject('There is an error'));
+      // eslint-disable-next-line ember/no-runloop
+      run(() => state.errors.pushObject('There is an error'));
       await settled();
 
       assert
@@ -789,14 +808,18 @@ module('Integration | Component | bs-form', function (hooks) {
 
   // @todo enable again when/if https://github.com/glimmerjs/glimmer-vm/pull/1298 is resolved
   skip('it supports hash helper as model', async function (assert) {
-    this.set('submitAction', function (model) {
+    const submitAction = function (model) {
       assert.step('submit');
       assert.equal(model.name, 'Moritz');
-    });
+    };
 
-    await render(hbs`<BsForm @model={{hash name='Max'}} @onSubmit={{this.submitAction}} as |form|>
-  <form.element @property='name' />
-</BsForm>`);
+    await render(
+      <template>
+        <BsForm @model={{hash name='Max'}} @onSubmit={{submitAction}} as |form|>
+          <form.element @property='name' />
+        </BsForm>
+      </template>,
+    );
 
     await fillIn('input', 'Moritz');
     await triggerEvent('form', 'submit');
@@ -805,11 +828,14 @@ module('Integration | Component | bs-form', function (hooks) {
   });
 
   test('it yields submit action', async function (assert) {
-    let submit = sinon.spy();
-    this.actions.submit = submit;
-    await render(hbs`<BsForm @onSubmit={{action 'submit'}} as |form|>
-  <a href='#' role='button' onclick={{action form.submit}}>submit</a>
-</BsForm>`);
+    const submit = sinon.spy();
+    await render(
+      <template>
+        <BsForm @onSubmit={{submit}} as |form|>
+          <a href='#' role='button' {{on 'click' form.submit}}>submit</a>
+        </BsForm>
+      </template>,
+    );
 
     await click('a');
     assert.ok(submit.calledOnce, 'onSubmit action has been called');
@@ -822,16 +848,17 @@ module('Integration | Component | bs-form', function (hooks) {
         let ret = this.args.onClick();
         assert.ok(ret instanceof Promise);
       }
-    }
-    setComponentTemplate(
-      hbs`<button type='button' {{on 'click' this.click}} />`,
-      TestComponent,
-    );
-    this.set('testComponent', TestComponent);
 
-    await render(hbs`<BsForm as |form|>
-  <this.testComponent @onClick={{form.submit}} />
-</BsForm>`);
+      <template><button type='button' {{on 'click' this.click}} /></template>
+    }
+
+    await render(
+      <template>
+        <BsForm as |form|>
+          <TestComponent @onClick={{form.submit}} />
+        </BsForm>
+      </template>,
+    );
     await click('button');
   });
 
@@ -854,12 +881,9 @@ module('Integration | Component | bs-form', function (hooks) {
           assert.ok(false, err);
         }
       }
+
+      <template><button type='button' {{on 'click' this.click}} /></template>
     }
-    setComponentTemplate(
-      hbs`<button type='button' {{on 'click' this.click}} />`,
-      TestComponent,
-    );
-    this.set('testComponent', TestComponent);
 
     class ValidForm extends Form {
       get hasValidator() {
@@ -871,15 +895,21 @@ module('Integration | Component | bs-form', function (hooks) {
       }
     }
 
-    this.set('form', ValidForm);
-
     assert.expect(scenarios.length * 2);
 
     for (let i = 0; i < scenarios.length; i++) {
-      this.setProperties(scenarios[i]);
-      await render(hbs`<this.form @onSubmit={{this.onSubmit}} @resolve={{this.resolve}} as |form|>
-  <this.testComponent @onClick={{form.submit}} />
-</this.form>`);
+      const scenario = scenarios[i];
+      await render(
+        <template>
+          <ValidForm
+            @onSubmit={{scenario.onSubmit}}
+            @resolve={{scenario.resolve}}
+            as |form|
+          >
+            <TestComponent @onClick={{form.submit}} />
+          </ValidForm>
+        </template>,
+      );
       await click('button');
     }
   });
@@ -901,12 +931,9 @@ module('Integration | Component | bs-form', function (hooks) {
       click() {
         assert.rejects(this.args.onSubmit(), 'rejected value');
       }
+
+      <template><button type='button' {{on 'click' this.click}} /></template>
     }
-    setComponentTemplate(
-      hbs`<button type='button' {{on 'click' this.click}} />`,
-      TestComponent,
-    );
-    this.set('testComponent', TestComponent);
 
     class ValidatingForm extends Form {
       get hasValidator() {
@@ -918,27 +945,37 @@ module('Integration | Component | bs-form', function (hooks) {
       }
     }
 
-    this.set('form', ValidatingForm);
-
     assert.expect(scenarios.length);
 
     for (let i = 0; i < scenarios.length; i++) {
-      this.setProperties(scenarios[i]);
-      await render(hbs`<this.form @onSubmit={{this.onSubmit}} @validate={{this.validate}} as |form|>
-  <this.testComponent @onSubmit={{form.submit}} />
-</this.form>`);
+      const scenario = scenarios[i];
+      await render(
+        <template>
+          <ValidatingForm
+            @onSubmit={{scenario.onSubmit}}
+            @validate={{scenario.validate}}
+            as |form|
+          >
+            <TestComponent @onSubmit={{form.submit}} />
+          </ValidatingForm>
+        </template>,
+      );
       await click('button');
     }
   });
 
   test('Yields #isSubmitting', async function (assert) {
     let deferredSubmitAction = defer();
-    this.set('submitAction', () => {
+    const submitAction = () => {
       return deferredSubmitAction.promise;
-    });
-    await render(hbs`<BsForm @onSubmit={{this.submitAction}} as |form|>
-  <div class='state {{if form.isSubmitting "is-submitting"}}'></div>
-</BsForm>`);
+    };
+    await render(
+      <template>
+        <BsForm @onSubmit={{submitAction}} as |form|>
+          <div class='state {{if form.isSubmitting "is-submitting"}}'></div>
+        </BsForm>
+      </template>,
+    );
 
     assert.dom('form .state').doesNotHaveClass('is-submitting');
 
@@ -952,17 +989,21 @@ module('Integration | Component | bs-form', function (hooks) {
   });
 
   test('Yielded #isSubmitting is never true if neither validate nor onSubmit returns Promise', async function (assert) {
-    this.set('submitAction', () => {});
-    this.set('validate', () => {});
-    this.set('hasValidator', true);
-    await render(hbs`<BsForm
-  @onSubmit={{this.submitAction}}
-  @validate={{this.validate}}
-  @hasValidator={{this.hasValidator}}
-  as |form|
->
-  <div class='state {{if form.isSubmitting "is-submitting"}}'></div>
-</BsForm>`);
+    const submitAction = () => {};
+    const validate = () => {};
+    const hasValidator = true;
+    await render(
+      <template>
+        <BsForm
+          @onSubmit={{submitAction}}
+          @validate={{validate}}
+          @hasValidator={{hasValidator}}
+          as |form|
+        >
+          <div class='state {{if form.isSubmitting "is-submitting"}}'></div>
+        </BsForm>
+      </template>,
+    );
 
     assert.dom('form .state').doesNotHaveClass('is-submitting');
     triggerEvent('form', 'submit');
@@ -972,13 +1013,17 @@ module('Integration | Component | bs-form', function (hooks) {
   });
 
   test('Yielded #isSubmitting is true as long as Promise returned by onSubmit is pending', async function (assert) {
-    let deferredSubmitAction = defer();
-    this.set('submitAction', () => {
+    const deferredSubmitAction = defer();
+    const submitAction = () => {
       return deferredSubmitAction.promise;
-    });
-    await render(hbs`<BsForm @onSubmit={{this.submitAction}} as |form|>
-  <div class='state {{if form.isSubmitting "is-submitting"}}'></div>
-</BsForm>`);
+    };
+    await render(
+      <template>
+        <BsForm @onSubmit={{submitAction}} as |form|>
+          <div class='state {{if form.isSubmitting "is-submitting"}}'></div>
+        </BsForm>
+      </template>,
+    );
 
     assert.dom('form .state').doesNotHaveClass('is-submitting');
 
@@ -991,15 +1036,22 @@ module('Integration | Component | bs-form', function (hooks) {
   });
 
   test('Yielded #isSubmitting is true as long as Promise returned by onInvalid is pending', async function (assert) {
-    let deferredSubmitAction = defer();
-    this.set('submitAction', () => {
+    const deferredSubmitAction = defer();
+    const submitAction = () => {
       return deferredSubmitAction.promise;
-    });
-    this.set('form', ValidatingForm);
+    };
 
-    await render(hbs`<this.form @onInvalid={{this.submitAction}} @validate={{false}} as |form|>
-  <div class='state {{if form.isSubmitting "is-submitting"}}'></div>
-</this.form>`);
+    await render(
+      <template>
+        <ValidatingForm
+          @onInvalid={{submitAction}}
+          @validate={{false}}
+          as |form|
+        >
+          <div class='state {{if form.isSubmitting "is-submitting"}}'></div>
+        </ValidatingForm>
+      </template>,
+    );
 
     assert.dom('form .state').doesNotHaveClass('is-submitting');
 
@@ -1013,15 +1065,17 @@ module('Integration | Component | bs-form', function (hooks) {
 
   test('Yielded #isSubmitting is true as long as Promise returned by validate is pending', async function (assert) {
     let deferredValidateAction = defer();
-    this.set('validateAction', () => {
+    const validateAction = () => {
       return deferredValidateAction.promise;
-    });
+    };
 
-    this.set('form', ensureSafeComponent(ValidatingForm, this));
-
-    await render(hbs`<this.form @validate={{this.validateAction}} as |form|>
-  <div class='state {{if form.isSubmitting "is-submitting"}}'></div>
-</this.form>`);
+    await render(
+      <template>
+        <ValidatingForm @validate={{validateAction}} as |form|>
+          <div class='state {{if form.isSubmitting "is-submitting"}}'></div>
+        </ValidatingForm>
+      </template>,
+    );
 
     assert.dom('form .state').doesNotHaveClass('is-submitting');
 
@@ -1034,24 +1088,26 @@ module('Integration | Component | bs-form', function (hooks) {
   });
 
   test('Yielded #isSubmitting is true as long as Promises returned by onSubmit and validate are pending', async function (assert) {
-    let deferredSubmitAction = defer();
-    let deferredValidateAction = defer();
-    this.set('submitAction', () => {
+    const deferredSubmitAction = defer();
+    const deferredValidateAction = defer();
+    const submitAction = () => {
       return deferredSubmitAction.promise;
-    });
-    this.set('validateAction', () => {
+    };
+    const validateAction = () => {
       return deferredValidateAction.promise;
-    });
+    };
 
-    this.set('form', ensureSafeComponent(ValidatingForm, this));
-
-    await render(hbs`<this.form
-  @onSubmit={{this.submitAction}}
-  @validate={{this.validateAction}}
-  as |form|
->
-  <div class='state {{if form.isSubmitting "is-submitting"}}'></div>
-</this.form>`);
+    await render(
+      <template>
+        <ValidatingForm
+          @onSubmit={{submitAction}}
+          @validate={{validateAction}}
+          as |form|
+        >
+          <div class='state {{if form.isSubmitting "is-submitting"}}'></div>
+        </ValidatingForm>
+      </template>,
+    );
 
     assert.dom('form .state').doesNotHaveClass('is-submitting');
 
@@ -1067,15 +1123,23 @@ module('Integration | Component | bs-form', function (hooks) {
   });
 
   test('Yielded #isSubmitting stays true until all pending submit have been fulfilled', async function (assert) {
-    let deferredSubmitActions = [];
-    this.set('submitAction', () => {
+    const deferredSubmitActions = [];
+    const submitAction = () => {
       let deferred = defer();
       deferredSubmitActions.push(deferred);
       return deferred.promise;
-    });
-    await render(hbs`<BsForm @onSubmit={{this.submitAction}} @preventConcurrency={{false}} as |form|>
-  <div class='state {{if form.isSubmitting "is-submitting"}}'></div>
-</BsForm>`);
+    };
+    await render(
+      <template>
+        <BsForm
+          @onSubmit={{submitAction}}
+          @preventConcurrency={{false}}
+          as |form|
+        >
+          <div class='state {{if form.isSubmitting "is-submitting"}}'></div>
+        </BsForm>
+      </template>,
+    );
 
     assert.dom('form .state').doesNotHaveClass('is-submitting');
 
@@ -1097,53 +1161,69 @@ module('Integration | Component | bs-form', function (hooks) {
   });
 
   test('Yielded #isSubmitted is true if onSubmit resolves', async function (assert) {
-    this.actions.submit = sinon.fake.resolves();
-    await render(hbs`<BsForm @onSubmit={{action 'submit'}} as |form|>
-  <button
-    type='submit'
-    class={{if form.isSubmitted 'is-submitted'}}
-  >submit</button>
-</BsForm>`);
+    const submit = sinon.fake.resolves();
+    await render(
+      <template>
+        <BsForm @onSubmit={{submit}} as |form|>
+          <button
+            type='submit'
+            class={{if form.isSubmitted 'is-submitted'}}
+          >submit</button>
+        </BsForm>
+      </template>,
+    );
 
     await triggerEvent('form', 'submit');
     assert.dom('form button').hasClass('is-submitted');
   });
 
   test('Yielded #isSubmitted is true if onSubmit is undefined', async function (assert) {
-    await render(hbs`<BsForm as |form|>
-  <button
-    type='submit'
-    class={{if form.isSubmitted 'is-submitted'}}
-  >submit</button>
-</BsForm>`);
+    await render(
+      <template>
+        <BsForm as |form|>
+          <button
+            type='submit'
+            class={{if form.isSubmitted 'is-submitted'}}
+          >submit</button>
+        </BsForm>
+      </template>,
+    );
 
     await triggerEvent('form', 'submit');
     assert.dom('form button').hasClass('is-submitted');
   });
 
   test('Yielded #isSubmitted is true if validation passes', async function (assert) {
-    this.actions.validate = sinon.fake.resolves();
-    await render(hbs`<BsForm @validate={{action 'validate'}} as |form|>
-  <button
-    type='submit'
-    class={{if form.isSubmitted 'is-submitted'}}
-  >submit</button>
-</BsForm>`);
+    const validate = sinon.fake.resolves();
+    await render(
+      <template>
+        <BsForm @validate={{validate}} as |form|>
+          <button
+            type='submit'
+            class={{if form.isSubmitted 'is-submitted'}}
+          >submit</button>
+        </BsForm>
+      </template>,
+    );
 
     await triggerEvent('form', 'submit');
     assert.dom('form button').hasClass('is-submitted');
   });
 
   test('A change to a form elements resets yielded #isSubmitted', async function (assert) {
-    this.model = {};
-    this.actions.submit = sinon.fake.resolves();
-    await render(hbs`<BsForm @onSubmit={{action 'submit'}} @model={{this.model}} as |form|>
-  <form.element @property='foo' />
-  <button
-    type='submit'
-    class={{if form.isSubmitted 'is-submitted'}}
-  >submit</button>
-</BsForm>`);
+    const model = {};
+    const submit = sinon.fake.resolves();
+    await render(
+      <template>
+        <BsForm @onSubmit={{submit}} @model={{model}} as |form|>
+          <form.element @property='foo' />
+          <button
+            type='submit'
+            class={{if form.isSubmitted 'is-submitted'}}
+          >submit</button>
+        </BsForm>
+      </template>,
+    );
 
     await triggerEvent('form', 'submit');
     assert.dom('form button').hasClass('is-submitted', 'assumption');
@@ -1156,13 +1236,17 @@ module('Integration | Component | bs-form', function (hooks) {
     // tests fail by default on unhandled errors
     let expectedError = new Error();
 
-    this.actions.submit = sinon.fake.rejects(expectedError);
-    await render(hbs`<BsForm @onSubmit={{action 'submit'}} as |form|>
-  <button
-    type='submit'
-    class={{if form.isRejected 'is-rejected'}}
-  >submit</button>
-</BsForm>`);
+    const submit = sinon.fake.rejects(expectedError);
+    await render(
+      <template>
+        <BsForm @onSubmit={{submit}} as |form|>
+          <button
+            type='submit'
+            class={{if form.isRejected 'is-rejected'}}
+          >submit</button>
+        </BsForm>
+      </template>,
+    );
 
     await assert.rejectsErrorNotHandledByEmberOnError(async () => {
       await triggerEvent('form', 'submit');
@@ -1172,13 +1256,16 @@ module('Integration | Component | bs-form', function (hooks) {
   });
 
   test('Yielded #isRejected is true if validation fails', async function (assert) {
-    this.set('form', ensureSafeComponent(ValidatingForm, this));
-    await render(hbs`<this.form @validate={{false}} as |form|>
-  <button
-    type='submit'
-    class={{if form.isRejected 'is-rejected'}}
-  >submit</button>
-</this.form>`);
+    await render(
+      <template>
+        <ValidatingForm @validate={{false}} as |form|>
+          <button
+            type='submit'
+            class={{if form.isRejected 'is-rejected'}}
+          >submit</button>
+        </ValidatingForm>
+      </template>,
+    );
 
     await triggerEvent('form', 'submit');
     assert.dom('form button').hasClass('is-rejected');
@@ -1186,17 +1273,21 @@ module('Integration | Component | bs-form', function (hooks) {
 
   test('A change to a form elements resets yielded #isRejected', async function (assert) {
     // tests fail by default on unhandled errors
-    let expectedError = new Error();
+    const expectedError = new Error();
 
-    this.model = {};
-    this.actions.submit = sinon.fake.rejects(expectedError);
-    await render(hbs`<BsForm @onSubmit={{action 'submit'}} @model={{this.model}} as |form|>
-  <form.element @property='foo' />
-  <button
-    type='submit'
-    class={{if form.isRejected 'is-rejected'}}
-  >submit</button>
-</BsForm>`);
+    const model = {};
+    const submit = sinon.fake.rejects(expectedError);
+    await render(
+      <template>
+        <BsForm @onSubmit={{submit}} @model={{model}} as |form|>
+          <form.element @property='foo' />
+          <button
+            type='submit'
+            class={{if form.isRejected 'is-rejected'}}
+          >submit</button>
+        </BsForm>
+      </template>,
+    );
 
     await assert.rejectsErrorNotHandledByEmberOnError(async () => {
       await triggerEvent('form', 'submit');
@@ -1209,14 +1300,18 @@ module('Integration | Component | bs-form', function (hooks) {
   });
 
   test('Triggering resetSubmissionState resets submission state of form', async function (assert) {
-    this.model = {};
-    this.actions.submit = sinon.fake.resolves();
-    await render(hbs`<BsForm @onSubmit={{action 'submit'}} @model={{this.model}} as |form|>
-  <input onchange={{form.resetSubmissionState}} />
-  {{#if form.isSubmitting}}isSubmitting{{/if}}
-  {{#if form.isSubmitted}}isSubmitted{{/if}}
-  {{#if form.isRejected}}isRejected{{/if}}
-</BsForm>`);
+    const model = {};
+    const submit = sinon.fake.resolves();
+    await render(
+      <template>
+        <BsForm @onSubmit={{submit}} @model={{model}} as |form|>
+          <input onchange={{form.resetSubmissionState}} />
+          {{#if form.isSubmitting}}isSubmitting{{/if}}
+          {{#if form.isSubmitted}}isSubmitted{{/if}}
+          {{#if form.isRejected}}isRejected{{/if}}
+        </BsForm>
+      </template>,
+    );
 
     await triggerEvent('form', 'submit');
     assert.dom('form').hasText('isSubmitted');
@@ -1226,13 +1321,17 @@ module('Integration | Component | bs-form', function (hooks) {
   });
 
   test("Adds default onChange action to form elements that updates model's property", async function (assert) {
-    let model = EmberObject.create({
+    const model = EmberObject.create({
       name: 'foo',
     });
-    this.set('model', model);
-    await render(hbs`<BsForm @model={{this.model}} as |form|>
-  <form.element @property='name' />
-</BsForm>`);
+
+    await render(
+      <template>
+        <BsForm @model={{model}} as |form|>
+          <form.element @property='name' />
+        </BsForm>
+      </template>,
+    );
 
     assert.dom('input').hasValue('foo', 'input has model property value');
 
@@ -1244,10 +1343,11 @@ module('Integration | Component | bs-form', function (hooks) {
   testRequiringFocus(
     'Pressing enter on a form with submitOnEnter submits the form',
     async function (assert) {
-      let submit = sinon.spy();
-      this.actions.submit = submit;
+      const submit = sinon.spy();
       await render(
-        hbs`<BsForm @onSubmit={{action 'submit'}} @submitOnEnter={{true}} />`,
+        <template>
+          <BsForm @onSubmit={{submit}} @submitOnEnter={{true}} />
+        </template>,
       );
       await triggerKeyEvent('form', 'keypress', 13);
       assert.ok(submit.calledOnce, 'onSubmit action has been called');
@@ -1257,12 +1357,15 @@ module('Integration | Component | bs-form', function (hooks) {
   testRequiringFocus(
     'Pressing enter on a form with multiple input elements and submitOnEnter submits the form',
     async function (assert) {
-      let submit = sinon.spy();
-      this.actions.submit = submit;
-      await render(hbs`<BsForm @onSubmit={{action 'submit'}} @submitOnEnter={{true}} as |form|>
-  <form.element @property='input1' />
-  <form.element @property='input2' />
-</BsForm>`);
+      const submit = sinon.spy();
+      await render(
+        <template>
+          <BsForm @onSubmit={{submit}} @submitOnEnter={{true}} as |form|>
+            <form.element @property='input1' />
+            <form.element @property='input2' />
+          </BsForm>
+        </template>,
+      );
       await triggerKeyEvent('input', 'keypress', 13);
       assert.ok(submit.calledOnce, 'onSubmit action has been called');
     },
@@ -1271,49 +1374,56 @@ module('Integration | Component | bs-form', function (hooks) {
   test('prevents submission to be fired concurrently', async function (assert) {
     let deferredSubmitAction = defer();
     let submitActionHasBeenExecuted = false;
-    this.set('submitAction', () => {
-      submitActionHasBeenExecuted = true;
-      return deferredSubmitAction.promise;
-    });
-    this.set('beforeAction', () => {});
-    this.set('validate', () => {
-      return Promise.resolve();
-    });
-    await render(hbs`<BsForm
-  @onSubmit={{this.submitAction}}
-  @onBefore={{this.beforeAction}}
-  @validate={{this.validate}}
-/>`);
+
+    class State {
+      @tracked submitAction = () => {
+        submitActionHasBeenExecuted = true;
+        return deferredSubmitAction.promise;
+      };
+      @tracked beforeAction = () => {};
+      @tracked validate = () => {};
+    }
+    const state = new State();
+
+    await render(
+      <template>
+        <BsForm
+          @onSubmit={{state.submitAction}}
+          @onBefore={{state.beforeAction}}
+          @validate={{state.validate}}
+        />
+      </template>,
+    );
 
     triggerEvent('form', 'submit');
     await waitUntil(() => submitActionHasBeenExecuted);
 
-    this.set('submitAction', () => {
+    state.submitAction = () => {
       assert.ok(false, 'onSubmit action is not executed concurrently');
-    });
-    this.set('beforeAction', () => {
+    };
+    state.beforeAction = () => {
       assert.ok(
         false,
         'onBefore action is not executed if concurrent submission has been dropped',
       );
-    });
-    this.set('validate', () => {
+    };
+    state.validate = () => {
       assert.ok(
         false,
         'validate is not executed if concurrent submission has been dropped',
       );
-    });
+    };
     await triggerEvent('form', 'submit');
 
     deferredSubmitAction.resolve();
     await settled();
-    this.set('submitAction', () => {
+    state.submitAction = () => {
       assert.step('onSubmit action');
-    });
-    this.set('beforeAction', () => {});
-    this.set('validate', () => {
+    };
+    state.beforeAction = () => {};
+    state.validate = () => {
       return Promise.resolve();
-    });
+    };
     await triggerEvent('form', 'submit');
     assert.verifySteps(
       ['onSubmit action'],
@@ -1325,24 +1435,24 @@ module('Integration | Component | bs-form', function (hooks) {
     let deferredSubmitAction = defer();
     let submitActionExecutionCounter = 0;
 
-    let beforeActionFake = sinon.fake();
-    let validateFake = sinon.fake();
+    const beforeAction = sinon.fake();
+    const validateAction = sinon.fake();
 
-    this.set('submitAction', () => {
+    const submitAction = () => {
       submitActionExecutionCounter++;
       return deferredSubmitAction.promise;
-    });
-    this.set('beforeAction', beforeActionFake);
-    this.set('validate', validateFake);
+    };
 
-    this.set('form', ensureSafeComponent(ValidatingForm, this));
-
-    await render(hbs`<this.form
-  @preventConcurrency={{false}}
-  @onSubmit={{this.submitAction}}
-  @onBefore={{this.beforeAction}}
-  @validate={{this.validate}}
-/>`);
+    await render(
+      <template>
+        <ValidatingForm
+          @preventConcurrency={{false}}
+          @onSubmit={{submitAction}}
+          @onBefore={{beforeAction}}
+          @validate={{validateAction}}
+        />
+      </template>,
+    );
 
     await triggerEvent('form', 'submit');
     assert.equal(submitActionExecutionCounter, 1);
@@ -1350,25 +1460,27 @@ module('Integration | Component | bs-form', function (hooks) {
     await triggerEvent('form', 'submit');
     assert.equal(submitActionExecutionCounter, 2);
 
-    assert.ok(beforeActionFake.calledTwice);
-    assert.ok(validateFake.calledTwice);
+    assert.ok(beforeAction.calledTwice);
+    assert.ok(validateAction.calledTwice);
 
     deferredSubmitAction.resolve();
   });
 
   test('supports novalidate attribute', async function (assert) {
-    await render(hbs`<BsForm />`);
+    await render(<template><BsForm /></template>);
     assert.dom('form').doesNotHaveAttribute('novalidate');
 
-    await render(hbs`<BsForm novalidate={{true}} />`);
+    await render(<template><BsForm novalidate={{true}} /></template>);
     assert.dom('form').hasAttribute('novalidate');
   });
 
   test('disabled property propagates to all its elements', async function (assert) {
     await render(
-      hbs`<BsForm @model={{this}} @disabled={{true}} as |form|>
-  <form.element @property='dummy' data-test-form-element />
-</BsForm>`,
+      <template>
+        <BsForm @model={{this}} @disabled={{true}} as |form|>
+          <form.element @property='dummy' data-test-form-element />
+        </BsForm>
+      </template>,
     );
 
     assert.dom('[data-test-form-element] input').hasAttribute('disabled');
@@ -1376,9 +1488,11 @@ module('Integration | Component | bs-form', function (hooks) {
 
   test('readOnly property propagates to all its elements', async function (assert) {
     await render(
-      hbs`<BsForm @model={{this}} @readonly={{true}} as |form|>
-  <form.element @property='dummy' data-test-form-element />
-</BsForm>`,
+      <template>
+        <BsForm @model={{this}} @readonly={{true}} as |form|>
+          <form.element @property='dummy' data-test-form-element />
+        </BsForm>
+      </template>,
     );
 
     assert.dom('[data-test-form-element] input').hasAttribute('readonly');
@@ -1386,9 +1500,11 @@ module('Integration | Component | bs-form', function (hooks) {
 
   test('it passes accessibility checks', async function (assert) {
     await render(
-      hbs`<BsForm @model={{this}} as |form|>
-  <form.element @property='dummy' @label='Dummy' />
-</BsForm>`,
+      <template>
+        <BsForm @model={{this}} as |form|>
+          <form.element @property='dummy' @label='Dummy' />
+        </BsForm>
+      </template>,
     );
 
     await a11yAudit();
@@ -1397,9 +1513,13 @@ module('Integration | Component | bs-form', function (hooks) {
 
   module('yielded submitButton', function () {
     test('it yields submitButton component', async function (assert) {
-      await render(hbs`<BsForm as |form|>
-  <form.submitButton />
-</BsForm>`);
+      await render(
+        <template>
+          <BsForm as |form|>
+            <form.submitButton />
+          </BsForm>
+        </template>,
+      );
 
       assert
         .dom('form button')
@@ -1413,13 +1533,17 @@ module('Integration | Component | bs-form', function (hooks) {
     });
 
     test('click yielded submitButton component submits the form', async function (assert) {
-      this.set('submitHandler', () => {
+      const submitHandler = () => {
         assert.step('@onSubmit action is exected');
-      });
+      };
 
-      await render(hbs`<BsForm @onSubmit={{this.submitHandler}} as |form|>
-  <form.submitButton />
-</BsForm>`);
+      await render(
+        <template>
+          <BsForm @onSubmit={{submitHandler}} as |form|>
+            <form.submitButton />
+          </BsForm>
+        </template>,
+      );
       await click('button');
       assert.verifySteps(['@onSubmit action is exected']);
     });
@@ -1444,21 +1568,24 @@ module('Integration | Component | bs-form', function (hooks) {
         test(`state of yielded submitButton component is bound to form submission state if ${scenario}`, async function (assert) {
           let deferredSubmitAction = defer();
 
-          this.set('resetTrigger', false);
-          this.set('submitHandler', () => {
+          const submitHandler = () => {
             return deferredSubmitAction.promise;
-          });
+          };
 
-          await render(hbs`<BsForm @onSubmit={{this.submitHandler}} as |form|>
-  <form.submitButton as |button|>
-    {{#if button.isPending}}isPending{{/if}}
-    {{#if button.isFulfilled}}isFulfilled{{/if}}
-    {{#if button.isRejected}}isRejected{{/if}}
-    {{#if button.isSettled}}isSettled{{/if}}
-  </form.submitButton>
-  <button type='button' {{on 'click' form.resetSubmissionState}}>
-  </button>
-</BsForm>`);
+          await render(
+            <template>
+              <BsForm @onSubmit={{submitHandler}} as |form|>
+                <form.submitButton as |button|>
+                  {{#if button.isPending}}isPending{{/if}}
+                  {{#if button.isFulfilled}}isFulfilled{{/if}}
+                  {{#if button.isRejected}}isRejected{{/if}}
+                  {{#if button.isSettled}}isSettled{{/if}}
+                </form.submitButton>
+                <button type='button' {{on 'click' form.resetSubmissionState}}>
+                </button>
+              </BsForm>
+            </template>,
+          );
           assert.dom('button[type="submit"]').hasNoText();
           assert.dom('button[type="submit"]').hasNoAttribute('disabled');
 
@@ -1496,82 +1623,99 @@ module('Integration | Component | bs-form', function (hooks) {
   test('arguments @onBefore, @onSubmit, @onInvalid can be undefined', async function (assert) {
     assert.expect(0);
 
-    this.set('onBefore', undefined);
-    this.set('onSubmit', undefined);
-    this.set('onInvalid', undefined);
+    const onBefore = undefined;
+    const onSubmit = undefined;
+    const onInvalid = undefined;
 
-    await render(hbs`<BsForm
-  @onBefore={{this.onBefore}}
-  @onSubmit={{this.onSubmit}}
-  @onInvalid={{this.onInvalid}}
-/>`);
+    await render(
+      <template>
+        <BsForm
+          @onBefore={{onBefore}}
+          @onSubmit={{onSubmit}}
+          @onInvalid={{onInvalid}}
+        />
+      </template>,
+    );
     await triggerEvent('form', 'submit');
   });
 
   test('it uses default value false for disabled argument if undefined', async function (assert) {
-    this.set('disabled', undefined);
+    const disabled = undefined;
     await render(
-      hbs`<BsForm @disabled={{this.disabled}} as |form|>
-  <form.element />
-</BsForm>`,
+      <template>
+        <BsForm @disabled={{disabled}} as |form|>
+          <form.element />
+        </BsForm>
+      </template>,
     );
     assert.dom('input').doesNotHaveAttribute('disabled');
   });
 
   test('it uses default value for formLayout argument if undefined', async function (assert) {
-    this.set('formLayout', undefined);
-    await render(hbs`<BsForm @formLayout={{this.formLayout}} />`);
+    const formLayout = undefined;
+    await render(<template><BsForm @formLayout={{formLayout}} /></template>);
     assert.dom('form').doesNotHaveAttribute('class');
   });
 
   test('it uses a POJO as model if undefined', async function (assert) {
-    this.set('model', undefined);
-    this.set('submitHandler', (model) => {
-      assert.step('submit action on untouched form');
-      assert.strictEqual(typeof model, 'object');
-    });
-    await render(hbs`<BsForm @model={{this.model}} @onSubmit={{this.submitHandler}} as |form|>
-  <form.element @property='name' />
-</BsForm>`);
+    class State {
+      @tracked submitHandler = (model) => {
+        assert.step('submit action on untouched form');
+        assert.strictEqual(typeof model, 'object');
+      };
+    }
+    const state = new State();
+    const model = undefined;
+    await render(
+      <template>
+        <BsForm @model={{model}} @onSubmit={{state.submitHandler}} as |form|>
+          <form.element @property='name' />
+        </BsForm>
+      </template>,
+    );
     await triggerEvent('form', 'submit');
     assert.verifySteps(['submit action on untouched form']);
 
-    this.set('submitHandler', (model) => {
+    state.submitHandler = (model) => {
       assert.step('submit action after user input');
       assert.deepEqual(model, { name: 'John Doe' });
-    });
+    };
     await fillIn('input', 'John Doe');
     await triggerEvent('form', 'submit');
     assert.verifySteps(['submit action after user input']);
   });
 
   test('POJO created for model if undefined does not leak between two instances', async function (assert) {
-    this.set('model', undefined);
-    this.set('submitHandlerForFirstForm', (model) => {
+    const model = undefined;
+    const submitHandlerForFirstForm = (model) => {
       assert.step('first form submitted');
       assert.deepEqual(
         model,
         { name: 'John Doe' },
         'name is set on model for first form',
       );
-    });
-    this.set('submitHandlerForSecondForm', (model) => {
+    };
+    const submitHandlerForSecondForm = (model) => {
       assert.step('second form submitted');
       assert.deepEqual(model, {}, 'name is not set on model for second form');
-    });
-    await render(hbs`<BsForm
-  @model={{this.model}}
-  @onSubmit={{this.submitHandlerForFirstForm}}
-  data-test-first-form
-  as |form|
->
-  <form.element @property='name' />
-</BsForm>
-<BsForm
-  @model={{this.model}}
-  @onSubmit={{this.submitHandlerForSecondForm}}
-  data-test-second-form
-/>`);
+    };
+    await render(
+      <template>
+        <BsForm
+          @model={{model}}
+          @onSubmit={{submitHandlerForFirstForm}}
+          data-test-first-form
+          as |form|
+        >
+          <form.element @property='name' />
+        </BsForm>
+        <BsForm
+          @model={{model}}
+          @onSubmit={{submitHandlerForSecondForm}}
+          data-test-second-form
+        />
+      </template>,
+    );
     await fillIn('input', 'John Doe');
     await triggerEvent('[data-test-first-form]', 'submit');
     await triggerEvent('[data-test-second-form]', 'submit');
@@ -1579,11 +1723,13 @@ module('Integration | Component | bs-form', function (hooks) {
   });
 
   test('it uses default value false for readonly argument if undefined', async function (assert) {
-    this.set('readonly', undefined);
+    const readonlyValue = undefined;
     await render(
-      hbs`<BsForm @readonly={{this.readonly}} as |form|>
-  <form.element />
-</BsForm>`,
+      <template>
+        <BsForm @readonly={{readonlyValue}} as |form|>
+          <form.element />
+        </BsForm>
+      </template>,
     );
     assert.dom('input').doesNotHaveAttribute('readonly');
   });
@@ -1593,38 +1739,57 @@ module('Integration | Component | bs-form', function (hooks) {
    */
   test('it does not have a showOwnValidation bug', async function (assert) {
     assert.expect(1);
-    this.set('submit', ({ name }) => assert.equal(name, 'Zoey'));
-    this.set('beforeSubmit', (model) => {
-      if (this.user) {
-        model.set('name', this.user.name);
+    class State {
+      @tracked name;
+      @tracked user;
+    }
+    const state = new State();
+
+    const submit = ({ name }) => assert.equal(name, 'Zoey');
+    const beforeSubmit = (model) => {
+      if (state.user) {
+        model.name = state.user.name;
       }
-    });
+    };
 
-    await render(hbs`<BsForm
-  @model={{this}}
-  @onBefore={{this.beforeSubmit}}
-  @onSubmit={{this.submit}}
-  as |Form|
->
-  {{#unless this.user}}
-    <Form.element @property='name' />
-  {{/unless}}
+    await render(
+      <template>
+        <BsForm
+          @model={{state}}
+          @onBefore={{beforeSubmit}}
+          @onSubmit={{submit}}
+          as |Form|
+        >
+          {{#unless state.user}}
+            <Form.element @property='name' />
+          {{/unless}}
 
-  <Form.submitButton @defaultText='Submit' />
-</BsForm>`);
+          <Form.submitButton @defaultText='Submit' />
+        </BsForm>
+      </template>,
+    );
 
     await fillIn('input', 'Tomster');
 
-    this.set('user', { name: 'Zoey' });
+    state.user = { name: 'Zoey' };
+    await settled();
 
     await click('button');
   });
 
   test('it provides model access inside form object', async function (assert) {
-    await render(hbs`<BsForm @model={{this.model}} @onSubmit={{this.submitHandler}} as |form|>
-  <form.element @property='name' />
-  <label id='name'>{{form.model.name}}</label>
-</BsForm>`);
+    await render(
+      <template>
+        <BsForm
+          @model={{this.model}}
+          @onSubmit={{this.submitHandler}}
+          as |form|
+        >
+          <form.element @property='name' />
+          <label id='name'>{{form.model.name}}</label>
+        </BsForm>
+      </template>,
+    );
 
     assert.dom(this.element.querySelector('#name')).hasText('');
     await fillIn('input', 'John Doe');
