@@ -42,7 +42,7 @@ import { ref } from 'ember-ref-bucket';
   with an invalid validation, or when focusing out of invalid inputs
 
   ```handlebars
-  <BsForm @formLayout="horizontal" @model={{this}} @onSubmit={{action "submit"}} as |form|>
+  <BsForm @formLayout="horizontal" @model={{this}} @onSubmit={{this.submit}} as |form|>
     <form.element @controlType="email" @label="Email" @placeholder="Email" @property="email" />
     <form.element @controlType="password" @label="Password" @placeholder="Password" @property="password" />
     <form.element @controlType="checkbox" @label="Remember me" @property="rememberMe" />
@@ -80,7 +80,7 @@ import { ref } from 'ember-ref-bucket';
   by `onSubmit` is fulfilled. It could be used to show a loading spinner instead of the form while it's submitting for example:
 
   ```hbs
-  <BsForm @onSubmit={{action "save"}} as |form|>
+  <BsForm @onSubmit={{this.save}} as |form|>
     {{#if form.isSubmitting}}
       <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
       Logging in...
@@ -97,7 +97,7 @@ import { ref } from 'ember-ref-bucket';
   It could be used for visual feedback about last submission:
 
   ```hbs
-  <BsForm @onSubmit={{action "save"}} as |form|>
+  <BsForm @onSubmit={{this.save}} as |form|>
     <form.submitButton @type={{if form.isRejected "danger" "primary"}}>
       Save
     </form.submitButton>

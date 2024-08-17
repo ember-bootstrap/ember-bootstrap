@@ -25,17 +25,17 @@ function afterRender() {
   ### Usage
 
   ```hbs
-  <BsModal @onSubmit={{action "submit"}} as |Modal|>
-    <Modal.header>
+  <BsModal @onSubmit={{this.submit}} as |modal|>
+    <modal.header>
       <h4 class="modal-title"><i class="glyphicon glyphicon-alert"></i> Alert</h4>
-    </Modal.header>
-    <Modal.body>
+    </modal.header>
+    <modal.body>
       Are you absolutely sure you want to do that???
-    </Modal.body>
-    <Modal.footer as |footer|>
-      <BsButton @onClick={{action Modal.close}} @type="danger">Oh no, forget it!</BsButton>
-      <BsButton @onClick={{action Modal.submit}} @type="success">Yeah!</BsButton>
-    </Modal.footer>
+    </modal.body>
+    <modal.footer as |footer|>
+      <BsButton @onClick={{modal.close}} @type="danger">Oh no, forget it!</BsButton>
+      <BsButton @onClick={{modal.submit}} @type="success">Yeah!</BsButton>
+    </modal.footer>
   </BsModal>
   ```
 
