@@ -752,7 +752,7 @@ module('Integration | Component | bs-tooltip', function (hooks) {
             @title='Dummy'
             class='wide'
             data-test
-            role='foo'
+            role='list'
           /></div>
       </template>,
     );

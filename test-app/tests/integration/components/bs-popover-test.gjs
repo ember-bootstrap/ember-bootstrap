@@ -290,7 +290,7 @@ module('Integration | Component | bs-popover', function (hooks) {
             @title='Dummy'
             class='wide'
             data-test
-            role='foo'
+            role='list'
           >test</BsPopover></div>
       </template>,
     );

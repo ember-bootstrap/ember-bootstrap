@@ -1305,7 +1305,7 @@ module('Integration | Component | bs-form', function (hooks) {
     await render(
       <template>
         <BsForm @onSubmit={{submit}} @model={{model}} as |form|>
-          <input onchange={{form.resetSubmissionState}} />
+          <label>Input: <input onchange={{form.resetSubmissionState}} /></label>
           {{#if form.isSubmitting}}isSubmitting{{/if}}
           {{#if form.isSubmitted}}isSubmitted{{/if}}
           {{#if form.isRejected}}isRejected{{/if}}

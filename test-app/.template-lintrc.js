@@ -10,19 +10,6 @@ module.exports = {
   },
   overrides: [
     {
-      files: ['tests/**/*'],
-      rules: {
-        // @todo we need to fix these in the tests!
-        'no-action': 'warn',
-        'no-autofocus-attribute': 'warn',
-        'no-capital-arguments': 'warn',
-        'no-curly-component-invocation': 'warn',
-        'no-invalid-role': 'warn',
-        'require-input-label': 'warn',
-        'require-presentational-children': 'warn',
-      },
-    },
-    {
       files: ['tests/**/*.(gjs|gts)'],
       rules: {
         prettier: 'off',

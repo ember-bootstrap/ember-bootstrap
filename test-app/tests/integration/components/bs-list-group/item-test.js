@@ -19,7 +19,7 @@ module('Integration | Component | bs-list-group/item', function (hooks) {
 
   test('custom HTML-attributes can be added to list items', async function (assert) {
     await render(hbs`<BsListGroup as |ListGroup|>
-  <ListGroup.item class='custom' role='foo' data-test>First</ListGroup.item>
+  <ListGroup.item class='custom' role='list' data-test>First</ListGroup.item>
 </BsListGroup>`);
     assert
       .dom('ul li.list-group-item')

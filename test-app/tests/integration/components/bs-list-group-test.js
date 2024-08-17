@@ -16,11 +16,11 @@ module('Integration | Component | bs-list-group', function (hooks) {
   });
 
   test('custom HTML-attributes can be added to list', async function (assert) {
-    await render(hbs`<BsListGroup class='custom' role='foo' data-test />`);
+    await render(hbs`<BsListGroup class='custom' role='list' data-test />`);
     assert
       .dom('ul.list-group')
       .hasClass('custom', 'class can be added')
-      .hasAttribute('role', 'foo')
+      .hasAttribute('role', 'list')
       .hasAttribute('data-test');
   });
 
