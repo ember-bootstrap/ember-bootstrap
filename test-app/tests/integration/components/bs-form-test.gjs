@@ -1314,10 +1314,10 @@ module('Integration | Component | bs-form', function (hooks) {
     );
 
     await triggerEvent('form', 'submit');
-    assert.dom('form').hasText('isSubmitted');
+    assert.dom('form').hasText('Input: isSubmitted');
 
     await fillIn('input', 'bar');
-    assert.dom('form').hasNoText();
+    assert.dom('form').hasText('Input:');
   });
 
   test("Adds default onChange action to form elements that updates model's property", async function (assert) {

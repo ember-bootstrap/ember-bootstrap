@@ -24,7 +24,7 @@ module('Integration | Component | bs-list-group/item', function (hooks) {
     assert
       .dom('ul li.list-group-item')
       .hasClass('custom', 'class can be added')
-      .hasAttribute('role', 'foo')
+      .hasAttribute('role', 'list')
       .hasAttribute('data-test');
   });
 

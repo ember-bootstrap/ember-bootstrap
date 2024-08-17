@@ -758,7 +758,7 @@ module('Integration | Component | bs-tooltip', function (hooks) {
     );
     await triggerEvent('#target', 'mouseenter');
     assert.dom('.tooltip').hasClass('wide');
-    assert.dom('.tooltip').hasAttribute('role', 'foo');
+    assert.dom('.tooltip').hasAttribute('role', 'list');
     assert.dom('.tooltip').hasAttribute('data-test');
   });
 

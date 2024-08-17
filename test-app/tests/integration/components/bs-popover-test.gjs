@@ -296,7 +296,7 @@ module('Integration | Component | bs-popover', function (hooks) {
     );
     await click('#target');
     assert.dom('.popover').hasClass('wide');
-    assert.dom('.popover').hasAttribute('role', 'foo');
+    assert.dom('.popover').hasAttribute('role', 'list');
     assert.dom('.popover').hasAttribute('data-test');
   });
 
