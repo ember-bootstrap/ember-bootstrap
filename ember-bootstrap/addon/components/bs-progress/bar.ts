@@ -1,5 +1,22 @@
 import Component from '@glimmer/component';
 
+export interface ProgressBarSignature {
+  Args: {
+    minValue?: number;
+    maxValue?: number;
+    value?: number;
+    showLabel?: boolean;
+    striped?: boolean;
+    animate?: boolean;
+    roundDigits?: number;
+    type?: 'default' | 'success' | 'info' | 'warning' | 'danger' | string;
+  };
+  Blocks: {
+    default: [percentRounded: number];
+  };
+  Element: HTMLDivElement;
+}
+
 /**
  Component for a single progress bar, see [Components.Progress](Components.Progress.html) for more examples.
 
@@ -8,7 +25,7 @@ import Component from '@glimmer/component';
  @extends Ember.Component
  @public
  */
-export default class ProgressBar extends Component {
+export default class ProgressBar extends Component<ProgressBarSignature> {
   /**
    * The lower limit of the value range
    *
@@ -48,7 +65,7 @@ export default class ProgressBar extends Component {
   /**
    If true a label will be shown inside the progress bar.
 
-   By default it will be the percentage corresponding to the `value` property, rounded to `roundDigits` digits.
+   By default, it will be the percentage corresponding to the `value` property, rounded to `roundDigits` digits.
    You can customize it by using the component with a block template, which the component yields the percentage
    value to:
 
@@ -130,9 +147,12 @@ export default class ProgressBar extends Component {
    * @readonly
    */
   get percent() {
-    let value = parseFloat(this.value);
-    let minValue = parseFloat(this.minValue);
-    let maxValue = parseFloat(this.maxValue);
+    // `parseFloat`'s types only accepts string values, but will handle numbers just fine.
+    // The casting here is meant to keep the type checking active without changing behaviour for
+    // consumers that still expect these values can be strings.
+    const value = parseFloat(this.value as unknown as string);
+    const minValue = parseFloat(this.minValue as unknown as string);
+    const maxValue = parseFloat(this.maxValue as unknown as string);
 
     return (
       Math.min(Math.max((value - minValue) / (maxValue - minValue), 0), 1) * 100
@@ -148,12 +168,12 @@ export default class ProgressBar extends Component {
    * @readonly
    */
   get percentRounded() {
-    let roundFactor = Math.pow(10, this.roundDigits);
+    const roundFactor = Math.pow(10, this.roundDigits);
     return Math.round(this.percent * roundFactor) / roundFactor;
   }
 
   get percentStyleValue() {
-    let percent = this.percent;
+    const percent = this.percent;
     return !isNaN(percent) ? `${percent}%` : '';
   }
 }
