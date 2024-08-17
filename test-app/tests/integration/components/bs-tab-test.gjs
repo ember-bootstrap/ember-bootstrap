@@ -376,7 +376,7 @@ module('Integration | Component | bs-tab', function (hooks) {
 
   test('changing active tab does not change public activeId property (DDAU)', async function (assert) {
     class State {
-      @tracked paneId = 'pane1';
+      paneId = 'pane1';
     }
     const state = new State();
     await render(
