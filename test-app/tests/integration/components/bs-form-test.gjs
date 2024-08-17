@@ -1305,16 +1305,17 @@ module('Integration | Component | bs-form', function (hooks) {
     await render(
       <template>
         <BsForm @onSubmit={{submit}} @model={{model}} as |form|>
-          <label>Input: <input {{on "click" form.resetSubmissionState}} /></label>
-          <span class="state">{{#if form.isSubmitting}}isSubmitting{{/if}}</span>
-          <span class="state">{{#if form.isSubmitted}}isSubmitted{{/if}}</span>
-          <span class="state">{{#if form.isRejected}}isRejected{{/if}}</span>
+          <label>Input: <input {{on "input" form.resetSubmissionState}} /></label>
+          <span class="state">
+            {{#if form.isSubmitting}}isSubmitting{{/if}}
+            {{#if form.isSubmitted}}isSubmitted{{/if}}
+            {{#if form.isRejected}}isRejected{{/if}}
+          </span>
         </BsForm>
       </template>,
     );
 
     await triggerEvent('form', 'submit');
-    await this.pauseTest();
     assert.dom('form .state').hasText('isSubmitted');
 
     await fillIn('input', 'bar');
