@@ -1305,19 +1305,20 @@ module('Integration | Component | bs-form', function (hooks) {
     await render(
       <template>
         <BsForm @onSubmit={{submit}} @model={{model}} as |form|>
-          <label>Input: <input onchange={{form.resetSubmissionState}} /></label>
-          {{#if form.isSubmitting}}isSubmitting{{/if}}
-          {{#if form.isSubmitted}}isSubmitted{{/if}}
-          {{#if form.isRejected}}isRejected{{/if}}
+          <label>Input: <input {{on "click" form.resetSubmissionState}} /></label>
+          <span class="state">{{#if form.isSubmitting}}isSubmitting{{/if}}</span>
+          <span class="state">{{#if form.isSubmitted}}isSubmitted{{/if}}</span>
+          <span class="state">{{#if form.isRejected}}isRejected{{/if}}</span>
         </BsForm>
       </template>,
     );
 
     await triggerEvent('form', 'submit');
-    assert.dom('form').hasText('Input: isSubmitted');
+    await this.pauseTest();
+    assert.dom('form .state').hasText('isSubmitted');
 
     await fillIn('input', 'bar');
-    assert.dom('form').hasText('Input:');
+    assert.dom('form .state').hasText('');
   });
 
   test("Adds default onChange action to form elements that updates model's property", async function (assert) {
