@@ -802,8 +802,8 @@ module('Integration | Component | bs-dropdown', function (hooks) {
               <dd.toggle>Dropdown</dd.toggle>
               <dd.menu @renderInPlace={{renderInPlace}}>
                 <a class='dropdown-item' href='#' id='item1'>Something</a>
-                <input type='text' />
-                <textarea></textarea>
+                <label>Input: <input type='text' /></label>
+                <label>TextArea: <textarea></textarea></label>
               </dd.menu>
             </BsDropdown>
           </template>,

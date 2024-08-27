@@ -542,7 +542,11 @@ module('Integration | Component | bs-modal-simple', function (hooks) {
             @fade={{false}}
             @open={{state.open}}
           >
-            <input data-test-autofocus autofocus='autofocus' />
+            {{! template-lint-disable no-autofocus-attribute }}
+            <label>
+              Input:
+              <input data-test-autofocus autofocus='autofocus' />
+            </label>
           </BsModalSimple>
         </template>,
       );
@@ -597,7 +601,7 @@ module('Integration | Component | bs-modal-simple', function (hooks) {
     await render(
       <template>
         <BsModalSimple @title='Simple Dialog' @fade={{false}}>
-          <input data-test-input />
+          <label>Input: <input data-test-input /></label>
           <a href='#' data-test-link>Link</a>
         </BsModalSimple>
       </template>,
@@ -693,7 +697,8 @@ module('Integration | Component | bs-modal-simple', function (hooks) {
             @onHide={{hideAction}}
             @keyboard={{true}}
           >
-            <input autofocus='autofocus' />
+            {{! template-lint-disable no-autofocus-attribute }}
+            <label>Input: <input autofocus='autofocus' /></label>
           </BsModalSimple>
         </template>,
       );

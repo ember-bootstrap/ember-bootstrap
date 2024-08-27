@@ -7,16 +7,7 @@ const deprecations = new Set<string>();
 const expectedDeprecations = new Set<string>();
 
 // Ignore deprecations that are not caused by our own code, and which we cannot fix easily.
-const ignoredDeprecations = [
-  // @todo remove when https://github.com/alexlafroscia/ember-popper-modifier/issues/452 is fixed
-  /ember-modifier/,
-  // @todo investigate what is still triggering the deprecation, might be some internals like
-  // ember-cli-app-version or ember-export-application-global
-  /@ember\/string/,
-  // @todo https://github.com/ember-bootstrap/ember-bootstrap/issues/2131
-  /Usage of the `\(action\)` helper is deprecated/,
-  /Usage of the `{{action}}` modifier is deprecated/,
-];
+const ignoredDeprecations: string[] = [];
 
 export default function setupNoDeprecations({
   beforeEach,
