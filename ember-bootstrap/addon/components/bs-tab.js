@@ -62,8 +62,8 @@ import { schedule } from '@ember/runloop';
   ```hbs
   <BsTab @customTabs={{true}} as |tab|>
     <BsNav @type="tabs" as |nav|>
-      <nav.item @active={{bs-eq Tab.activeId "pane1"}}><a href="#pane1" role="tab" onclick={{action Tab.select "pane1"}}>Tab 1</a></nav.item>
-      <nav.item @active={{bs-eq Tab.activeId "pane2"}}><a href="#pane2" role="tab" onclick={{action Tab.select "pane2"}}>Tab 2 <span class="badge">{{badge}}</span></a></nav.item>
+      <nav.item @active={{bs-eq tab.activeId "pane1"}}><a href="#pane1" role="tab" {{on "click" (fn tab.select "pane1")}}>Tab 1</a></nav.item>
+      <nav.item @active={{bs-eq tab.activeId "pane2"}}><a href="#pane2" role="tab" {{on "click" (fn tab.select "pane2")}}>Tab 2 <span class="badge">{{badge}}</span></a></nav.item>
     </BsNav>
     <div class="tab-content">
       <tab.pane @id="pane1" @title="Tab 1">

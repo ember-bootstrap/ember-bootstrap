@@ -66,7 +66,7 @@ import { isBlank } from '@ember/utils';
     <navbar.content>
       <navbar.nav as |nav|>
         <nav.item>
-          <a onclick={{action navbar.collapse}}>Collapse</a>
+          <a {{on "click" navbar.collapse}}>Collapse</a>
         </nav.item>
       </navbar.nav>
     </navbar.content>

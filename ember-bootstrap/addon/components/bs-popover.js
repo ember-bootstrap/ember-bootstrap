@@ -41,7 +41,7 @@ import arg from '../utils/decorators/arg';
   *  a `close` action is yielded, that allows you to close the tooltip:
 
   ```hbs
-  <BsPopover as |po| >This is a popover <button onclick={{action po.close}}>Close</button></BsPopover>
+  <BsPopover as |po| >This is a popover <button {{on "click" po.close}}>Close</button></BsPopover>
   ```
 
   See the individual API docs for each property.
