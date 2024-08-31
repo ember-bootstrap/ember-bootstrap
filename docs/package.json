@@ -83,7 +83,7 @@
     "stylelint-config-standard-scss": "13.1.0",
     "stylelint-prettier": "5.0.2",
     "tracked-built-ins": "3.3.0",
-    "webpack": "5.93.0"
+    "webpack": "5.94.0"
   },
   "engines": {
     "node": "18.* || >= 20"
