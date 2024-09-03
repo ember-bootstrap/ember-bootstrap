@@ -126,8 +126,8 @@ importers:
         specifier: 7.0.0
         version: 7.0.0(@ember/test-helpers@3.3.1)(@glint/template@1.4.0)(ember-source@5.10.1)(qunit@2.21.1)(webpack@5.94.0)
       ember-resolver:
-        specifier: 11.0.1
-        version: 11.0.1(ember-source@5.10.1)
+        specifier: 12.0.1
+        version: 12.0.1(ember-source@5.10.1)
       ember-sinon-qunit:
         specifier: 7.5.0
         version: 7.5.0(@babel/core@7.24.9)(ember-source@5.10.1)(qunit@2.21.1)(sinon@17.0.2)
@@ -562,8 +562,8 @@ importers:
         specifier: 1.0.2
         version: 1.0.2(@babel/core@7.24.9)
       ember-resolver:
-        specifier: 11.0.1
-        version: 11.0.1(ember-source@5.10.1)
+        specifier: 12.0.1
+        version: 12.0.1(ember-source@5.10.1)
       ember-sinon:
         specifier: 5.0.0
         version: 5.0.0
@@ -8101,11 +8101,11 @@ packages:
       - '@babel/core'
       - supports-color
 
-  /ember-resolver@11.0.1(ember-source@5.10.1):
-    resolution: {integrity: sha512-ucBk3oM+PR+AfYoSUXeQh8cDQS1sSiEKp4Pcgbew5cFMSqPxJfqd1zyZsfQKNTuyubeGmWxBOyMVSTvX2LeCyg==}
+  /ember-resolver@12.0.1(ember-source@5.10.1):
+    resolution: {integrity: sha512-U+ZBdbEHMhmvcZly1xhZKwqeH5/igjT93p9bbD6x+mQVg7hm4jrsQA4jsxHu3BqgL5MmqOVx0gtAuYEWV1x2MQ==}
     engines: {node: 14.* || 16.* || >= 18}
     peerDependencies:
-      ember-source: ^4.8.3 || >= 5.0.0
+      ember-source: ^4.12.0 || >= 5.0.0
     peerDependenciesMeta:
       ember-source:
         optional: true
