@@ -123,8 +123,8 @@ importers:
         specifier: 1.0.0
         version: 1.0.0(ember-source@5.10.1)(webpack@5.94.0)
       ember-qunit:
-        specifier: 7.0.0
-        version: 7.0.0(@ember/test-helpers@3.3.1)(@glint/template@1.4.0)(ember-source@5.10.1)(qunit@2.21.1)(webpack@5.94.0)
+        specifier: 8.1.0
+        version: 8.1.0(@ember/test-helpers@3.3.1)(@glint/template@1.4.0)(ember-source@5.10.1)(qunit@2.21.1)
       ember-resolver:
         specifier: 12.0.1
         version: 12.0.1(ember-source@5.10.1)
@@ -553,8 +553,8 @@ importers:
         specifier: 4.1.0
         version: 4.1.0(@glint/template@1.4.0)(ember-source@5.10.1)(webpack@5.94.0)
       ember-qunit:
-        specifier: 7.0.0
-        version: 7.0.0(@ember/test-helpers@3.3.1)(@glint/template@1.4.0)(ember-source@5.10.1)(qunit@2.21.1)(webpack@5.94.0)
+        specifier: 8.1.0
+        version: 8.1.0(@ember/test-helpers@3.3.1)(@glint/template@1.4.0)(ember-source@5.10.1)(qunit@2.21.1)
       ember-ref-bucket:
         specifier: 5.0.7
         version: 5.0.7(@babel/core@7.24.9)(@glint/template@1.4.0)(ember-source@5.10.1)(webpack@5.94.0)
@@ -5560,7 +5560,6 @@ packages:
 
   /chokidar@2.1.8:
     resolution: {integrity: sha512-ZmZUazfOzf0Nve7duiCKD23PFSCs4JPoYyccjUFF3aQkQadqBhfzhjkwBH2mNOG9cTBwhamM37EIsIkZw3nRgg==}
-    deprecated: Chokidar 2 does not receive security updates since 2019. Upgrade to chokidar 3 with 15x fewer dependencies
     dependencies:
       anymatch: 2.0.0
       async-each: 1.0.6
@@ -8032,6 +8031,7 @@ packages:
   /ember-prism@1.0.0(ember-source@5.10.1)(webpack@5.94.0):
     resolution: {integrity: sha512-+7+LhQA0qc5l+Y1+VInRxCAUL1BUPW6ml6d7QoEKXgagPzu3DRoZ+VhcOx/0PzBOoSYw7CmxmokKXU/faiztrA==}
     engines: {node: 18.* || >= 20, pnpm: ^8.15.3}
+    deprecated: Use ember-shiki instead
     peerDependencies:
       ember-source: '>= 4.0.0'
     dependencies:
@@ -8050,30 +8050,23 @@ packages:
       - webpack
     dev: true
 
-  /ember-qunit@7.0.0(@ember/test-helpers@3.3.1)(@glint/template@1.4.0)(ember-source@5.10.1)(qunit@2.21.1)(webpack@5.94.0):
-    resolution: {integrity: sha512-KhrndHYEXsHnXvmsGyJLJQ6VCudXaRs5dzPZBsdttZJIhsB6PmYAvq2Q+mh3GRDT/59T/sRDrB3FD3/lATS8aA==}
-    engines: {node: 16.* || >= 18}
+  /ember-qunit@8.1.0(@ember/test-helpers@3.3.1)(@glint/template@1.4.0)(ember-source@5.10.1)(qunit@2.21.1):
+    resolution: {integrity: sha512-55/xqvVQwhiNcnh/tCzWyvlYzrYqwDY0/cIPyDQbAxGKtkUt9jCfRUGllfyOofC6LX0fL/0fIi+5e9sg1m6vXw==}
     peerDependencies:
       '@ember/test-helpers': '>=3.0.3'
       ember-source: '>=4.0.0'
       qunit: ^2.13.0
     dependencies:
       '@ember/test-helpers': 3.3.1(@babel/core@7.24.9)(@glint/template@1.4.0)(ember-source@5.10.1)(webpack@5.94.0)
-      broccoli-funnel: 3.0.8
-      broccoli-merge-trees: 3.0.2
-      common-tags: 1.8.2
-      ember-auto-import: 2.7.4(@glint/template@1.4.0)(webpack@5.94.0)
-      ember-cli-babel: 7.26.11
+      '@embroider/addon-shim': 1.8.9
+      '@embroider/macros': 1.16.5(@glint/template@1.4.0)
       ember-cli-test-loader: 3.1.0
       ember-source: 5.10.1(@glimmer/component@1.1.2)(@glint/template@1.4.0)(rsvp@4.8.5)(webpack@5.94.0)
       qunit: 2.21.1
-      resolve-package-path: 4.0.3
-      silent-error: 1.1.1
-      validate-peer-dependencies: 2.2.0
+      qunit-theme-ember: 1.0.0
     transitivePeerDependencies:
       - '@glint/template'
       - supports-color
-      - webpack
     dev: true
 
   /ember-ref-bucket@5.0.7(@babel/core@7.24.9)(@glint/template@1.4.0)(ember-source@5.10.1)(webpack@5.94.0):
@@ -8872,6 +8865,7 @@ packages:
   /eslint@8.57.0:
     resolution: {integrity: sha512-dZ6+mexnaTIbSBZWgou51U6OmzIhYM2VcNdtiTtI7qPNZm35Akpr0f6vtw3w1Kmn5PYo+tZVfh13WrhpS6oLqQ==}
     engines: {node: ^12.22.0 || ^14.17.0 || >=16.0.0}
+    deprecated: This version is no longer supported. Please see https://eslint.org/version-support for other options.
     hasBin: true
     dependencies:
       '@eslint-community/eslint-utils': 4.4.0(eslint@8.57.0)
@@ -14365,6 +14359,10 @@ packages:
     resolution: {integrity: sha512-VYFXbwod2sis16Nzgx5UrdCvjNUPYIAbTwEGv7hF1RfgJaVgG5ASVaQz9en0ZRvlybtql0LrVuAbleJU/57zQQ==}
     dependencies:
       dom-element-descriptors: 0.5.1
+    dev: true
+
+  /qunit-theme-ember@1.0.0:
+    resolution: {integrity: sha512-vdMVVo6ecdCkWttMTKeyq1ZTLGHcA6zdze2zhguNuc3ritlJMhOXY5RDseqazOwqZVfCg3rtlmL3fMUyIzUyFQ==}
     dev: true
 
   /qunit@2.21.1:
