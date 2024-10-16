@@ -18,6 +18,31 @@
 
 
 
+
+## v6.4.0 (2024-10-16)
+
+#### :rocket: Enhancement
+* [#2156](https://github.com/ember-bootstrap/ember-bootstrap/pull/2156) Widen support for ember-render-helpers to v1 ([@jelhan](https://github.com/jelhan))
+* [#2107](https://github.com/ember-bootstrap/ember-bootstrap/pull/2107) Support ember-concurrency v4 ([@jakesjews](https://github.com/jakesjews))
+
+#### :memo: Documentation
+* [#2152](https://github.com/ember-bootstrap/ember-bootstrap/pull/2152) Replace {{action}} helper in doc comments with modern patterns ([@SanderKnauff](https://github.com/SanderKnauff))
+
+#### :house: Internal
+* [#2151](https://github.com/ember-bootstrap/ember-bootstrap/pull/2151) Tests: Re-enable template-lint rules and fix remaining issues ([@SanderKnauff](https://github.com/SanderKnauff))
+* [#2150](https://github.com/ember-bootstrap/ember-bootstrap/pull/2150) Tests: Remove remaining action helpers from tests and convert to gjs ([@SanderKnauff](https://github.com/SanderKnauff))
+* [#2149](https://github.com/ember-bootstrap/ember-bootstrap/pull/2149) Tests: Remove action helper from bs-navbar and bs-nav tests and convert to gjs ([@SanderKnauff](https://github.com/SanderKnauff))
+* [#2148](https://github.com/ember-bootstrap/ember-bootstrap/pull/2148) Tests: Remove action helper from bs-form tests and convert to gjs ([@SanderKnauff](https://github.com/SanderKnauff))
+* [#2143](https://github.com/ember-bootstrap/ember-bootstrap/pull/2143) Run tests for fastboot with ember-canary and Embroider ([@SanderKnauff](https://github.com/SanderKnauff))
+* [#2147](https://github.com/ember-bootstrap/ember-bootstrap/pull/2147) Tests: Remove action helper from bs-modal tests and convert to gjs ([@SanderKnauff](https://github.com/SanderKnauff))
+* [#2146](https://github.com/ember-bootstrap/ember-bootstrap/pull/2146) Tests: Remove action helper from bs-dropdown tests and convert to gjs ([@SanderKnauff](https://github.com/SanderKnauff))
+* [#2136](https://github.com/ember-bootstrap/ember-bootstrap/pull/2136) Tests: Add support for writing tests in Gjs/Gts ([@SanderKnauff](https://github.com/SanderKnauff))
+
+#### Committers: 3
+- Jacob Jewell ([@jakesjews](https://github.com/jakesjews))
+- Jeldrik Hanschke ([@jelhan](https://github.com/jelhan))
+- Sander Knauff ([@SanderKnauff](https://github.com/SanderKnauff))
+
 ## v6.3.3 (2024-07-18)
 
 #### :memo: Documentation
