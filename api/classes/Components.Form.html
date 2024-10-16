@@ -82,7 +82,7 @@ action is sent instead of <code>onSubmit</code>.</p>
 <li>markup for validation states and error messages is generated based on the model's validation (if available), when submitting the form
 with an invalid validation, or when focusing out of invalid inputs</li>
 </ul>
-<pre class="code prettyprint"><code class="language-handlebars">&lt;BsForm @formLayout="horizontal" @model={{this}} @onSubmit={{action "submit"}} as |form|&gt;
+<pre class="code prettyprint"><code class="language-handlebars">&lt;BsForm @formLayout="horizontal" @model={{this}} @onSubmit={{this.submit}} as |form|&gt;
   &lt;form.element @controlType="email" @label="Email" @placeholder="Email" @property="email" /&gt;
   &lt;form.element @controlType="password" @label="Password" @placeholder="Password" @property="password" /&gt;
   &lt;form.element @controlType="checkbox" @label="Remember me" @property="rememberMe" /&gt;
@@ -111,7 +111,7 @@ are shown. See the <a href="Components.FormElement.html">Components.FormElement<
 <h3>Submission state</h3>
 <p>A <code>isSubmitting</code> property is yielded, which is <code>true</code> after submit has been triggered and before the Promise returned
 by <code>onSubmit</code> is fulfilled. It could be used to show a loading spinner instead of the form while it's submitting for example:</p>
-<pre class="code prettyprint"><code class="language-hbs">&lt;BsForm @onSubmit={{action "save"}} as |form|&gt;
+<pre class="code prettyprint"><code class="language-hbs">&lt;BsForm @onSubmit={{this.save}} as |form|&gt;
   {{#if form.isSubmitting}}
     &lt;span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"&gt;&lt;/span&gt;
     Logging in...
@@ -125,7 +125,7 @@ by <code>onSubmit</code> is fulfilled. It could be used to show a loading spinne
 <p>Additionaly <code>isSubmitted</code> and <code>isRejected</code> properties are yielded. <code>isSubmitted</code> is <code>true</code> if last submission was successful.
 <code>isRejected</code> is <code>true</code> if last submission was rejected due to validation errors or by an action bound to <code>onSubmit</code> event, returning a rejected promise.
 It could be used for visual feedback about last submission:</p>
-<pre class="code prettyprint"><code class="language-hbs">&lt;BsForm @onSubmit={{action "save"}} as |form|&gt;
+<pre class="code prettyprint"><code class="language-hbs">&lt;BsForm @onSubmit={{this.save}} as |form|&gt;
   &lt;form.submitButton @type={{if form.isRejected "danger" "primary"}}&gt;
     Save
   &lt;/form.submitButton&gt;

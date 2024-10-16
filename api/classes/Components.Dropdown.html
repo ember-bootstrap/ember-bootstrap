@@ -146,7 +146,7 @@ For older Ember versions please use the legacy syntax with positional arguments:
   &lt;dd.menu as |ddm|&gt;
     {{#each this.items as |item|}}
       &lt;ddm.item&gt;
-        &lt;a href onclick={{action "changeItems" item dd.closeDropdown}}&gt;
+        &lt;a href {{on "click" (fn this.changeItems item dd.closeDropdown)}}&gt;
           {{item.text}}
         &lt;/a&gt;
       &lt;/ddm.item&gt;

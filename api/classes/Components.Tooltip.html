@@ -92,7 +92,7 @@ space, otherwise to the left.</p>
 <li><code>viewportSelector</code> and <code>viewportPadding</code> to customize the viewport that affects <code>autoPlacement</code></li>
 <li>a <code>close</code> action is yielded, that allows you to close the tooltip:</li>
 </ul>
-<pre class="code prettyprint"><code class="language-hbs">&lt;BsTooltip as |tt|&gt;This is a tooltip &lt;button onclick={{action tt.close}}&gt;Close&lt;/button&gt;&lt;/BsTooltip&gt;
+<pre class="code prettyprint"><code class="language-hbs">&lt;BsTooltip as |tt|&gt;This is a tooltip &lt;button {{on "click" tt.close}}&gt;Close&lt;/button&gt;&lt;/BsTooltip&gt;
 </code></pre>
 <p>See the individual API docs for each property.</p>
 <h3>Actions</h3>

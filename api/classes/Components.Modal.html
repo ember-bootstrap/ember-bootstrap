@@ -59,17 +59,17 @@
 
 <p>Component for creating <a href="http://getbootstrap.com/javascript/#modals">Bootstrap modals</a> with custom markup.</p>
 <h3>Usage</h3>
-<pre class="code prettyprint"><code class="language-hbs">&lt;BsModal @onSubmit={{action "submit"}} as |Modal|&gt;
-  &lt;Modal.header&gt;
+<pre class="code prettyprint"><code class="language-hbs">&lt;BsModal @onSubmit= as |modal|&gt;
+  &lt;modal.header&gt;
     &lt;h4 class="modal-title"&gt;&lt;i class="glyphicon glyphicon-alert"&gt;&lt;/i&gt; Alert&lt;/h4&gt;
-  &lt;/Modal.header&gt;
-  &lt;Modal.body&gt;
+  &lt;/modal.header&gt;
+  &lt;modal.body&gt;
     Are you absolutely sure you want to do that???
-  &lt;/Modal.body&gt;
-  &lt;Modal.footer as |footer|&gt;
-    &lt;BsButton @onClick={{action Modal.close}} @type="danger"&gt;Oh no, forget it!&lt;/BsButton&gt;
-    &lt;BsButton @onClick={{action Modal.submit}} @type="success"&gt;Yeah!&lt;/BsButton&gt;
-  &lt;/Modal.footer&gt;
+  &lt;/modal.body&gt;
+  &lt;modal.footer as |footer|&gt;
+    &lt;BsButton @onClick= @type="danger"&gt;Oh no, forget it!&lt;/BsButton&gt;
+    &lt;BsButton @onClick= @type="success"&gt;Yeah!&lt;/BsButton&gt;
+  &lt;/modal.footer&gt;
 &lt;/BsModal&gt;
 </code></pre>
 <p>The component yields references to the following contextual components, that you can use to further customize the output:</p>

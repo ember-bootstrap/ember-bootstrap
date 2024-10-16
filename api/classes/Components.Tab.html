@@ -100,8 +100,8 @@ its <code>select</code> action, which you would have to use to manually set the 
 trigger the selection of the different tab panes, using their ids:</p>
 <pre class="code prettyprint"><code class="language-hbs">&lt;BsTab @customTabs={{true}} as |tab|&gt;
   &lt;BsNav @type="tabs" as |nav|&gt;
-    &lt;nav.item @active={{bs-eq Tab.activeId "pane1"}}&gt;&lt;a href="#pane1" role="tab" onclick={{action Tab.select "pane1"}}&gt;Tab 1&lt;/a&gt;&lt;/nav.item&gt;
-    &lt;nav.item @active={{bs-eq Tab.activeId "pane2"}}&gt;&lt;a href="#pane2" role="tab" onclick={{action Tab.select "pane2"}}&gt;Tab 2 &lt;span class="badge"&gt;{{badge}}&lt;/span&gt;&lt;/a&gt;&lt;/nav.item&gt;
+    &lt;nav.item @active={{bs-eq tab.activeId "pane1"}}&gt;&lt;a href="#pane1" role="tab" {{on "click" (fn tab.select "pane1")}}&gt;Tab 1&lt;/a&gt;&lt;/nav.item&gt;
+    &lt;nav.item @active={{bs-eq tab.activeId "pane2"}}&gt;&lt;a href="#pane2" role="tab" {{on "click" (fn tab.select "pane2")}}&gt;Tab 2 &lt;span class="badge"&gt;{{badge}}&lt;/span&gt;&lt;/a&gt;&lt;/nav.item&gt;
   &lt;/BsNav&gt;
   &lt;div class="tab-content"&gt;
     &lt;tab.pane @id="pane1" @title="Tab 1"&gt;

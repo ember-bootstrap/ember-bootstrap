@@ -61,7 +61,7 @@
 <h3>Form layout</h3>
 <p>The appropriate Bootstrap markup for the given <code>formLayout</code> and <code>controlType</code> is automatically generated to easily
 create forms without coding the default Bootstrap form markup by hand:</p>
-<pre class="code prettyprint"><code class="language-handlebars">&lt;BsForm @formLayout="horizontal" @model={{this}} @onSubmit={{action "submit"}} as |form|&gt;
+<pre class="code prettyprint"><code class="language-handlebars">&lt;BsForm @formLayout="horizontal" @model={{this}} @onSubmit={{this.submit}} as |form|&gt;
   &lt;form.element @controlType="email" @label="Email" @value={{this.email}} /&gt;
   &lt;form.element @controlType="password" @label="Password" @value={{this.password}} /&gt;
   &lt;form.element @controlType="checkbox" @label="Remember me" @value={{this.rememberMe}} /&gt;
@@ -82,13 +82,13 @@ create forms without coding the default Bootstrap form markup by hand:</p>
 options, each of which will be rendered with an appropriate radio button and its label. It can be either a simple array
 of strings or objects. In the latter case, you would have to set <code>optionLabelPath</code> to the property, that contains the
 label on these objects.</p>
-<pre class="code prettyprint"><code class="language-hbs">&lt;BsForm @model={{this}} @onSubmit={{action "submit"}} as |form|&gt;
+<pre class="code prettyprint"><code class="language-hbs">&lt;BsForm @model={{this}} @onSubmit={{this.submit}} as |form|&gt;
   &lt;form.element @controlType="radio" @label="Gender" @options={{this.genderOptions}} @optionLabelPath="title" @property="gender" /&gt;
 &lt;/BsForm&gt;
 </code></pre>
 <p>The default layout for radios is stacked, but Bootstrap's inline layout is also supported using the <code>inline</code> property
 of the yielded control component:</p>
-<pre class="code prettyprint"><code class="language-hbs">&lt;BsForm @model={{this}} @onSubmit={{action "submit"}} as |form|&gt;
+<pre class="code prettyprint"><code class="language-hbs">&lt;BsForm @model={{this}} @onSubmit={{this.submit}} as |form|&gt;
   &lt;form.element @controlType="radio" @label="Gender" @options={{this.genderOptions}} @property="gender" as |el|&gt;
     &lt;el.control @inline={{true}} /&gt;
   &lt;/form.element&gt;
@@ -98,9 +98,9 @@ of the yielded control component:</p>
 <p>Apart from the standard built-in browser controls (see the <code>controlType</code> property), you can use any custom control simply
 by invoking the component with a block template. Use whatever control you might want, for example a <code>&lt;PikadayInput&gt;</code>
 component (from the <a href="https://github.com/adopted-ember-addons/ember-pikaday">ember-pikaday addon</a>):</p>
-<pre class="code prettyprint"><code class="language-hbs">&lt;BsForm @model={{this}} @onSubmit={{action "submit"}} as |form|&gt;
+<pre class="code prettyprint"><code class="language-hbs">&lt;BsForm @model={{this}} @onSubmit={{this.submit}} as |form|&gt;
   &lt;form.element @label="Select-2" @property="gender" as |el|&gt;
-    &lt;PikadayInput @value={{el.value}} @onSelection={{action el.setValue}} id={{el.id}} /&gt;
+    &lt;PikadayInput @value={{el.value}} @onSelection={{el.setValue}} id={{el.id}} /&gt;
   &lt;/form.element&gt;
 &lt;/BsForm&gt;
 </code></pre>
@@ -114,7 +114,7 @@ component (from the <a href="https://github.com/adopted-ember-addons/ember-pikad
 </ul>
 <p>If you just want to customize the existing control component, you can use the aforementioned yielded <code>control</code> component
 to customize that existing component:</p>
-<pre class="code prettyprint"><code class="language-hbs">&lt;BsForm @model={{this}} @onSubmit={{action "submit"}} as |form|&gt;
+<pre class="code prettyprint"><code class="language-hbs">&lt;BsForm @model={{this}} @onSubmit={{this.submit}} as |form|&gt;
   &lt;form.element @label="Email" @property="email" as |el|&gt;
     &lt;el.control class="input-lg" placeholder="Email" /&gt;
   &lt;/form.element&gt;
@@ -127,7 +127,7 @@ To do so, you need to provide a component <code>{{bs-form/element/control/my-cus
 <h3>Form validation</h3>
 <p>In the following example the control elements of the three form elements value will be bound to the properties
 (given by <code>property</code>) of the form's <code>model</code>, which in this case is its controller (see <code>model=this</code>):</p>
-<pre class="code prettyprint"><code class="language-handlebars">&lt;BsForm @formLayout="horizontal" @model={{this}} @onSubmit={{action "submit"}} as |form|&gt;
+<pre class="code prettyprint"><code class="language-handlebars">&lt;BsForm @formLayout="horizontal" @model={{this}} @onSubmit={{this.submit}} as |form|&gt;
   &lt;form.element @controlType="email" @label="Email" @property="email" /&gt;
   &lt;form.element @controlType="password" @label="Password" @property="password" /&gt;
   &lt;form.element @controlType="checkbox" @label="Remember me" @property="rememberMe" /&gt;
@@ -186,7 +186,7 @@ the validation library), you can use the <code>customError</code> or <code>custo
 <h3>HTML attributes</h3>
 <p>To set HTML attributes on the control element provided by this component when using the modern angle bracket invocation,
 you can pass them to the yielded <code>control</code> component:</p>
-<pre class="code prettyprint"><code class="language-hbs">&lt;BsForm @formLayout="horizontal" @model={{this}} @onSubmit={{action "submit"}} as |form|&gt;
+<pre class="code prettyprint"><code class="language-hbs">&lt;BsForm @formLayout="horizontal" @model={{this}} @onSubmit={{this.submit}} as |form|&gt;
 &lt;form.element @controlType="email" @label="Email" @property="email" as |el|&gt;
   &lt;el.control
     placeholder="Email"

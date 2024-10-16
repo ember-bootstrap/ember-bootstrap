@@ -71,7 +71,7 @@ a yielded pre-configured contextual component:</p>
 <p>Use the <code>type</code> property set to "radio" to make the child buttons toggle like radio buttons, i.e. only one button can be active.
 Set the <code>value</code> property of the buttons to something meaningful. The <code>value</code> property of the button group will then reflect
 the value of the active button:</p>
-<pre class="code prettyprint"><code class="language-handlebars">&lt;BsButtonGroup @value={{this.buttonGroupValue}} @type="radio" @onChange={{action (mut this.buttonGroupValue}} as |bg|&gt;
+<pre class="code prettyprint"><code class="language-handlebars">&lt;BsButtonGroup @value={{this.buttonGroupValue}} @type="radio" @onChange={{fn (mut this.buttonGroupValue}} as |bg|&gt;
   &lt;bg.button @type="default" @value={{1}}&gt;1&lt;/bg.button&gt;
   &lt;bg.button @type="default" @value={{2}}&gt;2&lt;/bg.button&gt;
   &lt;bg.button @type="default" @value={{3}}&gt;3&lt;/bg.button&gt;
@@ -82,7 +82,7 @@ You selected: {{this.buttonGroupValue}}!
 <h3>Checkbox-like behaviour</h3>
 <p>Set <code>type</code> to "checkbox" to make any number of child buttons selectable. The <code>value</code> property will be an array
 of all the values of the active buttons:</p>
-<pre class="code prettyprint"><code class="language-handlebars">&lt;BsButtonGroup @value={{this.buttonGroupValue}} @type="checkbox" @onChange={{action (mut this.buttonGroupValue}} as |bg|&gt;
+<pre class="code prettyprint"><code class="language-handlebars">&lt;BsButtonGroup @value={{this.buttonGroupValue}} @type="checkbox" @onChange={{fn (mut this.buttonGroupValue}} as |bg|&gt;
   &lt;bg.button @type="default" @value={{1}}&gt;1&lt;/bg.button&gt;
   &lt;bg.button @type="default" @value={{2}}&gt;2&lt;/bg.button&gt;
   &lt;bg.button @type="default" @value={{3}}&gt;3&lt;/bg.button&gt;
