@@ -77,9 +77,11 @@ module.exports = async function () {
       {
         name: 'ember-render-helpers-v0.2',
         npm: {
+          dependencies: {
+            'ember-render-helpers': '^0.2.0',
+          },
           devDependencies: {
             bootstrap: bootstrapVersion,
-            'ember-render-helpers': '^0.2.0',
           },
         },
       },
