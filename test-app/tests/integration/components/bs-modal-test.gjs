@@ -531,7 +531,9 @@ module('Integration | Component | bs-modal', function (hooks) {
 
   test('Modal focus-trap is not deactivated when clicking outside of the modal if @backdropClose=false', async function (assert) {
     await render(
-      <template><button /><BsModal @backdropClose={{false}} /></template>,
+      <template>
+        <button type='button' /><BsModal @backdropClose={{false}} />
+      </template>,
     );
     await click('*');
     await focus('button');
@@ -540,7 +542,9 @@ module('Integration | Component | bs-modal', function (hooks) {
 
   test('Modal focus-trap is not deactivated when pressing escape if @keyboard=false', async function (assert) {
     await render(
-      <template><button /><BsModal @keyboard={{false}} /></template>,
+      <template>
+        <button type='button' /><BsModal @keyboard={{false}} />
+      </template>,
     );
     await triggerKeyEvent('.modal', 'keydown', 'Escape');
     await focus('button');
