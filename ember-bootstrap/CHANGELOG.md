@@ -19,6 +19,15 @@
 
 
 
+
+## v6.4.1 (2024-10-25)
+
+#### :bug: Bug Fix
+* [#2159](https://github.com/ember-bootstrap/ember-bootstrap/pull/2159) Modal should keep focus on escape key if @keyboard=false and on backdrop click @backdropClose=false ([@kdagnan](https://github.com/kdagnan))
+
+#### Committers: 1
+- Kyle D. ([@kdagnan](https://github.com/kdagnan))
+
 ## v6.4.0 (2024-10-16)
 
 #### :rocket: Enhancement
