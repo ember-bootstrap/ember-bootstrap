@@ -35,7 +35,7 @@
     <div
       class="modal-content"
       tabindex="-1"
-      {{focus-trap shouldSelfFocus=true focusTrapOptions=(hash clickOutsideDeactivates=true fallbackFocus=".modal")}}
+      {{focus-trap shouldSelfFocus=true focusTrapOptions=(hash clickOutsideDeactivates=@backdropClose fallbackFocus=".modal" escapeDeactivates=@keyboard)}}
     >
       {{yield}}
     </div>
