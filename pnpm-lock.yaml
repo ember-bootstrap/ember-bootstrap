@@ -21,8 +21,8 @@ importers:
   docs:
     devDependencies:
       '@babel/eslint-parser':
-        specifier: 7.25.1
-        version: 7.25.1(@babel/core@7.24.9)(eslint@8.57.0)
+        specifier: 7.25.9
+        version: 7.25.9(@babel/core@7.24.9)(eslint@8.57.0)
       '@babel/plugin-proposal-decorators':
         specifier: 7.24.7
         version: 7.24.7(@babel/core@7.24.9)
@@ -307,8 +307,8 @@ importers:
         version: 2.0.0(@babel/core@7.24.9)(ember-source@5.10.1)
     devDependencies:
       '@babel/eslint-parser':
-        specifier: 7.25.1
-        version: 7.25.1(@babel/core@7.24.9)(eslint@8.57.0)
+        specifier: 7.25.9
+        version: 7.25.9(@babel/core@7.24.9)(eslint@8.57.0)
       '@babel/plugin-proposal-decorators':
         specifier: 7.24.7
         version: 7.24.7(@babel/core@7.24.9)
@@ -394,8 +394,8 @@ importers:
   test-app:
     devDependencies:
       '@babel/eslint-parser':
-        specifier: 7.25.1
-        version: 7.25.1(@babel/core@7.24.9)(eslint@8.57.0)
+        specifier: 7.25.9
+        version: 7.25.9(@babel/core@7.24.9)(eslint@8.57.0)
       '@babel/plugin-proposal-decorators':
         specifier: 7.24.7
         version: 7.24.7(@babel/core@7.24.9)
@@ -713,8 +713,8 @@ packages:
       semver: 6.3.1
     dev: true
 
-  /@babel/eslint-parser@7.25.1(@babel/core@7.24.9)(eslint@8.57.0):
-    resolution: {integrity: sha512-Y956ghgTT4j7rKesabkh5WeqgSFZVFwaPR0IWFm7KFHFmmJ4afbG49SmfW4S+GyRPx0Dy5jxEWA5t0rpxfElWg==}
+  /@babel/eslint-parser@7.25.9(@babel/core@7.24.9)(eslint@8.57.0):
+    resolution: {integrity: sha512-5UXfgpK0j0Xr/xIdgdLEhOFxaDZ0bRPWJJchRpqOSur/3rZoPbqqki5mm0p4NE2cs28krBEiSM2MB7//afRSQQ==}
     engines: {node: ^10.13.0 || ^12.13.0 || >=14.0.0}
     peerDependencies:
       '@babel/core': ^7.11.0
@@ -5560,7 +5560,6 @@ packages:
 
   /chokidar@2.1.8:
     resolution: {integrity: sha512-ZmZUazfOzf0Nve7duiCKD23PFSCs4JPoYyccjUFF3aQkQadqBhfzhjkwBH2mNOG9cTBwhamM37EIsIkZw3nRgg==}
-    deprecated: Chokidar 2 does not receive security updates since 2019. Upgrade to chokidar 3 with 15x fewer dependencies
     dependencies:
       anymatch: 2.0.0
       async-each: 1.0.6
@@ -8032,6 +8031,7 @@ packages:
   /ember-prism@1.0.0(ember-source@5.10.1)(webpack@5.94.0):
     resolution: {integrity: sha512-+7+LhQA0qc5l+Y1+VInRxCAUL1BUPW6ml6d7QoEKXgagPzu3DRoZ+VhcOx/0PzBOoSYw7CmxmokKXU/faiztrA==}
     engines: {node: 18.* || >= 20, pnpm: ^8.15.3}
+    deprecated: Use ember-shiki instead
     peerDependencies:
       ember-source: '>= 4.0.0'
     dependencies:
@@ -8872,6 +8872,7 @@ packages:
   /eslint@8.57.0:
     resolution: {integrity: sha512-dZ6+mexnaTIbSBZWgou51U6OmzIhYM2VcNdtiTtI7qPNZm35Akpr0f6vtw3w1Kmn5PYo+tZVfh13WrhpS6oLqQ==}
     engines: {node: ^12.22.0 || ^14.17.0 || >=16.0.0}
+    deprecated: This version is no longer supported. Please see https://eslint.org/version-support for other options.
     hasBin: true
     dependencies:
       '@eslint-community/eslint-utils': 4.4.0(eslint@8.57.0)
