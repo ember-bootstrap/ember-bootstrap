@@ -20,6 +20,15 @@
 
 
 
+
+## v6.4.2 (2024-11-11)
+
+#### :bug: Bug Fix
+* [#2157](https://github.com/ember-bootstrap/ember-bootstrap/pull/2157) Fix compatibility with ember-render-helpers v0.2 ([@jelhan](https://github.com/jelhan))
+
+#### Committers: 1
+- Jeldrik Hanschke ([@jelhan](https://github.com/jelhan))
+
 ## v6.4.1 (2024-10-25)
 
 #### :bug: Bug Fix

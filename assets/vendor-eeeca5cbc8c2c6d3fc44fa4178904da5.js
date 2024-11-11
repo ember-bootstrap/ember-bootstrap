@@ -4154,7 +4154,7 @@ let o;(!0===r||!1!==r&&t.default.testing)&&(i=0)
 return new Promise((function(t){const r=function(){o&&((0,n.cancel)(o),o=null),e.removeEventListener("transitionend",r),t()}
 e.addEventListener("transitionend",r,!1),o=(0,n.later)(this,r,i)}))},e.skipTransition=function(e){r=e}})),define("ember-bootstrap/version",["exports","ember"],(function(e,t){"use strict"
 Object.defineProperty(e,"__esModule",{value:!0}),e.VERSION=void 0,e.registerLibrary=function(){t.default.libraries.register("Ember Bootstrap",n)}
-const n=e.VERSION="6.4.1"})),define("ember-cli-app-version/initializer-factory",["exports","@ember/-internals/metal"],(function(e,t){"use strict"
+const n=e.VERSION="6.4.2"})),define("ember-cli-app-version/initializer-factory",["exports","@ember/-internals/metal"],(function(e,t){"use strict"
 Object.defineProperty(e,"__esModule",{value:!0}),e.default=function(e,n){let r=!1
 return function(){!r&&e&&n&&(t.libraries.register(e,n),r=!0)}}})),define("ember-cli-app-version/utils/regexp",["exports"],(function(e){"use strict"
 Object.defineProperty(e,"__esModule",{value:!0}),e.versionRegExp=e.versionExtendedRegExp=e.shaRegExp=void 0
