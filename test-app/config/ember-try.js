@@ -74,15 +74,6 @@ module.exports = async function () {
           },
         },
       },
-      {
-        name: 'ember-render-helpers-v0.2',
-        npm: {
-          devDependencies: {
-            bootstrap: bootstrapVersion,
-            'ember-render-helpers': '^0.2.0',
-          },
-        },
-      },
       embroiderSafe({
         npm: {
           devDependencies: {
