@@ -285,7 +285,7 @@ importers:
         specifier: ^4.0.0 || ^5.0.0
         version: 5.0.7(@babel/core@7.24.9)(@glint/template@1.4.0)(ember-source@5.10.1)(webpack@5.94.0)
       ember-render-helpers:
-        specifier: ^0.2.0 || ^1.0.0
+        specifier: ^0.2.1 || ^1.0.0
         version: 1.0.2(@babel/core@7.24.9)
       ember-source:
         specifier: '>=4.8.0'
