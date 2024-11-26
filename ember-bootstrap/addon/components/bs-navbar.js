@@ -13,10 +13,8 @@ import { isBlank } from '@ember/utils';
 
   ```hbs
   <BsNavbar as |navbar|>
-    <div class="navbar-header">
-      <navbar.toggle />
-      <a class="navbar-brand" href="#">Brand</a>
-    </div>
+    <a class="navbar-brand" href="#">Brand</a>
+    <navbar.toggle />
     <navbar.content>
       <navbar.nav as |nav|>
         <nav.item>
@@ -29,9 +27,6 @@ import { isBlank } from '@ember/utils';
     </navbar.content>
   </BsNavbar>
   ```
-
-  **Note:** the `<div class="navbar-header">` is required for BS3 to hold the elements visible on a mobile breakpoint,
-  when the actual content is collapsed. It should *not* be used for BS4!
 
   The component yields references to the following contextual components:
 
@@ -81,15 +76,6 @@ import { isBlank } from '@ember/utils';
 
   Other bootstrap navbar variations, such as forms, buttons, etc. can be supported through direct use of
   bootstrap styles applied through the `class` attribute on the components.
-
-  ### Bootstrap 3/4 Notes
-
-  Bootstrap 4 changed the default navbar styling option from `navbar-default` to `navbar-light`.
-  If you explicitly specified "default" in Bootstrap 3 and are migrating, you will need to change
-  this in your code. Bootstrap 4 changes `navbar-inverse` to `navbar-dark`.
-
-  Bootstrap 4 navbars are fluid by default without the need for an additional container. An
-  additional container is added like with Bootstrap 3 if `fluid` is `false`.
 
   *Note that only invoking the component in a template as shown above is considered part of its public API. Extending from it (subclassing) is generally not supported, and may break at any time.*
 
@@ -152,7 +138,7 @@ export default class Navbar extends Component {
 
   /**
    * Specifies the position classes for the navbar, currently supporting none, "fixed-top", "fixed-bottom", and
-   * either "static-top" (BS3) or "sticky-top" (BS4).
+   * "sticky-top".
    * See the [bootstrap docs](http://getbootstrap.com/components/#navbar-fixed-top) for details.
    *
    * @property position
