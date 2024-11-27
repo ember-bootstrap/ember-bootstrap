@@ -73,7 +73,7 @@ interface ButtonSignature<VALUE = undefined> {
   (see the `value` property) as an argument.
 
   ```hbs
-  <BsButton @type="primary" @icon="glyphicon glyphicon-download" @onClick=(action "download")>
+  <BsButton @type="primary" @icon="glyphicon glyphicon-download" @onClick={{this.download}}>
     Downloads
   </BsButton>
   ```
@@ -120,16 +120,16 @@ interface ButtonSignature<VALUE = undefined> {
 
   export default class MyController extends Controller {
     @action
-    download(value) {
+    download() {
       return new Promise(...);
     }
-  });
+  }
   ```
 
   For further customization `isPending`, `isFulfilled`, `isRejected` and `isSettled` properties are yielded:
 
   ```hbs
-  <BsButton @onClick=(action "download") as |button|>
+  <BsButton @onClick={{this.download}} as |button|>
     Download
     {{#if button.isPending}}
       <span class="loading-spinner"></span>
