@@ -1,4 +1,20 @@
 import templateOnly from '@ember/component/template-only';
+import type { ComponentLike } from '@glint/template';
+import type { ProgressBarSignature } from './bs-progress/bar';
+
+interface BsProgressSignature {
+  Args: {
+    progressBarComponent?: ComponentLike<ProgressBarSignature>;
+  };
+  Blocks: {
+    default: [
+      {
+        bar: ComponentLike<ProgressBarSignature>;
+      },
+    ];
+  };
+  Element: HTMLDivElement;
+}
 
 /**
   Component to display a Bootstrap progress bar, see http://getbootstrap.com/components/#progress.
@@ -37,7 +53,7 @@ import templateOnly from '@ember/component/template-only';
   @extends Ember.Component
   @public
 */
-export default templateOnly();
+export default templateOnly<BsProgressSignature>();
 
 /**
  * @property progressBarComponent
