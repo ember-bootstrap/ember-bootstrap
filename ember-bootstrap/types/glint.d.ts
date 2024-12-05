@@ -11,6 +11,7 @@ import type BsConditionalAttribute from 'ember-bootstrap/modifiers/bs-conditiona
 
 import type { HelperLike } from '@glint/template';
 import type { EmberBootstrapMacrosConfig } from './macros-config';
+import type BsProgressBar from 'ember-bootstrap/components/bs-progress/bar';
 
 type macroGetOwnConfig = HelperLike<{
   Args: {
@@ -24,6 +25,7 @@ declare module '@glint/environment-ember-loose/registry' {
     extends EmberBootstrapRegistry,
       EmberStyleModifierRegistry,
       RenderModifiersRegistry {
+    'bs-progress/bar': typeof BsProgressBar;
     'bs-default': typeof defaultHelper;
     'bs-size-class': typeof sizeClassHelper;
     'bs-type-class': typeof typeClassHelper;

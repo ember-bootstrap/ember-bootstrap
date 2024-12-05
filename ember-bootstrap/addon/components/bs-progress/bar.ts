@@ -9,7 +9,7 @@ export interface ProgressBarSignature {
     striped?: boolean;
     animate?: boolean;
     roundDigits?: number;
-    type?: 'default' | 'success' | 'info' | 'warning' | 'danger' | string;
+    type?: 'default' | 'success' | 'info' | 'warning' | 'danger';
   };
   Blocks: {
     default: [percentRounded: number];
