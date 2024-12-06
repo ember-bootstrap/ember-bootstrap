@@ -15,6 +15,13 @@ import type BsConditionalAttribute from 'ember-bootstrap/modifiers/bs-conditiona
 
 import type { HelperLike } from '@glint/template';
 import type { EmberBootstrapMacrosConfig } from './macros-config';
+import type BsButton from 'ember-bootstrap/components/bs-button';
+import type BsModalHeaderClose from 'ember-bootstrap/components/bs-modal/header/close';
+import type BsModalHeaderTitle from 'ember-bootstrap/components/bs-modal/header/title';
+import type BsModalHeader from 'ember-bootstrap/components/bs-modal/header';
+import type BsModalBody from 'ember-bootstrap/components/bs-modal/body';
+import type BsModalFooter from 'ember-bootstrap/components/bs-modal/footer';
+import type BsModalDialog from 'ember-bootstrap/components/bs-modal/footer';
 
 type macroGetOwnConfig = HelperLike<{
   Args: {
@@ -36,6 +43,14 @@ declare module '@glint/environment-ember-loose/registry' {
     'bs-size-class': typeof sizeClassHelper;
     'bs-type-class': typeof typeClassHelper;
     'bs-conditional-attribute': typeof BsConditionalAttribute;
+
+    'bs-button': typeof BsButton;
+    'bs-modal/header/close': typeof BsModalHeaderClose;
+    'bs-modal/header/title': typeof BsModalHeaderTitle;
+    'bs-modal/header': typeof BsModalHeader;
+    'bs-modal/body': typeof BsModalBody;
+    'bs-modal/footer': typeof BsModalFooter;
+    'bs-modal/dialog': typeof BsModalDialog;
 
     macroGetOwnConfig: macroGetOwnConfig;
     macroCondition: EmbroiderMacrosRegistry['macroCondition'];
