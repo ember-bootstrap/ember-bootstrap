@@ -1,4 +1,4 @@
-import { getOwner } from '@ember/application';
+import { getOwner } from '@ember/owner';
 import type FastBootService from 'ember-cli-fastboot/services/fastboot';
 
 export default function isFastBoot(context: object) {
@@ -6,6 +6,9 @@ export default function isFastBoot(context: object) {
   if (!owner) {
     return false;
   }
-  const fastbootService = owner.lookup('service:fastboot') as FastBootService;
+  const fastbootService = owner.lookup('service:fastboot') as
+    | FastBootService
+    | undefined
+    | null;
   return fastbootService ? fastbootService.isFastBoot : false;
 }
