@@ -34,8 +34,7 @@ interface Signature {
   Args: {
     backdrop?: boolean;
     backdropClose?: boolean;
-    body?: boolean;
-    footer?: boolean;
+    backdropTransitionDuration?: number;
     fade?: boolean;
     fullscreen?: ModalFullscreen;
     keyboard?: boolean;
@@ -49,7 +48,7 @@ interface Signature {
     renderInPlace?: boolean;
     scrollable?: boolean;
     size?: ModalSize;
-    title?: string;
+    transitionDuration?: number;
 
     dialogComponent?: ComponentLike<DialogSignature>;
     headerComponent?: ComponentLike<HeaderSignature>;

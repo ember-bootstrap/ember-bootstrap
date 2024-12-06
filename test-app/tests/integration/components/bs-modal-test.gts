@@ -83,12 +83,7 @@ module('Integration | Component | bs-modal', function (hooks) {
 
     await render(
       <template>
-        <BsModal
-          @title='Simple Dialog'
-          @body={{false}}
-          @footer={{false}}
-          as |modal|
-        >
+        <BsModal as |modal|>
           <testComponent>
             <modal.body>Hello world!</modal.body>
             <modal.footer />
