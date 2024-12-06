@@ -53,7 +53,9 @@ module.exports = {
         'plugin:@typescript-eslint/eslint-recommended',
         'plugin:@typescript-eslint/recommended',
       ],
-      rules: {},
+      rules: {
+        'no-undef': 'off',
+      },
     },
     // gjs files
     {
@@ -77,6 +79,9 @@ module.exports = {
         'plugin:ember/recommended',
         'plugin:ember/recommended-gts',
       ],
+      rules: {
+        'no-undef': 'off',
+      },
     },
     // node files
     {
