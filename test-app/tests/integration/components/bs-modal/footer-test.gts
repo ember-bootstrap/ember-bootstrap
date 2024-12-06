@@ -40,7 +40,6 @@ module('Integration | Component | bs-modal/footer', function (hooks) {
     assert.strictEqual(close.callCount, 1, '@onClose is called exactly once');
   });
 
-  // TODO The logs and expected values in the assertions for the button type do not agree on the expected button type.
   test('Footer can have submit button', async function (assert) {
     const submit = sinon.stub();
 
