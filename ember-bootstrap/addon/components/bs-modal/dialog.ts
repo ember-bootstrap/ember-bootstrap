@@ -85,7 +85,7 @@ export default class ModalDialog extends Component<DialogSignature> {
    */
   @action
   getOrSetTitleId(modalNode: Element) {
-    //Title element may be set by user, so we have to try and find it to set the id
+    // Title element may be set by user, so we have to try and find it to set the id
     let nodeId: string | null = null;
 
     if (modalNode) {
