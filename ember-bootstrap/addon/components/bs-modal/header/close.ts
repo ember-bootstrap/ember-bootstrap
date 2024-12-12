@@ -13,7 +13,7 @@
 
 import templateOnly from '@ember/component/template-only';
 
-interface BsModalHeaderCloseSignature {
+export interface CloseSignature {
   Args: {
     onClick?: (event: MouseEvent) => void;
   };
@@ -23,4 +23,4 @@ interface BsModalHeaderCloseSignature {
   Element: HTMLButtonElement;
 }
 
-export default templateOnly<BsModalHeaderCloseSignature>();
+export default templateOnly<CloseSignature>();

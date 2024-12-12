@@ -108,17 +108,14 @@ module('Integration | Component | bs-modal/header', function (hooks) {
   });
 
   test('close button can be removed in yield block form', async function (this: RenderingTestContext, assert) {
-    /* eslint-disable @typescript-eslint/no-unused-vars */
     await render(
       <template>
-        {{! template-lint-disable no-unused-block-params }}
         <BsModalHeader as |header|>
+          {{header.title}}
           <div id='custom'>Test</div>
         </BsModalHeader>
-        {{! template-lint-enable no-unused-block-params }}
       </template>,
     );
-    /* eslint-enable @typescript-eslint/no-unused-vars */
 
     assert
       .dom('.modal-header div#custom')

@@ -7,11 +7,11 @@
  */
 import templateOnly from '@ember/component/template-only';
 
-interface BsModalHeaderTitleSignature {
+export interface TitleSignature {
   Blocks: {
     default: [];
   };
   Element: HTMLHeadingElement;
 }
 
-export default templateOnly<BsModalHeaderTitleSignature>();
+export default templateOnly<TitleSignature>();
