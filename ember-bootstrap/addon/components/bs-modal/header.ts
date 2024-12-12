@@ -44,32 +44,22 @@
  */
 import templateOnly from '@ember/component/template-only';
 import type { ComponentLike } from '@glint/template';
-
-interface TitleComponentSignature {
-  Blocks: {
-    default: [];
-  };
-}
-
-interface CloseComponentSignature {
-  Args: {
-    onClose?: () => void;
-  };
-}
+import type { TitleSignature } from './header/title';
+import type { CloseSignature } from './header/close';
 
 export interface HeaderSignature {
   Args: {
     closeButton?: boolean;
     title?: string;
-    titleComponent?: ComponentLike<TitleComponentSignature>;
-    closeComponent?: ComponentLike<CloseComponentSignature>;
+    titleComponent?: ComponentLike<TitleSignature>;
+    closeComponent?: ComponentLike<CloseSignature>;
     onClose?: () => void;
   };
   Blocks: {
     default: [
       {
-        title: ComponentLike<TitleComponentSignature>;
-        close: ComponentLike<CloseComponentSignature>;
+        title: ComponentLike<TitleSignature>;
+        close: ComponentLike<CloseSignature>;
       },
     ];
   };
