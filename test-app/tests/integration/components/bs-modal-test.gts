@@ -15,9 +15,16 @@ import { test, testBS5, visibilityClass } from '../../helpers/bootstrap';
 import setupNoDeprecations from '../../helpers/setup-no-deprecations';
 import sinon from 'sinon';
 import { skipTransition } from 'ember-bootstrap/utils/transition-end';
-import BsModal from 'ember-bootstrap/components/bs-modal';
+import BsModal, {
+  type ModalPosition,
+} from 'ember-bootstrap/components/bs-modal';
+import type {
+  ModalFullscreen,
+  ModalSize,
+} from 'ember-bootstrap/components/bs-modal/dialog';
 import { tracked } from '@glimmer/tracking';
 import { on } from '@ember/modifier';
+import type { TemplateOnlyComponent } from '@ember/component/template-only';
 
 module('Integration | Component | bs-modal', function (hooks) {
   setupRenderingTest(hooks);
@@ -71,18 +78,12 @@ module('Integration | Component | bs-modal', function (hooks) {
   });
 
   test('clicking ok button closes modal when autoClose=true with custom component hierarchy', async function (assert) {
-    const testComponent = <template>
-      {{! template-lint-disable no-yield-only }}{{yield}}
-    </template>;
+    const testComponent: TemplateOnlyComponent<{ Blocks: { default: [] } }> =
+      <template>{{! template-lint-disable no-yield-only }}{{yield}}</template>;
 
     await render(
       <template>
-        <BsModal
-          @title='Simple Dialog'
-          @body={{false}}
-          @footer={{false}}
-          as |modal|
-        >
+        <BsModal as |modal|>
           <testComponent>
             <modal.body>Hello world!</modal.body>
             <modal.footer />
@@ -156,7 +157,7 @@ module('Integration | Component | bs-modal', function (hooks) {
       </template>,
     );
 
-    const modalTitleId = document.getElementsByClassName('modal-title')[0].id;
+    const modalTitleId = document.getElementsByClassName('modal-title')[0]!.id;
 
     assert.dom('.modal').exists({ count: 1 }, 'Modal exists.');
     assert.dom('.modal').hasAttribute('role', 'dialog');
@@ -175,7 +176,7 @@ module('Integration | Component | bs-modal', function (hooks) {
       </template>,
     );
 
-    const modalTitleId = document.getElementsByClassName('modal-title')[0].id;
+    const modalTitleId = document.getElementsByClassName('modal-title')[0]!.id;
 
     assert.dom('.modal').exists({ count: 1 }, 'Modal exists.');
     assert.dom('.modal').hasAttribute('role', 'dialog');
@@ -322,7 +323,7 @@ module('Integration | Component | bs-modal', function (hooks) {
     'it allows to render modal in fullscreen using @fullscreen argument',
     async function (assert) {
       class State {
-        @tracked fullscreen = null;
+        @tracked fullscreen: ModalFullscreen = null;
       }
 
       const state = new State();
@@ -405,12 +406,15 @@ module('Integration | Component | bs-modal', function (hooks) {
       assert.dom('.modal').hasStyle({ display: 'block' });
 
       await waitUntil(() => {
-        return find('.modal').getAnimations().length > 0;
+        return find('.modal')!.getAnimations().length > 0;
       });
       assert.ok(
-        find('.modal')
+        find('.modal')!
           .getAnimations()
-          .find((animation) => animation.transitionProperty === 'opacity'),
+          .find(
+            (animation) =>
+              (animation as CSSTransition).transitionProperty === 'opacity',
+          ),
         'modal opening is animated',
       );
     });
@@ -427,26 +431,28 @@ module('Integration | Component | bs-modal', function (hooks) {
       // wait until modal is shown and opening transition is finished
       await waitFor('.modal.show');
       await Promise.all(
-        find('.modal')
+        find('.modal')!
           .getAnimations()
           .map((animation) => animation.finished),
       );
 
       // close modal
       click('button');
-
       await waitUntil(() => {
-        return !find('.modal').classList.contains(visibilityClass());
+        return !find('.modal')!.classList.contains(visibilityClass());
       });
       assert.dom('.modal').hasStyle({ display: 'block' });
 
       await waitUntil(() => {
-        return find('.modal').getAnimations().length > 0;
+        return find('.modal')!.getAnimations().length > 0;
       });
       assert.ok(
-        find('.modal')
+        find('.modal')!
           .getAnimations()
-          .find((animation) => animation.transitionProperty === 'opacity'),
+          .find(
+            (animation) =>
+              (animation as CSSTransition).transitionProperty === 'opacity',
+          ),
         'modal closing is animated',
       );
 
@@ -457,7 +463,7 @@ module('Integration | Component | bs-modal', function (hooks) {
 
   test('Modal shows appropriate size respective to @size argument', async function (assert) {
     class State {
-      @tracked size = null;
+      @tracked size: ModalSize = null;
     }
 
     const state = new State();
@@ -475,7 +481,7 @@ module('Integration | Component | bs-modal', function (hooks) {
 
   test('Modal can be centered vertically', async function (assert) {
     class State {
-      @tracked position = 'top';
+      @tracked position: ModalPosition = 'top';
     }
     const state = new State();
     await render(<template><BsModal @position={{state.position}} /></template>);
