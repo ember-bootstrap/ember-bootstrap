@@ -72,8 +72,8 @@ importers:
         specifier: 8.2.0
         version: 8.2.0(@babel/core@7.24.9)
       ember-cli-dependency-checker:
-        specifier: 3.3.2
-        version: 3.3.2(ember-cli@5.10.0)
+        specifier: 3.3.3
+        version: 3.3.3(ember-cli@5.10.0)
       ember-cli-fastboot:
         specifier: 4.1.5
         version: 4.1.5(ember-source@5.10.1)
@@ -502,8 +502,8 @@ importers:
         specifier: 2.0.3
         version: 2.0.3
       ember-cli-dependency-checker:
-        specifier: 3.3.2
-        version: 3.3.2(ember-cli@5.10.0)
+        specifier: 3.3.3
+        version: 3.3.3(ember-cli@5.10.0)
       ember-cli-fastboot:
         specifier: 4.1.5
         version: 4.1.5(ember-source@5.10.1)
@@ -7146,20 +7146,18 @@ packages:
       - supports-color
     dev: true
 
-  /ember-cli-dependency-checker@3.3.2(ember-cli@5.10.0):
-    resolution: {integrity: sha512-PwkrW5oYsdPWwt+0Tojufmv/hxVETTjkrEdK7ANQB2VSnqpA5UcYubwpQM9ONuR2J8wyNDMwEHlqIrk/FYtBsQ==}
+  /ember-cli-dependency-checker@3.3.3(ember-cli@5.10.0):
+    resolution: {integrity: sha512-mvp+HrE0M5Zhc2oW8cqs8wdhtqq0CfQXAYzaIstOzHJJn/U01NZEGu3hz7J7zl/+jxZkyygylzcS57QqmPXMuQ==}
     engines: {node: '>= 6'}
     peerDependencies:
       ember-cli: ^3.2.0 || >=4.0.0
     dependencies:
       chalk: 2.4.2
       ember-cli: 5.10.0
-      find-yarn-workspace-root: 1.2.1
+      find-yarn-workspace-root: 2.0.0
       is-git-url: 1.0.0
       resolve: 1.22.8
       semver: 5.7.2
-    transitivePeerDependencies:
-      - supports-color
     dev: true
 
   /ember-cli-fastboot-testing@0.6.1(@glint/template@1.4.0)(ember-source@5.10.1)(webpack@5.94.0):
@@ -9526,15 +9524,6 @@ packages:
     dependencies:
       locate-path: 7.2.0
       path-exists: 5.0.0
-    dev: true
-
-  /find-yarn-workspace-root@1.2.1:
-    resolution: {integrity: sha512-dVtfb0WuQG+8Ag2uWkbG79hOUzEsRrhBzgfn86g2sJPkzmcpGdghbNTfUKGTxymFrY/tLIodDzLoW9nOJ4FY8Q==}
-    dependencies:
-      fs-extra: 4.0.3
-      micromatch: 3.1.10
-    transitivePeerDependencies:
-      - supports-color
     dev: true
 
   /find-yarn-workspace-root@2.0.0:
