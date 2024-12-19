@@ -2,18 +2,22 @@ import { modifier } from 'ember-modifier';
 
 interface Signature {
   Args: {
-    Positional: [attribute: string, condition: boolean, value: string];
+    Positional: [
+      attribute: string,
+      condition: boolean | undefined,
+      value: unknown,
+    ];
   };
-  Element: HTMLElement;
+  Element: Element;
 }
 
 export default modifier<Signature>(
   (
-    element: HTMLElement,
+    element: Signature['Element'],
     [attribute, condition, value]: Signature['Args']['Positional'],
   ) => {
     if (condition) {
-      element.setAttribute(attribute, value);
+      element.setAttribute(attribute, `${value}`);
     } else {
       element.removeAttribute(attribute);
     }
