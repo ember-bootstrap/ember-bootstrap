@@ -447,7 +447,7 @@ module('Integration | Component | bs-tooltip', function (hooks) {
     this.insertCSSRule!('.margin-top { margin-top: 200px; }');
 
     class State {
-      @tracked visible = true;
+      @tracked visible = false;
     }
     const state = new State();
 
