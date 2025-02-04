@@ -4,6 +4,27 @@ import arg from 'ember-bootstrap/utils/decorators/arg';
 import { tracked } from '@glimmer/tracking';
 import { getOwnConfig, macroCondition } from '@embroider/macros';
 import { trackedRef } from 'ember-ref-bucket';
+import type { EmberBootstrapMacrosConfig } from 'macros-config';
+import type {
+  Placement,
+  Options as PopperOptions,
+  Boundary,
+  Padding,
+  ModifierArguments,
+  State,
+} from '@popperjs/core';
+import type { ArrowModifier } from '@popperjs/core/lib/modifiers/arrow';
+import type { PreventOverflowModifier } from '@popperjs/core/lib/modifiers/preventOverflow';
+import type { FlipModifier } from '@popperjs/core/lib/modifiers/flip';
+
+export interface ContextualHelpElementSignature {
+  Args: {
+    autoPlacement?: boolean;
+    placement?: Placement;
+    viewportElement?: Boundary;
+    viewportPadding?: Padding;
+  };
+}
 
 /**
  Internal (abstract) component for contextual help markup. Should not be used directly.
@@ -13,7 +34,9 @@ import { trackedRef } from 'ember-ref-bucket';
  @extends Glimmer.Component
  @private
  */
-export default class ContextualHelpElement extends Component {
+export default class ContextualHelpElement<
+  Signature extends ContextualHelpElementSignature,
+> extends Component<Signature> {
   /**
    * @property placement
    * @type string
@@ -21,10 +44,10 @@ export default class ContextualHelpElement extends Component {
    * @public
    */
   @arg
-  placement = 'top';
+  placement: Placement = 'top';
 
   @tracked
-  actualPlacement = this.args.placement;
+  actualPlacement?: Placement = this.args.placement;
 
   /**
    * @property fade
@@ -95,7 +118,7 @@ export default class ContextualHelpElement extends Component {
 
   offset = [0, 0];
 
-  @trackedRef('popperElement') popperElement;
+  @trackedRef('popperElement') declare popperElement: HTMLElement;
 
   /**
    * popper.js modifier config
@@ -105,9 +128,11 @@ export default class ContextualHelpElement extends Component {
    * @private
    */
   get popperOptions() {
-    let options = {
+    const options: PopperOptions = {
       placement: this.placement,
       onFirstUpdate: this.updatePlacement,
+      modifiers: [],
+      strategy: 'absolute',
     };
 
     // We need popperElement, so we wait for this getter to recompute once it's available
@@ -122,7 +147,7 @@ export default class ContextualHelpElement extends Component {
           element: this.popperElement.querySelector(`.${this.arrowClass}`),
           padding: 4,
         },
-      },
+      } as ArrowModifier,
       {
         name: 'offset',
         options: {
@@ -136,11 +161,11 @@ export default class ContextualHelpElement extends Component {
           boundary: this.args.viewportElement,
           padding: this.args.viewportPadding,
         },
-      },
+      } as PreventOverflowModifier,
       {
         name: 'flip',
         enabled: this.args.autoPlacement,
-      },
+      } as FlipModifier,
       {
         name: 'onChange',
         enabled: true,
@@ -153,9 +178,9 @@ export default class ContextualHelpElement extends Component {
   }
 
   get actualPlacementClass() {
-    let ending = this.actualPlacement;
+    let ending: string | undefined = this.actualPlacement;
 
-    if (macroCondition(getOwnConfig().isBS5)) {
+    if (macroCondition(getOwnConfig<EmberBootstrapMacrosConfig>().isBS5)) {
       if (ending === 'right') {
         ending = 'end';
       }
@@ -169,13 +194,14 @@ export default class ContextualHelpElement extends Component {
   }
 
   @action
-  updatePlacement(state) {
+  updatePlacement(state: Partial<State> | ModifierArguments<object>) {
     // normalize argument
-    state = state.state ?? state;
+    const normalizedState: Partial<State> | ModifierArguments<object> =
+      'state' in state ? state.state : state;
 
-    if (this.actualPlacement === state.placement) {
+    if (this.actualPlacement === normalizedState.placement) {
       return;
     }
-    this.actualPlacement = state.placement;
+    this.actualPlacement = normalizedState.placement;
   }
 }

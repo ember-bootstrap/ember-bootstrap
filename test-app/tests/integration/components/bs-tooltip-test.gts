@@ -29,13 +29,14 @@ import BsTooltip from 'ember-bootstrap/components/bs-tooltip';
 import BsTooltipElement from 'ember-bootstrap/components/bs-tooltip/element';
 import { tracked } from '@glimmer/tracking';
 import { on } from '@ember/modifier';
+import type { Placement } from '@popperjs/core';
 
 module('Integration | Component | bs-tooltip', function (hooks) {
   setupRenderingTest(hooks);
   setupStylesheetSupport(hooks);
   setupNoDeprecations(hooks);
 
-  function isVisible(tt) {
+  function isVisible(tt: Element | null) {
     return (
       tt &&
       tt.classList.contains('fade') &&
@@ -47,7 +48,7 @@ module('Integration | Component | bs-tooltip', function (hooks) {
     // Template block usage:
     await render(
       <template>
-        <BsTooltip @id='tooltip-element' @fade={{true}} @visible={{true}}>
+        <BsTooltip id='tooltip-element' @fade={{true}} @visible={{true}}>
           template block text
         </BsTooltip>
       </template>,
@@ -58,7 +59,7 @@ module('Integration | Component | bs-tooltip', function (hooks) {
     assert.dom('.tooltip').hasClass('fade', 'has fade class');
     assert.dom('.tooltip').hasClass(visibilityClass(), 'has visibility class');
     assert.equal(
-      this.element.querySelector('.tooltip').getAttribute('role'),
+      document.querySelector('.tooltip')?.getAttribute('role'),
       'tooltip',
       'has ARIA role',
     );
@@ -67,14 +68,14 @@ module('Integration | Component | bs-tooltip', function (hooks) {
   });
 
   skip('it supports different placements', async function (assert) {
-    let placements = ['top', 'left', 'bottom', 'right'];
+    let placements: Placement[] = ['top', 'left', 'bottom', 'right'];
     class State {
       @tracked placement = placements[0];
     }
     const state = new State();
     await render(
       <template>
-        <BsTooltipElement @id='tooltip-element' @placement={{state.placement}}>
+        <BsTooltipElement id='tooltip-element' @placement={{state.placement}}>
           template block text
         </BsTooltipElement>
       </template>,
@@ -419,7 +420,7 @@ module('Integration | Component | bs-tooltip', function (hooks) {
   });
 
   test('should place tooltip on top of element', async function (assert) {
-    this.insertCSSRule('.margin-top { margin-top: 200px; }');
+    this.insertCSSRule!('.margin-top { margin-top: 200px; }');
 
     await render(
       <template>
@@ -443,10 +444,10 @@ module('Integration | Component | bs-tooltip', function (hooks) {
   });
 
   test('should place tooltip on top of element if already visible', async function (assert) {
-    this.insertCSSRule('.margin-top { margin-top: 200px; }');
+    this.insertCSSRule!('.margin-top { margin-top: 200px; }');
 
     class State {
-      @tracked visible;
+      @tracked visible = true;
     }
     const state = new State();
 
@@ -475,7 +476,7 @@ module('Integration | Component | bs-tooltip', function (hooks) {
   });
 
   test('should place tooltip on top of element if visible is set to true', async function (assert) {
-    this.insertCSSRule('.margin-top { margin-top: 200px; }');
+    this.insertCSSRule!('.margin-top { margin-top: 200px; }');
 
     class State {
       @tracked visible = false;
@@ -516,13 +517,13 @@ module('Integration | Component | bs-tooltip', function (hooks) {
 
     await delay(100);
     assert.notOk(
-      isVisible(this.element.querySelector('.tooltip')),
+      isVisible(document.querySelector('.tooltip')),
       '100ms: tooltip is not faded in',
     );
 
     await delay(100);
     assert.ok(
-      isVisible(this.element.querySelector('.tooltip')),
+      isVisible(document.querySelector('.tooltip')),
       '200ms: tooltip is faded in',
     );
   });
@@ -538,14 +539,14 @@ module('Integration | Component | bs-tooltip', function (hooks) {
 
     await delay(100);
     assert.notOk(
-      isVisible(this.element.querySelector('.tooltip')),
+      isVisible(document.querySelector('.tooltip')),
       '100ms: tooltip not faded in',
     );
     triggerEvent('#target', 'mouseleave');
 
     await delay(100);
     assert.notOk(
-      isVisible(this.element.querySelector('.tooltip')),
+      isVisible(document.querySelector('.tooltip')),
       '200ms: tooltip not faded in',
     );
   });
@@ -562,19 +563,19 @@ module('Integration | Component | bs-tooltip', function (hooks) {
     );
     triggerEvent('#target', 'mouseenter');
 
-    await waitUntil(() => isVisible(this.element.querySelector('.tooltip')));
+    await waitUntil(() => isVisible(document.querySelector('.tooltip')));
     triggerEvent('#target', 'mouseleave');
 
     await delay(100);
     assert.ok(
-      isVisible(this.element.querySelector('.tooltip')),
+      isVisible(document.querySelector('.tooltip')),
       '100ms: tooltip still faded in',
     );
     triggerEvent('#target', 'mouseenter');
 
     await delay(100);
     assert.ok(
-      isVisible(this.element.querySelector('.tooltip')),
+      isVisible(document.querySelector('.tooltip')),
       '200ms: tooltip still faded in',
     );
   });
@@ -589,20 +590,20 @@ module('Integration | Component | bs-tooltip', function (hooks) {
 
     await delay(100);
     assert.notOk(
-      isVisible(this.element.querySelector('.tooltip')),
+      isVisible(document.querySelector('.tooltip')),
       '100ms: tooltip not faded in',
     );
     triggerEvent('#target', 'mouseleave');
 
     await delay(100);
     assert.notOk(
-      isVisible(this.element.querySelector('.tooltip')),
+      isVisible(document.querySelector('.tooltip')),
       '200ms: tooltip not faded in',
     );
   });
 
   test('should position tooltip arrow centered', async function (assert) {
-    this.insertCSSRule('.margin-top { margin-top: 200px; }');
+    this.insertCSSRule!('.margin-top { margin-top: 200px; }');
 
     let expectedArrowPosition = 94;
     await render(
@@ -626,9 +627,9 @@ module('Integration | Component | bs-tooltip', function (hooks) {
 
     await click('#target');
     let arrowPosition = parseInt(
-      this.element
-        .querySelector(`.${tooltipArrowClass()}`)
-        .style.transform.match(/translate(?:3d)?\(([0-9.]+)px.*\)/)[1],
+      document
+        .querySelector<HTMLElement>(`.${tooltipArrowClass()}`)!
+        .style.transform.match(/translate(?:3d)?\(([0-9.]+)px.*\)/)![1]!,
       10,
     );
     assert.ok(
@@ -638,8 +639,8 @@ module('Integration | Component | bs-tooltip', function (hooks) {
   });
 
   test('should adjust tooltip arrow', async function (assert) {
-    this.insertCSSRule('.margin-top { margin-top: 200px; }');
-    this.insertCSSRule('#target { width: 100px; padding: 0; border: none; }');
+    this.insertCSSRule!('.margin-top { margin-top: 200px; }');
+    this.insertCSSRule!('#target { width: 100px; padding: 0; border: none; }');
 
     let expectedArrowPosition = 144;
 
@@ -666,9 +667,9 @@ module('Integration | Component | bs-tooltip', function (hooks) {
 
     await click('#target');
     let arrowPosition = parseInt(
-      this.element
-        .querySelector(`.${tooltipArrowClass()}`)
-        .style.transform.match(/translate(?:3d)?\(([0-9.]+)px.*\)/)[1],
+      document
+        .querySelector<HTMLElement>(`.${tooltipArrowClass()}`)!
+        .style.transform.match(/translate(?:3d)?\(([0-9.]+)px.*\)/)![1]!,
       10,
     );
 
@@ -682,9 +683,9 @@ module('Integration | Component | bs-tooltip', function (hooks) {
     await click('#target');
 
     arrowPosition = parseInt(
-      this.element
-        .querySelector(`.${tooltipArrowClass()}`)
-        .style.transform.match(/translate(?:3d)?\(([0-9.]+)px.*\)/)[1],
+      document
+        .querySelector<HTMLElement>(`.${tooltipArrowClass()}`)!
+        .style.transform.match(/translate(?:3d)?\(([0-9.]+)px.*\)/)![1]!,
       10,
     );
     assert.ok(
@@ -694,7 +695,7 @@ module('Integration | Component | bs-tooltip', function (hooks) {
   });
 
   test('should adjust placement if not fitting in viewport', async function (assert) {
-    this.insertCSSRule('.margin-top { margin-top: 300px; }');
+    this.insertCSSRule?.('.margin-top { margin-top: 300px; }');
 
     await render(
       <template>

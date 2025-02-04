@@ -71,6 +71,7 @@
     "@glint/core": "1.4.0",
     "@glint/environment-ember-loose": "1.4.0",
     "@glint/template": "1.4.0",
+    "@popperjs/core": "2.11.8",
     "@release-it-plugins/lerna-changelog": "7.0.0",
     "@tsconfig/ember": "3.0.8",
     "@types/rsvp": "4.0.9",
