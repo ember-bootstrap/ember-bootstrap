@@ -330,6 +330,9 @@ importers:
       '@release-it-plugins/lerna-changelog':
         specifier: 7.0.0
         version: 7.0.0(release-it@17.6.0(typescript@5.5.4))
+      '@simple-dom/interface':
+        specifier: 1.4.0
+        version: 1.4.0
       '@tsconfig/ember':
         specifier: 3.0.8
         version: 3.0.8

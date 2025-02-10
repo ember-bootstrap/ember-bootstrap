@@ -11,6 +11,7 @@ import { tracked } from '@glimmer/tracking';
 import { ref } from 'ember-ref-bucket';
 import type { View } from '@ember/-internals/glimmer/lib/renderer';
 import type { Placement } from '@popperjs/core';
+import type { SimpleElement } from '@simple-dom/interface';
 
 const HOVERSTATE_NONE = 'none';
 const HOVERSTATE_IN = 'in';
@@ -55,7 +56,7 @@ export interface ContextualHelpSignature {
   @extends Glimmer.Component
   @private
 */
-export default class ContextualHelp<
+export default abstract class ContextualHelp<
   Signature extends ContextualHelpSignature,
 > extends Component<Signature> {
   /**
@@ -210,7 +211,7 @@ export default class ContextualHelp<
   @arg
   viewportPadding = 0;
 
-  _parent?: HTMLElement;
+  _parent?: Element | SimpleElement | null;
 
   _parentFinder = self.document ? self.document.createTextNode('') : '';
 
@@ -222,9 +223,7 @@ export default class ContextualHelp<
    * @readonly
    * @private
    */
-  get arrowElement(): HTMLElement | null {
-    return null;
-  }
+  abstract get arrowElement(): HTMLElement | null;
 
   /**
    * The wormhole destinationElement
@@ -261,14 +260,13 @@ export default class ContextualHelp<
   @arg
   triggerElement = null;
 
-  @tracked
-  triggerTargetElement?: Element;
+  triggerTargetElement?: Element | SimpleElement | null;
 
   /**
    * @method getTriggerTargetElement
    * @private
    */
-  getTriggerTargetElement() {
+  getTriggerTargetElement(): Element | SimpleElement | undefined | null {
     const triggerElement = this.triggerElement;
     let el;
 
@@ -622,7 +620,7 @@ export default class ContextualHelp<
   addListeners() {
     const target = this.triggerTargetElement;
 
-    if (!target) {
+    if (!target || !(target instanceof Element)) {
       return;
     }
 
@@ -649,7 +647,7 @@ export default class ContextualHelp<
     try {
       const target = this.triggerTargetElement;
 
-      if (!target) {
+      if (!target || !(target instanceof Element)) {
         return;
       }
 
@@ -721,14 +719,17 @@ export default class ContextualHelp<
       return;
     }
 
-    let parent = this._parentFinder.parentNode;
+    let parent: ParentNode | SimpleElement | null =
+      this._parentFinder.parentNode;
+    if (!(parent instanceof Element)) {
+      return;
+    }
     // In the rare case of using FastBoot w/ rehydration, the parent finder TextNode rendered by FastBoot will be reused,
     // so our own instance on the component is not rendered, only exists here as detached from DOM and thus has no parent.
     // In this case we try to use Ember's private API as a fallback.
     // Related: https://github.com/emberjs/rfcs/issues/168
     if (!parent) {
       try {
-        // @ts-expect-error There seems to be a disconnect between DOM types and Fastboot types, and I do not know how to properly handle this case.
         parent = Ember.ViewUtils.getViewBounds(
           this as unknown as View,
         ).parentElement;
@@ -737,7 +738,6 @@ export default class ContextualHelp<
         // using a CSS selector.
       }
     }
-    // @ts-expect-error There seems to be a disconnect between DOM types and Fastboot types, and I do not know how to properly handle this case.
     this._parent = parent;
 
     // Look for target element after rendering has finished, in case the target DOM element is rendered *after* us

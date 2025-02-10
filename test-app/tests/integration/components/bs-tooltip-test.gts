@@ -55,14 +55,11 @@ module('Integration | Component | bs-tooltip', function (hooks) {
     );
 
     assert.dom('.tooltip').exists({ count: 1 }, 'has tooltip class');
+    assert.dom('.tooltip').hasProperty('id', 'tooltip-element', 'has id');
     // assert.ok(find('.tooltip').classList.contains(tooltipPositionClass('top')), 'has placement class');
     assert.dom('.tooltip').hasClass('fade', 'has fade class');
     assert.dom('.tooltip').hasClass(visibilityClass(), 'has visibility class');
-    assert.equal(
-      document.querySelector('.tooltip')?.getAttribute('role'),
-      'tooltip',
-      'has ARIA role',
-    );
+    assert.dom('.tooltip').hasProperty('role', 'tooltip', 'has ARIA role');
     assert.dom(`.${tooltipArrowClass()}`).exists({ count: 1 }, 'has arrow');
     assert.dom('.tooltip-inner').hasText('template block text', 'shows title');
   });
@@ -86,6 +83,9 @@ module('Integration | Component | bs-tooltip', function (hooks) {
       assert
         .dom('.tooltip')
         .hasClass(placementClass, `has ${placementClass} class`);
+      assert
+        .dom('.tooltip')
+        .hasProperty('id', 'tooltip-element', 'has id');
     });
   });
 
@@ -420,7 +420,7 @@ module('Integration | Component | bs-tooltip', function (hooks) {
   });
 
   test('should place tooltip on top of element', async function (assert) {
-    this.insertCSSRule!('.margin-top { margin-top: 200px; }');
+    this.insertCSSRule('.margin-top { margin-top: 200px; }');
 
     await render(
       <template>
@@ -444,7 +444,7 @@ module('Integration | Component | bs-tooltip', function (hooks) {
   });
 
   test('should place tooltip on top of element if already visible', async function (assert) {
-    this.insertCSSRule!('.margin-top { margin-top: 200px; }');
+    this.insertCSSRule('.margin-top { margin-top: 200px; }');
 
     class State {
       @tracked visible = false;
@@ -476,7 +476,7 @@ module('Integration | Component | bs-tooltip', function (hooks) {
   });
 
   test('should place tooltip on top of element if visible is set to true', async function (assert) {
-    this.insertCSSRule!('.margin-top { margin-top: 200px; }');
+    this.insertCSSRule('.margin-top { margin-top: 200px; }');
 
     class State {
       @tracked visible = false;
@@ -516,16 +516,11 @@ module('Integration | Component | bs-tooltip', function (hooks) {
     triggerEvent('#target', 'mouseenter');
 
     await delay(100);
-    assert.notOk(
-      isVisible(document.querySelector('.tooltip')),
-      '100ms: tooltip is not faded in',
-    );
+    assert.dom('.tooltip').isNotVisible('100ms: tooltip is not faded in');
 
     await delay(100);
-    assert.ok(
-      isVisible(document.querySelector('.tooltip')),
-      '200ms: tooltip is faded in',
-    );
+
+    assert.dom('.tooltip').isVisible('200ms: tooltip is faded in');
   });
 
   test('should not show tooltip if leave event occurs before delay expires', async function (assert) {
@@ -538,17 +533,12 @@ module('Integration | Component | bs-tooltip', function (hooks) {
     triggerEvent('#target', 'mouseenter');
 
     await delay(100);
-    assert.notOk(
-      isVisible(document.querySelector('.tooltip')),
-      '100ms: tooltip not faded in',
-    );
+    assert.dom('.tooltip').isNotVisible('100ms: tooltip is not faded in');
+
     triggerEvent('#target', 'mouseleave');
 
     await delay(100);
-    assert.notOk(
-      isVisible(document.querySelector('.tooltip')),
-      '200ms: tooltip not faded in',
-    );
+    assert.dom('.tooltip').isNotVisible('200ms: tooltip is not faded in');
   });
 
   test('should not hide tooltip if leave event occurs and enter event occurs within the hide delay', async function (assert) {
@@ -563,21 +553,15 @@ module('Integration | Component | bs-tooltip', function (hooks) {
     );
     triggerEvent('#target', 'mouseenter');
 
-    await waitUntil(() => isVisible(document.querySelector('.tooltip')));
+    await waitUntil(() => isVisible(this.element.querySelector('.tooltip')));
     triggerEvent('#target', 'mouseleave');
 
     await delay(100);
-    assert.ok(
-      isVisible(document.querySelector('.tooltip')),
-      '100ms: tooltip still faded in',
-    );
+    assert.dom('.tooltip').isVisible('100ms: tooltip still faded in');
     triggerEvent('#target', 'mouseenter');
 
     await delay(100);
-    assert.ok(
-      isVisible(document.querySelector('.tooltip')),
-      '200ms: tooltip still faded in',
-    );
+    assert.dom('.tooltip').isVisible('200ms: tooltip still faded in');
   });
 
   test('should not show tooltip if leave event occurs before delay expires', async function (assert) {
@@ -589,21 +573,15 @@ module('Integration | Component | bs-tooltip', function (hooks) {
     triggerEvent('#target', 'mouseenter');
 
     await delay(100);
-    assert.notOk(
-      isVisible(document.querySelector('.tooltip')),
-      '100ms: tooltip not faded in',
-    );
+    assert.dom('.tooltip').isNotVisible('100ms: tooltip is not faded in');
     triggerEvent('#target', 'mouseleave');
 
     await delay(100);
-    assert.notOk(
-      isVisible(document.querySelector('.tooltip')),
-      '200ms: tooltip not faded in',
-    );
+    assert.dom('.tooltip').isNotVisible('200ms: tooltip is not faded in');
   });
 
   test('should position tooltip arrow centered', async function (assert) {
-    this.insertCSSRule!('.margin-top { margin-top: 200px; }');
+    this.insertCSSRule('.margin-top { margin-top: 200px; }');
 
     let expectedArrowPosition = 94;
     await render(
@@ -639,8 +617,8 @@ module('Integration | Component | bs-tooltip', function (hooks) {
   });
 
   test('should adjust tooltip arrow', async function (assert) {
-    this.insertCSSRule!('.margin-top { margin-top: 200px; }');
-    this.insertCSSRule!('#target { width: 100px; padding: 0; border: none; }');
+    this.insertCSSRule('.margin-top { margin-top: 200px; }');
+    this.insertCSSRule('#target { width: 100px; padding: 0; border: none; }');
 
     let expectedArrowPosition = 144;
 
@@ -695,7 +673,7 @@ module('Integration | Component | bs-tooltip', function (hooks) {
   });
 
   test('should adjust placement if not fitting in viewport', async function (assert) {
-    this.insertCSSRule?.('.margin-top { margin-top: 300px; }');
+    this.insertCSSRule('.margin-top { margin-top: 300px; }');
 
     await render(
       <template>
