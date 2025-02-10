@@ -83,9 +83,7 @@ module('Integration | Component | bs-tooltip', function (hooks) {
       assert
         .dom('.tooltip')
         .hasClass(placementClass, `has ${placementClass} class`);
-      assert
-        .dom('.tooltip')
-        .hasProperty('id', 'tooltip-element', 'has id');
+      assert.dom('.tooltip').hasProperty('id', 'tooltip-element', 'has id');
     });
   });
 
