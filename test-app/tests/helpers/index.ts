@@ -7,7 +7,7 @@ import {
 } from 'ember-qunit';
 
 export interface CustomTestContext extends RenderingTestContext {
-  insertCSSRule?: (rule: string) => void;
+  insertCSSRule: (rule: string) => void;
 }
 
 export interface CustomAssert extends Assert {

@@ -62,8 +62,8 @@ module('Integration | Component | bs-progress', function (hooks) {
       },
     ];
 
-    this.insertCSSRule?.('.progress-bar { transition: none; }');
-    this.insertCSSRule?.('.width-500 { width: 500px }');
+    this.insertCSSRule('.progress-bar { transition: none; }');
+    this.insertCSSRule('.width-500 { width: 500px }');
 
     await render(
       <template>
