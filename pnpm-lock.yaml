@@ -246,8 +246,8 @@ importers:
         specifier: ^4.2.0
         version: 4.2.0
       chalk:
-        specifier: ^4.1.1
-        version: 4.1.2
+        specifier: ^5.0.0
+        version: 5.4.1
       ember-auto-import:
         specifier: ^2.6.3
         version: 2.7.4(@glint/template@1.4.0)(webpack@5.94.0)
@@ -484,8 +484,8 @@ importers:
         specifier: 4.2.0
         version: 4.2.0
       chalk:
-        specifier: 5.3.0
-        version: 5.3.0
+        specifier: 5.4.1
+        version: 5.4.1
       concurrently:
         specifier: 8.2.2
         version: 8.2.2
@@ -3103,6 +3103,10 @@ packages:
 
   chalk@5.3.0:
     resolution: {integrity: sha512-dLitG79d+GV1Nb/VYcCDFivJeK1hiukt9QjRNVOsUtTy1rR1YJsmpGGTZ3qJos+uw7WmWF4wUwBd9jxjocFC2w==}
+    engines: {node: ^12.17.0 || ^14.13 || >=16.0.0}
+
+  chalk@5.4.1:
+    resolution: {integrity: sha512-zgVZuo2WcZgfUEmsn6eO3kINexW8RAE4maiQ8QNs8CtpPCSyMiYsULR3HQYkm3w8FIA3SberyMJMSldGsW+U3w==}
     engines: {node: ^12.17.0 || ^14.13 || >=16.0.0}
 
   character-entities@2.0.2:
@@ -6343,6 +6347,7 @@ packages:
 
   lodash.get@4.4.2:
     resolution: {integrity: sha512-z+Uw/vLuy6gQe8cfaFWD7p0wVv8fJl3mbzXh33RS+0oW2wvUqiRXiQ69gLWSLpgB5/6sU+r6BlQR0MBILadqTQ==}
+    deprecated: This package is deprecated. Use the optional chaining (?.) operator instead.
 
   lodash.isarguments@3.1.0:
     resolution: {integrity: sha512-chi4NHZlZqZD18a0imDHnZPrDeBbTtVN7GXMwuGdRH9qotxAjYs3aVLKc7zNOG9eddR5Ksd8rvFEBc9SsggPpg==}
@@ -6370,15 +6375,18 @@ packages:
 
   lodash.omit@4.5.0:
     resolution: {integrity: sha512-XeqSp49hNGmlkj2EJlfrQFIzQ6lXdNro9sddtQzcJY8QaoC2GO0DT7xaIokHeyM+mIT0mPMlPvkYzg2xCuHdZg==}
+    deprecated: This package is deprecated. Use destructuring assignment syntax instead.
 
   lodash.restparam@3.6.1:
     resolution: {integrity: sha512-L4/arjjuq4noiUJpt3yS6KIKDtJwNe2fIYgMqyYYKoeIfV1iEqvPwhCx23o+R9dzouGihDAPN1dTIRWa7zk8tw==}
 
   lodash.template@3.6.2:
     resolution: {integrity: sha512-0B4Y53I0OgHUJkt+7RmlDFWKjVAI/YUpWNiL9GQz5ORDr4ttgfQGo+phBWKFLJbBdtOwgMuUkdOHOnPg45jKmQ==}
+    deprecated: This package is deprecated. Use https://socket.dev/npm/package/eta instead.
 
   lodash.template@4.5.0:
     resolution: {integrity: sha512-84vYFxIkmidUiFxidA/KjjH9pAycqW+h980j7Fuz5qxRtO9pgB7MDFTdys1N7A5mcucRiDyEq4fusljItR1T/A==}
+    deprecated: This package is deprecated. Use https://socket.dev/npm/package/eta instead.
 
   lodash.templatesettings@3.1.1:
     resolution: {integrity: sha512-TcrlEr31tDYnWkHFWDCV3dHYroKEXpJZ2YJYvJdhN+y4AkWMDZ5I4I8XDtUKqSAyG81N7w+I1mFEJtcED+tGqQ==}
@@ -11894,7 +11902,7 @@ snapshots:
     dependencies:
       ansi-align: 3.0.1
       camelcase: 7.0.1
-      chalk: 5.3.0
+      chalk: 5.4.1
       cli-boxes: 3.0.0
       string-width: 5.1.2
       type-fest: 2.19.0
@@ -12648,6 +12656,8 @@ snapshots:
       supports-color: 7.2.0
 
   chalk@5.3.0: {}
+
+  chalk@5.4.1: {}
 
   character-entities@2.0.2: {}
 
@@ -13440,7 +13450,7 @@ snapshots:
 
   ember-bootstrap-power-select@5.0.0(ember-bootstrap@ember-bootstrap)(ember-power-select@7.2.0(@babel/core@7.24.9)(@glint/environment-ember-loose@1.4.0(@glimmer/component@1.1.2(@babel/core@7.24.9))(@glint/template@1.4.0)(ember-cli-htmlbars@6.3.0)(ember-modifier@4.2.0(@babel/core@7.24.9)(ember-source@5.10.1(@glimmer/component@1.1.2(@babel/core@7.24.9))(@glint/template@1.4.0)(rsvp@4.8.5)(webpack@5.94.0))))(@glint/template@1.4.0)(ember-source@5.10.1(@glimmer/component@1.1.2(@babel/core@7.24.9))(@glint/template@1.4.0)(rsvp@4.8.5)(webpack@5.94.0))(webpack@5.94.0))(ember-source@5.10.1(@glimmer/component@1.1.2(@babel/core@7.24.9))(@glint/template@1.4.0)(rsvp@4.8.5)(webpack@5.94.0)):
     dependencies:
-      chalk: 5.3.0
+      chalk: 5.4.1
       ember-bootstrap: link:ember-bootstrap
       ember-cli-babel: 7.26.11
       ember-cli-build-config-editor: 0.5.1
@@ -14484,7 +14494,7 @@ snapshots:
     dependencies:
       '@lint-todo/utils': 13.1.1
       aria-query: 5.3.0
-      chalk: 5.3.0
+      chalk: 5.4.1
       ci-info: 3.9.0
       date-fns: 2.30.0
       ember-template-imports: 3.4.2
@@ -17081,7 +17091,7 @@ snapshots:
 
   log-symbols@6.0.0:
     dependencies:
-      chalk: 5.3.0
+      chalk: 5.4.1
       is-unicode-supported: 1.3.0
 
   log-update@6.1.0:
@@ -17894,7 +17904,7 @@ snapshots:
 
   ora@8.0.1:
     dependencies:
-      chalk: 5.3.0
+      chalk: 5.4.1
       cli-cursor: 4.0.0
       cli-spinners: 2.9.2
       is-interactive: 2.0.0
@@ -20083,7 +20093,7 @@ snapshots:
   update-notifier@7.1.0:
     dependencies:
       boxen: 7.1.1
-      chalk: 5.3.0
+      chalk: 5.4.1
       configstore: 6.0.0
       import-lazy: 4.0.0
       is-in-ci: 0.1.0
