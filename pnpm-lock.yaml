@@ -271,7 +271,7 @@ importers:
         version: 0.8.6(@glint/environment-ember-loose@1.4.0(@glimmer/component@1.1.2(@babel/core@7.24.9))(@glint/template@1.4.0)(ember-cli-htmlbars@6.3.0)(ember-modifier@4.2.0(@babel/core@7.24.9)(ember-source@5.10.1(@glimmer/component@1.1.2(@babel/core@7.24.9))(@glint/template@1.4.0)(rsvp@4.8.5)(webpack@5.94.0))))(@glint/template@1.4.0)(ember-source@5.10.1(@glimmer/component@1.1.2(@babel/core@7.24.9))(@glint/template@1.4.0)(rsvp@4.8.5)(webpack@5.94.0))
       ember-focus-trap:
         specifier: ^1.0.0
-        version: 1.1.0(ember-source@5.10.1(@glimmer/component@1.1.2(@babel/core@7.24.9))(@glint/template@1.4.0)(rsvp@4.8.5)(webpack@5.94.0))
+        version: 1.1.1(ember-source@5.10.1(@glimmer/component@1.1.2(@babel/core@7.24.9))(@glint/template@1.4.0)(rsvp@4.8.5)(webpack@5.94.0))
       ember-modifier:
         specifier: ^3.2.7 || ^4.0.0
         version: 4.2.0(@babel/core@7.24.9)(ember-source@5.10.1(@glimmer/component@1.1.2(@babel/core@7.24.9))(@glint/template@1.4.0)(rsvp@4.8.5)(webpack@5.94.0))
@@ -547,8 +547,8 @@ importers:
         specifier: 0.5.0
         version: 0.5.0(@babel/core@7.24.9)(@typescript-eslint/parser@7.18.0(eslint@8.57.0)(typescript@5.5.4))(eslint@8.57.0)
       ember-focus-trap:
-        specifier: 1.1.0
-        version: 1.1.0(ember-source@5.10.1(@glimmer/component@1.1.2(@babel/core@7.24.9))(@glint/template@1.4.0)(rsvp@4.8.5)(webpack@5.94.0))
+        specifier: 1.1.1
+        version: 1.1.1(ember-source@5.10.1(@glimmer/component@1.1.2(@babel/core@7.24.9))(@glint/template@1.4.0)(rsvp@4.8.5)(webpack@5.94.0))
       ember-load-initializers:
         specifier: 2.1.2
         version: 2.1.2(@babel/core@7.24.9)
@@ -4238,11 +4238,11 @@ packages:
     resolution: {integrity: sha512-TVx24/jrvDIuPL296DV0hBwp7BWLcSMf0I8464KGz01sPytAB+ZAePbc9ooBTJDkKZEGFgatJa4nj3yF1S9Bpw==}
     engines: {node: '>= 10'}
 
-  ember-focus-trap@1.1.0:
-    resolution: {integrity: sha512-KxbCKpAJaBVZm+bW4tHPoBJAZThmxa6pI+WQusL+bj0RtAnGUNkWsVy6UBMZ5QqTQzf4EvGHkCVACVp5lbAWMQ==}
+  ember-focus-trap@1.1.1:
+    resolution: {integrity: sha512-5tOWu6eV1UoNZE+P9Gl9lJXNrENZVCoOXi52ePb7JOrOZ3ckOk1OkPsFwR4Jym9VJ7vZ6S3Z3D8BrkFa2aCpYw==}
     engines: {node: 12.* || >= 14}
     peerDependencies:
-      ember-source: ^4.0.0 || ^5.0.0
+      ember-source: '>= 4.0.0'
 
   ember-functions-as-helper-polyfill@2.1.2:
     resolution: {integrity: sha512-yvW6xykvZEIYzzwlrC/g9yu6LtLkkj5F+ho6U+BDxN1uREMgoMOZnji7sSILn5ITVpaJ055DPcO+utEFD7IZOA==}
@@ -14222,7 +14222,7 @@ snapshots:
       - encoding
       - supports-color
 
-  ember-focus-trap@1.1.0(ember-source@5.10.1(@glimmer/component@1.1.2(@babel/core@7.24.9))(@glint/template@1.4.0)(rsvp@4.8.5)(webpack@5.94.0)):
+  ember-focus-trap@1.1.1(ember-source@5.10.1(@glimmer/component@1.1.2(@babel/core@7.24.9))(@glint/template@1.4.0)(rsvp@4.8.5)(webpack@5.94.0)):
     dependencies:
       '@embroider/addon-shim': 1.8.9
       ember-source: 5.10.1(@glimmer/component@1.1.2(@babel/core@7.24.9))(@glint/template@1.4.0)(rsvp@4.8.5)(webpack@5.94.0)
