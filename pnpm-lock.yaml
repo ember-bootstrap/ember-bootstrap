@@ -72,8 +72,8 @@ importers:
         specifier: 8.2.0
         version: 8.2.0(@babel/core@7.24.9)
       ember-cli-dependency-checker:
-        specifier: 3.3.2
-        version: 3.3.2(ember-cli@5.10.0(handlebars@4.7.8)(underscore@1.13.6))
+        specifier: 3.3.3
+        version: 3.3.3(ember-cli@5.10.0(handlebars@4.7.8)(underscore@1.13.6))
       ember-cli-fastboot:
         specifier: 4.1.5
         version: 4.1.5(ember-source@5.10.1(@glimmer/component@1.1.2(@babel/core@7.24.9))(@glint/template@1.4.0)(rsvp@4.8.5)(webpack@5.94.0))
@@ -511,8 +511,8 @@ importers:
         specifier: 2.0.3
         version: 2.0.3
       ember-cli-dependency-checker:
-        specifier: 3.3.2
-        version: 3.3.2(ember-cli@5.10.0(handlebars@4.7.8)(underscore@1.13.6))
+        specifier: 3.3.3
+        version: 3.3.3(ember-cli@5.10.0(handlebars@4.7.8)(underscore@1.13.6))
       ember-cli-fastboot:
         specifier: 4.1.5
         version: 4.1.5(ember-source@5.10.1(@glimmer/component@1.1.2(@babel/core@7.24.9))(@glint/template@1.4.0)(rsvp@4.8.5)(webpack@5.94.0))
@@ -4042,8 +4042,8 @@ packages:
     resolution: {integrity: sha512-tSGRbR2XiOjHk7oEH7LVF1y5S643rUEjl3mujI6EYPkrQbHaV0WdLyIWJkLvuP1KGnjBfvnLCyiKDFu6z2PjVg==}
     engines: {node: 12.* || 14.* || >= 16}
 
-  ember-cli-dependency-checker@3.3.2:
-    resolution: {integrity: sha512-PwkrW5oYsdPWwt+0Tojufmv/hxVETTjkrEdK7ANQB2VSnqpA5UcYubwpQM9ONuR2J8wyNDMwEHlqIrk/FYtBsQ==}
+  ember-cli-dependency-checker@3.3.3:
+    resolution: {integrity: sha512-mvp+HrE0M5Zhc2oW8cqs8wdhtqq0CfQXAYzaIstOzHJJn/U01NZEGu3hz7J7zl/+jxZkyygylzcS57QqmPXMuQ==}
     engines: {node: '>= 6'}
     peerDependencies:
       ember-cli: ^3.2.0 || >=4.0.0
@@ -4933,9 +4933,6 @@ packages:
   find-up@6.3.0:
     resolution: {integrity: sha512-v2ZsoEuVHYy8ZIlYqwPe/39Cy+cFDzp4dXPaxNvkEuouymu+2Jbz0PxpKarJHYJTmv2HWT3O382qY8l4jMWthw==}
     engines: {node: ^12.20.0 || ^14.13.1 || >=16.0.0}
-
-  find-yarn-workspace-root@1.2.1:
-    resolution: {integrity: sha512-dVtfb0WuQG+8Ag2uWkbG79hOUzEsRrhBzgfn86g2sJPkzmcpGdghbNTfUKGTxymFrY/tLIodDzLoW9nOJ4FY8Q==}
 
   find-yarn-workspace-root@2.0.0:
     resolution: {integrity: sha512-1IMnbjt4KzsQfnhnzNd8wUEgXZ44IzZaZmnLYx7D5FZlaHt2gW20Cri8Q+E/t5tIj4+epTBub+2Zxu/vNILzqQ==}
@@ -13631,16 +13628,14 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  ember-cli-dependency-checker@3.3.2(ember-cli@5.10.0(handlebars@4.7.8)(underscore@1.13.6)):
+  ember-cli-dependency-checker@3.3.3(ember-cli@5.10.0(handlebars@4.7.8)(underscore@1.13.6)):
     dependencies:
       chalk: 2.4.2
       ember-cli: 5.10.0(handlebars@4.7.8)(underscore@1.13.6)
-      find-yarn-workspace-root: 1.2.1
+      find-yarn-workspace-root: 2.0.0
       is-git-url: 1.0.0
       resolve: 1.22.8
       semver: 5.7.2
-    transitivePeerDependencies:
-      - supports-color
 
   ember-cli-fastboot-testing@0.6.1(@glint/template@1.4.0)(ember-source@5.10.1(@glimmer/component@1.1.2(@babel/core@7.24.9))(@glint/template@1.4.0)(rsvp@4.8.5)(webpack@5.94.0))(webpack@5.94.0):
     dependencies:
@@ -15392,13 +15387,6 @@ snapshots:
     dependencies:
       locate-path: 7.2.0
       path-exists: 5.0.0
-
-  find-yarn-workspace-root@1.2.1:
-    dependencies:
-      fs-extra: 4.0.3
-      micromatch: 3.1.10
-    transitivePeerDependencies:
-      - supports-color
 
   find-yarn-workspace-root@2.0.0:
     dependencies:
