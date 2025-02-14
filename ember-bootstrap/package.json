@@ -74,7 +74,7 @@
     "@popperjs/core": "2.11.8",
     "@release-it-plugins/lerna-changelog": "7.0.0",
     "@simple-dom/interface": "1.4.0",
-    "@tsconfig/ember": "3.0.8",
+    "@tsconfig/ember": "3.0.9",
     "@types/rsvp": "4.0.9",
     "@typescript-eslint/eslint-plugin": "7.18.0",
     "@typescript-eslint/parser": "7.18.0",
