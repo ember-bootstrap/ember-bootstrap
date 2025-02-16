@@ -2,7 +2,6 @@ import { action } from '@ember/object';
 import Component from '@glimmer/component';
 import { getDestinationElement } from 'ember-bootstrap/utils/dom';
 import { ref } from 'ember-ref-bucket';
-import { tracked } from '@glimmer/tracking';
 import { getOwnConfig, macroCondition } from '@embroider/macros';
 
 /**
@@ -96,9 +95,6 @@ export default class DropdownMenu extends Component {
 
     return undefined;
   }
-
-  @tracked
-  isOpen = this.args.isOpen;
 
   flip = true;
 

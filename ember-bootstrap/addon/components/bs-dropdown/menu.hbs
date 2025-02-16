@@ -3,7 +3,7 @@
   {{#if this._renderInPlace}}
     <div
       data-bs-popper
-      class="dropdown-menu {{this.alignClass}} {{if this.isOpen "show"}}"
+      class="dropdown-menu {{this.alignClass}} show"
       tabindex="-1"
       ...attributes
       {{popper-tooltip @toggleElement this.popperOptions}}
@@ -24,7 +24,7 @@
     {{#in-element this.destinationElement insertBefore=null}}
       <div
         data-bs-popper
-        class="dropdown-menu {{this.alignClass}} {{if this.isOpen "show"}}"
+        class="dropdown-menu {{this.alignClass}} show"
         tabindex="-1"
         ...attributes
         {{popper-tooltip @toggleElement this.popperOptions}}
