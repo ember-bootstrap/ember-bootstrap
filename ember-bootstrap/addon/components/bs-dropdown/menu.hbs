@@ -9,7 +9,6 @@
       {{popper-tooltip @toggleElement this.popperOptions}}
       {{did-insert @registerChildElement "menu"}}
       {{will-destroy @unregisterChildElement "menu"}}
-      {{did-update this.updateIsOpen @open}}
       {{create-ref "menuElement"}}
     >
       {{yield
@@ -31,7 +30,6 @@
         {{popper-tooltip @toggleElement this.popperOptions}}
         {{did-insert @registerChildElement "menu"}}
         {{will-destroy @unregisterChildElement "menu"}}
-        {{did-update this.updateIsOpen @open}}
         {{create-ref "menuElement"}}
       >
         {{yield
