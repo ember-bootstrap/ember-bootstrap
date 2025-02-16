@@ -5,9 +5,16 @@ import { getOwnConfig, macroCondition } from '@embroider/macros';
 import { tracked } from '@glimmer/tracking';
 import { next } from '@ember/runloop';
 import type { ComponentLike } from '@glint/template';
-import type BsDropdownMenuComponent from './bs-dropdown/menu';
-import type BsDropdownToggleComponent from './bs-dropdown/toggle';
+import BsDropdownMenuComponent, {
+  type DropdownMenuSignature,
+} from './bs-dropdown/menu';
+import BsDropdownToggleComponent, {
+  type DropdownToggleSignature,
+} from './bs-dropdown/toggle';
 import type EmbroiderConfig from '../utils/embroider-config';
+import BsDropdownButtonComponent, {
+  type DropdownButtonSignature,
+} from './bs-dropdown/button';
 
 const ESCAPE_KEYCODE = 27; // KeyboardEvent.which value for Escape (Esc) key
 const SPACE_KEYCODE = 32; // KeyboardEvent.which value for space key
@@ -24,18 +31,15 @@ const SUPPORTED_KEYCODES = [
 interface DropdownSignature {
   Element: Element;
   Args: {
-    buttonComponent?: ComponentLike<unknown>;
+    buttonComponent?: ComponentLike<DropdownButtonSignature>;
     closeOnMenuClick?: boolean;
     direction?: 'down' | 'up' | 'left' | 'right';
     htmlTag?: string;
     isOpen?: boolean;
-    menuComponent: ComponentLike<BsDropdownMenuComponent>;
+    menuComponent?: ComponentLike<DropdownMenuSignature>;
     onHide: () => undefined | false;
     onShow: () => void;
-    toggleComponent?: ComponentLike<BsDropdownToggleComponent>;
-
-    // TODO: Clarify usage of `open` and `isOpen` arguments. Likely one is a typo.
-    open: boolean;
+    toggleComponent?: ComponentLike<DropdownToggleSignature>;
 
     /** private */
     inNav?: boolean;
@@ -500,16 +504,25 @@ export default class Dropdown extends Component<DropdownSignature> {
    * @type {String}
    * @private
    */
+  get buttonComponent() {
+    return this.args.buttonComponent ?? BsDropdownButtonComponent;
+  }
 
   /**
    * @property toggleComponent
    * @type {String}
    * @private
    */
+  get toggleComponent() {
+    return this.args.toggleComponent ?? BsDropdownToggleComponent;
+  }
 
   /**
    * @property menuComponent
    * @type {String}
    * @private
    */
+  get menuComponent() {
+    return this.args.menuComponent ?? BsDropdownMenuComponent;
+  }
 }

@@ -141,21 +141,6 @@ export default class DropdownMenu extends Component<DropdownMenuSignature> {
     return undefined;
   }
 
-  @tracked
-  isOpen = this.args.isOpen;
-
-  @action
-  updateIsOpen(value: boolean) {
-    // delay removing the menu from DOM to allow (delegated Ember) event to fire for the menu's children
-    // Fixes https://github.com/kaliber5/ember-bootstrap/issues/660
-    next(() => {
-      if (this.isDestroying || this.isDestroyed) {
-        return;
-      }
-      this.isOpen = value;
-    });
-  }
-
   flip = true;
 
   get popperPlacement(): PopperPlacement {
@@ -233,3 +218,5 @@ export default class DropdownMenu extends Component<DropdownMenuSignature> {
     return this.args.dividerComponent ?? BsDropdownMenuDividerComponent;
   }
 }
+
+export { type DropdownMenuSignature };

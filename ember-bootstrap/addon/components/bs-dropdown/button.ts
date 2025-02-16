@@ -1,10 +1,12 @@
-import templateOnly from '@ember/component/template-only';
+import Component from '@glimmer/component';
+import { type ButtonSignature } from '../bs-button';
 
 interface DropdownButtonSignature {
   Element: HTMLButtonElement;
-  Args: {
-    block?: boolean;
-
+  Args: Pick<
+    ButtonSignature['Args'],
+    'active' | 'block' | 'size' | 'type' | 'outline'
+  > & {
     /**
      * @internal
      */
@@ -51,5 +53,9 @@ interface DropdownButtonSignature {
  @extends Components.Button
  @public
  */
-const BsDropdownButtonComponent = templateOnly<DropdownButtonSignature>();
-export default BsDropdownButtonComponent;
+export default class BsDropdownButtonComponent extends Component<DropdownButtonSignature> {
+  get block() {
+    return this.args.block ?? false;
+  }
+}
+export { type DropdownButtonSignature };

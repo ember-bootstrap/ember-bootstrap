@@ -58,3 +58,5 @@ export default class DropdownToggle extends Component<DropdownToggleSignature> {
     this.args.onKeyDown(e);
   }
 }
+
+export { type DropdownToggleSignature };

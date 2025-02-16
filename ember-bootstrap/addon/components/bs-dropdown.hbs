@@ -14,14 +14,14 @@
   >
     {{yield
       (hash
-        button=(component (ensure-safe-component (bs-default @buttonComponent (component "bs-dropdown/button")))
+        button=(component (ensure-safe-component this.buttonComponent)
           isOpen=this.isOpen
           onClick=this.toggleDropdown
           onKeyDown=this.handleKeyEvent
           registerChildElement=this.registerChildElement
           unregisterChildElement=this.unregisterChildElement
         )
-        toggle=(component (ensure-safe-component (bs-default @toggleComponent (component "bs-dropdown/toggle")))
+        toggle=(component (ensure-safe-component this.toggleComponent)
           isOpen=this.isOpen
           inNav=@inNav
           onClick=this.toggleDropdown
@@ -29,7 +29,7 @@
           registerChildElement=this.registerChildElement
           unregisterChildElement=this.unregisterChildElement
         )
-        menu=(component (ensure-safe-component (bs-default @menuComponent (component "bs-dropdown/menu")))
+        menu=(component (ensure-safe-component this.menuComponent)
           isOpen=this.isOpen
           inNav=@inNav
           direction=this.direction
