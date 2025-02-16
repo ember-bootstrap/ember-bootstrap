@@ -98,7 +98,7 @@
     "prettier-plugin-ember-template-tag": "2.0.4",
     "qunit": "2.21.1",
     "qunit-dom": "3.2.0",
-    "resolve": "1.22.8",
+    "resolve": "1.22.10",
     "silent-error": "1.1.1",
     "sinon": "17.0.2",
     "tracked-toolbox": "2.0.0",
