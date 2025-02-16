@@ -16,6 +16,77 @@
 
 
 
+
+
+
+
+
+## v6.4.2 (2024-11-11)
+
+#### :bug: Bug Fix
+* [#2157](https://github.com/ember-bootstrap/ember-bootstrap/pull/2157) Fix compatibility with ember-render-helpers v0.2 ([@jelhan](https://github.com/jelhan))
+
+#### Committers: 1
+- Jeldrik Hanschke ([@jelhan](https://github.com/jelhan))
+
+## v6.4.1 (2024-10-25)
+
+#### :bug: Bug Fix
+* [#2159](https://github.com/ember-bootstrap/ember-bootstrap/pull/2159) Modal should keep focus on escape key if @keyboard=false and on backdrop click @backdropClose=false ([@kdagnan](https://github.com/kdagnan))
+
+#### Committers: 1
+- Kyle D. ([@kdagnan](https://github.com/kdagnan))
+
+## v6.4.0 (2024-10-16)
+
+#### :rocket: Enhancement
+* [#2156](https://github.com/ember-bootstrap/ember-bootstrap/pull/2156) Widen support for ember-render-helpers to v1 ([@jelhan](https://github.com/jelhan))
+* [#2107](https://github.com/ember-bootstrap/ember-bootstrap/pull/2107) Support ember-concurrency v4 ([@jakesjews](https://github.com/jakesjews))
+
+#### :memo: Documentation
+* [#2152](https://github.com/ember-bootstrap/ember-bootstrap/pull/2152) Replace {{action}} helper in doc comments with modern patterns ([@SanderKnauff](https://github.com/SanderKnauff))
+
+#### :house: Internal
+* [#2151](https://github.com/ember-bootstrap/ember-bootstrap/pull/2151) Tests: Re-enable template-lint rules and fix remaining issues ([@SanderKnauff](https://github.com/SanderKnauff))
+* [#2150](https://github.com/ember-bootstrap/ember-bootstrap/pull/2150) Tests: Remove remaining action helpers from tests and convert to gjs ([@SanderKnauff](https://github.com/SanderKnauff))
+* [#2149](https://github.com/ember-bootstrap/ember-bootstrap/pull/2149) Tests: Remove action helper from bs-navbar and bs-nav tests and convert to gjs ([@SanderKnauff](https://github.com/SanderKnauff))
+* [#2148](https://github.com/ember-bootstrap/ember-bootstrap/pull/2148) Tests: Remove action helper from bs-form tests and convert to gjs ([@SanderKnauff](https://github.com/SanderKnauff))
+* [#2143](https://github.com/ember-bootstrap/ember-bootstrap/pull/2143) Run tests for fastboot with ember-canary and Embroider ([@SanderKnauff](https://github.com/SanderKnauff))
+* [#2147](https://github.com/ember-bootstrap/ember-bootstrap/pull/2147) Tests: Remove action helper from bs-modal tests and convert to gjs ([@SanderKnauff](https://github.com/SanderKnauff))
+* [#2146](https://github.com/ember-bootstrap/ember-bootstrap/pull/2146) Tests: Remove action helper from bs-dropdown tests and convert to gjs ([@SanderKnauff](https://github.com/SanderKnauff))
+* [#2136](https://github.com/ember-bootstrap/ember-bootstrap/pull/2136) Tests: Add support for writing tests in Gjs/Gts ([@SanderKnauff](https://github.com/SanderKnauff))
+
+#### Committers: 3
+- Jacob Jewell ([@jakesjews](https://github.com/jakesjews))
+- Jeldrik Hanschke ([@jelhan](https://github.com/jelhan))
+- Sander Knauff ([@SanderKnauff](https://github.com/SanderKnauff))
+
+## v6.3.3 (2024-07-18)
+
+#### :memo: Documentation
+* [#2135](https://github.com/ember-bootstrap/ember-bootstrap/pull/2135) Fix API page generation of TypeScript components ([@SanderKnauff](https://github.com/SanderKnauff))
+
+#### Committers: 1
+- Sander Knauff ([@SanderKnauff](https://github.com/SanderKnauff))
+
+## v6.3.2 (2024-07-03)
+
+#### :bug: Bug Fix
+* [#2129](https://github.com/ember-bootstrap/ember-bootstrap/pull/2129) Styling of toggle button yielded by BsDropdown via arguments is ignored  ([@zfir](https://github.com/zfir))
+
+#### :memo: Documentation
+* [#2127](https://github.com/ember-bootstrap/ember-bootstrap/pull/2127) Fix syntax in BsForm API docs ([@bracke](https://github.com/bracke))
+* [#2125](https://github.com/ember-bootstrap/ember-bootstrap/pull/2125) invalid syntax in docs example for form component  ([@craigteegarden](https://github.com/craigteegarden))
+
+#### :house: Internal
+* [#2130](https://github.com/ember-bootstrap/ember-bootstrap/pull/2130) allow action helper and modifier deprecation for now ([@jelhan](https://github.com/jelhan))
+
+#### Committers: 4
+- Bent Bracke ([@bracke](https://github.com/bracke))
+- Craig Teegarden ([@craigteegarden](https://github.com/craigteegarden))
+- Jeldrik Hanschke ([@jelhan](https://github.com/jelhan))
+- Zafir Sk Heerah ([@zfir](https://github.com/zfir))
+
 ## v6.3.1 (2024-04-16)
 
 #### :bug: Bug Fix

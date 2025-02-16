@@ -7,14 +7,14 @@ import type RenderModifiersRegistry from '@ember/render-modifiers/template-regis
 import type EmberElementHelperRegistry from 'ember-element-helper/template-registry';
 import type EmberPopperModifierRegistry from 'ember-popper-modifier/template-registry';
 import type EmberStyleModifierRegistry from 'ember-style-modifier/template-registry';
-import type BsLinkToComponent from 'ember-bootstrap/components/bs-link-to';
-import type bsDefaultHelper from 'ember-bootstrap/helpers/bs-default';
+import type defaultHelper from 'ember-bootstrap/helpers/bs-default';
 import type sizeClassHelper from 'ember-bootstrap/helpers/bs-size-class';
 import type typeClassHelper from 'ember-bootstrap/helpers/bs-type-class';
 import type BsConditionalAttribute from 'ember-bootstrap/modifiers/bs-conditional-attribute';
 
 import type { HelperLike } from '@glint/template';
 import type { EmberBootstrapMacrosConfig } from './macros-config';
+import type BsProgressBar from 'ember-bootstrap/components/bs-progress/bar';
 
 type macroGetOwnConfig = HelperLike<{
   Args: {
@@ -31,8 +31,8 @@ declare module '@glint/environment-ember-loose/registry' {
       EmberStyleModifierRegistry,
       EmbroiderUtilRegistry,
       RenderModifiersRegistry {
-    'bs-default': typeof bsDefaultHelper;
-    'bs-link-to': typeof BsLinkToComponent;
+    'bs-progress/bar': typeof BsProgressBar;
+    'bs-default': typeof defaultHelper;
     'bs-size-class': typeof sizeClassHelper;
     'bs-type-class': typeof typeClassHelper;
     'bs-conditional-attribute': typeof BsConditionalAttribute;

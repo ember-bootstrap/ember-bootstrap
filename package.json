@@ -17,11 +17,11 @@
   },
   "devDependencies": {
     "concurrently": "8.2.2",
-    "husky": "9.0.11",
-    "lint-staged": "15.2.2"
+    "husky": "9.1.7",
+    "lint-staged": "15.2.11"
   },
   "volta": {
-    "node": "18.19.1",
-    "pnpm": "8.15.4"
+    "node": "18.20.6",
+    "pnpm": "8.15.9"
   }
 }

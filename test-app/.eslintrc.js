@@ -20,6 +20,8 @@ module.exports = {
     'eslint:recommended',
     'plugin:ember/recommended',
     'plugin:prettier/recommended',
+    // @todo enable this while fixing linting errors in tests...
+    // 'plugin:qunit/recommended',
   ],
   env: {
     browser: true,
@@ -41,6 +43,7 @@ module.exports = {
     'ember/no-classic-components': 'warn',
     'ember/classic-decorator-no-classic-methods': 'warn',
     'ember/classic-decorator-hooks': 'warn',
+    'ember/no-runloop': 'off',
   },
   overrides: [
     // ts files
@@ -52,6 +55,29 @@ module.exports = {
       ],
       rules: {},
     },
+    // gjs files
+    {
+      files: ['tests/**/*.gjs'],
+      parser: 'ember-eslint-parser',
+      plugins: ['ember'],
+      extends: [
+        'eslint:recommended',
+        'plugin:ember/recommended',
+        'plugin:ember/recommended-gjs',
+      ],
+    },
+    // gts files
+    {
+      files: ['tests/**/*.gts'],
+      parser: 'ember-eslint-parser',
+      plugins: ['ember'],
+      extends: [
+        'eslint:recommended',
+        'plugin:@typescript-eslint/recommended',
+        'plugin:ember/recommended',
+        'plugin:ember/recommended-gts',
+      ],
+    },
     // node files
     {
       files: [
@@ -60,12 +86,8 @@ module.exports = {
         './.stylelintrc.js',
         './.template-lintrc.js',
         './ember-cli-build.js',
-        './index.js',
         './testem.js',
-        './blueprints/*/index.js',
         './config/**/*.js',
-        './lib/**/*.js',
-        './node-tests/**/*.js',
       ],
       parserOptions: {
         sourceType: 'script',
@@ -76,14 +98,6 @@ module.exports = {
         node: true,
       },
       extends: ['plugin:n/recommended'],
-    },
-    {
-      // test files
-      files: ['tests/**/*-test.{js,ts}'],
-      extends: [
-        // @todo enable this while fixing linting errors in tests...
-        // 'plugin:qunit/recommended'
-      ],
     },
   ],
 };

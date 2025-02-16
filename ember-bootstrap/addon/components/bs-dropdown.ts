@@ -162,7 +162,7 @@ interface DropdownSignature {
     <dd.menu as |ddm|>
       {{#each this.items as |item|}}
         <ddm.item>
-          <a href onclick={{action "changeItems" item dd.closeDropdown}}>
+          <a href {{on "click" (fn this.changeItems item dd.closeDropdown)}}>
             {{item.text}}
           </a>
         </ddm.item>

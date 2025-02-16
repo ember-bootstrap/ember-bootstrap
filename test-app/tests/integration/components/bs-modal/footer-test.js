@@ -5,14 +5,14 @@ import { defaultButtonClass, test } from '../../../helpers/bootstrap';
 import { hbs } from 'ember-cli-htmlbars';
 import setupNoDeprecations from '../../../helpers/setup-no-deprecations';
 import { defer } from '../../../helpers/defer';
-import { stub } from 'sinon';
+import sinon from 'sinon';
 
 module('Integration | Component | bs-modal/footer', function (hooks) {
   setupRenderingTest(hooks);
   setupNoDeprecations(hooks);
 
   test('Footer has close button', async function (assert) {
-    const close = this.set('close', stub());
+    const close = this.set('close', sinon.stub());
 
     await render(
       hbs`<BsModal::Footer @onClose={{this.close}} @closeTitle='close' />`,
@@ -38,7 +38,7 @@ module('Integration | Component | bs-modal/footer', function (hooks) {
   });
 
   test('Footer can have submit button', async function (assert) {
-    const submit = this.set('submit', stub());
+    const submit = this.set('submit', sinon.stub());
 
     await render(
       hbs`<BsModal::Footer
@@ -83,7 +83,7 @@ module('Integration | Component | bs-modal/footer', function (hooks) {
 
   test('Footer submit button gets disabled when `onSubmit` returns a pending promise', async function (assert) {
     const { promise, resolve } = defer();
-    const submit = this.set('submit', stub().returns(promise));
+    const submit = this.set('submit', sinon.stub().returns(promise));
 
     await render(
       hbs`<BsModal::Footer

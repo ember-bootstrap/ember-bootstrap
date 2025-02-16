@@ -16,6 +16,9 @@ module.exports = async function () {
         npm: {
           devDependencies: {
             'ember-source': '~4.8.0',
+            // ember-resolver 11 is required for ember < 4.12
+            // See: https://github.com/ember-cli/ember-resolver/releases/tag/v12.0.0
+            'ember-resolver': '11.0.1',
             bootstrap: bootstrapVersion,
           },
         },
@@ -60,10 +63,6 @@ module.exports = async function () {
         },
         env: {
           // FAIL_ON_DEPRECATION: true,
-
-          // TODO: Enable again when FastBoot is ready for Ember 5
-          // https://github.com/ember-fastboot/ember-cli-fastboot/pull/905
-          FASTBOOT_DISABLED: true,
         },
       },
       {
@@ -76,9 +75,6 @@ module.exports = async function () {
         },
       },
       embroiderSafe({
-        env: {
-          FASTBOOT_DISABLED: true,
-        },
         npm: {
           devDependencies: {
             bootstrap: bootstrapVersion,
@@ -86,9 +82,6 @@ module.exports = async function () {
         },
       }),
       embroiderOptimized({
-        env: {
-          FASTBOOT_DISABLED: true,
-        },
         npm: {
           devDependencies: {
             bootstrap: bootstrapVersion,

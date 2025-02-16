@@ -1,4 +1,13 @@
-import ContextualHelp from './bs-contextual-help';
+import ContextualHelp, {
+  type ContextualHelpSignature,
+} from './bs-contextual-help';
+
+type BsTooltipSignature = ContextualHelpSignature & {
+  Element: Element;
+  Blocks: {
+    default: [{ close: () => void }];
+  };
+};
 
 /**
   Component that implements Bootstrap [tooltips](http://getbootstrap.com/javascript/#tooltips).
@@ -50,7 +59,7 @@ import ContextualHelp from './bs-contextual-help';
   * a `close` action is yielded, that allows you to close the tooltip:
 
   ```hbs
-  <BsTooltip as |tt|>This is a tooltip <button onclick={{action tt.close}}>Close</button></BsTooltip>
+  <BsTooltip as |tt|>This is a tooltip <button {{on "click" tt.close}}>Close</button></BsTooltip>
   ```
 
   See the individual API docs for each property.
@@ -70,7 +79,7 @@ import ContextualHelp from './bs-contextual-help';
   @extends Components.ContextualHelp
   @public
 */
-export default class Tooltip extends ContextualHelp {
+export default class Tooltip extends ContextualHelp<BsTooltipSignature> {
   /**
    * @property elementComponent
    * @type {String}
@@ -86,6 +95,6 @@ export default class Tooltip extends ContextualHelp {
    * @private
    */
   get arrowElement() {
-    return this.overlayElement.querySelector('.tooltip-arrow');
+    return this.overlayElement.querySelector<HTMLElement>('.tooltip-arrow');
   }
 }

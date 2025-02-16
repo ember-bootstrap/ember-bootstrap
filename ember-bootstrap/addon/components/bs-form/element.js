@@ -24,8 +24,8 @@ import { dedupeTracked } from 'tracked-toolbox';
   create forms without coding the default Bootstrap form markup by hand:
 
   ```handlebars
-  <BsForm @formLayout="horizontal" @model={{this}} @onSubmit={{action "submit"}} as |form|>
-    <form.element @controlType="email" @label="Email" @value={{this.email}}" />
+  <BsForm @formLayout="horizontal" @model={{this}} @onSubmit={{this.submit}} as |form|>
+    <form.element @controlType="email" @label="Email" @value={{this.email}} />
     <form.element @controlType="password" @label="Password" @value={{this.password}} />
     <form.element @controlType="checkbox" @label="Remember me" @value={{this.rememberMe}} />
     <BsButton @defaultText="Submit" @type="primary" type="submit" />
@@ -50,7 +50,7 @@ import { dedupeTracked } from 'tracked-toolbox';
   label on these objects.
 
   ```hbs
-  <BsForm @model={{this}} @onSubmit={{action "submit"}} as |form|>
+  <BsForm @model={{this}} @onSubmit={{this.submit}} as |form|>
     <form.element @controlType="radio" @label="Gender" @options={{this.genderOptions}} @optionLabelPath="title" @property="gender" />
   </BsForm>
   ```
@@ -59,7 +59,7 @@ import { dedupeTracked } from 'tracked-toolbox';
   of the yielded control component:
 
   ```hbs
-  <BsForm @model={{this}} @onSubmit={{action "submit"}} as |form|>
+  <BsForm @model={{this}} @onSubmit={{this.submit}} as |form|>
     <form.element @controlType="radio" @label="Gender" @options={{this.genderOptions}} @property="gender" as |el|>
       <el.control @inline={{true}} />
     </form.element>
@@ -73,9 +73,9 @@ import { dedupeTracked } from 'tracked-toolbox';
   component (from the [ember-pikaday addon](https://github.com/adopted-ember-addons/ember-pikaday)):
 
   ```hbs
-  <BsForm @model={{this}} @onSubmit={{action "submit"}} as |form|>
+  <BsForm @model={{this}} @onSubmit={{this.submit}} as |form|>
     <form.element @label="Select-2" @property="gender" as |el|>
-      <PikadayInput @value={{el.value}} @onSelection={{action el.setValue}} id={{el.id}} />
+      <PikadayInput @value={{el.value}} @onSelection={{el.setValue}} id={{el.id}} />
     </form.element>
   </BsForm>
   ```
@@ -91,7 +91,7 @@ import { dedupeTracked } from 'tracked-toolbox';
   to customize that existing component:
 
   ```hbs
-  <BsForm @model={{this}} @onSubmit={{action "submit"}} as |form|>
+  <BsForm @model={{this}} @onSubmit={{this.submit}} as |form|>
     <form.element @label="Email" @property="email" as |el|>
       <el.control class="input-lg" placeholder="Email" />
     </form.element>
@@ -109,7 +109,7 @@ import { dedupeTracked } from 'tracked-toolbox';
   (given by `property`) of the form's `model`, which in this case is its controller (see `model=this`):
 
   ```handlebars
-  <BsForm @formLayout="horizontal" @model={{this}} @onSubmit={{action "submit"}} as |form|>
+  <BsForm @formLayout="horizontal" @model={{this}} @onSubmit={{this.submit}} as |form|>
     <form.element @controlType="email" @label="Email" @property="email" />
     <form.element @controlType="password" @label="Password" @property="password" />
     <form.element @controlType="checkbox" @label="Remember me" @property="rememberMe" />
@@ -178,7 +178,7 @@ import { dedupeTracked } from 'tracked-toolbox';
   you can pass them to the yielded `control` component:
 
   ```hbs
-  <BsForm @formLayout="horizontal" @model={{this}} @onSubmit={{action "submit"}} as |form|>
+  <BsForm @formLayout="horizontal" @model={{this}} @onSubmit={{this.submit}} as |form|>
   <form.element @controlType="email" @label="Email" @property="email" as |el|>
     <el.control
       placeholder="Email"

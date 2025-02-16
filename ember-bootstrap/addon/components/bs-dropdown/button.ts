@@ -51,4 +51,5 @@ interface DropdownButtonSignature {
  @extends Components.Button
  @public
  */
-export default templateOnly<DropdownButtonSignature>();
+const BsDropdownButtonComponent = templateOnly<DropdownButtonSignature>();
+export default BsDropdownButtonComponent;

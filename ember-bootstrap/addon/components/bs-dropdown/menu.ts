@@ -6,9 +6,9 @@ import { ref } from 'ember-ref-bucket';
 import { tracked } from '@glimmer/tracking';
 import { getOwnConfig, macroCondition } from '@embroider/macros';
 import type { Placement as PopperPlacement } from '@popperjs/core';
-import type BsDropdownMenuDividerComponent from './menu/divider';
-import type BsDropdownMenuItemComponent from './menu/item';
-import type BsLinkToComponent from '../bs-link-to';
+import BsDropdownMenuDividerComponent from './menu/divider';
+import BsDropdownMenuItemComponent from './menu/item';
+import BsLinkToComponent from '../bs-link-to';
 import type { ComponentLike } from '@glint/template';
 import type EmbroiderConfig from '../../utils/embroider-config';
 
@@ -211,16 +211,25 @@ export default class DropdownMenu extends Component<DropdownMenuSignature> {
    * @type {String}
    * @private
    */
+  get itemComponent() {
+    return this.args.itemComponent ?? BsDropdownMenuItemComponent;
+  }
 
   /**
    * @property linkToComponent
    * @type {String}
    * @private
    */
+  get linkToComponent() {
+    return this.args.linkToComponent ?? BsLinkToComponent;
+  }
 
   /**
    * @property dividerComponent
    * @type {String}
    * @private
    */
+  get dividerComponent() {
+    return this.args.dividerComponent ?? BsDropdownMenuDividerComponent;
+  }
 }

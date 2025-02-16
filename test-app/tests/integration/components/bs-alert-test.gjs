@@ -6,24 +6,21 @@ import {
   test,
   testRequiringTransitions,
 } from '../../helpers/bootstrap';
-import { hbs } from 'ember-cli-htmlbars';
 import setupNoDeprecations from '../../helpers/setup-no-deprecations';
 import a11yAudit from 'ember-a11y-testing/test-support/audit';
 import sinon from 'sinon';
+import { tracked } from '@glimmer/tracking';
+import BsAlert from 'ember-bootstrap/components/bs-alert';
 
 module('Integration | Component | bs-alert', function (hooks) {
   setupRenderingTest(hooks);
   setupNoDeprecations(hooks);
 
-  hooks.beforeEach(function () {
-    this.actions = {};
-    this.send = (actionName, ...args) =>
-      this.actions[actionName].apply(this, args);
-  });
-
   test('alert has correct CSS classes', async function (assert) {
     await render(
-      hbs`<BsAlert @type='success' @dismissible={{true}}>Test</BsAlert>`,
+      <template>
+        <BsAlert @type='success' @dismissible={{true}}>Test</BsAlert>
+      </template>,
     );
 
     assert.dom('.alert').exists('alert has alert class');
@@ -34,7 +31,11 @@ module('Integration | Component | bs-alert', function (hooks) {
   });
 
   test('dismissible alert can be hidden by clicking close button with fade=false', async function (assert) {
-    await render(hbs`<BsAlert @type='success' @fade={{false}}>Test</BsAlert>`);
+    await render(
+      <template>
+        <BsAlert @type='success' @fade={{false}}>Test</BsAlert>
+      </template>,
+    );
 
     assert
       .dom(`button.${closeButtonClass()}`)
@@ -48,12 +49,16 @@ module('Integration | Component | bs-alert', function (hooks) {
   testRequiringTransitions(
     'dismissible alert can be hidden by clicking close button with fade=true',
     async function (assert) {
-      await render(hbs`<BsAlert @type='success' @fade={{true}}>Test</BsAlert>`);
+      await render(
+        <template>
+          <BsAlert @type='success' @fade={{true}}>Test</BsAlert>
+        </template>,
+      );
 
       assert
         .dom(`button.${closeButtonClass()}`)
         .exists({ count: 1 }, 'alert has close button');
-      let promise = click(`button.${closeButtonClass()}`);
+      const promise = click(`button.${closeButtonClass()}`);
       await waitFor('.alert:not(.in)');
 
       assert.dom('.alert').exists('alert has alert class');
@@ -66,126 +71,152 @@ module('Integration | Component | bs-alert', function (hooks) {
   );
 
   test('alert can be hidden by setting visible property', async function (assert) {
-    this.set('visible', true);
+    class State {
+      @tracked visible = true;
+    }
+    const state = new State();
     await render(
-      hbs`<BsAlert
-  @type='success'
-  @fade={{false}}
-  @visible={{this.visible}}
->Test</BsAlert>`,
+      <template>
+        <BsAlert
+          @type='success'
+          @fade={{false}}
+          @visible={{state.visible}}
+        >Test</BsAlert>
+      </template>,
     );
 
-    this.set('visible', false);
+    state.visible = false;
+    await settled();
 
     assert.dom('.alert').doesNotExist('alert has no alert class');
     assert.dom('*').hasText('', 'alert has no content');
   });
 
   test('onDismiss is called when clicking the close button', async function (assert) {
-    let action = sinon.spy();
-    this.actions.dismiss = action;
+    const dismissAction = sinon.spy();
     await render(
-      hbs`<BsAlert
-  @type='success'
-  @fade={{false}}
-  @onDismiss={{action 'dismiss'}}
->Test</BsAlert>`,
+      <template>
+        <BsAlert
+          @type='success'
+          @fade={{false}}
+          @onDismiss={{dismissAction}}
+        >Test</BsAlert>
+      </template>,
     );
     await click(`button.${closeButtonClass()}`);
-    assert.ok(action.calledOnce, 'onDismiss has been called.');
+    assert.ok(dismissAction.calledOnce, 'onDismiss has been called.');
   });
 
   test('alert is not hidden after clicking the close button when onDismiss action return false', async function (assert) {
-    let action = sinon.stub();
-    action.returns(false);
-    this.actions.dismiss = action;
+    const dismissAction = sinon.stub().returns(false);
     await render(
-      hbs`<BsAlert
-  @type='success'
-  @fade={{false}}
-  @onDismiss={{action 'dismiss'}}
->Test</BsAlert>`,
+      <template>
+        <BsAlert
+          @type='success'
+          @fade={{false}}
+          @onDismiss={{dismissAction}}
+        >Test</BsAlert>
+      </template>,
     );
     await click(`button.${closeButtonClass()}`);
-    assert.ok(action.calledOnce, 'onDismiss has been called.');
+    assert.ok(dismissAction.calledOnce, 'onDismiss has been called.');
 
     assert.dom('.alert').exists('alert is still visible');
   });
 
   test('onDismissed is called after modal is closed', async function (assert) {
-    let action = sinon.spy();
-    this.actions.dismissed = action;
+    const dismissedAction = sinon.spy();
     await render(
-      hbs`<BsAlert
-  @type='success'
-  @fade={{false}}
-  @onDismissed={{action 'dismissed'}}
->Test</BsAlert>`,
+      <template>
+        <BsAlert
+          @type='success'
+          @fade={{false}}
+          @onDismissed={{dismissedAction}}
+        >Test</BsAlert>
+      </template>,
     );
     await click(`button.${closeButtonClass()}`);
-    assert.ok(action.calledOnce, 'onDismissed has been called.');
+    assert.ok(dismissedAction.calledOnce, 'onDismissed has been called.');
   });
 
   test('When fade is true, onDismissed is called once when visible changes from true to false', async function (assert) {
-    let action = sinon.spy();
-    this.dismissed = action;
-    this.isAlertShown = true;
+    const dismissedAction = sinon.spy();
+    class State {
+      @tracked isAlertShown = true;
+    }
+    const state = new State();
 
     await render(
-      hbs`<BsAlert
-  @fade={{true}}
-  @onDismissed={{this.dismissed}}
-  @visible={{this.isAlertShown}}
->Test</BsAlert>`,
+      <template>
+        <BsAlert
+          @fade={{true}}
+          @onDismissed={{dismissedAction}}
+          @visible={{state.isAlertShown}}
+        >Test</BsAlert>
+      </template>,
     );
 
-    this.set('isAlertShown', false);
+    state.isAlertShown = false;
     await settled();
 
-    assert.ok(action.calledOnce, 'onDismissed is called once.');
+    assert.ok(dismissedAction.calledOnce, 'onDismissed is called once.');
   });
 
   test('When fade is false, onDismissed is called once when visible changes from true to false', async function (assert) {
-    let action = sinon.spy();
-    this.dismissed = action;
-    this.isAlertShown = true;
+    const dismissedAction = sinon.spy();
+    class State {
+      @tracked isAlertShown = true;
+    }
+    const state = new State();
 
     await render(
-      hbs`<BsAlert
-  @fade={{false}}
-  @onDismissed={{this.dismissed}}
-  @visible={{this.isAlertShown}}
->Test</BsAlert>`,
+      <template>
+        <BsAlert
+          @fade={{false}}
+          @onDismissed={{dismissedAction}}
+          @visible={{state.isAlertShown}}
+        >Test</BsAlert>
+      </template>,
     );
 
-    this.set('isAlertShown', false);
+    state.isAlertShown = false;
     await settled();
 
-    assert.ok(action.calledOnce, 'onDismissed is called once.');
+    assert.ok(dismissedAction.calledOnce, 'onDismissed is called once.');
   });
 
   test('When fade is false, onDismissed is not called when visible changes from false to false', async function (assert) {
-    let action = sinon.spy();
-    this.dismissed = action;
-    this.isAlertShown = false;
+    const dismissedAction = sinon.spy();
+    class State {
+      @tracked isAlertShown = false;
+    }
+    const state = new State();
 
     await render(
-      hbs`<BsAlert
-  @fade={{false}}
-  @onDismissed={{this.dismissed}}
-  @visible={{this.isAlertShown}}
->Test</BsAlert>`,
+      <template>
+        <BsAlert
+          @fade={{false}}
+          @onDismissed={{dismissedAction}}
+          @visible={{state.isAlertShown}}
+        >Test</BsAlert>
+      </template>,
     );
 
-    this.set('isAlertShown', false);
+    state.isAlertShown = true;
     await settled();
 
-    assert.ok(action.notCalled, 'onDismissed is not called.');
+    assert.ok(dismissedAction.notCalled, 'onDismissed is not called.');
   });
 
   test('alert is initially hidden when visible=false', async function (assert) {
     await render(
-      hbs`<BsAlert @type='success' @fade={{false}} @visible={{false}}>Test</BsAlert>`,
+      <template>
+        <BsAlert
+          @type='success'
+          @fade={{false}}
+          @visible={{false}}
+        >Test</BsAlert>
+      </template>,
     );
 
     assert.dom('.alert').doesNotExist('alert has no alert class');
@@ -193,35 +224,48 @@ module('Integration | Component | bs-alert', function (hooks) {
   });
 
   test('alert can be made visible when setting visible=true', async function (assert) {
-    this.set('visible', false);
+    class State {
+      @tracked visible = false;
+    }
+    const state = new State();
     await render(
-      hbs`<BsAlert
-  @type='success'
-  @visible={{this.visible}}
-  @fade={{false}}
->Test</BsAlert>`,
+      <template>
+        <BsAlert
+          @type='success'
+          @visible={{state.visible}}
+          @fade={{false}}
+        >Test</BsAlert>
+      </template>,
     );
-    this.set('visible', true);
+    state.visible = true;
+    await settled();
 
     assert.dom('.alert').exists('alert has alert class');
     assert.dom('.alert').hasClass('alert-success', 'alert has type class');
   });
 
   test('alert can be made visible when setting visible=true after manually dismissing it', async function (assert) {
-    this.set('visible', true);
+    class State {
+      @tracked visible = true;
+    }
+    const state = new State();
 
-    this.set('handleOnDismissed', () => {
-      this.set('visible', false);
-    });
+    const handleOnDismissed = () => {
+      state.visible = false;
+    };
 
-    await render(hbs`<BsAlert
-  @type='success'
-  @fade={{false}}
-  @visible={{this.visible}}
-  @onDismissed={{this.handleOnDismissed}}
->
-  Test
-</BsAlert>`);
+    await render(
+      <template>
+        <BsAlert
+          @type='success'
+          @fade={{false}}
+          @visible={{state.visible}}
+          @onDismissed={{handleOnDismissed}}
+        >
+          Test
+        </BsAlert>
+      </template>,
+    );
 
     assert.dom('.alert').exists('alert has alert class');
 
@@ -229,38 +273,52 @@ module('Integration | Component | bs-alert', function (hooks) {
     assert.dom('.alert').doesNotExist('alert has no alert class');
     assert.dom('*').hasText('', 'alert has no content');
 
-    this.set('visible', true);
+    state.visible = true;
+    await settled();
 
     assert.dom('.alert').exists('alert has alert class');
   });
 
   test('dismissing alert does not change public visible property (DDAU)', async function (assert) {
-    this.set('visible', true);
+    class State {
+      @tracked visible = true;
+    }
+    const state = new State();
     await render(
-      hbs`<BsAlert
-  @type='success'
-  @visible={{this.visible}}
-  @fade={{false}}
->Test</BsAlert>`,
+      <template>
+        <BsAlert
+          @type='success'
+          @visible={{state.visible}}
+          @fade={{false}}
+        >Test</BsAlert>
+      </template>,
     );
 
     await click(`button.${closeButtonClass()}`);
 
-    assert.true(this.visible, 'Does not modify visible property');
+    assert.true(state.visible, 'Does not modify visible property');
   });
 
   test('it passes accessibility checks', async function (assert) {
-    await render(hbs`<BsAlert @type='success'>Test</BsAlert>`);
+    await render(
+      <template>
+        <BsAlert @type='success'>Test</BsAlert>
+      </template>,
+    );
 
     await a11yAudit();
     assert.ok(true, 'A11y audit passed');
   });
 
   test('it allows to set a header using named blocks', async function (assert) {
-    await render(hbs`<BsAlert>
-  <:header>Warning</:header>
-  <:body><p>Some content</p></:body>
-</BsAlert>`);
+    await render(
+      <template>
+        <BsAlert>
+          <:header>Warning</:header>
+          <:body><p>Some content</p></:body>
+        </BsAlert>
+      </template>,
+    );
 
     assert.dom('.alert .alert-heading').exists({ count: 1 }, 'header exists');
     assert
@@ -275,10 +333,14 @@ module('Integration | Component | bs-alert', function (hooks) {
   });
 
   test('tagName used for header element can be customized with headerTag argument', async function (assert) {
-    await render(hbs`<BsAlert @headerTag='h1'>
-  <:header>Warning</:header>
-  <:body><p>Some content</p></:body>
-</BsAlert>`);
+    await render(
+      <template>
+        <BsAlert @headerTag='h1'>
+          <:header>Warning</:header>
+          <:body><p>Some content</p></:body>
+        </BsAlert>
+      </template>,
+    );
     assert.dom('.alert .alert-heading').hasTagName('h1');
   });
 });

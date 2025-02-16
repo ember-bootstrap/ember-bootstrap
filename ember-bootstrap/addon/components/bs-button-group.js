@@ -24,7 +24,7 @@ import { A, isArray } from '@ember/array';
   the value of the active button:
 
   ```handlebars
-  <BsButtonGroup @value={{this.buttonGroupValue}} @type="radio" @onChange={{action (mut this.buttonGroupValue}} as |bg|>
+  <BsButtonGroup @value={{this.buttonGroupValue}} @type="radio" @onChange={{fn (mut this.buttonGroupValue}} as |bg|>
     <bg.button @type="default" @value={{1}}>1</bg.button>
     <bg.button @type="default" @value={{2}}>2</bg.button>
     <bg.button @type="default" @value={{3}}>3</bg.button>
@@ -39,7 +39,7 @@ import { A, isArray } from '@ember/array';
   of all the values of the active buttons:
 
   ```handlebars
-  <BsButtonGroup @value={{this.buttonGroupValue}} @type="checkbox" @onChange={{action (mut this.buttonGroupValue}} as |bg|>
+  <BsButtonGroup @value={{this.buttonGroupValue}} @type="checkbox" @onChange={{fn (mut this.buttonGroupValue}} as |bg|>
     <bg.button @type="default" @value={{1}}>1</bg.button>
     <bg.button @type="default" @value={{2}}>2</bg.button>
     <bg.button @type="default" @value={{3}}>3</bg.button>

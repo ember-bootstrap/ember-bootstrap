@@ -1,7 +1,6 @@
 import { module } from 'qunit';
 import { setupRenderingTest } from 'ember-qunit';
 import { click, render } from '@ember/test-helpers';
-import { hbs } from 'ember-cli-htmlbars';
 import {
   accordionClassFor,
   accordionItemBodyClass,
@@ -14,20 +13,17 @@ import {
 } from '../../../helpers/bootstrap';
 import setupNoDeprecations from '../../../helpers/setup-no-deprecations';
 import sinon from 'sinon';
+import BsAccordionItem from 'ember-bootstrap/components/bs-accordion/item';
 
 module('Integration | Component | bs-accordion-item', function (hooks) {
   setupRenderingTest(hooks);
   setupNoDeprecations(hooks);
 
-  hooks.beforeEach(function () {
-    this.actions = {};
-    this.send = (actionName, ...args) =>
-      this.actions[actionName].apply(this, args);
-  });
-
   test('accordion item has correct default markup', async function (assert) {
     await render(
-      hbs`<BsAccordion::Item @title='TITLE'>CONTENT</BsAccordion::Item>`,
+      <template>
+        <BsAccordionItem @title='TITLE'>CONTENT</BsAccordionItem>
+      </template>,
     );
     assert
       .dom(`.${accordionItemClass()}`)
@@ -57,25 +53,30 @@ module('Integration | Component | bs-accordion-item', function (hooks) {
   });
 
   test('calls onClick action when clicking heading', async function (assert) {
-    let action = sinon.spy();
-    this.actions.click = action;
+    const clickAction = sinon.spy();
     await render(
-      hbs`<BsAccordion::Item
-  @value={{1}}
-  @onClick={{action 'click'}}
-  @title='TITLE'
->CONTENT</BsAccordion::Item>`,
+      <template>
+        <BsAccordionItem
+          @value={{1}}
+          @onClick={{clickAction}}
+          @title='TITLE'
+        >CONTENT</BsAccordionItem>
+      </template>,
     );
 
     await click(accordionItemClickableSelector());
-    assert.ok(action.calledWith(1), 'onClick action has been called.');
+    assert.ok(clickAction.calledWith(1), 'onClick action has been called.');
   });
 
   test('renders a contextual title block', async function (assert) {
-    await render(hbs`<BsAccordion::Item as |aitem|>
-  <aitem.title>TITLE</aitem.title>
-  <aitem.body>CONTENT</aitem.body>
-</BsAccordion::Item>`);
+    await render(
+      <template>
+        <BsAccordionItem as |aitem|>
+          <aitem.title>TITLE</aitem.title>
+          <aitem.body>CONTENT</aitem.body>
+        </BsAccordionItem>
+      </template>,
+    );
 
     assert
       .dom(accordionTitleSelector())
@@ -86,15 +87,16 @@ module('Integration | Component | bs-accordion-item', function (hooks) {
   });
 
   test('accordion items can be disabled', async function (assert) {
-    let action = sinon.spy();
-    this.actions.click = action;
+    const clickAction = sinon.spy();
     await render(
-      hbs`<BsAccordion::Item
-  @value={{1}}
-  @disabled={{true}}
-  @onClick={{action 'click'}}
-  @title='TITLE'
->CONTENT</BsAccordion::Item>`,
+      <template>
+        <BsAccordionItem
+          @value={{1}}
+          @disabled={{true}}
+          @onClick={{clickAction}}
+          @title='TITLE'
+        >CONTENT</BsAccordionItem>
+      </template>,
     );
     assert
       .dom(accordionItemClickableSelector())
@@ -111,6 +113,9 @@ module('Integration | Component | bs-accordion-item', function (hooks) {
     } catch (e) {
       // click helper will throw on a disabled button
     }
-    assert.notOk(action.calledWith(1), 'onClick action should not be called');
+    assert.notOk(
+      clickAction.calledWith(1),
+      'onClick action should not be called',
+    );
   });
 });
