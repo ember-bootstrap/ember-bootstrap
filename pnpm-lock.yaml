@@ -192,8 +192,8 @@ importers:
         specifier: 2.21.1
         version: 2.21.1
       qunit-dom:
-        specifier: 3.2.0
-        version: 3.2.0
+        specifier: 3.2.1
+        version: 3.2.1
       sass:
         specifier: 1.77.8
         version: 1.77.8
@@ -640,8 +640,8 @@ importers:
         specifier: 2.21.1
         version: 2.21.1
       qunit-dom:
-        specifier: 3.2.0
-        version: 3.2.0
+        specifier: 3.2.1
+        version: 3.2.1
       resolve:
         specifier: 1.22.10
         version: 1.22.10
@@ -7616,8 +7616,8 @@ packages:
   quick-temp@0.1.8:
     resolution: {integrity: sha512-YsmIFfD9j2zaFwJkzI6eMG7y0lQP7YeWzgtFgNl38pGWZBSXJooZbOWwkcRot7Vt0Fg9L23pX0tqWU3VvLDsiA==}
 
-  qunit-dom@3.2.0:
-    resolution: {integrity: sha512-VYFXbwod2sis16Nzgx5UrdCvjNUPYIAbTwEGv7hF1RfgJaVgG5ASVaQz9en0ZRvlybtql0LrVuAbleJU/57zQQ==}
+  qunit-dom@3.2.1:
+    resolution: {integrity: sha512-+qSm8zQ7hPA9NijmTDVsUFNGEFP/K+DTymjlsU01O3NhkGtb9rsZRztJXwaiAlmVSX4vSzjydPxpZCRhpWIq4A==}
 
   qunit@2.21.1:
     resolution: {integrity: sha512-SMA8IBZamI9MyVB4dShGpn6+X6plO8mIyfZTQ815XBvv/nVMeUj+yxsw8SgZVnrMlrAvTziJkmjOhaDwkNMHWQ==}
@@ -18436,7 +18436,7 @@ snapshots:
       rimraf: 2.7.1
       underscore.string: 3.3.6
 
-  qunit-dom@3.2.0:
+  qunit-dom@3.2.1:
     dependencies:
       dom-element-descriptors: 0.5.1
 
