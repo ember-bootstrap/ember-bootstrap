@@ -81,7 +81,7 @@
     "striptags": "3.2.0",
     "stylelint": "16.8.1",
     "stylelint-config-standard-scss": "13.1.0",
-    "stylelint-prettier": "5.0.2",
+    "stylelint-prettier": "5.0.3",
     "tracked-built-ins": "3.3.0",
     "webpack": "5.94.0"
   },
