@@ -69,7 +69,7 @@
     "@babel/plugin-proposal-decorators": "7.25.9",
     "@embroider/test-setup": "4.0.0",
     "@glint/core": "1.5.2",
-    "@glint/environment-ember-loose": "1.4.0",
+    "@glint/environment-ember-loose": "1.5.2",
     "@glint/template": "1.4.0",
     "@popperjs/core": "2.11.8",
     "@release-it-plugins/lerna-changelog": "7.0.0",
