@@ -63,8 +63,8 @@ importers:
         specifier: 5.0.0
         version: 5.0.0(ember-bootstrap@ember-bootstrap)(ember-power-select@7.2.0(@babel/core@7.24.9)(@glint/environment-ember-loose@1.5.2(@glimmer/component@1.1.2(@babel/core@7.24.9))(@glint/template@1.5.2)(ember-cli-htmlbars@6.3.0)(ember-modifier@4.2.0(@babel/core@7.24.9)(ember-source@5.10.2(@glimmer/component@1.1.2(@babel/core@7.24.9))(@glint/template@1.5.2)(rsvp@4.8.5)(webpack@5.94.0))))(@glint/template@1.5.2)(ember-source@5.10.2(@glimmer/component@1.1.2(@babel/core@7.24.9))(@glint/template@1.5.2)(rsvp@4.8.5)(webpack@5.94.0))(webpack@5.94.0))(ember-source@5.10.2(@glimmer/component@1.1.2(@babel/core@7.24.9))(@glint/template@1.5.2)(rsvp@4.8.5)(webpack@5.94.0))
       ember-cli:
-        specifier: 5.10.0
-        version: 5.10.0(handlebars@4.7.8)(underscore@1.13.6)
+        specifier: 5.12.0
+        version: 5.12.0(handlebars@4.7.8)(underscore@1.13.6)
       ember-cli-app-version:
         specifier: 7.0.0
         version: 7.0.0(ember-source@5.10.2(@glimmer/component@1.1.2(@babel/core@7.24.9))(@glint/template@1.5.2)(rsvp@4.8.5)(webpack@5.94.0))
@@ -73,7 +73,7 @@ importers:
         version: 8.2.0(@babel/core@7.24.9)
       ember-cli-dependency-checker:
         specifier: 3.3.3
-        version: 3.3.3(ember-cli@5.10.0(handlebars@4.7.8)(underscore@1.13.6))
+        version: 3.3.3(ember-cli@5.12.0(handlebars@4.7.8)(underscore@1.13.6))
       ember-cli-fastboot:
         specifier: 4.1.5
         version: 4.1.5(ember-source@5.10.2(@glimmer/component@1.1.2(@babel/core@7.24.9))(@glint/template@1.5.2)(rsvp@4.8.5)(webpack@5.94.0))
@@ -355,8 +355,8 @@ importers:
         specifier: 8.2.2
         version: 8.2.2
       ember-cli:
-        specifier: 5.10.0
-        version: 5.10.0(handlebars@4.7.8)(underscore@1.13.6)
+        specifier: 5.12.0
+        version: 5.12.0(handlebars@4.7.8)(underscore@1.13.6)
       ember-cli-blueprint-test-helpers:
         specifier: 0.19.2
         version: 0.19.2
@@ -499,8 +499,8 @@ importers:
         specifier: workspace:*
         version: link:../ember-bootstrap
       ember-cli:
-        specifier: 5.10.0
-        version: 5.10.0(handlebars@4.7.8)(underscore@1.13.6)
+        specifier: 5.12.0
+        version: 5.12.0(handlebars@4.7.8)(underscore@1.13.6)
       ember-cli-app-version:
         specifier: 7.0.0
         version: 7.0.0(ember-source@5.10.2(@glimmer/component@1.1.2(@babel/core@7.24.9))(@glint/template@1.5.2)(rsvp@4.8.5)(webpack@5.94.0))
@@ -512,7 +512,7 @@ importers:
         version: 2.0.3
       ember-cli-dependency-checker:
         specifier: 3.3.3
-        version: 3.3.3(ember-cli@5.10.0(handlebars@4.7.8)(underscore@1.13.6))
+        version: 3.3.3(ember-cli@5.12.0(handlebars@4.7.8)(underscore@1.13.6))
       ember-cli-fastboot:
         specifier: 4.1.5
         version: 4.1.5(ember-source@5.10.2(@glimmer/component@1.1.2(@babel/core@7.24.9))(@glint/template@1.5.2)(rsvp@4.8.5)(webpack@5.94.0))
@@ -4177,8 +4177,8 @@ packages:
     resolution: {integrity: sha512-4pb3OKXhHCeUux6a7SDKziLDWdDciJwzmUld3Fumt60RLcH/nIk5lPdI0o+UXJ9NfP+WcSvvpWWroFmWqWAWWA==}
     engines: {node: '>= 4.0.0'}
 
-  ember-cli@5.10.0:
-    resolution: {integrity: sha512-Y9nihTELz3dxphn/Fvw9/Gdwe5Q13Zlsh3wa4qXyy84CHRo9FcDNb8ka8UstaUxHoCcsASS6iUq8cos2krLRdA==}
+  ember-cli@5.12.0:
+    resolution: {integrity: sha512-48ZOoUZTXsav37RIYY9gyCR35yo64mhzfv5YHtTbsZZwLv/HjvTz27X0CTvkfVQaOWHYDFekxdp9ppaKz84VNA==}
     engines: {node: '>= 18'}
     hasBin: true
 
@@ -6327,20 +6327,11 @@ packages:
   lodash._root@3.0.1:
     resolution: {integrity: sha512-O0pWuFSK6x4EXhM1dhZ8gchNtG7JMqBtrHdoUFUWXD7dJnNSUze1GuyQr5sOs0aCvgGeI3o/OJW8f4ca7FDxmQ==}
 
-  lodash.assignin@4.2.0:
-    resolution: {integrity: sha512-yX/rx6d/UTVh7sSVWVSIMjfnz95evAgDFdb1ZozC35I9mSFCkmzptOzevxjgbQUsc78NR44LVHWjsoMQXy9FDg==}
-
   lodash.camelcase@4.3.0:
     resolution: {integrity: sha512-TwuEnCnxbc3rAvhf/LbG7tJUDzhqXyFnv3dtzLOPgCG/hODL7WFnsbwktkD7yUV0RrreP/l1PALq/YSg6VvjlA==}
 
   lodash.capitalize@4.2.1:
     resolution: {integrity: sha512-kZzYOKspf8XVX5AvmQF94gQW0lejFVgb80G85bU4ZWzoJ6C03PQg3coYAUpSTpQWelrZELd3XWgHzw4Ck5kaIw==}
-
-  lodash.castarray@4.4.0:
-    resolution: {integrity: sha512-aVx8ztPv7/2ULbArGJ2Y42bG1mEQ5mGjpdvrbJcJFU3TbYybe+QlLS4pst9zV52ymy2in1KpFPiZnAOATxD4+Q==}
-
-  lodash.clonedeep@4.5.0:
-    resolution: {integrity: sha512-H5ZhCF25riFd9uB5UCkVKo61m3S/xZk1x4wA6yp/L3RFP6Z/eHH1ymQcGLo7J3GMPfm0V/7m1tryHuGVxpqEBQ==}
 
   lodash.debounce@3.1.1:
     resolution: {integrity: sha512-lcmJwMpdPAtChA4hfiwxTtgFeNAaow701wWUgVUqeD0XJF7vMXIN+bu/2FJSGxT0NUbZy9g9VFrlOFfPjl+0Ew==}
@@ -6356,9 +6347,6 @@ packages:
 
   lodash.escaperegexp@4.1.2:
     resolution: {integrity: sha512-TM9YBvyC84ZxE3rgfefxUWiQKLilstD6k7PTGt6wfbtXF8ixIJLOL3VYyV/z+ZiPLsVxAsKAFVwWlWeb2Y8Yyw==}
-
-  lodash.find@4.6.0:
-    resolution: {integrity: sha512-yaRZoAV3Xq28F1iafWN1+a0rflOej93l1DQUejs3SZ41h2O9UJBoS9aueGjPDgAl4B6tPC0NuuchLKaDQQ3Isg==}
 
   lodash.flatten@3.0.2:
     resolution: {integrity: sha512-jCXLoNcqQRbnT/KWZq2fIREHWeczrzpTR0vsycm96l/pu5hGeAntVBG0t7GuM/2wFqmnZs3d1eGptnAH2E8+xQ==}
@@ -8625,8 +8613,8 @@ packages:
     resolution: {integrity: sha512-D9Or6ayxr16dPPEkmXyGb8ow7VcQjUzuYFUxPTkx2FdSkn5Z6EC6cxQHwEGhedmE30FAJOYiAW+r7XXg6FmYOQ==}
     engines: {node: '>= 16'}
 
-  testem@3.12.0:
-    resolution: {integrity: sha512-N4eSSZaBwWQNX2TmaXbEgsz7qs5Q/GWtq2B4j5rkcYt7OfwB6pWDyC1rmYn8HNth+rV9ekRCAqWw4skId1gg6w==}
+  testem@3.15.2:
+    resolution: {integrity: sha512-mRzqZktqTCWi/rUP/RQOKXvMtuvY3lxuzBVb1xGXPnRNGMEj/1DaLGn6X447yOsz6SlWxSsZfcNuiE7fT1MOKg==}
     engines: {node: '>= 7.*'}
     hasBin: true
 
@@ -13617,10 +13605,10 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  ember-cli-dependency-checker@3.3.3(ember-cli@5.10.0(handlebars@4.7.8)(underscore@1.13.6)):
+  ember-cli-dependency-checker@3.3.3(ember-cli@5.12.0(handlebars@4.7.8)(underscore@1.13.6)):
     dependencies:
       chalk: 2.4.2
-      ember-cli: 5.10.0(handlebars@4.7.8)(underscore@1.13.6)
+      ember-cli: 5.12.0(handlebars@4.7.8)(underscore@1.13.6)
       find-yarn-workspace-root: 2.0.0
       is-git-url: 1.0.0
       resolve: 1.22.10
@@ -13955,7 +13943,7 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  ember-cli@5.10.0(handlebars@4.7.8)(underscore@1.13.6):
+  ember-cli@5.12.0(handlebars@4.7.8)(underscore@1.13.6):
     dependencies:
       '@pnpm/find-workspace-dir': 6.0.3
       broccoli: 3.5.2
@@ -13979,7 +13967,7 @@ snapshots:
       compression: 1.7.4
       configstore: 5.0.1
       console-ui: 3.1.2
-      content-tag: 1.2.2
+      content-tag: 2.0.1
       core-object: 3.1.5
       dag-map: 2.0.2
       diff: 5.2.0
@@ -14034,7 +14022,7 @@ snapshots:
       sort-package-json: 1.57.0
       symlink-or-copy: 1.3.1
       temp: 0.9.4
-      testem: 3.12.0(handlebars@4.7.8)(lodash@4.17.21)(underscore@1.13.6)
+      testem: 3.15.2(handlebars@4.7.8)(underscore@1.13.6)
       tiny-lr: 2.0.0
       tree-sync: 2.1.0
       walk-sync: 3.0.0
@@ -17027,15 +17015,9 @@ snapshots:
 
   lodash._root@3.0.1: {}
 
-  lodash.assignin@4.2.0: {}
-
   lodash.camelcase@4.3.0: {}
 
   lodash.capitalize@4.2.1: {}
-
-  lodash.castarray@4.4.0: {}
-
-  lodash.clonedeep@4.5.0: {}
 
   lodash.debounce@3.1.1:
     dependencies:
@@ -17050,8 +17032,6 @@ snapshots:
       lodash._root: 3.0.1
 
   lodash.escaperegexp@4.1.2: {}
-
-  lodash.find@4.6.0: {}
 
   lodash.flatten@3.0.2:
     dependencies:
@@ -19677,7 +19657,7 @@ snapshots:
       stringify-object-es5: 2.5.0
       theredoc: 1.0.0
 
-  testem@3.12.0(handlebars@4.7.8)(lodash@4.17.21)(underscore@1.13.6):
+  testem@3.15.2(handlebars@4.7.8)(underscore@1.13.6):
     dependencies:
       '@xmldom/xmldom': 0.8.10
       backbone: 1.6.0
@@ -19692,11 +19672,7 @@ snapshots:
       glob: 7.2.3
       http-proxy: 1.18.1
       js-yaml: 3.14.1
-      lodash.assignin: 4.2.0
-      lodash.castarray: 4.4.0
-      lodash.clonedeep: 4.5.0
-      lodash.find: 4.6.0
-      lodash.uniqby: 4.7.0
+      lodash: 4.17.21
       mkdirp: 3.0.1
       mustache: 4.2.0
       node-notifier: 10.0.1
@@ -19735,7 +19711,6 @@ snapshots:
       - just
       - liquid-node
       - liquor
-      - lodash
       - marko
       - mote
       - nunjucks
