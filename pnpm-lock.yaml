@@ -316,8 +316,8 @@ importers:
         specifier: 4.0.0
         version: 4.0.0(@embroider/core@3.4.14(@glint/template@1.4.0))
       '@glint/core':
-        specifier: 1.4.0
-        version: 1.4.0(typescript@5.5.4)
+        specifier: 1.5.2
+        version: 1.5.2(typescript@5.5.4)
       '@glint/environment-ember-loose':
         specifier: 1.4.0
         version: 1.4.0(@glimmer/component@1.1.2(@babel/core@7.24.9))(@glint/template@1.4.0)(ember-cli-htmlbars@6.3.0)(ember-modifier@4.2.0(@babel/core@7.24.9)(ember-source@5.10.2(@glimmer/component@1.1.2(@babel/core@7.24.9))(@glint/template@1.4.0)(rsvp@4.8.5)(webpack@5.94.0)))
@@ -436,8 +436,8 @@ importers:
         specifier: 1.1.2
         version: 1.1.2
       '@glint/core':
-        specifier: 1.4.0
-        version: 1.4.0(typescript@5.5.4)
+        specifier: 1.5.2
+        version: 1.5.2(typescript@5.5.4)
       '@glint/environment-ember-loose':
         specifier: 1.4.0
         version: 1.4.0(@glimmer/component@1.1.2(@babel/core@7.24.9))(@glint/template@1.4.0)(ember-cli-htmlbars@6.3.0)(ember-modifier@4.2.0(@babel/core@7.24.9)(ember-source@5.10.2(@glimmer/component@1.1.2(@babel/core@7.24.9))(@glint/template@1.4.0)(rsvp@4.8.5)(webpack@5.94.0)))
@@ -1585,8 +1585,8 @@ packages:
   '@glimmer/wire-format@0.92.0':
     resolution: {integrity: sha512-yKhfU7b3PN86iqbfKksB+F9PB/RqbVkZlcRpZWRpEL3HnZ0bJUKC9bsOJynOg77PDXuYQXkbDMfL8ngTuxk+rg==}
 
-  '@glint/core@1.4.0':
-    resolution: {integrity: sha512-nq27a/1R6kc3lsuciz8z9IZO1NQCbNkEBxf5KJI7AUrnps6RzQzmq3pmwO24zQYmFcH4sqpod8fleNIpg8YEqg==}
+  '@glint/core@1.5.2':
+    resolution: {integrity: sha512-kbEt8jBEkH65yDB20tBq/rnZl+iigmAenKQcgu1cqex6/eT6LrQ5E9QxyKtqe9S18qZv0c/LNa0qE7jwbAEKMA==}
     hasBin: true
     peerDependencies:
       typescript: '>=4.8.0'
@@ -10723,7 +10723,7 @@ snapshots:
       '@glimmer/interfaces': 0.92.0
       '@glimmer/util': 0.92.0
 
-  '@glint/core@1.4.0(typescript@5.5.4)':
+  '@glint/core@1.5.2(typescript@5.5.4)':
     dependencies:
       '@glimmer/syntax': 0.84.3
       escape-string-regexp: 4.0.0
