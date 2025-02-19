@@ -94,7 +94,7 @@
     "eslint-plugin-prettier": "5.2.3",
     "eslint-plugin-qunit": "8.1.2",
     "mocha": "10.8.2",
-    "release-it": "17.6.0",
+    "release-it": "17.11.0",
     "typescript": "5.5.4"
   },
   "peerDependencies": {
