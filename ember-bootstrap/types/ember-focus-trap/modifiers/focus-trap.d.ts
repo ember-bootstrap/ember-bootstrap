@@ -1,4 +1,5 @@
 import { ModifierLike } from '@glint/template';
+import { Options as FocusTrapOptions } from 'focus-trap';
 
 declare module '@glint/environment-ember-loose/registry' {
   export default interface Registry {
@@ -6,11 +7,7 @@ declare module '@glint/environment-ember-loose/registry' {
       Args: {
         Named: {
           shouldSelfFocus?: boolean;
-          focusTrapOptions?: {
-            clickOutsideDeactivates?: boolean;
-            fallbackFocus?: string;
-            escapeDeactivates?: boolean;
-          };
+          focusTrapOptions?: FocusTrapOptions;
         };
       };
     }>;

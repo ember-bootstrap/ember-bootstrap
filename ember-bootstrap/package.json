@@ -91,6 +91,7 @@
     "eslint-plugin-n": "16.6.2",
     "eslint-plugin-prettier": "5.2.1",
     "eslint-plugin-qunit": "8.1.1",
+    "focus-trap": "^7.6.4",
     "mocha": "10.7.0",
     "release-it": "17.6.0",
     "typescript": "5.5.4"
@@ -98,8 +99,8 @@
   "peerDependencies": {
     "@glimmer/component": "^1.0.4",
     "@glimmer/tracking": "^1.0.4",
-    "ember-source": ">=4.8.0",
-    "ember-modifier": "^3.2.7 || ^4.0.0"
+    "ember-modifier": "^3.2.7 || ^4.0.0",
+    "ember-source": ">=4.8.0"
   },
   "engines": {
     "node": "18.* || >= 20"
