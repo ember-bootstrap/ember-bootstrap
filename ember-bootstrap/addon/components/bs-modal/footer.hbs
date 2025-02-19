@@ -8,7 +8,7 @@
         <Button
           @type={{bs-default @submitButtonType "primary"}}
           @onClick={{@onSubmit}}
-          {{bs-conditional-attribute "disabled" @submitDisabled @submitDisabled}}
+          {{bs-conditional-attribute "disabled" @submitDisabled (if @submitDisabled "true" "false")}}
         >
           {{@submitTitle}}
         </Button>

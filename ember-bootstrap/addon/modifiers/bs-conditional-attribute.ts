@@ -5,7 +5,7 @@ interface Signature {
     Positional: [
       attribute: string,
       condition: boolean | undefined,
-      value: unknown,
+      value: string,
     ];
   };
   Element: Element;
@@ -17,7 +17,7 @@ export default modifier<Signature>(
     [attribute, condition, value]: Signature['Args']['Positional'],
   ) => {
     if (condition) {
-      element.setAttribute(attribute, `${value}`);
+      element.setAttribute(attribute, value);
     } else {
       element.removeAttribute(attribute);
     }
