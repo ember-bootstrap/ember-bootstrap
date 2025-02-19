@@ -700,7 +700,10 @@ export default class Modal extends Component<Signature> {
     const scrollDiv = document.createElement('div');
     scrollDiv.className = 'modal-scrollbar-measure';
     const modalEl = this.modalElement;
-    modalEl.parentNode?.insertBefore(scrollDiv, modalEl.nextSibling);
+    if (!modalEl.parentNode) {
+      return 0;
+    }
+    modalEl.parentNode.insertBefore(scrollDiv, modalEl.nextSibling);
     const scrollbarWidth = scrollDiv.offsetWidth - scrollDiv.clientWidth;
     scrollDiv.parentNode?.removeChild(scrollDiv);
     return scrollbarWidth;
