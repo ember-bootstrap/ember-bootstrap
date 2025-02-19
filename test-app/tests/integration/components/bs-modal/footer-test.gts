@@ -29,11 +29,9 @@ module('Integration | Component | bs-modal/footer', function (hooks) {
     assert
       .dom('.modal-footer button')
       .hasClass('btn-primary', 'Button is a primary button.');
-    assert.strictEqual(
-      this.element.querySelector('.modal-footer button')?.getAttribute('type'),
-      'button',
-      'Submit button is of type submit.',
-    );
+    assert
+      .dom('.modal-footer button')
+      .hasProperty('type', 'button', 'Submit button is of type submit.');
     assert
       .dom('.modal-footer button')
       .hasText('close', 'Button title is correct.');
@@ -60,26 +58,19 @@ module('Integration | Component | bs-modal/footer', function (hooks) {
     assert
       .dom('.modal-footer button:first-child')
       .hasClass(defaultButtonClass(), 'Close button is a default button.');
-    assert.strictEqual(
-      this.element
-        .querySelector('.modal-footer button:first-child')!
-        .getAttribute('type'),
-      'button',
-      'Submit button is of type submit.',
-    );
+    assert
+      .dom('.modal-footer button:first-child')
+      .hasProperty('type', 'button', 'Submit button is of type submit.');
+
     assert
       .dom('.modal-footer button:first-child')
       .hasText('close', 'Close button title is correct.');
     assert
       .dom('.modal-footer button:last-child')
       .hasClass('btn-primary', 'Submit button is a primary button.');
-    assert.strictEqual(
-      this.element
-        .querySelector('.modal-footer button:last-child')!
-        .getAttribute('type'),
-      'button',
-      'Submit button is of type button.',
-    );
+    assert
+      .dom('.modal-footer button:last-child')
+      .hasProperty('type', 'button', 'Submit button is of type button.');
     assert
       .dom('.modal-footer button:last-child')
       .hasText('submit', 'Submit button title is correct.');
@@ -162,27 +153,18 @@ module('Integration | Component | bs-modal/footer', function (hooks) {
     assert
       .dom('.modal-footer button')
       .exists({ count: 2 }, 'Modal footer has two button.');
-    assert.notOk(
-      this.element.querySelector<HTMLButtonElement>(
-        '.modal-footer button:first-child',
-      )?.disabled,
-      'Close button is not disabled.',
-    );
-    assert.ok(
-      this.element.querySelector<HTMLButtonElement>(
-        '.modal-footer button:last-child',
-      )?.disabled,
-      'Submit button is disabled.',
-    );
+    assert
+      .dom('.modal-footer button:first-child')
+      .isNotDisabled('Close button is not disabled.');
+    assert
+      .dom('.modal-footer button:last-child')
+      .isDisabled('Submit button is disabled');
 
     state.disabled = false;
     await settled();
 
-    assert.notOk(
-      this.element.querySelector<HTMLButtonElement>(
-        '.modal-footer button:last-child',
-      )?.disabled,
-      'Submit button is not disabled.',
-    );
+    assert
+      .dom('.modal-footer button:last-child')
+      .isNotDisabled('Submit button is not disabled.');
   });
 });
