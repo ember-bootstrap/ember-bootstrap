@@ -45,7 +45,7 @@
           <div class="modal-backdrop {{if this._fade "fade"}} {{if this.showModal "show"}}" {{create-ref "backdropElement"}}></div>
         {{/if}}
       </div>
-    {{else}}
+    {{else if this.destinationElement}}
       {{#in-element this.destinationElement insertBefore=null}}
         <Dialog
           {{create-ref "modalElement"}}
