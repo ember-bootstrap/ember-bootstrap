@@ -20,7 +20,7 @@ interface DropdownButtonSignature {
     /**
      * @internal
      */
-    onKeyDown: () => void;
+    onKeyDown: (event: Event) => void;
 
     /**
      * @internal

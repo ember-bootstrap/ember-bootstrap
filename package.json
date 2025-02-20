@@ -18,10 +18,10 @@
   "devDependencies": {
     "concurrently": "8.2.2",
     "husky": "9.1.7",
-    "lint-staged": "15.2.11"
+    "lint-staged": "15.4.3"
   },
   "volta": {
-    "node": "18.20.6",
+    "node": "18.20.7",
     "pnpm": "8.15.9"
   }
 }

@@ -1,9 +1,7 @@
 import { action } from '@ember/object';
 import Component from '@glimmer/component';
-import { next } from '@ember/runloop';
 import { getDestinationElement } from 'ember-bootstrap/utils/dom';
 import { ref } from 'ember-ref-bucket';
-import { tracked } from '@glimmer/tracking';
 import { getOwnConfig, macroCondition } from '@embroider/macros';
 import type { Placement as PopperPlacement } from '@popperjs/core';
 import BsDropdownMenuDividerComponent from './menu/divider';
@@ -16,10 +14,10 @@ interface DropdownMenuSignature {
   Element: HTMLDivElement;
   Args: {
     align?: 'left' | 'right';
-    dividerComponent: ComponentLike<typeof BsDropdownMenuDividerComponent>;
+    dividerComponent?: ComponentLike<typeof BsDropdownMenuDividerComponent>;
     isOpen?: boolean;
-    itemComponent: ComponentLike<typeof BsDropdownMenuItemComponent>;
-    linkToComponent: ComponentLike<BsLinkToComponent>;
+    itemComponent?: ComponentLike<typeof BsDropdownMenuItemComponent>;
+    linkToComponent?: ComponentLike<BsLinkToComponent>;
     registerChildElement: (element: HTMLDivElement, [type]: ['menu']) => void;
     renderInPlace?: boolean;
     toggleElement: HTMLAnchorElement;
