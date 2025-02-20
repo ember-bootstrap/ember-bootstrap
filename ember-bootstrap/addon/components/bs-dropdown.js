@@ -196,7 +196,7 @@ export default class Dropdown extends Component {
    * @type boolean
    * @private
    */
-  @tracked isOpen = this.args.isOpen ?? false;
+  @tracked isOpen = false;
 
   /**
    * By default, clicking on an open dropdown menu will close it. Set this property to false for the menu to stay open.
@@ -430,11 +430,6 @@ export default class Dropdown extends Component {
     );
 
     this[`${type}Element`] = null;
-  }
-
-  @action
-  updateIsOpen(open) {
-    this.isOpen = open;
   }
 
   /**

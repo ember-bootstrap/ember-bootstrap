@@ -1,9 +1,7 @@
 import { action } from '@ember/object';
 import Component from '@glimmer/component';
-import { next } from '@ember/runloop';
 import { getDestinationElement } from 'ember-bootstrap/utils/dom';
 import { ref } from 'ember-ref-bucket';
-import { tracked } from '@glimmer/tracking';
 import { getOwnConfig, macroCondition } from '@embroider/macros';
 
 /**
@@ -96,21 +94,6 @@ export default class DropdownMenu extends Component {
     }
 
     return undefined;
-  }
-
-  @tracked
-  isOpen = this.args.isOpen;
-
-  @action
-  updateIsOpen(value) {
-    // delay removing the menu from DOM to allow (delegated Ember) event to fire for the menu's children
-    // Fixes https://github.com/kaliber5/ember-bootstrap/issues/660
-    next(() => {
-      if (this.isDestroying || this.isDestroyed) {
-        return;
-      }
-      this.isOpen = value;
-    });
   }
 
   flip = true;
