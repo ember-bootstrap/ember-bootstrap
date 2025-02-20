@@ -15,6 +15,7 @@ import type EmbroiderConfig from '../utils/embroider-config';
 import BsDropdownButtonComponent, {
   type DropdownButtonSignature,
 } from './bs-dropdown/button';
+import type { ButtonSignature } from './bs-button';
 
 const ESCAPE_KEYCODE = 27; // KeyboardEvent.which value for Escape (Esc) key
 const SPACE_KEYCODE = 32; // KeyboardEvent.which value for space key
@@ -48,7 +49,7 @@ interface DropdownSignature {
     default: [
       {
         // TODO: improve typing
-        button: ComponentLike<unknown>;
+        button: ComponentLike<DropdownButtonSignature>;
         closeDropdown: () => void;
         isOpen: boolean;
         menu: ComponentLike<BsDropdownMenuComponent>;
@@ -471,7 +472,7 @@ export default class Dropdown extends Component<DropdownSignature> {
   }
 
   @action
-  registerChildElement(element: HTMLElement, [type]: ['toggle' | 'menu']) {
+  registerChildElement(element: HTMLElement, [type]: ['menu' | 'toggle']) {
     assert(
       `Unknown child element type "${type}"`,
       type === 'toggle' || type === 'menu',
@@ -499,7 +500,7 @@ export default class Dropdown extends Component<DropdownSignature> {
    * @type {String}
    * @private
    */
-  get buttonComponent() {
+  get buttonComponent(): ComponentLike<DropdownButtonSignature> {
     return this.args.buttonComponent ?? BsDropdownButtonComponent;
   }
 
@@ -508,7 +509,7 @@ export default class Dropdown extends Component<DropdownSignature> {
    * @type {String}
    * @private
    */
-  get toggleComponent() {
+  get toggleComponent(): ComponentLike<DropdownToggleSignature> {
     return this.args.toggleComponent ?? BsDropdownToggleComponent;
   }
 
@@ -517,7 +518,7 @@ export default class Dropdown extends Component<DropdownSignature> {
    * @type {String}
    * @private
    */
-  get menuComponent() {
+  get menuComponent(): ComponentLike<DropdownMenuSignature> {
     return this.args.menuComponent ?? BsDropdownMenuComponent;
   }
 }

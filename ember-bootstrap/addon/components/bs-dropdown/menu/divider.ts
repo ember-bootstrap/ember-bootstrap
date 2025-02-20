@@ -18,3 +18,4 @@ interface DropdownMenuDividerSignature {
  @public
  */
 export default templateOnly<DropdownMenuDividerSignature>();
+export { type DropdownMenuDividerSignature };

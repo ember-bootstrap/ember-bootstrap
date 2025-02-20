@@ -4,9 +4,13 @@ import { getDestinationElement } from 'ember-bootstrap/utils/dom';
 import { ref } from 'ember-ref-bucket';
 import { getOwnConfig, macroCondition } from '@embroider/macros';
 import type { Placement as PopperPlacement } from '@popperjs/core';
-import BsDropdownMenuDividerComponent from './menu/divider';
-import BsDropdownMenuItemComponent from './menu/item';
-import BsLinkToComponent from '../bs-link-to';
+import BsDropdownMenuDividerComponent, {
+  type DropdownMenuDividerSignature,
+} from './menu/divider';
+import BsDropdownMenuItemComponent, {
+  type DropdownMenuItemSignature,
+} from './menu/item';
+import BsLinkToComponent, { type BsLinkToSignature } from '../bs-link-to';
 import type { ComponentLike } from '@glint/template';
 import type EmbroiderConfig from '../../utils/embroider-config';
 
@@ -14,10 +18,10 @@ interface DropdownMenuSignature {
   Element: HTMLDivElement;
   Args: {
     align?: 'left' | 'right';
-    dividerComponent?: ComponentLike<typeof BsDropdownMenuDividerComponent>;
+    dividerComponent?: ComponentLike<DropdownMenuDividerSignature>;
     isOpen?: boolean;
-    itemComponent?: ComponentLike<typeof BsDropdownMenuItemComponent>;
-    linkToComponent?: ComponentLike<BsLinkToComponent>;
+    itemComponent?: ComponentLike<DropdownMenuItemSignature>;
+    linkToComponent?: ComponentLike<BsLinkToSignature>;
     registerChildElement: (element: HTMLDivElement, [type]: ['menu']) => void;
     renderInPlace?: boolean;
     toggleElement: HTMLAnchorElement;
@@ -36,10 +40,10 @@ interface DropdownMenuSignature {
   Blocks: {
     default: [
       {
-        divider: ComponentLike<typeof BsDropdownMenuDividerComponent>;
-        item: ComponentLike<typeof BsDropdownMenuItemComponent>;
-        linkTo: ComponentLike<BsLinkToComponent>;
-        'link-to': ComponentLike<BsLinkToComponent>;
+        divider: ComponentLike<DropdownMenuDividerSignature>;
+        item: ComponentLike<DropdownMenuItemSignature>;
+        linkTo: ComponentLike<BsLinkToSignature>;
+        'link-to': ComponentLike<BsLinkToSignature>;
       },
     ];
   };
@@ -194,7 +198,7 @@ export default class DropdownMenu extends Component<DropdownMenuSignature> {
    * @type {String}
    * @private
    */
-  get itemComponent() {
+  get itemComponent(): ComponentLike<DropdownMenuItemSignature> {
     return this.args.itemComponent ?? BsDropdownMenuItemComponent;
   }
 
@@ -203,7 +207,7 @@ export default class DropdownMenu extends Component<DropdownMenuSignature> {
    * @type {String}
    * @private
    */
-  get linkToComponent() {
+  get linkToComponent(): ComponentLike<BsLinkToSignature> {
     return this.args.linkToComponent ?? BsLinkToComponent;
   }
 
@@ -212,7 +216,7 @@ export default class DropdownMenu extends Component<DropdownMenuSignature> {
    * @type {String}
    * @private
    */
-  get dividerComponent() {
+  get dividerComponent(): ComponentLike<DropdownMenuDividerSignature> {
     return this.args.dividerComponent ?? BsDropdownMenuDividerComponent;
   }
 }

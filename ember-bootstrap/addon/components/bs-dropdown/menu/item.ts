@@ -17,3 +17,4 @@ interface DropdownMenuItemSignature {
  @public
  */
 export default templateOnly<DropdownMenuItemSignature>();
+export { type DropdownMenuItemSignature };

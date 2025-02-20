@@ -8,6 +8,14 @@ interface DropdownToggleSignature {
     isOpen?: boolean;
     onClick?: () => void;
     onKeyDown: (event: KeyboardEvent) => void;
+    registerChildElement: (
+      element: HTMLAnchorElement,
+      [type]: ['toggle'],
+    ) => void;
+    unregisterChildElement: (
+      element: HTMLAnchorElement,
+      [type]: ['toggle'],
+    ) => void;
   };
   Blocks: {
     default: [];
