@@ -246,8 +246,8 @@ importers:
         specifier: ^4.2.0
         version: 4.2.0
       chalk:
-        specifier: ^4.1.1
-        version: 4.1.2
+        specifier: ^5.0.0
+        version: 5.4.1
       ember-auto-import:
         specifier: ^2.6.3
         version: 2.10.0(@glint/template@1.5.2)(webpack@5.94.0)
@@ -484,8 +484,8 @@ importers:
         specifier: 4.2.0
         version: 4.2.0
       chalk:
-        specifier: 5.3.0
-        version: 5.3.0
+        specifier: 5.4.1
+        version: 5.4.1
       concurrently:
         specifier: 8.2.2
         version: 8.2.2
@@ -3097,10 +3097,6 @@ packages:
   chalk@4.1.2:
     resolution: {integrity: sha512-oKnbhFyRIXpUuez8iBMmyEa4nbj4IOQyuhc/wy9kY7/WVPcwIO9VA668Pu8RkO7+0G76SLROeyw9CpQ061i4mA==}
     engines: {node: '>=10'}
-
-  chalk@5.3.0:
-    resolution: {integrity: sha512-dLitG79d+GV1Nb/VYcCDFivJeK1hiukt9QjRNVOsUtTy1rR1YJsmpGGTZ3qJos+uw7WmWF4wUwBd9jxjocFC2w==}
-    engines: {node: ^12.17.0 || ^14.13 || >=16.0.0}
 
   chalk@5.4.1:
     resolution: {integrity: sha512-zgVZuo2WcZgfUEmsn6eO3kINexW8RAE4maiQ8QNs8CtpPCSyMiYsULR3HQYkm3w8FIA3SberyMJMSldGsW+U3w==}
@@ -11814,7 +11810,7 @@ snapshots:
     dependencies:
       ansi-align: 3.0.1
       camelcase: 8.0.0
-      chalk: 5.3.0
+      chalk: 5.4.1
       cli-boxes: 3.0.0
       string-width: 7.2.0
       type-fest: 4.35.0
@@ -12554,8 +12550,6 @@ snapshots:
     dependencies:
       ansi-styles: 4.3.0
       supports-color: 7.2.0
-
-  chalk@5.3.0: {}
 
   chalk@5.4.1: {}
 
@@ -13334,7 +13328,7 @@ snapshots:
 
   ember-bootstrap-power-select@5.0.0(ember-bootstrap@ember-bootstrap)(ember-power-select@7.2.0(@babel/core@7.24.9)(@glint/environment-ember-loose@1.5.2(@glimmer/component@1.1.2(@babel/core@7.24.9))(@glint/template@1.5.2)(ember-cli-htmlbars@6.3.0)(ember-modifier@4.2.0(@babel/core@7.24.9)(ember-source@5.12.0(@glimmer/component@1.1.2(@babel/core@7.24.9))(@glint/template@1.5.2)(rsvp@4.8.5)(webpack@5.94.0))))(@glint/template@1.5.2)(ember-source@5.12.0(@glimmer/component@1.1.2(@babel/core@7.24.9))(@glint/template@1.5.2)(rsvp@4.8.5)(webpack@5.94.0))(webpack@5.94.0))(ember-source@5.12.0(@glimmer/component@1.1.2(@babel/core@7.24.9))(@glint/template@1.5.2)(rsvp@4.8.5)(webpack@5.94.0)):
     dependencies:
-      chalk: 5.3.0
+      chalk: 5.4.1
       ember-bootstrap: link:ember-bootstrap
       ember-cli-babel: 7.26.11
       ember-cli-build-config-editor: 0.5.1
@@ -14379,7 +14373,7 @@ snapshots:
     dependencies:
       '@lint-todo/utils': 13.1.1
       aria-query: 5.3.0
-      chalk: 5.3.0
+      chalk: 5.4.1
       ci-info: 3.9.0
       date-fns: 2.30.0
       ember-template-imports: 3.4.2
@@ -16939,7 +16933,7 @@ snapshots:
 
   log-symbols@6.0.0:
     dependencies:
-      chalk: 5.3.0
+      chalk: 5.4.1
       is-unicode-supported: 1.3.0
 
   log-update@6.1.0:
@@ -17736,7 +17730,7 @@ snapshots:
 
   ora@8.1.1:
     dependencies:
-      chalk: 5.3.0
+      chalk: 5.4.1
       cli-cursor: 5.0.0
       cli-spinners: 2.9.2
       is-interactive: 2.0.0
@@ -19891,7 +19885,7 @@ snapshots:
   update-notifier@7.3.1:
     dependencies:
       boxen: 8.0.1
-      chalk: 5.3.0
+      chalk: 5.4.1
       configstore: 7.0.0
       is-in-ci: 1.0.0
       is-installed-globally: 1.0.0
