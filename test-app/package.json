@@ -103,7 +103,7 @@
     "sinon": "17.0.2",
     "tracked-toolbox": "2.0.0",
     "typescript": "5.5.4",
-    "webpack": "5.94.0"
+    "webpack": "5.98.0"
   },
   "engines": {
     "node": "18.* || >= 20"
