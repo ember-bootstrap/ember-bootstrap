@@ -4,6 +4,18 @@ import { assert } from '@ember/debug';
 import { getOwnConfig, macroCondition } from '@embroider/macros';
 import { tracked } from '@glimmer/tracking';
 import { next } from '@ember/runloop';
+import type { ComponentLike } from '@glint/template';
+import BsDropdownMenuComponent, {
+  type DropdownMenuSignature,
+} from './bs-dropdown/menu';
+import BsDropdownToggleComponent, {
+  type DropdownToggleSignature,
+} from './bs-dropdown/toggle';
+import type EmbroiderConfig from '../utils/embroider-config';
+import BsDropdownButtonComponent, {
+  type DropdownButtonSignature,
+} from './bs-dropdown/button';
+import type { ButtonSignature } from './bs-button';
 
 const ESCAPE_KEYCODE = 27; // KeyboardEvent.which value for Escape (Esc) key
 const SPACE_KEYCODE = 32; // KeyboardEvent.which value for space key
@@ -16,6 +28,38 @@ const SUPPORTED_KEYCODES = [
   ARROW_DOWN_KEYCODE,
   ARROW_UP_KEYCODE,
 ];
+
+interface DropdownSignature {
+  Element: Element;
+  Args: {
+    buttonComponent?: ComponentLike<DropdownButtonSignature>;
+    closeOnMenuClick?: boolean;
+    direction?: 'down' | 'up' | 'left' | 'right';
+    htmlTag?: string;
+    isOpen?: boolean;
+    menuComponent?: ComponentLike<DropdownMenuSignature>;
+    onHide: () => undefined | false;
+    onShow: () => void;
+    toggleComponent?: ComponentLike<DropdownToggleSignature>;
+
+    /** private */
+    inNav?: boolean;
+  };
+  Blocks: {
+    default: [
+      {
+        // TODO: improve typing
+        button: ComponentLike<DropdownButtonSignature>;
+        closeDropdown: () => void;
+        isOpen: boolean;
+        menu: ComponentLike<BsDropdownMenuComponent>;
+        openDropdown: () => void;
+        toggle: ComponentLike<BsDropdownToggleComponent>;
+        toggleDropdown: () => void;
+      },
+    ];
+  };
+}
 
 /**
   Bootstrap style [dropdown menus](http://getbootstrap.com/components/#dropdowns), consisting
@@ -175,7 +219,7 @@ const SUPPORTED_KEYCODES = [
   @extends Component
   @public
 s*/
-export default class Dropdown extends Component {
+export default class Dropdown extends Component<DropdownSignature> {
   /**
    * The tag name used for the dropdown element.
    *
@@ -245,7 +289,7 @@ export default class Dropdown extends Component {
    * @private
    */
   get containerClass() {
-    if (macroCondition(getOwnConfig().isBS5)) {
+    if (macroCondition(getOwnConfig<EmbroiderConfig>().isBS5)) {
       if (this.direction === 'left') {
         return 'dropstart';
       } else if (this.direction === 'right') {
@@ -261,7 +305,7 @@ export default class Dropdown extends Component {
    * @private
    */
   @tracked
-  toggleElement = null;
+  toggleElement: HTMLElement | null = null;
 
   /**
    * The DOM element of the `.dropdown-menu` element
@@ -270,7 +314,7 @@ export default class Dropdown extends Component {
    * @private
    */
   @tracked
-  menuElement = null;
+  menuElement: HTMLElement | null = null;
 
   /**
    * Action is called when dropdown is about to be shown
@@ -323,13 +367,19 @@ export default class Dropdown extends Component {
    * @protected
    */
   @action
-  closeHandler(e) {
-    let { target } = e;
-    let { toggleElement, menuElement } = this;
+  closeHandler(e: Event) {
+    const { target } = e;
+    const { toggleElement, menuElement } = this;
 
+    assert('Event must have a target', target);
+    assert(
+      'Event target must be an HTML element',
+      target instanceof HTMLElement,
+    );
     if (
       !this.isDestroyed &&
-      ((e.type === 'keyup' &&
+      ((e instanceof KeyboardEvent &&
+        e.type === 'keyup' &&
         e.which === TAB_KEYCODE &&
         menuElement &&
         !menuElement.contains(target)) ||
@@ -344,7 +394,14 @@ export default class Dropdown extends Component {
   }
 
   @action
-  handleKeyEvent(event) {
+  handleKeyEvent(event: Event) {
+    assert('Event must have a target', event.target);
+    assert(
+      'Event target must be an HTMLElement',
+      event.target instanceof HTMLElement,
+    );
+    assert('Event must be a keyboard event', event instanceof KeyboardEvent);
+
     // If not input/textarea:
     //  - And not a key in REGEXP_KEYDOWN => not a dropdown command
     // If input/textarea:
@@ -358,7 +415,7 @@ export default class Dropdown extends Component {
           (event.which !== ESCAPE_KEYCODE &&
             ((event.which !== ARROW_DOWN_KEYCODE &&
               event.which !== ARROW_UP_KEYCODE) ||
-              this.menuElement.contains(event.target)))
+              this.menuElement?.contains(event.target)))
         : !SUPPORTED_KEYCODES.includes(event.which)
     ) {
       return;
@@ -375,14 +432,15 @@ export default class Dropdown extends Component {
       event.which === SPACE_KEYCODE
     ) {
       this.closeDropdown();
-      this.toggleElement.focus();
+      this.toggleElement?.focus();
       return;
     }
 
-    let items = [].slice.call(
+    assert('Menu element must be set', this.menuElement);
+    const items = Array.from(
       this.menuElement.querySelectorAll(
         '.dropdown-item:not(.disabled):not(:disabled)',
-      ),
+      ) as NodeListOf<HTMLElement>,
     );
 
     if (items.length === 0) {
@@ -390,6 +448,10 @@ export default class Dropdown extends Component {
     }
 
     let index = items.indexOf(event.target);
+    assert(
+      'Event target must be an item of the dropdown which is not disabled',
+      index,
+    );
 
     if (event.which === ARROW_UP_KEYCODE && index > 0) {
       // Up
@@ -405,11 +467,12 @@ export default class Dropdown extends Component {
       index = 0;
     }
 
-    items[index].focus();
+    assert('Element targeted by keyboard navigation must exist', items[index]);
+    items[index]?.focus();
   }
 
   @action
-  registerChildElement(element, [type]) {
+  registerChildElement(element: HTMLElement, [type]: ['menu' | 'toggle']) {
     assert(
       `Unknown child element type "${type}"`,
       type === 'toggle' || type === 'menu',
@@ -423,7 +486,7 @@ export default class Dropdown extends Component {
   }
 
   @action
-  unregisterChildElement(element, [type]) {
+  unregisterChildElement(element: HTMLElement, [type]: ['toggle' | 'menu']) {
     assert(
       `Unknown child element type "${type}"`,
       type === 'toggle' || type === 'menu',
@@ -437,16 +500,25 @@ export default class Dropdown extends Component {
    * @type {String}
    * @private
    */
+  get buttonComponent(): ComponentLike<DropdownButtonSignature> {
+    return this.args.buttonComponent ?? BsDropdownButtonComponent;
+  }
 
   /**
    * @property toggleComponent
    * @type {String}
    * @private
    */
+  get toggleComponent(): ComponentLike<DropdownToggleSignature> {
+    return this.args.toggleComponent ?? BsDropdownToggleComponent;
+  }
 
   /**
    * @property menuComponent
    * @type {String}
    * @private
    */
+  get menuComponent(): ComponentLike<DropdownMenuSignature> {
+    return this.args.menuComponent ?? BsDropdownMenuComponent;
+  }
 }

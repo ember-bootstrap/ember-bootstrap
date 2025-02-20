@@ -2,7 +2,10 @@ import '@glint/environment-ember-loose';
 
 import type EmberBootstrapRegistry from 'ember-bootstrap/template-registry';
 import type { EmbroiderMacrosRegistry } from '@embroider/macros';
+import type { EmbroiderUtilRegistry } from '@embroider/util';
 import type RenderModifiersRegistry from '@ember/render-modifiers/template-registry';
+import type EmberElementHelperRegistry from 'ember-element-helper/template-registry';
+import type EmberPopperModifierRegistry from 'ember-popper-modifier/template-registry';
 import type EmberStyleModifierRegistry from 'ember-style-modifier/template-registry';
 import type defaultHelper from 'ember-bootstrap/helpers/bs-default';
 import type sizeClassHelper from 'ember-bootstrap/helpers/bs-size-class';
@@ -23,7 +26,10 @@ type macroGetOwnConfig = HelperLike<{
 declare module '@glint/environment-ember-loose/registry' {
   export default interface Registry
     extends EmberBootstrapRegistry,
+      EmberElementHelperRegistry,
+      EmberPopperModifierRegistry,
       EmberStyleModifierRegistry,
+      EmbroiderUtilRegistry,
       RenderModifiersRegistry {
     'bs-progress/bar': typeof BsProgressBar;
     'bs-default': typeof defaultHelper;
