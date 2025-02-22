@@ -1,4 +1,3 @@
-{{! @glint-nocheck }}
 {{did-insert-helper this.handleVisibilityChanges}}
 {{did-update-helper this.handleVisibilityChanges @open}}
 
@@ -12,7 +11,7 @@
     {{on-window "resize" this.adjustDialog}}
   {{/unless}}
 
-  {{#let (component (ensure-safe-component (bs-default @dialogComponent (component "bs-modal/dialog")))
+  {{#let (component (ensure-safe-component this.dialogComponent)
     onClose=this.close
     fade=this._fade
     showModal=this.showModal
@@ -33,9 +32,9 @@
       >
         {{yield
           (hash
-            header=(component (ensure-safe-component (bs-default @headerComponent (component "bs-modal/header"))) onClose=this.close)
-            body=(ensure-safe-component (bs-default @bodyComponent (component "bs-modal/body")))
-            footer=(component (ensure-safe-component (bs-default @footerComponent (component "bs-modal/footer"))) onClose=this.close onSubmit=this.doSubmit)
+            header=(component (ensure-safe-component this.headerComponent) onClose=this.close)
+            body=(ensure-safe-component this.bodyComponent)
+            footer=(component (ensure-safe-component this.footerComponent) onClose=this.close onSubmit=this.doSubmit)
             close=this.close
             submit=this.doSubmit
           )
@@ -46,7 +45,7 @@
           <div class="modal-backdrop {{if this._fade "fade"}} {{if this.showModal "show"}}" {{create-ref "backdropElement"}}></div>
         {{/if}}
       </div>
-    {{else}}
+    {{else if this.destinationElement}}
       {{#in-element this.destinationElement insertBefore=null}}
         <Dialog
           {{create-ref "modalElement"}}
@@ -54,9 +53,9 @@
         >
           {{yield
             (hash
-              header=(component (ensure-safe-component (bs-default @headerComponent (component "bs-modal/header"))) onClose=this.close)
-              body=(ensure-safe-component (bs-default @bodyComponent (component "bs-modal/body")))
-              footer=(component (ensure-safe-component (bs-default @footerComponent (component "bs-modal/footer"))) onClose=this.close onSubmit=this.doSubmit)
+              header=(component (ensure-safe-component this.headerComponent) onClose=this.close)
+              body=(ensure-safe-component this.bodyComponent)
+              footer=(component (ensure-safe-component this.footerComponent) onClose=this.close onSubmit=this.doSubmit)
               close=this.close
               submit=this.doSubmit
             )

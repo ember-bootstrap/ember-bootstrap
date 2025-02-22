@@ -3,20 +3,70 @@ import { assert } from '@ember/debug';
 import Component from '@glimmer/component';
 import { next, schedule } from '@ember/runloop';
 import { inject as service } from '@ember/service';
-import transitionEnd from 'ember-bootstrap/utils/transition-end';
-import { getDestinationElement } from 'ember-bootstrap/utils/dom';
-import usesTransition from 'ember-bootstrap/utils/decorators/uses-transition';
-import isFastBoot from 'ember-bootstrap/utils/is-fastboot';
+import transitionEnd from '../utils/transition-end';
+import { getDestinationElement } from '../utils/dom';
+import usesTransition from '../utils/decorators/uses-transition';
+import isFastBoot from '../utils/is-fastboot';
 import arg from '../utils/decorators/arg';
 import { cached, tracked } from '@glimmer/tracking';
 import { ref } from 'ember-ref-bucket';
+import ModalHeader, { type HeaderSignature } from './bs-modal/header';
+import ModalDialog, {
+  type DialogSignature,
+  type ModalFullscreen,
+  type ModalSize,
+} from './bs-modal/dialog';
+import ModalBody, { type BodySignature } from './bs-modal/body';
+import ModalFooter, { type FooterSignature } from './bs-modal/footer';
+import type { ComponentLike } from '@glint/template';
 
 function nextRunloop() {
-  return new Promise((resolve) => next(resolve));
+  return new Promise((resolve) => next(resolve, undefined));
 }
 
 function afterRender() {
-  return new Promise((resolve) => schedule('afterRender', resolve));
+  return new Promise((resolve) => schedule('afterRender', resolve, undefined));
+}
+
+export type ModalPosition = 'top' | 'center' | null;
+
+interface Signature {
+  Args: {
+    backdrop?: boolean;
+    backdropClose?: boolean;
+    backdropTransitionDuration?: number;
+    fade?: boolean;
+    fullscreen?: ModalFullscreen;
+    keyboard?: boolean;
+    onHide?: () => boolean;
+    onHidden?: () => void;
+    open?: boolean;
+    onShow?: () => void;
+    onShown?: () => void;
+    onSubmit?: () => void;
+    position?: ModalPosition;
+    renderInPlace?: boolean;
+    scrollable?: boolean;
+    size?: ModalSize;
+    transitionDuration?: number;
+
+    dialogComponent?: ComponentLike<DialogSignature>;
+    headerComponent?: ComponentLike<HeaderSignature>;
+    bodyComponent?: ComponentLike<BodySignature>;
+    footerComponent?: ComponentLike<FooterSignature>;
+  };
+  Blocks: {
+    default: [
+      {
+        header: ComponentLike<HeaderSignature>;
+        body: ComponentLike<BodySignature>;
+        footer: ComponentLike<FooterSignature>;
+        close: () => void;
+        submit: () => void;
+      },
+    ];
+  };
+  Element: HTMLElement;
 }
 
 /**
@@ -61,9 +111,8 @@ function afterRender() {
   @extends Glimmer.Component
   @public
 */
-export default class Modal extends Component {
-  @service('-document')
-  document;
+export default class Modal extends Component<Signature> {
+  @service('-document') declare document: Document;
 
   /**
    * @property _isOpen
@@ -81,9 +130,23 @@ export default class Modal extends Component {
    */
 
   get _fade() {
-    let isFB = isFastBoot(this);
+    const isFB = isFastBoot(this);
     return this.args.fade === undefined ? !isFB : this.args.fade;
   }
+
+  /**
+   * Visibility of the modal. Toggle to show/hide with CSS transitions.
+   *
+   * When the modal is closed by user interaction this property will not update by using two-way bindings in order
+   * to follow DDAU best practices. If you want to react to such changes, subscribe to the `onHide` action
+   *
+   * @property open
+   * @type boolean
+   * @default true
+   * @public
+   */
+  @arg
+  open = true;
 
   /**
    * Used to apply Bootstrap's visibility classes.
@@ -113,7 +176,7 @@ export default class Modal extends Component {
    * @private
    */
   @tracked
-  paddingLeft;
+  paddingLeft?: number;
 
   /**
    * @property paddingRight
@@ -121,21 +184,7 @@ export default class Modal extends Component {
    * @private
    */
   @tracked
-  paddingRight;
-
-  /**
-   * Visibility of the modal. Toggle to show/hide with CSS transitions.
-   *
-   * When the modal is closed by user interaction this property will not update by using two-way bindings in order
-   * to follow DDAU best practices. If you want to react to such changes, subscribe to the `onHide` action
-   *
-   * @property open
-   * @type boolean
-   * @default true
-   * @public
-   */
-  @arg
-  open = true;
+  paddingRight?: number;
 
   /**
    * Use a semi-transparent modal background to hide the rest of the page.
@@ -301,7 +350,7 @@ export default class Modal extends Component {
    * @private
    */
   @usesTransition('_fade')
-  usesTransition;
+  declare usesTransition: boolean;
 
   destinationElement = getDestinationElement(this);
 
@@ -313,7 +362,7 @@ export default class Modal extends Component {
    * @readonly
    * @private
    */
-  @ref('modalElement') modalElement;
+  @ref('modalElement') declare modalElement: HTMLElement;
 
   /**
    * The DOM element of the backdrop element.
@@ -323,7 +372,7 @@ export default class Modal extends Component {
    * @readonly
    * @private
    */
-  @ref('backdropElement') backdropElement;
+  @ref('backdropElement') declare backdropElement: HTMLElement;
 
   /**
    * @type boolean
@@ -386,6 +435,15 @@ export default class Modal extends Component {
    * @public
    */
 
+  /**
+   * @private
+   */
+  bodyIsOverflowing = false;
+  /**
+   * @private
+   */
+  _originalBodyPad: string = '';
+
   @action
   close() {
     if (this.args.onHide?.() !== false) {
@@ -395,10 +453,10 @@ export default class Modal extends Component {
 
   @action
   doSubmit() {
-    let forms = this.modalElement.querySelectorAll('.modal-body form');
+    const forms = this.modalElement.querySelectorAll('.modal-body form');
     if (forms.length > 0) {
       // trigger submit event on body forms
-      let event = document.createEvent('Events');
+      const event = document.createEvent('Events');
       event.initEvent('submit', true, true);
       Array.prototype.slice
         .call(forms)
@@ -557,7 +615,7 @@ export default class Modal extends Component {
    */
   @action
   adjustDialog() {
-    let modalIsOverflowing =
+    const modalIsOverflowing =
       this.modalElement.scrollHeight > document.documentElement.clientHeight;
     this.paddingLeft =
       !this.bodyIsOverflowing && modalIsOverflowing
@@ -592,10 +650,10 @@ export default class Modal extends Component {
    * @private
    */
   setScrollbar() {
-    let bodyPad = parseInt(document.body.style.paddingRight || 0, 10);
+    const bodyPad = parseInt(document.body.style.paddingRight || '0', 10);
     this._originalBodyPad = document.body.style.paddingRight || '';
     if (this.bodyIsOverflowing) {
-      document.body.style.paddingRight = bodyPad + this.scrollbarWidth;
+      document.body.style.paddingRight = `${bodyPad + this.scrollbarWidth}`;
     }
   }
 
@@ -611,9 +669,9 @@ export default class Modal extends Component {
     // special handling for FastBoot, where real `document` is not available
     if (isFastBoot(this)) {
       // a SimpleDOM instance with just a subset of the DOM API!
-      let document = this.document;
+      const document = this.document;
 
-      let existingClasses = document.body.getAttribute('class') || '';
+      const existingClasses = document.body.getAttribute('class') || '';
       if (!existingClasses.includes('modal-open')) {
         document.body.setAttribute('class', `modal-open ${existingClasses}`);
       }
@@ -639,17 +697,36 @@ export default class Modal extends Component {
    */
   @cached
   get scrollbarWidth() {
-    let scrollDiv = document.createElement('div');
+    const scrollDiv = document.createElement('div');
     scrollDiv.className = 'modal-scrollbar-measure';
-    let modalEl = this.modalElement;
+    const modalEl = this.modalElement;
+    if (!modalEl.parentNode || !scrollDiv.parentNode) {
+      return 0;
+    }
     modalEl.parentNode.insertBefore(scrollDiv, modalEl.nextSibling);
-    let scrollbarWidth = scrollDiv.offsetWidth - scrollDiv.clientWidth;
+    const scrollbarWidth = scrollDiv.offsetWidth - scrollDiv.clientWidth;
     scrollDiv.parentNode.removeChild(scrollDiv);
     return scrollbarWidth;
   }
 
-  willDestroy() {
-    super.willDestroy(...arguments);
+  get dialogComponent() {
+    return this.args.dialogComponent ?? ModalDialog;
+  }
+
+  get headerComponent() {
+    return this.args.headerComponent ?? ModalHeader;
+  }
+
+  get footerComponent() {
+    return this.args.footerComponent ?? ModalFooter;
+  }
+
+  get bodyComponent() {
+    return this.args.bodyComponent ?? ModalBody;
+  }
+
+  willDestroy(...rest: Parameters<Component['willDestroy']>) {
+    super.willDestroy(...rest);
 
     this.removeBodyClass();
 

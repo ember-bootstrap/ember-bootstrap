@@ -93,6 +93,7 @@
     "eslint-plugin-n": "16.6.2",
     "eslint-plugin-prettier": "5.2.3",
     "eslint-plugin-qunit": "8.1.2",
+    "focus-trap": "7.6.4",
     "mocha": "10.8.2",
     "release-it": "17.11.0",
     "typescript": "5.7.3"

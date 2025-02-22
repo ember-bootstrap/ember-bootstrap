@@ -1,1 +1,3 @@
-export function getDestinationElement(owner: object): Element;
+export function getDestinationElement(
+  owner: object,
+): Element | null | undefined;

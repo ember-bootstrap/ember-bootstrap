@@ -6,15 +6,47 @@ import { ref } from 'ember-ref-bucket';
 import { tracked } from '@glimmer/tracking';
 import { guidFor } from '@ember/object/internals';
 
-/**
- Internal component for modal's markup and event handling. Should not be used directly.
+export type ModalSize = 'sm' | 'lg' | 'xl' | null;
+export type ModalFullscreen =
+  | 'sm'
+  | 'md'
+  | 'lg'
+  | 'xl'
+  | 'xxl'
+  | null
+  | false
+  | true;
 
- @class ModalDialog
- @namespace Components
- @extends Glimmer.Component
- @private
+export interface DialogSignature {
+  Args: {
+    backdropClose?: boolean;
+    centered?: boolean;
+    fade?: boolean;
+    fullscreen?: ModalFullscreen;
+    inDom?: boolean;
+    keyboard?: boolean;
+    onClose?: () => void;
+    paddingLeft?: number;
+    paddingRight?: number;
+    scrollable?: boolean;
+    showModal?: boolean;
+    size?: ModalSize;
+  };
+  Blocks: {
+    default: [];
+  };
+  Element: HTMLDivElement;
+}
+
+/**
+ * Internal component for modal's markup and event handling. Should not be used directly.
+ *
+ * @class ModalDialog
+ * @namespace Components
+ * @extends Glimmer.Component
+ * @private
  */
-export default class ModalDialog extends Component {
+export default class ModalDialog extends Component<DialogSignature> {
   /**
    * @property id
    * @type null | HTMLElement
@@ -30,7 +62,7 @@ export default class ModalDialog extends Component {
    * @private
    */
   get sizeClass() {
-    let size = this.args.size;
+    const size = this.args.size;
     return isBlank(size) ? null : `modal-${size}`;
   }
 
@@ -43,7 +75,7 @@ export default class ModalDialog extends Component {
    * @private
    */
   @tracked
-  titleId = null;
+  titleId: string | null = null;
 
   /**
    * Gets or sets the id of the title element for aria accessibility tags
@@ -52,9 +84,9 @@ export default class ModalDialog extends Component {
    * @private
    */
   @action
-  getOrSetTitleId(modalNode) {
-    //Title element may be set by user so we have to try and find it to set the id
-    let nodeId = null;
+  getOrSetTitleId(modalNode: Element) {
+    // Title element may be set by user, so we have to try and find it to set the id
+    let nodeId: string | null = null;
 
     if (modalNode) {
       const titleNode = modalNode.querySelector('.modal-title');
@@ -72,9 +104,9 @@ export default class ModalDialog extends Component {
   }
 
   @action
-  setInitialFocus(element) {
-    let autofocus = element && element.querySelector('[autofocus]');
-    if (autofocus) {
+  setInitialFocus(element: HTMLElement) {
+    const autofocus = element && element.querySelector('[autofocus]');
+    if (autofocus instanceof HTMLElement) {
       next(() => autofocus.focus());
     }
   }
@@ -97,7 +129,7 @@ export default class ModalDialog extends Component {
    * @default null
    * @private
    */
-  mouseDownElement = null;
+  mouseDownElement: EventTarget | null = null;
 
   /**
    * @event onClose
@@ -105,15 +137,15 @@ export default class ModalDialog extends Component {
    */
 
   @action
-  handleKeyDown(e) {
-    let code = e.keyCode || e.which;
+  handleKeyDown(e: KeyboardEvent) {
+    const code = e.keyCode || e.which;
     if (code === 27 && this.args.keyboard) {
       this.args.onClose?.();
     }
   }
 
   @action
-  handleClick(e) {
+  handleClick(e: MouseEvent) {
     if (this.ignoreBackdropClick) {
       this.ignoreBackdropClick = false;
       return;
@@ -125,12 +157,12 @@ export default class ModalDialog extends Component {
   }
 
   @action
-  handleMouseDown(e) {
+  handleMouseDown(e: MouseEvent) {
     this.mouseDownElement = e.target;
   }
 
   @action
-  handleMouseUp(e) {
+  handleMouseUp(e: MouseEvent) {
     if (this.mouseDownElement !== this._element && e.target === this._element) {
       this.ignoreBackdropClick = true;
     }
