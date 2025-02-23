@@ -3,6 +3,7 @@ import '@glint/environment-ember-loose';
 import type EmberBootstrapRegistry from 'ember-bootstrap/template-registry';
 import type { EmbroiderMacrosRegistry } from '@embroider/macros';
 import type { EmbroiderUtilRegistry } from '@embroider/util';
+import type EmberElementHelperRegistry from 'ember-element-helper/template-registry';
 import type RenderModifiersRegistry from '@ember/render-modifiers/template-registry';
 import type RenderHelpersRegistry from 'ember-render-helpers/template-registry';
 import type EmberStyleModifierRegistry from 'ember-style-modifier/template-registry';
@@ -34,6 +35,7 @@ type macroGetOwnConfig = HelperLike<{
 declare module '@glint/environment-ember-loose/registry' {
   export default interface Registry
     extends EmberBootstrapRegistry,
+      EmberElementHelperRegistry,
       EmberStyleModifierRegistry,
       EmbroiderUtilRegistry,
       RenderModifiersRegistry,
