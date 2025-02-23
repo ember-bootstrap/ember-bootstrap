@@ -5,6 +5,25 @@ import { later } from '@ember/runloop';
 import usesTransition from 'ember-bootstrap/utils/decorators/uses-transition';
 import arg from 'ember-bootstrap/utils/decorators/arg';
 
+interface BsAlertSignature {
+  Args: {
+    dismissible?: boolean;
+    fade?: boolean;
+    fadeDuration?: number;
+    headerTag?: string;
+    onDismiss?: () => boolean;
+    onDismissed?: () => void;
+    type?: string;
+    visible?: boolean;
+  };
+  Blocks: {
+    body: [];
+    default: [];
+    header: [];
+  };
+  Element: HTMLDivElement;
+}
+
 /**
   Implements [Bootstrap alerts](http://getbootstrap.com/components/#alerts)
 
@@ -46,7 +65,7 @@ import arg from 'ember-bootstrap/utils/decorators/arg';
   @extends Glimmer.Component
   @public
 */
-export default class Alert extends Component {
+export default class Alert extends Component<BsAlertSignature> {
   /**
    * A dismissible alert will have a close button in the upper right corner, that the user can click to dismiss
    * the alert.
@@ -139,7 +158,7 @@ export default class Alert extends Component {
    * @private
    */
   @usesTransition('fade')
-  usesTransition;
+  declare usesTransition: boolean;
 
   /**
    * The action to be sent after the alert has been dismissed (including the CSS transition).
