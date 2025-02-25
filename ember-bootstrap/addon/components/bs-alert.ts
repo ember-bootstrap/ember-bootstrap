@@ -140,6 +140,15 @@ export default class Alert extends Component<BsAlertSignature> {
   fadeDuration = 150;
 
   /**
+   * HTML tag to be used for the header
+   *
+   * @property headerTag
+   * @type string
+   * @default 'h4'
+   * @public
+   */
+
+  /**
    * Property for type styling
    *
    * For the available types see the [Bootstrap docs](https://getbootstrap.com/docs/4.3/components/alerts/)
