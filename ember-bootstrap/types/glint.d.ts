@@ -16,6 +16,9 @@ import type BsConditionalAttribute from 'ember-bootstrap/modifiers/bs-conditiona
 
 import type { HelperLike } from '@glint/template';
 import type { EmberBootstrapMacrosConfig } from './macros-config';
+import type BsAccordionItem from 'ember-bootstrap/components/bs-accordion/item';
+import type BsAccordionItemBody from 'ember-bootstrap/components/bs-accordion/item/body';
+import type BsAccordionItemTitle from 'ember-bootstrap/components/bs-accordion/item/title';
 import type BsButton from 'ember-bootstrap/components/bs-button';
 import type BsModalHeaderClose from 'ember-bootstrap/components/bs-modal/header/close';
 import type BsModalHeaderTitle from 'ember-bootstrap/components/bs-modal/header/title';
@@ -46,6 +49,10 @@ declare module '@glint/environment-ember-loose/registry' {
     'bs-size-class': typeof sizeClassHelper;
     'bs-type-class': typeof typeClassHelper;
     'bs-conditional-attribute': typeof BsConditionalAttribute;
+
+    'bs-accordion/item': typeof BsAccordionItem;
+    'bs-accordion/item/body': typeof BsAccordionItemBody;
+    'bs-accordion/item/title': typeof BsAccordionItemTitle;
     'bs-button': typeof BsButton;
     'bs-modal/header/close': typeof BsModalHeaderClose;
     'bs-modal/header/title': typeof BsModalHeaderTitle;

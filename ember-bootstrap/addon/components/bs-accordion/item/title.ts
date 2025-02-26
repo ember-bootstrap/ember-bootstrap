@@ -1,6 +1,18 @@
 import { action } from '@ember/object';
 import Component from '@glimmer/component';
 
+export interface TitleSignature {
+  Args: {
+    controls?: string;
+    collapsed?: boolean;
+    disabled?: boolean;
+    onClick?: () => void;
+  };
+  Blocks: {
+    default: [];
+  };
+  Element: HTMLHeadingElement;
+}
 /**
  Component for an accordion item title.
 
@@ -11,7 +23,7 @@ import Component from '@glimmer/component';
  @extends Glimmer.Component
  @public
  */
-export default class AccordionItemTitle extends Component {
+export default class AccordionItemTitle extends Component<TitleSignature> {
   /**
    * @property collapsed
    * @type boolean
@@ -30,7 +42,7 @@ export default class AccordionItemTitle extends Component {
    */
 
   @action
-  handleClick(e) {
+  handleClick(e: Event) {
     e.preventDefault();
     if (!this.args.disabled) {
       this.args.onClick?.();
