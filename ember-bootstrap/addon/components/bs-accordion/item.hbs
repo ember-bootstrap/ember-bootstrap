@@ -1,4 +1,3 @@
-{{! @glint-nocheck }}
 {{#let
   (component (ensure-safe-component (bs-default @titleComponent (component "bs-accordion/item/title"))) collapsed=this.collapsed disabled=@disabled onClick=(fn (bs-default @onClick (bs-noop)) this.value))
   (component (ensure-safe-component (bs-default @bodyComponent (component "bs-accordion/item/body"))) collapsed=this.collapsed)
@@ -22,7 +21,12 @@ as |Title Body titleId collapsableId|
         {{@title}}
       </Title>
       <Body @collapsableId={{collapsableId}} @describedby={{titleId}}>
-        {{yield}}
+        {{yield
+          (hash
+            title=Title
+            body=Body
+          )
+        }}
       </Body>
     {{/if}}
   </div>

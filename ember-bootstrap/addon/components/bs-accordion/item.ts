@@ -1,6 +1,30 @@
 import Component from '@glimmer/component';
 import { guidFor } from '@ember/object/internals';
 import arg from '../../utils/decorators/arg';
+import type { ComponentLike } from '@glint/template';
+import type { TitleSignature } from './item/title';
+import type { BodySignature } from './item/body';
+
+export interface ItemSignature {
+  Args: {
+    bodyComponent?: ComponentLike<BodySignature>;
+    disabled?: boolean;
+    onClick?: (newValue?: unknown) => void;
+    selected?: unknown;
+    title?: string;
+    titleComponent?: ComponentLike<TitleSignature>;
+    value?: unknown;
+  };
+  Blocks: {
+    default: [
+      {
+        title: ComponentLike<TitleSignature>;
+        body: ComponentLike<BodySignature>;
+      },
+    ];
+  };
+  Element: HTMLDivElement;
+}
 
 /**
  A collapsible/expandable item within an accordion
@@ -12,7 +36,7 @@ import arg from '../../utils/decorators/arg';
  @extends Ember.Component
  @public
  */
-export default class AccordionItem extends Component {
+export default class AccordionItem extends Component<ItemSignature> {
   /**
    * The title of the accordion item, displayed as a .panel-title element
    *
@@ -28,7 +52,7 @@ export default class AccordionItem extends Component {
    * @public
    */
   @arg
-  value = guidFor(this);
+  value: unknown = guidFor(this);
 
   /**
    * @property selected

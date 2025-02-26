@@ -1,6 +1,25 @@
 import { action } from '@ember/object';
 import Component from '@glimmer/component';
 import { tracked } from '@glimmer/tracking';
+import type { ComponentLike } from '@glint/template';
+import AccordionItem, { type ItemSignature } from './bs-accordion/item';
+
+interface AccordionSignature {
+  Args: {
+    itemComponent?: ComponentLike<ItemSignature>;
+    selected?: unknown;
+    onChange?: (newValue: unknown, oldValue: unknown) => boolean;
+  };
+  Blocks: {
+    default: [
+      {
+        item: ComponentLike<ItemSignature>;
+        change: (newValue: unknown) => void;
+      },
+    ];
+  };
+  Element: HTMLDivElement;
+}
 
 /**
   Bootstrap-style [accordion group](http://getbootstrap.com/javascript/#collapse-example-accordion),
@@ -37,7 +56,7 @@ import { tracked } from '@glimmer/tracking';
   @extends Glimmer.Component
   @public
 */
-export default class Accordion extends Component {
+export default class Accordion extends Component<AccordionSignature> {
   /**
    * The value of the currently selected accordion item. Set this to change selection programmatically.
    *
@@ -55,10 +74,14 @@ export default class Accordion extends Component {
    */
 
   @tracked
-  _isSelected = this.args.selected;
-  _isSelectedNonTracked = this.args.selected;
+  _isSelected?: unknown = this.args.selected;
+  _isSelectedNonTracked?: unknown = this.args.selected;
 
-  _prevSelected = this.args.selected;
+  _prevSelected?: unknown = this.args.selected;
+
+  get itemComponent(): ComponentLike<ItemSignature> {
+    return this.args.itemComponent ?? AccordionItem;
+  }
 
   /**
    * The value of the currently selected accordion item
@@ -66,7 +89,7 @@ export default class Accordion extends Component {
    * @property isSelected
    * @private
    */
-  get isSelected() {
+  get isSelected(): unknown {
     // ideally we would have used @localCopy here, but unfortunately this fails for Ember 3.16 in this special case
     // see https://github.com/pzuraq/tracked-toolbox/issues/17
     // So don't look at this, it is going to get ugly...
@@ -79,7 +102,7 @@ export default class Accordion extends Component {
 
     return this._isSelectedNonTracked;
   }
-  set isSelected(value) {
+  set isSelected(value: unknown) {
     this._isSelectedNonTracked = value;
     this._isSelected = value;
   }
@@ -97,8 +120,8 @@ export default class Accordion extends Component {
    */
 
   @action
-  doChange(newValue) {
-    let oldValue = this.isSelected;
+  doChange(newValue?: unknown) {
+    const oldValue = this.isSelected;
     if (oldValue === newValue) {
       newValue = null;
     }

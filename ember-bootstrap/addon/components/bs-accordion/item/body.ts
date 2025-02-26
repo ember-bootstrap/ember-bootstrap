@@ -16,4 +16,15 @@
  */
 import templateOnly from '@ember/component/template-only';
 
-export default templateOnly();
+export interface BodySignature {
+  Args: {
+    collapsableId?: string;
+    collapsed?: boolean;
+    describedby?: string;
+  };
+  Blocks: {
+    default: [];
+  };
+}
+
+export default templateOnly<BodySignature>();

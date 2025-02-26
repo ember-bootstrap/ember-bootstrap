@@ -21,12 +21,6 @@ module('Integration | Component | bs-accordion', function (hooks) {
   setupRenderingTest(hooks);
   setupNoDeprecations(hooks);
 
-  hooks.beforeEach(function () {
-    this.actions = {};
-    this.send = (actionName, ...args) =>
-      this.actions[actionName].apply(this, args);
-  });
-
   test('accordion has correct default markup', async function (assert) {
     await render(
       <template>
@@ -54,14 +48,14 @@ module('Integration | Component | bs-accordion', function (hooks) {
       .dom('[data-test-item="1"] .accordion-collapse')
       .hasAria(
         'describedby',
-        find('[data-test-item="1"] h2').id,
+        find('[data-test-item="1"] h2')!.id,
         'aria: accordion body is described by accordion title',
       );
     assert
       .dom('[data-test-item="1"] h2 button')
       .hasAria(
         'controls',
-        find('[data-test-item="1"] .accordion-collapse').id,
+        find('[data-test-item="1"] .accordion-collapse')!.id,
         'aria: accordion title controls collapsable part',
       );
   });
