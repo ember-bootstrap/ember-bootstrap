@@ -39,7 +39,7 @@
     "release": "pnpm exec release-it"
   },
   "dependencies": {
-    "@ember/render-modifiers": "^2.0.0",
+    "@ember/render-modifiers": "^3.0.0",
     "@embroider/macros": "^1.0.0",
     "@embroider/util": "^1.0.0",
     "broccoli-debug": "^0.6.3",
