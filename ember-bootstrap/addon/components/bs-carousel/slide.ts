@@ -4,6 +4,27 @@ import { ref } from 'ember-ref-bucket';
 import { tracked } from '@glimmer/tracking';
 import { action } from '@ember/object';
 import { registerDestructor } from '@ember/destroyable';
+import type Owner from '@ember/owner';
+import type { PresentationState } from '../bs-carousel';
+
+export type DirectionalClassName = keyof Pick<CarouselSlide, 'left' | 'right'>;
+export type OrderClassName = keyof Pick<CarouselSlide, 'prev' | 'next'>;
+
+export interface CarouselSlideSignature {
+  Args: {
+    currentSlide?: CarouselSlide;
+    directionalClassName?: DirectionalClassName | null;
+    followingSlide?: CarouselSlide;
+    orderClassName?: OrderClassName | null;
+    presentationState?: PresentationState | null;
+    registerChild?: (slide: CarouselSlide) => void;
+    unregisterChild?: (slide: CarouselSlide) => void;
+  };
+  Blocks: {
+    default: [];
+  };
+  Element: HTMLDivElement;
+}
 
 /**
   A visible user-defined slide.
@@ -15,13 +36,13 @@ import { registerDestructor } from '@ember/destroyable';
   @extends Component
   @public
  */
-export default class CarouselSlide extends Component {
+export default class CarouselSlide extends Component<CarouselSlideSignature> {
   /**
    * @property _element
    * @type null | HTMLElement
    * @private
    */
-  @ref('mainNode') _element = null;
+  @ref('mainNode') _element: HTMLElement | null = null;
 
   /**
    * Defines slide visibility.
@@ -91,7 +112,7 @@ export default class CarouselSlide extends Component {
   @tracked
   right = false;
 
-  constructor(owner, args) {
+  constructor(owner: Owner, args: CarouselSlideSignature['Args']) {
     super(owner, args);
 
     args.registerChild?.(this);
@@ -111,7 +132,7 @@ export default class CarouselSlide extends Component {
     if (!this.active) {
       this.active = this.isCurrentSlide && this.args.presentationState === null;
     }
-    let presentationState = this.args.presentationState;
+    const presentationState = this.args.presentationState;
     if (this.isCurrentSlide) {
       switch (presentationState) {
         case 'didTransition':
@@ -139,7 +160,9 @@ export default class CarouselSlide extends Component {
    * @private
    */
   currentSlideDidTransition() {
-    this[this.args.directionalClassName] = false;
+    if (this.args.directionalClassName) {
+      this[this.args.directionalClassName] = false;
+    }
     this.active = false;
   }
 
@@ -149,8 +172,10 @@ export default class CarouselSlide extends Component {
    */
   currentSlideWillTransit() {
     this.active = true;
-    next(this, function () {
-      this[this.args.directionalClassName] = true;
+    next(this, function (this: CarouselSlide) {
+      if (this.args.directionalClassName) {
+        this[this.args.directionalClassName] = true;
+      }
     });
   }
 
@@ -160,8 +185,12 @@ export default class CarouselSlide extends Component {
    */
   followingSlideDidTransition() {
     this.active = true;
-    this[this.args.directionalClassName] = false;
-    this[this.args.orderClassName] = false;
+    if (this.args.directionalClassName) {
+      this[this.args.directionalClassName] = false;
+    }
+    if (this.args.orderClassName) {
+      this[this.args.orderClassName] = false;
+    }
   }
 
   /**
@@ -169,10 +198,14 @@ export default class CarouselSlide extends Component {
    * @private
    */
   followingSlideWillTransit() {
-    this[this.args.orderClassName] = true;
+    if (this.args.orderClassName) {
+      this[this.args.orderClassName] = true;
+    }
     next(this, () => {
       this.reflow();
-      this[this.args.directionalClassName] = true;
+      if (this.args.directionalClassName) {
+        this[this.args.directionalClassName] = true;
+      }
     });
   }
 
@@ -180,6 +213,6 @@ export default class CarouselSlide extends Component {
    * Makes things more stable, especially when fast changing.
    */
   reflow() {
-    this._element.offsetHeight;
+    this._element?.offsetHeight;
   }
 }

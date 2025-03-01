@@ -15,11 +15,12 @@ import type typeClassHelper from 'ember-bootstrap/helpers/bs-type-class';
 import type BsConditionalAttribute from 'ember-bootstrap/modifiers/bs-conditional-attribute';
 
 import type { HelperLike } from '@glint/template';
-import type { EmberBootstrapMacrosConfig } from './macros-config';
+import type { EmberBootstrapMacrosConfig } from 'ember-bootstrap/macros-config';
 import type BsAccordionItem from 'ember-bootstrap/components/bs-accordion/item';
 import type BsAccordionItemBody from 'ember-bootstrap/components/bs-accordion/item/body';
 import type BsAccordionItemTitle from 'ember-bootstrap/components/bs-accordion/item/title';
 import type BsButton from 'ember-bootstrap/components/bs-button';
+import type BsCarouselSlide from 'ember-bootstrap/components/bs-carousel/slide';
 import type BsModalHeaderClose from 'ember-bootstrap/components/bs-modal/header/close';
 import type BsModalHeaderTitle from 'ember-bootstrap/components/bs-modal/header/title';
 import type BsModalHeader from 'ember-bootstrap/components/bs-modal/header';
@@ -54,6 +55,7 @@ declare module '@glint/environment-ember-loose/registry' {
     'bs-accordion/item/body': typeof BsAccordionItemBody;
     'bs-accordion/item/title': typeof BsAccordionItemTitle;
     'bs-button': typeof BsButton;
+    'bs-carousel/slide': typeof BsCarouselSlide;
     'bs-modal/header/close': typeof BsModalHeaderClose;
     'bs-modal/header/title': typeof BsModalHeaderTitle;
     'bs-modal/header': typeof BsModalHeader;

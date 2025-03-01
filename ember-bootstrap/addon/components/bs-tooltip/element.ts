@@ -2,7 +2,7 @@ import ContextualHelpElement, {
   type ContextualHelpElementSignature,
 } from '../bs-contextual-help/element';
 import { getOwnConfig, macroCondition } from '@embroider/macros';
-import type { EmberBootstrapMacrosConfig } from 'macros-config';
+import type { EmberBootstrapMacrosConfig } from '../../macros-config';
 
 type BsTooltipElementSignature = ContextualHelpElementSignature & {
   Blocks: {
