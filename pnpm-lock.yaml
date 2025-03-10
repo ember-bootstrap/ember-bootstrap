@@ -283,7 +283,7 @@ importers:
         version: 4.1.0(@glint/template@1.5.2)(ember-source@5.12.0(@glimmer/component@1.1.2(@babel/core@7.26.9))(@glint/template@1.5.2)(rsvp@4.8.5)(webpack@5.98.0))(webpack@5.98.0)
       ember-ref-bucket:
         specifier: ^4.0.0 || ^5.0.0
-        version: 5.0.7(@babel/core@7.26.9)(@glint/template@1.5.2)(ember-source@5.12.0(@glimmer/component@1.1.2(@babel/core@7.26.9))(@glint/template@1.5.2)(rsvp@4.8.5)(webpack@5.98.0))(webpack@5.98.0)
+        version: 5.0.8(@babel/core@7.26.9)(@glint/template@1.5.2)(ember-source@5.12.0(@glimmer/component@1.1.2(@babel/core@7.26.9))(@glint/template@1.5.2)(rsvp@4.8.5)(webpack@5.98.0))(webpack@5.98.0)
       ember-render-helpers:
         specifier: ^0.2.1 || ^1.0.0
         version: 1.0.4(@babel/core@7.26.9)
@@ -568,8 +568,8 @@ importers:
         specifier: 7.0.0
         version: 7.0.0(@ember/test-helpers@3.3.1(@babel/core@7.26.9)(@glint/template@1.5.2)(ember-source@5.12.0(@glimmer/component@1.1.2(@babel/core@7.26.9))(@glint/template@1.5.2)(rsvp@4.8.5)(webpack@5.98.0))(webpack@5.98.0))(@glint/template@1.5.2)(ember-source@5.12.0(@glimmer/component@1.1.2(@babel/core@7.26.9))(@glint/template@1.5.2)(rsvp@4.8.5)(webpack@5.98.0))(qunit@2.24.1)(webpack@5.98.0)
       ember-ref-bucket:
-        specifier: 5.0.7
-        version: 5.0.7(@babel/core@7.26.9)(@glint/template@1.5.2)(ember-source@5.12.0(@glimmer/component@1.1.2(@babel/core@7.26.9))(@glint/template@1.5.2)(rsvp@4.8.5)(webpack@5.98.0))(webpack@5.98.0)
+        specifier: 5.0.8
+        version: 5.0.8(@babel/core@7.26.9)(@glint/template@1.5.2)(ember-source@5.12.0(@glimmer/component@1.1.2(@babel/core@7.26.9))(@glint/template@1.5.2)(rsvp@4.8.5)(webpack@5.98.0))(webpack@5.98.0)
       ember-render-helpers:
         specifier: 1.0.4
         version: 1.0.4(@babel/core@7.26.9)
@@ -4373,8 +4373,8 @@ packages:
       ember-source: '>=4.0.0'
       qunit: ^2.13.0
 
-  ember-ref-bucket@5.0.7:
-    resolution: {integrity: sha512-O9UednDVYAOJTuCaHrJww7c7ch9QnE2c+Z7IQoYOOiouVREH1Ns78T5Afhbwn293jCUcz2rdaRv89BPtTj1A0w==}
+  ember-ref-bucket@5.0.8:
+    resolution: {integrity: sha512-OYKLpryoyrwDYpKTqrGIx7cvAouv3cLwY1YkTZjXYp+NM+J5PtNu+Zmend4EtQpKQhrOI+UDEcL2ERl2fXl91g==}
     engines: {node: 14.* || 16.* || >= 18}
 
   ember-render-helpers@1.0.4:
@@ -14505,7 +14505,7 @@ snapshots:
       - supports-color
       - webpack
 
-  ember-ref-bucket@5.0.7(@babel/core@7.26.9)(@glint/template@1.5.2)(ember-source@5.12.0(@glimmer/component@1.1.2(@babel/core@7.26.9))(@glint/template@1.5.2)(rsvp@4.8.5)(webpack@5.98.0))(webpack@5.98.0):
+  ember-ref-bucket@5.0.8(@babel/core@7.26.9)(@glint/template@1.5.2)(ember-source@5.12.0(@glimmer/component@1.1.2(@babel/core@7.26.9))(@glint/template@1.5.2)(rsvp@4.8.5)(webpack@5.98.0))(webpack@5.98.0):
     dependencies:
       ember-auto-import: 2.10.0(@glint/template@1.5.2)(webpack@5.98.0)
       ember-cli-babel: 7.26.11
