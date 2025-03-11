@@ -421,8 +421,8 @@ importers:
         specifier: 3.3.1
         version: 3.3.1(@babel/core@7.26.9)(@glint/template@1.5.2)(ember-source@5.12.0(@glimmer/component@1.1.2(@babel/core@7.26.9))(@glint/template@1.5.2)(rsvp@4.8.5)(webpack@5.98.0))(webpack@5.98.0)
       '@embroider/addon-dev':
-        specifier: 5.0.0
-        version: 5.0.0(@glint/template@1.5.2)(rollup@4.34.8)
+        specifier: 7.1.3
+        version: 7.1.3(@glint/template@1.5.2)(rollup@4.34.8)
       '@embroider/macros':
         specifier: 1.16.11
         version: 1.16.11(@glint/template@1.5.2)
@@ -1336,8 +1336,8 @@ packages:
     resolution: {integrity: sha512-bb9h95ktG2wKY9+ja1sdsFBdOms2lB19VWs8wmNpzgHv1NCetonBoV5jHBV4DHt0uS1tg9z66cZqhUVlYs96KQ==}
     engines: {node: 10.* || 12.* || >= 14.*}
 
-  '@embroider/addon-dev@5.0.0':
-    resolution: {integrity: sha512-cEaPnhNJBqb+1Mp/1iDsfZjXU/odQ+vYqtqg19qh/28KBbbL5do1TzFPfXuGjzuDHiTIagklpGoNGkMwU/bJtw==}
+  '@embroider/addon-dev@7.1.3':
+    resolution: {integrity: sha512-19Zipr91mt7lsXjZGNZpFp9eTb8dXUzUg0hZy9S3EsjqJxrhL5zOdpRFNpDJeCeNtmFSPh+CWMQU5bc2k/zWhw==}
     engines: {node: 12.* || 14.* || >= 16}
     hasBin: true
     peerDependencies:
@@ -3905,10 +3905,6 @@ packages:
     resolution: {integrity: sha512-TllpMR/t0M5sqCXfj85i4XaAzxmS5tVA16dqvdkMwGmzI+dXLXnw3J+3Vdv7VKw+ThlTMboK6i9rnZ6Nntj5CQ==}
     engines: {node: '>= 14'}
 
-  del@6.1.1:
-    resolution: {integrity: sha512-ua8BhapfP0JUJKC/zV9yHHDW/rDoDxP4Zhn3AkA6/xT6gY7jYXJiaeyBZznYVujhZZET+UgcbZiQ7sN3WqcImg==}
-    engines: {node: '>=10'}
-
   delayed-stream@0.0.5:
     resolution: {integrity: sha512-v+7uBd1pqe5YtgPacIIbZ8HuHeLFVNe4mUEyFDXL6KiqzEykjbw+5mXZXpGFgNVasdL4jWKgaKIXrEHiynN1LA==}
     engines: {node: '>=0.4.0'}
@@ -5953,10 +5949,6 @@ packages:
   is-obj@2.0.0:
     resolution: {integrity: sha512-drqDG3cbczxxEJRoOXcOjtdp1J/lyp1mNn0xaznRs8+muBhgQcrnbspox5X5fOw0HnMnbfDzvnEMEtqDEJEo8w==}
     engines: {node: '>=8'}
-
-  is-path-cwd@2.2.0:
-    resolution: {integrity: sha512-w942bTcih8fdJPJmQHFzkS76NEP8Kzzvmw92cXsazb8intwLqPibPPdXf4ANdKV3rYMuuQYGIWtvz9JilB3NFQ==}
-    engines: {node: '>=6'}
 
   is-path-inside@3.0.3:
     resolution: {integrity: sha512-Fd4gABb+ycGAmKou8eMftCupSir5lRxqf4aD/vd0cD2qc4HL07OjCeuHMr8Ro4CoMaeCKDB0/ECBOVWjTwUvPQ==}
@@ -8016,12 +8008,6 @@ packages:
     resolution: {integrity: sha512-ETShhQGb9SoiwcNrvb3BhUNSGR89Jao0+XxxfzzLW1YsUzx8+rMO4z9oqWWmo6OHUmfNQRvqRj0cAyPkS9lN9w==}
     peerDependencies:
       rollup: '>=1.1.2'
-
-  rollup-plugin-delete@2.2.0:
-    resolution: {integrity: sha512-REKtDKWvjZlbrWpPvM9X/fadCs3E9I9ge27AK8G0e4bXwSLeABAAwtjiI1u3ihqZxk6mJeB2IVeSbH4DtOcw7A==}
-    engines: {node: '>=10'}
-    peerDependencies:
-      rollup: '*'
 
   rollup-pluginutils@2.8.2:
     resolution: {integrity: sha512-EEp9NhnUkwY8aif6bxgovPHMoMoNr2FulJziTndpt5H9RdwC47GSGuII9XxpSdzVGM0GWrNPHV6ie1LTNJPaLQ==}
@@ -10398,15 +10384,15 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  '@embroider/addon-dev@5.0.0(@glint/template@1.5.2)(rollup@4.34.8)':
+  '@embroider/addon-dev@7.1.3(@glint/template@1.5.2)(rollup@4.34.8)':
     dependencies:
       '@embroider/core': 3.5.2(@glint/template@1.5.2)
       '@rollup/pluginutils': 4.2.1
-      content-tag: 2.0.3
+      content-tag: 3.1.1
+      execa: 5.1.1
       fs-extra: 10.1.0
       minimatch: 3.1.2
       rollup-plugin-copy-assets: 2.0.3(rollup@4.34.8)
-      rollup-plugin-delete: 2.2.0(rollup@4.34.8)
       walk-sync: 3.0.0
       yargs: 17.7.2
     optionalDependencies:
@@ -13406,17 +13392,6 @@ snapshots:
       ast-types: 0.13.4
       escodegen: 2.1.0
       esprima: 4.0.1
-
-  del@6.1.1:
-    dependencies:
-      globby: 11.1.0
-      graceful-fs: 4.2.11
-      is-glob: 4.0.3
-      is-path-cwd: 2.2.0
-      is-path-inside: 3.0.3
-      p-map: 4.0.0
-      rimraf: 3.0.2
-      slash: 3.0.0
 
   delayed-stream@0.0.5:
     optional: true
@@ -16736,8 +16711,6 @@ snapshots:
 
   is-obj@2.0.0: {}
 
-  is-path-cwd@2.2.0: {}
-
   is-path-inside@3.0.3: {}
 
   is-path-inside@4.0.0: {}
@@ -19017,11 +18990,6 @@ snapshots:
   rollup-plugin-copy-assets@2.0.3(rollup@4.34.8):
     dependencies:
       fs-extra: 7.0.1
-      rollup: 4.34.8
-
-  rollup-plugin-delete@2.2.0(rollup@4.34.8):
-    dependencies:
-      del: 6.1.1
       rollup: 4.34.8
 
   rollup-pluginutils@2.8.2:
