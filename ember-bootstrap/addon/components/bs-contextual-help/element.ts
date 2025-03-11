@@ -4,7 +4,7 @@ import arg from 'ember-bootstrap/utils/decorators/arg';
 import { tracked } from '@glimmer/tracking';
 import { getOwnConfig, macroCondition } from '@embroider/macros';
 import { trackedRef } from 'ember-ref-bucket';
-import type { EmberBootstrapMacrosConfig } from 'macros-config';
+import type { EmberBootstrapMacrosConfig } from '../../macros-config';
 import type {
   Placement,
   Options as PopperOptions,
