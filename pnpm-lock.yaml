@@ -21,8 +21,8 @@ importers:
   docs:
     devDependencies:
       '@babel/eslint-parser':
-        specifier: 7.26.8
-        version: 7.26.8(@babel/core@7.26.9)(eslint@8.57.1)
+        specifier: 7.26.10
+        version: 7.26.10(@babel/core@7.26.9)(eslint@8.57.1)
       '@babel/plugin-proposal-decorators':
         specifier: 7.25.9
         version: 7.25.9(@babel/core@7.26.9)
@@ -307,8 +307,8 @@ importers:
         version: 2.0.0(@babel/core@7.26.9)(ember-source@5.12.0(@glimmer/component@1.1.2(@babel/core@7.26.9))(@glint/template@1.5.2)(rsvp@4.8.5)(webpack@5.98.0))
     devDependencies:
       '@babel/eslint-parser':
-        specifier: 7.26.8
-        version: 7.26.8(@babel/core@7.26.9)(eslint@8.57.1)
+        specifier: 7.26.10
+        version: 7.26.10(@babel/core@7.26.9)(eslint@8.57.1)
       '@babel/plugin-proposal-decorators':
         specifier: 7.25.9
         version: 7.25.9(@babel/core@7.26.9)
@@ -403,8 +403,8 @@ importers:
   test-app:
     devDependencies:
       '@babel/eslint-parser':
-        specifier: 7.26.8
-        version: 7.26.8(@babel/core@7.26.9)(eslint@8.57.1)
+        specifier: 7.26.10
+        version: 7.26.10(@babel/core@7.26.9)(eslint@8.57.1)
       '@babel/plugin-proposal-decorators':
         specifier: 7.25.9
         version: 7.25.9(@babel/core@7.26.9)
@@ -692,8 +692,8 @@ packages:
       '@babel/core': ^7.11.0
       eslint: ^7.5.0 || ^8.0.0
 
-  '@babel/eslint-parser@7.26.8':
-    resolution: {integrity: sha512-3tBctaHRW6xSub26z7n8uyOTwwUsCdvIug/oxBH9n6yCO5hMj2vwDJAo7RbBMKrM7P+W2j61zLKviJQFGOYKMg==}
+  '@babel/eslint-parser@7.26.10':
+    resolution: {integrity: sha512-QsfQZr4AiLpKqn7fz+j7SN+f43z2DZCgGyYbNJ2vJOqKfG4E6MZer1+jqGZqKJaxq/gdO2DC/nUu45+pOL5p2Q==}
     engines: {node: ^10.13.0 || ^12.13.0 || >=14.0.0}
     peerDependencies:
       '@babel/core': ^7.11.0
@@ -9567,7 +9567,7 @@ snapshots:
       eslint-visitor-keys: 2.1.0
       semver: 6.3.1
 
-  '@babel/eslint-parser@7.26.8(@babel/core@7.26.9)(eslint@8.57.1)':
+  '@babel/eslint-parser@7.26.10(@babel/core@7.26.9)(eslint@8.57.1)':
     dependencies:
       '@babel/core': 7.26.9
       '@nicolo-ribaudo/eslint-scope-5-internals': 5.1.1-v1
@@ -14299,7 +14299,7 @@ snapshots:
   ember-eslint-parser@0.5.9(@babel/core@7.26.9)(@typescript-eslint/parser@7.18.0(eslint@8.57.1)(typescript@5.8.2))(eslint@8.57.1):
     dependencies:
       '@babel/core': 7.26.9
-      '@babel/eslint-parser': 7.26.8(@babel/core@7.26.9)(eslint@8.57.1)
+      '@babel/eslint-parser': 7.26.10(@babel/core@7.26.9)(eslint@8.57.1)
       '@glimmer/syntax': 0.92.3
       content-tag: 2.0.3
       eslint-scope: 7.2.2
