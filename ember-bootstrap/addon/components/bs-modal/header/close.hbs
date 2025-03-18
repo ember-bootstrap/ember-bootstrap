@@ -1,4 +1,3 @@
-{{! @glint-nocheck }}
 <button type="button" aria-label="Close" class={{if (macroCondition (macroGetOwnConfig "isBS5")) "btn-close" "close"}} ...attributes {{on "click" (bs-default @onClick (bs-noop))}}>
   {{#if (macroCondition (macroGetOwnConfig "isBS4"))}}<span aria-hidden="true">&times;</span>{{/if}}
 </button>

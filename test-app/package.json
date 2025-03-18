@@ -17,14 +17,14 @@
     "test:ember-compatibility": "ember try:each"
   },
   "devDependencies": {
-    "@babel/eslint-parser": "7.26.8",
+    "@babel/eslint-parser": "7.26.10",
     "@babel/plugin-proposal-decorators": "7.25.9",
     "@ember/optional-features": "2.2.0",
-    "@ember/render-modifiers": "2.1.0",
+    "@ember/render-modifiers": "3.0.0",
     "@ember/string": "4.0.1",
     "@ember/test-helpers": "3.3.1",
-    "@embroider/addon-dev": "5.0.0",
-    "@embroider/macros": "1.16.10",
+    "@embroider/addon-dev": "7.1.3",
+    "@embroider/macros": "1.16.11",
     "@embroider/test-setup": "4.0.0",
     "@embroider/util": "1.13.2",
     "@glimmer/component": "1.1.2",
@@ -37,7 +37,7 @@
     "@tsconfig/ember": "3.0.9",
     "@types/qunit": "2.19.10",
     "@types/rsvp": "4.0.9",
-    "@types/sinon": "17.0.3",
+    "@types/sinon": "17.0.4",
     "@typescript-eslint/eslint-plugin": "7.18.0",
     "@typescript-eslint/parser": "7.18.0",
     "bootstrap": "5.3.3",
@@ -72,7 +72,7 @@
     "ember-page-title": "8.2.4",
     "ember-popper-modifier": "4.1.0",
     "ember-qunit": "7.0.0",
-    "ember-ref-bucket": "5.0.7",
+    "ember-ref-bucket": "5.0.8",
     "ember-render-helpers": "1.0.4",
     "ember-resolver": "12.0.1",
     "ember-sinon": "5.0.0",
@@ -102,8 +102,8 @@
     "silent-error": "1.1.1",
     "sinon": "17.0.2",
     "tracked-toolbox": "2.0.0",
-    "typescript": "5.5.4",
-    "webpack": "5.94.0"
+    "typescript": "5.8.2",
+    "webpack": "5.98.0"
   },
   "engines": {
     "node": "18.* || >= 20"

@@ -1,11 +1,11 @@
 /**
-
- Modal footer element used within [Components.Modal](Components.Modal.html) components. See there for examples.
-
- @class ModalFooter
- @namespace Components
- @extends Glimmer.Component
- @public
+ *
+ * Modal footer element used within [Components.Modal](Components.Modal.html) components. See there for examples.
+ *
+ * @class ModalFooter
+ * @namespace Components
+ * @extends Glimmer.Component
+ * @public
  */
 
 /**
@@ -65,5 +65,31 @@
  * @public
  */
 import templateOnly from '@ember/component/template-only';
+import type { ComponentLike } from '@glint/template';
 
-export default templateOnly();
+export interface FooterSignature {
+  Args: {
+    buttonComponent?: ComponentLike<{
+      Element: Element;
+      Args: {
+        type?: string;
+        onClick?: () => void;
+      };
+      Blocks: {
+        default: [unknown];
+      };
+    }>;
+    closeTitle?: string;
+    onClose?: (event?: MouseEvent) => void;
+    onSubmit?: (event?: SubmitEvent) => void;
+    submitButtonType?: string;
+    submitDisabled?: boolean;
+    submitTitle?: string;
+  };
+  Blocks: {
+    default: [];
+  };
+  Element: HTMLDivElement;
+}
+
+export default templateOnly<FooterSignature>();
