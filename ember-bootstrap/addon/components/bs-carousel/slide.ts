@@ -23,7 +23,7 @@ export interface CarouselSlideSignature {
   Blocks: {
     default: [];
   };
-  Element: HTMLDivElement;
+  Element: HTMLElement;
 }
 
 /**

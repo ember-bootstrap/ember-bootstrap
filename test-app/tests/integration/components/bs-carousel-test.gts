@@ -17,6 +17,8 @@ import { getConfig, macroCondition } from '@embroider/macros';
 import type { EmberBootstrapMacrosConfig } from 'ember-bootstrap/macros-config';
 import { tracked } from '@glimmer/tracking';
 import type { RenderingTestContext } from '@ember/test-helpers';
+import Component from "@glimmer/component";
+import {registerDestructor} from "@ember/destroyable";
 
 const TRANSITION_DURATION = 50;
 
@@ -119,7 +121,7 @@ module('Integration | Component | bs-carousel', function (hooks) {
         <BsCarousel
           @interval={{0}}
           as |car|
-        >{{car.slide}}{{car.slide}}</BsCarousel>
+        ><car.slide/><car.slide/></BsCarousel>
       </template>,
     );
 
@@ -150,7 +152,7 @@ module('Integration | Component | bs-carousel', function (hooks) {
           @interval={{300}}
           @transitionDuration={{TRANSITION_DURATION}}
           as |car|
-        >{{car.slide}}{{car.slide}}</BsCarousel>
+        ><car.slide/><car.slide/></BsCarousel>
       </template>,
     );
     await waitTransitionTime();
@@ -168,7 +170,7 @@ module('Integration | Component | bs-carousel', function (hooks) {
           @interval={{state.interval}}
           @transitionDuration={{TRANSITION_DURATION}}
           as |car|
-        >{{car.slide}}{{car.slide}}</BsCarousel>
+        ><car.slide/><car.slide/></BsCarousel>
       </template>,
     );
     await waitTransitionTime();
@@ -187,7 +189,7 @@ module('Integration | Component | bs-carousel', function (hooks) {
           @wrap={{false}}
           @transitionDuration={{TRANSITION_DURATION}}
           as |car|
-        >{{car.slide}}{{car.slide}}</BsCarousel>
+        ><car.slide/><car.slide/></BsCarousel>
       </template>,
     );
     clickToNextSlide();
@@ -209,7 +211,7 @@ module('Integration | Component | bs-carousel', function (hooks) {
           @wrap={{false}}
           @transitionDuration={{TRANSITION_DURATION}}
           as |car|
-        >{{car.slide}}{{car.slide}}</BsCarousel>
+        ><car.slide/><car.slide/></BsCarousel>
       </template>,
     );
     clickToPrevSlide();
@@ -226,7 +228,7 @@ module('Integration | Component | bs-carousel', function (hooks) {
           @index={{1}}
           @transitionDuration={{TRANSITION_DURATION}}
           as |car|
-        >{{car.slide}}{{car.slide}}</BsCarousel>
+        ><car.slide/><car.slide/></BsCarousel>
       </template>,
     );
     clickToNextSlide();
@@ -243,7 +245,7 @@ module('Integration | Component | bs-carousel', function (hooks) {
           @wrap={{true}}
           @transitionDuration={{TRANSITION_DURATION}}
           as |car|
-        >{{car.slide}}{{car.slide}}</BsCarousel>
+        ><car.slide/><car.slide/></BsCarousel>
       </template>,
     );
     await clickToPrevSlide();
@@ -260,7 +262,7 @@ module('Integration | Component | bs-carousel', function (hooks) {
           @index={{1}}
           @transitionDuration={{TRANSITION_DURATION}}
           as |car|
-        >{{car.slide}}{{car.slide}}</BsCarousel>
+        ><car.slide/><car.slide/></BsCarousel>
       </template>,
     );
     await clickToNextSlide();
@@ -274,7 +276,7 @@ module('Integration | Component | bs-carousel', function (hooks) {
         <BsCarousel
           @index={{1}}
           as |car|
-        >{{car.slide}}{{car.slide}}</BsCarousel>
+        ><car.slide/><car.slide/></BsCarousel>
       </template>,
     );
     assert.notOk(getActivatedSlide(1), 'index has correct behavior');
@@ -289,7 +291,7 @@ module('Integration | Component | bs-carousel', function (hooks) {
           @interval={{0}}
           @transitionDuration={{TRANSITION_DURATION}}
           as |car|
-        >{{car.slide}}{{car.slide}}</BsCarousel>
+        ><car.slide/><car.slide/></BsCarousel>
       </template>,
     );
     await waitTransitionTime();
@@ -308,7 +310,7 @@ module('Integration | Component | bs-carousel', function (hooks) {
           @transitionDuration={{TRANSITION_DURATION}}
           @ltr={{false}}
           as |car|
-        >{{car.slide}}{{car.slide}}{{car.slide}}</BsCarousel>
+        ><car.slide/><car.slide/><car.slide/></BsCarousel>
       </template>,
     );
     await waitTransitionTime();
@@ -329,7 +331,7 @@ module('Integration | Component | bs-carousel', function (hooks) {
           @transitionDuration={{TRANSITION_DURATION}}
           @ltr={{true}}
           as |car|
-        >{{car.slide}}{{car.slide}}{{car.slide}}</BsCarousel>
+        ><car.slide/><car.slide/><car.slide/></BsCarousel>
       </template>,
     );
     await waitTransitionTime();
@@ -348,7 +350,7 @@ module('Integration | Component | bs-carousel', function (hooks) {
           @transitionDuration={{TRANSITION_DURATION}}
           @pauseOnMouseEnter={{false}}
           as |car|
-        >{{car.slide}}{{car.slide}}</BsCarousel>
+        ><car.slide/><car.slide/></BsCarousel>
       </template>,
     );
     await waitTransitionTime(10);
@@ -373,7 +375,7 @@ module('Integration | Component | bs-carousel', function (hooks) {
           @transitionDuration={{TRANSITION_DURATION}}
           @pauseOnMouseEnter={{true}}
           as |car|
-        >{{car.slide}}{{car.slide}}</BsCarousel>
+        ><car.slide/><car.slide/></BsCarousel>
       </template>,
     );
     await waitTransitionTime(10);
@@ -396,7 +398,7 @@ module('Integration | Component | bs-carousel', function (hooks) {
           @interval={{0}}
           @transitionDuration={{TRANSITION_DURATION}}
           as |car|
-        >{{car.slide}}{{car.slide}}</BsCarousel>
+        ><car.slide/><car.slide/></BsCarousel>
       </template>,
     );
     clickToNextSlide();
@@ -430,7 +432,7 @@ module('Integration | Component | bs-carousel', function (hooks) {
           @transitionDuration={{TRANSITION_DURATION}}
           @index={{1}}
           as |car|
-        >{{car.slide}}{{car.slide}}</BsCarousel>
+        ><car.slide/><car.slide/></BsCarousel>
       </template>,
     );
     clickToPrevSlide();
@@ -463,9 +465,10 @@ module('Integration | Component | bs-carousel', function (hooks) {
           @interval={{0}}
           @transitionDuration={{TRANSITION_DURATION}}
           as |car|
-        >{{car.slide}}{{car.slide}}</BsCarousel>
+        ><car.slide/><car.slide/></BsCarousel>
       </template>,
     );
+
     await clickIndicator(2);
     assert
       .dom(`.carousel-indicators > ${INDICATOR_ELEMENT}:nth-child(2).active`)
@@ -481,7 +484,7 @@ module('Integration | Component | bs-carousel', function (hooks) {
           @interval={{0}}
           @transitionDuration={{TRANSITION_DURATION}}
           as |car|
-        >{{car.slide}}{{car.slide}}</BsCarousel>
+        ><car.slide/><car.slide/></BsCarousel>
       </template>,
     );
     await clickToNextSlide();
@@ -496,6 +499,57 @@ module('Integration | Component | bs-carousel', function (hooks) {
     );
   });
 
+  test('Can render custom slide components', async function (assert) {
+    interface CustomSlideSignature {
+      Args: {
+        currentSlide?: Component<any>;
+        registerChild?: (slide: any) => void
+        unregisterChild?: (slide: any) => void
+      };
+      Blocks: {
+        default: [];
+      }
+      Element: HTMLElement;
+    }
+
+    class CustomSlide extends Component<CustomSlideSignature> {
+      constructor(owner:unknown, args: CustomSlideSignature['Args']) {
+        super(owner, args);
+        this.args.registerChild?.(this);
+
+        registerDestructor(this, () => {
+          this.args.unregisterChild?.(this);
+        });
+      }
+
+      get isCurrentSlide() {
+        return this.args.currentSlide === this;
+      }
+
+      <template>
+        <div class="carousel-item {{if this.isCurrentSlide "active"}}">
+          {{yield}}
+        </div>
+      </template>
+    }
+
+    await render(
+      <template>
+        <BsCarousel
+          @interval={{0}}
+          @transitionDuration={{TRANSITION_DURATION}}
+          @slideComponent={{CustomSlide}}
+          as |car|
+        >
+          <car.slide>First Slide</car.slide>
+          <car.slide>Second Slide</car.slide>
+        </BsCarousel>
+      </template>
+    )
+
+    await this.pauseTest();
+  });
+
   // Default carousel markup has a11y issues (buttons w/o content)
   // Quote from https://getbootstrap.com/docs/4.0/components/carousel/:
   // carousels are generally not compliant with accessibility standards.
@@ -505,7 +559,7 @@ module('Integration | Component | bs-carousel', function (hooks) {
         <BsCarousel
           @interval={{0}}
           as |car|
-        >{{car.slide}}{{car.slide}}</BsCarousel>
+        ><car.slide/><car.slide/></BsCarousel>
       </template>,
     );
 

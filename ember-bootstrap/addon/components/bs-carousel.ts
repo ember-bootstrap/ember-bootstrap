@@ -133,7 +133,7 @@ export default class Carousel extends Component<CarouselSignature> {
    */
   get childSlides(): CarouselSlide[] {
     return this.children.filter(
-      (view) => view instanceof CarouselSlide,
+      (view) => view instanceof (this.args.slideComponent ?? CarouselSlide),
     ) as unknown as CarouselSlide[];
   }
 
