@@ -37,8 +37,8 @@ interface DropdownSignature {
     htmlTag?: string;
     isOpen?: boolean;
     menuComponent?: ComponentLike<DropdownMenuSignature>;
-    onHide: () => undefined | false;
-    onShow: () => void;
+    onHide?: () => undefined | false;
+    onShow?: () => void;
     toggleComponent?: ComponentLike<DropdownToggleSignature>;
 
     /** private */
