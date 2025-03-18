@@ -8,7 +8,6 @@ import Component from '@glimmer/component';
 import { schedule } from '@ember/runloop';
 import { task, timeout, type Task } from 'ember-concurrency';
 import { tracked } from '@glimmer/tracking';
-import { isNone } from '@ember/utils';
 import type { ComponentLike } from '@glint/template';
 
 export type PresentationState = 'didTransition' | 'willTransit';
@@ -530,7 +529,7 @@ export default class Carousel extends Component<CarouselSignature> {
     // from child components.
     yield new Promise<void>((resolve) => {
       schedule('afterRender', this, () => {
-        if (!isNone(this.followingIndex)) {
+        if (this.followingIndex !== undefined && this.followingIndex !== null) {
           this.currentIndex = this.followingIndex;
         }
         resolve();
