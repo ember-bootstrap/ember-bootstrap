@@ -47,7 +47,6 @@ interface DropdownSignature {
   Blocks: {
     default: [
       {
-        // TODO: improve typing
         button: ComponentLike<DropdownButtonSignature>;
         closeDropdown: () => void;
         isOpen: boolean;
