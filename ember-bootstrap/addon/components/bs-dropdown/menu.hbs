@@ -27,7 +27,7 @@
   {{else}}
     {{! @glint-expect-error
         destinationElement is guarded against being undefined or null by _rederInPlace.
-        _renderInPlace is false if destinationElement is not set. But sadly Glint / TypeScript
+        _renderInPlace is true if destinationElement is not set. But sadly Glint / TypeScript
         does not understand that and throws an error.
     }}
     {{#in-element this.destinationElement insertBefore=null}}
