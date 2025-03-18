@@ -61,10 +61,8 @@
 <h3>Usage</h3>
 <p>Uses the following components by a contextual reference:</p>
 <pre class="code prettyprint"><code class="language-hbs">&lt;BsNavbar as |navbar|&gt;
-  &lt;div class="navbar-header"&gt;
-    &lt;navbar.toggle /&gt;
-    &lt;a class="navbar-brand" href="#"&gt;Brand&lt;/a&gt;
-  &lt;/div&gt;
+  &lt;a class="navbar-brand" href="#"&gt;Brand&lt;/a&gt;
+  &lt;navbar.toggle /&gt;
   &lt;navbar.content&gt;
     &lt;navbar.nav as |nav|&gt;
       &lt;nav.item&gt;
@@ -77,8 +75,6 @@
   &lt;/navbar.content&gt;
 &lt;/BsNavbar&gt;
 </code></pre>
-<p><strong>Note:</strong> the <code>&lt;div class="navbar-header"&gt;</code> is required for BS3 to hold the elements visible on a mobile breakpoint,
-when the actual content is collapsed. It should <em>not</em> be used for BS4!</p>
 <p>The component yields references to the following contextual components:</p>
 <ul>
 <li><a href="Components.NavbarContent.html">Components.NavbarContent</a></li>
@@ -118,12 +114,6 @@ property. Bootstrap navbars <a href="http://getbootstrap.com/components/#navbar-
 so those are explicitly disallowed.</p>
 <p>Other bootstrap navbar variations, such as forms, buttons, etc. can be supported through direct use of
 bootstrap styles applied through the <code>class</code> attribute on the components.</p>
-<h3>Bootstrap 3/4 Notes</h3>
-<p>Bootstrap 4 changed the default navbar styling option from <code>navbar-default</code> to <code>navbar-light</code>.
-If you explicitly specified "default" in Bootstrap 3 and are migrating, you will need to change
-this in your code. Bootstrap 4 changes <code>navbar-inverse</code> to <code>navbar-dark</code>.</p>
-<p>Bootstrap 4 navbars are fluid by default without the need for an additional container. An
-additional container is added like with Bootstrap 3 if <code>fluid</code> is <code>false</code>.</p>
 <p><em>Note that only invoking the component in a template as shown above is considered part of its public API. Extending from it (subclassing) is generally not supported, and may break at any time.</em></p>
 
 
@@ -321,7 +311,7 @@ additional container is added like with Bootstrap 3 if <code>fluid</code> is <co
                 <div class="meta">
                             <p>
                             Defined in
-                    <a href="../files/.._ember-bootstrap_addon_components_bs-navbar.js.html#l255"><code>..&#x2F;ember-bootstrap&#x2F;addon&#x2F;components&#x2F;bs-navbar.js:255</code></a>
+                    <a href="../files/.._ember-bootstrap_addon_components_bs-navbar.js.html#l241"><code>..&#x2F;ember-bootstrap&#x2F;addon&#x2F;components&#x2F;bs-navbar.js:241</code></a>
                     </p>
             
             
@@ -351,7 +341,7 @@ additional container is added like with Bootstrap 3 if <code>fluid</code> is <co
                 <div class="meta">
                             <p>
                             Defined in
-                    <a href="../files/.._ember-bootstrap_addon_components_bs-navbar.js.html#l242"><code>..&#x2F;ember-bootstrap&#x2F;addon&#x2F;components&#x2F;bs-navbar.js:242</code></a>
+                    <a href="../files/.._ember-bootstrap_addon_components_bs-navbar.js.html#l228"><code>..&#x2F;ember-bootstrap&#x2F;addon&#x2F;components&#x2F;bs-navbar.js:228</code></a>
                     </p>
             
             
@@ -382,7 +372,7 @@ additional container is added like with Bootstrap 3 if <code>fluid</code> is <co
               <div class="meta">
                   <p>
                       Defined in
-                  <a href="../files/.._ember-bootstrap_addon_components_bs-navbar.js.html#l114"><code>..&#x2F;ember-bootstrap&#x2F;addon&#x2F;components&#x2F;bs-navbar.js:114</code></a>
+                  <a href="../files/.._ember-bootstrap_addon_components_bs-navbar.js.html#l100"><code>..&#x2F;ember-bootstrap&#x2F;addon&#x2F;components&#x2F;bs-navbar.js:100</code></a>
               </p>
             
             
@@ -411,7 +401,7 @@ additional container is added like with Bootstrap 3 if <code>fluid</code> is <co
                   <p><strong>Default:</strong> &#x27;light&#x27;</p>
                   <p>
                       Defined in
-                  <a href="../files/.._ember-bootstrap_addon_components_bs-navbar.js.html#l294"><code>..&#x2F;ember-bootstrap&#x2F;addon&#x2F;components&#x2F;bs-navbar.js:294</code></a>
+                  <a href="../files/.._ember-bootstrap_addon_components_bs-navbar.js.html#l280"><code>..&#x2F;ember-bootstrap&#x2F;addon&#x2F;components&#x2F;bs-navbar.js:280</code></a>
               </p>
             
             
@@ -443,7 +433,7 @@ additional container is added like with Bootstrap 3 if <code>fluid</code> is <co
                   <p><strong>Default:</strong> true</p>
                   <p>
                       Defined in
-                  <a href="../files/.._ember-bootstrap_addon_components_bs-navbar.js.html#l102"><code>..&#x2F;ember-bootstrap&#x2F;addon&#x2F;components&#x2F;bs-navbar.js:102</code></a>
+                  <a href="../files/.._ember-bootstrap_addon_components_bs-navbar.js.html#l88"><code>..&#x2F;ember-bootstrap&#x2F;addon&#x2F;components&#x2F;bs-navbar.js:88</code></a>
               </p>
             
             
@@ -472,7 +462,7 @@ additional container is added like with Bootstrap 3 if <code>fluid</code> is <co
               <div class="meta">
                   <p>
                       Defined in
-                  <a href="../files/.._ember-bootstrap_addon_components_bs-navbar.js.html#l133"><code>..&#x2F;ember-bootstrap&#x2F;addon&#x2F;components&#x2F;bs-navbar.js:133</code></a>
+                  <a href="../files/.._ember-bootstrap_addon_components_bs-navbar.js.html#l119"><code>..&#x2F;ember-bootstrap&#x2F;addon&#x2F;components&#x2F;bs-navbar.js:119</code></a>
               </p>
             
             
@@ -503,7 +493,7 @@ additional container is added like with Bootstrap 3 if <code>fluid</code> is <co
               <div class="meta">
                   <p>
                       Defined in
-                  <a href="../files/.._ember-bootstrap_addon_components_bs-navbar.js.html#l328"><code>..&#x2F;ember-bootstrap&#x2F;addon&#x2F;components&#x2F;bs-navbar.js:328</code></a>
+                  <a href="../files/.._ember-bootstrap_addon_components_bs-navbar.js.html#l314"><code>..&#x2F;ember-bootstrap&#x2F;addon&#x2F;components&#x2F;bs-navbar.js:314</code></a>
               </p>
             
             
@@ -532,7 +522,7 @@ additional container is added like with Bootstrap 3 if <code>fluid</code> is <co
                   <p><strong>Default:</strong> true</p>
                   <p>
                       Defined in
-                  <a href="../files/.._ember-bootstrap_addon_components_bs-navbar.js.html#l121"><code>..&#x2F;ember-bootstrap&#x2F;addon&#x2F;components&#x2F;bs-navbar.js:121</code></a>
+                  <a href="../files/.._ember-bootstrap_addon_components_bs-navbar.js.html#l107"><code>..&#x2F;ember-bootstrap&#x2F;addon&#x2F;components&#x2F;bs-navbar.js:107</code></a>
               </p>
             
             
@@ -561,7 +551,7 @@ additional container is added like with Bootstrap 3 if <code>fluid</code> is <co
               <div class="meta">
                   <p>
                       Defined in
-                  <a href="../files/.._ember-bootstrap_addon_components_bs-navbar.js.html#l340"><code>..&#x2F;ember-bootstrap&#x2F;addon&#x2F;components&#x2F;bs-navbar.js:340</code></a>
+                  <a href="../files/.._ember-bootstrap_addon_components_bs-navbar.js.html#l326"><code>..&#x2F;ember-bootstrap&#x2F;addon&#x2F;components&#x2F;bs-navbar.js:326</code></a>
               </p>
             
             
@@ -589,7 +579,7 @@ additional container is added like with Bootstrap 3 if <code>fluid</code> is <co
               <div class="meta">
                   <p>
                       Defined in
-                  <a href="../files/.._ember-bootstrap_addon_components_bs-navbar.js.html#l334"><code>..&#x2F;ember-bootstrap&#x2F;addon&#x2F;components&#x2F;bs-navbar.js:334</code></a>
+                  <a href="../files/.._ember-bootstrap_addon_components_bs-navbar.js.html#l320"><code>..&#x2F;ember-bootstrap&#x2F;addon&#x2F;components&#x2F;bs-navbar.js:320</code></a>
               </p>
             
             
@@ -618,7 +608,7 @@ additional container is added like with Bootstrap 3 if <code>fluid</code> is <co
                   <p><strong>Default:</strong> null</p>
                   <p>
                       Defined in
-                  <a href="../files/.._ember-bootstrap_addon_components_bs-navbar.js.html#l153"><code>..&#x2F;ember-bootstrap&#x2F;addon&#x2F;components&#x2F;bs-navbar.js:153</code></a>
+                  <a href="../files/.._ember-bootstrap_addon_components_bs-navbar.js.html#l139"><code>..&#x2F;ember-bootstrap&#x2F;addon&#x2F;components&#x2F;bs-navbar.js:139</code></a>
               </p>
             
             
@@ -626,7 +616,7 @@ additional container is added like with Bootstrap 3 if <code>fluid</code> is <co
             
               <div class="description">
                 <p>Specifies the position classes for the navbar, currently supporting none, "fixed-top", "fixed-bottom", and
-            either "static-top" (BS3) or "sticky-top" (BS4).
+            "sticky-top".
             See the <a href="http://getbootstrap.com/components/#navbar-fixed-top">bootstrap docs</a> for details.</p>
             
               </div>
@@ -650,7 +640,7 @@ additional container is added like with Bootstrap 3 if <code>fluid</code> is <co
                   <p><strong>Default:</strong> &#x27;lg&#x27;</p>
                   <p>
                       Defined in
-                  <a href="../files/.._ember-bootstrap_addon_components_bs-navbar.js.html#l277"><code>..&#x2F;ember-bootstrap&#x2F;addon&#x2F;components&#x2F;bs-navbar.js:277</code></a>
+                  <a href="../files/.._ember-bootstrap_addon_components_bs-navbar.js.html#l263"><code>..&#x2F;ember-bootstrap&#x2F;addon&#x2F;components&#x2F;bs-navbar.js:263</code></a>
               </p>
             
             
@@ -681,7 +671,7 @@ additional container is added like with Bootstrap 3 if <code>fluid</code> is <co
               <div class="meta">
                   <p>
                       Defined in
-                  <a href="../files/.._ember-bootstrap_addon_components_bs-navbar.js.html#l322"><code>..&#x2F;ember-bootstrap&#x2F;addon&#x2F;components&#x2F;bs-navbar.js:322</code></a>
+                  <a href="../files/.._ember-bootstrap_addon_components_bs-navbar.js.html#l308"><code>..&#x2F;ember-bootstrap&#x2F;addon&#x2F;components&#x2F;bs-navbar.js:308</code></a>
               </p>
             
             
@@ -710,7 +700,7 @@ additional container is added like with Bootstrap 3 if <code>fluid</code> is <co
                   <p><strong>Default:</strong> &#x27;light&#x27;</p>
                   <p>
                       Defined in
-                  <a href="../files/.._ember-bootstrap_addon_components_bs-navbar.js.html#l178"><code>..&#x2F;ember-bootstrap&#x2F;addon&#x2F;components&#x2F;bs-navbar.js:178</code></a>
+                  <a href="../files/.._ember-bootstrap_addon_components_bs-navbar.js.html#l164"><code>..&#x2F;ember-bootstrap&#x2F;addon&#x2F;components&#x2F;bs-navbar.js:164</code></a>
               </p>
             
             
@@ -742,7 +732,7 @@ additional container is added like with Bootstrap 3 if <code>fluid</code> is <co
                 <div class="meta">
                             <p>
                             Defined in
-                    <a href="../files/.._ember-bootstrap_addon_components_bs-navbar.js.html#l202"><code>..&#x2F;ember-bootstrap&#x2F;addon&#x2F;components&#x2F;bs-navbar.js:202</code></a>
+                    <a href="../files/.._ember-bootstrap_addon_components_bs-navbar.js.html#l188"><code>..&#x2F;ember-bootstrap&#x2F;addon&#x2F;components&#x2F;bs-navbar.js:188</code></a>
                     </p>
             
             
@@ -770,7 +760,7 @@ additional container is added like with Bootstrap 3 if <code>fluid</code> is <co
                 <div class="meta">
                             <p>
                             Defined in
-                    <a href="../files/.._ember-bootstrap_addon_components_bs-navbar.js.html#l212"><code>..&#x2F;ember-bootstrap&#x2F;addon&#x2F;components&#x2F;bs-navbar.js:212</code></a>
+                    <a href="../files/.._ember-bootstrap_addon_components_bs-navbar.js.html#l198"><code>..&#x2F;ember-bootstrap&#x2F;addon&#x2F;components&#x2F;bs-navbar.js:198</code></a>
                     </p>
             
             
@@ -796,7 +786,7 @@ additional container is added like with Bootstrap 3 if <code>fluid</code> is <co
                 <div class="meta">
                             <p>
                             Defined in
-                    <a href="../files/.._ember-bootstrap_addon_components_bs-navbar.js.html#l222"><code>..&#x2F;ember-bootstrap&#x2F;addon&#x2F;components&#x2F;bs-navbar.js:222</code></a>
+                    <a href="../files/.._ember-bootstrap_addon_components_bs-navbar.js.html#l208"><code>..&#x2F;ember-bootstrap&#x2F;addon&#x2F;components&#x2F;bs-navbar.js:208</code></a>
                     </p>
             
             
@@ -824,7 +814,7 @@ additional container is added like with Bootstrap 3 if <code>fluid</code> is <co
                 <div class="meta">
                             <p>
                             Defined in
-                    <a href="../files/.._ember-bootstrap_addon_components_bs-navbar.js.html#l232"><code>..&#x2F;ember-bootstrap&#x2F;addon&#x2F;components&#x2F;bs-navbar.js:232</code></a>
+                    <a href="../files/.._ember-bootstrap_addon_components_bs-navbar.js.html#l218"><code>..&#x2F;ember-bootstrap&#x2F;addon&#x2F;components&#x2F;bs-navbar.js:218</code></a>
                     </p>
             
             

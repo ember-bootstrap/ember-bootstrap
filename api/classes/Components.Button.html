@@ -67,7 +67,7 @@ as well as advanced functionality such as button states.</p>
 <h3>Actions</h3>
 <p>Use the <code>onClick</code> property of the component to send an action to your controller. It will receive the button's value
 (see the <code>value</code> property) as an argument.</p>
-<pre class="code prettyprint"><code class="language-hbs">&lt;BsButton @type="primary" @icon="glyphicon glyphicon-download" @onClick=(action "download")&gt;
+<pre class="code prettyprint"><code class="language-hbs">&lt;BsButton @type="primary" @icon="glyphicon glyphicon-download" @onClick={{this.download}}&gt;
   Downloads
 &lt;/BsButton&gt;
 </code></pre>
@@ -102,13 +102,13 @@ import { action } from '@ember/object';
 
 export default class MyController extends Controller {
   @action
-  download(value) {
+  download() {
     return new Promise(...);
   }
-});
+}
 </code></pre>
 <p>For further customization <code>isPending</code>, <code>isFulfilled</code>, <code>isRejected</code> and <code>isSettled</code> properties are yielded:</p>
-<pre class="code prettyprint"><code class="language-hbs">&lt;BsButton @onClick=(action "download") as |button|&gt;
+<pre class="code prettyprint"><code class="language-hbs">&lt;BsButton @onClick={{this.download}} as |button|&gt;
   Download
   {{#if button.isPending}}
     &lt;span class="loading-spinner"&gt;&lt;/span&gt;

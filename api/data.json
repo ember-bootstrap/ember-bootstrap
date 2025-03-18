@@ -2,11 +2,11 @@
     "project": {
         "name": "ember-bootstrap",
         "description": "Twitter Bootstrap components for Ember.js",
-        "version": "v6.4.2"
+        "version": "v6.5.0"
     },
     "files": {
-        "../ember-bootstrap/addon/components/bs-accordion/item/body.js": {
-            "name": "../ember-bootstrap/addon/components/bs-accordion/item/body.js",
+        "../ember-bootstrap/addon/components/bs-accordion/item/body.ts": {
+            "name": "../ember-bootstrap/addon/components/bs-accordion/item/body.ts",
             "modules": {},
             "classes": {
                 "Components.AccordionItemBody": 1
@@ -16,8 +16,8 @@
                 "Components": 1
             }
         },
-        "../ember-bootstrap/addon/components/bs-accordion/item/title.js": {
-            "name": "../ember-bootstrap/addon/components/bs-accordion/item/title.js",
+        "../ember-bootstrap/addon/components/bs-accordion/item/title.ts": {
+            "name": "../ember-bootstrap/addon/components/bs-accordion/item/title.ts",
             "modules": {},
             "classes": {
                 "Components.AccordionItemTitle": 1
@@ -27,8 +27,8 @@
                 "Components": 1
             }
         },
-        "../ember-bootstrap/addon/components/bs-accordion/item.js": {
-            "name": "../ember-bootstrap/addon/components/bs-accordion/item.js",
+        "../ember-bootstrap/addon/components/bs-accordion/item.ts": {
+            "name": "../ember-bootstrap/addon/components/bs-accordion/item.ts",
             "modules": {},
             "classes": {
                 "Components.AccordionItem": 1
@@ -60,8 +60,8 @@
                 "Components": 1
             }
         },
-        "../ember-bootstrap/addon/components/bs-contextual-help/element.js": {
-            "name": "../ember-bootstrap/addon/components/bs-contextual-help/element.js",
+        "../ember-bootstrap/addon/components/bs-contextual-help/element.ts": {
+            "name": "../ember-bootstrap/addon/components/bs-contextual-help/element.ts",
             "modules": {},
             "classes": {
                 "Components.ContextualHelpElement": 1
@@ -225,8 +225,8 @@
                 "Components": 1
             }
         },
-        "../ember-bootstrap/addon/components/bs-modal/header/close.js": {
-            "name": "../ember-bootstrap/addon/components/bs-modal/header/close.js",
+        "../ember-bootstrap/addon/components/bs-modal/header/close.ts": {
+            "name": "../ember-bootstrap/addon/components/bs-modal/header/close.ts",
             "modules": {},
             "classes": {
                 "Components.ModalHeaderClose": 1
@@ -236,8 +236,8 @@
                 "Components": 1
             }
         },
-        "../ember-bootstrap/addon/components/bs-modal/header/title.js": {
-            "name": "../ember-bootstrap/addon/components/bs-modal/header/title.js",
+        "../ember-bootstrap/addon/components/bs-modal/header/title.ts": {
+            "name": "../ember-bootstrap/addon/components/bs-modal/header/title.ts",
             "modules": {},
             "classes": {
                 "Components.ModalHeaderTitle": 1
@@ -247,8 +247,8 @@
                 "Components": 1
             }
         },
-        "../ember-bootstrap/addon/components/bs-modal/body.js": {
-            "name": "../ember-bootstrap/addon/components/bs-modal/body.js",
+        "../ember-bootstrap/addon/components/bs-modal/body.ts": {
+            "name": "../ember-bootstrap/addon/components/bs-modal/body.ts",
             "modules": {},
             "classes": {
                 "Components.ModalBody": 1
@@ -258,8 +258,8 @@
                 "Components": 1
             }
         },
-        "../ember-bootstrap/addon/components/bs-modal/dialog.js": {
-            "name": "../ember-bootstrap/addon/components/bs-modal/dialog.js",
+        "../ember-bootstrap/addon/components/bs-modal/dialog.ts": {
+            "name": "../ember-bootstrap/addon/components/bs-modal/dialog.ts",
             "modules": {},
             "classes": {
                 "Components.ModalDialog": 1
@@ -269,8 +269,8 @@
                 "Components": 1
             }
         },
-        "../ember-bootstrap/addon/components/bs-modal/footer.js": {
-            "name": "../ember-bootstrap/addon/components/bs-modal/footer.js",
+        "../ember-bootstrap/addon/components/bs-modal/footer.ts": {
+            "name": "../ember-bootstrap/addon/components/bs-modal/footer.ts",
             "modules": {},
             "classes": {
                 "Components.ModalFooter": 1
@@ -280,8 +280,8 @@
                 "Components": 1
             }
         },
-        "../ember-bootstrap/addon/components/bs-modal/header.js": {
-            "name": "../ember-bootstrap/addon/components/bs-modal/header.js",
+        "../ember-bootstrap/addon/components/bs-modal/header.ts": {
+            "name": "../ember-bootstrap/addon/components/bs-modal/header.ts",
             "modules": {},
             "classes": {
                 "Components.ModalHeader": 1
@@ -357,8 +357,8 @@
                 "Components": 1
             }
         },
-        "../ember-bootstrap/addon/components/bs-progress/bar.js": {
-            "name": "../ember-bootstrap/addon/components/bs-progress/bar.js",
+        "../ember-bootstrap/addon/components/bs-progress/bar.ts": {
+            "name": "../ember-bootstrap/addon/components/bs-progress/bar.ts",
             "modules": {},
             "classes": {
                 "Components.ProgressBar": 1
@@ -379,8 +379,8 @@
                 "Components": 1
             }
         },
-        "../ember-bootstrap/addon/components/bs-tooltip/element.js": {
-            "name": "../ember-bootstrap/addon/components/bs-tooltip/element.js",
+        "../ember-bootstrap/addon/components/bs-tooltip/element.ts": {
+            "name": "../ember-bootstrap/addon/components/bs-tooltip/element.ts",
             "modules": {},
             "classes": {
                 "Components.TooltipElement": 1
@@ -390,8 +390,8 @@
                 "Components": 1
             }
         },
-        "../ember-bootstrap/addon/components/bs-accordion.js": {
-            "name": "../ember-bootstrap/addon/components/bs-accordion.js",
+        "../ember-bootstrap/addon/components/bs-accordion.ts": {
+            "name": "../ember-bootstrap/addon/components/bs-accordion.ts",
             "modules": {},
             "classes": {
                 "Components.Accordion": 1
@@ -401,8 +401,8 @@
                 "Components": 1
             }
         },
-        "../ember-bootstrap/addon/components/bs-alert.js": {
-            "name": "../ember-bootstrap/addon/components/bs-alert.js",
+        "../ember-bootstrap/addon/components/bs-alert.ts": {
+            "name": "../ember-bootstrap/addon/components/bs-alert.ts",
             "modules": {},
             "classes": {
                 "Components.Alert": 1
@@ -456,8 +456,8 @@
                 "Components": 1
             }
         },
-        "../ember-bootstrap/addon/components/bs-contextual-help.js": {
-            "name": "../ember-bootstrap/addon/components/bs-contextual-help.js",
+        "../ember-bootstrap/addon/components/bs-contextual-help.ts": {
+            "name": "../ember-bootstrap/addon/components/bs-contextual-help.ts",
             "modules": {},
             "classes": {
                 "Components.ContextualHelp": 1
@@ -522,8 +522,8 @@
                 "Components": 1
             }
         },
-        "../ember-bootstrap/addon/components/bs-modal.js": {
-            "name": "../ember-bootstrap/addon/components/bs-modal.js",
+        "../ember-bootstrap/addon/components/bs-modal.ts": {
+            "name": "../ember-bootstrap/addon/components/bs-modal.ts",
             "modules": {},
             "classes": {
                 "Components.Modal": 1
@@ -566,8 +566,8 @@
                 "Components": 1
             }
         },
-        "../ember-bootstrap/addon/components/bs-progress.js": {
-            "name": "../ember-bootstrap/addon/components/bs-progress.js",
+        "../ember-bootstrap/addon/components/bs-progress.ts": {
+            "name": "../ember-bootstrap/addon/components/bs-progress.ts",
             "modules": {},
             "classes": {
                 "Components.Progress": 1
@@ -599,8 +599,8 @@
                 "Components": 1
             }
         },
-        "../ember-bootstrap/addon/components/bs-tooltip.js": {
-            "name": "../ember-bootstrap/addon/components/bs-tooltip.js",
+        "../ember-bootstrap/addon/components/bs-tooltip.ts": {
+            "name": "../ember-bootstrap/addon/components/bs-tooltip.ts",
             "modules": {},
             "classes": {
                 "Components.Tooltip": 1
@@ -622,7 +622,7 @@
             "plugin_for": [],
             "extension_for": [],
             "namespace": "Components",
-            "file": "../ember-bootstrap/addon/components/bs-accordion/item/body.js",
+            "file": "../ember-bootstrap/addon/components/bs-accordion/item/body.ts",
             "line": 1,
             "description": "Component for an accordion item body.\n\nSee [Components.Accordion](Components.Accordion.html) for examples.",
             "extends": "Ember.Component",
@@ -638,8 +638,8 @@
             "plugin_for": [],
             "extension_for": [],
             "namespace": "Components",
-            "file": "../ember-bootstrap/addon/components/bs-accordion/item/title.js",
-            "line": 4,
+            "file": "../ember-bootstrap/addon/components/bs-accordion/item/title.ts",
+            "line": 16,
             "description": "Component for an accordion item title.\n\nSee [Components.Accordion](Components.Accordion.html) for examples.",
             "extends": "Glimmer.Component",
             "access": "public",
@@ -654,8 +654,8 @@
             "plugin_for": [],
             "extension_for": [],
             "namespace": "Components",
-            "file": "../ember-bootstrap/addon/components/bs-accordion/item.js",
-            "line": 5,
+            "file": "../ember-bootstrap/addon/components/bs-accordion/item.ts",
+            "line": 29,
             "description": "A collapsible/expandable item within an accordion\n\nSee [Components.Accordion](Components.Accordion.html) for examples.",
             "extends": "Ember.Component",
             "access": "public",
@@ -702,8 +702,8 @@
             "plugin_for": [],
             "extension_for": [],
             "namespace": "Components",
-            "file": "../ember-bootstrap/addon/components/bs-contextual-help/element.js",
-            "line": 8,
+            "file": "../ember-bootstrap/addon/components/bs-contextual-help/element.ts",
+            "line": 29,
             "description": "Internal (abstract) component for contextual help markup. Should not be used directly.",
             "extends": "Glimmer.Component",
             "access": "private",
@@ -767,7 +767,7 @@
             "extension_for": [],
             "namespace": "Components",
             "file": "../ember-bootstrap/addon/components/bs-dropdown/menu.js",
-            "line": 9,
+            "line": 7,
             "description": "Component for the dropdown menu.\n\nSee [Components.Dropdown](Components.Dropdown.html) for examples.",
             "extends": "Component",
             "access": "public",
@@ -935,7 +935,7 @@
             "plugin_for": [],
             "extension_for": [],
             "namespace": "Components",
-            "file": "../ember-bootstrap/addon/components/bs-modal/header/close.js",
+            "file": "../ember-bootstrap/addon/components/bs-modal/header/close.ts",
             "line": 1,
             "extends": "Glimmer.Component",
             "access": "private",
@@ -950,7 +950,7 @@
             "plugin_for": [],
             "extension_for": [],
             "namespace": "Components",
-            "file": "../ember-bootstrap/addon/components/bs-modal/header/title.js",
+            "file": "../ember-bootstrap/addon/components/bs-modal/header/title.ts",
             "line": 1,
             "extends": "Glimmer.Component",
             "access": "private",
@@ -965,7 +965,7 @@
             "plugin_for": [],
             "extension_for": [],
             "namespace": "Components",
-            "file": "../ember-bootstrap/addon/components/bs-modal/body.js",
+            "file": "../ember-bootstrap/addon/components/bs-modal/body.ts",
             "line": 1,
             "description": "Modal body element used within [Components.Modal](Components.Modal.html) components. See there for examples.",
             "extends": "Glimmer.Component",
@@ -981,8 +981,8 @@
             "plugin_for": [],
             "extension_for": [],
             "namespace": "Components",
-            "file": "../ember-bootstrap/addon/components/bs-modal/dialog.js",
-            "line": 9,
+            "file": "../ember-bootstrap/addon/components/bs-modal/dialog.ts",
+            "line": 41,
             "description": "Internal component for modal's markup and event handling. Should not be used directly.",
             "extends": "Glimmer.Component",
             "access": "private",
@@ -997,7 +997,7 @@
             "plugin_for": [],
             "extension_for": [],
             "namespace": "Components",
-            "file": "../ember-bootstrap/addon/components/bs-modal/footer.js",
+            "file": "../ember-bootstrap/addon/components/bs-modal/footer.ts",
             "line": 1,
             "description": "Modal footer element used within [Components.Modal](Components.Modal.html) components. See there for examples.",
             "extends": "Glimmer.Component",
@@ -1013,7 +1013,7 @@
             "plugin_for": [],
             "extension_for": [],
             "namespace": "Components",
-            "file": "../ember-bootstrap/addon/components/bs-modal/header.js",
+            "file": "../ember-bootstrap/addon/components/bs-modal/header.ts",
             "line": 1,
             "description": "Modal header element used within [Components.Modal](Components.Modal.html) components. See there for examples.",
             "extends": "Glimmer.Component",
@@ -1125,8 +1125,8 @@
             "plugin_for": [],
             "extension_for": [],
             "namespace": "Components",
-            "file": "../ember-bootstrap/addon/components/bs-progress/bar.js",
-            "line": 3,
+            "file": "../ember-bootstrap/addon/components/bs-progress/bar.ts",
+            "line": 20,
             "description": "Component for a single progress bar, see [Components.Progress](Components.Progress.html) for more examples.",
             "extends": "Ember.Component",
             "access": "public",
@@ -1157,8 +1157,8 @@
             "plugin_for": [],
             "extension_for": [],
             "namespace": "Components",
-            "file": "../ember-bootstrap/addon/components/bs-tooltip/element.js",
-            "line": 4,
+            "file": "../ember-bootstrap/addon/components/bs-tooltip/element.ts",
+            "line": 14,
             "description": "Internal component for tooltip's markup. Should not be used directly.",
             "extends": "Components.ContextualHelpElement",
             "access": "private",
@@ -1173,8 +1173,8 @@
             "plugin_for": [],
             "extension_for": [],
             "namespace": "Components",
-            "file": "../ember-bootstrap/addon/components/bs-accordion.js",
-            "line": 5,
+            "file": "../ember-bootstrap/addon/components/bs-accordion.ts",
+            "line": 24,
             "description": "Bootstrap-style [accordion group](http://getbootstrap.com/javascript/#collapse-example-accordion),\nwith collapsible/expandable items.\n\n### Usage\n\nUse as a block level component with any number of yielded [Components.AccordionItem](Components.AccordionItem.html)\ncomponents as children:\n\n```handlebars\n<BsAccordion as |acc|>\n  <acc.item @value={{1}} @title=\"First item\">\n    <p>Lorem ipsum...</p>\n    <button {{on \"click\" (fn acc.change 2)}}>\n      Next\n    </button>\n  </acc.item>\n  <acc.item @value={{2}} @title=\"Second item\">\n    <p>Lorem ipsum...</p>\n  </acc.item>\n  <acc.item @value={{3}} @title=\"Third item\">\n    <p>Lorem ipsum...</p>\n  </acc.item>\n</BsAccordion>\n```\n\nIn the example above the first accordion item utilizes the yielded `change` action to add some custom behaviour.\n\n*Note that only invoking the component in a template as shown above is considered part of its public API. Extending from it (subclassing) is generally not supported, and may break at any time.*",
             "extends": "Glimmer.Component",
             "access": "public",
@@ -1189,8 +1189,8 @@
             "plugin_for": [],
             "extension_for": [],
             "namespace": "Components",
-            "file": "../ember-bootstrap/addon/components/bs-alert.js",
-            "line": 8,
+            "file": "../ember-bootstrap/addon/components/bs-alert.ts",
+            "line": 27,
             "description": "Implements [Bootstrap alerts](http://getbootstrap.com/components/#alerts)\n\n### Usage\n\nBy default, it is a user dismissible alert with a fade out animation, both of which can be disabled. Be sure to set the\n`type` property for proper styling.\n\n```hbs\n<BsAlert @type=\"success\">\n  <strong>Well done!</strong> You successfully read this important alert message.\n</BsAlert>\n```\n\nOptionally you can render a header for the alert using named blocks syntax:\n\n```hbs\n<BsAlert>\n  <:header>\n    Well done!\n  </:header>\n  <:body>\n    You successfully read this important alert message.\n  </:body>\n</BsAlert>\n```\n\nThe header is rendered using a `<h4>` element by default. You can customize\nthat one by setting `@headerTag` argument of `<BsAlert>`.\n\nUsing named block syntax as shown above may require installing\n[ember-named-blocks-polyfill](https://github.com/ember-polyfills/ember-named-blocks-polyfill)\nin your project depending on the Ember version used.\n\n*Note that only invoking the component in a template as shown above is considered part of its public API. Extending from it (subclassing) is generally not supported, and may break at any time.*",
             "extends": "Glimmer.Component",
             "access": "public",
@@ -1223,7 +1223,7 @@
             "namespace": "Components",
             "file": "../ember-bootstrap/addon/components/bs-button.ts",
             "line": 58,
-            "description": "Implements a HTML button element, with support for all [Bootstrap button CSS styles](http://getbootstrap.com/css/#buttons)\nas well as advanced functionality such as button states.\n\n### Basic Usage\n\n```hbs\n<BsButton @type=\"primary\" @icon=\"glyphicon glyphicon-download\">\n  Downloads\n</BsButton>\n```\n\n### Actions\n\nUse the `onClick` property of the component to send an action to your controller. It will receive the button's value\n(see the `value` property) as an argument.\n\n```hbs\n<BsButton @type=\"primary\" @icon=\"glyphicon glyphicon-download\" @onClick=(action \"download\")>\n  Downloads\n</BsButton>\n```\n\n### Promise support for automatic state change\n\nWhen returning a Promise for any asynchronous operation from the `onClick` closure action the button will\nmanage an internal state (\"default\" > \"pending\" > \"fulfilled\"/\"rejected\") automatically.\n\nThe button is disabled by default if it's in pending state. You could override this behavior by passing\nthe `disabled` HTML attribute or by setting `@preventConcurrency` to false.\n\n```hbs\n<BsButton\n  disabled={{false}}\n/>\n```\n\n```hbs\n<BsButton\n  @preventConcurrency={{false}}\n/>\n```\n\nThe label could be changed automatically according to the state of the promise with `@defaultText`,\n`@pendingText`, `@fulfilledText` and `@rejectedText` arguments:\n\n```hbs\n<BsButton\n  @type=\"primary\"\n  @icon=\"glyphicon glyphicon-download\"\n  @defaultText=\"Download\"\n  @pendingText=\"Loading...\"\n  @fulfilledText=\"Completed!\"\n  @rejectedText=\"Oups!?\"\n  @onClick={{this.download}}\n/>\n```\n\n```js\n// controller.js\nimport { Controller } from '@ember/controller';\nimport { action } from '@ember/object';\n\nexport default class MyController extends Controller {\n  @action\n  download(value) {\n    return new Promise(...);\n  }\n});\n```\n\nFor further customization `isPending`, `isFulfilled`, `isRejected` and `isSettled` properties are yielded:\n\n```hbs\n<BsButton @onClick=(action \"download\") as |button|>\n  Download\n  {{#if button.isPending}}\n    <span class=\"loading-spinner\"></span>\n  {{/if}}\n</BsButton>\n```\n\nYou can `reset` the state represented by these properties and used for button's text by setting `reset` property to\n`true`.\n\n*Note that only invoking the component in a template as shown above is considered part of its public API. Extending from it (subclassing) is generally not supported, and may break at any time.*",
+            "description": "Implements a HTML button element, with support for all [Bootstrap button CSS styles](http://getbootstrap.com/css/#buttons)\nas well as advanced functionality such as button states.\n\n### Basic Usage\n\n```hbs\n<BsButton @type=\"primary\" @icon=\"glyphicon glyphicon-download\">\n  Downloads\n</BsButton>\n```\n\n### Actions\n\nUse the `onClick` property of the component to send an action to your controller. It will receive the button's value\n(see the `value` property) as an argument.\n\n```hbs\n<BsButton @type=\"primary\" @icon=\"glyphicon glyphicon-download\" @onClick={{this.download}}>\n  Downloads\n</BsButton>\n```\n\n### Promise support for automatic state change\n\nWhen returning a Promise for any asynchronous operation from the `onClick` closure action the button will\nmanage an internal state (\"default\" > \"pending\" > \"fulfilled\"/\"rejected\") automatically.\n\nThe button is disabled by default if it's in pending state. You could override this behavior by passing\nthe `disabled` HTML attribute or by setting `@preventConcurrency` to false.\n\n```hbs\n<BsButton\n  disabled={{false}}\n/>\n```\n\n```hbs\n<BsButton\n  @preventConcurrency={{false}}\n/>\n```\n\nThe label could be changed automatically according to the state of the promise with `@defaultText`,\n`@pendingText`, `@fulfilledText` and `@rejectedText` arguments:\n\n```hbs\n<BsButton\n  @type=\"primary\"\n  @icon=\"glyphicon glyphicon-download\"\n  @defaultText=\"Download\"\n  @pendingText=\"Loading...\"\n  @fulfilledText=\"Completed!\"\n  @rejectedText=\"Oups!?\"\n  @onClick={{this.download}}\n/>\n```\n\n```js\n// controller.js\nimport { Controller } from '@ember/controller';\nimport { action } from '@ember/object';\n\nexport default class MyController extends Controller {\n  @action\n  download() {\n    return new Promise(...);\n  }\n}\n```\n\nFor further customization `isPending`, `isFulfilled`, `isRejected` and `isSettled` properties are yielded:\n\n```hbs\n<BsButton @onClick={{this.download}} as |button|>\n  Download\n  {{#if button.isPending}}\n    <span class=\"loading-spinner\"></span>\n  {{/if}}\n</BsButton>\n```\n\nYou can `reset` the state represented by these properties and used for button's text by setting `reset` property to\n`true`.\n\n*Note that only invoking the component in a template as shown above is considered part of its public API. Extending from it (subclassing) is generally not supported, and may break at any time.*",
             "extends": "Glimmer.Component",
             "access": "public",
             "tagname": ""
@@ -1269,8 +1269,8 @@
             "plugin_for": [],
             "extension_for": [],
             "namespace": "Components",
-            "file": "../ember-bootstrap/addon/components/bs-contextual-help.js",
-            "line": 20,
+            "file": "../ember-bootstrap/addon/components/bs-contextual-help.ts",
+            "line": 53,
             "extends": "Glimmer.Component",
             "access": "private",
             "tagname": ""
@@ -1363,8 +1363,8 @@
             "plugin_for": [],
             "extension_for": [],
             "namespace": "Components",
-            "file": "../ember-bootstrap/addon/components/bs-modal.js",
-            "line": 22,
+            "file": "../ember-bootstrap/addon/components/bs-modal.ts",
+            "line": 72,
             "description": "Component for creating [Bootstrap modals](http://getbootstrap.com/javascript/#modals) with custom markup.\n\n### Usage\n\n```hbs\n<BsModal @onSubmit={{this.submit}} as |modal|>\n  <modal.header>\n    <h4 class=\"modal-title\"><i class=\"glyphicon glyphicon-alert\"></i> Alert</h4>\n  </modal.header>\n  <modal.body>\n    Are you absolutely sure you want to do that???\n  </modal.body>\n  <modal.footer as |footer|>\n    <BsButton @onClick={{modal.close}} @type=\"danger\">Oh no, forget it!</BsButton>\n    <BsButton @onClick={{modal.submit}} @type=\"success\">Yeah!</BsButton>\n  </modal.footer>\n</BsModal>\n```\n\nThe component yields references to the following contextual components, that you can use to further customize the output:\n\n* [modal.body](Components.ModalBody.html)\n* [modal.header](Components.ModalHeader.html)\n* [modal.footer](Components.ModalFooter.html)\n\nFurthermore references to the following actions are yielded:\n\n* `close`: triggers the `onHide` action and closes the modal\n* `submit`: triggers the `onSubmit` action (or the submit event on a form if present in the body element)\n\n### Further reading\n\nSee the documentation of the [bs-modal-simple](Components.ModalSimple.html) component for further examples.\n\n*Note that only invoking the component in a template as shown above is considered part of its public API. Extending from it (subclassing) is generally not supported, and may break at any time.*",
             "extends": "Glimmer.Component",
             "access": "public",
@@ -1397,7 +1397,7 @@
             "namespace": "Components",
             "file": "../ember-bootstrap/addon/components/bs-navbar.js",
             "line": 7,
-            "description": "Component to generate [Bootstrap navbars](http://getbootstrap.com/components/#navbar).\n\n### Usage\n\nUses the following components by a contextual reference:\n\n```hbs\n<BsNavbar as |navbar|>\n  <div class=\"navbar-header\">\n    <navbar.toggle />\n    <a class=\"navbar-brand\" href=\"#\">Brand</a>\n  </div>\n  <navbar.content>\n    <navbar.nav as |nav|>\n      <nav.item>\n        <nav.linkTo @route=\"home\">Home</nav.linkTo>\n      </nav.item>\n      <nav.item>\n        <nav.linkTo @route=\"navbars\">Navbars</nav.linkTo>\n      </nav.item>\n    </navbar.nav>\n  </navbar.content>\n</BsNavbar>\n```\n\n**Note:** the `<div class=\"navbar-header\">` is required for BS3 to hold the elements visible on a mobile breakpoint,\nwhen the actual content is collapsed. It should *not* be used for BS4!\n\nThe component yields references to the following contextual components:\n\n* [Components.NavbarContent](Components.NavbarContent.html)\n* [Components.NavbarToggle](Components.NavbarToggle.html)\n* [Components.NavbarNav](Components.NavbarNav.html)\n\nFurthermore, references to the following actions are yielded:\n\n* `collapse`: triggers the `onCollapse` action and collapses the navbar (mobile)\n* `expand`: triggers the `onExpand` action and expands the navbar (mobile)\n* `toggleNavbar`: triggers the `toggleNavbar` action and toggles the navbar (mobile)\n\n### Responsive Design\n\nFor the mobile breakpoint the Bootstrap styles will hide the navbar content (`{{navbar.content}}`). Clicking on the\nnavbar toggle button (`{{navbar.toggle}}`) will expand the menu. By default, all nav links (`<nav.linkTo @route=\"...\">`) are already\nwired up to call the navbar's `collapse` action, so clicking any of them will collapse the navbar. To selectively\nprevent that, you can set its `collapseNavbar` property to false:\n\n```hbs\n<nav.item>\n  <nav.linkTo @route=\"index\" @collapseNavbar={{false}}>Don't collapse</nav.linkTo>\n</nav.item>\n```\n\nTo collapse the navbar when clicking on some nav items that are not internal links, you can use the yielded `collapse`\naction:\n\n```hbs\n<BsNavbar as |navbar|>\n  <navbar.content>\n    <navbar.nav as |nav|>\n      <nav.item>\n        <a {{on \"click\" navbar.collapse}}>Collapse</a>\n      </nav.item>\n    </navbar.nav>\n  </navbar.content>\n</BsNavbar>\n```\n\n### Navbar styles\n\nThe component supports the default bootstrap navbar styling options through the `type`\nproperty. Bootstrap navbars [do not currently support justified nav links](http://getbootstrap.com/components/#navbar-default),\nso those are explicitly disallowed.\n\nOther bootstrap navbar variations, such as forms, buttons, etc. can be supported through direct use of\nbootstrap styles applied through the `class` attribute on the components.\n\n### Bootstrap 3/4 Notes\n\nBootstrap 4 changed the default navbar styling option from `navbar-default` to `navbar-light`.\nIf you explicitly specified \"default\" in Bootstrap 3 and are migrating, you will need to change\nthis in your code. Bootstrap 4 changes `navbar-inverse` to `navbar-dark`.\n\nBootstrap 4 navbars are fluid by default without the need for an additional container. An\nadditional container is added like with Bootstrap 3 if `fluid` is `false`.\n\n*Note that only invoking the component in a template as shown above is considered part of its public API. Extending from it (subclassing) is generally not supported, and may break at any time.*",
+            "description": "Component to generate [Bootstrap navbars](http://getbootstrap.com/components/#navbar).\n\n### Usage\n\nUses the following components by a contextual reference:\n\n```hbs\n<BsNavbar as |navbar|>\n  <a class=\"navbar-brand\" href=\"#\">Brand</a>\n  <navbar.toggle />\n  <navbar.content>\n    <navbar.nav as |nav|>\n      <nav.item>\n        <nav.linkTo @route=\"home\">Home</nav.linkTo>\n      </nav.item>\n      <nav.item>\n        <nav.linkTo @route=\"navbars\">Navbars</nav.linkTo>\n      </nav.item>\n    </navbar.nav>\n  </navbar.content>\n</BsNavbar>\n```\n\nThe component yields references to the following contextual components:\n\n* [Components.NavbarContent](Components.NavbarContent.html)\n* [Components.NavbarToggle](Components.NavbarToggle.html)\n* [Components.NavbarNav](Components.NavbarNav.html)\n\nFurthermore, references to the following actions are yielded:\n\n* `collapse`: triggers the `onCollapse` action and collapses the navbar (mobile)\n* `expand`: triggers the `onExpand` action and expands the navbar (mobile)\n* `toggleNavbar`: triggers the `toggleNavbar` action and toggles the navbar (mobile)\n\n### Responsive Design\n\nFor the mobile breakpoint the Bootstrap styles will hide the navbar content (`{{navbar.content}}`). Clicking on the\nnavbar toggle button (`{{navbar.toggle}}`) will expand the menu. By default, all nav links (`<nav.linkTo @route=\"...\">`) are already\nwired up to call the navbar's `collapse` action, so clicking any of them will collapse the navbar. To selectively\nprevent that, you can set its `collapseNavbar` property to false:\n\n```hbs\n<nav.item>\n  <nav.linkTo @route=\"index\" @collapseNavbar={{false}}>Don't collapse</nav.linkTo>\n</nav.item>\n```\n\nTo collapse the navbar when clicking on some nav items that are not internal links, you can use the yielded `collapse`\naction:\n\n```hbs\n<BsNavbar as |navbar|>\n  <navbar.content>\n    <navbar.nav as |nav|>\n      <nav.item>\n        <a {{on \"click\" navbar.collapse}}>Collapse</a>\n      </nav.item>\n    </navbar.nav>\n  </navbar.content>\n</BsNavbar>\n```\n\n### Navbar styles\n\nThe component supports the default bootstrap navbar styling options through the `type`\nproperty. Bootstrap navbars [do not currently support justified nav links](http://getbootstrap.com/components/#navbar-default),\nso those are explicitly disallowed.\n\nOther bootstrap navbar variations, such as forms, buttons, etc. can be supported through direct use of\nbootstrap styles applied through the `class` attribute on the components.\n\n*Note that only invoking the component in a template as shown above is considered part of its public API. Extending from it (subclassing) is generally not supported, and may break at any time.*",
             "extends": "Component",
             "access": "public",
             "tagname": ""
@@ -1427,8 +1427,8 @@
             "plugin_for": [],
             "extension_for": [],
             "namespace": "Components",
-            "file": "../ember-bootstrap/addon/components/bs-progress.js",
-            "line": 3,
+            "file": "../ember-bootstrap/addon/components/bs-progress.ts",
+            "line": 19,
             "description": "Component to display a Bootstrap progress bar, see http://getbootstrap.com/components/#progress.\n\n### Usage\n\nThe component yields a [Components.ProgressBar](Components.ProgressBar.html) component that represents a single bar.\nUse the `value` property to control the progress bar's width. To apply the different styling options supplied by\nBootstrap, use the appropriate properties like `type`, `showLabel`, `striped` or `animate`.\n\n```hbs\n<BsProgress as |pg| >\n  <pg.bar @value={{this.progressValue}} @minValue={{0}} @maxValue={{10}} @showLabel={{true}} @type=\"danger\" aria-label=\"Loading\" />\n</BsProgress>\n```\n\n> Don't forget to add a `aria-label` attribute to the progress bar for accessibility!\n\n### Stacked\n\nYou can place multiple progress bar components in a single progress component to\ncreate a stack of progress bars as seen in http://getbootstrap.com/components/#progress-stacked.\n\n```hbs\n<BsProgress as |pg| >\n  <pg.bar @value={{this.progressValue1}} @type=\"success\" />\n  <pg.bar @value={{this.progressValue2}} @type=\"warning\" />\n  <pg.bar @value={{this.progressValue3}} @type=\"danger\" />\n</BsProgress>\n```\n\n*Note that only invoking the component in a template as shown above is considered part of its public API. Extending from it (subclassing) is generally not supported, and may break at any time.*",
             "extends": "Ember.Component",
             "access": "public",
@@ -1475,8 +1475,8 @@
             "plugin_for": [],
             "extension_for": [],
             "namespace": "Components",
-            "file": "../ember-bootstrap/addon/components/bs-tooltip.js",
-            "line": 3,
+            "file": "../ember-bootstrap/addon/components/bs-tooltip.ts",
+            "line": 12,
             "description": "Component that implements Bootstrap [tooltips](http://getbootstrap.com/javascript/#tooltips).\n\nBy default, it will attach its listeners (mouseover and focus) to the parent DOM element to trigger\nthe tooltip:\n\n```hbs\n<button class=\"btn\">\n  <BsTooltip @title=\"This is a tooltip\" />\n</button>\n```\n\nYou can also use the component in a block form to set the title:\n\n```hbs\n<button class=\"btn\">\n  <BsTooltip>\n    This is a tooltip\n  </BsTooltip>\n</button>\n```\n\n### Trigger\n\nThe trigger element is the DOM element that will cause the tooltip to be shown when one of the trigger events occur on\nthat element. By default, the trigger element is the parent DOM element of the component, and the trigger events will be\n\"hover\" and \"focus\".\n\nThe `triggerElement` property accepts any CSS selector to attach the tooltip to any other existing DOM element.\n\nTo customize the events that will trigger the tooltip use the `triggerEvents` property, that accepts an array or a\nstring of events, with \"hover\", \"focus\" and \"click\" being supported.\n\n### Placement options\n\nBy default, the tooltip will show up on top of the trigger element. Use the `placement` property to change that\n(\"top\", \"bottom\", \"left\" and \"right\"). To make sure the tooltip will not exceed the viewport (see Advanced customization)\nyou can set `autoPlacement` to true. A tooltip with `placement=\"right\" will be placed to the right if there is enough\nspace, otherwise to the left.\n\n### Advanced customization\n\nSeveral other properties allow for some advanced customization:\n* `visible` to show/hide the tooltip programmatically\n* `fade` to disable the fade in transition\n* `delay` (or `delayShow` and `delayHide`) to add a delay\n* `viewportSelector` and `viewportPadding` to customize the viewport that affects `autoPlacement`\n* a `close` action is yielded, that allows you to close the tooltip:\n\n```hbs\n<BsTooltip as |tt|>This is a tooltip <button {{on \"click\" tt.close}}>Close</button></BsTooltip>\n```\n\nSee the individual API docs for each property.\n\n### Actions\n\nWhen you want to react on the tooltip being shown or hidden, you can use one of the following supported actions:\n* `onShow`\n* `onShown`\n* `onHide`\n* `onHidden`\n\n*Note that only invoking the component in a template as shown above is considered part of its public API. Extending from it (subclassing) is generally not supported, and may break at any time.*",
             "extends": "Components.ContextualHelp",
             "access": "public",
@@ -1486,7 +1486,7 @@
     "elements": {},
     "classitems": [
         {
-            "file": "../ember-bootstrap/addon/components/bs-accordion/item/body.js",
+            "file": "../ember-bootstrap/addon/components/bs-accordion/item/body.ts",
             "line": 12,
             "itemtype": "property",
             "name": "collapsed",
@@ -1497,8 +1497,8 @@
             "namespace": "Components"
         },
         {
-            "file": "../ember-bootstrap/addon/components/bs-accordion/item/title.js",
-            "line": 15,
+            "file": "../ember-bootstrap/addon/components/bs-accordion/item/title.ts",
+            "line": 27,
             "itemtype": "property",
             "name": "collapsed",
             "type": "boolean",
@@ -1508,8 +1508,8 @@
             "namespace": "Components"
         },
         {
-            "file": "../ember-bootstrap/addon/components/bs-accordion/item/title.js",
-            "line": 21,
+            "file": "../ember-bootstrap/addon/components/bs-accordion/item/title.ts",
+            "line": 33,
             "itemtype": "property",
             "name": "disabled",
             "type": "boolean",
@@ -1519,8 +1519,8 @@
             "namespace": "Components"
         },
         {
-            "file": "../ember-bootstrap/addon/components/bs-accordion/item/title.js",
-            "line": 27,
+            "file": "../ember-bootstrap/addon/components/bs-accordion/item/title.ts",
+            "line": 39,
             "itemtype": "event",
             "name": "onClick",
             "access": "public",
@@ -1529,8 +1529,8 @@
             "namespace": "Components"
         },
         {
-            "file": "../ember-bootstrap/addon/components/bs-accordion/item.js",
-            "line": 16,
+            "file": "../ember-bootstrap/addon/components/bs-accordion/item.ts",
+            "line": 40,
             "description": "The title of the accordion item, displayed as a .panel-title element",
             "itemtype": "property",
             "name": "title",
@@ -1541,8 +1541,8 @@
             "namespace": "Components"
         },
         {
-            "file": "../ember-bootstrap/addon/components/bs-accordion/item.js",
-            "line": 24,
+            "file": "../ember-bootstrap/addon/components/bs-accordion/item.ts",
+            "line": 48,
             "description": "The value of the accordion item, which is used as the value of the `selected` property of the parent [Components.Accordion](Components.Accordion.html) component",
             "itemtype": "property",
             "name": "value",
@@ -1552,8 +1552,8 @@
             "namespace": "Components"
         },
         {
-            "file": "../ember-bootstrap/addon/components/bs-accordion/item.js",
-            "line": 33,
+            "file": "../ember-bootstrap/addon/components/bs-accordion/item.ts",
+            "line": 57,
             "itemtype": "property",
             "name": "selected",
             "access": "private",
@@ -1562,8 +1562,8 @@
             "namespace": "Components"
         },
         {
-            "file": "../ember-bootstrap/addon/components/bs-accordion/item.js",
-            "line": 38,
+            "file": "../ember-bootstrap/addon/components/bs-accordion/item.ts",
+            "line": 62,
             "itemtype": "property",
             "name": "titleComponent",
             "type": "{String}",
@@ -1573,8 +1573,8 @@
             "namespace": "Components"
         },
         {
-            "file": "../ember-bootstrap/addon/components/bs-accordion/item.js",
-            "line": 44,
+            "file": "../ember-bootstrap/addon/components/bs-accordion/item.ts",
+            "line": 68,
             "itemtype": "property",
             "name": "bodyComponent",
             "type": "{String}",
@@ -1584,8 +1584,8 @@
             "namespace": "Components"
         },
         {
-            "file": "../ember-bootstrap/addon/components/bs-accordion/item.js",
-            "line": 50,
+            "file": "../ember-bootstrap/addon/components/bs-accordion/item.ts",
+            "line": 74,
             "itemtype": "property",
             "name": "collapsed",
             "type": "boolean",
@@ -1596,8 +1596,8 @@
             "namespace": "Components"
         },
         {
-            "file": "../ember-bootstrap/addon/components/bs-accordion/item.js",
-            "line": 60,
+            "file": "../ember-bootstrap/addon/components/bs-accordion/item.ts",
+            "line": 84,
             "itemtype": "property",
             "name": "disabled",
             "type": "boolean",
@@ -1607,8 +1607,8 @@
             "namespace": "Components"
         },
         {
-            "file": "../ember-bootstrap/addon/components/bs-accordion/item.js",
-            "line": 66,
+            "file": "../ember-bootstrap/addon/components/bs-accordion/item.ts",
+            "line": 90,
             "description": "Property for type styling\n\nFor the available types see the [Bootstrap docs](https://getbootstrap.com/docs/4.3/components/navbar/#color-schemes)",
             "itemtype": "property",
             "name": "type",
@@ -1620,8 +1620,8 @@
             "namespace": "Components"
         },
         {
-            "file": "../ember-bootstrap/addon/components/bs-accordion/item.js",
-            "line": 83,
+            "file": "../ember-bootstrap/addon/components/bs-accordion/item.ts",
+            "line": 107,
             "description": "Reference to the parent `Components.Accordion` class.",
             "itemtype": "property",
             "name": "accordion",
@@ -1631,8 +1631,8 @@
             "namespace": "Components"
         },
         {
-            "file": "../ember-bootstrap/addon/components/bs-accordion/item.js",
-            "line": 90,
+            "file": "../ember-bootstrap/addon/components/bs-accordion/item.ts",
+            "line": 114,
             "itemtype": "event",
             "name": "onClick",
             "access": "public",
@@ -1825,8 +1825,8 @@
             "namespace": "Components"
         },
         {
-            "file": "../ember-bootstrap/addon/components/bs-contextual-help/element.js",
-            "line": 17,
+            "file": "../ember-bootstrap/addon/components/bs-contextual-help/element.ts",
+            "line": 40,
             "itemtype": "property",
             "name": "placement",
             "type": "string",
@@ -1837,8 +1837,8 @@
             "namespace": "Components"
         },
         {
-            "file": "../ember-bootstrap/addon/components/bs-contextual-help/element.js",
-            "line": 29,
+            "file": "../ember-bootstrap/addon/components/bs-contextual-help/element.ts",
+            "line": 52,
             "itemtype": "property",
             "name": "fade",
             "type": "boolean",
@@ -1849,8 +1849,8 @@
             "namespace": "Components"
         },
         {
-            "file": "../ember-bootstrap/addon/components/bs-contextual-help/element.js",
-            "line": 38,
+            "file": "../ember-bootstrap/addon/components/bs-contextual-help/element.ts",
+            "line": 61,
             "itemtype": "property",
             "name": "showHelp",
             "type": "boolean",
@@ -1861,8 +1861,8 @@
             "namespace": "Components"
         },
         {
-            "file": "../ember-bootstrap/addon/components/bs-contextual-help/element.js",
-            "line": 47,
+            "file": "../ember-bootstrap/addon/components/bs-contextual-help/element.ts",
+            "line": 70,
             "description": "If true component will render in place, rather than be wormholed.",
             "itemtype": "property",
             "name": "renderInPlace",
@@ -1874,8 +1874,8 @@
             "namespace": "Components"
         },
         {
-            "file": "../ember-bootstrap/addon/components/bs-contextual-help/element.js",
-            "line": 56,
+            "file": "../ember-bootstrap/addon/components/bs-contextual-help/element.ts",
+            "line": 79,
             "description": "Which element to align to",
             "itemtype": "property",
             "name": "popperTarget",
@@ -1886,8 +1886,8 @@
             "namespace": "Components"
         },
         {
-            "file": "../ember-bootstrap/addon/components/bs-contextual-help/element.js",
-            "line": 64,
+            "file": "../ember-bootstrap/addon/components/bs-contextual-help/element.ts",
+            "line": 87,
             "itemtype": "property",
             "name": "autoPlacement",
             "type": "boolean",
@@ -1898,8 +1898,8 @@
             "namespace": "Components"
         },
         {
-            "file": "../ember-bootstrap/addon/components/bs-contextual-help/element.js",
-            "line": 71,
+            "file": "../ember-bootstrap/addon/components/bs-contextual-help/element.ts",
+            "line": 94,
             "description": "The DOM element of the viewport element.",
             "itemtype": "property",
             "name": "viewportElement",
@@ -1910,8 +1910,8 @@
             "namespace": "Components"
         },
         {
-            "file": "../ember-bootstrap/addon/components/bs-contextual-help/element.js",
-            "line": 79,
+            "file": "../ember-bootstrap/addon/components/bs-contextual-help/element.ts",
+            "line": 102,
             "description": "Take a padding into account for keeping the tooltip/popover within the bounds of the element given by `viewportElement`.",
             "itemtype": "property",
             "name": "viewportPadding",
@@ -1923,8 +1923,8 @@
             "namespace": "Components"
         },
         {
-            "file": "../ember-bootstrap/addon/components/bs-contextual-help/element.js",
-            "line": 88,
+            "file": "../ember-bootstrap/addon/components/bs-contextual-help/element.ts",
+            "line": 111,
             "itemtype": "property",
             "name": "arrowClass",
             "access": "private",
@@ -1933,8 +1933,8 @@
             "namespace": "Components"
         },
         {
-            "file": "../ember-bootstrap/addon/components/bs-contextual-help/element.js",
-            "line": 100,
+            "file": "../ember-bootstrap/addon/components/bs-contextual-help/element.ts",
+            "line": 123,
             "description": "popper.js modifier config",
             "itemtype": "property",
             "name": "popperModifiers",
@@ -1946,7 +1946,7 @@
         },
         {
             "file": "../ember-bootstrap/addon/components/bs-dropdown/menu.js",
-            "line": 20,
+            "line": 18,
             "itemtype": "property",
             "name": "_element",
             "type": "null | HTMLElement",
@@ -1957,7 +1957,7 @@
         },
         {
             "file": "../ember-bootstrap/addon/components/bs-dropdown/menu.js",
-            "line": 27,
+            "line": 25,
             "description": "Alignment of the menu, either \"left\" or \"right\"",
             "itemtype": "property",
             "name": "align",
@@ -1970,7 +1970,7 @@
         },
         {
             "file": "../ember-bootstrap/addon/components/bs-dropdown/menu.js",
-            "line": 39,
+            "line": 37,
             "itemtype": "property",
             "name": "direction",
             "default": "'down'",
@@ -1982,7 +1982,7 @@
         },
         {
             "file": "../ember-bootstrap/addon/components/bs-dropdown/menu.js",
-            "line": 49,
+            "line": 47,
             "description": "By default, the menu is rendered in the same place as the dropdown. If you experience clipping\nissues, you can set this to false to render the menu in a wormhole at the top of the DOM.",
             "itemtype": "property",
             "name": "renderInPlace",
@@ -1995,7 +1995,7 @@
         },
         {
             "file": "../ember-bootstrap/addon/components/bs-dropdown/menu.js",
-            "line": 62,
+            "line": 60,
             "itemtype": "property",
             "name": "inNav",
             "type": "{boolean}",
@@ -2006,7 +2006,7 @@
         },
         {
             "file": "../ember-bootstrap/addon/components/bs-dropdown/menu.js",
-            "line": 71,
+            "line": 69,
             "itemtype": "property",
             "name": "_renderInPlace",
             "type": "boolean",
@@ -2017,7 +2017,7 @@
         },
         {
             "file": "../ember-bootstrap/addon/components/bs-dropdown/menu.js",
-            "line": 80,
+            "line": 78,
             "description": "The wormhole destinationElement",
             "itemtype": "property",
             "name": "destinationElement",
@@ -2030,7 +2030,7 @@
         },
         {
             "file": "../ember-bootstrap/addon/components/bs-dropdown/menu.js",
-            "line": 166,
+            "line": 149,
             "itemtype": "property",
             "name": "itemComponent",
             "type": "{String}",
@@ -2041,7 +2041,7 @@
         },
         {
             "file": "../ember-bootstrap/addon/components/bs-dropdown/menu.js",
-            "line": 172,
+            "line": 155,
             "itemtype": "property",
             "name": "linkToComponent",
             "type": "{String}",
@@ -2052,7 +2052,7 @@
         },
         {
             "file": "../ember-bootstrap/addon/components/bs-dropdown/menu.js",
-            "line": 178,
+            "line": 161,
             "itemtype": "property",
             "name": "dividerComponent",
             "type": "{String}",
@@ -2884,7 +2884,7 @@
             "namespace": "Components"
         },
         {
-            "file": "../ember-bootstrap/addon/components/bs-modal/header/close.js",
+            "file": "../ember-bootstrap/addon/components/bs-modal/header/close.ts",
             "line": 9,
             "itemtype": "event",
             "name": "onClick",
@@ -2894,8 +2894,8 @@
             "namespace": "Components"
         },
         {
-            "file": "../ember-bootstrap/addon/components/bs-modal/dialog.js",
-            "line": 18,
+            "file": "../ember-bootstrap/addon/components/bs-modal/dialog.ts",
+            "line": 50,
             "itemtype": "property",
             "name": "id",
             "type": "null | HTMLElement",
@@ -2903,8 +2903,8 @@
             "namespace": "Components"
         },
         {
-            "file": "../ember-bootstrap/addon/components/bs-modal/dialog.js",
-            "line": 24,
+            "file": "../ember-bootstrap/addon/components/bs-modal/dialog.ts",
+            "line": 56,
             "description": "Name of the size class",
             "itemtype": "property",
             "name": "sizeClass",
@@ -2916,8 +2916,8 @@
             "namespace": "Components"
         },
         {
-            "file": "../ember-bootstrap/addon/components/bs-modal/dialog.js",
-            "line": 37,
+            "file": "../ember-bootstrap/addon/components/bs-modal/dialog.ts",
+            "line": 69,
             "description": "The id of the `.modal-title` element",
             "itemtype": "property",
             "name": "titleId",
@@ -2929,8 +2929,8 @@
             "namespace": "Components"
         },
         {
-            "file": "../ember-bootstrap/addon/components/bs-modal/dialog.js",
-            "line": 48,
+            "file": "../ember-bootstrap/addon/components/bs-modal/dialog.ts",
+            "line": 80,
             "description": "Gets or sets the id of the title element for aria accessibility tags",
             "itemtype": "method",
             "name": "getSetTitleID",
@@ -2940,8 +2940,8 @@
             "namespace": "Components"
         },
         {
-            "file": "../ember-bootstrap/addon/components/bs-modal/dialog.js",
-            "line": 82,
+            "file": "../ember-bootstrap/addon/components/bs-modal/dialog.ts",
+            "line": 114,
             "description": "If true clicking on the backdrop will be ignored and will not close modal.",
             "itemtype": "property",
             "name": "ignoreBackdropClick",
@@ -2953,8 +2953,8 @@
             "namespace": "Components"
         },
         {
-            "file": "../ember-bootstrap/addon/components/bs-modal/dialog.js",
-            "line": 92,
+            "file": "../ember-bootstrap/addon/components/bs-modal/dialog.ts",
+            "line": 124,
             "description": "The target DOM element of mouse down event.",
             "itemtype": "property",
             "name": "mouseDownElement",
@@ -2966,8 +2966,8 @@
             "namespace": "Components"
         },
         {
-            "file": "../ember-bootstrap/addon/components/bs-modal/dialog.js",
-            "line": 102,
+            "file": "../ember-bootstrap/addon/components/bs-modal/dialog.ts",
+            "line": 134,
             "itemtype": "event",
             "name": "onClose",
             "access": "public",
@@ -2976,7 +2976,7 @@
             "namespace": "Components"
         },
         {
-            "file": "../ember-bootstrap/addon/components/bs-modal/footer.js",
+            "file": "../ember-bootstrap/addon/components/bs-modal/footer.ts",
             "line": 11,
             "description": "The title of the default close button. Will be ignored (i.e. no close button) if you provide your own block\ntemplate.",
             "itemtype": "property",
@@ -2989,7 +2989,7 @@
             "namespace": "Components"
         },
         {
-            "file": "../ember-bootstrap/addon/components/bs-modal/footer.js",
+            "file": "../ember-bootstrap/addon/components/bs-modal/footer.ts",
             "line": 21,
             "description": "The title of the submit button (primary button). Will be ignored (i.e. no button) if set to `null` or if you provide\nyour own block template.",
             "itemtype": "property",
@@ -3002,7 +3002,7 @@
             "namespace": "Components"
         },
         {
-            "file": "../ember-bootstrap/addon/components/bs-modal/footer.js",
+            "file": "../ember-bootstrap/addon/components/bs-modal/footer.ts",
             "line": 31,
             "description": "Set to `true` to disable the submit button. If you bind this to some property that indicates if submitting is allowed\n(form validation for example) this can be used to prevent the user from pressing the submit button.",
             "itemtype": "property",
@@ -3015,7 +3015,7 @@
             "namespace": "Components"
         },
         {
-            "file": "../ember-bootstrap/addon/components/bs-modal/footer.js",
+            "file": "../ember-bootstrap/addon/components/bs-modal/footer.ts",
             "line": 41,
             "description": "The type of the submit button (primary button).",
             "itemtype": "property",
@@ -3028,7 +3028,7 @@
             "namespace": "Components"
         },
         {
-            "file": "../ember-bootstrap/addon/components/bs-modal/footer.js",
+            "file": "../ember-bootstrap/addon/components/bs-modal/footer.ts",
             "line": 50,
             "itemtype": "property",
             "name": "buttonComponent",
@@ -3039,7 +3039,7 @@
             "namespace": "Components"
         },
         {
-            "file": "../ember-bootstrap/addon/components/bs-modal/footer.js",
+            "file": "../ember-bootstrap/addon/components/bs-modal/footer.ts",
             "line": 56,
             "description": "The action to send to the parent modal component when the modal footer's form is submitted",
             "itemtype": "event",
@@ -3050,7 +3050,7 @@
             "namespace": "Components"
         },
         {
-            "file": "../ember-bootstrap/addon/components/bs-modal/footer.js",
+            "file": "../ember-bootstrap/addon/components/bs-modal/footer.ts",
             "line": 63,
             "itemtype": "event",
             "name": "onClose",
@@ -3060,7 +3060,7 @@
             "namespace": "Components"
         },
         {
-            "file": "../ember-bootstrap/addon/components/bs-modal/header.js",
+            "file": "../ember-bootstrap/addon/components/bs-modal/header.ts",
             "line": 11,
             "description": "Show a close button (x icon)",
             "itemtype": "property",
@@ -3073,7 +3073,7 @@
             "namespace": "Components"
         },
         {
-            "file": "../ember-bootstrap/addon/components/bs-modal/header.js",
+            "file": "../ember-bootstrap/addon/components/bs-modal/header.ts",
             "line": 20,
             "description": "The title to display in the modal header",
             "itemtype": "property",
@@ -3086,7 +3086,7 @@
             "namespace": "Components"
         },
         {
-            "file": "../ember-bootstrap/addon/components/bs-modal/header.js",
+            "file": "../ember-bootstrap/addon/components/bs-modal/header.ts",
             "line": 29,
             "itemtype": "property",
             "name": "titleComponent",
@@ -3097,7 +3097,7 @@
             "namespace": "Components"
         },
         {
-            "file": "../ember-bootstrap/addon/components/bs-modal/header.js",
+            "file": "../ember-bootstrap/addon/components/bs-modal/header.ts",
             "line": 35,
             "itemtype": "property",
             "name": "closeComponent",
@@ -3108,7 +3108,7 @@
             "namespace": "Components"
         },
         {
-            "file": "../ember-bootstrap/addon/components/bs-modal/header.js",
+            "file": "../ember-bootstrap/addon/components/bs-modal/header.ts",
             "line": 41,
             "itemtype": "event",
             "name": "onClose",
@@ -3152,8 +3152,8 @@
             "namespace": "Components"
         },
         {
-            "file": "../ember-bootstrap/addon/components/bs-progress/bar.js",
-            "line": 12,
+            "file": "../ember-bootstrap/addon/components/bs-progress/bar.ts",
+            "line": 29,
             "description": "The lower limit of the value range",
             "itemtype": "property",
             "name": "minValue",
@@ -3165,8 +3165,8 @@
             "namespace": "Components"
         },
         {
-            "file": "../ember-bootstrap/addon/components/bs-progress/bar.js",
-            "line": 24,
+            "file": "../ember-bootstrap/addon/components/bs-progress/bar.ts",
+            "line": 41,
             "description": "The upper limit of the value range",
             "itemtype": "property",
             "name": "maxValue",
@@ -3178,8 +3178,8 @@
             "namespace": "Components"
         },
         {
-            "file": "../ember-bootstrap/addon/components/bs-progress/bar.js",
-            "line": 36,
+            "file": "../ember-bootstrap/addon/components/bs-progress/bar.ts",
+            "line": 53,
             "description": "The value the progress bar should represent",
             "itemtype": "property",
             "name": "value",
@@ -3191,9 +3191,9 @@
             "namespace": "Components"
         },
         {
-            "file": "../ember-bootstrap/addon/components/bs-progress/bar.js",
-            "line": 48,
-            "description": "If true a label will be shown inside the progress bar.\n\nBy default it will be the percentage corresponding to the `value` property, rounded to `roundDigits` digits.\nYou can customize it by using the component with a block template, which the component yields the percentage\nvalue to:\n\n```hbs\n{{#bs-progress}}\n{{#bs-progress-bar value=progressValue as |percent|}}{{progressValue}} ({{percent}}%){{/bs-progress-bar}}\n{{/bs-progress}}\n```",
+            "file": "../ember-bootstrap/addon/components/bs-progress/bar.ts",
+            "line": 65,
+            "description": "If true a label will be shown inside the progress bar.\n\nBy default, it will be the percentage corresponding to the `value` property, rounded to `roundDigits` digits.\nYou can customize it by using the component with a block template, which the component yields the percentage\nvalue to:\n\n```hbs\n{{#bs-progress}}\n{{#bs-progress-bar value=progressValue as |percent|}}{{progressValue}} ({{percent}}%){{/bs-progress-bar}}\n{{/bs-progress}}\n```",
             "itemtype": "property",
             "name": "showLabel",
             "type": "boolean",
@@ -3204,8 +3204,8 @@
             "namespace": "Components"
         },
         {
-            "file": "../ember-bootstrap/addon/components/bs-progress/bar.js",
-            "line": 70,
+            "file": "../ember-bootstrap/addon/components/bs-progress/bar.ts",
+            "line": 87,
             "description": "Create a striped effect, see http://getbootstrap.com/components/#progress-striped",
             "itemtype": "property",
             "name": "striped",
@@ -3217,8 +3217,8 @@
             "namespace": "Components"
         },
         {
-            "file": "../ember-bootstrap/addon/components/bs-progress/bar.js",
-            "line": 82,
+            "file": "../ember-bootstrap/addon/components/bs-progress/bar.ts",
+            "line": 99,
             "description": "Animate the stripes, see http://getbootstrap.com/components/#progress-animated",
             "itemtype": "property",
             "name": "animate",
@@ -3230,8 +3230,8 @@
             "namespace": "Components"
         },
         {
-            "file": "../ember-bootstrap/addon/components/bs-progress/bar.js",
-            "line": 94,
+            "file": "../ember-bootstrap/addon/components/bs-progress/bar.ts",
+            "line": 111,
             "description": "Specify to how many digits the progress bar label should be rounded.",
             "itemtype": "property",
             "name": "roundDigits",
@@ -3243,8 +3243,8 @@
             "namespace": "Components"
         },
         {
-            "file": "../ember-bootstrap/addon/components/bs-progress/bar.js",
-            "line": 106,
+            "file": "../ember-bootstrap/addon/components/bs-progress/bar.ts",
+            "line": 123,
             "description": "Property for type styling\n\nFor the available types see the [Bootstrap docs](https://getbootstrap.com/docs/4.3/components/progress/#backgrounds)",
             "itemtype": "property",
             "name": "type",
@@ -3256,8 +3256,8 @@
             "namespace": "Components"
         },
         {
-            "file": "../ember-bootstrap/addon/components/bs-progress/bar.js",
-            "line": 124,
+            "file": "../ember-bootstrap/addon/components/bs-progress/bar.ts",
+            "line": 141,
             "description": "The percentage of `value`",
             "itemtype": "property",
             "name": "percent",
@@ -3269,8 +3269,8 @@
             "namespace": "Components"
         },
         {
-            "file": "../ember-bootstrap/addon/components/bs-progress/bar.js",
-            "line": 142,
+            "file": "../ember-bootstrap/addon/components/bs-progress/bar.ts",
+            "line": 162,
             "description": "The percentage of `value`, rounded to `roundDigits` digits",
             "itemtype": "property",
             "name": "percentRounded",
@@ -3437,8 +3437,8 @@
             "namespace": "Components"
         },
         {
-            "file": "../ember-bootstrap/addon/components/bs-accordion.js",
-            "line": 41,
+            "file": "../ember-bootstrap/addon/components/bs-accordion.ts",
+            "line": 60,
             "description": "The value of the currently selected accordion item. Set this to change selection programmatically.\n\nWhen the selection is changed by user interaction this property will not update by using two-way bindings in order\nto follow DDAU best practices. If you want to react to such changes, subscribe to the `onChange` action",
             "itemtype": "property",
             "name": "selected",
@@ -3448,8 +3448,8 @@
             "namespace": "Components"
         },
         {
-            "file": "../ember-bootstrap/addon/components/bs-accordion.js",
-            "line": 51,
+            "file": "../ember-bootstrap/addon/components/bs-accordion.ts",
+            "line": 70,
             "itemtype": "property",
             "name": "itemComponent",
             "type": "{String}",
@@ -3459,8 +3459,8 @@
             "namespace": "Components"
         },
         {
-            "file": "../ember-bootstrap/addon/components/bs-accordion.js",
-            "line": 63,
+            "file": "../ember-bootstrap/addon/components/bs-accordion.ts",
+            "line": 86,
             "description": "The value of the currently selected accordion item",
             "itemtype": "property",
             "name": "isSelected",
@@ -3470,8 +3470,8 @@
             "namespace": "Components"
         },
         {
-            "file": "../ember-bootstrap/addon/components/bs-accordion.js",
-            "line": 87,
+            "file": "../ember-bootstrap/addon/components/bs-accordion.ts",
+            "line": 110,
             "description": "Action when the selected accordion item is about to be changed.\n\nYou can return false to prevent changing the active item, and do that in your action by\nsetting the `selected` accordingly.",
             "itemtype": "event",
             "name": "onChange",
@@ -3491,8 +3491,8 @@
             "namespace": "Components"
         },
         {
-            "file": "../ember-bootstrap/addon/components/bs-alert.js",
-            "line": 50,
+            "file": "../ember-bootstrap/addon/components/bs-alert.ts",
+            "line": 69,
             "description": "A dismissible alert will have a close button in the upper right corner, that the user can click to dismiss\nthe alert.",
             "itemtype": "property",
             "name": "dismissible",
@@ -3504,8 +3504,8 @@
             "namespace": "Components"
         },
         {
-            "file": "../ember-bootstrap/addon/components/bs-alert.js",
-            "line": 62,
+            "file": "../ember-bootstrap/addon/components/bs-alert.ts",
+            "line": 81,
             "description": "If true the alert is completely hidden. Will be set when the fade animation has finished.",
             "itemtype": "property",
             "name": "hidden",
@@ -3518,8 +3518,8 @@
             "namespace": "Components"
         },
         {
-            "file": "../ember-bootstrap/addon/components/bs-alert.js",
-            "line": 74,
+            "file": "../ember-bootstrap/addon/components/bs-alert.ts",
+            "line": 93,
             "description": "This property controls if the alert should be visible. If false it might still be in the DOM until the fade animation\nhas completed.\n\nWhen the alert is dismissed by user interaction this property will not update by using two-way bindings in order\nto follow DDAU best practices. If you want to react to such changes, subscribe to the `onDismiss` action",
             "itemtype": "property",
             "name": "visible",
@@ -3531,8 +3531,8 @@
             "namespace": "Components"
         },
         {
-            "file": "../ember-bootstrap/addon/components/bs-alert.js",
-            "line": 90,
+            "file": "../ember-bootstrap/addon/components/bs-alert.ts",
+            "line": 109,
             "itemtype": "property",
             "name": "_visible",
             "access": "private",
@@ -3541,8 +3541,8 @@
             "namespace": "Components"
         },
         {
-            "file": "../ember-bootstrap/addon/components/bs-alert.js",
-            "line": 97,
+            "file": "../ember-bootstrap/addon/components/bs-alert.ts",
+            "line": 116,
             "description": "Set to false to disable the fade out animation when hiding the alert.",
             "itemtype": "property",
             "name": "fade",
@@ -3554,8 +3554,8 @@
             "namespace": "Components"
         },
         {
-            "file": "../ember-bootstrap/addon/components/bs-alert.js",
-            "line": 112,
+            "file": "../ember-bootstrap/addon/components/bs-alert.ts",
+            "line": 131,
             "description": "The duration of the fade out animation",
             "itemtype": "property",
             "name": "fadeDuration",
@@ -3567,8 +3567,21 @@
             "namespace": "Components"
         },
         {
-            "file": "../ember-bootstrap/addon/components/bs-alert.js",
-            "line": 123,
+            "file": "../ember-bootstrap/addon/components/bs-alert.ts",
+            "line": 142,
+            "description": "HTML tag to be used for the header",
+            "itemtype": "property",
+            "name": "headerTag",
+            "type": "string",
+            "default": "'h4'",
+            "access": "public",
+            "tagname": "",
+            "class": "Components.Alert",
+            "namespace": "Components"
+        },
+        {
+            "file": "../ember-bootstrap/addon/components/bs-alert.ts",
+            "line": 151,
             "description": "Property for type styling\n\nFor the available types see the [Bootstrap docs](https://getbootstrap.com/docs/4.3/components/alerts/)",
             "itemtype": "property",
             "name": "type",
@@ -3579,8 +3592,8 @@
             "namespace": "Components"
         },
         {
-            "file": "../ember-bootstrap/addon/components/bs-alert.js",
-            "line": 133,
+            "file": "../ember-bootstrap/addon/components/bs-alert.ts",
+            "line": 161,
             "description": "Use CSS transitions?",
             "itemtype": "property",
             "name": "usesTransition",
@@ -3592,8 +3605,8 @@
             "namespace": "Components"
         },
         {
-            "file": "../ember-bootstrap/addon/components/bs-alert.js",
-            "line": 144,
+            "file": "../ember-bootstrap/addon/components/bs-alert.ts",
+            "line": 172,
             "description": "The action to be sent after the alert has been dismissed (including the CSS transition).",
             "itemtype": "event",
             "name": "onDismissed",
@@ -3603,8 +3616,8 @@
             "namespace": "Components"
         },
         {
-            "file": "../ember-bootstrap/addon/components/bs-alert.js",
-            "line": 151,
+            "file": "../ember-bootstrap/addon/components/bs-alert.ts",
+            "line": 179,
             "description": "The action is called when the close button is clicked.\n\nYou can return false to prevent closing the alert automatically, and do that in your action by\nsetting `visible` to false.",
             "itemtype": "event",
             "name": "onDismiss",
@@ -3614,8 +3627,8 @@
             "namespace": "Components"
         },
         {
-            "file": "../ember-bootstrap/addon/components/bs-alert.js",
-            "line": 168,
+            "file": "../ember-bootstrap/addon/components/bs-alert.ts",
+            "line": 196,
             "description": "Call to make the alert visible again after it has been hidden",
             "itemtype": "method",
             "name": "show",
@@ -3625,8 +3638,8 @@
             "namespace": "Components"
         },
         {
-            "file": "../ember-bootstrap/addon/components/bs-alert.js",
-            "line": 178,
+            "file": "../ember-bootstrap/addon/components/bs-alert.ts",
+            "line": 206,
             "description": "Call to hide the alert. If the `fade` property is true, this will fade out the alert before being finally\ndismissed.",
             "itemtype": "method",
             "name": "hide",
@@ -4761,8 +4774,8 @@
             "namespace": "Components"
         },
         {
-            "file": "../ember-bootstrap/addon/components/bs-contextual-help.js",
-            "line": 27,
+            "file": "../ember-bootstrap/addon/components/bs-contextual-help.ts",
+            "line": 62,
             "itemtype": "property",
             "name": "title",
             "type": "string",
@@ -4772,8 +4785,8 @@
             "namespace": "Components"
         },
         {
-            "file": "../ember-bootstrap/addon/components/bs-contextual-help.js",
-            "line": 33,
+            "file": "../ember-bootstrap/addon/components/bs-contextual-help.ts",
+            "line": 68,
             "description": "How to position the tooltip/popover - top | bottom | left | right",
             "itemtype": "property",
             "name": "title",
@@ -4785,9 +4798,9 @@
             "namespace": "Components"
         },
         {
-            "file": "../ember-bootstrap/addon/components/bs-contextual-help.js",
-            "line": 44,
-            "description": "By default it will dynamically reorient the tooltip/popover based on the available space in the viewport. For\nexample, if `placement` is \"left\", the tooltip/popover will display to the left when possible, otherwise it will\ndisplay right. Set to `false` to force placement according to the `placement` property",
+            "file": "../ember-bootstrap/addon/components/bs-contextual-help.ts",
+            "line": 79,
+            "description": "By default, it will dynamically reorient the tooltip/popover based on the available space in the viewport. For\nexample, if `placement` is \"left\", the tooltip/popover will display to the left when possible, otherwise it will\ndisplay right. Set to `false` to force placement according to the `placement` property",
             "itemtype": "property",
             "name": "autoPlacement",
             "type": "boolean",
@@ -4798,8 +4811,8 @@
             "namespace": "Components"
         },
         {
-            "file": "../ember-bootstrap/addon/components/bs-contextual-help.js",
-            "line": 57,
+            "file": "../ember-bootstrap/addon/components/bs-contextual-help.ts",
+            "line": 92,
             "description": "You can programmatically show the tooltip/popover by setting this to `true`",
             "itemtype": "property",
             "name": "visible",
@@ -4811,8 +4824,8 @@
             "namespace": "Components"
         },
         {
-            "file": "../ember-bootstrap/addon/components/bs-contextual-help.js",
-            "line": 68,
+            "file": "../ember-bootstrap/addon/components/bs-contextual-help.ts",
+            "line": 103,
             "itemtype": "property",
             "name": "inDom",
             "type": "boolean",
@@ -4822,8 +4835,8 @@
             "namespace": "Components"
         },
         {
-            "file": "../ember-bootstrap/addon/components/bs-contextual-help.js",
-            "line": 87,
+            "file": "../ember-bootstrap/addon/components/bs-contextual-help.ts",
+            "line": 121,
             "description": "Set to false to disable fade animations.",
             "itemtype": "property",
             "name": "fade",
@@ -4835,8 +4848,8 @@
             "namespace": "Components"
         },
         {
-            "file": "../ember-bootstrap/addon/components/bs-contextual-help.js",
-            "line": 98,
+            "file": "../ember-bootstrap/addon/components/bs-contextual-help.ts",
+            "line": 132,
             "description": "Used to apply Bootstrap's visibility class",
             "itemtype": "property",
             "name": "showHelp",
@@ -4848,8 +4861,8 @@
             "namespace": "Components"
         },
         {
-            "file": "../ember-bootstrap/addon/components/bs-contextual-help.js",
-            "line": 109,
+            "file": "../ember-bootstrap/addon/components/bs-contextual-help.ts",
+            "line": 143,
             "description": "Delay showing and hiding the tooltip/popover (ms). Individual delays for showing and hiding can be specified by using the\n`delayShow` and `delayHide` properties.",
             "itemtype": "property",
             "name": "delay",
@@ -4861,8 +4874,8 @@
             "namespace": "Components"
         },
         {
-            "file": "../ember-bootstrap/addon/components/bs-contextual-help.js",
-            "line": 121,
+            "file": "../ember-bootstrap/addon/components/bs-contextual-help.ts",
+            "line": 155,
             "description": "Delay showing the tooltip/popover. This property overrides the general delay set with the `delay` property.",
             "itemtype": "property",
             "name": "delayShow",
@@ -4874,8 +4887,8 @@
             "namespace": "Components"
         },
         {
-            "file": "../ember-bootstrap/addon/components/bs-contextual-help.js",
-            "line": 132,
+            "file": "../ember-bootstrap/addon/components/bs-contextual-help.ts",
+            "line": 166,
             "description": "Delay hiding the tooltip/popover. This property overrides the general delay set with the `delay` property.",
             "itemtype": "property",
             "name": "delayHide",
@@ -4887,8 +4900,8 @@
             "namespace": "Components"
         },
         {
-            "file": "../ember-bootstrap/addon/components/bs-contextual-help.js",
-            "line": 143,
+            "file": "../ember-bootstrap/addon/components/bs-contextual-help.ts",
+            "line": 177,
             "description": "The duration of the fade transition",
             "itemtype": "property",
             "name": "transitionDuration",
@@ -4900,8 +4913,8 @@
             "namespace": "Components"
         },
         {
-            "file": "../ember-bootstrap/addon/components/bs-contextual-help.js",
-            "line": 154,
+            "file": "../ember-bootstrap/addon/components/bs-contextual-help.ts",
+            "line": 188,
             "description": "Keeps the tooltip/popover within the bounds of this element when `autoPlacement` is true. Can be any valid CSS selector.",
             "itemtype": "property",
             "name": "viewportSelector",
@@ -4917,8 +4930,8 @@
             "namespace": "Components"
         },
         {
-            "file": "../ember-bootstrap/addon/components/bs-contextual-help.js",
-            "line": 167,
+            "file": "../ember-bootstrap/addon/components/bs-contextual-help.ts",
+            "line": 201,
             "description": "Take a padding into account for keeping the tooltip/popover within the bounds of the element given by `viewportSelector`.",
             "itemtype": "property",
             "name": "viewportPadding",
@@ -4934,8 +4947,8 @@
             "namespace": "Components"
         },
         {
-            "file": "../ember-bootstrap/addon/components/bs-contextual-help.js",
-            "line": 182,
+            "file": "../ember-bootstrap/addon/components/bs-contextual-help.ts",
+            "line": 218,
             "description": "The DOM element of the arrow element.",
             "itemtype": "property",
             "name": "arrowElement",
@@ -4947,8 +4960,8 @@
             "namespace": "Components"
         },
         {
-            "file": "../ember-bootstrap/addon/components/bs-contextual-help.js",
-            "line": 191,
+            "file": "../ember-bootstrap/addon/components/bs-contextual-help.ts",
+            "line": 228,
             "description": "The wormhole destinationElement",
             "itemtype": "property",
             "name": "destinationElement",
@@ -4960,8 +4973,8 @@
             "namespace": "Components"
         },
         {
-            "file": "../ember-bootstrap/addon/components/bs-contextual-help.js",
-            "line": 203,
+            "file": "../ember-bootstrap/addon/components/bs-contextual-help.ts",
+            "line": 240,
             "description": "The DOM element of the viewport element.",
             "itemtype": "property",
             "name": "viewportElement",
@@ -4973,9 +4986,9 @@
             "namespace": "Components"
         },
         {
-            "file": "../ember-bootstrap/addon/components/bs-contextual-help.js",
-            "line": 215,
-            "description": "The DOM element that triggers the tooltip/popover. By default it is the parent element of this component.\nYou can set this to any CSS selector to have any other element trigger the tooltip/popover.",
+            "file": "../ember-bootstrap/addon/components/bs-contextual-help.ts",
+            "line": 252,
+            "description": "The DOM element that triggers the tooltip/popover. By default, it is the parent element of this component.\nYou can set this to any CSS selector to have any other element trigger the tooltip/popover.",
             "itemtype": "property",
             "name": "triggerElement",
             "type": "string | null",
@@ -4985,8 +4998,8 @@
             "namespace": "Components"
         },
         {
-            "file": "../ember-bootstrap/addon/components/bs-contextual-help.js",
-            "line": 226,
+            "file": "../ember-bootstrap/addon/components/bs-contextual-help.ts",
+            "line": 265,
             "itemtype": "method",
             "name": "getTriggerTargetElement",
             "access": "private",
@@ -4995,8 +5008,8 @@
             "namespace": "Components"
         },
         {
-            "file": "../ember-bootstrap/addon/components/bs-contextual-help.js",
-            "line": 244,
+            "file": "../ember-bootstrap/addon/components/bs-contextual-help.ts",
+            "line": 283,
             "description": "The event(s) that should trigger the tooltip/popover - click | hover | focus.\nYou can set this to a single event or multiple events, given as an array or a string separated by spaces.",
             "itemtype": "property",
             "name": "triggerEvents",
@@ -5008,8 +5021,8 @@
             "namespace": "Components"
         },
         {
-            "file": "../ember-bootstrap/addon/components/bs-contextual-help.js",
-            "line": 274,
+            "file": "../ember-bootstrap/addon/components/bs-contextual-help.ts",
+            "line": 313,
             "description": "If true component will render in place, rather than be wormholed.",
             "itemtype": "property",
             "name": "renderInPlace",
@@ -5021,8 +5034,8 @@
             "namespace": "Components"
         },
         {
-            "file": "../ember-bootstrap/addon/components/bs-contextual-help.js",
-            "line": 283,
+            "file": "../ember-bootstrap/addon/components/bs-contextual-help.ts",
+            "line": 322,
             "itemtype": "property",
             "name": "_renderInPlace",
             "type": "boolean",
@@ -5032,8 +5045,8 @@
             "namespace": "Components"
         },
         {
-            "file": "../ember-bootstrap/addon/components/bs-contextual-help.js",
-            "line": 292,
+            "file": "../ember-bootstrap/addon/components/bs-contextual-help.ts",
+            "line": 331,
             "description": "Current hover state, 'in', 'out' or null",
             "itemtype": "property",
             "name": "hoverState",
@@ -5044,15 +5057,15 @@
             "namespace": "Components"
         },
         {
-            "file": "../ember-bootstrap/addon/components/bs-contextual-help.js",
-            "line": 301,
+            "file": "../ember-bootstrap/addon/components/bs-contextual-help.ts",
+            "line": 340,
             "description": "Current state for events",
             "class": "Components.ContextualHelp",
             "namespace": "Components"
         },
         {
-            "file": "../ember-bootstrap/addon/components/bs-contextual-help.js",
-            "line": 312,
+            "file": "../ember-bootstrap/addon/components/bs-contextual-help.ts",
+            "line": 351,
             "description": "Ember.run timer",
             "itemtype": "property",
             "name": "timer",
@@ -5062,8 +5075,8 @@
             "namespace": "Components"
         },
         {
-            "file": "../ember-bootstrap/addon/components/bs-contextual-help.js",
-            "line": 320,
+            "file": "../ember-bootstrap/addon/components/bs-contextual-help.ts",
+            "line": 359,
             "description": "Use CSS transitions?",
             "itemtype": "property",
             "name": "usesTransition",
@@ -5075,8 +5088,8 @@
             "namespace": "Components"
         },
         {
-            "file": "../ember-bootstrap/addon/components/bs-contextual-help.js",
-            "line": 331,
+            "file": "../ember-bootstrap/addon/components/bs-contextual-help.ts",
+            "line": 370,
             "description": "The DOM element of the overlay element.",
             "itemtype": "property",
             "name": "overlayElement",
@@ -5088,8 +5101,8 @@
             "namespace": "Components"
         },
         {
-            "file": "../ember-bootstrap/addon/components/bs-contextual-help.js",
-            "line": 341,
+            "file": "../ember-bootstrap/addon/components/bs-contextual-help.ts",
+            "line": 380,
             "description": "This action is called immediately when the tooltip/popover is about to be shown.",
             "itemtype": "event",
             "name": "onShow",
@@ -5099,8 +5112,8 @@
             "namespace": "Components"
         },
         {
-            "file": "../ember-bootstrap/addon/components/bs-contextual-help.js",
-            "line": 348,
+            "file": "../ember-bootstrap/addon/components/bs-contextual-help.ts",
+            "line": 387,
             "description": "This action will be called when the tooltip/popover has been made visible to the user (will wait for CSS transitions to complete).",
             "itemtype": "event",
             "name": "onShown",
@@ -5110,8 +5123,8 @@
             "namespace": "Components"
         },
         {
-            "file": "../ember-bootstrap/addon/components/bs-contextual-help.js",
-            "line": 355,
+            "file": "../ember-bootstrap/addon/components/bs-contextual-help.ts",
+            "line": 394,
             "description": "This action is called immediately when the tooltip/popover is about to be hidden.",
             "itemtype": "event",
             "name": "onHide",
@@ -5121,8 +5134,8 @@
             "namespace": "Components"
         },
         {
-            "file": "../ember-bootstrap/addon/components/bs-contextual-help.js",
-            "line": 362,
+            "file": "../ember-bootstrap/addon/components/bs-contextual-help.ts",
+            "line": 401,
             "description": "This action is called when the tooltip/popover has finished being hidden from the user (will wait for CSS transitions to complete).",
             "itemtype": "event",
             "name": "onHidden",
@@ -5132,8 +5145,8 @@
             "namespace": "Components"
         },
         {
-            "file": "../ember-bootstrap/addon/components/bs-contextual-help.js",
-            "line": 369,
+            "file": "../ember-bootstrap/addon/components/bs-contextual-help.ts",
+            "line": 408,
             "description": "Called when a show event has been received",
             "itemtype": "method",
             "name": "enter",
@@ -5149,8 +5162,8 @@
             "namespace": "Components"
         },
         {
-            "file": "../ember-bootstrap/addon/components/bs-contextual-help.js",
-            "line": 406,
+            "file": "../ember-bootstrap/addon/components/bs-contextual-help.ts",
+            "line": 445,
             "description": "Called when a hide event has been received",
             "itemtype": "method",
             "name": "leave",
@@ -5166,8 +5179,8 @@
             "namespace": "Components"
         },
         {
-            "file": "../ember-bootstrap/addon/components/bs-contextual-help.js",
-            "line": 438,
+            "file": "../ember-bootstrap/addon/components/bs-contextual-help.ts",
+            "line": 477,
             "description": "Called for a click event",
             "itemtype": "method",
             "name": "toggle",
@@ -5177,8 +5190,8 @@
             "namespace": "Components"
         },
         {
-            "file": "../ember-bootstrap/addon/components/bs-contextual-help.js",
-            "line": 453,
+            "file": "../ember-bootstrap/addon/components/bs-contextual-help.ts",
+            "line": 492,
             "description": "Show the tooltip/popover",
             "itemtype": "method",
             "name": "show",
@@ -5188,8 +5201,8 @@
             "namespace": "Components"
         },
         {
-            "file": "../ember-bootstrap/addon/components/bs-contextual-help.js",
-            "line": 514,
+            "file": "../ember-bootstrap/addon/components/bs-contextual-help.ts",
+            "line": 552,
             "description": "Position the tooltip/popover's arrow",
             "itemtype": "method",
             "name": "replaceArrow",
@@ -5213,8 +5226,8 @@
             "namespace": "Components"
         },
         {
-            "file": "../ember-bootstrap/addon/components/bs-contextual-help.js",
-            "line": 529,
+            "file": "../ember-bootstrap/addon/components/bs-contextual-help.ts",
+            "line": 570,
             "description": "Hide the tooltip/popover",
             "itemtype": "method",
             "name": "hide",
@@ -5224,8 +5237,8 @@
             "namespace": "Components"
         },
         {
-            "file": "../ember-bootstrap/addon/components/bs-contextual-help.js",
-            "line": 576,
+            "file": "../ember-bootstrap/addon/components/bs-contextual-help.ts",
+            "line": 616,
             "itemtype": "method",
             "name": "addListeners",
             "access": "private",
@@ -5234,8 +5247,8 @@
             "namespace": "Components"
         },
         {
-            "file": "../ember-bootstrap/addon/components/bs-contextual-help.js",
-            "line": 594,
+            "file": "../ember-bootstrap/addon/components/bs-contextual-help.ts",
+            "line": 642,
             "itemtype": "method",
             "name": "removeListeners",
             "access": "private",
@@ -5244,8 +5257,8 @@
             "namespace": "Components"
         },
         {
-            "file": "../ember-bootstrap/addon/components/bs-contextual-help.js",
-            "line": 613,
+            "file": "../ember-bootstrap/addon/components/bs-contextual-help.ts",
+            "line": 670,
             "itemtype": "method",
             "name": "handleTriggerEvent",
             "access": "private",
@@ -5407,7 +5420,7 @@
         },
         {
             "file": "../ember-bootstrap/addon/components/bs-dropdown.js",
-            "line": 440,
+            "line": 435,
             "itemtype": "property",
             "name": "buttonComponent",
             "type": "{String}",
@@ -5418,7 +5431,7 @@
         },
         {
             "file": "../ember-bootstrap/addon/components/bs-dropdown.js",
-            "line": 446,
+            "line": 441,
             "itemtype": "property",
             "name": "toggleComponent",
             "type": "{String}",
@@ -5429,7 +5442,7 @@
         },
         {
             "file": "../ember-bootstrap/addon/components/bs-dropdown.js",
-            "line": 452,
+            "line": 447,
             "itemtype": "property",
             "name": "menuComponent",
             "type": "{String}",
@@ -6107,8 +6120,8 @@
             "namespace": "Components"
         },
         {
-            "file": "../ember-bootstrap/addon/components/bs-modal.js",
-            "line": 68,
+            "file": "../ember-bootstrap/addon/components/bs-modal.ts",
+            "line": 117,
             "itemtype": "property",
             "name": "_isOpen",
             "access": "private",
@@ -6117,8 +6130,8 @@
             "namespace": "Components"
         },
         {
-            "file": "../ember-bootstrap/addon/components/bs-modal.js",
-            "line": 74,
+            "file": "../ember-bootstrap/addon/components/bs-modal.ts",
+            "line": 123,
             "description": "Set to false to disable fade animations.",
             "itemtype": "property",
             "name": "fade",
@@ -6130,56 +6143,8 @@
             "namespace": "Components"
         },
         {
-            "file": "../ember-bootstrap/addon/components/bs-modal.js",
-            "line": 88,
-            "description": "Used to apply Bootstrap's visibility classes.",
-            "itemtype": "property",
-            "name": "showModal",
-            "type": "boolean",
-            "default": "false",
-            "access": "private",
-            "tagname": "",
-            "class": "Components.Modal",
-            "namespace": "Components"
-        },
-        {
-            "file": "../ember-bootstrap/addon/components/bs-modal.js",
-            "line": 99,
-            "description": "Render modal markup?",
-            "itemtype": "property",
-            "name": "inDom",
-            "type": "boolean",
-            "default": "false",
-            "access": "private",
-            "tagname": "",
-            "class": "Components.Modal",
-            "namespace": "Components"
-        },
-        {
-            "file": "../ember-bootstrap/addon/components/bs-modal.js",
-            "line": 110,
-            "itemtype": "property",
-            "name": "paddingLeft",
-            "type": "number|undefined",
-            "access": "private",
-            "tagname": "",
-            "class": "Components.Modal",
-            "namespace": "Components"
-        },
-        {
-            "file": "../ember-bootstrap/addon/components/bs-modal.js",
-            "line": 118,
-            "itemtype": "property",
-            "name": "paddingRight",
-            "type": "number|undefined",
-            "access": "private",
-            "tagname": "",
-            "class": "Components.Modal",
-            "namespace": "Components"
-        },
-        {
-            "file": "../ember-bootstrap/addon/components/bs-modal.js",
-            "line": 126,
+            "file": "../ember-bootstrap/addon/components/bs-modal.ts",
+            "line": 137,
             "description": "Visibility of the modal. Toggle to show/hide with CSS transitions.\n\nWhen the modal is closed by user interaction this property will not update by using two-way bindings in order\nto follow DDAU best practices. If you want to react to such changes, subscribe to the `onHide` action",
             "itemtype": "property",
             "name": "open",
@@ -6191,8 +6156,56 @@
             "namespace": "Components"
         },
         {
-            "file": "../ember-bootstrap/addon/components/bs-modal.js",
-            "line": 140,
+            "file": "../ember-bootstrap/addon/components/bs-modal.ts",
+            "line": 151,
+            "description": "Used to apply Bootstrap's visibility classes.",
+            "itemtype": "property",
+            "name": "showModal",
+            "type": "boolean",
+            "default": "false",
+            "access": "private",
+            "tagname": "",
+            "class": "Components.Modal",
+            "namespace": "Components"
+        },
+        {
+            "file": "../ember-bootstrap/addon/components/bs-modal.ts",
+            "line": 162,
+            "description": "Render modal markup?",
+            "itemtype": "property",
+            "name": "inDom",
+            "type": "boolean",
+            "default": "false",
+            "access": "private",
+            "tagname": "",
+            "class": "Components.Modal",
+            "namespace": "Components"
+        },
+        {
+            "file": "../ember-bootstrap/addon/components/bs-modal.ts",
+            "line": 173,
+            "itemtype": "property",
+            "name": "paddingLeft",
+            "type": "number|undefined",
+            "access": "private",
+            "tagname": "",
+            "class": "Components.Modal",
+            "namespace": "Components"
+        },
+        {
+            "file": "../ember-bootstrap/addon/components/bs-modal.ts",
+            "line": 181,
+            "itemtype": "property",
+            "name": "paddingRight",
+            "type": "number|undefined",
+            "access": "private",
+            "tagname": "",
+            "class": "Components.Modal",
+            "namespace": "Components"
+        },
+        {
+            "file": "../ember-bootstrap/addon/components/bs-modal.ts",
+            "line": 189,
             "description": "Use a semi-transparent modal background to hide the rest of the page.",
             "itemtype": "property",
             "name": "backdrop",
@@ -6204,8 +6217,8 @@
             "namespace": "Components"
         },
         {
-            "file": "../ember-bootstrap/addon/components/bs-modal.js",
-            "line": 151,
+            "file": "../ember-bootstrap/addon/components/bs-modal.ts",
+            "line": 200,
             "itemtype": "property",
             "name": "shouldShowBackdrop",
             "type": "boolean",
@@ -6215,8 +6228,8 @@
             "namespace": "Components"
         },
         {
-            "file": "../ember-bootstrap/addon/components/bs-modal.js",
-            "line": 159,
+            "file": "../ember-bootstrap/addon/components/bs-modal.ts",
+            "line": 208,
             "description": "Closes the modal when escape key is pressed.",
             "itemtype": "property",
             "name": "keyboard",
@@ -6228,8 +6241,8 @@
             "namespace": "Components"
         },
         {
-            "file": "../ember-bootstrap/addon/components/bs-modal.js",
-            "line": 170,
+            "file": "../ember-bootstrap/addon/components/bs-modal.ts",
+            "line": 219,
             "description": "[BS4 only!] Vertical position, either 'top' (default) or 'center'\n'center' will apply the `modal-dialog-centered` class",
             "itemtype": "property",
             "name": "position",
@@ -6241,8 +6254,8 @@
             "namespace": "Components"
         },
         {
-            "file": "../ember-bootstrap/addon/components/bs-modal.js",
-            "line": 182,
+            "file": "../ember-bootstrap/addon/components/bs-modal.ts",
+            "line": 231,
             "description": "[BS4 only!] Allows scrolling within the modal body\n'true' will apply the `modal-dialog-scrollable` class",
             "itemtype": "property",
             "name": "scrollable",
@@ -6254,8 +6267,8 @@
             "namespace": "Components"
         },
         {
-            "file": "../ember-bootstrap/addon/components/bs-modal.js",
-            "line": 194,
+            "file": "../ember-bootstrap/addon/components/bs-modal.ts",
+            "line": 243,
             "description": "[BS5 only!] Allows adding fullscreen mode for modals. It will\napply the `modal-fullscreen` class when using `true` and\n`modal-fullscreen-[x]-down` class when using BS breakpoints\n ([x] = `sm`, `md`, `lg`, `xl`, `xxl`).\n\n Also see the [Bootstrap docs](https://getbootstrap.com/docs/5.1/components/modal/#fullscreen-modal)",
             "itemtype": "property",
             "name": "fullscreen",
@@ -6267,8 +6280,8 @@
             "namespace": "Components"
         },
         {
-            "file": "../ember-bootstrap/addon/components/bs-modal.js",
-            "line": 208,
+            "file": "../ember-bootstrap/addon/components/bs-modal.ts",
+            "line": 257,
             "itemtype": "property",
             "name": "dialogComponent",
             "type": "{String}",
@@ -6278,8 +6291,8 @@
             "namespace": "Components"
         },
         {
-            "file": "../ember-bootstrap/addon/components/bs-modal.js",
-            "line": 214,
+            "file": "../ember-bootstrap/addon/components/bs-modal.ts",
+            "line": 263,
             "itemtype": "property",
             "name": "headerComponent",
             "type": "{String}",
@@ -6289,8 +6302,8 @@
             "namespace": "Components"
         },
         {
-            "file": "../ember-bootstrap/addon/components/bs-modal.js",
-            "line": 220,
+            "file": "../ember-bootstrap/addon/components/bs-modal.ts",
+            "line": 269,
             "itemtype": "property",
             "name": "bodyComponent",
             "type": "{String}",
@@ -6300,8 +6313,8 @@
             "namespace": "Components"
         },
         {
-            "file": "../ember-bootstrap/addon/components/bs-modal.js",
-            "line": 226,
+            "file": "../ember-bootstrap/addon/components/bs-modal.ts",
+            "line": 275,
             "itemtype": "property",
             "name": "footerComponent",
             "type": "{String}",
@@ -6311,8 +6324,8 @@
             "namespace": "Components"
         },
         {
-            "file": "../ember-bootstrap/addon/components/bs-modal.js",
-            "line": 232,
+            "file": "../ember-bootstrap/addon/components/bs-modal.ts",
+            "line": 281,
             "description": "Property for size styling, set to null (default), 'lg' or 'sm'\n\nAlso see the [Bootstrap docs](http://getbootstrap.com/javascript/#modals-sizes)",
             "itemtype": "property",
             "name": "size",
@@ -6323,8 +6336,8 @@
             "namespace": "Components"
         },
         {
-            "file": "../ember-bootstrap/addon/components/bs-modal.js",
-            "line": 242,
+            "file": "../ember-bootstrap/addon/components/bs-modal.ts",
+            "line": 291,
             "description": "If true clicking on the backdrop will close the modal.",
             "itemtype": "property",
             "name": "backdropClose",
@@ -6336,8 +6349,8 @@
             "namespace": "Components"
         },
         {
-            "file": "../ember-bootstrap/addon/components/bs-modal.js",
-            "line": 253,
+            "file": "../ember-bootstrap/addon/components/bs-modal.ts",
+            "line": 302,
             "description": "If true component will render in place, rather than be wormholed.",
             "itemtype": "property",
             "name": "renderInPlace",
@@ -6349,8 +6362,8 @@
             "namespace": "Components"
         },
         {
-            "file": "../ember-bootstrap/addon/components/bs-modal.js",
-            "line": 264,
+            "file": "../ember-bootstrap/addon/components/bs-modal.ts",
+            "line": 313,
             "itemtype": "property",
             "name": "_renderInPlace",
             "type": "boolean",
@@ -6360,8 +6373,8 @@
             "namespace": "Components"
         },
         {
-            "file": "../ember-bootstrap/addon/components/bs-modal.js",
-            "line": 273,
+            "file": "../ember-bootstrap/addon/components/bs-modal.ts",
+            "line": 322,
             "description": "The duration of the fade transition",
             "itemtype": "property",
             "name": "transitionDuration",
@@ -6373,8 +6386,8 @@
             "namespace": "Components"
         },
         {
-            "file": "../ember-bootstrap/addon/components/bs-modal.js",
-            "line": 284,
+            "file": "../ember-bootstrap/addon/components/bs-modal.ts",
+            "line": 333,
             "description": "The duration of the backdrop fade transition",
             "itemtype": "property",
             "name": "backdropTransitionDuration",
@@ -6386,8 +6399,8 @@
             "namespace": "Components"
         },
         {
-            "file": "../ember-bootstrap/addon/components/bs-modal.js",
-            "line": 295,
+            "file": "../ember-bootstrap/addon/components/bs-modal.ts",
+            "line": 344,
             "description": "Use CSS transitions?",
             "itemtype": "property",
             "name": "usesTransition",
@@ -6399,8 +6412,8 @@
             "namespace": "Components"
         },
         {
-            "file": "../ember-bootstrap/addon/components/bs-modal.js",
-            "line": 308,
+            "file": "../ember-bootstrap/addon/components/bs-modal.ts",
+            "line": 357,
             "description": "The DOM element of the `.modal` element.",
             "itemtype": "property",
             "name": "modalElement",
@@ -6412,8 +6425,8 @@
             "namespace": "Components"
         },
         {
-            "file": "../ember-bootstrap/addon/components/bs-modal.js",
-            "line": 318,
+            "file": "../ember-bootstrap/addon/components/bs-modal.ts",
+            "line": 367,
             "description": "The DOM element of the backdrop element.",
             "itemtype": "property",
             "name": "backdropElement",
@@ -6425,8 +6438,8 @@
             "namespace": "Components"
         },
         {
-            "file": "../ember-bootstrap/addon/components/bs-modal.js",
-            "line": 328,
+            "file": "../ember-bootstrap/addon/components/bs-modal.ts",
+            "line": 377,
             "type": "boolean",
             "readonly": "",
             "access": "private",
@@ -6435,8 +6448,8 @@
             "namespace": "Components"
         },
         {
-            "file": "../ember-bootstrap/addon/components/bs-modal.js",
-            "line": 335,
+            "file": "../ember-bootstrap/addon/components/bs-modal.ts",
+            "line": 384,
             "description": "The action to be sent when the modal footer's submit button (if present) is pressed.\nNote that if your modal body contains a form (e.g. [Components.Form](Components.Form.html)) this action will\nnot be triggered. Instead, a submit event will be triggered on the form itself. See the class description for an\nexample.",
             "itemtype": "property",
             "name": "onSubmit",
@@ -6447,8 +6460,8 @@
             "namespace": "Components"
         },
         {
-            "file": "../ember-bootstrap/addon/components/bs-modal.js",
-            "line": 346,
+            "file": "../ember-bootstrap/addon/components/bs-modal.ts",
+            "line": 395,
             "description": "The action to be sent when the modal is closing.\nThis will be triggered by pressing the modal header's close button (x button) or the modal footer's close button.\nNote that this will happen before the modal is hidden from the DOM, as the fade transitions will still need some\ntime to finish. Use the `onHidden` if you need the modal to be hidden when the action triggers.\n\nYou can return false to prevent closing the modal automatically, and do that in your action by\nsetting `open` to false.",
             "itemtype": "property",
             "name": "onHide",
@@ -6459,8 +6472,8 @@
             "namespace": "Components"
         },
         {
-            "file": "../ember-bootstrap/addon/components/bs-modal.js",
-            "line": 360,
+            "file": "../ember-bootstrap/addon/components/bs-modal.ts",
+            "line": 409,
             "description": "The action to be sent after the modal has been completely hidden (including the CSS transition).",
             "itemtype": "property",
             "name": "onHidden",
@@ -6472,8 +6485,8 @@
             "namespace": "Components"
         },
         {
-            "file": "../ember-bootstrap/addon/components/bs-modal.js",
-            "line": 369,
+            "file": "../ember-bootstrap/addon/components/bs-modal.ts",
+            "line": 418,
             "description": "The action to be sent when the modal is opening.\nThis will be triggered immediately after the modal is shown (so it's safe to access the DOM for\nsize calculations and the like). This means that if fade=true, it will be shown in between the\nbackdrop animation and the fade animation.",
             "itemtype": "property",
             "name": "onShow",
@@ -6485,8 +6498,8 @@
             "namespace": "Components"
         },
         {
-            "file": "../ember-bootstrap/addon/components/bs-modal.js",
-            "line": 381,
+            "file": "../ember-bootstrap/addon/components/bs-modal.ts",
+            "line": 430,
             "description": "The action to be sent after the modal has been completely shown (including the CSS transition).",
             "itemtype": "property",
             "name": "onShown",
@@ -6497,8 +6510,24 @@
             "namespace": "Components"
         },
         {
-            "file": "../ember-bootstrap/addon/components/bs-modal.js",
-            "line": 412,
+            "file": "../ember-bootstrap/addon/components/bs-modal.ts",
+            "line": 438,
+            "access": "private",
+            "tagname": "",
+            "class": "Components.Modal",
+            "namespace": "Components"
+        },
+        {
+            "file": "../ember-bootstrap/addon/components/bs-modal.ts",
+            "line": 442,
+            "access": "private",
+            "tagname": "",
+            "class": "Components.Modal",
+            "namespace": "Components"
+        },
+        {
+            "file": "../ember-bootstrap/addon/components/bs-modal.ts",
+            "line": 470,
             "description": "Show the modal",
             "itemtype": "method",
             "name": "show",
@@ -6508,8 +6537,8 @@
             "namespace": "Components"
         },
         {
-            "file": "../ember-bootstrap/addon/components/bs-modal.js",
-            "line": 461,
+            "file": "../ember-bootstrap/addon/components/bs-modal.ts",
+            "line": 519,
             "description": "Hide the modal",
             "itemtype": "method",
             "name": "hide",
@@ -6519,8 +6548,8 @@
             "namespace": "Components"
         },
         {
-            "file": "../ember-bootstrap/addon/components/bs-modal.js",
-            "line": 482,
+            "file": "../ember-bootstrap/addon/components/bs-modal.ts",
+            "line": 540,
             "description": "Clean up after modal is hidden and call onHidden",
             "itemtype": "method",
             "name": "hideModal",
@@ -6530,8 +6559,8 @@
             "namespace": "Components"
         },
         {
-            "file": "../ember-bootstrap/addon/components/bs-modal.js",
-            "line": 506,
+            "file": "../ember-bootstrap/addon/components/bs-modal.ts",
+            "line": 564,
             "description": "Show the backdrop",
             "itemtype": "method",
             "name": "showBackdrop",
@@ -6542,8 +6571,8 @@
             "namespace": "Components"
         },
         {
-            "file": "../ember-bootstrap/addon/components/bs-modal.js",
-            "line": 528,
+            "file": "../ember-bootstrap/addon/components/bs-modal.ts",
+            "line": 586,
             "description": "Hide the backdrop",
             "itemtype": "method",
             "name": "hideBackdrop",
@@ -6554,8 +6583,8 @@
             "namespace": "Components"
         },
         {
-            "file": "../ember-bootstrap/addon/components/bs-modal.js",
-            "line": 554,
+            "file": "../ember-bootstrap/addon/components/bs-modal.ts",
+            "line": 612,
             "itemtype": "method",
             "name": "adjustDialog",
             "access": "private",
@@ -6564,8 +6593,8 @@
             "namespace": "Components"
         },
         {
-            "file": "../ember-bootstrap/addon/components/bs-modal.js",
-            "line": 572,
+            "file": "../ember-bootstrap/addon/components/bs-modal.ts",
+            "line": 630,
             "itemtype": "method",
             "name": "resetAdjustments",
             "access": "private",
@@ -6574,8 +6603,8 @@
             "namespace": "Components"
         },
         {
-            "file": "../ember-bootstrap/addon/components/bs-modal.js",
-            "line": 581,
+            "file": "../ember-bootstrap/addon/components/bs-modal.ts",
+            "line": 639,
             "itemtype": "method",
             "name": "checkScrollbar",
             "access": "private",
@@ -6584,8 +6613,8 @@
             "namespace": "Components"
         },
         {
-            "file": "../ember-bootstrap/addon/components/bs-modal.js",
-            "line": 590,
+            "file": "../ember-bootstrap/addon/components/bs-modal.ts",
+            "line": 648,
             "itemtype": "method",
             "name": "setScrollbar",
             "access": "private",
@@ -6594,8 +6623,8 @@
             "namespace": "Components"
         },
         {
-            "file": "../ember-bootstrap/addon/components/bs-modal.js",
-            "line": 602,
+            "file": "../ember-bootstrap/addon/components/bs-modal.ts",
+            "line": 660,
             "itemtype": "method",
             "name": "resetScrollbar",
             "access": "private",
@@ -6604,8 +6633,8 @@
             "namespace": "Components"
         },
         {
-            "file": "../ember-bootstrap/addon/components/bs-modal.js",
-            "line": 634,
+            "file": "../ember-bootstrap/addon/components/bs-modal.ts",
+            "line": 692,
             "itemtype": "property",
             "name": "scrollbarWidth",
             "type": "number",
@@ -6702,7 +6731,7 @@
         },
         {
             "file": "../ember-bootstrap/addon/components/bs-navbar.js",
-            "line": 102,
+            "line": 88,
             "description": "Manages the state for the responsive menu between the toggle and the content.",
             "itemtype": "property",
             "name": "collapsed",
@@ -6715,7 +6744,7 @@
         },
         {
             "file": "../ember-bootstrap/addon/components/bs-navbar.js",
-            "line": 114,
+            "line": 100,
             "itemtype": "property",
             "name": "_toggledCollapse",
             "access": "private",
@@ -6725,7 +6754,7 @@
         },
         {
             "file": "../ember-bootstrap/addon/components/bs-navbar.js",
-            "line": 121,
+            "line": 107,
             "description": "Controls whether the wrapping div is a fluid container or not.",
             "itemtype": "property",
             "name": "fluid",
@@ -6738,7 +6767,7 @@
         },
         {
             "file": "../ember-bootstrap/addon/components/bs-navbar.js",
-            "line": 133,
+            "line": 119,
             "description": "BS5 only: Allows to override the container layout, see https://getbootstrap.com/docs/5.0/components/navbar/#containers.\nAllowed values: `'sm'`, `'md'`, `'lg'`, `'xl'`, `'xxl'`, `'fluid'`, see https://getbootstrap.com/docs/5.0/layout/containers/.\nBy default, it is `.container-fluid`, or `.container` if the `@fluid` argument is set to false.",
             "itemtype": "property",
             "name": "container",
@@ -6750,8 +6779,8 @@
         },
         {
             "file": "../ember-bootstrap/addon/components/bs-navbar.js",
-            "line": 153,
-            "description": "Specifies the position classes for the navbar, currently supporting none, \"fixed-top\", \"fixed-bottom\", and\neither \"static-top\" (BS3) or \"sticky-top\" (BS4).\nSee the [bootstrap docs](http://getbootstrap.com/components/#navbar-fixed-top) for details.",
+            "line": 139,
+            "description": "Specifies the position classes for the navbar, currently supporting none, \"fixed-top\", \"fixed-bottom\", and\n\"sticky-top\".\nSee the [bootstrap docs](http://getbootstrap.com/components/#navbar-fixed-top) for details.",
             "itemtype": "property",
             "name": "position",
             "type": "String",
@@ -6763,7 +6792,7 @@
         },
         {
             "file": "../ember-bootstrap/addon/components/bs-navbar.js",
-            "line": 178,
+            "line": 164,
             "description": "Property for type styling\n\nFor the available types see the [Bootstrap docs](https://getbootstrap.com/docs/4.3/components/navbar/#color-schemes)",
             "itemtype": "property",
             "name": "type",
@@ -6776,7 +6805,7 @@
         },
         {
             "file": "../ember-bootstrap/addon/components/bs-navbar.js",
-            "line": 202,
+            "line": 188,
             "description": "The action to be sent when the navbar is about to be collapsed.\n\nYou can return false to prevent collapsing the navbar automatically, and do that in your action by\nsetting `collapsed` to true.",
             "itemtype": "event",
             "name": "onCollapse",
@@ -6787,7 +6816,7 @@
         },
         {
             "file": "../ember-bootstrap/addon/components/bs-navbar.js",
-            "line": 212,
+            "line": 198,
             "description": "The action to be sent after the navbar has been collapsed (including the CSS transition).",
             "itemtype": "event",
             "name": "onCollapsed",
@@ -6798,7 +6827,7 @@
         },
         {
             "file": "../ember-bootstrap/addon/components/bs-navbar.js",
-            "line": 222,
+            "line": 208,
             "description": "The action to be sent when the navbar is about to be expanded.\n\nYou can return false to prevent expanding the navbar automatically, and do that in your action by\nsetting `collapsed` to false.",
             "itemtype": "event",
             "name": "onExpand",
@@ -6809,7 +6838,7 @@
         },
         {
             "file": "../ember-bootstrap/addon/components/bs-navbar.js",
-            "line": 232,
+            "line": 218,
             "description": "The action to be sent after the navbar has been expanded (including the CSS transition).",
             "itemtype": "event",
             "name": "onExpanded",
@@ -6820,7 +6849,7 @@
         },
         {
             "file": "../ember-bootstrap/addon/components/bs-navbar.js",
-            "line": 242,
+            "line": 228,
             "itemtype": "method",
             "name": "expand",
             "access": "private",
@@ -6830,7 +6859,7 @@
         },
         {
             "file": "../ember-bootstrap/addon/components/bs-navbar.js",
-            "line": 255,
+            "line": 241,
             "itemtype": "method",
             "name": "collapse",
             "access": "private",
@@ -6840,7 +6869,7 @@
         },
         {
             "file": "../ember-bootstrap/addon/components/bs-navbar.js",
-            "line": 277,
+            "line": 263,
             "description": "Bootstrap 4 Only: Defines the responsive toggle breakpoint size. Options are the standard\ntwo character Bootstrap size abbreviations. Used to set the `navbar-expand-*`\nclass. Set to `null` to disable collapsing.",
             "itemtype": "property",
             "name": "toggleBreakpoint",
@@ -6853,7 +6882,7 @@
         },
         {
             "file": "../ember-bootstrap/addon/components/bs-navbar.js",
-            "line": 294,
+            "line": 280,
             "description": "Bootstrap 4 Only: Sets the background color for the navbar. Can be any color\nin the set that composes the `bg-*` classes and can be extended by creating your\nown `bg-*` classes.",
             "itemtype": "property",
             "name": "backgroundColor",
@@ -6866,7 +6895,7 @@
         },
         {
             "file": "../ember-bootstrap/addon/components/bs-navbar.js",
-            "line": 322,
+            "line": 308,
             "itemtype": "property",
             "name": "toggleComponent",
             "type": "{String}",
@@ -6877,7 +6906,7 @@
         },
         {
             "file": "../ember-bootstrap/addon/components/bs-navbar.js",
-            "line": 328,
+            "line": 314,
             "itemtype": "property",
             "name": "contentComponent",
             "type": "{String}",
@@ -6888,7 +6917,7 @@
         },
         {
             "file": "../ember-bootstrap/addon/components/bs-navbar.js",
-            "line": 334,
+            "line": 320,
             "itemtype": "property",
             "name": "navComponent",
             "type": "{String}",
@@ -6899,7 +6928,7 @@
         },
         {
             "file": "../ember-bootstrap/addon/components/bs-navbar.js",
-            "line": 340,
+            "line": 326,
             "itemtype": "property",
             "name": "linkToComponent",
             "type": "{String}",
@@ -6957,8 +6986,8 @@
             "namespace": "Components"
         },
         {
-            "file": "../ember-bootstrap/addon/components/bs-progress.js",
-            "line": 42,
+            "file": "../ember-bootstrap/addon/components/bs-progress.ts",
+            "line": 58,
             "itemtype": "property",
             "name": "progressBarComponent",
             "type": "{String}",
@@ -7139,8 +7168,8 @@
             "namespace": "Components"
         },
         {
-            "file": "../ember-bootstrap/addon/components/bs-tooltip.js",
-            "line": 74,
+            "file": "../ember-bootstrap/addon/components/bs-tooltip.ts",
+            "line": 83,
             "itemtype": "property",
             "name": "elementComponent",
             "type": "{String}",
@@ -7150,8 +7179,8 @@
             "namespace": "Components"
         },
         {
-            "file": "../ember-bootstrap/addon/components/bs-tooltip.js",
-            "line": 80,
+            "file": "../ember-bootstrap/addon/components/bs-tooltip.ts",
+            "line": 89,
             "description": "The DOM element of the arrow element.",
             "itemtype": "property",
             "name": "arrowElement",
@@ -7234,7 +7263,7 @@
         },
         {
             "message": "Missing item type\nCurrent state for events",
-            "line": " ../ember-bootstrap/addon/components/bs-contextual-help.js:301"
+            "line": " ../ember-bootstrap/addon/components/bs-contextual-help.ts:340"
         },
         {
             "message": "Missing item type\nThe DOM element of the `.dropdown-menu` element",
@@ -7262,7 +7291,15 @@
         },
         {
             "message": "Missing item type",
-            "line": " ../ember-bootstrap/addon/components/bs-modal.js:328"
+            "line": " ../ember-bootstrap/addon/components/bs-modal.ts:377"
+        },
+        {
+            "message": "Missing item type",
+            "line": " ../ember-bootstrap/addon/components/bs-modal.ts:438"
+        },
+        {
+            "message": "Missing item type",
+            "line": " ../ember-bootstrap/addon/components/bs-modal.ts:442"
         }
     ]
 }
