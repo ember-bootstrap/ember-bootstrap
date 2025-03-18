@@ -24,7 +24,7 @@ interface DropdownMenuSignature {
     linkToComponent?: ComponentLike<BsLinkToSignature>;
     registerChildElement: (element: HTMLDivElement, [type]: ['menu']) => void;
     renderInPlace?: boolean;
-    toggleElement: HTMLAnchorElement;
+    toggleElement: HTMLElement | null;
     unregisterChildElement: (element: HTMLDivElement, [type]: ['menu']) => void;
 
     /**

@@ -15,7 +15,6 @@ import type EmbroiderConfig from '../utils/embroider-config';
 import BsDropdownButtonComponent, {
   type DropdownButtonSignature,
 } from './bs-dropdown/button';
-import type { ButtonSignature } from './bs-button';
 
 const ESCAPE_KEYCODE = 27; // KeyboardEvent.which value for Escape (Esc) key
 const SPACE_KEYCODE = 32; // KeyboardEvent.which value for space key
