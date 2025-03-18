@@ -12,7 +12,7 @@ import BsDropdownMenuItemComponent, {
 } from './menu/item';
 import BsLinkToComponent, { type BsLinkToSignature } from '../bs-link-to';
 import type { ComponentLike } from '@glint/template';
-import type EmbroiderConfig from '../../utils/embroider-config';
+import type { EmberBootstrapMacrosConfig } from 'macros-config';
 
 interface DropdownMenuSignature {
   Element: HTMLDivElement;
@@ -134,7 +134,9 @@ export default class DropdownMenu extends Component<DropdownMenuSignature> {
 
   get alignClass() {
     if (this.align === 'right') {
-      const alignClass = macroCondition(getOwnConfig<EmbroiderConfig>().isBS4)
+      const alignClass = macroCondition(
+        getOwnConfig<EmberBootstrapMacrosConfig>().isBS4,
+      )
         ? 'right'
         : 'end';
       return `dropdown-menu-${alignClass}`;

@@ -11,10 +11,10 @@ import BsDropdownMenuComponent, {
 import BsDropdownToggleComponent, {
   type DropdownToggleSignature,
 } from './bs-dropdown/toggle';
-import type EmbroiderConfig from '../utils/embroider-config';
 import BsDropdownButtonComponent, {
   type DropdownButtonSignature,
 } from './bs-dropdown/button';
+import type { EmberBootstrapMacrosConfig } from 'macros-config';
 
 const ESCAPE_KEYCODE = 27; // KeyboardEvent.which value for Escape (Esc) key
 const SPACE_KEYCODE = 32; // KeyboardEvent.which value for space key
@@ -288,7 +288,7 @@ export default class Dropdown extends Component<DropdownSignature> {
    * @private
    */
   get containerClass() {
-    if (macroCondition(getOwnConfig<EmbroiderConfig>().isBS5)) {
+    if (macroCondition(getOwnConfig<EmberBootstrapMacrosConfig>().isBS5)) {
       if (this.direction === 'left') {
         return 'dropstart';
       } else if (this.direction === 'right') {
