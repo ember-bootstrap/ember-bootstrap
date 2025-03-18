@@ -246,8 +246,8 @@ importers:
         specifier: ^4.2.0
         version: 4.2.0
       chalk:
-        specifier: ^4.1.1
-        version: 4.1.2
+        specifier: ^5.0.0
+        version: 5.4.1
       ember-auto-import:
         specifier: ^2.6.3
         version: 2.10.0(@glint/template@1.5.2)(webpack@5.98.0)
@@ -487,8 +487,8 @@ importers:
         specifier: 4.2.0
         version: 4.2.0
       chalk:
-        specifier: 5.3.0
-        version: 5.3.0
+        specifier: 5.4.1
+        version: 5.4.1
       concurrently:
         specifier: 8.2.2
         version: 8.2.2
@@ -4642,7 +4642,7 @@ packages:
     dependencies:
       ansi-align: 3.0.1
       camelcase: 8.0.0
-      chalk: 5.3.0
+      chalk: 5.4.1
       cli-boxes: 3.0.0
       string-width: 7.2.0
       type-fest: 4.37.0
@@ -5621,15 +5621,9 @@ packages:
       ansi-styles: 4.3.0
       supports-color: 7.2.0
 
-  /chalk@5.3.0:
-    resolution: {integrity: sha512-dLitG79d+GV1Nb/VYcCDFivJeK1hiukt9QjRNVOsUtTy1rR1YJsmpGGTZ3qJos+uw7WmWF4wUwBd9jxjocFC2w==}
-    engines: {node: ^12.17.0 || ^14.13 || >=16.0.0}
-    dev: true
-
   /chalk@5.4.1:
     resolution: {integrity: sha512-zgVZuo2WcZgfUEmsn6eO3kINexW8RAE4maiQ8QNs8CtpPCSyMiYsULR3HQYkm3w8FIA3SberyMJMSldGsW+U3w==}
     engines: {node: ^12.17.0 || ^14.13 || >=16.0.0}
-    dev: true
 
   /character-entities@2.0.2:
     resolution: {integrity: sha512-shx7oQ0Awen/BRIdkjkvz54PnEEI/EjwXDSIZp86/KKdbafHh1Df/RYGBhn4hbe2+uKC9FnT5UCEdyPz3ai9hQ==}
@@ -7120,7 +7114,7 @@ packages:
       ember-power-select: '>=6'
       ember-source: '>3.28'
     dependencies:
-      chalk: 5.3.0
+      chalk: 5.4.1
       ember-bootstrap: link:ember-bootstrap
       ember-cli-babel: 7.26.11
       ember-cli-build-config-editor: 0.5.1
@@ -8182,6 +8176,7 @@ packages:
   /ember-prism@1.0.0(ember-source@5.12.0)(webpack@5.98.0):
     resolution: {integrity: sha512-+7+LhQA0qc5l+Y1+VInRxCAUL1BUPW6ml6d7QoEKXgagPzu3DRoZ+VhcOx/0PzBOoSYw7CmxmokKXU/faiztrA==}
     engines: {node: 18.* || >= 20, pnpm: ^8.15.3}
+    deprecated: Use ember-shiki instead
     peerDependencies:
       ember-source: '>= 4.0.0'
     dependencies:
@@ -8455,7 +8450,7 @@ packages:
     dependencies:
       '@lint-todo/utils': 13.1.1
       aria-query: 5.3.2
-      chalk: 5.3.0
+      chalk: 5.4.1
       ci-info: 3.9.0
       date-fns: 2.30.0
       ember-template-imports: 3.4.2
@@ -10903,7 +10898,7 @@ packages:
       depd: 1.1.2
       inherits: 2.0.3
       setprototypeof: 1.1.0
-      statuses: 1.4.0
+      statuses: 1.5.0
     dev: true
 
   /http-errors@2.0.0:
@@ -12487,7 +12482,7 @@ packages:
     resolution: {integrity: sha512-i24m8rpwhmPIS4zscNzK6MSEhk0DUWa/8iYQWxhffV8jkI4Phvs3F+quL5xvS0gdQR0FyTCMMH33Y78dDTzzIw==}
     engines: {node: '>=18'}
     dependencies:
-      chalk: 5.3.0
+      chalk: 5.4.1
       is-unicode-supported: 1.3.0
     dev: true
 
@@ -13759,7 +13754,7 @@ packages:
     resolution: {integrity: sha512-YWielGi1XzG1UTvOaCFaNgEnuhZVMSHYkW/FQ7UX8O26PtlpdM84c0f7wLPlkvx2RfiQmnzd61d/MGxmpQeJPw==}
     engines: {node: '>=18'}
     dependencies:
-      chalk: 5.3.0
+      chalk: 5.4.1
       cli-cursor: 5.0.0
       cli-spinners: 2.9.2
       is-interactive: 2.0.0
@@ -13963,7 +13958,7 @@ packages:
       ky: 1.7.5
       registry-auth-token: 5.1.0
       registry-url: 6.0.1
-      semver: 7.6.3
+      semver: 7.7.1
     dev: true
 
   /package-json@6.5.0:
@@ -17313,14 +17308,14 @@ packages:
     engines: {node: '>=18'}
     dependencies:
       boxen: 8.0.1
-      chalk: 5.3.0
+      chalk: 5.4.1
       configstore: 7.0.0
       is-in-ci: 1.0.0
       is-installed-globally: 1.0.0
       is-npm: 6.0.0
       latest-version: 9.0.0
       pupa: 3.1.0
-      semver: 7.6.3
+      semver: 7.7.1
       xdg-basedir: 5.1.0
     dev: true
 
