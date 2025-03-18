@@ -21,6 +21,29 @@
 
 
 
+
+## v6.5.0 (2025-03-18)
+
+#### :rocket: Enhancement
+* [#2180](https://github.com/ember-bootstrap/ember-bootstrap/pull/2180) support @ember/render-modifiers v3 ([@jelhan](https://github.com/jelhan))
+* [#2177](https://github.com/ember-bootstrap/ember-bootstrap/pull/2177) Convert bs-accordion to Typescript ([@SanderKnauff](https://github.com/SanderKnauff))
+* [#2176](https://github.com/ember-bootstrap/ember-bootstrap/pull/2176) Convert bs-alert to Typescript ([@SanderKnauff](https://github.com/SanderKnauff))
+* [#2115](https://github.com/ember-bootstrap/ember-bootstrap/pull/2115) Convert BsModal related classes to TS ([@SanderKnauff](https://github.com/SanderKnauff))
+* [#2166](https://github.com/ember-bootstrap/ember-bootstrap/pull/2166) Convert BsTooltip to Typescript ([@SanderKnauff](https://github.com/SanderKnauff))
+* [#2164](https://github.com/ember-bootstrap/ember-bootstrap/pull/2164) Convert BsProgress to TypeScript ([@SanderKnauff](https://github.com/SanderKnauff))
+
+#### :memo: Documentation
+* [#2163](https://github.com/ember-bootstrap/ember-bootstrap/pull/2163) Removed action helper from BsButton API doc ([@SanderKnauff](https://github.com/SanderKnauff))
+* [#2162](https://github.com/ember-bootstrap/ember-bootstrap/pull/2162) Cleanup outdated information about Bootstrap 3 from BsNavbar API docs ([@jelhan](https://github.com/jelhan))
+
+#### :house: Internal
+* [#2170](https://github.com/ember-bootstrap/ember-bootstrap/pull/2170) regenerate lockfile with pinned npm version ([@jelhan](https://github.com/jelhan))
+* [#2171](https://github.com/ember-bootstrap/ember-bootstrap/pull/2171) clean-up unused internal arguments of BsDropdown and BsDropdown::Menu ([@jelhan](https://github.com/jelhan))
+
+#### Committers: 2
+- Jeldrik Hanschke ([@jelhan](https://github.com/jelhan))
+- Sander Knauff ([@SanderKnauff](https://github.com/SanderKnauff))
+
 ## v6.4.2 (2024-11-11)
 
 #### :bug: Bug Fix
