@@ -59,7 +59,7 @@ module.exports = {
     },
     // gjs files
     {
-      files: ['tests/**/*.gjs'],
+      files: ['**/*.gjs'],
       parser: 'ember-eslint-parser',
       plugins: ['ember'],
       extends: [
@@ -70,7 +70,7 @@ module.exports = {
     },
     // gts files
     {
-      files: ['tests/**/*.gts'],
+      files: ['**/*.gts'],
       parser: 'ember-eslint-parser',
       plugins: ['ember'],
       extends: [
