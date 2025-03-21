@@ -1,9 +1,45 @@
 import { action } from '@ember/object';
-import CarouselSlide from 'ember-bootstrap/components/bs-carousel/slide';
+import CarouselSlide, {
+  type CarouselSlideSignature,
+  type DirectionalClassName,
+  type OrderClassName,
+} from './bs-carousel/slide';
 import Component from '@glimmer/component';
 import { schedule } from '@ember/runloop';
-import { task, timeout } from 'ember-concurrency';
+import { task, timeout, type Task } from 'ember-concurrency';
 import { tracked } from '@glimmer/tracking';
+import type { ComponentLike } from '@glint/template';
+
+export type PresentationState = 'didTransition' | 'willTransit';
+export type TransitionType = 'slide' | 'fade';
+
+interface CarouselSignature {
+  Args: {
+    autoPlay?: boolean;
+    index?: number;
+    interval?: number;
+    keyboard?: boolean;
+    ltr?: boolean;
+    nextControlLabel?: string;
+    pauseOnMouseEnter?: boolean;
+    onSlideChanged?: (index: number) => void;
+    prevControlLabel?: string;
+    showControls?: boolean;
+    showIndicators?: boolean;
+    slideComponent?: ComponentLike<CarouselSlideSignature>;
+    transitionDuration?: number;
+    transition?: TransitionType;
+    wrap?: boolean;
+  };
+  Blocks: {
+    default: [
+      {
+        slide: ComponentLike<CarouselSlideSignature>;
+      },
+    ];
+  };
+  Element: HTMLDivElement;
+}
 
 /**
   Ember implementation of Bootstrap's Carousel. Supports all original features but API is partially different:
@@ -54,7 +90,7 @@ import { tracked } from '@glimmer/tracking';
   @extends Component
   @public
 */
-export default class Carousel extends Component {
+export default class Carousel extends Component<CarouselSignature> {
   tabindex = '1';
 
   /**
@@ -84,7 +120,7 @@ export default class Carousel extends Component {
   }
 
   @tracked
-  children = [];
+  children: Component[] = [];
 
   /**
    * All `CarouselSlide` child components.
@@ -94,8 +130,10 @@ export default class Carousel extends Component {
    * @readonly
    * @type array
    */
-  get childSlides() {
-    return this.children.filter((view) => view instanceof CarouselSlide);
+  get childSlides(): CarouselSlide[] {
+    return this.children.filter(
+      (view) => view instanceof (this.args.slideComponent ?? CarouselSlide),
+    ) as unknown as CarouselSlide[];
   }
 
   /**
@@ -106,7 +144,7 @@ export default class Carousel extends Component {
    */
   @action
   childSlidesObserver() {
-    let childSlides = this.childSlides;
+    const childSlides = this.childSlides;
     if (childSlides.length === 0) {
       return;
     }
@@ -140,7 +178,7 @@ export default class Carousel extends Component {
    * @private
    *
    */
-  get currentSlide() {
+  get currentSlide(): CarouselSlide | undefined {
     return this.childSlides[this.currentIndex];
   }
 
@@ -152,17 +190,17 @@ export default class Carousel extends Component {
    * @type { 'left' | 'right' | null }
    */
   @tracked
-  directionalClassName = null;
+  directionalClassName: DirectionalClassName | null = null;
 
   /**
    * Indicates the next slide index to move into.
    *
    * @property followingIndex
    * @private
-   * @type number
+   * @type number | null
    */
   @tracked
-  followingIndex = null;
+  followingIndex: number | null = null;
 
   /**
    * The following slide object that is going to be used by the nested slides components.
@@ -170,8 +208,10 @@ export default class Carousel extends Component {
    * @property followingIndex
    * @private
    */
-  get followingSlide() {
-    return this.childSlides[this.followingIndex];
+  get followingSlide(): CarouselSlide | undefined {
+    return this.followingIndex != null
+      ? this.childSlides[this.followingIndex]
+      : undefined;
   }
 
   /**
@@ -229,7 +269,7 @@ export default class Carousel extends Component {
    * @type string
    */
   @tracked
-  orderClassName = null;
+  orderClassName: OrderClassName | null = null;
 
   /**
    * The current state of the current presentation, can be either "didTransition"
@@ -240,7 +280,7 @@ export default class Carousel extends Component {
    * @type { 'didTransition' | 'willTransit' | null }
    */
   @tracked
-  presentationState = null;
+  presentationState: PresentationState | null = null;
 
   /**
    * The class name to append to the previous control link element.
@@ -468,30 +508,34 @@ export default class Carousel extends Component {
    * @this Carousel
    * @private
    */
-  @task({ restartable: true }) *cycle() {
+  @task({ restartable: true })
+  cycle = function* (this: Carousel) {
     yield this.transitioner.perform();
     yield timeout(this.interval);
     this.toAppropriateSlide();
-  }
+  } as unknown as Task<unknown, unknown[]>;
 
   /**
    * @method transitioner
    * @this Carousel
    * @private
    */
-  @task({ drop: true }) *transitioner() {
+  @task({ drop: true })
+  transitioner = function* (this: Carousel) {
     this.presentationState = 'willTransit';
     yield timeout(this.transitionDuration);
     this.presentationState = 'didTransition';
     // Must change current index after execution of 'presentationStateObserver' method
     // from child components.
-    yield new Promise((resolve) => {
+    yield new Promise<void>((resolve) => {
       schedule('afterRender', this, () => {
-        this.currentIndex = this.followingIndex;
+        if (this.followingIndex !== undefined && this.followingIndex !== null) {
+          this.currentIndex = this.followingIndex;
+        }
         resolve();
       });
     });
-  }
+  } as unknown as Task<unknown, unknown[]>;
 
   /**
    * Waits an interval time to start a cycle.
@@ -500,16 +544,17 @@ export default class Carousel extends Component {
    * @this Carousel
    * @private
    */
-  @task({ restartable: true }) *waitIntervalToInitCycle() {
+  @task({ restartable: true })
+  waitIntervalToInitCycle = function* (this: Carousel) {
     if (this.shouldRunAutomatically === false) {
       return;
     }
     yield timeout(this.interval);
     this.toAppropriateSlide();
-  }
+  } as unknown as Task<unknown, unknown[]>;
 
   @action
-  toSlide(toIndex) {
+  toSlide(toIndex: number) {
     if (this.currentIndex === toIndex || this.shouldNotDoPresentation) {
       return;
     }
@@ -543,7 +588,7 @@ export default class Carousel extends Component {
    * @method assignClassNameControls
    * @private
    */
-  assignClassNameControls(toIndex) {
+  assignClassNameControls(toIndex: number) {
     if (toIndex < this.currentIndex) {
       this.directionalClassName = 'right';
       this.orderClassName = 'prev';
@@ -575,9 +620,13 @@ export default class Carousel extends Component {
   }
 
   @action
-  handleKeyDown(e) {
-    let code = e.keyCode || e.which;
-    if (this.keyboard === false || /input|textarea/i.test(e.target.tagName)) {
+  handleKeyDown(e: KeyboardEvent) {
+    const code = e.keyCode || e.which;
+    if (
+      this.keyboard === false ||
+      !(e.target instanceof HTMLElement) ||
+      /input|textarea/i.test(e.target.tagName)
+    ) {
       return;
     }
     switch (code) {
@@ -598,8 +647,8 @@ export default class Carousel extends Component {
    * @method setFollowingIndex
    * @private
    */
-  setFollowingIndex(toIndex) {
-    let slidesLengthMinusOne = this.childSlides.length - 1;
+  setFollowingIndex(toIndex: number) {
+    const slidesLengthMinusOne = this.childSlides.length - 1;
     if (toIndex > slidesLengthMinusOne) {
       this.followingIndex = 0;
     } else if (toIndex < 0) {
@@ -624,14 +673,18 @@ export default class Carousel extends Component {
   }
 
   @action
-  registerChild(element) {
+  // This means any component. Component and Component<unknown> don't work for this purpose.
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  registerChild(element: Component<any>) {
     schedule('actions', this, () => {
       this.children = [...this.children, element];
     });
   }
 
   @action
-  unregisterChild(element) {
+  // This means any component. Component and Component<unknown> don't work for this purpose.
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  unregisterChild(element: Component<any>) {
     schedule('actions', this, () => {
       this.children = this.children.filter((value) => value !== element);
     });
