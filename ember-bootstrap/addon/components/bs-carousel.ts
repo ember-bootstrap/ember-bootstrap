@@ -673,7 +673,7 @@ export default class Carousel extends Component<CarouselSignature> {
   }
 
   @action
-  //  This means any component. Component and Component<unknown> don't work for this purpose.
+  // This means any component. Component and Component<unknown> don't work for this purpose.
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   registerChild(element: Component<any>) {
     schedule('actions', this, () => {
