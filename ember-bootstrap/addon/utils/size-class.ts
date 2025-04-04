@@ -1,7 +1,7 @@
 import { isBlank } from '@ember/utils';
 import { assert } from '@ember/debug';
 
-export default function sizeClass(prefix, size) {
+export default function sizeClass(prefix: string, size?: string) {
   assert(
     'You have to provide a prefix for sizeClass',
     typeof prefix === 'string',

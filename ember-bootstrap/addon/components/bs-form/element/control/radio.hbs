@@ -1,4 +1,3 @@
-{{! @glint-nocheck }}
 {{!-- template-lint-disable no-positive-tabindex no-autofocus-attribute --}}
 {{#each @options as |option index|}}
   {{#let (concat @id "-" index) as |id|}}
@@ -8,7 +7,6 @@
         class="form-check-input"
         id={{id}}
         checked={{bs-eq option @value}}
-        onclick={{fn @onChange option}}
         name={{@name}}
         required={{@required}}
         disabled={{@disabled}}
@@ -17,6 +15,7 @@
         form={{@form}}
         title={{@title}}
         ...attributes
+        {{on "click" (fn @onChange option)}}
       >
       <label
         for={{id}}
@@ -25,11 +24,7 @@
         {{#if (has-block)}}
           {{yield option index}}
         {{else}}
-          {{#if @optionLabelPath}}
-            {{get option @optionLabelPath}}
-          {{else}}
-            {{option}}
-          {{/if}}
+          {{this.lableText option}}
         {{/if}}
       </label>
     </div>

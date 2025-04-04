@@ -1,4 +1,6 @@
-export default function formValidationClass(validationType) {
+export type ValidationType = 'error' | 'success' | 'warning';
+
+export default function formValidationClass(validationType: ValidationType) {
   switch (validationType) {
     case 'error':
       return 'is-invalid';
