@@ -2,6 +2,7 @@ import { module, skip } from 'qunit';
 import { setupRenderingTest } from 'ember-qunit';
 import { click, render, settled, triggerEvent } from '@ember/test-helpers';
 import {
+  delay,
   popoverArrowClass,
   popoverPositionClass,
   test,
@@ -186,6 +187,52 @@ module('Integration | Component | bs-popover', function (hooks) {
     assert.dom('.popover').exists('popover is visible');
     await click('#content');
     assert.dom('.popover').exists('popover is still visible');
+  });
+
+  test('it works with the hover trigger action and delay for the show', async function (assert) {
+    await render(
+      <template>
+        <div id='target'>
+          <BsPopover @delayShow={{200}} @triggerEvents='hover'>
+            <div id='content'>Content</div>
+          </BsPopover>
+        </div>
+      </template>,
+    );
+
+    triggerEvent('#target', 'mouseenter');
+    await delay(100);
+
+    assert.dom('.popover').doesNotExist('popover is not yet visible');
+
+    await delay(100);
+    assert.dom('.popover').exists('popover is now visible');
+
+    triggerEvent('#target', 'mouseleave');
+    await delay(10);
+    assert.dom('.popover').doesNotExist('popover is not visible again');
+  });
+
+  test('it works with the hover trigger action and delay for the show after the user left the triggering element without waiting for the rendering', async function (assert) {
+    await render(
+      <template>
+        <div id='target'>
+          <BsPopover @delayShow={{200}} @triggerEvents='hover'>
+            <div id='content'>Content</div>
+          </BsPopover>
+        </div>
+      </template>,
+    );
+
+    triggerEvent('#target', 'mouseenter');
+    await delay(10);
+    triggerEvent('#target', 'mouseleave');
+    await delay(10);
+    assert.dom('.popover').doesNotExist('popover is not visible');
+
+    triggerEvent('#target', 'mouseenter');
+    await delay(210);
+    assert.dom('.popover').exists('popover is now visible');
   });
 
   test('it yields close action', async function (assert) {
