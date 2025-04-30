@@ -605,6 +605,7 @@ export default abstract class ContextualHelp<
     if (this.usesTransition) {
       transitionEnd(this.overlayElement, this.transitionDuration).then(
         tooltipHideComplete,
+        noop,
       );
     } else {
       tooltipHideComplete();
