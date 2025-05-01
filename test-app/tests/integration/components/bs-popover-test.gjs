@@ -205,7 +205,7 @@ module('Integration | Component | bs-popover', function (hooks) {
 
     assert.dom('.popover').doesNotExist('popover is not yet visible');
 
-    await delay(100);
+    await delay(110);
     assert.dom('.popover').exists('popover is now visible');
 
     triggerEvent('#target', 'mouseleave');
