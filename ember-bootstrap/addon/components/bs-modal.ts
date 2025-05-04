@@ -217,7 +217,7 @@ export default class Modal extends Component<Signature> {
   keyboard = true;
 
   /**
-   * [BS4 only!] Vertical position, either 'top' (default) or 'center'
+   * Vertical position, either 'top' (default) or 'center'
    * 'center' will apply the `modal-dialog-centered` class
    *
    * @property position
