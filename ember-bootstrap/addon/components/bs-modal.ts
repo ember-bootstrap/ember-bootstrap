@@ -2,7 +2,6 @@ import { action } from '@ember/object';
 import { assert } from '@ember/debug';
 import Component from '@glimmer/component';
 import { next, schedule } from '@ember/runloop';
-import { inject as service } from '@ember/service';
 import transitionEnd from '../utils/transition-end';
 import { getDestinationElement } from '../utils/dom';
 import usesTransition from '../utils/decorators/uses-transition';
@@ -19,6 +18,9 @@ import ModalDialog, {
 import ModalBody, { type BodySignature } from './bs-modal/body';
 import ModalFooter, { type FooterSignature } from './bs-modal/footer';
 import type { ComponentLike } from '@glint/template';
+import * as emberService from '@ember/service';
+
+const service = emberService.service ?? emberService.inject;
 
 function nextRunloop() {
   return new Promise((resolve) => next(resolve, undefined));
