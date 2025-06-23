@@ -1,8 +1,6 @@
+import { service } from '@ember/service';
 import Controller from '@ember/controller';
 import { isEmpty } from '@ember/utils';
-import * as emberService from '@ember/service';
-
-const service = emberService.service ?? emberService.inject;
 
 export default class DemoController extends Controller {
   @service

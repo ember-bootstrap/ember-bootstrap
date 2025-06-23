@@ -1,9 +1,8 @@
 import Component from '@glimmer/component';
+import { service } from '@ember/service';
 import { assert } from '@ember/debug';
 import type RouterService from '@ember/routing/router-service';
-import * as emberService from '@ember/service';
 
-const service = emberService.service ?? emberService.inject;
 export interface BsLinkToSignature {
   // TODO: Should rely on Element of LinkTo signature instead
   Element: HTMLAnchorElement;
