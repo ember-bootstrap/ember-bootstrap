@@ -2,7 +2,7 @@ import { action } from '@ember/object';
 import { assert } from '@ember/debug';
 import Component from '@glimmer/component';
 import { next, schedule } from '@ember/runloop';
-import { inject as service } from '@ember/service';
+import { service } from '@ember/service';
 import transitionEnd from '../utils/transition-end';
 import { getDestinationElement } from '../utils/dom';
 import usesTransition from '../utils/decorators/uses-transition';
