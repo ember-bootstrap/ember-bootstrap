@@ -28,6 +28,8 @@ import type BsModalBody from 'ember-bootstrap/components/bs-modal/body';
 import type BsModalFooter from 'ember-bootstrap/components/bs-modal/footer';
 import type BsModalDialog from 'ember-bootstrap/components/bs-modal/footer';
 import type BsProgressBar from 'ember-bootstrap/components/bs-progress/bar';
+import type bsFormHorizInputClass from 'ember-bootstrap/helpers/bs-form-horiz-input-class';
+import type bsFormHorizOffsetClass from 'ember-bootstrap/helpers/bs-form-horiz-offset-class';
 
 type macroGetOwnConfig = HelperLike<{
   Args: {
@@ -46,6 +48,8 @@ declare module '@glint/environment-ember-loose/registry' {
       RenderHelpersRegistry {
     'bs-default': typeof defaultHelper;
     'bs-eq': typeof eqHelper;
+    'bs-form-horiz-input-class': typeof bsFormHorizInputClass;
+    'bs-form-horiz-offset-class': typeof bsFormHorizOffsetClass;
     'bs-noop': typeof noopHelper;
     'bs-size-class': typeof sizeClassHelper;
     'bs-type-class': typeof typeClassHelper;
