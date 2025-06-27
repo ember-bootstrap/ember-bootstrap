@@ -5,7 +5,7 @@ import transitionEnd from 'ember-bootstrap/utils/transition-end';
 import { getDestinationElement } from 'ember-bootstrap/utils/dom';
 import usesTransition from 'ember-bootstrap/utils/decorators/uses-transition';
 import { assert } from '@ember/debug';
-import Ember from 'ember';
+import { getViewBounds } from '@ember/-internals/views';
 import arg from '../utils/decorators/arg';
 import { tracked } from '@glimmer/tracking';
 import { ref } from 'ember-ref-bucket';
@@ -727,12 +727,10 @@ export default abstract class ContextualHelp<
     // In the rare case of using FastBoot w/ rehydration, the parent finder TextNode rendered by FastBoot will be reused,
     // so our own instance on the component is not rendered, only exists here as detached from DOM and thus has no parent.
     // In this case we try to use Ember's private API as a fallback.
-    // Related: https://github.com/emberjs/rfcs/issues/168
+    // Related: https://github.com/embegetrjs/rfcs/issues/168
     if (!parent) {
       try {
-        parent = Ember.ViewUtils.getViewBounds(
-          this as unknown as View,
-        ).parentElement;
+        parent = getViewBounds(this as unknown as View).parentElement;
       } catch (e) {
         // we catch the possibly broken private API call, the component can still work if the trigger element is defined
         // using a CSS selector.

@@ -63,7 +63,7 @@ interface Signature {
         footer: ComponentLike<FooterSignature>;
         close: () => void;
         submit: () => void;
-      }
+      },
     ];
   };
   Element: HTMLElement;
