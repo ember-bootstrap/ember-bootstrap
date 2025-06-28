@@ -7,7 +7,9 @@ const deprecations = new Set<string>();
 const expectedDeprecations = new Set<string>();
 
 // Ignore deprecations that are not caused by our own code, and which we cannot fix easily.
-const ignoredDeprecations: string[] = [];
+const ignoredDeprecations: string[] = [
+  "from the 'ember' barrel file is deprecated.",
+];
 
 export default function setupNoDeprecations({
   beforeEach,
