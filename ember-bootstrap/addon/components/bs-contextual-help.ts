@@ -727,7 +727,7 @@ export default abstract class ContextualHelp<
     // In the rare case of using FastBoot w/ rehydration, the parent finder TextNode rendered by FastBoot will be reused,
     // so our own instance on the component is not rendered, only exists here as detached from DOM and thus has no parent.
     // In this case we try to use Ember's private API as a fallback.
-    // Related: https://github.com/embegetrjs/rfcs/issues/168
+    // Related: https://github.com/emberjs/rfcs/issues/168
     if (!parent) {
       try {
         parent = getViewBounds(this as unknown as View).parentElement;
