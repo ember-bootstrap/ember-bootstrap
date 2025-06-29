@@ -1,8 +1,8 @@
 import { getOwnConfig } from '@embroider/macros';
-import Ember from 'ember';
+import { libraries } from '@ember/-internals/metal';
 
 export const VERSION = getOwnConfig().version;
 
 export function registerLibrary() {
-  Ember.libraries.register('Ember Bootstrap', VERSION);
+  libraries.register('Ember Bootstrap', VERSION);
 }

@@ -1,4 +1,4 @@
-import Ember from 'ember';
+import { isTesting } from '@embroider/macros';
 import { cancel, later, type Timer } from '@ember/runloop';
 
 let _skipTransition: boolean | undefined;
@@ -8,9 +8,7 @@ export function skipTransition(bool?: boolean) {
 }
 
 function _isSkipped() {
-  return (
-    _skipTransition === true || (_skipTransition !== false && Ember.testing)
-  );
+  return _skipTransition === true || (_skipTransition !== false && isTesting());
 }
 
 export default function waitForTransitionEnd(
