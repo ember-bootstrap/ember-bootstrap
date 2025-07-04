@@ -5,7 +5,7 @@ import transitionEnd from 'ember-bootstrap/utils/transition-end';
 import { getDestinationElement } from 'ember-bootstrap/utils/dom';
 import usesTransition from 'ember-bootstrap/utils/decorators/uses-transition';
 import { assert } from '@ember/debug';
-import Ember from 'ember';
+import { getViewBounds } from '@ember/-internals/views';
 import arg from '../utils/decorators/arg';
 import { tracked } from '@glimmer/tracking';
 import { ref } from 'ember-ref-bucket';
@@ -730,9 +730,7 @@ export default abstract class ContextualHelp<
     // Related: https://github.com/emberjs/rfcs/issues/168
     if (!parent) {
       try {
-        parent = Ember.ViewUtils.getViewBounds(
-          this as unknown as View,
-        ).parentElement;
+        parent = getViewBounds(this as unknown as View).parentElement;
       } catch (e) {
         // we catch the possibly broken private API call, the component can still work if the trigger element is defined
         // using a CSS selector.
