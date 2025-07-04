@@ -7,8 +7,8 @@
 
 import { getOwner } from '@ember/application';
 import { DEBUG } from '@glimmer/env';
-import requirejs from 'require';
 import { warn } from '@ember/debug';
+import { importSync, isTesting } from '@embroider/macros';
 
 function childNodesOfElement(element) {
   let children = [];
@@ -68,16 +68,13 @@ export function getDestinationElement(context) {
     findElementById(dom, id) || findElemementByIdInShadowDom(context, id);
 
   if (DEBUG && !destinationElement) {
-    let config = getOwner(context).resolveRegistration('config:environment');
-    if (config.environment === 'test' && typeof FastBoot === 'undefined') {
+    if (isTesting() && typeof FastBoot === 'undefined') {
       let id;
-      if (requirejs.has('@ember/test-helpers/dom/get-root-element')) {
-        try {
-          id = requirejs('@ember/test-helpers/dom/get-root-element').default()
-            .id;
-        } catch (ex) {
-          // no op
-        }
+      try {
+        id = importSync('@ember/test-helpers/dom/get-root-element').default()
+          .id;
+      } catch (ex) {
+        // no op
       }
       if (!id) {
         return document.querySelector('#ember-testing');
