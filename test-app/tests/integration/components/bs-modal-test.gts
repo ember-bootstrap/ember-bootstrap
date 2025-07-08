@@ -405,9 +405,12 @@ module('Integration | Component | bs-modal', function (hooks) {
       await waitFor('.modal.show');
       assert.dom('.modal').hasStyle({ display: 'block' });
 
-      await waitUntil(() => {
-        return find('.modal')!.getAnimations().length > 0;
-      }, { timeout: 5000 });
+      await waitUntil(
+        () => {
+          return find('.modal')!.getAnimations().length > 0;
+        },
+        { timeout: 5000 },
+      );
       assert.ok(
         find('.modal')!
           .getAnimations()
