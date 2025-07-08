@@ -411,19 +411,22 @@ module('Integration | Component | bs-modal', function (hooks) {
         await waitFor('.modal.show');
         assert.dom('.modal').hasStyle({ display: 'block' });
 
-        await waitUntil(() => {
+        await waitUntil(
+          () => {
           return find('.modal')!.getAnimations().length > 0;
-        }, { timeout: 5000 });
-        assert.ok(
-          find('.modal')!
-            .getAnimations()
-            .find(
-              (animation) =>
-                (animation as CSSTransition).transitionProperty === 'opacity',
-            ),
-          'modal opening is animated',
-        );
-      });
+        },
+        { timeout: 5000 },
+      );
+      assert.ok(
+        find('.modal')!
+          .getAnimations()
+          .find(
+            (animation) =>
+              (animation as CSSTransition).transitionProperty === 'opacity',
+          ),
+        'modal opening is animated',
+      );
+    });
 
       test('it animates closing the modal', async function (assert) {
         await render(
