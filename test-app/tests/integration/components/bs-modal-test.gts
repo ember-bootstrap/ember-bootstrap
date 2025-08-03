@@ -26,7 +26,7 @@ import { tracked } from '@glimmer/tracking';
 import { on } from '@ember/modifier';
 import type { TemplateOnlyComponent } from '@ember/component/template-only';
 
-const isSafari = !!(window as any).safari;
+const isSafari = !!(window as unknown as { safari?: object }).safari;
 
 module('Integration | Component | bs-modal', function (hooks) {
   setupRenderingTest(hooks);
@@ -399,9 +399,9 @@ module('Integration | Component | bs-modal', function (hooks) {
 
         const state = new State();
         await render(
-        <template>
-          <BsModal @open={{state.open}}>Hello world!</BsModal>
-        </template>,
+          <template>
+            <BsModal @open={{state.open}}>Hello world!</BsModal>
+          </template>,
         );
 
         state.open = true;
@@ -424,11 +424,11 @@ module('Integration | Component | bs-modal', function (hooks) {
 
       test('it animates closing the modal', async function (assert) {
         await render(
-        <template>
-          <BsModal as |modal|>
-            <button {{on 'click' modal.close}} type='button'>close</button>
-          </BsModal>
-        </template>,
+          <template>
+            <BsModal as |modal|>
+              <button {{on 'click' modal.close}} type='button'>close</button>
+            </BsModal>
+          </template>,
         );
 
         // wait until modal is shown and opening transition is finished
