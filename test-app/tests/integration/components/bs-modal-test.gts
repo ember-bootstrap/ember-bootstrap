@@ -382,6 +382,7 @@ module('Integration | Component | bs-modal', function (hooks) {
     },
   );
 
+  // TODO #2197: Fix modal animation tests on Safari
   if (!isSafari) {
     module('it animates opening and closing the modal', function () {
       hooks.before(function () {
