@@ -4,6 +4,7 @@ import type EmberBootstrapRegistry from 'ember-bootstrap/template-registry';
 import type { EmbroiderMacrosRegistry } from '@embroider/macros';
 import type { EmbroiderUtilRegistry } from '@embroider/util';
 import type EmberElementHelperRegistry from 'ember-element-helper/template-registry';
+import type EmberPopperModifierRegistry from 'ember-popper-modifier/template-registry';
 import type RenderModifiersRegistry from '@ember/render-modifiers/template-registry';
 import type RenderHelpersRegistry from 'ember-render-helpers/template-registry';
 import type EmberStyleModifierRegistry from 'ember-style-modifier/template-registry';
@@ -40,6 +41,7 @@ declare module '@glint/environment-ember-loose/registry' {
   export default interface Registry
     extends EmberBootstrapRegistry,
       EmberElementHelperRegistry,
+      EmberPopperModifierRegistry,
       EmberStyleModifierRegistry,
       EmbroiderUtilRegistry,
       RenderModifiersRegistry,
@@ -50,7 +52,6 @@ declare module '@glint/environment-ember-loose/registry' {
     'bs-size-class': typeof sizeClassHelper;
     'bs-type-class': typeof typeClassHelper;
     'bs-conditional-attribute': typeof BsConditionalAttribute;
-
     'bs-accordion/item': typeof BsAccordionItem;
     'bs-accordion/item/body': typeof BsAccordionItemBody;
     'bs-accordion/item/title': typeof BsAccordionItemTitle;
