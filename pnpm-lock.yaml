@@ -268,7 +268,7 @@ importers:
         version: 4.0.3(@babel/core@7.26.10)(@glimmer/tracking@1.1.2)(@glint/template@1.5.2)(ember-source@5.12.0)
       ember-element-helper:
         specifier: ^0.6.0 || ^0.7.0 || ^0.8.0
-        version: 0.8.6(@glint/environment-ember-loose@1.5.2)(@glint/template@1.5.2)(ember-source@5.12.0)
+        version: 0.8.8
       ember-focus-trap:
         specifier: ^1.0.0
         version: 1.1.1(ember-source@5.12.0)
@@ -544,8 +544,8 @@ importers:
         specifier: 1.2.7
         version: 1.2.7(@babel/core@7.26.10)
       ember-element-helper:
-        specifier: 0.8.6
-        version: 0.8.6(@glint/environment-ember-loose@1.5.2)(@glint/template@1.5.2)(ember-source@5.12.0)
+        specifier: 0.8.8
+        version: 0.8.8
       ember-eslint-parser:
         specifier: 0.5.9
         version: 0.5.9(@babel/core@7.26.10)(@typescript-eslint/parser@7.18.0)(eslint@8.57.1)
@@ -7128,7 +7128,7 @@ packages:
       ember-cli-babel: 7.26.11
       ember-cli-htmlbars: 6.3.0
       ember-cli-typescript: 5.3.0
-      ember-element-helper: 0.8.6(@glint/environment-ember-loose@1.5.2)(@glint/template@1.5.2)(ember-source@5.12.0)
+      ember-element-helper: 0.8.8
       ember-get-config: 2.1.1
       ember-maybe-in-element: 2.1.0
       ember-modifier: 4.2.0(@babel/core@7.26.10)(ember-source@5.12.0)
@@ -7987,18 +7987,12 @@ packages:
       - supports-color
     dev: true
 
-  /ember-element-helper@0.8.6(@glint/environment-ember-loose@1.5.2)(@glint/template@1.5.2)(ember-source@5.12.0):
-    resolution: {integrity: sha512-WcbkJKgBZypRGwujeiPrQfZRhETVFLR0wvH2UxDaNBhLWncapt6KK+M/2i/eODoAQwgGxziejhXC6Cbqa9zA8g==}
+  /ember-element-helper@0.8.8:
+    resolution: {integrity: sha512-3slTltQV5ke53t3YVP2GYoswsQ6y+lhuVzKmt09tbEx91DapG8I/xa8W5OA0StvcQlavL3/vHrz/vCQEFs8bBA==}
     engines: {node: 14.* || 16.* || >= 18}
-    peerDependencies:
-      ember-source: ^3.8 || ^4.0.0 || >= 5.0.0
     dependencies:
       '@embroider/addon-shim': 1.9.0
-      '@embroider/util': 1.13.4(@glint/environment-ember-loose@1.5.2)(@glint/template@1.5.2)(ember-source@5.12.0)
-      ember-source: 5.12.0(@glimmer/component@1.1.2)(@glint/template@1.5.2)(rsvp@4.8.5)(webpack@5.98.0)
     transitivePeerDependencies:
-      - '@glint/environment-ember-loose'
-      - '@glint/template'
       - supports-color
 
   /ember-eslint-parser@0.5.9(@babel/core@7.26.10)(@typescript-eslint/parser@7.18.0)(eslint@8.57.1):

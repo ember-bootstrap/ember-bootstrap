@@ -64,7 +64,7 @@
     "ember-cli-test-loader": "3.1.0",
     "ember-cli-version-checker": "5.1.2",
     "ember-compatibility-helpers": "1.2.7",
-    "ember-element-helper": "0.8.6",
+    "ember-element-helper": "0.8.8",
     "ember-eslint-parser": "0.5.9",
     "ember-focus-trap": "1.1.1",
     "ember-load-initializers": "2.1.2",
