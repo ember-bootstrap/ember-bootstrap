@@ -334,8 +334,8 @@ importers:
         specifier: 1.4.0
         version: 1.4.0
       '@tsconfig/ember':
-        specifier: 3.0.9
-        version: 3.0.9
+        specifier: 3.0.11
+        version: 3.0.11
       '@types/rsvp':
         specifier: 4.0.9
         version: 4.0.9
@@ -454,8 +454,8 @@ importers:
         specifier: 2.11.8
         version: 2.11.8
       '@tsconfig/ember':
-        specifier: 3.0.9
-        version: 3.0.9
+        specifier: 3.0.11
+        version: 3.0.11
       '@types/qunit':
         specifier: 2.19.13
         version: 2.19.13
@@ -3223,8 +3223,8 @@ packages:
     resolution: {integrity: sha512-C5Mc6rdnsaJDjO3UpGW/CQTHtCKaYlScZTly4JIu97Jxo/odCiH0ITnDXSJPTOrEKk/ycSZ0AOgTmkDtkOsvIA==}
     dev: true
 
-  /@tsconfig/ember@3.0.9:
-    resolution: {integrity: sha512-0B44GyEafxJLAZSixH9VBnm9kDFCpaLXu86httaJSDEm1nfl3WWI/XfY4diPsOyOg+pc9N1/YfqH7uKM2dF0lA==}
+  /@tsconfig/ember@3.0.11:
+    resolution: {integrity: sha512-c9uaKBN4KxtdT/UNPPxoWghyoDsTRHzYb53Z5Fv9eum+4cok0U+hYwyKNjvCxkBjEPECS8QAyp8nGAhRifZnBQ==}
     dev: true
 
   /@types/acorn@4.0.6:
@@ -8143,6 +8143,7 @@ packages:
   /ember-prism@1.0.0(ember-source@5.12.0)(webpack@5.98.0):
     resolution: {integrity: sha512-+7+LhQA0qc5l+Y1+VInRxCAUL1BUPW6ml6d7QoEKXgagPzu3DRoZ+VhcOx/0PzBOoSYw7CmxmokKXU/faiztrA==}
     engines: {node: 18.* || >= 20, pnpm: ^8.15.3}
+    deprecated: Use ember-shiki instead
     peerDependencies:
       ember-source: '>= 4.0.0'
     dependencies:
@@ -10864,7 +10865,7 @@ packages:
       depd: 1.1.2
       inherits: 2.0.3
       setprototypeof: 1.1.0
-      statuses: 1.4.0
+      statuses: 1.5.0
     dev: true
 
   /http-errors@2.0.0:
@@ -13924,7 +13925,7 @@ packages:
       ky: 1.7.5
       registry-auth-token: 5.1.0
       registry-url: 6.0.1
-      semver: 7.6.3
+      semver: 7.7.1
     dev: true
 
   /package-json@6.5.0:
@@ -17281,7 +17282,7 @@ packages:
       is-npm: 6.0.0
       latest-version: 9.0.0
       pupa: 3.1.0
-      semver: 7.6.3
+      semver: 7.7.1
       xdg-basedir: 5.1.0
     dev: true
 
