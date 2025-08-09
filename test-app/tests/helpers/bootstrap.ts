@@ -6,7 +6,7 @@ const currentBootstrapVersion = config.bootstrapVersion;
 
 function test<TC extends CustomTestContext>(
   name: string,
-  callback: (this: TC, assert: CustomAssert) => void | Promise<unknown>,
+  callback: (this: TC, assert: CustomAssert) => void | Promise<void>,
 ) {
   qunitTest(name, callback);
 }
