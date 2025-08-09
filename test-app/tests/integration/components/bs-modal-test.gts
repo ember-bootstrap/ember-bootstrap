@@ -383,86 +383,90 @@ module('Integration | Component | bs-modal', function (hooks) {
   );
 
   // TODO #2197: Fix modal animation tests on Safari
-  module.if('it animates opening and closing the modal', !isSafari, function () {
-    hooks.before(function () {
-      skipTransition(false);
-    });
-
-    hooks.after(function () {
-      skipTransition(undefined);
-    });
-
-    test('it animates opening the modal', async function (assert) {
-      class State {
-        @tracked open = false;
-      }
-
-      const state = new State();
-      await render(
-        <template>
-          <BsModal @open={{state.open}}>Hello world!</BsModal>
-        </template>,
-      );
-
-      state.open = true;
-      await waitFor('.modal.show');
-      assert.dom('.modal').hasStyle({ display: 'block' });
-
-      await waitUntil(() => {
-        return find('.modal')!.getAnimations().length > 0;
+  module.if(
+    'it animates opening and closing the modal',
+    !isSafari,
+    function () {
+      hooks.before(function () {
+        skipTransition(false);
       });
-      assert.ok(
-        find('.modal')!
-          .getAnimations()
-          .find(
-            (animation) =>
-              (animation as CSSTransition).transitionProperty === 'opacity',
-          ),
-        'modal opening is animated',
-      );
-    });
 
-    test('it animates closing the modal', async function (assert) {
-      await render(
-        <template>
-          <BsModal as |modal|>
-            <button {{on 'click' modal.close}} type='button'>close</button>
-          </BsModal>
-        </template>,
-      );
-
-      // wait until modal is shown and opening transition is finished
-      await waitFor('.modal.show');
-      await Promise.all(
-        find('.modal')!
-          .getAnimations()
-          .map((animation) => animation.finished),
-      );
-
-      // close modal
-      click('button');
-      await waitUntil(() => {
-        return !find('.modal')!.classList.contains(visibilityClass());
+      hooks.after(function () {
+        skipTransition(undefined);
       });
-      assert.dom('.modal').hasStyle({ display: 'block' });
 
-      await waitUntil(() => {
-        return find('.modal')!.getAnimations().length > 0;
+      test('it animates opening the modal', async function (assert) {
+        class State {
+          @tracked open = false;
+        }
+
+        const state = new State();
+        await render(
+          <template>
+            <BsModal @open={{state.open}}>Hello world!</BsModal>
+          </template>,
+        );
+
+        state.open = true;
+        await waitFor('.modal.show');
+        assert.dom('.modal').hasStyle({ display: 'block' });
+
+        await waitUntil(() => {
+          return find('.modal')!.getAnimations().length > 0;
+        });
+        assert.ok(
+          find('.modal')!
+            .getAnimations()
+            .find(
+              (animation) =>
+                (animation as CSSTransition).transitionProperty === 'opacity',
+            ),
+          'modal opening is animated',
+        );
       });
-      assert.ok(
-        find('.modal')!
-          .getAnimations()
-          .find(
-            (animation) =>
-              (animation as CSSTransition).transitionProperty === 'opacity',
-          ),
-        'modal closing is animated',
-      );
 
-      await settled();
-      assert.dom('.modal').doesNotExist();
-    });
-  });
+      test('it animates closing the modal', async function (assert) {
+        await render(
+          <template>
+            <BsModal as |modal|>
+              <button {{on 'click' modal.close}} type='button'>close</button>
+            </BsModal>
+          </template>,
+        );
+
+        // wait until modal is shown and opening transition is finished
+        await waitFor('.modal.show');
+        await Promise.all(
+          find('.modal')!
+            .getAnimations()
+            .map((animation) => animation.finished),
+        );
+
+        // close modal
+        click('button');
+        await waitUntil(() => {
+          return !find('.modal')!.classList.contains(visibilityClass());
+        });
+        assert.dom('.modal').hasStyle({ display: 'block' });
+
+        await waitUntil(() => {
+          return find('.modal')!.getAnimations().length > 0;
+        });
+        assert.ok(
+          find('.modal')!
+            .getAnimations()
+            .find(
+              (animation) =>
+                (animation as CSSTransition).transitionProperty === 'opacity',
+            ),
+          'modal closing is animated',
+        );
+
+        await settled();
+        assert.dom('.modal').doesNotExist();
+      });
+    },
+  );
 
   test('Modal shows appropriate size respective to @size argument', async function (assert) {
     class State {
