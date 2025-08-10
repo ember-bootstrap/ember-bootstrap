@@ -92,7 +92,7 @@
     "eslint-plugin-prettier": "5.2.6",
     "eslint-plugin-qunit": "8.1.2",
     "findup-sync": "5.0.0",
-    "fs-extra": "11.3.0",
+    "fs-extra": "11.3.1",
     "loader.js": "4.7.0",
     "prettier": "3.0.3",
     "prettier-plugin-ember-template-tag": "2.0.4",
