@@ -89,7 +89,7 @@
     "eslint-plugin-ember": "12.5.0",
     "eslint-plugin-hbs": "1.0.3",
     "eslint-plugin-n": "16.6.2",
-    "eslint-plugin-prettier": "5.2.3",
+    "eslint-plugin-prettier": "5.2.6",
     "eslint-plugin-qunit": "8.1.2",
     "findup-sync": "5.0.0",
     "fs-extra": "11.3.0",
