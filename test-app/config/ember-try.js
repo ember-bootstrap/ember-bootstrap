@@ -76,6 +76,15 @@ module.exports = async function () {
           },
         },
       },
+      {
+        name: 'ember-modifier-v3',
+        npm: {
+          devDependencies: {
+            bootstrap: bootstrapVersion,
+            'ember-modifier': '^3.2.7',
+          },
+        },
+      },
       embroiderSafe({
         npm: {
           devDependencies: {
