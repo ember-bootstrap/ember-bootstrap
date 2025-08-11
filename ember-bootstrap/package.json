@@ -96,7 +96,7 @@
     "focus-trap": "7.6.5",
     "mocha": "10.8.2",
     "release-it": "17.11.0",
-    "typescript": "5.8.2"
+    "typescript": "5.8.3"
   },
   "peerDependencies": {
     "@glimmer/component": "^1.0.4",
