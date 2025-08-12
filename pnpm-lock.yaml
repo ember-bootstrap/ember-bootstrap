@@ -171,8 +171,8 @@ importers:
         specifier: 0.5.0
         version: 0.5.0
       gulp-rename:
-        specifier: 2.0.0
-        version: 2.0.0
+        specifier: 2.1.0
+        version: 2.1.0
       gulp-transform:
         specifier: 3.0.5
         version: 3.0.5
@@ -10625,8 +10625,8 @@ packages:
       streamqueue: 0.0.6
     dev: true
 
-  /gulp-rename@2.0.0:
-    resolution: {integrity: sha512-97Vba4KBzbYmR5VBs9mWmK+HwIf5mj+/zioxfZhOKeXtx5ZjBk57KFlePf5nxq9QsTtFl0ejnHE3zTC9MHXqyQ==}
+  /gulp-rename@2.1.0:
+    resolution: {integrity: sha512-dGuzuH8jQGqCMqC544IEPhs5+O2l+IkdoSZsgd4kY97M1CxQeI3qrmweQBIrxLBbjbe/8uEWK8HHcNBc3OCy4g==}
     engines: {node: '>=4'}
     dev: true
 
