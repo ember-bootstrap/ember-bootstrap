@@ -156,8 +156,8 @@ importers:
         specifier: 5.5.4
         version: 5.5.4(eslint-config-prettier@9.1.2)(eslint@8.57.1)(prettier@3.0.3)
       eslint-plugin-qunit:
-        specifier: 8.1.2
-        version: 8.1.2(eslint@8.57.1)
+        specifier: 8.2.5
+        version: 8.2.5(eslint@8.57.1)
       execa:
         specifier: 5.1.1
         version: 5.1.1
@@ -385,8 +385,8 @@ importers:
         specifier: 5.5.4
         version: 5.5.4(eslint-config-prettier@9.1.2)(eslint@8.57.1)(prettier@3.0.3)
       eslint-plugin-qunit:
-        specifier: 8.1.2
-        version: 8.1.2(eslint@8.57.1)
+        specifier: 8.2.5
+        version: 8.2.5(eslint@8.57.1)
       focus-trap:
         specifier: 7.6.5
         version: 7.6.5
@@ -622,8 +622,8 @@ importers:
         specifier: 5.5.4
         version: 5.5.4(eslint-config-prettier@9.1.2)(eslint@8.57.1)(prettier@3.0.3)
       eslint-plugin-qunit:
-        specifier: 8.1.2
-        version: 8.1.2(eslint@8.57.1)
+        specifier: 8.2.5
+        version: 8.2.5(eslint@8.57.1)
       findup-sync:
         specifier: 5.0.0
         version: 5.0.0
@@ -9016,8 +9016,8 @@ packages:
       synckit: 0.11.11
     dev: true
 
-  /eslint-plugin-qunit@8.1.2(eslint@8.57.1):
-    resolution: {integrity: sha512-2gDQdHlQW8GVXD7YYkO8vbm9Ldc60JeGMuQN5QlD48OeZ8znBvvoHWZZMeXjvoDPReGaLEvyuWrDtrI8bDbcqw==}
+  /eslint-plugin-qunit@8.2.5(eslint@8.57.1):
+    resolution: {integrity: sha512-qr7RJCYImKQjB+39q4q46i1l7p1V3joHzBE5CAYfxn5tfVFjrnjn/tw7q/kDyweU9kAIcLul0Dx/KWVUCb3BgA==}
     engines: {node: ^16.0.0 || ^18.0.0 || >=20.0.0}
     dependencies:
       eslint-utils: 3.0.0(eslint@8.57.1)

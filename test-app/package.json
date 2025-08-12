@@ -90,7 +90,7 @@
     "eslint-plugin-hbs": "1.0.3",
     "eslint-plugin-n": "16.6.2",
     "eslint-plugin-prettier": "5.5.4",
-    "eslint-plugin-qunit": "8.1.2",
+    "eslint-plugin-qunit": "8.2.5",
     "findup-sync": "5.0.0",
     "fs-extra": "11.3.1",
     "loader.js": "4.7.0",

@@ -63,7 +63,7 @@
     "eslint-plugin-ember": "11.12.0",
     "eslint-plugin-n": "16.6.2",
     "eslint-plugin-prettier": "5.5.4",
-    "eslint-plugin-qunit": "8.1.2",
+    "eslint-plugin-qunit": "8.2.5",
     "execa": "5.1.1",
     "gulp": "4.0.2",
     "gulp-connect": "5.7.0",

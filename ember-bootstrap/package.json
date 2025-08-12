@@ -92,7 +92,7 @@
     "eslint-plugin-hbs": "1.0.3",
     "eslint-plugin-n": "16.6.2",
     "eslint-plugin-prettier": "5.5.4",
-    "eslint-plugin-qunit": "8.1.2",
+    "eslint-plugin-qunit": "8.2.5",
     "focus-trap": "7.6.5",
     "mocha": "10.8.2",
     "release-it": "17.11.0",
