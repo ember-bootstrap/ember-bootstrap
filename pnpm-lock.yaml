@@ -192,8 +192,8 @@ importers:
         specifier: 2.24.1
         version: 2.24.1
       qunit-dom:
-        specifier: 3.4.0
-        version: 3.4.0
+        specifier: 3.5.0
+        version: 3.5.0
       sass:
         specifier: 1.90.0
         version: 1.90.0
@@ -643,8 +643,8 @@ importers:
         specifier: 2.24.1
         version: 2.24.1
       qunit-dom:
-        specifier: 3.4.0
-        version: 3.4.0
+        specifier: 3.5.0
+        version: 3.5.0
       resolve:
         specifier: 1.22.10
         version: 1.22.10
@@ -14621,8 +14621,8 @@ packages:
       rimraf: 2.7.1
       underscore.string: 3.3.6
 
-  /qunit-dom@3.4.0:
-    resolution: {integrity: sha512-N5PYbJ20RD3JZN4whINdl7dDfxScUy7eNuO8IwUtBWC7d6SH+BqtBqVZdRn9evxLQVzuask6OGvMy4gdpiCceg==}
+  /qunit-dom@3.5.0:
+    resolution: {integrity: sha512-eemLM5bflWafzmBnwlYbjf9NrjEkV2j7NO7mTvsMzQBJbEaq2zFvUFDtHV9JaK0TT5mgRZt034LCUewYGmjjjQ==}
     dependencies:
       dom-element-descriptors: 0.5.1
     dev: true
