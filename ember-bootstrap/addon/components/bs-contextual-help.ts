@@ -540,7 +540,7 @@ export default abstract class ContextualHelp<
       }
     };
 
-    if (!skipTransition && this.usesTransition) {
+    if (!skipTransition && this.usesTransition && this.overlayElement) {
       transitionEnd(this.overlayElement, this.transitionDuration).then(
         tooltipShowComplete,
       );
@@ -602,7 +602,7 @@ export default abstract class ContextualHelp<
       }
     }
 
-    if (this.usesTransition) {
+    if (this.usesTransition && this.overlayElement) {
       transitionEnd(this.overlayElement, this.transitionDuration).then(
         tooltipHideComplete,
       );
