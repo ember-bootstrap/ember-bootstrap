@@ -64,13 +64,12 @@ module.exports = function(defaults) {
     href="https://github.com/adopted-ember-addons/ember-cli-sass"
     target="_blank"
     rel="noopener noreferrer"
-  >ember-cli-sass</a>) as a CSS preprocessor. When it detects it upon first
-  installation of ember-bootstrap, it will install the necessary packages and
-  add an
+  >ember-cli-sass</a>) as a CSS preprocessor. Ensure that you have the Bootstrap
+  package installed and add an
   <code>@import</code>
   statement to your
   <code>app.scss</code>
-  file respectively:
+  file:
 </p>
 
 {{! prettier-ignore }}
@@ -80,17 +79,6 @@ module.exports = function(defaults) {
 
 <p>This will add the whole bootstrap stylesheets allowing you to customize them
   easily using the available variables.</p>
-
-<BsAlert @type="info" @dismissible={{false}}>
-  <strong>Important note:</strong>
-  this only works when you have the CSS preprocessor addon installed before
-  installing ember-bootstrap itself. If that is not the case, then run the
-  default install blueprint using the
-  <code>preprocessor</code>
-  option:
-  <code>ember generate ember-bootstrap --preprocessor=sass</code>! This will
-  execute the necessary setup steps as described above.
-</BsAlert>
 
 <p>
   It is possible to import only the assets your app needs but the definitions
