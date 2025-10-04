@@ -60,7 +60,7 @@
     "ember-template-lint-plugin-prettier": "5.0.0",
     "eslint": "8.57.1",
     "eslint-config-prettier": "9.1.2",
-    "eslint-plugin-ember": "11.12.0",
+    "eslint-plugin-ember": "12.7.4",
     "eslint-plugin-n": "16.6.2",
     "eslint-plugin-prettier": "5.5.4",
     "eslint-plugin-qunit": "8.2.5",
