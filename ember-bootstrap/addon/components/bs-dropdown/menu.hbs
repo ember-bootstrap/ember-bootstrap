@@ -1,4 +1,3 @@
-{{! @glint-nocheck }}
 {{#if @isOpen}}
   {{#if this._renderInPlace}}
     <div
@@ -6,6 +5,11 @@
       class="dropdown-menu {{this.alignClass}} show"
       tabindex="-1"
       ...attributes
+      {{! @glint-expect-error
+          popper-tooltip is wrongly typed. It supports reference element to be null. But
+          that's not allowed by its signature. Surpressing the error until it is fixed
+          upstream: https://github.com/adopted-ember-addons/ember-popper-modifier/pull/940
+      }}
       {{popper-tooltip @toggleElement this.popperOptions}}
       {{did-insert @registerChildElement "menu"}}
       {{will-destroy @unregisterChildElement "menu"}}
@@ -13,20 +17,30 @@
     >
       {{yield
         (hash
-          item=(ensure-safe-component (bs-default @itemComponent (component "bs-dropdown/menu/item")))
-          link-to=(ensure-safe-component (bs-default @linkToComponent (component "bs-link-to" attrClassInternal="dropdown-item")))
-          linkTo=(ensure-safe-component (bs-default @linkToComponent (component "bs-link-to" attrClassInternal="dropdown-item")))
-          divider=(ensure-safe-component (bs-default @dividerComponent (component "bs-dropdown/menu/divider")))
+          item=this.dividerComponent
+          link-to=this.linkToComponent
+          linkTo=this.linkToComponent
+          divider=this.dividerComponent
         )
       }}
     </div>
   {{else}}
+    {{! @glint-expect-error
+        destinationElement is guarded against being undefined or null by _rederInPlace.
+        _renderInPlace is true if destinationElement is not set. But sadly Glint / TypeScript
+        does not understand that and throws an error.
+    }}
     {{#in-element this.destinationElement insertBefore=null}}
       <div
         data-bs-popper
         class="dropdown-menu {{this.alignClass}} show"
         tabindex="-1"
         ...attributes
+        {{! @glint-expect-error
+            popper-tooltip is wrongly typed. It supports reference element to be null. But
+            that's not allowed by its signature. Surpressing the error until it is fixed
+            upstream: https://github.com/adopted-ember-addons/ember-popper-modifier/pull/940
+        }}
         {{popper-tooltip @toggleElement this.popperOptions}}
         {{did-insert @registerChildElement "menu"}}
         {{will-destroy @unregisterChildElement "menu"}}
@@ -34,10 +48,10 @@
       >
         {{yield
           (hash
-            item=(ensure-safe-component (bs-default @itemComponent (component "bs-dropdown/menu/item")))
-            link-to=(ensure-safe-component (bs-default @linkToComponent (component "bs-link-to" attrClassInternal="dropdown-item")))
-            linkTo=(ensure-safe-component (bs-default @linkToComponent (component "bs-link-to" attrClassInternal="dropdown-item")))
-            divider=(ensure-safe-component (bs-default @dividerComponent (component "bs-dropdown/menu/divider")))
+            item=this.dividerComponent
+            link-to=this.linkToComponent
+            linkTo=this.linkToComponent
+            divider=this.dividerComponent
           )
         }}
       </div>
