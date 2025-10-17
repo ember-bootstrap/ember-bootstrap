@@ -22,6 +22,15 @@
 
 
 
+
+
+## Unreleased
+
+#### :warning: Deprecation
+* Deprecated the `include` and `exclude` configuration options. Manual tree-shaking via these options is no longer supported as Ember Bootstrap migrates to v2 addons. These options will be removed in v7.0.0.
+  
+  **Migration Guide:** Use [Embroider](https://ember-cli.com/embroider) instead, which supports automatic tree-shaking out of the box. Enable `staticComponents` or `staticInvocables` in your Embroider configuration for optimal tree-shaking results. For more information, see the [setup documentation](https://www.ember-bootstrap.com/getting-started/setup).
+
 ## v6.5.0 (2025-03-18)
 
 #### :rocket: Enhancement
