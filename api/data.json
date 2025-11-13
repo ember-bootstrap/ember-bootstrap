@@ -2,7 +2,7 @@
     "project": {
         "name": "ember-bootstrap",
         "description": "Twitter Bootstrap components for Ember.js",
-        "version": "v6.5.0"
+        "version": "v6.6.0"
     },
     "files": {
         "../ember-bootstrap/addon/components/bs-accordion/item/body.ts": {
@@ -49,8 +49,8 @@
                 "Components": 1
             }
         },
-        "../ember-bootstrap/addon/components/bs-carousel/slide.js": {
-            "name": "../ember-bootstrap/addon/components/bs-carousel/slide.js",
+        "../ember-bootstrap/addon/components/bs-carousel/slide.ts": {
+            "name": "../ember-bootstrap/addon/components/bs-carousel/slide.ts",
             "modules": {},
             "classes": {
                 "Components.CarouselSlide": 1
@@ -434,8 +434,8 @@
                 "Components": 1
             }
         },
-        "../ember-bootstrap/addon/components/bs-carousel.js": {
-            "name": "../ember-bootstrap/addon/components/bs-carousel.js",
+        "../ember-bootstrap/addon/components/bs-carousel.ts": {
+            "name": "../ember-bootstrap/addon/components/bs-carousel.ts",
             "modules": {},
             "classes": {
                 "Components.Carousel": 1
@@ -686,8 +686,8 @@
             "plugin_for": [],
             "extension_for": [],
             "namespace": "Components",
-            "file": "../ember-bootstrap/addon/components/bs-carousel/slide.js",
-            "line": 8,
+            "file": "../ember-bootstrap/addon/components/bs-carousel/slide.ts",
+            "line": 29,
             "description": "A visible user-defined slide.\n\nSee [Components.Carousel](Components.Carousel.html) for examples.",
             "extends": "Component",
             "access": "public",
@@ -1237,8 +1237,8 @@
             "plugin_for": [],
             "extension_for": [],
             "namespace": "Components",
-            "file": "../ember-bootstrap/addon/components/bs-carousel.js",
-            "line": 8,
+            "file": "../ember-bootstrap/addon/components/bs-carousel.ts",
+            "line": 44,
             "description": "Ember implementation of Bootstrap's Carousel. Supports all original features but API is partially different:\n\n| Description | Original | Component |\n| ------ | ------ | ------ |\n| Autoplays after first user event or on page load. | ride='carousel'\\|false | autoPlay=false\\|true |\n| Disable automatic cycle. | interval=false | interval=0 |\n| If first slide should follow last slide on \"previous\" event, the opposite will also be true for \"next\" event. | wrap=false\\|true | wrap=false\\|true |\n| Jumps into specific slide index | data-slide-to=n | index=n |\n| Keyboard events. | keyboard=false\\|true | keyboard=false\\|true |\n| Left-to-right or right-to-left sliding. | N/A |  ltr=false\\|true |\n| Pause current cycle on mouse enter. | pause='hover'\\|null | pauseOnMouseEnter=false\\|true |\n| Show or hide controls  | Tag manipulation. | showControls=false\\|true |\n| Show or hide indicators  | Tag manipulation. | showIndicators=false\\|true |\n| Waiting time of slides in an automatic cycle. | interval=n | interval=n |\n\nDefault settings are the same as the original, so you don't have to worry about changing parameters.\n\n```hbs\n<BsCarousel as |car|>\n  <car.slide>\n    <img alt=\"First slide\" src=\"slide1.jpg\">\n  </car.slide>\n  <car.slide>\n    <img alt=\"Second slide\" src=\"slide2.jpg\">\n  </car.slide>\n  <car.slide>\n    <img alt=\"Third slide\" src=\"slide3.jpg\">\n  </car.slide>\n</BsCarousel>\n```\n\nTo better understand the whole documentation, you should be aware of the following operations:\n\n| Operation | Description |\n| ------ | ------ |\n| Transition | Swaps two slides. |\n| Interval | Waiting time after a transition. |\n| Presentation | Represents a single transition, or a single interval, or the union of both. |\n| Cycle | Presents all slides until it reaches first or last slide. |\n| Wrap | wrap slides, cycles without stopping at first or last slide. |\n\n*Note that only invoking the component in a template as shown above is considered part of its public API. Extending from it (subclassing) is generally not supported, and may break at any time.*",
             "extends": "Component",
             "access": "public",
@@ -1674,8 +1674,8 @@
             "namespace": "Components"
         },
         {
-            "file": "../ember-bootstrap/addon/components/bs-carousel/slide.js",
-            "line": 19,
+            "file": "../ember-bootstrap/addon/components/bs-carousel/slide.ts",
+            "line": 40,
             "itemtype": "property",
             "name": "_element",
             "type": "null | HTMLElement",
@@ -1685,8 +1685,8 @@
             "namespace": "Components"
         },
         {
-            "file": "../ember-bootstrap/addon/components/bs-carousel/slide.js",
-            "line": 26,
+            "file": "../ember-bootstrap/addon/components/bs-carousel/slide.ts",
+            "line": 47,
             "description": "Defines slide visibility.",
             "itemtype": "property",
             "name": "active",
@@ -1697,8 +1697,8 @@
             "namespace": "Components"
         },
         {
-            "file": "../ember-bootstrap/addon/components/bs-carousel/slide.js",
-            "line": 36,
+            "file": "../ember-bootstrap/addon/components/bs-carousel/slide.ts",
+            "line": 57,
             "access": "private",
             "tagname": "",
             "itemtype": "property",
@@ -1708,8 +1708,8 @@
             "namespace": "Components"
         },
         {
-            "file": "../ember-bootstrap/addon/components/bs-carousel/slide.js",
-            "line": 45,
+            "file": "../ember-bootstrap/addon/components/bs-carousel/slide.ts",
+            "line": 66,
             "access": "private",
             "tagname": "",
             "itemtype": "property",
@@ -1719,8 +1719,8 @@
             "namespace": "Components"
         },
         {
-            "file": "../ember-bootstrap/addon/components/bs-carousel/slide.js",
-            "line": 54,
+            "file": "../ember-bootstrap/addon/components/bs-carousel/slide.ts",
+            "line": 75,
             "description": "Slide is moving to the left.",
             "itemtype": "property",
             "name": "left",
@@ -1731,8 +1731,8 @@
             "namespace": "Components"
         },
         {
-            "file": "../ember-bootstrap/addon/components/bs-carousel/slide.js",
-            "line": 64,
+            "file": "../ember-bootstrap/addon/components/bs-carousel/slide.ts",
+            "line": 85,
             "description": "Next to appear in a left sliding.",
             "itemtype": "property",
             "name": "next",
@@ -1743,8 +1743,8 @@
             "namespace": "Components"
         },
         {
-            "file": "../ember-bootstrap/addon/components/bs-carousel/slide.js",
-            "line": 74,
+            "file": "../ember-bootstrap/addon/components/bs-carousel/slide.ts",
+            "line": 95,
             "description": "Next to appear in a right sliding.",
             "itemtype": "property",
             "name": "prev",
@@ -1755,8 +1755,8 @@
             "namespace": "Components"
         },
         {
-            "file": "../ember-bootstrap/addon/components/bs-carousel/slide.js",
-            "line": 84,
+            "file": "../ember-bootstrap/addon/components/bs-carousel/slide.ts",
+            "line": 105,
             "description": "Slide is moving to the right.",
             "itemtype": "property",
             "name": "right",
@@ -1767,8 +1767,8 @@
             "namespace": "Components"
         },
         {
-            "file": "../ember-bootstrap/addon/components/bs-carousel/slide.js",
-            "line": 103,
+            "file": "../ember-bootstrap/addon/components/bs-carousel/slide.ts",
+            "line": 124,
             "description": "Coordinates the execution of a presentation.",
             "itemtype": "method",
             "name": "presentationStateObserver",
@@ -1778,8 +1778,8 @@
             "namespace": "Components"
         },
         {
-            "file": "../ember-bootstrap/addon/components/bs-carousel/slide.js",
-            "line": 137,
+            "file": "../ember-bootstrap/addon/components/bs-carousel/slide.ts",
+            "line": 158,
             "itemtype": "method",
             "name": "currentSlideDidTransition",
             "access": "private",
@@ -1788,8 +1788,8 @@
             "namespace": "Components"
         },
         {
-            "file": "../ember-bootstrap/addon/components/bs-carousel/slide.js",
-            "line": 146,
+            "file": "../ember-bootstrap/addon/components/bs-carousel/slide.ts",
+            "line": 169,
             "itemtype": "method",
             "name": "currentSlideWillTransit",
             "access": "private",
@@ -1798,8 +1798,8 @@
             "namespace": "Components"
         },
         {
-            "file": "../ember-bootstrap/addon/components/bs-carousel/slide.js",
-            "line": 157,
+            "file": "../ember-bootstrap/addon/components/bs-carousel/slide.ts",
+            "line": 182,
             "itemtype": "method",
             "name": "followingSlideDidTransition",
             "access": "private",
@@ -1808,8 +1808,8 @@
             "namespace": "Components"
         },
         {
-            "file": "../ember-bootstrap/addon/components/bs-carousel/slide.js",
-            "line": 167,
+            "file": "../ember-bootstrap/addon/components/bs-carousel/slide.ts",
+            "line": 196,
             "itemtype": "method",
             "name": "followingSlideWillTransit",
             "access": "private",
@@ -1818,8 +1818,8 @@
             "namespace": "Components"
         },
         {
-            "file": "../ember-bootstrap/addon/components/bs-carousel/slide.js",
-            "line": 179,
+            "file": "../ember-bootstrap/addon/components/bs-carousel/slide.ts",
+            "line": 212,
             "description": "Makes things more stable, especially when fast changing.",
             "class": "Components.CarouselSlide",
             "namespace": "Components"
@@ -4060,8 +4060,8 @@
             "namespace": "Components"
         },
         {
-            "file": "../ember-bootstrap/addon/components/bs-carousel.js",
-            "line": 60,
+            "file": "../ember-bootstrap/addon/components/bs-carousel.ts",
+            "line": 96,
             "itemtype": "property",
             "name": "slideComponent",
             "type": "{String}",
@@ -4071,8 +4071,8 @@
             "namespace": "Components"
         },
         {
-            "file": "../ember-bootstrap/addon/components/bs-carousel.js",
-            "line": 66,
+            "file": "../ember-bootstrap/addon/components/bs-carousel.ts",
+            "line": 102,
             "description": "If a slide can turn to left, including corners.",
             "access": "private",
             "tagname": "",
@@ -4082,8 +4082,8 @@
             "namespace": "Components"
         },
         {
-            "file": "../ember-bootstrap/addon/components/bs-carousel.js",
-            "line": 76,
+            "file": "../ember-bootstrap/addon/components/bs-carousel.ts",
+            "line": 112,
             "description": "If a slide can turn to right, including corners.",
             "access": "private",
             "tagname": "",
@@ -4093,8 +4093,8 @@
             "namespace": "Components"
         },
         {
-            "file": "../ember-bootstrap/addon/components/bs-carousel.js",
-            "line": 89,
+            "file": "../ember-bootstrap/addon/components/bs-carousel.ts",
+            "line": 125,
             "description": "All `CarouselSlide` child components.",
             "access": "private",
             "tagname": "",
@@ -4106,8 +4106,8 @@
             "namespace": "Components"
         },
         {
-            "file": "../ember-bootstrap/addon/components/bs-carousel.js",
-            "line": 101,
+            "file": "../ember-bootstrap/addon/components/bs-carousel.ts",
+            "line": 139,
             "description": "This observer is the entry point for real time insertion and removing of slides.",
             "access": "private",
             "tagname": "",
@@ -4117,8 +4117,8 @@
             "namespace": "Components"
         },
         {
-            "file": "../ember-bootstrap/addon/components/bs-carousel.js",
-            "line": 127,
+            "file": "../ember-bootstrap/addon/components/bs-carousel.ts",
+            "line": 165,
             "description": "Indicates the current index of the current slide.",
             "itemtype": "property",
             "name": "currentIndex",
@@ -4128,8 +4128,8 @@
             "namespace": "Components"
         },
         {
-            "file": "../ember-bootstrap/addon/components/bs-carousel.js",
-            "line": 136,
+            "file": "../ember-bootstrap/addon/components/bs-carousel.ts",
+            "line": 174,
             "description": "The current slide object that is going to be used by the nested slides components.",
             "itemtype": "property",
             "name": "currentSlide",
@@ -4139,8 +4139,8 @@
             "namespace": "Components"
         },
         {
-            "file": "../ember-bootstrap/addon/components/bs-carousel.js",
-            "line": 147,
+            "file": "../ember-bootstrap/addon/components/bs-carousel.ts",
+            "line": 185,
             "description": "Bootstrap style to indicate that a given slide should be moving to left/right.",
             "itemtype": "property",
             "name": "directionalClassName",
@@ -4151,20 +4151,20 @@
             "namespace": "Components"
         },
         {
-            "file": "../ember-bootstrap/addon/components/bs-carousel.js",
-            "line": 157,
+            "file": "../ember-bootstrap/addon/components/bs-carousel.ts",
+            "line": 195,
             "description": "Indicates the next slide index to move into.",
             "itemtype": "property",
             "name": "followingIndex",
             "access": "private",
             "tagname": "",
-            "type": "number",
+            "type": "number | null",
             "class": "Components.Carousel",
             "namespace": "Components"
         },
         {
-            "file": "../ember-bootstrap/addon/components/bs-carousel.js",
-            "line": 167,
+            "file": "../ember-bootstrap/addon/components/bs-carousel.ts",
+            "line": 205,
             "description": "The following slide object that is going to be used by the nested slides components.",
             "itemtype": "property",
             "name": "followingIndex",
@@ -4174,8 +4174,8 @@
             "namespace": "Components"
         },
         {
-            "file": "../ember-bootstrap/addon/components/bs-carousel.js",
-            "line": 177,
+            "file": "../ember-bootstrap/addon/components/bs-carousel.ts",
+            "line": 217,
             "access": "private",
             "tagname": "",
             "itemtype": "property",
@@ -4185,8 +4185,8 @@
             "namespace": "Components"
         },
         {
-            "file": "../ember-bootstrap/addon/components/bs-carousel.js",
-            "line": 186,
+            "file": "../ember-bootstrap/addon/components/bs-carousel.ts",
+            "line": 226,
             "description": "This observer is the entry point for programmatically slide changing.",
             "itemtype": "property",
             "name": "indexObserver",
@@ -4196,8 +4196,8 @@
             "namespace": "Components"
         },
         {
-            "file": "../ember-bootstrap/addon/components/bs-carousel.js",
-            "line": 197,
+            "file": "../ember-bootstrap/addon/components/bs-carousel.ts",
+            "line": 237,
             "itemtype": "property",
             "name": "indicators",
             "access": "private",
@@ -4206,8 +4206,8 @@
             "namespace": "Components"
         },
         {
-            "file": "../ember-bootstrap/addon/components/bs-carousel.js",
-            "line": 205,
+            "file": "../ember-bootstrap/addon/components/bs-carousel.ts",
+            "line": 245,
             "description": "If user is hovering its cursor on component.\nThis property is only manipulated when 'pauseOnMouseEnter' is true.",
             "itemtype": "property",
             "name": "isMouseHovering",
@@ -4218,8 +4218,8 @@
             "namespace": "Components"
         },
         {
-            "file": "../ember-bootstrap/addon/components/bs-carousel.js",
-            "line": 216,
+            "file": "../ember-bootstrap/addon/components/bs-carousel.ts",
+            "line": 256,
             "description": "The class name to append to the next control link element.",
             "itemtype": "property",
             "name": "nextControlClassName",
@@ -4230,8 +4230,8 @@
             "namespace": "Components"
         },
         {
-            "file": "../ember-bootstrap/addon/components/bs-carousel.js",
-            "line": 224,
+            "file": "../ember-bootstrap/addon/components/bs-carousel.ts",
+            "line": 264,
             "description": "Bootstrap style to indicate the next/previous slide.",
             "itemtype": "property",
             "name": "orderClassName",
@@ -4242,8 +4242,8 @@
             "namespace": "Components"
         },
         {
-            "file": "../ember-bootstrap/addon/components/bs-carousel.js",
-            "line": 234,
+            "file": "../ember-bootstrap/addon/components/bs-carousel.ts",
+            "line": 274,
             "description": "The current state of the current presentation, can be either \"didTransition\"\nor \"willTransit\".",
             "access": "private",
             "tagname": "",
@@ -4254,8 +4254,8 @@
             "namespace": "Components"
         },
         {
-            "file": "../ember-bootstrap/addon/components/bs-carousel.js",
-            "line": 245,
+            "file": "../ember-bootstrap/addon/components/bs-carousel.ts",
+            "line": 285,
             "description": "The class name to append to the previous control link element.",
             "itemtype": "property",
             "name": "prevControlClassName",
@@ -4266,8 +4266,8 @@
             "namespace": "Components"
         },
         {
-            "file": "../ember-bootstrap/addon/components/bs-carousel.js",
-            "line": 253,
+            "file": "../ember-bootstrap/addon/components/bs-carousel.ts",
+            "line": 293,
             "access": "private",
             "tagname": "",
             "itemtype": "property",
@@ -4277,8 +4277,8 @@
             "namespace": "Components"
         },
         {
-            "file": "../ember-bootstrap/addon/components/bs-carousel.js",
-            "line": 262,
+            "file": "../ember-bootstrap/addon/components/bs-carousel.ts",
+            "line": 302,
             "access": "private",
             "tagname": "",
             "itemtype": "property",
@@ -4288,8 +4288,8 @@
             "namespace": "Components"
         },
         {
-            "file": "../ember-bootstrap/addon/components/bs-carousel.js",
-            "line": 271,
+            "file": "../ember-bootstrap/addon/components/bs-carousel.ts",
+            "line": 311,
             "description": "Starts automatic sliding on page load.\nThis parameter has no effect if interval is less than or equal to zero.",
             "default": "false",
             "itemtype": "property",
@@ -4301,8 +4301,8 @@
             "namespace": "Components"
         },
         {
-            "file": "../ember-bootstrap/addon/components/bs-carousel.js",
-            "line": 284,
+            "file": "../ember-bootstrap/addon/components/bs-carousel.ts",
+            "line": 324,
             "description": "If false will hard stop on corners, i.e., first slide won't make a transition to the\nlast slide and vice versa.",
             "default": "true",
             "itemtype": "property",
@@ -4314,8 +4314,8 @@
             "namespace": "Components"
         },
         {
-            "file": "../ember-bootstrap/addon/components/bs-carousel.js",
-            "line": 297,
+            "file": "../ember-bootstrap/addon/components/bs-carousel.ts",
+            "line": 337,
             "description": "Index of starting slide.",
             "default": "0",
             "itemtype": "property",
@@ -4327,8 +4327,8 @@
             "namespace": "Components"
         },
         {
-            "file": "../ember-bootstrap/addon/components/bs-carousel.js",
-            "line": 309,
+            "file": "../ember-bootstrap/addon/components/bs-carousel.ts",
+            "line": 349,
             "description": "Waiting time before automatically show another slide.\nAutomatic sliding is canceled if interval is less than or equal to zero.",
             "default": "5000",
             "itemtype": "property",
@@ -4340,8 +4340,8 @@
             "namespace": "Components"
         },
         {
-            "file": "../ember-bootstrap/addon/components/bs-carousel.js",
-            "line": 322,
+            "file": "../ember-bootstrap/addon/components/bs-carousel.ts",
+            "line": 362,
             "description": "Should bind keyboard events into sliding.",
             "default": "true",
             "itemtype": "property",
@@ -4353,8 +4353,8 @@
             "namespace": "Components"
         },
         {
-            "file": "../ember-bootstrap/addon/components/bs-carousel.js",
-            "line": 334,
+            "file": "../ember-bootstrap/addon/components/bs-carousel.ts",
+            "line": 374,
             "description": "If automatic sliding should be left-to-right or right-to-left.\nThis parameter has no effect if interval is less than or equal to zero.",
             "default": "true",
             "itemtype": "property",
@@ -4366,8 +4366,8 @@
             "namespace": "Components"
         },
         {
-            "file": "../ember-bootstrap/addon/components/bs-carousel.js",
-            "line": 347,
+            "file": "../ember-bootstrap/addon/components/bs-carousel.ts",
+            "line": 387,
             "description": "The next control icon to be displayed.",
             "default": "null",
             "itemtype": "property",
@@ -4379,8 +4379,8 @@
             "namespace": "Components"
         },
         {
-            "file": "../ember-bootstrap/addon/components/bs-carousel.js",
-            "line": 356,
+            "file": "../ember-bootstrap/addon/components/bs-carousel.ts",
+            "line": 396,
             "description": "Label for screen readers, defaults to 'Next'.",
             "default": "'Next'",
             "itemtype": "property",
@@ -4392,8 +4392,8 @@
             "namespace": "Components"
         },
         {
-            "file": "../ember-bootstrap/addon/components/bs-carousel.js",
-            "line": 368,
+            "file": "../ember-bootstrap/addon/components/bs-carousel.ts",
+            "line": 408,
             "description": "Pauses automatic sliding if mouse cursor is hovering the component.\nThis parameter has no effect if interval is less than or equal to zero.",
             "default": "true",
             "itemtype": "property",
@@ -4405,8 +4405,8 @@
             "namespace": "Components"
         },
         {
-            "file": "../ember-bootstrap/addon/components/bs-carousel.js",
-            "line": 381,
+            "file": "../ember-bootstrap/addon/components/bs-carousel.ts",
+            "line": 421,
             "description": "The previous control icon to be displayed.",
             "default": "null",
             "itemtype": "property",
@@ -4418,8 +4418,8 @@
             "namespace": "Components"
         },
         {
-            "file": "../ember-bootstrap/addon/components/bs-carousel.js",
-            "line": 390,
+            "file": "../ember-bootstrap/addon/components/bs-carousel.ts",
+            "line": 430,
             "description": "Label for screen readers, defaults to 'Previous'.",
             "default": "'Previous'",
             "itemtype": "property",
@@ -4431,8 +4431,8 @@
             "namespace": "Components"
         },
         {
-            "file": "../ember-bootstrap/addon/components/bs-carousel.js",
-            "line": 402,
+            "file": "../ember-bootstrap/addon/components/bs-carousel.ts",
+            "line": 442,
             "description": "Show or hide controls.",
             "default": "true",
             "itemtype": "property",
@@ -4444,8 +4444,8 @@
             "namespace": "Components"
         },
         {
-            "file": "../ember-bootstrap/addon/components/bs-carousel.js",
-            "line": 414,
+            "file": "../ember-bootstrap/addon/components/bs-carousel.ts",
+            "line": 454,
             "description": "Show or hide indicators.",
             "default": "true",
             "itemtype": "property",
@@ -4457,8 +4457,8 @@
             "namespace": "Components"
         },
         {
-            "file": "../ember-bootstrap/addon/components/bs-carousel.js",
-            "line": 426,
+            "file": "../ember-bootstrap/addon/components/bs-carousel.ts",
+            "line": 466,
             "description": "The duration of the slide transition.\nYou should also change this parameter in Bootstrap CSS file.",
             "default": "600",
             "itemtype": "property",
@@ -4470,8 +4470,8 @@
             "namespace": "Components"
         },
         {
-            "file": "../ember-bootstrap/addon/components/bs-carousel.js",
-            "line": 439,
+            "file": "../ember-bootstrap/addon/components/bs-carousel.ts",
+            "line": 479,
             "description": "The type slide transition to perform.\nOptions are 'fade' or 'slide'. Note: BS4 only",
             "default": "'slide'",
             "itemtype": "property",
@@ -4483,8 +4483,8 @@
             "namespace": "Components"
         },
         {
-            "file": "../ember-bootstrap/addon/components/bs-carousel.js",
-            "line": 456,
+            "file": "../ember-bootstrap/addon/components/bs-carousel.ts",
+            "line": 496,
             "description": "Action called after the slide has changed.",
             "itemtype": "event",
             "name": "onSlideChanged",
@@ -4500,8 +4500,8 @@
             "namespace": "Components"
         },
         {
-            "file": "../ember-bootstrap/addon/components/bs-carousel.js",
-            "line": 464,
+            "file": "../ember-bootstrap/addon/components/bs-carousel.ts",
+            "line": 504,
             "description": "Do a presentation and calls itself to perform a cycle.",
             "itemtype": "method",
             "name": "cycle",
@@ -4512,8 +4512,8 @@
             "namespace": "Components"
         },
         {
-            "file": "../ember-bootstrap/addon/components/bs-carousel.js",
-            "line": 477,
+            "file": "../ember-bootstrap/addon/components/bs-carousel.ts",
+            "line": 518,
             "itemtype": "method",
             "name": "transitioner",
             "this": "Carousel",
@@ -4523,8 +4523,8 @@
             "namespace": "Components"
         },
         {
-            "file": "../ember-bootstrap/addon/components/bs-carousel.js",
-            "line": 496,
+            "file": "../ember-bootstrap/addon/components/bs-carousel.ts",
+            "line": 540,
             "description": "Waits an interval time to start a cycle.",
             "itemtype": "method",
             "name": "waitIntervalToInitCycle",
@@ -4535,8 +4535,8 @@
             "namespace": "Components"
         },
         {
-            "file": "../ember-bootstrap/addon/components/bs-carousel.js",
-            "line": 540,
+            "file": "../ember-bootstrap/addon/components/bs-carousel.ts",
+            "line": 585,
             "description": "Indicates what class names should be applicable to the current transition slides.",
             "itemtype": "method",
             "name": "assignClassNameControls",
@@ -4546,8 +4546,8 @@
             "namespace": "Components"
         },
         {
-            "file": "../ember-bootstrap/addon/components/bs-carousel.js",
-            "line": 595,
+            "file": "../ember-bootstrap/addon/components/bs-carousel.ts",
+            "line": 644,
             "description": "Sets the following slide index within the lower and upper bounds.",
             "itemtype": "method",
             "name": "setFollowingIndex",
@@ -4557,8 +4557,8 @@
             "namespace": "Components"
         },
         {
-            "file": "../ember-bootstrap/addon/components/bs-carousel.js",
-            "line": 612,
+            "file": "../ember-bootstrap/addon/components/bs-carousel.ts",
+            "line": 661,
             "description": "Coordinates the correct slide movement direction.",
             "itemtype": "method",
             "name": "toAppropriateSlide",
@@ -5918,7 +5918,7 @@
         {
             "file": "../ember-bootstrap/addon/components/bs-modal-simple.js",
             "line": 125,
-            "description": "[BS4 only!] Vertical position, either 'top' (default) or 'center'\n'center' will apply the `modal-dialog-centered` class",
+            "description": "Vertical position, either 'top' (default) or 'center'\n'center' will apply the `modal-dialog-centered` class",
             "itemtype": "property",
             "name": "position",
             "type": "{string}",
@@ -6243,7 +6243,7 @@
         {
             "file": "../ember-bootstrap/addon/components/bs-modal.ts",
             "line": 219,
-            "description": "[BS4 only!] Vertical position, either 'top' (default) or 'center'\n'center' will apply the `modal-dialog-centered` class",
+            "description": "Vertical position, either 'top' (default) or 'center'\n'center' will apply the `modal-dialog-centered` class",
             "itemtype": "property",
             "name": "position",
             "type": "{string}",
@@ -7207,15 +7207,15 @@
         },
         {
             "message": "unknown tag: this",
-            "line": " ../ember-bootstrap/addon/components/bs-carousel.js:464"
+            "line": " ../ember-bootstrap/addon/components/bs-carousel.ts:504"
         },
         {
             "message": "unknown tag: this",
-            "line": " ../ember-bootstrap/addon/components/bs-carousel.js:477"
+            "line": " ../ember-bootstrap/addon/components/bs-carousel.ts:518"
         },
         {
             "message": "unknown tag: this",
-            "line": " ../ember-bootstrap/addon/components/bs-carousel.js:496"
+            "line": " ../ember-bootstrap/addon/components/bs-carousel.ts:540"
         },
         {
             "message": "unknown tag: internal",
@@ -7223,7 +7223,7 @@
         },
         {
             "message": "Missing item type\nMakes things more stable, especially when fast changing.",
-            "line": " ../ember-bootstrap/addon/components/bs-carousel/slide.js:179"
+            "line": " ../ember-bootstrap/addon/components/bs-carousel/slide.ts:212"
         },
         {
             "message": "Missing item type\nOn of the allowed bs-types, e.g. `primary`, `secondary` etc.\n\nUsed to add contextual classes to style list items with a stateful background and color.\n\nAlso see the [Bootstrap Docs](https://getbootstrap.com/docs/5.2/components/list-group/#contextual-classes)",
