@@ -1,5 +1,11 @@
 # Changelog
 
+
+## v6.6.1 (2025-11-13)
+
+Re-release of v6.6.0 without any changes. v6.6.0 got released from a feature branch by accident.
+
+
 ## v6.6.0 (2025-11-13)
 
 #### :rocket: Enhancement
