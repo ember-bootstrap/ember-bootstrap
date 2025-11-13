@@ -1,26 +1,31 @@
+# Changelog
 
+## v6.6.0 (2025-11-13)
 
+#### :rocket: Enhancement
+* [#2203](https://github.com/ember-bootstrap/ember-bootstrap/pull/2203) remove blueprints not supported in v2 addon ([@jelhan](https://github.com/jelhan))
+* [#2192](https://github.com/ember-bootstrap/ember-bootstrap/pull/2192) Replace requirejs require in dom.js with @embroider/macros importSync ([@SanderKnauff](https://github.com/SanderKnauff))
+* [#2193](https://github.com/ember-bootstrap/ember-bootstrap/pull/2193) Fix deprecations triggered by importing from ember barrel file ([@locks](https://github.com/locks))
+* [#2178](https://github.com/ember-bootstrap/ember-bootstrap/pull/2178) Convert bs-carousel to Typescript ([@SanderKnauff](https://github.com/SanderKnauff))
 
+#### :bug: Bug Fix
+* [#2204](https://github.com/ember-bootstrap/ember-bootstrap/pull/2204) Fix popover/tooltip crash when hiding before element renders ([@emmanuel-ferdman](https://github.com/emmanuel-ferdman))
+* [#2191](https://github.com/ember-bootstrap/ember-bootstrap/pull/2191) resolve deprecation "do not import inject from @ember/service" ([@ZacharyMohler](https://github.com/ZacharyMohler))
 
+#### :memo: Documentation
+* [#2189](https://github.com/ember-bootstrap/ember-bootstrap/pull/2189) Update API docs of modal's vertical for BS5 support ([@drauschenbach](https://github.com/drauschenbach))
 
+#### :house: Internal
+* [#2195](https://github.com/ember-bootstrap/ember-bootstrap/pull/2195) Disable modal animation tests in Safari ([@SanderKnauff](https://github.com/SanderKnauff))
+* [#2184](https://github.com/ember-bootstrap/ember-bootstrap/pull/2184) gts and gjs files were not linted by ESLint due to wrong configuration ([@jelhan](https://github.com/jelhan))
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+#### Committers: 6
+- David Rauschenbach ([@drauschenbach](https://github.com/drauschenbach))
+- Emmanuel Ferdman ([@emmanuel-ferdman](https://github.com/emmanuel-ferdman))
+- Jeldrik Hanschke ([@jelhan](https://github.com/jelhan))
+- Ricardo Mendes ([@locks](https://github.com/locks))
+- Sander Knauff ([@SanderKnauff](https://github.com/SanderKnauff))
+- Zachary Mohler ([@ZacharyMohler](https://github.com/ZacharyMohler))
 
 ## v6.5.0 (2025-03-18)
 
