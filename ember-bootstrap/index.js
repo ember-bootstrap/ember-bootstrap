@@ -255,6 +255,27 @@ Until: 7.0.0`);
     let includeList = this.generateIncludeList(this.bootstrapOptions.include);
     let excludeList = this.bootstrapOptions.exclude || [];
 
+    // Emit deprecation warning if include or exclude options are used
+    if (this.bootstrapOptions.include) {
+      this.warn(`\
+Ember Bootstrap's \`include\` option is deprecated and will be removed in v7.0.0.
+Manual tree-shaking via the \`include\` and \`exclude\` options is no longer supported when migrating to v2 addons.
+Please migrate to Embroider, which supports automatic tree-shaking out of the box. For more information, visit: https://ember-cli.com/embroider
+
+To enable static component invocation detection in Embroider, set the \`staticComponents\` or \`staticInvocables\` option in your build configuration.
+`);
+    }
+
+    if (this.bootstrapOptions.exclude) {
+      this.warn(`\
+Ember Bootstrap's \`exclude\` option is deprecated and will be removed in v7.0.0.
+Manual tree-shaking via the \`include\` and \`exclude\` options is no longer supported when migrating to v2 addons.
+Please migrate to Embroider, which supports automatic tree-shaking out of the box. For more information, visit: https://ember-cli.com/embroider
+
+To enable static component invocation detection in Embroider, set the \`staticComponents\` or \`staticInvocables\` option in your build configuration.
+`);
+    }
+
     // exit early if no opts defined
     if (includeList.length === 0 && excludeList.length === 0) {
       return tree;
