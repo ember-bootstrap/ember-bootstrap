@@ -21,8 +21,8 @@ importers:
   docs:
     devDependencies:
       '@babel/eslint-parser':
-        specifier: 7.28.0
-        version: 7.28.0(@babel/core@7.26.10)(eslint@8.57.1)
+        specifier: 7.28.5
+        version: 7.28.5(@babel/core@7.26.10)(eslint@8.57.1)
       '@babel/plugin-proposal-decorators':
         specifier: 7.28.0
         version: 7.28.0(@babel/core@7.26.10)
@@ -307,8 +307,8 @@ importers:
         version: 2.0.0(@babel/core@7.26.10)(ember-source@5.12.0)
     devDependencies:
       '@babel/eslint-parser':
-        specifier: 7.28.0
-        version: 7.28.0(@babel/core@7.26.10)(eslint@8.57.1)
+        specifier: 7.28.5
+        version: 7.28.5(@babel/core@7.26.10)(eslint@8.57.1)
       '@babel/plugin-proposal-decorators':
         specifier: 7.28.0
         version: 7.28.0(@babel/core@7.26.10)
@@ -400,8 +400,8 @@ importers:
   test-app:
     devDependencies:
       '@babel/eslint-parser':
-        specifier: 7.28.0
-        version: 7.28.0(@babel/core@7.26.10)(eslint@8.57.1)
+        specifier: 7.28.5
+        version: 7.28.5(@babel/core@7.26.10)(eslint@8.57.1)
       '@babel/plugin-proposal-decorators':
         specifier: 7.28.0
         version: 7.28.0(@babel/core@7.26.10)
@@ -714,8 +714,8 @@ packages:
     transitivePeerDependencies:
       - supports-color
 
-  /@babel/eslint-parser@7.28.0(@babel/core@7.26.10)(eslint@8.57.1):
-    resolution: {integrity: sha512-N4ntErOlKvcbTt01rr5wj3y55xnIdx1ymrfIr8C2WnM1Y9glFgWaGDEULJIazOX3XM9NRzhfJ6zZnQ1sBNWU+w==}
+  /@babel/eslint-parser@7.28.5(@babel/core@7.26.10)(eslint@8.57.1):
+    resolution: {integrity: sha512-fcdRcWahONYo+JRnJg1/AekOacGvKx12Gu0qXJXFi2WBqQA1i7+O5PaxRB7kxE/Op94dExnCiiar6T09pvdHpA==}
     engines: {node: ^10.13.0 || ^12.13.0 || >=14.0.0}
     peerDependencies:
       '@babel/core': ^7.11.0
@@ -7947,7 +7947,7 @@ packages:
         optional: true
     dependencies:
       '@babel/core': 7.26.10
-      '@babel/eslint-parser': 7.28.0(@babel/core@7.26.10)(eslint@8.57.1)
+      '@babel/eslint-parser': 7.28.5(@babel/core@7.26.10)(eslint@8.57.1)
       '@glimmer/syntax': 0.92.3
       '@typescript-eslint/parser': 7.18.0(eslint@8.57.1)(typescript@5.9.2)
       '@typescript-eslint/tsconfig-utils': 8.39.0(typescript@5.9.2)
