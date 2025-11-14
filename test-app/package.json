@@ -23,7 +23,7 @@
     "@ember/render-modifiers": "3.0.0",
     "@ember/string": "4.0.1",
     "@ember/test-helpers": "3.3.1",
-    "@embroider/addon-dev": "7.1.5",
+    "@embroider/addon-dev": "8.1.0",
     "@embroider/macros": "1.18.3",
     "@embroider/test-setup": "4.0.0",
     "@embroider/util": "1.13.4",
