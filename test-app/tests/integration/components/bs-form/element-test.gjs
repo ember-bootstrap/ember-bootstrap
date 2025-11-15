@@ -762,14 +762,7 @@ module('Integration | Component | bs-form/element', function (hooks) {
   module('controlType "radio" is supported', function () {
     const simpleOptions = ['foo', 'bar'];
 
-    const hashOptions = [
-      {
-        title: 'foo',
-      },
-      {
-        title: 'bar',
-      },
-    ];
+    const hashOptions = [{ title: 'foo' }, { title: 'bar' }];
 
     test('controlType "radio" is supported', async function (assert) {
       class State {

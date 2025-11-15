@@ -1324,9 +1324,7 @@ module('Integration | Component | bs-form', function (hooks) {
   });
 
   test("Adds default onChange action to form elements that updates model's property", async function (assert) {
-    const model = EmberObject.create({
-      name: 'foo',
-    });
+    const model = EmberObject.create({ name: 'foo' });
 
     await render(
       <template>
