@@ -24,8 +24,8 @@ function arg<S>(
       return argValue !== undefined
         ? argValue
         : descriptor!.initializer
-        ? descriptor!.initializer.call(this)
-        : undefined;
+          ? descriptor!.initializer.call(this)
+          : undefined;
     },
   };
 }
