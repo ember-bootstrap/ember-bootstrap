@@ -45,21 +45,9 @@ module('Integration | Component | bs-progress', function (hooks) {
     let baseSize = 500;
     // some test data
     let testData = [
-      {
-        value: 60,
-        minValue: 0,
-        maxValue: 100,
-      },
-      {
-        value: 3,
-        minValue: 0,
-        maxValue: 10,
-      },
-      {
-        value: 6,
-        minValue: 5,
-        maxValue: 10,
-      },
+      { value: 60, minValue: 0, maxValue: 100 },
+      { value: 3, minValue: 0, maxValue: 10 },
+      { value: 6, minValue: 5, maxValue: 10 },
     ];
 
     this.insertCSSRule('.progress-bar { transition: none; }');

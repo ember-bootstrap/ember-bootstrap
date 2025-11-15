@@ -562,9 +562,7 @@ module('Integration | Component | bs-carousel', function (hooks) {
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
         unregisterChild?: (slide: any) => void;
       };
-      Blocks: {
-        default: [];
-      };
+      Blocks: { default: [] };
       Element: HTMLElement;
     }
 

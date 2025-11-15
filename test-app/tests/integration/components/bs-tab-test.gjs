@@ -413,11 +413,7 @@ module('Integration | Component | bs-tab', function (hooks) {
       </template>,
     );
 
-    await a11yAudit({
-      rules: {
-        'color-contrast': { enabled: false },
-      },
-    });
+    await a11yAudit({ rules: { 'color-contrast': { enabled: false } } });
     assert.ok(true, 'A11y audit passed');
   });
 });

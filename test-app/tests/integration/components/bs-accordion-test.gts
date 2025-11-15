@@ -402,9 +402,7 @@ module('Integration | Component | bs-accordion', function (hooks) {
     await a11yAudit({
       rules: {
         // @todo https://github.com/kaliber5/ember-bootstrap/issues/999
-        'nested-interactive': {
-          enabled: false,
-        },
+        'nested-interactive': { enabled: false },
         'color-contrast': { enabled: false },
         'heading-order': { enabled: false },
       },
