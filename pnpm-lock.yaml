@@ -544,8 +544,8 @@ importers:
         specifier: 0.8.8
         version: 0.8.8
       ember-eslint-parser:
-        specifier: 0.5.11
-        version: 0.5.11(@babel/core@7.26.10)(@typescript-eslint/parser@7.18.0)(eslint@8.57.1)(typescript@5.9.2)
+        specifier: 0.5.13
+        version: 0.5.13(@babel/core@7.26.10)(@typescript-eslint/parser@7.18.0)(eslint@8.57.1)(typescript@5.9.2)
       ember-focus-trap:
         specifier: 1.1.1
         version: 1.1.1(ember-source@5.12.0)
@@ -7933,8 +7933,8 @@ packages:
     transitivePeerDependencies:
       - supports-color
 
-  /ember-eslint-parser@0.5.11(@babel/core@7.26.10)(@typescript-eslint/parser@7.18.0)(eslint@8.57.1)(typescript@5.9.2):
-    resolution: {integrity: sha512-YuYc+bxDGHhNdz2yEZebwwzdiErHLLGud/Q2VE6J7czuMQ/vdiL8SYWBHWyYK691MCFzrxVYpSJb89+yjXv8yg==}
+  /ember-eslint-parser@0.5.13(@babel/core@7.26.10)(@typescript-eslint/parser@7.18.0)(eslint@8.57.1)(typescript@5.9.2):
+    resolution: {integrity: sha512-b6ALDaxs9Bb4v0uagWud/5lECb78qpXHFv7M340dUHFW4Y0RuhlsfA4Rb+765X1+6KHp8G7TaAs0UgggWUqD3g==}
     engines: {node: '>=16.0.0'}
     peerDependencies:
       '@babel/core': ^7.23.6
@@ -8868,7 +8868,7 @@ packages:
       '@ember-data/rfc395-data': 0.0.4
       '@typescript-eslint/parser': 7.18.0(eslint@8.57.1)(typescript@5.9.2)
       css-tree: 3.1.0
-      ember-eslint-parser: 0.5.11(@babel/core@7.26.10)(@typescript-eslint/parser@7.18.0)(eslint@8.57.1)(typescript@5.9.2)
+      ember-eslint-parser: 0.5.13(@babel/core@7.26.10)(@typescript-eslint/parser@7.18.0)(eslint@8.57.1)(typescript@5.9.2)
       ember-rfc176-data: 0.3.18
       eslint: 8.57.1
       eslint-utils: 3.0.0(eslint@8.57.1)
