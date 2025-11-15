@@ -110,6 +110,13 @@ export default class Alert extends Component<BsAlertSignature> {
    * @property _visible
    * @private
    */
+  // Changes to `@visible` argument are observed implicitly through a `{{did-update}}`
+  // template helper and the `updateVisibility` method.
+  //
+  // We should evaluate if we can refactor to localCopy decorator from the tracked-toolbox
+  // to reduce complexity.
+  //
+  // eslint-disable-next-line ember/no-tracked-properties-from-args
   @tracked
   _visible = this.args.visible;
 
