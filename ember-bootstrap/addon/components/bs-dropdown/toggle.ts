@@ -1,6 +1,27 @@
 import Component from '@glimmer/component';
 import { action } from '@ember/object';
 
+interface DropdownToggleSignature {
+  Element: HTMLDivElement;
+  Args: {
+    inNav?: boolean;
+    isOpen?: boolean;
+    onClick?: () => void;
+    onKeyDown: (event: KeyboardEvent) => void;
+    registerChildElement: (
+      element: HTMLAnchorElement,
+      [type]: ['toggle'],
+    ) => void;
+    unregisterChildElement: (
+      element: HTMLAnchorElement,
+      [type]: ['toggle'],
+    ) => void;
+  };
+  Blocks: {
+    default: [];
+  };
+}
+
 /**
  Anchor element that triggers the parent dropdown to open.
  Use [Components.DropdownButton](Components.DropdownButton.html) if you want a button instead of an anchor tag.
@@ -12,7 +33,7 @@ import { action } from '@ember/object';
  @extends Component
  @publicø
  */
-export default class DropdownToggle extends Component {
+export default class DropdownToggle extends Component<DropdownToggleSignature> {
   /**
    * @property inNav
    * @type {boolean}
@@ -35,13 +56,15 @@ export default class DropdownToggle extends Component {
    */
 
   @action
-  handleClick(e) {
+  handleClick(e: MouseEvent) {
     e.preventDefault();
     this.args.onClick?.();
   }
 
   @action
-  handleKeyDown(e) {
+  handleKeyDown(e: KeyboardEvent) {
     this.args.onKeyDown(e);
   }
 }
+
+export { type DropdownToggleSignature };

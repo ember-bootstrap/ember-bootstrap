@@ -3,6 +3,51 @@ import Component from '@glimmer/component';
 import { getDestinationElement } from 'ember-bootstrap/utils/dom';
 import { ref } from 'ember-ref-bucket';
 import { getOwnConfig, macroCondition } from '@embroider/macros';
+import type { Placement as PopperPlacement } from '@popperjs/core';
+import BsDropdownMenuDividerComponent, {
+  type DropdownMenuDividerSignature,
+} from './menu/divider';
+import BsDropdownMenuItemComponent, {
+  type DropdownMenuItemSignature,
+} from './menu/item';
+import BsLinkToComponent, { type BsLinkToSignature } from '../bs-link-to';
+import type { ComponentLike } from '@glint/template';
+import type { EmberBootstrapMacrosConfig } from 'macros-config';
+
+interface DropdownMenuSignature {
+  Element: HTMLDivElement;
+  Args: {
+    align?: 'left' | 'right';
+    dividerComponent?: ComponentLike<DropdownMenuDividerSignature>;
+    isOpen?: boolean;
+    itemComponent?: ComponentLike<DropdownMenuItemSignature>;
+    linkToComponent?: ComponentLike<BsLinkToSignature>;
+    registerChildElement: (element: HTMLDivElement, [type]: ['menu']) => void;
+    renderInPlace?: boolean;
+    toggleElement: HTMLElement | null;
+    unregisterChildElement: (element: HTMLDivElement, [type]: ['menu']) => void;
+
+    /**
+     * @internal
+     */
+    direction?: 'up' | 'down' | 'left' | 'right';
+
+    /**
+     * @internal
+     */
+    inNav?: boolean;
+  };
+  Blocks: {
+    default: [
+      {
+        divider: ComponentLike<DropdownMenuDividerSignature>;
+        item: ComponentLike<DropdownMenuItemSignature>;
+        linkTo: ComponentLike<BsLinkToSignature>;
+        'link-to': ComponentLike<BsLinkToSignature>;
+      },
+    ];
+  };
+}
 
 /**
  Component for the dropdown menu.
@@ -14,13 +59,13 @@ import { getOwnConfig, macroCondition } from '@embroider/macros';
  @extends Component
  @public
  */
-export default class DropdownMenu extends Component {
+export default class DropdownMenu extends Component<DropdownMenuSignature> {
   /**
    * @property _element
    * @type null | HTMLElement
    * @private
    */
-  @ref('menuElement') menuElement = null;
+  @ref('menuElement') menuElement: HTMLDivElement | null = null;
 
   /**
    * Alignment of the menu, either "left" or "right"
@@ -89,7 +134,11 @@ export default class DropdownMenu extends Component {
 
   get alignClass() {
     if (this.align === 'right') {
-      const alignClass = macroCondition(getOwnConfig().isBS4) ? 'right' : 'end';
+      const alignClass = macroCondition(
+        getOwnConfig<EmberBootstrapMacrosConfig>().isBS4,
+      )
+        ? 'right'
+        : 'end';
       return `dropdown-menu-${alignClass}`;
     }
 
@@ -98,9 +147,9 @@ export default class DropdownMenu extends Component {
 
   flip = true;
 
-  get popperPlacement() {
-    let placement = 'bottom-start';
-    let { direction, align } = this;
+  get popperPlacement(): PopperPlacement {
+    let placement: PopperPlacement = 'bottom-start';
+    const { direction, align } = this;
 
     if (direction === 'up') {
       placement = 'top-start';
@@ -151,16 +200,27 @@ export default class DropdownMenu extends Component {
    * @type {String}
    * @private
    */
+  get itemComponent(): ComponentLike<DropdownMenuItemSignature> {
+    return this.args.itemComponent ?? BsDropdownMenuItemComponent;
+  }
 
   /**
    * @property linkToComponent
    * @type {String}
    * @private
    */
+  get linkToComponent(): ComponentLike<BsLinkToSignature> {
+    return this.args.linkToComponent ?? BsLinkToComponent;
+  }
 
   /**
    * @property dividerComponent
    * @type {String}
    * @private
    */
+  get dividerComponent(): ComponentLike<DropdownMenuDividerSignature> {
+    return this.args.dividerComponent ?? BsDropdownMenuDividerComponent;
+  }
 }
+
+export { type DropdownMenuSignature };

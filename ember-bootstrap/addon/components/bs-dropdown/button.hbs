@@ -1,8 +1,7 @@
-{{! @glint-nocheck }}
 <BsButton
-  {{! cannot pass @block directly because that triggers reserved keyword assertion when compiling the template }}
-  {{! template-lint-disable no-capital-arguments no-args-paths }}
-  @block={{this.args.block}}
+  {{! template-lint-disable no-capital-arguments }}
+  {{! https://github.com/ember-bootstrap/ember-bootstrap/issues/1896 }}
+  @block={{this.block}}
   @onClick={{@onClick}}
   @active={{@active}}
   @size={{@size}}

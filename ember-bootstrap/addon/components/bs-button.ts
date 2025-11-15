@@ -1,7 +1,6 @@
 import { tracked } from '@glimmer/tracking';
 import { action } from '@ember/object';
 import Component from '@glimmer/component';
-import arg from '../utils/decorators/arg';
 
 type ButtonState = 'default' | 'pending' | 'fulfilled' | 'rejected';
 
@@ -218,7 +217,9 @@ export default class Button<VALUE> extends Component<ButtonSignature<VALUE>> {
    * @default false
    * @public
    */
-  @arg block = false;
+  get block() {
+    return this.args.block ?? false;
+  }
 
   /**
    * A click event on a button will not bubble up the DOM tree if it has an `onClick` action handler. Set to true to
@@ -456,3 +457,5 @@ export default class Button<VALUE> extends Component<ButtonSignature<VALUE>> {
     }
   }
 }
+
+export { type ButtonSignature };
