@@ -625,8 +625,8 @@ importers:
         specifier: 5.0.0
         version: 5.0.0
       fs-extra:
-        specifier: 11.3.1
-        version: 11.3.1
+        specifier: 11.3.2
+        version: 11.3.2
       loader.js:
         specifier: 4.7.0
         version: 4.7.0
@@ -7187,7 +7187,7 @@ packages:
       ember-cli-htmlbars: 6.3.0
       ember-power-select: 7.2.0(@babel/core@7.28.5)(ember-source@5.12.0)(webpack@5.101.3)
       ember-source: 5.12.0(@glimmer/component@1.1.2)(@glint/template@1.5.2)(rsvp@4.8.5)(webpack@5.101.3)
-      fs-extra: 11.3.1
+      fs-extra: 11.3.2
       rsvp: 4.8.5
     transitivePeerDependencies:
       - supports-color
@@ -7762,7 +7762,7 @@ packages:
       find-up: 5.0.0
       find-yarn-workspace-root: 2.0.0
       fixturify-project: 2.1.1
-      fs-extra: 11.3.1
+      fs-extra: 11.3.2
       fs-tree-diff: 2.0.1
       get-caller-file: 2.0.5
       git-repo-info: 2.1.1
@@ -9936,8 +9936,8 @@ packages:
       jsonfile: 6.1.0
       universalify: 2.0.1
 
-  /fs-extra@11.3.1:
-    resolution: {integrity: sha512-eXvGGwZ5CL17ZSwHWd3bbgk7UUpF6IFHtP57NYYakPvHOs8GDgDe5KJI36jIJzDkJ6eJjuzRA8eBQb6SkKue0g==}
+  /fs-extra@11.3.2:
+    resolution: {integrity: sha512-Xr9F6z6up6Ws+NjzMCZc6WXg2YFRlrLP9NQDO3VQrWrfiojdhS56TzueT88ze0uBdCTwEIhQ3ptnmKeWGFAe0A==}
     engines: {node: '>=14.14'}
     dependencies:
       graceful-fs: 4.2.11
