@@ -420,6 +420,9 @@ importers:
       '@ember/render-modifiers':
         specifier: 3.0.0
         version: 3.0.0(@glint/template@1.5.2)(ember-source@5.12.0)
+      '@ember/string':
+        specifier: 4.0.1
+        version: 4.0.1
       '@ember/test-helpers':
         specifier: 3.3.1
         version: 3.3.1(@babel/core@7.28.5)(@glint/template@1.5.2)(ember-source@5.12.0)(webpack@5.101.3)
