@@ -39,7 +39,7 @@ export function testBS5(name: string, fn: Parameters<typeof test>[1]) {
 }
 
 export function versionDependent<T>(v4: T, v5?: T): T {
-  return isBootstrap(5) ? v5 ?? v4 : v4;
+  return isBootstrap(5) ? (v5 ?? v4) : v4;
 }
 
 export function visibilityClass() {
