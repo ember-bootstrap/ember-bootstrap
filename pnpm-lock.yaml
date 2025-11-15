@@ -124,7 +124,7 @@ importers:
         version: 1.0.0(ember-source@5.12.0)(webpack@5.101.3)
       ember-qunit:
         specifier: 7.0.0
-        version: 7.0.0(@ember/test-helpers@3.3.1)(@glint/template@1.5.2)(ember-source@5.12.0)(qunit@2.24.1)(webpack@5.101.3)
+        version: 7.0.0(@ember/test-helpers@3.3.1)(ember-source@5.12.0)(qunit@2.24.1)(webpack@5.101.3)
       ember-resolver:
         specifier: 12.0.1
         version: 12.0.1(ember-source@5.12.0)
@@ -362,7 +362,7 @@ importers:
         version: 5.13.0
       ember-template-lint-plugin-prettier:
         specifier: 5.0.0
-        version: 5.0.0(ember-template-lint@5.13.0)(prettier@3.0.3)
+        version: 5.0.0(ember-template-lint@5.13.0)(prettier@3.3.3)
       eslint:
         specifier: 8.57.1
         version: 8.57.1
@@ -380,7 +380,7 @@ importers:
         version: 16.6.2(eslint@8.57.1)
       eslint-plugin-prettier:
         specifier: 5.5.4
-        version: 5.5.4(eslint-config-prettier@9.1.2)(eslint@8.57.1)(prettier@3.0.3)
+        version: 5.5.4(eslint-config-prettier@9.1.2)(eslint@8.57.1)(prettier@3.3.3)
       eslint-plugin-qunit:
         specifier: 8.2.5
         version: 8.2.5(eslint@8.57.1)
@@ -399,6 +399,9 @@ importers:
 
   test-app:
     devDependencies:
+      '@babel/core':
+        specifier: ^7.25.2
+        version: 7.28.5
       '@babel/eslint-parser':
         specifier: 7.28.5
         version: 7.28.5(@babel/core@7.28.5)(eslint@8.57.1)
@@ -411,9 +414,6 @@ importers:
       '@ember/render-modifiers':
         specifier: 3.0.0
         version: 3.0.0(@glint/template@1.5.2)(ember-source@5.12.0)
-      '@ember/string':
-        specifier: 4.0.1
-        version: 4.0.1
       '@ember/test-helpers':
         specifier: 3.3.1
         version: 3.3.1(@babel/core@7.28.5)(@glint/template@1.5.2)(ember-source@5.12.0)(webpack@5.101.3)
@@ -507,6 +507,9 @@ importers:
       ember-cli-babel:
         specifier: 8.2.0
         version: 8.2.0(@babel/core@7.28.5)
+      ember-cli-clean-css:
+        specifier: ^3.0.0
+        version: 3.0.0
       ember-cli-content-security-policy:
         specifier: 2.0.3
         version: 2.0.3
@@ -562,8 +565,8 @@ importers:
         specifier: 4.1.1
         version: 4.1.1(@glint/template@1.5.2)(ember-source@5.12.0)(webpack@5.101.3)
       ember-qunit:
-        specifier: 7.0.0
-        version: 7.0.0(@ember/test-helpers@3.3.1)(@glint/template@1.5.2)(ember-source@5.12.0)(qunit@2.24.1)(webpack@5.101.3)
+        specifier: 8.1.0
+        version: 8.1.0(@ember/test-helpers@3.3.1)(@glint/template@1.5.2)(ember-source@5.12.0)(qunit@2.24.1)
       ember-ref-bucket:
         specifier: 5.0.8
         version: 5.0.8(@babel/core@7.28.5)(@glint/template@1.5.2)(webpack@5.101.3)
@@ -592,11 +595,11 @@ importers:
         specifier: 4.3.0
         version: 4.3.0
       ember-template-lint:
-        specifier: 5.13.0
-        version: 5.13.0
+        specifier: 6.0.0
+        version: 6.0.0
       ember-template-lint-plugin-prettier:
         specifier: 5.0.0
-        version: 5.0.0(ember-template-lint@5.13.0)(prettier@3.0.3)
+        version: 5.0.0(ember-template-lint@6.0.0)(prettier@3.3.3)
       ember-try:
         specifier: 3.0.0
         version: 3.0.0
@@ -611,13 +614,13 @@ importers:
         version: 12.5.0(@babel/core@7.28.5)(@typescript-eslint/parser@7.18.0)(eslint@8.57.1)(typescript@5.9.2)
       eslint-plugin-hbs:
         specifier: 1.0.3
-        version: 1.0.3(ember-template-lint@5.13.0)
+        version: 1.0.3(ember-template-lint@6.0.0)
       eslint-plugin-n:
         specifier: 16.6.2
         version: 16.6.2(eslint@8.57.1)
       eslint-plugin-prettier:
         specifier: 5.5.4
-        version: 5.5.4(eslint-config-prettier@9.1.2)(eslint@8.57.1)(prettier@3.0.3)
+        version: 5.5.4(eslint-config-prettier@9.1.2)(eslint@8.57.1)(prettier@3.3.3)
       eslint-plugin-qunit:
         specifier: 8.2.5
         version: 8.2.5(eslint@8.57.1)
@@ -631,11 +634,11 @@ importers:
         specifier: 4.7.0
         version: 4.7.0
       prettier:
-        specifier: 3.0.3
-        version: 3.0.3
+        specifier: 3.3.3
+        version: 3.3.3
       prettier-plugin-ember-template-tag:
         specifier: 2.1.0
-        version: 2.1.0(prettier@3.0.3)
+        version: 2.1.0(prettier@3.3.3)
       qunit:
         specifier: 2.24.1
         version: 2.24.1
@@ -3004,6 +3007,14 @@ packages:
       prettier: ^3.0.0
     dependencies:
       prettier: 3.0.3
+    dev: true
+
+  /@prettier/sync@0.2.1(prettier@3.3.3):
+    resolution: {integrity: sha512-7ls1R6//+GPYD9vof1XaL5psViv83CwpdwlS8oUkWldYgbPhzZ3WgxIQMWqGyBmWPmoBfQg8C7jj7KI/ZuDHhQ==}
+    peerDependencies:
+      prettier: ^3.0.0
+    dependencies:
+      prettier: 3.3.3
     dev: true
 
   /@release-it-plugins/lerna-changelog@8.0.1(release-it@17.11.0):
@@ -5803,6 +5814,13 @@ packages:
       source-map: 0.4.4
     dev: true
 
+  /clean-css@5.3.3:
+    resolution: {integrity: sha512-D5J+kHaVb/wKSFcyyV75uCn8fiY4sV38XJoe4CUyGQ+mOU/fMVYUdH1hJC+CJQ5uY3EnW27SbJYS4X8BiLrAFg==}
+    engines: {node: '>= 10.0'}
+    dependencies:
+      source-map: 0.6.1
+    dev: true
+
   /clean-stack@2.2.0:
     resolution: {integrity: sha512-4diC9HaTE+KRAMWhDhrGOECgWZxoevMc5TlkObMqNSsVU62PYzXZ/SMTjzyGAFF1YusgxGcSWTEXBhp0CPwQ1A==}
     engines: {node: '>=6'}
@@ -6657,6 +6675,10 @@ packages:
       '@babel/runtime': 7.26.10
     dev: true
 
+  /date-fns@3.6.0:
+    resolution: {integrity: sha512-fRHTG8g/Gif+kSh50gaGEdToemgfj74aRX3swtiouboip5JDLAyDE9F11nHMIcvOaXeOC6D7SpNhi7uFyB7Uww==}
+    dev: true
+
   /date-time@2.1.0:
     resolution: {integrity: sha512-/9+C44X7lot0IeiyfgJmETtRMhBidBYM2QFFIkGa0U1k+hSyY87Nw7PY3eDqpvCBm7I3WCSfPeZskW/YYq6m4g==}
     engines: {node: '>=4'}
@@ -7300,6 +7322,17 @@ packages:
     resolution: {integrity: sha512-wNGVcpHbp6R+DeDHdpx+w4M+F+2cjaFDvf4ZV3VeIcHXLoxYlo0duXkbOLVKalHK/al6xO+rlZt5KqjK5Cyp0w==}
     dependencies:
       recast: 0.12.9
+
+  /ember-cli-clean-css@3.0.0:
+    resolution: {integrity: sha512-BbveJCyRvzzkaTH1llLW+MpHe/yzA5zpHOpMIg2vp/3JD9mban9zUm7lphaB0TSpPuMuby9rAhTI8pgXq0ifIA==}
+    engines: {node: 16.* || >= 18}
+    dependencies:
+      broccoli-persistent-filter: 3.1.3
+      clean-css: 5.3.3
+      json-stable-stringify: 1.2.1
+    transitivePeerDependencies:
+      - supports-color
+    dev: true
 
   /ember-cli-content-security-policy@2.0.3:
     resolution: {integrity: sha512-tSGRbR2XiOjHk7oEH7LVF1y5S643rUEjl3mujI6EYPkrQbHaV0WdLyIWJkLvuP1KGnjBfvnLCyiKDFu6z2PjVg==}
@@ -8192,7 +8225,7 @@ packages:
       - webpack
     dev: true
 
-  /ember-qunit@7.0.0(@ember/test-helpers@3.3.1)(@glint/template@1.5.2)(ember-source@5.12.0)(qunit@2.24.1)(webpack@5.101.3):
+  /ember-qunit@7.0.0(@ember/test-helpers@3.3.1)(ember-source@5.12.0)(qunit@2.24.1)(webpack@5.101.3):
     resolution: {integrity: sha512-KhrndHYEXsHnXvmsGyJLJQ6VCudXaRs5dzPZBsdttZJIhsB6PmYAvq2Q+mh3GRDT/59T/sRDrB3FD3/lATS8aA==}
     engines: {node: 16.* || >= 18}
     peerDependencies:
@@ -8216,6 +8249,25 @@ packages:
       - '@glint/template'
       - supports-color
       - webpack
+    dev: true
+
+  /ember-qunit@8.1.0(@ember/test-helpers@3.3.1)(@glint/template@1.5.2)(ember-source@5.12.0)(qunit@2.24.1):
+    resolution: {integrity: sha512-55/xqvVQwhiNcnh/tCzWyvlYzrYqwDY0/cIPyDQbAxGKtkUt9jCfRUGllfyOofC6LX0fL/0fIi+5e9sg1m6vXw==}
+    peerDependencies:
+      '@ember/test-helpers': '>=3.0.3'
+      ember-source: '>=4.0.0'
+      qunit: ^2.13.0
+    dependencies:
+      '@ember/test-helpers': 3.3.1(@babel/core@7.28.5)(@glint/template@1.5.2)(ember-source@5.12.0)(webpack@5.101.3)
+      '@embroider/addon-shim': 1.10.2
+      '@embroider/macros': 1.18.3(@glint/template@1.5.2)
+      ember-cli-test-loader: 3.1.0
+      ember-source: 5.12.0(@glimmer/component@1.1.2)(@glint/template@1.5.2)(rsvp@4.8.5)(webpack@5.101.3)
+      qunit: 2.24.1
+      qunit-theme-ember: 1.0.0
+    transitivePeerDependencies:
+      - '@glint/template'
+      - supports-color
     dev: true
 
   /ember-ref-bucket@5.0.8(@babel/core@7.28.5)(@glint/template@1.5.2)(webpack@5.101.3):
@@ -8438,6 +8490,32 @@ packages:
       prettier-linter-helpers: 1.0.0
     dev: true
 
+  /ember-template-lint-plugin-prettier@5.0.0(ember-template-lint@5.13.0)(prettier@3.3.3):
+    resolution: {integrity: sha512-aXUYM4yuIdPZ80+AsAU8QBwGSJJ/aAkRsNcQ5vI5HmXiBjzHlDc/ZhmP6iVcYuCmoA/3iKcssMAYwIDbuby4pg==}
+    engines: {node: ^16.0.0 || ^18.0.0 || >=20.0.0}
+    peerDependencies:
+      ember-template-lint: '>= 4.0.0'
+      prettier: '>= 3.0.0'
+    dependencies:
+      '@prettier/sync': 0.2.1(prettier@3.3.3)
+      ember-template-lint: 5.13.0
+      prettier: 3.3.3
+      prettier-linter-helpers: 1.0.0
+    dev: true
+
+  /ember-template-lint-plugin-prettier@5.0.0(ember-template-lint@6.0.0)(prettier@3.3.3):
+    resolution: {integrity: sha512-aXUYM4yuIdPZ80+AsAU8QBwGSJJ/aAkRsNcQ5vI5HmXiBjzHlDc/ZhmP6iVcYuCmoA/3iKcssMAYwIDbuby4pg==}
+    engines: {node: ^16.0.0 || ^18.0.0 || >=20.0.0}
+    peerDependencies:
+      ember-template-lint: '>= 4.0.0'
+      prettier: '>= 3.0.0'
+    dependencies:
+      '@prettier/sync': 0.2.1(prettier@3.3.3)
+      ember-template-lint: 6.0.0
+      prettier: 3.3.3
+      prettier-linter-helpers: 1.0.0
+    dev: true
+
   /ember-template-lint@5.13.0:
     resolution: {integrity: sha512-AYxz9S9fVZfHPmTsymc7NwsD7FVmDUZyfC+KYpxDlK0wic7JSQx2FNQNqQSBFRLOuzn7VQ0/+1pX6DGqKDGswg==}
     engines: {node: ^14.18.0 || ^16.0.0 || >= 18.0.0}
@@ -8455,6 +8533,33 @@ packages:
       fuse.js: 6.6.2
       get-stdin: 9.0.0
       globby: 13.2.2
+      is-glob: 4.0.3
+      language-tags: 1.0.9
+      micromatch: 4.0.8
+      resolve: 1.22.10
+      v8-compile-cache: 2.4.0
+      yargs: 17.7.2
+    transitivePeerDependencies:
+      - supports-color
+    dev: true
+
+  /ember-template-lint@6.0.0:
+    resolution: {integrity: sha512-TWWt/qCd4KoQ50T3We5nCoKcsrAT8Ip79Kmm9eyWjjyL+LAbRFu0z+GxcmW7MR+QCNW/1LQs3kwEdtIcaHEGiA==}
+    engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
+    hasBin: true
+    dependencies:
+      '@lint-todo/utils': 13.1.1
+      aria-query: 5.3.2
+      chalk: 5.3.0
+      ci-info: 4.2.0
+      date-fns: 3.6.0
+      ember-template-imports: 3.4.2
+      ember-template-recast: 6.1.5
+      eslint-formatter-kakoune: 1.0.0
+      find-up: 7.0.0
+      fuse.js: 7.1.0
+      get-stdin: 9.0.0
+      globby: 14.0.2
       is-glob: 4.0.3
       language-tags: 1.0.9
       micromatch: 4.0.8
@@ -8946,6 +9051,16 @@ packages:
       requireindex: 1.2.0
     dev: true
 
+  /eslint-plugin-hbs@1.0.3(ember-template-lint@6.0.0):
+    resolution: {integrity: sha512-l4iH4jml2ckNoJDhURf9FZO24WOC1M9M+KoBmL1hmJWczO2iCbRKCSDWRxuvoASVkYr8k2tYcb3EG1nCuG/nyQ==}
+    engines: {node: '>=12.0.0'}
+    peerDependencies:
+      ember-template-lint: ^3.6.0
+    dependencies:
+      ember-template-lint: 6.0.0
+      requireindex: 1.2.0
+    dev: true
+
   /eslint-plugin-n@16.6.2(eslint@8.57.1):
     resolution: {integrity: sha512-6TyDmZ1HXoFQXnhCTUjVFULReoBPOAjpuiKELMkeP40yffI/1ZRO+d9ug/VC6fqISo2WkuIBk3cvuRPALaWlOQ==}
     engines: {node: '>=16.0.0'}
@@ -8983,6 +9098,27 @@ packages:
       eslint: 8.57.1
       eslint-config-prettier: 9.1.2(eslint@8.57.1)
       prettier: 3.0.3
+      prettier-linter-helpers: 1.0.0
+      synckit: 0.11.11
+    dev: true
+
+  /eslint-plugin-prettier@5.5.4(eslint-config-prettier@9.1.2)(eslint@8.57.1)(prettier@3.3.3):
+    resolution: {integrity: sha512-swNtI95SToIz05YINMA6Ox5R057IMAmWZ26GqPxusAp1TZzj+IdY9tXNWWD3vkF/wEqydCONcwjTFpxybBqZsg==}
+    engines: {node: ^14.18.0 || >=16.0.0}
+    peerDependencies:
+      '@types/eslint': '>=8.0.0'
+      eslint: '>=8.0.0'
+      eslint-config-prettier: '>= 7.0.0 <10.0.0 || >=10.1.0'
+      prettier: '>=3.0.0'
+    peerDependenciesMeta:
+      '@types/eslint':
+        optional: true
+      eslint-config-prettier:
+        optional: true
+    dependencies:
+      eslint: 8.57.1
+      eslint-config-prettier: 9.1.2(eslint@8.57.1)
+      prettier: 3.3.3
       prettier-linter-helpers: 1.0.0
       synckit: 0.11.11
     dev: true
@@ -9693,6 +9829,15 @@ packages:
       path-exists: 5.0.0
     dev: true
 
+  /find-up@7.0.0:
+    resolution: {integrity: sha512-YyZM99iHrqLKjmt4LJDj58KI+fYyufRLBSYcqycxf//KpBk9FoewoGX0450m9nB44qrZnovzC2oeP5hUibxc/g==}
+    engines: {node: '>=18'}
+    dependencies:
+      locate-path: 7.2.0
+      path-exists: 5.0.0
+      unicorn-magic: 0.1.0
+    dev: true
+
   /find-yarn-workspace-root@2.0.0:
     resolution: {integrity: sha512-1IMnbjt4KzsQfnhnzNd8wUEgXZ44IzZaZmnLYx7D5FZlaHt2gW20Cri8Q+E/t5tIj4+epTBub+2Zxu/vNILzqQ==}
     dependencies:
@@ -10096,6 +10241,11 @@ packages:
 
   /fuse.js@6.6.2:
     resolution: {integrity: sha512-cJaJkxCCxC8qIIcPBF9yGxY0W/tVZS3uEISDxhYIdtk8OL93pe+6Zj7LjCqVV4dzbqcriOZ+kQ/NE4RXZHsIGA==}
+    engines: {node: '>=10'}
+    dev: true
+
+  /fuse.js@7.1.0:
+    resolution: {integrity: sha512-trLf4SzuuUxfusZADLINj+dE8clK1frKdmqiJNb1Es75fmI5oY6X2mxLVUciLLjxqw/xr72Dhy+lER6dGd02FQ==}
     engines: {node: '>=10'}
     dev: true
 
@@ -14314,7 +14464,7 @@ packages:
       fast-diff: 1.3.0
     dev: true
 
-  /prettier-plugin-ember-template-tag@2.1.0(prettier@3.0.3):
+  /prettier-plugin-ember-template-tag@2.1.0(prettier@3.3.3):
     resolution: {integrity: sha512-Ium+m2zHSZKzRFt1Shn+sv8j1BzfFWP3E0tZeKTKP1U7v/tMyLuQNBRyRCJ7REdKc9bWkIJG/hCSf0CKqCVU1w==}
     engines: {node: 18.* || >= 20}
     peerDependencies:
@@ -14322,7 +14472,7 @@ packages:
     dependencies:
       '@babel/core': 7.28.5
       content-tag: 4.0.0
-      prettier: 3.0.3
+      prettier: 3.3.3
     transitivePeerDependencies:
       - supports-color
     dev: true
@@ -14334,6 +14484,12 @@ packages:
 
   /prettier@3.0.3:
     resolution: {integrity: sha512-L/4pUDMxcNa8R/EthV08Zt42WBO4h1rarVtK0K+QJG0X187OLo7l699jWw0GKuwzkPQ//jMFA/8Xm6Fh3J/DAg==}
+    engines: {node: '>=14'}
+    hasBin: true
+    dev: true
+
+  /prettier@3.3.3:
+    resolution: {integrity: sha512-i2tDNA0O5IrMO757lfrdQZCc2jPNDVntV0m/+4whiDfWaTKfMNgR7Qz0NAeGz/nRqF4m5/6CLzbP4/liHt12Ew==}
     engines: {node: '>=14'}
     hasBin: true
     dev: true
@@ -14548,6 +14704,10 @@ packages:
     resolution: {integrity: sha512-eemLM5bflWafzmBnwlYbjf9NrjEkV2j7NO7mTvsMzQBJbEaq2zFvUFDtHV9JaK0TT5mgRZt034LCUewYGmjjjQ==}
     dependencies:
       dom-element-descriptors: 0.5.1
+    dev: true
+
+  /qunit-theme-ember@1.0.0:
+    resolution: {integrity: sha512-vdMVVo6ecdCkWttMTKeyq1ZTLGHcA6zdze2zhguNuc3ritlJMhOXY5RDseqazOwqZVfCg3rtlmL3fMUyIzUyFQ==}
     dev: true
 
   /qunit@2.24.1:

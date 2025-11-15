@@ -1,20 +1,14 @@
 # unconventional js
 /blueprints/*/files/
-/vendor/
 
 # compiled output
+/declarations/
 /dist/
-/tmp/
-
-# dependencies
-/bower_components/
-/node_modules/
 
 # misc
 /coverage/
 !.*
 .*/
-.eslintcache
 
 # ember-try
 /.node_modules.ember-try/
@@ -23,6 +17,3 @@
 /package.json.ember-try
 /package-lock.json.ember-try
 /yarn.lock.ember-try
-
-/docs/
-/fastboot-tests/fixtures/
