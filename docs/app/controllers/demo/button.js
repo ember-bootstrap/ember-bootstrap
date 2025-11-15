@@ -11,6 +11,7 @@ export default class ButtonController extends Controller {
   @action
   download() {
     return new Promise(function (resolve) {
+      // eslint-disable-next-line ember/no-runloop
       later(resolve, 3000);
     });
   }
