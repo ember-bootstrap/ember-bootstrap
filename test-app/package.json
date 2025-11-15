@@ -86,7 +86,7 @@
     "ember-try": "3.0.0",
     "eslint": "8.57.1",
     "eslint-config-prettier": "9.1.2",
-    "eslint-plugin-ember": "12.5.0",
+    "eslint-plugin-ember": "12.7.4",
     "eslint-plugin-hbs": "1.0.3",
     "eslint-plugin-n": "16.6.2",
     "eslint-plugin-prettier": "5.5.4",

@@ -73,6 +73,13 @@ export default class Accordion extends Component<AccordionSignature> {
    * @private
    */
 
+  // Updates to `@selected` argument are observed implicitly. See `isSelected`
+  // getter and setter for details.
+  //
+  // We should evaluate if we can refactor to localCopy decorator from the tracked-toolbox
+  // to reduce complexity.
+  //
+  // eslint-disable-next-line ember/no-tracked-properties-from-args
   @tracked
   _isSelected?: unknown = this.args.selected;
   _isSelectedNonTracked?: unknown = this.args.selected;

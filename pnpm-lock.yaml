@@ -147,8 +147,8 @@ importers:
         specifier: 9.1.2
         version: 9.1.2(eslint@8.57.1)
       eslint-plugin-ember:
-        specifier: 11.12.0
-        version: 11.12.0(eslint@8.57.1)
+        specifier: 12.7.4
+        version: 12.7.4(@babel/core@7.28.5)(@typescript-eslint/parser@7.18.0)(eslint@8.57.1)(typescript@5.9.2)
       eslint-plugin-n:
         specifier: 16.6.2
         version: 16.6.2(eslint@8.57.1)
@@ -205,7 +205,7 @@ importers:
         version: 3.2.0
       stylelint:
         specifier: 16.23.1
-        version: 16.23.1
+        version: 16.23.1(typescript@5.9.2)
       stylelint-config-standard-scss:
         specifier: 13.1.0
         version: 13.1.0(postcss@8.5.6)(stylelint@16.23.1)
@@ -370,8 +370,8 @@ importers:
         specifier: 9.1.2
         version: 9.1.2(eslint@8.57.1)
       eslint-plugin-ember:
-        specifier: 11.12.0
-        version: 11.12.0(eslint@8.57.1)
+        specifier: 12.7.4
+        version: 12.7.4(@babel/core@7.28.5)(@typescript-eslint/parser@7.18.0)(eslint@8.57.1)(typescript@5.9.2)
       eslint-plugin-hbs:
         specifier: 1.0.3
         version: 1.0.3(ember-template-lint@5.13.0)
@@ -607,8 +607,8 @@ importers:
         specifier: 9.1.2
         version: 9.1.2(eslint@8.57.1)
       eslint-plugin-ember:
-        specifier: 12.5.0
-        version: 12.5.0(@babel/core@7.28.5)(@typescript-eslint/parser@7.18.0)(eslint@8.57.1)(typescript@5.9.2)
+        specifier: 12.7.4
+        version: 12.7.4(@babel/core@7.28.5)(@typescript-eslint/parser@7.18.0)(eslint@8.57.1)(typescript@5.9.2)
       eslint-plugin-hbs:
         specifier: 1.0.3
         version: 1.0.3(ember-template-lint@5.13.0)
@@ -6538,14 +6538,6 @@ packages:
       semver: 7.7.1
       webpack: 5.101.3
 
-  /css-tree@2.3.1:
-    resolution: {integrity: sha512-6Fv1DV/TYw//QF5IzQdqsNDjx/wc8TrMBZsqjL9eW01tWb7R7k/mq+/VXfJCl7SoD5emsJop9cOByJZfs8hYIw==}
-    engines: {node: ^10 || ^12.20.0 || ^14.13.0 || >=15.0.0}
-    dependencies:
-      mdn-data: 2.0.30
-      source-map-js: 1.2.1
-    dev: true
-
   /css-tree@3.1.0:
     resolution: {integrity: sha512-0eW44TGN5SQXU1mWSkKwFstI/22X2bG1nYzZTYMAWjylYURhse752YgbE4Cx46AC+bAvI+/dYTPRk1LqSUnu6w==}
     engines: {node: ^10 || ^12.20.0 || ^14.13.0 || >=15.0.0}
@@ -8873,32 +8865,8 @@ packages:
     resolution: {integrity: sha512-Uk/TVLt6Nf6Xoz7C1iYuZjOSdJxe5aaauGRke8JhKeJwD66Y61/pY2FjtLP04Ooq9PwV34bzrkKkU2UZ5FtDRA==}
     dev: true
 
-  /eslint-plugin-ember@11.12.0(eslint@8.57.1):
-    resolution: {integrity: sha512-7Ow1ky5JnRR0k3cxuvgYi4AWTe9DzGjlLgOJbU5VABLgr7Q0iq3ioC+YwAP79nV48cpw2HOgMgkZ1MynuIg59g==}
-    engines: {node: 14.* || 16.* || >= 18}
-    peerDependencies:
-      eslint: '>= 7'
-    dependencies:
-      '@ember-data/rfc395-data': 0.0.4
-      '@glimmer/syntax': 0.84.3
-      css-tree: 2.3.1
-      ember-rfc176-data: 0.3.18
-      ember-template-imports: 3.4.2
-      ember-template-recast: 6.1.5
-      eslint: 8.57.1
-      eslint-utils: 3.0.0(eslint@8.57.1)
-      estraverse: 5.3.0
-      lodash.camelcase: 4.3.0
-      lodash.kebabcase: 4.1.1
-      magic-string: 0.30.17
-      requireindex: 1.2.0
-      snake-case: 3.0.4
-    transitivePeerDependencies:
-      - supports-color
-    dev: true
-
-  /eslint-plugin-ember@12.5.0(@babel/core@7.28.5)(@typescript-eslint/parser@7.18.0)(eslint@8.57.1)(typescript@5.9.2):
-    resolution: {integrity: sha512-DBUzsaKWDVXsujAZPpRir0O7owdlCoVzZmtaJm7g7iQeSrNtcRWI7AItsTqKSsws1XeAySH0sPsQItMdDCb9Fg==}
+  /eslint-plugin-ember@12.7.4(@babel/core@7.28.5)(@typescript-eslint/parser@7.18.0)(eslint@8.57.1)(typescript@5.9.2):
+    resolution: {integrity: sha512-0q6C9VEnHe9hbgs6TgFWHVyEZRrPwOdkqkiLFh7HkxQH0Y/RhCLCLiU695sfTacIk8ofzLcQSp9Fhd1WIZY9eA==}
     engines: {node: 18.* || 20.* || >= 21}
     peerDependencies:
       '@typescript-eslint/parser': '*'
@@ -12518,12 +12486,6 @@ packages:
     dependencies:
       sourcemap-codec: 1.4.8
 
-  /magic-string@0.30.17:
-    resolution: {integrity: sha512-sNPKHvyjVf7gyjwS4xGTaW/mCnF8wnjtifKBEhxfZ7E/S8tQ0rssrwGNn6q8JH/ohItJfSQp9mBtQYuTlH5QnA==}
-    dependencies:
-      '@jridgewell/sourcemap-codec': 1.5.0
-    dev: true
-
   /make-dir@3.1.0:
     resolution: {integrity: sha512-g3FeP20LNwhALb/6Cz6Dd4F2ngze0jz7tbzrD2wAV+o9FeNHe4rL+yK2md0J/fiSf1sa1ADhXqi5+oVwOM/eGw==}
     engines: {node: '>=8'}
@@ -12687,10 +12649,6 @@ packages:
     resolution: {integrity: sha512-0H44vDimn51F0YwvxSJSm0eCDOJTRlmN0R1yBh4HLj9wiV1Dn0QoXGbvFAWj2hSItVTlCmBF1hqKlIyUBVFLPg==}
     dependencies:
       '@types/mdast': 4.0.4
-    dev: true
-
-  /mdn-data@2.0.30:
-    resolution: {integrity: sha512-GaqWWShW4kv/G9IEucWScBx9G1/vsFZZJUO+tD26M8J8z3Kw5RDQjaoZe03YAClgeS/SWPOcb4nkFBTEi5DUEA==}
     dev: true
 
   /mdn-data@2.12.2:
@@ -16250,7 +16208,7 @@ packages:
     dependencies:
       postcss: 8.5.6
       postcss-scss: 4.0.9(postcss@8.5.6)
-      stylelint: 16.23.1
+      stylelint: 16.23.1(typescript@5.9.2)
       stylelint-config-recommended: 14.0.1(stylelint@16.23.1)
       stylelint-scss: 6.11.1(stylelint@16.23.1)
     dev: true
@@ -16261,7 +16219,7 @@ packages:
     peerDependencies:
       stylelint: ^16.1.0
     dependencies:
-      stylelint: 16.23.1
+      stylelint: 16.23.1(typescript@5.9.2)
     dev: true
 
   /stylelint-config-standard-scss@13.1.0(postcss@8.5.6)(stylelint@16.23.1):
@@ -16275,7 +16233,7 @@ packages:
         optional: true
     dependencies:
       postcss: 8.5.6
-      stylelint: 16.23.1
+      stylelint: 16.23.1(typescript@5.9.2)
       stylelint-config-recommended-scss: 14.1.0(postcss@8.5.6)(stylelint@16.23.1)
       stylelint-config-standard: 36.0.1(stylelint@16.23.1)
     dev: true
@@ -16286,7 +16244,7 @@ packages:
     peerDependencies:
       stylelint: ^16.1.0
     dependencies:
-      stylelint: 16.23.1
+      stylelint: 16.23.1(typescript@5.9.2)
       stylelint-config-recommended: 14.0.1(stylelint@16.23.1)
     dev: true
 
@@ -16299,7 +16257,7 @@ packages:
     dependencies:
       prettier: 3.6.2
       prettier-linter-helpers: 1.0.0
-      stylelint: 16.23.1
+      stylelint: 16.23.1(typescript@5.9.2)
     dev: true
 
   /stylelint-scss@6.11.1(stylelint@16.23.1):
@@ -16316,10 +16274,10 @@ packages:
       postcss-resolve-nested-selector: 0.1.6
       postcss-selector-parser: 7.1.0
       postcss-value-parser: 4.2.0
-      stylelint: 16.23.1
+      stylelint: 16.23.1(typescript@5.9.2)
     dev: true
 
-  /stylelint@16.23.1:
+  /stylelint@16.23.1(typescript@5.9.2):
     resolution: {integrity: sha512-dNvDTsKV1U2YtiUDfe9d2gp902veFeo3ecCWdGlmLm2WFrAV0+L5LoOj/qHSBABQwMsZPJwfC4bf39mQm1S5zw==}
     engines: {node: '>=18.12.0'}
     hasBin: true

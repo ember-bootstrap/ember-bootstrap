@@ -33,6 +33,7 @@ module.exports = {
     'ember/require-tagless-components': 'error',
     'ember/no-observers': 'warn',
     'ember/no-mixins': 'warn',
+    'ember/no-runloop': 'warn',
     // disabled, see above
     // 'hbs/check-hbs-template-literals': 'error',
     'no-setter-return': 'off', // computed setters may return a value!

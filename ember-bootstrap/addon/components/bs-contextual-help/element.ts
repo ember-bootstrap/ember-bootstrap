@@ -46,6 +46,20 @@ export default class ContextualHelpElement<
   @arg
   placement: Placement = 'top';
 
+  // `actualPlacement` is initialized with `@placement` and updated by Popper
+  // through the `updatePlacement` method which is bound to Popper's
+  // `onFirstUpdate` hook.
+  //
+  // The options passed to Popper are autotracked. And Ember Popper Modifier
+  // updates Popper with the new options whenever they change.
+  //
+  // `actualPlacement` is not updated when `@placement` changes and Popper's
+  // `onFirstUpdate` hook does not run. It is unclear if that situation can
+  // ever happen. But in case we get a bug report related to layout issues
+  // when `@placement` argument changed after initial rendering, it may be
+  // related.
+  //
+  // eslint-disable-next-line ember/no-tracked-properties-from-args
   @tracked
   actualPlacement?: Placement = this.args.placement;
 
@@ -130,6 +144,11 @@ export default class ContextualHelpElement<
   get popperOptions() {
     const options: PopperOptions = {
       placement: this.placement,
+      // Popper's `onFirstUpdate` hook only runs when Popper positioned the element
+      // the first time. But not when it updates that position later. This may lead
+      // to `actualPlacement` property getting out of sync. It is unclear if this
+      // leads to any actual bugs. But we should investigate it as a potential root
+      // cause when we get a bug report related to placement of popovers or tooltips.
       onFirstUpdate: this.updatePlacement,
       modifiers: [],
       strategy: 'absolute',
