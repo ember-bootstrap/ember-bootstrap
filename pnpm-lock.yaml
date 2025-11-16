@@ -60,8 +60,8 @@ importers:
         specifier: 2.1.0
         version: 2.1.0
       ember-bootstrap-power-select:
-        specifier: 5.0.0
-        version: 5.0.0(ember-bootstrap@ember-bootstrap)(ember-power-select@7.2.0)(ember-source@5.12.0)
+        specifier: 6.0.0
+        version: 6.0.0(ember-bootstrap@ember-bootstrap)(ember-power-select@7.2.0)(ember-source@5.12.0)
       ember-cli:
         specifier: 5.12.0
         version: 5.12.0
@@ -7131,23 +7131,23 @@ packages:
       - supports-color
     dev: true
 
-  /ember-bootstrap-power-select@5.0.0(ember-bootstrap@ember-bootstrap)(ember-power-select@7.2.0)(ember-source@5.12.0):
-    resolution: {integrity: sha512-GJVzwN//fG1D/vuvyL7pxA3qaNtUc9q2Uj9JhlE/KD0KxJlap6eTKvuwibyB80JUJqENzoTffnEcinM+6avU3Q==}
-    engines: {node: 14.* || 16.* || >= 18}
+  /ember-bootstrap-power-select@6.0.0(ember-bootstrap@ember-bootstrap)(ember-power-select@7.2.0)(ember-source@5.12.0):
+    resolution: {integrity: sha512-7GA8isxbUTTs3bhoJ2Rz+nglRe3CA2egOl/SMr5tTGLnkkFfN8nLPAtMv7z0+v+IrfcVuE+HIFuldUyIcGeP6w==}
+    engines: {node: 20.* || 22.* || >= 24}
     peerDependencies:
       ember-bootstrap: '>=5'
       ember-power-select: '>=6'
-      ember-source: '>3.28'
+      ember-source: '>=3.28'
     dependencies:
-      chalk: 5.3.0
+      '@babel/core': 7.28.5
+      chalk: 4.1.2
       ember-bootstrap: link:ember-bootstrap
-      ember-cli-babel: 7.26.11
+      ember-cli-babel: 8.2.0(@babel/core@7.28.5)
       ember-cli-build-config-editor: 0.5.1
       ember-cli-htmlbars: 6.3.0
       ember-power-select: 7.2.0(@babel/core@7.28.5)(ember-source@5.12.0)(webpack@5.101.3)
       ember-source: 5.12.0(@glimmer/component@1.1.2)(@glint/template@1.5.2)(rsvp@4.8.5)(webpack@5.101.3)
-      fs-extra: 11.3.2
-      rsvp: 4.8.5
+      ember-template-imports: 4.3.0
     transitivePeerDependencies:
       - supports-color
     dev: true
