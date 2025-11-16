@@ -27,7 +27,7 @@
     "@glimmer/tracking": "1.1.2",
     "bootstrap": "5.3.8",
     "broccoli-asset-rev": "3.0.0",
-    "concurrently": "8.2.2",
+    "concurrently": "9.2.1",
     "ember-auto-import": "2.11.2",
     "ember-bootstrap": "workspace:*",
     "ember-bootstrap-cp-validations": "2.1.0",
