@@ -16,7 +16,7 @@
     "release": "pnpm --filter ember-bootstrap release"
   },
   "devDependencies": {
-    "concurrently": "8.2.2",
+    "concurrently": "9.2.1",
     "husky": "9.1.7",
     "lint-staged": "15.5.2"
   },
