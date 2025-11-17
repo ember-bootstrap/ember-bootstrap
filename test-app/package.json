@@ -83,7 +83,7 @@
     "ember-template-imports": "4.3.0",
     "ember-template-lint": "5.13.0",
     "ember-template-lint-plugin-prettier": "5.0.0",
-    "ember-try": "3.0.0",
+    "ember-try": "4.0.0",
     "eslint": "8.57.1",
     "eslint-config-prettier": "9.1.2",
     "eslint-plugin-ember": "12.7.4",
