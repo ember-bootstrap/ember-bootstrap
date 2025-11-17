@@ -67,7 +67,7 @@
     "ember-element-helper": "0.8.8",
     "ember-eslint-parser": "0.5.13",
     "ember-focus-trap": "1.1.1",
-    "ember-load-initializers": "2.1.2",
+    "ember-load-initializers": "3.0.1",
     "ember-on-helper": "0.1.0",
     "ember-page-title": "8.2.4",
     "ember-popper-modifier": "4.1.1",
