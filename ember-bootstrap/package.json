@@ -45,7 +45,7 @@
     "broccoli-debug": "^0.6.3",
     "broccoli-funnel": "^3.0.8",
     "broccoli-merge-trees": "^4.2.0",
-    "chalk": "^4.1.1",
+    "chalk": "^5.0.0",
     "ember-auto-import": "^2.6.3",
     "ember-cli-babel": "^8.0.0",
     "ember-cli-build-config-editor": "^0.5.1",
