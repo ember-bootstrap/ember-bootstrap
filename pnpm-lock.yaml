@@ -285,8 +285,8 @@ importers:
         specifier: ^4.0.0 || ^5.0.0
         version: 5.0.8(@babel/core@7.28.5)(@glint/template@1.5.2)(webpack@5.102.1)
       ember-render-helpers:
-        specifier: ^0.2.1 || ^1.0.0
-        version: 1.0.5(@babel/core@7.28.5)
+        specifier: ^2.0.0
+        version: 2.0.0(@babel/core@7.28.5)
       ember-source:
         specifier: '>=4.8.0'
         version: 5.12.0(@glimmer/component@1.1.2)(@glint/template@1.5.2)(rsvp@4.8.5)(webpack@5.102.1)
@@ -568,8 +568,8 @@ importers:
         specifier: 5.0.8
         version: 5.0.8(@babel/core@7.28.5)(@glint/template@1.5.2)(webpack@5.102.1)
       ember-render-helpers:
-        specifier: 1.0.5
-        version: 1.0.5(@babel/core@7.28.5)
+        specifier: 2.0.0
+        version: 2.0.0(@babel/core@7.28.5)
       ember-resolver:
         specifier: 12.0.1
         version: 12.0.1(ember-source@5.12.0)
@@ -8276,9 +8276,9 @@ packages:
       - supports-color
       - webpack
 
-  /ember-render-helpers@1.0.5(@babel/core@7.28.5):
-    resolution: {integrity: sha512-arcopBXLBWSNwI4uezBW2UAGNUh+0eIAllM2ITMyvDoKvjftgWpD2tfchT9oh98lB095F/8KZH5w9t62U49/Sw==}
-    engines: {node: 18.* || >= 20}
+  /ember-render-helpers@2.0.0(@babel/core@7.28.5):
+    resolution: {integrity: sha512-jbjOQWs+eN4bETCCSfxtN4vdgSVYrV0YQaVrao/C0d0JOafN0x2dljevW/OaV5px1m4yRBdeuqtxHTwahWPXdg==}
+    engines: {node: 20.* || >= 22}
     dependencies:
       '@embroider/addon-shim': 1.10.2
       decorator-transforms: 2.3.0(@babel/core@7.28.5)
