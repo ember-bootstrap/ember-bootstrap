@@ -102,8 +102,8 @@ importers:
         specifier: 3.0.0
         version: 3.0.0
       ember-cp-validations:
-        specifier: 6.0.1
-        version: 6.0.1(ember-source@5.12.0)
+        specifier: 7.0.0
+        version: 7.0.0(ember-source@5.12.0)
       ember-fetch:
         specifier: 8.1.2
         version: 8.1.2
@@ -2114,6 +2114,27 @@ packages:
       - utf-8-validate
     dev: true
 
+  /@embroider/macros@1.16.13:
+    resolution: {integrity: sha512-2oGZh0m1byBYQFWEa8b2cvHJB2LzaF3DdMCLCqcRAccABMROt1G3sultnNCT30NhfdGWMEsJOT3Jm4nFxXmTRw==}
+    engines: {node: 12.* || 14.* || >= 16}
+    peerDependencies:
+      '@glint/template': ^1.0.0
+    peerDependenciesMeta:
+      '@glint/template':
+        optional: true
+    dependencies:
+      '@embroider/shared-internals': 2.9.0
+      assert-never: 1.4.0
+      babel-import-util: 2.1.1
+      ember-cli-babel: 7.26.11
+      find-up: 5.0.0
+      lodash: 4.17.21
+      resolve: 1.22.11
+      semver: 7.7.1
+    transitivePeerDependencies:
+      - supports-color
+    dev: true
+
   /@embroider/macros@1.19.4(@glint/template@1.5.2):
     resolution: {integrity: sha512-x4wrnkE6fPN6mOyJeJv2I+lpKE2pHPq25S8bCiRJJb3H3RyiTm2LjSeB4AOVTi8YUjiWToI4PBgZOtx44hM4LA==}
     engines: {node: 12.* || 14.* || >= 16}
@@ -2140,6 +2161,26 @@ packages:
     dependencies:
       mem: 8.1.1
       resolve.exports: 2.0.3
+    dev: true
+
+  /@embroider/shared-internals@2.9.0:
+    resolution: {integrity: sha512-8untWEvGy6av/oYibqZWMz/yB+LHsKxEOoUZiLvcpFwWj2Sipc0DcXeTJQZQZ++otNkLCWyDrDhOLrOkgjOPSg==}
+    engines: {node: 12.* || 14.* || >= 16}
+    dependencies:
+      babel-import-util: 2.1.1
+      debug: 4.4.3(supports-color@8.1.1)
+      ember-rfc176-data: 0.3.18
+      fs-extra: 9.1.0
+      is-subdir: 1.2.0
+      js-string-escape: 1.0.1
+      lodash: 4.17.21
+      minimatch: 3.1.2
+      pkg-entry-points: 1.1.1
+      resolve-package-path: 4.0.3
+      semver: 7.7.1
+      typescript-memoize: 1.1.1
+    transitivePeerDependencies:
+      - supports-color
     dev: true
 
   /@embroider/shared-internals@2.9.1:
@@ -7977,18 +8018,19 @@ packages:
       - supports-color
     dev: false
 
-  /ember-cp-validations@6.0.1(ember-source@5.12.0):
-    resolution: {integrity: sha512-OGxAsbb3thKE5SLsALFHQuTfOgshf2BCWY6FhK4TZatuu2G4cGD8f+Ys7Y4Yqx6ikfhjkTDVcZuU75+hHanVZA==}
-    engines: {node: 14.* || 16.* || >= 18}
+  /ember-cp-validations@7.0.0(ember-source@5.12.0):
+    resolution: {integrity: sha512-AFZHtFxGkxB5cONPy9MWGNMJCbJwkB3VGXTKJvoIJhknAChgS2xsEbLRGS911oWLQ0tk+rfIe1/QRCRJ87d/cw==}
+    engines: {node: '>= 18'}
     peerDependencies:
       ember-data: '*'
-      ember-source: '>= 3.28.0'
+      ember-source: '>= 4.0.0'
     peerDependenciesMeta:
       ember-data:
         optional: true
     dependencies:
-      '@embroider/macros': 1.19.4(@glint/template@1.5.2)
-      ember-cli-babel: 7.26.11
+      '@babel/core': 7.28.5
+      '@embroider/macros': 1.16.13
+      ember-cli-babel: 8.2.0(@babel/core@7.28.5)
       ember-source: 5.12.0(@glimmer/component@1.1.2)(@glint/template@1.5.2)(rsvp@4.8.5)(webpack@5.102.1)
       ember-validators: 4.1.2
     transitivePeerDependencies:
