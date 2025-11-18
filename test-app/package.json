@@ -32,7 +32,7 @@
     "@glint/core": "1.5.2",
     "@glint/environment-ember-loose": "1.5.2",
     "@glint/environment-ember-template-imports": "1.5.2",
-    "@glint/template": "1.5.2",
+    "@glint/template": "1.7.3",
     "@popperjs/core": "2.11.8",
     "@tsconfig/ember": "3.0.12",
     "@types/qunit": "2.19.13",
