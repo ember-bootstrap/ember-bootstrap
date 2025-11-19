@@ -94,7 +94,7 @@
     "eslint-plugin-qunit": "8.2.5",
     "focus-trap": "7.6.6",
     "mocha": "11.7.5",
-    "release-it": "17.11.0",
+    "release-it": "19.0.6",
     "typescript": "5.9.3"
   },
   "peerDependencies": {
