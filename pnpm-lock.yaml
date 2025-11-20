@@ -213,8 +213,8 @@ importers:
         specifier: 5.0.3
         version: 5.0.3(prettier@3.6.2)(stylelint@16.25.0)
       tracked-built-ins:
-        specifier: 3.4.0
-        version: 3.4.0(@babel/core@7.28.5)
+        specifier: 4.0.0
+        version: 4.0.0(@babel/core@7.28.5)
       webpack:
         specifier: 5.103.0
         version: 5.103.0
@@ -17197,8 +17197,8 @@ packages:
       punycode: 2.3.1
     dev: true
 
-  /tracked-built-ins@3.4.0(@babel/core@7.28.5):
-    resolution: {integrity: sha512-aRwWQXC3VkY50oYxS7wKZiavkjf3uaN+UYUH30D5gxUqbxDN2LnNsfWyDfckmxHUGw4gJDH5lpRS0jX/tim0vw==}
+  /tracked-built-ins@4.0.0(@babel/core@7.28.5):
+    resolution: {integrity: sha512-0Jl43A1SDZd+yYCJvXfgDSn4Wk/zcawkyFTBPqOETU5UJRngnVEnQ8oOjawqPRg6qja3sKjIQ8z6X9xJzcUTUA==}
     dependencies:
       '@embroider/addon-shim': 1.10.2
       decorator-transforms: 2.3.0(@babel/core@7.28.5)
