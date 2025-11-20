@@ -77,7 +77,7 @@
     "qunit": "2.24.2",
     "qunit-dom": "3.5.0",
     "sass": "1.94.2",
-    "sinon": "17.0.2",
+    "sinon": "21.0.0",
     "striptags": "3.2.0",
     "stylelint": "16.25.0",
     "stylelint-config-standard-scss": "13.1.0",
