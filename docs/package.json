@@ -76,7 +76,7 @@
     "prettier": "3.6.2",
     "qunit": "2.24.2",
     "qunit-dom": "3.5.0",
-    "sass": "1.94.1",
+    "sass": "1.94.2",
     "sinon": "17.0.2",
     "striptags": "3.2.0",
     "stylelint": "16.25.0",
