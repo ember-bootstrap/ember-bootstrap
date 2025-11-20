@@ -3,12 +3,11 @@ import type { CustomTestContext } from '.';
 export default function ({ beforeEach, afterEach }: NestedHooks) {
   const styleSheet: CSSStyleSheet = Array.prototype.slice
     .call(document.styleSheets)
-    .find((sheet) => sheet.href.indexOf('test-support.css') !== -1);
+    .find((sheet) => sheet.href.indexOf('test-app.css') !== -1);
   let numberOfInsertedRules: number;
 
   beforeEach(function (this: CustomTestContext) {
     numberOfInsertedRules = 0;
-
     this.insertCSSRule = function (rule: string) {
       styleSheet.insertRule(rule, styleSheet.cssRules.length);
       numberOfInsertedRules++;
