@@ -437,43 +437,37 @@ export default class Form extends Component {
         return this.hasValidator ? this.validate(model, this._element) : null;
       })
       .then(
-        (record) => {
+        async (record) => {
           if (this.args.hideValidationsOnSubmit === true) {
             this.showAllValidations = false;
           }
 
-          return Promise.resolve()
-            .then(() => {
-              return this.args.onSubmit?.(model, record);
-            })
-            .then(() => {
-              if (this.isDestroyed) {
-                return;
-              }
+          try {
+            await this.args.onSubmit?.(model, record);
 
-              this.isSubmitted = true;
-            })
-            .catch((error) => {
-              if (this.isDestroyed) {
-                return;
-              }
+            if (this.isDestroyed) {
+              return;
+            }
 
-              this.isRejected = true;
+            this.isSubmitted = true;
+          } catch (error) {
+            if (this.isDestroyed) {
+              return;
+            }
 
-              throw error;
-            })
-            .finally(() => {
-              if (this.isDestroyed) {
-                return;
-              }
+            this.isRejected = true;
 
+            throw error;
+          } finally {
+            if (!this.isDestroyed) {
               this.pendingSubmissions--;
 
               // reset forced hiding of validations
               if (this.showAllValidations === false) {
                 next(() => (this.showAllValidations = undefined));
               }
-            });
+            }
+          }
         },
         (error) => {
           return Promise.resolve()
