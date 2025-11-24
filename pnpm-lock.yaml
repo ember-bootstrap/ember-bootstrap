@@ -236,12 +236,6 @@ importers:
       '@embroider/util':
         specifier: ^1.0.0
         version: 1.13.4(@glint/environment-ember-loose@1.5.2)(@glint/template@1.7.3)(ember-source@6.8.2)
-      '@glimmer/component':
-        specifier: ^1.0.4
-        version: 1.1.2(@babel/core@7.28.5)
-      '@glimmer/tracking':
-        specifier: ^1.0.4
-        version: 1.1.2
       broccoli-debug:
         specifier: ^0.6.3
         version: 0.6.5
@@ -321,12 +315,18 @@ importers:
       '@embroider/test-setup':
         specifier: 4.0.0
         version: 4.0.0
+      '@glimmer/component':
+        specifier: 1.1.2
+        version: 1.1.2(@babel/core@7.28.5)
+      '@glimmer/tracking':
+        specifier: 1.1.2
+        version: 1.1.2
       '@glint/core':
         specifier: 1.5.2
         version: 1.5.2(typescript@5.9.3)
       '@glint/environment-ember-loose':
         specifier: 1.5.2
-        version: 1.5.2(@glimmer/component@1.1.2)(@glint/template@1.7.3)(ember-cli-htmlbars@6.3.0)(ember-modifier@4.2.2)
+        version: 1.5.2(@glimmer/component@1.1.2)(@glint/template@1.7.3)(ember-cli-htmlbars@6.3.0)
       '@glint/template':
         specifier: 1.7.3
         version: 1.7.3
@@ -449,7 +449,7 @@ importers:
         version: 1.5.2(typescript@5.9.3)
       '@glint/environment-ember-loose':
         specifier: 1.5.2
-        version: 1.5.2(@glimmer/component@1.1.2)(@glint/template@1.7.3)(ember-cli-htmlbars@6.3.0)(ember-modifier@4.2.2)
+        version: 1.5.2(@glimmer/component@1.1.2)(@glint/template@1.7.3)(ember-cli-htmlbars@6.3.0)
       '@glint/environment-ember-template-imports':
         specifier: 1.5.2
         version: 1.5.2(@glint/environment-ember-loose@1.5.2)(@glint/template@1.7.3)
@@ -2258,7 +2258,7 @@ packages:
         optional: true
     dependencies:
       '@embroider/macros': 1.19.4(@glint/template@1.7.3)
-      '@glint/environment-ember-loose': 1.5.2(@glimmer/component@1.1.2)(@glint/template@1.7.3)(ember-cli-htmlbars@6.3.0)(ember-modifier@4.2.2)
+      '@glint/environment-ember-loose': 1.5.2(@glimmer/component@1.1.2)(@glint/template@1.7.3)(ember-cli-htmlbars@6.3.0)
       '@glint/template': 1.7.3
       broccoli-funnel: 3.0.8
       ember-cli-babel: 7.26.11
@@ -2666,7 +2666,7 @@ packages:
       - supports-color
     dev: true
 
-  /@glint/environment-ember-loose@1.5.2(@glimmer/component@1.1.2)(@glint/template@1.7.3)(ember-cli-htmlbars@6.3.0)(ember-modifier@4.2.2):
+  /@glint/environment-ember-loose@1.5.2(@glimmer/component@1.1.2)(@glint/template@1.7.3)(ember-cli-htmlbars@6.3.0):
     resolution: {integrity: sha512-AuYRwZbQZW13WMW9tmyYqSGHLBXbdXn+HqdRDAG1qHItnjON4uv6sJVQUrnadlMT3G2AVRjL6jtfnwHs3t2Kuw==}
     peerDependencies:
       '@glimmer/component': '>=1.1.2'
@@ -2697,7 +2697,6 @@ packages:
       '@glimmer/component': 1.1.2(@babel/core@7.28.5)
       '@glint/template': 1.7.3
       ember-cli-htmlbars: 6.3.0
-      ember-modifier: 4.2.2(@babel/core@7.28.5)
 
   /@glint/environment-ember-template-imports@1.5.2(@glint/environment-ember-loose@1.5.2)(@glint/template@1.7.3):
     resolution: {integrity: sha512-f/asPRUr2YWtwYWlvl67JC6PIlihIiFnEtvESvMnblsDyJPpzJmVFGGlVujCOkajLwbkX9DDEw7fydn64He8Qw==}
@@ -2718,7 +2717,7 @@ packages:
       '@types/ember__routing':
         optional: true
     dependencies:
-      '@glint/environment-ember-loose': 1.5.2(@glimmer/component@1.1.2)(@glint/template@1.7.3)(ember-cli-htmlbars@6.3.0)(ember-modifier@4.2.2)
+      '@glint/environment-ember-loose': 1.5.2(@glimmer/component@1.1.2)(@glint/template@1.7.3)(ember-cli-htmlbars@6.3.0)
       '@glint/template': 1.7.3
       content-tag: 2.0.3
     dev: true
