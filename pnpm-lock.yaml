@@ -21,7 +21,7 @@ importers:
   docs:
     devDependencies:
       '@babel/core':
-        specifier: ^7.25.2
+        specifier: 7.28.5
         version: 7.28.5
       '@babel/eslint-parser':
         specifier: 7.28.5
@@ -75,7 +75,7 @@ importers:
         specifier: 8.2.0
         version: 8.2.0(@babel/core@7.28.5)
       ember-cli-clean-css:
-        specifier: ^3.0.0
+        specifier: 3.0.0
         version: 3.0.0
       ember-cli-dependency-checker:
         specifier: 3.3.3
@@ -406,7 +406,7 @@ importers:
   test-app:
     devDependencies:
       '@babel/core':
-        specifier: ^7.25.2
+        specifier: 7.28.5
         version: 7.28.5
       '@babel/eslint-parser':
         specifier: 7.28.5
@@ -517,7 +517,7 @@ importers:
         specifier: 8.2.0
         version: 8.2.0(@babel/core@7.28.5)
       ember-cli-clean-css:
-        specifier: ^3.0.0
+        specifier: 3.0.0
         version: 3.0.0
       ember-cli-content-security-policy:
         specifier: 2.0.3
