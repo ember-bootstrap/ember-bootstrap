@@ -141,11 +141,11 @@ importers:
         specifier: 6.7.0
         version: 6.7.0(@glimmer/component@1.1.2)(rsvp@4.8.5)
       ember-template-lint:
-        specifier: 6.0.0
-        version: 6.0.0
+        specifier: 6.1.0
+        version: 6.1.0
       ember-template-lint-plugin-prettier:
         specifier: 5.0.0
-        version: 5.0.0(ember-template-lint@6.0.0)(prettier@3.6.2)
+        version: 5.0.0(ember-template-lint@6.1.0)(prettier@3.6.2)
       eslint:
         specifier: 8.57.1
         version: 8.57.1
@@ -604,11 +604,11 @@ importers:
         specifier: 4.3.0
         version: 4.3.0
       ember-template-lint:
-        specifier: 6.0.0
-        version: 6.0.0
+        specifier: 6.1.0
+        version: 6.1.0
       ember-template-lint-plugin-prettier:
         specifier: 5.0.0
-        version: 5.0.0(ember-template-lint@6.0.0)(prettier@3.6.2)
+        version: 5.0.0(ember-template-lint@6.1.0)(prettier@3.6.2)
       ember-try:
         specifier: 4.0.0
         version: 4.0.0
@@ -623,7 +623,7 @@ importers:
         version: 12.7.4(@babel/core@7.28.5)(@typescript-eslint/parser@7.18.0)(eslint@8.57.1)(typescript@5.9.3)
       eslint-plugin-hbs:
         specifier: 1.0.3
-        version: 1.0.3(ember-template-lint@6.0.0)
+        version: 1.0.3(ember-template-lint@6.1.0)
       eslint-plugin-n:
         specifier: 17.23.1
         version: 17.23.1(eslint@8.57.1)(typescript@5.9.3)
@@ -8867,7 +8867,7 @@ packages:
       prettier-linter-helpers: 1.0.0
     dev: true
 
-  /ember-template-lint-plugin-prettier@5.0.0(ember-template-lint@6.0.0)(prettier@3.6.2):
+  /ember-template-lint-plugin-prettier@5.0.0(ember-template-lint@6.1.0)(prettier@3.6.2):
     resolution: {integrity: sha512-aXUYM4yuIdPZ80+AsAU8QBwGSJJ/aAkRsNcQ5vI5HmXiBjzHlDc/ZhmP6iVcYuCmoA/3iKcssMAYwIDbuby4pg==}
     engines: {node: ^16.0.0 || ^18.0.0 || >=20.0.0}
     peerDependencies:
@@ -8875,7 +8875,7 @@ packages:
       prettier: '>= 3.0.0'
     dependencies:
       '@prettier/sync': 0.2.1(prettier@3.6.2)
-      ember-template-lint: 6.0.0
+      ember-template-lint: 6.1.0
       prettier: 3.6.2
       prettier-linter-helpers: 1.0.0
     dev: true
@@ -8907,9 +8907,9 @@ packages:
       - supports-color
     dev: true
 
-  /ember-template-lint@6.0.0:
-    resolution: {integrity: sha512-TWWt/qCd4KoQ50T3We5nCoKcsrAT8Ip79Kmm9eyWjjyL+LAbRFu0z+GxcmW7MR+QCNW/1LQs3kwEdtIcaHEGiA==}
-    engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
+  /ember-template-lint@6.1.0:
+    resolution: {integrity: sha512-UyzLPcyneG3mnbBfewyYIlV7fy6JKHQVAJy5a9+URdJKkZKN+3vQkQzIIlsz6dP/GpoXVB+datns5HlfMfliSA==}
+    engines: {node: ^18.18.0 || >= 20.9.0}
     hasBin: true
     dependencies:
       '@lint-todo/utils': 13.1.1
@@ -9390,13 +9390,13 @@ packages:
       requireindex: 1.2.0
     dev: true
 
-  /eslint-plugin-hbs@1.0.3(ember-template-lint@6.0.0):
+  /eslint-plugin-hbs@1.0.3(ember-template-lint@6.1.0):
     resolution: {integrity: sha512-l4iH4jml2ckNoJDhURf9FZO24WOC1M9M+KoBmL1hmJWczO2iCbRKCSDWRxuvoASVkYr8k2tYcb3EG1nCuG/nyQ==}
     engines: {node: '>=12.0.0'}
     peerDependencies:
       ember-template-lint: ^3.6.0
     dependencies:
-      ember-template-lint: 6.0.0
+      ember-template-lint: 6.1.0
       requireindex: 1.2.0
     dev: true
 
