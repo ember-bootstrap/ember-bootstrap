@@ -81,6 +81,8 @@ jobs:
             bootstrap: 5
           - scenario: tracked-toolbox-v1
             bootstrap: 5
+          - scenario: glimmer-component-v1
+            bootstrap: 5
     steps:
       - name: Checkout code
         uses: wyvox/action@v1

@@ -68,6 +68,8 @@
     "@babel/eslint-parser": "7.28.5",
     "@babel/plugin-proposal-decorators": "7.28.0",
     "@embroider/test-setup": "4.0.0",
+    "@glimmer/component": "2.0.0",
+    "@glimmer/tracking": "1.1.2",
     "@glint/core": "1.5.2",
     "@glint/environment-ember-loose": "1.5.2",
     "@glint/template": "1.7.3",
@@ -98,10 +100,8 @@
     "typescript": "5.9.3"
   },
   "peerDependencies": {
-    "@glimmer/component": "^1.0.4",
-    "@glimmer/tracking": "^1.0.4",
-    "ember-source": ">=4.8.0",
-    "ember-modifier": "^3.2.7 || ^4.0.0"
+    "ember-modifier": "^3.2.7 || ^4.0.0",
+    "ember-source": ">=4.8.0"
   },
   "engines": {
     "node": "18.* || >= 20"
