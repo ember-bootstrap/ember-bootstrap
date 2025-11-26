@@ -21,7 +21,7 @@
     "@babel/core": "7.28.5",
     "@babel/eslint-parser": "7.28.5",
     "@babel/plugin-proposal-decorators": "7.28.0",
-    "@ember/optional-features": "2.2.0",
+    "@ember/optional-features": "2.3.0",
     "@ember/string": "4.0.1",
     "@ember/test-helpers": "5.4.1",
     "@glimmer/component": "1.1.2",
