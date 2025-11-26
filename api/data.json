@@ -2,7 +2,7 @@
     "project": {
         "name": "ember-bootstrap",
         "description": "Twitter Bootstrap components for Ember.js",
-        "version": "v6.6.1"
+        "version": "v6.7.0"
     },
     "files": {
         "../ember-bootstrap/addon/components/bs-accordion/item/body.ts": {
@@ -1838,7 +1838,7 @@
         },
         {
             "file": "../ember-bootstrap/addon/components/bs-contextual-help/element.ts",
-            "line": 52,
+            "line": 66,
             "itemtype": "property",
             "name": "fade",
             "type": "boolean",
@@ -1850,7 +1850,7 @@
         },
         {
             "file": "../ember-bootstrap/addon/components/bs-contextual-help/element.ts",
-            "line": 61,
+            "line": 75,
             "itemtype": "property",
             "name": "showHelp",
             "type": "boolean",
@@ -1862,7 +1862,7 @@
         },
         {
             "file": "../ember-bootstrap/addon/components/bs-contextual-help/element.ts",
-            "line": 70,
+            "line": 84,
             "description": "If true component will render in place, rather than be wormholed.",
             "itemtype": "property",
             "name": "renderInPlace",
@@ -1875,7 +1875,7 @@
         },
         {
             "file": "../ember-bootstrap/addon/components/bs-contextual-help/element.ts",
-            "line": 79,
+            "line": 93,
             "description": "Which element to align to",
             "itemtype": "property",
             "name": "popperTarget",
@@ -1887,7 +1887,7 @@
         },
         {
             "file": "../ember-bootstrap/addon/components/bs-contextual-help/element.ts",
-            "line": 87,
+            "line": 101,
             "itemtype": "property",
             "name": "autoPlacement",
             "type": "boolean",
@@ -1899,7 +1899,7 @@
         },
         {
             "file": "../ember-bootstrap/addon/components/bs-contextual-help/element.ts",
-            "line": 94,
+            "line": 108,
             "description": "The DOM element of the viewport element.",
             "itemtype": "property",
             "name": "viewportElement",
@@ -1911,7 +1911,7 @@
         },
         {
             "file": "../ember-bootstrap/addon/components/bs-contextual-help/element.ts",
-            "line": 102,
+            "line": 116,
             "description": "Take a padding into account for keeping the tooltip/popover within the bounds of the element given by `viewportElement`.",
             "itemtype": "property",
             "name": "viewportPadding",
@@ -1924,7 +1924,7 @@
         },
         {
             "file": "../ember-bootstrap/addon/components/bs-contextual-help/element.ts",
-            "line": 111,
+            "line": 125,
             "itemtype": "property",
             "name": "arrowClass",
             "access": "private",
@@ -1934,7 +1934,7 @@
         },
         {
             "file": "../ember-bootstrap/addon/components/bs-contextual-help/element.ts",
-            "line": 123,
+            "line": 137,
             "description": "popper.js modifier config",
             "itemtype": "property",
             "name": "popperModifiers",
@@ -3460,7 +3460,7 @@
         },
         {
             "file": "../ember-bootstrap/addon/components/bs-accordion.ts",
-            "line": 86,
+            "line": 93,
             "description": "The value of the currently selected accordion item",
             "itemtype": "property",
             "name": "isSelected",
@@ -3471,7 +3471,7 @@
         },
         {
             "file": "../ember-bootstrap/addon/components/bs-accordion.ts",
-            "line": 110,
+            "line": 117,
             "description": "Action when the selected accordion item is about to be changed.\n\nYou can return false to prevent changing the active item, and do that in your action by\nsetting the `selected` accordingly.",
             "itemtype": "event",
             "name": "onChange",
@@ -3542,7 +3542,7 @@
         },
         {
             "file": "../ember-bootstrap/addon/components/bs-alert.ts",
-            "line": 116,
+            "line": 123,
             "description": "Set to false to disable the fade out animation when hiding the alert.",
             "itemtype": "property",
             "name": "fade",
@@ -3555,7 +3555,7 @@
         },
         {
             "file": "../ember-bootstrap/addon/components/bs-alert.ts",
-            "line": 131,
+            "line": 138,
             "description": "The duration of the fade out animation",
             "itemtype": "property",
             "name": "fadeDuration",
@@ -3568,7 +3568,7 @@
         },
         {
             "file": "../ember-bootstrap/addon/components/bs-alert.ts",
-            "line": 142,
+            "line": 149,
             "description": "HTML tag to be used for the header",
             "itemtype": "property",
             "name": "headerTag",
@@ -3581,7 +3581,7 @@
         },
         {
             "file": "../ember-bootstrap/addon/components/bs-alert.ts",
-            "line": 151,
+            "line": 158,
             "description": "Property for type styling\n\nFor the available types see the [Bootstrap docs](https://getbootstrap.com/docs/4.3/components/alerts/)",
             "itemtype": "property",
             "name": "type",
@@ -3593,7 +3593,7 @@
         },
         {
             "file": "../ember-bootstrap/addon/components/bs-alert.ts",
-            "line": 161,
+            "line": 168,
             "description": "Use CSS transitions?",
             "itemtype": "property",
             "name": "usesTransition",
@@ -3606,7 +3606,7 @@
         },
         {
             "file": "../ember-bootstrap/addon/components/bs-alert.ts",
-            "line": 172,
+            "line": 179,
             "description": "The action to be sent after the alert has been dismissed (including the CSS transition).",
             "itemtype": "event",
             "name": "onDismissed",
@@ -3617,7 +3617,7 @@
         },
         {
             "file": "../ember-bootstrap/addon/components/bs-alert.ts",
-            "line": 179,
+            "line": 186,
             "description": "The action is called when the close button is clicked.\n\nYou can return false to prevent closing the alert automatically, and do that in your action by\nsetting `visible` to false.",
             "itemtype": "event",
             "name": "onDismiss",
@@ -3628,7 +3628,7 @@
         },
         {
             "file": "../ember-bootstrap/addon/components/bs-alert.ts",
-            "line": 196,
+            "line": 203,
             "description": "Call to make the alert visible again after it has been hidden",
             "itemtype": "method",
             "name": "show",
@@ -3639,7 +3639,7 @@
         },
         {
             "file": "../ember-bootstrap/addon/components/bs-alert.ts",
-            "line": 206,
+            "line": 213,
             "description": "Call to hide the alert. If the `fade` property is true, this will fade out the alert before being finally\ndismissed.",
             "itemtype": "method",
             "name": "hide",
