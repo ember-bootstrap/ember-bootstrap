@@ -19,6 +19,7 @@ import { tracked } from '@glimmer/tracking';
 import type { RenderingTestContext } from '@ember/test-helpers';
 import Component from '@glimmer/component';
 import { registerDestructor } from '@ember/destroyable';
+import type Owner from '@ember/owner';
 
 const TRANSITION_DURATION = 50;
 
@@ -567,7 +568,7 @@ module('Integration | Component | bs-carousel', function (hooks) {
     }
 
     class CustomSlide extends Component<CustomSlideSignature> {
-      constructor(owner: unknown, args: CustomSlideSignature['Args']) {
+      constructor(owner: Owner, args: CustomSlideSignature['Args']) {
         super(owner, args);
         this.args.registerChild?.(this);
 
