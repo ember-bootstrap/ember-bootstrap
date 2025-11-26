@@ -1,6 +1,18 @@
 # Changelog
 
 
+
+## v6.7.0 (2025-11-26)
+
+#### :rocket: Enhancement
+* [#2242](https://github.com/ember-bootstrap/ember-bootstrap/pull/2242) support @glimmer/component v2 ([@jelhan](https://github.com/jelhan))
+
+#### :house: Internal
+* [#2209](https://github.com/ember-bootstrap/ember-bootstrap/pull/2209) upgrade docs and test-app to blueprints v5.12 ([@jelhan](https://github.com/jelhan))
+
+#### Committers: 1
+- Jeldrik Hanschke ([@jelhan](https://github.com/jelhan))
+
 ## v6.6.1 (2025-11-13)
 
 Re-release of v6.6.0 without any changes. v6.6.0 got released from a feature branch by accident.
