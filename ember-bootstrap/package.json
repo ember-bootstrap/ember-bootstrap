@@ -100,7 +100,7 @@
   "peerDependencies": {
     "@glimmer/component": "^1.0.4 || ^2.0.0",
     "@glimmer/tracking": "^1.0.4",
-    "ember-source": ">=4.8.0",
+    "ember-source": ">= 5.12.0",
     "ember-modifier": "^3.2.7 || ^4.0.0"
   },
   "engines": {

@@ -294,7 +294,7 @@ importers:
         specifier: ^2.0.0
         version: 2.0.0(@babel/core@7.28.5)
       ember-source:
-        specifier: '>=4.8.0'
+        specifier: '>= 5.12.0'
         version: 6.8.2(@glimmer/component@1.1.2(@babel/core@7.28.5))(rsvp@4.8.5)
       ember-style-modifier:
         specifier: ^0.8.0 || ^1.0.0 || ^2.0.0 || ^3.0.0 || ^4.0.0
