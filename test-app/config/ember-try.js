@@ -67,23 +67,6 @@ module.exports = async function () {
           // FAIL_ON_DEPRECATION: true,
         },
       },
-      {
-        name: 'tracked-toolbox-v1',
-        npm: {
-          devDependencies: {
-            bootstrap: bootstrapVersion,
-            'tracked-toolbox': '^1.2.3',
-          },
-        },
-      },
-      {
-        name: 'glimmer-component-v1',
-        npm: {
-          devDependencies: {
-            '@glimmer/component': '^1.1.2',
-          },
-        },
-      },
       embroiderSafe({
         npm: {
           devDependencies: {
