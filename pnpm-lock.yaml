@@ -228,7 +228,7 @@ importers:
   ember-bootstrap:
     dependencies:
       '@ember/render-modifiers':
-        specifier: ^2.0.0 || ^3.0.0
+        specifier: ^3.0.0
         version: 3.0.0(@glint/template@1.7.3)(ember-source@6.8.2(@glimmer/component@1.1.2(@babel/core@7.28.5))(rsvp@4.8.5))
       '@embroider/macros':
         specifier: ^1.0.0
@@ -270,10 +270,10 @@ importers:
         specifier: ^5.1.2
         version: 5.1.2
       ember-concurrency:
-        specifier: ^2.1.2 || ^3.0.0 || ^4.0.0
+        specifier: ^4.0.0
         version: 4.0.6(@babel/core@7.28.5)(@glint/template@1.7.3)
       ember-element-helper:
-        specifier: ^0.6.0 || ^0.7.0 || ^0.8.0
+        specifier: ^0.8.0
         version: 0.8.8
       ember-focus-trap:
         specifier: ^1.0.0
@@ -285,10 +285,10 @@ importers:
         specifier: ^0.1.0
         version: 0.1.0
       ember-popper-modifier:
-        specifier: ^2.0.0 || ^3.0.0 || ^4.0.0
+        specifier: ^4.0.0
         version: 4.1.1(@glint/template@1.7.3)(ember-source@6.8.2(@glimmer/component@1.1.2(@babel/core@7.28.5))(rsvp@4.8.5))(webpack@5.103.0)
       ember-ref-bucket:
-        specifier: ^4.0.0 || ^5.0.0
+        specifier: ^5.0.0
         version: 5.0.8(@babel/core@7.28.5)(@glint/template@1.7.3)(webpack@5.103.0)
       ember-render-helpers:
         specifier: ^2.0.0
@@ -297,7 +297,7 @@ importers:
         specifier: '>=4.8.0'
         version: 6.8.2(@glimmer/component@1.1.2(@babel/core@7.28.5))(rsvp@4.8.5)
       ember-style-modifier:
-        specifier: ^0.8.0 || ^1.0.0 || ^2.0.0 || ^3.0.0 || ^4.0.0
+        specifier: ^4.0.0
         version: 4.5.1(@babel/core@7.28.5)(@ember/string@4.0.1)
       findup-sync:
         specifier: ^5.0.0
@@ -309,7 +309,7 @@ importers:
         specifier: ^1.0.1
         version: 1.1.1
       tracked-toolbox:
-        specifier: ^1.2.3 || ^2.0.0
+        specifier: ^2.0.0
         version: 2.0.0(@babel/core@7.28.5)(ember-source@6.8.2(@glimmer/component@1.1.2(@babel/core@7.28.5))(rsvp@4.8.5))
     devDependencies:
       '@babel/eslint-parser':
