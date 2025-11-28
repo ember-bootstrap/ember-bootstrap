@@ -78,7 +78,7 @@
     "@types/rsvp": "4.0.9",
     "@typescript-eslint/eslint-plugin": "7.18.0",
     "@typescript-eslint/parser": "7.18.0",
-    "chai": "4.5.0",
+    "chai": "6.2.1",
     "chai-things": "0.2.0",
     "concurrently": "9.2.1",
     "ember-cli": "6.8.0",
