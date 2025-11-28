@@ -104,7 +104,7 @@
     "ember-modifier": "^3.2.7 || ^4.0.0"
   },
   "engines": {
-    "node": "18.* || >= 20"
+    "node": "20.* || 22.* || >= 24"
   },
   "ember": {
     "edition": "octane"
