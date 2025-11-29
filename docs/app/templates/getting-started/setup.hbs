@@ -24,7 +24,7 @@
 <h3>Using plain css</h3>
 
 <p>
-  To use ember-bootstrap, include Bootstrap's style sheets into your app's build
+  To use Ember Bootstrap, include Bootstrap's style sheets into your app's build
   configuration.
 </p>
 
@@ -57,9 +57,8 @@ for more information about including assets into your app.
 
 <p>To use a Sass as a CSS preprocessor instead of plain CSS (highly
   recommended!), you can install and setup
-  <a
-    href="https://github.com/adopted-ember-addons/ember-cli-sass"
-  >ember-cli-sass</a>-
+  <a href="https://github.com/adopted-ember-addons/ember-cli-sass">Ember CLI
+    SASS</a>-
 </p>
 
 <p>See the
@@ -120,19 +119,6 @@ for more information about including assets into your app.
         </p>
       </td>
     </tr>
-    <tr>
-      <td>importBootstrapCSS</td>
-      <td><code>true</code> / <code>false</code></td>
-      <td><code>true</code> if no preprocessor</td>
-      <td>
-        <p>Include the default static
-          <code>bootstrap.css</code>. Only applicable when not using a
-          preprocessor.</p>
-        <p>See the
-          <LinkTo @route="getting-started.assets">Assets guide</LinkTo>
-          for more details.</p>
-      </td>
-    </tr>
   </tbody>
 
 </table>
@@ -146,7 +132,6 @@ module.exports = function(defaults) {
   const app = new EmberApp(defaults, {
     'ember-bootstrap': {
       bootstrapVersion: 4,
-      importBootstrapCSS: false,
     },
   });
 

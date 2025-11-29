@@ -1,22 +1,21 @@
 {{! template-lint-disable block-indentation }}
 <h1 id="included-assets">Included Assets</h1>
 
-<p>ember-bootstrap uses the Bootstrap CSS classes while replacing the behaviors
-  from the components Bootstrap implements in
+<p>Ember Bootstrap relies on the Bootstrap CSS classes while replacing the
+  behaviors from the components Bootstrap implements in
   <code>bootstrap.js</code>, such as toggle, navbar, modal, etc., with
   equivalent, CSS class-compatible native Ember components.</p>
 
-<p>If you are not using a preprocessor, ember-bootstrap will import the static
-  CSS files. If you are using Sass as a preprocessor, ember-bootstrap imports
-  the preprocessor-ready versions of the styles.</p>
+<p>Ember Bootstrap does not import the Bootstrap CSS. You need to import it
+  yourself.</p>
 
 <BsAlert @type="warning" @dismissible={{false}}>
   <h4>No bootstrap.js</h4>
-  ember-bootstrap deliberately excludes
+  Ember Bootstrap deliberately excludes
   <code>bootstrap.js</code>
   because the jQuery and Ember ways of control flow and animation sometimes
   don't play well together, causing unpredictable results. This is the main
-  motivation behind ember-bootstrap. It is possible to import
+  motivation behind Ember Bootstrap. It is possible to import
   <code>bootstrap.js</code>
   from manually. However this is NOT recommended or supported, and you will be
   on your own. You have been warned!
@@ -24,7 +23,7 @@
 
 <h1 id="addon-options">Importing assets</h1>
 
-<h2 id="importing-css-assets">Importing static CSS Assets</h2>
+<h2 id="importing-css-assets">Importing static CSS assets</h2>
 
 <p>
   When not using a CSS preprocessor (see below) you will need to import the
@@ -53,19 +52,13 @@ module.exports = function(defaults) {
 <h2>Using a CSS preprocessor</h2>
 
 <p>
-  ember-bootstrap supports
-  <a
-    href="http://sass-lang.com/"
-    target="_blank"
-    rel="noopener noreferrer"
-  >Sass</a>
-  (with
+  You can use
   <a
     href="https://github.com/adopted-ember-addons/ember-cli-sass"
     target="_blank"
     rel="noopener noreferrer"
-  >ember-cli-sass</a>) as a CSS preprocessor. Ensure that you have the Bootstrap
-  package installed and add an
+  >Ember CLI SASS</a>) if you want to use a CSS preprocessor. Ensure that you
+  have the Bootstrap package installed and add an
   <code>@import</code>
   statement to your
   <code>app.scss</code>
