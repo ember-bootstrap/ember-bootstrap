@@ -245,12 +245,6 @@ importers:
       broccoli-debug:
         specifier: ^0.6.3
         version: 0.6.5
-      broccoli-funnel:
-        specifier: ^3.0.8
-        version: 3.0.8
-      broccoli-merge-trees:
-        specifier: ^4.2.0
-        version: 4.2.0
       chalk:
         specifier: ^5.0.0
         version: 5.6.2
@@ -302,9 +296,6 @@ importers:
       findup-sync:
         specifier: ^5.0.0
         version: 5.0.0
-      resolve:
-        specifier: ^1.18.1
-        version: 1.22.11
       silent-error:
         specifier: ^1.0.1
         version: 1.1.1
