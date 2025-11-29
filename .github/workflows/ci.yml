@@ -88,18 +88,6 @@ jobs:
           BOOTSTRAPVERSION: ${{ matrix.bootstrap }}
           BROWSER: ${{ matrix.browser }}
 
-  test-node:
-    name: Node Tests
-    runs-on: ubuntu-latest
-    needs:
-      - test
-    steps:
-      - name: Checkout code
-        uses: wyvox/action@v1
-      - name: Run Node Tests
-        run: pnpm nodetest
-        working-directory: ember-bootstrap
-
   test-docs:
     name: Docs
     runs-on: ubuntu-latest

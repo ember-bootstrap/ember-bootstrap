@@ -16,20 +16,6 @@ const defaultOptions = {
 
 const supportedPreprocessors = ['sass'];
 
-const componentDependencies = {
-  'bs-button-group': ['bs-button'],
-  'bs-accordion': ['bs-collapse'],
-  'bs-dropdown': ['bs-button', 'bs-link-to'],
-  'bs-form': ['bs-button'],
-  'bs-modal-simple': ['bs-modal'],
-  'bs-modal': ['bs-button'],
-  'bs-nav': ['bs-link-to', 'bs-dropdown'],
-  'bs-navbar': ['bs-nav', 'bs-button', 'bs-link-to', 'bs-collapse'],
-  'bs-popover': ['bs-contextual-help'],
-  'bs-tab': ['bs-nav'],
-  'bs-tooltip': ['bs-contextual-help'],
-};
-
 const minimumBS4Version = '4.0.0-beta';
 const minimumBS5Version = '5.0.0';
 
@@ -238,103 +224,5 @@ Until: 7.0.0`);
 
   warn(message) {
     this.ui.writeWarnLine(message);
-  },
-
-  filterComponents(tree) {
-    if (this.bootstrapOptions.whitelist) {
-      throw new SilentError(
-        "Ember Bootstrap's `whitelist` option been renamed to `include`. Please update your ember-cli-build.js accordingly.",
-      );
-    }
-    if (this.bootstrapOptions.blacklist) {
-      throw new SilentError(
-        "Ember Bootstrap's `blacklist` option has been renamed to `exclude`. Please update your ember-cli-build.js accordingly.",
-      );
-    }
-
-    let includeList = this.generateIncludeList(this.bootstrapOptions.include);
-    let excludeList = this.bootstrapOptions.exclude || [];
-
-    // Emit deprecation warning if include or exclude options are used
-    if (this.bootstrapOptions.include) {
-      this.warn(`\
-Ember Bootstrap's \`include\` option is deprecated and will be removed in v7.0.0.
-Manual tree-shaking via the \`include\` and \`exclude\` options is no longer supported when migrating to v2 addons.
-Please migrate to Embroider, which supports automatic tree-shaking out of the box. For more information, visit: https://ember-cli.com/embroider
-
-To enable static component invocation detection in Embroider, set the \`staticComponents\` or \`staticInvocables\` option in your build configuration.
-`);
-    }
-
-    if (this.bootstrapOptions.exclude) {
-      this.warn(`\
-Ember Bootstrap's \`exclude\` option is deprecated and will be removed in v7.0.0.
-Manual tree-shaking via the \`include\` and \`exclude\` options is no longer supported when migrating to v2 addons.
-Please migrate to Embroider, which supports automatic tree-shaking out of the box. For more information, visit: https://ember-cli.com/embroider
-
-To enable static component invocation detection in Embroider, set the \`staticComponents\` or \`staticInvocables\` option in your build configuration.
-`);
-    }
-
-    // exit early if no opts defined
-    if (includeList.length === 0 && excludeList.length === 0) {
-      return tree;
-    }
-
-    return new Funnel(tree, {
-      exclude: [
-        (name) => this.excludeComponent(name, includeList, excludeList),
-      ],
-    });
-  },
-
-  excludeComponent(name, includeList, excludeList) {
-    let regex = /^(templates\/)?components\/(base\/)?/;
-    let isComponent = regex.test(name);
-    if (!isComponent) {
-      return false;
-    }
-
-    let baseName = name.replace(regex, '');
-    let firstSeparator = baseName.indexOf('/');
-    if (firstSeparator !== -1) {
-      baseName = baseName.substring(0, firstSeparator);
-    } else {
-      baseName = baseName.substring(0, baseName.lastIndexOf('.'));
-    }
-
-    let isIncluded = includeList.indexOf(baseName) !== -1;
-    let isExcluded = excludeList.indexOf(baseName) !== -1;
-
-    if (includeList.length === 0 && excludeList.length === 0) {
-      return false;
-    }
-
-    if (includeList.length && excludeList.length === 0) {
-      return !isIncluded;
-    }
-
-    return isExcluded;
-  },
-
-  generateIncludeList(includeList) {
-    let list = [];
-
-    if (!includeList) {
-      return list;
-    }
-
-    function _addToIncludeList(item) {
-      if (list.indexOf(item) === -1) {
-        list.push(item);
-
-        if (componentDependencies[item]) {
-          componentDependencies[item].forEach(_addToIncludeList);
-        }
-      }
-    }
-
-    includeList.forEach(_addToIncludeList);
-    return list;
   },
 };
