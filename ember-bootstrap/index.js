@@ -181,31 +181,6 @@ Until: 7.0.0
     return parseInt(this.bootstrapOptions.bootstrapVersion);
   },
 
-  treeForApp(tree) {
-    tree = this.filterComponents(tree);
-    return this._super.treeForApp.call(this, tree);
-  },
-
-  treeForAddon(tree) {
-    tree = this.filterComponents(tree);
-    tree = this.debugTree(tree, 'addon-tree:tree-shaken');
-
-    return this._super.treeForAddon.call(this, tree);
-  },
-
-  /*
-    This method is depreciated by ember-cli when building other apps
-    but it is still called when building ember-bootstrap
-    https://github.com/kaliber5/ember-bootstrap/pull/883
-  */
-  treeForAddonTemplates(tree) {
-    tree = this.debugTree(tree, 'addon-templates-tree:input');
-    tree = this.filterComponents(tree);
-    tree = this.debugTree(tree, 'addon-templates-tree:tree-shaken');
-
-    return this._super.treeForAddonTemplates.call(this, tree);
-  },
-
   contentFor(type, config) {
     if (
       type === 'body-footer' &&
