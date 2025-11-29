@@ -12,7 +12,6 @@
     "lint:fix": "pnpm --recursive lint:fix",
     "test": "concurrently \"npm:test:*\"",
     "test:ember": "pnpm --filter test-app test:ember",
-    "test:node": "pnpm --filter ember-bootstrap nodetest",
     "release": "pnpm --filter ember-bootstrap release"
   },
   "devDependencies": {

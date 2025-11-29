@@ -34,7 +34,6 @@
     "lint:js": "eslint . --cache",
     "lint:js:fix": "eslint . --fix",
     "lint:types": "glint",
-    "nodetest": "mocha node-tests --recursive",
     "prepack": "pnpm run build:types",
     "release": "pnpm exec release-it"
   },
@@ -78,8 +77,6 @@
     "@types/rsvp": "4.0.9",
     "@typescript-eslint/eslint-plugin": "7.18.0",
     "@typescript-eslint/parser": "7.18.0",
-    "chai": "6.2.1",
-    "chai-things": "0.2.0",
     "concurrently": "9.2.1",
     "ember-cli": "6.8.0",
     "ember-cli-build-config-editor": "0.5.1",
@@ -93,7 +90,6 @@
     "eslint-plugin-prettier": "5.5.4",
     "eslint-plugin-qunit": "8.2.5",
     "focus-trap": "7.6.6",
-    "mocha": "11.7.5",
     "release-it": "19.0.6",
     "typescript": "5.9.3"
   },

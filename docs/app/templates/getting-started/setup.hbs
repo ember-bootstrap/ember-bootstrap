@@ -133,70 +133,6 @@ for more information about including assets into your app.
           for more details.</p>
       </td>
     </tr>
-    <tr>
-      <td>include <span class="badge bg-warning">Deprecated</span></td>
-      <td>Array of component names</td>
-      <td></td>
-      <td>
-        <p>
-          <strong>Deprecated:</strong>
-          This option is deprecated and will be removed in v7.0.0. Manual
-          tree-shaking via
-          <code>include</code>
-          and
-          <code>exclude</code>
-          options is no longer supported as Ember Bootstrap migrates to v2
-          addons.
-        </p>
-
-        <p>
-          <strong>Recommended:</strong>
-          Use
-          <a
-            href="https://ember-cli.com/embroider"
-            target="_blank"
-            rel="noopener noreferrer"
-          >Embroider</a>
-          instead, which supports automatic tree-shaking out of the box. Enable
-          <code>staticComponents</code>
-          or
-          <code>staticInvocables</code>
-          in your Embroider configuration for optimal tree-shaking results.
-        </p>
-      </td>
-    </tr>
-    <tr>
-      <td>exclude <span class="badge bg-warning">Deprecated</span></td>
-      <td>Array of component names</td>
-      <td></td>
-      <td>
-        <p>
-          <strong>Deprecated:</strong>
-          This option is deprecated and will be removed in v7.0.0. Manual
-          tree-shaking via
-          <code>include</code>
-          and
-          <code>exclude</code>
-          options is no longer supported as Ember Bootstrap migrates to v2
-          addons.
-        </p>
-
-        <p>
-          <strong>Recommended:</strong>
-          Use
-          <a
-            href="https://ember-cli.com/embroider"
-            target="_blank"
-            rel="noopener noreferrer"
-          >Embroider</a>
-          instead, which supports automatic tree-shaking out of the box. Enable
-          <code>staticComponents</code>
-          or
-          <code>staticInvocables</code>
-          in your Embroider configuration for optimal tree-shaking results.
-        </p>
-      </td>
-    </tr>
   </tbody>
 
 </table>
@@ -211,7 +147,6 @@ module.exports = function(defaults) {
     'ember-bootstrap': {
       bootstrapVersion: 4,
       importBootstrapCSS: false,
-      exclude: ['bs-popover', 'bs-accordion'],
     },
   });
 
