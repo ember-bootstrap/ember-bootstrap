@@ -6,7 +6,7 @@
 
 An [ember-cli](http://www.ember-cli.com) addon for using [Bootstrap](http://getbootstrap.com/) 4 und 5 in Ember applications.
 
-The addon it provides a set of native Ember components for Bootstrap CSS. It does not rely on any Bootstrap JavaScript.
+The addon provides a set of native Ember components for Bootstrap CSS. It does not rely on any Bootstrap JavaScript.
 
 _See [www.ember-bootstrap.com](http://www.ember-bootstrap.com/) for full documentation._
 
