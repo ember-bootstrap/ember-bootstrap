@@ -21,6 +21,9 @@ module.exports = function (defaults) {
 
   const app = new EmberApp(defaults, options);
 
+  // import Bootstrap CSS
+  app.import('node_modules/bootstrap/dist/css/bootstrap.css');
+
   /*
     This build file specifies the options for the test-app of this
     addon, located in `/test-app`

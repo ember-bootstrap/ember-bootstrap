@@ -42,8 +42,6 @@
     "@embroider/macros": "^1.0.0",
     "@embroider/util": "^1.0.0",
     "broccoli-debug": "^0.6.3",
-    "broccoli-funnel": "^3.0.8",
-    "broccoli-merge-trees": "^4.2.0",
     "chalk": "^5.0.0",
     "ember-auto-import": "^2.6.3",
     "ember-cli-babel": "^8.0.0",
@@ -59,7 +57,6 @@
     "ember-render-helpers": "^2.0.0",
     "ember-style-modifier": "^4.0.0",
     "findup-sync": "^5.0.0",
-    "resolve": "^1.18.1",
     "silent-error": "^1.0.1",
     "tracked-toolbox": "^2.0.0"
   },

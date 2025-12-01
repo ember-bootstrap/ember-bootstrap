@@ -1,20 +1,14 @@
 'use strict';
 
 const path = require('path');
-const mergeTrees = require('broccoli-merge-trees');
-const Funnel = require('broccoli-funnel');
 const BroccoliDebug = require('broccoli-debug');
 const SilentError = require('silent-error'); // From ember-cli
 const VersionChecker = require('ember-cli-version-checker');
-const resolve = require('resolve');
 
 const defaultOptions = {
-  importBootstrapCSS: true,
   insertEmberWormholeElementToDom: true,
   bootstrapVersion: 5,
 };
-
-const supportedPreprocessors = ['sass'];
 
 const minimumBS4Version = '4.0.0-beta';
 const minimumBS5Version = '5.0.0';
@@ -60,32 +54,14 @@ module.exports = {
     this.bootstrapOptions = options;
 
     this.validateDependencies();
-    this.preprocessor = this.findPreprocessor();
 
-    // static Bootstrap CSS is mapped to vendor tree, independent of BS version, so import from there
-    let vendorPath = path.join('vendor', 'ember-bootstrap');
+    // import custom addon CSS required to use Popper.js v2 with Bootstrap v4
+    if (options.bootstrapVersion === 4) {
+      let vendorPath = path.join('vendor', 'ember-bootstrap');
 
-    if (!this.hasPreprocessor()) {
-      // / Import css from bootstrap
-      if (options.importBootstrapCSS) {
-        this.warn(`\
-Importing Bootstrap CSS through Ember Bootstrap is deprecated. Applications should import Bootstrap's CSS explicitly.
-Please find information how to do so in the Ember guides: https://guides.emberjs.com/release/addons-and-dependencies/#toc_css.
-Additionally set importBootstrapCSS configuration of Ember Bootstrap in your app's ember-cli-build.js to false. Please find more information about Ember Bootstrap's configuration here: https://www.ember-bootstrap.com/getting-started/setup
-
-Until: 7.0.0
-`);
-
-        this.needsBootstrapStyles = true;
-        this.import(path.join(vendorPath, 'bootstrap.css'));
-        this.import(path.join(vendorPath, 'bootstrap.css.map'), {
-          destDir: 'assets',
-        });
-      }
+      // import custom addon CSS
+      this.import(path.join(vendorPath, `bs4-overwrites-for-popper-js-v2.css`));
     }
-
-    // import custom addon CSS
-    this.import(path.join(vendorPath, `bs${options.bootstrapVersion}.css`));
 
     // setup config for @embroider/macros
     this.options['@embroider/macros'].setOwnConfig.isBS4 =
@@ -120,61 +96,6 @@ Until: 7.0.0
         `For Bootstrap 5 support this version of ember-bootstrap requires at least Bootstrap ${minimumBS5Version}, but you have ${dep.version}. Please run \`ember generate ember-bootstrap\` to update your dependencies!`,
       );
     }
-  },
-
-  findPreprocessor() {
-    return supportedPreprocessors.find(
-      (name) => !!this.app.project.findAddonByName(`ember-cli-${name}`),
-    );
-  },
-
-  getBootstrapStylesPath() {
-    switch (this.preprocessor) {
-      case 'sass':
-        return this.resolvePackagePath('bootstrap/scss');
-      default:
-        return this.resolvePackagePath('bootstrap/dist/css');
-    }
-  },
-
-  resolvePackagePath(pkgPath) {
-    let parts = pkgPath.split('/');
-    let pkg = parts[0];
-    let result = path.dirname(
-      resolve.sync(`${pkg}/package.json`, { basedir: this.app.project.root }),
-    );
-
-    // add sub folders to path
-    if (parts.length > 1) {
-      let args = parts.map((part, i) => (i === 0 ? result : part));
-      result = path.join.apply(path, args);
-    }
-    return result;
-  },
-
-  hasPreprocessor() {
-    return !!this.preprocessor;
-  },
-
-  treeForStyles() {
-    if (this.hasPreprocessor()) {
-      return new Funnel(this.getBootstrapStylesPath(), {
-        destDir: 'ember-bootstrap',
-      });
-    }
-  },
-
-  treeForVendor(tree) {
-    let trees = [tree];
-
-    if (!this.hasPreprocessor() && this.needsBootstrapStyles) {
-      trees.push(
-        new Funnel(this.getBootstrapStylesPath(), {
-          destDir: 'ember-bootstrap',
-        }),
-      );
-    }
-    return mergeTrees(trees, { overwrite: true });
   },
 
   getBootstrapVersion() {
