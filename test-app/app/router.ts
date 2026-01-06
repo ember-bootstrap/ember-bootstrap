@@ -12,24 +12,4 @@ Router.map(function () {
     this.route('link', { path: '/link/:model' });
     this.route('linkto', { path: '/linkto/:model' });
   });
-
-  this.route('fastboot', function () {
-    this.route('accordion');
-    this.route('alert');
-    this.route('button');
-    this.route('button-group');
-    this.route('carousel');
-    this.route('collapse');
-    this.route('dropdown');
-    this.route('forms');
-    this.route('list-group');
-    this.route('modal');
-    this.route('navbars');
-    this.route('navs');
-    this.route('popover');
-    this.route('progress');
-    this.route('spinner');
-    this.route('tabs');
-    this.route('tooltip');
-  });
 });
