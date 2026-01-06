@@ -6,7 +6,6 @@ const SilentError = require('silent-error'); // From ember-cli
 const VersionChecker = require('ember-cli-version-checker');
 
 const defaultOptions = {
-  insertEmberWormholeElementToDom: true,
   bootstrapVersion: 5,
 };
 
