@@ -16,6 +16,12 @@ In your application's directory:
 
     ember install ember-bootstrap
 
+Additionally, add the following code snippet to either your app's `index.html` or application template:
+
+```html
+<div id="ember-bootstrap-wormhole"></div>
+```
+
 Bootstrap CSS must be imported by the application additionally. Please see the [setup documentation](http://www.ember-bootstrap.com/#/getting-started/setup) for different options how to do so.
 
 ## Compatibility

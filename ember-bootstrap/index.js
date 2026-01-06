@@ -102,22 +102,6 @@ module.exports = {
     return parseInt(this.bootstrapOptions.bootstrapVersion);
   },
 
-  contentFor(type, config) {
-    if (
-      type === 'body-footer' &&
-      config.environment !== 'test' &&
-      this.bootstrapOptions.insertEmberWormholeElementToDom !== false
-    ) {
-      this.warn(`\
-Inserting the element used by Ember Bootstrap as wormhole target for modals and tooltips is deprecated.
-Please add a <div id="ember-bootstrap-wormhole"></div> to either the \`app/index.html\` or \`app/templates/application.hbs\` and set Ember Bootstrap's \`insertEmberWormholeElementToDom\` configuration option to \`false\`.
-Please find more details about Ember Bootstrap's configuration here: https://www.ember-bootstrap.com/getting-started/setup.
-
-Until: 7.0.0`);
-      return '<div id="ember-bootstrap-wormhole"></div>';
-    }
-  },
-
   warn(message) {
     this.ui.writeWarnLine(message);
   },
