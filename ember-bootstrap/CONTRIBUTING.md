@@ -4,7 +4,7 @@
 
 * For general questions please use the #e-bootstrap channel on the [Ember Discord server](https://discord.gg/zT3asNS).
 
-* For bug reports please include the output of `ember bootstrap:info` in your description.
+* For bug reports please include the versions of Ember Bootstrap, Bootstrap, and Ember in your description.
 
 ## Pull requests
 

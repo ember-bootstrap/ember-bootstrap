@@ -22,12 +22,6 @@ module.exports = {
     );
   },
 
-  includedCommands() {
-    return {
-      'bootstrap:info': require('./lib/commands/info'),
-    };
-  },
-
   included() {
     this._super.included.apply(this, arguments);
 
