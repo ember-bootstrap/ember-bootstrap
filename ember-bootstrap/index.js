@@ -40,10 +40,6 @@ module.exports = {
       );
     }
 
-    if (process.env.BOOTSTRAPVERSION) {
-      // override bootstrapVersion config when environment variable is set
-      options.bootstrapVersion = parseInt(process.env.BOOTSTRAPVERSION);
-    }
     this.bootstrapOptions = options;
 
     this.validateDependencies();
