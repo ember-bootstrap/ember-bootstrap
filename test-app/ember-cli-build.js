@@ -7,7 +7,9 @@ module.exports = function (defaults) {
   const trees = {};
 
   const options = {
-    'ember-bootstrap': {},
+    'ember-bootstrap': {
+      bootstrapVersion: parseInt(process.env.BOOTSTRAPVERSION) || 5,
+    },
     'ember-cli-babel': {
       includePolyfill: !!process.env.BABELPOLYFILL,
       enableTypeScriptTransform: true,
