@@ -4,7 +4,7 @@
 [![Ember Observer Score](http://emberobserver.com/badges/ember-bootstrap.svg)](http://emberobserver.com/addons/ember-bootstrap)
 [![npm version](https://badge.fury.io/js/ember-bootstrap.svg)](https://badge.fury.io/js/ember-bootstrap)
 
-An [ember-cli](http://www.ember-cli.com) addon for using [Bootstrap](http://getbootstrap.com/) 4 und 5 in Ember applications.
+An [ember-cli](http://www.ember-cli.com) addon for using [Bootstrap](http://getbootstrap.com/) 4 and 5 in Ember applications.
 
 The addon provides a set of native Ember components for Bootstrap CSS. It does not rely on any Bootstrap JavaScript.
 
