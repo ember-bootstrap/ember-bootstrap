@@ -78,6 +78,8 @@ jobs:
           - scenario: ember-release
             browser: Firefox
             bootstrap: 5
+          - scenario: ember-concurrency-v4
+            bootstrap: 5
     steps:
       - name: Checkout code
         uses: wyvox/action@v1
