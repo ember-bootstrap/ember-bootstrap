@@ -1,6 +1,5 @@
 'use strict';
 
-const path = require('path');
 const BroccoliDebug = require('broccoli-debug');
 
 const defaultOptions = {
@@ -29,14 +28,6 @@ module.exports = {
     );
 
     const bootstrapVersion = parseInt(options.bootstrapVersion);
-
-    // import custom addon CSS required to use Popper.js v2 with Bootstrap v4
-    if (bootstrapVersion === 4) {
-      let vendorPath = path.join('vendor', 'ember-bootstrap');
-
-      // import custom addon CSS
-      this.import(path.join(vendorPath, `bs4-overwrites-for-popper-js-v2.css`));
-    }
 
     // setup config for @embroider/macros
     this.options['@embroider/macros'].setOwnConfig.isBS4 =
