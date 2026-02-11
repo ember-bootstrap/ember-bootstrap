@@ -53,6 +53,15 @@ module.exports = async function () {
           // FAIL_ON_DEPRECATION: true,
         },
       },
+      {
+        name: 'ember-concurrency-v4',
+        npm: {
+          devDependencies: {
+            'ember-concurrency': '^4.0.0',
+            bootstrap: bootstrapVersion,
+          },
+        },
+      },
       embroiderSafe({
         npm: {
           devDependencies: {
