@@ -261,8 +261,8 @@ importers:
         specifier: ^7.0.0
         version: 7.0.0(@babel/core@7.28.5)(ember-source@6.8.2(@glimmer/component@1.1.2(@babel/core@7.28.5))(rsvp@4.8.5))
       ember-concurrency:
-        specifier: ^4.0.0
-        version: 4.0.6(@babel/core@7.28.5)(@glint/template@1.7.3)
+        specifier: ^5.0.0
+        version: 5.2.0(@babel/core@7.28.5)(@glint/template@1.7.3)
       ember-element-helper:
         specifier: ^0.8.0
         version: 0.8.8
@@ -4331,8 +4331,8 @@ packages:
     peerDependencies:
       ember-source: ^3.28.0 || ^4.0.0 || >=5.0.0
 
-  ember-concurrency@4.0.6:
-    resolution: {integrity: sha512-Ikwl2YwXVe8aBwrT1deWTcUVxVu6KxS1qeU1ks3EML1Q/nxwKgxCkGqTJavxczawO8H/SIW45dV4r7z5Yqd2Xg==}
+  ember-concurrency@5.2.0:
+    resolution: {integrity: sha512-NUptPzaxaF2XWqn3VQ5KqiLSRqPFIZhWXH3UkOMhiedmiolxGYjUV96maoHWdd5msxNgQBC0UkZ28m7pV7A0sQ==}
     engines: {node: 16.* || >= 18}
     peerDependencies:
       '@glint/template': '>= 1.0.0'
@@ -14541,7 +14541,7 @@ snapshots:
       - '@babel/core'
       - supports-color
 
-  ember-concurrency@4.0.6(@babel/core@7.28.5)(@glint/template@1.7.3):
+  ember-concurrency@5.2.0(@babel/core@7.28.5)(@glint/template@1.7.3):
     dependencies:
       '@babel/helper-module-imports': 7.27.1
       '@babel/helper-plugin-utils': 7.27.1
