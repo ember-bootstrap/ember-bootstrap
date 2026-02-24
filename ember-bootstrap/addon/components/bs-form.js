@@ -417,7 +417,7 @@ export default class Form extends Component {
    * @method submit
    * @private
    */
-  submitHandler(e, throwValidationErrors = true) {
+  async submitHandler(e, throwValidationErrors = true) {
     if (e) {
       e.preventDefault();
     }
@@ -432,69 +432,63 @@ export default class Form extends Component {
 
     this.args.onBefore?.(model);
 
-    return Promise.resolve()
-      .then(() => {
-        return this.hasValidator ? this.validate(model, this._element) : null;
-      })
-      .then(
-        (record) => {
-          if (this.args.hideValidationsOnSubmit === true) {
-            this.showAllValidations = false;
-          }
+    let validationResult;
 
-          return Promise.resolve()
-            .then(() => {
-              return this.args.onSubmit?.(model, record);
-            })
-            .then(() => {
-              if (this.isDestroyed) {
-                return;
-              }
+    if (this.hasValidator) {
+      try {
+        validationResult = await this.validate(model, this._element);
+      } catch (error) {
+        try {
+          await this.args.onInvalid?.(model, error);
+        } catch {
+          // onInvalid method is not expected to throw
+          throw error;
+        }
 
-              this.isSubmitted = true;
-            })
-            .catch((error) => {
-              if (this.isDestroyed) {
-                return;
-              }
+        if (!this.isDestroyed) {
+          this.showAllValidations = true;
+          this.isRejected = true;
+          this.pendingSubmissions = this.pendingSubmissions - 1;
+        }
 
-              this.isRejected = true;
+        if (throwValidationErrors) {
+          throw error;
+        }
 
-              throw error;
-            })
-            .finally(() => {
-              if (this.isDestroyed) {
-                return;
-              }
+        return;
+      }
+    }
 
-              this.pendingSubmissions--;
+    if (this.args.hideValidationsOnSubmit === true) {
+      this.showAllValidations = false;
+    }
 
-              // reset forced hiding of validations
-              if (this.showAllValidations === false) {
-                next(() => (this.showAllValidations = undefined));
-              }
-            });
-        },
-        (error) => {
-          return Promise.resolve()
-            .then(() => {
-              return this.args.onInvalid?.(model, error);
-            })
-            .finally(() => {
-              if (this.isDestroyed) {
-                return;
-              }
+    try {
+      await this.args.onSubmit?.(model, validationResult);
 
-              this.showAllValidations = true;
-              this.isRejected = true;
-              this.pendingSubmissions = this.pendingSubmissions - 1;
+      if (this.isDestroyed) {
+        return;
+      }
 
-              if (throwValidationErrors) {
-                throw error;
-              }
-            });
-        },
-      );
+      this.isSubmitted = true;
+    } catch (error) {
+      if (this.isDestroyed) {
+        return;
+      }
+
+      this.isRejected = true;
+
+      throw error;
+    } finally {
+      if (!this.isDestroyed) {
+        this.pendingSubmissions--;
+
+        // reset forced hiding of validations
+        if (this.showAllValidations === false) {
+          next(() => (this.showAllValidations = undefined));
+        }
+      }
+    }
   }
 
   @action
