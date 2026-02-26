@@ -79,7 +79,7 @@
     "ember-cli-build-config-editor": "0.5.1",
     "ember-template-lint": "5.13.0",
     "ember-template-lint-plugin-prettier": "5.0.0",
-    "eslint": "8.57.1",
+    "eslint": "10.0.2",
     "eslint-config-prettier": "10.1.8",
     "eslint-plugin-ember": "12.7.5",
     "eslint-plugin-hbs": "1.0.3",
