@@ -63,6 +63,10 @@ module.exports = {
         'plugin:ember/recommended',
         'plugin:ember/recommended-gts',
       ],
+      rules: {
+        'ember/no-at-ember-render-modifiers': 'warn',
+        'ember/no-runloop': 'warn',
+      },
     },
     {
       files: ['**/*.gjs'],
@@ -73,6 +77,10 @@ module.exports = {
         'plugin:ember/recommended',
         'plugin:ember/recommended-gjs',
       ],
+      rules: {
+        'ember/no-at-ember-render-modifiers': 'warn',
+        'ember/no-runloop': 'warn',
+      },
     },
     // node files
     {

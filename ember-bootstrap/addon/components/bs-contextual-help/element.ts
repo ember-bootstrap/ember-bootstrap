@@ -16,6 +16,7 @@ import type {
 import type { ArrowModifier } from '@popperjs/core/lib/modifiers/arrow';
 import type { PreventOverflowModifier } from '@popperjs/core/lib/modifiers/preventOverflow';
 import type { FlipModifier } from '@popperjs/core/lib/modifiers/flip';
+import {modifier} from "ember-modifier";
 
 export interface ContextualHelpElementSignature {
   Args: {
@@ -132,7 +133,11 @@ export default class ContextualHelpElement<
 
   offset = [0, 0];
 
-  @trackedRef('popperElement') declare popperElement: HTMLElement;
+  declare popperElement: HTMLElement;
+
+  getPopperElement = modifier((element: HTMLElement) => {
+    this.popperElement = element;
+  })
 
   /**
    * popper.js modifier config

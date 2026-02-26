@@ -4,8 +4,8 @@ import type EmberBootstrapRegistry from 'ember-bootstrap/template-registry';
 import type { EmbroiderMacrosRegistry } from '@embroider/macros';
 import type { EmbroiderUtilRegistry } from '@embroider/util';
 import type EmberElementHelperRegistry from 'ember-element-helper/template-registry';
-// We should avoid `@ember/render-modifiers` as it is an oudated pattern. But as long
-// as haven't had the time refactoring away from it, we need the types.
+// We should avoid `@ember/render-modifiers` as it is an outdated pattern. But as long
+// as we haven't had the time refactoring away from it, we need the types.
 //
 // eslint-disable-next-line ember/no-at-ember-render-modifiers
 import type RenderModifiersRegistry from '@ember/render-modifiers/template-registry';
