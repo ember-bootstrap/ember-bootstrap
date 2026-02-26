@@ -55,6 +55,7 @@
     "ember-ref-bucket": "^5.0.0",
     "ember-render-helpers": "^2.0.0",
     "ember-style-modifier": "^4.0.0",
+    "ember-template-imports": "^4.4.0",
     "findup-sync": "^5.0.0",
     "tracked-toolbox": "^2.0.0"
   },
@@ -64,6 +65,7 @@
     "@embroider/test-setup": "4.0.0",
     "@glint/core": "1.5.2",
     "@glint/environment-ember-loose": "1.5.2",
+    "@glint/environment-ember-template-imports": "1.5.2",
     "@glint/template": "1.7.3",
     "@popperjs/core": "2.11.8",
     "@release-it-plugins/lerna-changelog": "8.0.1",
@@ -85,6 +87,7 @@
     "eslint-plugin-prettier": "5.5.4",
     "eslint-plugin-qunit": "8.2.5",
     "focus-trap": "7.6.6",
+    "prettier-plugin-ember-template-tag": "2.1.0",
     "release-it": "19.0.6",
     "typescript": "5.9.3"
   },
