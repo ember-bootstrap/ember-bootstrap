@@ -434,27 +434,38 @@ export default class Form extends Component {
 
     let validationResult;
 
+    // Validate the input if form has a validator.
+    // If the form is invalid, it should not be submitted.
     if (this.hasValidator) {
       try {
         validationResult = await this.validate(model, this._element);
       } catch (error) {
+        // It is expected that validate method throws an error when the
+        // submitted form model is invalid.
+
         try {
           await this.args.onInvalid?.(model, error);
-        } catch {
-          // onInvalid method is not expected to throw
-          throw error;
+        } catch (errorThrownByOnInvalid) {
+          // The onInvalid method is not expected to throw. The error should
+          // be reported to the console. Nevertheless we need to continue
+          // our handling logic for invalid form submissions.
+          reportError(errorThrownByOnInvalid);
         }
 
-        if (!this.isDestroyed) {
-          this.showAllValidations = true;
-          this.isRejected = true;
-          this.pendingSubmissions = this.pendingSubmissions - 1;
+        if (this.isDestroyed) {
+          // Stop execution. Component has been destroyed in the meantime.
+          return;
         }
+
+        this.showAllValidations = true;
+        this.isRejected = true;
+        this.pendingSubmissions = this.pendingSubmissions - 1;
 
         if (throwValidationErrors) {
           throw error;
         }
 
+        // An invalid form should not be submitted
         return;
       }
     }
@@ -467,12 +478,14 @@ export default class Form extends Component {
       await this.args.onSubmit?.(model, validationResult);
 
       if (this.isDestroyed) {
+        // Stop execution. Component has been destroyed in the meantime.
         return;
       }
 
       this.isSubmitted = true;
     } catch (error) {
       if (this.isDestroyed) {
+        // Stop execution. Component has been destroyed in the meantime.
         return;
       }
 
