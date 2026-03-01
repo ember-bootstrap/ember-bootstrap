@@ -4,9 +4,9 @@
 [![Ember Observer Score](http://emberobserver.com/badges/ember-bootstrap.svg)](http://emberobserver.com/addons/ember-bootstrap)
 [![npm version](https://badge.fury.io/js/ember-bootstrap.svg)](https://badge.fury.io/js/ember-bootstrap)
 
-An [ember-cli](http://www.ember-cli.com) addon for using [Bootstrap](http://getbootstrap.com/) 4 und 5 in Ember applications.
+An [ember-cli](http://www.ember-cli.com) addon for using [Bootstrap](http://getbootstrap.com/) 4 and 5 in Ember applications.
 
-The addon includes the Bootstrap CSS (or Sass, Less) in your project (can be disabled). On top of that, it provides a set of native Ember components (no use of Bootstrap JavaScript!).</p>
+The addon provides a set of native Ember components for Bootstrap CSS. It does not rely on any Bootstrap JavaScript.
 
 _See [www.ember-bootstrap.com](http://www.ember-bootstrap.com/) for full documentation._
 
@@ -16,18 +16,23 @@ In your application's directory:
 
     ember install ember-bootstrap
 
-This will install Bootstrap 4 and will use the currently installed preprocessor or none if one is not installed.
-To switch Bootstrap version or preprocessor, see the [setup documentation](http://www.ember-bootstrap.com/#/getting-started/setup).
+Additionally, add the following code snippet to either your app's `index.html` or application template:
+
+```html
+<div id="ember-bootstrap-wormhole"></div>
+```
+
+Bootstrap CSS must be imported by the application additionally. Please see the [setup documentation](http://www.ember-bootstrap.com/#/getting-started/setup) for different options how to do so.
 
 ## Compatibility
 
 Ember Bootstrap works and is fully [tested](https://github.com/kaliber5/ember-bootstrap/actions?query=workflow%3ACI+branch%3Amaster) with
 
-- Ember.js 4.8 or above
-- Ember CLI 4.8 or above
+- Ember.js 5.12 or above
+- Ember CLI 5.12 or above
 - Bootstrap 4 and 5
 - all modern evergreen browsers (Chrome, Firefox, Safari, Edge)
-- node.js 18+
+- node.js 20+
 - FastBoot 1.0+
 - Embroider: we strive (and test) for maximum compatibility with Embroider, including the most aggressive setting
   (`staticComponents`) for tree shaking and code splitting. However as Embroider itself is still considered beta software,

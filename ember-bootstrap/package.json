@@ -34,35 +34,30 @@
     "lint:js": "eslint . --cache",
     "lint:js:fix": "eslint . --fix",
     "lint:types": "glint",
-    "nodetest": "mocha node-tests --recursive",
     "prepack": "pnpm run build:types",
     "release": "pnpm exec release-it"
   },
   "dependencies": {
-    "@ember/render-modifiers": "^2.0.0 || ^3.0.0",
+    "@ember/render-modifiers": "^3.0.0",
     "@embroider/macros": "^1.0.0",
     "@embroider/util": "^1.0.0",
     "broccoli-debug": "^0.6.3",
-    "broccoli-funnel": "^3.0.8",
-    "broccoli-merge-trees": "^4.2.0",
     "chalk": "^5.0.0",
     "ember-auto-import": "^2.6.3",
     "ember-cli-babel": "^8.0.0",
     "ember-cli-build-config-editor": "^0.5.1",
-    "ember-cli-htmlbars": "^6.2.0",
-    "ember-cli-version-checker": "^5.1.2",
-    "ember-concurrency": "^2.1.2 || ^3.0.0 || ^4.0.0",
-    "ember-element-helper": "^0.6.0 || ^0.7.0 || ^0.8.0",
+    "ember-cli-htmlbars": "^7.0.0",
+    "ember-concurrency": "^4.0.0",
+    "ember-element-helper": "^0.8.0",
     "ember-focus-trap": "^1.0.0",
     "ember-on-helper": "^0.1.0",
-    "ember-popper-modifier": "^2.0.0 || ^3.0.0 || ^4.0.0",
-    "ember-ref-bucket": "^4.0.0 || ^5.0.0",
+    "ember-popper-modifier": "^4.0.0",
+    "ember-ref-bucket": "^5.0.0",
     "ember-render-helpers": "^2.0.0",
-    "ember-style-modifier": "^0.8.0 || ^1.0.0 || ^2.0.0 || ^3.0.0 || ^4.0.0",
+    "ember-style-modifier": "^4.0.0",
+    "ember-template-imports": "^4.4.0",
     "findup-sync": "^5.0.0",
-    "resolve": "^1.18.1",
-    "silent-error": "^1.0.1",
-    "tracked-toolbox": "^1.2.3 || ^2.0.0"
+    "tracked-toolbox": "^2.0.0"
   },
   "devDependencies": {
     "@babel/eslint-parser": "7.28.5",
@@ -72,6 +67,7 @@
     "@glimmer/tracking": "1.1.2",
     "@glint/core": "1.5.2",
     "@glint/environment-ember-loose": "1.5.2",
+    "@glint/environment-ember-template-imports": "1.5.2",
     "@glint/template": "1.7.3",
     "@popperjs/core": "2.11.8",
     "@release-it-plugins/lerna-changelog": "8.0.1",
@@ -80,8 +76,6 @@
     "@types/rsvp": "4.0.9",
     "@typescript-eslint/eslint-plugin": "7.18.0",
     "@typescript-eslint/parser": "7.18.0",
-    "chai": "4.5.0",
-    "chai-things": "0.2.0",
     "concurrently": "9.2.1",
     "ember-cli": "6.8.0",
     "ember-cli-build-config-editor": "0.5.1",
@@ -89,22 +83,22 @@
     "ember-template-lint-plugin-prettier": "5.0.0",
     "eslint": "8.57.1",
     "eslint-config-prettier": "10.1.8",
-    "eslint-plugin-ember": "12.7.4",
+    "eslint-plugin-ember": "12.7.5",
     "eslint-plugin-hbs": "1.0.3",
     "eslint-plugin-n": "17.23.1",
     "eslint-plugin-prettier": "5.5.4",
     "eslint-plugin-qunit": "8.2.5",
     "focus-trap": "7.6.6",
-    "mocha": "11.7.5",
+    "prettier-plugin-ember-template-tag": "2.1.0",
     "release-it": "19.0.6",
     "typescript": "5.9.3"
   },
   "peerDependencies": {
-    "ember-modifier": "^3.2.7 || ^4.0.0",
-    "ember-source": ">=4.8.0"
+    "ember-source": ">= 5.12.0",
+    "ember-modifier": "^3.2.7 || ^4.0.0"
   },
   "engines": {
-    "node": "18.* || >= 20"
+    "node": "20.* || 22.* || >= 24"
   },
   "ember": {
     "edition": "octane"

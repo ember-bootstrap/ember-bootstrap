@@ -8,8 +8,6 @@ it will make it easier for us to track down the issue you're having.
 
 ---
 
-Output from `ember bootstrap:info`:
-
-```
-[Replace this line with the output.]
-```
+Ember Bootstrap: <version of ember-bootstrap package>
+Ember: <version of ember-source package>
+Bootstrap: <version of Bootstrap package>

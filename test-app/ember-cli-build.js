@@ -3,11 +3,15 @@
 const EmberApp = require('ember-cli/lib/broccoli/ember-app');
 const { maybeEmbroider } = require('@embroider/test-setup');
 
+const bootstrapVersion = parseInt(process.env.BOOTSTRAPVERSION) || 5;
+
 module.exports = function (defaults) {
   const trees = {};
 
   const options = {
-    'ember-bootstrap': {},
+    'ember-bootstrap': {
+      bootstrapVersion,
+    },
     'ember-cli-babel': {
       includePolyfill: !!process.env.BABELPOLYFILL,
       enableTypeScriptTransform: true,
@@ -20,6 +24,12 @@ module.exports = function (defaults) {
   };
 
   const app = new EmberApp(defaults, options);
+
+  // import Bootstrap CSS
+  app.import('node_modules/bootstrap/dist/css/bootstrap.css');
+  if (bootstrapVersion === 4) {
+    app.import('node_modules/ember-bootstrap/overwrites-for-bs4.css');
+  }
 
   /*
     This build file specifies the options for the test-app of this
