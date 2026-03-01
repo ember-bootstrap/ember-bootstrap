@@ -8,4 +8,12 @@ module.exports = {
     'attribute-indentation': false,
     'no-pointer-down-event-binding': false,
   },
+  overrides: [
+    {
+      files: ['addon/**/*.(gjs|gts)'],
+      rules: {
+        prettier: 'off',
+      },
+    },
+  ],
 };

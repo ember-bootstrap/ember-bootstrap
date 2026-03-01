@@ -20,12 +20,12 @@
     "@babel/core": "7.28.5",
     "@babel/eslint-parser": "7.28.5",
     "@babel/plugin-proposal-decorators": "7.28.0",
-    "@ember/optional-features": "2.2.0",
+    "@ember/optional-features": "2.3.0",
     "@ember/render-modifiers": "3.0.0",
     "@ember/string": "4.0.1",
     "@ember/test-helpers": "5.4.1",
     "@embroider/addon-dev": "8.1.2",
-    "@embroider/macros": "1.19.4",
+    "@embroider/macros": "1.19.5",
     "@embroider/test-setup": "4.0.0",
     "@embroider/util": "1.13.4",
     "@glimmer/component": "1.1.2",
@@ -59,7 +59,7 @@
     "ember-cli-dependency-checker": "3.3.3",
     "ember-cli-fastboot": "4.1.5",
     "ember-cli-fastboot-testing": "0.6.2",
-    "ember-cli-htmlbars": "6.3.0",
+    "ember-cli-htmlbars": "7.0.0",
     "ember-cli-inject-live-reload": "2.1.0",
     "ember-cli-sri": "2.1.1",
     "ember-cli-terser": "4.0.2",
@@ -82,13 +82,13 @@
     "ember-source": "6.8.2",
     "ember-source-channel-url": "3.0.0",
     "ember-style-modifier": "4.5.1",
-    "ember-template-imports": "4.3.0",
+    "ember-template-imports": "4.4.0",
     "ember-template-lint": "6.1.0",
     "ember-template-lint-plugin-prettier": "5.0.0",
     "ember-try": "4.0.0",
     "eslint": "8.57.1",
     "eslint-config-prettier": "10.1.8",
-    "eslint-plugin-ember": "12.7.4",
+    "eslint-plugin-ember": "12.7.5",
     "eslint-plugin-hbs": "1.0.3",
     "eslint-plugin-n": "17.23.1",
     "eslint-plugin-prettier": "5.5.4",
@@ -105,10 +105,10 @@
     "sinon": "21.0.0",
     "tracked-toolbox": "2.0.0",
     "typescript": "5.9.3",
-    "webpack": "5.103.0"
+    "webpack": "5.104.1"
   },
   "engines": {
-    "node": "18.* || >= 20"
+    "node": "20.* || 22.* || >= 24"
   },
   "ember": {
     "edition": "octane"

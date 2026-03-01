@@ -24,7 +24,7 @@
 <h3>Using plain css</h3>
 
 <p>
-  To use ember-bootstrap, include Bootstrap's style sheets into your app's build
+  To use Ember Bootstrap, include Bootstrap's style sheets into your app's build
   configuration.
 </p>
 
@@ -57,9 +57,8 @@ for more information about including assets into your app.
 
 <p>To use a Sass as a CSS preprocessor instead of plain CSS (highly
   recommended!), you can install and setup
-  <a
-    href="https://github.com/adopted-ember-addons/ember-cli-sass"
-  >ember-cli-sass</a>-
+  <a href="https://github.com/adopted-ember-addons/ember-cli-sass">Ember CLI
+    SASS</a>-
 </p>
 
 <p>See the
@@ -88,6 +87,14 @@ for more information about including assets into your app.
   // ...
 };
 </code></pre>
+</p>
+
+<p>
+  Additionally, import the CSS in
+  <code>ember-bootstrap/overwrites-for-bs4.css</code>
+  in your application.
+  {{! prettier-ignore }}
+  <pre class="highlight"><code>import 'ember-bootstrap/overwrites-for-bs4.css';</code></pre>
 </p>
 
 <hr />
@@ -120,83 +127,6 @@ for more information about including assets into your app.
         </p>
       </td>
     </tr>
-    <tr>
-      <td>importBootstrapCSS</td>
-      <td><code>true</code> / <code>false</code></td>
-      <td><code>true</code> if no preprocessor</td>
-      <td>
-        <p>Include the default static
-          <code>bootstrap.css</code>. Only applicable when not using a
-          preprocessor.</p>
-        <p>See the
-          <LinkTo @route="getting-started.assets">Assets guide</LinkTo>
-          for more details.</p>
-      </td>
-    </tr>
-    <tr>
-      <td>include <span class="badge bg-warning">Deprecated</span></td>
-      <td>Array of component names</td>
-      <td></td>
-      <td>
-        <p>
-          <strong>Deprecated:</strong>
-          This option is deprecated and will be removed in v7.0.0. Manual
-          tree-shaking via
-          <code>include</code>
-          and
-          <code>exclude</code>
-          options is no longer supported as Ember Bootstrap migrates to v2
-          addons.
-        </p>
-
-        <p>
-          <strong>Recommended:</strong>
-          Use
-          <a
-            href="https://ember-cli.com/embroider"
-            target="_blank"
-            rel="noopener noreferrer"
-          >Embroider</a>
-          instead, which supports automatic tree-shaking out of the box. Enable
-          <code>staticComponents</code>
-          or
-          <code>staticInvocables</code>
-          in your Embroider configuration for optimal tree-shaking results.
-        </p>
-      </td>
-    </tr>
-    <tr>
-      <td>exclude <span class="badge bg-warning">Deprecated</span></td>
-      <td>Array of component names</td>
-      <td></td>
-      <td>
-        <p>
-          <strong>Deprecated:</strong>
-          This option is deprecated and will be removed in v7.0.0. Manual
-          tree-shaking via
-          <code>include</code>
-          and
-          <code>exclude</code>
-          options is no longer supported as Ember Bootstrap migrates to v2
-          addons.
-        </p>
-
-        <p>
-          <strong>Recommended:</strong>
-          Use
-          <a
-            href="https://ember-cli.com/embroider"
-            target="_blank"
-            rel="noopener noreferrer"
-          >Embroider</a>
-          instead, which supports automatic tree-shaking out of the box. Enable
-          <code>staticComponents</code>
-          or
-          <code>staticInvocables</code>
-          in your Embroider configuration for optimal tree-shaking results.
-        </p>
-      </td>
-    </tr>
   </tbody>
 
 </table>
@@ -210,8 +140,6 @@ module.exports = function(defaults) {
   const app = new EmberApp(defaults, {
     'ember-bootstrap': {
       bootstrapVersion: 4,
-      importBootstrapCSS: false,
-      exclude: ['bs-popover', 'bs-accordion'],
     },
   });
 

@@ -7,7 +7,6 @@ Config.reopenClass({
   formValidationErrorIcon: 'glyphicon glyphicon-remove',
   formValidationWarningIcon: 'glyphicon glyphicon-warning-sign',
   formValidationInfoIcon: 'glyphicon glyphicon-info-sign',
-  insertEmberWormholeElementToDom: true,
 
   load(config = {}) {
     for (let property in config) {
