@@ -417,7 +417,7 @@ export default class Form extends Component {
    * @method submit
    * @private
    */
-  submitHandler(e, throwValidationErrors = true) {
+  async submitHandler(e, throwValidationErrors = true) {
     if (e) {
       e.preventDefault();
     }
@@ -432,69 +432,76 @@ export default class Form extends Component {
 
     this.args.onBefore?.(model);
 
-    return Promise.resolve()
-      .then(() => {
-        return this.hasValidator ? this.validate(model, this._element) : null;
-      })
-      .then(
-        (record) => {
-          if (this.args.hideValidationsOnSubmit === true) {
-            this.showAllValidations = false;
-          }
+    let validationResult;
 
-          return Promise.resolve()
-            .then(() => {
-              return this.args.onSubmit?.(model, record);
-            })
-            .then(() => {
-              if (this.isDestroyed) {
-                return;
-              }
+    // Validate the input if form has a validator.
+    // If the form is invalid, it should not be submitted.
+    if (this.hasValidator) {
+      try {
+        validationResult = await this.validate(model, this._element);
+      } catch (error) {
+        // It is expected that validate method throws an error when the
+        // submitted form model is invalid.
 
-              this.isSubmitted = true;
-            })
-            .catch((error) => {
-              if (this.isDestroyed) {
-                return;
-              }
+        try {
+          await this.args.onInvalid?.(model, error);
+        } catch (errorThrownByOnInvalid) {
+          // The onInvalid method is not expected to throw. The error should
+          // be reported to the console. Nevertheless we need to continue
+          // our handling logic for invalid form submissions.
+          reportError(errorThrownByOnInvalid);
+        }
 
-              this.isRejected = true;
+        if (this.isDestroyed) {
+          // Stop execution. Component has been destroyed in the meantime.
+          return;
+        }
 
-              throw error;
-            })
-            .finally(() => {
-              if (this.isDestroyed) {
-                return;
-              }
+        this.showAllValidations = true;
+        this.isRejected = true;
+        this.pendingSubmissions = this.pendingSubmissions - 1;
 
-              this.pendingSubmissions--;
+        if (throwValidationErrors) {
+          throw error;
+        }
 
-              // reset forced hiding of validations
-              if (this.showAllValidations === false) {
-                next(() => (this.showAllValidations = undefined));
-              }
-            });
-        },
-        (error) => {
-          return Promise.resolve()
-            .then(() => {
-              return this.args.onInvalid?.(model, error);
-            })
-            .finally(() => {
-              if (this.isDestroyed) {
-                return;
-              }
+        // An invalid form should not be submitted
+        return;
+      }
+    }
 
-              this.showAllValidations = true;
-              this.isRejected = true;
-              this.pendingSubmissions = this.pendingSubmissions - 1;
+    if (this.args.hideValidationsOnSubmit === true) {
+      this.showAllValidations = false;
+    }
 
-              if (throwValidationErrors) {
-                throw error;
-              }
-            });
-        },
-      );
+    try {
+      await this.args.onSubmit?.(model, validationResult);
+
+      if (this.isDestroyed) {
+        // Stop execution. Component has been destroyed in the meantime.
+        return;
+      }
+
+      this.isSubmitted = true;
+    } catch (error) {
+      if (this.isDestroyed) {
+        // Stop execution. Component has been destroyed in the meantime.
+        return;
+      }
+
+      this.isRejected = true;
+
+      throw error;
+    } finally {
+      if (!this.isDestroyed) {
+        this.pendingSubmissions--;
+
+        // reset forced hiding of validations
+        if (this.showAllValidations === false) {
+          next(() => (this.showAllValidations = undefined));
+        }
+      }
+    }
   }
 
   @action
