@@ -6,7 +6,7 @@
 as |Title Body titleId collapsableId|
 }}
   <div
-    class="{{if @disabled "disabled"}} {{this.typeClass}} {{if (macroCondition (macroGetOwnConfig "isBS4")) "card"}} {{if (macroCondition (macroGetOwnConfig "isBS5")) "accordion-item"}}"
+    class="{{if @disabled "disabled"}} {{this.typeClass}} {{if (macroCondition (macroGetOwnConfig "isBS4")) "card" "accordion-item"}}"
     ...attributes
   >
     {{#if (has-block-params)}}

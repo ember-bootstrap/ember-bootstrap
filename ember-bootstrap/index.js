@@ -32,8 +32,6 @@ module.exports = {
     // setup config for @embroider/macros
     this.options['@embroider/macros'].setOwnConfig.isBS4 =
       bootstrapVersion === 4;
-    this.options['@embroider/macros'].setOwnConfig.isBS5 =
-      bootstrapVersion === 5;
     this.options['@embroider/macros'].setOwnConfig.version =
       require('./package.json').version;
   },

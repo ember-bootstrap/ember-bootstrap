@@ -16,7 +16,7 @@ export default class PopoverElement extends ContextualHelpElement {
    * @public
    */
 
-  arrowClass = macroCondition(getOwnConfig().isBS5) ? 'popover-arrow' : 'arrow';
+  arrowClass = macroCondition(getOwnConfig().isBS4) ? 'arrow' : 'popover-arrow';
   placementClassPrefix = 'bs-popover-';
   offset = [0, 8];
 }

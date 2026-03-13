@@ -34,7 +34,7 @@ this example of the `<BsAlert>` component:
 ```hbs
 <label
   class="
-    {{if (macroCondition (macroGetOwnConfig "isBS5")) "form-label"}}
+    {{unless (macroCondition (macroGetOwnConfig "isBS4")) "form-label"}}
     {{@labelClass}}
   "
   ...attributes
