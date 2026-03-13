@@ -199,7 +199,9 @@ export default class ContextualHelpElement<
   get actualPlacementClass() {
     let ending: string | undefined = this.actualPlacement;
 
-    if (macroCondition(getOwnConfig<EmberBootstrapMacrosConfig>().isBS5)) {
+    if (macroCondition(getOwnConfig<EmberBootstrapMacrosConfig>().isBS4)) {
+      // no renaming for BS4
+    } else {
       if (ending === 'right') {
         ending = 'end';
       }

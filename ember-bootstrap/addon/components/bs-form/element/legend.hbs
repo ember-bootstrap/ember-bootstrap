@@ -1,7 +1,7 @@
 {{! @glint-nocheck }}
 <legend
   class="
-    {{if @invisibleLabel (if (macroCondition (macroGetOwnConfig "isBS5")) "visually-hidden" "sr-only")}}
+    {{if @invisibleLabel (if (macroCondition (macroGetOwnConfig "isBS4")) "sr-only" "visually-hidden")}}
     {{@labelClass}}
     {{if this.isHorizontalAndNotCheckbox "col-form-label"}}
     {{if this.isHorizontal (bs-size-class "col-form-label" @size)}}"

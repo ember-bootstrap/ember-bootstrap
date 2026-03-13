@@ -24,22 +24,22 @@ import type Owner from '@ember/owner';
 const TRANSITION_DURATION = 50;
 
 const INDICATOR_ELEMENT = macroCondition(
-  getConfig<EmberBootstrapMacrosConfig>('ember-bootstrap').isBS5,
+  getConfig<EmberBootstrapMacrosConfig>('ember-bootstrap').isBS4,
 )
-  ? 'button'
-  : 'li';
+  ? 'li'
+  : 'button';
 
 const DIRECTION_NEXT = macroCondition(
-  getConfig<EmberBootstrapMacrosConfig>('ember-bootstrap').isBS5,
+  getConfig<EmberBootstrapMacrosConfig>('ember-bootstrap').isBS4,
 )
-  ? 'start'
-  : 'left';
+  ? 'left'
+  : 'start';
 
 const DIRECTION_PREVIOUS = macroCondition(
-  getConfig<EmberBootstrapMacrosConfig>('ember-bootstrap').isBS5,
+  getConfig<EmberBootstrapMacrosConfig>('ember-bootstrap').isBS4,
 )
-  ? 'end'
-  : 'right';
+  ? 'right'
+  : 'end';
 
 function clickIndicator(index: number) {
   return click(`.carousel-indicators ${INDICATOR_ELEMENT}:nth-child(${index})`);

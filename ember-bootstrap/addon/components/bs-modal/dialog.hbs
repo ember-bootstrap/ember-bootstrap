@@ -18,12 +18,12 @@
   {{did-insert this.setInitialFocus}}
 >
   <div
+    {{!-- template-lint-disable simple-unless --}}
     class="modal-dialog
       {{this.sizeClass}}
       {{if @centered "modal-dialog-centered"}}
       {{if @scrollable "modal-dialog-scrollable"}}
-      {{if
-        (macroCondition (macroGetOwnConfig "isBS5"))
+      {{unless (macroCondition (macroGetOwnConfig "isBS4"))
         (if
           @fullscreen (if (bs-eq @fullscreen true) "modal-fullscreen" (concat "modal-fullscreen-" @fullscreen "-down"))
         )
