@@ -245,7 +245,9 @@ export default class Dropdown extends Component {
    * @private
    */
   get containerClass() {
-    if (macroCondition(getOwnConfig().isBS5)) {
+    if (macroCondition(getOwnConfig().isBS4)) {
+      // BS4: no special direction handling
+    } else {
       if (this.direction === 'left') {
         return 'dropstart';
       } else if (this.direction === 'right') {

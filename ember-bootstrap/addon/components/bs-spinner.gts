@@ -103,9 +103,9 @@ export default class BsSpinner extends Component<BsSpinnerSignature> {
       {{#if (has-block)}}
         <span
           class={{if
-            (macroCondition (macroGetOwnConfig 'isBS5'))
-            'visually-hidden'
+            (macroCondition (macroGetOwnConfig 'isBS4'))
             'sr-only'
+            'visually-hidden'
           }}
         >{{yield}}</span>
       {{/if}}
