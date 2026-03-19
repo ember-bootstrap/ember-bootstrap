@@ -3,6 +3,7 @@ import Component from '@glimmer/component';
 import { tracked } from '@glimmer/tracking';
 import type { ComponentLike } from '@glint/template';
 import AccordionItem, { type ItemSignature } from './bs-accordion/item';
+import { hash } from '@ember/helper';
 
 interface AccordionSignature {
   Args: {
@@ -136,4 +137,17 @@ export default class Accordion extends Component<AccordionSignature> {
       this.isSelected = newValue;
     }
   }
+
+  <template>
+    <div class='accordion' ...attributes>
+      {{yield
+        (hash
+          item=(component
+            this.itemComponent selected=this.isSelected onClick=this.doChange
+          )
+          change=this.doChange
+        )
+      }}
+    </div>
+  </template>
 }

@@ -4,6 +4,13 @@ import arg from '../../utils/decorators/arg';
 import type { ComponentLike } from '@glint/template';
 import type { TitleSignature } from './item/title';
 import type { BodySignature } from './item/body';
+import { macroCondition } from '@embroider/macros';
+import { fn, hash, uniqueId } from '@ember/helper';
+import bsDefault from '../../helpers/bs-default';
+import bsNoop from 'ember-bootstrap/helpers/bs-noop';
+import AccordionItemTitle from './item/title';
+import AccordionItemBody from './item/body';
+declare function macroGetOwnConfig(path: string): boolean;
 
 export interface ItemSignature {
   Args: {
@@ -115,4 +122,43 @@ export default class AccordionItem extends Component<ItemSignature> {
    * @event onClick
    * @public
    */
+
+  <template>
+    {{#let
+      (component
+        (bsDefault @titleComponent AccordionItemTitle)
+        collapsed=this.collapsed
+        disabled=@disabled
+        onClick=(fn (bsDefault @onClick bsNoop) this.value)
+      )
+      (component
+        (bsDefault @bodyComponent AccordionItemBody) collapsed=this.collapsed
+      )
+      (uniqueId)
+      (uniqueId)
+      as |Title Body titleId collapsableId|
+    }}
+      <div
+        class='{{if @disabled "disabled"}}
+          {{this.typeClass}}
+          {{if
+            (macroCondition (macroGetOwnConfig "isBS4"))
+            "card"
+            "accordion-item"
+          }}'
+        ...attributes
+      >
+        {{#if (has-block-params)}}
+          {{yield (hash title=Title body=Body)}}
+        {{else}}
+          <Title id={{titleId}} @controls={{collapsableId}}>
+            {{@title}}
+          </Title>
+          <Body @collapsableId={{collapsableId}} @describedby={{titleId}}>
+            {{yield (hash title=Title body=Body)}}
+          </Body>
+        {{/if}}
+      </div>
+    {{/let}}
+  </template>
 }
