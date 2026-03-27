@@ -239,9 +239,6 @@ importers:
       '@glimmer/component':
         specifier: ^1.0.4 || ^2.0.0
         version: 1.1.2(@babel/core@7.28.5)
-      '@glimmer/tracking':
-        specifier: ^1.0.4
-        version: 1.1.2
       broccoli-debug:
         specifier: ^0.6.3
         version: 0.6.5
