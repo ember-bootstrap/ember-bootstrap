@@ -9,6 +9,14 @@ import { schedule } from '@ember/runloop';
 import { task, timeout, type Task } from 'ember-concurrency';
 import { tracked } from '@glimmer/tracking';
 import type { ComponentLike } from '@glint/template';
+import { on } from '@ember/modifier';
+import didUpdate from '@ember/render-modifiers/modifiers/did-update';
+import { macroCondition } from '@embroider/macros';
+declare function macroGetOwnConfig(path: string): boolean;
+import bsEq from 'ember-bootstrap/helpers/bs-eq';
+import { fn, hash } from '@ember/helper';
+import bsDefault from 'ember-bootstrap/helpers/bs-default';
+import BsCarouselSlide from 'ember-bootstrap/components/bs-carousel/slide';
 
 export type PresentationState = 'didTransition' | 'willTransit';
 export type TransitionType = 'slide' | 'fade';
@@ -91,6 +99,95 @@ interface CarouselSignature {
   @public
 */
 export default class Carousel extends Component<CarouselSignature> {
+  <template>
+    <div
+      {{! template-lint-disable no-positive-tabindex }}
+      tabindex={{this.tabindex}}
+      class='carousel slide {{if this.carouselFade "carousel-fade"}}'
+      ...attributes
+      {{on 'keydown' this.handleKeyDown}}
+      {{on 'mouseenter' this.handleMouseEnter}}
+      {{on 'mouseleave' this.handleMouseLeave}}
+      {{didUpdate this.childSlidesObserver this.childSlides this.autoPlay}}
+      {{didUpdate this.indexObserver this.index}}
+    >
+      {{#if this.showIndicators}}
+        {{#if (macroCondition (macroGetOwnConfig 'isBS4'))}}
+          <ol class='carousel-indicators'>
+            {{#each this.indicators as |indicator _index|}}
+              <li
+                role='button'
+                class={{if (bsEq this.currentIndex _index) 'active'}}
+                {{on 'click' (fn this.toSlide _index)}}
+              />
+            {{/each}}
+          </ol>
+        {{else}}
+          <div class='carousel-indicators'>
+            {{#each this.indicators as |indicator _index|}}
+              <button
+                data-bs-target
+                type='button'
+                class={{if (bsEq this.currentIndex _index) 'active'}}
+                aria-current='{{bsEq this.currentIndex _index}}'
+                {{on 'click' (fn this.toSlide _index)}}
+              />
+            {{/each}}
+          </div>
+        {{/if}}
+
+      {{/if}}
+
+      <div class='carousel-inner' role='listbox'>
+        {{yield
+          (hash
+            slide=(component
+              (bsDefault @slideComponent (component BsCarouselSlide))
+              currentSlide=this.currentSlide
+              directionalClassName=this.directionalClassName
+              followingSlide=this.followingSlide
+              orderClassName=this.orderClassName
+              presentationState=this.presentationState
+              registerChild=this.registerChild
+              unregisterChild=this.unregisterChild
+            )
+          )
+        }}
+      </div>
+
+      {{#if this.showControls}}
+        <button
+          class='carousel-control-prev'
+          type='button'
+          {{on 'click' this.toPrevSlide}}
+        >
+          <span aria-hidden='true' class='carousel-control-prev-icon'></span>
+          <span
+            class={{if
+              (macroCondition (macroGetOwnConfig 'isBS4'))
+              'sr-only'
+              'visually-hidden'
+            }}
+          >{{this.prevControlLabel}}</span>
+        </button>
+        <button
+          class='carousel-control-next'
+          type='button'
+          {{on 'click' this.toNextSlide}}
+        >
+          <span aria-hidden='true' class='carousel-control-next-icon'></span>
+          <span
+            class={{if
+              (macroCondition (macroGetOwnConfig 'isBS4'))
+              'sr-only'
+              'visually-hidden'
+            }}
+          >{{this.nextControlLabel}}</span>
+        </button>
+      {{/if}}
+
+    </div>
+  </template>
   tabindex = '1';
 
   /**
@@ -690,70 +787,3 @@ export default class Carousel extends Component<CarouselSignature> {
     });
   }
 }
-
-<div
-  {{!-- template-lint-disable no-positive-tabindex --}}
-  tabindex={{this.tabindex}}
-  class="carousel slide {{if this.carouselFade "carousel-fade"}}"
-  ...attributes
-  {{on "keydown" this.handleKeyDown}}
-  {{on "mouseenter" this.handleMouseEnter}}
-  {{on "mouseleave" this.handleMouseLeave}}
-  {{did-update this.childSlidesObserver this.childSlides this.autoPlay}}
-  {{did-update this.indexObserver this.index}}
->
-  {{#if this.showIndicators}}
-    {{#if (macroCondition (macroGetOwnConfig "isBS4"))}}
-      <ol class="carousel-indicators">
-        {{#each this.indicators as |indicator _index|}}
-          <li
-            role="button"
-            class={{if (bs-eq this.currentIndex _index) "active"}}
-            {{on "click" (fn this.toSlide _index)}}
-          />
-        {{/each}}
-      </ol>
-    {{else}}
-      <div class="carousel-indicators">
-        {{#each this.indicators as |indicator _index|}}
-          <button
-            data-bs-target
-            type="button"
-            class={{if (bs-eq this.currentIndex _index) "active"}}
-            aria-current="{{bs-eq this.currentIndex _index}}"
-            {{on "click" (fn this.toSlide _index)}}
-          />
-        {{/each}}
-      </div>
-    {{/if}}
-
-  {{/if}}
-
-  <div class="carousel-inner" role="listbox">
-    {{yield
-      (hash
-        slide=(component (ensure-safe-component (bs-default @slideComponent (component "bs-carousel/slide")))
-          currentSlide=this.currentSlide
-          directionalClassName=this.directionalClassName
-          followingSlide=this.followingSlide
-          orderClassName=this.orderClassName
-          presentationState=this.presentationState
-          registerChild=this.registerChild
-          unregisterChild=this.unregisterChild
-        )
-      )
-    }}
-  </div>
-
-  {{#if this.showControls}}
-    <button class="carousel-control-prev" type="button" {{on "click" this.toPrevSlide}}>
-      <span aria-hidden="true" class="carousel-control-prev-icon"></span>
-      <span class={{if (macroCondition (macroGetOwnConfig "isBS4")) "sr-only" "visually-hidden"}}>{{this.prevControlLabel}}</span>
-    </button>
-    <button class="carousel-control-next" type="button" {{on "click" this.toNextSlide}}>
-      <span aria-hidden="true" class="carousel-control-next-icon"></span>
-      <span class={{if (macroCondition (macroGetOwnConfig "isBS4")) "sr-only" "visually-hidden"}}>{{this.nextControlLabel}}</span>
-    </button>
-  {{/if}}
-
-</div>

@@ -16,7 +16,26 @@ import { tracked } from '@glimmer/tracking';
  @extends Component
  @public
  */
+import createRef from 'ember-ref-bucket/modifiers/create-ref';
+import didInsert from '@ember/render-modifiers/modifiers/did-insert';
+import didUpdate from '@ember/render-modifiers/modifiers/did-update';
 export default class TabPane extends Component {
+  <template>
+    {{! @glint-nocheck }}
+    <div
+      class='tab-pane
+        {{if this.showContent "show"}}
+        {{if this.active "active"}}
+        {{if this.usesTransition "fade"}}'
+      role='tabpanel'
+      ...attributes
+      {{createRef 'mainNode'}}
+      {{didInsert this.updateActive @active}}
+      {{didUpdate this.showHide this.isActive}}
+    >
+      {{yield}}
+    </div>
+  </template>
   /**
    * @property id
    * @type null | HTMLElement
@@ -217,15 +236,3 @@ export default class TabPane extends Component {
     this.showContent = this.args.showContent;
   }
 }
-
-{{! @glint-nocheck }}
-<div
-  class="tab-pane {{if this.showContent "show"}} {{if this.active "active"}} {{if this.usesTransition "fade"}}"
-  role="tabpanel"
-  ...attributes
-  {{create-ref "mainNode"}}
-  {{did-insert this.updateActive @active}}
-  {{did-update this.showHide this.isActive}}
->
-  {{yield}}
-</div>

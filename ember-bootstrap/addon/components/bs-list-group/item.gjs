@@ -9,7 +9,28 @@ import arg from '../../utils/decorators/arg';
  * @extends Glimmer.Component
  * @public
  */
+import element_ from 'ember-element-helper/helpers/element';
+import bsTypeClass from 'ember-bootstrap/helpers/bs-type-class';
+import bsEq from 'ember-bootstrap/helpers/bs-eq';
 export default class BsListGroupItemComponent extends Component {
+  <template>
+    {{! @glint-nocheck }}
+    {{#let (element_ this.htmlTag) as |Tag|}}
+      <Tag
+        class='list-group-item
+          {{if @type (bsTypeClass "list-group-item" @type default='')}}
+          {{if @actionable "list-group-item-action"}}
+          {{if @disabled "disabled"}}
+          {{if @active "active"}}'
+        aria-current='{{if @active true}}'
+        aria-disabled='{{if @disabled true}}'
+        type='{{if (bsEq this.htmlTag "button") "button"}}'
+        ...attributes
+      >
+        {{yield}}
+      </Tag>
+    {{/let}}
+  </template>
   /**
    * On of the allowed bs-types, e.g. `primary`, `secondary` etc.
    *
@@ -73,15 +94,3 @@ export default class BsListGroupItemComponent extends Component {
     return this.args.actionable ? 'button' : 'li';
   }
 }
-
-{{! @glint-nocheck }}
-{{#let (element this.htmlTag) as |Tag|}}
-  <Tag
-    class="list-group-item {{if @type (bs-type-class "list-group-item" @type default="")}} {{if @actionable "list-group-item-action"}} {{if @disabled "disabled"}} {{if @active "active"}}"
-    aria-current="{{if @active true}}"
-    aria-disabled="{{if @disabled true}}"
-    type="{{if (bs-eq this.htmlTag "button") "button"}}"
-     ...attributes>
-    {{yield}}
-  </Tag>
-{{/let}}

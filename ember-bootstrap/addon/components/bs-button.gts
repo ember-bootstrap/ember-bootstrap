@@ -2,6 +2,13 @@ import { tracked } from '@glimmer/tracking';
 import { action } from '@ember/object';
 import Component from '@glimmer/component';
 import arg from '../utils/decorators/arg';
+import { macroCondition } from '@embroider/macros';
+declare function macroGetOwnConfig(path: string): boolean;
+import bsSizeClass from 'ember-bootstrap/helpers/bs-size-class';
+import bsTypeClass from 'ember-bootstrap/helpers/bs-type-class';
+import { on } from '@ember/modifier';
+import didUpdate from '@ember/render-modifiers/modifiers/did-update';
+import { hash } from '@ember/helper';
 
 type ButtonState = 'default' | 'pending' | 'fulfilled' | 'rejected';
 
@@ -148,6 +155,32 @@ interface ButtonSignature<VALUE = undefined> {
   @public
 */
 export default class Button<VALUE> extends Component<ButtonSignature<VALUE>> {
+  <template>
+    <button
+      disabled={{this.__disabled}}
+      type={{if @attrTypePrivateWorkaround @attrTypePrivateWorkaround 'button'}}
+      class='btn
+        {{if @active "active"}}
+        {{if
+          (macroCondition (macroGetOwnConfig "isBS4"))
+          (if this.block "btn-block")
+        }}
+        {{bsSizeClass "btn" @size}}
+        {{bsTypeClass "btn" @type default='secondary' outline=@outline}}'
+      ...attributes
+      {{on 'click' this.handleClick}}
+      {{didUpdate this.resetState @reset}}
+    >
+      {{#if this.icon}}<i class={{this.icon}}></i> {{/if}}{{this.text}}{{yield
+        (hash
+          isFulfilled=this.isFulfilled
+          isPending=this.isPending
+          isRejected=this.isRejected
+          isSettled=this.isSettled
+        )
+      }}
+    </button>
+  </template>
   /**
    * Default label of the button. Not need if used as a block component
    *
@@ -456,21 +489,3 @@ export default class Button<VALUE> extends Component<ButtonSignature<VALUE>> {
     }
   }
 }
-
-<button
-  disabled={{this.__disabled}}
-  type={{if @attrTypePrivateWorkaround @attrTypePrivateWorkaround "button"}}
-  class="btn {{if @active 'active'}} {{if (macroCondition (macroGetOwnConfig 'isBS4')) (if this.block 'btn-block')}} {{bs-size-class 'btn' @size}} {{bs-type-class 'btn' @type default="secondary" outline=@outline}}"
-  ...attributes
-  {{on "click" this.handleClick}}
-  {{did-update this.resetState @reset}}
->
-  {{#if this.icon}}<i class={{this.icon}}></i> {{/if}}{{this.text}}{{yield
-    (hash
-      isFulfilled=this.isFulfilled
-      isPending=this.isPending
-      isRejected=this.isRejected
-      isSettled=this.isSettled
-    )
-  }}
-</button>

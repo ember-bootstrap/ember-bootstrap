@@ -60,7 +60,31 @@ import { A, isArray } from '@ember/array';
   @extends Glimmer.Component
   @public
 */
+import bsSizeClass from 'ember-bootstrap/helpers/bs-size-class';
+import { hash } from '@ember/helper';
+import bsDefault from 'ember-bootstrap/helpers/bs-default';
+import BsButtonGroupButton from 'ember-bootstrap/components/bs-button-group/button';
 export default class ButtonGroup extends Component {
+  <template>
+    {{! @glint-nocheck }}
+    <div
+      class='{{if @vertical "btn-group-vertical" "btn-group"}}
+        {{bsSizeClass "btn-group" @size}}'
+      role='group'
+      ...attributes
+    >
+      {{yield
+        (hash
+          button=(component
+            (bsDefault @buttonComponent (component BsButtonGroupButton))
+            buttonGroupType=@type
+            groupValue=@value
+            onClick=this.buttonPressed
+          )
+        )
+      }}
+    </div>
+  </template>
   /**
    * @property buttonComponent
    * @type {String}
@@ -162,12 +186,3 @@ export default class ButtonGroup extends Component {
     this.args.onChange(newValue);
   }
 }
-
-{{! @glint-nocheck }}
-<div class="{{if @vertical "btn-group-vertical" "btn-group"}} {{bs-size-class "btn-group" @size}}" role="group" ...attributes>
-  {{yield
-    (hash
-      button=(component (ensure-safe-component (bs-default @buttonComponent (component "bs-button-group/button"))) buttonGroupType=@type groupValue=@value onClick=this.buttonPressed)
-    )
-  }}
-</div>

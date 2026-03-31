@@ -15,21 +15,22 @@ import { on } from '@ember/modifier';
  * @extends Ember.Component
  * @public
  */
+import bsDefault from 'ember-bootstrap/helpers/bs-default';
 export default class NavbarToggle extends Component {
+  <template>
+    {{! @glint-nocheck }}
+    <button
+      type='button'
+      class='navbar-toggler {{if (bsDefault @collapsed true) "collapsed"}}'
+      ...attributes
+      {{(if @onClick (modifier this.on 'click' @onClick))}}
+    >
+      {{#if (has-block)}}
+        {{yield}}
+      {{else}}
+        <span class='navbar-toggler-icon'></span>
+      {{/if}}
+    </button>
+  </template>
   on = on;
 }
-
-{{! @glint-nocheck }}
-<button
-  type="button"
-  class="navbar-toggler
-  {{if (bs-default @collapsed true) "collapsed"}}"
-  ...attributes
-  {{(if @onClick (modifier this.on "click" @onClick))}}
->
-  {{#if (has-block)}}
-    {{yield}}
-  {{else}}
-    <span class="navbar-toggler-icon"></span>
-  {{/if}}
-</button>

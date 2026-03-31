@@ -9,7 +9,24 @@ import { action } from '@ember/object';
  * @extends Components.NavLinkTo
  * @public
  */
+import BsLinkTo from 'ember-bootstrap/components/bs-link-to';
+import { on } from '@ember/modifier';
 export default class NavbarLinkTo extends Component {
+  <template>
+    {{! @glint-nocheck }}
+    <BsLinkTo
+      @route={{@route}}
+      @model={{@model}}
+      @models={{@models}}
+      @query={{@query}}
+      @disabled={{@disabled}}
+      {{on 'click' this.onClick}}
+      class={{@attrClassInternal}}
+      ...attributes
+    >
+      {{yield}}
+    </BsLinkTo>
+  </template>
   /**
    * @property collapseNavbar
    * @type {Boolean}
@@ -24,17 +41,3 @@ export default class NavbarLinkTo extends Component {
     }
   }
 }
-
-{{! @glint-nocheck }}
-<BsLinkTo
-  @route={{@route}}
-  @model={{@model}}
-  @models={{@models}}
-  @query={{@query}}
-  @disabled={{@disabled}}
-  {{on 'click' this.onClick}}
-  class={{@attrClassInternal}}
-  ...attributes
->
-  {{yield}}
-</BsLinkTo>

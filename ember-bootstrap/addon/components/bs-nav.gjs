@@ -79,7 +79,41 @@ import Component from '@glimmer/component';
   @public
 
  */
+import { hash } from '@ember/helper';
+import bsDefault from 'ember-bootstrap/helpers/bs-default';
+import BsNavItem from 'ember-bootstrap/components/bs-nav/item';
+import BsLinkTo from 'ember-bootstrap/components/bs-link-to';
+import BsDropdown from 'ember-bootstrap/components/bs-dropdown';
 export default class Nav extends Component {
+  <template>
+    {{! @glint-nocheck }}
+    <ul
+      class='nav
+        {{this.typeClass}}
+        {{this.additionalClass}}
+        {{if this.justified "nav-justified"}}
+        {{if this.stacked "flex-column"}}
+        {{if this.fill "nav-fill"}}'
+      ...attributes
+    >
+      {{yield
+        (hash
+          item=(bsDefault @itemComponent (component BsNavItem))
+          link-to=(bsDefault
+            @linkToComponent (component BsLinkTo attrClassInternal='nav-link')
+          )
+          linkTo=(bsDefault
+            @linkToComponent (component BsLinkTo attrClassInternal='nav-link')
+          )
+          dropdown=(component
+            (bsDefault @dropdownComponent (component BsDropdown))
+            inNav=true
+            htmlTag='li'
+          )
+        )
+      }}
+    </ul>
+  </template>
   get typeClass() {
     let type = this.type;
     return type ? `nav-${type}` : undefined;
@@ -151,15 +185,3 @@ export default class Nav extends Component {
    * @private
    */
 }
-
-{{! @glint-nocheck }}
-<ul class="nav {{this.typeClass}} {{this.additionalClass}} {{if this.justified "nav-justified"}} {{if this.stacked "flex-column"}} {{if this.fill "nav-fill"}}" ...attributes>
-  {{yield
-    (hash
-      item=(ensure-safe-component (bs-default @itemComponent (component "bs-nav/item")))
-      link-to=(ensure-safe-component (bs-default @linkToComponent (component "bs-link-to" attrClassInternal="nav-link")))
-      linkTo=(ensure-safe-component (bs-default @linkToComponent (component "bs-link-to" attrClassInternal="nav-link")))
-      dropdown=(component (ensure-safe-component (bs-default @dropdownComponent (component "bs-dropdown"))) inNav=true htmlTag="li")
-    )
-  }}
-</ul>

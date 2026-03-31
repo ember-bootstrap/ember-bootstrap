@@ -1,4 +1,7 @@
 import Component from '@glimmer/component';
+import style_ from 'ember-style-modifier/modifiers/style';
+import { macroCondition } from '@embroider/macros';
+declare function macroGetOwnConfig(path: string): boolean;
 
 export interface ProgressBarSignature {
   Args: {
@@ -26,6 +29,46 @@ export interface ProgressBarSignature {
  @public
  */
 export default class ProgressBar extends Component<ProgressBarSignature> {
+  <template>
+    <div
+      role='progressbar'
+      aria-valuenow={{this.value}}
+      aria-valuemin={{this.minValue}}
+      aria-valuemax={{this.maxValue}}
+      class='progress-bar
+        {{if this.striped "progress-bar-striped"}}
+        {{this.typeClass}}
+        {{if this.animate "progress-bar-animated"}}'
+      ...attributes
+      {{style_ width=this.percentStyleValue}}
+    >
+      {{#if this.showLabel}}
+        {{#if (has-block)}}
+          {{yield this.percentRounded}}
+        {{else}}
+          {{this.percentRounded}}%
+        {{/if}}
+      {{else}}
+        {{#if (has-block)}}
+          <span
+            class={{if
+              (macroCondition (macroGetOwnConfig 'isBS4'))
+              'sr-only'
+              'visually-hidden'
+            }}
+          >{{yield this.percentRounded}}</span>
+        {{else}}
+          <span
+            class={{if
+              (macroCondition (macroGetOwnConfig 'isBS4'))
+              'sr-only'
+              'visually-hidden'
+            }}
+          >{{this.percentRounded}}%</span>
+        {{/if}}
+      {{/if}}
+    </div>
+  </template>
   /**
    * The lower limit of the value range
    *
@@ -177,27 +220,3 @@ export default class ProgressBar extends Component<ProgressBarSignature> {
     return !isNaN(percent) ? `${percent}%` : '';
   }
 }
-
-<div
-  role="progressbar"
-  aria-valuenow={{this.value}}
-  aria-valuemin={{this.minValue}}
-  aria-valuemax={{this.maxValue}}
-  class="progress-bar {{if this.striped "progress-bar-striped"}} {{this.typeClass}} {{if this.animate "progress-bar-animated"}}"
-  ...attributes
-  {{style width=this.percentStyleValue}}
->
-  {{#if this.showLabel}}
-    {{#if (has-block)}}
-      {{yield this.percentRounded}}
-    {{else}}
-      {{this.percentRounded}}%
-    {{/if}}
-  {{else}}
-    {{#if (has-block)}}
-      <span class={{if (macroCondition (macroGetOwnConfig "isBS4")) "sr-only" "visually-hidden"}}>{{yield this.percentRounded}}</span>
-    {{else}}
-      <span class={{if (macroCondition (macroGetOwnConfig "isBS4")) "sr-only" "visually-hidden"}}>{{this.percentRounded}}%</span>
-    {{/if}}
-  {{/if}}
-</div>

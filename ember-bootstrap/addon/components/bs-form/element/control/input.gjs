@@ -9,7 +9,24 @@ import sizeClass from 'ember-bootstrap/utils/size-class';
  @extends Components.FormElementControl
  @private
  */
+import bsDefault from 'ember-bootstrap/helpers/bs-default';
+import { on } from '@ember/modifier';
 export default class FormElementControlInput extends Control {
+  <template>
+    {{! @glint-nocheck }}
+    <input
+      type={{bsDefault @type 'text'}}
+      id={{@id}}
+      disabled={{@disabled}}
+      readonly={{@readonly}}
+      aria-describedby={{@ariaDescribedBy}}
+      value={{@value}}
+      class='form-control {{this.formValidationClass}} {{this.sizeClass}}'
+      ...attributes
+      {{on 'change' this.handleChange}}
+      {{on 'input' this.handleInput}}
+    />
+  </template>
   /**
    * @property type
    * @type {String}
@@ -40,17 +57,3 @@ export default class FormElementControlInput extends Control {
     return sizeClass('form-control', this.args.size);
   }
 }
-
-{{! @glint-nocheck }}
-<input
-  type={{bs-default @type "text"}}
-  id={{@id}}
-  disabled={{@disabled}}
-  readonly={{@readonly}}
-  aria-describedby={{@ariaDescribedBy}}
-  value={{@value}}
-  class="form-control {{this.formValidationClass}} {{this.sizeClass}}"
-  ...attributes
-  {{on "change" this.handleChange}}
-  {{on "input" this.handleInput}}
->

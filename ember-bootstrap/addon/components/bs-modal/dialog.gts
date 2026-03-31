@@ -5,6 +5,15 @@ import { next } from '@ember/runloop';
 import { ref } from 'ember-ref-bucket';
 import { tracked } from '@glimmer/tracking';
 import { guidFor } from '@ember/object/internals';
+import { on } from '@ember/modifier';
+import style_ from 'ember-style-modifier/modifiers/style';
+import { concat, hash } from '@ember/helper';
+import createRef from 'ember-ref-bucket/modifiers/create-ref';
+import didInsert from '@ember/render-modifiers/modifiers/did-insert';
+import { macroCondition } from '@embroider/macros';
+declare function macroGetOwnConfig(path: string): boolean;
+import bsEq from 'ember-bootstrap/helpers/bs-eq';
+import focusTrap from 'ember-focus-trap/modifiers/focus-trap';
 
 export type ModalSize = 'sm' | 'lg' | 'xl' | null;
 export type ModalFullscreen =
@@ -47,6 +56,66 @@ export interface DialogSignature {
  * @private
  */
 export default class ModalDialog extends Component<DialogSignature> {
+  <template>
+    <div
+      role='dialog'
+      tabindex='-1'
+      aria-labelledby={{this.titleId}}
+      class='modal
+        {{if @fade "fade"}}
+        {{if @showModal "show"}}
+        {{if @inDom "d-block"}}'
+      ...attributes
+      {{on 'keydown' this.handleKeyDown}}
+      {{on 'mousedown' this.handleMouseDown}}
+      {{on 'mouseup' this.handleMouseUp}}
+      {{on 'click' this.handleClick}}
+      {{style_
+        paddingLeft=(concat @paddingLeft 'px')
+        paddingRight=(concat @paddingRight 'px')
+        display=(if @inDom 'block' '')
+      }}
+      {{createRef 'mainNode'}}
+      {{didInsert this.getOrSetTitleId}}
+      {{didInsert this.setInitialFocus}}
+    >
+      <div
+        {{! template-lint-disable simple-unless }}
+        class='modal-dialog
+          {{this.sizeClass}}
+          {{if @centered "modal-dialog-centered"}}
+          {{if @scrollable "modal-dialog-scrollable"}}
+          {{unless
+            (macroCondition (macroGetOwnConfig "isBS4"))
+            (if
+              @fullscreen
+              (if
+                (bsEq @fullscreen true)
+                "modal-fullscreen"
+                (concat "modal-fullscreen-" @fullscreen "-down")
+              )
+            )
+          }}
+          '
+        role='document'
+      >
+        <div
+          class='modal-content'
+          tabindex='-1'
+          {{focusTrap
+            shouldSelfFocus=true
+            focusTrapOptions=(hash
+              clickOutsideDeactivates=@backdropClose
+              fallbackFocus='.modal'
+              escapeDeactivates=@keyboard
+            )
+          }}
+        >
+          {{yield}}
+        </div>
+      </div>
+    </div>
+  </template>
   /**
    * @property id
    * @type null | HTMLElement
@@ -168,46 +237,3 @@ export default class ModalDialog extends Component<DialogSignature> {
     }
   }
 }
-
-<div
-  role="dialog"
-  tabindex="-1"
-  aria-labelledby={{this.titleId}}
-  class="modal {{if @fade "fade"}} {{if @showModal "show"}} {{if @inDom "d-block"}}"
-  ...attributes
-  {{on "keydown" this.handleKeyDown}}
-  {{on "mousedown" this.handleMouseDown}}
-  {{on "mouseup" this.handleMouseUp}}
-  {{on "click" this.handleClick}}
-  {{style
-    paddingLeft=(concat @paddingLeft "px")
-    paddingRight=(concat @paddingRight "px")
-    display=(if @inDom "block" "")
-  }}
-  {{create-ref "mainNode"}}
-  {{did-insert this.getOrSetTitleId}}
-  {{did-insert this.setInitialFocus}}
->
-  <div
-    {{!-- template-lint-disable simple-unless --}}
-    class="modal-dialog
-      {{this.sizeClass}}
-      {{if @centered "modal-dialog-centered"}}
-      {{if @scrollable "modal-dialog-scrollable"}}
-      {{unless (macroCondition (macroGetOwnConfig "isBS4"))
-        (if
-          @fullscreen (if (bs-eq @fullscreen true) "modal-fullscreen" (concat "modal-fullscreen-" @fullscreen "-down"))
-        )
-      }}
-      "
-    role="document"
-  >
-    <div
-      class="modal-content"
-      tabindex="-1"
-      {{focus-trap shouldSelfFocus=true focusTrapOptions=(hash clickOutsideDeactivates=@backdropClose fallbackFocus=".modal" escapeDeactivates=@keyboard)}}
-    >
-      {{yield}}
-    </div>
-  </div>
-</div>

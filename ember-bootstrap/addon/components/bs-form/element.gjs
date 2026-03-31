@@ -1,3 +1,4 @@
+/* global macroGetOwnConfig */
 import Component from '@glimmer/component';
 import { tracked } from '@glimmer/tracking';
 import { action, get } from '@ember/object';
@@ -196,7 +197,163 @@ import { dedupeTracked } from 'tracked-toolbox';
   @extends Components.FormGroup
   @public
 */
+import { macroCondition } from '@embroider/macros';
+import bsEq from 'ember-bootstrap/helpers/bs-eq';
+import createRef from 'ember-ref-bucket/modifiers/create-ref';
+import { on } from '@ember/modifier';
+import didUpdate from '@ember/render-modifiers/modifiers/did-update';
+import bsDefault from 'ember-bootstrap/helpers/bs-default';
+import bsContains from 'ember-bootstrap/helpers/bs-contains';
+import { array, hash } from '@ember/helper';
+import BsFormElementLayoutInlineCheckbox from 'ember-bootstrap/components/bs-form/element/layout/inline/checkbox';
+import BsFormElementLayoutHorizontalCheckbox from 'ember-bootstrap/components/bs-form/element/layout/horizontal/checkbox';
+import BsFormElementLayoutVerticalCheckbox from 'ember-bootstrap/components/bs-form/element/layout/vertical/checkbox';
+import BsFormElementLayoutInline from 'ember-bootstrap/components/bs-form/element/layout/inline';
+import BsFormElementLayoutHorizontal from 'ember-bootstrap/components/bs-form/element/layout/horizontal';
+import BsFormElementLayoutVertical from 'ember-bootstrap/components/bs-form/element/layout/vertical';
+import BsFormElementErrors from 'ember-bootstrap/components/bs-form/element/errors';
+import BsFormElementFeedbackIcon from 'ember-bootstrap/components/bs-form/element/feedback-icon';
+import BsFormElementLegend from 'ember-bootstrap/components/bs-form/element/legend';
+import BsFormElementLabel from 'ember-bootstrap/components/bs-form/element/label';
+import BsFormElementHelpText from 'ember-bootstrap/components/bs-form/element/help-text';
+
 export default class FormElement extends Component {
+  <template>
+    {{! @glint-nocheck }}
+    {{! template-lint-disable no-invalid-interactive simple-unless }}
+    <div
+      class='{{if (macroCondition (macroGetOwnConfig "isBS4")) "form-group"}}
+        {{unless
+          (macroCondition (macroGetOwnConfig "isBS4"))
+          (if (bsEq @formLayout "vertical") "mb-3")
+        }}
+        {{if
+          (bsEq @formLayout "horizontal")
+          (if (macroCondition (macroGetOwnConfig "isBS4")) "row" "row mb-3")
+        }}'
+      ...attributes
+      {{createRef 'mainNode'}}
+      {{on 'focusout' this.showValidationOnHandler}}
+      {{on 'change' this.showValidationOnHandler}}
+      {{on 'input' this.showValidationOnHandler}}
+      {{didUpdate this.handleShowAllValidationsChange this.showAllValidations}}
+    >
+      {{#component
+        (bsDefault
+          @layoutComponent
+          (if
+            (bsContains (array 'checkbox' 'switch') this.controlType)
+            (if
+              (bsEq @formLayout 'inline')
+              (component
+                BsFormElementLayoutInlineCheckbox controlType=this.controlType
+              )
+              (if
+                (bsEq @formLayout 'horizontal')
+                (component
+                  BsFormElementLayoutHorizontalCheckbox
+                  controlType=this.controlType
+                )
+                (component
+                  BsFormElementLayoutVerticalCheckbox
+                  controlType=this.controlType
+                )
+              )
+            )
+            (if
+              (bsEq @formLayout 'inline')
+              (component BsFormElementLayoutInline)
+              (if
+                (bsEq @formLayout 'horizontal')
+                (component BsFormElementLayoutHorizontal)
+                (component BsFormElementLayoutVertical)
+              )
+            )
+          )
+        )
+        hasLabel=(if @label true false)
+        formElementId=this.formElementId
+        horizontalLabelGridClass=@horizontalLabelGridClass
+        errorsComponent=(component
+          (bsDefault @errorsComponent (component BsFormElementErrors))
+          messages=this.validationMessages
+          show=this.showValidationMessages
+          showMultipleErrors=this.showMultipleErrors
+        )
+        feedbackIconComponent=(component
+          (bsDefault
+            @feedbackIconComponent (component BsFormElementFeedbackIcon)
+          )
+          iconName=@iconName
+          show=this.hasFeedback
+        )
+        labelComponent=(component
+          (bsDefault
+            @labelComponent
+            (if
+              (bsEq this.controlType 'radio')
+              (component BsFormElementLegend)
+              (component BsFormElementLabel)
+            )
+          )
+          label=@label
+          invisibleLabel=@invisibleLabel
+          formElementId=this.formElementId
+          controlType=this.controlType
+          formLayout=@formLayout
+          size=@size
+        )
+        helpTextComponent=(if
+          @helpText
+          (component
+            (bsDefault @helpTextComponent (component BsFormElementHelpText))
+            text=@helpText
+            id=this.ariaDescribedBy
+          )
+        )
+      }}
+        {{!
+      Ember does not allow to access a variable with `@` in template if its name start with an underscore.
+      `@_disabled` and `@_readonly` are affected by this. As a work-a-round we access them on `this.args`.
+    }}
+        {{! template-lint-disable no-args-paths }}
+        {{#let
+          (component
+            (bsDefault @controlComponent this.controlComponent)
+            value=this.value
+            id=this.formElementId
+            type=this.controlType
+            label=@label
+            disabled=this.args._disabled
+            readonly=this.args._readonly
+            required=@required
+            options=@options
+            optionLabelPath=@optionLabelPath
+            ariaDescribedBy=(if @helpText this.ariaDescribedBy)
+            onChange=this.doChange
+            validationType=this.validation
+            size=@size
+          )
+          as |Control|
+        }}
+          {{! template-lint-enable no-args-paths }}
+          {{#if (has-block)}}
+            {{yield
+              (hash
+                value=this.value
+                setValue=this.doChange
+                id=this.formElementId
+                validation=this.validation
+                control=Control
+              )
+            }}
+          {{else}}
+            <Control />
+          {{/if}}
+        {{/let}}
+      {{/component}}
+    </div>
+  </template>
   /**
    * @property _element
    * @type null | HTMLElement
@@ -802,123 +959,3 @@ export default class FormElement extends Component {
     _onChange?.();
   }
 }
-
-{{! @glint-nocheck }}
-{{!-- template-lint-disable no-invalid-interactive simple-unless --}}
-<div
-  class="{{if (macroCondition (macroGetOwnConfig "isBS4")) "form-group"}} {{unless (macroCondition (macroGetOwnConfig "isBS4")) (if (bs-eq @formLayout "vertical") "mb-3")}} {{if (bs-eq @formLayout "horizontal") (if (macroCondition (macroGetOwnConfig "isBS4")) "row" "row mb-3")}}"
-  ...attributes
-  {{create-ref "mainNode"}}
-  {{on "focusout" this.showValidationOnHandler}}
-  {{on "change" this.showValidationOnHandler}}
-  {{on "input" this.showValidationOnHandler}}
-  {{did-update this.handleShowAllValidationsChange this.showAllValidations}}
->
-  {{#component
-    (ensure-safe-component
-      (bs-default
-        @layoutComponent
-        (if
-          (bs-contains (array "checkbox" "switch") this.controlType)
-          (if
-            (bs-eq @formLayout "inline")
-            (component "bs-form/element/layout/inline/checkbox" controlType=this.controlType)
-            (if
-              (bs-eq @formLayout "horizontal")
-              (component "bs-form/element/layout/horizontal/checkbox" controlType=this.controlType)
-              (component "bs-form/element/layout/vertical/checkbox" controlType=this.controlType)
-            )
-          )
-          (if
-            (bs-eq @formLayout "inline")
-            (component "bs-form/element/layout/inline")
-            (if
-              (bs-eq @formLayout "horizontal")
-              (component "bs-form/element/layout/horizontal")
-              (component "bs-form/element/layout/vertical")
-            )
-          )
-        )
-      )
-    )
-    hasLabel=(if @label true false)
-    formElementId=this.formElementId
-    horizontalLabelGridClass=@horizontalLabelGridClass
-    errorsComponent=(component (ensure-safe-component (bs-default @errorsComponent (component "bs-form/element/errors")))
-      messages=this.validationMessages
-      show=this.showValidationMessages
-      showMultipleErrors=this.showMultipleErrors
-    )
-    feedbackIconComponent=(component (ensure-safe-component (bs-default @feedbackIconComponent (component "bs-form/element/feedback-icon")))
-      iconName=@iconName
-      show=this.hasFeedback
-    )
-    labelComponent=(component
-      (ensure-safe-component
-        (bs-default
-          @labelComponent
-          (if
-            (bs-eq this.controlType "radio")
-            (component "bs-form/element/legend")
-            (component "bs-form/element/label")
-          )
-        )
-      )
-      label=@label
-      invisibleLabel=@invisibleLabel
-      formElementId=this.formElementId
-      controlType=this.controlType
-      formLayout=@formLayout
-      size=@size
-    )
-    helpTextComponent=(if @helpText
-      (component (ensure-safe-component (bs-default @helpTextComponent (component "bs-form/element/help-text")))
-        text=@helpText
-        id=this.ariaDescribedBy
-      )
-    )
-  }}
-    {{!
-      Ember does not allow to access a variable with `@` in template if its name start with an underscore.
-      `@_disabled` and `@_readonly` are affected by this. As a work-a-round we access them on `this.args`.
-    }}
-    {{!-- template-lint-disable no-args-paths --}}
-    {{#let
-      (component
-        (ensure-safe-component
-          (bs-default
-            @controlComponent
-            this.controlComponent
-          )
-        )
-        value=this.value
-        id=this.formElementId
-        type=this.controlType
-        label=@label
-        disabled=this.args._disabled
-        readonly=this.args._readonly
-        required=@required
-        options=@options
-        optionLabelPath=@optionLabelPath
-        ariaDescribedBy=(if @helpText this.ariaDescribedBy)
-        onChange=this.doChange
-        validationType=this.validation
-        size=@size
-    ) as |Control|}}
-    {{!-- template-lint-enable no-args-paths --}}
-      {{#if (has-block)}}
-        {{yield
-          (hash
-            value=this.value
-            setValue=this.doChange
-            id=this.formElementId
-            validation=this.validation
-            control=Control
-          )
-        }}
-      {{else}}
-        <Control />
-      {{/if}}
-    {{/let}}
-  {{/component}}
-</div>

@@ -10,7 +10,15 @@ import { assert } from '@ember/debug';
  @extends Component
  @public
  */
+import { on } from '@ember/modifier';
 export default class NavItem extends Component {
+  <template>
+    {{! @glint-nocheck }}
+    {{! template-lint-disable no-invalid-interactive }}
+    <li class='nav-item' ...attributes {{on 'click' this.handleClick}}>
+      {{yield}}
+    </li>
+  </template>
   /**
    * Called when clicking the nav item
    *
@@ -32,9 +40,3 @@ export default class NavItem extends Component {
     );
   }
 }
-
-{{! @glint-nocheck }}
-{{!-- template-lint-disable no-invalid-interactive --}}
-<li class="nav-item" ...attributes {{on "click" this.handleClick}}>
-  {{yield}}
-</li>

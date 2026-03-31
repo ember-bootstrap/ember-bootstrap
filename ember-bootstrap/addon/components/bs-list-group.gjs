@@ -35,7 +35,31 @@ import arg from '../utils/decorators/arg';
  @extends Glimmer.Component
  @public
  */
+import element_ from 'ember-element-helper/helpers/element';
+import { hash } from '@ember/helper';
+import bsDefault from 'ember-bootstrap/helpers/bs-default';
+import BsListGroupItem from 'ember-bootstrap/components/bs-list-group/item';
 export default class BsListGroupComponent extends Component {
+  <template>
+    {{! @glint-nocheck }}
+    {{#let (element_ this.htmlTag) as |Tag|}}
+      <Tag
+        class='list-group
+          {{this.horizontalClass}}
+          {{if this.numbered "list-group-numbered"}}
+          {{if this.flush "list-group-flush"}}'
+        ...attributes
+      >
+        {{yield
+          (hash
+            item=(component
+              (bsDefault @listGroupItemComponent (component BsListGroupItem))
+            )
+          )
+        }}
+      </Tag>
+    {{/let}}
+  </template>
   /**
    * Determines if list should be numbered (e.g. `ol` or `ul` should be used)
    *
@@ -99,16 +123,3 @@ export default class BsListGroupComponent extends Component {
     return '';
   }
 }
-
-{{! @glint-nocheck }}
-{{#let (element this.htmlTag) as |Tag|}}
-  <Tag
-    class="list-group {{this.horizontalClass}} {{if this.numbered "list-group-numbered"}} {{if this.flush "list-group-flush"}}"
-    ...attributes>
-    {{yield
-      (hash
-        item=(component (ensure-safe-component (bs-default @listGroupItemComponent (component "bs-list-group/item"))))
-      )
-    }}
-  </Tag>
-{{/let}}

@@ -6,6 +6,10 @@ import { action } from '@ember/object';
 import { registerDestructor } from '@ember/destroyable';
 import type Owner from '@ember/owner';
 import type { PresentationState } from '../bs-carousel';
+import { macroCondition } from '@embroider/macros';
+declare function macroGetOwnConfig(path: string): boolean;
+import createRef from 'ember-ref-bucket/modifiers/create-ref';
+import didUpdate from '@ember/render-modifiers/modifiers/did-update';
 
 export type DirectionalClassName = keyof Pick<CarouselSlide, 'left' | 'right'>;
 export type OrderClassName = keyof Pick<CarouselSlide, 'prev' | 'next'>;
@@ -37,6 +41,39 @@ export interface CarouselSlideSignature {
   @public
  */
 export default class CarouselSlide extends Component<CarouselSlideSignature> {
+  <template>
+    <div
+      class='carousel-item
+        {{if this.active "active"}}
+        {{if
+          this.left
+          (if
+            (macroCondition (macroGetOwnConfig "isBS4"))
+            "carousel-item-left"
+            "carousel-item-start"
+          )
+        }}
+        {{if this.next "carousel-item-next"}}
+        {{if this.prev "carousel-item-prev"}}
+        {{if
+          this.right
+          (if
+            (macroCondition (macroGetOwnConfig "isBS4"))
+            "carousel-item-right"
+            "carousel-item-end"
+          )
+        }}'
+      ...attributes
+      {{createRef 'mainNode'}}
+      {{didUpdate
+        this.presentationStateObserver
+        @presentationState
+        @currentSlide
+      }}
+    >
+      {{yield}}
+    </div>
+  </template>
   /**
    * @property _element
    * @type null | HTMLElement
@@ -216,12 +253,3 @@ export default class CarouselSlide extends Component<CarouselSlideSignature> {
     this._element?.offsetHeight;
   }
 }
-
-<div
-  class="carousel-item {{if this.active "active"}} {{if this.left (if (macroCondition (macroGetOwnConfig "isBS4")) "carousel-item-left" "carousel-item-start")}} {{if this.next "carousel-item-next"}} {{if this.prev "carousel-item-prev"}} {{if this.right (if (macroCondition (macroGetOwnConfig "isBS4")) "carousel-item-right" "carousel-item-end")}}"
-  ...attributes
-  {{create-ref "mainNode"}}
-  {{did-update this.presentationStateObserver @presentationState @currentSlide}}
->
-  {{yield}}
-</div>

@@ -8,23 +8,24 @@ import Control from '../control';
  @extends Components.FormElementControl
  @private
  */
+import { on } from '@ember/modifier';
 export default class FormElementControlCheckbox extends Control {
+  <template>
+    {{! @glint-nocheck }}
+    <input
+      type='checkbox'
+      id={{@id}}
+      disabled={{@disabled}}
+      readonly={{@readonly}}
+      aria-describedby={{@ariaDescribedBy}}
+      checked={{@value}}
+      class='form-check-input {{this.formValidationClass}}'
+      ...attributes
+      {{on 'click' this.handleClick}}
+    />
+  </template>
   @action
   handleClick(event) {
     this.args.onChange(event.target.checked);
   }
 }
-
-{{! @glint-nocheck }}
-<input
-  type="checkbox"
-  id={{@id}}
-  disabled={{@disabled}}
-  readonly={{@readonly}}
-  aria-describedby={{@ariaDescribedBy}}
-  checked={{@value}}
-  class="form-check-input {{this.formValidationClass}}"
-  ...attributes
-  {{on "click" this.handleClick}}
->
-

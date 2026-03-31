@@ -61,7 +61,43 @@ import arg from '../utils/decorators/arg';
   @extends Components.ContextualHelp
   @public
 */
+import bsDefault from 'ember-bootstrap/helpers/bs-default';
+import BsPopoverElement from 'ember-bootstrap/components/bs-popover/element';
+import createRef from 'ember-ref-bucket/modifiers/create-ref';
+import { hash } from '@ember/helper';
+import didInsertHelper from 'ember-render-helpers/helpers/did-insert-helper';
+import didUpdateHelper from 'ember-render-helpers/helpers/did-update-helper';
 export default class Popover extends ContextualHelp {
+  <template>
+    {{! @glint-nocheck }}
+    {{! template-lint-disable no-unbound }}
+    {{unbound this._parentFinder}}
+    {{#if this.inDom}}
+      {{#let
+        (bsDefault @elementComponent (component BsPopoverElement))
+        as |Element|
+      }}
+        <Element
+          @placement={{this.placement}}
+          @fade={{this.fade}}
+          @showHelp={{this.showHelp}}
+          @title={{@title}}
+          @renderInPlace={{this._renderInPlace}}
+          @popperTarget={{this.triggerTargetElement}}
+          @destinationElement={{this.destinationElement}}
+          @autoPlacement={{this.autoPlacement}}
+          @viewportElement={{this.viewportElement}}
+          @viewportPadding={{this.viewportPadding}}
+          {{createRef 'overlayElement'}}
+          ...attributes
+        >
+          {{yield (hash close=this.close)}}
+        </Element>
+      {{/let}}
+    {{/if}}
+    {{didInsertHelper this.setup}}
+    {{didUpdateHelper this.showOrHide @visible}}
+  </template>
   /**
    * @property placement
    * @type string
@@ -98,34 +134,3 @@ export default class Popover extends ContextualHelp {
     return this.overlayElement.querySelector('.arrow');
   }
 }
-
-{{! @glint-nocheck }}
-{{! template-lint-disable no-unbound }}
-{{unbound this._parentFinder}}
-{{#if this.inDom}}
-  {{#let (ensure-safe-component (bs-default @elementComponent (component "bs-popover/element"))) as |Element|}}
-    <Element
-      @placement={{this.placement}}
-      @fade={{this.fade}}
-      @showHelp={{this.showHelp}}
-      @title={{@title}}
-      @renderInPlace={{this._renderInPlace}}
-      @popperTarget={{this.triggerTargetElement}}
-      @destinationElement={{this.destinationElement}}
-      @autoPlacement={{this.autoPlacement}}
-      @viewportElement={{this.viewportElement}}
-      @viewportPadding={{this.viewportPadding}}
-
-      {{create-ref "overlayElement"}}
-      ...attributes
-    >
-      {{yield
-        (hash
-          close=this.close
-        )
-      }}
-    </Element>
-  {{/let}}
-{{/if}}
-{{did-insert-helper this.setup}}
-{{did-update-helper this.showOrHide @visible}}
