@@ -6,7 +6,7 @@ import transitionEnd from 'ember-bootstrap/utils/transition-end';
 import arg from '../utils/decorators/arg';
 import { tracked } from '@glimmer/tracking';
 import { assert } from '@ember/debug';
-import {modifier} from "ember-modifier";
+import { modifier } from 'ember-modifier';
 
 export interface BsCollapseSignature {
   Element: HTMLDivElement;

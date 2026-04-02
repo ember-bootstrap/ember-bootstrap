@@ -4,7 +4,7 @@ import Component from '@glimmer/component';
 import { next } from '@ember/runloop';
 import { tracked } from '@glimmer/tracking';
 import { guidFor } from '@ember/object/internals';
-import {modifier} from "ember-modifier";
+import { modifier } from 'ember-modifier';
 
 export type ModalSize = 'sm' | 'lg' | 'xl' | null;
 export type ModalFullscreen =

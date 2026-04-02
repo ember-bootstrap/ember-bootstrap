@@ -18,7 +18,7 @@ import ModalDialog, {
 import ModalBody, { type BodySignature } from './bs-modal/body';
 import ModalFooter, { type FooterSignature } from './bs-modal/footer';
 import type { ComponentLike } from '@glint/template';
-import {modifier} from "ember-modifier";
+import { modifier } from 'ember-modifier';
 
 function nextRunloop() {
   return new Promise((resolve) => next(resolve, undefined));
@@ -366,7 +366,7 @@ export default class Modal extends Component<Signature> {
 
   trackModalElement = modifier((modalElement: HTMLElement) => {
     this.modalElement = modalElement;
-  })
+  });
 
   /**
    * The DOM element of the backdrop element.
@@ -380,7 +380,7 @@ export default class Modal extends Component<Signature> {
 
   trackBackdropElement = modifier((backdropElement: HTMLElement) => {
     this.backdropElement = backdropElement;
-  })
+  });
 
   /**
    * @type boolean

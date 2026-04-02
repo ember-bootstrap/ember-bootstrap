@@ -11,7 +11,7 @@ import { tracked } from '@glimmer/tracking';
 import type { View } from '@ember/-internals/glimmer/lib/renderer';
 import type { Placement } from '@popperjs/core';
 import type { SimpleElement } from '@simple-dom/interface';
-import {modifier} from "ember-modifier";
+import { modifier } from 'ember-modifier';
 
 const HOVERSTATE_NONE = 'none';
 const HOVERSTATE_IN = 'in';
