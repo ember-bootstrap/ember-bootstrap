@@ -1,0 +1,145 @@
+/* global macroGetOwnConfig */
+import Component from '@glimmer/component';
+import arg from 'ember-bootstrap/utils/decorators/arg';
+
+/**
+
+ @class FormElementLabel
+ @namespace Components
+ @extends Ember.Component
+ @private
+ */
+import { macroCondition } from '@embroider/macros';
+import bsEq from 'ember-bootstrap/helpers/bs-eq';
+import bsSizeClass from 'ember-bootstrap/helpers/bs-size-class';
+export default class FormElementLabel extends Component {
+  <template>
+    {{! @glint-nocheck }}
+    <label
+      {{! template-lint-disable simple-unless }}
+      class='{{unless
+          (macroCondition (macroGetOwnConfig "isBS4"))
+          "form-label"
+        }}
+        {{if
+          @invisibleLabel
+          (if
+            (macroCondition (macroGetOwnConfig "isBS4"))
+            "sr-only"
+            "visually-hidden"
+          )
+        }}
+        {{@labelClass}}
+        {{if this.isHorizontalAndNotCheckbox "col-form-label"}}
+        {{if this.isCheckbox "form-check-label"}}
+        {{if
+          (bsEq "switch" @controlType)
+          (if
+            (macroCondition (macroGetOwnConfig "isBS4"))
+            "custom-control-label"
+            "form-check-label"
+          )
+        }}
+        {{if this.isHorizontal (bsSizeClass "col-form-label" @size)}}'
+      for={{@formElementId}}
+      ...attributes
+    >
+      {{#if (has-block)}}
+        {{yield}}
+      {{/if}}
+      {{@label}}
+    </label>
+  </template>
+  /**
+   * @property label
+   * @type string
+   * @public
+   */
+
+  /**
+   * @property invisibleLabel
+   * @type boolean
+   * @public
+   */
+
+  get isHorizontalAndNotCheckbox() {
+    return this.isHorizontal && !this.isCheckbox;
+  }
+
+  /**
+   * [BS4 only] Property for size styling, set to 'lg', 'sm'
+   *
+   * @property size
+   * @type String
+   * @public
+   */
+
+  /**
+   * @property formElementId
+   * @type {String}
+   * @public
+   */
+
+  /**
+   * @property labelClass
+   * @type {String}
+   * @public
+   */
+
+  /**
+   * The form layout used for the markup generation (see http://getbootstrap.com/css/#forms):
+   *
+   * * 'horizontal'
+   * * 'vertical'
+   * * 'inline'
+   *
+   * Defaults to the parent `form`'s `formLayout` property.
+   *
+   * @property formLayout
+   * @type string
+   * @default 'vertical'
+   * @public
+   */
+  @arg
+  formLayout = 'vertical';
+
+  /**
+   * The type of the control widget.
+   * Supported types:
+   *
+   * * 'text'
+   * * 'checkbox'
+   * * 'textarea'
+   * * any other type will use an input tag with the `controlType` value as the type attribute (for e.g. HTML5 input
+   * types like 'email'), and the same layout as the 'text' type
+   *
+   * @property controlType
+   * @type string
+   * @default 'text'
+   * @public
+   */
+  @arg
+  controlType = 'text';
+
+  /**
+   * Indicates whether the type of the control widget equals `checkbox`
+   *
+   * @property isCheckbox
+   * @type boolean
+   * @private
+   */
+  get isCheckbox() {
+    return this.args.controlType === 'checkbox';
+  }
+
+  /**
+   * Indicates whether the form type equals `horizontal`
+   *
+   * @property isHorizontal
+   * @type boolean
+   * @private
+   */
+  get isHorizontal() {
+    return this.args.formLayout === 'horizontal';
+  }
+}
