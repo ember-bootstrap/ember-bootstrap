@@ -6,7 +6,6 @@ import { isBlank, isPresent, typeOf } from '@ember/utils';
 import { A, isArray } from '@ember/array';
 import { getOwner } from '@ember/application';
 import { guidFor } from '@ember/object/internals';
-import { ref } from 'ember-ref-bucket';
 import ControlInput from './element/control/input';
 import ControlCheckbox from './element/control/checkbox';
 import ControlTextarea from './element/control/textarea';
@@ -14,6 +13,7 @@ import ControlRadio from './element/control/radio';
 import ControlSwitch from './element/control/switch';
 import arg from 'ember-bootstrap/utils/decorators/arg';
 import { dedupeTracked } from 'tracked-toolbox';
+import { modifier } from 'ember-modifier';
 
 /**
   Subclass of `Components.FormGroup` that adds automatic form layout markup and form validation features.
@@ -202,7 +202,11 @@ export default class FormElement extends Component {
    * @type null | HTMLElement
    * @private
    */
-  @ref('mainNode') _element = null;
+  _element = null;
+
+  trackMainNode = modifier((mainNode) => {
+    this._element = mainNode;
+  });
 
   /**
    * Text to display within a `<label>` tag.

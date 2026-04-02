@@ -27,7 +27,7 @@
   ) as |Dialog|}}
     {{#if this._renderInPlace}}
       <Dialog
-        {{create-ref "modalElement"}}
+        {{this.trackModalElement}}
         ...attributes
       >
         {{yield
@@ -42,13 +42,13 @@
       </Dialog>
       <div>
         {{#if this.shouldShowBackdrop}}
-          <div class="modal-backdrop {{if this._fade "fade"}} {{if this.showModal "show"}}" {{create-ref "backdropElement"}}></div>
+          <div class="modal-backdrop {{if this._fade "fade"}} {{if this.showModal "show"}}" {{this.trackBackdropElement}}></div>
         {{/if}}
       </div>
     {{else if this.destinationElement}}
       {{#in-element this.destinationElement insertBefore=null}}
         <Dialog
-          {{create-ref "modalElement"}}
+          {{this.trackModalElement}}
           ...attributes
         >
           {{yield
@@ -63,7 +63,7 @@
         </Dialog>
         <div>
           {{#if this.shouldShowBackdrop}}
-            <div class="modal-backdrop {{if this._fade "fade"}} {{if this.showModal "show"}}" {{create-ref "backdropElement"}}></div>
+            <div class="modal-backdrop {{if this._fade "fade"}} {{if this.showModal "show"}}" {{this.trackBackdropElement}}></div>
           {{/if}}
         </div>
       {{/in-element}}

@@ -1,11 +1,11 @@
 import Component from '@glimmer/component';
 import { next } from '@ember/runloop';
-import { ref } from 'ember-ref-bucket';
 import { tracked } from '@glimmer/tracking';
 import { action } from '@ember/object';
 import { registerDestructor } from '@ember/destroyable';
 import type Owner from '@ember/owner';
 import type { PresentationState } from '../bs-carousel';
+import {modifier} from "ember-modifier";
 
 export type DirectionalClassName = keyof Pick<CarouselSlide, 'left' | 'right'>;
 export type OrderClassName = keyof Pick<CarouselSlide, 'prev' | 'next'>;
@@ -42,7 +42,11 @@ export default class CarouselSlide extends Component<CarouselSlideSignature> {
    * @type null | HTMLElement
    * @private
    */
-  @ref('mainNode') _element: HTMLElement | null = null;
+  _element: HTMLElement | null = null;
+
+  trackMainNode = modifier((mainNode: HTMLElement) => {
+    this._element = mainNode;
+  });
 
   /**
    * Defines slide visibility.

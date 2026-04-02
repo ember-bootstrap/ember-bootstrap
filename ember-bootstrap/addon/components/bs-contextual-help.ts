@@ -8,10 +8,10 @@ import { assert } from '@ember/debug';
 import { getViewBounds } from '@ember/-internals/views';
 import arg from '../utils/decorators/arg';
 import { tracked } from '@glimmer/tracking';
-import { ref } from 'ember-ref-bucket';
 import type { View } from '@ember/-internals/glimmer/lib/renderer';
 import type { Placement } from '@popperjs/core';
 import type { SimpleElement } from '@simple-dom/interface';
+import {modifier} from "ember-modifier";
 
 const HOVERSTATE_NONE = 'none';
 const HOVERSTATE_IN = 'in';
@@ -375,7 +375,11 @@ export default abstract class ContextualHelp<
    * @readonly
    * @private
    */
-  @ref('overlayElement') declare overlayElement: HTMLElement;
+  declare overlayElement: HTMLElement;
+
+  trackOverlayElement = modifier((element: HTMLElement) => {
+    this.overlayElement = element;
+  });
 
   /**
    * This action is called immediately when the tooltip/popover is about to be shown.

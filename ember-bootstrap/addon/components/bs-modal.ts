@@ -9,7 +9,6 @@ import usesTransition from '../utils/decorators/uses-transition';
 import isFastBoot from '../utils/is-fastboot';
 import arg from '../utils/decorators/arg';
 import { cached, tracked } from '@glimmer/tracking';
-import { ref } from 'ember-ref-bucket';
 import ModalHeader, { type HeaderSignature } from './bs-modal/header';
 import ModalDialog, {
   type DialogSignature,
@@ -19,6 +18,7 @@ import ModalDialog, {
 import ModalBody, { type BodySignature } from './bs-modal/body';
 import ModalFooter, { type FooterSignature } from './bs-modal/footer';
 import type { ComponentLike } from '@glint/template';
+import {modifier} from "ember-modifier";
 
 function nextRunloop() {
   return new Promise((resolve) => next(resolve, undefined));
@@ -362,7 +362,11 @@ export default class Modal extends Component<Signature> {
    * @readonly
    * @private
    */
-  @ref('modalElement') declare modalElement: HTMLElement;
+  declare modalElement: HTMLElement;
+
+  trackModalElement = modifier((modalElement: HTMLElement) => {
+    this.modalElement = modalElement;
+  })
 
   /**
    * The DOM element of the backdrop element.
@@ -372,7 +376,11 @@ export default class Modal extends Component<Signature> {
    * @readonly
    * @private
    */
-  @ref('backdropElement') declare backdropElement: HTMLElement;
+  declare backdropElement: HTMLElement;
+
+  trackBackdropElement = modifier((backdropElement: HTMLElement) => {
+    this.backdropElement = backdropElement;
+  })
 
   /**
    * @type boolean

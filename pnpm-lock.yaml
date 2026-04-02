@@ -275,9 +275,6 @@ importers:
       ember-popper-modifier:
         specifier: ^4.0.0
         version: 4.1.1(@glint/template@1.7.3)(ember-source@6.11.1(@glimmer/component@1.1.2(@babel/core@7.28.6))(rsvp@4.8.5))(webpack@5.104.1)
-      ember-ref-bucket:
-        specifier: ^5.0.0
-        version: 5.0.8(@babel/core@7.28.6)(@glint/template@1.7.3)(webpack@5.104.1)
       ember-render-helpers:
         specifier: ^2.0.0
         version: 2.0.0(@babel/core@7.28.6)
@@ -558,9 +555,6 @@ importers:
       ember-qunit:
         specifier: 9.0.4
         version: 9.0.4(@ember/test-helpers@5.4.1(@babel/core@7.28.6)(@glint/template@1.7.3))(@glint/template@1.7.3)(qunit@2.24.2)
-      ember-ref-bucket:
-        specifier: 5.0.8
-        version: 5.0.8(@babel/core@7.28.6)(@glint/template@1.7.3)(webpack@5.104.1)
       ember-render-helpers:
         specifier: 2.0.0
         version: 2.0.0(@babel/core@7.28.6)
@@ -4410,10 +4404,6 @@ packages:
     peerDependencies:
       '@ember/test-helpers': '>=3.0.3'
       qunit: ^2.13.0
-
-  ember-ref-bucket@5.0.8:
-    resolution: {integrity: sha512-OYKLpryoyrwDYpKTqrGIx7cvAouv3cLwY1YkTZjXYp+NM+J5PtNu+Zmend4EtQpKQhrOI+UDEcL2ERl2fXl91g==}
-    engines: {node: 14.* || 16.* || >= 18}
 
   ember-render-helpers@2.0.0:
     resolution: {integrity: sha512-jbjOQWs+eN4bETCCSfxtN4vdgSVYrV0YQaVrao/C0d0JOafN0x2dljevW/OaV5px1m4yRBdeuqtxHTwahWPXdg==}
@@ -14560,18 +14550,6 @@ snapshots:
     transitivePeerDependencies:
       - '@glint/template'
       - supports-color
-
-  ember-ref-bucket@5.0.8(@babel/core@7.28.6)(@glint/template@1.7.3)(webpack@5.104.1):
-    dependencies:
-      ember-auto-import: 2.12.0(@glint/template@1.7.3)(webpack@5.104.1)
-      ember-cli-babel: 7.26.11
-      ember-cli-htmlbars: 6.3.0
-      ember-modifier: 4.2.2(@babel/core@7.28.6)
-    transitivePeerDependencies:
-      - '@babel/core'
-      - '@glint/template'
-      - supports-color
-      - webpack
 
   ember-render-helpers@2.0.0(@babel/core@7.28.6):
     dependencies:
