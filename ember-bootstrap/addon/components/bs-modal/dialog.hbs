@@ -13,7 +13,7 @@
     paddingRight=(concat @paddingRight "px")
     display=(if @inDom "block" "")
   }}
-  {{create-ref "mainNode"}}
+  {{this.trackMainNode}}
   {{did-insert this.getOrSetTitleId}}
   {{did-insert this.setInitialFocus}}
 >

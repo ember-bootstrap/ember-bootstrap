@@ -3,7 +3,7 @@
 <div
   class="{{if (macroCondition (macroGetOwnConfig "isBS4")) "form-group"}} {{unless (macroCondition (macroGetOwnConfig "isBS4")) (if (bs-eq @formLayout "vertical") "mb-3")}} {{if (bs-eq @formLayout "horizontal") (if (macroCondition (macroGetOwnConfig "isBS4")) "row" "row mb-3")}}"
   ...attributes
-  {{create-ref "mainNode"}}
+  {{this.trackMainNode}}
   {{on "focusout" this.showValidationOnHandler}}
   {{on "change" this.showValidationOnHandler}}
   {{on "input" this.showValidationOnHandler}}

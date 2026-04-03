@@ -6,7 +6,7 @@ import { next } from '@ember/runloop';
 import { getOwnConfig, macroCondition } from '@embroider/macros';
 import arg from '../utils/decorators/arg';
 import { cached, tracked } from '@glimmer/tracking';
-import { ref } from 'ember-ref-bucket';
+import { modifier } from 'ember-modifier';
 
 /**
   Render a form with the appropriate Bootstrap layout class (see `formLayout`).
@@ -120,7 +120,11 @@ export default class Form extends Component {
    * @type null | HTMLFormElement
    * @private
    */
-  @ref('formElement') _element = null;
+  _element = null;
+
+  trackFormElement = modifier((element) => {
+    this._element = element;
+  });
 
   /**
    * Bootstrap form class name (computed)

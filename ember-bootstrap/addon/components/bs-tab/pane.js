@@ -3,9 +3,9 @@ import { scheduleOnce } from '@ember/runloop';
 import transitionEnd from 'ember-bootstrap/utils/transition-end';
 import usesTransition from 'ember-bootstrap/utils/decorators/uses-transition';
 import { guidFor } from '@ember/object/internals';
-import { ref } from 'ember-ref-bucket';
 import { action } from '@ember/object';
 import { tracked } from '@glimmer/tracking';
+import { modifier } from 'ember-modifier';
 
 /**
  The tab pane of a tab component.
@@ -21,7 +21,11 @@ export default class TabPane extends Component {
    * @property id
    * @type null | HTMLElement
    */
-  @ref('mainNode') _element = null;
+  _element = null;
+
+  trackMainNode = modifier((mainNode) => {
+    this._element = mainNode;
+  });
   /**
    * @property id
    * @type string

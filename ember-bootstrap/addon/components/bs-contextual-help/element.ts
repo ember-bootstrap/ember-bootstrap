@@ -3,7 +3,6 @@ import Component from '@glimmer/component';
 import arg from 'ember-bootstrap/utils/decorators/arg';
 import { tracked } from '@glimmer/tracking';
 import { getOwnConfig, macroCondition } from '@embroider/macros';
-import { trackedRef } from 'ember-ref-bucket';
 import type { EmberBootstrapMacrosConfig } from '../../macros-config';
 import type {
   Placement,
@@ -16,6 +15,7 @@ import type {
 import type { ArrowModifier } from '@popperjs/core/lib/modifiers/arrow';
 import type { PreventOverflowModifier } from '@popperjs/core/lib/modifiers/preventOverflow';
 import type { FlipModifier } from '@popperjs/core/lib/modifiers/flip';
+import { modifier } from 'ember-modifier';
 
 export interface ContextualHelpElementSignature {
   Args: {
@@ -132,7 +132,11 @@ export default class ContextualHelpElement<
 
   offset = [0, 0];
 
-  @trackedRef('popperElement') declare popperElement: HTMLElement;
+  @tracked popperElement?: HTMLElement;
+
+  trackPopperElement = modifier((element: HTMLElement) => {
+    this.popperElement = element;
+  });
 
   /**
    * popper.js modifier config

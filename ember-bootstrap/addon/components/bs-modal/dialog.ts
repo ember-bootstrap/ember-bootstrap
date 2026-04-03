@@ -2,9 +2,9 @@ import { action } from '@ember/object';
 import { isBlank } from '@ember/utils';
 import Component from '@glimmer/component';
 import { next } from '@ember/runloop';
-import { ref } from 'ember-ref-bucket';
 import { tracked } from '@glimmer/tracking';
 import { guidFor } from '@ember/object/internals';
+import { modifier } from 'ember-modifier';
 
 export type ModalSize = 'sm' | 'lg' | 'xl' | null;
 export type ModalFullscreen =
@@ -51,7 +51,11 @@ export default class ModalDialog extends Component<DialogSignature> {
    * @property id
    * @type null | HTMLElement
    */
-  @ref('mainNode') _element = null;
+  _element: HTMLElement | null = null;
+
+  trackMainNode = modifier((mainNode: HTMLElement) => {
+    this._element = mainNode;
+  });
 
   /**
    * Name of the size class

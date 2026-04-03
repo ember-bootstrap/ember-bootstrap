@@ -3,10 +3,10 @@ import Component from '@glimmer/component';
 import { isNone } from '@ember/utils';
 import { next } from '@ember/runloop';
 import transitionEnd from 'ember-bootstrap/utils/transition-end';
-import { ref } from 'ember-ref-bucket';
 import arg from '../utils/decorators/arg';
 import { tracked } from '@glimmer/tracking';
 import { assert } from '@ember/debug';
+import { modifier } from 'ember-modifier';
 
 export interface BsCollapseSignature {
   Element: HTMLDivElement;
@@ -54,7 +54,11 @@ export default class Collapse extends Component<BsCollapseSignature> {
    * @type null | HTMLElement
    * @private
    */
-  @ref('mainNode') _element: HTMLElement | null = null;
+  _element: HTMLElement | null = null;
+
+  trackMainNode = modifier((mainNode: HTMLElement) => {
+    this._element = mainNode;
+  });
 
   /**
    * Collapsed/expanded state
