@@ -4,6 +4,7 @@ import type EmberBootstrapRegistry from 'ember-bootstrap/template-registry';
 import type { EmbroiderMacrosRegistry } from '@embroider/macros';
 import type { EmbroiderUtilRegistry } from '@embroider/util';
 import type EmberElementHelperRegistry from 'ember-element-helper/template-registry';
+import type EmberFocusTrapRegistry from 'ember-focus-trap/template-registry';
 // We should avoid `@ember/render-modifiers` as it is an oudated pattern. But as long
 // as haven't had the time refactoring away from it, we need the types.
 //
@@ -44,6 +45,7 @@ declare module '@glint/environment-ember-loose/registry' {
   export default interface Registry
     extends EmberBootstrapRegistry,
       EmberElementHelperRegistry,
+      EmberFocusTrapRegistry,
       EmberStyleModifierRegistry,
       EmbroiderUtilRegistry,
       RenderModifiersRegistry,
