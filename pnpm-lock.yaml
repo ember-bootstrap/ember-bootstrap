@@ -264,8 +264,8 @@ importers:
         specifier: ^0.8.0
         version: 0.8.8
       ember-focus-trap:
-        specifier: ^2.0.0
-        version: 2.0.0(@babel/core@7.28.6)
+        specifier: ^1.0.0
+        version: 1.1.1(ember-source@6.11.1(@glimmer/component@1.1.2(@babel/core@7.28.6))(rsvp@4.8.5))
       ember-modifier:
         specifier: ^3.2.7 || ^4.0.0
         version: 4.2.2(@babel/core@7.28.6)
@@ -3902,9 +3902,6 @@ packages:
   decorator-transforms@2.3.0:
     resolution: {integrity: sha512-jo8c1ss9yFPudHuYYcrJ9jpkDZIoi+lOGvt+Uyp9B+dz32i50icRMx9Bfa8hEt7TnX1FyKWKkjV+cUdT/ep2kA==}
 
-  decorator-transforms@2.3.1:
-    resolution: {integrity: sha512-PDOk74Zqqy0946Lx4ckXxbgG6uhPScOICtrxL/pXmfznxchqNee0TaJISClGJQe6FeT8ohGqsOgdjfahm4FwEw==}
-
   deep-extend@0.6.0:
     resolution: {integrity: sha512-LOHxIOaPYdHlJRtCQfDIVZtfw/ufM8+rVj649RIHzcm/vGwQRXFt6OPqIFWsm2XEMrNIEtWR64sY1LEKD2vAOA==}
     engines: {node: '>=4.0.0'}
@@ -4349,10 +4346,6 @@ packages:
     engines: {node: 12.* || >= 14}
     peerDependencies:
       ember-source: '>= 4.0.0'
-
-  ember-focus-trap@2.0.0:
-    resolution: {integrity: sha512-zGPvt934h08gxdemIZz29XRn4cdwn51UxlodKtDkiahGrEpiSQ6qH8nvXGwDhQvZsf8zGumnXqcmDYYA5oFomQ==}
-    engines: {node: '>= 22.*', pnpm: '>= 10'}
 
   ember-functions-as-helper-polyfill@2.1.3:
     resolution: {integrity: sha512-Hte8jfOmSNzrz/vOchf68CGaBWXN2/5qKgFaylqr9omW2i4Wt9JmaBWRkeR0AJ53N57q3DX2TOb166Taq6QjiA==}
@@ -5118,9 +5111,6 @@ packages:
 
   focus-trap@7.6.6:
     resolution: {integrity: sha512-v/Z8bvMCajtx4mEXmOo7QEsIzlIOqRXTIwgUfsFOF9gEsespdbD0AkPIka1bSXZ8Y8oZ+2IVDQZePkTfEHZl7Q==}
-
-  focus-trap@8.0.1:
-    resolution: {integrity: sha512-9ptSG6z51YQOstI/oN4XuVGP/03u2nh0g//qz7L6zX0i6PZiPnkcf3GenXq7N2hZnASXaMxTPpbKwdI+PFvxlw==}
 
   follow-redirects@1.15.11:
     resolution: {integrity: sha512-deG2P0JfjrTxl50XGCDyfI97ZGVCxIpfKYmfyrQ54n5FO/0gfIES8C/Psl6kWVDolizcaaxZJnTS0QSMxvnsBQ==}
@@ -8693,9 +8683,6 @@ packages:
 
   tabbable@6.3.0:
     resolution: {integrity: sha512-EIHvdY5bPLuWForiR/AN2Bxngzpuwn1is4asboytXtpTgsArc+WmSJKVLlhdh71u7jFcryDqB2A8lQvj78MkyQ==}
-
-  tabbable@6.4.0:
-    resolution: {integrity: sha512-05PUHKSNE8ou2dwIxTngl4EzcnsCDZGJ/iCLtDflR/SHB/ny14rXc+qU5P4mG9JkusiV7EivzY9Mhm55AzAvCg==}
 
   table@6.9.0:
     resolution: {integrity: sha512-9kY+CygyYM6j02t5YFHbNz2FN5QmYGv9zAjVp4lCDjlCw7amdckXlEt/bjMhUIfj4ThGRE4gCUH5+yGnNuPo5A==}
@@ -13474,13 +13461,6 @@ snapshots:
     transitivePeerDependencies:
       - '@babel/core'
 
-  decorator-transforms@2.3.1(@babel/core@7.28.6):
-    dependencies:
-      '@babel/plugin-syntax-decorators': 7.28.6(@babel/core@7.28.6)
-      babel-import-util: 3.0.1
-    transitivePeerDependencies:
-      - '@babel/core'
-
   deep-extend@0.6.0: {}
 
   deep-is@0.1.4: {}
@@ -14443,15 +14423,6 @@ snapshots:
       ember-source: 6.11.1(@glimmer/component@1.1.2(@babel/core@7.28.6))(rsvp@4.8.5)
       focus-trap: 6.9.4
     transitivePeerDependencies:
-      - supports-color
-
-  ember-focus-trap@2.0.0(@babel/core@7.28.6):
-    dependencies:
-      '@embroider/addon-shim': 1.10.2
-      decorator-transforms: 2.3.1(@babel/core@7.28.6)
-      focus-trap: 8.0.1
-    transitivePeerDependencies:
-      - '@babel/core'
       - supports-color
 
   ember-functions-as-helper-polyfill@2.1.3(ember-source@6.11.1(@glimmer/component@1.1.2(@babel/core@7.28.6))(rsvp@4.8.5)):
@@ -15735,10 +15706,6 @@ snapshots:
   focus-trap@7.6.6:
     dependencies:
       tabbable: 6.3.0
-
-  focus-trap@8.0.1:
-    dependencies:
-      tabbable: 6.4.0
 
   follow-redirects@1.15.11: {}
 
@@ -19873,8 +19840,6 @@ snapshots:
   tabbable@5.3.3: {}
 
   tabbable@6.3.0: {}
-
-  tabbable@6.4.0: {}
 
   table@6.9.0:
     dependencies:
