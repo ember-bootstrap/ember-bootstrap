@@ -4,6 +4,13 @@ import { tracked } from '@glimmer/tracking';
 import { later } from '@ember/runloop';
 import usesTransition from 'ember-bootstrap/utils/decorators/uses-transition';
 import arg from 'ember-bootstrap/utils/decorators/arg';
+import bsTypeClass from 'ember-bootstrap/helpers/bs-type-class';
+import didUpdate from '@ember/render-modifiers/modifiers/did-update';
+import { on } from '@ember/modifier';
+import element_ from 'ember-element-helper/helpers/element';
+import bsDefault from 'ember-bootstrap/helpers/bs-default';
+import { macroCondition } from '@embroider/macros';
+declare function macroGetOwnConfig(path: string): boolean;
 
 interface BsAlertSignature {
   Args: {
@@ -252,33 +259,50 @@ export default class Alert extends Component<BsAlertSignature> {
   updateVisibility() {
     this._visible = this.args.visible;
   }
+
+  <template>
+    <div
+      class='{{unless this.hidden "alert"}}
+        {{if this.fade "fade"}}
+        {{if this.dismissible "alert-dismissible"}}
+        {{bsTypeClass "alert" @type}}
+        {{if this.showAlert "show"}}'
+      ...attributes
+      {{didUpdate this.showOrHide this._visible}}
+      {{didUpdate this.updateVisibility @visible}}
+    >
+      {{#unless this.hidden}}
+        {{#if this.dismissible}}
+          <button
+            type='button'
+            class={{if
+              (macroCondition (macroGetOwnConfig 'isBS4'))
+              'close'
+              'btn-close'
+            }}
+            aria-label='Close'
+            {{on 'click' this.dismiss}}
+          >
+            {{#if (macroCondition (macroGetOwnConfig 'isBS4'))}}<span
+                aria-hidden='true'
+              >&times;</span>{{/if}}
+          </button>
+        {{/if}}
+
+        {{#if (has-block 'header')}}
+          {{#let (element_ (bsDefault @headerTag 'h4')) as |Tag|}}
+            <Tag class='alert-heading'>
+              {{yield to='header'}}
+            </Tag>
+          {{/let}}
+        {{/if}}
+
+        {{#if (has-block 'body')}}
+          {{yield to='body'}}
+        {{else}}
+          {{yield}}
+        {{/if}}
+      {{/unless}}
+    </div>
+  </template>
 }
-
-<div
-  class="{{unless this.hidden "alert"}} {{if this.fade "fade"}} {{if this.dismissible "alert-dismissible"}} {{bs-type-class "alert" @type}} {{if this.showAlert "show"}}"
-  ...attributes
-  {{did-update this.showOrHide this._visible}}
-  {{did-update this.updateVisibility @visible}}
->
-  {{#unless this.hidden}}
-    {{#if this.dismissible}}
-      <button type="button" class={{if (macroCondition (macroGetOwnConfig "isBS4")) "close" "btn-close"}} aria-label="Close" {{on "click" this.dismiss}}>
-        {{#if (macroCondition (macroGetOwnConfig "isBS4"))}}<span aria-hidden="true">&times;</span>{{/if}}
-      </button>
-    {{/if}}
-
-    {{#if (has-block "header")}}
-      {{#let (element (bs-default @headerTag "h4")) as |Tag|}}
-        <Tag class="alert-heading">
-          {{yield to="header"}}
-        </Tag>
-      {{/let}}
-    {{/if}}
-
-    {{#if (has-block "body")}}
-      {{yield to="body"}}
-    {{else}}
-      {{yield}}
-    {{/if}}
-  {{/unless}}
-</div>

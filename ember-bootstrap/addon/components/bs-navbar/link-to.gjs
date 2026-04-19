@@ -1,5 +1,7 @@
 import Component from '@glimmer/component';
 import { action } from '@ember/object';
+import BsLinkTo from 'ember-bootstrap/components/bs-link-to';
+import { on } from '@ember/modifier';
 
 /**
  * Extended `{{link-to}}` component for use within Navbars.
@@ -23,18 +25,20 @@ export default class NavbarLinkTo extends Component {
       this.args.onCollapse();
     }
   }
-}
 
-{{! @glint-nocheck }}
-<BsLinkTo
-  @route={{@route}}
-  @model={{@model}}
-  @models={{@models}}
-  @query={{@query}}
-  @disabled={{@disabled}}
-  {{on 'click' this.onClick}}
-  class={{@attrClassInternal}}
-  ...attributes
->
-  {{yield}}
-</BsLinkTo>
+  <template>
+    {{! @glint-nocheck }}
+    <BsLinkTo
+      @route={{@route}}
+      @model={{@model}}
+      @models={{@models}}
+      @query={{@query}}
+      @disabled={{@disabled}}
+      {{on 'click' this.onClick}}
+      class={{@attrClassInternal}}
+      ...attributes
+    >
+      {{yield}}
+    </BsLinkTo>
+  </template>
+}

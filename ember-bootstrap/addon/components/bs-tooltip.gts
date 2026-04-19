@@ -1,6 +1,11 @@
 import ContextualHelp, {
   type ContextualHelpSignature,
 } from './bs-contextual-help';
+import bsDefault from 'ember-bootstrap/helpers/bs-default';
+import BsTooltipElement from 'ember-bootstrap/components/bs-tooltip/element';
+import { hash } from '@ember/helper';
+import didInsertHelper from 'ember-render-helpers/helpers/did-insert-helper';
+import didUpdateHelper from 'ember-render-helpers/helpers/did-update-helper';
 
 type BsTooltipSignature = ContextualHelpSignature & {
   Element: Element;
@@ -97,38 +102,38 @@ export default class Tooltip extends ContextualHelp<BsTooltipSignature> {
   get arrowElement() {
     return this.overlayElement.querySelector<HTMLElement>('.tooltip-arrow');
   }
+
+  <template>
+    {{! @glint-nocheck }}
+    {{! template-lint-disable no-unbound }}
+    {{unbound this._parentFinder}}
+    {{#if this.inDom}}
+      {{#let
+        (bsDefault @elementComponent (component BsTooltipElement))
+        as |Element|
+      }}
+        <Element
+          @placement={{this.placement}}
+          @fade={{this.fade}}
+          @showHelp={{this.showHelp}}
+          @renderInPlace={{this._renderInPlace}}
+          @destinationElement={{this.destinationElement}}
+          @popperTarget={{this.triggerTargetElement}}
+          @autoPlacement={{this.autoPlacement}}
+          @viewportElement={{this.viewportElement}}
+          @viewportPadding={{this.viewportPadding}}
+          {{this.trackOverlayElement}}
+          ...attributes
+        >
+          {{#if (has-block)}}
+            {{yield (hash close=this.close)}}
+          {{else}}
+            {{@title}}
+          {{/if}}
+        </Element>
+      {{/let}}
+    {{/if}}
+    {{didInsertHelper this.setup}}
+    {{didUpdateHelper this.showOrHide @visible}}
+  </template>
 }
-
-{{! @glint-nocheck }}
-{{! template-lint-disable no-unbound }}
-{{unbound this._parentFinder}}
-{{#if this.inDom}}
-  {{#let (ensure-safe-component (bs-default @elementComponent (component "bs-tooltip/element"))) as |Element|}}
-    <Element
-      @placement={{this.placement}}
-      @fade={{this.fade}}
-      @showHelp={{this.showHelp}}
-      @renderInPlace={{this._renderInPlace}}
-      @destinationElement={{this.destinationElement}}
-      @popperTarget={{this.triggerTargetElement}}
-      @autoPlacement={{this.autoPlacement}}
-      @viewportElement={{this.viewportElement}}
-      @viewportPadding={{this.viewportPadding}}
-
-      {{this.trackOverlayElement}}
-      ...attributes
-    >
-      {{#if (has-block)}}
-        {{yield
-          (hash
-            close=this.close
-          )
-        }}
-      {{else}}
-        {{@title}}
-      {{/if}}
-    </Element>
-  {{/let}}
-{{/if}}
-{{did-insert-helper this.setup}}
-{{did-update-helper this.showOrHide @visible}}

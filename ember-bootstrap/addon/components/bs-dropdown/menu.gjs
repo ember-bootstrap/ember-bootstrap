@@ -3,6 +3,14 @@ import Component from '@glimmer/component';
 import { getDestinationElement } from 'ember-bootstrap/utils/dom';
 import { getOwnConfig, macroCondition } from '@embroider/macros';
 import { modifier } from 'ember-modifier';
+import popperTooltip from 'ember-popper-modifier/modifiers/popper-tooltip';
+import didInsert from '@ember/render-modifiers/modifiers/did-insert';
+import willDestroy from '@ember/render-modifiers/modifiers/will-destroy';
+import { hash } from '@ember/helper';
+import bsDefault from 'ember-bootstrap/helpers/bs-default';
+import BsDropdownMenuItem from 'ember-bootstrap/components/bs-dropdown/menu/item';
+import BsLinkTo from 'ember-bootstrap/components/bs-link-to';
+import BsDropdownMenuDivider from 'ember-bootstrap/components/bs-dropdown/menu/divider';
 
 /**
  Component for the dropdown menu.
@@ -167,51 +175,69 @@ export default class DropdownMenu extends Component {
    * @type {String}
    * @private
    */
-}
 
-{{! @glint-nocheck }}
-{{#if @isOpen}}
-  {{#if this._renderInPlace}}
-    <div
-      data-bs-popper
-      class="dropdown-menu {{this.alignClass}} show"
-      tabindex="-1"
-      ...attributes
-      {{popper-tooltip @toggleElement this.popperOptions}}
-      {{did-insert @registerChildElement "menu"}}
-      {{will-destroy @unregisterChildElement "menu"}}
-      {{this.trackMenuElement}}
-    >
-      {{yield
-        (hash
-          item=(ensure-safe-component (bs-default @itemComponent (component "bs-dropdown/menu/item")))
-          link-to=(ensure-safe-component (bs-default @linkToComponent (component "bs-link-to" attrClassInternal="dropdown-item")))
-          linkTo=(ensure-safe-component (bs-default @linkToComponent (component "bs-link-to" attrClassInternal="dropdown-item")))
-          divider=(ensure-safe-component (bs-default @dividerComponent (component "bs-dropdown/menu/divider")))
-        )
-      }}
-    </div>
-  {{else}}
-    {{#in-element this.destinationElement insertBefore=null}}
-      <div
-        data-bs-popper
-        class="dropdown-menu {{this.alignClass}} show"
-        tabindex="-1"
-        ...attributes
-        {{popper-tooltip @toggleElement this.popperOptions}}
-        {{did-insert @registerChildElement "menu"}}
-        {{will-destroy @unregisterChildElement "menu"}}
-        {{this.trackMenuElement}}
-      >
-        {{yield
-          (hash
-            item=(ensure-safe-component (bs-default @itemComponent (component "bs-dropdown/menu/item")))
-            link-to=(ensure-safe-component (bs-default @linkToComponent (component "bs-link-to" attrClassInternal="dropdown-item")))
-            linkTo=(ensure-safe-component (bs-default @linkToComponent (component "bs-link-to" attrClassInternal="dropdown-item")))
-            divider=(ensure-safe-component (bs-default @dividerComponent (component "bs-dropdown/menu/divider")))
-          )
-        }}
-      </div>
-    {{/in-element}}
-  {{/if}}
-{{/if}}
+  <template>
+    {{! @glint-nocheck }}
+    {{#if @isOpen}}
+      {{#if this._renderInPlace}}
+        <div
+          data-bs-popper
+          class='dropdown-menu {{this.alignClass}} show'
+          tabindex='-1'
+          ...attributes
+          {{popperTooltip @toggleElement this.popperOptions}}
+          {{didInsert @registerChildElement 'menu'}}
+          {{willDestroy @unregisterChildElement 'menu'}}
+          {{this.trackMenuElement}}
+        >
+          {{yield
+            (hash
+              item=(bsDefault @itemComponent (component BsDropdownMenuItem))
+              link-to=(bsDefault
+                @linkToComponent
+                (component BsLinkTo attrClassInternal='dropdown-item')
+              )
+              linkTo=(bsDefault
+                @linkToComponent
+                (component BsLinkTo attrClassInternal='dropdown-item')
+              )
+              divider=(bsDefault
+                @dividerComponent (component BsDropdownMenuDivider)
+              )
+            )
+          }}
+        </div>
+      {{else}}
+        {{#in-element this.destinationElement insertBefore=null}}
+          <div
+            data-bs-popper
+            class='dropdown-menu {{this.alignClass}} show'
+            tabindex='-1'
+            ...attributes
+            {{popperTooltip @toggleElement this.popperOptions}}
+            {{didInsert @registerChildElement 'menu'}}
+            {{willDestroy @unregisterChildElement 'menu'}}
+            {{this.trackMenuElement}}
+          >
+            {{yield
+              (hash
+                item=(bsDefault @itemComponent (component BsDropdownMenuItem))
+                link-to=(bsDefault
+                  @linkToComponent
+                  (component BsLinkTo attrClassInternal='dropdown-item')
+                )
+                linkTo=(bsDefault
+                  @linkToComponent
+                  (component BsLinkTo attrClassInternal='dropdown-item')
+                )
+                divider=(bsDefault
+                  @dividerComponent (component BsDropdownMenuDivider)
+                )
+              )
+            }}
+          </div>
+        {{/in-element}}
+      {{/if}}
+    {{/if}}
+  </template>
+}

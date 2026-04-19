@@ -1,17 +1,9 @@
-/**
- *
- * @class ModalHeaderClose
- * @namespace Components
- * @extends Glimmer.Component
- * @private
- */
-
-/**
- * @event onClick
- * @public
- */
-
-import templateOnly from '@ember/component/template-only';
+import { on } from '@ember/modifier';
+import bsDefault from 'ember-bootstrap/helpers/bs-default';
+import bsNoop from 'ember-bootstrap/helpers/bs-noop';
+import type { TemplateOnlyComponent } from '@ember/component/template-only';
+import { macroCondition } from '@embroider/macros';
+declare function macroGetOwnConfig(path: string): boolean;
 
 export interface CloseSignature {
   Args: {
@@ -23,8 +15,20 @@ export interface CloseSignature {
   Element: HTMLButtonElement;
 }
 
-export default templateOnly<CloseSignature>();
-
-<button type="button" aria-label="Close" class={{if (macroCondition (macroGetOwnConfig "isBS4")) "close" "btn-close"}} ...attributes {{on "click" (bs-default @onClick (bs-noop))}}>
-  {{#if (macroCondition (macroGetOwnConfig "isBS4"))}}<span aria-hidden="true">&times;</span>{{/if}}
-</button>
+export default <template>
+  <button
+    type='button'
+    aria-label='Close'
+    class={{if
+      (macroCondition (macroGetOwnConfig 'isBS4'))
+      'close'
+      'btn-close'
+    }}
+    ...attributes
+    {{on 'click' (bsDefault @onClick (bsNoop))}}
+  >
+    {{#if (macroCondition (macroGetOwnConfig 'isBS4'))}}<span
+        aria-hidden='true'
+      >&times;</span>{{/if}}
+  </button>
+</template> satisfies TemplateOnlyComponent<CloseSignature>;

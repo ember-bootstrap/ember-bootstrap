@@ -6,6 +6,8 @@ import { guidFor } from '@ember/object/internals';
 import { action } from '@ember/object';
 import { tracked } from '@glimmer/tracking';
 import { modifier } from 'ember-modifier';
+import didInsert from '@ember/render-modifiers/modifiers/did-insert';
+import didUpdate from '@ember/render-modifiers/modifiers/did-update';
 
 /**
  The tab pane of a tab component.
@@ -220,16 +222,21 @@ export default class TabPane extends Component {
   updateShowContent() {
     this.showContent = this.args.showContent;
   }
-}
 
-{{! @glint-nocheck }}
-<div
-  class="tab-pane {{if this.showContent "show"}} {{if this.active "active"}} {{if this.usesTransition "fade"}}"
-  role="tabpanel"
-  ...attributes
-  {{this.trackMainNode}}
-  {{did-insert this.updateActive @active}}
-  {{did-update this.showHide this.isActive}}
->
-  {{yield}}
-</div>
+  <template>
+    {{! @glint-nocheck }}
+    <div
+      class='tab-pane
+        {{if this.showContent "show"}}
+        {{if this.active "active"}}
+        {{if this.usesTransition "fade"}}'
+      role='tabpanel'
+      ...attributes
+      {{this.trackMainNode}}
+      {{didInsert this.updateActive @active}}
+      {{didUpdate this.showHide this.isActive}}
+    >
+      {{yield}}
+    </div>
+  </template>
+}

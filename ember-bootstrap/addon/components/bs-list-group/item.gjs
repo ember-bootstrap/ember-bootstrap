@@ -1,5 +1,8 @@
 import Component from '@glimmer/component';
 import arg from '../../utils/decorators/arg';
+import element_ from 'ember-element-helper/helpers/element';
+import bsTypeClass from 'ember-bootstrap/helpers/bs-type-class';
+import bsEq from 'ember-bootstrap/helpers/bs-eq';
 
 /**
  * Component to create the items for [List Group](Components.ListGroup.html).
@@ -72,16 +75,23 @@ export default class BsListGroupItemComponent extends Component {
   get htmlTag() {
     return this.args.actionable ? 'button' : 'li';
   }
-}
 
-{{! @glint-nocheck }}
-{{#let (element this.htmlTag) as |Tag|}}
-  <Tag
-    class="list-group-item {{if @type (bs-type-class "list-group-item" @type default="")}} {{if @actionable "list-group-item-action"}} {{if @disabled "disabled"}} {{if @active "active"}}"
-    aria-current="{{if @active true}}"
-    aria-disabled="{{if @disabled true}}"
-    type="{{if (bs-eq this.htmlTag "button") "button"}}"
-     ...attributes>
-    {{yield}}
-  </Tag>
-{{/let}}
+  <template>
+    {{! @glint-nocheck }}
+    {{#let (element_ this.htmlTag) as |Tag|}}
+      <Tag
+        class='list-group-item
+          {{if @type (bsTypeClass "list-group-item" @type default='')}}
+          {{if @actionable "list-group-item-action"}}
+          {{if @disabled "disabled"}}
+          {{if @active "active"}}'
+        aria-current='{{if @active true}}'
+        aria-disabled='{{if @disabled true}}'
+        type='{{if (bsEq this.htmlTag "button") "button"}}'
+        ...attributes
+      >
+        {{yield}}
+      </Tag>
+    {{/let}}
+  </template>
+}

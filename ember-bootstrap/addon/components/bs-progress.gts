@@ -1,6 +1,9 @@
-import templateOnly from '@ember/component/template-only';
 import type { ComponentLike } from '@glint/template';
 import type { ProgressBarSignature } from './bs-progress/bar';
+import { hash } from '@ember/helper';
+import bsDefault from 'ember-bootstrap/helpers/bs-default';
+import BsProgressBar from 'ember-bootstrap/components/bs-progress/bar';
+import type { TemplateOnlyComponent } from '@ember/component/template-only';
 
 interface BsProgressSignature {
   Args: {
@@ -53,18 +56,17 @@ interface BsProgressSignature {
   @extends Ember.Component
   @public
 */
-export default templateOnly<BsProgressSignature>();
+
+export default <template>
+  <div class='progress' ...attributes>
+    {{yield
+      (hash bar=(bsDefault @progressBarComponent (component BsProgressBar)))
+    }}
+  </div>
+</template> satisfies TemplateOnlyComponent<BsProgressSignature>;
 
 /**
  * @property progressBarComponent
  * @type {String}
  * @private
  */
-
-<div class="progress" ...attributes>
-  {{yield
-    (hash
-      bar=(bs-default @progressBarComponent (component "bs-progress/bar"))
-    )
-  }}
-</div>

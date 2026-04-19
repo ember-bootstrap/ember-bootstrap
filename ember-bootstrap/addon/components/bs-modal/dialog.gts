@@ -5,6 +5,14 @@ import { next } from '@ember/runloop';
 import { tracked } from '@glimmer/tracking';
 import { guidFor } from '@ember/object/internals';
 import { modifier } from 'ember-modifier';
+import { on } from '@ember/modifier';
+import style_ from 'ember-style-modifier/modifiers/style';
+import { concat, hash } from '@ember/helper';
+import didInsert from '@ember/render-modifiers/modifiers/did-insert';
+import bsEq from 'ember-bootstrap/helpers/bs-eq';
+import focusTrap from 'ember-focus-trap/modifiers/focus-trap';
+import { macroCondition } from '@embroider/macros';
+declare function macroGetOwnConfig(path: string): boolean;
 
 export type ModalSize = 'sm' | 'lg' | 'xl' | null;
 export type ModalFullscreen =
@@ -171,47 +179,65 @@ export default class ModalDialog extends Component<DialogSignature> {
       this.ignoreBackdropClick = true;
     }
   }
-}
 
-<div
-  role="dialog"
-  tabindex="-1"
-  aria-labelledby={{this.titleId}}
-  class="modal {{if @fade "fade"}} {{if @showModal "show"}} {{if @inDom "d-block"}}"
-  ...attributes
-  {{on "keydown" this.handleKeyDown}}
-  {{on "mousedown" this.handleMouseDown}}
-  {{on "mouseup" this.handleMouseUp}}
-  {{on "click" this.handleClick}}
-  {{style
-    paddingLeft=(concat @paddingLeft "px")
-    paddingRight=(concat @paddingRight "px")
-    display=(if @inDom "block" "")
-  }}
-  {{this.trackMainNode}}
-  {{did-insert this.getOrSetTitleId}}
-  {{did-insert this.setInitialFocus}}
->
-  <div
-    {{!-- template-lint-disable simple-unless --}}
-    class="modal-dialog
-      {{this.sizeClass}}
-      {{if @centered "modal-dialog-centered"}}
-      {{if @scrollable "modal-dialog-scrollable"}}
-      {{unless (macroCondition (macroGetOwnConfig "isBS4"))
-        (if
-          @fullscreen (if (bs-eq @fullscreen true) "modal-fullscreen" (concat "modal-fullscreen-" @fullscreen "-down"))
-        )
-      }}
-      "
-    role="document"
-  >
+  <template>
     <div
-      class="modal-content"
-      tabindex="-1"
-      {{focus-trap shouldSelfFocus=true focusTrapOptions=(hash clickOutsideDeactivates=@backdropClose fallbackFocus=".modal" escapeDeactivates=@keyboard)}}
+      role='dialog'
+      tabindex='-1'
+      aria-labelledby={{this.titleId}}
+      class='modal
+        {{if @fade "fade"}}
+        {{if @showModal "show"}}
+        {{if @inDom "d-block"}}'
+      ...attributes
+      {{on 'keydown' this.handleKeyDown}}
+      {{on 'mousedown' this.handleMouseDown}}
+      {{on 'mouseup' this.handleMouseUp}}
+      {{on 'click' this.handleClick}}
+      {{style_
+        paddingLeft=(concat @paddingLeft 'px')
+        paddingRight=(concat @paddingRight 'px')
+        display=(if @inDom 'block' '')
+      }}
+      {{this.trackMainNode}}
+      {{didInsert this.getOrSetTitleId}}
+      {{didInsert this.setInitialFocus}}
     >
-      {{yield}}
+      <div
+        {{! template-lint-disable simple-unless }}
+        class='modal-dialog
+          {{this.sizeClass}}
+          {{if @centered "modal-dialog-centered"}}
+          {{if @scrollable "modal-dialog-scrollable"}}
+          {{unless
+            (macroCondition (macroGetOwnConfig "isBS4"))
+            (if
+              @fullscreen
+              (if
+                (bsEq @fullscreen true)
+                "modal-fullscreen"
+                (concat "modal-fullscreen-" @fullscreen "-down")
+              )
+            )
+          }}
+          '
+        role='document'
+      >
+        <div
+          class='modal-content'
+          tabindex='-1'
+          {{focusTrap
+            shouldSelfFocus=true
+            focusTrapOptions=(hash
+              clickOutsideDeactivates=@backdropClose
+              fallbackFocus='.modal'
+              escapeDeactivates=@keyboard
+            )
+          }}
+        >
+          {{yield}}
+        </div>
+      </div>
     </div>
-  </div>
-</div>
+  </template>
+}

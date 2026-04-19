@@ -7,6 +7,11 @@ import { getOwnConfig, macroCondition } from '@embroider/macros';
 import arg from '../utils/decorators/arg';
 import { cached, tracked } from '@glimmer/tracking';
 import { modifier } from 'ember-modifier';
+import { on } from '@ember/modifier';
+import { hash } from '@ember/helper';
+import bsDefault from 'ember-bootstrap/helpers/bs-default';
+import BsFormElement from 'ember-bootstrap/components/bs-form/element';
+import BsButton from 'ember-bootstrap/components/bs-button';
 
 /**
   Render a form with the appropriate Bootstrap layout class (see `formLayout`).
@@ -554,42 +559,46 @@ export default class Form extends Component {
   doSubmit() {
     return this.submitHandler();
   }
-}
 
-{{! @glint-nocheck }}
-{{!-- template-lint-disable no-invalid-interactive --}}
-<form
-  novalidate={{this.hasValidator}}
-  class={{this.layoutClass}}
-  ...attributes
-  {{on "keypress" this.handleKeyPress}}
-  {{on "submit" this.handleSubmit}}
-  {{this.trackFormElement}}
->
-  {{yield
-    (hash
-      element=(component (ensure-safe-component (bs-default @elementComponent (component "bs-form/element")))
-        model=this.model
-        formLayout=this.formLayout
-        horizontalLabelGridClass=this.horizontalLabelGridClass
-        showAllValidations=this.showAllValidations
-        _disabled=@disabled
-        _readonly=@readonly
-        onChange=this.elementChanged
-        _onChange=this.resetSubmissionState
-      )
-      isSubmitting=this.isSubmitting
-      isSubmitted=this.isSubmitted
-      isRejected=this.isRejected
-      model=this.model
-      resetSubmissionState=this.resetSubmissionState
-      submit=this.doSubmit
-      submitButton=(component (ensure-safe-component (bs-default @submitButtonComponent (component "bs-button")))
-        type="primary"
-        state=this.submitButtonState
-        _disabled=this.isSubmitting
-        attrTypePrivateWorkaround="submit"
-      )
-    )
-  }}
-</form>
+  <template>
+    {{! @glint-nocheck }}
+    {{! template-lint-disable no-invalid-interactive }}
+    <form
+      novalidate={{this.hasValidator}}
+      class={{this.layoutClass}}
+      ...attributes
+      {{on 'keypress' this.handleKeyPress}}
+      {{on 'submit' this.handleSubmit}}
+      {{this.trackFormElement}}
+    >
+      {{yield
+        (hash
+          element=(component
+            (bsDefault @elementComponent (component BsFormElement))
+            model=this.model
+            formLayout=this.formLayout
+            horizontalLabelGridClass=this.horizontalLabelGridClass
+            showAllValidations=this.showAllValidations
+            _disabled=@disabled
+            _readonly=@readonly
+            onChange=this.elementChanged
+            _onChange=this.resetSubmissionState
+          )
+          isSubmitting=this.isSubmitting
+          isSubmitted=this.isSubmitted
+          isRejected=this.isRejected
+          model=this.model
+          resetSubmissionState=this.resetSubmissionState
+          submit=this.doSubmit
+          submitButton=(component
+            (bsDefault @submitButtonComponent (component BsButton))
+            type='primary'
+            state=this.submitButtonState
+            _disabled=this.isSubmitting
+            attrTypePrivateWorkaround='submit'
+          )
+        )
+      }}
+    </form>
+  </template>
+}

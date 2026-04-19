@@ -7,6 +7,8 @@ import arg from '../utils/decorators/arg';
 import { tracked } from '@glimmer/tracking';
 import { assert } from '@ember/debug';
 import { modifier } from 'ember-modifier';
+import style_ from 'ember-style-modifier/modifiers/style';
+import didUpdate from '@ember/render-modifiers/modifiers/did-update';
 
 export interface BsCollapseSignature {
   Element: HTMLDivElement;
@@ -326,16 +328,20 @@ export default class Collapse extends Component<BsCollapseSignature> {
       this.collapseSize = this.expandedSize;
     }
   }
-}
 
-<div
-  class="{{if this.collapse "collapse"}} {{if this.transitioning "collapsing"}} {{if this.showContent "show"}}"
-  ...attributes
-  {{this.trackMainNode}}
-  {{style this.cssStyle}}
-  {{did-update this._onCollapsedChange this.collapsed}}
-  {{did-update this._updateCollapsedSize this.collapsedSize}}
-  {{did-update this._updateExpandedSize this.expandedSize}}
->
-  {{yield}}
-</div>
+  <template>
+    <div
+      class='{{if this.collapse "collapse"}}
+        {{if this.transitioning "collapsing"}}
+        {{if this.showContent "show"}}'
+      ...attributes
+      {{this.trackMainNode}}
+      {{style_ this.cssStyle}}
+      {{didUpdate this._onCollapsedChange this.collapsed}}
+      {{didUpdate this._updateCollapsedSize this.collapsedSize}}
+      {{didUpdate this._updateExpandedSize this.expandedSize}}
+    >
+      {{yield}}
+    </div>
+  </template>
+}

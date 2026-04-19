@@ -1,7 +1,12 @@
 import ContextualHelp from './bs-contextual-help';
 import arg from '../utils/decorators/arg';
-
-/**
+import bsDefault from 'ember-bootstrap/helpers/bs-default';
+import BsPopoverElement from 'ember-bootstrap/components/bs-popover/element';
+import { hash } from '@ember/helper';
+import didInsertHelper from 'ember-render-helpers/helpers/did-insert-helper';
+import didUpdateHelper from 'ember-render-helpers/helpers/did-update-helper';
+export default class Popover extends ContextualHelp {
+  /**
   Component that implements Bootstrap [popovers](http://getbootstrap.com/javascript/#popovers).
 
   By default, it will attach its listeners (click) to the parent DOM element to trigger
@@ -61,7 +66,7 @@ import arg from '../utils/decorators/arg';
   @extends Components.ContextualHelp
   @public
 */
-export default class Popover extends ContextualHelp {
+
   /**
    * @property placement
    * @type string
@@ -97,35 +102,35 @@ export default class Popover extends ContextualHelp {
   get arrowElement() {
     return this.overlayElement.querySelector('.arrow');
   }
-}
 
-{{! @glint-nocheck }}
-{{! template-lint-disable no-unbound }}
-{{unbound this._parentFinder}}
-{{#if this.inDom}}
-  {{#let (ensure-safe-component (bs-default @elementComponent (component "bs-popover/element"))) as |Element|}}
-    <Element
-      @placement={{this.placement}}
-      @fade={{this.fade}}
-      @showHelp={{this.showHelp}}
-      @title={{@title}}
-      @renderInPlace={{this._renderInPlace}}
-      @popperTarget={{this.triggerTargetElement}}
-      @destinationElement={{this.destinationElement}}
-      @autoPlacement={{this.autoPlacement}}
-      @viewportElement={{this.viewportElement}}
-      @viewportPadding={{this.viewportPadding}}
-
-      {{this.trackOverlayElement}}
-      ...attributes
-    >
-      {{yield
-        (hash
-          close=this.close
-        )
+  <template>
+    {{! @glint-nocheck }}
+    {{! template-lint-disable no-unbound }}
+    {{unbound this._parentFinder}}
+    {{#if this.inDom}}
+      {{#let
+        (bsDefault @elementComponent (component BsPopoverElement))
+        as |Element|
       }}
-    </Element>
-  {{/let}}
-{{/if}}
-{{did-insert-helper this.setup}}
-{{did-update-helper this.showOrHide @visible}}
+        <Element
+          @placement={{this.placement}}
+          @fade={{this.fade}}
+          @showHelp={{this.showHelp}}
+          @title={{@title}}
+          @renderInPlace={{this._renderInPlace}}
+          @popperTarget={{this.triggerTargetElement}}
+          @destinationElement={{this.destinationElement}}
+          @autoPlacement={{this.autoPlacement}}
+          @viewportElement={{this.viewportElement}}
+          @viewportPadding={{this.viewportPadding}}
+          {{this.trackOverlayElement}}
+          ...attributes
+        >
+          {{yield (hash close=this.close)}}
+        </Element>
+      {{/let}}
+    {{/if}}
+    {{didInsertHelper this.setup}}
+    {{didUpdateHelper this.showOrHide @visible}}
+  </template>
+}

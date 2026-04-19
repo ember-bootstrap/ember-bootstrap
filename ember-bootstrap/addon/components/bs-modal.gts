@@ -19,6 +19,11 @@ import ModalBody, { type BodySignature } from './bs-modal/body';
 import ModalFooter, { type FooterSignature } from './bs-modal/footer';
 import type { ComponentLike } from '@glint/template';
 import { modifier } from 'ember-modifier';
+import didInsertHelper from 'ember-render-helpers/helpers/did-insert-helper';
+import didUpdateHelper from 'ember-render-helpers/helpers/did-update-helper';
+import onWindow from 'ember-on-helper/helpers/on-window';
+import bsEq from 'ember-bootstrap/helpers/bs-eq';
+import { hash } from '@ember/helper';
 
 function nextRunloop() {
   return new Promise((resolve) => next(resolve, undefined));
@@ -751,77 +756,93 @@ export default class Modal extends Component<Signature> {
       this.hide();
     }
   }
-}
 
-{{did-insert-helper this.handleVisibilityChanges}}
-{{did-update-helper this.handleVisibilityChanges @open}}
+  <template>
+    {{didInsertHelper this.handleVisibilityChanges}}
+    {{didUpdateHelper this.handleVisibilityChanges @open}}
 
-{{#if this.inDom}}
-  {{!
+    {{#if this.inDom}}
+      {{!
     ember-on-helper do not support FastBoot yet. This guard can be removed as
     soon as ember-on-helper guards for FastBoot itself. It is tracked in this
     GitHub issue: https://github.com/buschtoens/ember-on-helper/issues/3
   }}
-  {{#unless this.isFastBoot}}
-    {{on-window "resize" this.adjustDialog}}
-  {{/unless}}
+      {{#unless this.isFastBoot}}
+        {{onWindow 'resize' this.adjustDialog}}
+      {{/unless}}
 
-  {{#let (component (ensure-safe-component this.dialogComponent)
-    onClose=this.close
-    fade=this._fade
-    showModal=this.showModal
-    keyboard=this.keyboard
-    size=@size
-    backdropClose=this.backdropClose
-    inDom=this.inDom
-    paddingLeft=this.paddingLeft
-    paddingRight=this.paddingRight
-    centered=(bs-eq this.position "center")
-    scrollable=this.scrollable
-    fullscreen=@fullscreen
-  ) as |Dialog|}}
-    {{#if this._renderInPlace}}
-      <Dialog
-        {{this.trackModalElement}}
-        ...attributes
-      >
-        {{yield
-          (hash
-            header=(component (ensure-safe-component this.headerComponent) onClose=this.close)
-            body=(ensure-safe-component this.bodyComponent)
-            footer=(component (ensure-safe-component this.footerComponent) onClose=this.close onSubmit=this.doSubmit)
-            close=this.close
-            submit=this.doSubmit
-          )
-        }}
-      </Dialog>
-      <div>
-        {{#if this.shouldShowBackdrop}}
-          <div class="modal-backdrop {{if this._fade "fade"}} {{if this.showModal "show"}}" {{this.trackBackdropElement}}></div>
+      {{#let
+        (component
+          this.dialogComponent
+          onClose=this.close
+          fade=this._fade
+          showModal=this.showModal
+          keyboard=this.keyboard
+          size=@size
+          backdropClose=this.backdropClose
+          inDom=this.inDom
+          paddingLeft=this.paddingLeft
+          paddingRight=this.paddingRight
+          centered=(bsEq this.position 'center')
+          scrollable=this.scrollable
+          fullscreen=@fullscreen
+        )
+        as |Dialog|
+      }}
+        {{#if this._renderInPlace}}
+          <Dialog {{this.trackModalElement}} ...attributes>
+            {{yield
+              (hash
+                header=(component this.headerComponent onClose=this.close)
+                body=this.bodyComponent
+                footer=(component
+                  this.footerComponent onClose=this.close onSubmit=this.doSubmit
+                )
+                close=this.close
+                submit=this.doSubmit
+              )
+            }}
+          </Dialog>
+          <div>
+            {{#if this.shouldShowBackdrop}}
+              <div
+                class='modal-backdrop
+                  {{if this._fade "fade"}}
+                  {{if this.showModal "show"}}'
+                {{this.trackBackdropElement}}
+              ></div>
+            {{/if}}
+          </div>
+        {{else if this.destinationElement}}
+          {{#in-element this.destinationElement insertBefore=null}}
+            <Dialog {{this.trackModalElement}} ...attributes>
+              {{yield
+                (hash
+                  header=(component this.headerComponent onClose=this.close)
+                  body=this.bodyComponent
+                  footer=(component
+                    this.footerComponent
+                    onClose=this.close
+                    onSubmit=this.doSubmit
+                  )
+                  close=this.close
+                  submit=this.doSubmit
+                )
+              }}
+            </Dialog>
+            <div>
+              {{#if this.shouldShowBackdrop}}
+                <div
+                  class='modal-backdrop
+                    {{if this._fade "fade"}}
+                    {{if this.showModal "show"}}'
+                  {{this.trackBackdropElement}}
+                ></div>
+              {{/if}}
+            </div>
+          {{/in-element}}
         {{/if}}
-      </div>
-    {{else if this.destinationElement}}
-      {{#in-element this.destinationElement insertBefore=null}}
-        <Dialog
-          {{this.trackModalElement}}
-          ...attributes
-        >
-          {{yield
-            (hash
-              header=(component (ensure-safe-component this.headerComponent) onClose=this.close)
-              body=(ensure-safe-component this.bodyComponent)
-              footer=(component (ensure-safe-component this.footerComponent) onClose=this.close onSubmit=this.doSubmit)
-              close=this.close
-              submit=this.doSubmit
-            )
-          }}
-        </Dialog>
-        <div>
-          {{#if this.shouldShowBackdrop}}
-            <div class="modal-backdrop {{if this._fade "fade"}} {{if this.showModal "show"}}" {{this.trackBackdropElement}}></div>
-          {{/if}}
-        </div>
-      {{/in-element}}
+      {{/let}}
     {{/if}}
-  {{/let}}
-{{/if}}
+  </template>
+}

@@ -1,13 +1,4 @@
-/**
- *
- * Modal body element used within [Components.Modal](Components.Modal.html) components. See there for examples.
- *
- * @class ModalBody
- * @namespace Components
- * @extends Glimmer.Component
- * @public
- */
-import templateOnly from '@ember/component/template-only';
+import type { TemplateOnlyComponent } from '@ember/component/template-only';
 
 export interface BodySignature {
   Blocks: {
@@ -16,8 +7,8 @@ export interface BodySignature {
   Element: HTMLDivElement;
 }
 
-export default templateOnly<BodySignature>();
-
-<div class="modal-body" ...attributes>
-  {{yield}}
-</div>
+export default <template>
+  <div class='modal-body' ...attributes>
+    {{yield}}
+  </div>
+</template> satisfies TemplateOnlyComponent<BodySignature>;

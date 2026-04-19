@@ -4,6 +4,13 @@ import { assert } from '@ember/debug';
 import { getOwnConfig, macroCondition } from '@embroider/macros';
 import { tracked } from '@glimmer/tracking';
 import { next } from '@ember/runloop';
+import element_ from 'ember-element-helper/helpers/element';
+import { hash } from '@ember/helper';
+import bsDefault from 'ember-bootstrap/helpers/bs-default';
+import BsDropdownButton from 'ember-bootstrap/components/bs-dropdown/button';
+import BsDropdownToggle from 'ember-bootstrap/components/bs-dropdown/toggle';
+import BsDropdownMenu from 'ember-bootstrap/components/bs-dropdown/menu';
+import onDocument from 'ember-on-helper/helpers/on-document';
 
 const ESCAPE_KEYCODE = 27; // KeyboardEvent.which value for Escape (Esc) key
 const SPACE_KEYCODE = 32; // KeyboardEvent.which value for space key
@@ -451,52 +458,57 @@ export default class Dropdown extends Component {
    * @type {String}
    * @private
    */
+
+  <template>
+    {{! @glint-nocheck }}
+    {{#let (element_ this.htmlTag) as |Tag|}}
+      <Tag
+        class='{{this.containerClass}}
+          {{if this.inNav "nav-item"}}
+          {{if this.isOpen "show"}}'
+        ...attributes
+      >
+        {{yield
+          (hash
+            button=(component
+              (bsDefault @buttonComponent (component BsDropdownButton))
+              isOpen=this.isOpen
+              onClick=this.toggleDropdown
+              onKeyDown=this.handleKeyEvent
+              registerChildElement=this.registerChildElement
+              unregisterChildElement=this.unregisterChildElement
+            )
+            toggle=(component
+              (bsDefault @toggleComponent (component BsDropdownToggle))
+              isOpen=this.isOpen
+              inNav=@inNav
+              onClick=this.toggleDropdown
+              onKeyDown=this.handleKeyEvent
+              registerChildElement=this.registerChildElement
+              unregisterChildElement=this.unregisterChildElement
+            )
+            menu=(component
+              (bsDefault @menuComponent (component BsDropdownMenu))
+              isOpen=this.isOpen
+              inNav=@inNav
+              direction=this.direction
+              toggleElement=this.toggleElement
+              registerChildElement=this.registerChildElement
+              unregisterChildElement=this.unregisterChildElement
+            )
+            toggleDropdown=this.toggleDropdown
+            openDropdown=this.openDropdown
+            closeDropdown=this.closeDropdown
+            isOpen=this.isOpen
+          )
+        }}
+        {{#if this.isOpen}}
+          {{onDocument 'keydown' this.handleKeyEvent}}
+          {{onDocument 'click' this.closeHandler capture=true}}
+          {{onDocument 'keyup' this.closeHandler}}
+        {{/if}}
+
+      </Tag>
+    {{/let}}
+  </template>
 }
-
-{{! @glint-nocheck }}
-{{#let (element this.htmlTag) as |Tag|}}
-  <Tag
-    class="{{this.containerClass}}
-      {{if this.inNav "nav-item"}}
-      {{if this.isOpen "show"}}"
-    ...attributes
-  >
-    {{yield
-      (hash
-        button=(component (ensure-safe-component (bs-default @buttonComponent (component "bs-dropdown/button")))
-          isOpen=this.isOpen
-          onClick=this.toggleDropdown
-          onKeyDown=this.handleKeyEvent
-          registerChildElement=this.registerChildElement
-          unregisterChildElement=this.unregisterChildElement
-        )
-        toggle=(component (ensure-safe-component (bs-default @toggleComponent (component "bs-dropdown/toggle")))
-          isOpen=this.isOpen
-          inNav=@inNav
-          onClick=this.toggleDropdown
-          onKeyDown=this.handleKeyEvent
-          registerChildElement=this.registerChildElement
-          unregisterChildElement=this.unregisterChildElement
-        )
-        menu=(component (ensure-safe-component (bs-default @menuComponent (component "bs-dropdown/menu")))
-          isOpen=this.isOpen
-          inNav=@inNav
-          direction=this.direction
-          toggleElement=this.toggleElement
-          registerChildElement=this.registerChildElement
-          unregisterChildElement=this.unregisterChildElement
-        )
-        toggleDropdown=this.toggleDropdown
-        openDropdown=this.openDropdown
-        closeDropdown=this.closeDropdown
-        isOpen=this.isOpen
-      )
-    }}
-    {{#if this.isOpen}}
-      {{on-document "keydown" this.handleKeyEvent}}
-      {{on-document "click" this.closeHandler capture=true}}
-      {{on-document "keyup" this.closeHandler}}
-    {{/if}}
-
-  </Tag>
-{{/let}}

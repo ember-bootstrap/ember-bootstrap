@@ -1,5 +1,6 @@
 import Component from '@glimmer/component';
 import { on } from '@ember/modifier';
+import bsDefault from 'ember-bootstrap/helpers/bs-default';
 
 /**
  * Component to implement the responsive menu toggle behavior in a [Components.Navbar](Components.Navbar.html)
@@ -17,19 +18,20 @@ import { on } from '@ember/modifier';
  */
 export default class NavbarToggle extends Component {
   on = on;
-}
 
-{{! @glint-nocheck }}
-<button
-  type="button"
-  class="navbar-toggler
-  {{if (bs-default @collapsed true) "collapsed"}}"
-  ...attributes
-  {{(if @onClick (modifier this.on "click" @onClick))}}
->
-  {{#if (has-block)}}
-    {{yield}}
-  {{else}}
-    <span class="navbar-toggler-icon"></span>
-  {{/if}}
-</button>
+  <template>
+    {{! @glint-nocheck }}
+    <button
+      type='button'
+      class='navbar-toggler {{if (bsDefault @collapsed true) "collapsed"}}'
+      ...attributes
+      {{(if @onClick (modifier this.on 'click' @onClick))}}
+    >
+      {{#if (has-block)}}
+        {{yield}}
+      {{else}}
+        <span class='navbar-toggler-icon'></span>
+      {{/if}}
+    </button>
+  </template>
+}

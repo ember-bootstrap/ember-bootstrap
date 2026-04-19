@@ -1,5 +1,6 @@
 import { action } from '@ember/object';
 import Control from '../control';
+import { on } from '@ember/modifier';
 
 /**
 
@@ -18,17 +19,20 @@ export default class FormElementControlTextarea extends Control {
   handleInput(event) {
     this.args.onChange(event.target.value);
   }
-}
 
-{{! @glint-nocheck }}
-<textarea
-  id={{@id}}
-  disabled={{@disabled}}
-  readonly={{@readonly}}
-  aria-describedby={{@ariaDescribedBy}}
-  value={{@value}}
-  class="form-control {{this.formValidationClass}}"
-  ...attributes
-  {{on "change" this.handleChange}}
-  {{on "input" this.handleInput}}>
-</textarea>
+  <template>
+    {{! @glint-nocheck }}
+    <textarea
+      id={{@id}}
+      disabled={{@disabled}}
+      readonly={{@readonly}}
+      aria-describedby={{@ariaDescribedBy}}
+      value={{@value}}
+      class='form-control {{this.formValidationClass}}'
+      ...attributes
+      {{on 'change' this.handleChange}}
+      {{on 'input' this.handleInput}}
+    >
+    </textarea>
+  </template>
+}

@@ -2,6 +2,7 @@ import Component from '@glimmer/component';
 import { service } from '@ember/service';
 import { assert } from '@ember/debug';
 import type RouterService from '@ember/routing/router-service';
+import { LinkTo } from '@ember/routing';
 
 export interface BsLinkToSignature {
   // TODO: Should rely on Element of LinkTo signature instead
@@ -64,15 +65,17 @@ export default class LinkComponent extends Component<BsLinkToSignature> {
   get query() {
     return this.args.query ?? {};
   }
-}
 
-<LinkTo
-  @route={{@route}}
-  @models={{this.models}}
-  @query={{this.query}}
-  @disabled={{@disabled}}
-  class={{@attrClassInternal}}
-  ...attributes
->
-  {{yield}}
-</LinkTo>
+  <template>
+    <LinkTo
+      @route={{@route}}
+      @models={{this.models}}
+      @query={{this.query}}
+      @disabled={{@disabled}}
+      class={{@attrClassInternal}}
+      ...attributes
+    >
+      {{yield}}
+    </LinkTo>
+  </template>
+}

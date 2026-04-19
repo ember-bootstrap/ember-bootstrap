@@ -1,4 +1,6 @@
-{{! @glint-nocheck }}
-{{#if @show}}
-  <span class="form-control-feedback {{@iconName}}" aria-hidden="true"></span>
-{{/if}}
+<template>
+  {{! @glint-nocheck }}
+  {{#if @show}}
+    <span class='form-control-feedback {{@iconName}}' aria-hidden='true'></span>
+  {{/if}}
+</template>

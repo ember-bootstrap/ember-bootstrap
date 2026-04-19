@@ -3,6 +3,7 @@ import ContextualHelpElement, {
 } from '../bs-contextual-help/element';
 import { getOwnConfig, macroCondition } from '@embroider/macros';
 import type { EmberBootstrapMacrosConfig } from '../../macros-config';
+import popperTooltip from 'ember-popper-modifier/modifiers/popper-tooltip';
 
 type BsTooltipElementSignature = ContextualHelpElementSignature & {
   Blocks: {
@@ -25,36 +26,43 @@ export default class TooltipElement extends ContextualHelpElement<BsTooltipEleme
     : 'tooltip-arrow';
   placementClassPrefix = 'bs-tooltip-';
   offset = [0, 6];
-}
 
-{{! @glint-nocheck }}
-{{#if @renderInPlace}}
-  <div
-    class="tooltip {{if this.fade "fade"}} {{this.actualPlacementClass}} {{if this.showHelp "show"}}"
-    role="tooltip"
-    ...attributes
-    {{popper-tooltip @popperTarget this.popperOptions}}
-    {{this.trackPopperElement}}
-  >
-    <div class={{this.arrowClass}}></div>
-    <div class="tooltip-inner">
-      {{yield}}
-    </div>
-  </div>
-{{else}}
-  {{#in-element @destinationElement insertBefore=null}}
-    <div
-      class="tooltip {{if this.fade "fade"}} {{this.actualPlacementClass}} {{if this.showHelp "show"}}"
-      role="tooltip"
-      ...attributes
-      {{popper-tooltip @popperTarget this.popperOptions}}
-      {{this.trackPopperElement}}
-    >
-      <div class={{this.arrowClass}}></div>
-      <div class="tooltip-inner">
-        {{yield}}
+  <template>
+    {{! @glint-nocheck }}
+    {{#if @renderInPlace}}
+      <div
+        class='tooltip
+          {{if this.fade "fade"}}
+          {{this.actualPlacementClass}}
+          {{if this.showHelp "show"}}'
+        role='tooltip'
+        ...attributes
+        {{popperTooltip @popperTarget this.popperOptions}}
+        {{this.trackPopperElement}}
+      >
+        <div class={{this.arrowClass}}></div>
+        <div class='tooltip-inner'>
+          {{yield}}
+        </div>
       </div>
-    </div>
-  {{/in-element}}
-{{/if}}
-
+    {{else}}
+      {{#in-element @destinationElement insertBefore=null}}
+        <div
+          class='tooltip
+            {{if this.fade "fade"}}
+            {{this.actualPlacementClass}}
+            {{if this.showHelp "show"}}'
+          role='tooltip'
+          ...attributes
+          {{popperTooltip @popperTarget this.popperOptions}}
+          {{this.trackPopperElement}}
+        >
+          <div class={{this.arrowClass}}></div>
+          <div class='tooltip-inner'>
+            {{yield}}
+          </div>
+        </div>
+      {{/in-element}}
+    {{/if}}
+  </template>
+}

@@ -1,6 +1,7 @@
 import Component from '@glimmer/component';
 import { action } from '@ember/object';
 import { assert } from '@ember/debug';
+import { on } from '@ember/modifier';
 
 /**
  Component for each item within a [Components.Nav](Components.Nav.html) component. Have a look there for examples.
@@ -31,10 +32,12 @@ export default class NavItem extends Component {
       !model || !models,
     );
   }
-}
 
-{{! @glint-nocheck }}
-{{!-- template-lint-disable no-invalid-interactive --}}
-<li class="nav-item" ...attributes {{on "click" this.handleClick}}>
-  {{yield}}
-</li>
+  <template>
+    {{! @glint-nocheck }}
+    {{! template-lint-disable no-invalid-interactive }}
+    <li class='nav-item' ...attributes {{on 'click' this.handleClick}}>
+      {{yield}}
+    </li>
+  </template>
+}

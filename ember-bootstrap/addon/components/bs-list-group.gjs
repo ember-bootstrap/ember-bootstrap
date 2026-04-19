@@ -1,5 +1,9 @@
 import Component from '@glimmer/component';
 import arg from '../utils/decorators/arg';
+import element_ from 'ember-element-helper/helpers/element';
+import { hash } from '@ember/helper';
+import bsDefault from 'ember-bootstrap/helpers/bs-default';
+import BsListGroupItem from 'ember-bootstrap/components/bs-list-group/item';
 
 /**
  Component for creating [Bootstrap List Groups](https://getbootstrap.com/docs/5.2/components/list-group/) with custom markup.
@@ -98,17 +102,25 @@ export default class BsListGroupComponent extends Component {
     }
     return '';
   }
-}
 
-{{! @glint-nocheck }}
-{{#let (element this.htmlTag) as |Tag|}}
-  <Tag
-    class="list-group {{this.horizontalClass}} {{if this.numbered "list-group-numbered"}} {{if this.flush "list-group-flush"}}"
-    ...attributes>
-    {{yield
-      (hash
-        item=(component (ensure-safe-component (bs-default @listGroupItemComponent (component "bs-list-group/item"))))
-      )
-    }}
-  </Tag>
-{{/let}}
+  <template>
+    {{! @glint-nocheck }}
+    {{#let (element_ this.htmlTag) as |Tag|}}
+      <Tag
+        class='list-group
+          {{this.horizontalClass}}
+          {{if this.numbered "list-group-numbered"}}
+          {{if this.flush "list-group-flush"}}'
+        ...attributes
+      >
+        {{yield
+          (hash
+            item=(component
+              (bsDefault @listGroupItemComponent (component BsListGroupItem))
+            )
+          )
+        }}
+      </Tag>
+    {{/let}}
+  </template>
+}

@@ -6,6 +6,9 @@ import { registerDestructor } from '@ember/destroyable';
 import type Owner from '@ember/owner';
 import type { PresentationState } from '../bs-carousel';
 import { modifier } from 'ember-modifier';
+import didUpdate from '@ember/render-modifiers/modifiers/did-update';
+import { macroCondition } from '@embroider/macros';
+declare function macroGetOwnConfig(path: string): boolean;
 
 export type DirectionalClassName = keyof Pick<CarouselSlide, 'left' | 'right'>;
 export type OrderClassName = keyof Pick<CarouselSlide, 'prev' | 'next'>;
@@ -219,13 +222,38 @@ export default class CarouselSlide extends Component<CarouselSlideSignature> {
   reflow() {
     this._element?.offsetHeight;
   }
-}
 
-<div
-  class="carousel-item {{if this.active "active"}} {{if this.left (if (macroCondition (macroGetOwnConfig "isBS4")) "carousel-item-left" "carousel-item-start")}} {{if this.next "carousel-item-next"}} {{if this.prev "carousel-item-prev"}} {{if this.right (if (macroCondition (macroGetOwnConfig "isBS4")) "carousel-item-right" "carousel-item-end")}}"
-  ...attributes
-  {{this.trackMainNode}}
-  {{did-update this.presentationStateObserver @presentationState @currentSlide}}
->
-  {{yield}}
-</div>
+  <template>
+    <div
+      class='carousel-item
+        {{if this.active "active"}}
+        {{if
+          this.left
+          (if
+            (macroCondition (macroGetOwnConfig "isBS4"))
+            "carousel-item-left"
+            "carousel-item-start"
+          )
+        }}
+        {{if this.next "carousel-item-next"}}
+        {{if this.prev "carousel-item-prev"}}
+        {{if
+          this.right
+          (if
+            (macroCondition (macroGetOwnConfig "isBS4"))
+            "carousel-item-right"
+            "carousel-item-end"
+          )
+        }}'
+      ...attributes
+      {{this.trackMainNode}}
+      {{didUpdate
+        this.presentationStateObserver
+        @presentationState
+        @currentSlide
+      }}
+    >
+      {{yield}}
+    </div>
+  </template>
+}
