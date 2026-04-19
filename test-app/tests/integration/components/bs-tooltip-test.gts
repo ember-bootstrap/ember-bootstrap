@@ -772,4 +772,51 @@ module('Integration | Component | bs-tooltip', function (hooks) {
     await a11yAudit();
     assert.ok(true, 'A11y audit passed');
   });
+
+  test('it cleans up iOS mouseover listeners on destroy', async function (assert) {
+    // Simulate a touch-enabled device so the iOS workaround code path is exercised
+    const hadOntouchstart = 'ontouchstart' in document.documentElement;
+    if (!hadOntouchstart) {
+      // Setting to null makes `'ontouchstart' in document.documentElement` return true
+      (document.documentElement as HTMLElement & { ontouchstart: unknown }).ontouchstart = null;
+    }
+
+    const bodyChild = document.body.children[0]!;
+    const removeListenerSpy = sinon.spy(bodyChild, 'removeEventListener');
+
+    class State {
+      @tracked show = true;
+    }
+    const state = new State();
+
+    try {
+      await render(
+        <template>
+          {{#if state.show}}
+            <button type='button'>
+              Test
+              <BsTooltip @title='Dummy' @visible={{true}} />
+            </button>
+          {{/if}}
+        </template>,
+      );
+      await settled();
+
+      // Destroy the component by removing it from the DOM.
+      // This triggers willDestroy() without calling hide() first,
+      // which previously leaked the iOS mouseover listeners.
+      state.show = false;
+      await settled();
+
+      assert.ok(
+        removeListenerSpy.calledWith('mouseover'),
+        'iOS mouseover listeners are removed when component is destroyed without hide()',
+      );
+    } finally {
+      removeListenerSpy.restore();
+      if (!hadOntouchstart) {
+        delete (document.documentElement as HTMLElement & { ontouchstart?: unknown }).ontouchstart;
+      }
+    }
+  });
 });
