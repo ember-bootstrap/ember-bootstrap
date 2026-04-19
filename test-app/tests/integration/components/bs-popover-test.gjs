@@ -149,7 +149,7 @@ module('Integration | Component | bs-popover', function (hooks) {
     let arrowPosition = parseInt(
       this.element
         .querySelector(`.${popoverArrowClass()}`)
-        .style.transform.match(/translate(?:3d)?\(([0-9]+)px.*\)/)[1],
+        .style.transform.match(/translate(?:3d)?\(([0-9.]+)px.*\)/)[1],
       10,
     );
     assert.ok(
@@ -163,7 +163,7 @@ module('Integration | Component | bs-popover', function (hooks) {
     arrowPosition = parseInt(
       this.element
         .querySelector(`.${popoverArrowClass()}`)
-        .style.transform.match(/translate(?:3d)?\(([0-9]+)px.*\)/)[1],
+        .style.transform.match(/translate(?:3d)?\(([0-9.]+)px.*\)/)[1],
       10,
     );
     assert.ok(

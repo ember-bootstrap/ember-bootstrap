@@ -1,7 +1,0 @@
-{{! @glint-nocheck }}
-<div class="{{if (bs-eq "switch" @controlType) (if (macroCondition (macroGetOwnConfig "isBS4")) "custom-control custom-switch" "form-check form-switch") "form-check"}}">
-  {{yield}}
-  <@labelComponent/>
-  <@errorsComponent/>
-  <@helpTextComponent/>
-</div>
