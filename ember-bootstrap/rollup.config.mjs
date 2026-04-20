@@ -9,7 +9,8 @@ const addon = new Addon({
 });
 
 const rootDirectory = dirname(fileURLToPath(import.meta.url));
-const babelConfig = resolve(rootDirectory, './babel.publish.config.cjs');
+const babelConfig = resolve(rootDirectory, './babel.config.cjs');
+const tsConfig = resolve(rootDirectory, './tsconfig.json');
 
 export default {
   // This provides defaults that work well alongside `publicEntrypoints` below.
@@ -24,7 +25,7 @@ export default {
     // up your addon's public API. Also make sure your package.json#exports
     // is aligned to the config here.
     // See https://github.com/embroider-build/embroider/blob/main/docs/v2-faq.md#how-can-i-define-the-public-exports-of-my-addon
-    addon.publicEntrypoints(['**/*.js', 'index.js']),
+    addon.publicEntrypoints(['**/*.js', 'index.js', 'template-registry.js']),
 
     // These are the modules that should get reexported into the traditional
     // "app" tree. Things in here should also be in publicEntrypoints above, but
@@ -48,16 +49,19 @@ export default {
     // By default, this will load the actual babel config from the file
     // babel.config.json.
     babel({
-      extensions: ['.js', '.gjs'],
+      extensions: ['.js', '.gjs', '.ts', '.gts'],
       babelHelpers: 'bundled',
       configFile: babelConfig,
     }),
 
-    // Ensure that standalone .hbs files are properly integrated as Javascript.
-    addon.hbs(),
-
     // Ensure that .gjs files are properly integrated as Javascript
     addon.gjs(),
+
+    // Emit .d.ts declaration files
+    addon.declarations(
+      'declarations',
+      `pnpm ember-tsc --declaration --project ${tsConfig}`,
+    ),
 
     // addons are allowed to contain imports of .css files, which we want rollup
     // to leave alone and keep in the published output.

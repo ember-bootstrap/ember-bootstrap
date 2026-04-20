@@ -1,23 +1,22 @@
 {
-  "extends": "@tsconfig/ember/tsconfig.json",
+  "extends": "@ember/library-tsconfig",
+  "include": ["src/**/*", "unpublished-development-types/**/*"],
   "compilerOptions": {
-    // allow declarations to be emitted when despite having glint-nocheck directives.
-    // See https://github.com/typed-ember/glint/issues/599
-    "noEmitOnError": false,
-
+    "allowJs": true,
     "declarationDir": "declarations",
 
-    // The combination of `baseUrl` with `paths` allows Ember's classic package
-    // layout, which is not resolvable with the Node resolution algorithm, to
-    // work with TypeScript.
-    "baseUrl": ".",
-    "paths": {
-      "ember-bootstrap": ["addon"],
-      "ember-bootstrap/*": ["addon/*"],
-      "*": ["types/*"]
-    }
-  },
-  "glint": {
-    "environment": ["ember-loose", "ember-template-imports"]
+    /**
+      https://www.typescriptlang.org/tsconfig#rootDir
+      "Default: The longest common path of all non-declaration input files."
+
+      Because we want our declarations' structure to match our rollup output,
+      we need this "rootDir" to match the "srcDir" in the rollup.config.mjs.
+
+      This way, we can have a simpler `package.json#exports` that matches
+      imports to files on disk
+    */
+    "rootDir": "./src",
+
+    "types": ["ember-source/types", "@glint/ember-tsc/types"]
   }
 }
