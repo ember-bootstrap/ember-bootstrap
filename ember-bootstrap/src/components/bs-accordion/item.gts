@@ -123,14 +123,14 @@ export default class AccordionItem extends Component<ItemSignature> {
    * @public
    */
 
-  get titleComponent(): ComponentLike<TitleSignature> {
-    return this.args.titleComponent ?? AccordionItemTitle;
+  castTitleComponent(titleComponent: unknown): ComponentLike<TitleSignature> {
+    return titleComponent as ComponentLike<TitleSignature>;
   }
 
   <template>
     {{#let
       (component
-        this.titleComponent
+        (bsDefault @titleComponent AccordionItemTitle)
         collapsed=this.collapsed
         disabled=@disabled
         onClick=(fn (bsDefault @onClick bsNoop) this.value)
@@ -153,13 +153,13 @@ export default class AccordionItem extends Component<ItemSignature> {
         ...attributes
       >
         {{#if (has-block-params)}}
-          {{yield (hash title=Title body=Body)}}
+          {{yield (hash title=(this.castTitleComponent Title) body=Body)}}
         {{else}}
           <Title id={{titleId}} @controls={{collapsableId}}>
             {{@title}}
           </Title>
           <Body @collapsableId={{collapsableId}} @describedby={{titleId}}>
-            {{yield (hash title=Title body=Body)}}
+            {{yield (hash title=(this.castTitleComponent Title) body=Body)}}
           </Body>
         {{/if}}
       </div>
