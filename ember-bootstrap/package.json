@@ -25,10 +25,6 @@
     }
   },
   "exports": {
-    ".": {
-      "types": "./declarations/index.d.ts",
-      "default": "./dist/index.js"
-    },
     "./addon-main.js": "./addon-main.cjs",
     "./*.css": "./dist/*.css",
     "./*": {
