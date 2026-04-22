@@ -1,8 +1,12 @@
-import { HelperLike } from '@glint/template';
+declare module 'ember-on-helper/helpers/on-window' {
+  import { HelperLike } from '@glint/template';
 
-export default HelperLike<{
-  Args: {
-    Positional: [event: keyof WindowEventMap, listener: () => void];
-  };
-  Return: string;
-}>;
+  const onWindow: HelperLike<{
+    Args: {
+      Positional: [event: keyof WindowEventMap, listener: () => void];
+    };
+    Return: string;
+  }>;
+
+  export default onWindow;
+}
