@@ -10,7 +10,7 @@ module.exports = {
   },
   overrides: [
     {
-      files: ['addon/**/*.(gjs|gts)'],
+      files: ['src/**/*.(gjs|gts)'],
       rules: {
         prettier: 'off',
       },
