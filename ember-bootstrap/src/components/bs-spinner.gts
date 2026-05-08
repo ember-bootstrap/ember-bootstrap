@@ -2,12 +2,6 @@ import Component from '@glimmer/component';
 import arg from '../utils/decorators/arg.ts';
 import bsSizeClass from '../helpers/bs-size-class.ts';
 import bsTypeClass from '../helpers/bs-type-class.ts';
-import { macroCondition } from '@embroider/macros';
-
-// @embroider/macros does not export the helpers. The macro helpers do not exist at runtime and do not need to be
-// imported for the preprocessor to work. Adding this type only serves to keep TypeScript happy with the missing import.
-// See: https://github.com/embroider-build/embroider/issues/2674
-declare function macroGetOwnConfig(path: string): boolean;
 
 interface BsSpinnerSignature {
   Element: HTMLDivElement;
@@ -102,8 +96,8 @@ export default class BsSpinner extends Component<BsSpinnerSignature> {
     >
       {{#if (has-block)}}
         <span
-          class={{if
-            (macroCondition (macroGetOwnConfig 'isBS4'))
+          {{! @glint-ignore }}
+          class={{if (macroCondition (macroGetOwnConfig 'isBS4'))
             'sr-only'
             'visually-hidden'
           }}

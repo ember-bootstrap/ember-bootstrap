@@ -86,6 +86,7 @@
     "@embroider/core": "^4.1.0",
     "@embroider/macros": "^1.20.1",
     "@embroider/vite": "^1.1.5",
+    "@glimmer/component": "^2.1.1",
     "@glint/ember-tsc": "^1.5.0",
     "@glint/template": "^1.7.7",
     "@glint/tsserver-plugin": "^2.0.0",
@@ -120,7 +121,6 @@
     "vite": "^7.1.9"
   },
   "peerDependencies": {
-    "@glimmer/component": "^1.0.4 || ^2.0.0",
     "ember-modifier": "^3.2.7 || ^4.0.0",
     "ember-source": ">= 5.12.0"
   },
