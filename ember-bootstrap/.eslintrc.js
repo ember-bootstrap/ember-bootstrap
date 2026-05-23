@@ -15,7 +15,7 @@ module.exports = {
   },
   // Disabling hbs plugin until https://github.com/ember-template-lint/eslint-plugin-hbs/issues/42 is resolved
   // plugins: ['ember', 'hbs'],
-  plugins: ['ember', '@typescript-eslint'],
+  plugins: ['ember', '@typescript-eslint', 'import'],
   extends: [
     'eslint:recommended',
     'plugin:ember/recommended',
@@ -42,6 +42,7 @@ module.exports = {
     'ember/no-classic-components': 'warn',
     'ember/classic-decorator-no-classic-methods': 'warn',
     'ember/classic-decorator-hooks': 'warn',
+    'import/extensions': ['error', 'ignorePackages'],
   },
   overrides: [
     // ts files

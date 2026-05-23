@@ -9,8 +9,12 @@ module.exports = function (defaults) {
   const trees = {};
 
   const options = {
-    'ember-bootstrap': {
-      bootstrapVersion,
+    '@embroider/macros': {
+      setConfig: {
+        'ember-bootstrap': {
+          bootstrapVersion,
+        },
+      },
     },
     'ember-cli-babel': {
       includePolyfill: !!process.env.BABELPOLYFILL,
