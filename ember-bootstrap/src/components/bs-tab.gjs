@@ -297,6 +297,8 @@ export default class Tab extends Component {
   }
 
   <template>
+    <BsSpinner/>
+
     {{! @glint-nocheck }}
     <div ...attributes {{didUpdate this.listenToActiveId @activeId}}>
       {{#if this.customTabs}}
@@ -316,7 +318,7 @@ export default class Tab extends Component {
           )
         }}
       {{else}}
-        {{#let (bsDefault @navComponent (component BsNav)) as |NavComponent|}}
+        {{#let (bsDefault @navComponent BsNav) as |NavComponent|}}
           <NavComponent @type={{this.type}} role='tablist' as |Nav|>
             {{#each this.navItems as |item|}}
               {{#if item.isGroup}}

@@ -1,3 +1,5 @@
+/* global macroCondition */
+/* global macroGetOwnConfig */
 import { tracked } from '@glimmer/tracking';
 import { action } from '@ember/object';
 import Component from '@glimmer/component';

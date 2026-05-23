@@ -4,6 +4,7 @@ import { tracked } from '@glimmer/tracking';
 import type { ComponentLike } from '@glint/template';
 import AccordionItem, { type ItemSignature } from './bs-accordion/item.gts';
 import { hash } from '@ember/helper';
+import bsDefault from '../helpers/bs-default.ts';
 
 interface AccordionSignature {
   Args: {
@@ -87,10 +88,6 @@ export default class Accordion extends Component<AccordionSignature> {
 
   _prevSelected?: unknown = this.args.selected;
 
-  get itemComponent(): ComponentLike<ItemSignature> {
-    return this.args.itemComponent ?? AccordionItem;
-  }
-
   /**
    * The value of the currently selected accordion item
    *
@@ -143,7 +140,9 @@ export default class Accordion extends Component<AccordionSignature> {
       {{yield
         (hash
           item=(component
-            this.itemComponent selected=this.isSelected onClick=this.doChange
+            (bsDefault @itemComponent AccordionItem)
+            selected=this.isSelected
+            onClick=this.doChange
           )
           change=this.doChange
         )

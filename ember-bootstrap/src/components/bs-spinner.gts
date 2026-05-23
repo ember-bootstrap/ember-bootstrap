@@ -1,3 +1,5 @@
+/* global macroCondition */
+/* global macroGetOwnConfig */
 import Component from '@glimmer/component';
 import arg from '../utils/decorators/arg.ts';
 import bsSizeClass from '../helpers/bs-size-class.ts';
@@ -96,8 +98,8 @@ export default class BsSpinner extends Component<BsSpinnerSignature> {
     >
       {{#if (has-block)}}
         <span
-          {{! @glint-ignore }}
-          class={{if (macroCondition (macroGetOwnConfig 'isBS4'))
+          class={{if
+            (macroCondition (macroGetOwnConfig 'isBS4'))
             'sr-only'
             'visually-hidden'
           }}

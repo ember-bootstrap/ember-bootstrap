@@ -1,9 +1,9 @@
+/* global macroCondition */
+/* global macroGetOwnConfig */
 import Component from '@glimmer/component';
 import { guidFor } from '@ember/object/internals';
 import arg from '../../utils/decorators/arg.ts';
 import type { ComponentLike } from '@glint/template';
-import type { TitleSignature } from './item/title.gts';
-import type { BodySignature } from './item/body.gts';
 import { fn, hash, uniqueId } from '@ember/helper';
 import bsDefault from '../../helpers/bs-default.ts';
 import bsNoop from '../../helpers/bs-noop.ts';
@@ -12,19 +12,19 @@ import AccordionItemBody from './item/body.gts';
 
 export interface ItemSignature {
   Args: {
-    bodyComponent?: ComponentLike<BodySignature>;
+    bodyComponent?: ComponentLike<typeof AccordionItemBody>;
     disabled?: boolean;
     onClick?: (newValue?: unknown) => void;
     selected?: unknown;
     title?: string;
-    titleComponent?: ComponentLike<TitleSignature>;
+    titleComponent?: ComponentLike<typeof AccordionItemTitle>;
     value?: unknown;
   };
   Blocks: {
     default: [
       {
-        title: ComponentLike<TitleSignature>;
-        body: ComponentLike<BodySignature>;
+        title: ComponentLike<typeof AccordionItemTitle>;
+        body: ComponentLike<typeof AccordionItemBody>;
       },
     ];
   };
@@ -121,10 +121,6 @@ export default class AccordionItem extends Component<ItemSignature> {
    * @public
    */
 
-  castTitleComponent(titleComponent: unknown): ComponentLike<TitleSignature> {
-    return titleComponent as ComponentLike<TitleSignature>;
-  }
-
   <template>
     {{#let
       (component
@@ -151,13 +147,13 @@ export default class AccordionItem extends Component<ItemSignature> {
         ...attributes
       >
         {{#if (has-block-params)}}
-          {{yield (hash title=(this.castTitleComponent Title) body=Body)}}
+          {{yield (hash title=Title body=Body)}}
         {{else}}
           <Title id={{titleId}} @controls={{collapsableId}}>
             {{@title}}
           </Title>
           <Body @collapsableId={{collapsableId}} @describedby={{titleId}}>
-            {{yield (hash title=(this.castTitleComponent Title) body=Body)}}
+            {{yield (hash title=Title body=Body)}}
           </Body>
         {{/if}}
       </div>

@@ -1,3 +1,5 @@
+/* global macroCondition */
+/* global macroGetOwnConfig */
 import { action } from '@ember/object';
 import { isBlank } from '@ember/utils';
 import Component from '@glimmer/component';

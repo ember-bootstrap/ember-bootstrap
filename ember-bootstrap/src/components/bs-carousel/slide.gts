@@ -1,3 +1,5 @@
+/* global macroCondition */
+/* global macroGetOwnConfig */
 import Component from '@glimmer/component';
 import { next } from '@ember/runloop';
 import { tracked } from '@glimmer/tracking';

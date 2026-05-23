@@ -1,3 +1,5 @@
+/* global macroCondition */
+/* global macroGetOwnConfig */
 import { on } from '@ember/modifier';
 import bsDefault from '../../../helpers/bs-default.ts';
 import bsNoop from '../../../helpers/bs-noop.ts';

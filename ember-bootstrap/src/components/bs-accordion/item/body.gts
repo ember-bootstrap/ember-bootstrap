@@ -1,3 +1,5 @@
+/* global macroCondition */
+/* global macroGetOwnConfig */
 import { type TemplateOnlyComponent } from '@ember/component/template-only';
 import BsCollapse from '../../bs-collapse.gts';
 
@@ -30,6 +32,7 @@ export interface BodySignature {
 }
 
 export default <template>
+  {{! @glint-expect-error }}
   <BsCollapse
     @collapsed={{@collapsed}}
     class='accordion-collapse'

@@ -1,3 +1,5 @@
+/* global macroCondition */
+/* global macroGetOwnConfig */
 import Component from '@glimmer/component';
 import style_ from 'ember-style-modifier/modifiers/style';
 

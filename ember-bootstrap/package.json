@@ -87,7 +87,7 @@
     "@embroider/macros": "^1.20.1",
     "@embroider/vite": "^1.1.5",
     "@glimmer/component": "^2.1.1",
-    "@glint/ember-tsc": "^1.5.0",
+    "@glint/ember-tsc": "^1.7.5",
     "@glint/template": "^1.7.7",
     "@glint/tsserver-plugin": "^2.0.0",
     "@popperjs/core": "2.11.8",

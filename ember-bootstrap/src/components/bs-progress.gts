@@ -59,9 +59,8 @@ interface BsProgressSignature {
 
 export default <template>
   <div class='progress' ...attributes>
-    {{yield
-      (hash bar=(bsDefault @progressBarComponent (component BsProgressBar)))
-    }}
+    {{! @glint-expect-error }}
+    {{yield (hash bar=(bsDefault @progressBarComponent BsProgressBar))}}
   </div>
 </template> satisfies TemplateOnlyComponent<BsProgressSignature>;
 

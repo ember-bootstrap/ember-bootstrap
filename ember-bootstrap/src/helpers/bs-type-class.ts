@@ -3,7 +3,7 @@ export default function (
   type: string | undefined | null,
   options: { default?: string; outline?: boolean },
 ) {
-  type = type ?? options.defaultValue;
+  type = type ?? options.default;
   if (options.outline) {
     return `${prefix}-outline-${type}`;
   }

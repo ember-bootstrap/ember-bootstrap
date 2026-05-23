@@ -32,7 +32,7 @@ export interface FooterSignature {
 }
 
 export default <template>
-  {{#let (bsDefault @buttonComponent (component BsButton)) as |Button|}}
+  {{#let (bsDefault @buttonComponent BsButton) as |Button|}}
     <div
       class='modal-footer'
       ...attributes
@@ -42,7 +42,9 @@ export default <template>
         {{yield}}
       {{else}}
         {{#if @submitTitle}}
-          <Button @onClick={{@onClose}}>{{bsDefault @closeTitle 'Ok'}}</Button>
+          {{! @glint-expect-error - Glint has issues with ComponentLike vs the actual component. Not sure why }}
+          <Button @onClick={{@onClose}}>{{bsDefault @closeTitle 'Ok'}}</Button>\
+          {{! @glint-expect-error - Glint has issues with ComponentLike vs the actual component. Not sure why }}
           <Button
             @type={{bsDefault @submitButtonType 'primary'}}
             @onClick={{@onSubmit}}
@@ -51,6 +53,7 @@ export default <template>
             {{@submitTitle}}
           </Button>
         {{else}}
+          {{! @glint-expect-error - Glint has issues with ComponentLike vs the actual component. Not sure why }}
           <Button @type='primary' @onClick={{@onClose}}>{{bsDefault
               @closeTitle
               'Ok'

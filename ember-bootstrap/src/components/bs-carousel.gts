@@ -1,3 +1,5 @@
+/* global macroCondition */
+/* global macroGetOwnConfig */
 import { action } from '@ember/object';
 import type {
   CarouselSlideSignature,
@@ -739,7 +741,7 @@ export default class Carousel extends Component<CarouselSignature> {
         {{yield
           (hash
             slide=(component
-              (bsDefault @slideComponent (component BsCarouselSlide))
+              (bsDefault @slideComponent BsCarouselSlide)
               currentSlide=this.currentSlide
               directionalClassName=this.directionalClassName
               followingSlide=this.followingSlide

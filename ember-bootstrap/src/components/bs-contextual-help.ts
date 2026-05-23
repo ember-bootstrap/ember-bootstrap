@@ -161,7 +161,7 @@ export default abstract class ContextualHelp<
    * @public
    */
   @arg
-  delayShow = this.args.delay ?? 0;
+  delayShow: number = this.args.delay ?? 0;
 
   /**
    * Delay hiding the tooltip/popover. This property overrides the general delay set with the `delay` property.
@@ -172,7 +172,7 @@ export default abstract class ContextualHelp<
    * @public
    */
   @arg
-  delayHide = this.args.delay ?? 0;
+  delayHide: number = this.args.delay ?? 0;
 
   /**
    * The duration of the fade transition
@@ -324,7 +324,7 @@ export default abstract class ContextualHelp<
    * @type boolean
    * @private
    */
-  get _renderInPlace() {
+  get _renderInPlace(): boolean {
     return this.args.renderInPlace || !this.destinationElement;
   }
 
