@@ -1,8 +1,6 @@
 import { action } from '@ember/object';
 import Component from '@glimmer/component';
 import { on } from '@ember/modifier';
-import { macroCondition } from '@embroider/macros';
-declare function macroGetOwnConfig(path: string): boolean;
 
 export interface TitleSignature {
   Args: {

@@ -1,7 +1,5 @@
 import Component from '@glimmer/component';
 import style_ from 'ember-style-modifier/modifiers/style';
-import { macroCondition } from '@embroider/macros';
-declare function macroGetOwnConfig(path: string): boolean;
 
 export interface ProgressBarSignature {
   Args: {

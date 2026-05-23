@@ -11,8 +11,6 @@ import { concat, hash } from '@ember/helper';
 import didInsert from '@ember/render-modifiers/modifiers/did-insert';
 import bsEq from '../../helpers/bs-eq.ts';
 import focusTrap from 'ember-focus-trap/modifiers/focus-trap';
-import { macroCondition } from '@embroider/macros';
-declare function macroGetOwnConfig(path: string): boolean;
 
 export type ModalSize = 'sm' | 'lg' | 'xl' | null;
 export type ModalFullscreen =

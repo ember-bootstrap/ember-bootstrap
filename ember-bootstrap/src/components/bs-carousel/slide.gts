@@ -7,8 +7,6 @@ import type Owner from '@ember/owner';
 import type { PresentationState } from '../bs-carousel.gts';
 import { modifier } from 'ember-modifier';
 import didUpdate from '@ember/render-modifiers/modifiers/did-update';
-import { macroCondition } from '@embroider/macros';
-declare function macroGetOwnConfig(path: string): boolean;
 
 export type DirectionalClassName = keyof Pick<CarouselSlide, 'left' | 'right'>;
 export type OrderClassName = keyof Pick<CarouselSlide, 'prev' | 'next'>;

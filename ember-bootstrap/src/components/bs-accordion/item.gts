@@ -4,13 +4,11 @@ import arg from '../../utils/decorators/arg.ts';
 import type { ComponentLike } from '@glint/template';
 import type { TitleSignature } from './item/title.gts';
 import type { BodySignature } from './item/body.gts';
-import { macroCondition } from '@embroider/macros';
 import { fn, hash, uniqueId } from '@ember/helper';
 import bsDefault from '../../helpers/bs-default.ts';
 import bsNoop from '../../helpers/bs-noop.ts';
 import AccordionItemTitle from './item/title.gts';
 import AccordionItemBody from './item/body.gts';
-declare function macroGetOwnConfig(path: string): boolean;
 
 export interface ItemSignature {
   Args: {

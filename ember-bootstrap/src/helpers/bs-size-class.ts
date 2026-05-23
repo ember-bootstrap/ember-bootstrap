@@ -1,12 +1,10 @@
-import { helper } from '@ember/component/helper';
 import { isBlank } from '@ember/utils';
 
-export function sizeClassHelper(
-  [prefix, size]: [string, string | undefined | null],
-  { default: defaultValue }: { default?: string },
+export default function sizeClassHelper(
+  prefix: string,
+  size: string | undefined | null,
+  options: { default?: string },
 ) {
-  size = size ?? defaultValue;
+  size = size ?? options.default;
   return isBlank(size) ? null : `${prefix}-${size}`;
 }
-
-export default helper(sizeClassHelper);

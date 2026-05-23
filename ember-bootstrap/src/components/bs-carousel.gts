@@ -15,8 +15,6 @@ import bsEq from '../helpers/bs-eq.ts';
 import { fn, hash } from '@ember/helper';
 import bsDefault from '../helpers/bs-default.ts';
 import BsCarouselSlide from './bs-carousel/slide.gts';
-import { macroCondition } from '@embroider/macros';
-declare function macroGetOwnConfig(path: string): boolean;
 
 export type PresentationState = 'didTransition' | 'willTransit';
 export type TransitionType = 'slide' | 'fade';

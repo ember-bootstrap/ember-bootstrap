@@ -1,3 +1,4 @@
+/* global macroCondition */
 /* global macroGetOwnConfig */
 import { action } from '@ember/object';
 import Component from '@glimmer/component';
@@ -10,7 +11,6 @@ import BsNavbarToggle from './bs-navbar/toggle.gjs';
 import BsNavbarContent from './bs-navbar/content.gjs';
 import BsNavbarNav from './bs-navbar/nav.js';
 import BsNavbarLinkTo from './bs-navbar/link-to.gjs';
-import { macroCondition } from '@embroider/macros';
 
 /**
   Component to generate [Bootstrap navbars](http://getbootstrap.com/components/#navbar).

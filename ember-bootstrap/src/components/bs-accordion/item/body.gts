@@ -1,6 +1,4 @@
 import { type TemplateOnlyComponent } from '@ember/component/template-only';
-import { macroCondition } from '@embroider/macros';
-declare function macroGetOwnConfig(path: string): boolean;
 import BsCollapse from '../../bs-collapse.gts';
 
 /**

@@ -9,8 +9,6 @@ import didUpdate from '@ember/render-modifiers/modifiers/did-update';
 import { on } from '@ember/modifier';
 import element_ from 'ember-element-helper/helpers/element';
 import bsDefault from '../helpers/bs-default.ts';
-import { macroCondition } from '@embroider/macros';
-declare function macroGetOwnConfig(path: string): boolean;
 
 interface BsAlertSignature {
   Args: {

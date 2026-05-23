@@ -7,8 +7,6 @@ import bsTypeClass from '../helpers/bs-type-class.ts';
 import { on } from '@ember/modifier';
 import didUpdate from '@ember/render-modifiers/modifiers/did-update';
 import { hash } from '@ember/helper';
-import { macroCondition } from '@embroider/macros';
-declare function macroGetOwnConfig(path: string): boolean;
 
 type ButtonState = 'default' | 'pending' | 'fulfilled' | 'rejected';
 

@@ -1,7 +1,6 @@
 import { isArray } from '@ember/array';
 import Button from '../bs-button.gts';
 import { guidFor } from '@ember/object/internals';
-import { getOwnConfig, macroCondition } from '@embroider/macros';
 import { on } from '@ember/modifier';
 import didUpdate from '@ember/render-modifiers/modifiers/did-update';
 import bsSizeClass from '../../helpers/bs-size-class.ts';

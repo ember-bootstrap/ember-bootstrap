@@ -2,8 +2,6 @@ import { on } from '@ember/modifier';
 import bsDefault from '../../../helpers/bs-default.ts';
 import bsNoop from '../../../helpers/bs-noop.ts';
 import type { TemplateOnlyComponent } from '@ember/component/template-only';
-import { macroCondition } from '@embroider/macros';
-declare function macroGetOwnConfig(path: string): boolean;
 
 export interface CloseSignature {
   Args: {
