@@ -145,7 +145,7 @@ importers:
         version: 6.1.0
       ember-template-lint-plugin-prettier:
         specifier: 5.0.0
-        version: 5.0.0(ember-template-lint@6.1.0)(prettier@3.6.2)
+        version: 5.0.0(ember-template-lint@6.1.0)(prettier@3.9.6)
       eslint:
         specifier: 8.57.1
         version: 8.57.1
@@ -160,7 +160,7 @@ importers:
         version: 17.23.1(eslint@8.57.1)(typescript@5.9.3)
       eslint-plugin-prettier:
         specifier: 5.5.4
-        version: 5.5.4(@types/eslint@9.6.1)(eslint-config-prettier@10.1.8(eslint@8.57.1))(eslint@8.57.1)(prettier@3.6.2)
+        version: 5.5.4(@types/eslint@9.6.1)(eslint-config-prettier@10.1.8(eslint@8.57.1))(eslint@8.57.1)(prettier@3.9.6)
       eslint-plugin-qunit:
         specifier: 8.2.5
         version: 8.2.5(eslint@8.57.1)
@@ -192,8 +192,8 @@ importers:
         specifier: 2.1.0
         version: 2.1.0
       prettier:
-        specifier: 3.6.2
-        version: 3.6.2
+        specifier: 3.9.6
+        version: 3.9.6
       qunit:
         specifier: 2.24.2
         version: 2.24.2
@@ -217,7 +217,7 @@ importers:
         version: 16.0.0(postcss@8.5.6)(stylelint@16.26.1(typescript@5.9.3))
       stylelint-prettier:
         specifier: 5.0.3
-        version: 5.0.3(prettier@3.6.2)(stylelint@16.26.1(typescript@5.9.3))
+        version: 5.0.3(prettier@3.9.6)(stylelint@16.26.1(typescript@5.9.3))
       tracked-built-ins:
         specifier: 4.0.0
         version: 4.0.0(@babel/core@7.28.6)
@@ -347,7 +347,7 @@ importers:
         version: 5.13.0
       ember-template-lint-plugin-prettier:
         specifier: 5.0.0
-        version: 5.0.0(ember-template-lint@5.13.0)(prettier@3.6.2)
+        version: 5.0.0(ember-template-lint@5.13.0)(prettier@3.9.6)
       eslint:
         specifier: 8.57.1
         version: 8.57.1
@@ -365,7 +365,7 @@ importers:
         version: 17.23.1(eslint@8.57.1)(typescript@5.9.3)
       eslint-plugin-prettier:
         specifier: 5.5.4
-        version: 5.5.4(@types/eslint@9.6.1)(eslint-config-prettier@10.1.8(eslint@8.57.1))(eslint@8.57.1)(prettier@3.6.2)
+        version: 5.5.4(@types/eslint@9.6.1)(eslint-config-prettier@10.1.8(eslint@8.57.1))(eslint@8.57.1)(prettier@3.9.6)
       eslint-plugin-qunit:
         specifier: 8.2.5
         version: 8.2.5(eslint@8.57.1)
@@ -374,7 +374,7 @@ importers:
         version: 7.6.6
       prettier-plugin-ember-template-tag:
         specifier: 2.1.0
-        version: 2.1.0(prettier@3.6.2)
+        version: 2.1.0(prettier@3.9.6)
       release-it:
         specifier: 19.0.6
         version: 19.0.6(@types/node@24.10.1)
@@ -584,7 +584,7 @@ importers:
         version: 6.1.0
       ember-template-lint-plugin-prettier:
         specifier: 5.0.0
-        version: 5.0.0(ember-template-lint@6.1.0)(prettier@3.6.2)
+        version: 5.0.0(ember-template-lint@6.1.0)(prettier@3.9.6)
       ember-try:
         specifier: 4.0.0
         version: 4.0.0(encoding@0.1.13)
@@ -605,7 +605,7 @@ importers:
         version: 17.23.1(eslint@8.57.1)(typescript@5.9.3)
       eslint-plugin-prettier:
         specifier: 5.5.4
-        version: 5.5.4(@types/eslint@9.6.1)(eslint-config-prettier@10.1.8(eslint@8.57.1))(eslint@8.57.1)(prettier@3.6.2)
+        version: 5.5.4(@types/eslint@9.6.1)(eslint-config-prettier@10.1.8(eslint@8.57.1))(eslint@8.57.1)(prettier@3.9.6)
       eslint-plugin-qunit:
         specifier: 8.2.5
         version: 8.2.5(eslint@8.57.1)
@@ -619,11 +619,11 @@ importers:
         specifier: 4.7.0
         version: 4.7.0
       prettier:
-        specifier: 3.6.2
-        version: 3.6.2
+        specifier: 3.9.6
+        version: 3.9.6
       prettier-plugin-ember-template-tag:
         specifier: 2.1.0
-        version: 2.1.0(prettier@3.6.2)
+        version: 2.1.0(prettier@3.9.6)
       qunit:
         specifier: 2.24.2
         version: 2.24.2
@@ -2295,6 +2295,7 @@ packages:
 
   '@ungap/structured-clone@1.3.0':
     resolution: {integrity: sha512-WmoN8qaIAo7WTYWbAZuG8PYEhn5fkz7dZrqTBZ7dtt//lL2Gwms1IcnQ5yHqjDfX8Ft5j4YzDM23f87zBfDe9g==}
+    deprecated: Potential CWE-502 - Update to 1.3.1 or higher
 
   '@webassemblyjs/ast@1.14.1':
     resolution: {integrity: sha512-nuBEDgQfm1ccRp/8bCQrx1frohyufl4JlbMMZ4P1wpeOfDhF6FQkxZJ1b/e+PLwr6X1Nhw6OLme5usuBWYBvuQ==}
@@ -2344,6 +2345,7 @@ packages:
   '@xmldom/xmldom@0.8.11':
     resolution: {integrity: sha512-cQzWCtO6C8TQiYl1ruKNn2U6Ao4o4WBBcbL61yJl84x+j5sOWWFU9X7DpND8XZG3daDppSsigMdfAIl2upQBRw==}
     engines: {node: '>=10.0.0'}
+    deprecated: this version has critical issues, please update to the latest version
 
   '@xtuc/ieee754@1.2.0':
     resolution: {integrity: sha512-DX8nKgqcGwsc0eJSqYt5lwP4DH5FlHnmuWWBRy7X0NcaGR0ZtuyeESgMwTYVEtxmsNGY+qit4QYT/MIYTOTPeA==}
@@ -2853,7 +2855,7 @@ packages:
   basic-ftp@5.0.5:
     resolution: {integrity: sha512-4Bcg1P8xhUuqcii/S0Z9wiHIrQVPMermM1any+MX5GeGD7faD3/msQUDGLol9wOcz4/jbg/WJnGqoJF6LiBdtg==}
     engines: {node: '>=10.0.0'}
-    deprecated: Security vulnerability fixed in 5.2.0, please upgrade
+    deprecated: Security vulnerability fixed in 5.2.1, please upgrade
 
   batch@0.6.1:
     resolution: {integrity: sha512-x+VAiMRL6UPkx+kudNvxTl6hB2XNNCG2r+7wixVfIYwu/2HKRXimwQyaumLjMveWvT2Hkd/cAJw+QBMfJ/EKVw==}
@@ -3898,9 +3900,6 @@ packages:
 
   decorator-transforms@1.2.1:
     resolution: {integrity: sha512-UUtmyfdlHvYoX3VSG1w5rbvBQ2r5TX1JsE4hmKU9snleFymadA3VACjl6SRfi9YgBCSjBbfQvR1bs9PRW9yBKw==}
-
-  decorator-transforms@2.3.0:
-    resolution: {integrity: sha512-jo8c1ss9yFPudHuYYcrJ9jpkDZIoi+lOGvt+Uyp9B+dz32i50icRMx9Bfa8hEt7TnX1FyKWKkjV+cUdT/ep2kA==}
 
   decorator-transforms@2.3.1:
     resolution: {integrity: sha512-PDOk74Zqqy0946Lx4ckXxbgG6uhPScOICtrxL/pXmfznxchqNee0TaJISClGJQe6FeT8ohGqsOgdjfahm4FwEw==}
@@ -7571,8 +7570,8 @@ packages:
     engines: {node: '>=10.13.0'}
     hasBin: true
 
-  prettier@3.6.2:
-    resolution: {integrity: sha512-I7AIg5boAr5R0FFtJ6rCfD+LFsWHp81dolrFD8S79U9tb8Az2nGrJncnMSnys+bpQJfRUzqs9hnA81OAA3hCuQ==}
+  prettier@3.9.6:
+    resolution: {integrity: sha512-OpN0zzVdiaiAhxpuuj5efpIS4sY9j7bY6uR5mnj5yPzGkdkjNKSJeUThPb60Jw29QuAZgA4o+/iB49kFiaBX6g==}
     engines: {node: '>=14'}
     hasBin: true
 
@@ -8679,9 +8678,6 @@ packages:
     resolution: {integrity: sha512-MeQTA1r0litLUf0Rp/iisCaL8761lKAZHaimlbGK4j0HysC4PLfqygQj9srcs0m2RdtDYnF8UuYyKpbjHYp7Jw==}
     engines: {node: ^14.18.0 || >=16.0.0}
 
-  tabbable@6.3.0:
-    resolution: {integrity: sha512-EIHvdY5bPLuWForiR/AN2Bxngzpuwn1is4asboytXtpTgsArc+WmSJKVLlhdh71u7jFcryDqB2A8lQvj78MkyQ==}
-
   tabbable@6.4.0:
     resolution: {integrity: sha512-05PUHKSNE8ou2dwIxTngl4EzcnsCDZGJ/iCLtDflR/SHB/ny14rXc+qU5P4mG9JkusiV7EivzY9Mhm55AzAvCg==}
 
@@ -9142,6 +9138,7 @@ packages:
 
   uuid@8.3.2:
     resolution: {integrity: sha512-+NYs2QeMWy+GWFOEm9xnn6HCDp0l7QBD7ml8zLUmJ+93Q5NF0NocErnwkTkXVFNiX3/fpC6afS8Dhb/gz7R7eg==}
+    deprecated: uuid@10 and below is no longer supported.  For ESM codebases, update to uuid@latest.  For CommonJS codebases, use uuid@11 (but be aware this version will likely be deprecated in 2028).
     hasBin: true
 
   v8-compile-cache@2.4.0:
@@ -10438,7 +10435,7 @@ snapshots:
       '@embroider/addon-shim': 1.10.2
       '@embroider/macros': 1.19.5(@glint/template@1.7.3)
       '@simple-dom/interface': 1.4.0
-      decorator-transforms: 2.3.0(@babel/core@7.28.6)
+      decorator-transforms: 2.3.1(@babel/core@7.28.6)
       dom-element-descriptors: 0.5.1
     transitivePeerDependencies:
       - '@babel/core'
@@ -11249,9 +11246,9 @@ snapshots:
 
   '@popperjs/core@2.11.8': {}
 
-  '@prettier/sync@0.2.1(prettier@3.6.2)':
+  '@prettier/sync@0.2.1(prettier@3.9.6)':
     dependencies:
-      prettier: 3.6.2
+      prettier: 3.9.6
 
   '@release-it-plugins/lerna-changelog@8.0.1(release-it@19.0.6(@types/node@24.10.1))':
     dependencies:
@@ -13455,13 +13452,6 @@ snapshots:
     transitivePeerDependencies:
       - '@babel/core'
 
-  decorator-transforms@2.3.0(@babel/core@7.28.6):
-    dependencies:
-      '@babel/plugin-syntax-decorators': 7.28.6(@babel/core@7.28.6)
-      babel-import-util: 3.0.1
-    transitivePeerDependencies:
-      - '@babel/core'
-
   decorator-transforms@2.3.1(@babel/core@7.28.6):
     dependencies:
       '@babel/plugin-syntax-decorators': 7.28.6(@babel/core@7.28.6)
@@ -14475,7 +14465,7 @@ snapshots:
   ember-modifier@4.2.2(@babel/core@7.28.6):
     dependencies:
       '@embroider/addon-shim': 1.10.2
-      decorator-transforms: 2.3.0(@babel/core@7.28.6)
+      decorator-transforms: 2.3.1(@babel/core@7.28.6)
       ember-cli-normalize-entity-name: 1.0.0
       ember-cli-string-utils: 1.1.0
     transitivePeerDependencies:
@@ -14563,7 +14553,7 @@ snapshots:
   ember-render-helpers@2.0.0(@babel/core@7.28.6):
     dependencies:
       '@embroider/addon-shim': 1.10.2
-      decorator-transforms: 2.3.0(@babel/core@7.28.6)
+      decorator-transforms: 2.3.1(@babel/core@7.28.6)
     transitivePeerDependencies:
       - '@babel/core'
       - supports-color
@@ -14588,7 +14578,7 @@ snapshots:
     dependencies:
       '@embroider/addon-shim': 1.10.2
       '@types/sinon': 17.0.4
-      decorator-transforms: 2.3.0(@babel/core@7.28.6)
+      decorator-transforms: 2.3.1(@babel/core@7.28.6)
       ember-source: 6.11.1(@glimmer/component@1.1.2(@babel/core@7.28.6))(rsvp@4.8.5)
       qunit: 2.24.2
       sinon: 21.0.0
@@ -14675,7 +14665,7 @@ snapshots:
       '@ember/string': 4.0.1
       '@embroider/addon-shim': 1.10.2
       csstype: 3.2.3
-      decorator-transforms: 2.3.0(@babel/core@7.28.6)
+      decorator-transforms: 2.3.1(@babel/core@7.28.6)
       ember-modifier: 4.2.2(@babel/core@7.28.6)
     transitivePeerDependencies:
       - '@babel/core'
@@ -14703,18 +14693,18 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  ember-template-lint-plugin-prettier@5.0.0(ember-template-lint@5.13.0)(prettier@3.6.2):
+  ember-template-lint-plugin-prettier@5.0.0(ember-template-lint@5.13.0)(prettier@3.9.6):
     dependencies:
-      '@prettier/sync': 0.2.1(prettier@3.6.2)
+      '@prettier/sync': 0.2.1(prettier@3.9.6)
       ember-template-lint: 5.13.0
-      prettier: 3.6.2
+      prettier: 3.9.6
       prettier-linter-helpers: 1.0.0
 
-  ember-template-lint-plugin-prettier@5.0.0(ember-template-lint@6.1.0)(prettier@3.6.2):
+  ember-template-lint-plugin-prettier@5.0.0(ember-template-lint@6.1.0)(prettier@3.9.6):
     dependencies:
-      '@prettier/sync': 0.2.1(prettier@3.6.2)
+      '@prettier/sync': 0.2.1(prettier@3.9.6)
       ember-template-lint: 6.1.0
-      prettier: 3.6.2
+      prettier: 3.9.6
       prettier-linter-helpers: 1.0.0
 
   ember-template-lint@5.13.0:
@@ -15099,10 +15089,10 @@ snapshots:
     transitivePeerDependencies:
       - typescript
 
-  eslint-plugin-prettier@5.5.4(@types/eslint@9.6.1)(eslint-config-prettier@10.1.8(eslint@8.57.1))(eslint@8.57.1)(prettier@3.6.2):
+  eslint-plugin-prettier@5.5.4(@types/eslint@9.6.1)(eslint-config-prettier@10.1.8(eslint@8.57.1))(eslint@8.57.1)(prettier@3.9.6):
     dependencies:
       eslint: 8.57.1
-      prettier: 3.6.2
+      prettier: 3.9.6
       prettier-linter-helpers: 1.0.0
       synckit: 0.11.11
     optionalDependencies:
@@ -15710,7 +15700,7 @@ snapshots:
 
   focus-trap@7.6.6:
     dependencies:
-      tabbable: 6.3.0
+      tabbable: 6.4.0
 
   focus-trap@8.0.1:
     dependencies:
@@ -18497,17 +18487,17 @@ snapshots:
     dependencies:
       fast-diff: 1.3.0
 
-  prettier-plugin-ember-template-tag@2.1.0(prettier@3.6.2):
+  prettier-plugin-ember-template-tag@2.1.0(prettier@3.9.6):
     dependencies:
       '@babel/core': 7.28.6
       content-tag: 4.1.0
-      prettier: 3.6.2
+      prettier: 3.9.6
     transitivePeerDependencies:
       - supports-color
 
   prettier@2.8.8: {}
 
-  prettier@3.6.2: {}
+  prettier@3.9.6: {}
 
   pretty-hrtime@1.0.3: {}
 
@@ -19723,9 +19713,9 @@ snapshots:
       stylelint: 16.26.1(typescript@5.9.3)
       stylelint-config-recommended: 17.0.0(stylelint@16.26.1(typescript@5.9.3))
 
-  stylelint-prettier@5.0.3(prettier@3.6.2)(stylelint@16.26.1(typescript@5.9.3)):
+  stylelint-prettier@5.0.3(prettier@3.9.6)(stylelint@16.26.1(typescript@5.9.3)):
     dependencies:
-      prettier: 3.6.2
+      prettier: 3.9.6
       prettier-linter-helpers: 1.0.0
       stylelint: 16.26.1(typescript@5.9.3)
 
@@ -19845,8 +19835,6 @@ snapshots:
   synckit@0.11.11:
     dependencies:
       '@pkgr/core': 0.2.9
-
-  tabbable@6.3.0: {}
 
   tabbable@6.4.0: {}
 
@@ -20141,7 +20129,7 @@ snapshots:
   tracked-built-ins@4.0.0(@babel/core@7.28.6):
     dependencies:
       '@embroider/addon-shim': 1.10.2
-      decorator-transforms: 2.3.0(@babel/core@7.28.6)
+      decorator-transforms: 2.3.1(@babel/core@7.28.6)
       ember-tracked-storage-polyfill: 1.0.0
     transitivePeerDependencies:
       - '@babel/core'
