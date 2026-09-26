@@ -11,8 +11,14 @@ import {
   waitUntil,
   triggerKeyEvent,
 } from '@ember/test-helpers';
-import { test, testBS5, visibilityClass } from '../../helpers/bootstrap';
+import {
+  test,
+  testBS5,
+  testRequiringScrollbar,
+  visibilityClass,
+} from '../../helpers/bootstrap';
 import setupNoDeprecations from '../../helpers/setup-no-deprecations';
+import setupStylesheetSupport from '../../helpers/setup-stylesheet-support';
 import sinon from 'sinon';
 import { skipTransition } from 'ember-bootstrap/utils/transition-end';
 import BsModal, {
@@ -28,9 +34,83 @@ import type { TemplateOnlyComponent } from '@ember/component/template-only';
 
 const isSafari = !!(window as unknown as { safari?: object }).safari;
 
+// Width the page's vertical scrollbar currently takes from the layout.
+function pageScrollbarWidth() {
+  return window.innerWidth - document.documentElement.clientWidth;
+}
+
+// Width available to the body's content, i.e. what the page lays out into.
+function bodyContentWidth() {
+  const { body } = document;
+  const style = getComputedStyle(body);
+  return (
+    body.clientWidth -
+    parseFloat(style.paddingLeft) -
+    parseFloat(style.paddingRight)
+  );
+}
+
 module('Integration | Component | bs-modal', function (hooks) {
   setupRenderingTest(hooks);
   setupNoDeprecations(hooks);
+  setupStylesheetSupport(hooks);
+
+  testRequiringScrollbar(
+    'Opening pads the body by the hidden scrollbar width so the page does not shift',
+    async function (assert) {
+      this.insertCSSRule('body { min-height: 200vh; }');
+      const scrollbarWidth = pageScrollbarWidth();
+      const contentWidth = bodyContentWidth();
+      assert.true(scrollbarWidth > 0, 'precondition: the page has a scrollbar');
+
+      await render(
+        <template>
+          <BsModal @open={{true}}>Hello world!</BsModal>
+        </template>,
+      );
+
+      assert.strictEqual(pageScrollbarWidth(), 0, 'page scrollbar is hidden');
+      assert.strictEqual(
+        document.body.style.paddingRight,
+        `${scrollbarWidth}px`,
+        'body is padded by the scrollbar width',
+      );
+      assert.strictEqual(
+        bodyContentWidth(),
+        contentWidth,
+        'page content keeps its width',
+      );
+    },
+  );
+
+  testRequiringScrollbar(
+    'Measures the scrollbar before a `.modal-open` stylesheet rule can hide it',
+    async function (assert) {
+      this.insertCSSRule('body { min-height: 200vh; }');
+      // Bootstrap 4's rule, and what apps add to lock scrolling themselves.
+      this.insertCSSRule('.modal-open { overflow: hidden; }');
+      const scrollbarWidth = pageScrollbarWidth();
+      const contentWidth = bodyContentWidth();
+      assert.true(scrollbarWidth > 0, 'precondition: the page has a scrollbar');
+
+      await render(
+        <template>
+          <BsModal @open={{true}}>Hello world!</BsModal>
+        </template>,
+      );
+
+      assert.strictEqual(
+        document.body.style.paddingRight,
+        `${scrollbarWidth}px`,
+        'body is padded by the scrollbar width',
+      );
+      assert.strictEqual(
+        bodyContentWidth(),
+        contentWidth,
+        'page content keeps its width',
+      );
+    },
+  );
 
   test('Modal yields header, footer and body components', async function (assert) {
     await render(
