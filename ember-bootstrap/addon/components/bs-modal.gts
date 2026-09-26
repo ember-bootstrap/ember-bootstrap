@@ -457,6 +457,11 @@ export default class Modal extends Component<Signature> {
    */
   _originalBodyPad: string = '';
 
+  /**
+   * @private
+   */
+  _originalBodyOverflow: string = '';
+
   @action
   close() {
     if (this.args.onHide?.() !== false) {
@@ -492,7 +497,17 @@ export default class Modal extends Component<Signature> {
     }
     this._isOpen = true;
 
+    // Bootstrap 4 sets overflow: hidden on body.modal-open, so check for body
+    // scroll before that is applied, Bootstrap 5 hides the body scrollbar in js
+    if (!isFastBoot(this)) {
+      this.checkScrollbar();
+    }
+
     this.addBodyClass();
+
+    if (!isFastBoot(this)) {
+      this.setScrollbar();
+    }
 
     this.inDom = true;
 
@@ -500,11 +515,6 @@ export default class Modal extends Component<Signature> {
 
     if (this.isDestroyed) {
       return;
-    }
-
-    if (!isFastBoot(this)) {
-      this.checkScrollbar();
-      this.setScrollbar();
     }
 
     await afterRender();
@@ -655,7 +665,8 @@ export default class Modal extends Component<Signature> {
    */
   checkScrollbar() {
     const fullWindowWidth = window.innerWidth;
-    this.bodyIsOverflowing = document.body.clientWidth < fullWindowWidth;
+    this.bodyIsOverflowing =
+      document.documentElement.clientWidth < fullWindowWidth;
   }
 
   /**
@@ -666,8 +677,10 @@ export default class Modal extends Component<Signature> {
     const bodyPad = parseInt(document.body.style.paddingRight || '0', 10);
     this._originalBodyPad = document.body.style.paddingRight || '';
     if (this.bodyIsOverflowing) {
-      document.body.style.paddingRight = `${bodyPad + this.scrollbarWidth}`;
+      document.body.style.paddingRight = `${bodyPad + this.scrollbarWidth}px`;
     }
+    this._originalBodyOverflow = document.body.style.overflow;
+    document.body.style.overflow = 'hidden';
   }
 
   /**
@@ -676,6 +689,7 @@ export default class Modal extends Component<Signature> {
    */
   resetScrollbar() {
     document.body.style.paddingRight = this._originalBodyPad;
+    document.body.style.overflow = this._originalBodyOverflow;
   }
 
   addBodyClass() {
@@ -711,14 +725,11 @@ export default class Modal extends Component<Signature> {
   @cached
   get scrollbarWidth() {
     const scrollDiv = document.createElement('div');
-    scrollDiv.className = 'modal-scrollbar-measure';
-    const modalEl = this.modalElement;
-    if (!modalEl.parentNode || !scrollDiv.parentNode) {
-      return 0;
-    }
-    modalEl.parentNode.insertBefore(scrollDiv, modalEl.nextSibling);
+    scrollDiv.style.cssText =
+      'position:absolute;top:-9999px;width:50px;height:50px;overflow:scroll;';
+    document.body.appendChild(scrollDiv);
     const scrollbarWidth = scrollDiv.offsetWidth - scrollDiv.clientWidth;
-    scrollDiv.parentNode.removeChild(scrollDiv);
+    scrollDiv.remove();
     return scrollbarWidth;
   }
 
