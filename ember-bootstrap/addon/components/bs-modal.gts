@@ -74,6 +74,11 @@ interface Signature {
   Element: HTMLElement;
 }
 
+// shared by all open modals
+const scrollLockHolders = new Set<object>();
+let originalBodyPad = '';
+let originalBodyOverflow = '';
+
 /**
   Component for creating [Bootstrap modals](http://getbootstrap.com/javascript/#modals) with custom markup.
 
@@ -452,16 +457,6 @@ export default class Modal extends Component<Signature> {
    * @private
    */
   bodyIsOverflowing = false;
-  /**
-   * @private
-   */
-  _originalBodyPad: string = '';
-
-  /**
-   * @private
-   */
-  _originalBodyOverflow: string = '';
-
   @action
   close() {
     if (this.args.onHide?.() !== false) {
@@ -674,13 +669,18 @@ export default class Modal extends Component<Signature> {
    * @private
    */
   setScrollbar() {
-    const bodyPad = parseInt(document.body.style.paddingRight || '0', 10);
-    this._originalBodyPad = document.body.style.paddingRight || '';
-    if (this.bodyIsOverflowing) {
-      document.body.style.paddingRight = `${bodyPad + this.scrollbarWidth}px`;
+    if (scrollLockHolders.has(this)) return;
+    if (scrollLockHolders.size === 0) {
+      originalBodyPad = document.body.style.paddingRight || '';
+      originalBodyOverflow = document.body.style.overflow;
+
+      const bodyPad = parseInt(originalBodyPad || '0', 10);
+      if (this.bodyIsOverflowing) {
+        document.body.style.paddingRight = `${bodyPad + this.scrollbarWidth}px`;
+      }
+      document.body.style.overflow = 'hidden';
     }
-    this._originalBodyOverflow = document.body.style.overflow;
-    document.body.style.overflow = 'hidden';
+    scrollLockHolders.add(this);
   }
 
   /**
@@ -688,8 +688,10 @@ export default class Modal extends Component<Signature> {
    * @private
    */
   resetScrollbar() {
-    document.body.style.paddingRight = this._originalBodyPad;
-    document.body.style.overflow = this._originalBodyOverflow;
+    // a modal that never took the lock (or already released it) does nothing
+    if (!scrollLockHolders.delete(this) || scrollLockHolders.size > 0) return;
+    document.body.style.paddingRight = originalBodyPad;
+    document.body.style.overflow = originalBodyOverflow;
   }
 
   addBodyClass() {

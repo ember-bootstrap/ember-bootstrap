@@ -112,6 +112,39 @@ module('Integration | Component | bs-modal', function (hooks) {
     },
   );
 
+  test('Replacing an open modal with another in the same render keeps the body locked until the last one closes', async function (assert) {
+    // e.g. a route's loading template showing a modal that the loaded
+    // template's modal replaces
+    class State {
+      @tracked step = 'loading';
+    }
+    const state = new State();
+    const eq = (a: unknown, b: unknown) => a === b;
+
+    await render(
+      <template>
+        {{#if (eq state.step 'loading')}}
+          <BsModal @open={{true}} @fade={{false}}>Loading…</BsModal>
+        {{else if (eq state.step 'loaded')}}
+          <BsModal @open={{true}} @fade={{false}}>Loaded</BsModal>
+        {{/if}}
+      </template>,
+    );
+    assert.strictEqual(document.body.style.overflow, 'hidden', 'locked');
+
+    state.step = 'loaded';
+    await settled();
+    assert.strictEqual(
+      document.body.style.overflow,
+      'hidden',
+      'still locked under the replacement modal',
+    );
+
+    state.step = 'closed';
+    await settled();
+    assert.strictEqual(document.body.style.overflow, '', 'unlocked');
+  });
+
   test('Modal yields header, footer and body components', async function (assert) {
     await render(
       <template>
