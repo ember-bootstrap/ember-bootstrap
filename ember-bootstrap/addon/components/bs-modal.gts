@@ -74,6 +74,11 @@ interface Signature {
   Element: HTMLElement;
 }
 
+// shared by all open modals
+const scrollLockHolders = new Set<object>();
+let originalBodyPad = '';
+let originalBodyOverflow = '';
+
 /**
   Component for creating [Bootstrap modals](http://getbootstrap.com/javascript/#modals) with custom markup.
 
@@ -452,11 +457,6 @@ export default class Modal extends Component<Signature> {
    * @private
    */
   bodyIsOverflowing = false;
-  /**
-   * @private
-   */
-  _originalBodyPad: string = '';
-
   @action
   close() {
     if (this.args.onHide?.() !== false) {
@@ -492,7 +492,17 @@ export default class Modal extends Component<Signature> {
     }
     this._isOpen = true;
 
+    // Bootstrap 4 sets overflow: hidden on body.modal-open, so check for body
+    // scroll before that is applied, Bootstrap 5 hides the body scrollbar in js
+    if (!isFastBoot(this)) {
+      this.checkScrollbar();
+    }
+
     this.addBodyClass();
+
+    if (!isFastBoot(this)) {
+      this.setScrollbar();
+    }
 
     this.inDom = true;
 
@@ -500,11 +510,6 @@ export default class Modal extends Component<Signature> {
 
     if (this.isDestroyed) {
       return;
-    }
-
-    if (!isFastBoot(this)) {
-      this.checkScrollbar();
-      this.setScrollbar();
     }
 
     await afterRender();
@@ -655,7 +660,8 @@ export default class Modal extends Component<Signature> {
    */
   checkScrollbar() {
     const fullWindowWidth = window.innerWidth;
-    this.bodyIsOverflowing = document.body.clientWidth < fullWindowWidth;
+    this.bodyIsOverflowing =
+      document.documentElement.clientWidth < fullWindowWidth;
   }
 
   /**
@@ -663,11 +669,18 @@ export default class Modal extends Component<Signature> {
    * @private
    */
   setScrollbar() {
-    const bodyPad = parseInt(document.body.style.paddingRight || '0', 10);
-    this._originalBodyPad = document.body.style.paddingRight || '';
-    if (this.bodyIsOverflowing) {
-      document.body.style.paddingRight = `${bodyPad + this.scrollbarWidth}`;
+    if (scrollLockHolders.has(this)) return;
+    if (scrollLockHolders.size === 0) {
+      originalBodyPad = document.body.style.paddingRight || '';
+      originalBodyOverflow = document.body.style.overflow;
+
+      const bodyPad = parseInt(originalBodyPad || '0', 10);
+      if (this.bodyIsOverflowing) {
+        document.body.style.paddingRight = `${bodyPad + this.scrollbarWidth}px`;
+      }
+      document.body.style.overflow = 'hidden';
     }
+    scrollLockHolders.add(this);
   }
 
   /**
@@ -675,7 +688,10 @@ export default class Modal extends Component<Signature> {
    * @private
    */
   resetScrollbar() {
-    document.body.style.paddingRight = this._originalBodyPad;
+    // a modal that never took the lock (or already released it) does nothing
+    if (!scrollLockHolders.delete(this) || scrollLockHolders.size > 0) return;
+    document.body.style.paddingRight = originalBodyPad;
+    document.body.style.overflow = originalBodyOverflow;
   }
 
   addBodyClass() {
@@ -711,14 +727,11 @@ export default class Modal extends Component<Signature> {
   @cached
   get scrollbarWidth() {
     const scrollDiv = document.createElement('div');
-    scrollDiv.className = 'modal-scrollbar-measure';
-    const modalEl = this.modalElement;
-    if (!modalEl.parentNode || !scrollDiv.parentNode) {
-      return 0;
-    }
-    modalEl.parentNode.insertBefore(scrollDiv, modalEl.nextSibling);
+    scrollDiv.style.cssText =
+      'position:absolute;top:-9999px;width:50px;height:50px;overflow:scroll;';
+    document.body.appendChild(scrollDiv);
     const scrollbarWidth = scrollDiv.offsetWidth - scrollDiv.clientWidth;
-    scrollDiv.parentNode.removeChild(scrollDiv);
+    scrollDiv.remove();
     return scrollbarWidth;
   }
 
