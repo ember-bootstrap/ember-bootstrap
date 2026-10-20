@@ -67,7 +67,7 @@
     "eslint-plugin-prettier": "5.5.4",
     "eslint-plugin-qunit": "8.2.5",
     "execa": "5.1.1",
-    "gulp": "4.0.2",
+    "gulp": "5.0.1",
     "gulp-connect": "5.7.0",
     "gulp-insert": "0.5.0",
     "gulp-rename": "2.1.0",
