@@ -10,7 +10,7 @@ import bsDefault from 'ember-bootstrap/helpers/bs-default';
 import BsDropdownButton from 'ember-bootstrap/components/bs-dropdown/button';
 import BsDropdownToggle from 'ember-bootstrap/components/bs-dropdown/toggle';
 import BsDropdownMenu from 'ember-bootstrap/components/bs-dropdown/menu';
-import onDocument from 'ember-on-helper/helpers/on-document';
+import bsOnDocument from 'ember-bootstrap/helpers/bs-on-document';
 
 const ESCAPE_KEYCODE = 27; // KeyboardEvent.which value for Escape (Esc) key
 const SPACE_KEYCODE = 32; // KeyboardEvent.which value for space key
@@ -503,9 +503,9 @@ export default class Dropdown extends Component {
           )
         }}
         {{#if this.isOpen}}
-          {{onDocument 'keydown' this.handleKeyEvent}}
-          {{onDocument 'click' this.closeHandler capture=true}}
-          {{onDocument 'keyup' this.closeHandler}}
+          {{bsOnDocument 'keydown' this.handleKeyEvent}}
+          {{bsOnDocument 'click' this.closeHandler capture=true}}
+          {{bsOnDocument 'keyup' this.closeHandler}}
         {{/if}}
 
       </Tag>
