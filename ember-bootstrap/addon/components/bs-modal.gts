@@ -21,7 +21,7 @@ import type { ComponentLike } from '@glint/template';
 import { modifier } from 'ember-modifier';
 import didInsertHelper from 'ember-render-helpers/helpers/did-insert-helper';
 import didUpdateHelper from 'ember-render-helpers/helpers/did-update-helper';
-import onWindow from 'ember-on-helper/helpers/on-window';
+import bsOnWindow from 'ember-bootstrap/helpers/bs-on-window';
 import bsEq from 'ember-bootstrap/helpers/bs-eq';
 import { hash } from '@ember/helper';
 
@@ -386,13 +386,6 @@ export default class Modal extends Component<Signature> {
   trackBackdropElement = modifier((backdropElement: HTMLElement) => {
     this.backdropElement = backdropElement;
   });
-
-  /**
-   * @type boolean
-   * @readonly
-   * @private
-   */
-  isFastBoot = isFastBoot(this);
 
   /**
    * The action to be sent when the modal footer's submit button (if present) is pressed.
@@ -762,14 +755,7 @@ export default class Modal extends Component<Signature> {
     {{didUpdateHelper this.handleVisibilityChanges @open}}
 
     {{#if this.inDom}}
-      {{!
-    ember-on-helper do not support FastBoot yet. This guard can be removed as
-    soon as ember-on-helper guards for FastBoot itself. It is tracked in this
-    GitHub issue: https://github.com/buschtoens/ember-on-helper/issues/3
-  }}
-      {{#unless this.isFastBoot}}
-        {{onWindow 'resize' this.adjustDialog}}
-      {{/unless}}
+      {{bsOnWindow 'resize' this.adjustDialog}}
 
       {{#let
         (component

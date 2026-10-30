@@ -50,7 +50,6 @@
     "ember-concurrency": "^4.0.0",
     "ember-element-helper": "^0.8.0",
     "ember-focus-trap": "^2.0.0",
-    "ember-on-helper": "^0.1.0",
     "ember-popper-modifier": "^4.0.0",
     "ember-render-helpers": "^2.0.0",
     "ember-style-modifier": "^4.0.0",
