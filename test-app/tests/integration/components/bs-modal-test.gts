@@ -250,18 +250,13 @@ module('Integration | Component | bs-modal', function (hooks) {
     const clientWidth = sinon
       .stub(document.body, 'clientWidth')
       .get(() => window.innerWidth);
-    class State {
-      @tracked tall = false;
-    }
-    const state = new State();
+    // control the viewport height, so whether the modal fits does not depend on the browser window
+    let viewportHeight = Number.MAX_SAFE_INTEGER;
+    const clientHeight = sinon
+      .stub(document.documentElement, 'clientHeight')
+      .get(() => viewportHeight);
     try {
-      await render(
-        <template>
-          <BsModal @fade={{false}}>
-            {{#if state.tall}}<svg width='1' height='5000'></svg>{{/if}}
-          </BsModal>
-        </template>,
-      );
+      await render(<template><BsModal @fade={{false}} /></template>);
 
       const modal = find('.modal') as HTMLElement;
       assert.strictEqual(
@@ -270,7 +265,7 @@ module('Integration | Component | bs-modal', function (hooks) {
         'no padding while the modal fits',
       );
 
-      state.tall = true;
+      viewportHeight = 0;
       await settled();
       assert.strictEqual(
         modal.style.paddingLeft,
@@ -286,6 +281,7 @@ module('Integration | Component | bs-modal', function (hooks) {
       );
     } finally {
       clientWidth.restore();
+      clientHeight.restore();
     }
   });
 
