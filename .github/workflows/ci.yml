@@ -43,7 +43,7 @@ jobs:
       - name: Checkout code
         uses: wyvox/action@v1
       - name: Setup firefox
-        uses: browser-actions/setup-firefox@fcf821c621167805dd63a29662bd7cb5676c81a8 # v1.7.1
+        uses: browser-actions/setup-firefox@0bc507ddf224827e3b1af68e014d5e42ab93e795 # v1.7.2
         with:
           firefox-version: 140.9.0esr
       - name: Test
