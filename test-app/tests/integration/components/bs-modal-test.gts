@@ -245,6 +245,46 @@ module('Integration | Component | bs-modal', function (hooks) {
       .hasClass(visibilityClass(), 'Modal backdrop has visibility class');
   });
 
+  test('it adjusts the dialog padding when the window is resized', async function (assert) {
+    // make the body not overflow, so an overflowing modal gets a left padding
+    const clientWidth = sinon
+      .stub(document.body, 'clientWidth')
+      .get(() => window.innerWidth);
+    // control the viewport height, so whether the modal fits does not depend on the browser window
+    let viewportHeight = Number.MAX_SAFE_INTEGER;
+    const clientHeight = sinon
+      .stub(document.documentElement, 'clientHeight')
+      .get(() => viewportHeight);
+    try {
+      await render(<template><BsModal @fade={{false}} /></template>);
+
+      const modal = find('.modal') as HTMLElement;
+      assert.strictEqual(
+        modal.style.paddingLeft,
+        '',
+        'no padding while the modal fits',
+      );
+
+      viewportHeight = 0;
+      await settled();
+      assert.strictEqual(
+        modal.style.paddingLeft,
+        '',
+        'padding is not adjusted before a resize',
+      );
+
+      await triggerEvent(window, 'resize');
+      assert.notStrictEqual(
+        modal.style.paddingLeft,
+        '',
+        'padding is adjusted on resize',
+      );
+    } finally {
+      clientWidth.restore();
+      clientHeight.restore();
+    }
+  });
+
   test('backdrop=true adds backdrop element, renderInPlace = true', async function (assert) {
     await render(
       <template>
