@@ -76,9 +76,10 @@ jobs:
           - false
         scenario:
           - ember-lts-5.12
-          - ember-release
-          - ember-beta
-          - ember-canary
+          - ember-lts-6.12
+          # - ember-release
+          # - ember-beta
+          # - ember-canary
           - embroider-safe
           - embroider-optimized
         bootstrap:

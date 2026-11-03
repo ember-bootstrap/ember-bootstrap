@@ -2,3 +2,9 @@ packages:
   - ember-bootstrap
   - test-app
   - docs
+overrides:
+  testem: 3.20.2
+allowBuilds:
+  '@parcel/watcher': false
+  core-js: false
+  es5-ext: false
