@@ -159,8 +159,8 @@ importers:
         specifier: 12.7.5
         version: 12.7.5(@babel/core@7.29.13)(@typescript-eslint/parser@7.18.0(eslint@8.57.1)(typescript@5.9.3))(eslint@8.57.1)(typescript@5.9.3)
       eslint-plugin-n:
-        specifier: 17.23.1
-        version: 17.23.1(eslint@8.57.1)(typescript@5.9.3)
+        specifier: 17.23.2
+        version: 17.23.2(eslint@8.57.1)(typescript@5.9.3)
       eslint-plugin-prettier:
         specifier: 5.5.4
         version: 5.5.4(@types/eslint@9.6.1)(eslint-config-prettier@10.1.8(eslint@8.57.1))(eslint@8.57.1)(prettier@3.6.2)
@@ -361,8 +361,8 @@ importers:
         specifier: 1.0.3
         version: 1.0.3(ember-template-lint@7.9.4)
       eslint-plugin-n:
-        specifier: 17.23.1
-        version: 17.23.1(eslint@8.57.1)(typescript@5.9.3)
+        specifier: 17.23.2
+        version: 17.23.2(eslint@8.57.1)(typescript@5.9.3)
       eslint-plugin-prettier:
         specifier: 5.5.4
         version: 5.5.4(@types/eslint@9.6.1)(eslint-config-prettier@10.1.8(eslint@8.57.1))(eslint@8.57.1)(prettier@3.6.2)
@@ -598,8 +598,8 @@ importers:
         specifier: 1.0.3
         version: 1.0.3(ember-template-lint@7.9.4)
       eslint-plugin-n:
-        specifier: 17.23.1
-        version: 17.23.1(eslint@8.57.1)(typescript@5.9.3)
+        specifier: 17.23.2
+        version: 17.23.2(eslint@8.57.1)(typescript@5.9.3)
       eslint-plugin-prettier:
         specifier: 5.5.4
         version: 5.5.4(@types/eslint@9.6.1)(eslint-config-prettier@10.1.8(eslint@8.57.1))(eslint@8.57.1)(prettier@3.6.2)
@@ -4794,8 +4794,8 @@ packages:
     peerDependencies:
       ember-template-lint: ^3.6.0
 
-  eslint-plugin-n@17.23.1:
-    resolution: {integrity: sha512-68PealUpYoHOBh332JLLD9Sj7OQUDkFpmcfqt8R9sySfFSeuGJjMTJQvCRRB96zO3A/PELRLkPrzsHmzEFQQ5A==}
+  eslint-plugin-n@17.23.2:
+    resolution: {integrity: sha512-RhWBeb7YVPmNa2eggvJooiuehdL76/bbfj/OJewyoGT80qn5PXdz8zMOTO6YHOsI7byPt7+Ighh/i/4a5/v7hw==}
     engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
     peerDependencies:
       eslint: '>=8.23.0'
@@ -15358,7 +15358,7 @@ snapshots:
       ember-template-lint: 7.9.4
       requireindex: 1.2.0
 
-  eslint-plugin-n@17.23.1(eslint@8.57.1)(typescript@5.9.3):
+  eslint-plugin-n@17.23.2(eslint@8.57.1)(typescript@5.9.3):
     dependencies:
       '@eslint-community/eslint-utils': 4.10.1(eslint@8.57.1)
       enhanced-resolve: 5.26.0
