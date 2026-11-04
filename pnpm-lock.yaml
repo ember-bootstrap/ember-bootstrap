@@ -69,8 +69,8 @@ importers:
         specifier: 6.0.0
         version: 6.0.0(ember-bootstrap@ember-bootstrap)(ember-power-select@7.2.0(@babel/core@7.29.7)(@glint/environment-ember-loose@1.5.2(@glimmer/component@1.1.2(@babel/core@7.29.7))(@glint/template@1.7.10)(ember-cli-htmlbars@7.0.0(@babel/core@7.29.7)(ember-source@6.11.1(@glimmer/component@1.1.2(@babel/core@7.29.7))(rsvp@4.8.5)))(ember-modifier@4.2.2(@babel/core@7.29.7)))(@glint/template@1.7.10)(ember-source@6.11.1(@glimmer/component@1.1.2(@babel/core@7.29.7))(rsvp@4.8.5))(webpack@5.104.1(postcss@8.5.32)))(ember-source@6.11.1(@glimmer/component@1.1.2(@babel/core@7.29.7))(rsvp@4.8.5))
       ember-cli:
-        specifier: 6.8.0
-        version: 6.8.0(@babel/core@7.29.7)(@types/node@26.6.6)(handlebars@4.7.10)(underscore@1.13.8)
+        specifier: 6.8.1
+        version: 6.8.1(@babel/core@7.29.7)(@types/node@26.6.6)(handlebars@4.7.10)(underscore@1.13.8)
       ember-cli-app-version:
         specifier: 7.0.0
         version: 7.0.0(ember-source@6.11.1(@glimmer/component@1.1.2(@babel/core@7.29.7))(rsvp@4.8.5))
@@ -82,7 +82,7 @@ importers:
         version: 3.0.0
       ember-cli-dependency-checker:
         specifier: 3.3.3
-        version: 3.3.3(ember-cli@6.8.0(@babel/core@7.29.7)(@types/node@26.6.6)(handlebars@4.7.10)(underscore@1.13.8))
+        version: 3.3.3(ember-cli@6.8.1(@babel/core@7.29.7)(@types/node@26.6.6)(handlebars@4.7.10)(underscore@1.13.8))
       ember-cli-fastboot:
         specifier: 4.1.5
         version: 4.1.5(ember-source@6.11.1(@glimmer/component@1.1.2(@babel/core@7.29.7))(rsvp@4.8.5))
@@ -340,8 +340,8 @@ importers:
         specifier: 9.2.5
         version: 9.2.5
       ember-cli:
-        specifier: 6.8.0
-        version: 6.8.0(@babel/core@7.29.7)(@types/node@26.6.6)(handlebars@4.7.10)(underscore@1.13.8)
+        specifier: 6.8.1
+        version: 6.8.1(@babel/core@7.29.7)(@types/node@26.6.6)(handlebars@4.7.10)(underscore@1.13.8)
       ember-template-lint:
         specifier: 5.13.0
         version: 5.13.0
@@ -487,8 +487,8 @@ importers:
         specifier: workspace:*
         version: link:../ember-bootstrap
       ember-cli:
-        specifier: 6.8.0
-        version: 6.8.0(@babel/core@7.29.7)(@types/node@26.6.6)(handlebars@4.7.10)(underscore@1.13.8)
+        specifier: 6.8.1
+        version: 6.8.1(@babel/core@7.29.7)(@types/node@26.6.6)(handlebars@4.7.10)(underscore@1.13.8)
       ember-cli-app-version:
         specifier: 7.0.0
         version: 7.0.0(ember-source@6.11.1(@glimmer/component@1.1.2(@babel/core@7.29.7))(rsvp@4.8.5))
@@ -503,7 +503,7 @@ importers:
         version: 2.0.3
       ember-cli-dependency-checker:
         specifier: 3.3.3
-        version: 3.3.3(ember-cli@6.8.0(@babel/core@7.29.7)(@types/node@26.6.6)(handlebars@4.7.10)(underscore@1.13.8))
+        version: 3.3.3(ember-cli@6.8.1(@babel/core@7.29.7)(@types/node@26.6.6)(handlebars@4.7.10)(underscore@1.13.8))
       ember-cli-fastboot:
         specifier: 4.1.5
         version: 4.1.5(ember-source@6.11.1(@glimmer/component@1.1.2(@babel/core@7.29.7))(rsvp@4.8.5))
@@ -4443,8 +4443,8 @@ packages:
     resolution: {integrity: sha512-4pb3OKXhHCeUux6a7SDKziLDWdDciJwzmUld3Fumt60RLcH/nIk5lPdI0o+UXJ9NfP+WcSvvpWWroFmWqWAWWA==}
     engines: {node: '>= 4.0.0'}
 
-  ember-cli@6.8.0:
-    resolution: {integrity: sha512-qUMfPDvyMUWjK+na34YHv/8AQGn5WJTcCL5qaMwa5MLi2hnKBzvCBwd99nORJdLG9GpCxYzxFQ+txyEkfmvk7g==}
+  ember-cli@6.8.1:
+    resolution: {integrity: sha512-lA/eW8ESZyYIuyyIkicxkEfsV3pZzDLaJJsEEAV09Bfw9x9yPxPn/6yJcX5xTmj+cYWfkeQlOWj4ZKvXNIzwiA==}
     engines: {node: '>= 20.11'}
     hasBin: true
 
@@ -14388,10 +14388,10 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  ember-cli-dependency-checker@3.3.3(ember-cli@6.8.0(@babel/core@7.29.7)(@types/node@26.6.6)(handlebars@4.7.10)(underscore@1.13.8)):
+  ember-cli-dependency-checker@3.3.3(ember-cli@6.8.1(@babel/core@7.29.7)(@types/node@26.6.6)(handlebars@4.7.10)(underscore@1.13.8)):
     dependencies:
       chalk: 2.4.2
-      ember-cli: 6.8.0(@babel/core@7.29.7)(@types/node@26.6.6)(handlebars@4.7.10)(underscore@1.13.8)
+      ember-cli: 6.8.1(@babel/core@7.29.7)(@types/node@26.6.6)(handlebars@4.7.10)(underscore@1.13.8)
       find-yarn-workspace-root: 2.0.0
       is-git-url: 1.0.0
       resolve: 1.22.11
@@ -14707,7 +14707,7 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  ember-cli@6.8.0(@babel/core@7.29.7)(@types/node@26.6.6)(handlebars@4.7.10)(underscore@1.13.8):
+  ember-cli@6.8.1(@babel/core@7.29.7)(@types/node@26.6.6)(handlebars@4.7.10)(underscore@1.13.8):
     dependencies:
       '@ember-tooling/blueprint-blueprint': 0.2.1
       '@ember-tooling/blueprint-model': 0.4.1
