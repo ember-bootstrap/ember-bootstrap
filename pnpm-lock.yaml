@@ -165,8 +165,8 @@ importers:
         specifier: 5.5.7
         version: 5.5.7(@types/eslint@9.6.1)(eslint-config-prettier@10.1.8(eslint@8.57.1))(eslint@8.57.1)(prettier@3.6.2)
       eslint-plugin-qunit:
-        specifier: 8.2.5
-        version: 8.2.5(eslint@8.57.1)
+        specifier: 8.2.6
+        version: 8.2.6(eslint@8.57.1)
       execa:
         specifier: 5.1.1
         version: 5.1.1
@@ -367,8 +367,8 @@ importers:
         specifier: 5.5.7
         version: 5.5.7(@types/eslint@9.6.1)(eslint-config-prettier@10.1.8(eslint@8.57.1))(eslint@8.57.1)(prettier@3.6.2)
       eslint-plugin-qunit:
-        specifier: 8.2.5
-        version: 8.2.5(eslint@8.57.1)
+        specifier: 8.2.6
+        version: 8.2.6(eslint@8.57.1)
       focus-trap:
         specifier: 7.6.6
         version: 7.6.6
@@ -604,8 +604,8 @@ importers:
         specifier: 5.5.7
         version: 5.5.7(@types/eslint@9.6.1)(eslint-config-prettier@10.1.8(eslint@8.57.1))(eslint@8.57.1)(prettier@3.6.2)
       eslint-plugin-qunit:
-        specifier: 8.2.5
-        version: 8.2.5(eslint@8.57.1)
+        specifier: 8.2.6
+        version: 8.2.6(eslint@8.57.1)
       findup-sync:
         specifier: 5.0.0
         version: 5.0.0
@@ -4814,9 +4814,11 @@ packages:
       eslint-config-prettier:
         optional: true
 
-  eslint-plugin-qunit@8.2.5:
-    resolution: {integrity: sha512-qr7RJCYImKQjB+39q4q46i1l7p1V3joHzBE5CAYfxn5tfVFjrnjn/tw7q/kDyweU9kAIcLul0Dx/KWVUCb3BgA==}
+  eslint-plugin-qunit@8.2.6:
+    resolution: {integrity: sha512-S1jC/DIW9J8VtNX4uG1vlf5FZVrfQFlcuiYmvTHR2IICUhubHqpWA5o+qS1tujh+81Gs39omKV2D4OXfbSJE5g==}
     engines: {node: ^16.0.0 || ^18.0.0 || >=20.0.0}
+    peerDependencies:
+      eslint: '>=8.38.0'
 
   eslint-scope@5.1.1:
     resolution: {integrity: sha512-2NxwbF/hZ0KpepYN0cNbo+FN6XoK7GaHlQhgx/hIZl6Va0bF45RQOOwhLIy8lQDbuCiadSLCBnH2CFYquit5bw==}
@@ -15383,12 +15385,11 @@ snapshots:
       '@types/eslint': 9.6.1
       eslint-config-prettier: 10.1.8(eslint@8.57.1)
 
-  eslint-plugin-qunit@8.2.5(eslint@8.57.1):
+  eslint-plugin-qunit@8.2.6(eslint@8.57.1):
     dependencies:
-      eslint-utils: 3.0.0(eslint@8.57.1)
+      '@eslint-community/eslint-utils': 4.10.1(eslint@8.57.1)
+      eslint: 8.57.1
       requireindex: 1.2.0
-    transitivePeerDependencies:
-      - eslint
 
   eslint-scope@5.1.1:
     dependencies:
