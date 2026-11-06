@@ -85,7 +85,7 @@
     "eslint-plugin-prettier": "5.5.7",
     "eslint-plugin-qunit": "8.2.6",
     "focus-trap": "7.6.6",
-    "prettier-plugin-ember-template-tag": "2.1.0",
+    "prettier-plugin-ember-template-tag": "2.1.8",
     "release-it": "19.0.6",
     "typescript": "5.9.3"
   },
