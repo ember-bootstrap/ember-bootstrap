@@ -58,13 +58,13 @@
     "tracked-toolbox": "^2.0.0"
   },
   "devDependencies": {
-    "@babel/eslint-parser": "7.28.6",
-    "@babel/plugin-proposal-decorators": "7.28.6",
+    "@babel/eslint-parser": "7.29.13",
+    "@babel/plugin-proposal-decorators": "7.29.7",
     "@embroider/test-setup": "4.0.0",
     "@glint/core": "1.5.2",
     "@glint/environment-ember-loose": "1.5.2",
     "@glint/environment-ember-template-imports": "1.5.2",
-    "@glint/template": "1.7.10",
+    "@glint/template": "1.11.1",
     "@popperjs/core": "2.11.8",
     "@release-it-plugins/lerna-changelog": "8.0.1",
     "@simple-dom/interface": "1.4.0",
