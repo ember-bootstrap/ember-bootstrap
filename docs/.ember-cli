@@ -5,5 +5,17 @@
   */
   "isTypeScriptProject": false,
 
+  /**
+    Setting `componentAuthoringFormat` to "strict" will force the blueprint generators to generate GJS
+    or GTS files for the component and the component rendering test. "loose" is the default.
+  */
+  "componentAuthoringFormat": "loose",
+
+  /**
+    Setting `routeAuthoringFormat` to "strict" will force the blueprint generators to generate GJS
+    or GTS templates for routes. "loose" is the default
+  */
+  "routeAuthoringFormat": "loose",
+
   "port": 4201
 }

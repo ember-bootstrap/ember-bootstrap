@@ -1,5 +1,4 @@
-
 ## Changelog dummy
- 
-* some
-* content
+
+- some
+- content
