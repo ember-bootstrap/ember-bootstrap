@@ -51,7 +51,7 @@
     "ember-a11y-testing": "7.1.3",
     "ember-auto-import": "2.13.1",
     "ember-bootstrap": "workspace:*",
-    "ember-cli": "6.8.1",
+    "ember-cli": "6.12.0",
     "ember-cli-app-version": "7.0.0",
     "ember-cli-babel": "8.2.0",
     "ember-cli-clean-css": "3.0.0",
