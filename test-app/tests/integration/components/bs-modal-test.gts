@@ -26,7 +26,10 @@ import { tracked } from '@glimmer/tracking';
 import { on } from '@ember/modifier';
 import type { TemplateOnlyComponent } from '@ember/component/template-only';
 
-const isSafari = !!(window as unknown as { safari?: object }).safari;
+// Detects WebKit (Safari on macOS and all browsers on iOS). The values of
+// navigator.vendor are frozen by the HTML spec. The previous check based on
+// window.safari stopped working with Safari 27.
+const isSafari = navigator.vendor === 'Apple Computer, Inc.';
 
 module('Integration | Component | bs-modal', function (hooks) {
   setupRenderingTest(hooks);
