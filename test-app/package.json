@@ -74,7 +74,7 @@
     "ember-popper-modifier": "4.1.1",
     "ember-qunit": "9.2.0",
     "ember-render-helpers": "2.0.0",
-    "ember-resolver": "13.1.1",
+    "ember-resolver": "13.2.0",
     "ember-sinon": "5.0.0",
     "ember-sinon-qunit": "7.5.0",
     "ember-source": "6.12.1",

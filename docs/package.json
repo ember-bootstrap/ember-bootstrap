@@ -57,7 +57,7 @@
     "ember-power-select": "8.12.2",
     "ember-prism": "1.0.0",
     "ember-qunit": "9.2.0",
-    "ember-resolver": "13.1.1",
+    "ember-resolver": "13.2.0",
     "ember-sinon-qunit": "7.5.0",
     "ember-source": "6.12.1",
     "ember-template-lint": "7.9.4",
