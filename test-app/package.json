@@ -72,7 +72,7 @@
     "ember-load-initializers": "3.0.1",
     "ember-page-title": "9.1.0",
     "ember-popper-modifier": "4.1.1",
-    "ember-qunit": "9.0.4",
+    "ember-qunit": "9.2.0",
     "ember-render-helpers": "2.0.0",
     "ember-resolver": "13.1.1",
     "ember-sinon": "5.0.0",
