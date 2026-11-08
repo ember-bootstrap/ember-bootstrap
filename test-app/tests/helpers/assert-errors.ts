@@ -17,7 +17,6 @@ export function setupAssertionsForErrorsNotHandledByEmberOnError(
      * methods to test rejecting promises should be preferred.
      */
 
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     (assert as CustomAssert).rejectsErrorNotHandledByEmberOnError =
       async function (
         callback: () => void | Promise<void>,

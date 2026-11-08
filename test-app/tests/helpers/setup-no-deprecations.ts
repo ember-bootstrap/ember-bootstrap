@@ -43,7 +43,6 @@ export default function setupNoDeprecations({
     }
   });
 
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   (QUnit.assert as CustomAssert).deprecations = function (count?: number) {
     if (count === undefined) {
       this.ok(deprecations.size, 'Expected deprecations during test.');
@@ -58,7 +57,6 @@ export default function setupNoDeprecations({
     deprecations.forEach((d) => expectedDeprecations.add(d));
   };
 
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   (QUnit.assert as CustomAssert).deprecationsInclude = function (
     expected: string,
   ) {

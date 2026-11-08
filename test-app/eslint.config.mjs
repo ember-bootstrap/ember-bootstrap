@@ -14,6 +14,7 @@
  */
 import globals from 'globals';
 import js from '@eslint/js';
+import ts from 'typescript-eslint';
 
 import ember from 'eslint-plugin-ember/recommended';
 import eslintConfigPrettier from 'eslint-config-prettier';
@@ -33,11 +34,12 @@ const esmParserOptions = {
   },
 };
 
-export default [
+export default ts.config(
   js.configs.recommended,
   eslintConfigPrettier,
   ember.configs.base,
   ember.configs.gjs,
+  ember.configs.gts,
   /**
    * Ignores must be in their own object
    * https://eslint.org/docs/latest/use/configure/ignore
@@ -69,7 +71,14 @@ export default [
     },
   },
   {
-    files: ['tests/**/*-test.{js,gjs}'],
+    files: ['**/*.{ts,gts}'],
+    languageOptions: {
+      parser: ember.parser,
+    },
+    extends: [...ts.configs.recommended, ember.configs.gts],
+  },
+  {
+    files: ['tests/**/*-test.{js,gjs,ts,gts}'],
     plugins: {
       qunit,
     },
@@ -120,4 +129,27 @@ export default [
       },
     },
   },
-];
+  /**
+   * Project-specific rules, carried over from the former .eslintrc.js
+   */
+  {
+    files: ['**/*.{js,gjs,ts,gts}'],
+    rules: {
+      'ember/no-jquery': 'error',
+      'ember/no-get': 'error',
+      'ember/no-get-with-default': 'error',
+      'ember/no-actions-hash': 'error',
+      'ember/no-classic-classes': 'error',
+      'ember/require-tagless-components': 'error',
+      'ember/no-observers': 'warn',
+      'ember/no-mixins': 'warn',
+      'no-setter-return': 'off', // computed setters may return a value!
+      // TODO turn Octane rules into warnings until all components have been refactored
+      'ember/no-computed-properties-in-native-classes': 'warn',
+      'ember/no-classic-components': 'warn',
+      'ember/classic-decorator-no-classic-methods': 'warn',
+      'ember/classic-decorator-hooks': 'warn',
+      'ember/no-runloop': 'off',
+    },
+  },
+);

@@ -10,7 +10,7 @@ module('Integration | Component | bs-modal/header', function (hooks) {
   setupNoDeprecations(hooks);
 
   test('Header has default markup', async function (assert) {
-    await render(<template><BsModalHeader @title='Header' /></template>);
+    await render(<template><BsModalHeader @title="Header" /></template>);
 
     assert.dom('.modal-header').exists({ count: 1 }, 'Modal header exists.');
     assert
@@ -25,7 +25,7 @@ module('Integration | Component | bs-modal/header', function (hooks) {
   });
 
   test('Header can be rendered as non-block', async function (this: RenderingTestContext, assert) {
-    await render(<template><BsModalHeader @title='Test' /></template>);
+    await render(<template><BsModalHeader @title="Test" /></template>);
 
     assert
       .dom('.modal-header')
@@ -45,10 +45,9 @@ module('Integration | Component | bs-modal/header', function (hooks) {
   test('Header can have custom block content', async function (this: RenderingTestContext, assert) {
     await render(
       <template>
-        <BsModalHeader><div id='custom'>Test</div></BsModalHeader>
+        <BsModalHeader><div id="custom">Test</div></BsModalHeader>
       </template>,
     );
-    ``;
     assert
       .dom('.modal-header div#custom')
       .exists({ count: 1 }, 'Modal header custom block.');
@@ -67,7 +66,7 @@ module('Integration | Component | bs-modal/header', function (hooks) {
       <template>
         <BsModalHeader as |header|>
           <header.title>
-            <div id='custom'>Test</div>
+            <div id="custom">Test</div>
           </header.title>
           {{header.close}}
         </BsModalHeader>
@@ -88,7 +87,7 @@ module('Integration | Component | bs-modal/header', function (hooks) {
   });
 
   test('close button has expected content', async function (assert) {
-    await render(<template><BsModalHeader @title='Header' /></template>);
+    await render(<template><BsModalHeader @title="Header" /></template>);
 
     assert
       .dom(`.modal-header button.${closeButtonClass()}`)
@@ -98,7 +97,7 @@ module('Integration | Component | bs-modal/header', function (hooks) {
   test('close button can be removed', async function (assert) {
     await render(
       <template>
-        <BsModalHeader @title='Header' @closeButton={{false}} />
+        <BsModalHeader @title="Header" @closeButton={{false}} />
       </template>,
     );
 
@@ -112,7 +111,7 @@ module('Integration | Component | bs-modal/header', function (hooks) {
       <template>
         <BsModalHeader as |header|>
           {{header.title}}
-          <div id='custom'>Test</div>
+          <div id="custom">Test</div>
         </BsModalHeader>
       </template>,
     );

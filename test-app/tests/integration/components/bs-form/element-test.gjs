@@ -93,8 +93,8 @@ module('Integration | Component | bs-form/element', function (hooks) {
   test('supports vertical form layout', async function (assert) {
     await render(
       <template>
-        <BsForm @formLayout='vertical' as |form|>
-          <form.element @label='some label' data-test-form-element />
+        <BsForm @formLayout="vertical" as |form|>
+          <form.element @label="some label" data-test-form-element />
         </BsForm>
       </template>,
     );
@@ -123,8 +123,8 @@ module('Integration | Component | bs-form/element', function (hooks) {
   test('supports horizontal form layout', async function (assert) {
     await render(
       <template>
-        <BsForm @formLayout='horizontal' as |form|>
-          <form.element @label='some label' data-test-form-element />
+        <BsForm @formLayout="horizontal" as |form|>
+          <form.element @label="some label" data-test-form-element />
         </BsForm>
       </template>,
     );
@@ -164,7 +164,7 @@ module('Integration | Component | bs-form/element', function (hooks) {
   });
 
   test('setting label property displays label tag', async function (assert) {
-    await render(<template><BsFormElement @label='myLabel' /></template>);
+    await render(<template><BsFormElement @label="myLabel" /></template>);
 
     assert.dom('label').exists({ count: 1 }, 'component has label tag');
     assert.dom('label').hasText('myLabel', 'label has text');
@@ -180,7 +180,7 @@ module('Integration | Component | bs-form/element', function (hooks) {
         <BsFormElement
           @controlType={{controlType}}
           @formLayout={{state.formLayout}}
-          @horizontalLabelGridClass='col-md-4'
+          @horizontalLabelGridClass="col-md-4"
         />
       </template>,
     );
@@ -220,7 +220,7 @@ module('Integration | Component | bs-form/element', function (hooks) {
       <template>
         <BsForm @model={{state.model}} as |f|><f.element
             @controlType={{controlType}}
-            @property='prop'
+            @property="prop"
           /></BsForm>
       </template>,
     );
@@ -267,9 +267,9 @@ module('Integration | Component | bs-form/element', function (hooks) {
       <template>
         <BsFormElement
           @controlType={{state.controlType}}
-          @horizontalLabelGridClass='col-md-4'
+          @horizontalLabelGridClass="col-md-4"
           @model={{model}}
-          @property='name'
+          @property="name"
           @onChange={{changeAction}}
         />
       </template>,
@@ -310,8 +310,8 @@ module('Integration | Component | bs-form/element', function (hooks) {
           as |form|
         ><form.element
             @controlType={{controlType}}
-            @property='prop'
-            @label='myLabel'
+            @property="prop"
+            @label="myLabel"
           /></BsForm>
       </template>,
     );
@@ -354,10 +354,10 @@ module('Integration | Component | bs-form/element', function (hooks) {
     test('supports horizontal form layout', async function (assert) {
       await render(
         <template>
-          <BsForm @formLayout='horizontal' as |form|>
+          <BsForm @formLayout="horizontal" as |form|>
             <form.element
-              @controlType='text'
-              @label='some label'
+              @controlType="text"
+              @label="some label"
               @options={{this.simpleOptions}}
               data-test-form-element
             />
@@ -372,12 +372,12 @@ module('Integration | Component | bs-form/element', function (hooks) {
     test('supports horizontal form layout with custom grid class', async function (assert) {
       await render(
         <template>
-          <BsForm @formLayout='horizontal' as |form|>
+          <BsForm @formLayout="horizontal" as |form|>
             <form.element
-              @controlType='text'
-              @label='some label'
+              @controlType="text"
+              @label="some label"
               @options={{this.simpleOptions}}
-              @horizontalLabelGridClass='col-md-3'
+              @horizontalLabelGridClass="col-md-3"
               data-test-form-element
             />
           </BsForm>
@@ -391,12 +391,12 @@ module('Integration | Component | bs-form/element', function (hooks) {
     test('supports horizontal form layout with multiple custom grid classes', async function (assert) {
       await render(
         <template>
-          <BsForm @formLayout='horizontal' as |form|>
+          <BsForm @formLayout="horizontal" as |form|>
             <form.element
-              @controlType='text'
-              @label='some label'
+              @controlType="text"
+              @label="some label"
               @options={{this.simpleOptions}}
-              @horizontalLabelGridClass='col-md-3 col-lg-2'
+              @horizontalLabelGridClass="col-md-3 col-lg-2"
               data-test-form-element
             />
           </BsForm>
@@ -440,10 +440,10 @@ module('Integration | Component | bs-form/element', function (hooks) {
     test('supports horizontal form layout', async function (assert) {
       await render(
         <template>
-          <BsForm @formLayout='horizontal' as |form|>
+          <BsForm @formLayout="horizontal" as |form|>
             <form.element
-              @controlType='textarea'
-              @label='some label'
+              @controlType="textarea"
+              @label="some label"
               @options={{this.simpleOptions}}
               data-test-form-element
             />
@@ -458,12 +458,12 @@ module('Integration | Component | bs-form/element', function (hooks) {
     test('supports horizontal form layout with custom grid class', async function (assert) {
       await render(
         <template>
-          <BsForm @formLayout='horizontal' as |form|>
+          <BsForm @formLayout="horizontal" as |form|>
             <form.element
-              @controlType='textarea'
-              @label='some label'
+              @controlType="textarea"
+              @label="some label"
               @options={{this.simpleOptions}}
-              @horizontalLabelGridClass='col-md-3'
+              @horizontalLabelGridClass="col-md-3"
               data-test-form-element
             />
           </BsForm>
@@ -477,12 +477,12 @@ module('Integration | Component | bs-form/element', function (hooks) {
     test('supports horizontal form layout with multiple custom grid classes', async function (assert) {
       await render(
         <template>
-          <BsForm @formLayout='horizontal' as |form|>
+          <BsForm @formLayout="horizontal" as |form|>
             <form.element
-              @controlType='textarea'
-              @label='some label'
+              @controlType="textarea"
+              @label="some label"
               @options={{this.simpleOptions}}
-              @horizontalLabelGridClass='col-md-3 col-lg-2'
+              @horizontalLabelGridClass="col-md-3 col-lg-2"
               data-test-form-element
             />
           </BsForm>
@@ -534,10 +534,10 @@ module('Integration | Component | bs-form/element', function (hooks) {
     test('supports horizontal form layout', async function (assert) {
       await render(
         <template>
-          <BsForm @formLayout='horizontal' as |form|>
+          <BsForm @formLayout="horizontal" as |form|>
             <form.element
-              @controlType='checkbox'
-              @label='some label'
+              @controlType="checkbox"
+              @label="some label"
               @options={{this.simpleOptions}}
               data-test-form-element
             />
@@ -554,12 +554,12 @@ module('Integration | Component | bs-form/element', function (hooks) {
     test('supports horizontal form layout with custom grid class', async function (assert) {
       await render(
         <template>
-          <BsForm @formLayout='horizontal' as |form|>
+          <BsForm @formLayout="horizontal" as |form|>
             <form.element
-              @controlType='checkbox'
-              @label='some label'
+              @controlType="checkbox"
+              @label="some label"
               @options={{this.simpleOptions}}
-              @horizontalLabelGridClass='col-md-3'
+              @horizontalLabelGridClass="col-md-3"
               data-test-form-element
             />
           </BsForm>
@@ -575,12 +575,12 @@ module('Integration | Component | bs-form/element', function (hooks) {
     test('supports horizontal form layout with multiple custom grid classes', async function (assert) {
       await render(
         <template>
-          <BsForm @formLayout='horizontal' as |form|>
+          <BsForm @formLayout="horizontal" as |form|>
             <form.element
-              @controlType='checkbox'
-              @label='some label'
+              @controlType="checkbox"
+              @label="some label"
               @options={{this.simpleOptions}}
-              @horizontalLabelGridClass='col-md-3 col-lg-2'
+              @horizontalLabelGridClass="col-md-3 col-lg-2"
               data-test-form-element
             />
           </BsForm>
@@ -601,7 +601,7 @@ module('Integration | Component | bs-form/element', function (hooks) {
       await render(
         <template>
           <BsForm as |form|>
-            <form.element @controlType='switch' />
+            <form.element @controlType="switch" />
           </BsForm>
         </template>,
       );
@@ -651,7 +651,7 @@ module('Integration | Component | bs-form/element', function (hooks) {
       await render(
         <template>
           <BsForm as |form|>
-            <form.element @controlType='switch' />
+            <form.element @controlType="switch" />
           </BsForm>
         </template>,
       );
@@ -697,10 +697,10 @@ module('Integration | Component | bs-form/element', function (hooks) {
     test('supports horizontal form layout', async function (assert) {
       await render(
         <template>
-          <BsForm @formLayout='horizontal' as |form|>
+          <BsForm @formLayout="horizontal" as |form|>
             <form.element
-              @controlType='switch'
-              @label='some label'
+              @controlType="switch"
+              @label="some label"
               @options={{this.simpleOptions}}
               data-test-form-element
             />
@@ -717,12 +717,12 @@ module('Integration | Component | bs-form/element', function (hooks) {
     test('supports horizontal form layout with custom grid class', async function (assert) {
       await render(
         <template>
-          <BsForm @formLayout='horizontal' as |form|>
+          <BsForm @formLayout="horizontal" as |form|>
             <form.element
-              @controlType='switch'
-              @label='some label'
+              @controlType="switch"
+              @label="some label"
               @options={{this.simpleOptions}}
-              @horizontalLabelGridClass='col-md-3'
+              @horizontalLabelGridClass="col-md-3"
               data-test-form-element
             />
           </BsForm>
@@ -738,12 +738,12 @@ module('Integration | Component | bs-form/element', function (hooks) {
     test('supports horizontal form layout with multiple custom grid classes', async function (assert) {
       await render(
         <template>
-          <BsForm @formLayout='horizontal' as |form|>
+          <BsForm @formLayout="horizontal" as |form|>
             <form.element
-              @controlType='switch'
-              @label='some label'
+              @controlType="switch"
+              @label="some label"
               @options={{this.simpleOptions}}
-              @horizontalLabelGridClass='col-md-3 col-lg-2'
+              @horizontalLabelGridClass="col-md-3 col-lg-2"
               data-test-form-element
             />
           </BsForm>
@@ -772,10 +772,10 @@ module('Integration | Component | bs-form/element', function (hooks) {
       await render(
         <template>
           <BsFormElement
-            @controlType='radio'
+            @controlType="radio"
             @formLayout={{state.formLayout}}
             @options={{simpleOptions}}
-            @horizontalLabelGridClass='col-md-4'
+            @horizontalLabelGridClass="col-md-4"
           />
         </template>,
       );
@@ -795,8 +795,8 @@ module('Integration | Component | bs-form/element', function (hooks) {
       await render(
         <template>
           <BsFormElement
-            @controlType='radio'
-            @formLayout='horizontal'
+            @controlType="radio"
+            @formLayout="horizontal"
             @options={{simpleOptions}}
           />
         </template>,
@@ -829,9 +829,9 @@ module('Integration | Component | bs-form/element', function (hooks) {
       await render(
         <template>
           <BsFormElement
-            @controlType='radio'
+            @controlType="radio"
             @options={{hashOptions}}
-            @optionLabelPath='title'
+            @optionLabelPath="title"
           />
         </template>,
       );
@@ -863,7 +863,7 @@ module('Integration | Component | bs-form/element', function (hooks) {
       await render(
         <template>
           <BsFormElement
-            @controlType='radio'
+            @controlType="radio"
             @options={{simpleOptions}}
             as |Element|
           >
@@ -883,8 +883,8 @@ module('Integration | Component | bs-form/element', function (hooks) {
       await render(
         <template>
           <BsFormElement
-            @controlType='radio'
-            @label='some label'
+            @controlType="radio"
+            @label="some label"
             @options={{simpleOptions}}
           />
         </template>,
@@ -914,10 +914,10 @@ module('Integration | Component | bs-form/element', function (hooks) {
     test('supports horizontal form layout', async function (assert) {
       await render(
         <template>
-          <BsForm @formLayout='horizontal' as |form|>
+          <BsForm @formLayout="horizontal" as |form|>
             <form.element
-              @controlType='radio'
-              @label='some label'
+              @controlType="radio"
+              @label="some label"
               @options={{simpleOptions}}
             />
           </BsForm>
@@ -933,7 +933,7 @@ module('Integration | Component | bs-form/element', function (hooks) {
       await render(
         <template>
           <BsFormElement
-            @controlType='radio'
+            @controlType="radio"
             @options={{simpleOptions}}
             as |Element|
           >
@@ -954,9 +954,9 @@ module('Integration | Component | bs-form/element', function (hooks) {
       await render(
         <template>
           <BsForm @model={{model}} as |f|><f.element
-              @controlType='radio'
+              @controlType="radio"
               @options={{simpleOptions}}
-              @property='prop'
+              @property="prop"
             /></BsForm>
         </template>,
       );
@@ -981,10 +981,10 @@ module('Integration | Component | bs-form/element', function (hooks) {
       await render(
         <template>
           <BsFormElement
-            @controlType='radio'
+            @controlType="radio"
             @options={{simpleOptions}}
             @model={{model}}
-            @property='name'
+            @property="name"
             @onChange={{changeAction}}
           />
         </template>,
@@ -1005,7 +1005,7 @@ module('Integration | Component | bs-form/element', function (hooks) {
     }
     const model = new Model();
     await render(
-      <template><BsFormElement @property='foo' @model={{model}} /></template>,
+      <template><BsFormElement @property="foo" @model={{model}} /></template>,
     );
 
     assert.dom('input').hasValue('bar', 'input has expected value from model');
@@ -1034,18 +1034,18 @@ module('Integration | Component | bs-form/element', function (hooks) {
           as |form|
         >
           <form.element
-            @controlType='textarea'
-            @label='Gender'
-            @property='gender'
+            @controlType="textarea"
+            @label="Gender"
+            @property="gender"
             @showAllValidations={{true}}
             as |el|
           >
             <input
-              type='text'
+              type="text"
               id={{el.id}}
               value={{el.value}}
               class={{el.validation}}
-              {{on 'input' (fn setTargetValue el)}}
+              {{on "input" (fn setTargetValue el)}}
             />
             <el.control />
           </form.element>
@@ -1094,7 +1094,7 @@ module('Integration | Component | bs-form/element', function (hooks) {
   });
 
   test('if invisibleLabel is true visually hidden class is added to label', async function (assert) {
-    await render(<template><BsFormElement @label='myLabel' /></template>);
+    await render(<template><BsFormElement @label="myLabel" /></template>);
     assert
       .dom('label')
       .hasNoClass(
@@ -1104,8 +1104,8 @@ module('Integration | Component | bs-form/element', function (hooks) {
 
     await render(
       <template>
-        <BsForm @formLayout='vertical'><BsFormElement
-            @label='myLabel'
+        <BsForm @formLayout="vertical"><BsFormElement
+            @label="myLabel"
             @invisibleLabel={{true}}
           /></BsForm>
       </template>,
@@ -1119,8 +1119,8 @@ module('Integration | Component | bs-form/element', function (hooks) {
 
     await render(
       <template>
-        <BsForm @formLayout='horizontal'><BsFormElement
-            @label='myLabel'
+        <BsForm @formLayout="horizontal"><BsFormElement
+            @label="myLabel"
             @invisibleLabel={{true}}
           /></BsForm>
       </template>,
@@ -1134,8 +1134,8 @@ module('Integration | Component | bs-form/element', function (hooks) {
 
     await render(
       <template>
-        <BsForm @formLayout='inline'><BsFormElement
-            @label='myLabel'
+        <BsForm @formLayout="inline"><BsFormElement
+            @label="myLabel"
             @invisibleLabel={{true}}
           /></BsForm>
       </template>,
@@ -1159,7 +1159,7 @@ module('Integration | Component | bs-form/element', function (hooks) {
 
       await render(
         <template>
-          <BsFormElement @property='name' @model={{model}} />
+          <BsFormElement @property="name" @model={{model}} />
         </template>,
       );
       await focus('input');
@@ -1182,7 +1182,7 @@ module('Integration | Component | bs-form/element', function (hooks) {
     await render(
       <template>
         <ValidatingFormElement
-          @property='name'
+          @property="name"
           @showAllValidations={{true}}
           @model={{model}}
         />
@@ -1209,7 +1209,7 @@ module('Integration | Component | bs-form/element', function (hooks) {
     await render(
       <template>
         <ValidatingFormElement
-          @property='name'
+          @property="name"
           @errors={{state.errors}}
           @model={{model}}
           data-test-form-element
@@ -1233,7 +1233,7 @@ module('Integration | Component | bs-form/element', function (hooks) {
     assert
       .dom(`[data-test-form-element] .${formFeedbackClass()}`)
       .hasText('Invalid');
-    /* eslint-disable-next-line ember/no-runloop */
+
     run(() => {
       state.errors = A();
     });
@@ -1258,7 +1258,7 @@ module('Integration | Component | bs-form/element', function (hooks) {
     await render(
       <template>
         <ValidatingFormElement
-          @property='name'
+          @property="name"
           @warnings={{state.warnings}}
           @model={{model}}
           data-test-form-element
@@ -1282,7 +1282,7 @@ module('Integration | Component | bs-form/element', function (hooks) {
     assert
       .dom(`[data-test-form-element] .${formFeedbackClass()}`)
       .hasText('Insecure');
-    /* eslint-disable-next-line ember/no-runloop */
+
     run(() => {
       state.warnings = A();
     });
@@ -1312,14 +1312,14 @@ module('Integration | Component | bs-form/element', function (hooks) {
         <template>
           <ValidatingForm @elementComponent={{formElement}} as |form|>
             <form.element
-              @property='name'
+              @property="name"
               @model={{model}}
               data-test-form-element
               as |el|
             >
               <el.control data-test-first />
               <button
-                type='submit'
+                type="submit"
                 disabled={{if el.validation true false}}
               >Send</button>
             </form.element>
@@ -1350,7 +1350,7 @@ module('Integration | Component | bs-form/element', function (hooks) {
       <template>
         <BsForm @model={{model}} as |form|>
           <form.element
-            @property='name'
+            @property="name"
             @customError={{state.error}}
             data-test-form-element
           />
@@ -1363,7 +1363,7 @@ module('Integration | Component | bs-form/element', function (hooks) {
     assert
       .dom(`[data-test-form-element] .${formFeedbackClass()}`)
       .hasText('some error');
-    /* eslint-disable-next-line ember/no-runloop */
+
     run(() => {
       state.error = null;
     });
@@ -1388,7 +1388,7 @@ module('Integration | Component | bs-form/element', function (hooks) {
       <template>
         <BsForm @model={{model}} as |form|>
           <form.element
-            @property='name'
+            @property="name"
             @customWarning={{state.warning}}
             data-test-form-element
           />
@@ -1404,7 +1404,7 @@ module('Integration | Component | bs-form/element', function (hooks) {
     assert
       .dom(`[data-test-form-element] .${formFeedbackClass()}`)
       .hasText('some warning');
-    /* eslint-disable-next-line ember/no-runloop */
+
     run(() => {
       state.warning = null;
     });
@@ -1432,7 +1432,7 @@ module('Integration | Component | bs-form/element', function (hooks) {
       await render(
         <template>
           <ValidatingFormElement
-            @property='name'
+            @property="name"
             @errors={{state.errors}}
             @customWarning={{state.warning}}
             @model={{model}}
@@ -1472,7 +1472,7 @@ module('Integration | Component | bs-form/element', function (hooks) {
       assert
         .dom(`[data-test-form-element] .${formFeedbackClass()}`)
         .hasText('Invalid', 'Validation error is shown');
-      /* eslint-disable-next-line ember/no-runloop */
+
       run(() => {
         state.errors = A();
       });
@@ -1504,7 +1504,7 @@ module('Integration | Component | bs-form/element', function (hooks) {
       await render(
         <template>
           <ValidatingFormElement
-            @property='name'
+            @property="name"
             @errors={{errors}}
             @model={{model}}
             @showValidationOn={{showValidationOn}}
@@ -1548,10 +1548,10 @@ module('Integration | Component | bs-form/element', function (hooks) {
       await render(
         <template>
           <ValidatingFormElement
-            @property='name'
+            @property="name"
             @errors={{errors}}
             @model={{model}}
-            @showValidationOn='change'
+            @showValidationOn="change"
           />
         </template>,
       );
@@ -1594,16 +1594,16 @@ module('Integration | Component | bs-form/element', function (hooks) {
         <template>
           <ValidatingForm @elementComponent={{formElement}} as |form|>
             <form.element
-              @property='name'
+              @property="name"
               @errors={{errors}}
               @model={{model}}
               as |el|
             >
-              <div class='input-group mb-3'>
-                <div class='input-group-prepend'>
+              <div class="input-group mb-3">
+                <div class="input-group-prepend">
                   <button
-                    class='btn btn-outline-secondary'
-                    type='button'
+                    class="btn btn-outline-secondary"
+                    type="button"
                   >Button</button>
                 </div>
                 {{el.control}}
@@ -1643,7 +1643,7 @@ module('Integration | Component | bs-form/element', function (hooks) {
         <template>
           <ValidatingForm @elementComponent={{formElement}} as |form|>
             <form.element
-              @property='name'
+              @property="name"
               @errors={{errors}}
               @model={{model}}
               @doNotShowValidationForEventTargets={{state.doNotShowValidationForEventTargets}}
@@ -1651,8 +1651,8 @@ module('Integration | Component | bs-form/element', function (hooks) {
             >
               {{el.control}}
               <button
-                type='button'
-                data-trigger-validation='false'
+                type="button"
+                data-trigger-validation="false"
               >Test</button>
             </form.element>
           </ValidatingForm>
@@ -1668,15 +1668,15 @@ module('Integration | Component | bs-form/element', function (hooks) {
   );
 
   test('it uses custom control component when registered in DI container', async function (assert) {
-    const testComponent = <template><div id='foo' /></template>;
+    const testComponent = <template><div id="foo" /></template>;
     this.owner.register('component:bs-form/element/control/foo', testComponent);
 
-    await render(<template><BsFormElement @controlType='foo' /></template>);
+    await render(<template><BsFormElement @controlType="foo" /></template>);
     assert.dom('#foo').exists({ count: 1 }, 'Custom control is used');
   });
 
   test('shows help text if available', async function (assert) {
-    await render(<template><BsFormElement @helpText='foo' /></template>);
+    await render(<template><BsFormElement @helpText="foo" /></template>);
 
     let helpTextClass = `.${formHelpTextClass()}`;
     assert.dom(helpTextClass).exists({ count: 1 }, 'has help text element');
@@ -1718,9 +1718,9 @@ module('Integration | Component | bs-form/element', function (hooks) {
     await render(
       <template>
         <BsFormElement
-          @size='lg'
-          @label='foo'
-          @formLayout='horizontal'
+          @size="lg"
+          @label="foo"
+          @formLayout="horizontal"
           data-test-form-element
         />
       </template>,
@@ -1734,9 +1734,9 @@ module('Integration | Component | bs-form/element', function (hooks) {
     await render(
       <template>
         <BsFormElement
-          @size='sm'
-          @label='foo'
-          @formLayout='horizontal'
+          @size="sm"
+          @label="foo"
+          @formLayout="horizontal"
           data-test-form-element
         />
       </template>,

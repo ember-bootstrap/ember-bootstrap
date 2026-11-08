@@ -19,7 +19,7 @@ module('Integration | Component | bs-alert', function (hooks) {
   test('alert has correct CSS classes', async function (assert) {
     await render(
       <template>
-        <BsAlert @type='success' @dismissible={{true}}>Test</BsAlert>
+        <BsAlert @type="success" @dismissible={{true}}>Test</BsAlert>
       </template>,
     );
 
@@ -33,7 +33,7 @@ module('Integration | Component | bs-alert', function (hooks) {
   test('dismissible alert can be hidden by clicking close button with fade=false', async function (assert) {
     await render(
       <template>
-        <BsAlert @type='success' @fade={{false}}>Test</BsAlert>
+        <BsAlert @type="success" @fade={{false}}>Test</BsAlert>
       </template>,
     );
 
@@ -51,7 +51,7 @@ module('Integration | Component | bs-alert', function (hooks) {
     async function (assert) {
       await render(
         <template>
-          <BsAlert @type='success' @fade={{true}}>Test</BsAlert>
+          <BsAlert @type="success" @fade={{true}}>Test</BsAlert>
         </template>,
       );
 
@@ -78,7 +78,7 @@ module('Integration | Component | bs-alert', function (hooks) {
     await render(
       <template>
         <BsAlert
-          @type='success'
+          @type="success"
           @fade={{false}}
           @visible={{state.visible}}
         >Test</BsAlert>
@@ -97,7 +97,7 @@ module('Integration | Component | bs-alert', function (hooks) {
     await render(
       <template>
         <BsAlert
-          @type='success'
+          @type="success"
           @fade={{false}}
           @onDismiss={{dismissAction}}
         >Test</BsAlert>
@@ -112,7 +112,7 @@ module('Integration | Component | bs-alert', function (hooks) {
     await render(
       <template>
         <BsAlert
-          @type='success'
+          @type="success"
           @fade={{false}}
           @onDismiss={{dismissAction}}
         >Test</BsAlert>
@@ -129,7 +129,7 @@ module('Integration | Component | bs-alert', function (hooks) {
     await render(
       <template>
         <BsAlert
-          @type='success'
+          @type="success"
           @fade={{false}}
           @onDismissed={{dismissedAction}}
         >Test</BsAlert>
@@ -212,7 +212,7 @@ module('Integration | Component | bs-alert', function (hooks) {
     await render(
       <template>
         <BsAlert
-          @type='success'
+          @type="success"
           @fade={{false}}
           @visible={{false}}
         >Test</BsAlert>
@@ -231,7 +231,7 @@ module('Integration | Component | bs-alert', function (hooks) {
     await render(
       <template>
         <BsAlert
-          @type='success'
+          @type="success"
           @visible={{state.visible}}
           @fade={{false}}
         >Test</BsAlert>
@@ -257,7 +257,7 @@ module('Integration | Component | bs-alert', function (hooks) {
     await render(
       <template>
         <BsAlert
-          @type='success'
+          @type="success"
           @fade={{false}}
           @visible={{state.visible}}
           @onDismissed={{handleOnDismissed}}
@@ -287,7 +287,7 @@ module('Integration | Component | bs-alert', function (hooks) {
     await render(
       <template>
         <BsAlert
-          @type='success'
+          @type="success"
           @visible={{state.visible}}
           @fade={{false}}
         >Test</BsAlert>
@@ -302,7 +302,7 @@ module('Integration | Component | bs-alert', function (hooks) {
   test('it passes accessibility checks', async function (assert) {
     await render(
       <template>
-        <BsAlert @type='success'>Test</BsAlert>
+        <BsAlert @type="success">Test</BsAlert>
       </template>,
     );
 
@@ -335,7 +335,7 @@ module('Integration | Component | bs-alert', function (hooks) {
   test('tagName used for header element can be customized with headerTag argument', async function (assert) {
     await render(
       <template>
-        <BsAlert @headerTag='h1'>
+        <BsAlert @headerTag="h1">
           <:header>Warning</:header>
           <:body><p>Some content</p></:body>
         </BsAlert>

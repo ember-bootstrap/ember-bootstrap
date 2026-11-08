@@ -39,7 +39,7 @@ module('Integration | Component | bs-dropdown', function (hooks) {
   test('dropdown container supports dropup style', async function (assert) {
     await render(
       <template>
-        <BsDropdown @direction='up'>Test</BsDropdown>
+        <BsDropdown @direction="up">Test</BsDropdown>
       </template>,
     );
 
@@ -49,7 +49,7 @@ module('Integration | Component | bs-dropdown', function (hooks) {
   test('dropdown container supports dropright style', async function (assert) {
     await render(
       <template>
-        <BsDropdown @direction='right'>Test</BsDropdown>
+        <BsDropdown @direction="right">Test</BsDropdown>
       </template>,
     );
 
@@ -60,7 +60,7 @@ module('Integration | Component | bs-dropdown', function (hooks) {
   test('dropdown container supports dropleft style', async function (assert) {
     await render(
       <template>
-        <BsDropdown @direction='left'>Test</BsDropdown>
+        <BsDropdown @direction="left">Test</BsDropdown>
       </template>,
     );
 
@@ -71,9 +71,9 @@ module('Integration | Component | bs-dropdown', function (hooks) {
   test('supports setting btn-group class', async function (assert) {
     await render(
       <template>
-        <BsDropdown class='btn-group' as |dd|><dd.button>Dropdown
-            <span class='caret'></span></dd.button><dd.menu><li><a
-                href='#'
+        <BsDropdown class="btn-group" as |dd|><dd.button>Dropdown
+            <span class="caret"></span></dd.button><dd.menu><li><a
+                href="#"
               >Something</a></li></dd.menu></BsDropdown>
       </template>,
     );
@@ -84,8 +84,8 @@ module('Integration | Component | bs-dropdown', function (hooks) {
     await render(
       <template>
         <BsDropdown as |dd|><dd.toggle>Dropdown
-            <span class='caret'></span></dd.toggle><dd.menu><li><a
-                href='#'
+            <span class="caret"></span></dd.toggle><dd.menu><li><a
+                href="#"
               >Something</a></li></dd.menu></BsDropdown>
       </template>,
     );
@@ -104,8 +104,8 @@ module('Integration | Component | bs-dropdown', function (hooks) {
     await render(
       <template>
         <BsDropdown as |dd|><dd.toggle>Dropdown
-            <span class='caret'></span></dd.toggle><dd.menu><li><a
-                href='#'
+            <span class="caret"></span></dd.toggle><dd.menu><li><a
+                href="#"
               >Something</a></li></dd.menu></BsDropdown>
       </template>,
     );
@@ -121,8 +121,8 @@ module('Integration | Component | bs-dropdown', function (hooks) {
     await render(
       <template>
         <BsDropdown as |dd|><dd.button>Dropdown
-            <span class='caret'></span></dd.button><dd.menu><li><a
-                href='#'
+            <span class="caret"></span></dd.button><dd.menu><li><a
+                href="#"
               >Something</a></li></dd.menu></BsDropdown>
       </template>,
     );
@@ -138,8 +138,8 @@ module('Integration | Component | bs-dropdown', function (hooks) {
     await render(
       <template>
         <BsDropdown as |dd|><dd.toggle>Dropdown
-            <span class='caret'></span></dd.toggle><dd.menu><li><a
-                href='#'
+            <span class="caret"></span></dd.toggle><dd.menu><li><a
+                href="#"
               >Something</a></li></dd.menu></BsDropdown>
       </template>,
     );
@@ -159,8 +159,8 @@ module('Integration | Component | bs-dropdown', function (hooks) {
     await render(
       <template>
         <BsDropdown @onHide={{onHide}} as |dd|><dd.toggle>Dropdown
-            <span class='caret'></span></dd.toggle><dd.menu><li><a
-                href='#'
+            <span class="caret"></span></dd.toggle><dd.menu><li><a
+                href="#"
               >Something</a></li></dd.menu></BsDropdown>
       </template>,
     );
@@ -178,8 +178,8 @@ module('Integration | Component | bs-dropdown', function (hooks) {
     await render(
       <template>
         <BsDropdown as |dd|><dd.toggle>Dropdown
-            <span class='caret'></span></dd.toggle><dd.menu><li><a
-                href='#'
+            <span class="caret"></span></dd.toggle><dd.menu><li><a
+                href="#"
               >Something</a></li></dd.menu></BsDropdown>
       </template>,
     );
@@ -199,8 +199,8 @@ module('Integration | Component | bs-dropdown', function (hooks) {
     await render(
       <template>
         <BsDropdown @onHide={{onHide}} as |dd|><dd.toggle>Dropdown
-            <span class='caret'></span></dd.toggle><dd.menu><li><a
-                href='#'
+            <span class="caret"></span></dd.toggle><dd.menu><li><a
+                href="#"
               >Something</a></li></dd.menu></BsDropdown>
       </template>,
     );
@@ -226,10 +226,10 @@ module('Integration | Component | bs-dropdown', function (hooks) {
     await render(
       <template>
         <BsDropdown as |dd|>
-          <dd.toggle>Dropdown <span class='caret'></span></dd.toggle>
-          <dd.menu><li><a href='#'>Something</a></li></dd.menu>
+          <dd.toggle>Dropdown <span class="caret"></span></dd.toggle>
+          <dd.menu><li><a href="#">Something</a></li></dd.menu>
         </BsDropdown>
-        <div id='target' role='button' onclick={{stopEvent}} />
+        <div id="target" role="button" onclick={{stopEvent}} />
       </template>,
     );
 
@@ -244,8 +244,8 @@ module('Integration | Component | bs-dropdown', function (hooks) {
     await render(
       <template>
         <BsDropdown @closeOnMenuClick={{false}} as |dd|>
-          <dd.toggle>Dropdown <span class='caret'></span></dd.toggle>
-          <dd.menu><li><a href='#'>Something</a></li></dd.menu>
+          <dd.toggle>Dropdown <span class="caret"></span></dd.toggle>
+          <dd.menu><li><a href="#">Something</a></li></dd.menu>
         </BsDropdown>
       </template>,
     );
@@ -266,8 +266,8 @@ module('Integration | Component | bs-dropdown', function (hooks) {
     await render(
       <template>
         <BsDropdown @closeOnMenuClick={{false}} as |dd|>
-          <dd.toggle>Dropdown <span class='caret'></span></dd.toggle>
-          <dd.menu><li><a href='#'>Something</a></li></dd.menu>
+          <dd.toggle>Dropdown <span class="caret"></span></dd.toggle>
+          <dd.menu><li><a href="#">Something</a></li></dd.menu>
         </BsDropdown>
       </template>,
     );
@@ -305,8 +305,8 @@ module('Integration | Component | bs-dropdown', function (hooks) {
     await render(
       <template>
         <BsDropdown @closeOnMenuClick={{false}} as |dd|><dd.toggle>Dropdown
-            <span class='caret'></span></dd.toggle><dd.menu><li><a
-                href='#'
+            <span class="caret"></span></dd.toggle><dd.menu><li><a
+                href="#"
               >Something</a></li></dd.menu></BsDropdown>
       </template>,
     );
@@ -323,11 +323,11 @@ module('Integration | Component | bs-dropdown', function (hooks) {
   test('clicking outside dropdown menu when closeOnMenuClick is false and renderInPlace is false will close it', async function (assert) {
     await render(
       <template>
-        <div id='ember-bootstrap-wormhole'></div>
+        <div id="ember-bootstrap-wormhole"></div>
         <BsDropdown @closeOnMenuClick={{false}} as |dd|><dd.toggle>Dropdown
-            <span class='caret'></span></dd.toggle><dd.menu
+            <span class="caret"></span></dd.toggle><dd.menu
             @renderInPlace={{false}}
-          ><li><a href='#'>Something</a></li></dd.menu></BsDropdown>
+          ><li><a href="#">Something</a></li></dd.menu></BsDropdown>
       </template>,
     );
     await click('a.dropdown-toggle');
@@ -343,10 +343,10 @@ module('Integration | Component | bs-dropdown', function (hooks) {
   test('child components can access isOpen property', async function (assert) {
     await render(
       <template>
-        <BsDropdown as |dd|><dd.toggle><span id='toggleText'>{{if
+        <BsDropdown as |dd|><dd.toggle><span id="toggleText">{{if
                 dd.isOpen
-                'open'
-                'closed'
+                "open"
+                "closed"
               }}</span></dd.toggle></BsDropdown>
       </template>,
     );
@@ -366,14 +366,14 @@ module('Integration | Component | bs-dropdown', function (hooks) {
         <BsDropdown as |dd|>
           <dd.toggle data-test-dropdown-toggle>
             Dropdown
-            <span class='caret'></span>
+            <span class="caret"></span>
           </dd.toggle>
           <dd.menu>
             <li><a
-                href='#'
-                role='button'
+                href="#"
+                role="button"
                 data-test-dropdown-item
-                {{on 'click' actionStub}}
+                {{on "click" actionStub}}
               >Something</a></li>
           </dd.menu>
         </BsDropdown>
@@ -391,8 +391,8 @@ module('Integration | Component | bs-dropdown', function (hooks) {
     await render(
       <template>
         <BsDropdown @onShow={{showAction}} as |dd|><dd.toggle>Dropdown
-            <span class='caret'></span></dd.toggle><dd.menu><li><a
-                href='#'
+            <span class="caret"></span></dd.toggle><dd.menu><li><a
+                href="#"
               >Something</a></li></dd.menu></BsDropdown>
       </template>,
     );
@@ -407,8 +407,8 @@ module('Integration | Component | bs-dropdown', function (hooks) {
     await render(
       <template>
         <BsDropdown @onHide={{hideAction}} as |dd|><dd.toggle>Dropdown
-            <span class='caret'></span></dd.toggle><dd.menu><li><a
-                href='#'
+            <span class="caret"></span></dd.toggle><dd.menu><li><a
+                href="#"
               >Something</a></li></dd.menu></BsDropdown>
       </template>,
     );
@@ -424,8 +424,8 @@ module('Integration | Component | bs-dropdown', function (hooks) {
     await render(
       <template>
         <BsDropdown @onHide={{hideAction}} as |dd|><dd.toggle>Dropdown
-            <span class='caret'></span></dd.toggle><dd.menu><li><a
-                href='#'
+            <span class="caret"></span></dd.toggle><dd.menu><li><a
+                href="#"
               >Something</a></li></dd.menu></BsDropdown>
       </template>,
     );
@@ -447,13 +447,13 @@ module('Integration | Component | bs-dropdown', function (hooks) {
     await render(
       <template>
         <BsDropdown @onShow={{showAction}} as |dd|>
-          <dd.toggle>Dropdown <span class='caret'></span></dd.toggle>
-          <dd.menu><li><a href='#'>Something</a></li></dd.menu>
+          <dd.toggle>Dropdown <span class="caret"></span></dd.toggle>
+          <dd.menu><li><a href="#">Something</a></li></dd.menu>
           <a
-            href='#'
-            role='button'
-            {{on 'click' dd.openDropdown}}
-            class='custom-open'
+            href="#"
+            role="button"
+            {{on "click" dd.openDropdown}}
+            class="custom-open"
           >Custom open link</a>
         </BsDropdown>
       </template>,
@@ -469,15 +469,15 @@ module('Integration | Component | bs-dropdown', function (hooks) {
     await render(
       <template>
         <BsDropdown @closeOnMenuClick={{false}} @onHide={{hideAction}} as |dd|>
-          <dd.toggle>Dropdown <span class='caret'></span></dd.toggle>
+          <dd.toggle>Dropdown <span class="caret"></span></dd.toggle>
           <dd.menu>
             <li>
-              <a href='#'>Something</a>
+              <a href="#">Something</a>
               <a
-                href='#'
-                role='button'
-                {{on 'click' dd.closeDropdown}}
-                class='custom-close'
+                href="#"
+                role="button"
+                {{on "click" dd.closeDropdown}}
+                class="custom-close"
               >Custom close link</a>
             </li>
           </dd.menu>
@@ -502,17 +502,17 @@ module('Integration | Component | bs-dropdown', function (hooks) {
           @onHide={{hideAction}}
           as |dd|
         >
-          <dd.toggle>Dropdown <span class='caret'></span></dd.toggle>
+          <dd.toggle>Dropdown <span class="caret"></span></dd.toggle>
           <dd.menu><li><a
-                href='#'
+                href="#"
                 data-test-dropdown-menu-toggle
-                {{on 'click' dd.toggleDropdown}}
+                {{on "click" dd.toggleDropdown}}
               >Something</a></li></dd.menu>
           <a
-            href='#'
+            href="#"
             data-test-dropdown-outside-toggle
-            {{on 'click' dd.toggleDropdown}}
-            role='button'
+            {{on "click" dd.toggleDropdown}}
+            role="button"
           >Custom toggle link</a>
         </BsDropdown>
       </template>,
@@ -535,7 +535,7 @@ module('Integration | Component | bs-dropdown', function (hooks) {
           <dd.toggle>Dropdown</dd.toggle>
           <dd.menu as |menu|>
             <menu.item>
-              <menu.link-to @route='index'>Home</menu.link-to>
+              <menu.link-to @route="index">Home</menu.link-to>
             </menu.item>
           </dd.menu>
         </BsDropdown>
@@ -564,7 +564,7 @@ module('Integration | Component | bs-dropdown', function (hooks) {
           <dd.toggle>Dropdown</dd.toggle>
           <dd.menu as |menu|>
             <menu.item>
-              <menu.link-to @route='index'>Home</menu.link-to>
+              <menu.link-to @route="index">Home</menu.link-to>
             </menu.item>
           </dd.menu>
         </BsDropdown>
@@ -591,11 +591,11 @@ module('Integration | Component | bs-dropdown', function (hooks) {
   test('dropdown menu can be rendered in a wormhole', async function (assert) {
     await render(
       <template>
-        <div id='ember-bootstrap-wormhole'></div>
+        <div id="ember-bootstrap-wormhole"></div>
         <BsDropdown as |dd|>
-          <dd.toggle>Dropdown <span class='caret'></span></dd.toggle>
+          <dd.toggle>Dropdown <span class="caret"></span></dd.toggle>
           <dd.menu @renderInPlace={{false}}><li><a
-                href='#'
+                href="#"
               >Something</a></li></dd.menu>
         </BsDropdown>
       </template>,
@@ -616,8 +616,8 @@ module('Integration | Component | bs-dropdown', function (hooks) {
               <dd.toggle>Dropdown</dd.toggle>
               <dd.menu @renderInPlace={{renderInPlace}} as |menu|>
                 <menu.item><a
-                    class='dropdown-item'
-                    href='#'
+                    class="dropdown-item"
+                    href="#"
                   >Something</a></menu.item>
               </dd.menu>
             </BsDropdown>
@@ -639,8 +639,8 @@ module('Integration | Component | bs-dropdown', function (hooks) {
               <dd.toggle>Dropdown</dd.toggle>
               <dd.menu @renderInPlace={{renderInPlace}} as |menu|>
                 <menu.item><a
-                    class='dropdown-item'
-                    href='#'
+                    class="dropdown-item"
+                    href="#"
                   >Something</a></menu.item>
               </dd.menu>
             </BsDropdown>
@@ -660,8 +660,8 @@ module('Integration | Component | bs-dropdown', function (hooks) {
               <dd.button>Dropdown</dd.button>
               <dd.menu @renderInPlace={{renderInPlace}} as |menu|>
                 <menu.item><a
-                    class='dropdown-item'
-                    href='#'
+                    class="dropdown-item"
+                    href="#"
                   >Something</a></menu.item>
               </dd.menu>
             </BsDropdown>
@@ -681,8 +681,8 @@ module('Integration | Component | bs-dropdown', function (hooks) {
               <dd.toggle>Dropdown</dd.toggle>
               <dd.menu @renderInPlace={{renderInPlace}} as |menu|>
                 <menu.item><a
-                    class='dropdown-item'
-                    href='#'
+                    class="dropdown-item"
+                    href="#"
                   >Something</a></menu.item>
               </dd.menu>
             </BsDropdown>
@@ -708,8 +708,8 @@ module('Integration | Component | bs-dropdown', function (hooks) {
               <dd.toggle>Dropdown</dd.toggle>
               <dd.menu @renderInPlace={{renderInPlace}} as |menu|>
                 <menu.item><a
-                    class='dropdown-item'
-                    href='#'
+                    class="dropdown-item"
+                    href="#"
                   >Something</a></menu.item>
               </dd.menu>
             </BsDropdown>
@@ -732,8 +732,8 @@ module('Integration | Component | bs-dropdown', function (hooks) {
               <dd.toggle>Dropdown</dd.toggle>
               <dd.menu @renderInPlace={{renderInPlace}} as |menu|>
                 <menu.item><a
-                    class='dropdown-item'
-                    href='#'
+                    class="dropdown-item"
+                    href="#"
                   >Something</a></menu.item>
               </dd.menu>
             </BsDropdown>
@@ -756,14 +756,14 @@ module('Integration | Component | bs-dropdown', function (hooks) {
               <dd.toggle>Dropdown</dd.toggle>
               <dd.menu @renderInPlace={{renderInPlace}} as |menu|>
                 <menu.item><a
-                    class='dropdown-item'
-                    href='#'
-                    id='item1'
+                    class="dropdown-item"
+                    href="#"
+                    id="item1"
                   >Something</a></menu.item>
                 <menu.item><a
-                    class='dropdown-item'
-                    href='#'
-                    id='item2'
+                    class="dropdown-item"
+                    href="#"
+                    id="item2"
                   >Something</a></menu.item>
               </dd.menu>
             </BsDropdown>
@@ -789,17 +789,17 @@ module('Integration | Component | bs-dropdown', function (hooks) {
               <dd.toggle>Dropdown</dd.toggle>
               <dd.menu @renderInPlace={{renderInPlace}} as |menu|>
                 <menu.item><a
-                    class='dropdown-item'
-                    href='#'
-                    id='item1'
+                    class="dropdown-item"
+                    href="#"
+                    id="item1"
                   >Something</a></menu.item>
                 <menu.item><a
-                    class='dropdown-item'
-                    href='#'
-                    id='item2'
+                    class="dropdown-item"
+                    href="#"
+                    id="item2"
                   >Something</a></menu.item>
               </dd.menu>
-              <button type='button' id='next'>Next</button>
+              <button type="button" id="next">Next</button>
             </BsDropdown>
           </template>,
         );
@@ -824,8 +824,8 @@ module('Integration | Component | bs-dropdown', function (hooks) {
             <BsDropdown as |dd|>
               <dd.toggle>Dropdown</dd.toggle>
               <dd.menu @renderInPlace={{renderInPlace}}>
-                <a class='dropdown-item' href='#' id='item1'>Something</a>
-                <label>Input: <input type='text' /></label>
+                <a class="dropdown-item" href="#" id="item1">Something</a>
+                <label>Input: <input type="text" /></label>
                 <label>TextArea: <textarea></textarea></label>
               </dd.menu>
             </BsDropdown>
@@ -853,10 +853,10 @@ module('Integration | Component | bs-dropdown', function (hooks) {
             <BsDropdown as |dd|>
               <dd.toggle>Dropdown</dd.toggle>
               <dd.menu @renderInPlace={{renderInPlace}}>
-                <a class='dropdown-item disabled' href='#sub1'>Submenu 1</a>
-                <button class='dropdown-item' type='button' disabled>Disabled
+                <a class="dropdown-item disabled" href="#sub1">Submenu 1</a>
+                <button class="dropdown-item" type="button" disabled>Disabled
                   button</button>
-                <a class='dropdown-item' href='#' id='item1'>Something</a>
+                <a class="dropdown-item" href="#" id="item1">Something</a>
               </dd.menu>
             </BsDropdown>
           </template>,
@@ -885,7 +885,7 @@ module('Integration | Component | bs-dropdown', function (hooks) {
           <dd.toggle>Dropdown</dd.toggle>
           <dd.menu as |menu|>
             <menu.item>
-              <a class='dropdown-item' href='#'>
+              <a class="dropdown-item" href="#">
                 Something
               </a>
             </menu.item>

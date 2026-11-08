@@ -32,11 +32,11 @@ module('Integration | Component | bs-popover', function (hooks) {
     await render(
       <template>
         <BsPopover
-          @id='popover-element'
+          @id="popover-element"
           @fade={{true}}
-          @title='dummy title'
+          @title="dummy title"
           @visible={{true}}
-          class='wide'
+          class="wide"
         >
           template block text
         </BsPopover>
@@ -70,11 +70,11 @@ module('Integration | Component | bs-popover', function (hooks) {
     this.set('placement', placements[0]);
     await render(
       <template>
-        <div id='wrapper'>
+        <div id="wrapper">
           <BsPopoverElement
-            @id='popover-element'
+            @id="popover-element"
             @placement={{this.placement}}
-            @title='dummy title'
+            @title="dummy title"
           >
             template block text
           </BsPopoverElement>
@@ -96,13 +96,13 @@ module('Integration | Component | bs-popover', function (hooks) {
 
     await render(
       <template>
-        <div id='ember-bootstrap-wormhole'></div>
-        <div id='wrapper'>
+        <div id="ember-bootstrap-wormhole"></div>
+        <div id="wrapper">
           <p>
-            <button type='button' class='btn' id='target'>
+            <button type="button" class="btn" id="target">
               Click me<BsPopover
-                @placement='top'
-                @title='very very very very very very very long popover'
+                @placement="top"
+                @title="very very very very very very very long popover"
                 @fade={{false}}
               >very very very very very very very long popover</BsPopover>
             </button>
@@ -126,15 +126,15 @@ module('Integration | Component | bs-popover', function (hooks) {
 
     await render(
       <template>
-        <div id='ember-bootstrap-wormhole'></div>
-        <div id='wrapper'>
+        <div id="ember-bootstrap-wormhole"></div>
+        <div id="wrapper">
           <p>
-            <button type='button' id='target'>
+            <button type="button" id="target">
               Click me<BsPopover
-                @placement='top'
+                @placement="top"
                 @autoPlacement={{true}}
-                @viewportSelector='#wrapper'
-                @title='very very very very very very very long popover'
+                @viewportSelector="#wrapper"
+                @title="very very very very very very very long popover"
                 @fade={{false}}
               >very very very very very very very long popover</BsPopover>
             </button>
@@ -175,9 +175,9 @@ module('Integration | Component | bs-popover', function (hooks) {
   test('it stays open when clicked when rendered in place', async function (assert) {
     await render(
       <template>
-        <div id='target'>
+        <div id="target">
           <BsPopover>
-            <div id='content'>Content</div>
+            <div id="content">Content</div>
           </BsPopover>
         </div>
       </template>,
@@ -194,14 +194,14 @@ module('Integration | Component | bs-popover', function (hooks) {
     const hiddenAction = sinon.spy();
     await render(
       <template>
-        <div id='target'>
+        <div id="target">
           <BsPopover
             @visible={{true}}
             @onHide={{hideAction}}
             @onHidden={{hiddenAction}}
             as |po|
           >
-            <div id='hide' {{on 'click' po.close}} role='button'>Hide</div>
+            <div id="hide" {{on "click" po.close}} role="button">Hide</div>
           </BsPopover>
         </div>
       </template>,
@@ -215,9 +215,9 @@ module('Integration | Component | bs-popover', function (hooks) {
   test('click-initiated close action does not interfere with click-to-open', async function (assert) {
     await render(
       <template>
-        <div id='target'>
+        <div id="target">
           <BsPopover as |po|>
-            <div id='hide' {{on 'click' po.close}} role='button'>Hide</div>
+            <div id="hide" {{on "click" po.close}} role="button">Hide</div>
           </BsPopover>
         </div>
       </template>,
@@ -233,12 +233,12 @@ module('Integration | Component | bs-popover', function (hooks) {
   test('click-initiated close action does not interfere with click-to-open when wormholed', async function (assert) {
     await render(
       <template>
-        <div id='ember-bootstrap-wormhole'></div>
-        <div id='target'>
+        <div id="ember-bootstrap-wormhole"></div>
+        <div id="target">
           <BsPopover as |po|><div
-              id='hide'
-              {{on 'click' po.close}}
-              role='button'
+              id="hide"
+              {{on "click" po.close}}
+              role="button"
             >Hide</div></BsPopover>
         </div>
       </template>,
@@ -254,9 +254,9 @@ module('Integration | Component | bs-popover', function (hooks) {
   test('non-click-initiated close action does not interfere with click-to-open', async function (assert) {
     await render(
       <template>
-        <div id='target'><BsPopover as |po|><input
-              id='hide'
-              {{on 'blur' po.close}}
+        <div id="target"><BsPopover as |po|><input
+              id="hide"
+              {{on "blur" po.close}}
             /></BsPopover></div>
       </template>,
     );
@@ -271,9 +271,9 @@ module('Integration | Component | bs-popover', function (hooks) {
   test('non-click-initiated close action does not interfere with click-to-open when wormholed', async function (assert) {
     await render(
       <template>
-        <div id='ember-bootstrap-wormhole'></div><div id='target'><BsPopover
+        <div id="ember-bootstrap-wormhole"></div><div id="target"><BsPopover
             as |po|
-          ><input id='hide' {{on 'blur' po.close}} /></BsPopover></div>
+          ><input id="hide" {{on "blur" po.close}} /></BsPopover></div>
       </template>,
     );
     await click('#target');
@@ -287,11 +287,11 @@ module('Integration | Component | bs-popover', function (hooks) {
   test('it passes all HTML attribute', async function (assert) {
     await render(
       <template>
-        <div id='target'><BsPopover
-            @title='Dummy'
-            class='wide'
+        <div id="target"><BsPopover
+            @title="Dummy"
+            class="wide"
             data-test
-            role='list'
+            role="list"
           >test</BsPopover></div>
       </template>,
     );
@@ -308,8 +308,8 @@ module('Integration | Component | bs-popover', function (hooks) {
     const state = new State();
     await render(
       <template>
-        <div id='ember-bootstrap-wormhole'></div>{{#if state.show}}<BsPopover
-            @title='Simple popover'
+        <div id="ember-bootstrap-wormhole"></div>{{#if state.show}}<BsPopover
+            @title="Simple popover"
             @visible={{true}}
             @fade={{false}}
           />{{/if}}
@@ -331,7 +331,7 @@ module('Integration | Component | bs-popover', function (hooks) {
     await render(
       <template>
         {{#if state.show}}<BsPopover
-            @title='Simple popover'
+            @title="Simple popover"
             @visible={{true}}
             @fade={{false}}
           />{{/if}}
@@ -351,10 +351,10 @@ module('Integration | Component | bs-popover', function (hooks) {
     const state = new State();
     await render(
       <template>
-        <div id='ember-bootstrap-wormhole'></div><div id='wrapper'>{{#if
+        <div id="ember-bootstrap-wormhole"></div><div id="wrapper">{{#if
             state.show
           }}<BsPopover
-              @title='Simple popover'
+              @title="Simple popover"
               @visible={{true}}
               @fade={{false}}
               @renderInPlace={{true}}
@@ -374,8 +374,8 @@ module('Integration | Component | bs-popover', function (hooks) {
     const shownAction = sinon.spy();
     await render(
       <template>
-        <div id='target'><BsPopover
-            @title='Dummy'
+        <div id="target"><BsPopover
+            @title="Dummy"
             @fade={{false}}
             @onShow={{showAction}}
             @onShown={{shownAction}}
@@ -396,8 +396,8 @@ module('Integration | Component | bs-popover', function (hooks) {
     const state = new State();
     await render(
       <template>
-        <div id='target'><BsPopover
-            @title='Dummy'
+        <div id="target"><BsPopover
+            @title="Dummy"
             @visible={{state.visible}}
             @fade={{false}}
             @onShow={{showAction}}
@@ -417,8 +417,8 @@ module('Integration | Component | bs-popover', function (hooks) {
     const shownAction = sinon.spy();
     await render(
       <template>
-        <div id='target'><BsPopover
-            @title='Dummy'
+        <div id="target"><BsPopover
+            @title="Dummy"
             @fade={{false}}
             @onShow={{showAction}}
             @onShown={{shownAction}}
@@ -436,8 +436,8 @@ module('Integration | Component | bs-popover', function (hooks) {
     const hiddenAction = sinon.spy();
     await render(
       <template>
-        <div id='target'><BsPopover
-            @title='Dummy'
+        <div id="target"><BsPopover
+            @title="Dummy"
             @fade={{false}}
             @onHide={{hideAction}}
             @onHidden={{hiddenAction}}
@@ -459,9 +459,9 @@ module('Integration | Component | bs-popover', function (hooks) {
     const state = new State();
     await render(
       <template>
-        <div id='target'><BsPopover
+        <div id="target"><BsPopover
             @visible={{state.visible}}
-            @title='Dummy'
+            @title="Dummy"
             @fade={{false}}
             @onHide={{hideAction}}
             @onHidden={{hiddenAction}}
@@ -479,8 +479,8 @@ module('Integration | Component | bs-popover', function (hooks) {
     const hiddenAction = sinon.spy();
     await render(
       <template>
-        <div id='target'><BsPopover
-            @title='Dummy'
+        <div id="target"><BsPopover
+            @title="Dummy"
             @fade={{false}}
             @onHide={{hideAction}}
             @onHidden={{hiddenAction}}
@@ -497,9 +497,9 @@ module('Integration | Component | bs-popover', function (hooks) {
   test('it works with hover trigger and delayShow', async function (assert) {
     await render(
       <template>
-        <div id='target'>
-          <BsPopover @delayShow={{200}} @triggerEvents='hover'>
-            <div id='content'>Content</div>
+        <div id="target">
+          <BsPopover @delayShow={{200}} @triggerEvents="hover">
+            <div id="content">Content</div>
           </BsPopover>
         </div>
       </template>,
@@ -521,9 +521,9 @@ module('Integration | Component | bs-popover', function (hooks) {
   test('it handles hover with delayShow when user leaves before rendering completes', async function (assert) {
     await render(
       <template>
-        <div id='target'>
-          <BsPopover @delayShow={{200}} @triggerEvents='hover'>
-            <div id='content'>Content</div>
+        <div id="target">
+          <BsPopover @delayShow={{200}} @triggerEvents="hover">
+            <div id="content">Content</div>
           </BsPopover>
         </div>
       </template>,
@@ -547,9 +547,9 @@ module('Integration | Component | bs-popover', function (hooks) {
   test('it passes accessibility checks', async function (assert) {
     await render(
       <template>
-        <button type='button'>
+        <button type="button">
           Test
-          <BsPopover @title='dummy title' @visible={{true}}>
+          <BsPopover @title="dummy title" @visible={{true}}>
             template block text
           </BsPopover>
         </button>

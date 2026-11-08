@@ -36,17 +36,17 @@ module('Integration | Component | bs-tab', function (hooks) {
     await render(
       <template>
         <BsTab @fade={{false}} as |tab|>
-          <tab.pane @id='pane1' @title='Tab 1'>
+          <tab.pane @id="pane1" @title="Tab 1">
             tabcontent 1
           </tab.pane>
-          <tab.pane @id='pane2' @title='Tab 2'>
+          <tab.pane @id="pane2" @title="Tab 2">
             tabcontent 2
           </tab.pane>
-          <div id='activeId'>{{tab.activeId}}</div>
+          <div id="activeId">{{tab.activeId}}</div>
           <div
-            id='switch'
-            {{on 'click' (fn tab.select 'pane2')}}
-            role='button'
+            id="switch"
+            {{on "click" (fn tab.select "pane2")}}
+            role="button"
           ></div>
         </BsTab>
       </template>,
@@ -65,18 +65,18 @@ module('Integration | Component | bs-tab', function (hooks) {
     await render(
       <template>
         <BsTab @fade={{false}} @customTabs={{true}} as |tab|>
-          <div class='tab-content'>
-            <tab.pane @id='pane1' @title='Tab 1'>
+          <div class="tab-content">
+            <tab.pane @id="pane1" @title="Tab 1">
               tabcontent 1
             </tab.pane>
-            <tab.pane @id='pane2' @title='Tab 2'>
+            <tab.pane @id="pane2" @title="Tab 2">
               tabcontent 2
             </tab.pane>
-            <div id='activeId'>{{tab.activeId}}</div>
+            <div id="activeId">{{tab.activeId}}</div>
             <div
-              id='switch'
-              {{on 'click' (fn tab.select 'pane2')}}
-              role='button'
+              id="switch"
+              {{on "click" (fn tab.select "pane2")}}
+              role="button"
             ></div>
           </div>
         </BsTab>
@@ -96,10 +96,10 @@ module('Integration | Component | bs-tab', function (hooks) {
     await render(
       <template>
         <BsTab as |tab|>
-          <tab.pane @title='Tab 1'>
+          <tab.pane @title="Tab 1">
             tabcontent 1
           </tab.pane>
-          <tab.pane @title='Tab 2'>
+          <tab.pane @title="Tab 2">
             tabcontent 2
           </tab.pane>
         </BsTab>
@@ -122,10 +122,10 @@ module('Integration | Component | bs-tab', function (hooks) {
     await render(
       <template>
         <BsTab as |tab|>
-          <tab.pane @title='Tab 1'>
+          <tab.pane @title="Tab 1">
             tabcontent 1
           </tab.pane>
-          <tab.pane @title='Tab 2'>
+          <tab.pane @title="Tab 2">
             tabcontent 2
           </tab.pane>
         </BsTab>
@@ -147,10 +147,10 @@ module('Integration | Component | bs-tab', function (hooks) {
     await render(
       <template>
         <BsTab @fade={{false}} as |tab|>
-          <tab.pane @title='Tab 1'>
+          <tab.pane @title="Tab 1">
             tabcontent 1
           </tab.pane>
-          <tab.pane @title='Tab 2'>
+          <tab.pane @title="Tab 2">
             tabcontent 2
           </tab.pane>
         </BsTab>
@@ -169,10 +169,10 @@ module('Integration | Component | bs-tab', function (hooks) {
     await render(
       <template>
         <BsTab @fade={{false}} @activeId={{state.paneId}} as |tab|>
-          <tab.pane @id='pane1' @title='Tab 1'>
+          <tab.pane @id="pane1" @title="Tab 1">
             tabcontent 1
           </tab.pane>
-          <tab.pane @id='pane2' @title='Tab 2'>
+          <tab.pane @id="pane2" @title="Tab 2">
             tabcontent 2
           </tab.pane>
         </BsTab>
@@ -193,10 +193,10 @@ module('Integration | Component | bs-tab', function (hooks) {
     await render(
       <template>
         <BsTab @fade={{true}} as |tab|>
-          <tab.pane @title='Tab 1'>
+          <tab.pane @title="Tab 1">
             tabcontent 1
           </tab.pane>
-          <tab.pane @title='Tab 2'>
+          <tab.pane @title="Tab 2">
             tabcontent 2
           </tab.pane>
         </BsTab>
@@ -215,10 +215,10 @@ module('Integration | Component | bs-tab', function (hooks) {
     await render(
       <template>
         <BsTab @fade={{true}} @activeId={{state.paneId}} as |tab|>
-          <tab.pane @id='pane1' @title='Tab 1'>
+          <tab.pane @id="pane1" @title="Tab 1">
             tabcontent 1
           </tab.pane>
-          <tab.pane @id='pane2' @title='Tab 2'>
+          <tab.pane @id="pane2" @title="Tab 2">
             tabcontent 2
           </tab.pane>
         </BsTab>
@@ -239,16 +239,16 @@ module('Integration | Component | bs-tab', function (hooks) {
     await render(
       <template>
         <BsTab as |tab|>
-          <tab.pane @title='Tab 1'>
+          <tab.pane @title="Tab 1">
             tabcontent 1
           </tab.pane>
-          <tab.pane @title='Tab 2'>
+          <tab.pane @title="Tab 2">
             tabcontent 2
           </tab.pane>
-          <tab.pane @title='Tab 3' @groupTitle='Dropdown'>
+          <tab.pane @title="Tab 3" @groupTitle="Dropdown">
             tabcontent 3
           </tab.pane>
-          <tab.pane @title='Tab 4' @groupTitle='Dropdown'>
+          <tab.pane @title="Tab 4" @groupTitle="Dropdown">
             tabcontent 4
           </tab.pane>
         </BsTab>
@@ -295,10 +295,10 @@ module('Integration | Component | bs-tab', function (hooks) {
     await render(
       <template>
         <BsTab @customTabs={{true}} as |tab|>
-          <tab.pane @title='Tab 1'>
+          <tab.pane @title="Tab 1">
             tabcontent 1
           </tab.pane>
-          <tab.pane @title='Tab 2'>
+          <tab.pane @title="Tab 2">
             tabcontent 2
           </tab.pane>
         </BsTab>
@@ -311,11 +311,11 @@ module('Integration | Component | bs-tab', function (hooks) {
   test('type sets tab navigation type', async function (assert) {
     await render(
       <template>
-        <BsTab @type='pills' as |tab|>
-          <tab.pane @title='Tab 1'>
+        <BsTab @type="pills" as |tab|>
+          <tab.pane @title="Tab 1">
             tabcontent 1
           </tab.pane>
-          <tab.pane @title='Tab 2'>
+          <tab.pane @title="Tab 2">
             tabcontent 2
           </tab.pane>
         </BsTab>
@@ -334,10 +334,10 @@ module('Integration | Component | bs-tab', function (hooks) {
     await render(
       <template>
         <BsTab @fade={{false}} @onChange={{onChange}} as |tab|>
-          <tab.pane @id='pane1' @title='Tab 1'>
+          <tab.pane @id="pane1" @title="Tab 1">
             tabcontent 1
           </tab.pane>
-          <tab.pane @id='pane2' @title='Tab 2'>
+          <tab.pane @id="pane2" @title="Tab 2">
             tabcontent 2
           </tab.pane>
         </BsTab>
@@ -357,10 +357,10 @@ module('Integration | Component | bs-tab', function (hooks) {
     await render(
       <template>
         <BsTab @fade={{false}} @onChange={{onChange}} as |tab|>
-          <tab.pane @id='pane1' @title='Tab 1'>
+          <tab.pane @id="pane1" @title="Tab 1">
             tabcontent 1
           </tab.pane>
-          <tab.pane @id='pane2' @title='Tab 2'>
+          <tab.pane @id="pane2" @title="Tab 2">
             tabcontent 2
           </tab.pane>
         </BsTab>
@@ -382,10 +382,10 @@ module('Integration | Component | bs-tab', function (hooks) {
     await render(
       <template>
         <BsTab @fade={{false}} @activeId={{state.paneId}} as |tab|>
-          <tab.pane @id='pane1' @title='Tab 1'>
+          <tab.pane @id="pane1" @title="Tab 1">
             tabcontent 1
           </tab.pane>
-          <tab.pane @id='pane2' @title='Tab 2'>
+          <tab.pane @id="pane2" @title="Tab 2">
             tabcontent 2
           </tab.pane>
         </BsTab>
@@ -403,10 +403,10 @@ module('Integration | Component | bs-tab', function (hooks) {
     await render(
       <template>
         <BsTab as |tab|>
-          <tab.pane @title='Tab 1'>
+          <tab.pane @title="Tab 1">
             tabcontent 1
           </tab.pane>
-          <tab.pane @title='Tab 2'>
+          <tab.pane @title="Tab 2">
             tabcontent 2
           </tab.pane>
         </BsTab>
