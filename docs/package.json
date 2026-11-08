@@ -33,7 +33,7 @@
     "ember-basic-dropdown": "8.11.1",
     "ember-bootstrap": "workspace:*",
     "ember-bootstrap-cp-validations": "2.1.0",
-    "ember-bootstrap-power-select": "6.0.0",
+    "ember-bootstrap-power-select": "6.2.0",
     "ember-cli": "6.8.1",
     "ember-cli-app-version": "7.0.0",
     "ember-cli-babel": "8.2.0",
