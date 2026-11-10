@@ -376,8 +376,8 @@ importers:
         specifier: 8.2.6
         version: 8.2.6(eslint@8.57.1)
       focus-trap:
-        specifier: 7.6.6
-        version: 7.6.6
+        specifier: 7.8.0
+        version: 7.8.0
       prettier-plugin-ember-template-tag:
         specifier: 2.1.0
         version: 2.1.0(prettier@3.6.2)
@@ -5354,8 +5354,8 @@ packages:
   flush-write-stream@1.1.1:
     resolution: {integrity: sha512-3Z4XhFZ3992uIq0XOqb9AreonueSYphE6oYbpt5+3u06JWklbsPkNv3ZKkP9Bz/r+1MWCaMoSQ28P85+1Yc77w==}
 
-  focus-trap@7.6.6:
-    resolution: {integrity: sha512-v/Z8bvMCajtx4mEXmOo7QEsIzlIOqRXTIwgUfsFOF9gEsespdbD0AkPIka1bSXZ8Y8oZ+2IVDQZePkTfEHZl7Q==}
+  focus-trap@7.8.0:
+    resolution: {integrity: sha512-/yNdlIkpWbM0ptxno3ONTuf+2g318kh2ez3KSeZN5dZ8YC6AAmgeWz+GasYYiBJPFaYcSAPeu4GfhUaChzIJXA==}
 
   focus-trap@8.2.4:
     resolution: {integrity: sha512-oy6dj7WZYgMbbpoOA29K5W++473F1zEzdI1oJgPb6x7yWT36YaWedUe6i6YPWEt5quSh0pRMohVyHLWXUxtdxg==}
@@ -15999,7 +15999,7 @@ snapshots:
       inherits: 2.0.4
       readable-stream: 2.3.8
 
-  focus-trap@7.6.6:
+  focus-trap@7.8.0:
     dependencies:
       tabbable: 6.5.1
 
