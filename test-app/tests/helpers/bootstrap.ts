@@ -170,6 +170,29 @@ export function testRequiringFocus(
   }
 }
 
+// Width of this browser's scrollbars, or 0 when they overlay the content
+// (e.g. Safari on macOS) and so never take up layout width.
+function browserScrollbarWidth() {
+  const scrollDiv = document.createElement('div');
+  scrollDiv.style.cssText =
+    'position:absolute;top:-9999px;width:50px;height:50px;overflow:scroll;';
+  document.body.appendChild(scrollDiv);
+  const width = scrollDiv.offsetWidth - scrollDiv.clientWidth;
+  scrollDiv.remove();
+  return width;
+}
+
+export function testRequiringScrollbar(
+  name: string,
+  fn: Parameters<typeof test>[1],
+) {
+  if (browserScrollbarWidth() > 0) {
+    return test(name, fn);
+  } else {
+    skip(name);
+  }
+}
+
 export function testRequiringTransitions(
   name: string,
   fn: Parameters<typeof test>[1],
