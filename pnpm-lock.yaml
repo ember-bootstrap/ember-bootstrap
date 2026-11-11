@@ -145,7 +145,7 @@ importers:
         version: 13.2.0
       ember-sinon-qunit:
         specifier: 7.5.0
-        version: 7.5.0(@babel/core@7.29.13)(ember-source@6.12.1(@glimmer/component@1.1.2(@babel/core@7.29.13))(rsvp@4.8.5))(qunit@2.26.0)(sinon@21.0.3)
+        version: 7.5.0(@babel/core@7.29.13)(ember-source@6.12.1(@glimmer/component@1.1.2(@babel/core@7.29.13))(rsvp@4.8.5))(qunit@2.26.0)(sinon@21.1.2)
       ember-source:
         specifier: 6.12.1
         version: 6.12.1(@glimmer/component@1.1.2(@babel/core@7.29.13))(rsvp@4.8.5)
@@ -213,8 +213,8 @@ importers:
         specifier: 1.108.2
         version: 1.108.2
       sinon:
-        specifier: 21.0.3
-        version: 21.0.3
+        specifier: 21.1.2
+        version: 21.1.2
       striptags:
         specifier: 3.2.0
         version: 3.2.0
@@ -569,7 +569,7 @@ importers:
         version: 5.0.0
       ember-sinon-qunit:
         specifier: 7.5.0
-        version: 7.5.0(@babel/core@7.29.13)(ember-source@6.12.1(@glimmer/component@1.1.2(@babel/core@7.29.13))(rsvp@4.8.5))(qunit@2.26.0)(sinon@21.0.3)
+        version: 7.5.0(@babel/core@7.29.13)(ember-source@6.12.1(@glimmer/component@1.1.2(@babel/core@7.29.13))(rsvp@4.8.5))(qunit@2.26.0)(sinon@21.1.2)
       ember-source:
         specifier: 6.12.1
         version: 6.12.1(@glimmer/component@1.1.2(@babel/core@7.29.13))(rsvp@4.8.5)
@@ -640,8 +640,8 @@ importers:
         specifier: 1.1.1
         version: 1.1.1
       sinon:
-        specifier: 21.0.3
-        version: 21.0.3
+        specifier: 21.1.2
+        version: 21.1.2
       tracked-toolbox:
         specifier: 2.0.0
         version: 2.0.0(@babel/core@7.29.13)(ember-source@6.12.1(@glimmer/component@1.1.2(@babel/core@7.29.13))(rsvp@4.8.5))
@@ -2410,11 +2410,11 @@ packages:
   '@sinonjs/fake-timers@6.0.1':
     resolution: {integrity: sha512-MZPUxrmFubI36XS1DI3qmI0YdN1gks62JtFZvxR67ljjSNCeK6U08Zx4msEWOXuofgqUt6zPHSi1H9fbjR/NRA==}
 
+  '@sinonjs/samsam@10.0.2':
+    resolution: {integrity: sha512-8lVwD1Df1BmzoaOLhMcGGcz/Jyr5QY2KSB75/YK1QgKzoabTeLdIVyhXNZK9ojfSKSdirbXqdbsXXqP9/Ve8+A==}
+
   '@sinonjs/samsam@5.3.1':
     resolution: {integrity: sha512-1Hc0b1TtyfBu8ixF/tpfSHTVWKwCBLY4QJbkgnE7HcwyvT2xArDxb4K7dMgqRm3szI+LJbzmW/s4xxEhv6hwDg==}
-
-  '@sinonjs/samsam@9.0.3':
-    resolution: {integrity: sha512-ZgYY7Dc2RW+OUdnZ1DEHg00lhRt+9BjymPKHog4PRFzr1U3MbK57+djmscWyKxzO1qfunHqs4N45WWyKIFKpiQ==}
 
   '@sinonjs/text-encoding@0.7.3':
     resolution: {integrity: sha512-DE427ROAphMQzU4ENbliGYrBSYPXF+TtLg9S8vzeA+OF4ZKzoDdzfL8sxuMUGS/lgRhM6j1URSk9ghf7Xo1tyA==}
@@ -8486,8 +8486,8 @@ packages:
     resolution: {integrity: sha512-ydo9dHOcttfRxVWBglPk7jcBucsuva2zN+5SmUO5eXgUBlxFCZ9CwYEpF30ESzfKsckimVQE+GIbfsgM3mgSdQ==}
     engines: {node: '>= 20.19'}
 
-  sinon@21.0.3:
-    resolution: {integrity: sha512-0x8TQFr8EjADhSME01u1ZK31yv2+bd6Z5NrBCHVM+n4qL1wFqbxftmeyi3bwlr49FbbzRfrqSFOpyHCOh/YmYA==}
+  sinon@21.1.2:
+    resolution: {integrity: sha512-FS6mN+/bx7e2ajpXkEmOcWB6xBzWiuNoAQT18/+a20SS4U7FSYl8Ms7N6VTUxN/1JAjkx7aXp+THMC8xdpp0gA==}
 
   sinon@9.2.4:
     resolution: {integrity: sha512-zljcULZQsJxVra28qIAL6ow1Z9tpattkCTEJR4RBP3TGc00FcttsP5pK284Nas5WjMZU5Yzy3kAIp3B3KRf5Yg==}
@@ -11764,15 +11764,15 @@ snapshots:
     dependencies:
       '@sinonjs/commons': 1.8.6
 
+  '@sinonjs/samsam@10.0.2':
+    dependencies:
+      '@sinonjs/commons': 3.0.1
+      type-detect: 4.1.0
+
   '@sinonjs/samsam@5.3.1':
     dependencies:
       '@sinonjs/commons': 1.8.6
       lodash.get: 4.4.2
-      type-detect: 4.1.0
-
-  '@sinonjs/samsam@9.0.3':
-    dependencies:
-      '@sinonjs/commons': 3.0.1
       type-detect: 4.1.0
 
   '@sinonjs/text-encoding@0.7.3': {}
@@ -14939,14 +14939,14 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  ember-sinon-qunit@7.5.0(@babel/core@7.29.13)(ember-source@6.12.1(@glimmer/component@1.1.2(@babel/core@7.29.13))(rsvp@4.8.5))(qunit@2.26.0)(sinon@21.0.3):
+  ember-sinon-qunit@7.5.0(@babel/core@7.29.13)(ember-source@6.12.1(@glimmer/component@1.1.2(@babel/core@7.29.13))(rsvp@4.8.5))(qunit@2.26.0)(sinon@21.1.2):
     dependencies:
       '@embroider/addon-shim': 1.11.0
       '@types/sinon': 17.0.4
       decorator-transforms: 2.4.0(@babel/core@7.29.13)
       ember-source: 6.12.1(@glimmer/component@1.1.2(@babel/core@7.29.13))(rsvp@4.8.5)
       qunit: 2.26.0
-      sinon: 21.0.3
+      sinon: 21.1.2
     transitivePeerDependencies:
       - '@babel/core'
 
@@ -19623,13 +19623,12 @@ snapshots:
 
   simple-html-tokenizer@1.0.0: {}
 
-  sinon@21.0.3:
+  sinon@21.1.2:
     dependencies:
       '@sinonjs/commons': 3.0.1
       '@sinonjs/fake-timers': 15.4.0
-      '@sinonjs/samsam': 9.0.3
+      '@sinonjs/samsam': 10.0.2
       diff: 8.0.4
-      supports-color: 7.2.0
 
   sinon@9.2.4:
     dependencies:
