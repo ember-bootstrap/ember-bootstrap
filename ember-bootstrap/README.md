@@ -32,7 +32,7 @@ Ember Bootstrap works and is fully [tested](https://github.com/kaliber5/ember-bo
 - Ember CLI 5.12 or above
 - Bootstrap 4 and 5
 - all modern evergreen browsers (Chrome, Firefox, Safari, Edge)
-- node.js 20+
+- Node 22+
 - FastBoot 1.0+
 - Embroider: we strive (and test) for maximum compatibility with Embroider, including the most aggressive setting
   (`staticComponents`) for tree shaking and code splitting. However as Embroider itself is still considered beta software,
