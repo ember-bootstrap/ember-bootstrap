@@ -61,6 +61,7 @@
     "@babel/eslint-parser": "7.29.13",
     "@babel/plugin-proposal-decorators": "7.29.7",
     "@embroider/test-setup": "4.0.0",
+    "@glimmer/component": "1.1.2",
     "@glint/core": "1.5.2",
     "@glint/environment-ember-loose": "1.5.2",
     "@glint/environment-ember-template-imports": "1.5.2",
@@ -90,7 +91,6 @@
     "typescript": "5.9.3"
   },
   "peerDependencies": {
-    "@glimmer/component": "^1.0.4 || ^2.0.0",
     "ember-modifier": "^3.2.7 || ^4.0.0",
     "ember-source": ">= 5.12.0"
   },

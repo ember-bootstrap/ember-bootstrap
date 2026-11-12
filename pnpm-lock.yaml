@@ -245,9 +245,6 @@ importers:
       '@embroider/util':
         specifier: ^1.0.0
         version: 1.13.5(@babel/core@7.29.13)(@glint/environment-ember-loose@1.5.2(@glimmer/component@1.1.2(@babel/core@7.29.13))(@glint/template@1.11.1)(ember-cli-htmlbars@7.0.1(@babel/core@7.29.13)(ember-source@6.12.1(@glimmer/component@1.1.2(@babel/core@7.29.13))(rsvp@4.8.5)))(ember-modifier@4.3.0(@babel/core@7.29.13)))(@glint/template@1.11.1)(ember-source@6.12.1(@glimmer/component@1.1.2(@babel/core@7.29.13))(rsvp@4.8.5))
-      '@glimmer/component':
-        specifier: ^1.0.4 || ^2.0.0
-        version: 1.1.2(@babel/core@7.29.13)
       broccoli-debug:
         specifier: ^0.6.3
         version: 0.6.5
@@ -309,6 +306,9 @@ importers:
       '@embroider/test-setup':
         specifier: 4.0.0
         version: 4.0.0
+      '@glimmer/component':
+        specifier: 1.1.2
+        version: 1.1.2(@babel/core@7.29.13)
       '@glint/core':
         specifier: 1.5.2
         version: 1.5.2(typescript@5.9.3)
