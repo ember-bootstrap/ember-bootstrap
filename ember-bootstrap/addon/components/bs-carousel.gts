@@ -6,7 +6,7 @@ import CarouselSlide, {
 } from './bs-carousel/slide';
 import Component from '@glimmer/component';
 import { schedule } from '@ember/runloop';
-import { task, timeout, type Task } from 'ember-concurrency';
+import { task, timeout } from 'ember-concurrency';
 import { tracked } from '@glimmer/tracking';
 import type { ComponentLike } from '@glint/template';
 import { on } from '@ember/modifier';
@@ -516,26 +516,24 @@ export default class Carousel extends Component<CarouselSignature> {
    * @this Carousel
    * @private
    */
-  @task({ restartable: true })
-  cycle = function* (this: Carousel) {
-    yield this.transitioner.perform();
-    yield timeout(this.interval);
+  cycle = task({ restartable: true }, async () => {
+    await this.transitioner.perform();
+    await timeout(this.interval);
     this.toAppropriateSlide();
-  } as unknown as Task<unknown, unknown[]>;
+  });
 
   /**
    * @method transitioner
    * @this Carousel
    * @private
    */
-  @task({ drop: true })
-  transitioner = function* (this: Carousel) {
+  transitioner = task({ drop: true }, async () => {
     this.presentationState = 'willTransit';
-    yield timeout(this.transitionDuration);
+    await timeout(this.transitionDuration);
     this.presentationState = 'didTransition';
     // Must change current index after execution of 'presentationStateObserver' method
     // from child components.
-    yield new Promise<void>((resolve) => {
+    await new Promise<void>((resolve) => {
       schedule('afterRender', this, () => {
         if (this.followingIndex !== undefined && this.followingIndex !== null) {
           this.currentIndex = this.followingIndex;
@@ -543,7 +541,7 @@ export default class Carousel extends Component<CarouselSignature> {
         resolve();
       });
     });
-  } as unknown as Task<unknown, unknown[]>;
+  });
 
   /**
    * Waits an interval time to start a cycle.
@@ -552,14 +550,13 @@ export default class Carousel extends Component<CarouselSignature> {
    * @this Carousel
    * @private
    */
-  @task({ restartable: true })
-  waitIntervalToInitCycle = function* (this: Carousel) {
+  waitIntervalToInitCycle = task({ restartable: true }, async () => {
     if (this.shouldRunAutomatically === false) {
       return;
     }
-    yield timeout(this.interval);
+    await timeout(this.interval);
     this.toAppropriateSlide();
-  } as unknown as Task<unknown, unknown[]>;
+  });
 
   @action
   toSlide(toIndex: number) {

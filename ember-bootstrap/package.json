@@ -47,7 +47,7 @@
     "ember-cli-babel": "^8.0.0",
     "ember-cli-build-config-editor": "^0.5.1",
     "ember-cli-htmlbars": "^7.0.0",
-    "ember-concurrency": "^4.0.0",
+    "ember-concurrency": "^5.0.0",
     "ember-element-helper": "^0.8.0",
     "ember-focus-trap": "^2.0.0",
     "ember-popper-modifier": "^4.0.0",
@@ -61,7 +61,7 @@
     "@babel/eslint-parser": "7.29.13",
     "@babel/plugin-proposal-decorators": "7.29.7",
     "@embroider/test-setup": "4.0.0",
-    "@glimmer/component": "2.0.0",
+    "@glimmer/component": "1.1.2",
     "@glint/core": "1.5.2",
     "@glint/environment-ember-loose": "1.5.2",
     "@glint/environment-ember-template-imports": "1.5.2",
@@ -69,7 +69,7 @@
     "@popperjs/core": "2.11.8",
     "@release-it-plugins/lerna-changelog": "8.0.1",
     "@simple-dom/interface": "1.4.0",
-    "@tsconfig/ember": "3.0.12",
+    "@tsconfig/ember": "3.0.13",
     "@types/rsvp": "4.0.9",
     "@typescript-eslint/eslint-plugin": "7.18.0",
     "@typescript-eslint/parser": "7.18.0",
@@ -82,21 +82,20 @@
     "eslint-config-prettier": "10.1.8",
     "eslint-plugin-ember": "12.7.5",
     "eslint-plugin-hbs": "1.0.3",
-    "eslint-plugin-n": "17.23.2",
+    "eslint-plugin-n": "17.24.0",
     "eslint-plugin-prettier": "5.5.7",
     "eslint-plugin-qunit": "8.2.6",
-    "focus-trap": "7.6.6",
+    "focus-trap": "7.8.0",
     "prettier-plugin-ember-template-tag": "2.1.0",
-    "release-it": "19.0.6",
+    "release-it": "19.2.4",
     "typescript": "5.9.3"
   },
   "peerDependencies": {
-    "@glimmer/component": "^1.0.4 || ^2.0.0",
     "ember-modifier": "^3.2.7 || ^4.0.0",
     "ember-source": ">= 5.12.0"
   },
   "engines": {
-    "node": "20.* || 22.* || >= 24"
+    "node": "22.* || 24.* || >= 26"
   },
   "ember": {
     "edition": "octane"

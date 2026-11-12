@@ -39,5 +39,11 @@ module.exports = {
       setOwnConfig: {},
     },
     'ember-cli-babel': { enableTypeScriptTransform: true },
+    babel: {
+      plugins: [
+        // Required by ember-concurrency v5 to compile `task(async () => {})`
+        require.resolve('ember-concurrency/async-arrow-task-transform'),
+      ],
+    },
   },
 };
