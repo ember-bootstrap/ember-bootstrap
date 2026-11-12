@@ -69,7 +69,7 @@
     "eslint": "9.35.0",
     "eslint-config-prettier": "10.1.8",
     "eslint-plugin-ember": "12.7.5",
-    "eslint-plugin-n": "17.23.2",
+    "eslint-plugin-n": "17.24.0",
     "eslint-plugin-qunit": "8.2.6",
     "execa": "5.1.1",
     "globals": "^15.15.0",
@@ -83,15 +83,15 @@
     "prember": "2.1.0",
     "prettier": "3.6.2",
     "prettier-plugin-ember-template-tag": "^2.1.0",
-    "qunit": "2.24.3",
-    "qunit-dom": "3.5.1",
-    "sass": "1.94.3",
-    "sinon": "21.0.3",
+    "qunit": "2.26.0",
+    "qunit-dom": "3.6.0",
+    "sass": "1.108.2",
+    "sinon": "21.1.2",
     "striptags": "3.2.0",
     "stylelint": "16.26.1",
     "stylelint-config-standard-scss": "16.0.0",
-    "tracked-built-ins": "4.0.0",
-    "webpack": "5.104.1"
+    "tracked-built-ins": "4.1.2",
+    "webpack": "5.112.2"
   },
   "engines": {
     "node": "22.* || 24.* || >= 26"
