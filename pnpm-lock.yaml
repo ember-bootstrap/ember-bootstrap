@@ -331,8 +331,8 @@ importers:
         specifier: 1.4.0
         version: 1.4.0
       '@tsconfig/ember':
-        specifier: 3.0.12
-        version: 3.0.12
+        specifier: 3.0.13
+        version: 3.0.13
       '@types/rsvp':
         specifier: 4.0.9
         version: 4.0.9
@@ -445,8 +445,8 @@ importers:
         specifier: 2.11.8
         version: 2.11.8
       '@tsconfig/ember':
-        specifier: 3.0.12
-        version: 3.0.12
+        specifier: 3.0.13
+        version: 3.0.13
       '@types/qunit':
         specifier: 2.19.14
         version: 2.19.14
@@ -2440,9 +2440,8 @@ packages:
   '@tootallnate/quickjs-emscripten@0.23.0':
     resolution: {integrity: sha512-C5Mc6rdnsaJDjO3UpGW/CQTHtCKaYlScZTly4JIu97Jxo/odCiH0ITnDXSJPTOrEKk/ycSZ0AOgTmkDtkOsvIA==}
 
-  '@tsconfig/ember@3.0.12':
-    resolution: {integrity: sha512-ypFTXqIzQAB5HpYPi4TwDElDcUheWrKsEaYXgjiCAvsH6zxcQ4zUeuJqmfT+FoUlHTPZ3Xyel81OxrcjI+rilw==}
-    deprecated: Please use @ember/app-tsconfig or @ember/library-tsconfig instead. These live at https://github.com/ember-cli/tsconfigs
+  '@tsconfig/ember@3.0.13':
+    resolution: {integrity: sha512-/sOaDN37PWmMuXqd+7RTnJkMKIwui7feji2ffsl40hoIMjKbge2d8gojNKVrYg1qlQK62DF41ssinrWmZpKorg==}
 
   '@tybys/wasm-util@0.10.4':
     resolution: {integrity: sha512-W3c4gRigFS0T/Ma4qIYF3GDAc5AQdHb1yL5znJT1Zv1YaD9Kitx656wBjvr19qbiosmZT8lWDM5BEMynUqX65A==}
@@ -11790,7 +11789,7 @@ snapshots:
 
   '@tootallnate/quickjs-emscripten@0.23.0': {}
 
-  '@tsconfig/ember@3.0.12': {}
+  '@tsconfig/ember@3.0.13': {}
 
   '@tybys/wasm-util@0.10.4':
     dependencies:
