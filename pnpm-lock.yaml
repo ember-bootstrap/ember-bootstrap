@@ -295,7 +295,7 @@ importers:
         version: 5.0.0
       tracked-toolbox:
         specifier: ^2.0.0
-        version: 2.0.0(@babel/core@7.29.13)(ember-source@6.12.1(@glimmer/component@1.1.2(@babel/core@7.29.13))(rsvp@4.8.5))
+        version: 2.2.0(@babel/core@7.29.13)
     devDependencies:
       '@babel/eslint-parser':
         specifier: 7.29.13
@@ -643,8 +643,8 @@ importers:
         specifier: 21.1.2
         version: 21.1.2
       tracked-toolbox:
-        specifier: 2.0.0
-        version: 2.0.0(@babel/core@7.29.13)(ember-source@6.12.1(@glimmer/component@1.1.2(@babel/core@7.29.13))(rsvp@4.8.5))
+        specifier: 2.2.0
+        version: 2.2.0(@babel/core@7.29.13)
       typescript:
         specifier: 5.9.3
         version: 5.9.3
@@ -9130,14 +9130,8 @@ packages:
   tracked-built-ins@4.1.2:
     resolution: {integrity: sha512-KiiV/Pzi7VNKTn9Fip6Ic54AjKgFfqows1Jq3L0WLVqZcvfswdhVxQ9yqqhTXsmgLhVzIgtdzNBH4ExqWf34BQ==}
 
-  tracked-toolbox@2.0.0:
-    resolution: {integrity: sha512-adZtX+RGN6F+pWs/5JqVuDxLhuia4uhqmQp+UlUaxpykWjDFETtAdQR+LdDJiFPXFAXnS6FBqn/tnSLJQCm3Yw==}
-    engines: {node: 14.* || 16.* || >= 18}
-    peerDependencies:
-      ember-source: '*'
-    peerDependenciesMeta:
-      ember-source:
-        optional: true
+  tracked-toolbox@2.2.0:
+    resolution: {integrity: sha512-YknotXj74U0nCqBk9nh1Uv1IWTnVOgt8sXIecNkyEq4oFOU70niQUlozO4E3kMKx7ae/rNlOtoF+1ALcHYzCrQ==}
 
   tree-kill@1.2.2:
     resolution: {integrity: sha512-L0Orpi8qGpRG//Nd+H90vFB+3iHnue1zSSGmNOOCh1GLJ7rUKVwV2HvijphGQS2UmhUZewS9VgvxYIdgr+fG1A==}
@@ -20419,12 +20413,11 @@ snapshots:
     transitivePeerDependencies:
       - '@babel/core'
 
-  tracked-toolbox@2.0.0(@babel/core@7.29.13)(ember-source@6.12.1(@glimmer/component@1.1.2(@babel/core@7.29.13))(rsvp@4.8.5)):
+  tracked-toolbox@2.2.0(@babel/core@7.29.13):
     dependencies:
       '@embroider/addon-shim': 1.11.0
+      decorator-transforms: 2.4.0(@babel/core@7.29.13)
       ember-cache-primitive-polyfill: 1.0.1(@babel/core@7.29.13)
-    optionalDependencies:
-      ember-source: 6.12.1(@glimmer/component@1.1.2(@babel/core@7.29.13))(rsvp@4.8.5)
     transitivePeerDependencies:
       - '@babel/core'
       - supports-color
