@@ -42,7 +42,7 @@
     "@types/qunit": "2.19.14",
     "@types/rsvp": "4.0.9",
     "@types/sinon": "21.0.1",
-    "bootstrap": "5.3.8",
+    "bootstrap": "5.3.9",
     "broccoli-asset-rev": "3.0.0",
     "broccoli-debug": "0.6.5",
     "broccoli-funnel": "3.0.8",
@@ -90,10 +90,10 @@
     "eslint-config-prettier": "10.1.8",
     "eslint-plugin-ember": "12.7.5",
     "eslint-plugin-hbs": "1.0.3",
-    "eslint-plugin-n": "17.23.2",
+    "eslint-plugin-n": "17.24.0",
     "eslint-plugin-qunit": "8.2.6",
     "findup-sync": "5.0.0",
-    "fs-extra": "11.3.6",
+    "fs-extra": "11.4.1",
     "globals": "15.15.0",
     "loader.js": "4.7.0",
     "prettier": "3.6.2",
@@ -106,7 +106,7 @@
     "tracked-toolbox": "2.0.0",
     "typescript": "5.9.3",
     "typescript-eslint": "8.72.1",
-    "webpack": "5.104.1"
+    "webpack": "5.112.2"
   },
   "engines": {
     "node": "22.* || 24.* || >= 26"
