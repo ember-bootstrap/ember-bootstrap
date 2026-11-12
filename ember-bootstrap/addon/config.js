@@ -1,8 +1,4 @@
-import EmberObject from '@ember/object';
-
-class Config extends EmberObject {}
-
-Config.reopenClass({
+const Config = {
   formValidationSuccessIcon: 'glyphicon glyphicon-ok',
   formValidationErrorIcon: 'glyphicon glyphicon-remove',
   formValidationWarningIcon: 'glyphicon glyphicon-warning-sign',
@@ -18,6 +14,6 @@ Config.reopenClass({
       }
     }
   },
-});
+};
 
 export default Config;
