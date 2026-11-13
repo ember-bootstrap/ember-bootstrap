@@ -472,8 +472,8 @@ importers:
         specifier: 0.6.5
         version: 0.6.5
       broccoli-funnel:
-        specifier: 3.0.8
-        version: 3.0.8
+        specifier: 4.0.0
+        version: 4.0.0
       broccoli-merge-trees:
         specifier: 4.2.0
         version: 4.2.0
@@ -2906,6 +2906,10 @@ packages:
   array-equal@1.0.2:
     resolution: {integrity: sha512-gUHx76KtnhEgB3HOuFYiCm3FIdEs6ocM2asHvNTkfu/Y09qQVrrVVaOKENmS2KkSaGoxgXNqC+ZVtR/n0MOkSA==}
 
+  array-equal@2.0.0:
+    resolution: {integrity: sha512-omyuT98dFFarEaqhHvhzcJ6/lX+qxT1kzdNzaAp3Dr/6AkmU2+tXeDXYkdB8n84w0/QhrX6FFRUY6l7U250oCQ==}
+    engines: {node: '>=20'}
+
   array-flatten@1.1.1:
     resolution: {integrity: sha512-PCVAQswWemu6UdxsDFFX/+gVeYqKAod3D3UVm91jHwynguOwAvYPhx8nNlM++NqRcK6CxxpUafjmhIdKiHibqg==}
 
@@ -3296,6 +3300,10 @@ packages:
     resolution: {integrity: sha512-ng4eIhPYiXqMw6SyGoxPHR3YAwEd2lr9FgBI1CyTbspl4txZovOsmzFkMkGAlu88xyvYXJqHiM2crfLa65T1BQ==}
     engines: {node: 10.* || >= 12.*}
 
+  broccoli-funnel@4.0.0:
+    resolution: {integrity: sha512-VsEjKM5XBzm2osABRL3gYuK/qD22IFG2URWjNL5Pgh2VsHvhpZ6cFIllR9e1PlmaKTr2tp4x2n7pPiqRizHNdQ==}
+    engines: {node: 10.* || >= 12.*}
+
   broccoli-kitchen-sink-helpers@0.2.9:
     resolution: {integrity: sha512-C+oEqivDofZv/h80rgN4WJkbZkbfwkrIeu8vFn4bb4m4jPd3ICNNplhkXGl3ps439pzc2yjZ1qIwz0yy8uHcQg==}
 
@@ -3355,6 +3363,10 @@ packages:
   broccoli-plugin@4.0.7:
     resolution: {integrity: sha512-a4zUsWtA1uns1K7p9rExYVYG99rdKeGRymW0qOCNkvDPHQxVi3yVyJHhQbM3EZwdt2E0mnhr5e0c/bPpJ7p3Wg==}
     engines: {node: 10.* || >= 12.*}
+
+  broccoli-plugin@6.0.0:
+    resolution: {integrity: sha512-EyZ7CroBVosQZN9AfCdC9aIoaLytE601AQfmKg2U9EiuNS2K8Gj6Q8gmr8hGOUMGFKSf+yNMn7UCAncCWvgXUg==}
+    engines: {node: '>= 14.14'}
 
   broccoli-rollup@2.1.1:
     resolution: {integrity: sha512-aky/Ovg5DbsrsJEx2QCXxHLA6ZR+9u1TNVTf85soP4gL8CjGGKQ/JU8R3BZ2ntkWzo6/83RCKzX6O+nlNKR5MQ==}
@@ -12200,6 +12212,8 @@ snapshots:
 
   array-equal@1.0.2: {}
 
+  array-equal@2.0.0: {}
+
   array-flatten@1.1.1: {}
 
   array-initial@1.1.0:
@@ -12808,6 +12822,18 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
+  broccoli-funnel@4.0.0:
+    dependencies:
+      array-equal: 2.0.0
+      broccoli-plugin: 6.0.0
+      debug: 4.4.3
+      fs-tree-diff: 2.0.1
+      heimdalljs: 0.2.6
+      minimatch: 10.2.6
+      walk-sync: 4.0.2
+    transitivePeerDependencies:
+      - supports-color
+
   broccoli-kitchen-sink-helpers@0.2.9:
     dependencies:
       glob: 5.0.15
@@ -12953,6 +12979,16 @@ snapshots:
       promise-map-series: 0.3.0
       quick-temp: 0.1.9
       rimraf: 3.0.2
+      symlink-or-copy: 1.3.1
+    transitivePeerDependencies:
+      - supports-color
+
+  broccoli-plugin@6.0.0:
+    dependencies:
+      broccoli-node-api: 1.7.0
+      broccoli-output-wrapper: 3.2.5
+      fs-merger: 3.2.1
+      promise-map-series: 0.3.0
       symlink-or-copy: 1.3.1
     transitivePeerDependencies:
       - supports-color
