@@ -249,8 +249,8 @@ importers:
         specifier: ^0.6.3
         version: 0.6.5
       chalk:
-        specifier: ^5.0.0
-        version: 5.6.2
+        specifier: ^6.0.0
+        version: 6.0.1
       ember-auto-import:
         specifier: ^2.6.3
         version: 2.13.1(@glint/template@1.11.1)(webpack@5.112.2)
@@ -478,8 +478,8 @@ importers:
         specifier: 4.2.0
         version: 4.2.0
       chalk:
-        specifier: 5.6.2
-        version: 5.6.2
+        specifier: 6.0.1
+        version: 6.0.1
       concurrently:
         specifier: 9.2.5
         version: 9.2.5
@@ -3529,6 +3529,10 @@ packages:
   chalk@5.6.2:
     resolution: {integrity: sha512-7NzBL0rN6fMUW+f7A6Io4h40qQlG+xGmtMxfbnH/K7TAtt8JQWVQK+6g0UXKMeVJoyV5EkkNsErQ8pVD3bLHbA==}
     engines: {node: ^12.17.0 || ^14.13 || >=16.0.0}
+
+  chalk@6.0.1:
+    resolution: {integrity: sha512-/Ce6KNm3vIbWdMlNna6RVIZ/ICQxnJxCicet5LBKK9ZffBkqzDw0xh9EiKSljdRtiIQ1S1z4YgcscUUGzNCWrA==}
+    engines: {node: '>=22'}
 
   character-entities@2.0.2:
     resolution: {integrity: sha512-shx7oQ0Awen/BRIdkjkvz54PnEEI/EjwXDSIZp86/KKdbafHh1Df/RYGBhn4hbe2+uKC9FnT5UCEdyPz3ai9hQ==}
@@ -13299,6 +13303,8 @@ snapshots:
       supports-color: 7.2.0
 
   chalk@5.6.2: {}
+
+  chalk@6.0.1: {}
 
   character-entities@2.0.2: {}
 
