@@ -47,7 +47,7 @@
     "broccoli-funnel": "4.0.0",
     "broccoli-merge-trees": "4.2.0",
     "chalk": "6.0.1",
-    "concurrently": "9.2.5",
+    "concurrently": "10.0.7",
     "ember-a11y-testing": "8.0.1",
     "ember-auto-import": "2.13.1",
     "ember-bootstrap": "workspace:*",
