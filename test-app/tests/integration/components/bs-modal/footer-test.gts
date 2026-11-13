@@ -17,7 +17,7 @@ module('Integration | Component | bs-modal/footer', function (hooks) {
 
     await render(
       <template>
-        <BsModalFooter @onClose={{close}} @closeTitle='close' />
+        <BsModalFooter @onClose={{close}} @closeTitle="close" />
       </template>,
     );
     await click('.modal-footer button');
@@ -45,8 +45,8 @@ module('Integration | Component | bs-modal/footer', function (hooks) {
       <template>
         <BsModalFooter
           @onSubmit={{submit}}
-          @closeTitle='close'
-          @submitTitle='submit'
+          @closeTitle="close"
+          @submitTitle="submit"
         />
       </template>,
     );
@@ -85,8 +85,8 @@ module('Integration | Component | bs-modal/footer', function (hooks) {
       <template>
         <BsModalFooter
           @onSubmit={{submit}}
-          @closeTitle='close'
-          @submitTitle='submit'
+          @closeTitle="close"
+          @submitTitle="submit"
         />
       </template>,
     );
@@ -108,9 +108,9 @@ module('Integration | Component | bs-modal/footer', function (hooks) {
     await render(
       <template>
         <BsModalFooter
-          @closeTitle='close'
-          @submitTitle='submit'
-          @submitButtonType='danger'
+          @closeTitle="close"
+          @submitTitle="submit"
+          @submitButtonType="danger"
         />
       </template>,
     );
@@ -123,8 +123,8 @@ module('Integration | Component | bs-modal/footer', function (hooks) {
     await render(
       <template>
         <BsModalFooter
-          @closeTitle='close'
-          @submitTitle='submit'
+          @closeTitle="close"
+          @submitTitle="submit"
         >custom</BsModalFooter>
       </template>,
     );
@@ -143,8 +143,8 @@ module('Integration | Component | bs-modal/footer', function (hooks) {
     await render(
       <template>
         <BsModalFooter
-          @closeTitle='close'
-          @submitTitle='submit'
+          @closeTitle="close"
+          @submitTitle="submit"
           @submitDisabled={{state.disabled}}
         />
       </template>,

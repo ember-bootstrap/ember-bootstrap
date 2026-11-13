@@ -41,7 +41,6 @@ import { tracked } from '@glimmer/tracking';
 
 const nextRunloop = function () {
   return new Promise((resolve) => {
-    // eslint-disable-next-line ember/no-runloop
     next(() => {
       resolve();
     });
@@ -150,7 +149,7 @@ module('Integration | Component | bs-form', function (hooks) {
     await render(
       <template>
         <BsForm @onSubmit={{submit}}><button
-            type='submit'
+            type="submit"
           >Submit</button></BsForm>
       </template>,
     );
@@ -165,9 +164,9 @@ module('Integration | Component | bs-form', function (hooks) {
     // Enable again when hbs plugin works again _eslint-disable-next-line hbs/check-hbs-template-literals
     await render(
       <template>
-        <div {{on 'submit' submitAction}}>
+        <div {{on "submit" submitAction}}>
           <BsForm>
-            <button type='submit'>submit</button>
+            <button type="submit">submit</button>
           </BsForm>
         </div>
       </template>,
@@ -238,7 +237,7 @@ module('Integration | Component | bs-form', function (hooks) {
     await render(
       <template>
         <ValidatingForm @model={{model}} as |form|>
-          <button type='button' {{on 'click' form.submit}}>Submit</button>
+          <button type="button" {{on "click" form.submit}}>Submit</button>
         </ValidatingForm>
       </template>,
     );
@@ -538,7 +537,7 @@ module('Integration | Component | bs-form', function (hooks) {
     await render(
       <template>
         <BsForm @onSubmit={{submitAction}}>
-          <button type='submit'>submit</button>
+          <button type="submit">submit</button>
         </BsForm>
       </template>,
     );
@@ -558,7 +557,7 @@ module('Integration | Component | bs-form', function (hooks) {
     await render(
       <template>
         <BsForm @onSubmit={{submitAction}}>
-          <button type='submit'>submit</button>
+          <button type="submit">submit</button>
         </BsForm>
       </template>,
     );
@@ -615,7 +614,7 @@ module('Integration | Component | bs-form', function (hooks) {
             @onSubmit={{submitAction}}
             as |form|
           >
-            <form.element @property='dummy' @errors={{state.errors}} />
+            <form.element @property="dummy" @errors={{state.errors}} />
           </ValidatingForm>
         </template>,
       );
@@ -639,7 +638,7 @@ module('Integration | Component | bs-form', function (hooks) {
         );
 
       // simulate validation errors being added while a submission is ongoing
-      // eslint-disable-next-line ember/no-runloop
+
       run(() => state.errors.pushObject('There is an error'));
       await settled();
 
@@ -689,7 +688,7 @@ module('Integration | Component | bs-form', function (hooks) {
             @validate={{validateStub}}
             as |form|
           >
-            <form.element @property='dummy' @errors={{state.errors}} />
+            <form.element @property="dummy" @errors={{state.errors}} />
           </ValidatingForm>
         </template>,
       );
@@ -706,7 +705,7 @@ module('Integration | Component | bs-form', function (hooks) {
       await triggerEvent('form', 'submit');
 
       // simulate validation errors being added while a submission is ongoing
-      // eslint-disable-next-line ember/no-runloop
+
       run(() => state.errors.pushObject('There is an error'));
       await settled();
 
@@ -764,7 +763,7 @@ module('Integration | Component | bs-form', function (hooks) {
             @validate={{validateStub}}
             as |form|
           >
-            <form.element @property='dummy' @errors={{state.errors}} />
+            <form.element @property="dummy" @errors={{state.errors}} />
           </ValidatingForm>
         </template>,
       );
@@ -781,7 +780,7 @@ module('Integration | Component | bs-form', function (hooks) {
       await triggerEvent('form', 'submit');
 
       // simulate validation errors being added while a submission is ongoing
-      // eslint-disable-next-line ember/no-runloop
+
       run(() => state.errors.pushObject('There is an error'));
       await settled();
 
@@ -815,8 +814,8 @@ module('Integration | Component | bs-form', function (hooks) {
 
     await render(
       <template>
-        <BsForm @model={{hash name='Max'}} @onSubmit={{submitAction}} as |form|>
-          <form.element @property='name' />
+        <BsForm @model={{hash name="Max"}} @onSubmit={{submitAction}} as |form|>
+          <form.element @property="name" />
         </BsForm>
       </template>,
     );
@@ -832,7 +831,7 @@ module('Integration | Component | bs-form', function (hooks) {
     await render(
       <template>
         <BsForm @onSubmit={{submit}} as |form|>
-          <a href='#' role='button' {{on 'click' form.submit}}>submit</a>
+          <a href="#" role="button" {{on "click" form.submit}}>submit</a>
         </BsForm>
       </template>,
     );
@@ -849,7 +848,7 @@ module('Integration | Component | bs-form', function (hooks) {
         assert.ok(ret instanceof Promise);
       }
 
-      <template><button type='button' {{on 'click' this.click}} /></template>
+      <template><button type="button" {{on "click" this.click}} /></template>
     }
 
     await render(
@@ -882,7 +881,7 @@ module('Integration | Component | bs-form', function (hooks) {
         }
       }
 
-      <template><button type='button' {{on 'click' this.click}} /></template>
+      <template><button type="button" {{on "click" this.click}} /></template>
     }
 
     class ValidForm extends Form {
@@ -932,7 +931,7 @@ module('Integration | Component | bs-form', function (hooks) {
         assert.rejects(this.args.onSubmit(), 'rejected value');
       }
 
-      <template><button type='button' {{on 'click' this.click}} /></template>
+      <template><button type="button" {{on "click" this.click}} /></template>
     }
 
     class ValidatingForm extends Form {
@@ -972,7 +971,7 @@ module('Integration | Component | bs-form', function (hooks) {
     await render(
       <template>
         <BsForm @onSubmit={{submitAction}} as |form|>
-          <div class='state {{if form.isSubmitting "is-submitting"}}'></div>
+          <div class="state {{if form.isSubmitting 'is-submitting'}}"></div>
         </BsForm>
       </template>,
     );
@@ -1000,7 +999,7 @@ module('Integration | Component | bs-form', function (hooks) {
           @hasValidator={{hasValidator}}
           as |form|
         >
-          <div class='state {{if form.isSubmitting "is-submitting"}}'></div>
+          <div class="state {{if form.isSubmitting 'is-submitting'}}"></div>
         </BsForm>
       </template>,
     );
@@ -1020,7 +1019,7 @@ module('Integration | Component | bs-form', function (hooks) {
     await render(
       <template>
         <BsForm @onSubmit={{submitAction}} as |form|>
-          <div class='state {{if form.isSubmitting "is-submitting"}}'></div>
+          <div class="state {{if form.isSubmitting 'is-submitting'}}"></div>
         </BsForm>
       </template>,
     );
@@ -1048,7 +1047,7 @@ module('Integration | Component | bs-form', function (hooks) {
           @validate={{false}}
           as |form|
         >
-          <div class='state {{if form.isSubmitting "is-submitting"}}'></div>
+          <div class="state {{if form.isSubmitting 'is-submitting'}}"></div>
         </ValidatingForm>
       </template>,
     );
@@ -1072,7 +1071,7 @@ module('Integration | Component | bs-form', function (hooks) {
     await render(
       <template>
         <ValidatingForm @validate={{validateAction}} as |form|>
-          <div class='state {{if form.isSubmitting "is-submitting"}}'></div>
+          <div class="state {{if form.isSubmitting 'is-submitting'}}"></div>
         </ValidatingForm>
       </template>,
     );
@@ -1104,7 +1103,7 @@ module('Integration | Component | bs-form', function (hooks) {
           @validate={{validateAction}}
           as |form|
         >
-          <div class='state {{if form.isSubmitting "is-submitting"}}'></div>
+          <div class="state {{if form.isSubmitting 'is-submitting'}}"></div>
         </ValidatingForm>
       </template>,
     );
@@ -1136,7 +1135,7 @@ module('Integration | Component | bs-form', function (hooks) {
           @preventConcurrency={{false}}
           as |form|
         >
-          <div class='state {{if form.isSubmitting "is-submitting"}}'></div>
+          <div class="state {{if form.isSubmitting 'is-submitting'}}"></div>
         </BsForm>
       </template>,
     );
@@ -1166,8 +1165,8 @@ module('Integration | Component | bs-form', function (hooks) {
       <template>
         <BsForm @onSubmit={{submit}} as |form|>
           <button
-            type='submit'
-            class={{if form.isSubmitted 'is-submitted'}}
+            type="submit"
+            class={{if form.isSubmitted "is-submitted"}}
           >submit</button>
         </BsForm>
       </template>,
@@ -1182,8 +1181,8 @@ module('Integration | Component | bs-form', function (hooks) {
       <template>
         <BsForm as |form|>
           <button
-            type='submit'
-            class={{if form.isSubmitted 'is-submitted'}}
+            type="submit"
+            class={{if form.isSubmitted "is-submitted"}}
           >submit</button>
         </BsForm>
       </template>,
@@ -1199,8 +1198,8 @@ module('Integration | Component | bs-form', function (hooks) {
       <template>
         <BsForm @validate={{validate}} as |form|>
           <button
-            type='submit'
-            class={{if form.isSubmitted 'is-submitted'}}
+            type="submit"
+            class={{if form.isSubmitted "is-submitted"}}
           >submit</button>
         </BsForm>
       </template>,
@@ -1216,10 +1215,10 @@ module('Integration | Component | bs-form', function (hooks) {
     await render(
       <template>
         <BsForm @onSubmit={{submit}} @model={{model}} as |form|>
-          <form.element @property='foo' />
+          <form.element @property="foo" />
           <button
-            type='submit'
-            class={{if form.isSubmitted 'is-submitted'}}
+            type="submit"
+            class={{if form.isSubmitted "is-submitted"}}
           >submit</button>
         </BsForm>
       </template>,
@@ -1241,8 +1240,8 @@ module('Integration | Component | bs-form', function (hooks) {
       <template>
         <BsForm @onSubmit={{submit}} as |form|>
           <button
-            type='submit'
-            class={{if form.isRejected 'is-rejected'}}
+            type="submit"
+            class={{if form.isRejected "is-rejected"}}
           >submit</button>
         </BsForm>
       </template>,
@@ -1260,8 +1259,8 @@ module('Integration | Component | bs-form', function (hooks) {
       <template>
         <ValidatingForm @validate={{false}} as |form|>
           <button
-            type='submit'
-            class={{if form.isRejected 'is-rejected'}}
+            type="submit"
+            class={{if form.isRejected "is-rejected"}}
           >submit</button>
         </ValidatingForm>
       </template>,
@@ -1280,10 +1279,10 @@ module('Integration | Component | bs-form', function (hooks) {
     await render(
       <template>
         <BsForm @onSubmit={{submit}} @model={{model}} as |form|>
-          <form.element @property='foo' />
+          <form.element @property="foo" />
           <button
-            type='submit'
-            class={{if form.isRejected 'is-rejected'}}
+            type="submit"
+            class={{if form.isRejected "is-rejected"}}
           >submit</button>
         </BsForm>
       </template>,
@@ -1306,8 +1305,8 @@ module('Integration | Component | bs-form', function (hooks) {
       <template>
         <BsForm @onSubmit={{submit}} @model={{model}} as |form|>
           <label>Input:
-            <input {{on 'input' form.resetSubmissionState}} /></label>
-          <span class='state'>
+            <input {{on "input" form.resetSubmissionState}} /></label>
+          <span class="state">
             {{#if form.isSubmitting}}isSubmitting{{/if}}
             {{#if form.isSubmitted}}isSubmitted{{/if}}
             {{#if form.isRejected}}isRejected{{/if}}
@@ -1329,7 +1328,7 @@ module('Integration | Component | bs-form', function (hooks) {
     await render(
       <template>
         <BsForm @model={{model}} as |form|>
-          <form.element @property='name' />
+          <form.element @property="name" />
         </BsForm>
       </template>,
     );
@@ -1362,8 +1361,8 @@ module('Integration | Component | bs-form', function (hooks) {
       await render(
         <template>
           <BsForm @onSubmit={{submit}} @submitOnEnter={{true}} as |form|>
-            <form.element @property='input1' />
-            <form.element @property='input2' />
+            <form.element @property="input1" />
+            <form.element @property="input2" />
           </BsForm>
         </template>,
       );
@@ -1479,7 +1478,7 @@ module('Integration | Component | bs-form', function (hooks) {
     await render(
       <template>
         <BsForm @model={{this}} @disabled={{true}} as |form|>
-          <form.element @property='dummy' data-test-form-element />
+          <form.element @property="dummy" data-test-form-element />
         </BsForm>
       </template>,
     );
@@ -1491,7 +1490,7 @@ module('Integration | Component | bs-form', function (hooks) {
     await render(
       <template>
         <BsForm @model={{this}} @readonly={{true}} as |form|>
-          <form.element @property='dummy' data-test-form-element />
+          <form.element @property="dummy" data-test-form-element />
         </BsForm>
       </template>,
     );
@@ -1503,7 +1502,7 @@ module('Integration | Component | bs-form', function (hooks) {
     await render(
       <template>
         <BsForm @model={{this}} as |form|>
-          <form.element @property='dummy' @label='Dummy' />
+          <form.element @property="dummy" @label="Dummy" />
         </BsForm>
       </template>,
     );
@@ -1582,7 +1581,7 @@ module('Integration | Component | bs-form', function (hooks) {
                   {{#if button.isRejected}}isRejected{{/if}}
                   {{#if button.isSettled}}isSettled{{/if}}
                 </form.submitButton>
-                <button type='button' {{on 'click' form.resetSubmissionState}}>
+                <button type="button" {{on "click" form.resetSubmissionState}}>
                 </button>
               </BsForm>
             </template>,
@@ -1670,7 +1669,7 @@ module('Integration | Component | bs-form', function (hooks) {
     await render(
       <template>
         <BsForm @model={{model}} @onSubmit={{state.submitHandler}} as |form|>
-          <form.element @property='name' />
+          <form.element @property="name" />
         </BsForm>
       </template>,
     );
@@ -1708,7 +1707,7 @@ module('Integration | Component | bs-form', function (hooks) {
           data-test-first-form
           as |form|
         >
-          <form.element @property='name' />
+          <form.element @property="name" />
         </BsForm>
         <BsForm
           @model={{model}}
@@ -1762,10 +1761,10 @@ module('Integration | Component | bs-form', function (hooks) {
           as |Form|
         >
           {{#unless state.user}}
-            <Form.element @property='name' />
+            <Form.element @property="name" />
           {{/unless}}
 
-          <Form.submitButton @defaultText='Submit' />
+          <Form.submitButton @defaultText="Submit" />
         </BsForm>
       </template>,
     );
@@ -1786,8 +1785,8 @@ module('Integration | Component | bs-form', function (hooks) {
           @onSubmit={{this.submitHandler}}
           as |form|
         >
-          <form.element @property='name' />
-          <label id='name'>{{form.model.name}}</label>
+          <form.element @property="name" />
+          <label id="name">{{form.model.name}}</label>
         </BsForm>
       </template>,
     );

@@ -13,7 +13,7 @@ module('Integration | Helper | bs-on-document', function (hooks) {
 
   test('it calls the callback for events on document', async function (assert) {
     const handler = sinon.spy();
-    await render(<template>{{bsOnDocument 'click' handler}}</template>);
+    await render(<template>{{bsOnDocument "click" handler}}</template>);
 
     document.dispatchEvent(new Event('click'));
     assert.ok(handler.calledOnce, 'callback was called');
@@ -32,7 +32,7 @@ module('Integration | Helper | bs-on-document', function (hooks) {
     const handler = sinon.spy();
     await render(
       <template>
-        {{#if state.show}}{{bsOnDocument 'click' handler}}{{/if}}
+        {{#if state.show}}{{bsOnDocument "click" handler}}{{/if}}
       </template>,
     );
 
@@ -68,7 +68,7 @@ module('Integration | Helper | bs-on-document', function (hooks) {
       @tracked handler = first;
     }
     const state = new State();
-    await render(<template>{{bsOnDocument 'click' state.handler}}</template>);
+    await render(<template>{{bsOnDocument "click" state.handler}}</template>);
 
     state.handler = second;
     await settled();
@@ -87,9 +87,9 @@ module('Integration | Helper | bs-on-document', function (hooks) {
     const stopPropagation = (e: Event) => e.stopPropagation();
     await render(
       <template>
-        <button type='button' {{on 'click' stopPropagation}}>Button</button>
+        <button type="button" {{on "click" stopPropagation}}>Button</button>
         {{#if state.show}}
-          {{bsOnDocument 'click' handler capture=true}}
+          {{bsOnDocument "click" handler capture=true}}
         {{/if}}
       </template>,
     );
