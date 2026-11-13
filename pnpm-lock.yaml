@@ -485,10 +485,10 @@ importers:
         version: 9.2.5
       ember-a11y-testing:
         specifier: 7.1.3
-        version: 7.1.3(@babel/core@7.29.13)(@ember/test-helpers@5.4.3(@babel/core@7.29.13))(@glint/template@1.11.1)(qunit@2.26.0)(webpack@5.112.2)
+        version: 7.1.3(@babel/core@7.29.13)(@ember/test-helpers@5.4.3(@babel/core@7.29.13))(@glint/template@1.11.1)(qunit@2.26.0)(webpack@5.112.2(postcss@8.5.32))
       ember-auto-import:
         specifier: 2.13.1
-        version: 2.13.1(@glint/template@1.11.1)(webpack@5.112.2)
+        version: 2.13.1(@glint/template@1.11.1)(webpack@5.112.2(postcss@8.5.32))
       ember-bootstrap:
         specifier: workspace:*
         version: link:../ember-bootstrap
@@ -515,7 +515,7 @@ importers:
         version: 4.1.5(ember-source@6.12.1(@glimmer/component@1.1.2(@babel/core@7.29.13))(rsvp@4.8.5))
       ember-cli-fastboot-testing:
         specifier: 0.9.0
-        version: 0.9.0(@babel/core@7.29.13)(@ember/test-helpers@5.4.3(@babel/core@7.29.13))(@glint/template@1.11.1)(ember-source@6.12.1(@glimmer/component@1.1.2(@babel/core@7.29.13))(rsvp@4.8.5))(webpack@5.112.2)
+        version: 0.9.0(@babel/core@7.29.13)(@ember/test-helpers@5.4.3(@babel/core@7.29.13))(@glint/template@1.11.1)(ember-source@6.12.1(@glimmer/component@1.1.2(@babel/core@7.29.13))(rsvp@4.8.5))(webpack@5.112.2(postcss@8.5.32))
       ember-cli-htmlbars:
         specifier: 7.0.1
         version: 7.0.1(@babel/core@7.29.13)(ember-source@6.12.1(@glimmer/component@1.1.2(@babel/core@7.29.13))(rsvp@4.8.5))
@@ -554,7 +554,7 @@ importers:
         version: 9.1.0
       ember-popper-modifier:
         specifier: 4.1.1
-        version: 4.1.1(@glint/template@1.11.1)(ember-source@6.12.1(@glimmer/component@1.1.2(@babel/core@7.29.13))(rsvp@4.8.5))(webpack@5.112.2)
+        version: 4.1.1(@glint/template@1.11.1)(ember-source@6.12.1(@glimmer/component@1.1.2(@babel/core@7.29.13))(rsvp@4.8.5))(webpack@5.112.2(postcss@8.5.32))
       ember-qunit:
         specifier: 9.2.0
         version: 9.2.0(@ember/test-helpers@5.4.3(@babel/core@7.29.13))(qunit@2.26.0)
@@ -564,6 +564,9 @@ importers:
       ember-resolver:
         specifier: 13.2.0
         version: 13.2.0
+      ember-route-template:
+        specifier: 1.0.3
+        version: 1.0.3
       ember-sinon:
         specifier: 5.0.0
         version: 5.0.0
@@ -650,7 +653,7 @@ importers:
         version: 5.9.3
       webpack:
         specifier: 5.112.2
-        version: 5.112.2
+        version: 5.112.2(postcss@8.5.32)
 
 packages:
 
@@ -4680,6 +4683,9 @@ packages:
 
   ember-rfc176-data@0.3.18:
     resolution: {integrity: sha512-JtuLoYGSjay1W3MQAxt3eINWXNYYQliK90tLwtb8aeCuQK8zKGCRbBodVIrkcTqshULMnRuTOS6t1P7oQk3g6Q==}
+
+  ember-route-template@1.0.3:
+    resolution: {integrity: sha512-p//Nk4g4Wu9F8cZdjB69rKxTRi6RRW32a8K5sYsi5cofTcJtPBXRWUXWpQEjJX6qcucgxooQwEm9+7MOy4lwNw==}
 
   ember-router-generator@2.0.0:
     resolution: {integrity: sha512-89oVHVJwmLDvGvAUWgS87KpBoRhy3aZ6U0Ql6HOmU4TrPkyaa8pM0W81wj9cIwjYprcQtN9EwzZMHnq46+oUyw==}
@@ -13961,7 +13967,7 @@ snapshots:
 
   electron-to-chromium@1.5.467: {}
 
-  ember-a11y-testing@7.1.3(@babel/core@7.29.13)(@ember/test-helpers@5.4.3(@babel/core@7.29.13))(@glint/template@1.11.1)(qunit@2.26.0)(webpack@5.112.2):
+  ember-a11y-testing@7.1.3(@babel/core@7.29.13)(@ember/test-helpers@5.4.3(@babel/core@7.29.13))(@glint/template@1.11.1)(qunit@2.26.0)(webpack@5.112.2(postcss@8.5.32)):
     dependencies:
       '@ember/test-helpers': 5.4.3(@babel/core@7.29.13)
       '@ember/test-waiters': 4.1.2
@@ -13969,7 +13975,7 @@ snapshots:
       '@scalvert/ember-setup-middleware-reporter': 0.1.1
       axe-core: 4.14.0
       broccoli-persistent-filter: 3.1.3
-      ember-auto-import: 2.13.1(@glint/template@1.11.1)(webpack@5.112.2)
+      ember-auto-import: 2.13.1(@glint/template@1.11.1)(webpack@5.112.2(postcss@8.5.32))
       ember-cli-babel: 8.3.2(@babel/core@7.29.13)
       ember-cli-htmlbars: 6.3.0
       ember-cli-typescript: 4.2.1
@@ -14236,11 +14242,11 @@ snapshots:
       resolve: 1.22.14
       semver: 5.7.2
 
-  ember-cli-fastboot-testing@0.9.0(@babel/core@7.29.13)(@ember/test-helpers@5.4.3(@babel/core@7.29.13))(@glint/template@1.11.1)(ember-source@6.12.1(@glimmer/component@1.1.2(@babel/core@7.29.13))(rsvp@4.8.5))(webpack@5.112.2):
+  ember-cli-fastboot-testing@0.9.0(@babel/core@7.29.13)(@ember/test-helpers@5.4.3(@babel/core@7.29.13))(@glint/template@1.11.1)(ember-source@6.12.1(@glimmer/component@1.1.2(@babel/core@7.29.13))(rsvp@4.8.5))(webpack@5.112.2(postcss@8.5.32)):
     dependencies:
       '@ember/test-helpers': 5.4.3(@babel/core@7.29.13)
       body-parser: 2.4.0
-      ember-auto-import: 2.13.1(@glint/template@1.11.1)(webpack@5.112.2)
+      ember-auto-import: 2.13.1(@glint/template@1.11.1)(webpack@5.112.2(postcss@8.5.32))
       ember-cli-babel: 8.3.2(@babel/core@7.29.13)
       ember-source: 6.12.1(@glimmer/component@1.1.2(@babel/core@7.29.13))(rsvp@4.8.5)
       fastboot: 4.1.5
@@ -14820,6 +14826,20 @@ snapshots:
       '@embroider/addon-shim': 1.11.0
       '@simple-dom/document': 1.4.0
 
+  ember-popper-modifier@4.1.1(@glint/template@1.11.1)(ember-source@6.12.1(@glimmer/component@1.1.2(@babel/core@7.29.13))(rsvp@4.8.5))(webpack@5.112.2(postcss@8.5.32)):
+    dependencies:
+      '@babel/core': 7.29.13
+      '@popperjs/core': 2.11.8
+      ember-auto-import: 2.13.1(@glint/template@1.11.1)(webpack@5.112.2(postcss@8.5.32))
+      ember-cli-babel: 8.3.2(@babel/core@7.29.13)
+      ember-cli-htmlbars: 6.3.0
+      ember-modifier: 4.3.0(@babel/core@7.29.13)
+      ember-source: 6.12.1(@glimmer/component@1.1.2(@babel/core@7.29.13))(rsvp@4.8.5)
+    transitivePeerDependencies:
+      - '@glint/template'
+      - supports-color
+      - webpack
+
   ember-popper-modifier@4.1.1(@glint/template@1.11.1)(ember-source@6.12.1(@glimmer/component@1.1.2(@babel/core@7.29.13))(rsvp@4.8.5))(webpack@5.112.2):
     dependencies:
       '@babel/core': 7.29.13
@@ -14887,6 +14907,10 @@ snapshots:
   ember-resolver@13.2.0: {}
 
   ember-rfc176-data@0.3.18: {}
+
+  ember-route-template@1.0.3:
+    dependencies:
+      '@embroider/addon-shim': 1.11.0
 
   ember-router-generator@2.0.0:
     dependencies:

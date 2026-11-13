@@ -1,0 +1,26 @@
+import RouteTemplate from 'ember-route-template';
+import BsDropdown from 'ember-bootstrap/components/bs-dropdown';
+
+export default RouteTemplate(
+  <template>
+    <BsDropdown @tagName='span' as |dd|>
+      <dd.toggle>
+        Dropdown
+        <span class='caret'></span>
+      </dd.toggle>
+      <dd.menu as |menu|>
+        <menu.item>
+          <menu.link-to @route='index'>Home</menu.link-to>
+        </menu.item>
+        <menu.divider />
+        <menu.item>
+          <menu.link-to @route='fastboot.dropdown'>Dropdowns</menu.link-to>
+        </menu.item>
+        <menu.divider />
+        <menu.item>
+          <a href='https://example.com' class='dropdown-item'>External</a>
+        </menu.item>
+      </dd.menu>
+    </BsDropdown>
+  </template>,
+);
