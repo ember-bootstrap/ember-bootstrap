@@ -67,7 +67,8 @@ variable to "4", e.g. `BOOTSTRAPVERSION=4 ember test`.
 
 * `git clone https://github.com/kaliber5/ember-bootstrap`
 * `cd ember-bootstrap`
-* `pnpm`
+* `corepack enable` (once per machine; installs the pnpm version pinned in `package.json#packageManager`)
+* `pnpm install`
 
 ### Linting
 
