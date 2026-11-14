@@ -48,7 +48,7 @@ module('Integration | Component | bs-tooltip', function (hooks) {
     // Template block usage:
     await render(
       <template>
-        <BsTooltip id='tooltip-element' @fade={{true}} @visible={{true}}>
+        <BsTooltip id="tooltip-element" @fade={{true}} @visible={{true}}>
           template block text
         </BsTooltip>
       </template>,
@@ -65,21 +65,21 @@ module('Integration | Component | bs-tooltip', function (hooks) {
   });
 
   skip('it supports different placements', async function (assert) {
-    let placements: Placement[] = ['top', 'left', 'bottom', 'right'];
+    const placements: Placement[] = ['top', 'left', 'bottom', 'right'];
     class State {
       @tracked placement = placements[0];
     }
     const state = new State();
     await render(
       <template>
-        <BsTooltipElement id='tooltip-element' @placement={{state.placement}}>
+        <BsTooltipElement id="tooltip-element" @placement={{state.placement}}>
           template block text
         </BsTooltipElement>
       </template>,
     );
     placements.forEach((placement) => {
       state.placement = placement;
-      let placementClass = tooltipPositionClass(placement);
+      const placementClass = tooltipPositionClass(placement);
       assert
         .dom('.tooltip')
         .hasClass(placementClass, `has ${placementClass} class`);
@@ -89,7 +89,7 @@ module('Integration | Component | bs-tooltip', function (hooks) {
 
   test('it shows visible tooltip', async function (assert) {
     await render(
-      <template><BsTooltip @title='Dummy' @visible={{true}} /></template>,
+      <template><BsTooltip @title="Dummy" @visible={{true}} /></template>,
     );
 
     assert.dom('.tooltip').exists({ count: 1 }, 'tooltip is visible');
@@ -110,7 +110,7 @@ module('Integration | Component | bs-tooltip', function (hooks) {
   });
 
   test('it hides invisible tooltip', async function (assert) {
-    await render(<template><BsTooltip @title='Dummy' /></template>);
+    await render(<template><BsTooltip @title="Dummy" /></template>);
 
     assert.dom('.tooltip').doesNotExist('tooltip is not visible');
   });
@@ -118,7 +118,7 @@ module('Integration | Component | bs-tooltip', function (hooks) {
   test('it shows and hides immediately when hovering [fade=false]', async function (assert) {
     await render(
       <template>
-        <div id='target'><BsTooltip @title='Dummy' @fade={{false}} /></div>
+        <div id="target"><BsTooltip @title="Dummy" @fade={{false}} /></div>
       </template>,
     );
 
@@ -134,8 +134,8 @@ module('Integration | Component | bs-tooltip', function (hooks) {
     async function (assert) {
       await render(
         <template>
-          <button type='button' class='btn' id='target'><BsTooltip
-              @title='Dummy'
+          <button type="button" class="btn" id="target"><BsTooltip
+              @title="Dummy"
               @fade={{false}}
             /></button>
         </template>,
@@ -152,10 +152,10 @@ module('Integration | Component | bs-tooltip', function (hooks) {
   test('it shows and hides immediately when clicking [fade=false]', async function (assert) {
     await render(
       <template>
-        <div id='target'><BsTooltip
-            @title='Dummy'
+        <div id="target"><BsTooltip
+            @title="Dummy"
             @fade={{false}}
-            @triggerEvents='click'
+            @triggerEvents="click"
           /></div>
       </template>,
     );
@@ -170,10 +170,10 @@ module('Integration | Component | bs-tooltip', function (hooks) {
   test('it allows changing the trigger element to some arbitrary element', async function (assert) {
     await render(
       <template>
-        <div id='target'></div><div><BsTooltip
-            @title='Dummy'
+        <div id="target"></div><div><BsTooltip
+            @title="Dummy"
             @fade={{false}}
-            @triggerElement='#target'
+            @triggerElement="#target"
           /></div>
       </template>,
     );
@@ -189,10 +189,10 @@ module('Integration | Component | bs-tooltip', function (hooks) {
     await render(
       <template>
         <div><BsTooltip
-            @title='Dummy'
+            @title="Dummy"
             @fade={{false}}
-            @triggerElement='#target'
-          /></div><div id='target'></div>
+            @triggerElement="#target"
+          /></div><div id="target"></div>
       </template>,
     );
 
@@ -208,8 +208,8 @@ module('Integration | Component | bs-tooltip', function (hooks) {
     const shownAction = sinon.spy();
     await render(
       <template>
-        <div id='target'><BsTooltip
-            @title='Dummy'
+        <div id="target"><BsTooltip
+            @title="Dummy"
             @fade={{false}}
             @onShow={{showAction}}
             @onShown={{shownAction}}
@@ -230,8 +230,8 @@ module('Integration | Component | bs-tooltip', function (hooks) {
     const shownAction = sinon.spy();
     await render(
       <template>
-        <div id='target'><BsTooltip
-            @title='Dummy'
+        <div id="target"><BsTooltip
+            @title="Dummy"
             @visible={{state.visible}}
             @fade={{false}}
             @onShow={{showAction}}
@@ -250,8 +250,8 @@ module('Integration | Component | bs-tooltip', function (hooks) {
     const shownAction = sinon.spy();
     await render(
       <template>
-        <div id='target'><BsTooltip
-            @title='Dummy'
+        <div id="target"><BsTooltip
+            @title="Dummy"
             @fade={{false}}
             @onShow={{showAction}}
             @onShown={{shownAction}}
@@ -269,8 +269,8 @@ module('Integration | Component | bs-tooltip', function (hooks) {
     const hiddenAction = sinon.spy();
     await render(
       <template>
-        <div id='target'><BsTooltip
-            @title='Dummy'
+        <div id="target"><BsTooltip
+            @title="Dummy"
             @fade={{false}}
             @onHide={{hideAction}}
             @onHidden={{hiddenAction}}
@@ -292,9 +292,9 @@ module('Integration | Component | bs-tooltip', function (hooks) {
     const hiddenAction = sinon.spy();
     await render(
       <template>
-        <div id='target'><BsTooltip
+        <div id="target"><BsTooltip
             @visible={{state.visible}}
-            @title='Dummy'
+            @title="Dummy"
             @fade={{false}}
             @onHide={{hideAction}}
             @onHidden={{hiddenAction}}
@@ -312,8 +312,8 @@ module('Integration | Component | bs-tooltip', function (hooks) {
     const hiddenAction = sinon.spy();
     await render(
       <template>
-        <div id='target'><BsTooltip
-            @title='Dummy'
+        <div id="target"><BsTooltip
+            @title="Dummy"
             @fade={{false}}
             @onHide={{hideAction}}
             @onHidden={{hiddenAction}}
@@ -332,8 +332,8 @@ module('Integration | Component | bs-tooltip', function (hooks) {
     async function (assert) {
       await render(
         <template>
-          <a href='#' id='target'><BsTooltip
-              @title='Dummy'
+          <a href="#" id="target"><BsTooltip
+              @title="Dummy"
               @fade={{false}}
             /></a>
         </template>,
@@ -356,8 +356,8 @@ module('Integration | Component | bs-tooltip', function (hooks) {
     const state = new State();
     await render(
       <template>
-        <div id='ember-bootstrap-wormhole'></div>{{#if state.show}}<BsTooltip
-            @title='Simple Tooltip'
+        <div id="ember-bootstrap-wormhole"></div>{{#if state.show}}<BsTooltip
+            @title="Simple Tooltip"
             @visible={{true}}
             @fade={{false}}
           />{{/if}}
@@ -379,7 +379,7 @@ module('Integration | Component | bs-tooltip', function (hooks) {
     await render(
       <template>
         {{#if state.show}}<BsTooltip
-            @title='Simple Tooltip'
+            @title="Simple Tooltip"
             @visible={{true}}
             @fade={{false}}
           />{{/if}}
@@ -399,10 +399,10 @@ module('Integration | Component | bs-tooltip', function (hooks) {
     const state = new State();
     await render(
       <template>
-        <div id='ember-bootstrap-wormhole'></div><div id='wrapper'>{{#if
+        <div id="ember-bootstrap-wormhole"></div><div id="wrapper">{{#if
             state.show
           }}<BsTooltip
-              @title='Simple Tooltip'
+              @title="Simple Tooltip"
               @visible={{true}}
               @fade={{false}}
               @renderInPlace={{true}}
@@ -422,11 +422,11 @@ module('Integration | Component | bs-tooltip', function (hooks) {
 
     await render(
       <template>
-        <div id='wrapper'>
-          <p class='margin-top'>
-            <a href='#' id='target'>
+        <div id="wrapper">
+          <p class="margin-top">
+            <a href="#" id="target">
               Hover me<BsTooltip
-                @title='very very very very very very very long tooltip'
+                @title="very very very very very very very long tooltip"
                 @fade={{false}}
               />
             </a>
@@ -451,12 +451,12 @@ module('Integration | Component | bs-tooltip', function (hooks) {
 
     await render(
       <template>
-        <div id='wrapper'>
+        <div id="wrapper">
           {{#if state.visible}}
-            <p class='margin-top'>
-              <a href='#' id='target'>
+            <p class="margin-top">
+              <a href="#" id="target">
                 Hover me<BsTooltip
-                  @title='very very very very very very very long tooltip'
+                  @title="very very very very very very very long tooltip"
                   @fade={{false}}
                   @visible={{true}}
                 />
@@ -483,11 +483,11 @@ module('Integration | Component | bs-tooltip', function (hooks) {
 
     await render(
       <template>
-        <div id='wrapper'>
-          <p class='margin-top'>
-            <a href='#' id='target'>
+        <div id="wrapper">
+          <p class="margin-top">
+            <a href="#" id="target">
               Hover me<BsTooltip
-                @title='very very very very very very very long tooltip'
+                @title="very very very very very very very long tooltip"
                 @fade={{false}}
                 @visible={{state.visible}}
               />
@@ -507,7 +507,7 @@ module('Integration | Component | bs-tooltip', function (hooks) {
   test("should show tooltip if leave event hasn't occurred before delay expires", async function (assert) {
     await render(
       <template>
-        <div id='target'><BsTooltip @title='Dummy' @delay={{150}} /></div>
+        <div id="target"><BsTooltip @title="Dummy" @delay={{150}} /></div>
       </template>,
     );
 
@@ -524,7 +524,7 @@ module('Integration | Component | bs-tooltip', function (hooks) {
   test('should not show tooltip if leave event occurs before delay expires', async function (assert) {
     await render(
       <template>
-        <div id='target'><BsTooltip @title='Dummy' @delay={{150}} /></div>
+        <div id="target"><BsTooltip @title="Dummy" @delay={{150}} /></div>
       </template>,
     );
 
@@ -542,8 +542,8 @@ module('Integration | Component | bs-tooltip', function (hooks) {
   test('should not hide tooltip if leave event occurs and enter event occurs within the hide delay', async function (assert) {
     await render(
       <template>
-        <div id='target'><BsTooltip
-            @title='Dummy'
+        <div id="target"><BsTooltip
+            @title="Dummy"
             @delayShow={{0}}
             @delayHide={{150}}
           /></div>
@@ -565,7 +565,7 @@ module('Integration | Component | bs-tooltip', function (hooks) {
   test('should not show tooltip if leave event occurs before delay expires', async function (assert) {
     await render(
       <template>
-        <div id='target'><BsTooltip @title='Dummy' @delay={{150}} /></div>
+        <div id="target"><BsTooltip @title="Dummy" @delay={{150}} /></div>
       </template>,
     );
     triggerEvent('#target', 'mouseenter');
@@ -581,16 +581,16 @@ module('Integration | Component | bs-tooltip', function (hooks) {
   test('should position tooltip arrow centered', async function (assert) {
     this.insertCSSRule('.margin-top { margin-top: 200px; }');
 
-    let expectedArrowPosition = 94;
+    const expectedArrowPosition = 94;
     await render(
       <template>
-        <div id='ember-bootstrap-wormhole'></div>
-        <div id='wrapper'>
-          <p class='margin-top'>
-            <button type='button' class='btn' id='target'>
+        <div id="ember-bootstrap-wormhole"></div>
+        <div id="wrapper">
+          <p class="margin-top">
+            <button type="button" class="btn" id="target">
               Click me<BsTooltip
-                @placement='top'
-                @title='very very very very very very very long tooltip'
+                @placement="top"
+                @title="very very very very very very very long tooltip"
                 @fade={{false}}
               />
             </button>
@@ -602,7 +602,7 @@ module('Integration | Component | bs-tooltip', function (hooks) {
     setupForPositioning();
 
     await click('#target');
-    let arrowPosition = parseInt(
+    const arrowPosition = parseInt(
       document
         .querySelector<HTMLElement>(`.${tooltipArrowClass()}`)!
         .style.transform.match(/translate(?:3d)?\(([0-9.]+)px.*\)/)![1]!,
@@ -618,19 +618,19 @@ module('Integration | Component | bs-tooltip', function (hooks) {
     this.insertCSSRule('.margin-top { margin-top: 200px; }');
     this.insertCSSRule('#target { width: 100px; padding: 0; border: none; }');
 
-    let expectedArrowPosition = 144;
+    const expectedArrowPosition = 144;
 
     await render(
       <template>
-        <div id='ember-bootstrap-wormhole'></div>
-        <div id='wrapper'>
-          <p class='margin-top'>
-            <button type='button' id='target'>
+        <div id="ember-bootstrap-wormhole"></div>
+        <div id="wrapper">
+          <p class="margin-top">
+            <button type="button" id="target">
               Click me<BsTooltip
                 @autoPlacement={{true}}
-                @viewportSelector='#wrapper'
-                @placement='top'
-                @title='very very very very very very very long tooltip'
+                @viewportSelector="#wrapper"
+                @placement="top"
+                @title="very very very very very very very long tooltip"
                 @fade={{false}}
               />
             </button>
@@ -675,14 +675,14 @@ module('Integration | Component | bs-tooltip', function (hooks) {
 
     await render(
       <template>
-        <div id='ember-bootstrap-wormhole'></div>
-        <div id='wrapper'>
-          <p class='margin-top'>
-            <button type='button' class='btn' id='target'>
+        <div id="ember-bootstrap-wormhole"></div>
+        <div id="wrapper">
+          <p class="margin-top">
+            <button type="button" class="btn" id="target">
               Click me<BsTooltip
-                @placement='bottom'
+                @placement="bottom"
                 @autoPlacement={{true}}
-                @title='very very very very very very very long tooltip'
+                @title="very very very very very very very long tooltip"
                 @fade={{false}}
               />
             </button>
@@ -704,14 +704,14 @@ module('Integration | Component | bs-tooltip', function (hooks) {
     const hiddenAction = sinon.spy();
     await render(
       <template>
-        <div id='target'>
+        <div id="target">
           <BsTooltip
             @visible={{true}}
             @onHide={{hideAction}}
             @onHidden={{hiddenAction}}
             as |tt|
           >
-            <div id='hide' {{on 'click' tt.close}} role='button'>Hide</div>
+            <div id="hide" {{on "click" tt.close}} role="button">Hide</div>
           </BsTooltip>
         </div>
       </template>,
@@ -725,11 +725,11 @@ module('Integration | Component | bs-tooltip', function (hooks) {
   test('it passes all HTML attribute', async function (assert) {
     await render(
       <template>
-        <div id='target'><BsTooltip
-            @title='Dummy'
-            class='wide'
+        <div id="target"><BsTooltip
+            @title="Dummy"
+            class="wide"
             data-test
-            role='list'
+            role="list"
           /></div>
       </template>,
     );
@@ -747,9 +747,9 @@ module('Integration | Component | bs-tooltip', function (hooks) {
     const state = new State();
     await render(
       <template>
-        {{#if state.show}}<div id='target'><BsTooltip
-              @title='Dummy'
-              class='wide'
+        {{#if state.show}}<div id="target"><BsTooltip
+              @title="Dummy"
+              class="wide"
             /></div>{{/if}}
       </template>,
     );
@@ -762,9 +762,9 @@ module('Integration | Component | bs-tooltip', function (hooks) {
   test('it passes accessibility checks', async function (assert) {
     await render(
       <template>
-        <button type='button'>
+        <button type="button">
           Test
-          <BsTooltip @title='Dummy' @visible={{true}} />
+          <BsTooltip @title="Dummy" @visible={{true}} />
         </button>
       </template>,
     );

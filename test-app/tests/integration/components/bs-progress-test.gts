@@ -42,9 +42,9 @@ module('Integration | Component | bs-progress', function (hooks) {
     }
     const state = new State();
 
-    let baseSize = 500;
+    const baseSize = 500;
     // some test data
-    let testData = [
+    const testData = [
       { value: 60, minValue: 0, maxValue: 100 },
       { value: 3, minValue: 0, maxValue: 10 },
       { value: 6, minValue: 5, maxValue: 10 },
@@ -55,7 +55,7 @@ module('Integration | Component | bs-progress', function (hooks) {
 
     await render(
       <template>
-        <div class='width-500'>
+        <div class="width-500">
           <BsProgress as |p|>
             <p.bar
               @value={{state.value}}
@@ -181,7 +181,7 @@ module('Integration | Component | bs-progress', function (hooks) {
     await render(
       <template>
         <BsProgress as |p|>
-          <p.bar @value={{50}} @type='success' />
+          <p.bar @value={{50}} @type="success" />
         </BsProgress>
       </template>,
     );
@@ -195,7 +195,7 @@ module('Integration | Component | bs-progress', function (hooks) {
     await render(
       <template>
         <BsProgress as |p|>
-          <p.bar @value={{50}} @type='success' @striped={{true}} />
+          <p.bar @value={{50}} @type="success" @striped={{true}} />
         </BsProgress>
       </template>,
     );
@@ -211,7 +211,7 @@ module('Integration | Component | bs-progress', function (hooks) {
         <BsProgress as |p|>
           <p.bar
             @value={{50}}
-            @type='success'
+            @type="success"
             @striped={{true}}
             @animate={{true}}
           />
@@ -231,8 +231,8 @@ module('Integration | Component | bs-progress', function (hooks) {
     await render(
       <template>
         <BsProgress as |p|>
-          <p.bar @value={{50}} @type='success' />
-          <p.bar @value={{30}} @type='info' />
+          <p.bar @value={{50}} @type="success" />
+          <p.bar @value={{30}} @type="info" />
         </BsProgress>
       </template>,
     );
@@ -246,9 +246,9 @@ module('Integration | Component | bs-progress', function (hooks) {
     await render(
       <template>
         <BsProgress as |p|>
-          <p.bar @value={{5}} @maxValue={{10}} aria-label='Saving...' />
+          <p.bar @value={{5}} @maxValue={{10}} aria-label="Saving..." />
         </BsProgress>
-        <button type='button'>Test</button>
+        <button type="button">Test</button>
       </template>,
     );
 

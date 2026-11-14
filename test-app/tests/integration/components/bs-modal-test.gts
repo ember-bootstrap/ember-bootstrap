@@ -39,7 +39,7 @@ module('Integration | Component | bs-modal', function (hooks) {
     await render(
       <template>
         <BsModal as |modal|>
-          <modal.header @title='Dialog' />
+          <modal.header @title="Dialog" />
           <modal.body>Hello world!</modal.body>
           <modal.footer />
         </BsModal>
@@ -72,7 +72,7 @@ module('Integration | Component | bs-modal', function (hooks) {
     await render(
       <template>
         <BsModal @open={{false}} as |modal|>
-          <modal.header @title='Dialog' />
+          <modal.header @title="Dialog" />
           <modal.body>Hello world!</modal.body>
           <modal.footer />
         </BsModal>
@@ -107,13 +107,13 @@ module('Integration | Component | bs-modal', function (hooks) {
     await render(
       <template>
         <BsModal @onHide={{closeAction}} as |modal|>
-          <modal.header @title='Dialog' />
+          <modal.header @title="Dialog" />
           <modal.body>Hello world!</modal.body>
           <modal.footer>
             <button
-              type='button'
-              id='close'
-              {{on 'click' modal.close}}
+              type="button"
+              id="close"
+              {{on "click" modal.close}}
             >Close</button>
           </modal.footer>
         </BsModal>
@@ -130,13 +130,13 @@ module('Integration | Component | bs-modal', function (hooks) {
     await render(
       <template>
         <BsModal @onSubmit={{submitAction}} as |modal|>
-          <modal.header @title='Dialog' />
+          <modal.header @title="Dialog" />
           <modal.body>Hello world!</modal.body>
           <modal.footer>
             <button
-              type='button'
-              id='submit'
-              {{on 'click' modal.submit}}
+              type="button"
+              id="submit"
+              {{on "click" modal.submit}}
             >Submit</button>
           </modal.footer>
         </BsModal>
@@ -152,7 +152,7 @@ module('Integration | Component | bs-modal', function (hooks) {
       <template>
         <BsModal as |modal|>
           <modal.header>
-            <h4 class='modal-title'>
+            <h4 class="modal-title">
               Custom Dialog title
             </h4>
           </modal.header>
@@ -174,7 +174,7 @@ module('Integration | Component | bs-modal', function (hooks) {
     await render(
       <template>
         <BsModal as |modal|>
-          <modal.header @title='Some title' />
+          <modal.header @title="Some title" />
           <modal.body>Hello world!</modal.body>
           <modal.footer />
         </BsModal>
@@ -192,7 +192,7 @@ module('Integration | Component | bs-modal', function (hooks) {
   test('it passes along HTML attributes', async function (assert) {
     await render(
       <template>
-        <BsModal @fade={{false}} class='custom' role='alert' data-test>
+        <BsModal @fade={{false}} class="custom" role="alert" data-test>
           template block text
         </BsModal>
       </template>,
@@ -472,7 +472,7 @@ module('Integration | Component | bs-modal', function (hooks) {
         await render(
           <template>
             <BsModal as |modal|>
-              <button {{on 'click' modal.close}} type='button'>close</button>
+              <button {{on "click" modal.close}} type="button">close</button>
             </BsModal>
           </template>,
         );
@@ -588,7 +588,7 @@ module('Integration | Component | bs-modal', function (hooks) {
   test('Modal focus-trap is not deactivated when clicking outside of the modal if @backdropClose=false', async function (assert) {
     await render(
       <template>
-        <button type='button' /><BsModal @backdropClose={{false}} />
+        <button type="button" /><BsModal @backdropClose={{false}} />
       </template>,
     );
     await click('*');
@@ -599,7 +599,7 @@ module('Integration | Component | bs-modal', function (hooks) {
   test('Modal focus-trap is not deactivated when pressing escape if @keyboard=false', async function (assert) {
     await render(
       <template>
-        <button type='button' /><BsModal @keyboard={{false}} />
+        <button type="button" /><BsModal @keyboard={{false}} />
       </template>,
     );
     await triggerKeyEvent('.modal', 'keydown', 'Escape');

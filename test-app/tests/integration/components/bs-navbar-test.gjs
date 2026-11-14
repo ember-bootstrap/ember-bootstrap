@@ -48,7 +48,7 @@ module('Integration | Component | bs-navbar', function (hooks) {
   });
 
   test('it handles inverse navbars properly', async function (assert) {
-    await render(<template><BsNavbar @type='inverse' /></template>);
+    await render(<template><BsNavbar @type="inverse" /></template>);
 
     assert
       .dom('nav')
@@ -76,7 +76,7 @@ module('Integration | Component | bs-navbar', function (hooks) {
   });
 
   testBS5('it supports custom containers', async function (assert) {
-    await render(<template><BsNavbar @container='md' /></template>);
+    await render(<template><BsNavbar @container="md" /></template>);
 
     assert
       .dom('nav > div')
@@ -93,7 +93,7 @@ module('Integration | Component | bs-navbar', function (hooks) {
     await render(
       <template>
         <BsNavbar as |navbar|>
-          <navbar.toggle @class='clickme'>Button</navbar.toggle>
+          <navbar.toggle @class="clickme">Button</navbar.toggle>
         </BsNavbar>
       </template>,
     );
@@ -118,9 +118,9 @@ module('Integration | Component | bs-navbar', function (hooks) {
     await render(
       <template>
         <BsNavbar as |navbar|>
-          <div class='navbar-header'>
+          <div class="navbar-header">
             {{navbar.toggle}}
-            <a class='navbar-brand' href='#'>Brand</a>
+            <a class="navbar-brand" href="#">Brand</a>
           </div>
           <navbar.content>
             {{navbar.nav}}
@@ -165,7 +165,7 @@ module('Integration | Component | bs-navbar', function (hooks) {
   });
 
   test('it handles fixed-top properly', async function (assert) {
-    await render(<template><BsNavbar @position='fixed-top' /></template>);
+    await render(<template><BsNavbar @position="fixed-top" /></template>);
 
     assert
       .dom('nav')
@@ -185,7 +185,7 @@ module('Integration | Component | bs-navbar', function (hooks) {
   });
 
   test('it handles fixed-bottom properly', async function (assert) {
-    await render(<template><BsNavbar @position='fixed-bottom' /></template>);
+    await render(<template><BsNavbar @position="fixed-bottom" /></template>);
 
     assert
       .dom('nav')
@@ -208,7 +208,7 @@ module('Integration | Component | bs-navbar', function (hooks) {
   });
 
   test('it handles navbar-expand[-*] properly', async function (assert) {
-    await render(<template><BsNavbar @toggleBreakpoint='sm' /></template>);
+    await render(<template><BsNavbar @toggleBreakpoint="sm" /></template>);
     assert
       .dom('nav')
       .hasNoClass(
@@ -224,7 +224,7 @@ module('Integration | Component | bs-navbar', function (hooks) {
   });
 
   test('it handles sticky-top properly', async function (assert) {
-    await render(<template><BsNavbar @position='sticky-top' /></template>);
+    await render(<template><BsNavbar @position="sticky-top" /></template>);
 
     assert
       .dom('nav')
@@ -257,9 +257,9 @@ module('Integration | Component | bs-navbar', function (hooks) {
           @onExpanded={{expandedAction}}
           as |navbar|
         >
-          <div class='navbar-header'>
+          <div class="navbar-header">
             {{navbar.toggle}}
-            <a class='navbar-brand' href='#'>Brand</a>
+            <a class="navbar-brand" href="#">Brand</a>
           </div>
           <navbar.content>
             {{navbar.nav}}
@@ -301,9 +301,9 @@ module('Integration | Component | bs-navbar', function (hooks) {
           @onCollapsed={{collapsedAction}}
           as |navbar|
         >
-          <div class='navbar-header'>
+          <div class="navbar-header">
             {{navbar.toggle}}
-            <a class='navbar-brand' href='#'>Brand</a>
+            <a class="navbar-brand" href="#">Brand</a>
           </div>
           <navbar.content>
             {{navbar.nav}}
@@ -344,9 +344,9 @@ module('Integration | Component | bs-navbar', function (hooks) {
           @onExpanded={{expandedAction}}
           as |navbar|
         >
-          <div class='navbar-header'>
+          <div class="navbar-header">
             {{navbar.toggle}}
-            <a class='navbar-brand' href='#'>Brand</a>
+            <a class="navbar-brand" href="#">Brand</a>
           </div>
           <navbar.content>
             {{navbar.nav}}
@@ -381,9 +381,9 @@ module('Integration | Component | bs-navbar', function (hooks) {
           @onCollapsed={{collapsedAction}}
           as |navbar|
         >
-          <div class='navbar-header'>
+          <div class="navbar-header">
             {{navbar.toggle}}
-            <a class='navbar-brand' href='#'>Brand</a>
+            <a class="navbar-brand" href="#">Brand</a>
           </div>
           <navbar.content>
             {{navbar.nav}}
@@ -412,9 +412,9 @@ module('Integration | Component | bs-navbar', function (hooks) {
     await render(
       <template>
         <BsNavbar @collapsed={{true}} @onExpand={{expandAction}} as |navbar|>
-          <div class='navbar-header'>
+          <div class="navbar-header">
             {{navbar.toggle}}
-            <a class='navbar-brand' href='#'>Brand</a>
+            <a class="navbar-brand" href="#">Brand</a>
           </div>
           <navbar.content>
             {{navbar.nav}}
@@ -438,9 +438,9 @@ module('Integration | Component | bs-navbar', function (hooks) {
           @onCollapse={{collapseAction}}
           as |navbar|
         >
-          <div class='navbar-header'>
+          <div class="navbar-header">
             {{navbar.toggle}}
-            <a class='navbar-brand' href='#'>Brand</a>
+            <a class="navbar-brand" href="#">Brand</a>
           </div>
           <navbar.content>
             {{navbar.nav}}
@@ -462,9 +462,9 @@ module('Integration | Component | bs-navbar', function (hooks) {
     await render(
       <template>
         <BsNavbar @collapsed={{state.collapsed}} as |navbar|>
-          <div class='navbar-header'>
+          <div class="navbar-header">
             {{navbar.toggle}}
-            <a class='navbar-brand' href='#'>Brand</a>
+            <a class="navbar-brand" href="#">Brand</a>
           </div>
         </BsNavbar>
       </template>,
@@ -484,7 +484,7 @@ module('Integration | Component | bs-navbar', function (hooks) {
           @onCollapse={{collapseAction}}
           as |navbar|
         >
-          <button type='button' {{on 'click' navbar.collapse}}>Collapse</button>
+          <button type="button" {{on "click" navbar.collapse}}>Collapse</button>
         </BsNavbar>
       </template>,
     );
@@ -499,7 +499,7 @@ module('Integration | Component | bs-navbar', function (hooks) {
     await render(
       <template>
         <BsNavbar @collapsed={{true}} @onExpand={{expandAction}} as |navbar|>
-          <button type='button' {{on 'click' navbar.expand}}>Expand</button>
+          <button type="button" {{on "click" navbar.expand}}>Expand</button>
         </BsNavbar>
       </template>,
     );
@@ -521,8 +521,8 @@ module('Integration | Component | bs-navbar', function (hooks) {
           as |navbar|
         >
           <button
-            type='button'
-            {{on 'click' navbar.toggleNavbar}}
+            type="button"
+            {{on "click" navbar.toggleNavbar}}
           >Expand</button>
         </BsNavbar>
       </template>,
@@ -547,15 +547,15 @@ module('Integration | Component | bs-navbar', function (hooks) {
           @onCollapse={{collapseAction}}
           as |navbar|
         >
-          <div class='navbar-header'>
+          <div class="navbar-header">
             {{navbar.toggle}}
-            <a class='navbar-brand' href='#'>Brand</a>
+            <a class="navbar-brand" href="#">Brand</a>
           </div>
           <navbar.content>
             <navbar.nav as |nav|>
               <nav.item><nav.linkTo
-                  @route='index'
-                  id='link'
+                  @route="index"
+                  id="link"
                   @disabled={{true}}
                 >Home</nav.linkTo></nav.item>
             </navbar.nav>
@@ -574,13 +574,13 @@ module('Integration | Component | bs-navbar', function (hooks) {
     await render(
       <template>
         <BsNavbar as |navbar|>
-          <div class='navbar-header'>
+          <div class="navbar-header">
             {{navbar.toggle}}
-            <a class='navbar-brand' href='#'>Brand</a>
+            <a class="navbar-brand" href="#">Brand</a>
           </div>
           <navbar.content>
             <navbar.nav as |nav|>
-              <nav.item><nav.linkTo @route='index'>Home</nav.linkTo></nav.item>
+              <nav.item><nav.linkTo @route="index">Home</nav.linkTo></nav.item>
             </navbar.nav>
           </navbar.content>
         </BsNavbar>

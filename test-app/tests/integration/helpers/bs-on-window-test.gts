@@ -12,7 +12,7 @@ module('Integration | Helper | bs-on-window', function (hooks) {
 
   test('it calls the callback for events on window', async function (assert) {
     const handler = sinon.spy();
-    await render(<template>{{bsOnWindow 'resize' handler}}</template>);
+    await render(<template>{{bsOnWindow "resize" handler}}</template>);
 
     window.dispatchEvent(new Event('resize'));
     assert.ok(handler.calledOnce, 'callback was called');
@@ -31,7 +31,7 @@ module('Integration | Helper | bs-on-window', function (hooks) {
     const handler = sinon.spy();
     await render(
       <template>
-        {{#if state.show}}{{bsOnWindow 'resize' handler}}{{/if}}
+        {{#if state.show}}{{bsOnWindow "resize" handler}}{{/if}}
       </template>,
     );
 

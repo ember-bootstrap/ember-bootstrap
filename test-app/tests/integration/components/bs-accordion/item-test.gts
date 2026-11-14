@@ -22,7 +22,7 @@ module('Integration | Component | bs-accordion-item', function (hooks) {
   test('accordion item has correct default markup', async function (assert) {
     await render(
       <template>
-        <BsAccordionItem @title='TITLE'>CONTENT</BsAccordionItem>
+        <BsAccordionItem @title="TITLE">CONTENT</BsAccordionItem>
       </template>,
     );
     assert
@@ -59,7 +59,7 @@ module('Integration | Component | bs-accordion-item', function (hooks) {
         <BsAccordionItem
           @value={{1}}
           @onClick={{clickAction}}
-          @title='TITLE'
+          @title="TITLE"
         >CONTENT</BsAccordionItem>
       </template>,
     );
@@ -94,7 +94,7 @@ module('Integration | Component | bs-accordion-item', function (hooks) {
           @value={{1}}
           @disabled={{true}}
           @onClick={{clickAction}}
-          @title='TITLE'
+          @title="TITLE"
         >CONTENT</BsAccordionItem>
       </template>,
     );
@@ -110,7 +110,7 @@ module('Integration | Component | bs-accordion-item', function (hooks) {
       .hasClass('disabled', 'entire item has `.disabled` class');
     try {
       await click(accordionItemClickableSelector());
-    } catch (e) {
+    } catch {
       // click helper will throw on a disabled button
     }
     assert.notOk(
