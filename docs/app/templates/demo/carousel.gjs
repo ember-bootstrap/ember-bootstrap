@@ -61,7 +61,11 @@ export default class CarouselTemplate extends Component {
   }
 
   <template>
-    <div class="bs-example" data-test-fastboot-container>
+    <div
+      class="bs-example"
+      data-test-fastboot-container
+      data-test-example="carousel-demo"
+    >
       <BsForm @model={{this}} as |form|>
         <div class="row">
           <div class="col-sm-6">
@@ -141,7 +145,6 @@ export default class CarouselTemplate extends Component {
         @pauseOnMouseEnter={{this.pauseOnMouseEnter}}
         @showControls={{this.showControls}}
         @showIndicators={{this.showIndicators}}
-        data-test-example="main"
         as |car|
       >
         {{#each this.slides as |slide|}}
