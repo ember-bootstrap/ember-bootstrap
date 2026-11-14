@@ -36,8 +36,8 @@ importers:
         specifier: 3.0.0
         version: 3.0.0(@types/node@26.6.6)
       '@ember/test-helpers':
-        specifier: 5.4.3
-        version: 5.4.3(@babel/core@7.29.13)
+        specifier: 5.8.0
+        version: 5.8.0(@babel/core@7.29.13)
       '@embroider/macros':
         specifier: 1.21.4
         version: 1.21.4(@babel/core@7.29.13)(@glint/template@1.11.1)
@@ -64,7 +64,7 @@ importers:
         version: 2.13.1(@glint/template@1.11.1)(webpack@5.112.2(postcss@8.5.32))
       ember-basic-dropdown:
         specifier: 9.0.1
-        version: 9.0.1(@babel/core@7.29.13)(@ember/test-helpers@5.4.3(@babel/core@7.29.13))(@embroider/macros@1.21.4(@babel/core@7.29.13)(@glint/template@1.11.1))(@glimmer/component@2.2.1)
+        version: 9.0.1(@babel/core@7.29.13)(@ember/test-helpers@5.8.0(@babel/core@7.29.13))(@embroider/macros@1.21.4(@babel/core@7.29.13)(@glint/template@1.11.1))(@glimmer/component@2.2.1)
       ember-bootstrap:
         specifier: workspace:*
         version: link:../ember-bootstrap
@@ -73,7 +73,7 @@ importers:
         version: 2.1.0
       ember-bootstrap-power-select:
         specifier: 7.0.0
-        version: 7.0.0(ember-bootstrap@ember-bootstrap)(ember-power-select@8.12.2(@babel/core@7.29.13)(@ember/test-helpers@5.4.3(@babel/core@7.29.13))(@glimmer/component@2.2.1)(@glint/environment-ember-loose@1.5.2(@glimmer/component@2.2.1)(@glint/template@1.11.1)(ember-cli-htmlbars@7.0.1(@babel/core@7.29.13)(ember-source@6.12.1(@glimmer/component@2.2.1)(rsvp@4.8.5)))(ember-modifier@4.3.0(@babel/core@7.29.13)))(@glint/template@1.11.1)(ember-basic-dropdown@9.0.1(@babel/core@7.29.13)(@ember/test-helpers@5.4.3(@babel/core@7.29.13))(@embroider/macros@1.21.4(@babel/core@7.29.13)(@glint/template@1.11.1))(@glimmer/component@2.2.1))(ember-concurrency@5.3.0(@babel/core@7.29.13)(@glint/template@1.11.1))(ember-source@6.12.1(@glimmer/component@2.2.1)(rsvp@4.8.5)))(ember-source@6.12.1(@glimmer/component@2.2.1)(rsvp@4.8.5))
+        version: 7.0.0(ember-bootstrap@ember-bootstrap)(ember-power-select@8.12.2(@babel/core@7.29.13)(@ember/test-helpers@5.8.0(@babel/core@7.29.13))(@glimmer/component@2.2.1)(@glint/environment-ember-loose@1.5.2(@glimmer/component@2.2.1)(@glint/template@1.11.1)(ember-cli-htmlbars@7.0.1(@babel/core@7.29.13)(ember-source@6.12.1(@glimmer/component@2.2.1)(rsvp@4.8.5)))(ember-modifier@4.3.0(@babel/core@7.29.13)))(@glint/template@1.11.1)(ember-basic-dropdown@9.0.1(@babel/core@7.29.13)(@ember/test-helpers@5.8.0(@babel/core@7.29.13))(@embroider/macros@1.21.4(@babel/core@7.29.13)(@glint/template@1.11.1))(@glimmer/component@2.2.1))(ember-concurrency@5.3.0(@babel/core@7.29.13)(@glint/template@1.11.1))(ember-source@6.12.1(@glimmer/component@2.2.1)(rsvp@4.8.5)))(ember-source@6.12.1(@glimmer/component@2.2.1)(rsvp@4.8.5))
       ember-cli:
         specifier: 6.12.0
         version: 6.12.0(@babel/core@7.29.13)(@types/node@26.6.6)(ejs@3.1.10)(handlebars@4.7.10)(underscore@1.13.8)
@@ -136,13 +136,13 @@ importers:
         version: 9.1.0
       ember-power-select:
         specifier: 8.12.2
-        version: 8.12.2(@babel/core@7.29.13)(@ember/test-helpers@5.4.3(@babel/core@7.29.13))(@glimmer/component@2.2.1)(@glint/environment-ember-loose@1.5.2(@glimmer/component@2.2.1)(@glint/template@1.11.1)(ember-cli-htmlbars@7.0.1(@babel/core@7.29.13)(ember-source@6.12.1(@glimmer/component@2.2.1)(rsvp@4.8.5)))(ember-modifier@4.3.0(@babel/core@7.29.13)))(@glint/template@1.11.1)(ember-basic-dropdown@9.0.1(@babel/core@7.29.13)(@ember/test-helpers@5.4.3(@babel/core@7.29.13))(@embroider/macros@1.21.4(@babel/core@7.29.13)(@glint/template@1.11.1))(@glimmer/component@2.2.1))(ember-concurrency@5.3.0(@babel/core@7.29.13)(@glint/template@1.11.1))(ember-source@6.12.1(@glimmer/component@2.2.1)(rsvp@4.8.5))
+        version: 8.12.2(@babel/core@7.29.13)(@ember/test-helpers@5.8.0(@babel/core@7.29.13))(@glimmer/component@2.2.1)(@glint/environment-ember-loose@1.5.2(@glimmer/component@2.2.1)(@glint/template@1.11.1)(ember-cli-htmlbars@7.0.1(@babel/core@7.29.13)(ember-source@6.12.1(@glimmer/component@2.2.1)(rsvp@4.8.5)))(ember-modifier@4.3.0(@babel/core@7.29.13)))(@glint/template@1.11.1)(ember-basic-dropdown@9.0.1(@babel/core@7.29.13)(@ember/test-helpers@5.8.0(@babel/core@7.29.13))(@embroider/macros@1.21.4(@babel/core@7.29.13)(@glint/template@1.11.1))(@glimmer/component@2.2.1))(ember-concurrency@5.3.0(@babel/core@7.29.13)(@glint/template@1.11.1))(ember-source@6.12.1(@glimmer/component@2.2.1)(rsvp@4.8.5))
       ember-prism:
         specifier: 1.0.0
         version: 1.0.0(@glint/template@1.11.1)(ember-source@6.12.1(@glimmer/component@2.2.1)(rsvp@4.8.5))(webpack@5.112.2(postcss@8.5.32))
       ember-qunit:
         specifier: 9.2.0
-        version: 9.2.0(@ember/test-helpers@5.4.3(@babel/core@7.29.13))(qunit@2.26.0)
+        version: 9.2.0(@ember/test-helpers@5.8.0(@babel/core@7.29.13))(qunit@2.26.0)
       ember-resolver:
         specifier: 13.2.0
         version: 13.2.0
@@ -419,8 +419,8 @@ importers:
         specifier: 4.0.1
         version: 4.0.1
       '@ember/test-helpers':
-        specifier: 5.4.3
-        version: 5.4.3(@babel/core@7.29.13)
+        specifier: 5.8.0
+        version: 5.8.0(@babel/core@7.29.13)
       '@embroider/addon-dev':
         specifier: 8.5.0
         version: 8.5.0(@glint/template@1.11.1)(rollup@4.66.0)
@@ -492,7 +492,7 @@ importers:
         version: 10.0.7
       ember-a11y-testing:
         specifier: 8.0.1
-        version: 8.0.1(@babel/core@7.29.13)(@ember/test-helpers@5.4.3(@babel/core@7.29.13))(@ember/test-waiters@4.1.2)(axe-core@4.14.0)(qunit@2.26.0)
+        version: 8.0.1(@babel/core@7.29.13)(@ember/test-helpers@5.8.0(@babel/core@7.29.13))(@ember/test-waiters@4.1.2)(axe-core@4.14.0)(qunit@2.26.0)
       ember-auto-import:
         specifier: 2.13.1
         version: 2.13.1(@glint/template@1.11.1)(webpack@5.112.2)
@@ -525,7 +525,7 @@ importers:
         version: 4.1.5(ember-source@6.12.1(@glimmer/component@1.1.2(@babel/core@7.29.13))(rsvp@4.8.5))
       ember-cli-fastboot-testing:
         specifier: 0.9.0
-        version: 0.9.0(@babel/core@7.29.13)(@ember/test-helpers@5.4.3(@babel/core@7.29.13))(@glint/template@1.11.1)(ember-source@6.12.1(@glimmer/component@1.1.2(@babel/core@7.29.13))(rsvp@4.8.5))(webpack@5.112.2)
+        version: 0.9.0(@babel/core@7.29.13)(@ember/test-helpers@5.8.0(@babel/core@7.29.13))(@glint/template@1.11.1)(ember-source@6.12.1(@glimmer/component@1.1.2(@babel/core@7.29.13))(rsvp@4.8.5))(webpack@5.112.2)
       ember-cli-htmlbars:
         specifier: 7.0.1
         version: 7.0.1(@babel/core@7.29.13)(ember-source@6.12.1(@glimmer/component@1.1.2(@babel/core@7.29.13))(rsvp@4.8.5))
@@ -567,7 +567,7 @@ importers:
         version: 4.1.1(@glint/template@1.11.1)(ember-source@6.12.1(@glimmer/component@1.1.2(@babel/core@7.29.13))(rsvp@4.8.5))(webpack@5.112.2)
       ember-qunit:
         specifier: 9.2.0
-        version: 9.2.0(@ember/test-helpers@5.4.3(@babel/core@7.29.13))(qunit@2.26.0)
+        version: 9.2.0(@ember/test-helpers@5.8.0(@babel/core@7.29.13))(qunit@2.26.0)
       ember-render-helpers:
         specifier: 2.0.0
         version: 2.0.0(@babel/core@7.29.13)
@@ -1355,8 +1355,8 @@ packages:
   '@ember/string@4.0.1':
     resolution: {integrity: sha512-VWeng8BSWrIsdPfffOQt/bKwNKJL7+37gPFh/6iZZ9bke+S83kKqkS30poo4bTGfRcMnvAE0ie7txom+iDu81Q==}
 
-  '@ember/test-helpers@5.4.3':
-    resolution: {integrity: sha512-WeNABJsXBidEXP87AH5gaI/KAyb0zEUYJxWa31A/Us5lqg85E3tPlHjBwCrlReOrJbSgvvArMnrdCwt7TRpjPQ==}
+  '@ember/test-helpers@5.8.0':
+    resolution: {integrity: sha512-JvQr0F8f5YfhshcG9gpOhZyuCPHFGMnWYaMH0rPf33W2R+CocSdp/aHr7D5wUg9Tl7aBiMJW6yz80MpTPVpTWQ==}
 
   '@ember/test-waiters@4.1.2':
     resolution: {integrity: sha512-zJwFaHLHjJn6mKoXYVM1SEyMT+U1JpaaSKg3JBmxHJwiIoJRI5djJ/CE33Z7N09mk5JfXd2xdhbd9LBWdlvAzg==}
@@ -10789,7 +10789,7 @@ snapshots:
 
   '@ember/string@4.0.1': {}
 
-  '@ember/test-helpers@5.4.3(@babel/core@7.29.13)':
+  '@ember/test-helpers@5.8.0(@babel/core@7.29.13)':
     dependencies:
       '@ember/test-waiters': 4.1.2
       '@embroider/addon-shim': 1.11.0
@@ -14217,9 +14217,9 @@ snapshots:
 
   electron-to-chromium@1.5.467: {}
 
-  ember-a11y-testing@8.0.1(@babel/core@7.29.13)(@ember/test-helpers@5.4.3(@babel/core@7.29.13))(@ember/test-waiters@4.1.2)(axe-core@4.14.0)(qunit@2.26.0):
+  ember-a11y-testing@8.0.1(@babel/core@7.29.13)(@ember/test-helpers@5.8.0(@babel/core@7.29.13))(@ember/test-waiters@4.1.2)(axe-core@4.14.0)(qunit@2.26.0):
     dependencies:
-      '@ember/test-helpers': 5.4.3(@babel/core@7.29.13)
+      '@ember/test-helpers': 5.8.0(@babel/core@7.29.13)
       '@ember/test-waiters': 4.1.2
       '@embroider/addon-shim': 1.11.0
       axe-core: 4.14.0
@@ -14321,9 +14321,9 @@ snapshots:
       - supports-color
       - webpack
 
-  ember-basic-dropdown@9.0.1(@babel/core@7.29.13)(@ember/test-helpers@5.4.3(@babel/core@7.29.13))(@embroider/macros@1.21.4(@babel/core@7.29.13)(@glint/template@1.11.1))(@glimmer/component@2.2.1):
+  ember-basic-dropdown@9.0.1(@babel/core@7.29.13)(@ember/test-helpers@5.8.0(@babel/core@7.29.13))(@embroider/macros@1.21.4(@babel/core@7.29.13)(@glint/template@1.11.1))(@glimmer/component@2.2.1):
     dependencies:
-      '@ember/test-helpers': 5.4.3(@babel/core@7.29.13)
+      '@ember/test-helpers': 5.8.0(@babel/core@7.29.13)
       '@embroider/addon-shim': 1.11.0
       '@embroider/macros': 1.21.4(@babel/core@7.29.13)(@glint/template@1.11.1)
       '@glimmer/component': 2.2.1
@@ -14342,7 +14342,7 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  ember-bootstrap-power-select@7.0.0(ember-bootstrap@ember-bootstrap)(ember-power-select@8.12.2(@babel/core@7.29.13)(@ember/test-helpers@5.4.3(@babel/core@7.29.13))(@glimmer/component@2.2.1)(@glint/environment-ember-loose@1.5.2(@glimmer/component@2.2.1)(@glint/template@1.11.1)(ember-cli-htmlbars@7.0.1(@babel/core@7.29.13)(ember-source@6.12.1(@glimmer/component@2.2.1)(rsvp@4.8.5)))(ember-modifier@4.3.0(@babel/core@7.29.13)))(@glint/template@1.11.1)(ember-basic-dropdown@9.0.1(@babel/core@7.29.13)(@ember/test-helpers@5.4.3(@babel/core@7.29.13))(@embroider/macros@1.21.4(@babel/core@7.29.13)(@glint/template@1.11.1))(@glimmer/component@2.2.1))(ember-concurrency@5.3.0(@babel/core@7.29.13)(@glint/template@1.11.1))(ember-source@6.12.1(@glimmer/component@2.2.1)(rsvp@4.8.5)))(ember-source@6.12.1(@glimmer/component@2.2.1)(rsvp@4.8.5)):
+  ember-bootstrap-power-select@7.0.0(ember-bootstrap@ember-bootstrap)(ember-power-select@8.12.2(@babel/core@7.29.13)(@ember/test-helpers@5.8.0(@babel/core@7.29.13))(@glimmer/component@2.2.1)(@glint/environment-ember-loose@1.5.2(@glimmer/component@2.2.1)(@glint/template@1.11.1)(ember-cli-htmlbars@7.0.1(@babel/core@7.29.13)(ember-source@6.12.1(@glimmer/component@2.2.1)(rsvp@4.8.5)))(ember-modifier@4.3.0(@babel/core@7.29.13)))(@glint/template@1.11.1)(ember-basic-dropdown@9.0.1(@babel/core@7.29.13)(@ember/test-helpers@5.8.0(@babel/core@7.29.13))(@embroider/macros@1.21.4(@babel/core@7.29.13)(@glint/template@1.11.1))(@glimmer/component@2.2.1))(ember-concurrency@5.3.0(@babel/core@7.29.13)(@glint/template@1.11.1))(ember-source@6.12.1(@glimmer/component@2.2.1)(rsvp@4.8.5)))(ember-source@6.12.1(@glimmer/component@2.2.1)(rsvp@4.8.5)):
     dependencies:
       '@babel/core': 7.29.13
       chalk: 6.0.1
@@ -14350,7 +14350,7 @@ snapshots:
       ember-cli-babel: 8.3.2(@babel/core@7.29.13)
       ember-cli-build-config-editor: 0.5.1
       ember-cli-htmlbars: 7.0.1(@babel/core@7.29.13)(ember-source@6.12.1(@glimmer/component@2.2.1)(rsvp@4.8.5))
-      ember-power-select: 8.12.2(@babel/core@7.29.13)(@ember/test-helpers@5.4.3(@babel/core@7.29.13))(@glimmer/component@2.2.1)(@glint/environment-ember-loose@1.5.2(@glimmer/component@2.2.1)(@glint/template@1.11.1)(ember-cli-htmlbars@7.0.1(@babel/core@7.29.13)(ember-source@6.12.1(@glimmer/component@2.2.1)(rsvp@4.8.5)))(ember-modifier@4.3.0(@babel/core@7.29.13)))(@glint/template@1.11.1)(ember-basic-dropdown@9.0.1(@babel/core@7.29.13)(@ember/test-helpers@5.4.3(@babel/core@7.29.13))(@embroider/macros@1.21.4(@babel/core@7.29.13)(@glint/template@1.11.1))(@glimmer/component@2.2.1))(ember-concurrency@5.3.0(@babel/core@7.29.13)(@glint/template@1.11.1))(ember-source@6.12.1(@glimmer/component@2.2.1)(rsvp@4.8.5))
+      ember-power-select: 8.12.2(@babel/core@7.29.13)(@ember/test-helpers@5.8.0(@babel/core@7.29.13))(@glimmer/component@2.2.1)(@glint/environment-ember-loose@1.5.2(@glimmer/component@2.2.1)(@glint/template@1.11.1)(ember-cli-htmlbars@7.0.1(@babel/core@7.29.13)(ember-source@6.12.1(@glimmer/component@2.2.1)(rsvp@4.8.5)))(ember-modifier@4.3.0(@babel/core@7.29.13)))(@glint/template@1.11.1)(ember-basic-dropdown@9.0.1(@babel/core@7.29.13)(@ember/test-helpers@5.8.0(@babel/core@7.29.13))(@embroider/macros@1.21.4(@babel/core@7.29.13)(@glint/template@1.11.1))(@glimmer/component@2.2.1))(ember-concurrency@5.3.0(@babel/core@7.29.13)(@glint/template@1.11.1))(ember-source@6.12.1(@glimmer/component@2.2.1)(rsvp@4.8.5))
       ember-source: 6.12.1(@glimmer/component@2.2.1)(rsvp@4.8.5)
       ember-template-imports: 4.4.0
     transitivePeerDependencies:
@@ -14500,9 +14500,9 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  ember-cli-fastboot-testing@0.9.0(@babel/core@7.29.13)(@ember/test-helpers@5.4.3(@babel/core@7.29.13))(@glint/template@1.11.1)(ember-source@6.12.1(@glimmer/component@1.1.2(@babel/core@7.29.13))(rsvp@4.8.5))(webpack@5.112.2):
+  ember-cli-fastboot-testing@0.9.0(@babel/core@7.29.13)(@ember/test-helpers@5.8.0(@babel/core@7.29.13))(@glint/template@1.11.1)(ember-source@6.12.1(@glimmer/component@1.1.2(@babel/core@7.29.13))(rsvp@4.8.5))(webpack@5.112.2):
     dependencies:
-      '@ember/test-helpers': 5.4.3(@babel/core@7.29.13)
+      '@ember/test-helpers': 5.8.0(@babel/core@7.29.13)
       body-parser: 2.4.0
       ember-auto-import: 2.13.1(@glint/template@1.11.1)(webpack@5.112.2)
       ember-cli-babel: 8.3.2(@babel/core@7.29.13)
@@ -15121,15 +15121,15 @@ snapshots:
       - supports-color
       - webpack
 
-  ember-power-select@8.12.2(@babel/core@7.29.13)(@ember/test-helpers@5.4.3(@babel/core@7.29.13))(@glimmer/component@2.2.1)(@glint/environment-ember-loose@1.5.2(@glimmer/component@2.2.1)(@glint/template@1.11.1)(ember-cli-htmlbars@7.0.1(@babel/core@7.29.13)(ember-source@6.12.1(@glimmer/component@2.2.1)(rsvp@4.8.5)))(ember-modifier@4.3.0(@babel/core@7.29.13)))(@glint/template@1.11.1)(ember-basic-dropdown@9.0.1(@babel/core@7.29.13)(@ember/test-helpers@5.4.3(@babel/core@7.29.13))(@embroider/macros@1.21.4(@babel/core@7.29.13)(@glint/template@1.11.1))(@glimmer/component@2.2.1))(ember-concurrency@5.3.0(@babel/core@7.29.13)(@glint/template@1.11.1))(ember-source@6.12.1(@glimmer/component@2.2.1)(rsvp@4.8.5)):
+  ember-power-select@8.12.2(@babel/core@7.29.13)(@ember/test-helpers@5.8.0(@babel/core@7.29.13))(@glimmer/component@2.2.1)(@glint/environment-ember-loose@1.5.2(@glimmer/component@2.2.1)(@glint/template@1.11.1)(ember-cli-htmlbars@7.0.1(@babel/core@7.29.13)(ember-source@6.12.1(@glimmer/component@2.2.1)(rsvp@4.8.5)))(ember-modifier@4.3.0(@babel/core@7.29.13)))(@glint/template@1.11.1)(ember-basic-dropdown@9.0.1(@babel/core@7.29.13)(@ember/test-helpers@5.8.0(@babel/core@7.29.13))(@embroider/macros@1.21.4(@babel/core@7.29.13)(@glint/template@1.11.1))(@glimmer/component@2.2.1))(ember-concurrency@5.3.0(@babel/core@7.29.13)(@glint/template@1.11.1))(ember-source@6.12.1(@glimmer/component@2.2.1)(rsvp@4.8.5)):
     dependencies:
-      '@ember/test-helpers': 5.4.3(@babel/core@7.29.13)
+      '@ember/test-helpers': 5.8.0(@babel/core@7.29.13)
       '@embroider/addon-shim': 1.11.0
       '@embroider/util': 1.13.5(@babel/core@7.29.13)(@glint/environment-ember-loose@1.5.2(@glimmer/component@2.2.1)(@glint/template@1.11.1)(ember-cli-htmlbars@7.0.1(@babel/core@7.29.13)(ember-source@6.12.1(@glimmer/component@2.2.1)(rsvp@4.8.5)))(ember-modifier@4.3.0(@babel/core@7.29.13)))(@glint/template@1.11.1)(ember-source@6.12.1(@glimmer/component@2.2.1)(rsvp@4.8.5))
       '@glimmer/component': 2.2.1
       decorator-transforms: 2.4.0(@babel/core@7.29.13)
       ember-assign-helper: 0.5.1
-      ember-basic-dropdown: 9.0.1(@babel/core@7.29.13)(@ember/test-helpers@5.4.3(@babel/core@7.29.13))(@embroider/macros@1.21.4(@babel/core@7.29.13)(@glint/template@1.11.1))(@glimmer/component@2.2.1)
+      ember-basic-dropdown: 9.0.1(@babel/core@7.29.13)(@ember/test-helpers@5.8.0(@babel/core@7.29.13))(@embroider/macros@1.21.4(@babel/core@7.29.13)(@glint/template@1.11.1))(@glimmer/component@2.2.1)
       ember-concurrency: 5.3.0(@babel/core@7.29.13)(@glint/template@1.11.1)
       ember-element-helper: 0.8.8
       ember-modifier: 4.3.0(@babel/core@7.29.13)
@@ -15157,9 +15157,9 @@ snapshots:
       - supports-color
       - webpack
 
-  ember-qunit@9.2.0(@ember/test-helpers@5.4.3(@babel/core@7.29.13))(qunit@2.26.0):
+  ember-qunit@9.2.0(@ember/test-helpers@5.8.0(@babel/core@7.29.13))(qunit@2.26.0):
     dependencies:
-      '@ember/test-helpers': 5.4.3(@babel/core@7.29.13)
+      '@ember/test-helpers': 5.8.0(@babel/core@7.29.13)
       '@embroider/addon-shim': 1.11.0
       qunit: 2.26.0
       qunit-theme-ember: 1.0.0
