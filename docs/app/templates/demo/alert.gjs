@@ -70,6 +70,7 @@ export default class AlertTemplate extends Component {
           @options={{this.typeChoices}}
           @label="Type"
           @property="type"
+          data-test-option="type"
           class="ml-sm-2"
           as |el|
         >

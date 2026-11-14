@@ -26,13 +26,18 @@ export default class NavbarsTemplate extends Component {
   ];
 
   <template>
-    <div class="bs-example" data-test-fastboot-container>
+    <div
+      class="bs-example"
+      data-test-fastboot-container
+      data-test-example="navbar-demo"
+    >
       <BsForm @formLayout="horizontal" @model={{this}} as |form|>
         <form.element
           @controlType="power-select"
           @options={{this.typeChoices}}
           @label="Type"
           @property="type"
+          data-test-option="type"
           as |el|
         >
           <el.control @searchEnabled={{true}} />
@@ -42,6 +47,7 @@ export default class NavbarsTemplate extends Component {
           @options={{this.bgChoices}}
           @label="Background"
           @property="bg"
+          data-test-option="bg"
           as |el|
         >
           <el.control @searchEnabled={{true}} />

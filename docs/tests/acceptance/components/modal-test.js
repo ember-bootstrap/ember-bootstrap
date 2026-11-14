@@ -8,6 +8,7 @@ import {
   waitUntil,
 } from '@ember/test-helpers';
 import { setupApplicationTest } from 'ember-qunit';
+import { selectChoose } from 'ember-power-select/test-support';
 import { codeSnippetText } from 'ember-bootstrap-docs/tests/helpers/code-snippet';
 
 module('Acceptance | components/modal', function (hooks) {
@@ -54,5 +55,17 @@ module('Acceptance | components/modal', function (hooks) {
     assert.true(
       codeSnippetText('modal-options.gjs').includes('@title="Custom title"'),
     );
+  });
+
+  test('changing the size updates the modal and the code', async function (assert) {
+    await visit('/components/modal');
+
+    let dialog = '[data-test-example="modal-options"] .modal-dialog';
+    assert.dom(dialog).doesNotHaveClass('modal-lg');
+
+    await selectChoose('[data-test-option="size"]', 'lg');
+
+    assert.dom(dialog).hasClass('modal-lg');
+    assert.true(codeSnippetText('modal-options.gjs').includes('@size="lg"'));
   });
 });

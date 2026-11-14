@@ -107,6 +107,7 @@ export default class ModalTemplate extends Component {
         @options={{this.sizes}}
         @label="Size"
         @property="size"
+        data-test-option="size"
         as |el|
       >
         <el.control @searchEnabled={{true}} />

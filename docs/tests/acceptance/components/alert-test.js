@@ -1,6 +1,7 @@
 import { module, test } from 'qunit';
 import { visit, currentURL, click, fillIn } from '@ember/test-helpers';
 import { setupApplicationTest } from 'ember-qunit';
+import { selectChoose } from 'ember-power-select/test-support';
 import { codeSnippetText } from 'ember-bootstrap-docs/tests/helpers/code-snippet';
 
 module('Acceptance | components/alert', function (hooks) {
@@ -31,6 +32,20 @@ module('Acceptance | components/alert', function (hooks) {
     assert.dom(alerts).doesNotExist();
     assert.true(
       codeSnippetText('alert-options.gjs').includes('@visible={{false}}'),
+    );
+  });
+
+  test('changing the type updates the alerts and the code', async function (assert) {
+    await visit('/components/alert');
+
+    let alerts = '[data-test-example="alert-options"] .alert';
+    assert.dom(alerts).hasClass('alert-success');
+
+    await selectChoose('[data-test-option="type"]', 'danger');
+
+    assert.dom(alerts).hasClass('alert-danger');
+    assert.true(
+      codeSnippetText('alert-options.gjs').includes('@type="danger"'),
     );
   });
 });

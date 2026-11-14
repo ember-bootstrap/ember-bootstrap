@@ -48,6 +48,7 @@ export default class NavsTemplate extends Component {
           @label="Type"
           @property="type"
           @onChange={{this.updateType}}
+          data-test-option="type"
           as |el|
         >
           <el.control @searchEnabled={{true}} @class="ml-sm-1" />
@@ -67,6 +68,7 @@ export default class NavsTemplate extends Component {
           @controlType="checkbox"
           @label="Justified"
           @property="justified"
+          data-test-option="justified"
           class="ml-sm-2"
           as |el|
         >
