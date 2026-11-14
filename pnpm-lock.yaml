@@ -5,7 +5,7 @@ settings:
   excludeLinksFromLockfile: false
 
 overrides:
-  testem: 3.20.2
+  testem: 3.21.5
 
 importers:
 
@@ -2976,6 +2976,9 @@ packages:
 
   argparse@2.0.1:
     resolution: {integrity: sha512-8+9WqebbFzpX9OR+Wa6O29asIogeRMzcGtAINdpMHHyAg10f05aSFVBbcEqGf/PXw1EjAZ+q2/bEBg3DvurK3Q==}
+
+  argparse@3.0.4:
+    resolution: {integrity: sha512-fwWK3Zq22l4XJJjx5mcBHGikIk+hJqO+32dPm0Jur7+rtG5x1scOjSfdT9ZKeWHPpsya/l0HHK4tDImBkTrtvA==}
 
   arr-diff@4.0.0:
     resolution: {integrity: sha512-YVIQ82gZPGBebQV/a8dar4AitzCQs0jjXwMPZllpXMaGjXPYVUawSxQrRsjhjupyVxEvbHgUmIhKVlND+j02kA==}
@@ -6031,6 +6034,9 @@ packages:
     resolution: {integrity: sha512-vK9P5/iUfdl95AI+JVyUuIcVtd4ofvtrOr3HNtM2yxC9bnMbEdp3x01OhQNnjb8IJYi38VlTE3mBXwcfvywuSw==}
     engines: {node: '>= 14'}
 
+  httpxy@0.5.6:
+    resolution: {integrity: sha512-iqc3nOxvNb5FxbhJozt8wNmHgjlmk4zzba512jMEXVwHCEBCbGAj49eGfy5PI8ts3/LFSFq8siiSNqwfY1AlfQ==}
+
   human-signals@1.1.1:
     resolution: {integrity: sha512-SEQu7vl8KjNL2eoGBLF3+wAjpsNfA9XMlXAYj/3EdaNfAlxKthD1xjEQfGOUhllCGGJVNY34bRr6lPINhNjyZw==}
     engines: {node: '>=8.12.0'}
@@ -6520,6 +6526,10 @@ packages:
 
   js-yaml@4.3.2:
     resolution: {integrity: sha512-SFNOvSJ+Dgf/9An904Yx+CgSlIPCkIpao4qo51lpee25TIRejdH3rhR4EZMGoNx3/TP3O+wzWuiTFl4sqbltzA==}
+    hasBin: true
+
+  js-yaml@5.5.0:
+    resolution: {integrity: sha512-paNr4LFIFPjeeSmwNYdrb8FafLLG/Cr2Af3GjbsHJ5CxIjH4r0c2emlmRdAtpPAieP1gRVzk6buBbVP5gBMGAg==}
     hasBin: true
 
   jsdom@19.0.0:
@@ -7944,10 +7954,6 @@ packages:
     resolution: {integrity: sha512-HzMy3Geq23nVALD/M2LliU+F+M+gVNsvkQWWqeBZ8HDiCgzo6YPJ/Omrmtq24EFrIsk0a3EkQGEd7bDOo+IhGA==}
     engines: {node: '>=18'}
 
-  printf@0.6.1:
-    resolution: {integrity: sha512-is0ctgGdPJ5951KulgfzvHGwJtZ5ck8l042vRkV6jrkpBzTmb/lueTqguWHy2JfVA+RY6gFVlaZgUS0j7S/dsw==}
-    engines: {node: '>= 0.9.0'}
-
   prismjs-glimmer@1.1.1:
     resolution: {integrity: sha512-GNLdqx749bMQx40nPtLtRjhs6c+xBGmJCRizv0mZs2LPH2bhw6sYBEYKbXZWMmFWdhPdGQWB8Qf8h/k9wgBIvw==}
     engines: {node: '>= 10'}
@@ -9076,9 +9082,9 @@ packages:
     engines: {node: '>=10'}
     hasBin: true
 
-  testem@3.20.2:
-    resolution: {integrity: sha512-Y29LKJ4XHjr2oUZHHIDJbz7/AYDM8soqc7Irg6sfBI5W3nfOuuovyN2SEKnFw4LqGdQe0cFXZG3xAvt00INvWQ==}
-    engines: {node: ^20.19.0 || ^22.12.0 || >=24.0.0}
+  testem@3.21.5:
+    resolution: {integrity: sha512-HvQM6RYYBGNmg+PSrK6x/SKeJVpp8z6zgEdi9VkBA9kfE7M7XSbF9h16QLycA3TntWr/bDS1iuasZdtz1qh9+g==}
+    engines: {node: ^20.19.0 || ^22.12.0 || ^24.0.0 || >= 26.0.0}
     hasBin: true
 
   text-table@0.2.0:
@@ -12478,6 +12484,8 @@ snapshots:
 
   argparse@2.0.1: {}
 
+  argparse@3.0.4: {}
+
   arr-diff@4.0.0: {}
 
   arr-filter@1.1.2:
@@ -14885,7 +14893,7 @@ snapshots:
       silent-error: 1.1.1
       sort-package-json: 3.7.1
       symlink-or-copy: 1.3.1
-      testem: 3.20.2(@babel/core@7.29.13)(ejs@3.1.10)(handlebars@4.7.10)(underscore@1.13.8)
+      testem: 3.21.5(@babel/core@7.29.13)(ejs@3.1.10)(handlebars@4.7.10)(underscore@1.13.8)
       tiny-lr: 2.0.0
       tree-sync: 2.1.0
       walk-sync: 4.0.2
@@ -17231,6 +17239,8 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
+  httpxy@0.5.6: {}
+
   human-signals@1.1.1: {}
 
   human-signals@2.1.0: {}
@@ -17669,6 +17679,10 @@ snapshots:
   js-yaml@4.3.2:
     dependencies:
       argparse: 2.0.1
+
+  js-yaml@5.5.0:
+    dependencies:
+      argparse: 3.0.4
 
   jsdom@19.0.0:
     dependencies:
@@ -19217,8 +19231,6 @@ snapshots:
     dependencies:
       parse-ms: 4.0.0
 
-  printf@0.6.1: {}
-
   prismjs-glimmer@1.1.1(prismjs@1.30.0):
     dependencies:
       prismjs: 1.30.0
@@ -20649,7 +20661,7 @@ snapshots:
       commander: 2.20.3
       source-map-support: 0.5.21
 
-  testem@3.20.2(@babel/core@7.29.13)(ejs@3.1.10)(handlebars@4.7.10)(underscore@1.13.8):
+  testem@3.21.5(@babel/core@7.29.13)(ejs@3.1.10)(handlebars@4.7.10)(underscore@1.13.8):
     dependencies:
       '@xmldom/xmldom': 0.9.12
       backbone: 1.6.1
@@ -20661,13 +20673,11 @@ snapshots:
       execa: 9.6.1
       express: 5.3.0
       glob: 13.0.6
-      http-proxy: 1.18.1
-      js-yaml: 4.3.2
+      httpxy: 0.5.6
+      js-yaml: 5.5.0
       lodash: 4.18.1
       minimatch: 10.2.6
-      mkdirp: 3.0.1
       mustache: 4.2.0
-      printf: 0.6.1
       proc-log: 6.1.0
       rimraf: 6.1.3
       socket.io: 4.8.4
@@ -20682,7 +20692,6 @@ snapshots:
       - bracket-template
       - bufferutil
       - coffee-script
-      - debug
       - dot
       - dust
       - dustjs-helpers
