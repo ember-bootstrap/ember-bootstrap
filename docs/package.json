@@ -30,7 +30,7 @@
     "broccoli-asset-rev": "3.0.0",
     "concurrently": "10.0.7",
     "ember-auto-import": "2.13.1",
-    "ember-basic-dropdown": "8.11.1",
+    "ember-basic-dropdown": "9.0.1",
     "ember-bootstrap": "workspace:*",
     "ember-bootstrap-cp-validations": "2.1.0",
     "ember-bootstrap-power-select": "6.2.0",
