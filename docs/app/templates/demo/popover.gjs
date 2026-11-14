@@ -1,0 +1,114 @@
+import BsAlert from 'ember-bootstrap/components/bs-alert';
+import BsButton from 'ember-bootstrap/components/bs-button';
+import BsPopover from 'ember-bootstrap/components/bs-popover';
+import CodeSnippet from 'ember-bootstrap-docs/components/code-snippet';
+
+<template>
+  <div class="bs-example" data-test-fastboot-container>
+    <!-- BEGIN-SNIPPET popover-demo -->
+    <BsButton class="mb-1">
+      Popover on left
+      <BsPopover @placement="left" title="Popover on left">
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Explicabo
+        magnam similique voluptate!
+      </BsPopover>
+    </BsButton>
+    <BsButton class="mb-1">
+      Popover on top
+      <BsPopover @placement="top" title="Popover on top">
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Explicabo
+        magnam similique voluptate!
+      </BsPopover>
+    </BsButton>
+    <BsButton class="mb-1">
+      Popover on bottom
+      <BsPopover @placement="bottom" title="Popover on bottom">
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Explicabo
+        magnam similique voluptate!
+      </BsPopover>
+    </BsButton>
+    <BsButton class="mb-1">
+      Popover on right
+      <BsPopover @placement="right" title="Popover on right">
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Explicabo
+        magnam similique voluptate!
+      </BsPopover>
+    </BsButton>
+    <BsButton class="mb-1">
+      Hover Popover
+      <BsPopover @triggerEvents="hover" title="Hover Popover">
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Explicabo
+        magnam similique voluptate!
+      </BsPopover>
+    </BsButton>
+    <!-- END-SNIPPET -->
+  </div>
+  <div class="highlight">
+    <CodeSnippet @name="popover-demo.gjs" />
+  </div>
+  <h2>
+    Popover trigger
+  </h2>
+  <p>
+    By default the popover will attach itself to the parent DOM element, but
+    there are ways to customize this:
+  </p>
+  <div class="bs-example">
+    <!-- BEGIN-SNIPPET popover-target -->
+    <button type="button" class="btn btn-secondary">
+      DOM parent
+      <BsPopover title="DOM parent">
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Explicabo
+        magnam similique voluptate!
+      </BsPopover>
+    </button>
+    <button type="button" id="popover-button" class="btn btn-secondary">
+      CSS selector
+    </button>
+    <BsPopover @triggerElement="#popover-button" title="CSS selector">
+      Lorem ipsum dolor sit amet, consectetur adipisicing elit. Explicabo magnam
+      similique voluptate!
+    </BsPopover>
+    <!-- END-SNIPPET -->
+  </div>
+  <div class="highlight">
+    <CodeSnippet @name="popover-target.gjs" />
+  </div>
+  <h2>
+    Dismiss on next click
+  </h2>
+  <p>
+    Use the focus trigger to dismiss popovers on the user’s next click of a
+    different element than the toggle element.
+  </p>
+  <BsAlert @type="info" @dismissible={{false}}>
+    For proper cross-browser and cross-platform behavior, you must use the
+    <code>&lt;a&gt;</code>
+    tag, not the
+    <code>&lt;button&gt;</code>
+    tag, and you also must include a
+    <code>tabindex</code>
+    attribute.
+  </BsAlert>
+  <div class="bs-example">
+    <!-- BEGIN-SNIPPET popover-focus -->
+    {{! Due to the above mentioned rule, this must be an <a> tag.
+      Clicking a <a href="#"> will jump to the top of the page however.
+      By removing it, we get the expected behaviour. }}
+    {{! template-lint-disable link-href-attributes }}
+    {{! The popover is not rendered inside the <a> tag,
+    so it is okay not to have the 'presentational' role. }}
+    {{! template-lint-disable require-presentational-children }}
+    <a role="button" tabindex="0" class="btn btn-primary">
+      Focus me
+      <BsPopover @triggerEvents="focus" title="Focused">
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Explicabo
+        magnam similiquevoluptate!
+      </BsPopover>
+    </a>
+    <!-- END-SNIPPET -->
+  </div>
+  <div class="highlight">
+    <CodeSnippet @name="popover-focus.gjs" />
+  </div>
+</template>

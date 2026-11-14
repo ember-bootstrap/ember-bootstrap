@@ -1,0 +1,18 @@
+import BsAlert from 'ember-bootstrap/components/bs-alert';
+
+<template>
+  <BsAlert @type="info" @dismissible={{false}}>
+    This page shows some example usage of the
+    <code>&lt;{{@component.templateName}}&gt;</code>
+    component. For the full documentation please refer to the
+    <a href={{@component.apiUrl}} class="alert-link">API Docs</a>. You might
+    also want to consult the official
+    <a
+      href={{@component.bsUrl}}
+      class="alert-link"
+      target="_blank"
+      rel="noopener noreferrer"
+    >Bootstrap Docs</a>
+    for general information.
+  </BsAlert>
+</template>

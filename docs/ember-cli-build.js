@@ -7,6 +7,8 @@ module.exports = function (defaults) {
     'ember-bootstrap': {
       bootstrapVersion: 5,
     },
+    // Code snippets shown in the docs are extracted from these files.
+    snippetExtensions: ['js', 'gjs'],
     'ember-prism': {
       components: ['markup-templating', 'handlebars', 'javascript'],
       plugins: ['line-numbers'],

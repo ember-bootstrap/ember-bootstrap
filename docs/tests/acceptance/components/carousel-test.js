@@ -25,7 +25,7 @@ module('Acceptance | components/carousel', function (hooks) {
     await waitFor('[data-test-option="interval"] input');
     assert.strictEqual(currentURL(), '/components/carousel');
     assert
-      .dom('[data-test-example="main"] .carousel-item.active img')
+      .dom('[data-test-example="carousel-demo"] .carousel-item.active img')
       .hasAttribute('alt', 'First slide', 'shows the first slide');
 
     const intervalBetweenSlides = find(
@@ -43,7 +43,7 @@ module('Acceptance | components/carousel', function (hooks) {
     await settled();
 
     assert
-      .dom('[data-test-example="main"] .carousel-item.active img')
+      .dom('[data-test-example="carousel-demo"] .carousel-item.active img')
       .hasAttribute('alt', 'Second slide', 'shows the second slide');
   });
 });
