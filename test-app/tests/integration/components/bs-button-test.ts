@@ -452,7 +452,7 @@ module('Integration | Component | bs-button', function (hooks) {
     };
     try {
       await click('button');
-    } catch (e) {
+    } catch {
       // click helper will throw on a disabled button
     }
 

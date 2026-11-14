@@ -46,7 +46,7 @@ function clickIndicator(index: number) {
 }
 
 function clickToNextSlide() {
-  let rootEl = (getContext() as RenderingTestContext)!.element;
+  const rootEl = (getContext() as RenderingTestContext)!.element;
   let control = rootEl.querySelector('.carousel-control.right');
   if (control !== null) {
     return click('.carousel-control.right');
@@ -59,7 +59,7 @@ function clickToNextSlide() {
 }
 
 function clickToPrevSlide() {
-  let rootEl = (getContext() as RenderingTestContext)!.element;
+  const rootEl = (getContext() as RenderingTestContext)!.element;
   let control = rootEl.querySelector('.carousel-control.left');
   if (control !== null) {
     return click('.carousel-control.left');
@@ -72,7 +72,7 @@ function clickToPrevSlide() {
 }
 
 function getActivatedSlide(index: number) {
-  let rootEl = (getContext() as RenderingTestContext)!.element;
+  const rootEl = (getContext() as RenderingTestContext)!.element;
   return rootEl.querySelector(`.carousel-inner div:nth-child(${index}).active`);
 }
 
@@ -102,8 +102,8 @@ module('Integration | Component | bs-carousel', function (hooks) {
   test('carousel has correct controls markup', async function (this: RenderingTestContext, assert) {
     await render(<template><BsCarousel @interval={{0}} /></template>);
 
-    let prev = this.element.querySelectorAll('.carousel-control-prev')!;
-    let next = this.element.querySelectorAll('.carousel-control-next')!;
+    const prev = this.element.querySelectorAll('.carousel-control-prev')!;
+    const next = this.element.querySelectorAll('.carousel-control-next')!;
     assert.equal(prev.length, 1, 'has left control class names');
     assert.equal(next.length, 1, 'has right control class names');
     assert.ok(
@@ -138,7 +138,7 @@ module('Integration | Component | bs-carousel', function (hooks) {
 
   test('carousel transition="fade" has correct markup', async function (assert) {
     await render(
-      <template><BsCarousel @interval={{0}} @transition='fade' /></template>,
+      <template><BsCarousel @interval={{0}} @transition="fade" /></template>,
     );
     assert
       .dom('.carousel')
@@ -583,8 +583,8 @@ module('Integration | Component | bs-carousel', function (hooks) {
 
       <template>
         <div
-          class='custom-carousel-slide carousel-item
-            {{if this.isCurrentSlide "active"}}'
+          class="custom-carousel-slide carousel-item
+            {{if this.isCurrentSlide 'active'}}"
         >
           {{yield}}
         </div>

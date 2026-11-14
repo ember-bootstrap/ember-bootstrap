@@ -27,10 +27,10 @@ module('Integration | Component | bs-accordion', function (hooks) {
         <BsAccordion as |acc|>
           <acc.item
             @value={{1}}
-            @title='TITLE1'
-            data-test-item='1'
+            @title="TITLE1"
+            data-test-item="1"
           >CONTENT1</acc.item>
-          <acc.item @value={{2}} @title='TITLE2'>CONTENT2</acc.item>
+          <acc.item @value={{2}} @title="TITLE2">CONTENT2</acc.item>
         </BsAccordion>
       </template>,
     );
@@ -66,8 +66,8 @@ module('Integration | Component | bs-accordion', function (hooks) {
     await render(
       <template>
         <BsAccordion @selected={{selected}} as |acc|>
-          <acc.item @value={{1}} @title='TITLE1'>CONTENT1</acc.item>
-          <acc.item @value={{2}} @title='TITLE2'>CONTENT2</acc.item>
+          <acc.item @value={{1}} @title="TITLE1">CONTENT1</acc.item>
+          <acc.item @value={{2}} @title="TITLE2">CONTENT2</acc.item>
         </BsAccordion>
       </template>,
     );
@@ -98,8 +98,8 @@ module('Integration | Component | bs-accordion', function (hooks) {
     await render(
       <template>
         <BsAccordion @selected={{state.selected}} as |acc|>
-          <acc.item @value={{1}} @title='TITLE1'>CONTENT1</acc.item>
-          <acc.item @value={{2}} @title='TITLE2'>CONTENT2</acc.item>
+          <acc.item @value={{1}} @title="TITLE1">CONTENT1</acc.item>
+          <acc.item @value={{2}} @title="TITLE2">CONTENT2</acc.item>
         </BsAccordion>
       </template>,
     );
@@ -129,8 +129,8 @@ module('Integration | Component | bs-accordion', function (hooks) {
     await render(
       <template>
         <BsAccordion as |acc|>
-          <acc.item @value={{1}} @title='TITLE1'>CONTENT1</acc.item>
-          <acc.item @value={{2}} @title='TITLE2'>CONTENT2</acc.item>
+          <acc.item @value={{1}} @title="TITLE1">CONTENT1</acc.item>
+          <acc.item @value={{2}} @title="TITLE2">CONTENT2</acc.item>
         </BsAccordion>
       </template>,
     );
@@ -159,8 +159,8 @@ module('Integration | Component | bs-accordion', function (hooks) {
     await render(
       <template>
         <BsAccordion @selected={{1}} as |acc|>
-          <acc.item @value={{1}} @title='TITLE1'>CONTENT1</acc.item>
-          <acc.item @value={{2}} @title='TITLE2'>CONTENT2</acc.item>
+          <acc.item @value={{1}} @title="TITLE1">CONTENT1</acc.item>
+          <acc.item @value={{2}} @title="TITLE2">CONTENT2</acc.item>
         </BsAccordion>
       </template>,
     );
@@ -202,8 +202,8 @@ module('Integration | Component | bs-accordion', function (hooks) {
     await render(
       <template>
         <BsAccordion @onChange={{change}} as |acc|>
-          <acc.item @value={{1}} @title='TITLE1'>CONTENT1</acc.item>
-          <acc.item @value={{2}} @title='TITLE2'>CONTENT2</acc.item>
+          <acc.item @value={{1}} @title="TITLE1">CONTENT1</acc.item>
+          <acc.item @value={{2}} @title="TITLE2">CONTENT2</acc.item>
         </BsAccordion>
       </template>,
     );
@@ -220,8 +220,8 @@ module('Integration | Component | bs-accordion', function (hooks) {
     await render(
       <template>
         <BsAccordion @onChange={{change}} as |acc|>
-          <acc.item @value={{1}} @title='TITLE1'>CONTENT1</acc.item>
-          <acc.item @value={{2}} @title='TITLE2'>CONTENT2</acc.item>
+          <acc.item @value={{1}} @title="TITLE1">CONTENT1</acc.item>
+          <acc.item @value={{2}} @title="TITLE2">CONTENT2</acc.item>
         </BsAccordion>
       </template>,
     );
@@ -250,10 +250,10 @@ module('Integration | Component | bs-accordion', function (hooks) {
         <BsAccordion @onChange={{undefined}} as |acc|>
           <acc.item
             @value={{1}}
-            @title='TITLE1'
-            data-test-item='1'
+            @title="TITLE1"
+            data-test-item="1"
           >CONTENT1</acc.item>
-          <acc.item @value={{2}} @title='TITLE2'>CONTENT2</acc.item>
+          <acc.item @value={{2}} @title="TITLE2">CONTENT2</acc.item>
         </BsAccordion>
       </template>,
     );
@@ -268,8 +268,8 @@ module('Integration | Component | bs-accordion', function (hooks) {
     await render(
       <template>
         <BsAccordion @selected={{selected}} as |acc|>
-          <acc.item @value={{1}} @title='TITLE1'>CONTENT1</acc.item>
-          <acc.item @value={{2}} @title='TITLE2'>CONTENT2</acc.item>
+          <acc.item @value={{1}} @title="TITLE1">CONTENT1</acc.item>
+          <acc.item @value={{2}} @title="TITLE2">CONTENT2</acc.item>
         </BsAccordion>
       </template>,
     );
@@ -284,13 +284,13 @@ module('Integration | Component | bs-accordion', function (hooks) {
     await render(
       <template>
         <BsAccordion @selected={{1}} as |acc|>
-          <acc.item @value={{1}} @title='TITLE1'>CONTENT1
+          <acc.item @value={{1}} @title="TITLE1">CONTENT1
             <button
-              type='button'
-              id='btn'
-              {{on 'click' (fn acc.change 2)}}
+              type="button"
+              id="btn"
+              {{on "click" (fn acc.change 2)}}
             >Next</button></acc.item>
-          <acc.item @value={{2}} @title='TITLE2'>CONTENT2</acc.item>
+          <acc.item @value={{2}} @title="TITLE2">CONTENT2</acc.item>
         </BsAccordion>
       </template>,
     );
@@ -354,7 +354,7 @@ module('Integration | Component | bs-accordion', function (hooks) {
             <aitem.title>TITLE1</aitem.title>
             <aitem.body>CONTENT1</aitem.body>
           </acc.item>
-          <acc.item @value={{2}} @title='TITLE2'>CONTENT2</acc.item>
+          <acc.item @value={{2}} @title="TITLE2">CONTENT2</acc.item>
         </BsAccordion>
       </template>,
     );
@@ -393,8 +393,8 @@ module('Integration | Component | bs-accordion', function (hooks) {
     await render(
       <template>
         <BsAccordion as |acc|>
-          <acc.item @value={{1}} @title='TITLE1'>CONTENT1</acc.item>
-          <acc.item @value={{2}} @title='TITLE2'>CONTENT2</acc.item>
+          <acc.item @value={{1}} @title="TITLE1">CONTENT1</acc.item>
+          <acc.item @value={{2}} @title="TITLE2">CONTENT2</acc.item>
         </BsAccordion>
       </template>,
     );

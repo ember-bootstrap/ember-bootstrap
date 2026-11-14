@@ -32,7 +32,7 @@ module('Integration | Component | bs-modal-simple', function (hooks) {
   test('Simple modal has header, footer and body', async function (assert) {
     await render(
       <template>
-        <BsModalSimple @fade={{false}} @title='Simple Dialog'>Hello world!</BsModalSimple>
+        <BsModalSimple @fade={{false}} @title="Simple Dialog">Hello world!</BsModalSimple>
       </template>,
     );
 
@@ -61,7 +61,7 @@ module('Integration | Component | bs-modal-simple', function (hooks) {
   test('Hidden modal does not render', async function (assert) {
     await render(
       <template>
-        <BsModalSimple @open={{false}} @title='Simple Dialog'>Hello world!</BsModalSimple>
+        <BsModalSimple @open={{false}} @title="Simple Dialog">Hello world!</BsModalSimple>
       </template>,
     );
 
@@ -71,7 +71,7 @@ module('Integration | Component | bs-modal-simple', function (hooks) {
   test('Simple modal has default CSS classes', async function (assert) {
     await render(
       <template>
-        <BsModalSimple @title='Simple Dialog'>Hello world!</BsModalSimple>
+        <BsModalSimple @title="Simple Dialog">Hello world!</BsModalSimple>
       </template>,
     );
 
@@ -85,9 +85,9 @@ module('Integration | Component | bs-modal-simple', function (hooks) {
     await render(
       <template>
         <BsModalSimple
-          @title='Simple Dialog'
-          @closeTitle='Cancel'
-          @submitTitle='Ok'
+          @title="Simple Dialog"
+          @closeTitle="Cancel"
+          @submitTitle="Ok"
         >Hello world!</BsModalSimple>
       </template>,
     );
@@ -110,9 +110,9 @@ module('Integration | Component | bs-modal-simple', function (hooks) {
     await render(
       <template>
         <BsModalSimple
-          @closeTitle='Cancel'
-          @submitTitle='Ok'
-          @submitButtonType='danger'
+          @closeTitle="Cancel"
+          @submitTitle="Ok"
+          @submitButtonType="danger"
         >Hello world!</BsModalSimple>
       </template>,
     );
@@ -125,7 +125,7 @@ module('Integration | Component | bs-modal-simple', function (hooks) {
   test('open modal is immediately shown', async function (assert) {
     await render(
       <template>
-        <BsModalSimple @title='Simple Dialog' @fade={{false}}>Hello world!</BsModalSimple>
+        <BsModalSimple @title="Simple Dialog" @fade={{false}}>Hello world!</BsModalSimple>
       </template>,
     );
 
@@ -138,7 +138,7 @@ module('Integration | Component | bs-modal-simple', function (hooks) {
     async function (assert) {
       await render(
         <template>
-          <BsModalSimple @title='Simple Dialog'>Hello world!</BsModalSimple>
+          <BsModalSimple @title="Simple Dialog">Hello world!</BsModalSimple>
         </template>,
       );
 
@@ -155,7 +155,7 @@ module('Integration | Component | bs-modal-simple', function (hooks) {
     await render(
       <template>
         <BsModalSimple
-          @title='Simple Dialog'
+          @title="Simple Dialog"
           @fade={{false}}
           @open={{state.open}}
         >Hello world!</BsModalSimple>
@@ -184,7 +184,7 @@ module('Integration | Component | bs-modal-simple', function (hooks) {
     await render(
       <template>
         <BsModalSimple
-          @title='Simple Dialog'
+          @title="Simple Dialog"
           @fade={{false}}
           @open={{state.open}}
         >Hello world!</BsModalSimple>
@@ -213,7 +213,7 @@ module('Integration | Component | bs-modal-simple', function (hooks) {
       const state = new State();
       await render(
         <template>
-          <BsModalSimple @title='Simple Dialog' @open={{state.open}}>Hello
+          <BsModalSimple @title="Simple Dialog" @open={{state.open}}>Hello
             world!</BsModalSimple>
         </template>,
       );
@@ -239,7 +239,7 @@ module('Integration | Component | bs-modal-simple', function (hooks) {
     await render(
       <template>
         <BsModalSimple
-          @title='Simple Dialog'
+          @title="Simple Dialog"
           @closeButton={{state.closeButton}}
         >Hello world!</BsModalSimple>
       </template>,
@@ -262,7 +262,7 @@ module('Integration | Component | bs-modal-simple', function (hooks) {
     const state = new State();
     await render(
       <template>
-        <BsModalSimple @title='Simple Dialog' @fade={{state.fade}}>Hello world!</BsModalSimple>
+        <BsModalSimple @title="Simple Dialog" @fade={{state.fade}}>Hello world!</BsModalSimple>
       </template>,
     );
     assert.dom('.modal').hasNoClass('fade', 'Modal has no fade class');
@@ -274,7 +274,7 @@ module('Integration | Component | bs-modal-simple', function (hooks) {
   test('backdrop=true adds backdrop element', async function (assert) {
     await render(
       <template>
-        <BsModalSimple @title='Simple Dialog' @backdrop={{true}}>Hello world!</BsModalSimple>
+        <BsModalSimple @title="Simple Dialog" @backdrop={{true}}>Hello world!</BsModalSimple>
       </template>,
     );
 
@@ -289,7 +289,7 @@ module('Integration | Component | bs-modal-simple', function (hooks) {
   test('backdrop=false removes backdrop element', async function (assert) {
     await render(
       <template>
-        <BsModalSimple @title='Simple Dialog' @backdrop={{false}}>Hello world!</BsModalSimple>
+        <BsModalSimple @title="Simple Dialog" @backdrop={{false}}>Hello world!</BsModalSimple>
       </template>,
     );
 
@@ -299,7 +299,7 @@ module('Integration | Component | bs-modal-simple', function (hooks) {
   test('clicking close button closes modal', async function (assert) {
     await render(
       <template>
-        <BsModalSimple @title='Simple Dialog'>Hello world!</BsModalSimple>
+        <BsModalSimple @title="Simple Dialog">Hello world!</BsModalSimple>
       </template>,
     );
 
@@ -313,7 +313,7 @@ module('Integration | Component | bs-modal-simple', function (hooks) {
   test('clicking ok button closes modal', async function (assert) {
     await render(
       <template>
-        <BsModalSimple @title='Simple Dialog'>Hello world!</BsModalSimple>
+        <BsModalSimple @title="Simple Dialog">Hello world!</BsModalSimple>
       </template>,
     );
 
@@ -329,7 +329,7 @@ module('Integration | Component | bs-modal-simple', function (hooks) {
 
     await render(
       <template>
-        <BsModalSimple @title='Simple Dialog' @onHide={{hideAction}}>Hello
+        <BsModalSimple @title="Simple Dialog" @onHide={{hideAction}}>Hello
           world!</BsModalSimple>
       </template>,
     );
@@ -345,9 +345,9 @@ module('Integration | Component | bs-modal-simple', function (hooks) {
   test('can implement custom close buttons', async function (assert) {
     await render(
       <template>
-        <BsModalSimple @title='Simple Dialog' as |modal|>
+        <BsModalSimple @title="Simple Dialog" as |modal|>
           Hello world!
-          <a href='#' class='close-link' onclick={{modal.close}}>close</a>
+          <a href="#" class="close-link" onclick={{modal.close}}>close</a>
         </BsModalSimple>
       </template>,
     );
@@ -362,7 +362,7 @@ module('Integration | Component | bs-modal-simple', function (hooks) {
   test('size property adds size class', async function (assert) {
     await render(
       <template>
-        <BsModalSimple @title='Simple Dialog' @size='lg' @fade={{false}}>Hello
+        <BsModalSimple @title="Simple Dialog" @size="lg" @fade={{false}}>Hello
           world!</BsModalSimple>
       </template>,
     );
@@ -379,7 +379,7 @@ module('Integration | Component | bs-modal-simple', function (hooks) {
     await render(
       <template>
         <BsModalSimple
-          @title='Simple Dialog'
+          @title="Simple Dialog"
           @onShow={{openAction}}
           @onShown={{openedAction}}
           @open={{state.open}}
@@ -413,7 +413,7 @@ module('Integration | Component | bs-modal-simple', function (hooks) {
       await render(
         <template>
           <BsModalSimple
-            @title='Simple Dialog'
+            @title="Simple Dialog"
             @onShow={{openAction}}
             @onShown={{openedAction}}
             @open={{state.open}}
@@ -440,7 +440,7 @@ module('Integration | Component | bs-modal-simple', function (hooks) {
     await render(
       <template>
         <BsModalSimple
-          @title='Simple Dialog'
+          @title="Simple Dialog"
           @fade={{false}}
           @onHide={{testAction}}
         >Hello world!</BsModalSimple>
@@ -459,7 +459,7 @@ module('Integration | Component | bs-modal-simple', function (hooks) {
     await render(
       <template>
         <BsModalSimple
-          @title='Simple Dialog'
+          @title="Simple Dialog"
           @onHidden={{hiddenAction}}
           @open={{state.open}}
         >Hello world!</BsModalSimple>
@@ -477,9 +477,9 @@ module('Integration | Component | bs-modal-simple', function (hooks) {
     await render(
       <template>
         <BsModalSimple
-          @title='Simple Dialog'
-          @closeTitle='Cancel'
-          @submitTitle='Ok'
+          @title="Simple Dialog"
+          @closeTitle="Cancel"
+          @submitTitle="Ok"
           @onSubmit={{testAction}}
         >Hello world!</BsModalSimple>
       </template>,
@@ -494,9 +494,9 @@ module('Integration | Component | bs-modal-simple', function (hooks) {
     await render(
       <template>
         <BsModalSimple
-          @title='Simple Dialog'
-          @closeTitle='Cancel'
-          @submitTitle='Ok'
+          @title="Simple Dialog"
+          @closeTitle="Cancel"
+          @submitTitle="Ok"
           @onSubmit={{modalSubmit}}
         ><BsForm @onSubmit={{formSubmit}} /></BsModalSimple>
       </template>,
@@ -513,9 +513,9 @@ module('Integration | Component | bs-modal-simple', function (hooks) {
     await render(
       <template>
         <BsModalSimple
-          @title='Simple Dialog'
-          @closeTitle='Cancel'
-          @submitTitle='Ok'
+          @title="Simple Dialog"
+          @closeTitle="Cancel"
+          @submitTitle="Ok"
           @onSubmit={{modalSubmit}}
         ><BsForm @onSubmit={{formOneSubmit}} /><BsForm
             @onSubmit={{formTwoSubmit}}
@@ -538,14 +538,14 @@ module('Integration | Component | bs-modal-simple', function (hooks) {
       await render(
         <template>
           <BsModalSimple
-            @title='Simple Dialog'
+            @title="Simple Dialog"
             @fade={{false}}
             @open={{state.open}}
           >
             {{! template-lint-disable no-autofocus-attribute }}
             <label>
               Input:
-              <input data-test-autofocus autofocus='autofocus' />
+              <input data-test-autofocus autofocus="autofocus" />
             </label>
           </BsModalSimple>
         </template>,
@@ -560,7 +560,7 @@ module('Integration | Component | bs-modal-simple', function (hooks) {
   testRequiringFocus('modal is focused when open', async function (assert) {
     await render(
       <template>
-        <BsModalSimple @title='Simple Dialog' @fade={{false}} @open={{true}}>
+        <BsModalSimple @title="Simple Dialog" @fade={{false}} @open={{true}}>
           Hallo
         </BsModalSimple>
       </template>,
@@ -579,7 +579,7 @@ module('Integration | Component | bs-modal-simple', function (hooks) {
       await render(
         <template>
           <BsModalSimple
-            @title='Simple Dialog'
+            @title="Simple Dialog"
             @fade={{false}}
             @open={{state.open}}
           >
@@ -600,9 +600,9 @@ module('Integration | Component | bs-modal-simple', function (hooks) {
   skip('focus is trapped in modal', async function (assert) {
     await render(
       <template>
-        <BsModalSimple @title='Simple Dialog' @fade={{false}}>
+        <BsModalSimple @title="Simple Dialog" @fade={{false}}>
           <label>Input: <input data-test-input /></label>
-          <a href='#' data-test-link>Link</a>
+          <a href="#" data-test-link>Link</a>
         </BsModalSimple>
       </template>,
     );
@@ -632,9 +632,9 @@ module('Integration | Component | bs-modal-simple', function (hooks) {
       const state = new State();
       await render(
         <template>
-          <button type='button' data-test-button>Open</button>
+          <button type="button" data-test-button>Open</button>
           <BsModalSimple
-            @title='Simple Dialog'
+            @title="Simple Dialog"
             @fade={{false}}
             @open={{state.open}}
           >
@@ -662,7 +662,7 @@ module('Integration | Component | bs-modal-simple', function (hooks) {
       await render(
         <template>
           <BsModalSimple
-            @title='Simple Dialog'
+            @title="Simple Dialog"
             @onHide={{hideAction}}
             @keyboard={{true}}
           >Hello world!</BsModalSimple>
@@ -693,12 +693,12 @@ module('Integration | Component | bs-modal-simple', function (hooks) {
       await render(
         <template>
           <BsModalSimple
-            @title='Simple Dialog'
+            @title="Simple Dialog"
             @onHide={{hideAction}}
             @keyboard={{true}}
           >
             {{! template-lint-disable no-autofocus-attribute }}
-            <label>Input: <input autofocus='autofocus' /></label>
+            <label>Input: <input autofocus="autofocus" /></label>
           </BsModalSimple>
         </template>,
       );
@@ -727,7 +727,7 @@ module('Integration | Component | bs-modal-simple', function (hooks) {
       await render(
         <template>
           <BsModalSimple
-            @title='Simple Dialog'
+            @title="Simple Dialog"
             @onHide={{hideAction}}
             @keyboard={{false}}
           >Hello world!</BsModalSimple>
@@ -752,7 +752,7 @@ module('Integration | Component | bs-modal-simple', function (hooks) {
     const hideAction = sinon.spy();
     await render(
       <template>
-        <BsModalSimple @title='Simple Dialog' @onHide={{hideAction}}>Hello
+        <BsModalSimple @title="Simple Dialog" @onHide={{hideAction}}>Hello
           world!</BsModalSimple>
       </template>,
     );
@@ -776,7 +776,7 @@ module('Integration | Component | bs-modal-simple', function (hooks) {
     await render(
       <template>
         <BsModalSimple
-          @title='Simple Dialog'
+          @title="Simple Dialog"
           @onHide={{hideAction}}
           @backdropClose={{false}}
         >Hello world!</BsModalSimple>
@@ -801,9 +801,9 @@ module('Integration | Component | bs-modal-simple', function (hooks) {
     const state = new State();
     await render(
       <template>
-        <div id='ember-bootstrap-wormhole'></div>{{#if
+        <div id="ember-bootstrap-wormhole"></div>{{#if
           state.show
-        }}<BsModalSimple @title='Simple Dialog'>Hello world!</BsModalSimple>{{/if}}
+        }}<BsModalSimple @title="Simple Dialog">Hello world!</BsModalSimple>{{/if}}
       </template>,
     );
     state.show = true;
@@ -822,8 +822,8 @@ module('Integration | Component | bs-modal-simple', function (hooks) {
     const state = new State();
     await render(
       <template>
-        <div id='wrapper'>{{#if state.show}}<BsModalSimple
-              @title='Simple Dialog'
+        <div id="wrapper">{{#if state.show}}<BsModalSimple
+              @title="Simple Dialog"
             >Hello world!</BsModalSimple>{{/if}}</div>
       </template>,
     );
@@ -841,9 +841,9 @@ module('Integration | Component | bs-modal-simple', function (hooks) {
     const state = new State();
     await render(
       <template>
-        <div id='ember-bootstrap-wormhole'></div><div id='wrapper'>{{#if
+        <div id="ember-bootstrap-wormhole"></div><div id="wrapper">{{#if
             state.show
-          }}<BsModalSimple @title='Simple Dialog' @renderInPlace={{true}}>Hello
+          }}<BsModalSimple @title="Simple Dialog" @renderInPlace={{true}}>Hello
               world!</BsModalSimple>{{/if}}</div>
       </template>,
     );
@@ -860,7 +860,7 @@ module('Integration | Component | bs-modal-simple', function (hooks) {
     const state = new State();
     await render(
       <template>
-        {{#if state.renderComponent}}<BsModalSimple @title='Simple Dialog'>Hello
+        {{#if state.renderComponent}}<BsModalSimple @title="Simple Dialog">Hello
             world!</BsModalSimple>{{/if}}
       </template>,
     );
@@ -892,7 +892,7 @@ module('Integration | Component | bs-modal-simple', function (hooks) {
     const state = new State();
     await render(
       <template>
-        {{#if state.renderComponent}}<BsModalSimple @title='Simple Dialog'>Hello
+        {{#if state.renderComponent}}<BsModalSimple @title="Simple Dialog">Hello
             world!</BsModalSimple>{{/if}}
       </template>,
     );
@@ -922,9 +922,9 @@ module('Integration | Component | bs-modal-simple', function (hooks) {
       <template>
         <BsModalSimple @onHide={{closeAction}} as |modal|>
           <button
-            type='button'
-            id='close'
-            {{on 'click' modal.close}}
+            type="button"
+            id="close"
+            {{on "click" modal.close}}
           >Close</button>
         </BsModalSimple>
       </template>,
@@ -941,9 +941,9 @@ module('Integration | Component | bs-modal-simple', function (hooks) {
       <template>
         <BsModalSimple @onSubmit={{submitAction}} as |modal|>
           <button
-            type='button'
-            id='submit'
-            {{on 'click' modal.submit}}
+            type="button"
+            id="submit"
+            {{on "click" modal.submit}}
           >Submit</button>
         </BsModalSimple>
       </template>,
@@ -961,7 +961,7 @@ module('Integration | Component | bs-modal-simple', function (hooks) {
     await render(
       <template>
         <BsModalSimple
-          @title='Simple Dialog'
+          @title="Simple Dialog"
           @fade={{false}}
           @open={{state.open}}
         >Hello world!</BsModalSimple>
@@ -975,9 +975,9 @@ module('Integration | Component | bs-modal-simple', function (hooks) {
     await render(
       <template>
         <BsModalSimple
-          @title='Simple Dialog'
+          @title="Simple Dialog"
           @fade={{false}}
-          @position='center'
+          @position="center"
         >Hello world!</BsModalSimple>
       </template>,
     );
@@ -987,7 +987,7 @@ module('Integration | Component | bs-modal-simple', function (hooks) {
   test('Modal has accessibility attributes with default title', async function (assert) {
     await render(
       <template>
-        <BsModalSimple @open={{true}} @title='Simple Dialog'>Hello world!</BsModalSimple>
+        <BsModalSimple @open={{true}} @title="Simple Dialog">Hello world!</BsModalSimple>
       </template>,
     );
 
@@ -1002,7 +1002,7 @@ module('Integration | Component | bs-modal-simple', function (hooks) {
   test('it passes along HTML attributes', async function (assert) {
     await render(
       <template>
-        <BsModalSimple @fade={{false}} class='custom' role='alert' data-test>
+        <BsModalSimple @fade={{false}} class="custom" role="alert" data-test>
           template block text
         </BsModalSimple>
       </template>,
@@ -1018,7 +1018,7 @@ module('Integration | Component | bs-modal-simple', function (hooks) {
     await render(
       <template>
         <BsModalSimple
-          @title='Simple Dialog'
+          @title="Simple Dialog"
           @fade={{false}}
           @scrollable={{true}}
         >Hello world!</BsModalSimple>
@@ -1030,7 +1030,7 @@ module('Integration | Component | bs-modal-simple', function (hooks) {
   test('it passes accessibility checks', async function (assert) {
     await render(
       <template>
-        <BsModalSimple @title='Some Title'>
+        <BsModalSimple @title="Some Title">
           template block text
         </BsModalSimple>
       </template>,

@@ -16,13 +16,13 @@ module('Integration | Component | bs-spinner', function (hooks) {
   });
 
   test('spinner has correct size', async function (assert) {
-    await render(<template><BsSpinner @size='sm' /></template>);
+    await render(<template><BsSpinner @size="sm" /></template>);
 
     assert.dom('div').hasClass('spinner-border-sm', 'spinner has size class');
   });
 
   test('spinner has correct type', async function (assert) {
-    await render(<template><BsSpinner @type='primary' /></template>);
+    await render(<template><BsSpinner @type="primary" /></template>);
 
     assert
       .dom('div')
@@ -90,14 +90,14 @@ module('Integration | Component | bs-spinner', function (hooks) {
   );
 
   test('spinner has HTML attributes', async function (assert) {
-    await render(<template><BsSpinner id='test' /></template>);
+    await render(<template><BsSpinner id="test" /></template>);
 
     assert.dom('div').hasAttribute('id', 'test');
     assert.dom('div').hasAttribute('role', 'status');
   });
 
   test('spinnerType property allows changing spinner type', async function (assert) {
-    await render(<template><BsSpinner @spinnerType='grow' /></template>);
+    await render(<template><BsSpinner @spinnerType="grow" /></template>);
 
     assert.dom('div').hasClass('spinner-grow');
   });
