@@ -4,9 +4,6 @@ const EmberApp = require('ember-cli/lib/broccoli/ember-app');
 
 module.exports = function (defaults) {
   const app = new EmberApp(defaults, {
-    'ember-bootstrap': {
-      bootstrapVersion: 5,
-    },
     'ember-prism': {
       components: ['markup-templating', 'handlebars', 'javascript'],
       plugins: ['line-numbers'],
