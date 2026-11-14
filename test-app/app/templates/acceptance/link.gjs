@@ -1,0 +1,24 @@
+import RouteTemplate from 'ember-route-template';
+import BsNav from 'ember-bootstrap/components/bs-nav';
+
+export default RouteTemplate(
+  <template>
+    <BsNav as |nav|>
+      <nav.item>
+        <nav.linkTo @route="acceptance.link" @model="1">
+          first
+        </nav.linkTo>
+      </nav.item>
+      <nav.item>
+        <nav.linkTo @route="acceptance.link" @model="2">
+          second
+        </nav.linkTo>
+      </nav.item>
+      <nav.item>
+        <nav.linkTo @route="acceptance.link" @model={{@model}}>
+          current
+        </nav.linkTo>
+      </nav.item>
+    </BsNav>
+  </template>,
+);

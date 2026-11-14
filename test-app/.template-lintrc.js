@@ -10,7 +10,7 @@ module.exports = {
   },
   overrides: [
     {
-      files: ['tests/**/*.(gjs|gts)'],
+      files: ['**/*.{gjs,gts}'],
       rules: {
         prettier: 'off',
       },
