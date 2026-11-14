@@ -1,0 +1,85 @@
+import BsButton from 'ember-bootstrap/components/bs-button';
+import BsDropdown from 'ember-bootstrap/components/bs-dropdown';
+import CodeSnippet from 'ember-bootstrap-docs/components/code-snippet';
+
+<template>
+  <div class="bs-example" data-test-fastboot-container>
+    <!-- BEGIN-SNIPPET dropdown-demo -->
+    <BsDropdown @tagName="span" as |dd|>
+      <dd.toggle>
+        Dropdown
+        <span class="caret"></span>
+      </dd.toggle>
+      <dd.menu as |menu|>
+        <menu.item>
+          <menu.linkTo @route="index">Home</menu.linkTo>
+        </menu.item>
+        <menu.divider />
+        <menu.item>
+          <menu.linkTo @route="demo.dropdown">Dropdowns</menu.linkTo>
+        </menu.item>
+        <menu.divider />
+        <menu.item>
+          <a href="https://example.com" class="dropdown-item">External</a>
+        </menu.item>
+      </dd.menu>
+    </BsDropdown>
+    <BsDropdown @direction="up" @tagName="span" as |dd|>
+      <dd.toggle>
+        Dropup
+        <span class="caret"></span>
+      </dd.toggle>
+      <dd.menu @align="right" as |menu|>
+        <menu.item>
+          <menu.linkTo @route="index">Home</menu.linkTo>
+        </menu.item>
+        <menu.divider />
+        <menu.item>
+          <menu.linkTo @route="demo.dropdown">Dropdowns</menu.linkTo>
+        </menu.item>
+      </dd.menu>
+    </BsDropdown>
+    <!-- END-SNIPPET -->
+  </div>
+  <div class="highlight">
+    <CodeSnippet @name="dropdown-demo.gjs" />
+  </div>
+  <h2>
+    Button dropdowns
+  </h2>
+  <div class="bs-example">
+    <!-- BEGIN-SNIPPET dropdown-button -->
+    <BsDropdown as |dd|>
+      <dd.button>
+        Dropdown
+        <span class="caret"></span>
+      </dd.button>
+      <dd.menu as |menu|>
+        <menu.item>
+          <menu.linkTo @route="index">Home</menu.linkTo>
+        </menu.item>
+        <menu.item>
+          <menu.linkTo @route="demo.dropdown">Dropdowns</menu.linkTo>
+        </menu.item>
+      </dd.menu>
+    </BsDropdown>
+    <BsDropdown as |dd|>
+      <BsButton>Dropdown</BsButton>
+      <dd.button>
+        <span class="caret"></span>
+      </dd.button>
+      <dd.menu as |menu|>
+        <menu.item>
+          <menu.linkTo @route="index">Home</menu.linkTo>
+        </menu.item>
+        <menu.item>
+          <menu.linkTo @route="demo.dropdown">Dropdowns</menu.linkTo>
+        </menu.item>
+      </dd.menu>
+    </BsDropdown>
+    <!-- END-SNIPPET -->
+  </div>
+  <div class="highlight">
+    <CodeSnippet @name="dropdown-button.gjs" />
+  </div>
+</template>
