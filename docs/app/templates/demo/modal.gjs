@@ -74,7 +74,7 @@ export default class ModalTemplate extends Component {
       </code>
       component for Modals with a default layout
     </p>
-    <div class="bs-example">
+    <div class="bs-example" data-test-example="modal-demo">
       <!-- BEGIN-SNIPPET modal-demo -->
       <BsModalSimple
         @open={{this.modal1}}
@@ -97,7 +97,7 @@ export default class ModalTemplate extends Component {
       Options
     </h3>
     <BsForm @formLayout="horizontal" @model={{this}} as |form|>
-      <form.element @label="Title" @property="title" />
+      <form.element @label="Title" @property="title" data-test-option="title" />
       <form.element @label="Close button" @property="closeTitle" />
       <form.element @label="Submit button" @property="submitTitle" as |el|>
         <el.control placeholder="Enter title to add a submit button" />
@@ -124,7 +124,11 @@ export default class ModalTemplate extends Component {
       />
 
     </BsForm>
-    <div class="bs-example bs-example-modal" data-test-fastboot-container>
+    <div
+      class="bs-example bs-example-modal"
+      data-test-fastboot-container
+      data-test-example="modal-options"
+    >
       <!-- BEGIN-SNIPPET modal-options -->
       <BsModalSimple
         @open={{this.modal2}}

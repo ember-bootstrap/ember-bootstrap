@@ -12,6 +12,7 @@ import CodeBlock from 'ember-prism/components/code-block';
         dynamic=@dynamicProperties
       }}
       class="line-numbers"
+      data-test-code-snippet={{@name}}
     />
   {{/let}}
 </template>

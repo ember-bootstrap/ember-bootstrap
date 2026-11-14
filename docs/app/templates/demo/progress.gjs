@@ -30,9 +30,14 @@ export default class ProgressTemplate extends Component {
     <h2>
       Options
     </h2>
-    <div class="bs-example">
+    <div class="bs-example" data-test-example="progress-options">
       <BsForm @formLayout="horizontal" @model={{this}} as |form|>
-        <form.element @controlType="number" @label="Value" @property="value" />
+        <form.element
+          @controlType="number"
+          @label="Value"
+          @property="value"
+          data-test-option="value"
+        />
         <form.element @controlType="number" @label="Min" @property="minValue" />
         <form.element @controlType="number" @label="Max" @property="maxValue" />
         <form.element

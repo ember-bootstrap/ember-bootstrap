@@ -22,7 +22,11 @@ export default class ButtonTemplate extends Component {
     <h2>
       Simple example
     </h2>
-    <div class="bs-example" data-test-fastboot-container>
+    <div
+      class="bs-example"
+      data-test-fastboot-container
+      data-test-example="button-demo"
+    >
       <!-- BEGIN-SNIPPET button-demo -->
       <BsButton @onClick={{this.submit}}>Button</BsButton>
       <!-- END-SNIPPET -->

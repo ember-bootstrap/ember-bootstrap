@@ -43,12 +43,13 @@ export default class AlertTemplate extends Component {
     <h2>
       Options
     </h2>
-    <div class="bs-example">
+    <div class="bs-example" data-test-example="alert-options">
       <BsForm @formLayout="inline" @model={{this}} as |form|>
         <form.element
           @controlType="checkbox"
           @label="Show/Hide"
           @property="visible"
+          data-test-option="visible"
           class="mr-2"
         />
         <form.element
@@ -77,6 +78,7 @@ export default class AlertTemplate extends Component {
         <form.element
           @label="Header tag"
           @property="headerTag"
+          data-test-option="headerTag"
           class="ml-sm-2"
         />
       </BsForm>

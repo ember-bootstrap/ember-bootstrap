@@ -26,7 +26,7 @@ import { LinkTo } from '@ember/routing';
     </thead>
     <tbody>
       {{#each @model as |comp|}}
-        <tr>
+        <tr data-test-component={{comp.id}}>
           <th scope="row">
             {{comp.title}}
           </th>

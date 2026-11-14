@@ -36,7 +36,11 @@ export default class NavsTemplate extends Component {
   }
 
   <template>
-    <div class="bs-example" data-test-fastboot-container>
+    <div
+      class="bs-example"
+      data-test-fastboot-container
+      data-test-example="nav-demo"
+    >
       <BsForm @formLayout="inline" @model={{this}} as |form|>
         <form.element
           @controlType="power-select"
@@ -52,6 +56,7 @@ export default class NavsTemplate extends Component {
           @controlType="checkbox"
           @label="Stacked"
           @property="stacked"
+          data-test-option="stacked"
           @onChange={{this.updateStacked}}
           class="ml-sm-2"
           as |el|

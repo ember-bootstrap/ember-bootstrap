@@ -20,7 +20,11 @@ export default class CollapseTemplate extends Component {
   }
 
   <template>
-    <div class="bs-example" data-test-fastboot-container>
+    <div
+      class="bs-example"
+      data-test-fastboot-container
+      data-test-example="collapse-demo"
+    >
       <BsButton @active={{this.notCollapsed}} @onClick={{this.toggle}}>
         {{#if this.collapsed}}
           Show

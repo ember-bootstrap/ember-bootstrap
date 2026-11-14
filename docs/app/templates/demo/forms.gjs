@@ -51,9 +51,18 @@ export default class FormsTemplate extends Component {
     <p>The forms component lets you easily create forms with automatic markup
       generation based on the chosen form layout:</p>
 
-    <div class="bs-example" data-test-fastboot-container>
+    <div
+      class="bs-example"
+      data-test-fastboot-container
+      data-test-example="form-demo"
+    >
       <BsForm @formLayout="horizontal" @model={{this}} as |form|>
-        <form.element @label="Layout" @property="formLayout" as |el|>
+        <form.element
+          @label="Layout"
+          @property="formLayout"
+          data-test-option="formLayout"
+          as |el|
+        >
           <BsButtonGroup
             @value={{el.value}}
             @type="radio"
@@ -131,6 +140,7 @@ export default class FormsTemplate extends Component {
           @code={{withTemplatePlaceholder snippet.source}}
           @language="javascript"
           class="line-numbers"
+          data-test-code-snippet="form-component.gjs"
         />
       {{/let}}
     </div>
@@ -253,7 +263,7 @@ export default class FormsTemplate extends Component {
 
     <p>You can also just customize the existing control component:</p>
 
-    <div class="bs-example">
+    <div class="bs-example" data-test-example="form-customized">
       <!-- BEGIN-SNIPPET form-customized -->
       <BsForm @model={{this}} @onSubmit={{this.submit}} as |form|>
         <form.element @label="Email" @property="email" as |el|>
