@@ -11,8 +11,6 @@
     "exclude": "vendor",
     "outdir": "api",
     "themedir": "yuidoc-theme",
-    "helpers": [
-      "yuidoc-theme/helpers/index.js"
-    ]
+    "helpers": ["yuidoc-theme/helpers/index.js"]
   }
 }
