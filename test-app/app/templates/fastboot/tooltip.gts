@@ -4,9 +4,9 @@ import BsTooltip from 'ember-bootstrap/components/bs-tooltip';
 
 export default RouteTemplate(
   <template>
-    <BsButton class='mb-1'>
+    <BsButton class="mb-1">
       Tooltip on left
-      <BsTooltip @placement='left'>Tooltip on left</BsTooltip>
+      <BsTooltip @placement="left">Tooltip on left</BsTooltip>
     </BsButton>
   </template>,
 );

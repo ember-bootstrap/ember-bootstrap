@@ -3,7 +3,7 @@ import BsAlert from 'ember-bootstrap/components/bs-alert';
 
 export default RouteTemplate(
   <template>
-    <BsAlert @type='success'>
+    <BsAlert @type="success">
       <strong> Well done! </strong>
       You successfully read this important alert message.
     </BsAlert>

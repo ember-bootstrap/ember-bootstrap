@@ -4,14 +4,14 @@ import BsAccordion from 'ember-bootstrap/components/bs-accordion';
 export default RouteTemplate(
   <template>
     <BsAccordion as |acc|>
-      <acc.item @value='1' @title='First item'>
+      <acc.item @value="1" @title="First item">
         <p>
           Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consectetur
           ea eos hic neque quia sequi sunt. Amet at atque corporis earum et
           fugiat illum magnam nisi sapiente voluptatem. Laudantium, quam?
         </p>
       </acc.item>
-      <acc.item @value='2' as |aitem|>
+      <acc.item @value="2" as |aitem|>
         <aitem.title>
           <strong> Second </strong>
           <i> item </i>
@@ -25,7 +25,7 @@ export default RouteTemplate(
           </p>
         </aitem.body>
       </acc.item>
-      <acc.item @value='3' @title='Third item'>
+      <acc.item @value="3" @title="Third item">
         <p>
           Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consectetur
           ea eos hic neque quia sequi sunt. Amet at atque corporis earum et

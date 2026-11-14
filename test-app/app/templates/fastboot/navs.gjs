@@ -5,22 +5,22 @@ export default RouteTemplate(
   <template>
     <BsNav as |nav|>
       <nav.item>
-        <nav.link-to @route='index'>Home</nav.link-to>
+        <nav.link-to @route="index">Home</nav.link-to>
       </nav.item>
       <nav.item>
-        <nav.link-to @route='fastboot.navs'>Nav</nav.link-to>
+        <nav.link-to @route="fastboot.navs">Nav</nav.link-to>
       </nav.item>
       <nav.dropdown as |dd|>
         <dd.toggle>
           Dropdown
-          <span class='caret'></span>
+          <span class="caret"></span>
         </dd.toggle>
         <dd.menu as |ddm|>
           <ddm.item>
-            <ddm.link-to @route='index'>Home</ddm.link-to>
+            <ddm.link-to @route="index">Home</ddm.link-to>
           </ddm.item>
           <ddm.item>
-            <ddm.link-to @route='fastboot.navs'>Nav</ddm.link-to>
+            <ddm.link-to @route="fastboot.navs">Nav</ddm.link-to>
           </ddm.item>
         </dd.menu>
       </nav.dropdown>

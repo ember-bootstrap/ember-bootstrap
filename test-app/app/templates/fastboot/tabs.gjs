@@ -4,7 +4,7 @@ import BsTab from 'ember-bootstrap/components/bs-tab';
 export default RouteTemplate(
   <template>
     <BsTab as |tab|>
-      <tab.pane @title='Tab 1'>
+      <tab.pane @title="Tab 1">
         <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem
           accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae
           ab illo inventore veritatis et quasi architecto beatae vitae dicta
@@ -19,7 +19,7 @@ export default RouteTemplate(
           ea voluptate velit esse quam nihil molestiae consequatur, vel illum
           qui dolorem eum fugiat quo voluptas nulla pariatur?</p>
       </tab.pane>
-      <tab.pane @title='Tab 2'>
+      <tab.pane @title="Tab 2">
         <p>At vero eos et accusamus et iusto odio dignissimos ducimus qui
           blanditiis praesentium voluptatum deleniti atque corrupti quos dolores
           et quas molestias excepturi sint occaecati cupiditate non provident,
