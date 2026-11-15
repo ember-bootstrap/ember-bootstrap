@@ -105,8 +105,8 @@ importers:
         specifier: 11.0.1
         version: 11.0.1
       ember-cli-showdown:
-        specifier: 9.0.2
-        version: 9.0.2(@glint/template@1.11.1)(webpack@5.112.2(postcss@8.5.32))
+        specifier: 10.0.0
+        version: 10.0.0(@babel/core@7.29.13)
       ember-cli-sri:
         specifier: 2.1.1
         version: 2.1.1
@@ -4582,8 +4582,8 @@ packages:
     resolution: {integrity: sha512-RMlFPMK4kaB+67seF/IIoY3EC4rRd+L58q+lyElrxB3FcQTgph/qmGwtqf9Up7m3SDbPiA7cccCOSmgReMgCXA==}
     engines: {node: '>= 10.*'}
 
-  ember-cli-showdown@9.0.2:
-    resolution: {integrity: sha512-uNZHfNeWuv9K0bdCjG3phWtDNjns67TDl6Q8oGStkNEVn8/Py3vL94bMf4WPZkPUb6yMPq0S3z4LPTiABUAEvQ==}
+  ember-cli-showdown@10.0.0:
+    resolution: {integrity: sha512-NMEHVXC/eURvekkt1rIQY6frFxpgPsolnHVVcZWeztkXx83RLBzxMkFnx0GWk28QQTMCAXZ3ppaezg1RTdoNJQ==}
     engines: {node: '>= 18'}
 
   ember-cli-sri@2.1.1:
@@ -14608,17 +14608,13 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  ember-cli-showdown@9.0.2(@glint/template@1.11.1)(webpack@5.112.2(postcss@8.5.32)):
+  ember-cli-showdown@10.0.0(@babel/core@7.29.13):
     dependencies:
-      '@babel/core': 7.29.13
-      ember-auto-import: 2.13.1(@glint/template@1.11.1)(webpack@5.112.2(postcss@8.5.32))
-      ember-cli-babel: 8.3.2(@babel/core@7.29.13)
-      ember-cli-htmlbars: 6.3.0
+      '@embroider/addon-shim': 1.11.0
+      decorator-transforms: 2.4.0(@babel/core@7.29.13)
       showdown: 2.1.0
     transitivePeerDependencies:
-      - '@glint/template'
-      - supports-color
-      - webpack
+      - '@babel/core'
 
   ember-cli-sri@2.1.1:
     dependencies:
