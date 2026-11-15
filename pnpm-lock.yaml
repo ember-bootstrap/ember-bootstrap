@@ -90,8 +90,8 @@ importers:
         specifier: 3.3.3
         version: 3.3.3(ember-cli@6.12.0(@babel/core@7.29.13)(@types/node@26.6.6)(ejs@3.1.10)(handlebars@4.7.10)(underscore@1.13.8))
       ember-cli-deprecation-workflow:
-        specifier: 3.4.0
-        version: 3.4.0(ember-source@6.12.1(@glimmer/component@2.2.1)(rsvp@4.8.5))
+        specifier: 4.0.1
+        version: 4.0.1(@babel/core@7.29.13)
       ember-cli-fastboot:
         specifier: 4.1.5
         version: 4.1.5(ember-source@6.12.1(@glimmer/component@2.2.1)(rsvp@4.8.5))
@@ -518,8 +518,8 @@ importers:
         specifier: 3.3.3
         version: 3.3.3(ember-cli@6.12.0(@babel/core@7.29.13)(@types/node@26.6.6)(ejs@3.1.10)(handlebars@4.7.10)(underscore@1.13.8))
       ember-cli-deprecation-workflow:
-        specifier: 3.4.0
-        version: 3.4.0(ember-source@6.12.1(@glimmer/component@1.1.2(@babel/core@7.29.13))(rsvp@4.8.5))
+        specifier: 4.0.1
+        version: 4.0.1(@babel/core@7.29.13)
       ember-cli-fastboot:
         specifier: 4.1.5
         version: 4.1.5(ember-source@6.12.1(@glimmer/component@1.1.2(@babel/core@7.29.13))(rsvp@4.8.5))
@@ -4514,11 +4514,8 @@ packages:
     peerDependencies:
       ember-cli: ^3.2.0 || >=4.0.0
 
-  ember-cli-deprecation-workflow@3.4.0:
-    resolution: {integrity: sha512-Ksrmib4mjD4xa0dqFgxJLBwkSp9EVYH6jSqe2NpODlBKEAZhsVzQj5wKPnC1dXfK3Erq/r1Fh3q4g46FZiCUiw==}
-    engines: {node: '>= 18'}
-    peerDependencies:
-      ember-source: '>= 3.28.0'
+  ember-cli-deprecation-workflow@4.0.1:
+    resolution: {integrity: sha512-XJzUZVXyb6/nFKU7GzGRlHlcAl4KtkioBTjfuIHp1aysbRZ6XxYLSPtP090EbOxQBtYwAPsH2kPAtPS86tL2RA==}
 
   ember-cli-fastboot-testing@0.9.0:
     resolution: {integrity: sha512-3jE+pOLKwuchnyV4y1UsiQZYC57NJHkSmn8V7XWEq+VthxRB+d9MqD9TITbNtKNGq+i3chTnMizpPUWuMYZUHg==}
@@ -14418,21 +14415,12 @@ snapshots:
       resolve: 1.22.14
       semver: 5.7.2
 
-  ember-cli-deprecation-workflow@3.4.0(ember-source@6.12.1(@glimmer/component@1.1.2(@babel/core@7.29.13))(rsvp@4.8.5)):
+  ember-cli-deprecation-workflow@4.0.1(@babel/core@7.29.13):
     dependencies:
-      '@babel/core': 7.29.13
-      ember-cli-babel: 8.3.2(@babel/core@7.29.13)
-      ember-source: 6.12.1(@glimmer/component@1.1.2(@babel/core@7.29.13))(rsvp@4.8.5)
+      '@embroider/addon-shim': 1.11.0
+      decorator-transforms: 2.4.0(@babel/core@7.29.13)
     transitivePeerDependencies:
-      - supports-color
-
-  ember-cli-deprecation-workflow@3.4.0(ember-source@6.12.1(@glimmer/component@2.2.1)(rsvp@4.8.5)):
-    dependencies:
-      '@babel/core': 7.29.13
-      ember-cli-babel: 8.3.2(@babel/core@7.29.13)
-      ember-source: 6.12.1(@glimmer/component@2.2.1)(rsvp@4.8.5)
-    transitivePeerDependencies:
-      - supports-color
+      - '@babel/core'
 
   ember-cli-fastboot-testing@0.9.0(@babel/core@7.29.13)(@ember/test-helpers@5.4.3(@babel/core@7.29.13))(@glint/template@1.11.1)(ember-source@6.12.1(@glimmer/component@1.1.2(@babel/core@7.29.13))(rsvp@4.8.5))(webpack@5.112.2):
     dependencies:
