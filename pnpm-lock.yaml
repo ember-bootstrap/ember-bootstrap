@@ -93,8 +93,8 @@ importers:
         specifier: 4.0.1
         version: 4.0.1(@babel/core@7.29.13)
       ember-cli-fastboot:
-        specifier: 4.1.5
-        version: 4.1.5(ember-source@6.12.1(@glimmer/component@2.2.1)(rsvp@4.8.5))
+        specifier: 6.0.0
+        version: 6.0.0
       ember-cli-htmlbars:
         specifier: 7.0.1
         version: 7.0.1(@babel/core@7.29.13)(ember-source@6.12.1(@glimmer/component@2.2.1)(rsvp@4.8.5))
@@ -521,8 +521,8 @@ importers:
         specifier: 4.0.1
         version: 4.0.1(@babel/core@7.29.13)
       ember-cli-fastboot:
-        specifier: 4.1.5
-        version: 4.1.5(ember-source@6.12.1(@glimmer/component@1.1.2(@babel/core@7.29.13))(rsvp@4.8.5))
+        specifier: 6.0.0
+        version: 6.0.0
       ember-cli-fastboot-testing:
         specifier: 0.9.0
         version: 0.9.0(@babel/core@7.29.13)(@ember/test-helpers@5.4.3(@babel/core@7.29.13))(@glint/template@1.11.1)(ember-source@6.12.1(@glimmer/component@1.1.2(@babel/core@7.29.13))(rsvp@4.8.5))(webpack@5.112.2)
@@ -4524,11 +4524,9 @@ packages:
       '@ember/test-helpers': '>= 3.0.0'
       ember-source: ^3.28.0 || >= 4.0.0
 
-  ember-cli-fastboot@4.1.5:
-    resolution: {integrity: sha512-XVigHzn+xXMqvovdrPNQHXRCzVOkU78ij6adU8Qt7PAaF3stR9oPh/35f30aJ2vcL6jwR72glnuCyXpm3EL22A==}
-    engines: {node: 14.* || 16.* || >= 18}
-    peerDependencies:
-      ember-source: '>=3.16'
+  ember-cli-fastboot@6.0.0:
+    resolution: {integrity: sha512-KkMywuj9xLEMnkV5Z4p3e1ET3wrWaZhh0rp5ESyKiZIl5ACbW4zPmCvqpfzyd8O5UrwA+QpbTFAbuXwXlB6Qag==}
+    engines: {node: '>= 20.19'}
 
   ember-cli-get-component-path-option@1.0.0:
     resolution: {integrity: sha512-k47TDwcJ2zPideBCZE8sCiShSxQSpebY2BHcX2DdipMmBox5gsfyVrbKJWIHeSTTKyEUgmBIvQkqTOozEziCZA==}
@@ -5264,20 +5262,20 @@ packages:
   fast-wrap-ansi@0.2.2:
     resolution: {integrity: sha512-7F2Fl+TjRSenLqlU3UjSH0iyqopqoZIu7eZVpEirP2g1GtWa2G/ecEmBdgz31+Mxr+ELclgg6sokpSFIQiZ02Q==}
 
-  fastboot-express-middleware@4.1.2:
-    resolution: {integrity: sha512-vnzEBV7gZ3lSoGiqG/7+006nHNA3z+ZnU/5u9jPHtKpjH28yEbvZq6PnAeTu24UR98jZVR0pnFbfX0co+O9PeA==}
-    engines: {node: 12.* || 14.* || >=16}
+  fastboot-express-middleware@5.0.2:
+    resolution: {integrity: sha512-I3+gcwS+wlnJmjG70FBhQpENZtkhXF4WzBUUtpK82UWArvw+j9UgvSukqMtbQIE0ubGU/mWuY0zJpH4yy5O/rQ==}
+    engines: {node: 20.* || 22.* || >= 24}
 
   fastboot-transform@0.1.3:
     resolution: {integrity: sha512-6otygPIJw1ARp1jJb+6KVO56iKBjhO+5x59RSC9qiZTbZRrv+HZAuP00KD3s+nWMvcFDemtdkugki9DNFTTwCQ==}
 
-  fastboot@4.1.2:
-    resolution: {integrity: sha512-VJLmF0xdCNwIIuA7DQtN1KTAKfEGsbZGJ0cfKh64h6DeMh3Fhr2FCCxkPh8zYqGoqzjXFdFbtk60WS3f6HKqBg==}
-    engines: {node: 12.* || 14.* || >=16}
-
   fastboot@4.1.5:
     resolution: {integrity: sha512-2FkJWrpxgJjy5kLb3KrYp0pKdB4WgT/6qxtQO7ozYtQqMBOAARMnp59xp/Hdosa1cE2jslZgwDAv3v11OlQfAw==}
     engines: {node: 12.* || 14.* || >=16}
+
+  fastboot@6.0.0:
+    resolution: {integrity: sha512-MhXM9GvjyvzVne2WMon9EZ5+KvshQ3dunPIqWRgmlJpIBY9zxnYfCdwC6mE10ps6ZN+G5QIubeMnv3QjL5PEFQ==}
+    engines: {node: 20.* || 22.* || >= 24}
 
   fastest-levenshtein@1.0.16:
     resolution: {integrity: sha512-eRnCtTTtGZFpQCwhJiUOuxPQWRXVKYDn0b2PeHfXL6/Zi53SLAzAHfVhVWK2AryC/WH05kGfxhFIPvTF0SXQzg==}
@@ -14429,7 +14427,7 @@ snapshots:
       ember-auto-import: 2.13.1(@glint/template@1.11.1)(webpack@5.112.2)
       ember-cli-babel: 8.3.2(@babel/core@7.29.13)
       ember-source: 6.12.1(@glimmer/component@1.1.2(@babel/core@7.29.13))(rsvp@4.8.5)
-      fastboot: 4.1.5
+      fastboot: 6.0.0
       json-fn: 1.1.1
       minimist: 1.2.8
       nock: 15.0.6
@@ -14444,48 +14442,22 @@ snapshots:
       - utf-8-validate
       - webpack
 
-  ember-cli-fastboot@4.1.5(ember-source@6.12.1(@glimmer/component@1.1.2(@babel/core@7.29.13))(rsvp@4.8.5)):
+  ember-cli-fastboot@6.0.0:
     dependencies:
+      '@babel/core': 7.29.13
       broccoli-concat: 4.2.7
       broccoli-file-creator: 2.1.1
       broccoli-funnel: 3.0.8
       broccoli-merge-trees: 4.2.0
+      broccoli-persistent-filter: 3.1.3
       broccoli-plugin: 4.0.7
       chalk: 4.1.2
-      ember-cli-babel: 7.26.11
+      ember-cli-babel: 8.3.2(@babel/core@7.29.13)
       ember-cli-lodash-subset: 2.0.1
       ember-cli-preprocess-registry: 3.3.0
       ember-cli-version-checker: 5.1.2
-      ember-source: 6.12.1(@glimmer/component@1.1.2(@babel/core@7.29.13))(rsvp@4.8.5)
-      fastboot: 4.1.5
-      fastboot-express-middleware: 4.1.2
-      fastboot-transform: 0.1.3
-      fs-extra: 10.1.0
-      json-stable-stringify: 1.3.0
-      md5-hex: 3.0.1
-      recast: 0.19.1
-      silent-error: 1.1.1
-    transitivePeerDependencies:
-      - bufferutil
-      - canvas
-      - supports-color
-      - utf-8-validate
-
-  ember-cli-fastboot@4.1.5(ember-source@6.12.1(@glimmer/component@2.2.1)(rsvp@4.8.5)):
-    dependencies:
-      broccoli-concat: 4.2.7
-      broccoli-file-creator: 2.1.1
-      broccoli-funnel: 3.0.8
-      broccoli-merge-trees: 4.2.0
-      broccoli-plugin: 4.0.7
-      chalk: 4.1.2
-      ember-cli-babel: 7.26.11
-      ember-cli-lodash-subset: 2.0.1
-      ember-cli-preprocess-registry: 3.3.0
-      ember-cli-version-checker: 5.1.2
-      ember-source: 6.12.1(@glimmer/component@2.2.1)(rsvp@4.8.5)
-      fastboot: 4.1.5
-      fastboot-express-middleware: 4.1.2
+      fastboot: 6.0.0
+      fastboot-express-middleware: 5.0.2
       fastboot-transform: 0.1.3
       fs-extra: 10.1.0
       json-stable-stringify: 1.3.0
@@ -16018,10 +15990,10 @@ snapshots:
     dependencies:
       fast-string-width: 3.0.2
 
-  fastboot-express-middleware@4.1.2:
+  fastboot-express-middleware@5.0.2:
     dependencies:
       chalk: 4.1.2
-      fastboot: 4.1.2
+      fastboot: 6.0.0
     transitivePeerDependencies:
       - bufferutil
       - canvas
@@ -16035,7 +16007,7 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  fastboot@4.1.2:
+  fastboot@4.1.5:
     dependencies:
       chalk: 4.1.2
       cookie: 0.4.2
@@ -16050,7 +16022,7 @@ snapshots:
       - supports-color
       - utf-8-validate
 
-  fastboot@4.1.5:
+  fastboot@6.0.0:
     dependencies:
       chalk: 4.1.2
       cookie: 0.4.2
