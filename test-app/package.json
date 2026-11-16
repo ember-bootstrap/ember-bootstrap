@@ -97,7 +97,7 @@
     "fs-extra": "11.4.1",
     "globals": "15.15.0",
     "loader.js": "4.7.0",
-    "prettier": "3.6.2",
+    "prettier": "3.10.1",
     "prettier-plugin-ember-template-tag": "2.1.0",
     "qunit": "2.26.0",
     "qunit-dom": "3.6.0",
