@@ -73,7 +73,7 @@
     "eslint-plugin-qunit": "8.2.6",
     "execa": "5.1.1",
     "globals": "15.15.0",
-    "gulp": "4.0.2",
+    "gulp": "5.0.1",
     "gulp-connect": "5.7.0",
     "gulp-insert": "0.5.0",
     "gulp-rename": "2.1.0",
