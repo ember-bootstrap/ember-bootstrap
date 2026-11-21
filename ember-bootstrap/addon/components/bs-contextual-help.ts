@@ -598,13 +598,7 @@ export default abstract class ContextualHelp<
 
     this.showHelp = false;
 
-    // if this is a touch-enabled device we remove the extra
-    // empty mouseover listeners we added for iOS support
-    if ('ontouchstart' in document.documentElement) {
-      for (const child of document.body.children) {
-        child.removeEventListener('mouseover', noop);
-      }
-    }
+    this._removeiOSMouseoverListeners();
 
     if (this.usesTransition && this.overlayElement) {
       transitionEnd(this.overlayElement, this.transitionDuration).then(
@@ -641,6 +635,22 @@ export default abstract class ContextualHelp<
         }
       }
     });
+  }
+
+  /**
+   * Remove the empty mouseover listeners added to body's children for iOS support.
+   *
+   * @method _removeiOSMouseoverListeners
+   * @private
+   * @see https://www.quirksmode.org/blog/archives/2014/02/mouse_event_bub.html
+   * @see https://github.com/twbs/bootstrap/pull/22481
+   */
+  _removeiOSMouseoverListeners() {
+    if ('ontouchstart' in document.documentElement) {
+      for (const child of document.body.children) {
+        child.removeEventListener('mouseover', noop);
+      }
+    }
   }
 
   /**
@@ -765,5 +775,6 @@ export default abstract class ContextualHelp<
   willDestroy() {
     super.willDestroy();
     this.removeListeners();
+    this._removeiOSMouseoverListeners();
   }
 }
