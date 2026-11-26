@@ -4,9 +4,6 @@ const EmberApp = require('ember-cli/lib/broccoli/ember-app');
 
 module.exports = function (defaults) {
   const app = new EmberApp(defaults, {
-    'ember-bootstrap': {
-      bootstrapVersion: 5,
-    },
     // Code snippets shown in the docs are extracted from these files.
     snippetExtensions: ['js', 'gjs'],
     'ember-prism': {

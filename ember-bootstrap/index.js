@@ -2,10 +2,6 @@
 
 const BroccoliDebug = require('broccoli-debug');
 
-const defaultOptions = {
-  bootstrapVersion: 5,
-};
-
 module.exports = {
   name: require('./package').name,
 
@@ -21,22 +17,32 @@ module.exports = {
 
     let app = this._findHost(this);
 
-    let options = Object.assign(
-      {},
-      defaultOptions,
-      app.options['ember-bootstrap'],
-    );
-
-    const bootstrapVersion = parseInt(options.bootstrapVersion);
-
-    // setup config for @embroider/macros
-    this.options['@embroider/macros'].setOwnConfig.isBS4 =
-      bootstrapVersion === 4;
+    // The `bootstrapVersion` option was replaced by the `isBS4` option of
+    // `@embroider/macros` config. Fail loudly instead of silently ignoring it,
+    // as it would render Bootstrap 5 markup in Bootstrap 4 apps otherwise.
+    if (app.options['ember-bootstrap']?.bootstrapVersion !== undefined) {
+      throw new Error(
+        `[ember-bootstrap] The \`bootstrapVersion\` option is not supported anymore. ` +
+          `Remove the \`ember-bootstrap\` options from your ember-cli-build.js. ` +
+          `To use Bootstrap 4, set \`isBS4\` in the \`@embroider/macros\` config instead:\n\n` +
+          `  '@embroider/macros': {\n` +
+          `    setConfig: {\n` +
+          `      'ember-bootstrap': {\n` +
+          `        isBS4: true,\n` +
+          `      },\n` +
+          `    },\n` +
+          `  },\n`,
+      );
+    }
   },
 
   options: {
     '@embroider/macros': {
-      setOwnConfig: {},
+      // Defaults to Bootstrap 5. Apps opt into Bootstrap 4 by setting `isBS4`
+      // through `setConfig` of `@embroider/macros`, which takes precedence.
+      setOwnConfig: {
+        isBS4: false,
+      },
     },
     'ember-cli-babel': { enableTypeScriptTransform: true },
     babel: {

@@ -13,9 +13,11 @@ import { LinkTo } from '@ember/routing';
     To allow Bootstrap to render modals and tooltips, add
     <code>&lt;div id=&quot;ember-bootstrap-wormhole&quot;&gt;&lt;/div&gt;</code>
     to either the
-    <code>app/index.html</code>
+    <code>index.html</code>
     or
-    <code>app/templates/application.hbs</code>.
+    <code>app/templates/application.gjs</code>
+    (<code>application.gts</code>
+    in TypeScript apps).
   </p>
 
   <p>To import the Bootstrap styles, you need to install Bootstrap as well:</p>
@@ -72,18 +74,24 @@ app.toTree();
 
   <p>Ember Bootstrap defaults to Bootstrap 5 but supports Bootstrap 4 in
     parallel. You can switch to Bootstrap 4 by setting the
-    <code>bootstrapVersion</code>
+    <code>isBS4</code>
     option to
-    <code>4</code>
-    in your
+    <code>true</code>
+    in the
+    <code>@embroider/macros</code>
+    configuration in your
     <code>ember-cli-build.js</code>:
 
     {{! prettier-ignore }}
     <pre class="highlight"><code
 >module.exports = function (defaults) {
   const app = new EmberApp(defaults, {
-    'ember-bootstrap': {
-      bootstrapVersion: 4,
+    '@embroider/macros': {
+      setConfig: {
+        'ember-bootstrap': {
+          isBS4: true,
+        },
+      },
     },
   });
 
@@ -119,14 +127,14 @@ app.toTree();
     </thead>
     <tbody>
       <tr>
-        <td>bootstrapVersion</td>
-        <td>4 / 5</td>
-        <td>5</td>
+        <td>isBS4</td>
+        <td>true / false</td>
+        <td>false</td>
         <td>
           <p>
-            Specify the Bootstrap version to use. To make sure you have the
-            right dependencies installed, you should use the default blueprint
-            mentioned above to set this!
+            Set to
+            <code>true</code>
+            to use Bootstrap 4 instead of Bootstrap 5.
           </p>
         </td>
       </tr>
@@ -134,15 +142,23 @@ app.toTree();
 
   </table>
 
-  <p>These options can be set in your <code>ember-cli-build.js</code> file:</p>
+  <p>These options can be set in the
+    <code>@embroider/macros</code>
+    configuration in your
+    <code>ember-cli-build.js</code>
+    file:</p>
 
   {{! prettier-ignore }}
   <pre class="highlight"><code>//your-bootstrap-app/ember-cli-build.js
 
 module.exports = function(defaults) {
   const app = new EmberApp(defaults, {
-    'ember-bootstrap': {
-      bootstrapVersion: 4,
+    '@embroider/macros': {
+      setConfig: {
+        'ember-bootstrap': {
+          isBS4: true,
+        },
+      },
     },
   });
 
