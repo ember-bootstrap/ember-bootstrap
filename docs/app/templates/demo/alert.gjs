@@ -1,0 +1,123 @@
+import Component from '@glimmer/component';
+import { tracked } from '@glimmer/tracking';
+import { hash } from '@ember/helper';
+import BsAlert from 'ember-bootstrap/components/bs-alert';
+import BsForm from 'ember-bootstrap/components/bs-form';
+import CodeSnippet from 'ember-bootstrap-docs/components/code-snippet';
+
+export default class AlertTemplate extends Component {
+  @tracked
+  visible = true;
+
+  @tracked
+  fade = true;
+
+  @tracked
+  dismissible = true;
+
+  @tracked
+  headerTag = 'h4';
+
+  @tracked
+  typeChoices = ['success', 'info', 'warning', 'danger'];
+
+  @tracked
+  type = this.typeChoices[0];
+
+  <template>
+    <h2>
+      Simple example
+    </h2>
+    <div class="bs-example" data-test-fastboot-container>
+      <!-- BEGIN-SNIPPET alert-simple -->
+      <BsAlert @type="success">
+        <strong> Well done! </strong>
+        You successfully read this important alert message.
+      </BsAlert>
+      <!-- END-SNIPPET -->
+    </div>
+    <div class="highlight">
+      <CodeSnippet @name="alert-simple.gjs" />
+    </div>
+
+    <h2>
+      Options
+    </h2>
+    <div class="bs-example" data-test-example="alert-options">
+      <BsForm @formLayout="inline" @model={{this}} as |form|>
+        <form.element
+          @controlType="checkbox"
+          @label="Show/Hide"
+          @property="visible"
+          data-test-option="visible"
+          class="mr-2"
+        />
+        <form.element
+          @controlType="checkbox"
+          @label="Fade animation"
+          @property="fade"
+          class="ml-sm-2"
+        />
+
+        <form.element
+          @controlType="checkbox"
+          @label="Dismissible"
+          @property="dismissible"
+          class="ml-sm-2"
+        />
+        <form.element
+          @controlType="power-select"
+          @options={{this.typeChoices}}
+          @label="Type"
+          @property="type"
+          data-test-option="type"
+          class="ml-sm-2"
+          as |el|
+        >
+          <el.control @searchEnabled={{true}} @class="ml-1" />
+        </form.element>
+        <form.element
+          @label="Header tag"
+          @property="headerTag"
+          data-test-option="headerTag"
+          class="ml-sm-2"
+        />
+      </BsForm>
+      <hr />
+      <!-- BEGIN-SNIPPET alert-options -->
+      <BsAlert
+        @visible={{this.visible}}
+        @fade={{this.fade}}
+        @type={{this.type}}
+        @dismissible={{this.dismissible}}
+      >
+        <strong> Well done! </strong>
+        You successfully read this important alert message.
+      </BsAlert>
+
+      <BsAlert
+        @visible={{this.visible}}
+        @fade={{this.fade}}
+        @type={{this.type}}
+        @dismissible={{this.dismissible}}
+        @headerTag={{this.headerTag}}
+      >
+        <:header>Well done!</:header>
+        <:body>You successfully read this important alert message.</:body>
+      </BsAlert>
+      <!-- END-SNIPPET -->
+    </div>
+    <div class="highlight">
+      <CodeSnippet
+        @name="alert-options.gjs"
+        @dynamicProperties={{hash
+          visible=this.visible
+          fade=this.fade
+          dismissible=this.dismissible
+          type=this.type
+          headerTag=this.headerTag
+        }}
+      />
+    </div>
+  </template>
+}

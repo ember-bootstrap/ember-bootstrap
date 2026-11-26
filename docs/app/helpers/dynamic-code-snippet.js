@@ -14,6 +14,7 @@ export default helper(function ([source], { language, dynamic, quote = '"' }) {
       type === 'string' ? `${quote}${propertyValue}${quote}` : propertyValue;
 
     switch (language) {
+      case 'gjs':
       case 'handlebars':
       case 'htmlbars':
         source = source.replace(

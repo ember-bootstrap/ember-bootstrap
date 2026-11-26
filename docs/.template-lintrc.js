@@ -5,7 +5,13 @@ module.exports = {
   extends: ['recommended', 'ember-template-lint-plugin-prettier:recommended'],
   rules: {
     'no-html-comments': false,
-    'no-implicit-this': { allow: ['current-year'] },
-    'no-curly-component-invocation': { allow: ['current-year'] },
   },
+  overrides: [
+    {
+      files: ['**/*.{gjs,gts}'],
+      rules: {
+        prettier: 'off',
+      },
+    },
+  ],
 };

@@ -4,6 +4,8 @@ const EmberApp = require('ember-cli/lib/broccoli/ember-app');
 
 module.exports = function (defaults) {
   const app = new EmberApp(defaults, {
+    // Code snippets shown in the docs are extracted from these files.
+    snippetExtensions: ['js', 'gjs'],
     'ember-prism': {
       components: ['markup-templating', 'handlebars', 'javascript'],
       plugins: ['line-numbers'],
